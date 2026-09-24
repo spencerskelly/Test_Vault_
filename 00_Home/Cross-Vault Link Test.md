@@ -8,21 +8,36 @@ status: Draft
 
 ## Goal
 
-Verify that this new vault can reference content owned by another locally available vault without copying that content.
+Verify that `Test_Vault_` can reference content owned by `Ampure_Data` without copying that content.
 
-## Test 1 — current/native Obsidian behavior
+## Resolver test
 
-Until the UID resolver plugin is implemented, use an Obsidian URI as a **temporary transport test**:
+The lightweight resolver plugin is the current MVP.
+
+1. Make sure `Test_Vault_` and `Ampure_Data` are sibling folders on the same computer.
+2. Pull both repositories.
+3. Reload Obsidian.
+4. In this note, type:
 
 ```text
-[Open Ampure_Data README](obsidian://open?vault=Ampure_Data&file=README.md)
+[[Cross-Vault Resolver Target
 ```
 
-This proves that both vaults can be opened and addressed locally. It is **not** the durable production link format because vault names and paths can change.
+5. Choose the result labeled from **Ampure Data**.
+6. The inserted link should be UID-backed and readable.
+7. Click it.
 
-## Test 2 — canonical durable format
+Expected target:
 
-Production cross-vault references use:
+```text
+Cross-Vault Resolver Target
+```
+
+Expected behavior: Obsidian opens the target note in `Ampure_Data`.
+
+## Canonical durable format
+
+Stored cross-vault references use:
 
 ```text
 [Readable title](uid:<30-character-note-uid>)
@@ -34,7 +49,7 @@ Optional section target:
 [Readable section](uid:<30-character-note-uid>#<section-anchor>)
 ```
 
-The future resolver plugin will translate the UID to the current accessible vault/path.
+The note UID is durable. Vault name and path are only current location metadata.
 
 ## View-level rule
 
@@ -44,8 +59,3 @@ When a system/reference view needs to point into another vault:
 - otherwise point to the target vault/folder README or equivalent index.
 
 When a note relates to a specific note in another vault, link directly to that note's UID.
-
-## Expected result
-
-- Native URI test can open `Ampure_Data` now.
-- UID links remain the stored durable architecture, but will not navigate until the resolver layer is implemented.
