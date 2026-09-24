@@ -1,0 +1,6 @@
+filters:
+  and:
+    - file.folder == "37_Transitions"
+views:
+  - type: table
+    name: Contents

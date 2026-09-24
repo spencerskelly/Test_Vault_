@@ -1,0 +1,6 @@
+filters:
+  and:
+    - file.folder == "60_Verification/06_Results"
+views:
+  - type: table
+    name: Contents

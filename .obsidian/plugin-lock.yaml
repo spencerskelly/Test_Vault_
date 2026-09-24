@@ -1,0 +1,12 @@
+schema: 1
+plugins:
+  mdse-bootstrap: "0.2.0"
+  nodian: "1.4.14"
+  breadcrumbs: "4.21.11"
+  dataview: "0.5.68"
+  fileclass: "0.2.15"
+  advanced-canvas: "7.0.0"
+  templater-obsidian: "2.25.0"
+  quickadd: "2.23.0"
+  table-exporter: "0.3.0"
+  obsidian-git: "PIN_ON_VALIDATED_INSTALL"

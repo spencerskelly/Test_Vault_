@@ -1,0 +1,6 @@
+filters:
+  and:
+    - file.folder == "20_Interfaces"
+views:
+  - type: table
+    name: Contents

@@ -1,0 +1,6 @@
+filters:
+  and:
+    - file.folder == "10_Things"
+views:
+  - type: table
+    name: Contents

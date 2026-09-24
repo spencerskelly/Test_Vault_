@@ -1,0 +1,6 @@
+filters:
+  and:
+    - file.folder == "47_Actors"
+views:
+  - type: table
+    name: Contents

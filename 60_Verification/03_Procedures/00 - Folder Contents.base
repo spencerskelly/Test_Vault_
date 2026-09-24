@@ -1,0 +1,6 @@
+filters:
+  and:
+    - file.folder == "60_Verification/03_Procedures"
+views:
+  - type: table
+    name: Contents

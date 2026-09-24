@@ -1,0 +1,6 @@
+filters:
+  and:
+    - file.folder == "21_Item_Flows"
+views:
+  - type: table
+    name: Contents

@@ -1,0 +1,6 @@
+filters:
+  and:
+    - file.folder == "25_Contexts"
+views:
+  - type: table
+    name: Contents

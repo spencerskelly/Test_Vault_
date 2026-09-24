@@ -1,0 +1,6 @@
+filters:
+  and:
+    - file.folder == "50_Failure_Modes"
+views:
+  - type: table
+    name: Contents

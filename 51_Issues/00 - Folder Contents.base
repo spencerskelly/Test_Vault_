@@ -1,0 +1,6 @@
+filters:
+  and:
+    - file.folder == "51_Issues"
+views:
+  - type: table
+    name: Contents

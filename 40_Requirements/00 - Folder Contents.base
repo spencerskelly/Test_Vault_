@@ -1,0 +1,6 @@
+filters:
+  and:
+    - file.folder == "40_Requirements"
+views:
+  - type: table
+    name: Contents

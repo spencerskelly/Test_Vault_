@@ -1,0 +1,6 @@
+filters:
+  and:
+    - file.folder == "36_State_Machines"
+views:
+  - type: table
+    name: Contents
