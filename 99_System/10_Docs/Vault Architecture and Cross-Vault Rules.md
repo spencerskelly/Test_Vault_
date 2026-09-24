@@ -50,17 +50,22 @@ Readable Markdown:
 
 The resolver translates UID to the current accessible vault/path.
 
-## Cross-vault UX target
+## Cross-vault UX
 
-Users should create cross-vault links with the normal `[[` interaction.
+Users create cross-vault links through the normal `[[` interaction.
 
-The resolver/plugin picker searches all locally registered accessible vaults, disambiguates duplicates, and inserts a readable UID-backed link.
+The lightweight resolver plugin currently:
+- discovers sibling local vaults that contain `.vault.yaml`;
+- indexes notes by immutable `uid`;
+- adds accessible cross-vault notes to link suggestions;
+- inserts readable UID-backed Markdown links;
+- resolves `uid:` links to the current local vault/path.
+
+Duplicate titles are disambiguated with vault/path context.
 
 Users should not need to type raw UID syntax.
 
-## Current test limitation
-
-Native Obsidian does not resolve `uid:` links across vaults by itself. Until the resolver plugin exists, `obsidian://open?vault=...&file=...` may be used only to test local cross-vault opening. It is not the production durable storage format.
+The sibling-scan implementation is the MVP test layer. The planned machine-level sync agent remains the long-term owner of the authoritative UID index.
 
 ## Access states
 
@@ -72,12 +77,12 @@ For discoverability/governance metadata, use:
 
 Repository permissions remain the real enforcement layer. The registry does not grant access.
 
-The local resolver indexes only vaults the current user can access and must not reveal restricted vault names or paths to unauthorized users.
+The resolver indexes only locally available vaults and must not reveal restricted vault names or paths to unauthorized users.
 
 ## Missing target behavior
 
 - installed + accessible: open normally;
-- previously known but not installed: show `Vault not installed`;
+- previously known but not installed: future agent-backed behavior may show `Vault not installed`;
 - unknown/unavailable: show `Referenced note unavailable`;
 - never enumerate restricted remote repositories just to resolve an unknown UID.
 
