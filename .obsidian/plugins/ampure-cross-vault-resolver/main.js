@@ -37,7 +37,7 @@ class CrossVaultModal extends FuzzySuggestModal {
     return `${item.title} — ${item.vaultName} — ${item.relPath}`;
   }
   onChooseItem(item) {
-    this.editor.replaceSelection(`[${item.title}](uid:${item.uid})`);
+    this.editor.replaceSelection(`[[uid:${item.uid}|${item.title}]]`);
   }
 }
 
@@ -75,7 +75,7 @@ class CrossVaultSuggest extends EditorSuggest {
     const ctx = this.context;
     if (!ctx) return;
     ctx.editor.replaceRange(
-      `[${item.title}](uid:${item.uid})`,
+      `[[uid:${item.uid}|${item.title}]]`,
       ctx.start,
       ctx.end
     );
