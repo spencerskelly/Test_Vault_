@@ -2,7 +2,7 @@
 uid:
 id:
 type: Plan
-kind: 
+subtype: 
 status: Draft
 control:
 boundary:

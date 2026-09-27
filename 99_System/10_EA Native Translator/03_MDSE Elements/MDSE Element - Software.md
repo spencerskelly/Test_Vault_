@@ -2,22 +2,22 @@
 uid:
 type: MDSE Element Definition
 status: Working
-elementType: "Software"
+mdseType: "Thing"
+mdseSubtype: "software"
 ---
 # Software
 
+## Classification
+
+```yaml
+type: Thing
+subtype: software
+```
+
 ## Definition
 
-Application, cloud, tool, or service software not classified as embedded Firmware.
+Application, cloud, tool, or service software.
 
-## Known EA source paths
+## Nomenclature note
 
-selected [[EA Element - Class - Software Component]]
-
-## Translation principle
-
-The source EA type is evidence. Where a source construct is not deterministically type-bearing, semantic classification occurs before relationship translation.
-
-## Canvas
-
-[[CANVAS - Software Translation]]
+Software is an MDSE **subtype of Thing**, not a top-level MDSE type.

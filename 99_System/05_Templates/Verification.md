@@ -2,7 +2,7 @@
 uid:
 id:
 type: Verification
-kind: test
+subtype: test
 status: Draft
 control:
 boundary:

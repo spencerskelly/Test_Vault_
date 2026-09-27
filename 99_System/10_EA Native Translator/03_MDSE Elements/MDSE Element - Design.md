@@ -2,22 +2,31 @@
 uid:
 type: MDSE Element Definition
 status: Working
-elementType: "Design"
+mdseType: "Design"
+mdseSubtypes: ["characteristic","decision"]
 ---
 # Design
 
 ## Definition
 
-Engineering design characteristic, solution, choice, or definition.
+Engineering design characteristic, choice, or definition.
 
-## Known EA source paths
+## Approved subtypes
 
-selected [[EA Element - State]], selected [[EA Element - Change]], non-behavioral [[EA Element - StateMachine]] taxonomies
+- `characteristic`
+- `decision`
 
-## Translation principle
+## Nomenclature
 
-The source EA type is evidence. Where a source construct is not deterministically type-bearing, semantic classification occurs before relationship translation.
+Engineering notes use:
 
-## Canvas
+```yaml
+type: Design
+subtype: characteristic
+```
 
-[[CANVAS - Design Translation]]
+`subtype` replaces the former `kind` property.
+
+## Translator principle
+
+Source EA stereotypes do not automatically create new MDSE subtypes. Only approved subtype mappings may populate `subtype`; otherwise preserve the source stereotype as provenance and leave `subtype` blank pending semantic review.

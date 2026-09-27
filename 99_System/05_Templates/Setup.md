@@ -2,7 +2,7 @@
 uid:
 id:
 type: Setup
-kind: 
+subtype: 
 status: Draft
 control:
 boundary:

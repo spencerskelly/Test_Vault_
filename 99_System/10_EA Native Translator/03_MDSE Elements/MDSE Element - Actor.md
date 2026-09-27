@@ -2,22 +2,30 @@
 uid:
 type: MDSE Element Definition
 status: Working
-elementType: "Actor"
+mdseType: "Actor"
+mdseSubtypes: []
 ---
 # Actor
 
 ## Definition
 
-External living/person role participating in behavior.
+External living/person role participating in modeled behavior.
 
-## Known EA source paths
+## Approved subtypes
 
-living/person [[EA Element - Actor]] only
+No predefined subtypes.
 
-## Translation principle
+## Nomenclature
 
-The source EA type is evidence. Where a source construct is not deterministically type-bearing, semantic classification occurs before relationship translation.
+Engineering notes use:
 
-## Canvas
+```yaml
+type: Actor
+subtype: 
+```
 
-[[CANVAS - Actor Translation]]
+`subtype` replaces the former `kind` property.
+
+## Translator principle
+
+Source EA stereotypes do not automatically create new MDSE subtypes. Only approved subtype mappings may populate `subtype`; otherwise preserve the source stereotype as provenance and leave `subtype` blank pending semantic review.

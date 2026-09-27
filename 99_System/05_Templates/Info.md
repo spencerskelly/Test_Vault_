@@ -2,7 +2,7 @@
 uid:
 id:
 type: Info
-kind: need
+subtype: need
 status: Draft
 control:
 boundary:

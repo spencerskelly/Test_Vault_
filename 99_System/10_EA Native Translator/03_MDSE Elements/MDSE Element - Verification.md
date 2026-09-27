@@ -2,37 +2,29 @@
 uid:
 type: MDSE Element Definition
 status: Working
-mdseType: "Info"
-mdseSubtypes: ["need","objective","concern","decision","assumption","rationale","finding","analysis","trade study","calculation","milestone","lesson learned"]
+mdseType: "Verification"
+mdseSubtypes: ["test","analysis","inspection","demonstration"]
 ---
-# Info
+# Verification
 
 ## Definition
 
-Reusable engineering knowledge or rationale.
+Reusable verification intent.
 
 ## Approved subtypes
 
-- `need`
-- `objective`
-- `concern`
-- `decision`
-- `assumption`
-- `rationale`
-- `finding`
+- `test`
 - `analysis`
-- `trade study`
-- `calculation`
-- `milestone`
-- `lesson learned`
+- `inspection`
+- `demonstration`
 
 ## Nomenclature
 
 Engineering notes use:
 
 ```yaml
-type: Info
-subtype: need
+type: Verification
+subtype: test
 ```
 
 `subtype` replaces the former `kind` property.

@@ -2,7 +2,7 @@
 uid:
 id:
 type: Issue
-kind: engineering issue
+subtype: engineering issue
 status: Draft
 control:
 boundary:

@@ -2,7 +2,7 @@
 uid:
 id:
 type: Item Flow
-kind: information
+subtype: information
 status: Draft
 control:
 boundary:

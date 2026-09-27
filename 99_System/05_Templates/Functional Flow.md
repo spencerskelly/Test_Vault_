@@ -2,7 +2,7 @@
 uid:
 id:
 type: Functional Flow
-kind: 
+subtype: 
 status: Draft
 control:
 boundary:

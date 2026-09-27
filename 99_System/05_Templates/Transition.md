@@ -2,7 +2,7 @@
 uid:
 id:
 type: Transition
-kind: 
+subtype: 
 status: Draft
 control:
 boundary:

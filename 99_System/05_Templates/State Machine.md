@@ -2,7 +2,7 @@
 uid:
 id:
 type: State Machine
-kind: 
+subtype: 
 status: Draft
 control:
 boundary:

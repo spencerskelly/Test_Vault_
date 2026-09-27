@@ -2,22 +2,30 @@
 uid:
 type: MDSE Element Definition
 status: Working
-elementType: "State Machine"
+mdseType: "State Machine"
+mdseSubtypes: []
 ---
 # State Machine
 
 ## Definition
 
-First-class state model containing genuine persistent states and meaningful transitions.
+First-class state model containing States and Transitions.
 
-## Known EA source paths
+## Approved subtypes
 
-true-state [[EA Element - StateMachine]]
+No predefined subtypes.
 
-## Translation principle
+## Nomenclature
 
-The source EA type is evidence. Where a source construct is not deterministically type-bearing, semantic classification occurs before relationship translation.
+Engineering notes use:
 
-## Canvas
+```yaml
+type: State Machine
+subtype: 
+```
 
-[[CANVAS - State Machine Translation]]
+`subtype` replaces the former `kind` property.
+
+## Translator principle
+
+Source EA stereotypes do not automatically create new MDSE subtypes. Only approved subtype mappings may populate `subtype`; otherwise preserve the source stereotype as provenance and leave `subtype` blank pending semantic review.

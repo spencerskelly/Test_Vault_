@@ -1,101 +1,101 @@
-schemaVersion: '1.2'
-date: '2026-09-24'
-basis: MDSE ruleset 1.19
-commonProperties: [uid, id, type, status, control, boundary, tags, aliases, formerIds]
+schemaVersion: '1.3'
+date: '2026-09-27'
+basis: MDSE ruleset 1.20
+commonProperties: [uid, id, type, subtype, status, control, boundary, tags, aliases, formerIds]
 classes:
 - name: Thing
   prefix: THG
   folder: 10_Things
-  kind: ["electrical", "circuit", "mechanical", "software", "firmware"]
+  subtype: ["electrical","circuit","mechanical","software","firmware"]
 - name: Interface
   prefix: INT
   folder: 20_Interfaces
-  kind: ["electrical & material", "data", "mechanical", "generic physical", "environmental"]
+  subtype: ["electrical & material","data","mechanical","generic physical","environmental"]
 - name: Item Flow
   prefix: IFLOW
   folder: 21_Item_Flows
-  kind: ["information", "energy", "material"]
+  subtype: ["information","energy","material"]
 - name: Context
   prefix: CTX
   folder: 25_Contexts
-  kind: []
+  subtype: []
 - name: Function
   prefix: FUNC
   folder: 30_Functions
-  kind: ["system", "hardware", "software", "module"]
+  subtype: ["system","hardware","software","module"]
 - name: Functional Flow
   prefix: FFLOW
   folder: 31_Functional_Flows
-  kind: []
+  subtype: []
 - name: State
   prefix: STATE
   folder: 35_States
-  kind: []
+  subtype: []
 - name: State Machine
   prefix: SM
   folder: 36_State_Machines
-  kind: []
+  subtype: []
 - name: Transition
   prefix: TRANS
   folder: 37_Transitions
-  kind: []
+  subtype: []
 - name: Requirement
   prefix: REQ
   folder: 40_Requirements
-  kind: ["functional", "design", "standard", "stakeholder"]
+  subtype: ["functional","design","standard","stakeholder"]
 - name: Design
   prefix: DES
   folder: 41_Designs
-  kind: ["characteristic", "decision"]
+  subtype: ["characteristic","decision"]
 - name: Use Case
   prefix: UC
   folder: 45_Use_Cases
-  kind: ["what", "where", "why", "when"]
+  subtype: ["what","where","why","when"]
 - name: Actor
   prefix: ACT
   folder: 47_Actors
-  kind: []
+  subtype: []
 - name: Failure Mode
   prefix: FM
   folder: 50_Failure_Modes
-  kind: []
+  subtype: []
 - name: Issue
   prefix: ISS
   folder: 51_Issues
-  kind: ["engineering issue", "lifecycle risk"]
+  subtype: ["engineering issue","lifecycle risk"]
 - name: Info
   prefix: INFO
   folder: 55_Info
-  kind: ["need", "objective", "concern", "decision", "assumption", "rationale", "finding", "analysis", "trade study", "calculation", "milestone", "lesson learned"]
+  subtype: ["need","objective","concern","decision","assumption","rationale","finding","analysis","trade study","calculation","milestone","lesson learned"]
 - name: Step
   prefix: STEP
   folder: 60_Verification/01_Steps
-  kind: []
+  subtype: []
 - name: Verification
   prefix: VER
   folder: 60_Verification/02_Verifications
-  kind: ["test", "analysis", "inspection", "demonstration"]
+  subtype: ["test","analysis","inspection","demonstration"]
 - name: Procedure
   prefix: PROC
   folder: 60_Verification/03_Procedures
-  kind: ["test", "assembly", "configuration", "commissioning", "calibration", "maintenance", "repair", "decommissioning"]
+  subtype: ["test","assembly","configuration","commissioning","calibration","maintenance","repair","decommissioning"]
 - name: Setup
   prefix: SETUP
   folder: 60_Verification/04_Setups
-  kind: []
+  subtype: []
 - name: Plan
   prefix: PLAN
   folder: 60_Verification/05_Plans
-  kind: []
+  subtype: []
 - name: Result
   prefix: RES
   folder: 60_Verification/06_Results
-  kind: []
+  subtype: []
 - name: Document
   prefix: DOC
   folder: 70_Documents
-  kind: ["standard", "specification", "report", "drawing"]
+  subtype: ["standard","specification","report","drawing"]
 - name: Artifact
   prefix: ART
   folder: 71_Artifacts
-  kind: ["image", "document"]
+  subtype: ["image","document"]

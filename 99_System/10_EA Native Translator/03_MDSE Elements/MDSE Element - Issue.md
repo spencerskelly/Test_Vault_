@@ -2,22 +2,31 @@
 uid:
 type: MDSE Element Definition
 status: Working
-elementType: "Issue"
+mdseType: "Issue"
+mdseSubtypes: ["engineering issue","lifecycle risk"]
 ---
 # Issue
 
 ## Definition
 
-Problem, fault, defect, undesirable condition, or other issue requiring engineering attention.
+Problem, concern, defect, or risk requiring engineering attention.
 
-## Known EA source paths
+## Approved subtypes
 
-[[EA Element - Issue]], problem-content [[EA Element - InformationItem]], selected [[EA Element - Change]], mis-modeled failure content
+- `engineering issue`
+- `lifecycle risk`
 
-## Translation principle
+## Nomenclature
 
-The source EA type is evidence. Where a source construct is not deterministically type-bearing, semantic classification occurs before relationship translation.
+Engineering notes use:
 
-## Canvas
+```yaml
+type: Issue
+subtype: engineering issue
+```
 
-[[CANVAS - Issue Translation]]
+`subtype` replaces the former `kind` property.
+
+## Translator principle
+
+Source EA stereotypes do not automatically create new MDSE subtypes. Only approved subtype mappings may populate `subtype`; otherwise preserve the source stereotype as provenance and leave `subtype` blank pending semantic review.

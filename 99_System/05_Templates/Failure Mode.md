@@ -2,7 +2,7 @@
 uid:
 id:
 type: Failure Mode
-kind: 
+subtype: 
 status: Draft
 control:
 boundary:

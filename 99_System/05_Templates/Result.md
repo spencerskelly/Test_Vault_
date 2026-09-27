@@ -2,7 +2,7 @@
 uid:
 id:
 type: Result
-kind: 
+subtype: 
 status: Draft
 control:
 boundary:

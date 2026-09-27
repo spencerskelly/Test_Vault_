@@ -2,7 +2,7 @@
 uid:
 id:
 type: Step
-kind: 
+subtype: 
 status: Draft
 control:
 boundary:

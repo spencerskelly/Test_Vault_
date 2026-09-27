@@ -2,22 +2,31 @@
 uid:
 type: MDSE Element Definition
 status: Working
-elementType: "Artifact"
+mdseType: "Artifact"
+mdseSubtypes: ["image","document"]
 ---
 # Artifact
 
 ## Definition
 
-Physical label, marking, or other artifact with independent engineering identity.
+Physical or digital artifact with independent engineering identity.
 
-## Known EA source paths
+## Approved subtypes
 
-selected [[EA Element - Class - Physical Component]]
+- `image`
+- `document`
 
-## Translation principle
+## Nomenclature
 
-The source EA type is evidence. Where a source construct is not deterministically type-bearing, semantic classification occurs before relationship translation.
+Engineering notes use:
 
-## Canvas
+```yaml
+type: Artifact
+subtype: image
+```
 
-[[CANVAS - Artifact Translation]]
+`subtype` replaces the former `kind` property.
+
+## Translator principle
+
+Source EA stereotypes do not automatically create new MDSE subtypes. Only approved subtype mappings may populate `subtype`; otherwise preserve the source stereotype as provenance and leave `subtype` blank pending semantic review.

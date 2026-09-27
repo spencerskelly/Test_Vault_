@@ -2,22 +2,22 @@
 uid:
 type: MDSE Element Definition
 status: Working
-elementType: "Firmware"
+mdseType: "Thing"
+mdseSubtype: "firmware"
 ---
 # Firmware
+
+## Classification
+
+```yaml
+type: Thing
+subtype: firmware
+```
 
 ## Definition
 
 Embedded software tied to a physical product/platform.
 
-## Known EA source paths
+## Nomenclature note
 
-selected [[EA Element - Class - Software Component]], selected [[EA Element - InstanceSpecification]], selected [[EA Element - block]]
-
-## Translation principle
-
-The source EA type is evidence. Where a source construct is not deterministically type-bearing, semantic classification occurs before relationship translation.
-
-## Canvas
-
-[[CANVAS - Firmware Translation]]
+Firmware is an MDSE **subtype of Thing**, not a top-level MDSE type.

@@ -2,37 +2,28 @@
 uid:
 type: MDSE Element Definition
 status: Working
-mdseType: "Info"
-mdseSubtypes: ["need","objective","concern","decision","assumption","rationale","finding","analysis","trade study","calculation","milestone","lesson learned"]
+mdseType: "Item Flow"
+mdseSubtypes: ["information","energy","material"]
 ---
-# Info
+# Item Flow
 
 ## Definition
 
-Reusable engineering knowledge or rationale.
+Reusable item/energy/material/information transfer definition.
 
 ## Approved subtypes
 
-- `need`
-- `objective`
-- `concern`
-- `decision`
-- `assumption`
-- `rationale`
-- `finding`
-- `analysis`
-- `trade study`
-- `calculation`
-- `milestone`
-- `lesson learned`
+- `information`
+- `energy`
+- `material`
 
 ## Nomenclature
 
 Engineering notes use:
 
 ```yaml
-type: Info
-subtype: need
+type: Item Flow
+subtype: information
 ```
 
 `subtype` replaces the former `kind` property.

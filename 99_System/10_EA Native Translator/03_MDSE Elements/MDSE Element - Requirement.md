@@ -2,21 +2,36 @@
 uid:
 type: MDSE Element Definition
 status: Working
-elementType: "Requirement"
+mdseType: "Requirement"
+mdseSubtypes: ["functional","design","standard","stakeholder"]
 ---
 # Requirement
 
 ## Definition
 
-Normative engineering requirement; requirementType carries Functional, Design Constraint, or other approved semantic classification.
+Normative engineering requirement.
 
-## Known EA source paths
+## Approved subtypes
 
-[[EA Element - Requirement - functionalRequirement]], [[EA Element - Requirement - Functional]], [[EA Element - Requirement - designConstraint]], [[EA Element - Requirement - requirement]], selected [[EA Element - Change]]
+- `functional`
+- `design`
+- `standard`
+- `stakeholder`
+
+## Nomenclature
+
+Engineering Requirement notes use the common MDSE property:
+
+```yaml
+type: Requirement
+subtype: functional
+```
+
+The former Requirement-specific idea of `requirementType` is not used. The former common property `kind` is renamed to `subtype`.
 
 ## Translation principle
 
-The source EA type is evidence. Where a source construct is not deterministically type-bearing, semantic classification occurs before relationship translation.
+Every EA `Object_Type = Requirement` becomes MDSE `type: Requirement`. An EA stereotype populates `subtype` only through an explicit approved mapping. Unknown/custom stereotypes are preserved as source provenance without expanding the MDSE taxonomy.
 
 ## Canvas
 

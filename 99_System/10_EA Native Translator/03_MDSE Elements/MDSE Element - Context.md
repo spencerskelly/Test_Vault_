@@ -2,37 +2,26 @@
 uid:
 type: MDSE Element Definition
 status: Working
-mdseType: "Info"
-mdseSubtypes: ["need","objective","concern","decision","assumption","rationale","finding","analysis","trade study","calculation","milestone","lesson learned"]
+mdseType: "Context"
+mdseSubtypes: []
 ---
-# Info
+# Context
 
 ## Definition
 
-Reusable engineering knowledge or rationale.
+Modeled external or situational context relevant to behavior or applicability.
 
 ## Approved subtypes
 
-- `need`
-- `objective`
-- `concern`
-- `decision`
-- `assumption`
-- `rationale`
-- `finding`
-- `analysis`
-- `trade study`
-- `calculation`
-- `milestone`
-- `lesson learned`
+No predefined subtypes.
 
 ## Nomenclature
 
 Engineering notes use:
 
 ```yaml
-type: Info
-subtype: need
+type: Context
+subtype: 
 ```
 
 `subtype` replaces the former `kind` property.

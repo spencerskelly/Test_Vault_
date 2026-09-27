@@ -2,7 +2,7 @@
 uid:
 id:
 type: Use Case
-kind: what
+subtype: what
 status: Draft
 control:
 boundary:

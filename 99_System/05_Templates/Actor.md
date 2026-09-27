@@ -2,7 +2,7 @@
 uid:
 id:
 type: Actor
-kind: 
+subtype: 
 status: Draft
 control:
 boundary:

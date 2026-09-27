@@ -12,14 +12,7 @@ Define the disposition of EA Requirement fields and tagged values during native 
 
 ## Required disposition vocabulary
 
-Each source field must end as one of:
-
-- Direct
-- Transform
-- Body
-- Provenance
-- Ignore
-- Review
+Each source field must end as one of: Direct, Transform, Body, Provenance, Ignore, or Review.
 
 ## Current baseline
 
@@ -28,7 +21,7 @@ Each source field must end as one of:
 | Name | note title | Direct | Proposed |
 | Notes / description | note body | Direct | Proposed |
 | Object_Type | `type: Requirement` | Direct | Proposed |
-| Stereotype | `eaStereotype` provenance and optional approved `requirementType` | Transform | Proposed |
+| Stereotype | `eaStereotype` provenance and optional approved `subtype` | Transform | Proposed |
 | eaGUID | `eaGUID` | Provenance | Settled |
 | EA package | `eaPackage` | Provenance | Settled |
 | Package hierarchy | none automatically | Ignore as semantic structure | Settled |
@@ -40,8 +33,4 @@ Each source field must end as one of:
 
 ## Rule
 
-No EA property is silently dropped until it has an explicit disposition in this note or a linked field-specific rule.
-
-## Next step
-
-Inventory the actual Requirement properties and tagged values present in the EA source export, then replace the open rows with concrete mappings.
+No EA property is silently dropped until it has an explicit disposition here or in a linked field-specific rule.

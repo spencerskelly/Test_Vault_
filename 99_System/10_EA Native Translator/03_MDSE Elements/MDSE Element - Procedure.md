@@ -2,37 +2,33 @@
 uid:
 type: MDSE Element Definition
 status: Working
-mdseType: "Info"
-mdseSubtypes: ["need","objective","concern","decision","assumption","rationale","finding","analysis","trade study","calculation","milestone","lesson learned"]
+mdseType: "Procedure"
+mdseSubtypes: ["test","assembly","configuration","commissioning","calibration","maintenance","repair","decommissioning"]
 ---
-# Info
+# Procedure
 
 ## Definition
 
-Reusable engineering knowledge or rationale.
+Ordered reusable procedure.
 
 ## Approved subtypes
 
-- `need`
-- `objective`
-- `concern`
-- `decision`
-- `assumption`
-- `rationale`
-- `finding`
-- `analysis`
-- `trade study`
-- `calculation`
-- `milestone`
-- `lesson learned`
+- `test`
+- `assembly`
+- `configuration`
+- `commissioning`
+- `calibration`
+- `maintenance`
+- `repair`
+- `decommissioning`
 
 ## Nomenclature
 
 Engineering notes use:
 
 ```yaml
-type: Info
-subtype: need
+type: Procedure
+subtype: test
 ```
 
 `subtype` replaces the former `kind` property.

@@ -2,7 +2,7 @@
 uid:
 id:
 type: Thing
-kind: electrical
+subtype: electrical
 status: Draft
 control:
 boundary:

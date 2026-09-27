@@ -2,22 +2,33 @@
 uid:
 type: MDSE Element Definition
 status: Working
-elementType: "Use Case"
+mdseType: "Use Case"
+mdseSubtypes: ["what","where","why","when"]
 ---
 # Use Case
 
 ## Definition
 
-Behavior/activity outside the modeled product's control.
+Externally controlled behavior, scenario, or actor goal.
 
-## Known EA source paths
+## Approved subtypes
 
-selected [[EA Element - Activity]], [[EA Element - Physical Context]], selected [[EA Element - UseCase]]
+- `what`
+- `where`
+- `why`
+- `when`
 
-## Translation principle
+## Nomenclature
 
-The source EA type is evidence. Where a source construct is not deterministically type-bearing, semantic classification occurs before relationship translation.
+Engineering notes use:
 
-## Canvas
+```yaml
+type: Use Case
+subtype: what
+```
 
-[[CANVAS - Use Case Translation]]
+`subtype` replaces the former `kind` property.
+
+## Translator principle
+
+Source EA stereotypes do not automatically create new MDSE subtypes. Only approved subtype mappings may populate `subtype`; otherwise preserve the source stereotype as provenance and leave `subtype` blank pending semantic review.

@@ -2,22 +2,30 @@
 uid:
 type: MDSE Element Definition
 status: Working
-elementType: "Transition"
+mdseType: "Transition"
+mdseSubtypes: []
 ---
 # Transition
 
 ## Definition
 
-State-to-state transition in a true state model.
+State-to-state transition within a State Machine.
 
-## Known EA source paths
+## Approved subtypes
 
-EA StateFlow/transition content when endpoints remain true States
+No predefined subtypes.
 
-## Translation principle
+## Nomenclature
 
-The source EA type is evidence. Where a source construct is not deterministically type-bearing, semantic classification occurs before relationship translation.
+Engineering notes use:
 
-## Canvas
+```yaml
+type: Transition
+subtype: 
+```
 
-[[CANVAS - Transition Translation]]
+`subtype` replaces the former `kind` property.
+
+## Translator principle
+
+Source EA stereotypes do not automatically create new MDSE subtypes. Only approved subtype mappings may populate `subtype`; otherwise preserve the source stereotype as provenance and leave `subtype` blank pending semantic review.

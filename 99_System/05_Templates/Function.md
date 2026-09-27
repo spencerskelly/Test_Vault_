@@ -2,7 +2,7 @@
 uid:
 id:
 type: Function
-kind: system
+subtype: system
 status: Draft
 control:
 boundary:

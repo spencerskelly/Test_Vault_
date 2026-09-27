@@ -2,37 +2,26 @@
 uid:
 type: MDSE Element Definition
 status: Working
-mdseType: "Info"
-mdseSubtypes: ["need","objective","concern","decision","assumption","rationale","finding","analysis","trade study","calculation","milestone","lesson learned"]
+mdseType: "Setup"
+mdseSubtypes: []
 ---
-# Info
+# Setup
 
 ## Definition
 
-Reusable engineering knowledge or rationale.
+Reusable verification/procedure setup definition.
 
 ## Approved subtypes
 
-- `need`
-- `objective`
-- `concern`
-- `decision`
-- `assumption`
-- `rationale`
-- `finding`
-- `analysis`
-- `trade study`
-- `calculation`
-- `milestone`
-- `lesson learned`
+No predefined subtypes.
 
 ## Nomenclature
 
 Engineering notes use:
 
 ```yaml
-type: Info
-subtype: need
+type: Setup
+subtype: 
 ```
 
 `subtype` replaces the former `kind` property.

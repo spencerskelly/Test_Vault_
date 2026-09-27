@@ -2,7 +2,7 @@
 uid:
 id:
 type: Artifact
-kind: image
+subtype: image
 status: Draft
 control:
 boundary:

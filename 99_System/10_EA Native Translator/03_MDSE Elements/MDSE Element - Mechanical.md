@@ -2,22 +2,22 @@
 uid:
 type: MDSE Element Definition
 status: Working
-elementType: "Mechanical"
+mdseType: "Thing"
+mdseSubtype: "mechanical"
 ---
 # Mechanical
 
+## Classification
+
+```yaml
+type: Thing
+subtype: mechanical
+```
+
 ## Definition
 
-Mechanical/physical architecture element.
+Mechanical/physical product architecture element.
 
-## Known EA source paths
+## Nomenclature note
 
-selected [[EA Element - Class - Physical Component]], selected [[EA Element - Port]]
-
-## Translation principle
-
-The source EA type is evidence. Where a source construct is not deterministically type-bearing, semantic classification occurs before relationship translation.
-
-## Canvas
-
-[[CANVAS - Mechanical Translation]]
+Mechanical is an MDSE **subtype of Thing**, not a top-level MDSE type.

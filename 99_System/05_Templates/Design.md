@@ -2,7 +2,7 @@
 uid:
 id:
 type: Design
-kind: characteristic
+subtype: characteristic
 status: Draft
 control:
 boundary:

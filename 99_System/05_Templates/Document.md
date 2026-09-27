@@ -2,7 +2,7 @@
 uid:
 id:
 type: Document
-kind: standard
+subtype: standard
 status: Draft
 control:
 boundary:

@@ -2,37 +2,30 @@
 uid:
 type: MDSE Element Definition
 status: Working
-mdseType: "Info"
-mdseSubtypes: ["need","objective","concern","decision","assumption","rationale","finding","analysis","trade study","calculation","milestone","lesson learned"]
+mdseType: "Thing"
+mdseSubtypes: ["electrical","circuit","mechanical","software","firmware"]
 ---
-# Info
+# Thing
 
 ## Definition
 
-Reusable engineering knowledge or rationale.
+Reusable physical, software, firmware, or otherwise modeled engineering entity.
 
 ## Approved subtypes
 
-- `need`
-- `objective`
-- `concern`
-- `decision`
-- `assumption`
-- `rationale`
-- `finding`
-- `analysis`
-- `trade study`
-- `calculation`
-- `milestone`
-- `lesson learned`
+- `electrical`
+- `circuit`
+- `mechanical`
+- `software`
+- `firmware`
 
 ## Nomenclature
 
 Engineering notes use:
 
 ```yaml
-type: Info
-subtype: need
+type: Thing
+subtype: electrical
 ```
 
 `subtype` replaces the former `kind` property.

@@ -1,0 +1,375 @@
+{
+  "nodes": [
+    {
+      "id": "title",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/03_MDSE Elements/MDSE Type and Subtype Taxonomy.md",
+      "x": 0,
+      "y": -500,
+      "width": 520,
+      "height": 260
+    },
+    {
+      "id": "t0",
+      "type": "text",
+      "text": "## Thing\n- electrical\n- circuit\n- mechanical\n- software\n- firmware",
+      "x": -720,
+      "y": 0,
+      "width": 390,
+      "height": 220
+    },
+    {
+      "id": "t1",
+      "type": "text",
+      "text": "## Interface\n- electrical & material\n- data\n- mechanical\n- generic physical\n- environmental",
+      "x": -240,
+      "y": 0,
+      "width": 390,
+      "height": 220
+    },
+    {
+      "id": "t2",
+      "type": "text",
+      "text": "## Item Flow\n- information\n- energy\n- material",
+      "x": 240,
+      "y": 0,
+      "width": 390,
+      "height": 220
+    },
+    {
+      "id": "t3",
+      "type": "text",
+      "text": "## Context\n_no defined subtypes_",
+      "x": 720,
+      "y": 0,
+      "width": 390,
+      "height": 220
+    },
+    {
+      "id": "t4",
+      "type": "text",
+      "text": "## Function\n- system\n- hardware\n- software\n- module",
+      "x": -720,
+      "y": 310,
+      "width": 390,
+      "height": 220
+    },
+    {
+      "id": "t5",
+      "type": "text",
+      "text": "## Functional Flow\n_no defined subtypes_",
+      "x": -240,
+      "y": 310,
+      "width": 390,
+      "height": 220
+    },
+    {
+      "id": "t6",
+      "type": "text",
+      "text": "## State\n_no defined subtypes_",
+      "x": 240,
+      "y": 310,
+      "width": 390,
+      "height": 220
+    },
+    {
+      "id": "t7",
+      "type": "text",
+      "text": "## State Machine\n_no defined subtypes_",
+      "x": 720,
+      "y": 310,
+      "width": 390,
+      "height": 220
+    },
+    {
+      "id": "t8",
+      "type": "text",
+      "text": "## Transition\n_no defined subtypes_",
+      "x": -720,
+      "y": 620,
+      "width": 390,
+      "height": 220
+    },
+    {
+      "id": "t9",
+      "type": "text",
+      "text": "## Requirement\n- functional\n- design\n- standard\n- stakeholder",
+      "x": -240,
+      "y": 620,
+      "width": 390,
+      "height": 220
+    },
+    {
+      "id": "t10",
+      "type": "text",
+      "text": "## Design\n- characteristic\n- decision",
+      "x": 240,
+      "y": 620,
+      "width": 390,
+      "height": 220
+    },
+    {
+      "id": "t11",
+      "type": "text",
+      "text": "## Use Case\n- what\n- where\n- why\n- when",
+      "x": 720,
+      "y": 620,
+      "width": 390,
+      "height": 220
+    },
+    {
+      "id": "t12",
+      "type": "text",
+      "text": "## Actor\n_no defined subtypes_",
+      "x": -720,
+      "y": 930,
+      "width": 390,
+      "height": 220
+    },
+    {
+      "id": "t13",
+      "type": "text",
+      "text": "## Failure Mode\n_no defined subtypes_",
+      "x": -240,
+      "y": 930,
+      "width": 390,
+      "height": 220
+    },
+    {
+      "id": "t14",
+      "type": "text",
+      "text": "## Issue\n- engineering issue\n- lifecycle risk",
+      "x": 240,
+      "y": 930,
+      "width": 390,
+      "height": 220
+    },
+    {
+      "id": "t15",
+      "type": "text",
+      "text": "## Info\n- need\n- objective\n- concern\n- decision\n- assumption\n- rationale\n- finding\n- analysis\n- trade study\n- calculation\n- milestone\n- lesson learned",
+      "x": 720,
+      "y": 930,
+      "width": 390,
+      "height": 220
+    },
+    {
+      "id": "t16",
+      "type": "text",
+      "text": "## Step\n_no defined subtypes_",
+      "x": -720,
+      "y": 1240,
+      "width": 390,
+      "height": 220
+    },
+    {
+      "id": "t17",
+      "type": "text",
+      "text": "## Verification\n- test\n- analysis\n- inspection\n- demonstration",
+      "x": -240,
+      "y": 1240,
+      "width": 390,
+      "height": 220
+    },
+    {
+      "id": "t18",
+      "type": "text",
+      "text": "## Procedure\n- test\n- assembly\n- configuration\n- commissioning\n- calibration\n- maintenance\n- repair\n- decommissioning",
+      "x": 240,
+      "y": 1240,
+      "width": 390,
+      "height": 220
+    },
+    {
+      "id": "t19",
+      "type": "text",
+      "text": "## Setup\n_no defined subtypes_",
+      "x": 720,
+      "y": 1240,
+      "width": 390,
+      "height": 220
+    },
+    {
+      "id": "t20",
+      "type": "text",
+      "text": "## Plan\n_no defined subtypes_",
+      "x": -720,
+      "y": 1550,
+      "width": 390,
+      "height": 220
+    },
+    {
+      "id": "t21",
+      "type": "text",
+      "text": "## Result\n_no defined subtypes_",
+      "x": -240,
+      "y": 1550,
+      "width": 390,
+      "height": 220
+    },
+    {
+      "id": "t22",
+      "type": "text",
+      "text": "## Document\n- standard\n- specification\n- report\n- drawing",
+      "x": 240,
+      "y": 1550,
+      "width": 390,
+      "height": 220
+    },
+    {
+      "id": "t23",
+      "type": "text",
+      "text": "## Artifact\n- image\n- document",
+      "x": 720,
+      "y": 1550,
+      "width": 390,
+      "height": 220
+    }
+  ],
+  "edges": [
+    {
+      "id": "e1",
+      "fromNode": "title",
+      "toNode": "t0",
+      "label": "type"
+    },
+    {
+      "id": "e2",
+      "fromNode": "title",
+      "toNode": "t1",
+      "label": "type"
+    },
+    {
+      "id": "e3",
+      "fromNode": "title",
+      "toNode": "t2",
+      "label": "type"
+    },
+    {
+      "id": "e4",
+      "fromNode": "title",
+      "toNode": "t3",
+      "label": "type"
+    },
+    {
+      "id": "e5",
+      "fromNode": "title",
+      "toNode": "t4",
+      "label": "type"
+    },
+    {
+      "id": "e6",
+      "fromNode": "title",
+      "toNode": "t5",
+      "label": "type"
+    },
+    {
+      "id": "e7",
+      "fromNode": "title",
+      "toNode": "t6",
+      "label": "type"
+    },
+    {
+      "id": "e8",
+      "fromNode": "title",
+      "toNode": "t7",
+      "label": "type"
+    },
+    {
+      "id": "e9",
+      "fromNode": "title",
+      "toNode": "t8",
+      "label": "type"
+    },
+    {
+      "id": "e10",
+      "fromNode": "title",
+      "toNode": "t9",
+      "label": "type"
+    },
+    {
+      "id": "e11",
+      "fromNode": "title",
+      "toNode": "t10",
+      "label": "type"
+    },
+    {
+      "id": "e12",
+      "fromNode": "title",
+      "toNode": "t11",
+      "label": "type"
+    },
+    {
+      "id": "e13",
+      "fromNode": "title",
+      "toNode": "t12",
+      "label": "type"
+    },
+    {
+      "id": "e14",
+      "fromNode": "title",
+      "toNode": "t13",
+      "label": "type"
+    },
+    {
+      "id": "e15",
+      "fromNode": "title",
+      "toNode": "t14",
+      "label": "type"
+    },
+    {
+      "id": "e16",
+      "fromNode": "title",
+      "toNode": "t15",
+      "label": "type"
+    },
+    {
+      "id": "e17",
+      "fromNode": "title",
+      "toNode": "t16",
+      "label": "type"
+    },
+    {
+      "id": "e18",
+      "fromNode": "title",
+      "toNode": "t17",
+      "label": "type"
+    },
+    {
+      "id": "e19",
+      "fromNode": "title",
+      "toNode": "t18",
+      "label": "type"
+    },
+    {
+      "id": "e20",
+      "fromNode": "title",
+      "toNode": "t19",
+      "label": "type"
+    },
+    {
+      "id": "e21",
+      "fromNode": "title",
+      "toNode": "t20",
+      "label": "type"
+    },
+    {
+      "id": "e22",
+      "fromNode": "title",
+      "toNode": "t21",
+      "label": "type"
+    },
+    {
+      "id": "e23",
+      "fromNode": "title",
+      "toNode": "t22",
+      "label": "type"
+    },
+    {
+      "id": "e24",
+      "fromNode": "title",
+      "toNode": "t23",
+      "label": "type"
+    }
+  ]
+}

@@ -2,37 +2,26 @@
 uid:
 type: MDSE Element Definition
 status: Working
-mdseType: "Info"
-mdseSubtypes: ["need","objective","concern","decision","assumption","rationale","finding","analysis","trade study","calculation","milestone","lesson learned"]
+mdseType: "Failure Mode"
+mdseSubtypes: []
 ---
-# Info
+# Failure Mode
 
 ## Definition
 
-Reusable engineering knowledge or rationale.
+Mode in which a modeled element can fail.
 
 ## Approved subtypes
 
-- `need`
-- `objective`
-- `concern`
-- `decision`
-- `assumption`
-- `rationale`
-- `finding`
-- `analysis`
-- `trade study`
-- `calculation`
-- `milestone`
-- `lesson learned`
+No predefined subtypes.
 
 ## Nomenclature
 
 Engineering notes use:
 
 ```yaml
-type: Info
-subtype: need
+type: Failure Mode
+subtype: 
 ```
 
 `subtype` replaces the former `kind` property.

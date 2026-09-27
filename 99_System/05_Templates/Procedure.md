@@ -2,7 +2,7 @@
 uid:
 id:
 type: Procedure
-kind: test
+subtype: test
 status: Draft
 control:
 boundary:

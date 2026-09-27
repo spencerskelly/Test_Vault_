@@ -2,7 +2,7 @@
 uid:
 id:
 type: State
-kind: 
+subtype: 
 status: Draft
 control:
 boundary:

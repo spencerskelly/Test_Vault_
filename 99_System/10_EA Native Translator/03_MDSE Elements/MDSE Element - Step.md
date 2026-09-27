@@ -2,37 +2,26 @@
 uid:
 type: MDSE Element Definition
 status: Working
-mdseType: "Info"
-mdseSubtypes: ["need","objective","concern","decision","assumption","rationale","finding","analysis","trade study","calculation","milestone","lesson learned"]
+mdseType: "Step"
+mdseSubtypes: []
 ---
-# Info
+# Step
 
 ## Definition
 
-Reusable engineering knowledge or rationale.
+Reusable verification/procedure activity step.
 
 ## Approved subtypes
 
-- `need`
-- `objective`
-- `concern`
-- `decision`
-- `assumption`
-- `rationale`
-- `finding`
-- `analysis`
-- `trade study`
-- `calculation`
-- `milestone`
-- `lesson learned`
+No predefined subtypes.
 
 ## Nomenclature
 
 Engineering notes use:
 
 ```yaml
-type: Info
-subtype: need
+type: Step
+subtype: 
 ```
 
 `subtype` replaces the former `kind` property.

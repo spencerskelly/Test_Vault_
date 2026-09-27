@@ -2,7 +2,7 @@
 uid:
 id:
 type: Requirement
-kind: functional
+subtype: functional
 status: Draft
 control:
 boundary:

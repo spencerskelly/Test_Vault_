@@ -2,7 +2,7 @@
 uid:
 id:
 type: Context
-kind: 
+subtype: 
 status: Draft
 control:
 boundary:

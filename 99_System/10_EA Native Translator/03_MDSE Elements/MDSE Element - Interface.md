@@ -2,22 +2,34 @@
 uid:
 type: MDSE Element Definition
 status: Working
-elementType: "Interface"
+mdseType: "Interface"
+mdseSubtypes: ["electrical & material","data","mechanical","generic physical","environmental"]
 ---
 # Interface
 
 ## Definition
 
-Meaningful engineering boundary through which elements interact or must remain compatible.
+Meaningful boundary through which modeled elements interact or must remain compatible.
 
-## Known EA source paths
+## Approved subtypes
 
-[[EA Element - Port - ProxyPort]], selected [[EA Element - Port]]
+- `electrical & material`
+- `data`
+- `mechanical`
+- `generic physical`
+- `environmental`
 
-## Translation principle
+## Nomenclature
 
-The source EA type is evidence. Where a source construct is not deterministically type-bearing, semantic classification occurs before relationship translation.
+Engineering notes use:
 
-## Canvas
+```yaml
+type: Interface
+subtype: electrical & material
+```
 
-[[CANVAS - Interface Translation]]
+`subtype` replaces the former `kind` property.
+
+## Translator principle
+
+Source EA stereotypes do not automatically create new MDSE subtypes. Only approved subtype mappings may populate `subtype`; otherwise preserve the source stereotype as provenance and leave `subtype` blank pending semantic review.

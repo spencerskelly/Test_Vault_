@@ -2,7 +2,7 @@
 uid:
 id:
 type: Interface
-kind: electrical & material
+subtype: electrical & material
 status: Draft
 control:
 boundary:
