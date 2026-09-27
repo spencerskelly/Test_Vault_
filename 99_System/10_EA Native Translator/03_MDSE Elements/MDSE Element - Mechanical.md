@@ -2,7 +2,7 @@
 uid:
 type: MDSE Element Definition
 status: Working
-mdseType: "Thing"
+mdseType: "Object"
 mdseSubtype: "mechanical"
 ---
 # Mechanical
@@ -10,7 +10,7 @@ mdseSubtype: "mechanical"
 ## Classification
 
 ```yaml
-type: Thing
+type: Object
 subtype: mechanical
 ```
 
@@ -20,4 +20,4 @@ Mechanical/physical product architecture element.
 
 ## Nomenclature note
 
-Mechanical is an MDSE **subtype of Thing**, not a top-level MDSE type.
+Mechanical is an MDSE **subtype of Object**, not a top-level MDSE type.

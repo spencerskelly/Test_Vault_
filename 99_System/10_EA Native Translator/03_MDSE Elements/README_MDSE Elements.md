@@ -10,13 +10,13 @@ Canonical MDSE target taxonomy used by translation.
 
 ## Nomenclature
 
-Use **type → subtype**. The former term/property **kind** is deprecated.
+Use **type → subtype**. `kind` is deprecated. The former MDSE type **Thing** is replaced by **Object**.
 
-See [[MDSE Type and Subtype Taxonomy]] and [[CANVAS_MDSE Type and Subtype Taxonomy]].
+See [[MDSE Type and Subtype Taxonomy]].
 
 ## All MDSE types
 
-- **Thing** — electrical, circuit, mechanical, software, firmware
+- **Object** — electrical, circuit, mechanical, software, firmware
 - **Interface** — electrical & material, data, mechanical, generic physical, environmental
 - **Item Flow** — information, energy, material
 - **Context**

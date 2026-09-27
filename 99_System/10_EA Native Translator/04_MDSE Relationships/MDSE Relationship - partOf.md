@@ -9,12 +9,8 @@ category: "structure"
 
 ## Meaning
 
-Thing is a structural constituent of another Thing.
+Object is a structural constituent of another Object.
 
 ## Inverse
 
 `hasPart`
-
-## Translator use
-
-Create this relationship only when the approved source pattern and endpoint semantics support this exact meaning. Do not use it as a generic replacement for an ambiguous EA connector.

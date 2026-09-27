@@ -1,4 +1,4 @@
-# 10 Things
+# 10 Objects
 
 This is a model-facing folder.
 

@@ -9,12 +9,8 @@ category: "design ownership"
 
 ## Meaning
 
-Design describes/is the design of a Thing.
+Design describes/is the design of an Object.
 
 ## Inverse
 
 `hasDesign`
-
-## Translator use
-
-Create this relationship only when the approved source pattern and endpoint semantics support this exact meaning. Do not use it as a generic replacement for an ambiguous EA connector.

@@ -2,7 +2,7 @@
 uid:
 type: MDSE Element Definition
 status: Working
-mdseType: "Thing"
+mdseType: "Object"
 mdseSubtype: "software"
 ---
 # Software
@@ -10,7 +10,7 @@ mdseSubtype: "software"
 ## Classification
 
 ```yaml
-type: Thing
+type: Object
 subtype: software
 ```
 
@@ -20,4 +20,4 @@ Application, cloud, tool, or service software.
 
 ## Nomenclature note
 
-Software is an MDSE **subtype of Thing**, not a top-level MDSE type.
+Software is an MDSE **subtype of Object**, not a top-level MDSE type.

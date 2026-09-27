@@ -2,7 +2,7 @@
 uid:
 type: MDSE Element Definition
 status: Working
-mdseType: "Thing"
+mdseType: "Object"
 mdseSubtype: "electrical"
 ---
 # Electrical
@@ -10,7 +10,7 @@ mdseSubtype: "electrical"
 ## Classification
 
 ```yaml
-type: Thing
+type: Object
 subtype: electrical
 ```
 
@@ -20,4 +20,4 @@ Physical/electrical product architecture element.
 
 ## Nomenclature note
 
-Electrical is an MDSE **subtype of Thing**, not a top-level MDSE type.
+Electrical is an MDSE **subtype of Object**, not a top-level MDSE type.

@@ -8,20 +8,18 @@ workspace: EA Native Translator
 
 ## Nomenclature
 
-MDSE uses a two-level classification vocabulary:
+MDSE uses:
 
-- **type** — the primary semantic element class, such as `Thing`, `Requirement`, or `Function`.
-- **subtype** — an approved reusable specialization/classification within that type, such as `Thing / electrical` or `Requirement / functional`.
+- **type** — primary semantic element class, such as `Object`, `Requirement`, or `Function`;
+- **subtype** — approved specialization/classification within that type.
 
-The former property name `kind` is deprecated. New and migrated notes use `subtype`.
-
-This property nomenclature is distinct from the semantic relationship `subtypeOf / supertypeOf`, which remains the relationship used for true reusable generalization between modeled elements.
+The former property `kind` is deprecated. The former top-level MDSE type `Thing` is renamed to `Object`.
 
 ## Authoritative taxonomy
 
 | MDSE type | Prefix | Folder | Approved subtypes |
 |---|---|---|---|
-| Thing | THG | `10_Things` | `electrical`, `circuit`, `mechanical`, `software`, `firmware` |
+| Object | OBJ | `10_Objects` | `electrical`, `circuit`, `mechanical`, `software`, `firmware` |
 | Interface | INT | `20_Interfaces` | `electrical & material`, `data`, `mechanical`, `generic physical`, `environmental` |
 | Item Flow | IFLOW | `21_Item_Flows` | `information`, `energy`, `material` |
 | Context | CTX | `25_Contexts` | — |
@@ -46,6 +44,6 @@ This property nomenclature is distinct from the semantic relationship `subtypeOf
 | Document | DOC | `70_Documents` | `standard`, `specification`, `report`, `drawing` |
 | Artifact | ART | `71_Artifacts` | `image`, `document` |
 
-## Translator rule
+## EA Object distinction
 
-A translator may create a `subtype` value only when the source semantics match an approved subtype above or an explicit methodology amendment adds a new subtype. Source stereotypes do not automatically expand this taxonomy.
+EA's source metaclass `Object` is **EA Object**. The target MDSE type is **MDSE Object**. Matching names do not imply automatic identity or conversion.

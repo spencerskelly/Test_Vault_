@@ -1,20 +1,20 @@
-schemaVersion: '1.3'
+schemaVersion: '1.4'
 date: '2026-09-27'
-basis: MDSE ruleset 1.20
+basis: MDSE ruleset 1.21
 commonProperties: [uid, id, type, subtype, status, control, boundary, tags, aliases, formerIds]
 classes:
-- name: Thing
-  prefix: THG
-  folder: 10_Things
-  subtype: ["electrical","circuit","mechanical","software","firmware"]
+- name: Object
+  prefix: OBJ
+  folder: 10_Objects
+  subtype: ["electrical", "circuit", "mechanical", "software", "firmware"]
 - name: Interface
   prefix: INT
   folder: 20_Interfaces
-  subtype: ["electrical & material","data","mechanical","generic physical","environmental"]
+  subtype: ["electrical & material", "data", "mechanical", "generic physical", "environmental"]
 - name: Item Flow
   prefix: IFLOW
   folder: 21_Item_Flows
-  subtype: ["information","energy","material"]
+  subtype: ["information", "energy", "material"]
 - name: Context
   prefix: CTX
   folder: 25_Contexts
@@ -22,7 +22,7 @@ classes:
 - name: Function
   prefix: FUNC
   folder: 30_Functions
-  subtype: ["system","hardware","software","module"]
+  subtype: ["system", "hardware", "software", "module"]
 - name: Functional Flow
   prefix: FFLOW
   folder: 31_Functional_Flows
@@ -42,15 +42,15 @@ classes:
 - name: Requirement
   prefix: REQ
   folder: 40_Requirements
-  subtype: ["functional","design","standard","stakeholder"]
+  subtype: ["functional", "design", "standard", "stakeholder"]
 - name: Design
   prefix: DES
   folder: 41_Designs
-  subtype: ["characteristic","decision"]
+  subtype: ["characteristic", "decision"]
 - name: Use Case
   prefix: UC
   folder: 45_Use_Cases
-  subtype: ["what","where","why","when"]
+  subtype: ["what", "where", "why", "when"]
 - name: Actor
   prefix: ACT
   folder: 47_Actors
@@ -62,11 +62,11 @@ classes:
 - name: Issue
   prefix: ISS
   folder: 51_Issues
-  subtype: ["engineering issue","lifecycle risk"]
+  subtype: ["engineering issue", "lifecycle risk"]
 - name: Info
   prefix: INFO
   folder: 55_Info
-  subtype: ["need","objective","concern","decision","assumption","rationale","finding","analysis","trade study","calculation","milestone","lesson learned"]
+  subtype: ["need", "objective", "concern", "decision", "assumption", "rationale", "finding", "analysis", "trade study", "calculation", "milestone", "lesson learned"]
 - name: Step
   prefix: STEP
   folder: 60_Verification/01_Steps
@@ -74,11 +74,11 @@ classes:
 - name: Verification
   prefix: VER
   folder: 60_Verification/02_Verifications
-  subtype: ["test","analysis","inspection","demonstration"]
+  subtype: ["test", "analysis", "inspection", "demonstration"]
 - name: Procedure
   prefix: PROC
   folder: 60_Verification/03_Procedures
-  subtype: ["test","assembly","configuration","commissioning","calibration","maintenance","repair","decommissioning"]
+  subtype: ["test", "assembly", "configuration", "commissioning", "calibration", "maintenance", "repair", "decommissioning"]
 - name: Setup
   prefix: SETUP
   folder: 60_Verification/04_Setups
@@ -94,8 +94,8 @@ classes:
 - name: Document
   prefix: DOC
   folder: 70_Documents
-  subtype: ["standard","specification","report","drawing"]
+  subtype: ["standard", "specification", "report", "drawing"]
 - name: Artifact
   prefix: ART
   folder: 71_Artifacts
-  subtype: ["image","document"]
+  subtype: ["image", "document"]

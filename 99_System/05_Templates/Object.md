@@ -1,7 +1,7 @@
 ---
 uid:
 id:
-type: Thing
+type: Object
 subtype: electrical
 status: Draft
 control:

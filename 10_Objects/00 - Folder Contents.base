@@ -1,6 +1,6 @@
 filters:
   and:
-    - file.folder == "10_Things"
+    - file.folder == "10_Objects"
 views:
   - type: table
     name: Contents

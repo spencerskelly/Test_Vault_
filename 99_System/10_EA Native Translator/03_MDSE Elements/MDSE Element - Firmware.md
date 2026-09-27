@@ -2,7 +2,7 @@
 uid:
 type: MDSE Element Definition
 status: Working
-mdseType: "Thing"
+mdseType: "Object"
 mdseSubtype: "firmware"
 ---
 # Firmware
@@ -10,7 +10,7 @@ mdseSubtype: "firmware"
 ## Classification
 
 ```yaml
-type: Thing
+type: Object
 subtype: firmware
 ```
 
@@ -20,4 +20,4 @@ Embedded software tied to a physical product/platform.
 
 ## Nomenclature note
 
-Firmware is an MDSE **subtype of Thing**, not a top-level MDSE type.
+Firmware is an MDSE **subtype of Object**, not a top-level MDSE type.
