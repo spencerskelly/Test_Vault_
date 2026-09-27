@@ -1,0 +1,339 @@
+{
+  "nodes": [
+    {
+      "id": "title",
+      "type": "text",
+      "text": "# Requirement Translation Review\nUse this canvas to approve how EA Requirements become MDSE Requirements.\n\nLeft = EA source\nCenter = translation decision\nRight = MDSE result",
+      "x": 0,
+      "y": -850,
+      "width": 760,
+      "height": 220
+    },
+    {
+      "id": "req",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/01_EA Elements/Requirement/README_Requirement.md",
+      "x": -1200,
+      "y": -300,
+      "width": 380,
+      "height": 220
+    },
+    {
+      "id": "fr",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/01_EA Elements/Requirement/EA Stereotype - functionalRequirement.md",
+      "x": -1200,
+      "y": 0,
+      "width": 380,
+      "height": 180
+    },
+    {
+      "id": "f2",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/01_EA Elements/Requirement/EA Stereotype - Functional.md",
+      "x": -1200,
+      "y": 220,
+      "width": 380,
+      "height": 180
+    },
+    {
+      "id": "dc",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/01_EA Elements/Requirement/EA Stereotype - designConstraint.md",
+      "x": -1200,
+      "y": 440,
+      "width": 380,
+      "height": 180
+    },
+    {
+      "id": "gen",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/01_EA Elements/Requirement/EA Stereotype - requirement.md",
+      "x": -1200,
+      "y": 660,
+      "width": 380,
+      "height": 180
+    },
+    {
+      "id": "perf",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/01_EA Elements/Requirement/EA Stereotype - performanceRequirement.md",
+      "x": -1200,
+      "y": 880,
+      "width": 380,
+      "height": 180
+    },
+    {
+      "id": "reg",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/01_EA Elements/Requirement/EA Stereotype - Regulatory Requirement.md",
+      "x": -1200,
+      "y": 1100,
+      "width": 380,
+      "height": 180
+    },
+    {
+      "id": "typeDecision",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/01_EA Elements/Requirement/Decisions/Requirement Type Mapping.md",
+      "x": -250,
+      "y": 250,
+      "width": 460,
+      "height": 280
+    },
+    {
+      "id": "propDecision",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/01_EA Elements/Requirement/Decisions/Requirement Property Mapping.md",
+      "x": -250,
+      "y": 620,
+      "width": 460,
+      "height": 260
+    },
+    {
+      "id": "relDecision",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/01_EA Elements/Requirement/Decisions/Requirement Relationship Mapping.md",
+      "x": -250,
+      "y": 980,
+      "width": 460,
+      "height": 280
+    },
+    {
+      "id": "verifyDecision",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/01_EA Elements/Requirement/Decisions/Requirement Verification Cases.md",
+      "x": -250,
+      "y": 1340,
+      "width": 460,
+      "height": 260
+    },
+    {
+      "id": "mdseReq",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/03_MDSE Elements/MDSE Element - Requirement.md",
+      "x": 750,
+      "y": 250,
+      "width": 420,
+      "height": 260
+    },
+    {
+      "id": "functional",
+      "type": "text",
+      "text": "**Proposed Settled**\nMDSE Requirement\n`requirementType: Functional`",
+      "x": 750,
+      "y": 600,
+      "width": 420,
+      "height": 180
+    },
+    {
+      "id": "designc",
+      "type": "text",
+      "text": "**Proposed Settled**\nMDSE Requirement\n`requirementType: Design Constraint`",
+      "x": 750,
+      "y": 820,
+      "width": 420,
+      "height": 180
+    },
+    {
+      "id": "preserve",
+      "type": "text",
+      "text": "**Preserve / Review**\nMDSE Requirement\n`requirementType:` blank\nEA stereotype retained as provenance",
+      "x": 750,
+      "y": 1040,
+      "width": 420,
+      "height": 210
+    },
+    {
+      "id": "r15",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/05_Translation Rules/Matrix Rules/Rule 015 - satisfy - Function → Functional Requirement.md",
+      "x": 1450,
+      "y": 0,
+      "width": 420,
+      "height": 190
+    },
+    {
+      "id": "r16",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/05_Translation Rules/Matrix Rules/Rule 016 - satisfy - Design → Design Constraint.md",
+      "x": 1450,
+      "y": 230,
+      "width": 420,
+      "height": 190
+    },
+    {
+      "id": "r17",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/05_Translation Rules/Matrix Rules/Rule 017 - satisfy - State - State Machine → requirement.md",
+      "x": 1450,
+      "y": 460,
+      "width": 420,
+      "height": 190
+    },
+    {
+      "id": "r18",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/05_Translation Rules/Matrix Rules/Rule 018 - Realisation - Requirement applicability.md",
+      "x": 1450,
+      "y": 690,
+      "width": 420,
+      "height": 190
+    },
+    {
+      "id": "r22",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/05_Translation Rules/Matrix Rules/Rule 022 - refine - Requirement → Requirement.md",
+      "x": 1450,
+      "y": 920,
+      "width": 420,
+      "height": 190
+    },
+    {
+      "id": "r23",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/05_Translation Rules/Matrix Rules/Rule 023 - deriveReqt - Requirement → Requirement.md",
+      "x": 1450,
+      "y": 1150,
+      "width": 420,
+      "height": 190
+    },
+    {
+      "id": "r63",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/05_Translation Rules/Matrix Rules/Rule 063 - Dependency - verify — testCase → Requirement.md",
+      "x": 1450,
+      "y": 1380,
+      "width": 420,
+      "height": 190
+    }
+  ],
+  "edges": [
+    {
+      "id": "e0",
+      "fromNode": "req",
+      "toNode": "typeDecision",
+      "label": "all EA Requirements"
+    },
+    {
+      "id": "e1",
+      "fromNode": "fr",
+      "toNode": "typeDecision",
+      "label": "stereotype"
+    },
+    {
+      "id": "e2",
+      "fromNode": "f2",
+      "toNode": "typeDecision",
+      "label": "stereotype"
+    },
+    {
+      "id": "e3",
+      "fromNode": "dc",
+      "toNode": "typeDecision",
+      "label": "stereotype"
+    },
+    {
+      "id": "e4",
+      "fromNode": "gen",
+      "toNode": "typeDecision",
+      "label": "stereotype"
+    },
+    {
+      "id": "e5",
+      "fromNode": "perf",
+      "toNode": "typeDecision",
+      "label": "review"
+    },
+    {
+      "id": "e6",
+      "fromNode": "reg",
+      "toNode": "typeDecision",
+      "label": "review"
+    },
+    {
+      "id": "e7",
+      "fromNode": "typeDecision",
+      "toNode": "mdseReq",
+      "label": "always creates Requirement"
+    },
+    {
+      "id": "e8",
+      "fromNode": "typeDecision",
+      "toNode": "functional",
+      "label": "approved functional stereotypes"
+    },
+    {
+      "id": "e9",
+      "fromNode": "typeDecision",
+      "toNode": "designc",
+      "label": "designConstraint"
+    },
+    {
+      "id": "e10",
+      "fromNode": "typeDecision",
+      "toNode": "preserve",
+      "label": "generic / unresolved stereotypes"
+    },
+    {
+      "id": "e11",
+      "fromNode": "mdseReq",
+      "toNode": "propDecision",
+      "label": "fields / provenance"
+    },
+    {
+      "id": "e12",
+      "fromNode": "mdseReq",
+      "toNode": "relDecision",
+      "label": "connector semantics"
+    },
+    {
+      "id": "e13",
+      "fromNode": "relDecision",
+      "toNode": "verifyDecision",
+      "label": "prove implementation"
+    },
+    {
+      "id": "e14",
+      "fromNode": "relDecision",
+      "toNode": "r15",
+      "label": "Function satisfy"
+    },
+    {
+      "id": "e15",
+      "fromNode": "relDecision",
+      "toNode": "r16",
+      "label": "Design satisfy"
+    },
+    {
+      "id": "e16",
+      "fromNode": "relDecision",
+      "toNode": "r17",
+      "label": "State satisfy"
+    },
+    {
+      "id": "e17",
+      "fromNode": "relDecision",
+      "toNode": "r18",
+      "label": "applicability"
+    },
+    {
+      "id": "e18",
+      "fromNode": "relDecision",
+      "toNode": "r22",
+      "label": "refine"
+    },
+    {
+      "id": "e19",
+      "fromNode": "relDecision",
+      "toNode": "r23",
+      "label": "derive"
+    },
+    {
+      "id": "e20",
+      "fromNode": "relDecision",
+      "toNode": "r63",
+      "label": "verify"
+    }
+  ]
+}
