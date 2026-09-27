@@ -12,7 +12,7 @@
     {
       "id": "t0",
       "type": "text",
-      "text": "## Thing\n- electrical\n- circuit\n- mechanical\n- software\n- firmware",
+      "text": "## Object\n- electrical\n- circuit\n- mechanical\n- software\n- firmware",
       "x": -720,
       "y": 0,
       "width": 390,

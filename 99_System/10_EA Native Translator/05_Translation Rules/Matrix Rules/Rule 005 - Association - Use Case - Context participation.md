@@ -3,7 +3,7 @@ uid:
 type: Translation Rule
 status: "Settled"
 matrixRuleId: 5
-source: "EA Native Import Relationship Mapping Matrix 2026-09-27 r12"
+source: "EA Native Import Relationship Mapping Matrix 2026-09-27 r12; terminology amended 2026-09-27"
 ---
 # Rule 5 — Association — Use Case / Context participation
 
@@ -12,7 +12,7 @@ source: "EA Native Import Relationship Mapping Matrix 2026-09-27 r12"
 - **EA Connector:** Association
 - **EA Stereotype / Pattern:** Use Case / Context participation
 - **Source Endpoint Semantics:** Use Case or Context endpoint (source or target)
-- **Target Endpoint Semantics:** Participating Thing / Actor / external element
+- **Target Endpoint Semantics:** Participating Object / Actor / external element
 
 ## MDSE relationship
 
@@ -34,7 +34,3 @@ Settled
 ## Review trigger
 
 If the connector clearly means a different approved global semantic relationship
-
-## Source basis / notes
-
-Subject versus participant distinction is intentionally deferred to post-import cleanup.

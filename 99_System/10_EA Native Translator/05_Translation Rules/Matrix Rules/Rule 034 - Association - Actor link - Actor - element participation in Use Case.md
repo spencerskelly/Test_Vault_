@@ -3,7 +3,7 @@ uid:
 type: Translation Rule
 status: "Settled"
 matrixRuleId: 34
-source: "EA Native Import Relationship Mapping Matrix 2026-09-27 r12"
+source: "EA Native Import Relationship Mapping Matrix 2026-09-27 r12; terminology amended 2026-09-27"
 ---
 # Rule 34 — Association / Actor link — Actor / element participation in Use Case
 
@@ -21,7 +21,7 @@ source: "EA Native Import Relationship Mapping Matrix 2026-09-27 r12"
 
 ## Transformation rule
 
-Store participation only on the owning Use Case. Do not write reciprocal participation YAML to the Actor/Thing note.
+Store participation only on the owning Use Case. Do not write reciprocal participation YAML to the Actor/Object note.
 
 ## Body detail rule
 
@@ -34,7 +34,3 @@ Settled
 ## Review trigger
 
 If the connector represents another approved semantic relationship rather than participation
-
-## Source basis / notes
-
-Same one-sided context-local membership rule applies to Actor and non-Actor participants.

@@ -1,8 +1,8 @@
-# MDSE Modeling Ruleset 1.20
+# MDSE Modeling Ruleset 1.21
 
 ## Status
 
-Superseded by [[MDSE Modeling Ruleset 1.21]]. Retained for history.
+Current reusable modeling ruleset for new Ampure vaults.
 
 ## 1. Model meaning before structure
 
@@ -11,6 +11,11 @@ Classify the concept semantically before choosing a type. Search for an existing
 Folder placement is navigation only.
 
 ## 1.1 Type and subtype nomenclature
+
+The primary reusable engineering-entity type is **Object**. The former top-level type name `Thing` is deprecated.
+
+`Object` may represent physical hardware, software, firmware, or other reusable engineering entities according to its approved subtype. In translator material, use **EA Object** for the Sparx EA metaclass and **MDSE Object** for the MDSE type whenever ambiguity is possible.
+
 
 Every modeled note uses `type` for its primary MDSE semantic class and `subtype` for an approved specialization/classification within that type.
 

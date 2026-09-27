@@ -23,7 +23,7 @@ Provide a Requirement-centered view of approved and unresolved connector transla
 | testCase → `verify` → Requirement | [[Rule 063 - Dependency - verify — testCase → Requirement]] | Test `verifies` Requirement |
 | Info → `trace` → Requirement | [[Rule 024 - trace - Info → element]] | Info `describes` Requirement |
 | Issue → `trace` → Requirement | [[Rule 025 - trace - Issue → element]] | Issue `affects` Requirement |
-| Thing → `trace` → Requirement | [[Rule 026 - trace - Thing → Requirement]] | Requirement `appliesTo` Thing |
+| Object → `trace` → Requirement | [[Rule 026 - trace - Object → Requirement]] | Requirement `appliesTo` Object |
 
 ## Review / deferred families
 

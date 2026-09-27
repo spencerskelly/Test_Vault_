@@ -3,7 +3,7 @@ uid:
 type: Translation Rule
 status: "Settled"
 matrixRuleId: 2
-source: "EA Native Import Relationship Mapping Matrix 2026-09-27 r12"
+source: "EA Native Import Relationship Mapping Matrix 2026-09-27 r12; terminology amended 2026-09-27"
 ---
 # Rule 2 — Aggregation — Composite/shared
 
@@ -11,8 +11,8 @@ source: "EA Native Import Relationship Mapping Matrix 2026-09-27 r12"
 
 - **EA Connector:** Aggregation
 - **EA Stereotype / Pattern:** Composite/shared
-- **Source Endpoint Semantics:** Thing
-- **Target Endpoint Semantics:** Thing
+- **Source Endpoint Semantics:** Object
+- **Target Endpoint Semantics:** Object
 
 ## MDSE relationship
 
@@ -37,4 +37,4 @@ Physical Context exception; endpoint semantics not structural
 
 ## Source basis / notes
 
-Normal Thing structural aggregation.
+Normal MDSE Object structural aggregation.

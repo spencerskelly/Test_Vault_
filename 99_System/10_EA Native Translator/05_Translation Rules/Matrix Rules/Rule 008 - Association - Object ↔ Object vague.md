@@ -3,16 +3,16 @@ uid:
 type: Translation Rule
 status: "Review"
 matrixRuleId: 8
-source: "EA Native Import Relationship Mapping Matrix 2026-09-27 r12"
+source: "EA Native Import Relationship Mapping Matrix 2026-09-27 r12; terminology amended 2026-09-27"
 ---
-# Rule 8 — Association — Thing ↔ Thing vague
+# Rule 8 — Association — Object ↔ Object vague
 
 ## Source pattern
 
 - **EA Connector:** Association
-- **EA Stereotype / Pattern:** Thing ↔ Thing vague
-- **Source Endpoint Semantics:** Thing
-- **Target Endpoint Semantics:** Thing
+- **EA Stereotype / Pattern:** Object ↔ Object vague
+- **Source Endpoint Semantics:** Object
+- **Target Endpoint Semantics:** Object
 
 ## MDSE relationship
 
@@ -34,7 +34,3 @@ Review
 ## Review trigger
 
 Any non-empty label/notes/roles/constraints or meaningful endpoint pattern
-
-## Source basis / notes
-
-No generic associatedWith relationship.

@@ -3,7 +3,7 @@ uid:
 type: Translation Rule
 status: "Settled"
 matrixRuleId: 18
-source: "EA Native Import Relationship Mapping Matrix 2026-09-27 r12"
+source: "EA Native Import Relationship Mapping Matrix 2026-09-27 r12; terminology amended 2026-09-27"
 ---
 # Rule 18 — Realisation — Requirement applicability
 
@@ -21,7 +21,7 @@ source: "EA Native Import Relationship Mapping Matrix 2026-09-27 r12"
 
 ## Transformation rule
 
-Convert Thing/Document/Firmware→Requirement Realisation into Requirement appliesTo endpoint.
+Convert Object/Document/Firmware→Requirement Realisation into Requirement appliesTo endpoint.
 
 ## Body detail rule
 
@@ -34,7 +34,3 @@ Settled
 ## Review trigger
 
 Realisation is clearly implementation rather than applicability
-
-## Source basis / notes
-
-Current conservative mapping.

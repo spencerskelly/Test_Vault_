@@ -3,7 +3,7 @@ uid:
 type: Translation Rule
 status: "Settled"
 matrixRuleId: 10
-source: "EA Native Import Relationship Mapping Matrix 2026-09-27 r12"
+source: "EA Native Import Relationship Mapping Matrix 2026-09-27 r12; terminology amended 2026-09-27"
 ---
 # Rule 10 — allocate — Function allocation
 
@@ -11,7 +11,7 @@ source: "EA Native Import Relationship Mapping Matrix 2026-09-27 r12"
 
 - **EA Connector:** allocate
 - **EA Stereotype / Pattern:** Function allocation
-- **Source Endpoint Semantics:** Thing
+- **Source Endpoint Semantics:** Object
 - **Target Endpoint Semantics:** Function
 
 ## MDSE relationship
@@ -21,7 +21,7 @@ source: "EA Native Import Relationship Mapping Matrix 2026-09-27 r12"
 
 ## Transformation rule
 
-Reverse EA Function→Thing allocation into Thing performs Function.
+Reverse EA Function→Object allocation into Object performs Function.
 
 ## Body detail rule
 
@@ -34,7 +34,3 @@ Settled
 ## Review trigger
 
 Allocation endpoints do not read as performer/behavior
-
-## Source basis / notes
-
-Approved allocate semantic mapping.

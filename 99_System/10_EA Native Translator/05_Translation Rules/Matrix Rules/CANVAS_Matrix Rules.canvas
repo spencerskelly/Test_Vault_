@@ -66,7 +66,7 @@
     {
       "id": "m8",
       "type": "file",
-      "file": "99_System/10_EA Native Translator/05_Translation Rules/Matrix Rules/Rule 008 - Association - Thing ↔ Thing vague.md",
+      "file": "99_System/10_EA Native Translator/05_Translation Rules/Matrix Rules/Rule 008 - Association - Object ↔ Object vague.md",
       "x": 380,
       "y": 230,
       "width": 320,
@@ -120,7 +120,7 @@
     {
       "id": "m14",
       "type": "file",
-      "file": "99_System/10_EA Native Translator/05_Translation Rules/Matrix Rules/Rule 014 - allocate - State to Thing.md",
+      "file": "99_System/10_EA Native Translator/05_Translation Rules/Matrix Rules/Rule 014 - allocate - State to Object.md",
       "x": 380,
       "y": 460,
       "width": 320,
@@ -228,7 +228,7 @@
     {
       "id": "m26",
       "type": "file",
-      "file": "99_System/10_EA Native Translator/05_Translation Rules/Matrix Rules/Rule 026 - trace - Thing → Requirement.md",
+      "file": "99_System/10_EA Native Translator/05_Translation Rules/Matrix Rules/Rule 026 - trace - Object → Requirement.md",
       "x": 380,
       "y": 920,
       "width": 320,
