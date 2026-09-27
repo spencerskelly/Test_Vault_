@@ -1,0 +1,354 @@
+{
+  "nodes": [
+    {
+      "id": "central",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/01_EA Elements/Activity/EA Stereotype - testCase.md",
+      "x": 0,
+      "y": 0,
+      "width": 430,
+      "height": 260
+    },
+    {
+      "id": "c0",
+      "type": "text",
+      "text": "**Incoming**\\nAbstraction «allocate»",
+      "x": -920,
+      "y": -650,
+      "width": 300,
+      "height": 130
+    },
+    {
+      "id": "e0",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/01_EA Elements/Issue/README_Issue.md",
+      "x": -1470,
+      "y": -750,
+      "width": 350,
+      "height": 155
+    },
+    {
+      "id": "c1",
+      "type": "text",
+      "text": "**Outgoing**\\nDependency",
+      "x": 600,
+      "y": -650,
+      "width": 300,
+      "height": 130
+    },
+    {
+      "id": "e1",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/01_EA Elements/Object/README_Object.md",
+      "x": 1150,
+      "y": -750,
+      "width": 350,
+      "height": 155
+    },
+    {
+      "id": "e2",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/01_EA Elements/Artifact/EA Stereotype - Image.md",
+      "x": 1150,
+      "y": -565,
+      "width": 350,
+      "height": 155
+    },
+    {
+      "id": "e3",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/01_EA Elements/InformationItem/README_InformationItem.md",
+      "x": 1150,
+      "y": -380,
+      "width": 350,
+      "height": 155
+    },
+    {
+      "id": "c2",
+      "type": "text",
+      "text": "**Incoming**\\nDependency",
+      "x": -920,
+      "y": -440,
+      "width": 300,
+      "height": 130
+    },
+    {
+      "id": "c3",
+      "type": "text",
+      "text": "**Outgoing**\\nDependency «trace»",
+      "x": 600,
+      "y": -440,
+      "width": 300,
+      "height": 130
+    },
+    {
+      "id": "e4",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/01_EA Elements/Text/README_Text.md",
+      "x": 1150,
+      "y": -195,
+      "width": 350,
+      "height": 155
+    },
+    {
+      "id": "c4",
+      "type": "text",
+      "text": "**Incoming**\\nDependency «trace»",
+      "x": -920,
+      "y": -230,
+      "width": 300,
+      "height": 130
+    },
+    {
+      "id": "e5",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/01_EA Elements/Change/README_Change.md",
+      "x": 1150,
+      "y": -10,
+      "width": 350,
+      "height": 155
+    },
+    {
+      "id": "c5",
+      "type": "text",
+      "text": "**Outgoing**\\nDependency «verify»",
+      "x": 600,
+      "y": -230,
+      "width": 300,
+      "height": 130
+    },
+    {
+      "id": "e6",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/01_EA Elements/Requirement/EA Stereotype - requirement.md",
+      "x": 1150,
+      "y": 175,
+      "width": 350,
+      "height": 155
+    },
+    {
+      "id": "e7",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/01_EA Elements/Requirement/EA Stereotype - designConstraint.md",
+      "x": 1150,
+      "y": 360,
+      "width": 350,
+      "height": 155
+    },
+    {
+      "id": "e8",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/01_EA Elements/Requirement/EA Stereotype - functionalRequirement.md",
+      "x": 1150,
+      "y": 545,
+      "width": 350,
+      "height": 155
+    },
+    {
+      "id": "e9",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/01_EA Elements/Activity/EA Stereotype - Hardware Function.md",
+      "x": 1150,
+      "y": 730,
+      "width": 350,
+      "height": 155
+    },
+    {
+      "id": "e10",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/01_EA Elements/Requirement/EA Stereotype - extendedRequirement.md",
+      "x": 1150,
+      "y": 915,
+      "width": 350,
+      "height": 155
+    },
+    {
+      "id": "c6",
+      "type": "text",
+      "text": "**Outgoing**\\nGeneralization",
+      "x": 600,
+      "y": -20,
+      "width": 300,
+      "height": 130
+    },
+    {
+      "id": "e11",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/01_EA Elements/Activity/EA Stereotype - testCase.md",
+      "x": 1150,
+      "y": 1100,
+      "width": 350,
+      "height": 155
+    },
+    {
+      "id": "c7",
+      "type": "text",
+      "text": "**Outgoing**\\nNesting",
+      "x": 600,
+      "y": 190,
+      "width": 300,
+      "height": 130
+    },
+    {
+      "id": "c8",
+      "type": "text",
+      "text": "**Incoming**\\nNesting",
+      "x": -920,
+      "y": -20,
+      "width": 300,
+      "height": 130
+    },
+    {
+      "id": "e12",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/01_EA Elements/Activity/EA Element - No Stereotype.md",
+      "x": -1470,
+      "y": -565,
+      "width": 350,
+      "height": 155
+    }
+  ],
+  "edges": [
+    {
+      "id": "ce0",
+      "fromNode": "c0",
+      "toNode": "central"
+    },
+    {
+      "id": "ce1",
+      "fromNode": "central",
+      "toNode": "c1"
+    },
+    {
+      "id": "ce2",
+      "fromNode": "c2",
+      "toNode": "central"
+    },
+    {
+      "id": "ce3",
+      "fromNode": "central",
+      "toNode": "c3"
+    },
+    {
+      "id": "ce4",
+      "fromNode": "c4",
+      "toNode": "central"
+    },
+    {
+      "id": "ce5",
+      "fromNode": "central",
+      "toNode": "c5"
+    },
+    {
+      "id": "ce6",
+      "fromNode": "central",
+      "toNode": "c6"
+    },
+    {
+      "id": "ce7",
+      "fromNode": "central",
+      "toNode": "c7"
+    },
+    {
+      "id": "ce8",
+      "fromNode": "c8",
+      "toNode": "central"
+    },
+    {
+      "id": "pe9",
+      "fromNode": "e0",
+      "toNode": "c0",
+      "label": "5 | rule 12 | Settled: Map: affects / affectedBy"
+    },
+    {
+      "id": "pe10",
+      "fromNode": "c1",
+      "toNode": "e1",
+      "label": "4 | rule 58 | Review: Review: Dependency endpoint pattern"
+    },
+    {
+      "id": "pe11",
+      "fromNode": "c1",
+      "toNode": "e2",
+      "label": "1 | rule 58 | Review: Review: Dependency endpoint pattern"
+    },
+    {
+      "id": "pe12",
+      "fromNode": "c1",
+      "toNode": "e3",
+      "label": "1 | rule 58 | Review: Review: Dependency endpoint pattern"
+    },
+    {
+      "id": "pe13",
+      "fromNode": "e0",
+      "toNode": "c2",
+      "label": "1 | rule 58 | Review: Review: Dependency endpoint pattern"
+    },
+    {
+      "id": "pe14",
+      "fromNode": "c3",
+      "toNode": "e4",
+      "label": "2 | rule 50 | Review: Review: trace endpoint pattern"
+    },
+    {
+      "id": "pe15",
+      "fromNode": "e0",
+      "toNode": "c4",
+      "label": "2 | rule 25 | Settled: Map: affects / affectedBy"
+    },
+    {
+      "id": "pe16",
+      "fromNode": "c3",
+      "toNode": "e5",
+      "label": "1 | rule 50 | Review: Review: trace endpoint pattern"
+    },
+    {
+      "id": "pe17",
+      "fromNode": "c5",
+      "toNode": "e6",
+      "label": "272 | rule 63 | Settled: Map: verifies / verifiedBy"
+    },
+    {
+      "id": "pe18",
+      "fromNode": "c5",
+      "toNode": "e7",
+      "label": "26 | rule 63 | Settled: Map: verifies / verifiedBy"
+    },
+    {
+      "id": "pe19",
+      "fromNode": "c5",
+      "toNode": "e8",
+      "label": "26 | rule 63 | Settled: Map: verifies / verifiedBy"
+    },
+    {
+      "id": "pe20",
+      "fromNode": "c5",
+      "toNode": "e9",
+      "label": "1 | rule 64 | Review: Review: verify endpoint pattern"
+    },
+    {
+      "id": "pe21",
+      "fromNode": "c5",
+      "toNode": "e10",
+      "label": "1 | rule 63 | Settled: Map: verifies / verifiedBy"
+    },
+    {
+      "id": "pe22",
+      "fromNode": "c6",
+      "toNode": "e11",
+      "label": "1 | rule 1 | Settled: Map: subtypeOf / supertypeOf"
+    },
+    {
+      "id": "pe23",
+      "fromNode": "c7",
+      "toNode": "e11",
+      "label": "6 | rule 33 | Deferred: Deferred: explicit EA Nesting"
+    },
+    {
+      "id": "pe24",
+      "fromNode": "e12",
+      "toNode": "c8",
+      "label": "4 | rule 33 | Deferred: Deferred: explicit EA Nesting"
+    }
+  ]
+}

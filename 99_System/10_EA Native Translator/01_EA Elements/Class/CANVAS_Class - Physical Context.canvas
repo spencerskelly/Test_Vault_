@@ -1,0 +1,362 @@
+{
+  "nodes": [
+    {
+      "id": "central",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/01_EA Elements/Class/EA Stereotype - Physical Context.md",
+      "x": 0,
+      "y": 0,
+      "width": 430,
+      "height": 260
+    },
+    {
+      "id": "c0",
+      "type": "text",
+      "text": "**Incoming**\\nAbstraction «allocate»",
+      "x": -920,
+      "y": -650,
+      "width": 300,
+      "height": 130
+    },
+    {
+      "id": "e0",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/01_EA Elements/Activity/EA Stereotype - System Function.md",
+      "x": -1470,
+      "y": -750,
+      "width": 350,
+      "height": 155
+    },
+    {
+      "id": "c1",
+      "type": "text",
+      "text": "**Incoming**\\nAggregation",
+      "x": -920,
+      "y": -440,
+      "width": 300,
+      "height": 130
+    },
+    {
+      "id": "e1",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/01_EA Elements/Class/EA Stereotype - System Partner.md",
+      "x": -1470,
+      "y": -565,
+      "width": 350,
+      "height": 155
+    },
+    {
+      "id": "e2",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/01_EA Elements/Class/EA Stereotype - Module.md",
+      "x": -1470,
+      "y": -380,
+      "width": 350,
+      "height": 155
+    },
+    {
+      "id": "e3",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/01_EA Elements/Class/EA Stereotype - Physical System Variant.md",
+      "x": -1470,
+      "y": -195,
+      "width": 350,
+      "height": 155
+    },
+    {
+      "id": "e4",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/01_EA Elements/Object/README_Object.md",
+      "x": -1470,
+      "y": -10,
+      "width": 350,
+      "height": 155
+    },
+    {
+      "id": "e5",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/01_EA Elements/Class/EA Stereotype - Hardware Component.md",
+      "x": -1470,
+      "y": 175,
+      "width": 350,
+      "height": 155
+    },
+    {
+      "id": "e6",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/01_EA Elements/Class/EA Stereotype - Physical Component.md",
+      "x": -1470,
+      "y": 360,
+      "width": 350,
+      "height": 155
+    },
+    {
+      "id": "e7",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/01_EA Elements/Actor/README_Actor.md",
+      "x": -1470,
+      "y": 545,
+      "width": 350,
+      "height": 155
+    },
+    {
+      "id": "e8",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/01_EA Elements/Class/EA Stereotype - Business Line.md",
+      "x": -1470,
+      "y": 730,
+      "width": 350,
+      "height": 155
+    },
+    {
+      "id": "e9",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/01_EA Elements/Class/EA Stereotype - Software Component.md",
+      "x": -1470,
+      "y": 915,
+      "width": 350,
+      "height": 155
+    },
+    {
+      "id": "e10",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/01_EA Elements/Class/EA Stereotype - Platform.md",
+      "x": -1470,
+      "y": 1100,
+      "width": 350,
+      "height": 155
+    },
+    {
+      "id": "c2",
+      "type": "text",
+      "text": "**Incoming**\\nAssociation",
+      "x": -920,
+      "y": -230,
+      "width": 300,
+      "height": 130
+    },
+    {
+      "id": "e11",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/01_EA Elements/UseCase/README_UseCase.md",
+      "x": -1470,
+      "y": 1285,
+      "width": 350,
+      "height": 155
+    },
+    {
+      "id": "c3",
+      "type": "text",
+      "text": "**Outgoing**\\nAssociation",
+      "x": 600,
+      "y": -650,
+      "width": 300,
+      "height": 130
+    },
+    {
+      "id": "e12",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/01_EA Elements/UseCase/README_UseCase.md",
+      "x": 1150,
+      "y": -750,
+      "width": 350,
+      "height": 155
+    },
+    {
+      "id": "c4",
+      "type": "text",
+      "text": "**Outgoing**\\nGeneralization",
+      "x": 600,
+      "y": -440,
+      "width": 300,
+      "height": 130
+    },
+    {
+      "id": "e13",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/01_EA Elements/Class/EA Stereotype - Physical Context.md",
+      "x": 1150,
+      "y": -565,
+      "width": 350,
+      "height": 155
+    },
+    {
+      "id": "c5",
+      "type": "text",
+      "text": "**Incoming**\\nGeneralization",
+      "x": -920,
+      "y": -20,
+      "width": 300,
+      "height": 130
+    },
+    {
+      "id": "e14",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/01_EA Elements/Class/EA Stereotype - block.md",
+      "x": -1470,
+      "y": 1470,
+      "width": 350,
+      "height": 155
+    },
+    {
+      "id": "c6",
+      "type": "text",
+      "text": "**Incoming**\\nUsage «Responsibility»",
+      "x": -920,
+      "y": 190,
+      "width": 300,
+      "height": 130
+    }
+  ],
+  "edges": [
+    {
+      "id": "ce0",
+      "fromNode": "c0",
+      "toNode": "central"
+    },
+    {
+      "id": "ce1",
+      "fromNode": "c1",
+      "toNode": "central"
+    },
+    {
+      "id": "ce2",
+      "fromNode": "c2",
+      "toNode": "central"
+    },
+    {
+      "id": "ce3",
+      "fromNode": "central",
+      "toNode": "c3"
+    },
+    {
+      "id": "ce4",
+      "fromNode": "central",
+      "toNode": "c4"
+    },
+    {
+      "id": "ce5",
+      "fromNode": "c5",
+      "toNode": "central"
+    },
+    {
+      "id": "ce6",
+      "fromNode": "c6",
+      "toNode": "central"
+    },
+    {
+      "id": "pe7",
+      "fromNode": "e0",
+      "toNode": "c0",
+      "label": "2 | rule 10 | Settled: Map: target Thing performs source Function"
+    },
+    {
+      "id": "pe8",
+      "fromNode": "e1",
+      "toNode": "c1",
+      "label": "69 | rule 4 | Settled: Map: participants on the Context endpoint"
+    },
+    {
+      "id": "pe9",
+      "fromNode": "e2",
+      "toNode": "c1",
+      "label": "30 | rule 4 | Settled: Map: participants on the Context endpoint"
+    },
+    {
+      "id": "pe10",
+      "fromNode": "e3",
+      "toNode": "c1",
+      "label": "25 | rule 4 | Settled: Map: participants on the Context endpoint"
+    },
+    {
+      "id": "pe11",
+      "fromNode": "e4",
+      "toNode": "c1",
+      "label": "22 | rule 4 | Settled: Map: participants on the Context endpoint"
+    },
+    {
+      "id": "pe12",
+      "fromNode": "e5",
+      "toNode": "c1",
+      "label": "20 | rule 4 | Settled: Map: participants on the Context endpoint"
+    },
+    {
+      "id": "pe13",
+      "fromNode": "e6",
+      "toNode": "c1",
+      "label": "11 | rule 4 | Settled: Map: participants on the Context endpoint"
+    },
+    {
+      "id": "pe14",
+      "fromNode": "e7",
+      "toNode": "c1",
+      "label": "10 | rule 4 | Settled: Map: participants on the Context endpoint"
+    },
+    {
+      "id": "pe15",
+      "fromNode": "e8",
+      "toNode": "c1",
+      "label": "10 | rule 4 | Settled: Map: participants on the Context endpoint"
+    },
+    {
+      "id": "pe16",
+      "fromNode": "e9",
+      "toNode": "c1",
+      "label": "6 | rule 4 | Settled: Map: participants on the Context endpoint"
+    },
+    {
+      "id": "pe17",
+      "fromNode": "e10",
+      "toNode": "c1",
+      "label": "3 | rule 4 | Settled: Map: participants on the Context endpoint"
+    },
+    {
+      "id": "pe18",
+      "fromNode": "e11",
+      "toNode": "c2",
+      "label": "5 | rule 5 | Settled: Map: participants on the Use Case/Context endpoint"
+    },
+    {
+      "id": "pe19",
+      "fromNode": "c3",
+      "toNode": "e12",
+      "label": "1 | rule 5 | Settled: Map: participants on the Use Case/Context endpoint"
+    },
+    {
+      "id": "pe20",
+      "fromNode": "c4",
+      "toNode": "e13",
+      "label": "39 | rule 1 | Settled: Map: subtypeOf / supertypeOf"
+    },
+    {
+      "id": "pe21",
+      "fromNode": "e5",
+      "toNode": "c5",
+      "label": "2 | rule 1 | Settled: Map: subtypeOf / supertypeOf"
+    },
+    {
+      "id": "pe22",
+      "fromNode": "e1",
+      "toNode": "c5",
+      "label": "2 | rule 1 | Settled: Map: subtypeOf / supertypeOf"
+    },
+    {
+      "id": "pe23",
+      "fromNode": "e3",
+      "toNode": "c5",
+      "label": "1 | rule 1 | Settled: Map: subtypeOf / supertypeOf"
+    },
+    {
+      "id": "pe24",
+      "fromNode": "e14",
+      "toNode": "c5",
+      "label": "1 | rule 1 | Settled: Map: subtypeOf / supertypeOf"
+    },
+    {
+      "id": "pe25",
+      "fromNode": "e3",
+      "toNode": "c6",
+      "label": "1 | rule 70 | Review: Review: StandardProfile Responsibility"
+    }
+  ]
+}

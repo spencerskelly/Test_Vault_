@@ -1,0 +1,73 @@
+{
+  "nodes": [
+    {
+      "id": "central",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/01_EA Elements/Requirement/EA Stereotype - Functional.md",
+      "x": 0,
+      "y": 0,
+      "width": 430,
+      "height": 260
+    },
+    {
+      "id": "c0",
+      "type": "text",
+      "text": "**Outgoing**\\nDependency «deriveReqt»",
+      "x": 600,
+      "y": -650,
+      "width": 300,
+      "height": 130
+    },
+    {
+      "id": "e0",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/01_EA Elements/Requirement/EA Stereotype - requirement.md",
+      "x": 1150,
+      "y": -750,
+      "width": 350,
+      "height": 155
+    },
+    {
+      "id": "c1",
+      "type": "text",
+      "text": "**Incoming**\\nDependency «satisfy»",
+      "x": -920,
+      "y": -650,
+      "width": 300,
+      "height": 130
+    },
+    {
+      "id": "e1",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/01_EA Elements/Activity/EA Stereotype - Hardware Function.md",
+      "x": -1470,
+      "y": -750,
+      "width": 350,
+      "height": 155
+    }
+  ],
+  "edges": [
+    {
+      "id": "ce0",
+      "fromNode": "central",
+      "toNode": "c0"
+    },
+    {
+      "id": "ce1",
+      "fromNode": "c1",
+      "toNode": "central"
+    },
+    {
+      "id": "pe2",
+      "fromNode": "c0",
+      "toNode": "e0",
+      "label": "4 | rule 23 | Settled: Map: derivedFrom / derivedBy"
+    },
+    {
+      "id": "pe3",
+      "fromNode": "e1",
+      "toNode": "c1",
+      "label": "2 | rule 15 | Settled: Map: satisfies / satisfiedBy"
+    }
+  ]
+}

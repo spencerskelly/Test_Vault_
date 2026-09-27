@@ -1,0 +1,1050 @@
+{
+  "nodes": [
+    {
+      "id": "central",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/02_EA Relationships/Association/README_Association.md",
+      "x": 0,
+      "y": 0,
+      "width": 430,
+      "height": 260
+    },
+    {
+      "id": "s0",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/01_EA Elements/Actor/README_Actor.md",
+      "x": -950,
+      "y": -700,
+      "width": 350,
+      "height": 150
+    },
+    {
+      "id": "t0",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/01_EA Elements/UseCase/README_UseCase.md",
+      "x": 950,
+      "y": -700,
+      "width": 350,
+      "height": 150
+    },
+    {
+      "id": "s1",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/01_EA Elements/UseCase/README_UseCase.md",
+      "x": -950,
+      "y": -520,
+      "width": 350,
+      "height": 150
+    },
+    {
+      "id": "t1",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/01_EA Elements/Class/EA Stereotype - Module.md",
+      "x": 950,
+      "y": -520,
+      "width": 350,
+      "height": 150
+    },
+    {
+      "id": "t2",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/01_EA Elements/Object/README_Object.md",
+      "x": 950,
+      "y": -340,
+      "width": 350,
+      "height": 150
+    },
+    {
+      "id": "s2",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/01_EA Elements/Class/EA Stereotype - System Partner.md",
+      "x": -950,
+      "y": -340,
+      "width": 350,
+      "height": 150
+    },
+    {
+      "id": "s3",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/01_EA Elements/Class/EA Stereotype - Hardware Component.md",
+      "x": -950,
+      "y": -160,
+      "width": 350,
+      "height": 150
+    },
+    {
+      "id": "t3",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/01_EA Elements/Class/EA Stereotype - Hardware Component.md",
+      "x": 950,
+      "y": -160,
+      "width": 350,
+      "height": 150
+    },
+    {
+      "id": "t4",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/01_EA Elements/Class/EA Stereotype - System Partner.md",
+      "x": 950,
+      "y": 20,
+      "width": 350,
+      "height": 150
+    },
+    {
+      "id": "t5",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/01_EA Elements/Class/EA Stereotype - Physical System Variant.md",
+      "x": 950,
+      "y": 200,
+      "width": 350,
+      "height": 150
+    },
+    {
+      "id": "s4",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/01_EA Elements/Object/README_Object.md",
+      "x": -950,
+      "y": 20,
+      "width": 350,
+      "height": 150
+    },
+    {
+      "id": "t6",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/01_EA Elements/Class/EA Stereotype - Software Component.md",
+      "x": 950,
+      "y": 380,
+      "width": 350,
+      "height": 150
+    },
+    {
+      "id": "t7",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/01_EA Elements/Class/EA Stereotype - Physical Component.md",
+      "x": 950,
+      "y": 560,
+      "width": 350,
+      "height": 150
+    },
+    {
+      "id": "s5",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/01_EA Elements/State/EA Stereotype - System State.md",
+      "x": -950,
+      "y": 200,
+      "width": 350,
+      "height": 150
+    },
+    {
+      "id": "t8",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/01_EA Elements/Class/EA Stereotype - block.md",
+      "x": 950,
+      "y": 740,
+      "width": 350,
+      "height": 150
+    },
+    {
+      "id": "t9",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/01_EA Elements/Class/EA Stereotype - Business Line.md",
+      "x": 950,
+      "y": 920,
+      "width": 350,
+      "height": 150
+    },
+    {
+      "id": "s6",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/01_EA Elements/Class/EA Stereotype - Physical System Variant.md",
+      "x": -950,
+      "y": 380,
+      "width": 350,
+      "height": 150
+    },
+    {
+      "id": "s7",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/01_EA Elements/Class/EA Stereotype - block.md",
+      "x": -950,
+      "y": 560,
+      "width": 350,
+      "height": 150
+    },
+    {
+      "id": "t10",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/01_EA Elements/Actor/README_Actor.md",
+      "x": 950,
+      "y": 1100,
+      "width": 350,
+      "height": 150
+    },
+    {
+      "id": "t11",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/01_EA Elements/Class/EA Stereotype - Physical Context.md",
+      "x": 950,
+      "y": 1280,
+      "width": 350,
+      "height": 150
+    },
+    {
+      "id": "s8",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/01_EA Elements/Activity/EA Stereotype - System Function.md",
+      "x": -950,
+      "y": 740,
+      "width": 350,
+      "height": 150
+    },
+    {
+      "id": "s9",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/01_EA Elements/Class/EA Stereotype - Module.md",
+      "x": -950,
+      "y": 920,
+      "width": 350,
+      "height": 150
+    },
+    {
+      "id": "s10",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/01_EA Elements/Class/EA Stereotype - Physical Component.md",
+      "x": -950,
+      "y": 1100,
+      "width": 350,
+      "height": 150
+    },
+    {
+      "id": "s11",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/01_EA Elements/Class/EA Stereotype - Software Component.md",
+      "x": -950,
+      "y": 1280,
+      "width": 350,
+      "height": 150
+    },
+    {
+      "id": "t12",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/01_EA Elements/Activity/EA Element - No Stereotype.md",
+      "x": 950,
+      "y": 1460,
+      "width": 350,
+      "height": 150
+    },
+    {
+      "id": "s12",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/01_EA Elements/Class/EA Stereotype - Business Line.md",
+      "x": -950,
+      "y": 1460,
+      "width": 350,
+      "height": 150
+    },
+    {
+      "id": "s13",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/01_EA Elements/Class/EA Stereotype - Electrical & Material Interface.md",
+      "x": -950,
+      "y": 1640,
+      "width": 350,
+      "height": 150
+    },
+    {
+      "id": "s14",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/01_EA Elements/Class/EA Stereotype - Platform.md",
+      "x": -950,
+      "y": 1820,
+      "width": 350,
+      "height": 150
+    },
+    {
+      "id": "t13",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/01_EA Elements/Class/EA Stereotype - Electrical & Material Interface.md",
+      "x": 950,
+      "y": 1640,
+      "width": 350,
+      "height": 150
+    },
+    {
+      "id": "t14",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/01_EA Elements/Issue/README_Issue.md",
+      "x": 950,
+      "y": 1820,
+      "width": 350,
+      "height": 150
+    },
+    {
+      "id": "s15",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/01_EA Elements/Artifact/EA Stereotype - Document.md",
+      "x": -950,
+      "y": 2000,
+      "width": 350,
+      "height": 150
+    },
+    {
+      "id": "t15",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/01_EA Elements/Text/README_Text.md",
+      "x": 950,
+      "y": 2000,
+      "width": 350,
+      "height": 150
+    },
+    {
+      "id": "t16",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/01_EA Elements/Class/EA Stereotype - Mechanical Interface.md",
+      "x": 950,
+      "y": 2180,
+      "width": 350,
+      "height": 150
+    },
+    {
+      "id": "s16",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/01_EA Elements/Class/EA Stereotype - Physical Context.md",
+      "x": -950,
+      "y": 2180,
+      "width": 350,
+      "height": 150
+    },
+    {
+      "id": "s17",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/01_EA Elements/InformationItem/README_InformationItem.md",
+      "x": -950,
+      "y": 2360,
+      "width": 350,
+      "height": 150
+    },
+    {
+      "id": "s18",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/01_EA Elements/Issue/README_Issue.md",
+      "x": -950,
+      "y": 2540,
+      "width": 350,
+      "height": 150
+    },
+    {
+      "id": "s19",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/01_EA Elements/Note/README_Note.md",
+      "x": -950,
+      "y": 2720,
+      "width": 350,
+      "height": 150
+    },
+    {
+      "id": "t17",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/01_EA Elements/Activity/EA Stereotype - Software Function.md",
+      "x": 950,
+      "y": 2360,
+      "width": 350,
+      "height": 150
+    },
+    {
+      "id": "t18",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/01_EA Elements/Class/EA Stereotype - Data Interface.md",
+      "x": 950,
+      "y": 2540,
+      "width": 350,
+      "height": 150
+    },
+    {
+      "id": "t19",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/01_EA Elements/Class/EA Stereotype - Platform.md",
+      "x": 950,
+      "y": 2720,
+      "width": 350,
+      "height": 150
+    },
+    {
+      "id": "v0",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/02_EA Relationships/Association/README_Association.md",
+      "x": 30,
+      "y": -380,
+      "width": 250,
+      "height": 130
+    }
+  ],
+  "edges": [
+    {
+      "id": "se0",
+      "fromNode": "s0",
+      "toNode": "central",
+      "label": "210 | rule 34 | Settled: Map: participants on the Use Case endpoint"
+    },
+    {
+      "id": "te1",
+      "fromNode": "central",
+      "toNode": "t0",
+      "label": "210 | rule 34 | Settled: Map: participants on the Use Case endpoint"
+    },
+    {
+      "id": "se2",
+      "fromNode": "s1",
+      "toNode": "central",
+      "label": "61 | rule 5 | Settled: Map: participants on the Use Case/Context endpoint"
+    },
+    {
+      "id": "te3",
+      "fromNode": "central",
+      "toNode": "t1",
+      "label": "61 | rule 5 | Settled: Map: participants on the Use Case/Context endpoint"
+    },
+    {
+      "id": "se4",
+      "fromNode": "s1",
+      "toNode": "central",
+      "label": "39 | rule 5 | Settled: Map: participants on the Use Case/Context endpoint"
+    },
+    {
+      "id": "te5",
+      "fromNode": "central",
+      "toNode": "t2",
+      "label": "39 | rule 5 | Settled: Map: participants on the Use Case/Context endpoint"
+    },
+    {
+      "id": "se6",
+      "fromNode": "s2",
+      "toNode": "central",
+      "label": "29 | rule 5 | Settled: Map: participants on the Use Case/Context endpoint"
+    },
+    {
+      "id": "te7",
+      "fromNode": "central",
+      "toNode": "t0",
+      "label": "29 | rule 5 | Settled: Map: participants on the Use Case/Context endpoint"
+    },
+    {
+      "id": "se8",
+      "fromNode": "s3",
+      "toNode": "central",
+      "label": "25 | rule 8 | Review: Review: vague Association"
+    },
+    {
+      "id": "te9",
+      "fromNode": "central",
+      "toNode": "t3",
+      "label": "25 | rule 8 | Review: Review: vague Association"
+    },
+    {
+      "id": "se10",
+      "fromNode": "s1",
+      "toNode": "central",
+      "label": "24 | rule 5 | Settled: Map: participants on the Use Case/Context endpoint"
+    },
+    {
+      "id": "te11",
+      "fromNode": "central",
+      "toNode": "t4",
+      "label": "24 | rule 5 | Settled: Map: participants on the Use Case/Context endpoint"
+    },
+    {
+      "id": "se12",
+      "fromNode": "s1",
+      "toNode": "central",
+      "label": "20 | rule 5 | Settled: Map: participants on the Use Case/Context endpoint"
+    },
+    {
+      "id": "te13",
+      "fromNode": "central",
+      "toNode": "t5",
+      "label": "20 | rule 5 | Settled: Map: participants on the Use Case/Context endpoint"
+    },
+    {
+      "id": "se14",
+      "fromNode": "s4",
+      "toNode": "central",
+      "label": "17 | rule 5 | Settled: Map: participants on the Use Case/Context endpoint"
+    },
+    {
+      "id": "te15",
+      "fromNode": "central",
+      "toNode": "t0",
+      "label": "17 | rule 5 | Settled: Map: participants on the Use Case/Context endpoint"
+    },
+    {
+      "id": "se16",
+      "fromNode": "s1",
+      "toNode": "central",
+      "label": "15 | rule 5 | Settled: Map: participants on the Use Case/Context endpoint"
+    },
+    {
+      "id": "te17",
+      "fromNode": "central",
+      "toNode": "t6",
+      "label": "15 | rule 5 | Settled: Map: participants on the Use Case/Context endpoint"
+    },
+    {
+      "id": "se18",
+      "fromNode": "s1",
+      "toNode": "central",
+      "label": "14 | rule 5 | Settled: Map: participants on the Use Case/Context endpoint"
+    },
+    {
+      "id": "te19",
+      "fromNode": "central",
+      "toNode": "t3",
+      "label": "14 | rule 5 | Settled: Map: participants on the Use Case/Context endpoint"
+    },
+    {
+      "id": "se20",
+      "fromNode": "s1",
+      "toNode": "central",
+      "label": "13 | rule 5 | Settled: Map: participants on the Use Case/Context endpoint"
+    },
+    {
+      "id": "te21",
+      "fromNode": "central",
+      "toNode": "t7",
+      "label": "13 | rule 5 | Settled: Map: participants on the Use Case/Context endpoint"
+    },
+    {
+      "id": "se22",
+      "fromNode": "s5",
+      "toNode": "central",
+      "label": "12 | rule 52 | Review: Review: Association endpoint pattern"
+    },
+    {
+      "id": "te23",
+      "fromNode": "central",
+      "toNode": "t8",
+      "label": "12 | rule 52 | Review: Review: Association endpoint pattern"
+    },
+    {
+      "id": "se24",
+      "fromNode": "s1",
+      "toNode": "central",
+      "label": "12 | rule 5 | Settled: Map: participants on the Use Case/Context endpoint"
+    },
+    {
+      "id": "te25",
+      "fromNode": "central",
+      "toNode": "t9",
+      "label": "12 | rule 5 | Settled: Map: participants on the Use Case/Context endpoint"
+    },
+    {
+      "id": "se26",
+      "fromNode": "s6",
+      "toNode": "central",
+      "label": "11 | rule 5 | Settled: Map: participants on the Use Case/Context endpoint"
+    },
+    {
+      "id": "te27",
+      "fromNode": "central",
+      "toNode": "t0",
+      "label": "11 | rule 5 | Settled: Map: participants on the Use Case/Context endpoint"
+    },
+    {
+      "id": "se28",
+      "fromNode": "s2",
+      "toNode": "central",
+      "label": "8 | rule 8 | Review: Review: vague Association"
+    },
+    {
+      "id": "te29",
+      "fromNode": "central",
+      "toNode": "t4",
+      "label": "8 | rule 8 | Review: Review: vague Association"
+    },
+    {
+      "id": "se30",
+      "fromNode": "s7",
+      "toNode": "central",
+      "label": "8 | rule 8 | Review: Review: vague Association"
+    },
+    {
+      "id": "te31",
+      "fromNode": "central",
+      "toNode": "t6",
+      "label": "8 | rule 8 | Review: Review: vague Association"
+    },
+    {
+      "id": "se32",
+      "fromNode": "s1",
+      "toNode": "central",
+      "label": "6 | rule 5 | Settled: Map: participants on the Use Case/Context endpoint"
+    },
+    {
+      "id": "te33",
+      "fromNode": "central",
+      "toNode": "t0",
+      "label": "6 | rule 5 | Settled: Map: participants on the Use Case/Context endpoint"
+    },
+    {
+      "id": "se34",
+      "fromNode": "s3",
+      "toNode": "central",
+      "label": "5 | rule 8 | Review: Review: vague Association"
+    },
+    {
+      "id": "te35",
+      "fromNode": "central",
+      "toNode": "t4",
+      "label": "5 | rule 8 | Review: Review: vague Association"
+    },
+    {
+      "id": "se36",
+      "fromNode": "s7",
+      "toNode": "central",
+      "label": "5 | rule 8 | Review: Review: vague Association"
+    },
+    {
+      "id": "te37",
+      "fromNode": "central",
+      "toNode": "t8",
+      "label": "5 | rule 8 | Review: Review: vague Association"
+    },
+    {
+      "id": "se38",
+      "fromNode": "s1",
+      "toNode": "central",
+      "label": "5 | rule 34 | Settled: Map: participants on the Use Case endpoint"
+    },
+    {
+      "id": "te39",
+      "fromNode": "central",
+      "toNode": "t10",
+      "label": "5 | rule 34 | Settled: Map: participants on the Use Case endpoint"
+    },
+    {
+      "id": "se40",
+      "fromNode": "s1",
+      "toNode": "central",
+      "label": "5 | rule 5 | Settled: Map: participants on the Use Case/Context endpoint"
+    },
+    {
+      "id": "te41",
+      "fromNode": "central",
+      "toNode": "t11",
+      "label": "5 | rule 5 | Settled: Map: participants on the Use Case/Context endpoint"
+    },
+    {
+      "id": "se42",
+      "fromNode": "s8",
+      "toNode": "central",
+      "label": "4 | rule 5 | Settled: Map: participants on the Use Case/Context endpoint"
+    },
+    {
+      "id": "te43",
+      "fromNode": "central",
+      "toNode": "t0",
+      "label": "4 | rule 5 | Settled: Map: participants on the Use Case/Context endpoint"
+    },
+    {
+      "id": "se44",
+      "fromNode": "s9",
+      "toNode": "central",
+      "label": "4 | rule 8 | Review: Review: vague Association"
+    },
+    {
+      "id": "te45",
+      "fromNode": "central",
+      "toNode": "t4",
+      "label": "4 | rule 8 | Review: Review: vague Association"
+    },
+    {
+      "id": "se46",
+      "fromNode": "s10",
+      "toNode": "central",
+      "label": "4 | rule 5 | Settled: Map: participants on the Use Case/Context endpoint"
+    },
+    {
+      "id": "te47",
+      "fromNode": "central",
+      "toNode": "t0",
+      "label": "4 | rule 5 | Settled: Map: participants on the Use Case/Context endpoint"
+    },
+    {
+      "id": "se48",
+      "fromNode": "s11",
+      "toNode": "central",
+      "label": "4 | rule 8 | Review: Review: vague Association"
+    },
+    {
+      "id": "te49",
+      "fromNode": "central",
+      "toNode": "t6",
+      "label": "4 | rule 8 | Review: Review: vague Association"
+    },
+    {
+      "id": "se50",
+      "fromNode": "s2",
+      "toNode": "central",
+      "label": "3 | rule 8 | Review: Review: vague Association"
+    },
+    {
+      "id": "te51",
+      "fromNode": "central",
+      "toNode": "t3",
+      "label": "3 | rule 8 | Review: Review: vague Association"
+    },
+    {
+      "id": "se52",
+      "fromNode": "s1",
+      "toNode": "central",
+      "label": "3 | rule 5 | Settled: Map: participants on the Use Case/Context endpoint"
+    },
+    {
+      "id": "te53",
+      "fromNode": "central",
+      "toNode": "t8",
+      "label": "3 | rule 5 | Settled: Map: participants on the Use Case/Context endpoint"
+    },
+    {
+      "id": "se54",
+      "fromNode": "s0",
+      "toNode": "central",
+      "label": "2 | rule 52 | Review: Review: Association endpoint pattern"
+    },
+    {
+      "id": "te55",
+      "fromNode": "central",
+      "toNode": "t12",
+      "label": "2 | rule 52 | Review: Review: Association endpoint pattern"
+    },
+    {
+      "id": "se56",
+      "fromNode": "s12",
+      "toNode": "central",
+      "label": "2 | rule 5 | Settled: Map: participants on the Use Case/Context endpoint"
+    },
+    {
+      "id": "te57",
+      "fromNode": "central",
+      "toNode": "t0",
+      "label": "2 | rule 5 | Settled: Map: participants on the Use Case/Context endpoint"
+    },
+    {
+      "id": "se58",
+      "fromNode": "s13",
+      "toNode": "central",
+      "label": "2 | rule 8 | Review: Review: vague Association"
+    },
+    {
+      "id": "te59",
+      "fromNode": "central",
+      "toNode": "t5",
+      "label": "2 | rule 8 | Review: Review: vague Association"
+    },
+    {
+      "id": "se60",
+      "fromNode": "s13",
+      "toNode": "central",
+      "label": "2 | rule 8 | Review: Review: vague Association"
+    },
+    {
+      "id": "te61",
+      "fromNode": "central",
+      "toNode": "t4",
+      "label": "2 | rule 8 | Review: Review: vague Association"
+    },
+    {
+      "id": "se62",
+      "fromNode": "s9",
+      "toNode": "central",
+      "label": "2 | rule 8 | Review: Review: vague Association"
+    },
+    {
+      "id": "te63",
+      "fromNode": "central",
+      "toNode": "t1",
+      "label": "2 | rule 8 | Review: Review: vague Association"
+    },
+    {
+      "id": "se64",
+      "fromNode": "s10",
+      "toNode": "central",
+      "label": "2 | rule 8 | Review: Review: vague Association"
+    },
+    {
+      "id": "te65",
+      "fromNode": "central",
+      "toNode": "t4",
+      "label": "2 | rule 8 | Review: Review: vague Association"
+    },
+    {
+      "id": "se66",
+      "fromNode": "s14",
+      "toNode": "central",
+      "label": "2 | rule 8 | Review: Review: vague Association"
+    },
+    {
+      "id": "te67",
+      "fromNode": "central",
+      "toNode": "t1",
+      "label": "2 | rule 8 | Review: Review: vague Association"
+    },
+    {
+      "id": "se68",
+      "fromNode": "s11",
+      "toNode": "central",
+      "label": "2 | rule 5 | Settled: Map: participants on the Use Case/Context endpoint"
+    },
+    {
+      "id": "te69",
+      "fromNode": "central",
+      "toNode": "t0",
+      "label": "2 | rule 5 | Settled: Map: participants on the Use Case/Context endpoint"
+    },
+    {
+      "id": "se70",
+      "fromNode": "s2",
+      "toNode": "central",
+      "label": "2 | rule 8 | Review: Review: vague Association"
+    },
+    {
+      "id": "te71",
+      "fromNode": "central",
+      "toNode": "t13",
+      "label": "2 | rule 8 | Review: Review: vague Association"
+    },
+    {
+      "id": "se72",
+      "fromNode": "s0",
+      "toNode": "central",
+      "label": "1 | rule 6 | Settled: Map: affects / affectedBy"
+    },
+    {
+      "id": "te73",
+      "fromNode": "central",
+      "toNode": "t14",
+      "label": "1 | rule 6 | Settled: Map: affects / affectedBy"
+    },
+    {
+      "id": "se74",
+      "fromNode": "s15",
+      "toNode": "central",
+      "label": "1 | rule 7 | Settled: Map: describes / describedBy"
+    },
+    {
+      "id": "te75",
+      "fromNode": "central",
+      "toNode": "t3",
+      "label": "1 | rule 7 | Settled: Map: describes / describedBy"
+    },
+    {
+      "id": "se76",
+      "fromNode": "s13",
+      "toNode": "central",
+      "label": "1 | rule 8 | Review: Review: vague Association"
+    },
+    {
+      "id": "te77",
+      "fromNode": "central",
+      "toNode": "t13",
+      "label": "1 | rule 8 | Review: Review: vague Association"
+    },
+    {
+      "id": "se78",
+      "fromNode": "s13",
+      "toNode": "central",
+      "label": "1 | rule 8 | Review: Review: vague Association"
+    },
+    {
+      "id": "te79",
+      "fromNode": "central",
+      "toNode": "t3",
+      "label": "1 | rule 8 | Review: Review: vague Association"
+    },
+    {
+      "id": "se80",
+      "fromNode": "s13",
+      "toNode": "central",
+      "label": "1 | rule 8 | Review: Review: vague Association"
+    },
+    {
+      "id": "te81",
+      "fromNode": "central",
+      "toNode": "t7",
+      "label": "1 | rule 8 | Review: Review: vague Association"
+    },
+    {
+      "id": "se82",
+      "fromNode": "s9",
+      "toNode": "central",
+      "label": "1 | rule 52 | Review: Review: Association endpoint pattern"
+    },
+    {
+      "id": "te83",
+      "fromNode": "central",
+      "toNode": "t15",
+      "label": "1 | rule 52 | Review: Review: Association endpoint pattern"
+    },
+    {
+      "id": "se84",
+      "fromNode": "s10",
+      "toNode": "central",
+      "label": "1 | rule 8 | Review: Review: vague Association"
+    },
+    {
+      "id": "te85",
+      "fromNode": "central",
+      "toNode": "t16",
+      "label": "1 | rule 8 | Review: Review: vague Association"
+    },
+    {
+      "id": "se86",
+      "fromNode": "s16",
+      "toNode": "central",
+      "label": "1 | rule 5 | Settled: Map: participants on the Use Case/Context endpoint"
+    },
+    {
+      "id": "te87",
+      "fromNode": "central",
+      "toNode": "t0",
+      "label": "1 | rule 5 | Settled: Map: participants on the Use Case/Context endpoint"
+    },
+    {
+      "id": "se88",
+      "fromNode": "s6",
+      "toNode": "central",
+      "label": "1 | rule 8 | Review: Review: vague Association"
+    },
+    {
+      "id": "te89",
+      "fromNode": "central",
+      "toNode": "t4",
+      "label": "1 | rule 8 | Review: Review: vague Association"
+    },
+    {
+      "id": "se90",
+      "fromNode": "s6",
+      "toNode": "central",
+      "label": "1 | rule 8 | Review: Review: vague Association"
+    },
+    {
+      "id": "te91",
+      "fromNode": "central",
+      "toNode": "t2",
+      "label": "1 | rule 8 | Review: Review: vague Association"
+    },
+    {
+      "id": "se92",
+      "fromNode": "s11",
+      "toNode": "central",
+      "label": "1 | rule 8 | Review: Review: vague Association"
+    },
+    {
+      "id": "te93",
+      "fromNode": "central",
+      "toNode": "t8",
+      "label": "1 | rule 8 | Review: Review: vague Association"
+    },
+    {
+      "id": "se94",
+      "fromNode": "s17",
+      "toNode": "central",
+      "label": "1 | rule 7 | Settled: Map: describes / describedBy"
+    },
+    {
+      "id": "te95",
+      "fromNode": "central",
+      "toNode": "t5",
+      "label": "1 | rule 7 | Settled: Map: describes / describedBy"
+    },
+    {
+      "id": "se96",
+      "fromNode": "s18",
+      "toNode": "central",
+      "label": "1 | rule 6 | Settled: Map: affects / affectedBy"
+    },
+    {
+      "id": "te97",
+      "fromNode": "central",
+      "toNode": "t1",
+      "label": "1 | rule 6 | Settled: Map: affects / affectedBy"
+    },
+    {
+      "id": "se98",
+      "fromNode": "s18",
+      "toNode": "central",
+      "label": "1 | rule 6 | Settled: Map: affects / affectedBy"
+    },
+    {
+      "id": "te99",
+      "fromNode": "central",
+      "toNode": "t5",
+      "label": "1 | rule 6 | Settled: Map: affects / affectedBy"
+    },
+    {
+      "id": "se100",
+      "fromNode": "s19",
+      "toNode": "central",
+      "label": "1 | rule 52 | Review: Review: Association endpoint pattern"
+    },
+    {
+      "id": "te101",
+      "fromNode": "central",
+      "toNode": "t8",
+      "label": "1 | rule 52 | Review: Review: Association endpoint pattern"
+    },
+    {
+      "id": "se102",
+      "fromNode": "s4",
+      "toNode": "central",
+      "label": "1 | rule 8 | Review: Review: vague Association"
+    },
+    {
+      "id": "te103",
+      "fromNode": "central",
+      "toNode": "t2",
+      "label": "1 | rule 8 | Review: Review: vague Association"
+    },
+    {
+      "id": "se104",
+      "fromNode": "s1",
+      "toNode": "central",
+      "label": "1 | rule 5 | Settled: Map: participants on the Use Case/Context endpoint"
+    },
+    {
+      "id": "te105",
+      "fromNode": "central",
+      "toNode": "t17",
+      "label": "1 | rule 5 | Settled: Map: participants on the Use Case/Context endpoint"
+    },
+    {
+      "id": "se106",
+      "fromNode": "s1",
+      "toNode": "central",
+      "label": "1 | rule 5 | Settled: Map: participants on the Use Case/Context endpoint"
+    },
+    {
+      "id": "te107",
+      "fromNode": "central",
+      "toNode": "t18",
+      "label": "1 | rule 5 | Settled: Map: participants on the Use Case/Context endpoint"
+    },
+    {
+      "id": "se108",
+      "fromNode": "s1",
+      "toNode": "central",
+      "label": "1 | rule 5 | Settled: Map: participants on the Use Case/Context endpoint"
+    },
+    {
+      "id": "te109",
+      "fromNode": "central",
+      "toNode": "t19",
+      "label": "1 | rule 5 | Settled: Map: participants on the Use Case/Context endpoint"
+    },
+    {
+      "id": "ve110",
+      "fromNode": "central",
+      "toNode": "v0",
+      "label": "no stereotype"
+    }
+  ]
+}

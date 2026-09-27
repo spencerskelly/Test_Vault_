@@ -1,0 +1,10 @@
+filters:
+  and:
+    - 'file.inFolder("99_System/10_EA Native Translator/01_EA Elements/Requirement")'
+views:
+  - type: table
+    name: Requirement local
+    order:
+      - file.name
+      - type
+      - status

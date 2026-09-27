@@ -1,0 +1,273 @@
+{
+  "nodes": [
+    {
+      "id": "central",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/02_EA Relationships/StateFlow/README_StateFlow.md",
+      "x": 0,
+      "y": 0,
+      "width": 430,
+      "height": 260
+    },
+    {
+      "id": "s0",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/01_EA Elements/State/EA Element - No Stereotype.md",
+      "x": -950,
+      "y": -700,
+      "width": 350,
+      "height": 150
+    },
+    {
+      "id": "t0",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/01_EA Elements/State/EA Element - No Stereotype.md",
+      "x": 950,
+      "y": -700,
+      "width": 350,
+      "height": 150
+    },
+    {
+      "id": "s1",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/01_EA Elements/StateNode/README_StateNode.md",
+      "x": -950,
+      "y": -520,
+      "width": 350,
+      "height": 150
+    },
+    {
+      "id": "t1",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/01_EA Elements/StateNode/README_StateNode.md",
+      "x": 950,
+      "y": -520,
+      "width": 350,
+      "height": 150
+    },
+    {
+      "id": "s2",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/01_EA Elements/State/EA Stereotype - System State.md",
+      "x": -950,
+      "y": -340,
+      "width": 350,
+      "height": 150
+    },
+    {
+      "id": "t2",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/01_EA Elements/State/EA Stereotype - System State.md",
+      "x": 950,
+      "y": -340,
+      "width": 350,
+      "height": 150
+    },
+    {
+      "id": "t3",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/01_EA Elements/Synchronization/README_Synchronization.md",
+      "x": 950,
+      "y": -160,
+      "width": 350,
+      "height": 150
+    },
+    {
+      "id": "s3",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/01_EA Elements/Synchronization/README_Synchronization.md",
+      "x": -950,
+      "y": -160,
+      "width": 350,
+      "height": 150
+    },
+    {
+      "id": "t4",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/01_EA Elements/State/EA Stereotype - Fault State.md",
+      "x": 950,
+      "y": 20,
+      "width": 350,
+      "height": 150
+    },
+    {
+      "id": "s4",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/01_EA Elements/Event/README_Event.md",
+      "x": -950,
+      "y": 20,
+      "width": 350,
+      "height": 150
+    },
+    {
+      "id": "t5",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/01_EA Elements/Event/README_Event.md",
+      "x": 950,
+      "y": 200,
+      "width": 350,
+      "height": 150
+    },
+    {
+      "id": "v0",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/02_EA Relationships/StateFlow/README_StateFlow.md",
+      "x": 30,
+      "y": -380,
+      "width": 250,
+      "height": 130
+    }
+  ],
+  "edges": [
+    {
+      "id": "se0",
+      "fromNode": "s0",
+      "toNode": "central",
+      "label": "110 | rule 47 | Deferred: Deferred: transition evidence"
+    },
+    {
+      "id": "te1",
+      "fromNode": "central",
+      "toNode": "t0",
+      "label": "110 | rule 47 | Deferred: Deferred: transition evidence"
+    },
+    {
+      "id": "se2",
+      "fromNode": "s1",
+      "toNode": "central",
+      "label": "41 | rule 47 | Deferred: Deferred: transition evidence"
+    },
+    {
+      "id": "te3",
+      "fromNode": "central",
+      "toNode": "t0",
+      "label": "41 | rule 47 | Deferred: Deferred: transition evidence"
+    },
+    {
+      "id": "se4",
+      "fromNode": "s0",
+      "toNode": "central",
+      "label": "24 | rule 47 | Deferred: Deferred: transition evidence"
+    },
+    {
+      "id": "te5",
+      "fromNode": "central",
+      "toNode": "t1",
+      "label": "24 | rule 47 | Deferred: Deferred: transition evidence"
+    },
+    {
+      "id": "se6",
+      "fromNode": "s2",
+      "toNode": "central",
+      "label": "7 | rule 47 | Deferred: Deferred: transition evidence"
+    },
+    {
+      "id": "te7",
+      "fromNode": "central",
+      "toNode": "t2",
+      "label": "7 | rule 47 | Deferred: Deferred: transition evidence"
+    },
+    {
+      "id": "se8",
+      "fromNode": "s0",
+      "toNode": "central",
+      "label": "5 | rule 47 | Deferred: Deferred: transition evidence"
+    },
+    {
+      "id": "te9",
+      "fromNode": "central",
+      "toNode": "t3",
+      "label": "5 | rule 47 | Deferred: Deferred: transition evidence"
+    },
+    {
+      "id": "se10",
+      "fromNode": "s3",
+      "toNode": "central",
+      "label": "5 | rule 47 | Deferred: Deferred: transition evidence"
+    },
+    {
+      "id": "te11",
+      "fromNode": "central",
+      "toNode": "t0",
+      "label": "5 | rule 47 | Deferred: Deferred: transition evidence"
+    },
+    {
+      "id": "se12",
+      "fromNode": "s0",
+      "toNode": "central",
+      "label": "2 | rule 47 | Deferred: Deferred: transition evidence"
+    },
+    {
+      "id": "te13",
+      "fromNode": "central",
+      "toNode": "t4",
+      "label": "2 | rule 47 | Deferred: Deferred: transition evidence"
+    },
+    {
+      "id": "se14",
+      "fromNode": "s1",
+      "toNode": "central",
+      "label": "2 | rule 47 | Deferred: Deferred: transition evidence"
+    },
+    {
+      "id": "te15",
+      "fromNode": "central",
+      "toNode": "t2",
+      "label": "2 | rule 47 | Deferred: Deferred: transition evidence"
+    },
+    {
+      "id": "se16",
+      "fromNode": "s4",
+      "toNode": "central",
+      "label": "1 | rule 47 | Deferred: Deferred: transition evidence"
+    },
+    {
+      "id": "te17",
+      "fromNode": "central",
+      "toNode": "t2",
+      "label": "1 | rule 47 | Deferred: Deferred: transition evidence"
+    },
+    {
+      "id": "se18",
+      "fromNode": "s0",
+      "toNode": "central",
+      "label": "1 | rule 47 | Deferred: Deferred: transition evidence"
+    },
+    {
+      "id": "te19",
+      "fromNode": "central",
+      "toNode": "t2",
+      "label": "1 | rule 47 | Deferred: Deferred: transition evidence"
+    },
+    {
+      "id": "se20",
+      "fromNode": "s2",
+      "toNode": "central",
+      "label": "1 | rule 47 | Deferred: Deferred: transition evidence"
+    },
+    {
+      "id": "te21",
+      "fromNode": "central",
+      "toNode": "t5",
+      "label": "1 | rule 47 | Deferred: Deferred: transition evidence"
+    },
+    {
+      "id": "se22",
+      "fromNode": "s2",
+      "toNode": "central",
+      "label": "1 | rule 47 | Deferred: Deferred: transition evidence"
+    },
+    {
+      "id": "te23",
+      "fromNode": "central",
+      "toNode": "t1",
+      "label": "1 | rule 47 | Deferred: Deferred: transition evidence"
+    },
+    {
+      "id": "ve24",
+      "fromNode": "central",
+      "toNode": "v0",
+      "label": "no stereotype"
+    }
+  ]
+}

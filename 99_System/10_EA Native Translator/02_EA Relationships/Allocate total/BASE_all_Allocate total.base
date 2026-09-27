@@ -1,0 +1,10 @@
+filters:
+  and:
+    - 'file.inFolder("99_System/10_EA Native Translator/02_EA Relationships/Allocate total")'
+views:
+  - type: table
+    name: Allocate total all
+    order:
+      - file.name
+      - type
+      - status

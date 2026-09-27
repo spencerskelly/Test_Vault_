@@ -6,188 +6,248 @@
       "file": "99_System/10_EA Native Translator/01_EA Elements/Decision/README_Decision.md",
       "x": 0,
       "y": 0,
-      "width": 420,
+      "width": 430,
       "height": 260
     },
     {
       "id": "c0",
       "type": "text",
       "text": "**Outgoing**\\nControlFlow",
-      "x": 650,
-      "y": -400,
-      "width": 320,
-      "height": 150
+      "x": 600,
+      "y": -650,
+      "width": 300,
+      "height": 130
     },
     {
       "id": "e0",
       "type": "file",
       "file": "99_System/10_EA Native Translator/01_EA Elements/Activity/EA Element - No Stereotype.md",
-      "x": 1200,
-      "y": -600,
-      "width": 360,
-      "height": 180
+      "x": 1150,
+      "y": -750,
+      "width": 350,
+      "height": 155
     },
     {
       "id": "c1",
       "type": "text",
       "text": "**Incoming**\\nControlFlow",
-      "x": -650,
-      "y": -400,
-      "width": 320,
-      "height": 150
+      "x": -920,
+      "y": -650,
+      "width": 300,
+      "height": 130
     },
     {
       "id": "e1",
       "type": "file",
-      "file": "99_System/10_EA Native Translator/01_EA Elements/Issue/README_Issue.md",
-      "x": 1200,
-      "y": -380,
-      "width": 360,
-      "height": 180
+      "file": "99_System/10_EA Native Translator/01_EA Elements/Activity/EA Element - No Stereotype.md",
+      "x": -1470,
+      "y": -750,
+      "width": 350,
+      "height": 155
     },
     {
       "id": "e2",
       "type": "file",
-      "file": "99_System/10_EA Native Translator/01_EA Elements/Action/README_Action.md",
-      "x": 1200,
-      "y": -160,
-      "width": 360,
-      "height": 180
+      "file": "99_System/10_EA Native Translator/01_EA Elements/Issue/README_Issue.md",
+      "x": 1150,
+      "y": -565,
+      "width": 350,
+      "height": 155
     },
     {
       "id": "e3",
       "type": "file",
-      "file": "99_System/10_EA Native Translator/01_EA Elements/Synchronization/README_Synchronization.md",
-      "x": 1200,
-      "y": 60,
-      "width": 360,
-      "height": 180
+      "file": "99_System/10_EA Native Translator/01_EA Elements/Action/README_Action.md",
+      "x": 1150,
+      "y": -380,
+      "width": 350,
+      "height": 155
     },
     {
       "id": "e4",
       "type": "file",
-      "file": "99_System/10_EA Native Translator/01_EA Elements/Object/README_Object.md",
-      "x": 1200,
-      "y": 280,
-      "width": 360,
-      "height": 180
+      "file": "99_System/10_EA Native Translator/01_EA Elements/Synchronization/README_Synchronization.md",
+      "x": 1150,
+      "y": -195,
+      "width": 350,
+      "height": 155
     },
     {
       "id": "e5",
       "type": "file",
-      "file": "99_System/10_EA Native Translator/01_EA Elements/StateNode/README_StateNode.md",
-      "x": 1200,
-      "y": 500,
-      "width": 360,
-      "height": 180
+      "file": "99_System/10_EA Native Translator/01_EA Elements/Action/README_Action.md",
+      "x": -1470,
+      "y": -565,
+      "width": 350,
+      "height": 155
     },
     {
       "id": "e6",
       "type": "file",
-      "file": "99_System/10_EA Native Translator/01_EA Elements/Decision/README_Decision.md",
-      "x": 1200,
-      "y": 720,
-      "width": 360,
-      "height": 180
+      "file": "99_System/10_EA Native Translator/01_EA Elements/Synchronization/README_Synchronization.md",
+      "x": -1470,
+      "y": -380,
+      "width": 350,
+      "height": 155
     },
     {
       "id": "e7",
       "type": "file",
+      "file": "99_System/10_EA Native Translator/01_EA Elements/Object/README_Object.md",
+      "x": 1150,
+      "y": -10,
+      "width": 350,
+      "height": 155
+    },
+    {
+      "id": "e8",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/01_EA Elements/StateNode/README_StateNode.md",
+      "x": 1150,
+      "y": 175,
+      "width": 350,
+      "height": 155
+    },
+    {
+      "id": "e9",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/01_EA Elements/Object/README_Object.md",
+      "x": -1470,
+      "y": -195,
+      "width": 350,
+      "height": 155
+    },
+    {
+      "id": "e10",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/01_EA Elements/Decision/README_Decision.md",
+      "x": 1150,
+      "y": 360,
+      "width": 350,
+      "height": 155
+    },
+    {
+      "id": "e11",
+      "type": "file",
       "file": "99_System/10_EA Native Translator/01_EA Elements/State/EA Stereotype - System State.md",
-      "x": 1200,
-      "y": 940,
-      "width": 360,
-      "height": 180
+      "x": 1150,
+      "y": 545,
+      "width": 350,
+      "height": 155
+    },
+    {
+      "id": "e12",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/01_EA Elements/StateNode/README_StateNode.md",
+      "x": -1470,
+      "y": -10,
+      "width": 350,
+      "height": 155
+    },
+    {
+      "id": "v0",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/01_EA Elements/Decision/README_Decision.md",
+      "x": -50,
+      "y": -360,
+      "width": 230,
+      "height": 130
     }
   ],
   "edges": [
     {
-      "id": "ec0",
+      "id": "ce0",
       "fromNode": "central",
       "toNode": "c0"
     },
     {
-      "id": "ec1",
+      "id": "ce1",
       "fromNode": "c1",
       "toNode": "central"
     },
     {
-      "id": "ee2",
+      "id": "pe2",
       "fromNode": "c0",
       "toNode": "e0",
       "label": "21 | rule 44 | Deferred: Deferred: local flow detail"
     },
     {
-      "id": "ee3",
-      "fromNode": "e0",
+      "id": "pe3",
+      "fromNode": "e1",
       "toNode": "c1",
       "label": "18 | rule 44 | Deferred: Deferred: local flow detail"
     },
     {
-      "id": "ee4",
+      "id": "pe4",
       "fromNode": "c0",
-      "toNode": "e1",
+      "toNode": "e2",
       "label": "10 | rule 44 | Deferred: Deferred: local flow detail"
     },
     {
-      "id": "ee5",
+      "id": "pe5",
       "fromNode": "c0",
-      "toNode": "e2",
+      "toNode": "e3",
       "label": "9 | rule 44 | Deferred: Deferred: local flow detail"
     },
     {
-      "id": "ee6",
+      "id": "pe6",
       "fromNode": "c0",
-      "toNode": "e3",
+      "toNode": "e4",
       "label": "4 | rule 44 | Deferred: Deferred: local flow detail"
     },
     {
-      "id": "ee7",
-      "fromNode": "e2",
-      "toNode": "c1",
-      "label": "3 | rule 44 | Deferred: Deferred: local flow detail"
-    },
-    {
-      "id": "ee8",
-      "fromNode": "e3",
-      "toNode": "c1",
-      "label": "3 | rule 44 | Deferred: Deferred: local flow detail"
-    },
-    {
-      "id": "ee9",
-      "fromNode": "c0",
-      "toNode": "e4",
-      "label": "2 | rule 44 | Deferred: Deferred: local flow detail"
-    },
-    {
-      "id": "ee10",
-      "fromNode": "c0",
-      "toNode": "e5",
-      "label": "2 | rule 44 | Deferred: Deferred: local flow detail"
-    },
-    {
-      "id": "ee11",
-      "fromNode": "e4",
-      "toNode": "c1",
-      "label": "2 | rule 44 | Deferred: Deferred: local flow detail"
-    },
-    {
-      "id": "ee12",
-      "fromNode": "c0",
-      "toNode": "e6",
-      "label": "1 | rule 44 | Deferred: Deferred: local flow detail"
-    },
-    {
-      "id": "ee13",
-      "fromNode": "c0",
-      "toNode": "e7",
-      "label": "1 | rule 44 | Deferred: Deferred: local flow detail"
-    },
-    {
-      "id": "ee14",
+      "id": "pe7",
       "fromNode": "e5",
       "toNode": "c1",
+      "label": "3 | rule 44 | Deferred: Deferred: local flow detail"
+    },
+    {
+      "id": "pe8",
+      "fromNode": "e6",
+      "toNode": "c1",
+      "label": "3 | rule 44 | Deferred: Deferred: local flow detail"
+    },
+    {
+      "id": "pe9",
+      "fromNode": "c0",
+      "toNode": "e7",
+      "label": "2 | rule 44 | Deferred: Deferred: local flow detail"
+    },
+    {
+      "id": "pe10",
+      "fromNode": "c0",
+      "toNode": "e8",
+      "label": "2 | rule 44 | Deferred: Deferred: local flow detail"
+    },
+    {
+      "id": "pe11",
+      "fromNode": "e9",
+      "toNode": "c1",
+      "label": "2 | rule 44 | Deferred: Deferred: local flow detail"
+    },
+    {
+      "id": "pe12",
+      "fromNode": "c0",
+      "toNode": "e10",
       "label": "1 | rule 44 | Deferred: Deferred: local flow detail"
+    },
+    {
+      "id": "pe13",
+      "fromNode": "c0",
+      "toNode": "e11",
+      "label": "1 | rule 44 | Deferred: Deferred: local flow detail"
+    },
+    {
+      "id": "pe14",
+      "fromNode": "e12",
+      "toNode": "c1",
+      "label": "1 | rule 44 | Deferred: Deferred: local flow detail"
+    },
+    {
+      "id": "ve15",
+      "fromNode": "central",
+      "toNode": "v0",
+      "label": "no stereotype"
     }
   ]
 }

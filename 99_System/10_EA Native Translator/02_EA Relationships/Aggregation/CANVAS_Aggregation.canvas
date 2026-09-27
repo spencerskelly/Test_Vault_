@@ -1,0 +1,1548 @@
+{
+  "nodes": [
+    {
+      "id": "central",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/02_EA Relationships/Aggregation/README_Aggregation.md",
+      "x": 0,
+      "y": 0,
+      "width": 430,
+      "height": 260
+    },
+    {
+      "id": "s0",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/01_EA Elements/Class/EA Stereotype - Hardware Component.md",
+      "x": -950,
+      "y": -700,
+      "width": 350,
+      "height": 150
+    },
+    {
+      "id": "t0",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/01_EA Elements/Class/EA Stereotype - Module.md",
+      "x": 950,
+      "y": -700,
+      "width": 350,
+      "height": 150
+    },
+    {
+      "id": "t1",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/01_EA Elements/Class/EA Stereotype - Hardware Component.md",
+      "x": 950,
+      "y": -520,
+      "width": 350,
+      "height": 150
+    },
+    {
+      "id": "s1",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/01_EA Elements/Class/EA Stereotype - block.md",
+      "x": -950,
+      "y": -520,
+      "width": 350,
+      "height": 150
+    },
+    {
+      "id": "t2",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/01_EA Elements/Class/EA Stereotype - System Partner.md",
+      "x": 950,
+      "y": -340,
+      "width": 350,
+      "height": 150
+    },
+    {
+      "id": "s2",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/01_EA Elements/Object/README_Object.md",
+      "x": -950,
+      "y": -340,
+      "width": 350,
+      "height": 150
+    },
+    {
+      "id": "t3",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/01_EA Elements/Object/README_Object.md",
+      "x": 950,
+      "y": -160,
+      "width": 350,
+      "height": 150
+    },
+    {
+      "id": "s3",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/01_EA Elements/State/EA Stereotype - System State.md",
+      "x": -950,
+      "y": -160,
+      "width": 350,
+      "height": 150
+    },
+    {
+      "id": "t4",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/01_EA Elements/State/EA Stereotype - System State.md",
+      "x": 950,
+      "y": 20,
+      "width": 350,
+      "height": 150
+    },
+    {
+      "id": "s4",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/01_EA Elements/Class/EA Stereotype - System Partner.md",
+      "x": -950,
+      "y": 20,
+      "width": 350,
+      "height": 150
+    },
+    {
+      "id": "t5",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/01_EA Elements/Class/EA Stereotype - Physical Context.md",
+      "x": 950,
+      "y": 200,
+      "width": 350,
+      "height": 150
+    },
+    {
+      "id": "s5",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/01_EA Elements/Class/EA Stereotype - Module.md",
+      "x": -950,
+      "y": 200,
+      "width": 350,
+      "height": 150
+    },
+    {
+      "id": "t6",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/01_EA Elements/Class/EA Stereotype - Physical System Variant.md",
+      "x": 950,
+      "y": 380,
+      "width": 350,
+      "height": 150
+    },
+    {
+      "id": "s6",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/01_EA Elements/Class/EA Stereotype - Physical Component.md",
+      "x": -950,
+      "y": 380,
+      "width": 350,
+      "height": 150
+    },
+    {
+      "id": "t7",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/01_EA Elements/Class/EA Stereotype - Physical Component.md",
+      "x": 950,
+      "y": 560,
+      "width": 350,
+      "height": 150
+    },
+    {
+      "id": "s7",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/01_EA Elements/Class/EA Stereotype - Software Component.md",
+      "x": -950,
+      "y": 560,
+      "width": 350,
+      "height": 150
+    },
+    {
+      "id": "t8",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/01_EA Elements/Class/EA Stereotype - Software Component.md",
+      "x": 950,
+      "y": 740,
+      "width": 350,
+      "height": 150
+    },
+    {
+      "id": "s8",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/01_EA Elements/Activity/EA Stereotype - Hardware Function.md",
+      "x": -950,
+      "y": 740,
+      "width": 350,
+      "height": 150
+    },
+    {
+      "id": "t9",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/01_EA Elements/Activity/EA Stereotype - Hardware Function.md",
+      "x": 950,
+      "y": 920,
+      "width": 350,
+      "height": 150
+    },
+    {
+      "id": "t10",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/01_EA Elements/Activity/EA Stereotype - System Function.md",
+      "x": 950,
+      "y": 1100,
+      "width": 350,
+      "height": 150
+    },
+    {
+      "id": "s9",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/01_EA Elements/Activity/EA Stereotype - Software Function.md",
+      "x": -950,
+      "y": 920,
+      "width": 350,
+      "height": 150
+    },
+    {
+      "id": "t11",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/01_EA Elements/Activity/EA Stereotype - Software Function.md",
+      "x": 950,
+      "y": 1280,
+      "width": 350,
+      "height": 150
+    },
+    {
+      "id": "s10",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/01_EA Elements/Class/EA Stereotype - Physical System Variant.md",
+      "x": -950,
+      "y": 1100,
+      "width": 350,
+      "height": 150
+    },
+    {
+      "id": "s11",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/01_EA Elements/Activity/EA Stereotype - System Function.md",
+      "x": -950,
+      "y": 1280,
+      "width": 350,
+      "height": 150
+    },
+    {
+      "id": "s12",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/01_EA Elements/Class/EA Element - No Stereotype.md",
+      "x": -950,
+      "y": 1460,
+      "width": 350,
+      "height": 150
+    },
+    {
+      "id": "s13",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/01_EA Elements/Change/README_Change.md",
+      "x": -950,
+      "y": 1640,
+      "width": 350,
+      "height": 150
+    },
+    {
+      "id": "t12",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/01_EA Elements/Change/README_Change.md",
+      "x": 950,
+      "y": 1460,
+      "width": 350,
+      "height": 150
+    },
+    {
+      "id": "s14",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/01_EA Elements/Actor/README_Actor.md",
+      "x": -950,
+      "y": 1820,
+      "width": 350,
+      "height": 150
+    },
+    {
+      "id": "s15",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/01_EA Elements/Class/EA Stereotype - Business Line.md",
+      "x": -950,
+      "y": 2000,
+      "width": 350,
+      "height": 150
+    },
+    {
+      "id": "s16",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/01_EA Elements/UseCase/README_UseCase.md",
+      "x": -950,
+      "y": 2180,
+      "width": 350,
+      "height": 150
+    },
+    {
+      "id": "t13",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/01_EA Elements/UseCase/README_UseCase.md",
+      "x": 950,
+      "y": 1640,
+      "width": 350,
+      "height": 150
+    },
+    {
+      "id": "t14",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/01_EA Elements/Class/EA Stereotype - Business Line.md",
+      "x": 950,
+      "y": 1820,
+      "width": 350,
+      "height": 150
+    },
+    {
+      "id": "t15",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/01_EA Elements/Class/EA Stereotype - block.md",
+      "x": 950,
+      "y": 2000,
+      "width": 350,
+      "height": 150
+    },
+    {
+      "id": "s17",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/01_EA Elements/Class/EA Stereotype - Electrical & Material Interface.md",
+      "x": -950,
+      "y": 2360,
+      "width": 350,
+      "height": 150
+    },
+    {
+      "id": "t16",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/01_EA Elements/State/EA Element - No Stereotype.md",
+      "x": 950,
+      "y": 2180,
+      "width": 350,
+      "height": 150
+    },
+    {
+      "id": "s18",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/01_EA Elements/Activity/EA Element - No Stereotype.md",
+      "x": -950,
+      "y": 2540,
+      "width": 350,
+      "height": 150
+    },
+    {
+      "id": "t17",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/01_EA Elements/Activity/EA Element - No Stereotype.md",
+      "x": 950,
+      "y": 2360,
+      "width": 350,
+      "height": 150
+    },
+    {
+      "id": "s19",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/01_EA Elements/Signal/EA Stereotype - Logical Signal.md",
+      "x": -950,
+      "y": 2720,
+      "width": 350,
+      "height": 150
+    },
+    {
+      "id": "t18",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/01_EA Elements/Signal/EA Stereotype - Logical Signal.md",
+      "x": 950,
+      "y": 2540,
+      "width": 350,
+      "height": 150
+    },
+    {
+      "id": "t19",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/01_EA Elements/Class/EA Stereotype - Platform.md",
+      "x": 950,
+      "y": 2720,
+      "width": 350,
+      "height": 150
+    },
+    {
+      "id": "s20",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/01_EA Elements/Class/EA Stereotype - Platform.md",
+      "x": -950,
+      "y": 2900,
+      "width": 350,
+      "height": 150
+    },
+    {
+      "id": "s21",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/01_EA Elements/State/EA Element - No Stereotype.md",
+      "x": -950,
+      "y": 3080,
+      "width": 350,
+      "height": 150
+    },
+    {
+      "id": "s22",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/01_EA Elements/Class/EA Stereotype - Physical Component + block.md",
+      "x": -950,
+      "y": 3260,
+      "width": 350,
+      "height": 150
+    },
+    {
+      "id": "s23",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/01_EA Elements/InformationItem/README_InformationItem.md",
+      "x": -950,
+      "y": 3440,
+      "width": 350,
+      "height": 150
+    },
+    {
+      "id": "s24",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/01_EA Elements/Class/EA Stereotype - Data Interface.md",
+      "x": -950,
+      "y": 3620,
+      "width": 350,
+      "height": 150
+    },
+    {
+      "id": "t20",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/01_EA Elements/Class/EA Stereotype - Electrical & Material Interface.md",
+      "x": 950,
+      "y": 2900,
+      "width": 350,
+      "height": 150
+    },
+    {
+      "id": "v0",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/02_EA Relationships/Aggregation/README_Aggregation.md",
+      "x": 30,
+      "y": -380,
+      "width": 250,
+      "height": 130
+    }
+  ],
+  "edges": [
+    {
+      "id": "se0",
+      "fromNode": "s0",
+      "toNode": "central",
+      "label": "371 | rule 2 | Settled: Map: partOf / hasPart"
+    },
+    {
+      "id": "te1",
+      "fromNode": "central",
+      "toNode": "t0",
+      "label": "371 | rule 2 | Settled: Map: partOf / hasPart"
+    },
+    {
+      "id": "se2",
+      "fromNode": "s0",
+      "toNode": "central",
+      "label": "350 | rule 2 | Settled: Map: partOf / hasPart"
+    },
+    {
+      "id": "te3",
+      "fromNode": "central",
+      "toNode": "t1",
+      "label": "350 | rule 2 | Settled: Map: partOf / hasPart"
+    },
+    {
+      "id": "se4",
+      "fromNode": "s1",
+      "toNode": "central",
+      "label": "279 | rule 2 | Settled: Map: partOf / hasPart"
+    },
+    {
+      "id": "te5",
+      "fromNode": "central",
+      "toNode": "t2",
+      "label": "279 | rule 2 | Settled: Map: partOf / hasPart"
+    },
+    {
+      "id": "se6",
+      "fromNode": "s2",
+      "toNode": "central",
+      "label": "195 | rule 2 | Settled: Map: partOf / hasPart"
+    },
+    {
+      "id": "te7",
+      "fromNode": "central",
+      "toNode": "t3",
+      "label": "195 | rule 2 | Settled: Map: partOf / hasPart"
+    },
+    {
+      "id": "se8",
+      "fromNode": "s3",
+      "toNode": "central",
+      "label": "74 | rule 51 | Review: Review: Aggregation endpoint pattern"
+    },
+    {
+      "id": "te9",
+      "fromNode": "central",
+      "toNode": "t4",
+      "label": "74 | rule 51 | Review: Review: Aggregation endpoint pattern"
+    },
+    {
+      "id": "se10",
+      "fromNode": "s4",
+      "toNode": "central",
+      "label": "69 | rule 4 | Settled: Map: participants on the Context endpoint"
+    },
+    {
+      "id": "te11",
+      "fromNode": "central",
+      "toNode": "t5",
+      "label": "69 | rule 4 | Settled: Map: participants on the Context endpoint"
+    },
+    {
+      "id": "se12",
+      "fromNode": "s5",
+      "toNode": "central",
+      "label": "54 | rule 2 | Settled: Map: partOf / hasPart"
+    },
+    {
+      "id": "te13",
+      "fromNode": "central",
+      "toNode": "t6",
+      "label": "54 | rule 2 | Settled: Map: partOf / hasPart"
+    },
+    {
+      "id": "se14",
+      "fromNode": "s6",
+      "toNode": "central",
+      "label": "54 | rule 2 | Settled: Map: partOf / hasPart"
+    },
+    {
+      "id": "te15",
+      "fromNode": "central",
+      "toNode": "t7",
+      "label": "54 | rule 2 | Settled: Map: partOf / hasPart"
+    },
+    {
+      "id": "se16",
+      "fromNode": "s0",
+      "toNode": "central",
+      "label": "48 | rule 2 | Settled: Map: partOf / hasPart"
+    },
+    {
+      "id": "te17",
+      "fromNode": "central",
+      "toNode": "t6",
+      "label": "48 | rule 2 | Settled: Map: partOf / hasPart"
+    },
+    {
+      "id": "se18",
+      "fromNode": "s6",
+      "toNode": "central",
+      "label": "47 | rule 2 | Settled: Map: partOf / hasPart"
+    },
+    {
+      "id": "te19",
+      "fromNode": "central",
+      "toNode": "t0",
+      "label": "47 | rule 2 | Settled: Map: partOf / hasPart"
+    },
+    {
+      "id": "se20",
+      "fromNode": "s4",
+      "toNode": "central",
+      "label": "44 | rule 2 | Settled: Map: partOf / hasPart"
+    },
+    {
+      "id": "te21",
+      "fromNode": "central",
+      "toNode": "t2",
+      "label": "44 | rule 2 | Settled: Map: partOf / hasPart"
+    },
+    {
+      "id": "se22",
+      "fromNode": "s6",
+      "toNode": "central",
+      "label": "43 | rule 2 | Settled: Map: partOf / hasPart"
+    },
+    {
+      "id": "te23",
+      "fromNode": "central",
+      "toNode": "t1",
+      "label": "43 | rule 2 | Settled: Map: partOf / hasPart"
+    },
+    {
+      "id": "se24",
+      "fromNode": "s0",
+      "toNode": "central",
+      "label": "41 | rule 2 | Settled: Map: partOf / hasPart"
+    },
+    {
+      "id": "te25",
+      "fromNode": "central",
+      "toNode": "t7",
+      "label": "41 | rule 2 | Settled: Map: partOf / hasPart"
+    },
+    {
+      "id": "se26",
+      "fromNode": "s7",
+      "toNode": "central",
+      "label": "41 | rule 2 | Settled: Map: partOf / hasPart"
+    },
+    {
+      "id": "te27",
+      "fromNode": "central",
+      "toNode": "t8",
+      "label": "41 | rule 2 | Settled: Map: partOf / hasPart"
+    },
+    {
+      "id": "se28",
+      "fromNode": "s8",
+      "toNode": "central",
+      "label": "38 | rule 3 | Settled: Map: parent / child"
+    },
+    {
+      "id": "te29",
+      "fromNode": "central",
+      "toNode": "t9",
+      "label": "38 | rule 3 | Settled: Map: parent / child"
+    },
+    {
+      "id": "se30",
+      "fromNode": "s8",
+      "toNode": "central",
+      "label": "38 | rule 3 | Settled: Map: parent / child"
+    },
+    {
+      "id": "te31",
+      "fromNode": "central",
+      "toNode": "t10",
+      "label": "38 | rule 3 | Settled: Map: parent / child"
+    },
+    {
+      "id": "se32",
+      "fromNode": "s5",
+      "toNode": "central",
+      "label": "32 | rule 2 | Settled: Map: partOf / hasPart"
+    },
+    {
+      "id": "te33",
+      "fromNode": "central",
+      "toNode": "t0",
+      "label": "32 | rule 2 | Settled: Map: partOf / hasPart"
+    },
+    {
+      "id": "se34",
+      "fromNode": "s5",
+      "toNode": "central",
+      "label": "30 | rule 4 | Settled: Map: participants on the Context endpoint"
+    },
+    {
+      "id": "te35",
+      "fromNode": "central",
+      "toNode": "t5",
+      "label": "30 | rule 4 | Settled: Map: participants on the Context endpoint"
+    },
+    {
+      "id": "se36",
+      "fromNode": "s9",
+      "toNode": "central",
+      "label": "25 | rule 3 | Settled: Map: parent / child"
+    },
+    {
+      "id": "te37",
+      "fromNode": "central",
+      "toNode": "t11",
+      "label": "25 | rule 3 | Settled: Map: parent / child"
+    },
+    {
+      "id": "se38",
+      "fromNode": "s10",
+      "toNode": "central",
+      "label": "25 | rule 4 | Settled: Map: participants on the Context endpoint"
+    },
+    {
+      "id": "te39",
+      "fromNode": "central",
+      "toNode": "t5",
+      "label": "25 | rule 4 | Settled: Map: participants on the Context endpoint"
+    },
+    {
+      "id": "se40",
+      "fromNode": "s6",
+      "toNode": "central",
+      "label": "23 | rule 2 | Settled: Map: partOf / hasPart"
+    },
+    {
+      "id": "te41",
+      "fromNode": "central",
+      "toNode": "t6",
+      "label": "23 | rule 2 | Settled: Map: partOf / hasPart"
+    },
+    {
+      "id": "se42",
+      "fromNode": "s11",
+      "toNode": "central",
+      "label": "22 | rule 3 | Settled: Map: parent / child"
+    },
+    {
+      "id": "te43",
+      "fromNode": "central",
+      "toNode": "t10",
+      "label": "22 | rule 3 | Settled: Map: parent / child"
+    },
+    {
+      "id": "se44",
+      "fromNode": "s2",
+      "toNode": "central",
+      "label": "22 | rule 4 | Settled: Map: participants on the Context endpoint"
+    },
+    {
+      "id": "te45",
+      "fromNode": "central",
+      "toNode": "t5",
+      "label": "22 | rule 4 | Settled: Map: participants on the Context endpoint"
+    },
+    {
+      "id": "se46",
+      "fromNode": "s0",
+      "toNode": "central",
+      "label": "20 | rule 4 | Settled: Map: participants on the Context endpoint"
+    },
+    {
+      "id": "te47",
+      "fromNode": "central",
+      "toNode": "t5",
+      "label": "20 | rule 4 | Settled: Map: participants on the Context endpoint"
+    },
+    {
+      "id": "se48",
+      "fromNode": "s12",
+      "toNode": "central",
+      "label": "16 | rule 2 | Settled: Map: partOf / hasPart"
+    },
+    {
+      "id": "te49",
+      "fromNode": "central",
+      "toNode": "t1",
+      "label": "16 | rule 2 | Settled: Map: partOf / hasPart"
+    },
+    {
+      "id": "se50",
+      "fromNode": "s2",
+      "toNode": "central",
+      "label": "15 | rule 2 | Settled: Map: partOf / hasPart"
+    },
+    {
+      "id": "te51",
+      "fromNode": "central",
+      "toNode": "t0",
+      "label": "15 | rule 2 | Settled: Map: partOf / hasPart"
+    },
+    {
+      "id": "se52",
+      "fromNode": "s10",
+      "toNode": "central",
+      "label": "14 | rule 2 | Settled: Map: partOf / hasPart"
+    },
+    {
+      "id": "te53",
+      "fromNode": "central",
+      "toNode": "t6",
+      "label": "14 | rule 2 | Settled: Map: partOf / hasPart"
+    },
+    {
+      "id": "se54",
+      "fromNode": "s13",
+      "toNode": "central",
+      "label": "12 | rule 51 | Review: Review: Aggregation endpoint pattern"
+    },
+    {
+      "id": "te55",
+      "fromNode": "central",
+      "toNode": "t12",
+      "label": "12 | rule 51 | Review: Review: Aggregation endpoint pattern"
+    },
+    {
+      "id": "se56",
+      "fromNode": "s6",
+      "toNode": "central",
+      "label": "11 | rule 4 | Settled: Map: participants on the Context endpoint"
+    },
+    {
+      "id": "te57",
+      "fromNode": "central",
+      "toNode": "t5",
+      "label": "11 | rule 4 | Settled: Map: participants on the Context endpoint"
+    },
+    {
+      "id": "se58",
+      "fromNode": "s14",
+      "toNode": "central",
+      "label": "10 | rule 4 | Settled: Map: participants on the Context endpoint"
+    },
+    {
+      "id": "te59",
+      "fromNode": "central",
+      "toNode": "t5",
+      "label": "10 | rule 4 | Settled: Map: participants on the Context endpoint"
+    },
+    {
+      "id": "se60",
+      "fromNode": "s15",
+      "toNode": "central",
+      "label": "10 | rule 4 | Settled: Map: participants on the Context endpoint"
+    },
+    {
+      "id": "te61",
+      "fromNode": "central",
+      "toNode": "t5",
+      "label": "10 | rule 4 | Settled: Map: participants on the Context endpoint"
+    },
+    {
+      "id": "se62",
+      "fromNode": "s16",
+      "toNode": "central",
+      "label": "10 | rule 51 | Review: Review: Aggregation endpoint pattern"
+    },
+    {
+      "id": "te63",
+      "fromNode": "central",
+      "toNode": "t13",
+      "label": "10 | rule 51 | Review: Review: Aggregation endpoint pattern"
+    },
+    {
+      "id": "se64",
+      "fromNode": "s5",
+      "toNode": "central",
+      "label": "9 | rule 2 | Settled: Map: partOf / hasPart"
+    },
+    {
+      "id": "te65",
+      "fromNode": "central",
+      "toNode": "t14",
+      "label": "9 | rule 2 | Settled: Map: partOf / hasPart"
+    },
+    {
+      "id": "se66",
+      "fromNode": "s7",
+      "toNode": "central",
+      "label": "9 | rule 2 | Settled: Map: partOf / hasPart"
+    },
+    {
+      "id": "te67",
+      "fromNode": "central",
+      "toNode": "t0",
+      "label": "9 | rule 2 | Settled: Map: partOf / hasPart"
+    },
+    {
+      "id": "se68",
+      "fromNode": "s7",
+      "toNode": "central",
+      "label": "9 | rule 2 | Settled: Map: partOf / hasPart"
+    },
+    {
+      "id": "te69",
+      "fromNode": "central",
+      "toNode": "t6",
+      "label": "9 | rule 2 | Settled: Map: partOf / hasPart"
+    },
+    {
+      "id": "se70",
+      "fromNode": "s1",
+      "toNode": "central",
+      "label": "9 | rule 2 | Settled: Map: partOf / hasPart"
+    },
+    {
+      "id": "te71",
+      "fromNode": "central",
+      "toNode": "t15",
+      "label": "9 | rule 2 | Settled: Map: partOf / hasPart"
+    },
+    {
+      "id": "se72",
+      "fromNode": "s17",
+      "toNode": "central",
+      "label": "8 | rule 2 | Settled: Map: partOf / hasPart"
+    },
+    {
+      "id": "te73",
+      "fromNode": "central",
+      "toNode": "t1",
+      "label": "8 | rule 2 | Settled: Map: partOf / hasPart"
+    },
+    {
+      "id": "se74",
+      "fromNode": "s2",
+      "toNode": "central",
+      "label": "8 | rule 2 | Settled: Map: partOf / hasPart"
+    },
+    {
+      "id": "te75",
+      "fromNode": "central",
+      "toNode": "t6",
+      "label": "8 | rule 2 | Settled: Map: partOf / hasPart"
+    },
+    {
+      "id": "se76",
+      "fromNode": "s3",
+      "toNode": "central",
+      "label": "8 | rule 51 | Review: Review: Aggregation endpoint pattern"
+    },
+    {
+      "id": "te77",
+      "fromNode": "central",
+      "toNode": "t16",
+      "label": "8 | rule 51 | Review: Review: Aggregation endpoint pattern"
+    },
+    {
+      "id": "se78",
+      "fromNode": "s18",
+      "toNode": "central",
+      "label": "6 | rule 51 | Review: Review: Aggregation endpoint pattern"
+    },
+    {
+      "id": "te79",
+      "fromNode": "central",
+      "toNode": "t17",
+      "label": "6 | rule 51 | Review: Review: Aggregation endpoint pattern"
+    },
+    {
+      "id": "se80",
+      "fromNode": "s0",
+      "toNode": "central",
+      "label": "6 | rule 2 | Settled: Map: partOf / hasPart"
+    },
+    {
+      "id": "te81",
+      "fromNode": "central",
+      "toNode": "t14",
+      "label": "6 | rule 2 | Settled: Map: partOf / hasPart"
+    },
+    {
+      "id": "se82",
+      "fromNode": "s0",
+      "toNode": "central",
+      "label": "6 | rule 2 | Settled: Map: partOf / hasPart"
+    },
+    {
+      "id": "te83",
+      "fromNode": "central",
+      "toNode": "t2",
+      "label": "6 | rule 2 | Settled: Map: partOf / hasPart"
+    },
+    {
+      "id": "se84",
+      "fromNode": "s5",
+      "toNode": "central",
+      "label": "6 | rule 2 | Settled: Map: partOf / hasPart"
+    },
+    {
+      "id": "te85",
+      "fromNode": "central",
+      "toNode": "t1",
+      "label": "6 | rule 2 | Settled: Map: partOf / hasPart"
+    },
+    {
+      "id": "se86",
+      "fromNode": "s5",
+      "toNode": "central",
+      "label": "6 | rule 2 | Settled: Map: partOf / hasPart"
+    },
+    {
+      "id": "te87",
+      "fromNode": "central",
+      "toNode": "t7",
+      "label": "6 | rule 2 | Settled: Map: partOf / hasPart"
+    },
+    {
+      "id": "se88",
+      "fromNode": "s10",
+      "toNode": "central",
+      "label": "6 | rule 2 | Settled: Map: partOf / hasPart"
+    },
+    {
+      "id": "te89",
+      "fromNode": "central",
+      "toNode": "t15",
+      "label": "6 | rule 2 | Settled: Map: partOf / hasPart"
+    },
+    {
+      "id": "se90",
+      "fromNode": "s7",
+      "toNode": "central",
+      "label": "6 | rule 4 | Settled: Map: participants on the Context endpoint"
+    },
+    {
+      "id": "te91",
+      "fromNode": "central",
+      "toNode": "t5",
+      "label": "6 | rule 4 | Settled: Map: participants on the Context endpoint"
+    },
+    {
+      "id": "se92",
+      "fromNode": "s4",
+      "toNode": "central",
+      "label": "6 | rule 2 | Settled: Map: partOf / hasPart"
+    },
+    {
+      "id": "te93",
+      "fromNode": "central",
+      "toNode": "t7",
+      "label": "6 | rule 2 | Settled: Map: partOf / hasPart"
+    },
+    {
+      "id": "se94",
+      "fromNode": "s1",
+      "toNode": "central",
+      "label": "6 | rule 2 | Settled: Map: partOf / hasPart"
+    },
+    {
+      "id": "te95",
+      "fromNode": "central",
+      "toNode": "t0",
+      "label": "6 | rule 2 | Settled: Map: partOf / hasPart"
+    },
+    {
+      "id": "se96",
+      "fromNode": "s19",
+      "toNode": "central",
+      "label": "6 | rule 2 | Settled: Map: partOf / hasPart"
+    },
+    {
+      "id": "te97",
+      "fromNode": "central",
+      "toNode": "t18",
+      "label": "6 | rule 2 | Settled: Map: partOf / hasPart"
+    },
+    {
+      "id": "se98",
+      "fromNode": "s0",
+      "toNode": "central",
+      "label": "5 | rule 2 | Settled: Map: partOf / hasPart"
+    },
+    {
+      "id": "te99",
+      "fromNode": "central",
+      "toNode": "t19",
+      "label": "5 | rule 2 | Settled: Map: partOf / hasPart"
+    },
+    {
+      "id": "se100",
+      "fromNode": "s11",
+      "toNode": "central",
+      "label": "4 | rule 3 | Settled: Map: parent / child"
+    },
+    {
+      "id": "te101",
+      "fromNode": "central",
+      "toNode": "t9",
+      "label": "4 | rule 3 | Settled: Map: parent / child"
+    },
+    {
+      "id": "se102",
+      "fromNode": "s5",
+      "toNode": "central",
+      "label": "4 | rule 2 | Settled: Map: partOf / hasPart"
+    },
+    {
+      "id": "te103",
+      "fromNode": "central",
+      "toNode": "t19",
+      "label": "4 | rule 2 | Settled: Map: partOf / hasPart"
+    },
+    {
+      "id": "se104",
+      "fromNode": "s1",
+      "toNode": "central",
+      "label": "4 | rule 2 | Settled: Map: partOf / hasPart"
+    },
+    {
+      "id": "te105",
+      "fromNode": "central",
+      "toNode": "t8",
+      "label": "4 | rule 2 | Settled: Map: partOf / hasPart"
+    },
+    {
+      "id": "se106",
+      "fromNode": "s14",
+      "toNode": "central",
+      "label": "3 | rule 51 | Review: Review: Aggregation endpoint pattern"
+    },
+    {
+      "id": "te107",
+      "fromNode": "central",
+      "toNode": "t1",
+      "label": "3 | rule 51 | Review: Review: Aggregation endpoint pattern"
+    },
+    {
+      "id": "se108",
+      "fromNode": "s17",
+      "toNode": "central",
+      "label": "3 | rule 2 | Settled: Map: partOf / hasPart"
+    },
+    {
+      "id": "te109",
+      "fromNode": "central",
+      "toNode": "t7",
+      "label": "3 | rule 2 | Settled: Map: partOf / hasPart"
+    },
+    {
+      "id": "se110",
+      "fromNode": "s6",
+      "toNode": "central",
+      "label": "3 | rule 2 | Settled: Map: partOf / hasPart"
+    },
+    {
+      "id": "te111",
+      "fromNode": "central",
+      "toNode": "t14",
+      "label": "3 | rule 2 | Settled: Map: partOf / hasPart"
+    },
+    {
+      "id": "se112",
+      "fromNode": "s20",
+      "toNode": "central",
+      "label": "3 | rule 4 | Settled: Map: participants on the Context endpoint"
+    },
+    {
+      "id": "te113",
+      "fromNode": "central",
+      "toNode": "t5",
+      "label": "3 | rule 4 | Settled: Map: participants on the Context endpoint"
+    },
+    {
+      "id": "se114",
+      "fromNode": "s4",
+      "toNode": "central",
+      "label": "3 | rule 2 | Settled: Map: partOf / hasPart"
+    },
+    {
+      "id": "te115",
+      "fromNode": "central",
+      "toNode": "t1",
+      "label": "3 | rule 2 | Settled: Map: partOf / hasPart"
+    },
+    {
+      "id": "se116",
+      "fromNode": "s4",
+      "toNode": "central",
+      "label": "3 | rule 2 | Settled: Map: partOf / hasPart"
+    },
+    {
+      "id": "te117",
+      "fromNode": "central",
+      "toNode": "t6",
+      "label": "3 | rule 2 | Settled: Map: partOf / hasPart"
+    },
+    {
+      "id": "se118",
+      "fromNode": "s1",
+      "toNode": "central",
+      "label": "3 | rule 2 | Settled: Map: partOf / hasPart"
+    },
+    {
+      "id": "te119",
+      "fromNode": "central",
+      "toNode": "t7",
+      "label": "3 | rule 2 | Settled: Map: partOf / hasPart"
+    },
+    {
+      "id": "se120",
+      "fromNode": "s21",
+      "toNode": "central",
+      "label": "3 | rule 51 | Review: Review: Aggregation endpoint pattern"
+    },
+    {
+      "id": "te121",
+      "fromNode": "central",
+      "toNode": "t16",
+      "label": "3 | rule 51 | Review: Review: Aggregation endpoint pattern"
+    },
+    {
+      "id": "se122",
+      "fromNode": "s3",
+      "toNode": "central",
+      "label": "3 | rule 51 | Review: Review: Aggregation endpoint pattern"
+    },
+    {
+      "id": "te123",
+      "fromNode": "central",
+      "toNode": "t10",
+      "label": "3 | rule 51 | Review: Review: Aggregation endpoint pattern"
+    },
+    {
+      "id": "se124",
+      "fromNode": "s11",
+      "toNode": "central",
+      "label": "2 | rule 51 | Review: Review: Aggregation endpoint pattern"
+    },
+    {
+      "id": "te125",
+      "fromNode": "central",
+      "toNode": "t17",
+      "label": "2 | rule 51 | Review: Review: Aggregation endpoint pattern"
+    },
+    {
+      "id": "se126",
+      "fromNode": "s11",
+      "toNode": "central",
+      "label": "2 | rule 3 | Settled: Map: parent / child"
+    },
+    {
+      "id": "te127",
+      "fromNode": "central",
+      "toNode": "t11",
+      "label": "2 | rule 3 | Settled: Map: parent / child"
+    },
+    {
+      "id": "se128",
+      "fromNode": "s17",
+      "toNode": "central",
+      "label": "2 | rule 2 | Settled: Map: partOf / hasPart"
+    },
+    {
+      "id": "te129",
+      "fromNode": "central",
+      "toNode": "t3",
+      "label": "2 | rule 2 | Settled: Map: partOf / hasPart"
+    },
+    {
+      "id": "se130",
+      "fromNode": "s22",
+      "toNode": "central",
+      "label": "2 | rule 2 | Settled: Map: partOf / hasPart"
+    },
+    {
+      "id": "te131",
+      "fromNode": "central",
+      "toNode": "t0",
+      "label": "2 | rule 2 | Settled: Map: partOf / hasPart"
+    },
+    {
+      "id": "se132",
+      "fromNode": "s22",
+      "toNode": "central",
+      "label": "2 | rule 2 | Settled: Map: partOf / hasPart"
+    },
+    {
+      "id": "te133",
+      "fromNode": "central",
+      "toNode": "t7",
+      "label": "2 | rule 2 | Settled: Map: partOf / hasPart"
+    },
+    {
+      "id": "se134",
+      "fromNode": "s10",
+      "toNode": "central",
+      "label": "2 | rule 2 | Settled: Map: partOf / hasPart"
+    },
+    {
+      "id": "te135",
+      "fromNode": "central",
+      "toNode": "t14",
+      "label": "2 | rule 2 | Settled: Map: partOf / hasPart"
+    },
+    {
+      "id": "se136",
+      "fromNode": "s1",
+      "toNode": "central",
+      "label": "2 | rule 2 | Settled: Map: partOf / hasPart"
+    },
+    {
+      "id": "te137",
+      "fromNode": "central",
+      "toNode": "t14",
+      "label": "2 | rule 2 | Settled: Map: partOf / hasPart"
+    },
+    {
+      "id": "se138",
+      "fromNode": "s23",
+      "toNode": "central",
+      "label": "2 | rule 51 | Review: Review: Aggregation endpoint pattern"
+    },
+    {
+      "id": "te139",
+      "fromNode": "central",
+      "toNode": "t1",
+      "label": "2 | rule 51 | Review: Review: Aggregation endpoint pattern"
+    },
+    {
+      "id": "se140",
+      "fromNode": "s2",
+      "toNode": "central",
+      "label": "2 | rule 2 | Settled: Map: partOf / hasPart"
+    },
+    {
+      "id": "te141",
+      "fromNode": "central",
+      "toNode": "t1",
+      "label": "2 | rule 2 | Settled: Map: partOf / hasPart"
+    },
+    {
+      "id": "se142",
+      "fromNode": "s2",
+      "toNode": "central",
+      "label": "2 | rule 2 | Settled: Map: partOf / hasPart"
+    },
+    {
+      "id": "te143",
+      "fromNode": "central",
+      "toNode": "t19",
+      "label": "2 | rule 2 | Settled: Map: partOf / hasPart"
+    },
+    {
+      "id": "se144",
+      "fromNode": "s3",
+      "toNode": "central",
+      "label": "2 | rule 51 | Review: Review: Aggregation endpoint pattern"
+    },
+    {
+      "id": "te145",
+      "fromNode": "central",
+      "toNode": "t9",
+      "label": "2 | rule 51 | Review: Review: Aggregation endpoint pattern"
+    },
+    {
+      "id": "se146",
+      "fromNode": "s18",
+      "toNode": "central",
+      "label": "1 | rule 51 | Review: Review: Aggregation endpoint pattern"
+    },
+    {
+      "id": "te147",
+      "fromNode": "central",
+      "toNode": "t10",
+      "label": "1 | rule 51 | Review: Review: Aggregation endpoint pattern"
+    },
+    {
+      "id": "se148",
+      "fromNode": "s8",
+      "toNode": "central",
+      "label": "1 | rule 51 | Review: Review: Aggregation endpoint pattern"
+    },
+    {
+      "id": "te149",
+      "fromNode": "central",
+      "toNode": "t17",
+      "label": "1 | rule 51 | Review: Review: Aggregation endpoint pattern"
+    },
+    {
+      "id": "se150",
+      "fromNode": "s15",
+      "toNode": "central",
+      "label": "1 | rule 2 | Settled: Map: partOf / hasPart"
+    },
+    {
+      "id": "te151",
+      "fromNode": "central",
+      "toNode": "t6",
+      "label": "1 | rule 2 | Settled: Map: partOf / hasPart"
+    },
+    {
+      "id": "se152",
+      "fromNode": "s24",
+      "toNode": "central",
+      "label": "1 | rule 2 | Settled: Map: partOf / hasPart"
+    },
+    {
+      "id": "te153",
+      "fromNode": "central",
+      "toNode": "t1",
+      "label": "1 | rule 2 | Settled: Map: partOf / hasPart"
+    },
+    {
+      "id": "se154",
+      "fromNode": "s17",
+      "toNode": "central",
+      "label": "1 | rule 2 | Settled: Map: partOf / hasPart"
+    },
+    {
+      "id": "te155",
+      "fromNode": "central",
+      "toNode": "t20",
+      "label": "1 | rule 2 | Settled: Map: partOf / hasPart"
+    },
+    {
+      "id": "se156",
+      "fromNode": "s0",
+      "toNode": "central",
+      "label": "1 | rule 2 | Settled: Map: partOf / hasPart"
+    },
+    {
+      "id": "te157",
+      "fromNode": "central",
+      "toNode": "t3",
+      "label": "1 | rule 2 | Settled: Map: partOf / hasPart"
+    },
+    {
+      "id": "se158",
+      "fromNode": "s6",
+      "toNode": "central",
+      "label": "1 | rule 2 | Settled: Map: partOf / hasPart"
+    },
+    {
+      "id": "te159",
+      "fromNode": "central",
+      "toNode": "t19",
+      "label": "1 | rule 2 | Settled: Map: partOf / hasPart"
+    },
+    {
+      "id": "se160",
+      "fromNode": "s22",
+      "toNode": "central",
+      "label": "1 | rule 2 | Settled: Map: partOf / hasPart"
+    },
+    {
+      "id": "te161",
+      "fromNode": "central",
+      "toNode": "t14",
+      "label": "1 | rule 2 | Settled: Map: partOf / hasPart"
+    },
+    {
+      "id": "se162",
+      "fromNode": "s22",
+      "toNode": "central",
+      "label": "1 | rule 2 | Settled: Map: partOf / hasPart"
+    },
+    {
+      "id": "te163",
+      "fromNode": "central",
+      "toNode": "t6",
+      "label": "1 | rule 2 | Settled: Map: partOf / hasPart"
+    },
+    {
+      "id": "se164",
+      "fromNode": "s10",
+      "toNode": "central",
+      "label": "1 | rule 2 | Settled: Map: partOf / hasPart"
+    },
+    {
+      "id": "te165",
+      "fromNode": "central",
+      "toNode": "t0",
+      "label": "1 | rule 2 | Settled: Map: partOf / hasPart"
+    },
+    {
+      "id": "se166",
+      "fromNode": "s10",
+      "toNode": "central",
+      "label": "1 | rule 2 | Settled: Map: partOf / hasPart"
+    },
+    {
+      "id": "te167",
+      "fromNode": "central",
+      "toNode": "t7",
+      "label": "1 | rule 2 | Settled: Map: partOf / hasPart"
+    },
+    {
+      "id": "se168",
+      "fromNode": "s20",
+      "toNode": "central",
+      "label": "1 | rule 2 | Settled: Map: partOf / hasPart"
+    },
+    {
+      "id": "te169",
+      "fromNode": "central",
+      "toNode": "t1",
+      "label": "1 | rule 2 | Settled: Map: partOf / hasPart"
+    },
+    {
+      "id": "se170",
+      "fromNode": "s7",
+      "toNode": "central",
+      "label": "1 | rule 2 | Settled: Map: partOf / hasPart"
+    },
+    {
+      "id": "te171",
+      "fromNode": "central",
+      "toNode": "t14",
+      "label": "1 | rule 2 | Settled: Map: partOf / hasPart"
+    },
+    {
+      "id": "se172",
+      "fromNode": "s7",
+      "toNode": "central",
+      "label": "1 | rule 2 | Settled: Map: partOf / hasPart"
+    },
+    {
+      "id": "te173",
+      "fromNode": "central",
+      "toNode": "t19",
+      "label": "1 | rule 2 | Settled: Map: partOf / hasPart"
+    },
+    {
+      "id": "se174",
+      "fromNode": "s7",
+      "toNode": "central",
+      "label": "1 | rule 2 | Settled: Map: partOf / hasPart"
+    },
+    {
+      "id": "te175",
+      "fromNode": "central",
+      "toNode": "t2",
+      "label": "1 | rule 2 | Settled: Map: partOf / hasPart"
+    },
+    {
+      "id": "se176",
+      "fromNode": "s1",
+      "toNode": "central",
+      "label": "1 | rule 2 | Settled: Map: partOf / hasPart"
+    },
+    {
+      "id": "te177",
+      "fromNode": "central",
+      "toNode": "t3",
+      "label": "1 | rule 2 | Settled: Map: partOf / hasPart"
+    },
+    {
+      "id": "se178",
+      "fromNode": "s23",
+      "toNode": "central",
+      "label": "1 | rule 51 | Review: Review: Aggregation endpoint pattern"
+    },
+    {
+      "id": "te179",
+      "fromNode": "central",
+      "toNode": "t19",
+      "label": "1 | rule 51 | Review: Review: Aggregation endpoint pattern"
+    },
+    {
+      "id": "se180",
+      "fromNode": "s21",
+      "toNode": "central",
+      "label": "1 | rule 51 | Review: Review: Aggregation endpoint pattern"
+    },
+    {
+      "id": "te181",
+      "fromNode": "central",
+      "toNode": "t4",
+      "label": "1 | rule 51 | Review: Review: Aggregation endpoint pattern"
+    },
+    {
+      "id": "se182",
+      "fromNode": "s3",
+      "toNode": "central",
+      "label": "1 | rule 51 | Review: Review: Aggregation endpoint pattern"
+    },
+    {
+      "id": "te183",
+      "fromNode": "central",
+      "toNode": "t1",
+      "label": "1 | rule 51 | Review: Review: Aggregation endpoint pattern"
+    },
+    {
+      "id": "ve184",
+      "fromNode": "central",
+      "toNode": "v0",
+      "label": "no stereotype"
+    }
+  ]
+}

@@ -1,0 +1,30 @@
+{
+  "nodes": [
+    {
+      "id": "central",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/02_EA Relationships/Remaining Requirement allocate endpoint types/README_Remaining Requirement allocate endpoint types.md",
+      "x": 0,
+      "y": 0,
+      "width": 430,
+      "height": 260
+    },
+    {
+      "id": "v0",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/02_EA Relationships/Remaining Requirement allocate endpoint types/README_Remaining Requirement allocate endpoint types.md",
+      "x": 30,
+      "y": -380,
+      "width": 250,
+      "height": 130
+    }
+  ],
+  "edges": [
+    {
+      "id": "ve0",
+      "fromNode": "central",
+      "toNode": "v0",
+      "label": "no stereotype"
+    }
+  ]
+}

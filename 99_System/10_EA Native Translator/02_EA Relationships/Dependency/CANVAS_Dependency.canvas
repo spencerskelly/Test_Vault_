@@ -1,0 +1,4821 @@
+{
+  "nodes": [
+    {
+      "id": "central",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/02_EA Relationships/Dependency/README_Dependency.md",
+      "x": 0,
+      "y": 0,
+      "width": 430,
+      "height": 260
+    },
+    {
+      "id": "s0",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/01_EA Elements/Artifact/EA Stereotype - Document.md",
+      "x": -950,
+      "y": -700,
+      "width": 350,
+      "height": 150
+    },
+    {
+      "id": "t0",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/01_EA Elements/Requirement/EA Stereotype - Regulatory Requirement.md",
+      "x": 950,
+      "y": -700,
+      "width": 350,
+      "height": 150
+    },
+    {
+      "id": "s1",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/01_EA Elements/Activity/EA Element - No Stereotype.md",
+      "x": -950,
+      "y": -520,
+      "width": 350,
+      "height": 150
+    },
+    {
+      "id": "t1",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/01_EA Elements/Activity/EA Element - No Stereotype.md",
+      "x": 950,
+      "y": -520,
+      "width": 350,
+      "height": 150
+    },
+    {
+      "id": "s2",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/01_EA Elements/Activity/EA Stereotype - System Function.md",
+      "x": -950,
+      "y": -340,
+      "width": 350,
+      "height": 150
+    },
+    {
+      "id": "t2",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/01_EA Elements/State/EA Stereotype - System State.md",
+      "x": 950,
+      "y": -340,
+      "width": 350,
+      "height": 150
+    },
+    {
+      "id": "t3",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/01_EA Elements/Activity/EA Stereotype - System Function.md",
+      "x": 950,
+      "y": -160,
+      "width": 350,
+      "height": 150
+    },
+    {
+      "id": "s3",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/01_EA Elements/InformationItem/README_InformationItem.md",
+      "x": -950,
+      "y": -160,
+      "width": 350,
+      "height": 150
+    },
+    {
+      "id": "t4",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/01_EA Elements/Requirement/EA Stereotype - requirement.md",
+      "x": 950,
+      "y": 20,
+      "width": 350,
+      "height": 150
+    },
+    {
+      "id": "s4",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/01_EA Elements/State/EA Stereotype - System State.md",
+      "x": -950,
+      "y": 20,
+      "width": 350,
+      "height": 150
+    },
+    {
+      "id": "t5",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/01_EA Elements/Activity/EA Stereotype - Hardware Function.md",
+      "x": 950,
+      "y": 200,
+      "width": 350,
+      "height": 150
+    },
+    {
+      "id": "t6",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/01_EA Elements/State/EA Element - No Stereotype.md",
+      "x": 950,
+      "y": 380,
+      "width": 350,
+      "height": 150
+    },
+    {
+      "id": "s5",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/01_EA Elements/Class/EA Stereotype - Software Component.md",
+      "x": -950,
+      "y": 200,
+      "width": 350,
+      "height": 150
+    },
+    {
+      "id": "t7",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/01_EA Elements/Class/EA Stereotype - Software Component.md",
+      "x": 950,
+      "y": 560,
+      "width": 350,
+      "height": 150
+    },
+    {
+      "id": "s6",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/01_EA Elements/Activity/EA Stereotype - Hardware Function.md",
+      "x": -950,
+      "y": 380,
+      "width": 350,
+      "height": 150
+    },
+    {
+      "id": "s7",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/01_EA Elements/Requirement/EA Stereotype - requirement.md",
+      "x": -950,
+      "y": 560,
+      "width": 350,
+      "height": 150
+    },
+    {
+      "id": "s8",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/01_EA Elements/Class/EA Stereotype - Hardware Component.md",
+      "x": -950,
+      "y": 740,
+      "width": 350,
+      "height": 150
+    },
+    {
+      "id": "t8",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/01_EA Elements/Class/EA Stereotype - Hardware Component.md",
+      "x": 950,
+      "y": 740,
+      "width": 350,
+      "height": 150
+    },
+    {
+      "id": "s9",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/01_EA Elements/Issue/README_Issue.md",
+      "x": -950,
+      "y": 920,
+      "width": 350,
+      "height": 150
+    },
+    {
+      "id": "t9",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/01_EA Elements/Requirement/EA Stereotype - designConstraint.md",
+      "x": 950,
+      "y": 920,
+      "width": 350,
+      "height": 150
+    },
+    {
+      "id": "s10",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/01_EA Elements/Port/EA Element - No Stereotype.md",
+      "x": -950,
+      "y": 1100,
+      "width": 350,
+      "height": 150
+    },
+    {
+      "id": "s11",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/01_EA Elements/Activity/EA Stereotype - Module Function.md",
+      "x": -950,
+      "y": 1280,
+      "width": 350,
+      "height": 150
+    },
+    {
+      "id": "s12",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/01_EA Elements/Activity/EA Stereotype - testCase.md",
+      "x": -950,
+      "y": 1460,
+      "width": 350,
+      "height": 150
+    },
+    {
+      "id": "t10",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/01_EA Elements/Object/README_Object.md",
+      "x": 950,
+      "y": 1100,
+      "width": 350,
+      "height": 150
+    },
+    {
+      "id": "t11",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/01_EA Elements/Class/EA Stereotype - Physical Component.md",
+      "x": 950,
+      "y": 1280,
+      "width": 350,
+      "height": 150
+    },
+    {
+      "id": "t12",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/01_EA Elements/Change/README_Change.md",
+      "x": 950,
+      "y": 1460,
+      "width": 350,
+      "height": 150
+    },
+    {
+      "id": "s13",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/01_EA Elements/Action/README_Action.md",
+      "x": -950,
+      "y": 1640,
+      "width": 350,
+      "height": 150
+    },
+    {
+      "id": "t13",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/01_EA Elements/Class/EA Stereotype - Platform.md",
+      "x": 950,
+      "y": 1640,
+      "width": 350,
+      "height": 150
+    },
+    {
+      "id": "t14",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/01_EA Elements/Class/EA Stereotype - System Partner.md",
+      "x": 950,
+      "y": 1820,
+      "width": 350,
+      "height": 150
+    },
+    {
+      "id": "t15",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/01_EA Elements/Text/README_Text.md",
+      "x": 950,
+      "y": 2000,
+      "width": 350,
+      "height": 150
+    },
+    {
+      "id": "s14",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/01_EA Elements/Activity/EA Stereotype - Software Function.md",
+      "x": -950,
+      "y": 1820,
+      "width": 350,
+      "height": 150
+    },
+    {
+      "id": "s15",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/01_EA Elements/Change/README_Change.md",
+      "x": -950,
+      "y": 2000,
+      "width": 350,
+      "height": 150
+    },
+    {
+      "id": "s16",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/01_EA Elements/Class/EA Stereotype - System Partner.md",
+      "x": -950,
+      "y": 2180,
+      "width": 350,
+      "height": 150
+    },
+    {
+      "id": "s17",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/01_EA Elements/Class/EA Stereotype - block.md",
+      "x": -950,
+      "y": 2360,
+      "width": 350,
+      "height": 150
+    },
+    {
+      "id": "t16",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/01_EA Elements/Class/EA Stereotype - block.md",
+      "x": 950,
+      "y": 2180,
+      "width": 350,
+      "height": 150
+    },
+    {
+      "id": "s18",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/01_EA Elements/Requirement/EA Stereotype - designConstraint.md",
+      "x": -950,
+      "y": 2540,
+      "width": 350,
+      "height": 150
+    },
+    {
+      "id": "t17",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/01_EA Elements/Artifact/EA Stereotype - Document.md",
+      "x": 950,
+      "y": 2360,
+      "width": 350,
+      "height": 150
+    },
+    {
+      "id": "s19",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/01_EA Elements/Requirement/EA Stereotype - functionalRequirement.md",
+      "x": -950,
+      "y": 2720,
+      "width": 350,
+      "height": 150
+    },
+    {
+      "id": "s20",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/01_EA Elements/State/EA Element - No Stereotype.md",
+      "x": -950,
+      "y": 2900,
+      "width": 350,
+      "height": 150
+    },
+    {
+      "id": "s21",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/01_EA Elements/UseCase/README_UseCase.md",
+      "x": -950,
+      "y": 3080,
+      "width": 350,
+      "height": 150
+    },
+    {
+      "id": "t18",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/01_EA Elements/Issue/README_Issue.md",
+      "x": 950,
+      "y": 2540,
+      "width": 350,
+      "height": 150
+    },
+    {
+      "id": "t19",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/01_EA Elements/Activity/EA Stereotype - Software Function.md",
+      "x": 950,
+      "y": 2720,
+      "width": 350,
+      "height": 150
+    },
+    {
+      "id": "t20",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/01_EA Elements/Activity/EA Stereotype - Module Function.md",
+      "x": 950,
+      "y": 2900,
+      "width": 350,
+      "height": 150
+    },
+    {
+      "id": "t21",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/01_EA Elements/Class/EA Stereotype - Physical System Variant.md",
+      "x": 950,
+      "y": 3080,
+      "width": 350,
+      "height": 150
+    },
+    {
+      "id": "t22",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/01_EA Elements/Artifact/EA Stereotype - Image.md",
+      "x": 950,
+      "y": 3260,
+      "width": 350,
+      "height": 150
+    },
+    {
+      "id": "t23",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/01_EA Elements/InformationItem/README_InformationItem.md",
+      "x": 950,
+      "y": 3440,
+      "width": 350,
+      "height": 150
+    },
+    {
+      "id": "s22",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/01_EA Elements/Class/EA Stereotype - Data Interface.md",
+      "x": -950,
+      "y": 3260,
+      "width": 350,
+      "height": 150
+    },
+    {
+      "id": "s23",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/01_EA Elements/Class/EA Stereotype - Physical System Variant.md",
+      "x": -950,
+      "y": 3440,
+      "width": 350,
+      "height": 150
+    },
+    {
+      "id": "t24",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/01_EA Elements/Activity/EA Stereotype - testCase.md",
+      "x": 950,
+      "y": 3620,
+      "width": 350,
+      "height": 150
+    },
+    {
+      "id": "t25",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/01_EA Elements/Port/EA Element - No Stereotype.md",
+      "x": 950,
+      "y": 3800,
+      "width": 350,
+      "height": 150
+    },
+    {
+      "id": "s24",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/01_EA Elements/Requirement/EA Element - No Stereotype.md",
+      "x": -950,
+      "y": 3620,
+      "width": 350,
+      "height": 150
+    },
+    {
+      "id": "s25",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/01_EA Elements/Requirement/EA Stereotype - Regulatory Requirement.md",
+      "x": -950,
+      "y": 3800,
+      "width": 350,
+      "height": 150
+    },
+    {
+      "id": "s26",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/01_EA Elements/Requirement/EA Stereotype - extendedRequirement.md",
+      "x": -950,
+      "y": 3980,
+      "width": 350,
+      "height": 150
+    },
+    {
+      "id": "t26",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/01_EA Elements/Requirement/EA Stereotype - extendedRequirement.md",
+      "x": 950,
+      "y": 3980,
+      "width": 350,
+      "height": 150
+    },
+    {
+      "id": "t27",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/01_EA Elements/Requirement/EA Stereotype - functionalRequirement.md",
+      "x": 950,
+      "y": 4160,
+      "width": 350,
+      "height": 150
+    },
+    {
+      "id": "t28",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/01_EA Elements/Class/EA Stereotype - Module.md",
+      "x": 950,
+      "y": 4340,
+      "width": 350,
+      "height": 150
+    },
+    {
+      "id": "t29",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/01_EA Elements/UseCase/README_UseCase.md",
+      "x": 950,
+      "y": 4520,
+      "width": 350,
+      "height": 150
+    },
+    {
+      "id": "t30",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/01_EA Elements/Requirement/EA Element - No Stereotype.md",
+      "x": 950,
+      "y": 4700,
+      "width": 350,
+      "height": 150
+    },
+    {
+      "id": "s27",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/01_EA Elements/Requirement/EA Stereotype - Functional.md",
+      "x": -950,
+      "y": 4160,
+      "width": 350,
+      "height": 150
+    },
+    {
+      "id": "s28",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/01_EA Elements/Requirement/EA Stereotype - performanceRequirement.md",
+      "x": -950,
+      "y": 4340,
+      "width": 350,
+      "height": 150
+    },
+    {
+      "id": "t31",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/01_EA Elements/Action/README_Action.md",
+      "x": 950,
+      "y": 4880,
+      "width": 350,
+      "height": 150
+    },
+    {
+      "id": "t32",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/01_EA Elements/Requirement/EA Stereotype - physicalRequirement.md",
+      "x": 950,
+      "y": 5060,
+      "width": 350,
+      "height": 150
+    },
+    {
+      "id": "s29",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/01_EA Elements/MISSING Endpoint/README_MISSING Endpoint.md",
+      "x": -950,
+      "y": 4520,
+      "width": 350,
+      "height": 150
+    },
+    {
+      "id": "t33",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/01_EA Elements/MISSING Endpoint/README_MISSING Endpoint.md",
+      "x": 950,
+      "y": 5240,
+      "width": 350,
+      "height": 150
+    },
+    {
+      "id": "t34",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/01_EA Elements/Requirement/EA Stereotype - Functional.md",
+      "x": 950,
+      "y": 5420,
+      "width": 350,
+      "height": 150
+    },
+    {
+      "id": "s30",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/01_EA Elements/Class/EA Stereotype - Physical Component.md",
+      "x": -950,
+      "y": 4700,
+      "width": 350,
+      "height": 150
+    },
+    {
+      "id": "t35",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/01_EA Elements/Requirement/EA Stereotype - Webasto Requirement.md",
+      "x": 950,
+      "y": 5600,
+      "width": 350,
+      "height": 150
+    },
+    {
+      "id": "t36",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/01_EA Elements/Requirement/EA Stereotype - performanceRequirement.md",
+      "x": 950,
+      "y": 5780,
+      "width": 350,
+      "height": 150
+    },
+    {
+      "id": "s31",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/01_EA Elements/Artifact/EA Stereotype - Image.md",
+      "x": -950,
+      "y": 4880,
+      "width": 350,
+      "height": 150
+    },
+    {
+      "id": "s32",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/01_EA Elements/Class/EA Stereotype - Module.md",
+      "x": -950,
+      "y": 5060,
+      "width": 350,
+      "height": 150
+    },
+    {
+      "id": "s33",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/01_EA Elements/Object/README_Object.md",
+      "x": -950,
+      "y": 5240,
+      "width": 350,
+      "height": 150
+    },
+    {
+      "id": "t37",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/01_EA Elements/Class/EA Stereotype - Physical Component + block.md",
+      "x": 950,
+      "y": 5960,
+      "width": 350,
+      "height": 150
+    },
+    {
+      "id": "s34",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/01_EA Elements/Actor/README_Actor.md",
+      "x": -950,
+      "y": 5420,
+      "width": 350,
+      "height": 150
+    },
+    {
+      "id": "s35",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/01_EA Elements/Boundary/README_Boundary.md",
+      "x": -950,
+      "y": 5600,
+      "width": 350,
+      "height": 150
+    },
+    {
+      "id": "s36",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/01_EA Elements/Class/EA Stereotype - Business Line.md",
+      "x": -950,
+      "y": 5780,
+      "width": 350,
+      "height": 150
+    },
+    {
+      "id": "t38",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/01_EA Elements/Actor/README_Actor.md",
+      "x": 950,
+      "y": 6140,
+      "width": 350,
+      "height": 150
+    },
+    {
+      "id": "s37",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/01_EA Elements/ProxyConnector/README_ProxyConnector.md",
+      "x": -950,
+      "y": 5960,
+      "width": 350,
+      "height": 150
+    },
+    {
+      "id": "s38",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/01_EA Elements/Text/README_Text.md",
+      "x": -950,
+      "y": 6140,
+      "width": 350,
+      "height": 150
+    },
+    {
+      "id": "v0",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/02_EA Relationships/Dependency/EA Relationship - No Stereotype.md",
+      "x": 30,
+      "y": -380,
+      "width": 250,
+      "height": 130
+    },
+    {
+      "id": "v1",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/02_EA Relationships/Dependency/EA Relationship Stereotype - ASILDecompose.md",
+      "x": 310,
+      "y": -380,
+      "width": 250,
+      "height": 130
+    },
+    {
+      "id": "v2",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/02_EA Relationships/Dependency/EA Relationship Stereotype - deriveReqt.md",
+      "x": -250,
+      "y": -560,
+      "width": 250,
+      "height": 130
+    },
+    {
+      "id": "v3",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/02_EA Relationships/Dependency/EA Relationship Stereotype - RecoveryRequirement.md",
+      "x": 30,
+      "y": -560,
+      "width": 250,
+      "height": 130
+    },
+    {
+      "id": "v4",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/02_EA Relationships/Dependency/EA Relationship Stereotype - refine.md",
+      "x": 310,
+      "y": -560,
+      "width": 250,
+      "height": 130
+    },
+    {
+      "id": "v5",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/02_EA Relationships/Dependency/EA Relationship Stereotype - satisfy.md",
+      "x": -250,
+      "y": -740,
+      "width": 250,
+      "height": 130
+    },
+    {
+      "id": "v6",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/02_EA Relationships/Dependency/EA Relationship Stereotype - trace.md",
+      "x": 30,
+      "y": -740,
+      "width": 250,
+      "height": 130
+    },
+    {
+      "id": "v7",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/02_EA Relationships/Dependency/EA Relationship Stereotype - verify.md",
+      "x": 310,
+      "y": -740,
+      "width": 250,
+      "height": 130
+    }
+  ],
+  "edges": [
+    {
+      "id": "se0",
+      "fromNode": "s0",
+      "toNode": "central",
+      "label": "173 | rule 58 | Review: Review: Dependency endpoint pattern"
+    },
+    {
+      "id": "te1",
+      "fromNode": "central",
+      "toNode": "t0",
+      "label": "173 | rule 58 | Review: Review: Dependency endpoint pattern"
+    },
+    {
+      "id": "se2",
+      "fromNode": "s1",
+      "toNode": "central",
+      "label": "58 | rule 27 | Settled: Map: dependsOn / dependencyOf"
+    },
+    {
+      "id": "te3",
+      "fromNode": "central",
+      "toNode": "t1",
+      "label": "58 | rule 27 | Settled: Map: dependsOn / dependencyOf"
+    },
+    {
+      "id": "se4",
+      "fromNode": "s2",
+      "toNode": "central",
+      "label": "51 | rule 58 | Review: Review: Dependency endpoint pattern"
+    },
+    {
+      "id": "te5",
+      "fromNode": "central",
+      "toNode": "t2",
+      "label": "51 | rule 58 | Review: Review: Dependency endpoint pattern"
+    },
+    {
+      "id": "se6",
+      "fromNode": "s1",
+      "toNode": "central",
+      "label": "39 | rule 58 | Review: Review: Dependency endpoint pattern"
+    },
+    {
+      "id": "te7",
+      "fromNode": "central",
+      "toNode": "t2",
+      "label": "39 | rule 58 | Review: Review: Dependency endpoint pattern"
+    },
+    {
+      "id": "se8",
+      "fromNode": "s1",
+      "toNode": "central",
+      "label": "35 | rule 27 | Settled: Map: dependsOn / dependencyOf"
+    },
+    {
+      "id": "te9",
+      "fromNode": "central",
+      "toNode": "t3",
+      "label": "35 | rule 27 | Settled: Map: dependsOn / dependencyOf"
+    },
+    {
+      "id": "se10",
+      "fromNode": "s2",
+      "toNode": "central",
+      "label": "35 | rule 27 | Settled: Map: dependsOn / dependencyOf"
+    },
+    {
+      "id": "te11",
+      "fromNode": "central",
+      "toNode": "t3",
+      "label": "35 | rule 27 | Settled: Map: dependsOn / dependencyOf"
+    },
+    {
+      "id": "se12",
+      "fromNode": "s2",
+      "toNode": "central",
+      "label": "25 | rule 27 | Settled: Map: dependsOn / dependencyOf"
+    },
+    {
+      "id": "te13",
+      "fromNode": "central",
+      "toNode": "t1",
+      "label": "25 | rule 27 | Settled: Map: dependsOn / dependencyOf"
+    },
+    {
+      "id": "se14",
+      "fromNode": "s3",
+      "toNode": "central",
+      "label": "25 | rule 58 | Review: Review: Dependency endpoint pattern"
+    },
+    {
+      "id": "te15",
+      "fromNode": "central",
+      "toNode": "t4",
+      "label": "25 | rule 58 | Review: Review: Dependency endpoint pattern"
+    },
+    {
+      "id": "se16",
+      "fromNode": "s4",
+      "toNode": "central",
+      "label": "23 | rule 58 | Review: Review: Dependency endpoint pattern"
+    },
+    {
+      "id": "te17",
+      "fromNode": "central",
+      "toNode": "t2",
+      "label": "23 | rule 58 | Review: Review: Dependency endpoint pattern"
+    },
+    {
+      "id": "se18",
+      "fromNode": "s2",
+      "toNode": "central",
+      "label": "18 | rule 27 | Settled: Map: dependsOn / dependencyOf"
+    },
+    {
+      "id": "te19",
+      "fromNode": "central",
+      "toNode": "t5",
+      "label": "18 | rule 27 | Settled: Map: dependsOn / dependencyOf"
+    },
+    {
+      "id": "se20",
+      "fromNode": "s1",
+      "toNode": "central",
+      "label": "12 | rule 58 | Review: Review: Dependency endpoint pattern"
+    },
+    {
+      "id": "te21",
+      "fromNode": "central",
+      "toNode": "t6",
+      "label": "12 | rule 58 | Review: Review: Dependency endpoint pattern"
+    },
+    {
+      "id": "se22",
+      "fromNode": "s5",
+      "toNode": "central",
+      "label": "10 | rule 58 | Review: Review: Dependency endpoint pattern"
+    },
+    {
+      "id": "te23",
+      "fromNode": "central",
+      "toNode": "t7",
+      "label": "10 | rule 58 | Review: Review: Dependency endpoint pattern"
+    },
+    {
+      "id": "se24",
+      "fromNode": "s6",
+      "toNode": "central",
+      "label": "9 | rule 58 | Review: Review: Dependency endpoint pattern"
+    },
+    {
+      "id": "te25",
+      "fromNode": "central",
+      "toNode": "t2",
+      "label": "9 | rule 58 | Review: Review: Dependency endpoint pattern"
+    },
+    {
+      "id": "se26",
+      "fromNode": "s2",
+      "toNode": "central",
+      "label": "8 | rule 58 | Review: Review: Dependency endpoint pattern"
+    },
+    {
+      "id": "te27",
+      "fromNode": "central",
+      "toNode": "t6",
+      "label": "8 | rule 58 | Review: Review: Dependency endpoint pattern"
+    },
+    {
+      "id": "se28",
+      "fromNode": "s7",
+      "toNode": "central",
+      "label": "7 | rule 58 | Review: Review: Dependency endpoint pattern"
+    },
+    {
+      "id": "te29",
+      "fromNode": "central",
+      "toNode": "t4",
+      "label": "7 | rule 58 | Review: Review: Dependency endpoint pattern"
+    },
+    {
+      "id": "se30",
+      "fromNode": "s1",
+      "toNode": "central",
+      "label": "5 | rule 27 | Settled: Map: dependsOn / dependencyOf"
+    },
+    {
+      "id": "te31",
+      "fromNode": "central",
+      "toNode": "t5",
+      "label": "5 | rule 27 | Settled: Map: dependsOn / dependencyOf"
+    },
+    {
+      "id": "se32",
+      "fromNode": "s8",
+      "toNode": "central",
+      "label": "5 | rule 58 | Review: Review: Dependency endpoint pattern"
+    },
+    {
+      "id": "te33",
+      "fromNode": "central",
+      "toNode": "t8",
+      "label": "5 | rule 58 | Review: Review: Dependency endpoint pattern"
+    },
+    {
+      "id": "se34",
+      "fromNode": "s9",
+      "toNode": "central",
+      "label": "5 | rule 58 | Review: Review: Dependency endpoint pattern"
+    },
+    {
+      "id": "te35",
+      "fromNode": "central",
+      "toNode": "t9",
+      "label": "5 | rule 58 | Review: Review: Dependency endpoint pattern"
+    },
+    {
+      "id": "se36",
+      "fromNode": "s10",
+      "toNode": "central",
+      "label": "5 | rule 58 | Review: Review: Dependency endpoint pattern"
+    },
+    {
+      "id": "te37",
+      "fromNode": "central",
+      "toNode": "t9",
+      "label": "5 | rule 58 | Review: Review: Dependency endpoint pattern"
+    },
+    {
+      "id": "se38",
+      "fromNode": "s6",
+      "toNode": "central",
+      "label": "4 | rule 27 | Settled: Map: dependsOn / dependencyOf"
+    },
+    {
+      "id": "te39",
+      "fromNode": "central",
+      "toNode": "t5",
+      "label": "4 | rule 27 | Settled: Map: dependsOn / dependencyOf"
+    },
+    {
+      "id": "se40",
+      "fromNode": "s11",
+      "toNode": "central",
+      "label": "4 | rule 58 | Review: Review: Dependency endpoint pattern"
+    },
+    {
+      "id": "te41",
+      "fromNode": "central",
+      "toNode": "t2",
+      "label": "4 | rule 58 | Review: Review: Dependency endpoint pattern"
+    },
+    {
+      "id": "se42",
+      "fromNode": "s12",
+      "toNode": "central",
+      "label": "4 | rule 58 | Review: Review: Dependency endpoint pattern"
+    },
+    {
+      "id": "te43",
+      "fromNode": "central",
+      "toNode": "t10",
+      "label": "4 | rule 58 | Review: Review: Dependency endpoint pattern"
+    },
+    {
+      "id": "se44",
+      "fromNode": "s7",
+      "toNode": "central",
+      "label": "4 | rule 58 | Review: Review: Dependency endpoint pattern"
+    },
+    {
+      "id": "te45",
+      "fromNode": "central",
+      "toNode": "t11",
+      "label": "4 | rule 58 | Review: Review: Dependency endpoint pattern"
+    },
+    {
+      "id": "se46",
+      "fromNode": "s6",
+      "toNode": "central",
+      "label": "3 | rule 27 | Settled: Map: dependsOn / dependencyOf"
+    },
+    {
+      "id": "te47",
+      "fromNode": "central",
+      "toNode": "t3",
+      "label": "3 | rule 27 | Settled: Map: dependsOn / dependencyOf"
+    },
+    {
+      "id": "se48",
+      "fromNode": "s7",
+      "toNode": "central",
+      "label": "3 | rule 58 | Review: Review: Dependency endpoint pattern"
+    },
+    {
+      "id": "te49",
+      "fromNode": "central",
+      "toNode": "t12",
+      "label": "3 | rule 58 | Review: Review: Dependency endpoint pattern"
+    },
+    {
+      "id": "se50",
+      "fromNode": "s7",
+      "toNode": "central",
+      "label": "3 | rule 58 | Review: Review: Dependency endpoint pattern"
+    },
+    {
+      "id": "te51",
+      "fromNode": "central",
+      "toNode": "t8",
+      "label": "3 | rule 58 | Review: Review: Dependency endpoint pattern"
+    },
+    {
+      "id": "se52",
+      "fromNode": "s4",
+      "toNode": "central",
+      "label": "3 | rule 58 | Review: Review: Dependency endpoint pattern"
+    },
+    {
+      "id": "te53",
+      "fromNode": "central",
+      "toNode": "t11",
+      "label": "3 | rule 58 | Review: Review: Dependency endpoint pattern"
+    },
+    {
+      "id": "se54",
+      "fromNode": "s13",
+      "toNode": "central",
+      "label": "2 | rule 58 | Review: Review: Dependency endpoint pattern"
+    },
+    {
+      "id": "te55",
+      "fromNode": "central",
+      "toNode": "t8",
+      "label": "2 | rule 58 | Review: Review: Dependency endpoint pattern"
+    },
+    {
+      "id": "se56",
+      "fromNode": "s1",
+      "toNode": "central",
+      "label": "2 | rule 58 | Review: Review: Dependency endpoint pattern"
+    },
+    {
+      "id": "te57",
+      "fromNode": "central",
+      "toNode": "t13",
+      "label": "2 | rule 58 | Review: Review: Dependency endpoint pattern"
+    },
+    {
+      "id": "se58",
+      "fromNode": "s1",
+      "toNode": "central",
+      "label": "2 | rule 58 | Review: Review: Dependency endpoint pattern"
+    },
+    {
+      "id": "te59",
+      "fromNode": "central",
+      "toNode": "t14",
+      "label": "2 | rule 58 | Review: Review: Dependency endpoint pattern"
+    },
+    {
+      "id": "se60",
+      "fromNode": "s1",
+      "toNode": "central",
+      "label": "2 | rule 58 | Review: Review: Dependency endpoint pattern"
+    },
+    {
+      "id": "te61",
+      "fromNode": "central",
+      "toNode": "t15",
+      "label": "2 | rule 58 | Review: Review: Dependency endpoint pattern"
+    },
+    {
+      "id": "se62",
+      "fromNode": "s6",
+      "toNode": "central",
+      "label": "2 | rule 27 | Settled: Map: dependsOn / dependencyOf"
+    },
+    {
+      "id": "te63",
+      "fromNode": "central",
+      "toNode": "t1",
+      "label": "2 | rule 27 | Settled: Map: dependsOn / dependencyOf"
+    },
+    {
+      "id": "se64",
+      "fromNode": "s11",
+      "toNode": "central",
+      "label": "2 | rule 27 | Settled: Map: dependsOn / dependencyOf"
+    },
+    {
+      "id": "te65",
+      "fromNode": "central",
+      "toNode": "t3",
+      "label": "2 | rule 27 | Settled: Map: dependsOn / dependencyOf"
+    },
+    {
+      "id": "se66",
+      "fromNode": "s14",
+      "toNode": "central",
+      "label": "2 | rule 27 | Settled: Map: dependsOn / dependencyOf"
+    },
+    {
+      "id": "te67",
+      "fromNode": "central",
+      "toNode": "t3",
+      "label": "2 | rule 27 | Settled: Map: dependsOn / dependencyOf"
+    },
+    {
+      "id": "se68",
+      "fromNode": "s14",
+      "toNode": "central",
+      "label": "2 | rule 58 | Review: Review: Dependency endpoint pattern"
+    },
+    {
+      "id": "te69",
+      "fromNode": "central",
+      "toNode": "t2",
+      "label": "2 | rule 58 | Review: Review: Dependency endpoint pattern"
+    },
+    {
+      "id": "se70",
+      "fromNode": "s15",
+      "toNode": "central",
+      "label": "2 | rule 58 | Review: Review: Dependency endpoint pattern"
+    },
+    {
+      "id": "te71",
+      "fromNode": "central",
+      "toNode": "t1",
+      "label": "2 | rule 58 | Review: Review: Dependency endpoint pattern"
+    },
+    {
+      "id": "se72",
+      "fromNode": "s16",
+      "toNode": "central",
+      "label": "2 | rule 58 | Review: Review: Dependency endpoint pattern"
+    },
+    {
+      "id": "te73",
+      "fromNode": "central",
+      "toNode": "t4",
+      "label": "2 | rule 58 | Review: Review: Dependency endpoint pattern"
+    },
+    {
+      "id": "se74",
+      "fromNode": "s17",
+      "toNode": "central",
+      "label": "2 | rule 58 | Review: Review: Dependency endpoint pattern"
+    },
+    {
+      "id": "te75",
+      "fromNode": "central",
+      "toNode": "t7",
+      "label": "2 | rule 58 | Review: Review: Dependency endpoint pattern"
+    },
+    {
+      "id": "se76",
+      "fromNode": "s17",
+      "toNode": "central",
+      "label": "2 | rule 58 | Review: Review: Dependency endpoint pattern"
+    },
+    {
+      "id": "te77",
+      "fromNode": "central",
+      "toNode": "t16",
+      "label": "2 | rule 58 | Review: Review: Dependency endpoint pattern"
+    },
+    {
+      "id": "se78",
+      "fromNode": "s18",
+      "toNode": "central",
+      "label": "2 | rule 58 | Review: Review: Dependency endpoint pattern"
+    },
+    {
+      "id": "te79",
+      "fromNode": "central",
+      "toNode": "t17",
+      "label": "2 | rule 58 | Review: Review: Dependency endpoint pattern"
+    },
+    {
+      "id": "se80",
+      "fromNode": "s19",
+      "toNode": "central",
+      "label": "2 | rule 58 | Review: Review: Dependency endpoint pattern"
+    },
+    {
+      "id": "te81",
+      "fromNode": "central",
+      "toNode": "t8",
+      "label": "2 | rule 58 | Review: Review: Dependency endpoint pattern"
+    },
+    {
+      "id": "se82",
+      "fromNode": "s19",
+      "toNode": "central",
+      "label": "2 | rule 58 | Review: Review: Dependency endpoint pattern"
+    },
+    {
+      "id": "te83",
+      "fromNode": "central",
+      "toNode": "t9",
+      "label": "2 | rule 58 | Review: Review: Dependency endpoint pattern"
+    },
+    {
+      "id": "se84",
+      "fromNode": "s7",
+      "toNode": "central",
+      "label": "2 | rule 58 | Review: Review: Dependency endpoint pattern"
+    },
+    {
+      "id": "te85",
+      "fromNode": "central",
+      "toNode": "t2",
+      "label": "2 | rule 58 | Review: Review: Dependency endpoint pattern"
+    },
+    {
+      "id": "se86",
+      "fromNode": "s20",
+      "toNode": "central",
+      "label": "2 | rule 58 | Review: Review: Dependency endpoint pattern"
+    },
+    {
+      "id": "te87",
+      "fromNode": "central",
+      "toNode": "t1",
+      "label": "2 | rule 58 | Review: Review: Dependency endpoint pattern"
+    },
+    {
+      "id": "se88",
+      "fromNode": "s20",
+      "toNode": "central",
+      "label": "2 | rule 58 | Review: Review: Dependency endpoint pattern"
+    },
+    {
+      "id": "te89",
+      "fromNode": "central",
+      "toNode": "t11",
+      "label": "2 | rule 58 | Review: Review: Dependency endpoint pattern"
+    },
+    {
+      "id": "se90",
+      "fromNode": "s20",
+      "toNode": "central",
+      "label": "2 | rule 58 | Review: Review: Dependency endpoint pattern"
+    },
+    {
+      "id": "te91",
+      "fromNode": "central",
+      "toNode": "t4",
+      "label": "2 | rule 58 | Review: Review: Dependency endpoint pattern"
+    },
+    {
+      "id": "se92",
+      "fromNode": "s4",
+      "toNode": "central",
+      "label": "2 | rule 58 | Review: Review: Dependency endpoint pattern"
+    },
+    {
+      "id": "te93",
+      "fromNode": "central",
+      "toNode": "t8",
+      "label": "2 | rule 58 | Review: Review: Dependency endpoint pattern"
+    },
+    {
+      "id": "se94",
+      "fromNode": "s4",
+      "toNode": "central",
+      "label": "2 | rule 58 | Review: Review: Dependency endpoint pattern"
+    },
+    {
+      "id": "te95",
+      "fromNode": "central",
+      "toNode": "t6",
+      "label": "2 | rule 58 | Review: Review: Dependency endpoint pattern"
+    },
+    {
+      "id": "se96",
+      "fromNode": "s21",
+      "toNode": "central",
+      "label": "2 | rule 58 | Review: Review: Dependency endpoint pattern"
+    },
+    {
+      "id": "te97",
+      "fromNode": "central",
+      "toNode": "t18",
+      "label": "2 | rule 58 | Review: Review: Dependency endpoint pattern"
+    },
+    {
+      "id": "se98",
+      "fromNode": "s21",
+      "toNode": "central",
+      "label": "2 | rule 58 | Review: Review: Dependency endpoint pattern"
+    },
+    {
+      "id": "te99",
+      "fromNode": "central",
+      "toNode": "t2",
+      "label": "2 | rule 58 | Review: Review: Dependency endpoint pattern"
+    },
+    {
+      "id": "se100",
+      "fromNode": "s13",
+      "toNode": "central",
+      "label": "1 | rule 58 | Review: Review: Dependency endpoint pattern"
+    },
+    {
+      "id": "te101",
+      "fromNode": "central",
+      "toNode": "t11",
+      "label": "1 | rule 58 | Review: Review: Dependency endpoint pattern"
+    },
+    {
+      "id": "se102",
+      "fromNode": "s1",
+      "toNode": "central",
+      "label": "1 | rule 27 | Settled: Map: dependsOn / dependencyOf"
+    },
+    {
+      "id": "te103",
+      "fromNode": "central",
+      "toNode": "t19",
+      "label": "1 | rule 27 | Settled: Map: dependsOn / dependencyOf"
+    },
+    {
+      "id": "se104",
+      "fromNode": "s1",
+      "toNode": "central",
+      "label": "1 | rule 58 | Review: Review: Dependency endpoint pattern"
+    },
+    {
+      "id": "te105",
+      "fromNode": "central",
+      "toNode": "t8",
+      "label": "1 | rule 58 | Review: Review: Dependency endpoint pattern"
+    },
+    {
+      "id": "se106",
+      "fromNode": "s1",
+      "toNode": "central",
+      "label": "1 | rule 58 | Review: Review: Dependency endpoint pattern"
+    },
+    {
+      "id": "te107",
+      "fromNode": "central",
+      "toNode": "t18",
+      "label": "1 | rule 58 | Review: Review: Dependency endpoint pattern"
+    },
+    {
+      "id": "se108",
+      "fromNode": "s1",
+      "toNode": "central",
+      "label": "1 | rule 58 | Review: Review: Dependency endpoint pattern"
+    },
+    {
+      "id": "te109",
+      "fromNode": "central",
+      "toNode": "t10",
+      "label": "1 | rule 58 | Review: Review: Dependency endpoint pattern"
+    },
+    {
+      "id": "se110",
+      "fromNode": "s1",
+      "toNode": "central",
+      "label": "1 | rule 58 | Review: Review: Dependency endpoint pattern"
+    },
+    {
+      "id": "te111",
+      "fromNode": "central",
+      "toNode": "t9",
+      "label": "1 | rule 58 | Review: Review: Dependency endpoint pattern"
+    },
+    {
+      "id": "se112",
+      "fromNode": "s1",
+      "toNode": "central",
+      "label": "1 | rule 58 | Review: Review: Dependency endpoint pattern"
+    },
+    {
+      "id": "te113",
+      "fromNode": "central",
+      "toNode": "t4",
+      "label": "1 | rule 58 | Review: Review: Dependency endpoint pattern"
+    },
+    {
+      "id": "se114",
+      "fromNode": "s14",
+      "toNode": "central",
+      "label": "1 | rule 27 | Settled: Map: dependsOn / dependencyOf"
+    },
+    {
+      "id": "te115",
+      "fromNode": "central",
+      "toNode": "t1",
+      "label": "1 | rule 27 | Settled: Map: dependsOn / dependencyOf"
+    },
+    {
+      "id": "se116",
+      "fromNode": "s14",
+      "toNode": "central",
+      "label": "1 | rule 27 | Settled: Map: dependsOn / dependencyOf"
+    },
+    {
+      "id": "te117",
+      "fromNode": "central",
+      "toNode": "t5",
+      "label": "1 | rule 27 | Settled: Map: dependsOn / dependencyOf"
+    },
+    {
+      "id": "se118",
+      "fromNode": "s14",
+      "toNode": "central",
+      "label": "1 | rule 27 | Settled: Map: dependsOn / dependencyOf"
+    },
+    {
+      "id": "te119",
+      "fromNode": "central",
+      "toNode": "t19",
+      "label": "1 | rule 27 | Settled: Map: dependsOn / dependencyOf"
+    },
+    {
+      "id": "se120",
+      "fromNode": "s2",
+      "toNode": "central",
+      "label": "1 | rule 27 | Settled: Map: dependsOn / dependencyOf"
+    },
+    {
+      "id": "te121",
+      "fromNode": "central",
+      "toNode": "t20",
+      "label": "1 | rule 27 | Settled: Map: dependsOn / dependencyOf"
+    },
+    {
+      "id": "se122",
+      "fromNode": "s2",
+      "toNode": "central",
+      "label": "1 | rule 27 | Settled: Map: dependsOn / dependencyOf"
+    },
+    {
+      "id": "te123",
+      "fromNode": "central",
+      "toNode": "t19",
+      "label": "1 | rule 27 | Settled: Map: dependsOn / dependencyOf"
+    },
+    {
+      "id": "se124",
+      "fromNode": "s2",
+      "toNode": "central",
+      "label": "1 | rule 58 | Review: Review: Dependency endpoint pattern"
+    },
+    {
+      "id": "te125",
+      "fromNode": "central",
+      "toNode": "t21",
+      "label": "1 | rule 58 | Review: Review: Dependency endpoint pattern"
+    },
+    {
+      "id": "se126",
+      "fromNode": "s2",
+      "toNode": "central",
+      "label": "1 | rule 58 | Review: Review: Dependency endpoint pattern"
+    },
+    {
+      "id": "te127",
+      "fromNode": "central",
+      "toNode": "t7",
+      "label": "1 | rule 58 | Review: Review: Dependency endpoint pattern"
+    },
+    {
+      "id": "se128",
+      "fromNode": "s2",
+      "toNode": "central",
+      "label": "1 | rule 58 | Review: Review: Dependency endpoint pattern"
+    },
+    {
+      "id": "te129",
+      "fromNode": "central",
+      "toNode": "t4",
+      "label": "1 | rule 58 | Review: Review: Dependency endpoint pattern"
+    },
+    {
+      "id": "se130",
+      "fromNode": "s12",
+      "toNode": "central",
+      "label": "1 | rule 58 | Review: Review: Dependency endpoint pattern"
+    },
+    {
+      "id": "te131",
+      "fromNode": "central",
+      "toNode": "t22",
+      "label": "1 | rule 58 | Review: Review: Dependency endpoint pattern"
+    },
+    {
+      "id": "se132",
+      "fromNode": "s12",
+      "toNode": "central",
+      "label": "1 | rule 58 | Review: Review: Dependency endpoint pattern"
+    },
+    {
+      "id": "te133",
+      "fromNode": "central",
+      "toNode": "t23",
+      "label": "1 | rule 58 | Review: Review: Dependency endpoint pattern"
+    },
+    {
+      "id": "se134",
+      "fromNode": "s22",
+      "toNode": "central",
+      "label": "1 | rule 58 | Review: Review: Dependency endpoint pattern"
+    },
+    {
+      "id": "te135",
+      "fromNode": "central",
+      "toNode": "t8",
+      "label": "1 | rule 58 | Review: Review: Dependency endpoint pattern"
+    },
+    {
+      "id": "se136",
+      "fromNode": "s8",
+      "toNode": "central",
+      "label": "1 | rule 58 | Review: Review: Dependency endpoint pattern"
+    },
+    {
+      "id": "te137",
+      "fromNode": "central",
+      "toNode": "t15",
+      "label": "1 | rule 58 | Review: Review: Dependency endpoint pattern"
+    },
+    {
+      "id": "se138",
+      "fromNode": "s23",
+      "toNode": "central",
+      "label": "1 | rule 58 | Review: Review: Dependency endpoint pattern"
+    },
+    {
+      "id": "te139",
+      "fromNode": "central",
+      "toNode": "t1",
+      "label": "1 | rule 58 | Review: Review: Dependency endpoint pattern"
+    },
+    {
+      "id": "se140",
+      "fromNode": "s23",
+      "toNode": "central",
+      "label": "1 | rule 58 | Review: Review: Dependency endpoint pattern"
+    },
+    {
+      "id": "te141",
+      "fromNode": "central",
+      "toNode": "t5",
+      "label": "1 | rule 58 | Review: Review: Dependency endpoint pattern"
+    },
+    {
+      "id": "se142",
+      "fromNode": "s23",
+      "toNode": "central",
+      "label": "1 | rule 58 | Review: Review: Dependency endpoint pattern"
+    },
+    {
+      "id": "te143",
+      "fromNode": "central",
+      "toNode": "t11",
+      "label": "1 | rule 58 | Review: Review: Dependency endpoint pattern"
+    },
+    {
+      "id": "se144",
+      "fromNode": "s16",
+      "toNode": "central",
+      "label": "1 | rule 58 | Review: Review: Dependency endpoint pattern"
+    },
+    {
+      "id": "te145",
+      "fromNode": "central",
+      "toNode": "t14",
+      "label": "1 | rule 58 | Review: Review: Dependency endpoint pattern"
+    },
+    {
+      "id": "se146",
+      "fromNode": "s9",
+      "toNode": "central",
+      "label": "1 | rule 58 | Review: Review: Dependency endpoint pattern"
+    },
+    {
+      "id": "te147",
+      "fromNode": "central",
+      "toNode": "t24",
+      "label": "1 | rule 58 | Review: Review: Dependency endpoint pattern"
+    },
+    {
+      "id": "se148",
+      "fromNode": "s9",
+      "toNode": "central",
+      "label": "1 | rule 58 | Review: Review: Dependency endpoint pattern"
+    },
+    {
+      "id": "te149",
+      "fromNode": "central",
+      "toNode": "t4",
+      "label": "1 | rule 58 | Review: Review: Dependency endpoint pattern"
+    },
+    {
+      "id": "se150",
+      "fromNode": "s10",
+      "toNode": "central",
+      "label": "1 | rule 58 | Review: Review: Dependency endpoint pattern"
+    },
+    {
+      "id": "te151",
+      "fromNode": "central",
+      "toNode": "t25",
+      "label": "1 | rule 58 | Review: Review: Dependency endpoint pattern"
+    },
+    {
+      "id": "se152",
+      "fromNode": "s24",
+      "toNode": "central",
+      "label": "1 | rule 58 | Review: Review: Dependency endpoint pattern"
+    },
+    {
+      "id": "te153",
+      "fromNode": "central",
+      "toNode": "t1",
+      "label": "1 | rule 58 | Review: Review: Dependency endpoint pattern"
+    },
+    {
+      "id": "se154",
+      "fromNode": "s25",
+      "toNode": "central",
+      "label": "1 | rule 58 | Review: Review: Dependency endpoint pattern"
+    },
+    {
+      "id": "te155",
+      "fromNode": "central",
+      "toNode": "t6",
+      "label": "1 | rule 58 | Review: Review: Dependency endpoint pattern"
+    },
+    {
+      "id": "se156",
+      "fromNode": "s18",
+      "toNode": "central",
+      "label": "1 | rule 58 | Review: Review: Dependency endpoint pattern"
+    },
+    {
+      "id": "te157",
+      "fromNode": "central",
+      "toNode": "t9",
+      "label": "1 | rule 58 | Review: Review: Dependency endpoint pattern"
+    },
+    {
+      "id": "se158",
+      "fromNode": "s18",
+      "toNode": "central",
+      "label": "1 | rule 58 | Review: Review: Dependency endpoint pattern"
+    },
+    {
+      "id": "te159",
+      "fromNode": "central",
+      "toNode": "t4",
+      "label": "1 | rule 58 | Review: Review: Dependency endpoint pattern"
+    },
+    {
+      "id": "se160",
+      "fromNode": "s18",
+      "toNode": "central",
+      "label": "1 | rule 58 | Review: Review: Dependency endpoint pattern"
+    },
+    {
+      "id": "te161",
+      "fromNode": "central",
+      "toNode": "t2",
+      "label": "1 | rule 58 | Review: Review: Dependency endpoint pattern"
+    },
+    {
+      "id": "se162",
+      "fromNode": "s26",
+      "toNode": "central",
+      "label": "1 | rule 58 | Review: Review: Dependency endpoint pattern"
+    },
+    {
+      "id": "te163",
+      "fromNode": "central",
+      "toNode": "t26",
+      "label": "1 | rule 58 | Review: Review: Dependency endpoint pattern"
+    },
+    {
+      "id": "se164",
+      "fromNode": "s19",
+      "toNode": "central",
+      "label": "1 | rule 58 | Review: Review: Dependency endpoint pattern"
+    },
+    {
+      "id": "te165",
+      "fromNode": "central",
+      "toNode": "t27",
+      "label": "1 | rule 58 | Review: Review: Dependency endpoint pattern"
+    },
+    {
+      "id": "se166",
+      "fromNode": "s7",
+      "toNode": "central",
+      "label": "1 | rule 58 | Review: Review: Dependency endpoint pattern"
+    },
+    {
+      "id": "te167",
+      "fromNode": "central",
+      "toNode": "t1",
+      "label": "1 | rule 58 | Review: Review: Dependency endpoint pattern"
+    },
+    {
+      "id": "se168",
+      "fromNode": "s7",
+      "toNode": "central",
+      "label": "1 | rule 58 | Review: Review: Dependency endpoint pattern"
+    },
+    {
+      "id": "te169",
+      "fromNode": "central",
+      "toNode": "t3",
+      "label": "1 | rule 58 | Review: Review: Dependency endpoint pattern"
+    },
+    {
+      "id": "se170",
+      "fromNode": "s7",
+      "toNode": "central",
+      "label": "1 | rule 58 | Review: Review: Dependency endpoint pattern"
+    },
+    {
+      "id": "te171",
+      "fromNode": "central",
+      "toNode": "t21",
+      "label": "1 | rule 58 | Review: Review: Dependency endpoint pattern"
+    },
+    {
+      "id": "se172",
+      "fromNode": "s7",
+      "toNode": "central",
+      "label": "1 | rule 58 | Review: Review: Dependency endpoint pattern"
+    },
+    {
+      "id": "te173",
+      "fromNode": "central",
+      "toNode": "t16",
+      "label": "1 | rule 58 | Review: Review: Dependency endpoint pattern"
+    },
+    {
+      "id": "se174",
+      "fromNode": "s7",
+      "toNode": "central",
+      "label": "1 | rule 58 | Review: Review: Dependency endpoint pattern"
+    },
+    {
+      "id": "te175",
+      "fromNode": "central",
+      "toNode": "t15",
+      "label": "1 | rule 58 | Review: Review: Dependency endpoint pattern"
+    },
+    {
+      "id": "se176",
+      "fromNode": "s20",
+      "toNode": "central",
+      "label": "1 | rule 58 | Review: Review: Dependency endpoint pattern"
+    },
+    {
+      "id": "te177",
+      "fromNode": "central",
+      "toNode": "t3",
+      "label": "1 | rule 58 | Review: Review: Dependency endpoint pattern"
+    },
+    {
+      "id": "se178",
+      "fromNode": "s20",
+      "toNode": "central",
+      "label": "1 | rule 58 | Review: Review: Dependency endpoint pattern"
+    },
+    {
+      "id": "te179",
+      "fromNode": "central",
+      "toNode": "t9",
+      "label": "1 | rule 58 | Review: Review: Dependency endpoint pattern"
+    },
+    {
+      "id": "se180",
+      "fromNode": "s20",
+      "toNode": "central",
+      "label": "1 | rule 58 | Review: Review: Dependency endpoint pattern"
+    },
+    {
+      "id": "te181",
+      "fromNode": "central",
+      "toNode": "t2",
+      "label": "1 | rule 58 | Review: Review: Dependency endpoint pattern"
+    },
+    {
+      "id": "se182",
+      "fromNode": "s4",
+      "toNode": "central",
+      "label": "1 | rule 58 | Review: Review: Dependency endpoint pattern"
+    },
+    {
+      "id": "te183",
+      "fromNode": "central",
+      "toNode": "t1",
+      "label": "1 | rule 58 | Review: Review: Dependency endpoint pattern"
+    },
+    {
+      "id": "se184",
+      "fromNode": "s4",
+      "toNode": "central",
+      "label": "1 | rule 58 | Review: Review: Dependency endpoint pattern"
+    },
+    {
+      "id": "te185",
+      "fromNode": "central",
+      "toNode": "t28",
+      "label": "1 | rule 58 | Review: Review: Dependency endpoint pattern"
+    },
+    {
+      "id": "se186",
+      "fromNode": "s4",
+      "toNode": "central",
+      "label": "1 | rule 58 | Review: Review: Dependency endpoint pattern"
+    },
+    {
+      "id": "te187",
+      "fromNode": "central",
+      "toNode": "t4",
+      "label": "1 | rule 58 | Review: Review: Dependency endpoint pattern"
+    },
+    {
+      "id": "se188",
+      "fromNode": "s21",
+      "toNode": "central",
+      "label": "1 | rule 27 | Settled: Map: dependsOn / dependencyOf"
+    },
+    {
+      "id": "te189",
+      "fromNode": "central",
+      "toNode": "t29",
+      "label": "1 | rule 27 | Settled: Map: dependsOn / dependencyOf"
+    },
+    {
+      "id": "se190",
+      "fromNode": "s19",
+      "toNode": "central",
+      "label": "4 | rule 69 | Review: Review: RAAML ASILDecompose"
+    },
+    {
+      "id": "te191",
+      "fromNode": "central",
+      "toNode": "t4",
+      "label": "4 | rule 69 | Review: Review: RAAML ASILDecompose"
+    },
+    {
+      "id": "se192",
+      "fromNode": "s4",
+      "toNode": "central",
+      "label": "4 | rule 68 | Review: Review: RAAML RecoveryRequirement"
+    },
+    {
+      "id": "te193",
+      "fromNode": "central",
+      "toNode": "t9",
+      "label": "4 | rule 68 | Review: Review: RAAML RecoveryRequirement"
+    },
+    {
+      "id": "se194",
+      "fromNode": "s20",
+      "toNode": "central",
+      "label": "3 | rule 68 | Review: Review: RAAML RecoveryRequirement"
+    },
+    {
+      "id": "te195",
+      "fromNode": "central",
+      "toNode": "t9",
+      "label": "3 | rule 68 | Review: Review: RAAML RecoveryRequirement"
+    },
+    {
+      "id": "se196",
+      "fromNode": "s20",
+      "toNode": "central",
+      "label": "3 | rule 68 | Review: Review: RAAML RecoveryRequirement"
+    },
+    {
+      "id": "te197",
+      "fromNode": "central",
+      "toNode": "t4",
+      "label": "3 | rule 68 | Review: Review: RAAML RecoveryRequirement"
+    },
+    {
+      "id": "se198",
+      "fromNode": "s4",
+      "toNode": "central",
+      "label": "3 | rule 68 | Review: Review: RAAML RecoveryRequirement"
+    },
+    {
+      "id": "te199",
+      "fromNode": "central",
+      "toNode": "t4",
+      "label": "3 | rule 68 | Review: Review: RAAML RecoveryRequirement"
+    },
+    {
+      "id": "se200",
+      "fromNode": "s2",
+      "toNode": "central",
+      "label": "1 | rule 68 | Review: Review: RAAML RecoveryRequirement"
+    },
+    {
+      "id": "te201",
+      "fromNode": "central",
+      "toNode": "t4",
+      "label": "1 | rule 68 | Review: Review: RAAML RecoveryRequirement"
+    },
+    {
+      "id": "se202",
+      "fromNode": "s19",
+      "toNode": "central",
+      "label": "560 | rule 23 | Settled: Map: derivedFrom / derivedBy"
+    },
+    {
+      "id": "te203",
+      "fromNode": "central",
+      "toNode": "t4",
+      "label": "560 | rule 23 | Settled: Map: derivedFrom / derivedBy"
+    },
+    {
+      "id": "se204",
+      "fromNode": "s18",
+      "toNode": "central",
+      "label": "542 | rule 23 | Settled: Map: derivedFrom / derivedBy"
+    },
+    {
+      "id": "te205",
+      "fromNode": "central",
+      "toNode": "t4",
+      "label": "542 | rule 23 | Settled: Map: derivedFrom / derivedBy"
+    },
+    {
+      "id": "se206",
+      "fromNode": "s7",
+      "toNode": "central",
+      "label": "78 | rule 23 | Settled: Map: derivedFrom / derivedBy"
+    },
+    {
+      "id": "te207",
+      "fromNode": "central",
+      "toNode": "t4",
+      "label": "78 | rule 23 | Settled: Map: derivedFrom / derivedBy"
+    },
+    {
+      "id": "se208",
+      "fromNode": "s19",
+      "toNode": "central",
+      "label": "55 | rule 23 | Settled: Map: derivedFrom / derivedBy"
+    },
+    {
+      "id": "te209",
+      "fromNode": "central",
+      "toNode": "t30",
+      "label": "55 | rule 23 | Settled: Map: derivedFrom / derivedBy"
+    },
+    {
+      "id": "se210",
+      "fromNode": "s18",
+      "toNode": "central",
+      "label": "40 | rule 23 | Settled: Map: derivedFrom / derivedBy"
+    },
+    {
+      "id": "te211",
+      "fromNode": "central",
+      "toNode": "t30",
+      "label": "40 | rule 23 | Settled: Map: derivedFrom / derivedBy"
+    },
+    {
+      "id": "se212",
+      "fromNode": "s18",
+      "toNode": "central",
+      "label": "29 | rule 23 | Settled: Map: derivedFrom / derivedBy"
+    },
+    {
+      "id": "te213",
+      "fromNode": "central",
+      "toNode": "t0",
+      "label": "29 | rule 23 | Settled: Map: derivedFrom / derivedBy"
+    },
+    {
+      "id": "se214",
+      "fromNode": "s18",
+      "toNode": "central",
+      "label": "20 | rule 23 | Settled: Map: derivedFrom / derivedBy"
+    },
+    {
+      "id": "te215",
+      "fromNode": "central",
+      "toNode": "t9",
+      "label": "20 | rule 23 | Settled: Map: derivedFrom / derivedBy"
+    },
+    {
+      "id": "se216",
+      "fromNode": "s18",
+      "toNode": "central",
+      "label": "20 | rule 23 | Settled: Map: derivedFrom / derivedBy"
+    },
+    {
+      "id": "te217",
+      "fromNode": "central",
+      "toNode": "t26",
+      "label": "20 | rule 23 | Settled: Map: derivedFrom / derivedBy"
+    },
+    {
+      "id": "se218",
+      "fromNode": "s19",
+      "toNode": "central",
+      "label": "20 | rule 23 | Settled: Map: derivedFrom / derivedBy"
+    },
+    {
+      "id": "te219",
+      "fromNode": "central",
+      "toNode": "t27",
+      "label": "20 | rule 23 | Settled: Map: derivedFrom / derivedBy"
+    },
+    {
+      "id": "se220",
+      "fromNode": "s19",
+      "toNode": "central",
+      "label": "13 | rule 23 | Settled: Map: derivedFrom / derivedBy"
+    },
+    {
+      "id": "te221",
+      "fromNode": "central",
+      "toNode": "t9",
+      "label": "13 | rule 23 | Settled: Map: derivedFrom / derivedBy"
+    },
+    {
+      "id": "se222",
+      "fromNode": "s7",
+      "toNode": "central",
+      "label": "6 | rule 23 | Settled: Map: derivedFrom / derivedBy"
+    },
+    {
+      "id": "te223",
+      "fromNode": "central",
+      "toNode": "t9",
+      "label": "6 | rule 23 | Settled: Map: derivedFrom / derivedBy"
+    },
+    {
+      "id": "se224",
+      "fromNode": "s26",
+      "toNode": "central",
+      "label": "5 | rule 23 | Settled: Map: derivedFrom / derivedBy"
+    },
+    {
+      "id": "te225",
+      "fromNode": "central",
+      "toNode": "t4",
+      "label": "5 | rule 23 | Settled: Map: derivedFrom / derivedBy"
+    },
+    {
+      "id": "se226",
+      "fromNode": "s27",
+      "toNode": "central",
+      "label": "4 | rule 23 | Settled: Map: derivedFrom / derivedBy"
+    },
+    {
+      "id": "te227",
+      "fromNode": "central",
+      "toNode": "t4",
+      "label": "4 | rule 23 | Settled: Map: derivedFrom / derivedBy"
+    },
+    {
+      "id": "se228",
+      "fromNode": "s24",
+      "toNode": "central",
+      "label": "3 | rule 23 | Settled: Map: derivedFrom / derivedBy"
+    },
+    {
+      "id": "te229",
+      "fromNode": "central",
+      "toNode": "t4",
+      "label": "3 | rule 23 | Settled: Map: derivedFrom / derivedBy"
+    },
+    {
+      "id": "se230",
+      "fromNode": "s18",
+      "toNode": "central",
+      "label": "3 | rule 57 | Review: Review: deriveReqt non-Requirement endpoint"
+    },
+    {
+      "id": "te231",
+      "fromNode": "central",
+      "toNode": "t17",
+      "label": "3 | rule 57 | Review: Review: deriveReqt non-Requirement endpoint"
+    },
+    {
+      "id": "se232",
+      "fromNode": "s19",
+      "toNode": "central",
+      "label": "3 | rule 23 | Settled: Map: derivedFrom / derivedBy"
+    },
+    {
+      "id": "te233",
+      "fromNode": "central",
+      "toNode": "t26",
+      "label": "3 | rule 23 | Settled: Map: derivedFrom / derivedBy"
+    },
+    {
+      "id": "se234",
+      "fromNode": "s28",
+      "toNode": "central",
+      "label": "3 | rule 23 | Settled: Map: derivedFrom / derivedBy"
+    },
+    {
+      "id": "te235",
+      "fromNode": "central",
+      "toNode": "t4",
+      "label": "3 | rule 23 | Settled: Map: derivedFrom / derivedBy"
+    },
+    {
+      "id": "se236",
+      "fromNode": "s18",
+      "toNode": "central",
+      "label": "2 | rule 23 | Settled: Map: derivedFrom / derivedBy"
+    },
+    {
+      "id": "te237",
+      "fromNode": "central",
+      "toNode": "t27",
+      "label": "2 | rule 23 | Settled: Map: derivedFrom / derivedBy"
+    },
+    {
+      "id": "se238",
+      "fromNode": "s7",
+      "toNode": "central",
+      "label": "2 | rule 23 | Settled: Map: derivedFrom / derivedBy"
+    },
+    {
+      "id": "te239",
+      "fromNode": "central",
+      "toNode": "t0",
+      "label": "2 | rule 23 | Settled: Map: derivedFrom / derivedBy"
+    },
+    {
+      "id": "se240",
+      "fromNode": "s7",
+      "toNode": "central",
+      "label": "2 | rule 23 | Settled: Map: derivedFrom / derivedBy"
+    },
+    {
+      "id": "te241",
+      "fromNode": "central",
+      "toNode": "t26",
+      "label": "2 | rule 23 | Settled: Map: derivedFrom / derivedBy"
+    },
+    {
+      "id": "se242",
+      "fromNode": "s2",
+      "toNode": "central",
+      "label": "1 | rule 57 | Review: Review: deriveReqt non-Requirement endpoint"
+    },
+    {
+      "id": "te243",
+      "fromNode": "central",
+      "toNode": "t30",
+      "label": "1 | rule 57 | Review: Review: deriveReqt non-Requirement endpoint"
+    },
+    {
+      "id": "se244",
+      "fromNode": "s25",
+      "toNode": "central",
+      "label": "1 | rule 23 | Settled: Map: derivedFrom / derivedBy"
+    },
+    {
+      "id": "te245",
+      "fromNode": "central",
+      "toNode": "t4",
+      "label": "1 | rule 23 | Settled: Map: derivedFrom / derivedBy"
+    },
+    {
+      "id": "se246",
+      "fromNode": "s18",
+      "toNode": "central",
+      "label": "1 | rule 57 | Review: Review: deriveReqt non-Requirement endpoint"
+    },
+    {
+      "id": "te247",
+      "fromNode": "central",
+      "toNode": "t23",
+      "label": "1 | rule 57 | Review: Review: deriveReqt non-Requirement endpoint"
+    },
+    {
+      "id": "se248",
+      "fromNode": "s19",
+      "toNode": "central",
+      "label": "1 | rule 23 | Settled: Map: derivedFrom / derivedBy"
+    },
+    {
+      "id": "te249",
+      "fromNode": "central",
+      "toNode": "t0",
+      "label": "1 | rule 23 | Settled: Map: derivedFrom / derivedBy"
+    },
+    {
+      "id": "se250",
+      "fromNode": "s7",
+      "toNode": "central",
+      "label": "1 | rule 23 | Settled: Map: derivedFrom / derivedBy"
+    },
+    {
+      "id": "te251",
+      "fromNode": "central",
+      "toNode": "t27",
+      "label": "1 | rule 23 | Settled: Map: derivedFrom / derivedBy"
+    },
+    {
+      "id": "se252",
+      "fromNode": "s4",
+      "toNode": "central",
+      "label": "1 | rule 57 | Review: Review: deriveReqt non-Requirement endpoint"
+    },
+    {
+      "id": "te253",
+      "fromNode": "central",
+      "toNode": "t30",
+      "label": "1 | rule 57 | Review: Review: deriveReqt non-Requirement endpoint"
+    },
+    {
+      "id": "se254",
+      "fromNode": "s7",
+      "toNode": "central",
+      "label": "236 | rule 22 | Settled: Map: refines / refinedBy"
+    },
+    {
+      "id": "te255",
+      "fromNode": "central",
+      "toNode": "t4",
+      "label": "236 | rule 22 | Settled: Map: refines / refinedBy"
+    },
+    {
+      "id": "se256",
+      "fromNode": "s18",
+      "toNode": "central",
+      "label": "228 | rule 22 | Settled: Map: refines / refinedBy"
+    },
+    {
+      "id": "te257",
+      "fromNode": "central",
+      "toNode": "t9",
+      "label": "228 | rule 22 | Settled: Map: refines / refinedBy"
+    },
+    {
+      "id": "se258",
+      "fromNode": "s21",
+      "toNode": "central",
+      "label": "179 | rule 20 | Settled: Map: describes / describedBy"
+    },
+    {
+      "id": "te259",
+      "fromNode": "central",
+      "toNode": "t27",
+      "label": "179 | rule 20 | Settled: Map: describes / describedBy"
+    },
+    {
+      "id": "se260",
+      "fromNode": "s21",
+      "toNode": "central",
+      "label": "155 | rule 20 | Settled: Map: describes / describedBy"
+    },
+    {
+      "id": "te261",
+      "fromNode": "central",
+      "toNode": "t4",
+      "label": "155 | rule 20 | Settled: Map: describes / describedBy"
+    },
+    {
+      "id": "se262",
+      "fromNode": "s3",
+      "toNode": "central",
+      "label": "121 | rule 65 | Settled: Map: describes / describedBy (non-Requirement refinement)"
+    },
+    {
+      "id": "te263",
+      "fromNode": "central",
+      "toNode": "t4",
+      "label": "121 | rule 65 | Settled: Map: describes / describedBy (non-Requirement refinement)"
+    },
+    {
+      "id": "se264",
+      "fromNode": "s21",
+      "toNode": "central",
+      "label": "70 | rule 20 | Settled: Map: describes / describedBy"
+    },
+    {
+      "id": "te265",
+      "fromNode": "central",
+      "toNode": "t9",
+      "label": "70 | rule 20 | Settled: Map: describes / describedBy"
+    },
+    {
+      "id": "se266",
+      "fromNode": "s18",
+      "toNode": "central",
+      "label": "27 | rule 22 | Settled: Map: refines / refinedBy"
+    },
+    {
+      "id": "te267",
+      "fromNode": "central",
+      "toNode": "t4",
+      "label": "27 | rule 22 | Settled: Map: refines / refinedBy"
+    },
+    {
+      "id": "se268",
+      "fromNode": "s7",
+      "toNode": "central",
+      "label": "18 | rule 22 | Settled: Map: refines / refinedBy"
+    },
+    {
+      "id": "te269",
+      "fromNode": "central",
+      "toNode": "t27",
+      "label": "18 | rule 22 | Settled: Map: refines / refinedBy"
+    },
+    {
+      "id": "se270",
+      "fromNode": "s19",
+      "toNode": "central",
+      "label": "15 | rule 22 | Settled: Map: refines / refinedBy"
+    },
+    {
+      "id": "te271",
+      "fromNode": "central",
+      "toNode": "t4",
+      "label": "15 | rule 22 | Settled: Map: refines / refinedBy"
+    },
+    {
+      "id": "se272",
+      "fromNode": "s0",
+      "toNode": "central",
+      "label": "11 | rule 65 | Settled: Map: describes / describedBy (non-Requirement refinement)"
+    },
+    {
+      "id": "te273",
+      "fromNode": "central",
+      "toNode": "t4",
+      "label": "11 | rule 65 | Settled: Map: describes / describedBy (non-Requirement refinement)"
+    },
+    {
+      "id": "se274",
+      "fromNode": "s21",
+      "toNode": "central",
+      "label": "7 | rule 20 | Settled: Map: describes / describedBy"
+    },
+    {
+      "id": "te275",
+      "fromNode": "central",
+      "toNode": "t30",
+      "label": "7 | rule 20 | Settled: Map: describes / describedBy"
+    },
+    {
+      "id": "se276",
+      "fromNode": "s3",
+      "toNode": "central",
+      "label": "6 | rule 65 | Settled: Map: describes / describedBy (non-Requirement refinement)"
+    },
+    {
+      "id": "te277",
+      "fromNode": "central",
+      "toNode": "t27",
+      "label": "6 | rule 65 | Settled: Map: describes / describedBy (non-Requirement refinement)"
+    },
+    {
+      "id": "se278",
+      "fromNode": "s19",
+      "toNode": "central",
+      "label": "6 | rule 22 | Settled: Map: refines / refinedBy"
+    },
+    {
+      "id": "te279",
+      "fromNode": "central",
+      "toNode": "t27",
+      "label": "6 | rule 22 | Settled: Map: refines / refinedBy"
+    },
+    {
+      "id": "se280",
+      "fromNode": "s3",
+      "toNode": "central",
+      "label": "5 | rule 65 | Settled: Map: describes / describedBy (non-Requirement refinement)"
+    },
+    {
+      "id": "te281",
+      "fromNode": "central",
+      "toNode": "t8",
+      "label": "5 | rule 65 | Settled: Map: describes / describedBy (non-Requirement refinement)"
+    },
+    {
+      "id": "se282",
+      "fromNode": "s19",
+      "toNode": "central",
+      "label": "5 | rule 22 | Settled: Map: refines / refinedBy"
+    },
+    {
+      "id": "te283",
+      "fromNode": "central",
+      "toNode": "t9",
+      "label": "5 | rule 22 | Settled: Map: refines / refinedBy"
+    },
+    {
+      "id": "se284",
+      "fromNode": "s3",
+      "toNode": "central",
+      "label": "3 | rule 65 | Settled: Map: describes / describedBy (non-Requirement refinement)"
+    },
+    {
+      "id": "te285",
+      "fromNode": "central",
+      "toNode": "t2",
+      "label": "3 | rule 65 | Settled: Map: describes / describedBy (non-Requirement refinement)"
+    },
+    {
+      "id": "se286",
+      "fromNode": "s7",
+      "toNode": "central",
+      "label": "3 | rule 22 | Settled: Map: refines / refinedBy"
+    },
+    {
+      "id": "te287",
+      "fromNode": "central",
+      "toNode": "t9",
+      "label": "3 | rule 22 | Settled: Map: refines / refinedBy"
+    },
+    {
+      "id": "se288",
+      "fromNode": "s0",
+      "toNode": "central",
+      "label": "2 | rule 65 | Settled: Map: describes / describedBy (non-Requirement refinement)"
+    },
+    {
+      "id": "te289",
+      "fromNode": "central",
+      "toNode": "t9",
+      "label": "2 | rule 65 | Settled: Map: describes / describedBy (non-Requirement refinement)"
+    },
+    {
+      "id": "se290",
+      "fromNode": "s3",
+      "toNode": "central",
+      "label": "2 | rule 65 | Settled: Map: describes / describedBy (non-Requirement refinement)"
+    },
+    {
+      "id": "te291",
+      "fromNode": "central",
+      "toNode": "t31",
+      "label": "2 | rule 65 | Settled: Map: describes / describedBy (non-Requirement refinement)"
+    },
+    {
+      "id": "se292",
+      "fromNode": "s3",
+      "toNode": "central",
+      "label": "2 | rule 65 | Settled: Map: describes / describedBy (non-Requirement refinement)"
+    },
+    {
+      "id": "te293",
+      "fromNode": "central",
+      "toNode": "t5",
+      "label": "2 | rule 65 | Settled: Map: describes / describedBy (non-Requirement refinement)"
+    },
+    {
+      "id": "se294",
+      "fromNode": "s3",
+      "toNode": "central",
+      "label": "2 | rule 65 | Settled: Map: describes / describedBy (non-Requirement refinement)"
+    },
+    {
+      "id": "te295",
+      "fromNode": "central",
+      "toNode": "t3",
+      "label": "2 | rule 65 | Settled: Map: describes / describedBy (non-Requirement refinement)"
+    },
+    {
+      "id": "se296",
+      "fromNode": "s3",
+      "toNode": "central",
+      "label": "2 | rule 65 | Settled: Map: describes / describedBy (non-Requirement refinement)"
+    },
+    {
+      "id": "te297",
+      "fromNode": "central",
+      "toNode": "t9",
+      "label": "2 | rule 65 | Settled: Map: describes / describedBy (non-Requirement refinement)"
+    },
+    {
+      "id": "se298",
+      "fromNode": "s18",
+      "toNode": "central",
+      "label": "2 | rule 22 | Settled: Map: refines / refinedBy"
+    },
+    {
+      "id": "te299",
+      "fromNode": "central",
+      "toNode": "t32",
+      "label": "2 | rule 22 | Settled: Map: refines / refinedBy"
+    },
+    {
+      "id": "se300",
+      "fromNode": "s0",
+      "toNode": "central",
+      "label": "1 | rule 65 | Settled: Map: describes / describedBy (non-Requirement refinement)"
+    },
+    {
+      "id": "te301",
+      "fromNode": "central",
+      "toNode": "t27",
+      "label": "1 | rule 65 | Settled: Map: describes / describedBy (non-Requirement refinement)"
+    },
+    {
+      "id": "se302",
+      "fromNode": "s3",
+      "toNode": "central",
+      "label": "1 | rule 65 | Settled: Map: describes / describedBy (non-Requirement refinement)"
+    },
+    {
+      "id": "te303",
+      "fromNode": "central",
+      "toNode": "t28",
+      "label": "1 | rule 65 | Settled: Map: describes / describedBy (non-Requirement refinement)"
+    },
+    {
+      "id": "se304",
+      "fromNode": "s3",
+      "toNode": "central",
+      "label": "1 | rule 65 | Settled: Map: describes / describedBy (non-Requirement refinement)"
+    },
+    {
+      "id": "te305",
+      "fromNode": "central",
+      "toNode": "t7",
+      "label": "1 | rule 65 | Settled: Map: describes / describedBy (non-Requirement refinement)"
+    },
+    {
+      "id": "se306",
+      "fromNode": "s3",
+      "toNode": "central",
+      "label": "1 | rule 65 | Settled: Map: describes / describedBy (non-Requirement refinement)"
+    },
+    {
+      "id": "te307",
+      "fromNode": "central",
+      "toNode": "t26",
+      "label": "1 | rule 65 | Settled: Map: describes / describedBy (non-Requirement refinement)"
+    },
+    {
+      "id": "se308",
+      "fromNode": "s18",
+      "toNode": "central",
+      "label": "1 | rule 22 | Settled: Map: refines / refinedBy"
+    },
+    {
+      "id": "te309",
+      "fromNode": "central",
+      "toNode": "t27",
+      "label": "1 | rule 22 | Settled: Map: refines / refinedBy"
+    },
+    {
+      "id": "se310",
+      "fromNode": "s7",
+      "toNode": "central",
+      "label": "1 | rule 65 | Settled: Map: describes / describedBy (non-Requirement refinement)"
+    },
+    {
+      "id": "te311",
+      "fromNode": "central",
+      "toNode": "t2",
+      "label": "1 | rule 65 | Settled: Map: describes / describedBy (non-Requirement refinement)"
+    },
+    {
+      "id": "se312",
+      "fromNode": "s21",
+      "toNode": "central",
+      "label": "1 | rule 20 | Settled: Map: describes / describedBy"
+    },
+    {
+      "id": "te313",
+      "fromNode": "central",
+      "toNode": "t26",
+      "label": "1 | rule 20 | Settled: Map: describes / describedBy"
+    },
+    {
+      "id": "se314",
+      "fromNode": "s4",
+      "toNode": "central",
+      "label": "364 | rule 17 | Deferred: Deferred: State/StateMachine satisfaction scope"
+    },
+    {
+      "id": "te315",
+      "fromNode": "central",
+      "toNode": "t4",
+      "label": "364 | rule 17 | Deferred: Deferred: State/StateMachine satisfaction scope"
+    },
+    {
+      "id": "se316",
+      "fromNode": "s4",
+      "toNode": "central",
+      "label": "340 | rule 17 | Deferred: Deferred: State/StateMachine satisfaction scope"
+    },
+    {
+      "id": "te317",
+      "fromNode": "central",
+      "toNode": "t9",
+      "label": "340 | rule 17 | Deferred: Deferred: State/StateMachine satisfaction scope"
+    },
+    {
+      "id": "se318",
+      "fromNode": "s1",
+      "toNode": "central",
+      "label": "336 | rule 54 | Review: Review: satisfy endpoint pattern"
+    },
+    {
+      "id": "te319",
+      "fromNode": "central",
+      "toNode": "t4",
+      "label": "336 | rule 54 | Review: Review: satisfy endpoint pattern"
+    },
+    {
+      "id": "se320",
+      "fromNode": "s2",
+      "toNode": "central",
+      "label": "224 | rule 15 | Settled: Map: satisfies / satisfiedBy"
+    },
+    {
+      "id": "te321",
+      "fromNode": "central",
+      "toNode": "t27",
+      "label": "224 | rule 15 | Settled: Map: satisfies / satisfiedBy"
+    },
+    {
+      "id": "se322",
+      "fromNode": "s1",
+      "toNode": "central",
+      "label": "196 | rule 54 | Review: Review: satisfy endpoint pattern"
+    },
+    {
+      "id": "te323",
+      "fromNode": "central",
+      "toNode": "t27",
+      "label": "196 | rule 54 | Review: Review: satisfy endpoint pattern"
+    },
+    {
+      "id": "se324",
+      "fromNode": "s2",
+      "toNode": "central",
+      "label": "185 | rule 15 | Settled: Map: satisfies / satisfiedBy"
+    },
+    {
+      "id": "te325",
+      "fromNode": "central",
+      "toNode": "t4",
+      "label": "185 | rule 15 | Settled: Map: satisfies / satisfiedBy"
+    },
+    {
+      "id": "se326",
+      "fromNode": "s20",
+      "toNode": "central",
+      "label": "176 | rule 17 | Deferred: Deferred: State/StateMachine satisfaction scope"
+    },
+    {
+      "id": "te327",
+      "fromNode": "central",
+      "toNode": "t4",
+      "label": "176 | rule 17 | Deferred: Deferred: State/StateMachine satisfaction scope"
+    },
+    {
+      "id": "se328",
+      "fromNode": "s1",
+      "toNode": "central",
+      "label": "160 | rule 54 | Review: Review: satisfy endpoint pattern"
+    },
+    {
+      "id": "te329",
+      "fromNode": "central",
+      "toNode": "t30",
+      "label": "160 | rule 54 | Review: Review: satisfy endpoint pattern"
+    },
+    {
+      "id": "se330",
+      "fromNode": "s2",
+      "toNode": "central",
+      "label": "88 | rule 15 | Settled: Map: satisfies / satisfiedBy"
+    },
+    {
+      "id": "te331",
+      "fromNode": "central",
+      "toNode": "t30",
+      "label": "88 | rule 15 | Settled: Map: satisfies / satisfiedBy"
+    },
+    {
+      "id": "se332",
+      "fromNode": "s20",
+      "toNode": "central",
+      "label": "60 | rule 17 | Deferred: Deferred: State/StateMachine satisfaction scope"
+    },
+    {
+      "id": "te333",
+      "fromNode": "central",
+      "toNode": "t9",
+      "label": "60 | rule 17 | Deferred: Deferred: State/StateMachine satisfaction scope"
+    },
+    {
+      "id": "se334",
+      "fromNode": "s4",
+      "toNode": "central",
+      "label": "53 | rule 17 | Deferred: Deferred: State/StateMachine satisfaction scope"
+    },
+    {
+      "id": "te335",
+      "fromNode": "central",
+      "toNode": "t26",
+      "label": "53 | rule 17 | Deferred: Deferred: State/StateMachine satisfaction scope"
+    },
+    {
+      "id": "se336",
+      "fromNode": "s6",
+      "toNode": "central",
+      "label": "49 | rule 15 | Settled: Map: satisfies / satisfiedBy"
+    },
+    {
+      "id": "te337",
+      "fromNode": "central",
+      "toNode": "t4",
+      "label": "49 | rule 15 | Settled: Map: satisfies / satisfiedBy"
+    },
+    {
+      "id": "se338",
+      "fromNode": "s6",
+      "toNode": "central",
+      "label": "31 | rule 15 | Settled: Map: satisfies / satisfiedBy"
+    },
+    {
+      "id": "te339",
+      "fromNode": "central",
+      "toNode": "t27",
+      "label": "31 | rule 15 | Settled: Map: satisfies / satisfiedBy"
+    },
+    {
+      "id": "se340",
+      "fromNode": "s4",
+      "toNode": "central",
+      "label": "30 | rule 17 | Deferred: Deferred: State/StateMachine satisfaction scope"
+    },
+    {
+      "id": "te341",
+      "fromNode": "central",
+      "toNode": "t30",
+      "label": "30 | rule 17 | Deferred: Deferred: State/StateMachine satisfaction scope"
+    },
+    {
+      "id": "se342",
+      "fromNode": "s14",
+      "toNode": "central",
+      "label": "22 | rule 15 | Settled: Map: satisfies / satisfiedBy"
+    },
+    {
+      "id": "te343",
+      "fromNode": "central",
+      "toNode": "t4",
+      "label": "22 | rule 15 | Settled: Map: satisfies / satisfiedBy"
+    },
+    {
+      "id": "se344",
+      "fromNode": "s1",
+      "toNode": "central",
+      "label": "20 | rule 54 | Review: Review: satisfy endpoint pattern"
+    },
+    {
+      "id": "te345",
+      "fromNode": "central",
+      "toNode": "t9",
+      "label": "20 | rule 54 | Review: Review: satisfy endpoint pattern"
+    },
+    {
+      "id": "se346",
+      "fromNode": "s11",
+      "toNode": "central",
+      "label": "13 | rule 15 | Settled: Map: satisfies / satisfiedBy"
+    },
+    {
+      "id": "te347",
+      "fromNode": "central",
+      "toNode": "t4",
+      "label": "13 | rule 15 | Settled: Map: satisfies / satisfiedBy"
+    },
+    {
+      "id": "se348",
+      "fromNode": "s14",
+      "toNode": "central",
+      "label": "12 | rule 15 | Settled: Map: satisfies / satisfiedBy"
+    },
+    {
+      "id": "te349",
+      "fromNode": "central",
+      "toNode": "t27",
+      "label": "12 | rule 15 | Settled: Map: satisfies / satisfiedBy"
+    },
+    {
+      "id": "se350",
+      "fromNode": "s4",
+      "toNode": "central",
+      "label": "9 | rule 17 | Deferred: Deferred: State/StateMachine satisfaction scope"
+    },
+    {
+      "id": "te351",
+      "fromNode": "central",
+      "toNode": "t27",
+      "label": "9 | rule 17 | Deferred: Deferred: State/StateMachine satisfaction scope"
+    },
+    {
+      "id": "se352",
+      "fromNode": "s11",
+      "toNode": "central",
+      "label": "8 | rule 15 | Settled: Map: satisfies / satisfiedBy"
+    },
+    {
+      "id": "te353",
+      "fromNode": "central",
+      "toNode": "t27",
+      "label": "8 | rule 15 | Settled: Map: satisfies / satisfiedBy"
+    },
+    {
+      "id": "se354",
+      "fromNode": "s2",
+      "toNode": "central",
+      "label": "8 | rule 15 | Settled: Map: satisfies / satisfiedBy"
+    },
+    {
+      "id": "te355",
+      "fromNode": "central",
+      "toNode": "t9",
+      "label": "8 | rule 15 | Settled: Map: satisfies / satisfiedBy"
+    },
+    {
+      "id": "se356",
+      "fromNode": "s20",
+      "toNode": "central",
+      "label": "8 | rule 17 | Deferred: Deferred: State/StateMachine satisfaction scope"
+    },
+    {
+      "id": "te357",
+      "fromNode": "central",
+      "toNode": "t30",
+      "label": "8 | rule 17 | Deferred: Deferred: State/StateMachine satisfaction scope"
+    },
+    {
+      "id": "se358",
+      "fromNode": "s11",
+      "toNode": "central",
+      "label": "7 | rule 15 | Settled: Map: satisfies / satisfiedBy"
+    },
+    {
+      "id": "te359",
+      "fromNode": "central",
+      "toNode": "t30",
+      "label": "7 | rule 15 | Settled: Map: satisfies / satisfiedBy"
+    },
+    {
+      "id": "se360",
+      "fromNode": "s13",
+      "toNode": "central",
+      "label": "5 | rule 54 | Review: Review: satisfy endpoint pattern"
+    },
+    {
+      "id": "te361",
+      "fromNode": "central",
+      "toNode": "t4",
+      "label": "5 | rule 54 | Review: Review: satisfy endpoint pattern"
+    },
+    {
+      "id": "se362",
+      "fromNode": "s29",
+      "toNode": "central",
+      "label": "4 | rule 71 | Exception: Review — endpoint missing from t_object"
+    },
+    {
+      "id": "te363",
+      "fromNode": "central",
+      "toNode": "t33",
+      "label": "4 | rule 71 | Exception: Review — endpoint missing from t_object"
+    },
+    {
+      "id": "se364",
+      "fromNode": "s6",
+      "toNode": "central",
+      "label": "3 | rule 15 | Settled: Map: satisfies / satisfiedBy"
+    },
+    {
+      "id": "te365",
+      "fromNode": "central",
+      "toNode": "t30",
+      "label": "3 | rule 15 | Settled: Map: satisfies / satisfiedBy"
+    },
+    {
+      "id": "se366",
+      "fromNode": "s2",
+      "toNode": "central",
+      "label": "3 | rule 15 | Settled: Map: satisfies / satisfiedBy"
+    },
+    {
+      "id": "te367",
+      "fromNode": "central",
+      "toNode": "t26",
+      "label": "3 | rule 15 | Settled: Map: satisfies / satisfiedBy"
+    },
+    {
+      "id": "se368",
+      "fromNode": "s20",
+      "toNode": "central",
+      "label": "3 | rule 17 | Deferred: Deferred: State/StateMachine satisfaction scope"
+    },
+    {
+      "id": "te369",
+      "fromNode": "central",
+      "toNode": "t27",
+      "label": "3 | rule 17 | Deferred: Deferred: State/StateMachine satisfaction scope"
+    },
+    {
+      "id": "se370",
+      "fromNode": "s6",
+      "toNode": "central",
+      "label": "2 | rule 15 | Settled: Map: satisfies / satisfiedBy"
+    },
+    {
+      "id": "te371",
+      "fromNode": "central",
+      "toNode": "t34",
+      "label": "2 | rule 15 | Settled: Map: satisfies / satisfiedBy"
+    },
+    {
+      "id": "se372",
+      "fromNode": "s6",
+      "toNode": "central",
+      "label": "2 | rule 15 | Settled: Map: satisfies / satisfiedBy"
+    },
+    {
+      "id": "te373",
+      "fromNode": "central",
+      "toNode": "t9",
+      "label": "2 | rule 15 | Settled: Map: satisfies / satisfiedBy"
+    },
+    {
+      "id": "se374",
+      "fromNode": "s14",
+      "toNode": "central",
+      "label": "2 | rule 15 | Settled: Map: satisfies / satisfiedBy"
+    },
+    {
+      "id": "te375",
+      "fromNode": "central",
+      "toNode": "t9",
+      "label": "2 | rule 15 | Settled: Map: satisfies / satisfiedBy"
+    },
+    {
+      "id": "se376",
+      "fromNode": "s7",
+      "toNode": "central",
+      "label": "2 | rule 54 | Review: Review: satisfy endpoint pattern"
+    },
+    {
+      "id": "te377",
+      "fromNode": "central",
+      "toNode": "t4",
+      "label": "2 | rule 54 | Review: Review: satisfy endpoint pattern"
+    },
+    {
+      "id": "se378",
+      "fromNode": "s4",
+      "toNode": "central",
+      "label": "2 | rule 17 | Deferred: Deferred: State/StateMachine satisfaction scope"
+    },
+    {
+      "id": "te379",
+      "fromNode": "central",
+      "toNode": "t0",
+      "label": "2 | rule 17 | Deferred: Deferred: State/StateMachine satisfaction scope"
+    },
+    {
+      "id": "se380",
+      "fromNode": "s4",
+      "toNode": "central",
+      "label": "2 | rule 54 | Review: Review: satisfy endpoint pattern"
+    },
+    {
+      "id": "te381",
+      "fromNode": "central",
+      "toNode": "t2",
+      "label": "2 | rule 54 | Review: Review: satisfy endpoint pattern"
+    },
+    {
+      "id": "se382",
+      "fromNode": "s13",
+      "toNode": "central",
+      "label": "1 | rule 54 | Review: Review: satisfy endpoint pattern"
+    },
+    {
+      "id": "te383",
+      "fromNode": "central",
+      "toNode": "t30",
+      "label": "1 | rule 54 | Review: Review: satisfy endpoint pattern"
+    },
+    {
+      "id": "se384",
+      "fromNode": "s1",
+      "toNode": "central",
+      "label": "1 | rule 54 | Review: Review: satisfy endpoint pattern"
+    },
+    {
+      "id": "te385",
+      "fromNode": "central",
+      "toNode": "t26",
+      "label": "1 | rule 54 | Review: Review: satisfy endpoint pattern"
+    },
+    {
+      "id": "se386",
+      "fromNode": "s11",
+      "toNode": "central",
+      "label": "1 | rule 54 | Review: Review: satisfy endpoint pattern"
+    },
+    {
+      "id": "te387",
+      "fromNode": "central",
+      "toNode": "t3",
+      "label": "1 | rule 54 | Review: Review: satisfy endpoint pattern"
+    },
+    {
+      "id": "se388",
+      "fromNode": "s2",
+      "toNode": "central",
+      "label": "1 | rule 54 | Review: Review: satisfy endpoint pattern"
+    },
+    {
+      "id": "te389",
+      "fromNode": "central",
+      "toNode": "t3",
+      "label": "1 | rule 54 | Review: Review: satisfy endpoint pattern"
+    },
+    {
+      "id": "se390",
+      "fromNode": "s0",
+      "toNode": "central",
+      "label": "1 | rule 54 | Review: Review: satisfy endpoint pattern"
+    },
+    {
+      "id": "te391",
+      "fromNode": "central",
+      "toNode": "t26",
+      "label": "1 | rule 54 | Review: Review: satisfy endpoint pattern"
+    },
+    {
+      "id": "se392",
+      "fromNode": "s8",
+      "toNode": "central",
+      "label": "1 | rule 54 | Review: Review: satisfy endpoint pattern"
+    },
+    {
+      "id": "te393",
+      "fromNode": "central",
+      "toNode": "t30",
+      "label": "1 | rule 54 | Review: Review: satisfy endpoint pattern"
+    },
+    {
+      "id": "se394",
+      "fromNode": "s8",
+      "toNode": "central",
+      "label": "1 | rule 54 | Review: Review: satisfy endpoint pattern"
+    },
+    {
+      "id": "te395",
+      "fromNode": "central",
+      "toNode": "t26",
+      "label": "1 | rule 54 | Review: Review: satisfy endpoint pattern"
+    },
+    {
+      "id": "se396",
+      "fromNode": "s30",
+      "toNode": "central",
+      "label": "1 | rule 54 | Review: Review: satisfy endpoint pattern"
+    },
+    {
+      "id": "te397",
+      "fromNode": "central",
+      "toNode": "t4",
+      "label": "1 | rule 54 | Review: Review: satisfy endpoint pattern"
+    },
+    {
+      "id": "se398",
+      "fromNode": "s18",
+      "toNode": "central",
+      "label": "1 | rule 54 | Review: Review: satisfy endpoint pattern"
+    },
+    {
+      "id": "te399",
+      "fromNode": "central",
+      "toNode": "t1",
+      "label": "1 | rule 54 | Review: Review: satisfy endpoint pattern"
+    },
+    {
+      "id": "se400",
+      "fromNode": "s18",
+      "toNode": "central",
+      "label": "1 | rule 54 | Review: Review: satisfy endpoint pattern"
+    },
+    {
+      "id": "te401",
+      "fromNode": "central",
+      "toNode": "t4",
+      "label": "1 | rule 54 | Review: Review: satisfy endpoint pattern"
+    },
+    {
+      "id": "se402",
+      "fromNode": "s18",
+      "toNode": "central",
+      "label": "1 | rule 54 | Review: Review: satisfy endpoint pattern"
+    },
+    {
+      "id": "te403",
+      "fromNode": "central",
+      "toNode": "t6",
+      "label": "1 | rule 54 | Review: Review: satisfy endpoint pattern"
+    },
+    {
+      "id": "se404",
+      "fromNode": "s20",
+      "toNode": "central",
+      "label": "1 | rule 17 | Deferred: Deferred: State/StateMachine satisfaction scope"
+    },
+    {
+      "id": "te405",
+      "fromNode": "central",
+      "toNode": "t35",
+      "label": "1 | rule 17 | Deferred: Deferred: State/StateMachine satisfaction scope"
+    },
+    {
+      "id": "se406",
+      "fromNode": "s4",
+      "toNode": "central",
+      "label": "1 | rule 54 | Review: Review: satisfy endpoint pattern"
+    },
+    {
+      "id": "te407",
+      "fromNode": "central",
+      "toNode": "t17",
+      "label": "1 | rule 54 | Review: Review: satisfy endpoint pattern"
+    },
+    {
+      "id": "se408",
+      "fromNode": "s4",
+      "toNode": "central",
+      "label": "1 | rule 17 | Deferred: Deferred: State/StateMachine satisfaction scope"
+    },
+    {
+      "id": "te409",
+      "fromNode": "central",
+      "toNode": "t35",
+      "label": "1 | rule 17 | Deferred: Deferred: State/StateMachine satisfaction scope"
+    },
+    {
+      "id": "se410",
+      "fromNode": "s4",
+      "toNode": "central",
+      "label": "1 | rule 17 | Deferred: Deferred: State/StateMachine satisfaction scope"
+    },
+    {
+      "id": "te411",
+      "fromNode": "central",
+      "toNode": "t36",
+      "label": "1 | rule 17 | Deferred: Deferred: State/StateMachine satisfaction scope"
+    },
+    {
+      "id": "se412",
+      "fromNode": "s7",
+      "toNode": "central",
+      "label": "295 | rule 50 | Review: Review: trace endpoint pattern"
+    },
+    {
+      "id": "te413",
+      "fromNode": "central",
+      "toNode": "t4",
+      "label": "295 | rule 50 | Review: Review: trace endpoint pattern"
+    },
+    {
+      "id": "se414",
+      "fromNode": "s31",
+      "toNode": "central",
+      "label": "103 | rule 24 | Settled: Map: describes / describedBy"
+    },
+    {
+      "id": "te415",
+      "fromNode": "central",
+      "toNode": "t8",
+      "label": "103 | rule 24 | Settled: Map: describes / describedBy"
+    },
+    {
+      "id": "se416",
+      "fromNode": "s3",
+      "toNode": "central",
+      "label": "22 | rule 24 | Settled: Map: describes / describedBy"
+    },
+    {
+      "id": "te417",
+      "fromNode": "central",
+      "toNode": "t8",
+      "label": "22 | rule 24 | Settled: Map: describes / describedBy"
+    },
+    {
+      "id": "se418",
+      "fromNode": "s3",
+      "toNode": "central",
+      "label": "21 | rule 24 | Settled: Map: describes / describedBy"
+    },
+    {
+      "id": "te419",
+      "fromNode": "central",
+      "toNode": "t4",
+      "label": "21 | rule 24 | Settled: Map: describes / describedBy"
+    },
+    {
+      "id": "se420",
+      "fromNode": "s9",
+      "toNode": "central",
+      "label": "16 | rule 25 | Settled: Map: affects / affectedBy"
+    },
+    {
+      "id": "te421",
+      "fromNode": "central",
+      "toNode": "t27",
+      "label": "16 | rule 25 | Settled: Map: affects / affectedBy"
+    },
+    {
+      "id": "se422",
+      "fromNode": "s3",
+      "toNode": "central",
+      "label": "14 | rule 24 | Settled: Map: describes / describedBy"
+    },
+    {
+      "id": "te423",
+      "fromNode": "central",
+      "toNode": "t7",
+      "label": "14 | rule 24 | Settled: Map: describes / describedBy"
+    },
+    {
+      "id": "se424",
+      "fromNode": "s32",
+      "toNode": "central",
+      "label": "11 | rule 50 | Review: Review: trace endpoint pattern"
+    },
+    {
+      "id": "te425",
+      "fromNode": "central",
+      "toNode": "t15",
+      "label": "11 | rule 50 | Review: Review: trace endpoint pattern"
+    },
+    {
+      "id": "se426",
+      "fromNode": "s9",
+      "toNode": "central",
+      "label": "11 | rule 25 | Settled: Map: affects / affectedBy"
+    },
+    {
+      "id": "te427",
+      "fromNode": "central",
+      "toNode": "t29",
+      "label": "11 | rule 25 | Settled: Map: affects / affectedBy"
+    },
+    {
+      "id": "se428",
+      "fromNode": "s7",
+      "toNode": "central",
+      "label": "10 | rule 50 | Review: Review: trace endpoint pattern"
+    },
+    {
+      "id": "te429",
+      "fromNode": "central",
+      "toNode": "t17",
+      "label": "10 | rule 50 | Review: Review: trace endpoint pattern"
+    },
+    {
+      "id": "se430",
+      "fromNode": "s3",
+      "toNode": "central",
+      "label": "9 | rule 24 | Settled: Map: describes / describedBy"
+    },
+    {
+      "id": "te431",
+      "fromNode": "central",
+      "toNode": "t27",
+      "label": "9 | rule 24 | Settled: Map: describes / describedBy"
+    },
+    {
+      "id": "se432",
+      "fromNode": "s33",
+      "toNode": "central",
+      "label": "8 | rule 50 | Review: Review: trace endpoint pattern"
+    },
+    {
+      "id": "te433",
+      "fromNode": "central",
+      "toNode": "t15",
+      "label": "8 | rule 50 | Review: Review: trace endpoint pattern"
+    },
+    {
+      "id": "se434",
+      "fromNode": "s24",
+      "toNode": "central",
+      "label": "8 | rule 50 | Review: Review: trace endpoint pattern"
+    },
+    {
+      "id": "te435",
+      "fromNode": "central",
+      "toNode": "t2",
+      "label": "8 | rule 50 | Review: Review: trace endpoint pattern"
+    },
+    {
+      "id": "se436",
+      "fromNode": "s18",
+      "toNode": "central",
+      "label": "8 | rule 50 | Review: Review: trace endpoint pattern"
+    },
+    {
+      "id": "te437",
+      "fromNode": "central",
+      "toNode": "t4",
+      "label": "8 | rule 50 | Review: Review: trace endpoint pattern"
+    },
+    {
+      "id": "se438",
+      "fromNode": "s26",
+      "toNode": "central",
+      "label": "8 | rule 50 | Review: Review: trace endpoint pattern"
+    },
+    {
+      "id": "te439",
+      "fromNode": "central",
+      "toNode": "t17",
+      "label": "8 | rule 50 | Review: Review: trace endpoint pattern"
+    },
+    {
+      "id": "se440",
+      "fromNode": "s0",
+      "toNode": "central",
+      "label": "7 | rule 24 | Settled: Map: describes / describedBy"
+    },
+    {
+      "id": "te441",
+      "fromNode": "central",
+      "toNode": "t4",
+      "label": "7 | rule 24 | Settled: Map: describes / describedBy"
+    },
+    {
+      "id": "se442",
+      "fromNode": "s17",
+      "toNode": "central",
+      "label": "7 | rule 50 | Review: Review: trace endpoint pattern"
+    },
+    {
+      "id": "te443",
+      "fromNode": "central",
+      "toNode": "t15",
+      "label": "7 | rule 50 | Review: Review: trace endpoint pattern"
+    },
+    {
+      "id": "se444",
+      "fromNode": "s3",
+      "toNode": "central",
+      "label": "7 | rule 24 | Settled: Map: describes / describedBy"
+    },
+    {
+      "id": "te445",
+      "fromNode": "central",
+      "toNode": "t21",
+      "label": "7 | rule 24 | Settled: Map: describes / describedBy"
+    },
+    {
+      "id": "se446",
+      "fromNode": "s3",
+      "toNode": "central",
+      "label": "7 | rule 24 | Settled: Map: describes / describedBy"
+    },
+    {
+      "id": "te447",
+      "fromNode": "central",
+      "toNode": "t6",
+      "label": "7 | rule 24 | Settled: Map: describes / describedBy"
+    },
+    {
+      "id": "se448",
+      "fromNode": "s19",
+      "toNode": "central",
+      "label": "7 | rule 50 | Review: Review: trace endpoint pattern"
+    },
+    {
+      "id": "te449",
+      "fromNode": "central",
+      "toNode": "t4",
+      "label": "7 | rule 50 | Review: Review: trace endpoint pattern"
+    },
+    {
+      "id": "se450",
+      "fromNode": "s23",
+      "toNode": "central",
+      "label": "6 | rule 50 | Review: Review: trace endpoint pattern"
+    },
+    {
+      "id": "te451",
+      "fromNode": "central",
+      "toNode": "t23",
+      "label": "6 | rule 50 | Review: Review: trace endpoint pattern"
+    },
+    {
+      "id": "se452",
+      "fromNode": "s3",
+      "toNode": "central",
+      "label": "6 | rule 24 | Settled: Map: describes / describedBy"
+    },
+    {
+      "id": "te453",
+      "fromNode": "central",
+      "toNode": "t28",
+      "label": "6 | rule 24 | Settled: Map: describes / describedBy"
+    },
+    {
+      "id": "se454",
+      "fromNode": "s9",
+      "toNode": "central",
+      "label": "6 | rule 25 | Settled: Map: affects / affectedBy"
+    },
+    {
+      "id": "te455",
+      "fromNode": "central",
+      "toNode": "t9",
+      "label": "6 | rule 25 | Settled: Map: affects / affectedBy"
+    },
+    {
+      "id": "se456",
+      "fromNode": "s24",
+      "toNode": "central",
+      "label": "6 | rule 50 | Review: Review: trace endpoint pattern"
+    },
+    {
+      "id": "te457",
+      "fromNode": "central",
+      "toNode": "t3",
+      "label": "6 | rule 50 | Review: Review: trace endpoint pattern"
+    },
+    {
+      "id": "se458",
+      "fromNode": "s4",
+      "toNode": "central",
+      "label": "6 | rule 50 | Review: Review: trace endpoint pattern"
+    },
+    {
+      "id": "te459",
+      "fromNode": "central",
+      "toNode": "t4",
+      "label": "6 | rule 50 | Review: Review: trace endpoint pattern"
+    },
+    {
+      "id": "se460",
+      "fromNode": "s3",
+      "toNode": "central",
+      "label": "5 | rule 24 | Settled: Map: describes / describedBy"
+    },
+    {
+      "id": "te461",
+      "fromNode": "central",
+      "toNode": "t29",
+      "label": "5 | rule 24 | Settled: Map: describes / describedBy"
+    },
+    {
+      "id": "se462",
+      "fromNode": "s19",
+      "toNode": "central",
+      "label": "5 | rule 50 | Review: Review: trace endpoint pattern"
+    },
+    {
+      "id": "te463",
+      "fromNode": "central",
+      "toNode": "t27",
+      "label": "5 | rule 50 | Review: Review: trace endpoint pattern"
+    },
+    {
+      "id": "se464",
+      "fromNode": "s7",
+      "toNode": "central",
+      "label": "5 | rule 50 | Review: Review: trace endpoint pattern"
+    },
+    {
+      "id": "te465",
+      "fromNode": "central",
+      "toNode": "t23",
+      "label": "5 | rule 50 | Review: Review: trace endpoint pattern"
+    },
+    {
+      "id": "se466",
+      "fromNode": "s3",
+      "toNode": "central",
+      "label": "4 | rule 24 | Settled: Map: describes / describedBy"
+    },
+    {
+      "id": "te467",
+      "fromNode": "central",
+      "toNode": "t1",
+      "label": "4 | rule 24 | Settled: Map: describes / describedBy"
+    },
+    {
+      "id": "se468",
+      "fromNode": "s9",
+      "toNode": "central",
+      "label": "4 | rule 25 | Settled: Map: affects / affectedBy"
+    },
+    {
+      "id": "te469",
+      "fromNode": "central",
+      "toNode": "t21",
+      "label": "4 | rule 25 | Settled: Map: affects / affectedBy"
+    },
+    {
+      "id": "se470",
+      "fromNode": "s33",
+      "toNode": "central",
+      "label": "4 | rule 26 | Settled: Map: Requirement appliesTo source element"
+    },
+    {
+      "id": "te471",
+      "fromNode": "central",
+      "toNode": "t4",
+      "label": "4 | rule 26 | Settled: Map: Requirement appliesTo source element"
+    },
+    {
+      "id": "se472",
+      "fromNode": "s18",
+      "toNode": "central",
+      "label": "4 | rule 50 | Review: Review: trace endpoint pattern"
+    },
+    {
+      "id": "te473",
+      "fromNode": "central",
+      "toNode": "t2",
+      "label": "4 | rule 50 | Review: Review: trace endpoint pattern"
+    },
+    {
+      "id": "se474",
+      "fromNode": "s7",
+      "toNode": "central",
+      "label": "4 | rule 50 | Review: Review: trace endpoint pattern"
+    },
+    {
+      "id": "te475",
+      "fromNode": "central",
+      "toNode": "t15",
+      "label": "4 | rule 50 | Review: Review: trace endpoint pattern"
+    },
+    {
+      "id": "se476",
+      "fromNode": "s4",
+      "toNode": "central",
+      "label": "4 | rule 50 | Review: Review: trace endpoint pattern"
+    },
+    {
+      "id": "te477",
+      "fromNode": "central",
+      "toNode": "t2",
+      "label": "4 | rule 50 | Review: Review: trace endpoint pattern"
+    },
+    {
+      "id": "se478",
+      "fromNode": "s3",
+      "toNode": "central",
+      "label": "3 | rule 24 | Settled: Map: describes / describedBy"
+    },
+    {
+      "id": "te479",
+      "fromNode": "central",
+      "toNode": "t5",
+      "label": "3 | rule 24 | Settled: Map: describes / describedBy"
+    },
+    {
+      "id": "se480",
+      "fromNode": "s3",
+      "toNode": "central",
+      "label": "3 | rule 24 | Settled: Map: describes / describedBy"
+    },
+    {
+      "id": "te481",
+      "fromNode": "central",
+      "toNode": "t23",
+      "label": "3 | rule 24 | Settled: Map: describes / describedBy"
+    },
+    {
+      "id": "se482",
+      "fromNode": "s3",
+      "toNode": "central",
+      "label": "3 | rule 24 | Settled: Map: describes / describedBy"
+    },
+    {
+      "id": "te483",
+      "fromNode": "central",
+      "toNode": "t10",
+      "label": "3 | rule 24 | Settled: Map: describes / describedBy"
+    },
+    {
+      "id": "se484",
+      "fromNode": "s9",
+      "toNode": "central",
+      "label": "3 | rule 25 | Settled: Map: affects / affectedBy"
+    },
+    {
+      "id": "te485",
+      "fromNode": "central",
+      "toNode": "t23",
+      "label": "3 | rule 25 | Settled: Map: affects / affectedBy"
+    },
+    {
+      "id": "se486",
+      "fromNode": "s24",
+      "toNode": "central",
+      "label": "3 | rule 50 | Review: Review: trace endpoint pattern"
+    },
+    {
+      "id": "te487",
+      "fromNode": "central",
+      "toNode": "t4",
+      "label": "3 | rule 50 | Review: Review: trace endpoint pattern"
+    },
+    {
+      "id": "se488",
+      "fromNode": "s1",
+      "toNode": "central",
+      "label": "2 | rule 50 | Review: Review: trace endpoint pattern"
+    },
+    {
+      "id": "te489",
+      "fromNode": "central",
+      "toNode": "t29",
+      "label": "2 | rule 50 | Review: Review: trace endpoint pattern"
+    },
+    {
+      "id": "se490",
+      "fromNode": "s2",
+      "toNode": "central",
+      "label": "2 | rule 50 | Review: Review: trace endpoint pattern"
+    },
+    {
+      "id": "te491",
+      "fromNode": "central",
+      "toNode": "t3",
+      "label": "2 | rule 50 | Review: Review: trace endpoint pattern"
+    },
+    {
+      "id": "se492",
+      "fromNode": "s12",
+      "toNode": "central",
+      "label": "2 | rule 50 | Review: Review: trace endpoint pattern"
+    },
+    {
+      "id": "te493",
+      "fromNode": "central",
+      "toNode": "t15",
+      "label": "2 | rule 50 | Review: Review: trace endpoint pattern"
+    },
+    {
+      "id": "se494",
+      "fromNode": "s15",
+      "toNode": "central",
+      "label": "2 | rule 50 | Review: Review: trace endpoint pattern"
+    },
+    {
+      "id": "te495",
+      "fromNode": "central",
+      "toNode": "t18",
+      "label": "2 | rule 50 | Review: Review: trace endpoint pattern"
+    },
+    {
+      "id": "se496",
+      "fromNode": "s15",
+      "toNode": "central",
+      "label": "2 | rule 50 | Review: Review: trace endpoint pattern"
+    },
+    {
+      "id": "te497",
+      "fromNode": "central",
+      "toNode": "t10",
+      "label": "2 | rule 50 | Review: Review: trace endpoint pattern"
+    },
+    {
+      "id": "se498",
+      "fromNode": "s15",
+      "toNode": "central",
+      "label": "2 | rule 50 | Review: Review: trace endpoint pattern"
+    },
+    {
+      "id": "te499",
+      "fromNode": "central",
+      "toNode": "t29",
+      "label": "2 | rule 50 | Review: Review: trace endpoint pattern"
+    },
+    {
+      "id": "se500",
+      "fromNode": "s8",
+      "toNode": "central",
+      "label": "2 | rule 50 | Review: Review: trace endpoint pattern"
+    },
+    {
+      "id": "te501",
+      "fromNode": "central",
+      "toNode": "t28",
+      "label": "2 | rule 50 | Review: Review: trace endpoint pattern"
+    },
+    {
+      "id": "se502",
+      "fromNode": "s8",
+      "toNode": "central",
+      "label": "2 | rule 26 | Settled: Map: Requirement appliesTo source element"
+    },
+    {
+      "id": "te503",
+      "fromNode": "central",
+      "toNode": "t4",
+      "label": "2 | rule 26 | Settled: Map: Requirement appliesTo source element"
+    },
+    {
+      "id": "se504",
+      "fromNode": "s32",
+      "toNode": "central",
+      "label": "2 | rule 50 | Review: Review: trace endpoint pattern"
+    },
+    {
+      "id": "te505",
+      "fromNode": "central",
+      "toNode": "t11",
+      "label": "2 | rule 50 | Review: Review: trace endpoint pattern"
+    },
+    {
+      "id": "se506",
+      "fromNode": "s30",
+      "toNode": "central",
+      "label": "2 | rule 26 | Settled: Map: Requirement appliesTo source element"
+    },
+    {
+      "id": "te507",
+      "fromNode": "central",
+      "toNode": "t4",
+      "label": "2 | rule 26 | Settled: Map: Requirement appliesTo source element"
+    },
+    {
+      "id": "se508",
+      "fromNode": "s23",
+      "toNode": "central",
+      "label": "2 | rule 26 | Settled: Map: Requirement appliesTo source element"
+    },
+    {
+      "id": "te509",
+      "fromNode": "central",
+      "toNode": "t4",
+      "label": "2 | rule 26 | Settled: Map: Requirement appliesTo source element"
+    },
+    {
+      "id": "se510",
+      "fromNode": "s17",
+      "toNode": "central",
+      "label": "2 | rule 50 | Review: Review: trace endpoint pattern"
+    },
+    {
+      "id": "te511",
+      "fromNode": "central",
+      "toNode": "t8",
+      "label": "2 | rule 50 | Review: Review: trace endpoint pattern"
+    },
+    {
+      "id": "se512",
+      "fromNode": "s3",
+      "toNode": "central",
+      "label": "2 | rule 24 | Settled: Map: describes / describedBy"
+    },
+    {
+      "id": "te513",
+      "fromNode": "central",
+      "toNode": "t3",
+      "label": "2 | rule 24 | Settled: Map: describes / describedBy"
+    },
+    {
+      "id": "se514",
+      "fromNode": "s3",
+      "toNode": "central",
+      "label": "2 | rule 24 | Settled: Map: describes / describedBy"
+    },
+    {
+      "id": "te515",
+      "fromNode": "central",
+      "toNode": "t11",
+      "label": "2 | rule 24 | Settled: Map: describes / describedBy"
+    },
+    {
+      "id": "se516",
+      "fromNode": "s3",
+      "toNode": "central",
+      "label": "2 | rule 24 | Settled: Map: describes / describedBy"
+    },
+    {
+      "id": "te517",
+      "fromNode": "central",
+      "toNode": "t37",
+      "label": "2 | rule 24 | Settled: Map: describes / describedBy"
+    },
+    {
+      "id": "se518",
+      "fromNode": "s3",
+      "toNode": "central",
+      "label": "2 | rule 24 | Settled: Map: describes / describedBy"
+    },
+    {
+      "id": "te519",
+      "fromNode": "central",
+      "toNode": "t2",
+      "label": "2 | rule 24 | Settled: Map: describes / describedBy"
+    },
+    {
+      "id": "se520",
+      "fromNode": "s9",
+      "toNode": "central",
+      "label": "2 | rule 25 | Settled: Map: affects / affectedBy"
+    },
+    {
+      "id": "te521",
+      "fromNode": "central",
+      "toNode": "t19",
+      "label": "2 | rule 25 | Settled: Map: affects / affectedBy"
+    },
+    {
+      "id": "se522",
+      "fromNode": "s9",
+      "toNode": "central",
+      "label": "2 | rule 25 | Settled: Map: affects / affectedBy"
+    },
+    {
+      "id": "te523",
+      "fromNode": "central",
+      "toNode": "t24",
+      "label": "2 | rule 25 | Settled: Map: affects / affectedBy"
+    },
+    {
+      "id": "se524",
+      "fromNode": "s9",
+      "toNode": "central",
+      "label": "2 | rule 25 | Settled: Map: affects / affectedBy"
+    },
+    {
+      "id": "te525",
+      "fromNode": "central",
+      "toNode": "t8",
+      "label": "2 | rule 25 | Settled: Map: affects / affectedBy"
+    },
+    {
+      "id": "se526",
+      "fromNode": "s33",
+      "toNode": "central",
+      "label": "2 | rule 50 | Review: Review: trace endpoint pattern"
+    },
+    {
+      "id": "te527",
+      "fromNode": "central",
+      "toNode": "t22",
+      "label": "2 | rule 50 | Review: Review: trace endpoint pattern"
+    },
+    {
+      "id": "se528",
+      "fromNode": "s33",
+      "toNode": "central",
+      "label": "2 | rule 26 | Settled: Map: Requirement appliesTo source element"
+    },
+    {
+      "id": "te529",
+      "fromNode": "central",
+      "toNode": "t30",
+      "label": "2 | rule 26 | Settled: Map: Requirement appliesTo source element"
+    },
+    {
+      "id": "se530",
+      "fromNode": "s18",
+      "toNode": "central",
+      "label": "2 | rule 50 | Review: Review: trace endpoint pattern"
+    },
+    {
+      "id": "te531",
+      "fromNode": "central",
+      "toNode": "t8",
+      "label": "2 | rule 50 | Review: Review: trace endpoint pattern"
+    },
+    {
+      "id": "se532",
+      "fromNode": "s18",
+      "toNode": "central",
+      "label": "2 | rule 50 | Review: Review: trace endpoint pattern"
+    },
+    {
+      "id": "te533",
+      "fromNode": "central",
+      "toNode": "t14",
+      "label": "2 | rule 50 | Review: Review: trace endpoint pattern"
+    },
+    {
+      "id": "se534",
+      "fromNode": "s26",
+      "toNode": "central",
+      "label": "2 | rule 50 | Review: Review: trace endpoint pattern"
+    },
+    {
+      "id": "te535",
+      "fromNode": "central",
+      "toNode": "t26",
+      "label": "2 | rule 50 | Review: Review: trace endpoint pattern"
+    },
+    {
+      "id": "se536",
+      "fromNode": "s26",
+      "toNode": "central",
+      "label": "2 | rule 50 | Review: Review: trace endpoint pattern"
+    },
+    {
+      "id": "te537",
+      "fromNode": "central",
+      "toNode": "t4",
+      "label": "2 | rule 50 | Review: Review: trace endpoint pattern"
+    },
+    {
+      "id": "se538",
+      "fromNode": "s4",
+      "toNode": "central",
+      "label": "2 | rule 50 | Review: Review: trace endpoint pattern"
+    },
+    {
+      "id": "te539",
+      "fromNode": "central",
+      "toNode": "t22",
+      "label": "2 | rule 50 | Review: Review: trace endpoint pattern"
+    },
+    {
+      "id": "se540",
+      "fromNode": "s21",
+      "toNode": "central",
+      "label": "2 | rule 50 | Review: Review: trace endpoint pattern"
+    },
+    {
+      "id": "te541",
+      "fromNode": "central",
+      "toNode": "t20",
+      "label": "2 | rule 50 | Review: Review: trace endpoint pattern"
+    },
+    {
+      "id": "se542",
+      "fromNode": "s13",
+      "toNode": "central",
+      "label": "1 | rule 50 | Review: Review: trace endpoint pattern"
+    },
+    {
+      "id": "te543",
+      "fromNode": "central",
+      "toNode": "t22",
+      "label": "1 | rule 50 | Review: Review: trace endpoint pattern"
+    },
+    {
+      "id": "se544",
+      "fromNode": "s1",
+      "toNode": "central",
+      "label": "1 | rule 50 | Review: Review: trace endpoint pattern"
+    },
+    {
+      "id": "te545",
+      "fromNode": "central",
+      "toNode": "t22",
+      "label": "1 | rule 50 | Review: Review: trace endpoint pattern"
+    },
+    {
+      "id": "se546",
+      "fromNode": "s1",
+      "toNode": "central",
+      "label": "1 | rule 50 | Review: Review: trace endpoint pattern"
+    },
+    {
+      "id": "te547",
+      "fromNode": "central",
+      "toNode": "t15",
+      "label": "1 | rule 50 | Review: Review: trace endpoint pattern"
+    },
+    {
+      "id": "se548",
+      "fromNode": "s6",
+      "toNode": "central",
+      "label": "1 | rule 50 | Review: Review: trace endpoint pattern"
+    },
+    {
+      "id": "te549",
+      "fromNode": "central",
+      "toNode": "t23",
+      "label": "1 | rule 50 | Review: Review: trace endpoint pattern"
+    },
+    {
+      "id": "se550",
+      "fromNode": "s6",
+      "toNode": "central",
+      "label": "1 | rule 50 | Review: Review: trace endpoint pattern"
+    },
+    {
+      "id": "te551",
+      "fromNode": "central",
+      "toNode": "t2",
+      "label": "1 | rule 50 | Review: Review: trace endpoint pattern"
+    },
+    {
+      "id": "se552",
+      "fromNode": "s14",
+      "toNode": "central",
+      "label": "1 | rule 50 | Review: Review: trace endpoint pattern"
+    },
+    {
+      "id": "te553",
+      "fromNode": "central",
+      "toNode": "t1",
+      "label": "1 | rule 50 | Review: Review: trace endpoint pattern"
+    },
+    {
+      "id": "se554",
+      "fromNode": "s2",
+      "toNode": "central",
+      "label": "1 | rule 50 | Review: Review: trace endpoint pattern"
+    },
+    {
+      "id": "te555",
+      "fromNode": "central",
+      "toNode": "t23",
+      "label": "1 | rule 50 | Review: Review: trace endpoint pattern"
+    },
+    {
+      "id": "se556",
+      "fromNode": "s2",
+      "toNode": "central",
+      "label": "1 | rule 50 | Review: Review: trace endpoint pattern"
+    },
+    {
+      "id": "te557",
+      "fromNode": "central",
+      "toNode": "t4",
+      "label": "1 | rule 50 | Review: Review: trace endpoint pattern"
+    },
+    {
+      "id": "se558",
+      "fromNode": "s12",
+      "toNode": "central",
+      "label": "1 | rule 50 | Review: Review: trace endpoint pattern"
+    },
+    {
+      "id": "te559",
+      "fromNode": "central",
+      "toNode": "t12",
+      "label": "1 | rule 50 | Review: Review: trace endpoint pattern"
+    },
+    {
+      "id": "se560",
+      "fromNode": "s34",
+      "toNode": "central",
+      "label": "1 | rule 50 | Review: Review: trace endpoint pattern"
+    },
+    {
+      "id": "te561",
+      "fromNode": "central",
+      "toNode": "t23",
+      "label": "1 | rule 50 | Review: Review: trace endpoint pattern"
+    },
+    {
+      "id": "se562",
+      "fromNode": "s31",
+      "toNode": "central",
+      "label": "1 | rule 24 | Settled: Map: describes / describedBy"
+    },
+    {
+      "id": "te563",
+      "fromNode": "central",
+      "toNode": "t23",
+      "label": "1 | rule 24 | Settled: Map: describes / describedBy"
+    },
+    {
+      "id": "se564",
+      "fromNode": "s35",
+      "toNode": "central",
+      "label": "1 | rule 50 | Review: Review: trace endpoint pattern"
+    },
+    {
+      "id": "te565",
+      "fromNode": "central",
+      "toNode": "t1",
+      "label": "1 | rule 50 | Review: Review: trace endpoint pattern"
+    },
+    {
+      "id": "se566",
+      "fromNode": "s35",
+      "toNode": "central",
+      "label": "1 | rule 50 | Review: Review: trace endpoint pattern"
+    },
+    {
+      "id": "te567",
+      "fromNode": "central",
+      "toNode": "t28",
+      "label": "1 | rule 50 | Review: Review: trace endpoint pattern"
+    },
+    {
+      "id": "se568",
+      "fromNode": "s15",
+      "toNode": "central",
+      "label": "1 | rule 50 | Review: Review: trace endpoint pattern"
+    },
+    {
+      "id": "te569",
+      "fromNode": "central",
+      "toNode": "t23",
+      "label": "1 | rule 50 | Review: Review: trace endpoint pattern"
+    },
+    {
+      "id": "se570",
+      "fromNode": "s36",
+      "toNode": "central",
+      "label": "1 | rule 26 | Settled: Map: Requirement appliesTo source element"
+    },
+    {
+      "id": "te571",
+      "fromNode": "central",
+      "toNode": "t4",
+      "label": "1 | rule 26 | Settled: Map: Requirement appliesTo source element"
+    },
+    {
+      "id": "se572",
+      "fromNode": "s8",
+      "toNode": "central",
+      "label": "1 | rule 50 | Review: Review: trace endpoint pattern"
+    },
+    {
+      "id": "te573",
+      "fromNode": "central",
+      "toNode": "t8",
+      "label": "1 | rule 50 | Review: Review: trace endpoint pattern"
+    },
+    {
+      "id": "se574",
+      "fromNode": "s8",
+      "toNode": "central",
+      "label": "1 | rule 26 | Settled: Map: Requirement appliesTo source element"
+    },
+    {
+      "id": "te575",
+      "fromNode": "central",
+      "toNode": "t27",
+      "label": "1 | rule 26 | Settled: Map: Requirement appliesTo source element"
+    },
+    {
+      "id": "se576",
+      "fromNode": "s32",
+      "toNode": "central",
+      "label": "1 | rule 50 | Review: Review: trace endpoint pattern"
+    },
+    {
+      "id": "te577",
+      "fromNode": "central",
+      "toNode": "t23",
+      "label": "1 | rule 50 | Review: Review: trace endpoint pattern"
+    },
+    {
+      "id": "se578",
+      "fromNode": "s30",
+      "toNode": "central",
+      "label": "1 | rule 50 | Review: Review: trace endpoint pattern"
+    },
+    {
+      "id": "te579",
+      "fromNode": "central",
+      "toNode": "t22",
+      "label": "1 | rule 50 | Review: Review: trace endpoint pattern"
+    },
+    {
+      "id": "se580",
+      "fromNode": "s30",
+      "toNode": "central",
+      "label": "1 | rule 50 | Review: Review: trace endpoint pattern"
+    },
+    {
+      "id": "te581",
+      "fromNode": "central",
+      "toNode": "t15",
+      "label": "1 | rule 50 | Review: Review: trace endpoint pattern"
+    },
+    {
+      "id": "se582",
+      "fromNode": "s23",
+      "toNode": "central",
+      "label": "1 | rule 26 | Settled: Map: Requirement appliesTo source element"
+    },
+    {
+      "id": "te583",
+      "fromNode": "central",
+      "toNode": "t9",
+      "label": "1 | rule 26 | Settled: Map: Requirement appliesTo source element"
+    },
+    {
+      "id": "se584",
+      "fromNode": "s5",
+      "toNode": "central",
+      "label": "1 | rule 50 | Review: Review: trace endpoint pattern"
+    },
+    {
+      "id": "te585",
+      "fromNode": "central",
+      "toNode": "t15",
+      "label": "1 | rule 50 | Review: Review: trace endpoint pattern"
+    },
+    {
+      "id": "se586",
+      "fromNode": "s3",
+      "toNode": "central",
+      "label": "1 | rule 24 | Settled: Map: describes / describedBy"
+    },
+    {
+      "id": "te587",
+      "fromNode": "central",
+      "toNode": "t38",
+      "label": "1 | rule 24 | Settled: Map: describes / describedBy"
+    },
+    {
+      "id": "se588",
+      "fromNode": "s3",
+      "toNode": "central",
+      "label": "1 | rule 24 | Settled: Map: describes / describedBy"
+    },
+    {
+      "id": "te589",
+      "fromNode": "central",
+      "toNode": "t13",
+      "label": "1 | rule 24 | Settled: Map: describes / describedBy"
+    },
+    {
+      "id": "se590",
+      "fromNode": "s3",
+      "toNode": "central",
+      "label": "1 | rule 24 | Settled: Map: describes / describedBy"
+    },
+    {
+      "id": "te591",
+      "fromNode": "central",
+      "toNode": "t16",
+      "label": "1 | rule 24 | Settled: Map: describes / describedBy"
+    },
+    {
+      "id": "se592",
+      "fromNode": "s3",
+      "toNode": "central",
+      "label": "1 | rule 24 | Settled: Map: describes / describedBy"
+    },
+    {
+      "id": "te593",
+      "fromNode": "central",
+      "toNode": "t15",
+      "label": "1 | rule 24 | Settled: Map: describes / describedBy"
+    },
+    {
+      "id": "se594",
+      "fromNode": "s9",
+      "toNode": "central",
+      "label": "1 | rule 25 | Settled: Map: affects / affectedBy"
+    },
+    {
+      "id": "te595",
+      "fromNode": "central",
+      "toNode": "t1",
+      "label": "1 | rule 25 | Settled: Map: affects / affectedBy"
+    },
+    {
+      "id": "se596",
+      "fromNode": "s9",
+      "toNode": "central",
+      "label": "1 | rule 25 | Settled: Map: affects / affectedBy"
+    },
+    {
+      "id": "te597",
+      "fromNode": "central",
+      "toNode": "t3",
+      "label": "1 | rule 25 | Settled: Map: affects / affectedBy"
+    },
+    {
+      "id": "se598",
+      "fromNode": "s9",
+      "toNode": "central",
+      "label": "1 | rule 25 | Settled: Map: affects / affectedBy"
+    },
+    {
+      "id": "te599",
+      "fromNode": "central",
+      "toNode": "t14",
+      "label": "1 | rule 25 | Settled: Map: affects / affectedBy"
+    },
+    {
+      "id": "se600",
+      "fromNode": "s37",
+      "toNode": "central",
+      "label": "1 | rule 50 | Review: Review: trace endpoint pattern"
+    },
+    {
+      "id": "te601",
+      "fromNode": "central",
+      "toNode": "t18",
+      "label": "1 | rule 50 | Review: Review: trace endpoint pattern"
+    },
+    {
+      "id": "se602",
+      "fromNode": "s24",
+      "toNode": "central",
+      "label": "1 | rule 50 | Review: Review: trace endpoint pattern"
+    },
+    {
+      "id": "te603",
+      "fromNode": "central",
+      "toNode": "t1",
+      "label": "1 | rule 50 | Review: Review: trace endpoint pattern"
+    },
+    {
+      "id": "se604",
+      "fromNode": "s24",
+      "toNode": "central",
+      "label": "1 | rule 50 | Review: Review: trace endpoint pattern"
+    },
+    {
+      "id": "te605",
+      "fromNode": "central",
+      "toNode": "t6",
+      "label": "1 | rule 50 | Review: Review: trace endpoint pattern"
+    },
+    {
+      "id": "se606",
+      "fromNode": "s25",
+      "toNode": "central",
+      "label": "1 | rule 50 | Review: Review: trace endpoint pattern"
+    },
+    {
+      "id": "te607",
+      "fromNode": "central",
+      "toNode": "t4",
+      "label": "1 | rule 50 | Review: Review: trace endpoint pattern"
+    },
+    {
+      "id": "se608",
+      "fromNode": "s18",
+      "toNode": "central",
+      "label": "1 | rule 50 | Review: Review: trace endpoint pattern"
+    },
+    {
+      "id": "te609",
+      "fromNode": "central",
+      "toNode": "t11",
+      "label": "1 | rule 50 | Review: Review: trace endpoint pattern"
+    },
+    {
+      "id": "se610",
+      "fromNode": "s18",
+      "toNode": "central",
+      "label": "1 | rule 50 | Review: Review: trace endpoint pattern"
+    },
+    {
+      "id": "te611",
+      "fromNode": "central",
+      "toNode": "t7",
+      "label": "1 | rule 50 | Review: Review: trace endpoint pattern"
+    },
+    {
+      "id": "se612",
+      "fromNode": "s18",
+      "toNode": "central",
+      "label": "1 | rule 50 | Review: Review: trace endpoint pattern"
+    },
+    {
+      "id": "te613",
+      "fromNode": "central",
+      "toNode": "t9",
+      "label": "1 | rule 50 | Review: Review: trace endpoint pattern"
+    },
+    {
+      "id": "se614",
+      "fromNode": "s26",
+      "toNode": "central",
+      "label": "1 | rule 50 | Review: Review: trace endpoint pattern"
+    },
+    {
+      "id": "te615",
+      "fromNode": "central",
+      "toNode": "t35",
+      "label": "1 | rule 50 | Review: Review: trace endpoint pattern"
+    },
+    {
+      "id": "se616",
+      "fromNode": "s19",
+      "toNode": "central",
+      "label": "1 | rule 50 | Review: Review: trace endpoint pattern"
+    },
+    {
+      "id": "te617",
+      "fromNode": "central",
+      "toNode": "t3",
+      "label": "1 | rule 50 | Review: Review: trace endpoint pattern"
+    },
+    {
+      "id": "se618",
+      "fromNode": "s19",
+      "toNode": "central",
+      "label": "1 | rule 50 | Review: Review: trace endpoint pattern"
+    },
+    {
+      "id": "te619",
+      "fromNode": "central",
+      "toNode": "t14",
+      "label": "1 | rule 50 | Review: Review: trace endpoint pattern"
+    },
+    {
+      "id": "se620",
+      "fromNode": "s19",
+      "toNode": "central",
+      "label": "1 | rule 50 | Review: Review: trace endpoint pattern"
+    },
+    {
+      "id": "te621",
+      "fromNode": "central",
+      "toNode": "t6",
+      "label": "1 | rule 50 | Review: Review: trace endpoint pattern"
+    },
+    {
+      "id": "se622",
+      "fromNode": "s7",
+      "toNode": "central",
+      "label": "1 | rule 50 | Review: Review: trace endpoint pattern"
+    },
+    {
+      "id": "te623",
+      "fromNode": "central",
+      "toNode": "t8",
+      "label": "1 | rule 50 | Review: Review: trace endpoint pattern"
+    },
+    {
+      "id": "se624",
+      "fromNode": "s20",
+      "toNode": "central",
+      "label": "1 | rule 50 | Review: Review: trace endpoint pattern"
+    },
+    {
+      "id": "te625",
+      "fromNode": "central",
+      "toNode": "t5",
+      "label": "1 | rule 50 | Review: Review: trace endpoint pattern"
+    },
+    {
+      "id": "se626",
+      "fromNode": "s20",
+      "toNode": "central",
+      "label": "1 | rule 50 | Review: Review: trace endpoint pattern"
+    },
+    {
+      "id": "te627",
+      "fromNode": "central",
+      "toNode": "t2",
+      "label": "1 | rule 50 | Review: Review: trace endpoint pattern"
+    },
+    {
+      "id": "se628",
+      "fromNode": "s4",
+      "toNode": "central",
+      "label": "1 | rule 50 | Review: Review: trace endpoint pattern"
+    },
+    {
+      "id": "te629",
+      "fromNode": "central",
+      "toNode": "t17",
+      "label": "1 | rule 50 | Review: Review: trace endpoint pattern"
+    },
+    {
+      "id": "se630",
+      "fromNode": "s4",
+      "toNode": "central",
+      "label": "1 | rule 50 | Review: Review: trace endpoint pattern"
+    },
+    {
+      "id": "te631",
+      "fromNode": "central",
+      "toNode": "t11",
+      "label": "1 | rule 50 | Review: Review: trace endpoint pattern"
+    },
+    {
+      "id": "se632",
+      "fromNode": "s4",
+      "toNode": "central",
+      "label": "1 | rule 50 | Review: Review: trace endpoint pattern"
+    },
+    {
+      "id": "te633",
+      "fromNode": "central",
+      "toNode": "t21",
+      "label": "1 | rule 50 | Review: Review: trace endpoint pattern"
+    },
+    {
+      "id": "se634",
+      "fromNode": "s4",
+      "toNode": "central",
+      "label": "1 | rule 50 | Review: Review: trace endpoint pattern"
+    },
+    {
+      "id": "te635",
+      "fromNode": "central",
+      "toNode": "t9",
+      "label": "1 | rule 50 | Review: Review: trace endpoint pattern"
+    },
+    {
+      "id": "se636",
+      "fromNode": "s4",
+      "toNode": "central",
+      "label": "1 | rule 50 | Review: Review: trace endpoint pattern"
+    },
+    {
+      "id": "te637",
+      "fromNode": "central",
+      "toNode": "t27",
+      "label": "1 | rule 50 | Review: Review: trace endpoint pattern"
+    },
+    {
+      "id": "se638",
+      "fromNode": "s38",
+      "toNode": "central",
+      "label": "1 | rule 50 | Review: Review: trace endpoint pattern"
+    },
+    {
+      "id": "te639",
+      "fromNode": "central",
+      "toNode": "t8",
+      "label": "1 | rule 50 | Review: Review: trace endpoint pattern"
+    },
+    {
+      "id": "se640",
+      "fromNode": "s38",
+      "toNode": "central",
+      "label": "1 | rule 50 | Review: Review: trace endpoint pattern"
+    },
+    {
+      "id": "te641",
+      "fromNode": "central",
+      "toNode": "t14",
+      "label": "1 | rule 50 | Review: Review: trace endpoint pattern"
+    },
+    {
+      "id": "se642",
+      "fromNode": "s38",
+      "toNode": "central",
+      "label": "1 | rule 50 | Review: Review: trace endpoint pattern"
+    },
+    {
+      "id": "te643",
+      "fromNode": "central",
+      "toNode": "t10",
+      "label": "1 | rule 50 | Review: Review: trace endpoint pattern"
+    },
+    {
+      "id": "se644",
+      "fromNode": "s21",
+      "toNode": "central",
+      "label": "1 | rule 50 | Review: Review: trace endpoint pattern"
+    },
+    {
+      "id": "te645",
+      "fromNode": "central",
+      "toNode": "t1",
+      "label": "1 | rule 50 | Review: Review: trace endpoint pattern"
+    },
+    {
+      "id": "se646",
+      "fromNode": "s21",
+      "toNode": "central",
+      "label": "1 | rule 50 | Review: Review: trace endpoint pattern"
+    },
+    {
+      "id": "te647",
+      "fromNode": "central",
+      "toNode": "t4",
+      "label": "1 | rule 50 | Review: Review: trace endpoint pattern"
+    },
+    {
+      "id": "se648",
+      "fromNode": "s12",
+      "toNode": "central",
+      "label": "272 | rule 63 | Settled: Map: verifies / verifiedBy"
+    },
+    {
+      "id": "te649",
+      "fromNode": "central",
+      "toNode": "t4",
+      "label": "272 | rule 63 | Settled: Map: verifies / verifiedBy"
+    },
+    {
+      "id": "se650",
+      "fromNode": "s12",
+      "toNode": "central",
+      "label": "26 | rule 63 | Settled: Map: verifies / verifiedBy"
+    },
+    {
+      "id": "te651",
+      "fromNode": "central",
+      "toNode": "t9",
+      "label": "26 | rule 63 | Settled: Map: verifies / verifiedBy"
+    },
+    {
+      "id": "se652",
+      "fromNode": "s12",
+      "toNode": "central",
+      "label": "26 | rule 63 | Settled: Map: verifies / verifiedBy"
+    },
+    {
+      "id": "te653",
+      "fromNode": "central",
+      "toNode": "t27",
+      "label": "26 | rule 63 | Settled: Map: verifies / verifiedBy"
+    },
+    {
+      "id": "se654",
+      "fromNode": "s7",
+      "toNode": "central",
+      "label": "4 | rule 64 | Review: Review: verify endpoint pattern"
+    },
+    {
+      "id": "te655",
+      "fromNode": "central",
+      "toNode": "t9",
+      "label": "4 | rule 64 | Review: Review: verify endpoint pattern"
+    },
+    {
+      "id": "se656",
+      "fromNode": "s7",
+      "toNode": "central",
+      "label": "2 | rule 64 | Review: Review: verify endpoint pattern"
+    },
+    {
+      "id": "te657",
+      "fromNode": "central",
+      "toNode": "t27",
+      "label": "2 | rule 64 | Review: Review: verify endpoint pattern"
+    },
+    {
+      "id": "se658",
+      "fromNode": "s12",
+      "toNode": "central",
+      "label": "1 | rule 64 | Review: Review: verify endpoint pattern"
+    },
+    {
+      "id": "te659",
+      "fromNode": "central",
+      "toNode": "t5",
+      "label": "1 | rule 64 | Review: Review: verify endpoint pattern"
+    },
+    {
+      "id": "se660",
+      "fromNode": "s12",
+      "toNode": "central",
+      "label": "1 | rule 63 | Settled: Map: verifies / verifiedBy"
+    },
+    {
+      "id": "te661",
+      "fromNode": "central",
+      "toNode": "t26",
+      "label": "1 | rule 63 | Settled: Map: verifies / verifiedBy"
+    },
+    {
+      "id": "se662",
+      "fromNode": "s7",
+      "toNode": "central",
+      "label": "1 | rule 64 | Review: Review: verify endpoint pattern"
+    },
+    {
+      "id": "te663",
+      "fromNode": "central",
+      "toNode": "t1",
+      "label": "1 | rule 64 | Review: Review: verify endpoint pattern"
+    },
+    {
+      "id": "ve664",
+      "fromNode": "central",
+      "toNode": "v0",
+      "label": "no stereotype"
+    },
+    {
+      "id": "ve665",
+      "fromNode": "central",
+      "toNode": "v1",
+      "label": "ASILDecompose"
+    },
+    {
+      "id": "ve666",
+      "fromNode": "central",
+      "toNode": "v2",
+      "label": "deriveReqt"
+    },
+    {
+      "id": "ve667",
+      "fromNode": "central",
+      "toNode": "v3",
+      "label": "RecoveryRequirement"
+    },
+    {
+      "id": "ve668",
+      "fromNode": "central",
+      "toNode": "v4",
+      "label": "refine"
+    },
+    {
+      "id": "ve669",
+      "fromNode": "central",
+      "toNode": "v5",
+      "label": "satisfy"
+    },
+    {
+      "id": "ve670",
+      "fromNode": "central",
+      "toNode": "v6",
+      "label": "trace"
+    },
+    {
+      "id": "ve671",
+      "fromNode": "central",
+      "toNode": "v7",
+      "label": "verify"
+    }
+  ]
+}

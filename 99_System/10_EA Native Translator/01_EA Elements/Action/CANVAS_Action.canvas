@@ -6,395 +6,455 @@
       "file": "99_System/10_EA Native Translator/01_EA Elements/Action/README_Action.md",
       "x": 0,
       "y": 0,
-      "width": 420,
+      "width": 430,
       "height": 260
     },
     {
       "id": "c0",
       "type": "text",
       "text": "**Incoming**\\nAbstraction «allocate»",
-      "x": -650,
-      "y": -400,
-      "width": 320,
-      "height": 150
+      "x": -920,
+      "y": -650,
+      "width": 300,
+      "height": 130
     },
     {
       "id": "e0",
       "type": "file",
       "file": "99_System/10_EA Native Translator/01_EA Elements/Issue/README_Issue.md",
-      "x": -1200,
-      "y": -600,
-      "width": 360,
-      "height": 180
+      "x": -1470,
+      "y": -750,
+      "width": 350,
+      "height": 155
     },
     {
       "id": "c1",
       "type": "text",
       "text": "**Outgoing**\\nAbstraction «allocate»",
-      "x": 650,
-      "y": -400,
-      "width": 320,
-      "height": 150
+      "x": 600,
+      "y": -650,
+      "width": 300,
+      "height": 130
     },
     {
       "id": "e1",
       "type": "file",
       "file": "99_System/10_EA Native Translator/01_EA Elements/ProxyConnector/README_ProxyConnector.md",
-      "x": 1200,
-      "y": -380,
-      "width": 360,
-      "height": 180
+      "x": 1150,
+      "y": -750,
+      "width": 350,
+      "height": 155
     },
     {
       "id": "e2",
       "type": "file",
       "file": "99_System/10_EA Native Translator/01_EA Elements/InformationItem/README_InformationItem.md",
-      "x": -1200,
-      "y": -160,
-      "width": 360,
-      "height": 180
+      "x": -1470,
+      "y": -565,
+      "width": 350,
+      "height": 155
     },
     {
       "id": "e3",
       "type": "file",
       "file": "99_System/10_EA Native Translator/01_EA Elements/Port/EA Element - No Stereotype.md",
-      "x": 1200,
-      "y": 60,
-      "width": 360,
-      "height": 180
+      "x": 1150,
+      "y": -565,
+      "width": 350,
+      "height": 155
     },
     {
       "id": "c2",
       "type": "text",
       "text": "**Outgoing**\\nControlFlow",
-      "x": 650,
-      "y": -140,
-      "width": 320,
-      "height": 150
+      "x": 600,
+      "y": -440,
+      "width": 300,
+      "height": 130
     },
     {
       "id": "e4",
       "type": "file",
       "file": "99_System/10_EA Native Translator/01_EA Elements/Action/README_Action.md",
-      "x": 1200,
-      "y": 280,
-      "width": 360,
-      "height": 180
+      "x": 1150,
+      "y": -380,
+      "width": 350,
+      "height": 155
     },
     {
       "id": "c3",
       "type": "text",
       "text": "**Incoming**\\nControlFlow",
-      "x": -650,
-      "y": -140,
-      "width": 320,
-      "height": 150
+      "x": -920,
+      "y": -440,
+      "width": 300,
+      "height": 130
     },
     {
       "id": "e5",
       "type": "file",
       "file": "99_System/10_EA Native Translator/01_EA Elements/Decision/README_Decision.md",
-      "x": -1200,
-      "y": 500,
-      "width": 360,
-      "height": 180
+      "x": -1470,
+      "y": -380,
+      "width": 350,
+      "height": 155
     },
     {
       "id": "e6",
       "type": "file",
       "file": "99_System/10_EA Native Translator/01_EA Elements/Object/README_Object.md",
-      "x": 1200,
-      "y": 720,
-      "width": 360,
-      "height": 180
+      "x": 1150,
+      "y": -195,
+      "width": 350,
+      "height": 155
     },
     {
       "id": "e7",
       "type": "file",
       "file": "99_System/10_EA Native Translator/01_EA Elements/Activity/EA Element - No Stereotype.md",
-      "x": 1200,
-      "y": 940,
-      "width": 360,
-      "height": 180
+      "x": 1150,
+      "y": -10,
+      "width": 350,
+      "height": 155
     },
     {
       "id": "e8",
       "type": "file",
-      "file": "99_System/10_EA Native Translator/01_EA Elements/StateNode/README_StateNode.md",
-      "x": -1200,
-      "y": -560,
-      "width": 360,
-      "height": 180
+      "file": "99_System/10_EA Native Translator/01_EA Elements/Object/README_Object.md",
+      "x": -1470,
+      "y": -195,
+      "width": 350,
+      "height": 155
     },
     {
       "id": "e9",
       "type": "file",
-      "file": "99_System/10_EA Native Translator/01_EA Elements/State/EA Stereotype - System State.md",
-      "x": 1200,
-      "y": -340,
-      "width": 360,
-      "height": 180
+      "file": "99_System/10_EA Native Translator/01_EA Elements/StateNode/README_StateNode.md",
+      "x": -1470,
+      "y": -10,
+      "width": 350,
+      "height": 155
     },
     {
       "id": "e10",
       "type": "file",
+      "file": "99_System/10_EA Native Translator/01_EA Elements/Decision/README_Decision.md",
+      "x": 1150,
+      "y": 175,
+      "width": 350,
+      "height": 155
+    },
+    {
+      "id": "e11",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/01_EA Elements/StateNode/README_StateNode.md",
+      "x": 1150,
+      "y": 360,
+      "width": 350,
+      "height": 155
+    },
+    {
+      "id": "e12",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/01_EA Elements/State/EA Stereotype - System State.md",
+      "x": 1150,
+      "y": 545,
+      "width": 350,
+      "height": 155
+    },
+    {
+      "id": "e13",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/01_EA Elements/Activity/EA Element - No Stereotype.md",
+      "x": -1470,
+      "y": 175,
+      "width": 350,
+      "height": 155
+    },
+    {
+      "id": "e14",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/01_EA Elements/State/EA Stereotype - System State.md",
+      "x": -1470,
+      "y": 360,
+      "width": 350,
+      "height": 155
+    },
+    {
+      "id": "e15",
+      "type": "file",
       "file": "99_System/10_EA Native Translator/01_EA Elements/Requirement/EA Element - No Stereotype.md",
-      "x": 1200,
-      "y": -120,
-      "width": 360,
-      "height": 180
+      "x": 1150,
+      "y": 730,
+      "width": 350,
+      "height": 155
     },
     {
       "id": "c4",
       "type": "text",
       "text": "**Outgoing**\\nDependency",
-      "x": 650,
-      "y": 120,
-      "width": 320,
-      "height": 150
+      "x": 600,
+      "y": -230,
+      "width": 300,
+      "height": 130
     },
     {
-      "id": "e11",
+      "id": "e16",
       "type": "file",
       "file": "99_System/10_EA Native Translator/01_EA Elements/Class/EA Stereotype - Hardware Component.md",
-      "x": 1200,
-      "y": 100,
-      "width": 360,
-      "height": 180
+      "x": 1150,
+      "y": 915,
+      "width": 350,
+      "height": 155
     },
     {
-      "id": "e12",
+      "id": "e17",
       "type": "file",
       "file": "99_System/10_EA Native Translator/01_EA Elements/Class/EA Stereotype - Physical Component.md",
-      "x": 1200,
-      "y": 320,
-      "width": 360,
-      "height": 180
+      "x": 1150,
+      "y": 1100,
+      "width": 350,
+      "height": 155
     },
     {
       "id": "c5",
       "type": "text",
       "text": "**Incoming**\\nDependency «refine»",
-      "x": -650,
-      "y": 120,
-      "width": 320,
-      "height": 150
+      "x": -920,
+      "y": -230,
+      "width": 300,
+      "height": 130
     },
     {
       "id": "c6",
       "type": "text",
       "text": "**Outgoing**\\nDependency «satisfy»",
-      "x": 650,
-      "y": 380,
-      "width": 320,
-      "height": 150
+      "x": 600,
+      "y": -20,
+      "width": 300,
+      "height": 130
     },
     {
-      "id": "e13",
+      "id": "e18",
       "type": "file",
       "file": "99_System/10_EA Native Translator/01_EA Elements/Requirement/EA Stereotype - requirement.md",
-      "x": 1200,
-      "y": 540,
-      "width": 360,
-      "height": 180
+      "x": 1150,
+      "y": 1285,
+      "width": 350,
+      "height": 155
     },
     {
       "id": "c7",
       "type": "text",
       "text": "**Outgoing**\\nDependency «trace»",
-      "x": 650,
-      "y": 640,
-      "width": 320,
-      "height": 150
+      "x": 600,
+      "y": 190,
+      "width": 300,
+      "height": 130
     },
     {
-      "id": "e14",
+      "id": "e19",
       "type": "file",
       "file": "99_System/10_EA Native Translator/01_EA Elements/Artifact/EA Stereotype - Image.md",
-      "x": 1200,
-      "y": 760,
-      "width": 360,
-      "height": 180
+      "x": 1150,
+      "y": 1470,
+      "width": 350,
+      "height": 155
+    },
+    {
+      "id": "v0",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/01_EA Elements/Action/README_Action.md",
+      "x": -50,
+      "y": -360,
+      "width": 230,
+      "height": 130
     }
   ],
   "edges": [
     {
-      "id": "ec0",
+      "id": "ce0",
       "fromNode": "c0",
       "toNode": "central"
     },
     {
-      "id": "ec1",
+      "id": "ce1",
       "fromNode": "central",
       "toNode": "c1"
     },
     {
-      "id": "ec2",
+      "id": "ce2",
       "fromNode": "central",
       "toNode": "c2"
     },
     {
-      "id": "ec3",
+      "id": "ce3",
       "fromNode": "c3",
       "toNode": "central"
     },
     {
-      "id": "ec4",
+      "id": "ce4",
       "fromNode": "central",
       "toNode": "c4"
     },
     {
-      "id": "ec5",
+      "id": "ce5",
       "fromNode": "c5",
       "toNode": "central"
     },
     {
-      "id": "ec6",
+      "id": "ce6",
       "fromNode": "central",
       "toNode": "c6"
     },
     {
-      "id": "ec7",
+      "id": "ce7",
       "fromNode": "central",
       "toNode": "c7"
     },
     {
-      "id": "ee8",
+      "id": "pe8",
       "fromNode": "e0",
       "toNode": "c0",
       "label": "20 | rule 53 | Review: Review: allocate endpoint pattern"
     },
     {
-      "id": "ee9",
+      "id": "pe9",
       "fromNode": "c1",
       "toNode": "e1",
       "label": "2 | rule 53 | Review: Review: allocate endpoint pattern"
     },
     {
-      "id": "ee10",
+      "id": "pe10",
       "fromNode": "e2",
       "toNode": "c0",
       "label": "2 | rule 53 | Review: Review: allocate endpoint pattern"
     },
     {
-      "id": "ee11",
+      "id": "pe11",
       "fromNode": "c1",
       "toNode": "e3",
       "label": "1 | rule 53 | Review: Review: allocate endpoint pattern"
     },
     {
-      "id": "ee12",
+      "id": "pe12",
       "fromNode": "c2",
       "toNode": "e4",
       "label": "104 | rule 44 | Deferred: Deferred: local flow detail"
     },
     {
-      "id": "ee13",
+      "id": "pe13",
       "fromNode": "e5",
       "toNode": "c3",
       "label": "9 | rule 44 | Deferred: Deferred: local flow detail"
     },
     {
-      "id": "ee14",
+      "id": "pe14",
       "fromNode": "c2",
       "toNode": "e6",
       "label": "6 | rule 44 | Deferred: Deferred: local flow detail"
     },
     {
-      "id": "ee15",
+      "id": "pe15",
       "fromNode": "c2",
       "toNode": "e7",
       "label": "4 | rule 44 | Deferred: Deferred: local flow detail"
     },
     {
-      "id": "ee16",
-      "fromNode": "e6",
-      "toNode": "c3",
-      "label": "4 | rule 44 | Deferred: Deferred: local flow detail"
-    },
-    {
-      "id": "ee17",
+      "id": "pe16",
       "fromNode": "e8",
       "toNode": "c3",
       "label": "4 | rule 44 | Deferred: Deferred: local flow detail"
     },
     {
-      "id": "ee18",
-      "fromNode": "c2",
-      "toNode": "e5",
-      "label": "3 | rule 44 | Deferred: Deferred: local flow detail"
-    },
-    {
-      "id": "ee19",
-      "fromNode": "c2",
-      "toNode": "e8",
-      "label": "3 | rule 44 | Deferred: Deferred: local flow detail"
-    },
-    {
-      "id": "ee20",
-      "fromNode": "c2",
-      "toNode": "e9",
-      "label": "2 | rule 44 | Deferred: Deferred: local flow detail"
-    },
-    {
-      "id": "ee21",
-      "fromNode": "e7",
-      "toNode": "c3",
-      "label": "2 | rule 44 | Deferred: Deferred: local flow detail"
-    },
-    {
-      "id": "ee22",
+      "id": "pe17",
       "fromNode": "e9",
       "toNode": "c3",
+      "label": "4 | rule 44 | Deferred: Deferred: local flow detail"
+    },
+    {
+      "id": "pe18",
+      "fromNode": "c2",
+      "toNode": "e10",
+      "label": "3 | rule 44 | Deferred: Deferred: local flow detail"
+    },
+    {
+      "id": "pe19",
+      "fromNode": "c2",
+      "toNode": "e11",
+      "label": "3 | rule 44 | Deferred: Deferred: local flow detail"
+    },
+    {
+      "id": "pe20",
+      "fromNode": "c2",
+      "toNode": "e12",
       "label": "2 | rule 44 | Deferred: Deferred: local flow detail"
     },
     {
-      "id": "ee23",
+      "id": "pe21",
+      "fromNode": "e13",
+      "toNode": "c3",
+      "label": "2 | rule 44 | Deferred: Deferred: local flow detail"
+    },
+    {
+      "id": "pe22",
+      "fromNode": "e14",
+      "toNode": "c3",
+      "label": "2 | rule 44 | Deferred: Deferred: local flow detail"
+    },
+    {
+      "id": "pe23",
       "fromNode": "c2",
-      "toNode": "e10",
+      "toNode": "e15",
       "label": "1 | rule 44 | Deferred: Deferred: local flow detail"
     },
     {
-      "id": "ee24",
+      "id": "pe24",
       "fromNode": "e0",
       "toNode": "c3",
       "label": "1 | rule 44 | Deferred: Deferred: local flow detail"
     },
     {
-      "id": "ee25",
+      "id": "pe25",
       "fromNode": "c4",
-      "toNode": "e11",
+      "toNode": "e16",
       "label": "2 | rule 58 | Review: Review: Dependency endpoint pattern"
     },
     {
-      "id": "ee26",
+      "id": "pe26",
       "fromNode": "c4",
-      "toNode": "e12",
+      "toNode": "e17",
       "label": "1 | rule 58 | Review: Review: Dependency endpoint pattern"
     },
     {
-      "id": "ee27",
+      "id": "pe27",
       "fromNode": "e2",
       "toNode": "c5",
       "label": "2 | rule 65 | Settled: Map: describes / describedBy (non-Requirement refinement)"
     },
     {
-      "id": "ee28",
+      "id": "pe28",
       "fromNode": "c6",
-      "toNode": "e13",
+      "toNode": "e18",
       "label": "5 | rule 54 | Review: Review: satisfy endpoint pattern"
     },
     {
-      "id": "ee29",
+      "id": "pe29",
       "fromNode": "c6",
-      "toNode": "e10",
+      "toNode": "e15",
       "label": "1 | rule 54 | Review: Review: satisfy endpoint pattern"
     },
     {
-      "id": "ee30",
+      "id": "pe30",
       "fromNode": "c7",
-      "toNode": "e14",
+      "toNode": "e19",
       "label": "1 | rule 50 | Review: Review: trace endpoint pattern"
+    },
+    {
+      "id": "ve31",
+      "fromNode": "central",
+      "toNode": "v0",
+      "label": "no stereotype"
     }
   ]
 }

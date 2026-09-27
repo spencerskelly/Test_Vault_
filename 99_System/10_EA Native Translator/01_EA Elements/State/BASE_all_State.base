@@ -1,0 +1,10 @@
+filters:
+  and:
+    - 'file.inFolder("99_System/10_EA Native Translator/01_EA Elements/State")'
+views:
+  - type: table
+    name: State all
+    order:
+      - file.name
+      - type
+      - status

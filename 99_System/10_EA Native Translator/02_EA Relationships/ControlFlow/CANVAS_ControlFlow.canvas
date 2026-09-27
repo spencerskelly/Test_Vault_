@@ -1,0 +1,909 @@
+{
+  "nodes": [
+    {
+      "id": "central",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/02_EA Relationships/ControlFlow/README_ControlFlow.md",
+      "x": 0,
+      "y": 0,
+      "width": 430,
+      "height": 260
+    },
+    {
+      "id": "s0",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/01_EA Elements/Activity/EA Element - No Stereotype.md",
+      "x": -950,
+      "y": -700,
+      "width": 350,
+      "height": 150
+    },
+    {
+      "id": "t0",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/01_EA Elements/Activity/EA Element - No Stereotype.md",
+      "x": 950,
+      "y": -700,
+      "width": 350,
+      "height": 150
+    },
+    {
+      "id": "s1",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/01_EA Elements/Action/README_Action.md",
+      "x": -950,
+      "y": -520,
+      "width": 350,
+      "height": 150
+    },
+    {
+      "id": "t1",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/01_EA Elements/Action/README_Action.md",
+      "x": 950,
+      "y": -520,
+      "width": 350,
+      "height": 150
+    },
+    {
+      "id": "s2",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/01_EA Elements/Decision/README_Decision.md",
+      "x": -950,
+      "y": -340,
+      "width": 350,
+      "height": 150
+    },
+    {
+      "id": "t2",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/01_EA Elements/Decision/README_Decision.md",
+      "x": 950,
+      "y": -340,
+      "width": 350,
+      "height": 150
+    },
+    {
+      "id": "s3",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/01_EA Elements/Synchronization/README_Synchronization.md",
+      "x": -950,
+      "y": -160,
+      "width": 350,
+      "height": 150
+    },
+    {
+      "id": "t3",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/01_EA Elements/StateNode/README_StateNode.md",
+      "x": 950,
+      "y": -160,
+      "width": 350,
+      "height": 150
+    },
+    {
+      "id": "t4",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/01_EA Elements/Issue/README_Issue.md",
+      "x": 950,
+      "y": 20,
+      "width": 350,
+      "height": 150
+    },
+    {
+      "id": "t5",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/01_EA Elements/Synchronization/README_Synchronization.md",
+      "x": 950,
+      "y": 200,
+      "width": 350,
+      "height": 150
+    },
+    {
+      "id": "s4",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/01_EA Elements/StateNode/README_StateNode.md",
+      "x": -950,
+      "y": 20,
+      "width": 350,
+      "height": 150
+    },
+    {
+      "id": "t6",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/01_EA Elements/Object/README_Object.md",
+      "x": 950,
+      "y": 380,
+      "width": 350,
+      "height": 150
+    },
+    {
+      "id": "s5",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/01_EA Elements/Issue/README_Issue.md",
+      "x": -950,
+      "y": 200,
+      "width": 350,
+      "height": 150
+    },
+    {
+      "id": "s6",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/01_EA Elements/Object/README_Object.md",
+      "x": -950,
+      "y": 380,
+      "width": 350,
+      "height": 150
+    },
+    {
+      "id": "s7",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/01_EA Elements/Activity/EA Stereotype - Hardware Function.md",
+      "x": -950,
+      "y": 560,
+      "width": 350,
+      "height": 150
+    },
+    {
+      "id": "t7",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/01_EA Elements/Activity/EA Stereotype - Hardware Function.md",
+      "x": 950,
+      "y": 560,
+      "width": 350,
+      "height": 150
+    },
+    {
+      "id": "t8",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/01_EA Elements/State/EA Stereotype - System State.md",
+      "x": 950,
+      "y": 740,
+      "width": 350,
+      "height": 150
+    },
+    {
+      "id": "t9",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/01_EA Elements/Activity/EA Stereotype - System Function.md",
+      "x": 950,
+      "y": 920,
+      "width": 350,
+      "height": 150
+    },
+    {
+      "id": "s8",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/01_EA Elements/Activity/EA Stereotype - System Function.md",
+      "x": -950,
+      "y": 740,
+      "width": 350,
+      "height": 150
+    },
+    {
+      "id": "s9",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/01_EA Elements/State/EA Stereotype - System State.md",
+      "x": -950,
+      "y": 920,
+      "width": 350,
+      "height": 150
+    },
+    {
+      "id": "s10",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/01_EA Elements/UseCase/README_UseCase.md",
+      "x": -950,
+      "y": 1100,
+      "width": 350,
+      "height": 150
+    },
+    {
+      "id": "t10",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/01_EA Elements/Requirement/EA Element - No Stereotype.md",
+      "x": 950,
+      "y": 1100,
+      "width": 350,
+      "height": 150
+    },
+    {
+      "id": "t11",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/01_EA Elements/Activity/EA Stereotype - Module Function.md",
+      "x": 950,
+      "y": 1280,
+      "width": 350,
+      "height": 150
+    },
+    {
+      "id": "t12",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/01_EA Elements/State/EA Element - No Stereotype.md",
+      "x": 950,
+      "y": 1460,
+      "width": 350,
+      "height": 150
+    },
+    {
+      "id": "t13",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/01_EA Elements/UseCase/README_UseCase.md",
+      "x": 950,
+      "y": 1640,
+      "width": 350,
+      "height": 150
+    },
+    {
+      "id": "s11",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/01_EA Elements/Activity/EA Stereotype - Module Function.md",
+      "x": -950,
+      "y": 1280,
+      "width": 350,
+      "height": 150
+    },
+    {
+      "id": "s12",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/01_EA Elements/State/EA Element - No Stereotype.md",
+      "x": -950,
+      "y": 1460,
+      "width": 350,
+      "height": 150
+    },
+    {
+      "id": "v0",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/02_EA Relationships/ControlFlow/README_ControlFlow.md",
+      "x": 30,
+      "y": -380,
+      "width": 250,
+      "height": 130
+    }
+  ],
+  "edges": [
+    {
+      "id": "se0",
+      "fromNode": "s0",
+      "toNode": "central",
+      "label": "109 | rule 44 | Deferred: Deferred: local flow detail"
+    },
+    {
+      "id": "te1",
+      "fromNode": "central",
+      "toNode": "t0",
+      "label": "109 | rule 44 | Deferred: Deferred: local flow detail"
+    },
+    {
+      "id": "se2",
+      "fromNode": "s1",
+      "toNode": "central",
+      "label": "104 | rule 44 | Deferred: Deferred: local flow detail"
+    },
+    {
+      "id": "te3",
+      "fromNode": "central",
+      "toNode": "t1",
+      "label": "104 | rule 44 | Deferred: Deferred: local flow detail"
+    },
+    {
+      "id": "se4",
+      "fromNode": "s2",
+      "toNode": "central",
+      "label": "21 | rule 44 | Deferred: Deferred: local flow detail"
+    },
+    {
+      "id": "te5",
+      "fromNode": "central",
+      "toNode": "t0",
+      "label": "21 | rule 44 | Deferred: Deferred: local flow detail"
+    },
+    {
+      "id": "se6",
+      "fromNode": "s0",
+      "toNode": "central",
+      "label": "18 | rule 44 | Deferred: Deferred: local flow detail"
+    },
+    {
+      "id": "te7",
+      "fromNode": "central",
+      "toNode": "t2",
+      "label": "18 | rule 44 | Deferred: Deferred: local flow detail"
+    },
+    {
+      "id": "se8",
+      "fromNode": "s3",
+      "toNode": "central",
+      "label": "18 | rule 44 | Deferred: Deferred: local flow detail"
+    },
+    {
+      "id": "te9",
+      "fromNode": "central",
+      "toNode": "t0",
+      "label": "18 | rule 44 | Deferred: Deferred: local flow detail"
+    },
+    {
+      "id": "se10",
+      "fromNode": "s0",
+      "toNode": "central",
+      "label": "10 | rule 44 | Deferred: Deferred: local flow detail"
+    },
+    {
+      "id": "te11",
+      "fromNode": "central",
+      "toNode": "t3",
+      "label": "10 | rule 44 | Deferred: Deferred: local flow detail"
+    },
+    {
+      "id": "se12",
+      "fromNode": "s2",
+      "toNode": "central",
+      "label": "10 | rule 44 | Deferred: Deferred: local flow detail"
+    },
+    {
+      "id": "te13",
+      "fromNode": "central",
+      "toNode": "t4",
+      "label": "10 | rule 44 | Deferred: Deferred: local flow detail"
+    },
+    {
+      "id": "se14",
+      "fromNode": "s2",
+      "toNode": "central",
+      "label": "9 | rule 44 | Deferred: Deferred: local flow detail"
+    },
+    {
+      "id": "te15",
+      "fromNode": "central",
+      "toNode": "t1",
+      "label": "9 | rule 44 | Deferred: Deferred: local flow detail"
+    },
+    {
+      "id": "se16",
+      "fromNode": "s0",
+      "toNode": "central",
+      "label": "8 | rule 44 | Deferred: Deferred: local flow detail"
+    },
+    {
+      "id": "te17",
+      "fromNode": "central",
+      "toNode": "t5",
+      "label": "8 | rule 44 | Deferred: Deferred: local flow detail"
+    },
+    {
+      "id": "se18",
+      "fromNode": "s4",
+      "toNode": "central",
+      "label": "8 | rule 44 | Deferred: Deferred: local flow detail"
+    },
+    {
+      "id": "te19",
+      "fromNode": "central",
+      "toNode": "t0",
+      "label": "8 | rule 44 | Deferred: Deferred: local flow detail"
+    },
+    {
+      "id": "se20",
+      "fromNode": "s1",
+      "toNode": "central",
+      "label": "6 | rule 44 | Deferred: Deferred: local flow detail"
+    },
+    {
+      "id": "te21",
+      "fromNode": "central",
+      "toNode": "t6",
+      "label": "6 | rule 44 | Deferred: Deferred: local flow detail"
+    },
+    {
+      "id": "se22",
+      "fromNode": "s5",
+      "toNode": "central",
+      "label": "5 | rule 44 | Deferred: Deferred: local flow detail"
+    },
+    {
+      "id": "te23",
+      "fromNode": "central",
+      "toNode": "t3",
+      "label": "5 | rule 44 | Deferred: Deferred: local flow detail"
+    },
+    {
+      "id": "se24",
+      "fromNode": "s6",
+      "toNode": "central",
+      "label": "5 | rule 44 | Deferred: Deferred: local flow detail"
+    },
+    {
+      "id": "te25",
+      "fromNode": "central",
+      "toNode": "t3",
+      "label": "5 | rule 44 | Deferred: Deferred: local flow detail"
+    },
+    {
+      "id": "se26",
+      "fromNode": "s1",
+      "toNode": "central",
+      "label": "4 | rule 44 | Deferred: Deferred: local flow detail"
+    },
+    {
+      "id": "te27",
+      "fromNode": "central",
+      "toNode": "t0",
+      "label": "4 | rule 44 | Deferred: Deferred: local flow detail"
+    },
+    {
+      "id": "se28",
+      "fromNode": "s2",
+      "toNode": "central",
+      "label": "4 | rule 44 | Deferred: Deferred: local flow detail"
+    },
+    {
+      "id": "te29",
+      "fromNode": "central",
+      "toNode": "t5",
+      "label": "4 | rule 44 | Deferred: Deferred: local flow detail"
+    },
+    {
+      "id": "se30",
+      "fromNode": "s6",
+      "toNode": "central",
+      "label": "4 | rule 44 | Deferred: Deferred: local flow detail"
+    },
+    {
+      "id": "te31",
+      "fromNode": "central",
+      "toNode": "t1",
+      "label": "4 | rule 44 | Deferred: Deferred: local flow detail"
+    },
+    {
+      "id": "se32",
+      "fromNode": "s4",
+      "toNode": "central",
+      "label": "4 | rule 44 | Deferred: Deferred: local flow detail"
+    },
+    {
+      "id": "te33",
+      "fromNode": "central",
+      "toNode": "t1",
+      "label": "4 | rule 44 | Deferred: Deferred: local flow detail"
+    },
+    {
+      "id": "se34",
+      "fromNode": "s1",
+      "toNode": "central",
+      "label": "3 | rule 44 | Deferred: Deferred: local flow detail"
+    },
+    {
+      "id": "te35",
+      "fromNode": "central",
+      "toNode": "t2",
+      "label": "3 | rule 44 | Deferred: Deferred: local flow detail"
+    },
+    {
+      "id": "se36",
+      "fromNode": "s1",
+      "toNode": "central",
+      "label": "3 | rule 44 | Deferred: Deferred: local flow detail"
+    },
+    {
+      "id": "te37",
+      "fromNode": "central",
+      "toNode": "t3",
+      "label": "3 | rule 44 | Deferred: Deferred: local flow detail"
+    },
+    {
+      "id": "se38",
+      "fromNode": "s7",
+      "toNode": "central",
+      "label": "3 | rule 44 | Deferred: Deferred: local flow detail"
+    },
+    {
+      "id": "te39",
+      "fromNode": "central",
+      "toNode": "t7",
+      "label": "3 | rule 44 | Deferred: Deferred: local flow detail"
+    },
+    {
+      "id": "se40",
+      "fromNode": "s6",
+      "toNode": "central",
+      "label": "3 | rule 44 | Deferred: Deferred: local flow detail"
+    },
+    {
+      "id": "te41",
+      "fromNode": "central",
+      "toNode": "t0",
+      "label": "3 | rule 44 | Deferred: Deferred: local flow detail"
+    },
+    {
+      "id": "se42",
+      "fromNode": "s3",
+      "toNode": "central",
+      "label": "3 | rule 44 | Deferred: Deferred: local flow detail"
+    },
+    {
+      "id": "te43",
+      "fromNode": "central",
+      "toNode": "t2",
+      "label": "3 | rule 44 | Deferred: Deferred: local flow detail"
+    },
+    {
+      "id": "se44",
+      "fromNode": "s1",
+      "toNode": "central",
+      "label": "2 | rule 44 | Deferred: Deferred: local flow detail"
+    },
+    {
+      "id": "te45",
+      "fromNode": "central",
+      "toNode": "t8",
+      "label": "2 | rule 44 | Deferred: Deferred: local flow detail"
+    },
+    {
+      "id": "se46",
+      "fromNode": "s0",
+      "toNode": "central",
+      "label": "2 | rule 44 | Deferred: Deferred: local flow detail"
+    },
+    {
+      "id": "te47",
+      "fromNode": "central",
+      "toNode": "t1",
+      "label": "2 | rule 44 | Deferred: Deferred: local flow detail"
+    },
+    {
+      "id": "se48",
+      "fromNode": "s0",
+      "toNode": "central",
+      "label": "2 | rule 44 | Deferred: Deferred: local flow detail"
+    },
+    {
+      "id": "te49",
+      "fromNode": "central",
+      "toNode": "t9",
+      "label": "2 | rule 44 | Deferred: Deferred: local flow detail"
+    },
+    {
+      "id": "se50",
+      "fromNode": "s0",
+      "toNode": "central",
+      "label": "2 | rule 44 | Deferred: Deferred: local flow detail"
+    },
+    {
+      "id": "te51",
+      "fromNode": "central",
+      "toNode": "t6",
+      "label": "2 | rule 44 | Deferred: Deferred: local flow detail"
+    },
+    {
+      "id": "se52",
+      "fromNode": "s8",
+      "toNode": "central",
+      "label": "2 | rule 44 | Deferred: Deferred: local flow detail"
+    },
+    {
+      "id": "te53",
+      "fromNode": "central",
+      "toNode": "t0",
+      "label": "2 | rule 44 | Deferred: Deferred: local flow detail"
+    },
+    {
+      "id": "se54",
+      "fromNode": "s8",
+      "toNode": "central",
+      "label": "2 | rule 44 | Deferred: Deferred: local flow detail"
+    },
+    {
+      "id": "te55",
+      "fromNode": "central",
+      "toNode": "t7",
+      "label": "2 | rule 44 | Deferred: Deferred: local flow detail"
+    },
+    {
+      "id": "se56",
+      "fromNode": "s2",
+      "toNode": "central",
+      "label": "2 | rule 44 | Deferred: Deferred: local flow detail"
+    },
+    {
+      "id": "te57",
+      "fromNode": "central",
+      "toNode": "t6",
+      "label": "2 | rule 44 | Deferred: Deferred: local flow detail"
+    },
+    {
+      "id": "se58",
+      "fromNode": "s2",
+      "toNode": "central",
+      "label": "2 | rule 44 | Deferred: Deferred: local flow detail"
+    },
+    {
+      "id": "te59",
+      "fromNode": "central",
+      "toNode": "t3",
+      "label": "2 | rule 44 | Deferred: Deferred: local flow detail"
+    },
+    {
+      "id": "se60",
+      "fromNode": "s6",
+      "toNode": "central",
+      "label": "2 | rule 44 | Deferred: Deferred: local flow detail"
+    },
+    {
+      "id": "te61",
+      "fromNode": "central",
+      "toNode": "t2",
+      "label": "2 | rule 44 | Deferred: Deferred: local flow detail"
+    },
+    {
+      "id": "se62",
+      "fromNode": "s6",
+      "toNode": "central",
+      "label": "2 | rule 44 | Deferred: Deferred: local flow detail"
+    },
+    {
+      "id": "te63",
+      "fromNode": "central",
+      "toNode": "t5",
+      "label": "2 | rule 44 | Deferred: Deferred: local flow detail"
+    },
+    {
+      "id": "se64",
+      "fromNode": "s9",
+      "toNode": "central",
+      "label": "2 | rule 44 | Deferred: Deferred: local flow detail"
+    },
+    {
+      "id": "te65",
+      "fromNode": "central",
+      "toNode": "t1",
+      "label": "2 | rule 44 | Deferred: Deferred: local flow detail"
+    },
+    {
+      "id": "se66",
+      "fromNode": "s4",
+      "toNode": "central",
+      "label": "2 | rule 44 | Deferred: Deferred: local flow detail"
+    },
+    {
+      "id": "te67",
+      "fromNode": "central",
+      "toNode": "t5",
+      "label": "2 | rule 44 | Deferred: Deferred: local flow detail"
+    },
+    {
+      "id": "se68",
+      "fromNode": "s3",
+      "toNode": "central",
+      "label": "2 | rule 44 | Deferred: Deferred: local flow detail"
+    },
+    {
+      "id": "te69",
+      "fromNode": "central",
+      "toNode": "t3",
+      "label": "2 | rule 44 | Deferred: Deferred: local flow detail"
+    },
+    {
+      "id": "se70",
+      "fromNode": "s10",
+      "toNode": "central",
+      "label": "2 | rule 44 | Deferred: Deferred: local flow detail"
+    },
+    {
+      "id": "te71",
+      "fromNode": "central",
+      "toNode": "t0",
+      "label": "2 | rule 44 | Deferred: Deferred: local flow detail"
+    },
+    {
+      "id": "se72",
+      "fromNode": "s1",
+      "toNode": "central",
+      "label": "1 | rule 44 | Deferred: Deferred: local flow detail"
+    },
+    {
+      "id": "te73",
+      "fromNode": "central",
+      "toNode": "t10",
+      "label": "1 | rule 44 | Deferred: Deferred: local flow detail"
+    },
+    {
+      "id": "se74",
+      "fromNode": "s0",
+      "toNode": "central",
+      "label": "1 | rule 44 | Deferred: Deferred: local flow detail"
+    },
+    {
+      "id": "te75",
+      "fromNode": "central",
+      "toNode": "t11",
+      "label": "1 | rule 44 | Deferred: Deferred: local flow detail"
+    },
+    {
+      "id": "se76",
+      "fromNode": "s0",
+      "toNode": "central",
+      "label": "1 | rule 44 | Deferred: Deferred: local flow detail"
+    },
+    {
+      "id": "te77",
+      "fromNode": "central",
+      "toNode": "t12",
+      "label": "1 | rule 44 | Deferred: Deferred: local flow detail"
+    },
+    {
+      "id": "se78",
+      "fromNode": "s0",
+      "toNode": "central",
+      "label": "1 | rule 44 | Deferred: Deferred: local flow detail"
+    },
+    {
+      "id": "te79",
+      "fromNode": "central",
+      "toNode": "t13",
+      "label": "1 | rule 44 | Deferred: Deferred: local flow detail"
+    },
+    {
+      "id": "se80",
+      "fromNode": "s7",
+      "toNode": "central",
+      "label": "1 | rule 44 | Deferred: Deferred: local flow detail"
+    },
+    {
+      "id": "te81",
+      "fromNode": "central",
+      "toNode": "t0",
+      "label": "1 | rule 44 | Deferred: Deferred: local flow detail"
+    },
+    {
+      "id": "se82",
+      "fromNode": "s7",
+      "toNode": "central",
+      "label": "1 | rule 44 | Deferred: Deferred: local flow detail"
+    },
+    {
+      "id": "te83",
+      "fromNode": "central",
+      "toNode": "t9",
+      "label": "1 | rule 44 | Deferred: Deferred: local flow detail"
+    },
+    {
+      "id": "se84",
+      "fromNode": "s11",
+      "toNode": "central",
+      "label": "1 | rule 44 | Deferred: Deferred: local flow detail"
+    },
+    {
+      "id": "te85",
+      "fromNode": "central",
+      "toNode": "t7",
+      "label": "1 | rule 44 | Deferred: Deferred: local flow detail"
+    },
+    {
+      "id": "se86",
+      "fromNode": "s8",
+      "toNode": "central",
+      "label": "1 | rule 44 | Deferred: Deferred: local flow detail"
+    },
+    {
+      "id": "te87",
+      "fromNode": "central",
+      "toNode": "t11",
+      "label": "1 | rule 44 | Deferred: Deferred: local flow detail"
+    },
+    {
+      "id": "se88",
+      "fromNode": "s8",
+      "toNode": "central",
+      "label": "1 | rule 44 | Deferred: Deferred: local flow detail"
+    },
+    {
+      "id": "te89",
+      "fromNode": "central",
+      "toNode": "t9",
+      "label": "1 | rule 44 | Deferred: Deferred: local flow detail"
+    },
+    {
+      "id": "se90",
+      "fromNode": "s2",
+      "toNode": "central",
+      "label": "1 | rule 44 | Deferred: Deferred: local flow detail"
+    },
+    {
+      "id": "te91",
+      "fromNode": "central",
+      "toNode": "t2",
+      "label": "1 | rule 44 | Deferred: Deferred: local flow detail"
+    },
+    {
+      "id": "se92",
+      "fromNode": "s2",
+      "toNode": "central",
+      "label": "1 | rule 44 | Deferred: Deferred: local flow detail"
+    },
+    {
+      "id": "te93",
+      "fromNode": "central",
+      "toNode": "t8",
+      "label": "1 | rule 44 | Deferred: Deferred: local flow detail"
+    },
+    {
+      "id": "se94",
+      "fromNode": "s5",
+      "toNode": "central",
+      "label": "1 | rule 44 | Deferred: Deferred: local flow detail"
+    },
+    {
+      "id": "te95",
+      "fromNode": "central",
+      "toNode": "t1",
+      "label": "1 | rule 44 | Deferred: Deferred: local flow detail"
+    },
+    {
+      "id": "se96",
+      "fromNode": "s12",
+      "toNode": "central",
+      "label": "1 | rule 44 | Deferred: Deferred: local flow detail"
+    },
+    {
+      "id": "te97",
+      "fromNode": "central",
+      "toNode": "t4",
+      "label": "1 | rule 44 | Deferred: Deferred: local flow detail"
+    },
+    {
+      "id": "se98",
+      "fromNode": "s4",
+      "toNode": "central",
+      "label": "1 | rule 44 | Deferred: Deferred: local flow detail"
+    },
+    {
+      "id": "te99",
+      "fromNode": "central",
+      "toNode": "t2",
+      "label": "1 | rule 44 | Deferred: Deferred: local flow detail"
+    },
+    {
+      "id": "se100",
+      "fromNode": "s4",
+      "toNode": "central",
+      "label": "1 | rule 44 | Deferred: Deferred: local flow detail"
+    },
+    {
+      "id": "te101",
+      "fromNode": "central",
+      "toNode": "t8",
+      "label": "1 | rule 44 | Deferred: Deferred: local flow detail"
+    },
+    {
+      "id": "se102",
+      "fromNode": "s4",
+      "toNode": "central",
+      "label": "1 | rule 44 | Deferred: Deferred: local flow detail"
+    },
+    {
+      "id": "te103",
+      "fromNode": "central",
+      "toNode": "t13",
+      "label": "1 | rule 44 | Deferred: Deferred: local flow detail"
+    },
+    {
+      "id": "se104",
+      "fromNode": "s10",
+      "toNode": "central",
+      "label": "1 | rule 44 | Deferred: Deferred: local flow detail"
+    },
+    {
+      "id": "te105",
+      "fromNode": "central",
+      "toNode": "t13",
+      "label": "1 | rule 44 | Deferred: Deferred: local flow detail"
+    },
+    {
+      "id": "ve106",
+      "fromNode": "central",
+      "toNode": "v0",
+      "label": "no stereotype"
+    }
+  ]
+}

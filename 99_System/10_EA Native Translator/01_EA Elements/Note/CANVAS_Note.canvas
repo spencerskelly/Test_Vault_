@@ -1,0 +1,468 @@
+{
+  "nodes": [
+    {
+      "id": "central",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/01_EA Elements/Note/README_Note.md",
+      "x": 0,
+      "y": 0,
+      "width": 430,
+      "height": 260
+    },
+    {
+      "id": "c0",
+      "type": "text",
+      "text": "**Outgoing**\\nAssociation",
+      "x": 600,
+      "y": -650,
+      "width": 300,
+      "height": 130
+    },
+    {
+      "id": "e0",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/01_EA Elements/Class/EA Stereotype - block.md",
+      "x": 1150,
+      "y": -750,
+      "width": 350,
+      "height": 155
+    },
+    {
+      "id": "c1",
+      "type": "text",
+      "text": "**Outgoing**\\nNoteLink",
+      "x": 600,
+      "y": -440,
+      "width": 300,
+      "height": 130
+    },
+    {
+      "id": "e1",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/01_EA Elements/UseCase/README_UseCase.md",
+      "x": 1150,
+      "y": -565,
+      "width": 350,
+      "height": 155
+    },
+    {
+      "id": "e2",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/01_EA Elements/Requirement/EA Stereotype - requirement.md",
+      "x": 1150,
+      "y": -380,
+      "width": 350,
+      "height": 155
+    },
+    {
+      "id": "e3",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/01_EA Elements/Activity/EA Stereotype - System Function.md",
+      "x": 1150,
+      "y": -195,
+      "width": 350,
+      "height": 155
+    },
+    {
+      "id": "e4",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/01_EA Elements/Requirement/EA Stereotype - designConstraint.md",
+      "x": 1150,
+      "y": -10,
+      "width": 350,
+      "height": 155
+    },
+    {
+      "id": "e5",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/01_EA Elements/Class/EA Stereotype - Module.md",
+      "x": 1150,
+      "y": 175,
+      "width": 350,
+      "height": 155
+    },
+    {
+      "id": "e6",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/01_EA Elements/Requirement/EA Stereotype - extendedRequirement.md",
+      "x": 1150,
+      "y": 360,
+      "width": 350,
+      "height": 155
+    },
+    {
+      "id": "e7",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/01_EA Elements/Class/EA Stereotype - Physical Component.md",
+      "x": 1150,
+      "y": 545,
+      "width": 350,
+      "height": 155
+    },
+    {
+      "id": "c2",
+      "type": "text",
+      "text": "**Incoming**\\nNoteLink",
+      "x": -920,
+      "y": -650,
+      "width": 300,
+      "height": 130
+    },
+    {
+      "id": "e8",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/01_EA Elements/Class/EA Stereotype - Software Component.md",
+      "x": -1470,
+      "y": -750,
+      "width": 350,
+      "height": 155
+    },
+    {
+      "id": "e9",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/01_EA Elements/Class/EA Stereotype - block.md",
+      "x": -1470,
+      "y": -565,
+      "width": 350,
+      "height": 155
+    },
+    {
+      "id": "e10",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/01_EA Elements/Class/EA Stereotype - Hardware Component.md",
+      "x": 1150,
+      "y": 730,
+      "width": 350,
+      "height": 155
+    },
+    {
+      "id": "e11",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/01_EA Elements/Requirement/EA Element - No Stereotype.md",
+      "x": 1150,
+      "y": 915,
+      "width": 350,
+      "height": 155
+    },
+    {
+      "id": "e12",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/01_EA Elements/State/EA Stereotype - System State.md",
+      "x": 1150,
+      "y": 1100,
+      "width": 350,
+      "height": 155
+    },
+    {
+      "id": "e13",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/01_EA Elements/Actor/README_Actor.md",
+      "x": 1150,
+      "y": 1285,
+      "width": 350,
+      "height": 155
+    },
+    {
+      "id": "e14",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/01_EA Elements/Class/EA Stereotype - Hardware Component.md",
+      "x": -1470,
+      "y": -380,
+      "width": 350,
+      "height": 155
+    },
+    {
+      "id": "e15",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/01_EA Elements/Class/EA Stereotype - Physical Component.md",
+      "x": -1470,
+      "y": -195,
+      "width": 350,
+      "height": 155
+    },
+    {
+      "id": "e16",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/01_EA Elements/Requirement/EA Stereotype - functionalRequirement.md",
+      "x": 1150,
+      "y": 1470,
+      "width": 350,
+      "height": 155
+    },
+    {
+      "id": "e17",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/01_EA Elements/State/EA Element - No Stereotype.md",
+      "x": 1150,
+      "y": 1655,
+      "width": 350,
+      "height": 155
+    },
+    {
+      "id": "e18",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/01_EA Elements/Activity/EA Element - No Stereotype.md",
+      "x": 1150,
+      "y": 1840,
+      "width": 350,
+      "height": 155
+    },
+    {
+      "id": "e19",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/01_EA Elements/Artifact/EA Stereotype - Document.md",
+      "x": 1150,
+      "y": 2025,
+      "width": 350,
+      "height": 155
+    },
+    {
+      "id": "e20",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/01_EA Elements/Class/EA Stereotype - Software Component.md",
+      "x": 1150,
+      "y": 2210,
+      "width": 350,
+      "height": 155
+    },
+    {
+      "id": "e21",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/01_EA Elements/Note/README_Note.md",
+      "x": 1150,
+      "y": 2395,
+      "width": 350,
+      "height": 155
+    },
+    {
+      "id": "e22",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/01_EA Elements/Class/EA Stereotype - Business Line.md",
+      "x": -1470,
+      "y": -10,
+      "width": 350,
+      "height": 155
+    },
+    {
+      "id": "e23",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/01_EA Elements/Artifact/EA Stereotype - Image.md",
+      "x": 1150,
+      "y": 2580,
+      "width": 350,
+      "height": 155
+    },
+    {
+      "id": "e24",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/01_EA Elements/Requirement/EA Stereotype - designConstraint.md",
+      "x": -1470,
+      "y": 175,
+      "width": 350,
+      "height": 155
+    },
+    {
+      "id": "e25",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/01_EA Elements/State/EA Stereotype - System State.md",
+      "x": -1470,
+      "y": 360,
+      "width": 350,
+      "height": 155
+    },
+    {
+      "id": "v0",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/01_EA Elements/Note/README_Note.md",
+      "x": -50,
+      "y": -360,
+      "width": 230,
+      "height": 130
+    }
+  ],
+  "edges": [
+    {
+      "id": "ce0",
+      "fromNode": "central",
+      "toNode": "c0"
+    },
+    {
+      "id": "ce1",
+      "fromNode": "central",
+      "toNode": "c1"
+    },
+    {
+      "id": "ce2",
+      "fromNode": "c2",
+      "toNode": "central"
+    },
+    {
+      "id": "pe3",
+      "fromNode": "c0",
+      "toNode": "e0",
+      "label": "1 | rule 52 | Review: Review: Association endpoint pattern"
+    },
+    {
+      "id": "pe4",
+      "fromNode": "c1",
+      "toNode": "e1",
+      "label": "159 | rule 45 | Settled: No YAML relationship; preserve annotation/body detail"
+    },
+    {
+      "id": "pe5",
+      "fromNode": "c1",
+      "toNode": "e2",
+      "label": "40 | rule 45 | Settled: No YAML relationship; preserve annotation/body detail"
+    },
+    {
+      "id": "pe6",
+      "fromNode": "c1",
+      "toNode": "e3",
+      "label": "33 | rule 45 | Settled: No YAML relationship; preserve annotation/body detail"
+    },
+    {
+      "id": "pe7",
+      "fromNode": "c1",
+      "toNode": "e4",
+      "label": "17 | rule 45 | Settled: No YAML relationship; preserve annotation/body detail"
+    },
+    {
+      "id": "pe8",
+      "fromNode": "c1",
+      "toNode": "e5",
+      "label": "12 | rule 45 | Settled: No YAML relationship; preserve annotation/body detail"
+    },
+    {
+      "id": "pe9",
+      "fromNode": "c1",
+      "toNode": "e6",
+      "label": "10 | rule 45 | Settled: No YAML relationship; preserve annotation/body detail"
+    },
+    {
+      "id": "pe10",
+      "fromNode": "c1",
+      "toNode": "e7",
+      "label": "9 | rule 45 | Settled: No YAML relationship; preserve annotation/body detail"
+    },
+    {
+      "id": "pe11",
+      "fromNode": "e8",
+      "toNode": "c2",
+      "label": "8 | rule 45 | Settled: No YAML relationship; preserve annotation/body detail"
+    },
+    {
+      "id": "pe12",
+      "fromNode": "e9",
+      "toNode": "c2",
+      "label": "8 | rule 45 | Settled: No YAML relationship; preserve annotation/body detail"
+    },
+    {
+      "id": "pe13",
+      "fromNode": "c1",
+      "toNode": "e10",
+      "label": "8 | rule 45 | Settled: No YAML relationship; preserve annotation/body detail"
+    },
+    {
+      "id": "pe14",
+      "fromNode": "c1",
+      "toNode": "e11",
+      "label": "7 | rule 45 | Settled: No YAML relationship; preserve annotation/body detail"
+    },
+    {
+      "id": "pe15",
+      "fromNode": "c1",
+      "toNode": "e12",
+      "label": "5 | rule 45 | Settled: No YAML relationship; preserve annotation/body detail"
+    },
+    {
+      "id": "pe16",
+      "fromNode": "c1",
+      "toNode": "e13",
+      "label": "4 | rule 45 | Settled: No YAML relationship; preserve annotation/body detail"
+    },
+    {
+      "id": "pe17",
+      "fromNode": "c1",
+      "toNode": "e0",
+      "label": "4 | rule 45 | Settled: No YAML relationship; preserve annotation/body detail"
+    },
+    {
+      "id": "pe18",
+      "fromNode": "e14",
+      "toNode": "c2",
+      "label": "3 | rule 45 | Settled: No YAML relationship; preserve annotation/body detail"
+    },
+    {
+      "id": "pe19",
+      "fromNode": "e15",
+      "toNode": "c2",
+      "label": "3 | rule 45 | Settled: No YAML relationship; preserve annotation/body detail"
+    },
+    {
+      "id": "pe20",
+      "fromNode": "c1",
+      "toNode": "e16",
+      "label": "3 | rule 45 | Settled: No YAML relationship; preserve annotation/body detail"
+    },
+    {
+      "id": "pe21",
+      "fromNode": "c1",
+      "toNode": "e17",
+      "label": "3 | rule 45 | Settled: No YAML relationship; preserve annotation/body detail"
+    },
+    {
+      "id": "pe22",
+      "fromNode": "c1",
+      "toNode": "e18",
+      "label": "2 | rule 45 | Settled: No YAML relationship; preserve annotation/body detail"
+    },
+    {
+      "id": "pe23",
+      "fromNode": "c1",
+      "toNode": "e19",
+      "label": "2 | rule 45 | Settled: No YAML relationship; preserve annotation/body detail"
+    },
+    {
+      "id": "pe24",
+      "fromNode": "c1",
+      "toNode": "e20",
+      "label": "2 | rule 45 | Settled: No YAML relationship; preserve annotation/body detail"
+    },
+    {
+      "id": "pe25",
+      "fromNode": "c1",
+      "toNode": "e21",
+      "label": "2 | rule 45 | Settled: No YAML relationship; preserve annotation/body detail"
+    },
+    {
+      "id": "pe26",
+      "fromNode": "e22",
+      "toNode": "c2",
+      "label": "1 | rule 45 | Settled: No YAML relationship; preserve annotation/body detail"
+    },
+    {
+      "id": "pe27",
+      "fromNode": "c1",
+      "toNode": "e23",
+      "label": "1 | rule 45 | Settled: No YAML relationship; preserve annotation/body detail"
+    },
+    {
+      "id": "pe28",
+      "fromNode": "e24",
+      "toNode": "c2",
+      "label": "1 | rule 45 | Settled: No YAML relationship; preserve annotation/body detail"
+    },
+    {
+      "id": "pe29",
+      "fromNode": "e25",
+      "toNode": "c2",
+      "label": "1 | rule 45 | Settled: No YAML relationship; preserve annotation/body detail"
+    },
+    {
+      "id": "ve30",
+      "fromNode": "central",
+      "toNode": "v0",
+      "label": "no stereotype"
+    }
+  ]
+}

@@ -1,0 +1,10 @@
+filters:
+  and:
+    - 'file.inFolder("99_System/10_EA Native Translator/02_EA Relationships/Allocate endpoint precedence")'
+views:
+  - type: table
+    name: Allocate endpoint precedence local
+    order:
+      - file.name
+      - type
+      - status

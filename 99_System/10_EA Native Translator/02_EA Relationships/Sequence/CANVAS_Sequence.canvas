@@ -1,0 +1,600 @@
+{
+  "nodes": [
+    {
+      "id": "central",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/02_EA Relationships/Sequence/README_Sequence.md",
+      "x": 0,
+      "y": 0,
+      "width": 430,
+      "height": 260
+    },
+    {
+      "id": "s0",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/01_EA Elements/Object/README_Object.md",
+      "x": -950,
+      "y": -700,
+      "width": 350,
+      "height": 150
+    },
+    {
+      "id": "t0",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/01_EA Elements/Object/README_Object.md",
+      "x": 950,
+      "y": -700,
+      "width": 350,
+      "height": 150
+    },
+    {
+      "id": "s1",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/01_EA Elements/Class/EA Stereotype - Module.md",
+      "x": -950,
+      "y": -520,
+      "width": 350,
+      "height": 150
+    },
+    {
+      "id": "t1",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/01_EA Elements/Part/EA Stereotype - FlowProperty.md",
+      "x": 950,
+      "y": -520,
+      "width": 350,
+      "height": 150
+    },
+    {
+      "id": "t2",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/01_EA Elements/Class/EA Stereotype - Module.md",
+      "x": 950,
+      "y": -340,
+      "width": 350,
+      "height": 150
+    },
+    {
+      "id": "s2",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/01_EA Elements/Class/EA Stereotype - Hardware Component.md",
+      "x": -950,
+      "y": -340,
+      "width": 350,
+      "height": 150
+    },
+    {
+      "id": "s3",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/01_EA Elements/Class/EA Stereotype - Platform.md",
+      "x": -950,
+      "y": -160,
+      "width": 350,
+      "height": 150
+    },
+    {
+      "id": "t3",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/01_EA Elements/Class/EA Stereotype - Physical System Variant.md",
+      "x": 950,
+      "y": -160,
+      "width": 350,
+      "height": 150
+    },
+    {
+      "id": "t4",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/01_EA Elements/Class/EA Stereotype - Hardware Component.md",
+      "x": 950,
+      "y": 20,
+      "width": 350,
+      "height": 150
+    },
+    {
+      "id": "t5",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/01_EA Elements/Class/EA Stereotype - Business Line.md",
+      "x": 950,
+      "y": 200,
+      "width": 350,
+      "height": 150
+    },
+    {
+      "id": "s4",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/01_EA Elements/Class/EA Stereotype - Business Line.md",
+      "x": -950,
+      "y": 20,
+      "width": 350,
+      "height": 150
+    },
+    {
+      "id": "t6",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/01_EA Elements/Class/EA Stereotype - block.md",
+      "x": 950,
+      "y": 380,
+      "width": 350,
+      "height": 150
+    },
+    {
+      "id": "s5",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/01_EA Elements/Class/EA Stereotype - block.md",
+      "x": -950,
+      "y": 200,
+      "width": 350,
+      "height": 150
+    },
+    {
+      "id": "s6",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/01_EA Elements/Sequence/README_Sequence.md",
+      "x": -950,
+      "y": 380,
+      "width": 350,
+      "height": 150
+    },
+    {
+      "id": "t7",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/01_EA Elements/Sequence/README_Sequence.md",
+      "x": 950,
+      "y": 560,
+      "width": 350,
+      "height": 150
+    },
+    {
+      "id": "s7",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/01_EA Elements/Class/EA Stereotype - Physical System Variant.md",
+      "x": -950,
+      "y": 560,
+      "width": 350,
+      "height": 150
+    },
+    {
+      "id": "t8",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/01_EA Elements/Class/EA Stereotype - Platform.md",
+      "x": 950,
+      "y": 740,
+      "width": 350,
+      "height": 150
+    },
+    {
+      "id": "t9",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/01_EA Elements/Class/EA Stereotype - System Partner.md",
+      "x": 950,
+      "y": 920,
+      "width": 350,
+      "height": 150
+    },
+    {
+      "id": "s8",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/01_EA Elements/Class/EA Stereotype - System Partner.md",
+      "x": -950,
+      "y": 740,
+      "width": 350,
+      "height": 150
+    },
+    {
+      "id": "s9",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/01_EA Elements/Actor/README_Actor.md",
+      "x": -950,
+      "y": 920,
+      "width": 350,
+      "height": 150
+    },
+    {
+      "id": "t10",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/01_EA Elements/Issue/README_Issue.md",
+      "x": 950,
+      "y": 1100,
+      "width": 350,
+      "height": 150
+    },
+    {
+      "id": "t11",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/01_EA Elements/Class/EA Stereotype - Software Component.md",
+      "x": 950,
+      "y": 1280,
+      "width": 350,
+      "height": 150
+    },
+    {
+      "id": "v0",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/02_EA Relationships/Sequence/README_Sequence.md",
+      "x": 30,
+      "y": -380,
+      "width": 250,
+      "height": 130
+    }
+  ],
+  "edges": [
+    {
+      "id": "se0",
+      "fromNode": "s0",
+      "toNode": "central",
+      "label": "77 | rule 43 | Deferred: Deferred: local sequence/behavior detail"
+    },
+    {
+      "id": "te1",
+      "fromNode": "central",
+      "toNode": "t0",
+      "label": "77 | rule 43 | Deferred: Deferred: local sequence/behavior detail"
+    },
+    {
+      "id": "se2",
+      "fromNode": "s1",
+      "toNode": "central",
+      "label": "19 | rule 43 | Deferred: Deferred: local sequence/behavior detail"
+    },
+    {
+      "id": "te3",
+      "fromNode": "central",
+      "toNode": "t1",
+      "label": "19 | rule 43 | Deferred: Deferred: local sequence/behavior detail"
+    },
+    {
+      "id": "se4",
+      "fromNode": "s1",
+      "toNode": "central",
+      "label": "11 | rule 43 | Deferred: Deferred: local sequence/behavior detail"
+    },
+    {
+      "id": "te5",
+      "fromNode": "central",
+      "toNode": "t2",
+      "label": "11 | rule 43 | Deferred: Deferred: local sequence/behavior detail"
+    },
+    {
+      "id": "se6",
+      "fromNode": "s2",
+      "toNode": "central",
+      "label": "8 | rule 43 | Deferred: Deferred: local sequence/behavior detail"
+    },
+    {
+      "id": "te7",
+      "fromNode": "central",
+      "toNode": "t2",
+      "label": "8 | rule 43 | Deferred: Deferred: local sequence/behavior detail"
+    },
+    {
+      "id": "se8",
+      "fromNode": "s3",
+      "toNode": "central",
+      "label": "8 | rule 43 | Deferred: Deferred: local sequence/behavior detail"
+    },
+    {
+      "id": "te9",
+      "fromNode": "central",
+      "toNode": "t3",
+      "label": "8 | rule 43 | Deferred: Deferred: local sequence/behavior detail"
+    },
+    {
+      "id": "se10",
+      "fromNode": "s0",
+      "toNode": "central",
+      "label": "8 | rule 43 | Deferred: Deferred: local sequence/behavior detail"
+    },
+    {
+      "id": "te11",
+      "fromNode": "central",
+      "toNode": "t4",
+      "label": "8 | rule 43 | Deferred: Deferred: local sequence/behavior detail"
+    },
+    {
+      "id": "se12",
+      "fromNode": "s1",
+      "toNode": "central",
+      "label": "5 | rule 43 | Deferred: Deferred: local sequence/behavior detail"
+    },
+    {
+      "id": "te13",
+      "fromNode": "central",
+      "toNode": "t5",
+      "label": "5 | rule 43 | Deferred: Deferred: local sequence/behavior detail"
+    },
+    {
+      "id": "se14",
+      "fromNode": "s4",
+      "toNode": "central",
+      "label": "4 | rule 43 | Deferred: Deferred: local sequence/behavior detail"
+    },
+    {
+      "id": "te15",
+      "fromNode": "central",
+      "toNode": "t2",
+      "label": "4 | rule 43 | Deferred: Deferred: local sequence/behavior detail"
+    },
+    {
+      "id": "se16",
+      "fromNode": "s4",
+      "toNode": "central",
+      "label": "4 | rule 43 | Deferred: Deferred: local sequence/behavior detail"
+    },
+    {
+      "id": "te17",
+      "fromNode": "central",
+      "toNode": "t3",
+      "label": "4 | rule 43 | Deferred: Deferred: local sequence/behavior detail"
+    },
+    {
+      "id": "se18",
+      "fromNode": "s2",
+      "toNode": "central",
+      "label": "4 | rule 43 | Deferred: Deferred: local sequence/behavior detail"
+    },
+    {
+      "id": "te19",
+      "fromNode": "central",
+      "toNode": "t0",
+      "label": "4 | rule 43 | Deferred: Deferred: local sequence/behavior detail"
+    },
+    {
+      "id": "se20",
+      "fromNode": "s1",
+      "toNode": "central",
+      "label": "4 | rule 43 | Deferred: Deferred: local sequence/behavior detail"
+    },
+    {
+      "id": "te21",
+      "fromNode": "central",
+      "toNode": "t4",
+      "label": "4 | rule 43 | Deferred: Deferred: local sequence/behavior detail"
+    },
+    {
+      "id": "se22",
+      "fromNode": "s1",
+      "toNode": "central",
+      "label": "4 | rule 43 | Deferred: Deferred: local sequence/behavior detail"
+    },
+    {
+      "id": "te23",
+      "fromNode": "central",
+      "toNode": "t6",
+      "label": "4 | rule 43 | Deferred: Deferred: local sequence/behavior detail"
+    },
+    {
+      "id": "se24",
+      "fromNode": "s5",
+      "toNode": "central",
+      "label": "4 | rule 43 | Deferred: Deferred: local sequence/behavior detail"
+    },
+    {
+      "id": "te25",
+      "fromNode": "central",
+      "toNode": "t6",
+      "label": "4 | rule 43 | Deferred: Deferred: local sequence/behavior detail"
+    },
+    {
+      "id": "se26",
+      "fromNode": "s6",
+      "toNode": "central",
+      "label": "4 | rule 43 | Deferred: Deferred: local sequence/behavior detail"
+    },
+    {
+      "id": "te27",
+      "fromNode": "central",
+      "toNode": "t2",
+      "label": "4 | rule 43 | Deferred: Deferred: local sequence/behavior detail"
+    },
+    {
+      "id": "se28",
+      "fromNode": "s1",
+      "toNode": "central",
+      "label": "3 | rule 43 | Deferred: Deferred: local sequence/behavior detail"
+    },
+    {
+      "id": "te29",
+      "fromNode": "central",
+      "toNode": "t7",
+      "label": "3 | rule 43 | Deferred: Deferred: local sequence/behavior detail"
+    },
+    {
+      "id": "se30",
+      "fromNode": "s7",
+      "toNode": "central",
+      "label": "3 | rule 43 | Deferred: Deferred: local sequence/behavior detail"
+    },
+    {
+      "id": "te31",
+      "fromNode": "central",
+      "toNode": "t5",
+      "label": "3 | rule 43 | Deferred: Deferred: local sequence/behavior detail"
+    },
+    {
+      "id": "se32",
+      "fromNode": "s7",
+      "toNode": "central",
+      "label": "3 | rule 43 | Deferred: Deferred: local sequence/behavior detail"
+    },
+    {
+      "id": "te33",
+      "fromNode": "central",
+      "toNode": "t3",
+      "label": "3 | rule 43 | Deferred: Deferred: local sequence/behavior detail"
+    },
+    {
+      "id": "se34",
+      "fromNode": "s7",
+      "toNode": "central",
+      "label": "3 | rule 43 | Deferred: Deferred: local sequence/behavior detail"
+    },
+    {
+      "id": "te35",
+      "fromNode": "central",
+      "toNode": "t8",
+      "label": "3 | rule 43 | Deferred: Deferred: local sequence/behavior detail"
+    },
+    {
+      "id": "se36",
+      "fromNode": "s3",
+      "toNode": "central",
+      "label": "3 | rule 43 | Deferred: Deferred: local sequence/behavior detail"
+    },
+    {
+      "id": "te37",
+      "fromNode": "central",
+      "toNode": "t9",
+      "label": "3 | rule 43 | Deferred: Deferred: local sequence/behavior detail"
+    },
+    {
+      "id": "se38",
+      "fromNode": "s8",
+      "toNode": "central",
+      "label": "3 | rule 43 | Deferred: Deferred: local sequence/behavior detail"
+    },
+    {
+      "id": "te39",
+      "fromNode": "central",
+      "toNode": "t2",
+      "label": "3 | rule 43 | Deferred: Deferred: local sequence/behavior detail"
+    },
+    {
+      "id": "se40",
+      "fromNode": "s8",
+      "toNode": "central",
+      "label": "3 | rule 43 | Deferred: Deferred: local sequence/behavior detail"
+    },
+    {
+      "id": "te41",
+      "fromNode": "central",
+      "toNode": "t3",
+      "label": "3 | rule 43 | Deferred: Deferred: local sequence/behavior detail"
+    },
+    {
+      "id": "se42",
+      "fromNode": "s9",
+      "toNode": "central",
+      "label": "2 | rule 43 | Deferred: Deferred: local sequence/behavior detail"
+    },
+    {
+      "id": "te43",
+      "fromNode": "central",
+      "toNode": "t9",
+      "label": "2 | rule 43 | Deferred: Deferred: local sequence/behavior detail"
+    },
+    {
+      "id": "se44",
+      "fromNode": "s4",
+      "toNode": "central",
+      "label": "2 | rule 43 | Deferred: Deferred: local sequence/behavior detail"
+    },
+    {
+      "id": "te45",
+      "fromNode": "central",
+      "toNode": "t5",
+      "label": "2 | rule 43 | Deferred: Deferred: local sequence/behavior detail"
+    },
+    {
+      "id": "se46",
+      "fromNode": "s7",
+      "toNode": "central",
+      "label": "2 | rule 43 | Deferred: Deferred: local sequence/behavior detail"
+    },
+    {
+      "id": "te47",
+      "fromNode": "central",
+      "toNode": "t9",
+      "label": "2 | rule 43 | Deferred: Deferred: local sequence/behavior detail"
+    },
+    {
+      "id": "se48",
+      "fromNode": "s8",
+      "toNode": "central",
+      "label": "2 | rule 43 | Deferred: Deferred: local sequence/behavior detail"
+    },
+    {
+      "id": "te49",
+      "fromNode": "central",
+      "toNode": "t9",
+      "label": "2 | rule 43 | Deferred: Deferred: local sequence/behavior detail"
+    },
+    {
+      "id": "se50",
+      "fromNode": "s7",
+      "toNode": "central",
+      "label": "1 | rule 43 | Deferred: Deferred: local sequence/behavior detail"
+    },
+    {
+      "id": "te51",
+      "fromNode": "central",
+      "toNode": "t6",
+      "label": "1 | rule 43 | Deferred: Deferred: local sequence/behavior detail"
+    },
+    {
+      "id": "se52",
+      "fromNode": "s3",
+      "toNode": "central",
+      "label": "1 | rule 43 | Deferred: Deferred: local sequence/behavior detail"
+    },
+    {
+      "id": "te53",
+      "fromNode": "central",
+      "toNode": "t8",
+      "label": "1 | rule 43 | Deferred: Deferred: local sequence/behavior detail"
+    },
+    {
+      "id": "se54",
+      "fromNode": "s8",
+      "toNode": "central",
+      "label": "1 | rule 43 | Deferred: Deferred: local sequence/behavior detail"
+    },
+    {
+      "id": "te55",
+      "fromNode": "central",
+      "toNode": "t10",
+      "label": "1 | rule 43 | Deferred: Deferred: local sequence/behavior detail"
+    },
+    {
+      "id": "se56",
+      "fromNode": "s5",
+      "toNode": "central",
+      "label": "1 | rule 43 | Deferred: Deferred: local sequence/behavior detail"
+    },
+    {
+      "id": "te57",
+      "fromNode": "central",
+      "toNode": "t2",
+      "label": "1 | rule 43 | Deferred: Deferred: local sequence/behavior detail"
+    },
+    {
+      "id": "se58",
+      "fromNode": "s5",
+      "toNode": "central",
+      "label": "1 | rule 43 | Deferred: Deferred: local sequence/behavior detail"
+    },
+    {
+      "id": "te59",
+      "fromNode": "central",
+      "toNode": "t11",
+      "label": "1 | rule 43 | Deferred: Deferred: local sequence/behavior detail"
+    },
+    {
+      "id": "se60",
+      "fromNode": "s6",
+      "toNode": "central",
+      "label": "1 | rule 43 | Deferred: Deferred: local sequence/behavior detail"
+    },
+    {
+      "id": "te61",
+      "fromNode": "central",
+      "toNode": "t0",
+      "label": "1 | rule 43 | Deferred: Deferred: local sequence/behavior detail"
+    },
+    {
+      "id": "ve62",
+      "fromNode": "central",
+      "toNode": "v0",
+      "label": "no stereotype"
+    }
+  ]
+}

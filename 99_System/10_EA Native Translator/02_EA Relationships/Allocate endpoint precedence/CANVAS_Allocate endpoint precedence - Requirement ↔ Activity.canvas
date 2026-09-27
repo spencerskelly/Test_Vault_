@@ -1,0 +1,14 @@
+{
+  "nodes": [
+    {
+      "id": "central",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/02_EA Relationships/Allocate endpoint precedence/EA Relationship Stereotype - Requirement ↔ Activity.md",
+      "x": 0,
+      "y": 0,
+      "width": 430,
+      "height": 260
+    }
+  ],
+  "edges": []
+}

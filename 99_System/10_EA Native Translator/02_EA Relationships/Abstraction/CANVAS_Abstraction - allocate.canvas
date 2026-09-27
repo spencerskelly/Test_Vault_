@@ -1,0 +1,2427 @@
+{
+  "nodes": [
+    {
+      "id": "central",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/02_EA Relationships/Abstraction/EA Relationship Stereotype - allocate.md",
+      "x": 0,
+      "y": 0,
+      "width": 430,
+      "height": 260
+    },
+    {
+      "id": "s0",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/01_EA Elements/State/EA Stereotype - System State.md",
+      "x": -950,
+      "y": -700,
+      "width": 350,
+      "height": 150
+    },
+    {
+      "id": "t0",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/01_EA Elements/Class/EA Stereotype - Hardware Component.md",
+      "x": 950,
+      "y": -700,
+      "width": 350,
+      "height": 150
+    },
+    {
+      "id": "s1",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/01_EA Elements/Activity/EA Stereotype - Hardware Function.md",
+      "x": -950,
+      "y": -520,
+      "width": 350,
+      "height": 150
+    },
+    {
+      "id": "t1",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/01_EA Elements/Class/EA Stereotype - Module.md",
+      "x": 950,
+      "y": -520,
+      "width": 350,
+      "height": 150
+    },
+    {
+      "id": "s2",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/01_EA Elements/Activity/EA Stereotype - System Function.md",
+      "x": -950,
+      "y": -340,
+      "width": 350,
+      "height": 150
+    },
+    {
+      "id": "s3",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/01_EA Elements/Activity/EA Element - No Stereotype.md",
+      "x": -950,
+      "y": -160,
+      "width": 350,
+      "height": 150
+    },
+    {
+      "id": "t2",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/01_EA Elements/Class/EA Stereotype - Software Component.md",
+      "x": 950,
+      "y": -340,
+      "width": 350,
+      "height": 150
+    },
+    {
+      "id": "t3",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/01_EA Elements/Class/EA Stereotype - Physical System Variant.md",
+      "x": 950,
+      "y": -160,
+      "width": 350,
+      "height": 150
+    },
+    {
+      "id": "t4",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/01_EA Elements/Class/EA Stereotype - Business Line.md",
+      "x": 950,
+      "y": 20,
+      "width": 350,
+      "height": 150
+    },
+    {
+      "id": "t5",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/01_EA Elements/Class/EA Stereotype - Physical Component.md",
+      "x": 950,
+      "y": 200,
+      "width": 350,
+      "height": 150
+    },
+    {
+      "id": "s4",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/01_EA Elements/State/EA Element - No Stereotype.md",
+      "x": -950,
+      "y": 20,
+      "width": 350,
+      "height": 150
+    },
+    {
+      "id": "t6",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/01_EA Elements/Class/EA Stereotype - block.md",
+      "x": 950,
+      "y": 380,
+      "width": 350,
+      "height": 150
+    },
+    {
+      "id": "s5",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/01_EA Elements/Change/README_Change.md",
+      "x": -950,
+      "y": 200,
+      "width": 350,
+      "height": 150
+    },
+    {
+      "id": "t7",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/01_EA Elements/Issue/README_Issue.md",
+      "x": 950,
+      "y": 560,
+      "width": 350,
+      "height": 150
+    },
+    {
+      "id": "s6",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/01_EA Elements/Issue/README_Issue.md",
+      "x": -950,
+      "y": 380,
+      "width": 350,
+      "height": 150
+    },
+    {
+      "id": "t8",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/01_EA Elements/Activity/EA Element - No Stereotype.md",
+      "x": 950,
+      "y": 740,
+      "width": 350,
+      "height": 150
+    },
+    {
+      "id": "t9",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/01_EA Elements/Object/README_Object.md",
+      "x": 950,
+      "y": 920,
+      "width": 350,
+      "height": 150
+    },
+    {
+      "id": "t10",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/01_EA Elements/Class/EA Stereotype - Platform.md",
+      "x": 950,
+      "y": 1100,
+      "width": 350,
+      "height": 150
+    },
+    {
+      "id": "t11",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/01_EA Elements/Activity/EA Stereotype - System Function.md",
+      "x": 950,
+      "y": 1280,
+      "width": 350,
+      "height": 150
+    },
+    {
+      "id": "t12",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/01_EA Elements/UseCase/README_UseCase.md",
+      "x": 950,
+      "y": 1460,
+      "width": 350,
+      "height": 150
+    },
+    {
+      "id": "t13",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/01_EA Elements/Action/README_Action.md",
+      "x": 950,
+      "y": 1640,
+      "width": 350,
+      "height": 150
+    },
+    {
+      "id": "s7",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/01_EA Elements/InformationItem/README_InformationItem.md",
+      "x": -950,
+      "y": 560,
+      "width": 350,
+      "height": 150
+    },
+    {
+      "id": "s8",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/01_EA Elements/Activity/EA Stereotype - Module Function.md",
+      "x": -950,
+      "y": 740,
+      "width": 350,
+      "height": 150
+    },
+    {
+      "id": "t14",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/01_EA Elements/Requirement/EA Element - No Stereotype.md",
+      "x": 950,
+      "y": 1820,
+      "width": 350,
+      "height": 150
+    },
+    {
+      "id": "t15",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/01_EA Elements/State/EA Stereotype - System State.md",
+      "x": 950,
+      "y": 2000,
+      "width": 350,
+      "height": 150
+    },
+    {
+      "id": "s9",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/01_EA Elements/Requirement/EA Stereotype - requirement.md",
+      "x": -950,
+      "y": 920,
+      "width": 350,
+      "height": 150
+    },
+    {
+      "id": "t16",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/01_EA Elements/Class/EA Stereotype - System Partner.md",
+      "x": 950,
+      "y": 2180,
+      "width": 350,
+      "height": 150
+    },
+    {
+      "id": "t17",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/01_EA Elements/Requirement/EA Stereotype - functionalRequirement.md",
+      "x": 950,
+      "y": 2360,
+      "width": 350,
+      "height": 150
+    },
+    {
+      "id": "t18",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/01_EA Elements/Requirement/EA Stereotype - requirement.md",
+      "x": 950,
+      "y": 2540,
+      "width": 350,
+      "height": 150
+    },
+    {
+      "id": "t19",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/01_EA Elements/Class/EA Stereotype - Data Interface.md",
+      "x": 950,
+      "y": 2720,
+      "width": 350,
+      "height": 150
+    },
+    {
+      "id": "s10",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/01_EA Elements/Class/EA Stereotype - Software Component.md",
+      "x": -950,
+      "y": 1100,
+      "width": 350,
+      "height": 150
+    },
+    {
+      "id": "t20",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/01_EA Elements/Activity/EA Stereotype - Hardware Function.md",
+      "x": 950,
+      "y": 2900,
+      "width": 350,
+      "height": 150
+    },
+    {
+      "id": "t21",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/01_EA Elements/State/EA Element - No Stereotype.md",
+      "x": 950,
+      "y": 3080,
+      "width": 350,
+      "height": 150
+    },
+    {
+      "id": "t22",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/01_EA Elements/Class/EA Stereotype - Electrical & Material Interface.md",
+      "x": 950,
+      "y": 3260,
+      "width": 350,
+      "height": 150
+    },
+    {
+      "id": "s11",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/01_EA Elements/Activity/EA Stereotype - Software Function.md",
+      "x": -950,
+      "y": 1280,
+      "width": 350,
+      "height": 150
+    },
+    {
+      "id": "s12",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/01_EA Elements/Class/EA Stereotype - Generic Physical Interface.md",
+      "x": -950,
+      "y": 1460,
+      "width": 350,
+      "height": 150
+    },
+    {
+      "id": "t23",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/01_EA Elements/Activity/EA Stereotype - testCase.md",
+      "x": 950,
+      "y": 3440,
+      "width": 350,
+      "height": 150
+    },
+    {
+      "id": "t24",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/01_EA Elements/Class/EA Stereotype - Physical Component + block.md",
+      "x": 950,
+      "y": 3620,
+      "width": 350,
+      "height": 150
+    },
+    {
+      "id": "t25",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/01_EA Elements/Requirement/EA Stereotype - designConstraint.md",
+      "x": 950,
+      "y": 3800,
+      "width": 350,
+      "height": 150
+    },
+    {
+      "id": "s13",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/01_EA Elements/Text/README_Text.md",
+      "x": -950,
+      "y": 1640,
+      "width": 350,
+      "height": 150
+    },
+    {
+      "id": "t26",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/01_EA Elements/Port/EA Element - No Stereotype.md",
+      "x": 950,
+      "y": 3980,
+      "width": 350,
+      "height": 150
+    },
+    {
+      "id": "t27",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/01_EA Elements/Activity/EA Stereotype - Module Function.md",
+      "x": 950,
+      "y": 4160,
+      "width": 350,
+      "height": 150
+    },
+    {
+      "id": "s14",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/01_EA Elements/MISSING Endpoint/README_MISSING Endpoint.md",
+      "x": -950,
+      "y": 1820,
+      "width": 350,
+      "height": 150
+    },
+    {
+      "id": "t28",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/01_EA Elements/MISSING Endpoint/README_MISSING Endpoint.md",
+      "x": 950,
+      "y": 4340,
+      "width": 350,
+      "height": 150
+    },
+    {
+      "id": "s15",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/01_EA Elements/Action/README_Action.md",
+      "x": -950,
+      "y": 2000,
+      "width": 350,
+      "height": 150
+    },
+    {
+      "id": "t29",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/01_EA Elements/ProxyConnector/README_ProxyConnector.md",
+      "x": 950,
+      "y": 4520,
+      "width": 350,
+      "height": 150
+    },
+    {
+      "id": "t30",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/01_EA Elements/Class/EA Stereotype - Physical Context.md",
+      "x": 950,
+      "y": 4700,
+      "width": 350,
+      "height": 150
+    },
+    {
+      "id": "t31",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/01_EA Elements/Actor/README_Actor.md",
+      "x": 950,
+      "y": 4880,
+      "width": 350,
+      "height": 150
+    },
+    {
+      "id": "s16",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/01_EA Elements/ProxyConnector/README_ProxyConnector.md",
+      "x": -950,
+      "y": 2180,
+      "width": 350,
+      "height": 150
+    },
+    {
+      "id": "t32",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/01_EA Elements/Artifact/EA Stereotype - Document.md",
+      "x": 950,
+      "y": 5060,
+      "width": 350,
+      "height": 150
+    },
+    {
+      "id": "s17",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/01_EA Elements/Class/EA Stereotype - System Partner.md",
+      "x": -950,
+      "y": 2360,
+      "width": 350,
+      "height": 150
+    },
+    {
+      "id": "s18",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/01_EA Elements/Class/EA Stereotype - block.md",
+      "x": -950,
+      "y": 2540,
+      "width": 350,
+      "height": 150
+    },
+    {
+      "id": "t33",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/01_EA Elements/Activity/EA Stereotype - Software Function.md",
+      "x": 950,
+      "y": 5240,
+      "width": 350,
+      "height": 150
+    },
+    {
+      "id": "t34",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/01_EA Elements/InformationItem/README_InformationItem.md",
+      "x": 950,
+      "y": 5420,
+      "width": 350,
+      "height": 150
+    },
+    {
+      "id": "s19",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/01_EA Elements/Object/README_Object.md",
+      "x": -950,
+      "y": 2720,
+      "width": 350,
+      "height": 150
+    },
+    {
+      "id": "s20",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/01_EA Elements/Requirement/EA Element - No Stereotype.md",
+      "x": -950,
+      "y": 2900,
+      "width": 350,
+      "height": 150
+    },
+    {
+      "id": "s21",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/01_EA Elements/Requirement/EA Stereotype - Webasto Requirement.md",
+      "x": -950,
+      "y": 3080,
+      "width": 350,
+      "height": 150
+    },
+    {
+      "id": "t35",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/01_EA Elements/Class/EA Stereotype - Mechanical Interface.md",
+      "x": 950,
+      "y": 5600,
+      "width": 350,
+      "height": 150
+    },
+    {
+      "id": "s22",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/01_EA Elements/Trigger/README_Trigger.md",
+      "x": -950,
+      "y": 3260,
+      "width": 350,
+      "height": 150
+    },
+    {
+      "id": "s23",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/01_EA Elements/UseCase/README_UseCase.md",
+      "x": -950,
+      "y": 3440,
+      "width": 350,
+      "height": 150
+    }
+  ],
+  "edges": [
+    {
+      "id": "se0",
+      "fromNode": "s0",
+      "toNode": "central",
+      "label": "277 | rule 14 | Review: Review: State allocation/context evidence"
+    },
+    {
+      "id": "te1",
+      "fromNode": "central",
+      "toNode": "t0",
+      "label": "277 | rule 14 | Review: Review: State allocation/context evidence"
+    },
+    {
+      "id": "se2",
+      "fromNode": "s1",
+      "toNode": "central",
+      "label": "231 | rule 10 | Settled: Map: target Thing performs source Function"
+    },
+    {
+      "id": "te3",
+      "fromNode": "central",
+      "toNode": "t0",
+      "label": "231 | rule 10 | Settled: Map: target Thing performs source Function"
+    },
+    {
+      "id": "se4",
+      "fromNode": "s0",
+      "toNode": "central",
+      "label": "199 | rule 14 | Review: Review: State allocation/context evidence"
+    },
+    {
+      "id": "te5",
+      "fromNode": "central",
+      "toNode": "t1",
+      "label": "199 | rule 14 | Review: Review: State allocation/context evidence"
+    },
+    {
+      "id": "se6",
+      "fromNode": "s2",
+      "toNode": "central",
+      "label": "158 | rule 10 | Settled: Map: target Thing performs source Function"
+    },
+    {
+      "id": "te7",
+      "fromNode": "central",
+      "toNode": "t0",
+      "label": "158 | rule 10 | Settled: Map: target Thing performs source Function"
+    },
+    {
+      "id": "se8",
+      "fromNode": "s3",
+      "toNode": "central",
+      "label": "139 | rule 53 | Review: Review: allocate endpoint pattern"
+    },
+    {
+      "id": "te9",
+      "fromNode": "central",
+      "toNode": "t2",
+      "label": "139 | rule 53 | Review: Review: allocate endpoint pattern"
+    },
+    {
+      "id": "se10",
+      "fromNode": "s3",
+      "toNode": "central",
+      "label": "123 | rule 53 | Review: Review: allocate endpoint pattern"
+    },
+    {
+      "id": "te11",
+      "fromNode": "central",
+      "toNode": "t0",
+      "label": "123 | rule 53 | Review: Review: allocate endpoint pattern"
+    },
+    {
+      "id": "se12",
+      "fromNode": "s2",
+      "toNode": "central",
+      "label": "108 | rule 10 | Settled: Map: target Thing performs source Function"
+    },
+    {
+      "id": "te13",
+      "fromNode": "central",
+      "toNode": "t2",
+      "label": "108 | rule 10 | Settled: Map: target Thing performs source Function"
+    },
+    {
+      "id": "se14",
+      "fromNode": "s0",
+      "toNode": "central",
+      "label": "102 | rule 14 | Review: Review: State allocation/context evidence"
+    },
+    {
+      "id": "te15",
+      "fromNode": "central",
+      "toNode": "t3",
+      "label": "102 | rule 14 | Review: Review: State allocation/context evidence"
+    },
+    {
+      "id": "se16",
+      "fromNode": "s2",
+      "toNode": "central",
+      "label": "80 | rule 10 | Settled: Map: target Thing performs source Function"
+    },
+    {
+      "id": "te17",
+      "fromNode": "central",
+      "toNode": "t4",
+      "label": "80 | rule 10 | Settled: Map: target Thing performs source Function"
+    },
+    {
+      "id": "se18",
+      "fromNode": "s0",
+      "toNode": "central",
+      "label": "76 | rule 14 | Review: Review: State allocation/context evidence"
+    },
+    {
+      "id": "te19",
+      "fromNode": "central",
+      "toNode": "t4",
+      "label": "76 | rule 14 | Review: Review: State allocation/context evidence"
+    },
+    {
+      "id": "se20",
+      "fromNode": "s3",
+      "toNode": "central",
+      "label": "75 | rule 53 | Review: Review: allocate endpoint pattern"
+    },
+    {
+      "id": "te21",
+      "fromNode": "central",
+      "toNode": "t1",
+      "label": "75 | rule 53 | Review: Review: allocate endpoint pattern"
+    },
+    {
+      "id": "se22",
+      "fromNode": "s0",
+      "toNode": "central",
+      "label": "71 | rule 14 | Review: Review: State allocation/context evidence"
+    },
+    {
+      "id": "te23",
+      "fromNode": "central",
+      "toNode": "t5",
+      "label": "71 | rule 14 | Review: Review: State allocation/context evidence"
+    },
+    {
+      "id": "se24",
+      "fromNode": "s4",
+      "toNode": "central",
+      "label": "68 | rule 14 | Review: Review: State allocation/context evidence"
+    },
+    {
+      "id": "te25",
+      "fromNode": "central",
+      "toNode": "t1",
+      "label": "68 | rule 14 | Review: Review: State allocation/context evidence"
+    },
+    {
+      "id": "se26",
+      "fromNode": "s2",
+      "toNode": "central",
+      "label": "62 | rule 10 | Settled: Map: target Thing performs source Function"
+    },
+    {
+      "id": "te27",
+      "fromNode": "central",
+      "toNode": "t3",
+      "label": "62 | rule 10 | Settled: Map: target Thing performs source Function"
+    },
+    {
+      "id": "se28",
+      "fromNode": "s3",
+      "toNode": "central",
+      "label": "61 | rule 53 | Review: Review: allocate endpoint pattern"
+    },
+    {
+      "id": "te29",
+      "fromNode": "central",
+      "toNode": "t3",
+      "label": "61 | rule 53 | Review: Review: allocate endpoint pattern"
+    },
+    {
+      "id": "se30",
+      "fromNode": "s2",
+      "toNode": "central",
+      "label": "57 | rule 10 | Settled: Map: target Thing performs source Function"
+    },
+    {
+      "id": "te31",
+      "fromNode": "central",
+      "toNode": "t1",
+      "label": "57 | rule 10 | Settled: Map: target Thing performs source Function"
+    },
+    {
+      "id": "se32",
+      "fromNode": "s3",
+      "toNode": "central",
+      "label": "54 | rule 53 | Review: Review: allocate endpoint pattern"
+    },
+    {
+      "id": "te33",
+      "fromNode": "central",
+      "toNode": "t6",
+      "label": "54 | rule 53 | Review: Review: allocate endpoint pattern"
+    },
+    {
+      "id": "se34",
+      "fromNode": "s3",
+      "toNode": "central",
+      "label": "49 | rule 53 | Review: Review: allocate endpoint pattern"
+    },
+    {
+      "id": "te35",
+      "fromNode": "central",
+      "toNode": "t4",
+      "label": "49 | rule 53 | Review: Review: allocate endpoint pattern"
+    },
+    {
+      "id": "se36",
+      "fromNode": "s5",
+      "toNode": "central",
+      "label": "42 | rule 53 | Review: Review: allocate endpoint pattern"
+    },
+    {
+      "id": "te37",
+      "fromNode": "central",
+      "toNode": "t7",
+      "label": "42 | rule 53 | Review: Review: allocate endpoint pattern"
+    },
+    {
+      "id": "se38",
+      "fromNode": "s6",
+      "toNode": "central",
+      "label": "41 | rule 12 | Settled: Map: affects / affectedBy"
+    },
+    {
+      "id": "te39",
+      "fromNode": "central",
+      "toNode": "t8",
+      "label": "41 | rule 12 | Settled: Map: affects / affectedBy"
+    },
+    {
+      "id": "se40",
+      "fromNode": "s4",
+      "toNode": "central",
+      "label": "35 | rule 14 | Review: Review: State allocation/context evidence"
+    },
+    {
+      "id": "te41",
+      "fromNode": "central",
+      "toNode": "t0",
+      "label": "35 | rule 14 | Review: Review: State allocation/context evidence"
+    },
+    {
+      "id": "se42",
+      "fromNode": "s1",
+      "toNode": "central",
+      "label": "27 | rule 10 | Settled: Map: target Thing performs source Function"
+    },
+    {
+      "id": "te43",
+      "fromNode": "central",
+      "toNode": "t2",
+      "label": "27 | rule 10 | Settled: Map: target Thing performs source Function"
+    },
+    {
+      "id": "se44",
+      "fromNode": "s6",
+      "toNode": "central",
+      "label": "27 | rule 53 | Review: Review: allocate endpoint pattern"
+    },
+    {
+      "id": "te45",
+      "fromNode": "central",
+      "toNode": "t9",
+      "label": "27 | rule 53 | Review: Review: allocate endpoint pattern"
+    },
+    {
+      "id": "se46",
+      "fromNode": "s0",
+      "toNode": "central",
+      "label": "27 | rule 14 | Review: Review: State allocation/context evidence"
+    },
+    {
+      "id": "te47",
+      "fromNode": "central",
+      "toNode": "t10",
+      "label": "27 | rule 14 | Review: Review: State allocation/context evidence"
+    },
+    {
+      "id": "se48",
+      "fromNode": "s6",
+      "toNode": "central",
+      "label": "26 | rule 12 | Settled: Map: affects / affectedBy"
+    },
+    {
+      "id": "te49",
+      "fromNode": "central",
+      "toNode": "t11",
+      "label": "26 | rule 12 | Settled: Map: affects / affectedBy"
+    },
+    {
+      "id": "se50",
+      "fromNode": "s6",
+      "toNode": "central",
+      "label": "26 | rule 12 | Settled: Map: affects / affectedBy"
+    },
+    {
+      "id": "te51",
+      "fromNode": "central",
+      "toNode": "t12",
+      "label": "26 | rule 12 | Settled: Map: affects / affectedBy"
+    },
+    {
+      "id": "se52",
+      "fromNode": "s4",
+      "toNode": "central",
+      "label": "22 | rule 14 | Review: Review: State allocation/context evidence"
+    },
+    {
+      "id": "te53",
+      "fromNode": "central",
+      "toNode": "t4",
+      "label": "22 | rule 14 | Review: Review: State allocation/context evidence"
+    },
+    {
+      "id": "se54",
+      "fromNode": "s2",
+      "toNode": "central",
+      "label": "21 | rule 10 | Settled: Map: target Thing performs source Function"
+    },
+    {
+      "id": "te55",
+      "fromNode": "central",
+      "toNode": "t6",
+      "label": "21 | rule 10 | Settled: Map: target Thing performs source Function"
+    },
+    {
+      "id": "se56",
+      "fromNode": "s4",
+      "toNode": "central",
+      "label": "21 | rule 14 | Review: Review: State allocation/context evidence"
+    },
+    {
+      "id": "te57",
+      "fromNode": "central",
+      "toNode": "t3",
+      "label": "21 | rule 14 | Review: Review: State allocation/context evidence"
+    },
+    {
+      "id": "se58",
+      "fromNode": "s6",
+      "toNode": "central",
+      "label": "20 | rule 53 | Review: Review: allocate endpoint pattern"
+    },
+    {
+      "id": "te59",
+      "fromNode": "central",
+      "toNode": "t13",
+      "label": "20 | rule 53 | Review: Review: allocate endpoint pattern"
+    },
+    {
+      "id": "se60",
+      "fromNode": "s4",
+      "toNode": "central",
+      "label": "20 | rule 14 | Review: Review: State allocation/context evidence"
+    },
+    {
+      "id": "te61",
+      "fromNode": "central",
+      "toNode": "t5",
+      "label": "20 | rule 14 | Review: Review: State allocation/context evidence"
+    },
+    {
+      "id": "se62",
+      "fromNode": "s0",
+      "toNode": "central",
+      "label": "18 | rule 14 | Review: Review: State allocation/context evidence"
+    },
+    {
+      "id": "te63",
+      "fromNode": "central",
+      "toNode": "t9",
+      "label": "18 | rule 14 | Review: Review: State allocation/context evidence"
+    },
+    {
+      "id": "se64",
+      "fromNode": "s4",
+      "toNode": "central",
+      "label": "16 | rule 14 | Review: Review: State allocation/context evidence"
+    },
+    {
+      "id": "te65",
+      "fromNode": "central",
+      "toNode": "t6",
+      "label": "16 | rule 14 | Review: Review: State allocation/context evidence"
+    },
+    {
+      "id": "se66",
+      "fromNode": "s7",
+      "toNode": "central",
+      "label": "14 | rule 53 | Review: Review: allocate endpoint pattern"
+    },
+    {
+      "id": "te67",
+      "fromNode": "central",
+      "toNode": "t9",
+      "label": "14 | rule 53 | Review: Review: allocate endpoint pattern"
+    },
+    {
+      "id": "se68",
+      "fromNode": "s0",
+      "toNode": "central",
+      "label": "14 | rule 14 | Review: Review: State allocation/context evidence"
+    },
+    {
+      "id": "te69",
+      "fromNode": "central",
+      "toNode": "t6",
+      "label": "14 | rule 14 | Review: Review: State allocation/context evidence"
+    },
+    {
+      "id": "se70",
+      "fromNode": "s8",
+      "toNode": "central",
+      "label": "12 | rule 10 | Settled: Map: target Thing performs source Function"
+    },
+    {
+      "id": "te71",
+      "fromNode": "central",
+      "toNode": "t0",
+      "label": "12 | rule 10 | Settled: Map: target Thing performs source Function"
+    },
+    {
+      "id": "se72",
+      "fromNode": "s1",
+      "toNode": "central",
+      "label": "11 | rule 10 | Settled: Map: target Thing performs source Function"
+    },
+    {
+      "id": "te73",
+      "fromNode": "central",
+      "toNode": "t1",
+      "label": "11 | rule 10 | Settled: Map: target Thing performs source Function"
+    },
+    {
+      "id": "se74",
+      "fromNode": "s8",
+      "toNode": "central",
+      "label": "11 | rule 10 | Settled: Map: target Thing performs source Function"
+    },
+    {
+      "id": "te75",
+      "fromNode": "central",
+      "toNode": "t2",
+      "label": "11 | rule 10 | Settled: Map: target Thing performs source Function"
+    },
+    {
+      "id": "se76",
+      "fromNode": "s2",
+      "toNode": "central",
+      "label": "11 | rule 10 | Settled: Map: target Thing performs source Function"
+    },
+    {
+      "id": "te77",
+      "fromNode": "central",
+      "toNode": "t5",
+      "label": "11 | rule 10 | Settled: Map: target Thing performs source Function"
+    },
+    {
+      "id": "se78",
+      "fromNode": "s6",
+      "toNode": "central",
+      "label": "11 | rule 53 | Review: Review: allocate endpoint pattern"
+    },
+    {
+      "id": "te79",
+      "fromNode": "central",
+      "toNode": "t14",
+      "label": "11 | rule 53 | Review: Review: allocate endpoint pattern"
+    },
+    {
+      "id": "se80",
+      "fromNode": "s0",
+      "toNode": "central",
+      "label": "11 | rule 53 | Review: Review: allocate endpoint pattern"
+    },
+    {
+      "id": "te81",
+      "fromNode": "central",
+      "toNode": "t15",
+      "label": "11 | rule 53 | Review: Review: allocate endpoint pattern"
+    },
+    {
+      "id": "se82",
+      "fromNode": "s6",
+      "toNode": "central",
+      "label": "10 | rule 53 | Review: Review: allocate endpoint pattern"
+    },
+    {
+      "id": "te83",
+      "fromNode": "central",
+      "toNode": "t15",
+      "label": "10 | rule 53 | Review: Review: allocate endpoint pattern"
+    },
+    {
+      "id": "se84",
+      "fromNode": "s9",
+      "toNode": "central",
+      "label": "10 | rule 53 | Review: Review: allocate endpoint pattern"
+    },
+    {
+      "id": "te85",
+      "fromNode": "central",
+      "toNode": "t16",
+      "label": "10 | rule 53 | Review: Review: allocate endpoint pattern"
+    },
+    {
+      "id": "se86",
+      "fromNode": "s2",
+      "toNode": "central",
+      "label": "9 | rule 10 | Settled: Map: target Thing performs source Function"
+    },
+    {
+      "id": "te87",
+      "fromNode": "central",
+      "toNode": "t10",
+      "label": "9 | rule 10 | Settled: Map: target Thing performs source Function"
+    },
+    {
+      "id": "se88",
+      "fromNode": "s9",
+      "toNode": "central",
+      "label": "9 | rule 53 | Review: Review: allocate endpoint pattern"
+    },
+    {
+      "id": "te89",
+      "fromNode": "central",
+      "toNode": "t6",
+      "label": "9 | rule 53 | Review: Review: allocate endpoint pattern"
+    },
+    {
+      "id": "se90",
+      "fromNode": "s6",
+      "toNode": "central",
+      "label": "8 | rule 53 | Review: Review: allocate endpoint pattern"
+    },
+    {
+      "id": "te91",
+      "fromNode": "central",
+      "toNode": "t17",
+      "label": "8 | rule 53 | Review: Review: allocate endpoint pattern"
+    },
+    {
+      "id": "se92",
+      "fromNode": "s0",
+      "toNode": "central",
+      "label": "8 | rule 14 | Review: Review: State allocation/context evidence"
+    },
+    {
+      "id": "te93",
+      "fromNode": "central",
+      "toNode": "t16",
+      "label": "8 | rule 14 | Review: Review: State allocation/context evidence"
+    },
+    {
+      "id": "se94",
+      "fromNode": "s3",
+      "toNode": "central",
+      "label": "7 | rule 53 | Review: Review: allocate endpoint pattern"
+    },
+    {
+      "id": "te95",
+      "fromNode": "central",
+      "toNode": "t10",
+      "label": "7 | rule 53 | Review: Review: allocate endpoint pattern"
+    },
+    {
+      "id": "se96",
+      "fromNode": "s6",
+      "toNode": "central",
+      "label": "7 | rule 53 | Review: Review: allocate endpoint pattern"
+    },
+    {
+      "id": "te97",
+      "fromNode": "central",
+      "toNode": "t18",
+      "label": "7 | rule 53 | Review: Review: allocate endpoint pattern"
+    },
+    {
+      "id": "se98",
+      "fromNode": "s4",
+      "toNode": "central",
+      "label": "7 | rule 14 | Review: Review: State allocation/context evidence"
+    },
+    {
+      "id": "te99",
+      "fromNode": "central",
+      "toNode": "t10",
+      "label": "7 | rule 14 | Review: Review: State allocation/context evidence"
+    },
+    {
+      "id": "se100",
+      "fromNode": "s1",
+      "toNode": "central",
+      "label": "6 | rule 10 | Settled: Map: target Thing performs source Function"
+    },
+    {
+      "id": "te101",
+      "fromNode": "central",
+      "toNode": "t5",
+      "label": "6 | rule 10 | Settled: Map: target Thing performs source Function"
+    },
+    {
+      "id": "se102",
+      "fromNode": "s2",
+      "toNode": "central",
+      "label": "6 | rule 10 | Settled: Map: target Thing performs source Function"
+    },
+    {
+      "id": "te103",
+      "fromNode": "central",
+      "toNode": "t19",
+      "label": "6 | rule 10 | Settled: Map: target Thing performs source Function"
+    },
+    {
+      "id": "se104",
+      "fromNode": "s10",
+      "toNode": "central",
+      "label": "6 | rule 53 | Review: Review: allocate endpoint pattern"
+    },
+    {
+      "id": "te105",
+      "fromNode": "central",
+      "toNode": "t9",
+      "label": "6 | rule 53 | Review: Review: allocate endpoint pattern"
+    },
+    {
+      "id": "se106",
+      "fromNode": "s6",
+      "toNode": "central",
+      "label": "6 | rule 12 | Settled: Map: affects / affectedBy"
+    },
+    {
+      "id": "te107",
+      "fromNode": "central",
+      "toNode": "t20",
+      "label": "6 | rule 12 | Settled: Map: affects / affectedBy"
+    },
+    {
+      "id": "se108",
+      "fromNode": "s6",
+      "toNode": "central",
+      "label": "6 | rule 53 | Review: Review: allocate endpoint pattern"
+    },
+    {
+      "id": "te109",
+      "fromNode": "central",
+      "toNode": "t0",
+      "label": "6 | rule 53 | Review: Review: allocate endpoint pattern"
+    },
+    {
+      "id": "se110",
+      "fromNode": "s6",
+      "toNode": "central",
+      "label": "6 | rule 53 | Review: Review: allocate endpoint pattern"
+    },
+    {
+      "id": "te111",
+      "fromNode": "central",
+      "toNode": "t21",
+      "label": "6 | rule 53 | Review: Review: allocate endpoint pattern"
+    },
+    {
+      "id": "se112",
+      "fromNode": "s9",
+      "toNode": "central",
+      "label": "6 | rule 53 | Review: Review: allocate endpoint pattern"
+    },
+    {
+      "id": "te113",
+      "fromNode": "central",
+      "toNode": "t8",
+      "label": "6 | rule 53 | Review: Review: allocate endpoint pattern"
+    },
+    {
+      "id": "se114",
+      "fromNode": "s4",
+      "toNode": "central",
+      "label": "6 | rule 14 | Review: Review: State allocation/context evidence"
+    },
+    {
+      "id": "te115",
+      "fromNode": "central",
+      "toNode": "t2",
+      "label": "6 | rule 14 | Review: Review: State allocation/context evidence"
+    },
+    {
+      "id": "se116",
+      "fromNode": "s0",
+      "toNode": "central",
+      "label": "6 | rule 14 | Review: Review: State allocation/context evidence"
+    },
+    {
+      "id": "te117",
+      "fromNode": "central",
+      "toNode": "t22",
+      "label": "6 | rule 14 | Review: Review: State allocation/context evidence"
+    },
+    {
+      "id": "se118",
+      "fromNode": "s1",
+      "toNode": "central",
+      "label": "5 | rule 10 | Settled: Map: target Thing performs source Function"
+    },
+    {
+      "id": "te119",
+      "fromNode": "central",
+      "toNode": "t19",
+      "label": "5 | rule 10 | Settled: Map: target Thing performs source Function"
+    },
+    {
+      "id": "se120",
+      "fromNode": "s1",
+      "toNode": "central",
+      "label": "5 | rule 10 | Settled: Map: target Thing performs source Function"
+    },
+    {
+      "id": "te121",
+      "fromNode": "central",
+      "toNode": "t3",
+      "label": "5 | rule 10 | Settled: Map: target Thing performs source Function"
+    },
+    {
+      "id": "se122",
+      "fromNode": "s11",
+      "toNode": "central",
+      "label": "5 | rule 10 | Settled: Map: target Thing performs source Function"
+    },
+    {
+      "id": "te123",
+      "fromNode": "central",
+      "toNode": "t6",
+      "label": "5 | rule 10 | Settled: Map: target Thing performs source Function"
+    },
+    {
+      "id": "se124",
+      "fromNode": "s12",
+      "toNode": "central",
+      "label": "5 | rule 53 | Review: Review: allocate endpoint pattern"
+    },
+    {
+      "id": "te125",
+      "fromNode": "central",
+      "toNode": "t16",
+      "label": "5 | rule 53 | Review: Review: allocate endpoint pattern"
+    },
+    {
+      "id": "se126",
+      "fromNode": "s7",
+      "toNode": "central",
+      "label": "5 | rule 53 | Review: Review: allocate endpoint pattern"
+    },
+    {
+      "id": "te127",
+      "fromNode": "central",
+      "toNode": "t15",
+      "label": "5 | rule 53 | Review: Review: allocate endpoint pattern"
+    },
+    {
+      "id": "se128",
+      "fromNode": "s6",
+      "toNode": "central",
+      "label": "5 | rule 12 | Settled: Map: affects / affectedBy"
+    },
+    {
+      "id": "te129",
+      "fromNode": "central",
+      "toNode": "t23",
+      "label": "5 | rule 12 | Settled: Map: affects / affectedBy"
+    },
+    {
+      "id": "se130",
+      "fromNode": "s3",
+      "toNode": "central",
+      "label": "4 | rule 53 | Review: Review: allocate endpoint pattern"
+    },
+    {
+      "id": "te131",
+      "fromNode": "central",
+      "toNode": "t5",
+      "label": "4 | rule 53 | Review: Review: allocate endpoint pattern"
+    },
+    {
+      "id": "se132",
+      "fromNode": "s11",
+      "toNode": "central",
+      "label": "4 | rule 10 | Settled: Map: target Thing performs source Function"
+    },
+    {
+      "id": "te133",
+      "fromNode": "central",
+      "toNode": "t2",
+      "label": "4 | rule 10 | Settled: Map: target Thing performs source Function"
+    },
+    {
+      "id": "se134",
+      "fromNode": "s2",
+      "toNode": "central",
+      "label": "4 | rule 10 | Settled: Map: target Thing performs source Function"
+    },
+    {
+      "id": "te135",
+      "fromNode": "central",
+      "toNode": "t16",
+      "label": "4 | rule 10 | Settled: Map: target Thing performs source Function"
+    },
+    {
+      "id": "se136",
+      "fromNode": "s5",
+      "toNode": "central",
+      "label": "4 | rule 53 | Review: Review: allocate endpoint pattern"
+    },
+    {
+      "id": "te137",
+      "fromNode": "central",
+      "toNode": "t1",
+      "label": "4 | rule 53 | Review: Review: allocate endpoint pattern"
+    },
+    {
+      "id": "se138",
+      "fromNode": "s5",
+      "toNode": "central",
+      "label": "4 | rule 53 | Review: Review: allocate endpoint pattern"
+    },
+    {
+      "id": "te139",
+      "fromNode": "central",
+      "toNode": "t9",
+      "label": "4 | rule 53 | Review: Review: allocate endpoint pattern"
+    },
+    {
+      "id": "se140",
+      "fromNode": "s0",
+      "toNode": "central",
+      "label": "4 | rule 14 | Review: Review: State allocation/context evidence"
+    },
+    {
+      "id": "te141",
+      "fromNode": "central",
+      "toNode": "t24",
+      "label": "4 | rule 14 | Review: Review: State allocation/context evidence"
+    },
+    {
+      "id": "se142",
+      "fromNode": "s0",
+      "toNode": "central",
+      "label": "4 | rule 53 | Review: Review: allocate endpoint pattern"
+    },
+    {
+      "id": "te143",
+      "fromNode": "central",
+      "toNode": "t25",
+      "label": "4 | rule 53 | Review: Review: allocate endpoint pattern"
+    },
+    {
+      "id": "se144",
+      "fromNode": "s13",
+      "toNode": "central",
+      "label": "4 | rule 53 | Review: Review: allocate endpoint pattern"
+    },
+    {
+      "id": "te145",
+      "fromNode": "central",
+      "toNode": "t26",
+      "label": "4 | rule 53 | Review: Review: allocate endpoint pattern"
+    },
+    {
+      "id": "se146",
+      "fromNode": "s3",
+      "toNode": "central",
+      "label": "3 | rule 53 | Review: Review: allocate endpoint pattern"
+    },
+    {
+      "id": "te147",
+      "fromNode": "central",
+      "toNode": "t17",
+      "label": "3 | rule 53 | Review: Review: allocate endpoint pattern"
+    },
+    {
+      "id": "se148",
+      "fromNode": "s1",
+      "toNode": "central",
+      "label": "3 | rule 10 | Settled: Map: target Thing performs source Function"
+    },
+    {
+      "id": "te149",
+      "fromNode": "central",
+      "toNode": "t4",
+      "label": "3 | rule 10 | Settled: Map: target Thing performs source Function"
+    },
+    {
+      "id": "se150",
+      "fromNode": "s1",
+      "toNode": "central",
+      "label": "3 | rule 10 | Settled: Map: target Thing performs source Function"
+    },
+    {
+      "id": "te151",
+      "fromNode": "central",
+      "toNode": "t6",
+      "label": "3 | rule 10 | Settled: Map: target Thing performs source Function"
+    },
+    {
+      "id": "se152",
+      "fromNode": "s8",
+      "toNode": "central",
+      "label": "3 | rule 10 | Settled: Map: target Thing performs source Function"
+    },
+    {
+      "id": "te153",
+      "fromNode": "central",
+      "toNode": "t3",
+      "label": "3 | rule 10 | Settled: Map: target Thing performs source Function"
+    },
+    {
+      "id": "se154",
+      "fromNode": "s8",
+      "toNode": "central",
+      "label": "3 | rule 10 | Settled: Map: target Thing performs source Function"
+    },
+    {
+      "id": "te155",
+      "fromNode": "central",
+      "toNode": "t6",
+      "label": "3 | rule 10 | Settled: Map: target Thing performs source Function"
+    },
+    {
+      "id": "se156",
+      "fromNode": "s11",
+      "toNode": "central",
+      "label": "3 | rule 10 | Settled: Map: target Thing performs source Function"
+    },
+    {
+      "id": "te157",
+      "fromNode": "central",
+      "toNode": "t0",
+      "label": "3 | rule 10 | Settled: Map: target Thing performs source Function"
+    },
+    {
+      "id": "se158",
+      "fromNode": "s7",
+      "toNode": "central",
+      "label": "3 | rule 13 | Settled: Map: describes / describedBy"
+    },
+    {
+      "id": "te159",
+      "fromNode": "central",
+      "toNode": "t8",
+      "label": "3 | rule 13 | Settled: Map: describes / describedBy"
+    },
+    {
+      "id": "se160",
+      "fromNode": "s7",
+      "toNode": "central",
+      "label": "3 | rule 53 | Review: Review: allocate endpoint pattern"
+    },
+    {
+      "id": "te161",
+      "fromNode": "central",
+      "toNode": "t1",
+      "label": "3 | rule 53 | Review: Review: allocate endpoint pattern"
+    },
+    {
+      "id": "se162",
+      "fromNode": "s7",
+      "toNode": "central",
+      "label": "3 | rule 53 | Review: Review: allocate endpoint pattern"
+    },
+    {
+      "id": "te163",
+      "fromNode": "central",
+      "toNode": "t3",
+      "label": "3 | rule 53 | Review: Review: allocate endpoint pattern"
+    },
+    {
+      "id": "se164",
+      "fromNode": "s6",
+      "toNode": "central",
+      "label": "3 | rule 12 | Settled: Map: affects / affectedBy"
+    },
+    {
+      "id": "te165",
+      "fromNode": "central",
+      "toNode": "t27",
+      "label": "3 | rule 12 | Settled: Map: affects / affectedBy"
+    },
+    {
+      "id": "se166",
+      "fromNode": "s14",
+      "toNode": "central",
+      "label": "2 | rule 71 | Exception: Review — endpoint missing from t_object"
+    },
+    {
+      "id": "te167",
+      "fromNode": "central",
+      "toNode": "t28",
+      "label": "2 | rule 71 | Exception: Review — endpoint missing from t_object"
+    },
+    {
+      "id": "se168",
+      "fromNode": "s15",
+      "toNode": "central",
+      "label": "2 | rule 53 | Review: Review: allocate endpoint pattern"
+    },
+    {
+      "id": "te169",
+      "fromNode": "central",
+      "toNode": "t29",
+      "label": "2 | rule 53 | Review: Review: allocate endpoint pattern"
+    },
+    {
+      "id": "se170",
+      "fromNode": "s3",
+      "toNode": "central",
+      "label": "2 | rule 53 | Review: Review: allocate endpoint pattern"
+    },
+    {
+      "id": "te171",
+      "fromNode": "central",
+      "toNode": "t19",
+      "label": "2 | rule 53 | Review: Review: allocate endpoint pattern"
+    },
+    {
+      "id": "se172",
+      "fromNode": "s3",
+      "toNode": "central",
+      "label": "2 | rule 53 | Review: Review: allocate endpoint pattern"
+    },
+    {
+      "id": "te173",
+      "fromNode": "central",
+      "toNode": "t16",
+      "label": "2 | rule 53 | Review: Review: allocate endpoint pattern"
+    },
+    {
+      "id": "se174",
+      "fromNode": "s3",
+      "toNode": "central",
+      "label": "2 | rule 53 | Review: Review: allocate endpoint pattern"
+    },
+    {
+      "id": "te175",
+      "fromNode": "central",
+      "toNode": "t14",
+      "label": "2 | rule 53 | Review: Review: allocate endpoint pattern"
+    },
+    {
+      "id": "se176",
+      "fromNode": "s3",
+      "toNode": "central",
+      "label": "2 | rule 53 | Review: Review: allocate endpoint pattern"
+    },
+    {
+      "id": "te177",
+      "fromNode": "central",
+      "toNode": "t18",
+      "label": "2 | rule 53 | Review: Review: allocate endpoint pattern"
+    },
+    {
+      "id": "se178",
+      "fromNode": "s1",
+      "toNode": "central",
+      "label": "2 | rule 10 | Settled: Map: target Thing performs source Function"
+    },
+    {
+      "id": "te179",
+      "fromNode": "central",
+      "toNode": "t22",
+      "label": "2 | rule 10 | Settled: Map: target Thing performs source Function"
+    },
+    {
+      "id": "se180",
+      "fromNode": "s8",
+      "toNode": "central",
+      "label": "2 | rule 10 | Settled: Map: target Thing performs source Function"
+    },
+    {
+      "id": "te181",
+      "fromNode": "central",
+      "toNode": "t4",
+      "label": "2 | rule 10 | Settled: Map: target Thing performs source Function"
+    },
+    {
+      "id": "se182",
+      "fromNode": "s8",
+      "toNode": "central",
+      "label": "2 | rule 10 | Settled: Map: target Thing performs source Function"
+    },
+    {
+      "id": "te183",
+      "fromNode": "central",
+      "toNode": "t19",
+      "label": "2 | rule 10 | Settled: Map: target Thing performs source Function"
+    },
+    {
+      "id": "se184",
+      "fromNode": "s8",
+      "toNode": "central",
+      "label": "2 | rule 10 | Settled: Map: target Thing performs source Function"
+    },
+    {
+      "id": "te185",
+      "fromNode": "central",
+      "toNode": "t1",
+      "label": "2 | rule 10 | Settled: Map: target Thing performs source Function"
+    },
+    {
+      "id": "se186",
+      "fromNode": "s2",
+      "toNode": "central",
+      "label": "2 | rule 10 | Settled: Map: target Thing performs source Function"
+    },
+    {
+      "id": "te187",
+      "fromNode": "central",
+      "toNode": "t30",
+      "label": "2 | rule 10 | Settled: Map: target Thing performs source Function"
+    },
+    {
+      "id": "se188",
+      "fromNode": "s2",
+      "toNode": "central",
+      "label": "2 | rule 53 | Review: Review: allocate endpoint pattern"
+    },
+    {
+      "id": "te189",
+      "fromNode": "central",
+      "toNode": "t17",
+      "label": "2 | rule 53 | Review: Review: allocate endpoint pattern"
+    },
+    {
+      "id": "se190",
+      "fromNode": "s2",
+      "toNode": "central",
+      "label": "2 | rule 53 | Review: Review: allocate endpoint pattern"
+    },
+    {
+      "id": "te191",
+      "fromNode": "central",
+      "toNode": "t18",
+      "label": "2 | rule 53 | Review: Review: allocate endpoint pattern"
+    },
+    {
+      "id": "se192",
+      "fromNode": "s5",
+      "toNode": "central",
+      "label": "2 | rule 53 | Review: Review: allocate endpoint pattern"
+    },
+    {
+      "id": "te193",
+      "fromNode": "central",
+      "toNode": "t5",
+      "label": "2 | rule 53 | Review: Review: allocate endpoint pattern"
+    },
+    {
+      "id": "se194",
+      "fromNode": "s10",
+      "toNode": "central",
+      "label": "2 | rule 53 | Review: Review: allocate endpoint pattern"
+    },
+    {
+      "id": "te195",
+      "fromNode": "central",
+      "toNode": "t0",
+      "label": "2 | rule 53 | Review: Review: allocate endpoint pattern"
+    },
+    {
+      "id": "se196",
+      "fromNode": "s7",
+      "toNode": "central",
+      "label": "2 | rule 53 | Review: Review: allocate endpoint pattern"
+    },
+    {
+      "id": "te197",
+      "fromNode": "central",
+      "toNode": "t13",
+      "label": "2 | rule 53 | Review: Review: allocate endpoint pattern"
+    },
+    {
+      "id": "se198",
+      "fromNode": "s7",
+      "toNode": "central",
+      "label": "2 | rule 53 | Review: Review: allocate endpoint pattern"
+    },
+    {
+      "id": "te199",
+      "fromNode": "central",
+      "toNode": "t10",
+      "label": "2 | rule 53 | Review: Review: allocate endpoint pattern"
+    },
+    {
+      "id": "se200",
+      "fromNode": "s7",
+      "toNode": "central",
+      "label": "2 | rule 53 | Review: Review: allocate endpoint pattern"
+    },
+    {
+      "id": "te201",
+      "fromNode": "central",
+      "toNode": "t7",
+      "label": "2 | rule 53 | Review: Review: allocate endpoint pattern"
+    },
+    {
+      "id": "se202",
+      "fromNode": "s6",
+      "toNode": "central",
+      "label": "2 | rule 53 | Review: Review: allocate endpoint pattern"
+    },
+    {
+      "id": "te203",
+      "fromNode": "central",
+      "toNode": "t31",
+      "label": "2 | rule 53 | Review: Review: allocate endpoint pattern"
+    },
+    {
+      "id": "se204",
+      "fromNode": "s6",
+      "toNode": "central",
+      "label": "2 | rule 53 | Review: Review: allocate endpoint pattern"
+    },
+    {
+      "id": "te205",
+      "fromNode": "central",
+      "toNode": "t1",
+      "label": "2 | rule 53 | Review: Review: allocate endpoint pattern"
+    },
+    {
+      "id": "se206",
+      "fromNode": "s6",
+      "toNode": "central",
+      "label": "2 | rule 53 | Review: Review: allocate endpoint pattern"
+    },
+    {
+      "id": "te207",
+      "fromNode": "central",
+      "toNode": "t5",
+      "label": "2 | rule 53 | Review: Review: allocate endpoint pattern"
+    },
+    {
+      "id": "se208",
+      "fromNode": "s6",
+      "toNode": "central",
+      "label": "2 | rule 53 | Review: Review: allocate endpoint pattern"
+    },
+    {
+      "id": "te209",
+      "fromNode": "central",
+      "toNode": "t7",
+      "label": "2 | rule 53 | Review: Review: allocate endpoint pattern"
+    },
+    {
+      "id": "se210",
+      "fromNode": "s16",
+      "toNode": "central",
+      "label": "2 | rule 53 | Review: Review: allocate endpoint pattern"
+    },
+    {
+      "id": "te211",
+      "fromNode": "central",
+      "toNode": "t7",
+      "label": "2 | rule 53 | Review: Review: allocate endpoint pattern"
+    },
+    {
+      "id": "se212",
+      "fromNode": "s9",
+      "toNode": "central",
+      "label": "2 | rule 53 | Review: Review: allocate endpoint pattern"
+    },
+    {
+      "id": "te213",
+      "fromNode": "central",
+      "toNode": "t32",
+      "label": "2 | rule 53 | Review: Review: allocate endpoint pattern"
+    },
+    {
+      "id": "se214",
+      "fromNode": "s9",
+      "toNode": "central",
+      "label": "2 | rule 53 | Review: Review: allocate endpoint pattern"
+    },
+    {
+      "id": "te215",
+      "fromNode": "central",
+      "toNode": "t0",
+      "label": "2 | rule 53 | Review: Review: allocate endpoint pattern"
+    },
+    {
+      "id": "se216",
+      "fromNode": "s4",
+      "toNode": "central",
+      "label": "2 | rule 53 | Review: Review: allocate endpoint pattern"
+    },
+    {
+      "id": "te217",
+      "fromNode": "central",
+      "toNode": "t15",
+      "label": "2 | rule 53 | Review: Review: allocate endpoint pattern"
+    },
+    {
+      "id": "se218",
+      "fromNode": "s0",
+      "toNode": "central",
+      "label": "2 | rule 14 | Review: Review: State allocation/context evidence"
+    },
+    {
+      "id": "te219",
+      "fromNode": "central",
+      "toNode": "t2",
+      "label": "2 | rule 14 | Review: Review: State allocation/context evidence"
+    },
+    {
+      "id": "se220",
+      "fromNode": "s15",
+      "toNode": "central",
+      "label": "1 | rule 53 | Review: Review: allocate endpoint pattern"
+    },
+    {
+      "id": "te221",
+      "fromNode": "central",
+      "toNode": "t26",
+      "label": "1 | rule 53 | Review: Review: allocate endpoint pattern"
+    },
+    {
+      "id": "se222",
+      "fromNode": "s3",
+      "toNode": "central",
+      "label": "1 | rule 53 | Review: Review: allocate endpoint pattern"
+    },
+    {
+      "id": "te223",
+      "fromNode": "central",
+      "toNode": "t8",
+      "label": "1 | rule 53 | Review: Review: allocate endpoint pattern"
+    },
+    {
+      "id": "se224",
+      "fromNode": "s3",
+      "toNode": "central",
+      "label": "1 | rule 53 | Review: Review: allocate endpoint pattern"
+    },
+    {
+      "id": "te225",
+      "fromNode": "central",
+      "toNode": "t11",
+      "label": "1 | rule 53 | Review: Review: allocate endpoint pattern"
+    },
+    {
+      "id": "se226",
+      "fromNode": "s3",
+      "toNode": "central",
+      "label": "1 | rule 53 | Review: Review: allocate endpoint pattern"
+    },
+    {
+      "id": "te227",
+      "fromNode": "central",
+      "toNode": "t25",
+      "label": "1 | rule 53 | Review: Review: allocate endpoint pattern"
+    },
+    {
+      "id": "se228",
+      "fromNode": "s3",
+      "toNode": "central",
+      "label": "1 | rule 53 | Review: Review: allocate endpoint pattern"
+    },
+    {
+      "id": "te229",
+      "fromNode": "central",
+      "toNode": "t21",
+      "label": "1 | rule 53 | Review: Review: allocate endpoint pattern"
+    },
+    {
+      "id": "se230",
+      "fromNode": "s1",
+      "toNode": "central",
+      "label": "1 | rule 10 | Settled: Map: target Thing performs source Function"
+    },
+    {
+      "id": "te231",
+      "fromNode": "central",
+      "toNode": "t9",
+      "label": "1 | rule 10 | Settled: Map: target Thing performs source Function"
+    },
+    {
+      "id": "se232",
+      "fromNode": "s11",
+      "toNode": "central",
+      "label": "1 | rule 10 | Settled: Map: target Thing performs source Function"
+    },
+    {
+      "id": "te233",
+      "fromNode": "central",
+      "toNode": "t1",
+      "label": "1 | rule 10 | Settled: Map: target Thing performs source Function"
+    },
+    {
+      "id": "se234",
+      "fromNode": "s11",
+      "toNode": "central",
+      "label": "1 | rule 10 | Settled: Map: target Thing performs source Function"
+    },
+    {
+      "id": "te235",
+      "fromNode": "central",
+      "toNode": "t3",
+      "label": "1 | rule 10 | Settled: Map: target Thing performs source Function"
+    },
+    {
+      "id": "se236",
+      "fromNode": "s11",
+      "toNode": "central",
+      "label": "1 | rule 10 | Settled: Map: target Thing performs source Function"
+    },
+    {
+      "id": "te237",
+      "fromNode": "central",
+      "toNode": "t16",
+      "label": "1 | rule 10 | Settled: Map: target Thing performs source Function"
+    },
+    {
+      "id": "se238",
+      "fromNode": "s2",
+      "toNode": "central",
+      "label": "1 | rule 53 | Review: Review: allocate endpoint pattern"
+    },
+    {
+      "id": "te239",
+      "fromNode": "central",
+      "toNode": "t8",
+      "label": "1 | rule 53 | Review: Review: allocate endpoint pattern"
+    },
+    {
+      "id": "se240",
+      "fromNode": "s2",
+      "toNode": "central",
+      "label": "1 | rule 53 | Review: Review: allocate endpoint pattern"
+    },
+    {
+      "id": "te241",
+      "fromNode": "central",
+      "toNode": "t11",
+      "label": "1 | rule 53 | Review: Review: allocate endpoint pattern"
+    },
+    {
+      "id": "se242",
+      "fromNode": "s2",
+      "toNode": "central",
+      "label": "1 | rule 10 | Settled: Map: target Thing performs source Function"
+    },
+    {
+      "id": "te243",
+      "fromNode": "central",
+      "toNode": "t32",
+      "label": "1 | rule 10 | Settled: Map: target Thing performs source Function"
+    },
+    {
+      "id": "se244",
+      "fromNode": "s2",
+      "toNode": "central",
+      "label": "1 | rule 10 | Settled: Map: target Thing performs source Function"
+    },
+    {
+      "id": "te245",
+      "fromNode": "central",
+      "toNode": "t22",
+      "label": "1 | rule 10 | Settled: Map: target Thing performs source Function"
+    },
+    {
+      "id": "se246",
+      "fromNode": "s2",
+      "toNode": "central",
+      "label": "1 | rule 10 | Settled: Map: target Thing performs source Function"
+    },
+    {
+      "id": "te247",
+      "fromNode": "central",
+      "toNode": "t9",
+      "label": "1 | rule 10 | Settled: Map: target Thing performs source Function"
+    },
+    {
+      "id": "se248",
+      "fromNode": "s5",
+      "toNode": "central",
+      "label": "1 | rule 53 | Review: Review: allocate endpoint pattern"
+    },
+    {
+      "id": "te249",
+      "fromNode": "central",
+      "toNode": "t8",
+      "label": "1 | rule 53 | Review: Review: allocate endpoint pattern"
+    },
+    {
+      "id": "se250",
+      "fromNode": "s5",
+      "toNode": "central",
+      "label": "1 | rule 53 | Review: Review: allocate endpoint pattern"
+    },
+    {
+      "id": "te251",
+      "fromNode": "central",
+      "toNode": "t31",
+      "label": "1 | rule 53 | Review: Review: allocate endpoint pattern"
+    },
+    {
+      "id": "se252",
+      "fromNode": "s5",
+      "toNode": "central",
+      "label": "1 | rule 53 | Review: Review: allocate endpoint pattern"
+    },
+    {
+      "id": "te253",
+      "fromNode": "central",
+      "toNode": "t3",
+      "label": "1 | rule 53 | Review: Review: allocate endpoint pattern"
+    },
+    {
+      "id": "se254",
+      "fromNode": "s5",
+      "toNode": "central",
+      "label": "1 | rule 53 | Review: Review: allocate endpoint pattern"
+    },
+    {
+      "id": "te255",
+      "fromNode": "central",
+      "toNode": "t17",
+      "label": "1 | rule 53 | Review: Review: allocate endpoint pattern"
+    },
+    {
+      "id": "se256",
+      "fromNode": "s17",
+      "toNode": "central",
+      "label": "1 | rule 53 | Review: Review: allocate endpoint pattern"
+    },
+    {
+      "id": "te257",
+      "fromNode": "central",
+      "toNode": "t8",
+      "label": "1 | rule 53 | Review: Review: allocate endpoint pattern"
+    },
+    {
+      "id": "se258",
+      "fromNode": "s17",
+      "toNode": "central",
+      "label": "1 | rule 53 | Review: Review: allocate endpoint pattern"
+    },
+    {
+      "id": "te259",
+      "fromNode": "central",
+      "toNode": "t18",
+      "label": "1 | rule 53 | Review: Review: allocate endpoint pattern"
+    },
+    {
+      "id": "se260",
+      "fromNode": "s18",
+      "toNode": "central",
+      "label": "1 | rule 53 | Review: Review: allocate endpoint pattern"
+    },
+    {
+      "id": "te261",
+      "fromNode": "central",
+      "toNode": "t5",
+      "label": "1 | rule 53 | Review: Review: allocate endpoint pattern"
+    },
+    {
+      "id": "se262",
+      "fromNode": "s18",
+      "toNode": "central",
+      "label": "1 | rule 53 | Review: Review: allocate endpoint pattern"
+    },
+    {
+      "id": "te263",
+      "fromNode": "central",
+      "toNode": "t15",
+      "label": "1 | rule 53 | Review: Review: allocate endpoint pattern"
+    },
+    {
+      "id": "se264",
+      "fromNode": "s7",
+      "toNode": "central",
+      "label": "1 | rule 13 | Settled: Map: describes / describedBy"
+    },
+    {
+      "id": "te265",
+      "fromNode": "central",
+      "toNode": "t27",
+      "label": "1 | rule 13 | Settled: Map: describes / describedBy"
+    },
+    {
+      "id": "se266",
+      "fromNode": "s7",
+      "toNode": "central",
+      "label": "1 | rule 53 | Review: Review: allocate endpoint pattern"
+    },
+    {
+      "id": "te267",
+      "fromNode": "central",
+      "toNode": "t31",
+      "label": "1 | rule 53 | Review: Review: allocate endpoint pattern"
+    },
+    {
+      "id": "se268",
+      "fromNode": "s7",
+      "toNode": "central",
+      "label": "1 | rule 53 | Review: Review: allocate endpoint pattern"
+    },
+    {
+      "id": "te269",
+      "fromNode": "central",
+      "toNode": "t0",
+      "label": "1 | rule 53 | Review: Review: allocate endpoint pattern"
+    },
+    {
+      "id": "se270",
+      "fromNode": "s7",
+      "toNode": "central",
+      "label": "1 | rule 53 | Review: Review: allocate endpoint pattern"
+    },
+    {
+      "id": "te271",
+      "fromNode": "central",
+      "toNode": "t18",
+      "label": "1 | rule 53 | Review: Review: allocate endpoint pattern"
+    },
+    {
+      "id": "se272",
+      "fromNode": "s6",
+      "toNode": "central",
+      "label": "1 | rule 12 | Settled: Map: affects / affectedBy"
+    },
+    {
+      "id": "te273",
+      "fromNode": "central",
+      "toNode": "t33",
+      "label": "1 | rule 12 | Settled: Map: affects / affectedBy"
+    },
+    {
+      "id": "se274",
+      "fromNode": "s6",
+      "toNode": "central",
+      "label": "1 | rule 53 | Review: Review: allocate endpoint pattern"
+    },
+    {
+      "id": "te275",
+      "fromNode": "central",
+      "toNode": "t3",
+      "label": "1 | rule 53 | Review: Review: allocate endpoint pattern"
+    },
+    {
+      "id": "se276",
+      "fromNode": "s6",
+      "toNode": "central",
+      "label": "1 | rule 53 | Review: Review: allocate endpoint pattern"
+    },
+    {
+      "id": "te277",
+      "fromNode": "central",
+      "toNode": "t34",
+      "label": "1 | rule 53 | Review: Review: allocate endpoint pattern"
+    },
+    {
+      "id": "se278",
+      "fromNode": "s19",
+      "toNode": "central",
+      "label": "1 | rule 53 | Review: Review: allocate endpoint pattern"
+    },
+    {
+      "id": "te279",
+      "fromNode": "central",
+      "toNode": "t1",
+      "label": "1 | rule 53 | Review: Review: allocate endpoint pattern"
+    },
+    {
+      "id": "se280",
+      "fromNode": "s19",
+      "toNode": "central",
+      "label": "1 | rule 53 | Review: Review: allocate endpoint pattern"
+    },
+    {
+      "id": "te281",
+      "fromNode": "central",
+      "toNode": "t9",
+      "label": "1 | rule 53 | Review: Review: allocate endpoint pattern"
+    },
+    {
+      "id": "se282",
+      "fromNode": "s20",
+      "toNode": "central",
+      "label": "1 | rule 53 | Review: Review: allocate endpoint pattern"
+    },
+    {
+      "id": "te283",
+      "fromNode": "central",
+      "toNode": "t9",
+      "label": "1 | rule 53 | Review: Review: allocate endpoint pattern"
+    },
+    {
+      "id": "se284",
+      "fromNode": "s21",
+      "toNode": "central",
+      "label": "1 | rule 53 | Review: Review: allocate endpoint pattern"
+    },
+    {
+      "id": "te285",
+      "fromNode": "central",
+      "toNode": "t12",
+      "label": "1 | rule 53 | Review: Review: allocate endpoint pattern"
+    },
+    {
+      "id": "se286",
+      "fromNode": "s9",
+      "toNode": "central",
+      "label": "1 | rule 53 | Review: Review: allocate endpoint pattern"
+    },
+    {
+      "id": "te287",
+      "fromNode": "central",
+      "toNode": "t3",
+      "label": "1 | rule 53 | Review: Review: allocate endpoint pattern"
+    },
+    {
+      "id": "se288",
+      "fromNode": "s9",
+      "toNode": "central",
+      "label": "1 | rule 53 | Review: Review: allocate endpoint pattern"
+    },
+    {
+      "id": "te289",
+      "fromNode": "central",
+      "toNode": "t9",
+      "label": "1 | rule 53 | Review: Review: allocate endpoint pattern"
+    },
+    {
+      "id": "se290",
+      "fromNode": "s9",
+      "toNode": "central",
+      "label": "1 | rule 53 | Review: Review: allocate endpoint pattern"
+    },
+    {
+      "id": "te291",
+      "fromNode": "central",
+      "toNode": "t15",
+      "label": "1 | rule 53 | Review: Review: allocate endpoint pattern"
+    },
+    {
+      "id": "se292",
+      "fromNode": "s9",
+      "toNode": "central",
+      "label": "1 | rule 53 | Review: Review: allocate endpoint pattern"
+    },
+    {
+      "id": "te293",
+      "fromNode": "central",
+      "toNode": "t12",
+      "label": "1 | rule 53 | Review: Review: allocate endpoint pattern"
+    },
+    {
+      "id": "se294",
+      "fromNode": "s4",
+      "toNode": "central",
+      "label": "1 | rule 14 | Review: Review: State allocation/context evidence"
+    },
+    {
+      "id": "te295",
+      "fromNode": "central",
+      "toNode": "t9",
+      "label": "1 | rule 14 | Review: Review: State allocation/context evidence"
+    },
+    {
+      "id": "se296",
+      "fromNode": "s0",
+      "toNode": "central",
+      "label": "1 | rule 53 | Review: Review: allocate endpoint pattern"
+    },
+    {
+      "id": "te297",
+      "fromNode": "central",
+      "toNode": "t11",
+      "label": "1 | rule 53 | Review: Review: allocate endpoint pattern"
+    },
+    {
+      "id": "se298",
+      "fromNode": "s0",
+      "toNode": "central",
+      "label": "1 | rule 14 | Review: Review: State allocation/context evidence"
+    },
+    {
+      "id": "te299",
+      "fromNode": "central",
+      "toNode": "t35",
+      "label": "1 | rule 14 | Review: Review: State allocation/context evidence"
+    },
+    {
+      "id": "se300",
+      "fromNode": "s0",
+      "toNode": "central",
+      "label": "1 | rule 53 | Review: Review: allocate endpoint pattern"
+    },
+    {
+      "id": "te301",
+      "fromNode": "central",
+      "toNode": "t21",
+      "label": "1 | rule 53 | Review: Review: allocate endpoint pattern"
+    },
+    {
+      "id": "se302",
+      "fromNode": "s13",
+      "toNode": "central",
+      "label": "1 | rule 53 | Review: Review: allocate endpoint pattern"
+    },
+    {
+      "id": "te303",
+      "fromNode": "central",
+      "toNode": "t34",
+      "label": "1 | rule 53 | Review: Review: allocate endpoint pattern"
+    },
+    {
+      "id": "se304",
+      "fromNode": "s13",
+      "toNode": "central",
+      "label": "1 | rule 53 | Review: Review: allocate endpoint pattern"
+    },
+    {
+      "id": "te305",
+      "fromNode": "central",
+      "toNode": "t9",
+      "label": "1 | rule 53 | Review: Review: allocate endpoint pattern"
+    },
+    {
+      "id": "se306",
+      "fromNode": "s22",
+      "toNode": "central",
+      "label": "1 | rule 53 | Review: Review: allocate endpoint pattern"
+    },
+    {
+      "id": "te307",
+      "fromNode": "central",
+      "toNode": "t18",
+      "label": "1 | rule 53 | Review: Review: allocate endpoint pattern"
+    },
+    {
+      "id": "se308",
+      "fromNode": "s23",
+      "toNode": "central",
+      "label": "1 | rule 53 | Review: Review: allocate endpoint pattern"
+    },
+    {
+      "id": "te309",
+      "fromNode": "central",
+      "toNode": "t11",
+      "label": "1 | rule 53 | Review: Review: allocate endpoint pattern"
+    },
+    {
+      "id": "se310",
+      "fromNode": "s23",
+      "toNode": "central",
+      "label": "1 | rule 53 | Review: Review: allocate endpoint pattern"
+    },
+    {
+      "id": "te311",
+      "fromNode": "central",
+      "toNode": "t5",
+      "label": "1 | rule 53 | Review: Review: allocate endpoint pattern"
+    }
+  ]
+}

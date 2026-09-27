@@ -1,4 +1,257 @@
 {
-  "nodes": [],
+  "nodes": [
+    {
+      "id": "e0",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/01_EA Elements/MISSING Endpoint/README_MISSING Endpoint.md",
+      "x": 0,
+      "y": 0,
+      "width": 360,
+      "height": 190
+    },
+    {
+      "id": "e1",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/01_EA Elements/Action/README_Action.md",
+      "x": 430,
+      "y": 0,
+      "width": 360,
+      "height": 190
+    },
+    {
+      "id": "e2",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/01_EA Elements/Activity/README_Activity.md",
+      "x": 860,
+      "y": 0,
+      "width": 360,
+      "height": 190
+    },
+    {
+      "id": "e3",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/01_EA Elements/Actor/README_Actor.md",
+      "x": 1290,
+      "y": 0,
+      "width": 360,
+      "height": 190
+    },
+    {
+      "id": "e4",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/01_EA Elements/Artifact/README_Artifact.md",
+      "x": 1720,
+      "y": 0,
+      "width": 360,
+      "height": 190
+    },
+    {
+      "id": "e5",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/01_EA Elements/Boundary/README_Boundary.md",
+      "x": 0,
+      "y": 260,
+      "width": 360,
+      "height": 190
+    },
+    {
+      "id": "e6",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/01_EA Elements/Change/README_Change.md",
+      "x": 430,
+      "y": 260,
+      "width": 360,
+      "height": 190
+    },
+    {
+      "id": "e7",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/01_EA Elements/Class/README_Class.md",
+      "x": 860,
+      "y": 260,
+      "width": 360,
+      "height": 190
+    },
+    {
+      "id": "e8",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/01_EA Elements/Constraint/README_Constraint.md",
+      "x": 1290,
+      "y": 260,
+      "width": 360,
+      "height": 190
+    },
+    {
+      "id": "e9",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/01_EA Elements/Decision/README_Decision.md",
+      "x": 1720,
+      "y": 260,
+      "width": 360,
+      "height": 190
+    },
+    {
+      "id": "e10",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/01_EA Elements/Event/README_Event.md",
+      "x": 0,
+      "y": 520,
+      "width": 360,
+      "height": 190
+    },
+    {
+      "id": "e11",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/01_EA Elements/InformationItem/README_InformationItem.md",
+      "x": 430,
+      "y": 520,
+      "width": 360,
+      "height": 190
+    },
+    {
+      "id": "e12",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/01_EA Elements/Issue/README_Issue.md",
+      "x": 860,
+      "y": 520,
+      "width": 360,
+      "height": 190
+    },
+    {
+      "id": "e13",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/01_EA Elements/Note/README_Note.md",
+      "x": 1290,
+      "y": 520,
+      "width": 360,
+      "height": 190
+    },
+    {
+      "id": "e14",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/01_EA Elements/Object/README_Object.md",
+      "x": 1720,
+      "y": 520,
+      "width": 360,
+      "height": 190
+    },
+    {
+      "id": "e15",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/01_EA Elements/Package/README_Package.md",
+      "x": 0,
+      "y": 780,
+      "width": 360,
+      "height": 190
+    },
+    {
+      "id": "e16",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/01_EA Elements/Part/README_Part.md",
+      "x": 430,
+      "y": 780,
+      "width": 360,
+      "height": 190
+    },
+    {
+      "id": "e17",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/01_EA Elements/Port/README_Port.md",
+      "x": 860,
+      "y": 780,
+      "width": 360,
+      "height": 190
+    },
+    {
+      "id": "e18",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/01_EA Elements/ProxyConnector/README_ProxyConnector.md",
+      "x": 1290,
+      "y": 780,
+      "width": 360,
+      "height": 190
+    },
+    {
+      "id": "e19",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/01_EA Elements/Requirement/README_Requirement.md",
+      "x": 1720,
+      "y": 780,
+      "width": 360,
+      "height": 190
+    },
+    {
+      "id": "e20",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/01_EA Elements/Sequence/README_Sequence.md",
+      "x": 0,
+      "y": 1040,
+      "width": 360,
+      "height": 190
+    },
+    {
+      "id": "e21",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/01_EA Elements/Signal/README_Signal.md",
+      "x": 430,
+      "y": 1040,
+      "width": 360,
+      "height": 190
+    },
+    {
+      "id": "e22",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/01_EA Elements/State/README_State.md",
+      "x": 860,
+      "y": 1040,
+      "width": 360,
+      "height": 190
+    },
+    {
+      "id": "e23",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/01_EA Elements/StateNode/README_StateNode.md",
+      "x": 1290,
+      "y": 1040,
+      "width": 360,
+      "height": 190
+    },
+    {
+      "id": "e24",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/01_EA Elements/Synchronization/README_Synchronization.md",
+      "x": 1720,
+      "y": 1040,
+      "width": 360,
+      "height": 190
+    },
+    {
+      "id": "e25",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/01_EA Elements/Text/README_Text.md",
+      "x": 0,
+      "y": 1300,
+      "width": 360,
+      "height": 190
+    },
+    {
+      "id": "e26",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/01_EA Elements/Trigger/README_Trigger.md",
+      "x": 430,
+      "y": 1300,
+      "width": 360,
+      "height": 190
+    },
+    {
+      "id": "e27",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/01_EA Elements/UseCase/README_UseCase.md",
+      "x": 860,
+      "y": 1300,
+      "width": 360,
+      "height": 190
+    }
+  ],
   "edges": []
 }

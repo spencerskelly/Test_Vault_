@@ -1,0 +1,45 @@
+{
+  "nodes": [
+    {
+      "id": "central",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/02_EA Relationships/Allocate package precedence/README_Allocate package precedence.md",
+      "x": 0,
+      "y": 0,
+      "width": 430,
+      "height": 260
+    },
+    {
+      "id": "v0",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/02_EA Relationships/Allocate package precedence/EA Relationship Stereotype - 04 Product Function.md",
+      "x": 30,
+      "y": -380,
+      "width": 250,
+      "height": 130
+    },
+    {
+      "id": "v1",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/02_EA Relationships/Allocate package precedence/EA Relationship Stereotype - 05 Product Design.md",
+      "x": 310,
+      "y": -380,
+      "width": 250,
+      "height": 130
+    }
+  ],
+  "edges": [
+    {
+      "id": "ve0",
+      "fromNode": "central",
+      "toNode": "v0",
+      "label": "04 Product Function"
+    },
+    {
+      "id": "ve1",
+      "fromNode": "central",
+      "toNode": "v1",
+      "label": "05 Product Design"
+    }
+  ]
+}

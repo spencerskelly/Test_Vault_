@@ -1,0 +1,411 @@
+{
+  "nodes": [
+    {
+      "id": "central",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/02_EA Relationships/Connector/README_Connector.md",
+      "x": 0,
+      "y": 0,
+      "width": 430,
+      "height": 260
+    },
+    {
+      "id": "s0",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/01_EA Elements/Port/EA Element - No Stereotype.md",
+      "x": -950,
+      "y": -700,
+      "width": 350,
+      "height": 150
+    },
+    {
+      "id": "t0",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/01_EA Elements/Port/EA Element - No Stereotype.md",
+      "x": 950,
+      "y": -700,
+      "width": 350,
+      "height": 150
+    },
+    {
+      "id": "s1",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/01_EA Elements/Part/EA Element - No Stereotype.md",
+      "x": -950,
+      "y": -520,
+      "width": 350,
+      "height": 150
+    },
+    {
+      "id": "t1",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/01_EA Elements/Part/EA Element - No Stereotype.md",
+      "x": 950,
+      "y": -520,
+      "width": 350,
+      "height": 150
+    },
+    {
+      "id": "t2",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/01_EA Elements/Port/EA Stereotype - ProxyPort.md",
+      "x": 950,
+      "y": -340,
+      "width": 350,
+      "height": 150
+    },
+    {
+      "id": "s2",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/01_EA Elements/Port/EA Stereotype - ProxyPort.md",
+      "x": -950,
+      "y": -340,
+      "width": 350,
+      "height": 150
+    },
+    {
+      "id": "s3",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/01_EA Elements/Object/README_Object.md",
+      "x": -950,
+      "y": -160,
+      "width": 350,
+      "height": 150
+    },
+    {
+      "id": "t3",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/01_EA Elements/Object/README_Object.md",
+      "x": 950,
+      "y": -160,
+      "width": 350,
+      "height": 150
+    },
+    {
+      "id": "t4",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/01_EA Elements/Port/EA Stereotype - FullPort.md",
+      "x": 950,
+      "y": 20,
+      "width": 350,
+      "height": 150
+    },
+    {
+      "id": "t5",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/01_EA Elements/Class/EA Stereotype - Module.md",
+      "x": 950,
+      "y": 200,
+      "width": 350,
+      "height": 150
+    },
+    {
+      "id": "t6",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/01_EA Elements/InformationItem/README_InformationItem.md",
+      "x": 950,
+      "y": 380,
+      "width": 350,
+      "height": 150
+    },
+    {
+      "id": "s4",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/01_EA Elements/Port/EA Stereotype - FullPort.md",
+      "x": -950,
+      "y": 20,
+      "width": 350,
+      "height": 150
+    },
+    {
+      "id": "s5",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/01_EA Elements/MISSING Endpoint/README_MISSING Endpoint.md",
+      "x": -950,
+      "y": 200,
+      "width": 350,
+      "height": 150
+    },
+    {
+      "id": "t7",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/01_EA Elements/MISSING Endpoint/README_MISSING Endpoint.md",
+      "x": 950,
+      "y": 560,
+      "width": 350,
+      "height": 150
+    },
+    {
+      "id": "v0",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/02_EA Relationships/Connector/EA Relationship - No Stereotype.md",
+      "x": 30,
+      "y": -380,
+      "width": 250,
+      "height": 130
+    },
+    {
+      "id": "v1",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/02_EA Relationships/Connector/EA Relationship Stereotype - BindingConnector.md",
+      "x": 310,
+      "y": -380,
+      "width": 250,
+      "height": 130
+    }
+  ],
+  "edges": [
+    {
+      "id": "se0",
+      "fromNode": "s0",
+      "toNode": "central",
+      "label": "406 | rule 41 | Settled: Map: interfaces / interfaces"
+    },
+    {
+      "id": "te1",
+      "fromNode": "central",
+      "toNode": "t0",
+      "label": "406 | rule 41 | Settled: Map: interfaces / interfaces"
+    },
+    {
+      "id": "se2",
+      "fromNode": "s1",
+      "toNode": "central",
+      "label": "87 | rule 41 | Settled: Map: interfaces / interfaces"
+    },
+    {
+      "id": "te3",
+      "fromNode": "central",
+      "toNode": "t1",
+      "label": "87 | rule 41 | Settled: Map: interfaces / interfaces"
+    },
+    {
+      "id": "se4",
+      "fromNode": "s0",
+      "toNode": "central",
+      "label": "27 | rule 41 | Settled: Map: interfaces / interfaces"
+    },
+    {
+      "id": "te5",
+      "fromNode": "central",
+      "toNode": "t2",
+      "label": "27 | rule 41 | Settled: Map: interfaces / interfaces"
+    },
+    {
+      "id": "se6",
+      "fromNode": "s2",
+      "toNode": "central",
+      "label": "23 | rule 41 | Settled: Map: interfaces / interfaces"
+    },
+    {
+      "id": "te7",
+      "fromNode": "central",
+      "toNode": "t0",
+      "label": "23 | rule 41 | Settled: Map: interfaces / interfaces"
+    },
+    {
+      "id": "se8",
+      "fromNode": "s2",
+      "toNode": "central",
+      "label": "7 | rule 41 | Settled: Map: interfaces / interfaces"
+    },
+    {
+      "id": "te9",
+      "fromNode": "central",
+      "toNode": "t2",
+      "label": "7 | rule 41 | Settled: Map: interfaces / interfaces"
+    },
+    {
+      "id": "se10",
+      "fromNode": "s3",
+      "toNode": "central",
+      "label": "6 | rule 41 | Settled: Map: interfaces / interfaces"
+    },
+    {
+      "id": "te11",
+      "fromNode": "central",
+      "toNode": "t3",
+      "label": "6 | rule 41 | Settled: Map: interfaces / interfaces"
+    },
+    {
+      "id": "se12",
+      "fromNode": "s1",
+      "toNode": "central",
+      "label": "6 | rule 41 | Settled: Map: interfaces / interfaces"
+    },
+    {
+      "id": "te13",
+      "fromNode": "central",
+      "toNode": "t4",
+      "label": "6 | rule 41 | Settled: Map: interfaces / interfaces"
+    },
+    {
+      "id": "se14",
+      "fromNode": "s0",
+      "toNode": "central",
+      "label": "2 | rule 41 | Settled: Map: interfaces / interfaces"
+    },
+    {
+      "id": "te15",
+      "fromNode": "central",
+      "toNode": "t5",
+      "label": "2 | rule 41 | Settled: Map: interfaces / interfaces"
+    },
+    {
+      "id": "se16",
+      "fromNode": "s0",
+      "toNode": "central",
+      "label": "2 | rule 41 | Settled: Map: interfaces / interfaces"
+    },
+    {
+      "id": "te17",
+      "fromNode": "central",
+      "toNode": "t6",
+      "label": "2 | rule 41 | Settled: Map: interfaces / interfaces"
+    },
+    {
+      "id": "se18",
+      "fromNode": "s0",
+      "toNode": "central",
+      "label": "2 | rule 41 | Settled: Map: interfaces / interfaces"
+    },
+    {
+      "id": "te19",
+      "fromNode": "central",
+      "toNode": "t4",
+      "label": "2 | rule 41 | Settled: Map: interfaces / interfaces"
+    },
+    {
+      "id": "se20",
+      "fromNode": "s4",
+      "toNode": "central",
+      "label": "2 | rule 41 | Settled: Map: interfaces / interfaces"
+    },
+    {
+      "id": "te21",
+      "fromNode": "central",
+      "toNode": "t1",
+      "label": "2 | rule 41 | Settled: Map: interfaces / interfaces"
+    },
+    {
+      "id": "se22",
+      "fromNode": "s5",
+      "toNode": "central",
+      "label": "1 | rule 71 | Exception: Review — endpoint missing from t_object"
+    },
+    {
+      "id": "te23",
+      "fromNode": "central",
+      "toNode": "t7",
+      "label": "1 | rule 71 | Exception: Review — endpoint missing from t_object"
+    },
+    {
+      "id": "se24",
+      "fromNode": "s1",
+      "toNode": "central",
+      "label": "1 | rule 41 | Settled: Map: interfaces / interfaces"
+    },
+    {
+      "id": "te25",
+      "fromNode": "central",
+      "toNode": "t0",
+      "label": "1 | rule 41 | Settled: Map: interfaces / interfaces"
+    },
+    {
+      "id": "se26",
+      "fromNode": "s0",
+      "toNode": "central",
+      "label": "1 | rule 41 | Settled: Map: interfaces / interfaces"
+    },
+    {
+      "id": "te27",
+      "fromNode": "central",
+      "toNode": "t1",
+      "label": "1 | rule 41 | Settled: Map: interfaces / interfaces"
+    },
+    {
+      "id": "se28",
+      "fromNode": "s2",
+      "toNode": "central",
+      "label": "1 | rule 41 | Settled: Map: interfaces / interfaces"
+    },
+    {
+      "id": "te29",
+      "fromNode": "central",
+      "toNode": "t1",
+      "label": "1 | rule 41 | Settled: Map: interfaces / interfaces"
+    },
+    {
+      "id": "se30",
+      "fromNode": "s0",
+      "toNode": "central",
+      "label": "197 | rule 40 | Settled: Map: equals / equals"
+    },
+    {
+      "id": "te31",
+      "fromNode": "central",
+      "toNode": "t0",
+      "label": "197 | rule 40 | Settled: Map: equals / equals"
+    },
+    {
+      "id": "se32",
+      "fromNode": "s2",
+      "toNode": "central",
+      "label": "48 | rule 40 | Settled: Map: equals / equals"
+    },
+    {
+      "id": "te33",
+      "fromNode": "central",
+      "toNode": "t2",
+      "label": "48 | rule 40 | Settled: Map: equals / equals"
+    },
+    {
+      "id": "se34",
+      "fromNode": "s0",
+      "toNode": "central",
+      "label": "2 | rule 40 | Settled: Map: equals / equals"
+    },
+    {
+      "id": "te35",
+      "fromNode": "central",
+      "toNode": "t4",
+      "label": "2 | rule 40 | Settled: Map: equals / equals"
+    },
+    {
+      "id": "se36",
+      "fromNode": "s0",
+      "toNode": "central",
+      "label": "1 | rule 40 | Settled: Map: equals / equals"
+    },
+    {
+      "id": "te37",
+      "fromNode": "central",
+      "toNode": "t2",
+      "label": "1 | rule 40 | Settled: Map: equals / equals"
+    },
+    {
+      "id": "se38",
+      "fromNode": "s2",
+      "toNode": "central",
+      "label": "1 | rule 40 | Settled: Map: equals / equals"
+    },
+    {
+      "id": "te39",
+      "fromNode": "central",
+      "toNode": "t0",
+      "label": "1 | rule 40 | Settled: Map: equals / equals"
+    },
+    {
+      "id": "ve40",
+      "fromNode": "central",
+      "toNode": "v0",
+      "label": "no stereotype"
+    },
+    {
+      "id": "ve41",
+      "fromNode": "central",
+      "toNode": "v1",
+      "label": "BindingConnector"
+    }
+  ]
+}

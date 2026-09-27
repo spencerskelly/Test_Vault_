@@ -1,0 +1,10 @@
+filters:
+  and:
+    - 'file.inFolder("99_System/10_EA Native Translator/02_EA Relationships/Generalization")'
+views:
+  - type: table
+    name: Generalization local
+    order:
+      - file.name
+      - type
+      - status

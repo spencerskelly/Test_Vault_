@@ -1,0 +1,10 @@
+filters:
+  and:
+    - 'file.inFolder("99_System/10_EA Native Translator/01_EA Elements/ProxyConnector")'
+views:
+  - type: table
+    name: ProxyConnector local
+    order:
+      - file.name
+      - type
+      - status

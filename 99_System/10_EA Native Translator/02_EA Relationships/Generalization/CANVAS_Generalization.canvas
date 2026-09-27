@@ -1,0 +1,1881 @@
+{
+  "nodes": [
+    {
+      "id": "central",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/02_EA Relationships/Generalization/README_Generalization.md",
+      "x": 0,
+      "y": 0,
+      "width": 430,
+      "height": 260
+    },
+    {
+      "id": "s0",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/01_EA Elements/Class/EA Stereotype - Hardware Component.md",
+      "x": -950,
+      "y": -700,
+      "width": 350,
+      "height": 150
+    },
+    {
+      "id": "t0",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/01_EA Elements/Class/EA Stereotype - Hardware Component.md",
+      "x": 950,
+      "y": -700,
+      "width": 350,
+      "height": 150
+    },
+    {
+      "id": "s1",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/01_EA Elements/Signal/EA Stereotype - Logical Signal.md",
+      "x": -950,
+      "y": -520,
+      "width": 350,
+      "height": 150
+    },
+    {
+      "id": "t1",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/01_EA Elements/Signal/EA Stereotype - Logical Signal.md",
+      "x": 950,
+      "y": -520,
+      "width": 350,
+      "height": 150
+    },
+    {
+      "id": "s2",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/01_EA Elements/UseCase/README_UseCase.md",
+      "x": -950,
+      "y": -340,
+      "width": 350,
+      "height": 150
+    },
+    {
+      "id": "t2",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/01_EA Elements/UseCase/README_UseCase.md",
+      "x": 950,
+      "y": -340,
+      "width": 350,
+      "height": 150
+    },
+    {
+      "id": "s3",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/01_EA Elements/State/EA Stereotype - System State.md",
+      "x": -950,
+      "y": -160,
+      "width": 350,
+      "height": 150
+    },
+    {
+      "id": "t3",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/01_EA Elements/State/EA Stereotype - System State.md",
+      "x": 950,
+      "y": -160,
+      "width": 350,
+      "height": 150
+    },
+    {
+      "id": "s4",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/01_EA Elements/Activity/EA Stereotype - System Function.md",
+      "x": -950,
+      "y": 20,
+      "width": 350,
+      "height": 150
+    },
+    {
+      "id": "t4",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/01_EA Elements/Activity/EA Stereotype - System Function.md",
+      "x": 950,
+      "y": 20,
+      "width": 350,
+      "height": 150
+    },
+    {
+      "id": "s5",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/01_EA Elements/Activity/EA Element - No Stereotype.md",
+      "x": -950,
+      "y": 200,
+      "width": 350,
+      "height": 150
+    },
+    {
+      "id": "t5",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/01_EA Elements/Activity/EA Element - No Stereotype.md",
+      "x": 950,
+      "y": 200,
+      "width": 350,
+      "height": 150
+    },
+    {
+      "id": "s6",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/01_EA Elements/Class/EA Stereotype - Physical Component.md",
+      "x": -950,
+      "y": 380,
+      "width": 350,
+      "height": 150
+    },
+    {
+      "id": "t6",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/01_EA Elements/Class/EA Stereotype - Physical Component.md",
+      "x": 950,
+      "y": 380,
+      "width": 350,
+      "height": 150
+    },
+    {
+      "id": "s7",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/01_EA Elements/Class/EA Stereotype - Module.md",
+      "x": -950,
+      "y": 560,
+      "width": 350,
+      "height": 150
+    },
+    {
+      "id": "t7",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/01_EA Elements/Class/EA Stereotype - Module.md",
+      "x": 950,
+      "y": 560,
+      "width": 350,
+      "height": 150
+    },
+    {
+      "id": "s8",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/01_EA Elements/Class/EA Stereotype - Data Interface.md",
+      "x": -950,
+      "y": 740,
+      "width": 350,
+      "height": 150
+    },
+    {
+      "id": "t8",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/01_EA Elements/Class/EA Stereotype - Electrical & Material Interface.md",
+      "x": 950,
+      "y": 740,
+      "width": 350,
+      "height": 150
+    },
+    {
+      "id": "s9",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/01_EA Elements/Class/EA Stereotype - System Partner.md",
+      "x": -950,
+      "y": 920,
+      "width": 350,
+      "height": 150
+    },
+    {
+      "id": "t9",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/01_EA Elements/Class/EA Stereotype - System Partner.md",
+      "x": 950,
+      "y": 920,
+      "width": 350,
+      "height": 150
+    },
+    {
+      "id": "s10",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/01_EA Elements/Class/EA Stereotype - Physical System Variant.md",
+      "x": -950,
+      "y": 1100,
+      "width": 350,
+      "height": 150
+    },
+    {
+      "id": "t10",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/01_EA Elements/Class/EA Stereotype - Physical System Variant.md",
+      "x": 950,
+      "y": 1100,
+      "width": 350,
+      "height": 150
+    },
+    {
+      "id": "s11",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/01_EA Elements/Activity/EA Stereotype - Hardware Function.md",
+      "x": -950,
+      "y": 1280,
+      "width": 350,
+      "height": 150
+    },
+    {
+      "id": "t11",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/01_EA Elements/Activity/EA Stereotype - Hardware Function.md",
+      "x": 950,
+      "y": 1280,
+      "width": 350,
+      "height": 150
+    },
+    {
+      "id": "s12",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/01_EA Elements/Class/EA Stereotype - Software Component.md",
+      "x": -950,
+      "y": 1460,
+      "width": 350,
+      "height": 150
+    },
+    {
+      "id": "t12",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/01_EA Elements/Class/EA Stereotype - Software Component.md",
+      "x": 950,
+      "y": 1460,
+      "width": 350,
+      "height": 150
+    },
+    {
+      "id": "s13",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/01_EA Elements/Class/EA Stereotype - Electrical & Material Interface.md",
+      "x": -950,
+      "y": 1640,
+      "width": 350,
+      "height": 150
+    },
+    {
+      "id": "s14",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/01_EA Elements/Class/EA Stereotype - Physical Context.md",
+      "x": -950,
+      "y": 1820,
+      "width": 350,
+      "height": 150
+    },
+    {
+      "id": "t13",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/01_EA Elements/Class/EA Stereotype - Physical Context.md",
+      "x": 950,
+      "y": 1640,
+      "width": 350,
+      "height": 150
+    },
+    {
+      "id": "s15",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/01_EA Elements/Class/EA Stereotype - block.md",
+      "x": -950,
+      "y": 2000,
+      "width": 350,
+      "height": 150
+    },
+    {
+      "id": "t14",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/01_EA Elements/Class/EA Stereotype - block.md",
+      "x": 950,
+      "y": 1820,
+      "width": 350,
+      "height": 150
+    },
+    {
+      "id": "t15",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/01_EA Elements/Class/EA Stereotype - Mechanical Interface.md",
+      "x": 950,
+      "y": 2000,
+      "width": 350,
+      "height": 150
+    },
+    {
+      "id": "s16",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/01_EA Elements/Activity/EA Stereotype - Software Function.md",
+      "x": -950,
+      "y": 2180,
+      "width": 350,
+      "height": 150
+    },
+    {
+      "id": "t16",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/01_EA Elements/Activity/EA Stereotype - Software Function.md",
+      "x": 950,
+      "y": 2180,
+      "width": 350,
+      "height": 150
+    },
+    {
+      "id": "s17",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/01_EA Elements/Object/README_Object.md",
+      "x": -950,
+      "y": 2360,
+      "width": 350,
+      "height": 150
+    },
+    {
+      "id": "s18",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/01_EA Elements/Requirement/EA Stereotype - requirement.md",
+      "x": -950,
+      "y": 2540,
+      "width": 350,
+      "height": 150
+    },
+    {
+      "id": "t17",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/01_EA Elements/Requirement/EA Stereotype - requirement.md",
+      "x": 950,
+      "y": 2360,
+      "width": 350,
+      "height": 150
+    },
+    {
+      "id": "t18",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/01_EA Elements/Class/EA Stereotype - Business Line.md",
+      "x": 950,
+      "y": 2540,
+      "width": 350,
+      "height": 150
+    },
+    {
+      "id": "t19",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/01_EA Elements/State/EA Element - No Stereotype.md",
+      "x": 950,
+      "y": 2720,
+      "width": 350,
+      "height": 150
+    },
+    {
+      "id": "t20",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/01_EA Elements/Class/EA Stereotype - Generic Physical Interface.md",
+      "x": 950,
+      "y": 2900,
+      "width": 350,
+      "height": 150
+    },
+    {
+      "id": "s19",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/01_EA Elements/Class/EA Element - No Stereotype.md",
+      "x": -950,
+      "y": 2720,
+      "width": 350,
+      "height": 150
+    },
+    {
+      "id": "t21",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/01_EA Elements/Class/EA Stereotype - Platform.md",
+      "x": 950,
+      "y": 3080,
+      "width": 350,
+      "height": 150
+    },
+    {
+      "id": "t22",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/01_EA Elements/Class/EA Stereotype - Data Interface.md",
+      "x": 950,
+      "y": 3260,
+      "width": 350,
+      "height": 150
+    },
+    {
+      "id": "t23",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/01_EA Elements/Activity/EA Stereotype - Module Function.md",
+      "x": 950,
+      "y": 3440,
+      "width": 350,
+      "height": 150
+    },
+    {
+      "id": "s20",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/01_EA Elements/Class/EA Stereotype - Mechanical Interface.md",
+      "x": -950,
+      "y": 2900,
+      "width": 350,
+      "height": 150
+    },
+    {
+      "id": "s21",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/01_EA Elements/Class/EA Stereotype - Physical Component + block.md",
+      "x": -950,
+      "y": 3080,
+      "width": 350,
+      "height": 150
+    },
+    {
+      "id": "t24",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/01_EA Elements/Class/EA Stereotype - Physical Component + block.md",
+      "x": 950,
+      "y": 3620,
+      "width": 350,
+      "height": 150
+    },
+    {
+      "id": "s22",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/01_EA Elements/Class/EA Stereotype - Platform.md",
+      "x": -950,
+      "y": 3260,
+      "width": 350,
+      "height": 150
+    },
+    {
+      "id": "s23",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/01_EA Elements/Class/EA Stereotype - Business Line.md",
+      "x": -950,
+      "y": 3440,
+      "width": 350,
+      "height": 150
+    },
+    {
+      "id": "s24",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/01_EA Elements/Class/EA Stereotype - Generic Physical Interface.md",
+      "x": -950,
+      "y": 3620,
+      "width": 350,
+      "height": 150
+    },
+    {
+      "id": "s25",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/01_EA Elements/State/EA Element - No Stereotype.md",
+      "x": -950,
+      "y": 3800,
+      "width": 350,
+      "height": 150
+    },
+    {
+      "id": "s26",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/01_EA Elements/Actor/README_Actor.md",
+      "x": -950,
+      "y": 3980,
+      "width": 350,
+      "height": 150
+    },
+    {
+      "id": "t25",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/01_EA Elements/Actor/README_Actor.md",
+      "x": 950,
+      "y": 3800,
+      "width": 350,
+      "height": 150
+    },
+    {
+      "id": "s27",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/01_EA Elements/Activity/EA Stereotype - Module Function.md",
+      "x": -950,
+      "y": 4160,
+      "width": 350,
+      "height": 150
+    },
+    {
+      "id": "s28",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/01_EA Elements/Class/EA Stereotype - Software Unit.md",
+      "x": -950,
+      "y": 4340,
+      "width": 350,
+      "height": 150
+    },
+    {
+      "id": "s29",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/01_EA Elements/Issue/README_Issue.md",
+      "x": -950,
+      "y": 4520,
+      "width": 350,
+      "height": 150
+    },
+    {
+      "id": "t26",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/01_EA Elements/Issue/README_Issue.md",
+      "x": 950,
+      "y": 3980,
+      "width": 350,
+      "height": 150
+    },
+    {
+      "id": "s30",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/01_EA Elements/Trigger/README_Trigger.md",
+      "x": -950,
+      "y": 4700,
+      "width": 350,
+      "height": 150
+    },
+    {
+      "id": "t27",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/01_EA Elements/Trigger/README_Trigger.md",
+      "x": 950,
+      "y": 4160,
+      "width": 350,
+      "height": 150
+    },
+    {
+      "id": "s31",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/01_EA Elements/MISSING Endpoint/README_MISSING Endpoint.md",
+      "x": -950,
+      "y": 4880,
+      "width": 350,
+      "height": 150
+    },
+    {
+      "id": "t28",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/01_EA Elements/MISSING Endpoint/README_MISSING Endpoint.md",
+      "x": 950,
+      "y": 4340,
+      "width": 350,
+      "height": 150
+    },
+    {
+      "id": "s32",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/01_EA Elements/Activity/EA Stereotype - testCase.md",
+      "x": -950,
+      "y": 5060,
+      "width": 350,
+      "height": 150
+    },
+    {
+      "id": "t29",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/01_EA Elements/Activity/EA Stereotype - testCase.md",
+      "x": 950,
+      "y": 4520,
+      "width": 350,
+      "height": 150
+    },
+    {
+      "id": "v0",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/02_EA Relationships/Generalization/README_Generalization.md",
+      "x": 30,
+      "y": -380,
+      "width": 250,
+      "height": 130
+    }
+  ],
+  "edges": [
+    {
+      "id": "se0",
+      "fromNode": "s0",
+      "toNode": "central",
+      "label": "763 | rule 1 | Settled: Map: subtypeOf / supertypeOf"
+    },
+    {
+      "id": "te1",
+      "fromNode": "central",
+      "toNode": "t0",
+      "label": "763 | rule 1 | Settled: Map: subtypeOf / supertypeOf"
+    },
+    {
+      "id": "se2",
+      "fromNode": "s1",
+      "toNode": "central",
+      "label": "579 | rule 1 | Settled: Map: subtypeOf / supertypeOf"
+    },
+    {
+      "id": "te3",
+      "fromNode": "central",
+      "toNode": "t1",
+      "label": "579 | rule 1 | Settled: Map: subtypeOf / supertypeOf"
+    },
+    {
+      "id": "se4",
+      "fromNode": "s2",
+      "toNode": "central",
+      "label": "384 | rule 1 | Settled: Map: subtypeOf / supertypeOf"
+    },
+    {
+      "id": "te5",
+      "fromNode": "central",
+      "toNode": "t2",
+      "label": "384 | rule 1 | Settled: Map: subtypeOf / supertypeOf"
+    },
+    {
+      "id": "se6",
+      "fromNode": "s3",
+      "toNode": "central",
+      "label": "260 | rule 1 | Settled: Map: subtypeOf / supertypeOf"
+    },
+    {
+      "id": "te7",
+      "fromNode": "central",
+      "toNode": "t3",
+      "label": "260 | rule 1 | Settled: Map: subtypeOf / supertypeOf"
+    },
+    {
+      "id": "se8",
+      "fromNode": "s4",
+      "toNode": "central",
+      "label": "187 | rule 1 | Settled: Map: subtypeOf / supertypeOf"
+    },
+    {
+      "id": "te9",
+      "fromNode": "central",
+      "toNode": "t4",
+      "label": "187 | rule 1 | Settled: Map: subtypeOf / supertypeOf"
+    },
+    {
+      "id": "se10",
+      "fromNode": "s5",
+      "toNode": "central",
+      "label": "173 | rule 1 | Settled: Map: subtypeOf / supertypeOf"
+    },
+    {
+      "id": "te11",
+      "fromNode": "central",
+      "toNode": "t5",
+      "label": "173 | rule 1 | Settled: Map: subtypeOf / supertypeOf"
+    },
+    {
+      "id": "se12",
+      "fromNode": "s6",
+      "toNode": "central",
+      "label": "168 | rule 1 | Settled: Map: subtypeOf / supertypeOf"
+    },
+    {
+      "id": "te13",
+      "fromNode": "central",
+      "toNode": "t6",
+      "label": "168 | rule 1 | Settled: Map: subtypeOf / supertypeOf"
+    },
+    {
+      "id": "se14",
+      "fromNode": "s7",
+      "toNode": "central",
+      "label": "150 | rule 1 | Settled: Map: subtypeOf / supertypeOf"
+    },
+    {
+      "id": "te15",
+      "fromNode": "central",
+      "toNode": "t7",
+      "label": "150 | rule 1 | Settled: Map: subtypeOf / supertypeOf"
+    },
+    {
+      "id": "se16",
+      "fromNode": "s5",
+      "toNode": "central",
+      "label": "113 | rule 1 | Settled: Map: subtypeOf / supertypeOf"
+    },
+    {
+      "id": "te17",
+      "fromNode": "central",
+      "toNode": "t4",
+      "label": "113 | rule 1 | Settled: Map: subtypeOf / supertypeOf"
+    },
+    {
+      "id": "se18",
+      "fromNode": "s8",
+      "toNode": "central",
+      "label": "108 | rule 1 | Settled: Map: subtypeOf / supertypeOf"
+    },
+    {
+      "id": "te19",
+      "fromNode": "central",
+      "toNode": "t8",
+      "label": "108 | rule 1 | Settled: Map: subtypeOf / supertypeOf"
+    },
+    {
+      "id": "se20",
+      "fromNode": "s9",
+      "toNode": "central",
+      "label": "90 | rule 1 | Settled: Map: subtypeOf / supertypeOf"
+    },
+    {
+      "id": "te21",
+      "fromNode": "central",
+      "toNode": "t9",
+      "label": "90 | rule 1 | Settled: Map: subtypeOf / supertypeOf"
+    },
+    {
+      "id": "se22",
+      "fromNode": "s10",
+      "toNode": "central",
+      "label": "70 | rule 1 | Settled: Map: subtypeOf / supertypeOf"
+    },
+    {
+      "id": "te23",
+      "fromNode": "central",
+      "toNode": "t10",
+      "label": "70 | rule 1 | Settled: Map: subtypeOf / supertypeOf"
+    },
+    {
+      "id": "se24",
+      "fromNode": "s11",
+      "toNode": "central",
+      "label": "68 | rule 1 | Settled: Map: subtypeOf / supertypeOf"
+    },
+    {
+      "id": "te25",
+      "fromNode": "central",
+      "toNode": "t11",
+      "label": "68 | rule 1 | Settled: Map: subtypeOf / supertypeOf"
+    },
+    {
+      "id": "se26",
+      "fromNode": "s12",
+      "toNode": "central",
+      "label": "58 | rule 1 | Settled: Map: subtypeOf / supertypeOf"
+    },
+    {
+      "id": "te27",
+      "fromNode": "central",
+      "toNode": "t12",
+      "label": "58 | rule 1 | Settled: Map: subtypeOf / supertypeOf"
+    },
+    {
+      "id": "se28",
+      "fromNode": "s4",
+      "toNode": "central",
+      "label": "48 | rule 1 | Settled: Map: subtypeOf / supertypeOf"
+    },
+    {
+      "id": "te29",
+      "fromNode": "central",
+      "toNode": "t5",
+      "label": "48 | rule 1 | Settled: Map: subtypeOf / supertypeOf"
+    },
+    {
+      "id": "se30",
+      "fromNode": "s11",
+      "toNode": "central",
+      "label": "45 | rule 1 | Settled: Map: subtypeOf / supertypeOf"
+    },
+    {
+      "id": "te31",
+      "fromNode": "central",
+      "toNode": "t4",
+      "label": "45 | rule 1 | Settled: Map: subtypeOf / supertypeOf"
+    },
+    {
+      "id": "se32",
+      "fromNode": "s13",
+      "toNode": "central",
+      "label": "39 | rule 1 | Settled: Map: subtypeOf / supertypeOf"
+    },
+    {
+      "id": "te33",
+      "fromNode": "central",
+      "toNode": "t8",
+      "label": "39 | rule 1 | Settled: Map: subtypeOf / supertypeOf"
+    },
+    {
+      "id": "se34",
+      "fromNode": "s14",
+      "toNode": "central",
+      "label": "39 | rule 1 | Settled: Map: subtypeOf / supertypeOf"
+    },
+    {
+      "id": "te35",
+      "fromNode": "central",
+      "toNode": "t13",
+      "label": "39 | rule 1 | Settled: Map: subtypeOf / supertypeOf"
+    },
+    {
+      "id": "se36",
+      "fromNode": "s15",
+      "toNode": "central",
+      "label": "36 | rule 1 | Settled: Map: subtypeOf / supertypeOf"
+    },
+    {
+      "id": "te37",
+      "fromNode": "central",
+      "toNode": "t14",
+      "label": "36 | rule 1 | Settled: Map: subtypeOf / supertypeOf"
+    },
+    {
+      "id": "se38",
+      "fromNode": "s13",
+      "toNode": "central",
+      "label": "35 | rule 1 | Settled: Map: subtypeOf / supertypeOf"
+    },
+    {
+      "id": "te39",
+      "fromNode": "central",
+      "toNode": "t15",
+      "label": "35 | rule 1 | Settled: Map: subtypeOf / supertypeOf"
+    },
+    {
+      "id": "se40",
+      "fromNode": "s16",
+      "toNode": "central",
+      "label": "32 | rule 1 | Settled: Map: subtypeOf / supertypeOf"
+    },
+    {
+      "id": "te41",
+      "fromNode": "central",
+      "toNode": "t16",
+      "label": "32 | rule 1 | Settled: Map: subtypeOf / supertypeOf"
+    },
+    {
+      "id": "se42",
+      "fromNode": "s16",
+      "toNode": "central",
+      "label": "28 | rule 1 | Settled: Map: subtypeOf / supertypeOf"
+    },
+    {
+      "id": "te43",
+      "fromNode": "central",
+      "toNode": "t14",
+      "label": "28 | rule 1 | Settled: Map: subtypeOf / supertypeOf"
+    },
+    {
+      "id": "se44",
+      "fromNode": "s6",
+      "toNode": "central",
+      "label": "27 | rule 1 | Settled: Map: subtypeOf / supertypeOf"
+    },
+    {
+      "id": "te45",
+      "fromNode": "central",
+      "toNode": "t0",
+      "label": "27 | rule 1 | Settled: Map: subtypeOf / supertypeOf"
+    },
+    {
+      "id": "se46",
+      "fromNode": "s17",
+      "toNode": "central",
+      "label": "27 | rule 1 | Settled: Map: subtypeOf / supertypeOf"
+    },
+    {
+      "id": "te47",
+      "fromNode": "central",
+      "toNode": "t12",
+      "label": "27 | rule 1 | Settled: Map: subtypeOf / supertypeOf"
+    },
+    {
+      "id": "se48",
+      "fromNode": "s18",
+      "toNode": "central",
+      "label": "26 | rule 1 | Settled: Map: subtypeOf / supertypeOf"
+    },
+    {
+      "id": "te49",
+      "fromNode": "central",
+      "toNode": "t17",
+      "label": "26 | rule 1 | Settled: Map: subtypeOf / supertypeOf"
+    },
+    {
+      "id": "se50",
+      "fromNode": "s0",
+      "toNode": "central",
+      "label": "25 | rule 1 | Settled: Map: subtypeOf / supertypeOf"
+    },
+    {
+      "id": "te51",
+      "fromNode": "central",
+      "toNode": "t7",
+      "label": "25 | rule 1 | Settled: Map: subtypeOf / supertypeOf"
+    },
+    {
+      "id": "se52",
+      "fromNode": "s10",
+      "toNode": "central",
+      "label": "23 | rule 1 | Settled: Map: subtypeOf / supertypeOf"
+    },
+    {
+      "id": "te53",
+      "fromNode": "central",
+      "toNode": "t18",
+      "label": "23 | rule 1 | Settled: Map: subtypeOf / supertypeOf"
+    },
+    {
+      "id": "se54",
+      "fromNode": "s3",
+      "toNode": "central",
+      "label": "23 | rule 1 | Settled: Map: subtypeOf / supertypeOf"
+    },
+    {
+      "id": "te55",
+      "fromNode": "central",
+      "toNode": "t19",
+      "label": "23 | rule 1 | Settled: Map: subtypeOf / supertypeOf"
+    },
+    {
+      "id": "se56",
+      "fromNode": "s13",
+      "toNode": "central",
+      "label": "20 | rule 1 | Settled: Map: subtypeOf / supertypeOf"
+    },
+    {
+      "id": "te57",
+      "fromNode": "central",
+      "toNode": "t0",
+      "label": "20 | rule 1 | Settled: Map: subtypeOf / supertypeOf"
+    },
+    {
+      "id": "se58",
+      "fromNode": "s5",
+      "toNode": "central",
+      "label": "17 | rule 1 | Settled: Map: subtypeOf / supertypeOf"
+    },
+    {
+      "id": "te59",
+      "fromNode": "central",
+      "toNode": "t11",
+      "label": "17 | rule 1 | Settled: Map: subtypeOf / supertypeOf"
+    },
+    {
+      "id": "se60",
+      "fromNode": "s0",
+      "toNode": "central",
+      "label": "16 | rule 1 | Settled: Map: subtypeOf / supertypeOf"
+    },
+    {
+      "id": "te61",
+      "fromNode": "central",
+      "toNode": "t6",
+      "label": "16 | rule 1 | Settled: Map: subtypeOf / supertypeOf"
+    },
+    {
+      "id": "se62",
+      "fromNode": "s7",
+      "toNode": "central",
+      "label": "15 | rule 1 | Settled: Map: subtypeOf / supertypeOf"
+    },
+    {
+      "id": "te63",
+      "fromNode": "central",
+      "toNode": "t0",
+      "label": "15 | rule 1 | Settled: Map: subtypeOf / supertypeOf"
+    },
+    {
+      "id": "se64",
+      "fromNode": "s11",
+      "toNode": "central",
+      "label": "14 | rule 1 | Settled: Map: subtypeOf / supertypeOf"
+    },
+    {
+      "id": "te65",
+      "fromNode": "central",
+      "toNode": "t5",
+      "label": "14 | rule 1 | Settled: Map: subtypeOf / supertypeOf"
+    },
+    {
+      "id": "se66",
+      "fromNode": "s8",
+      "toNode": "central",
+      "label": "13 | rule 1 | Settled: Map: subtypeOf / supertypeOf"
+    },
+    {
+      "id": "te67",
+      "fromNode": "central",
+      "toNode": "t20",
+      "label": "13 | rule 1 | Settled: Map: subtypeOf / supertypeOf"
+    },
+    {
+      "id": "se68",
+      "fromNode": "s17",
+      "toNode": "central",
+      "label": "13 | rule 1 | Settled: Map: subtypeOf / supertypeOf"
+    },
+    {
+      "id": "te69",
+      "fromNode": "central",
+      "toNode": "t0",
+      "label": "13 | rule 1 | Settled: Map: subtypeOf / supertypeOf"
+    },
+    {
+      "id": "se70",
+      "fromNode": "s16",
+      "toNode": "central",
+      "label": "12 | rule 1 | Settled: Map: subtypeOf / supertypeOf"
+    },
+    {
+      "id": "te71",
+      "fromNode": "central",
+      "toNode": "t4",
+      "label": "12 | rule 1 | Settled: Map: subtypeOf / supertypeOf"
+    },
+    {
+      "id": "se72",
+      "fromNode": "s4",
+      "toNode": "central",
+      "label": "12 | rule 1 | Settled: Map: subtypeOf / supertypeOf"
+    },
+    {
+      "id": "te73",
+      "fromNode": "central",
+      "toNode": "t11",
+      "label": "12 | rule 1 | Settled: Map: subtypeOf / supertypeOf"
+    },
+    {
+      "id": "se74",
+      "fromNode": "s19",
+      "toNode": "central",
+      "label": "11 | rule 1 | Settled: Map: subtypeOf / supertypeOf"
+    },
+    {
+      "id": "te75",
+      "fromNode": "central",
+      "toNode": "t0",
+      "label": "11 | rule 1 | Settled: Map: subtypeOf / supertypeOf"
+    },
+    {
+      "id": "se76",
+      "fromNode": "s10",
+      "toNode": "central",
+      "label": "10 | rule 1 | Settled: Map: subtypeOf / supertypeOf"
+    },
+    {
+      "id": "te77",
+      "fromNode": "central",
+      "toNode": "t21",
+      "label": "10 | rule 1 | Settled: Map: subtypeOf / supertypeOf"
+    },
+    {
+      "id": "se78",
+      "fromNode": "s0",
+      "toNode": "central",
+      "label": "9 | rule 1 | Settled: Map: subtypeOf / supertypeOf"
+    },
+    {
+      "id": "te79",
+      "fromNode": "central",
+      "toNode": "t22",
+      "label": "9 | rule 1 | Settled: Map: subtypeOf / supertypeOf"
+    },
+    {
+      "id": "se80",
+      "fromNode": "s5",
+      "toNode": "central",
+      "label": "7 | rule 1 | Settled: Map: subtypeOf / supertypeOf"
+    },
+    {
+      "id": "te81",
+      "fromNode": "central",
+      "toNode": "t23",
+      "label": "7 | rule 1 | Settled: Map: subtypeOf / supertypeOf"
+    },
+    {
+      "id": "se82",
+      "fromNode": "s11",
+      "toNode": "central",
+      "label": "7 | rule 1 | Settled: Map: subtypeOf / supertypeOf"
+    },
+    {
+      "id": "te83",
+      "fromNode": "central",
+      "toNode": "t23",
+      "label": "7 | rule 1 | Settled: Map: subtypeOf / supertypeOf"
+    },
+    {
+      "id": "se84",
+      "fromNode": "s20",
+      "toNode": "central",
+      "label": "7 | rule 1 | Settled: Map: subtypeOf / supertypeOf"
+    },
+    {
+      "id": "te85",
+      "fromNode": "central",
+      "toNode": "t20",
+      "label": "7 | rule 1 | Settled: Map: subtypeOf / supertypeOf"
+    },
+    {
+      "id": "se86",
+      "fromNode": "s21",
+      "toNode": "central",
+      "label": "7 | rule 1 | Settled: Map: subtypeOf / supertypeOf"
+    },
+    {
+      "id": "te87",
+      "fromNode": "central",
+      "toNode": "t24",
+      "label": "7 | rule 1 | Settled: Map: subtypeOf / supertypeOf"
+    },
+    {
+      "id": "se88",
+      "fromNode": "s22",
+      "toNode": "central",
+      "label": "7 | rule 1 | Settled: Map: subtypeOf / supertypeOf"
+    },
+    {
+      "id": "te89",
+      "fromNode": "central",
+      "toNode": "t21",
+      "label": "7 | rule 1 | Settled: Map: subtypeOf / supertypeOf"
+    },
+    {
+      "id": "se90",
+      "fromNode": "s23",
+      "toNode": "central",
+      "label": "6 | rule 1 | Settled: Map: subtypeOf / supertypeOf"
+    },
+    {
+      "id": "te91",
+      "fromNode": "central",
+      "toNode": "t18",
+      "label": "6 | rule 1 | Settled: Map: subtypeOf / supertypeOf"
+    },
+    {
+      "id": "se92",
+      "fromNode": "s24",
+      "toNode": "central",
+      "label": "6 | rule 1 | Settled: Map: subtypeOf / supertypeOf"
+    },
+    {
+      "id": "te93",
+      "fromNode": "central",
+      "toNode": "t20",
+      "label": "6 | rule 1 | Settled: Map: subtypeOf / supertypeOf"
+    },
+    {
+      "id": "se94",
+      "fromNode": "s6",
+      "toNode": "central",
+      "label": "6 | rule 1 | Settled: Map: subtypeOf / supertypeOf"
+    },
+    {
+      "id": "te95",
+      "fromNode": "central",
+      "toNode": "t24",
+      "label": "6 | rule 1 | Settled: Map: subtypeOf / supertypeOf"
+    },
+    {
+      "id": "se96",
+      "fromNode": "s25",
+      "toNode": "central",
+      "label": "6 | rule 1 | Settled: Map: subtypeOf / supertypeOf"
+    },
+    {
+      "id": "te97",
+      "fromNode": "central",
+      "toNode": "t19",
+      "label": "6 | rule 1 | Settled: Map: subtypeOf / supertypeOf"
+    },
+    {
+      "id": "se98",
+      "fromNode": "s26",
+      "toNode": "central",
+      "label": "5 | rule 1 | Settled: Map: subtypeOf / supertypeOf"
+    },
+    {
+      "id": "te99",
+      "fromNode": "central",
+      "toNode": "t25",
+      "label": "5 | rule 1 | Settled: Map: subtypeOf / supertypeOf"
+    },
+    {
+      "id": "se100",
+      "fromNode": "s0",
+      "toNode": "central",
+      "label": "5 | rule 1 | Settled: Map: subtypeOf / supertypeOf"
+    },
+    {
+      "id": "te101",
+      "fromNode": "central",
+      "toNode": "t8",
+      "label": "5 | rule 1 | Settled: Map: subtypeOf / supertypeOf"
+    },
+    {
+      "id": "se102",
+      "fromNode": "s0",
+      "toNode": "central",
+      "label": "5 | rule 1 | Settled: Map: subtypeOf / supertypeOf"
+    },
+    {
+      "id": "te103",
+      "fromNode": "central",
+      "toNode": "t9",
+      "label": "5 | rule 1 | Settled: Map: subtypeOf / supertypeOf"
+    },
+    {
+      "id": "se104",
+      "fromNode": "s10",
+      "toNode": "central",
+      "label": "5 | rule 1 | Settled: Map: subtypeOf / supertypeOf"
+    },
+    {
+      "id": "te105",
+      "fromNode": "central",
+      "toNode": "t7",
+      "label": "5 | rule 1 | Settled: Map: subtypeOf / supertypeOf"
+    },
+    {
+      "id": "se106",
+      "fromNode": "s25",
+      "toNode": "central",
+      "label": "5 | rule 1 | Settled: Map: subtypeOf / supertypeOf"
+    },
+    {
+      "id": "te107",
+      "fromNode": "central",
+      "toNode": "t3",
+      "label": "5 | rule 1 | Settled: Map: subtypeOf / supertypeOf"
+    },
+    {
+      "id": "se108",
+      "fromNode": "s3",
+      "toNode": "central",
+      "label": "5 | rule 1 | Settled: Map: subtypeOf / supertypeOf"
+    },
+    {
+      "id": "te109",
+      "fromNode": "central",
+      "toNode": "t14",
+      "label": "5 | rule 1 | Settled: Map: subtypeOf / supertypeOf"
+    },
+    {
+      "id": "se110",
+      "fromNode": "s5",
+      "toNode": "central",
+      "label": "4 | rule 1 | Settled: Map: subtypeOf / supertypeOf"
+    },
+    {
+      "id": "te111",
+      "fromNode": "central",
+      "toNode": "t16",
+      "label": "4 | rule 1 | Settled: Map: subtypeOf / supertypeOf"
+    },
+    {
+      "id": "se112",
+      "fromNode": "s27",
+      "toNode": "central",
+      "label": "4 | rule 1 | Settled: Map: subtypeOf / supertypeOf"
+    },
+    {
+      "id": "te113",
+      "fromNode": "central",
+      "toNode": "t4",
+      "label": "4 | rule 1 | Settled: Map: subtypeOf / supertypeOf"
+    },
+    {
+      "id": "se114",
+      "fromNode": "s4",
+      "toNode": "central",
+      "label": "4 | rule 1 | Settled: Map: subtypeOf / supertypeOf"
+    },
+    {
+      "id": "te115",
+      "fromNode": "central",
+      "toNode": "t16",
+      "label": "4 | rule 1 | Settled: Map: subtypeOf / supertypeOf"
+    },
+    {
+      "id": "se116",
+      "fromNode": "s7",
+      "toNode": "central",
+      "label": "4 | rule 1 | Settled: Map: subtypeOf / supertypeOf"
+    },
+    {
+      "id": "te117",
+      "fromNode": "central",
+      "toNode": "t6",
+      "label": "4 | rule 1 | Settled: Map: subtypeOf / supertypeOf"
+    },
+    {
+      "id": "se118",
+      "fromNode": "s6",
+      "toNode": "central",
+      "label": "4 | rule 1 | Settled: Map: subtypeOf / supertypeOf"
+    },
+    {
+      "id": "te119",
+      "fromNode": "central",
+      "toNode": "t14",
+      "label": "4 | rule 1 | Settled: Map: subtypeOf / supertypeOf"
+    },
+    {
+      "id": "se120",
+      "fromNode": "s10",
+      "toNode": "central",
+      "label": "4 | rule 1 | Settled: Map: subtypeOf / supertypeOf"
+    },
+    {
+      "id": "te121",
+      "fromNode": "central",
+      "toNode": "t0",
+      "label": "4 | rule 1 | Settled: Map: subtypeOf / supertypeOf"
+    },
+    {
+      "id": "se122",
+      "fromNode": "s15",
+      "toNode": "central",
+      "label": "4 | rule 1 | Settled: Map: subtypeOf / supertypeOf"
+    },
+    {
+      "id": "te123",
+      "fromNode": "central",
+      "toNode": "t10",
+      "label": "4 | rule 1 | Settled: Map: subtypeOf / supertypeOf"
+    },
+    {
+      "id": "se124",
+      "fromNode": "s15",
+      "toNode": "central",
+      "label": "4 | rule 1 | Settled: Map: subtypeOf / supertypeOf"
+    },
+    {
+      "id": "te125",
+      "fromNode": "central",
+      "toNode": "t12",
+      "label": "4 | rule 1 | Settled: Map: subtypeOf / supertypeOf"
+    },
+    {
+      "id": "se126",
+      "fromNode": "s27",
+      "toNode": "central",
+      "label": "3 | rule 1 | Settled: Map: subtypeOf / supertypeOf"
+    },
+    {
+      "id": "te127",
+      "fromNode": "central",
+      "toNode": "t23",
+      "label": "3 | rule 1 | Settled: Map: subtypeOf / supertypeOf"
+    },
+    {
+      "id": "se128",
+      "fromNode": "s4",
+      "toNode": "central",
+      "label": "3 | rule 1 | Settled: Map: subtypeOf / supertypeOf"
+    },
+    {
+      "id": "te129",
+      "fromNode": "central",
+      "toNode": "t23",
+      "label": "3 | rule 1 | Settled: Map: subtypeOf / supertypeOf"
+    },
+    {
+      "id": "se130",
+      "fromNode": "s4",
+      "toNode": "central",
+      "label": "3 | rule 1 | Settled: Map: subtypeOf / supertypeOf"
+    },
+    {
+      "id": "te131",
+      "fromNode": "central",
+      "toNode": "t3",
+      "label": "3 | rule 1 | Settled: Map: subtypeOf / supertypeOf"
+    },
+    {
+      "id": "se132",
+      "fromNode": "s6",
+      "toNode": "central",
+      "label": "3 | rule 1 | Settled: Map: subtypeOf / supertypeOf"
+    },
+    {
+      "id": "te133",
+      "fromNode": "central",
+      "toNode": "t7",
+      "label": "3 | rule 1 | Settled: Map: subtypeOf / supertypeOf"
+    },
+    {
+      "id": "se134",
+      "fromNode": "s28",
+      "toNode": "central",
+      "label": "3 | rule 1 | Settled: Map: subtypeOf / supertypeOf"
+    },
+    {
+      "id": "te135",
+      "fromNode": "central",
+      "toNode": "t12",
+      "label": "3 | rule 1 | Settled: Map: subtypeOf / supertypeOf"
+    },
+    {
+      "id": "se136",
+      "fromNode": "s11",
+      "toNode": "central",
+      "label": "2 | rule 1 | Settled: Map: subtypeOf / supertypeOf"
+    },
+    {
+      "id": "te137",
+      "fromNode": "central",
+      "toNode": "t19",
+      "label": "2 | rule 1 | Settled: Map: subtypeOf / supertypeOf"
+    },
+    {
+      "id": "se138",
+      "fromNode": "s27",
+      "toNode": "central",
+      "label": "2 | rule 1 | Settled: Map: subtypeOf / supertypeOf"
+    },
+    {
+      "id": "te139",
+      "fromNode": "central",
+      "toNode": "t5",
+      "label": "2 | rule 1 | Settled: Map: subtypeOf / supertypeOf"
+    },
+    {
+      "id": "se140",
+      "fromNode": "s16",
+      "toNode": "central",
+      "label": "2 | rule 1 | Settled: Map: subtypeOf / supertypeOf"
+    },
+    {
+      "id": "te141",
+      "fromNode": "central",
+      "toNode": "t5",
+      "label": "2 | rule 1 | Settled: Map: subtypeOf / supertypeOf"
+    },
+    {
+      "id": "se142",
+      "fromNode": "s16",
+      "toNode": "central",
+      "label": "2 | rule 1 | Settled: Map: subtypeOf / supertypeOf"
+    },
+    {
+      "id": "te143",
+      "fromNode": "central",
+      "toNode": "t3",
+      "label": "2 | rule 1 | Settled: Map: subtypeOf / supertypeOf"
+    },
+    {
+      "id": "se144",
+      "fromNode": "s4",
+      "toNode": "central",
+      "label": "2 | rule 1 | Settled: Map: subtypeOf / supertypeOf"
+    },
+    {
+      "id": "te145",
+      "fromNode": "central",
+      "toNode": "t14",
+      "label": "2 | rule 1 | Settled: Map: subtypeOf / supertypeOf"
+    },
+    {
+      "id": "se146",
+      "fromNode": "s4",
+      "toNode": "central",
+      "label": "2 | rule 1 | Settled: Map: subtypeOf / supertypeOf"
+    },
+    {
+      "id": "te147",
+      "fromNode": "central",
+      "toNode": "t19",
+      "label": "2 | rule 1 | Settled: Map: subtypeOf / supertypeOf"
+    },
+    {
+      "id": "se148",
+      "fromNode": "s0",
+      "toNode": "central",
+      "label": "2 | rule 1 | Settled: Map: subtypeOf / supertypeOf"
+    },
+    {
+      "id": "te149",
+      "fromNode": "central",
+      "toNode": "t13",
+      "label": "2 | rule 1 | Settled: Map: subtypeOf / supertypeOf"
+    },
+    {
+      "id": "se150",
+      "fromNode": "s22",
+      "toNode": "central",
+      "label": "2 | rule 1 | Settled: Map: subtypeOf / supertypeOf"
+    },
+    {
+      "id": "te151",
+      "fromNode": "central",
+      "toNode": "t18",
+      "label": "2 | rule 1 | Settled: Map: subtypeOf / supertypeOf"
+    },
+    {
+      "id": "se152",
+      "fromNode": "s9",
+      "toNode": "central",
+      "label": "2 | rule 1 | Settled: Map: subtypeOf / supertypeOf"
+    },
+    {
+      "id": "te153",
+      "fromNode": "central",
+      "toNode": "t13",
+      "label": "2 | rule 1 | Settled: Map: subtypeOf / supertypeOf"
+    },
+    {
+      "id": "se154",
+      "fromNode": "s29",
+      "toNode": "central",
+      "label": "2 | rule 1 | Settled: Map: subtypeOf / supertypeOf"
+    },
+    {
+      "id": "te155",
+      "fromNode": "central",
+      "toNode": "t26",
+      "label": "2 | rule 1 | Settled: Map: subtypeOf / supertypeOf"
+    },
+    {
+      "id": "se156",
+      "fromNode": "s17",
+      "toNode": "central",
+      "label": "2 | rule 1 | Settled: Map: subtypeOf / supertypeOf"
+    },
+    {
+      "id": "te157",
+      "fromNode": "central",
+      "toNode": "t7",
+      "label": "2 | rule 1 | Settled: Map: subtypeOf / supertypeOf"
+    },
+    {
+      "id": "se158",
+      "fromNode": "s17",
+      "toNode": "central",
+      "label": "2 | rule 1 | Settled: Map: subtypeOf / supertypeOf"
+    },
+    {
+      "id": "te159",
+      "fromNode": "central",
+      "toNode": "t14",
+      "label": "2 | rule 1 | Settled: Map: subtypeOf / supertypeOf"
+    },
+    {
+      "id": "se160",
+      "fromNode": "s30",
+      "toNode": "central",
+      "label": "2 | rule 1 | Settled: Map: subtypeOf / supertypeOf"
+    },
+    {
+      "id": "te161",
+      "fromNode": "central",
+      "toNode": "t27",
+      "label": "2 | rule 1 | Settled: Map: subtypeOf / supertypeOf"
+    },
+    {
+      "id": "se162",
+      "fromNode": "s31",
+      "toNode": "central",
+      "label": "1 | rule 71 | Exception: Review — endpoint missing from t_object"
+    },
+    {
+      "id": "te163",
+      "fromNode": "central",
+      "toNode": "t28",
+      "label": "1 | rule 71 | Exception: Review — endpoint missing from t_object"
+    },
+    {
+      "id": "se164",
+      "fromNode": "s11",
+      "toNode": "central",
+      "label": "1 | rule 1 | Settled: Map: subtypeOf / supertypeOf"
+    },
+    {
+      "id": "te165",
+      "fromNode": "central",
+      "toNode": "t3",
+      "label": "1 | rule 1 | Settled: Map: subtypeOf / supertypeOf"
+    },
+    {
+      "id": "se166",
+      "fromNode": "s32",
+      "toNode": "central",
+      "label": "1 | rule 1 | Settled: Map: subtypeOf / supertypeOf"
+    },
+    {
+      "id": "te167",
+      "fromNode": "central",
+      "toNode": "t29",
+      "label": "1 | rule 1 | Settled: Map: subtypeOf / supertypeOf"
+    },
+    {
+      "id": "se168",
+      "fromNode": "s26",
+      "toNode": "central",
+      "label": "1 | rule 1 | Settled: Map: subtypeOf / supertypeOf"
+    },
+    {
+      "id": "te169",
+      "fromNode": "central",
+      "toNode": "t9",
+      "label": "1 | rule 1 | Settled: Map: subtypeOf / supertypeOf"
+    },
+    {
+      "id": "se170",
+      "fromNode": "s19",
+      "toNode": "central",
+      "label": "1 | rule 1 | Settled: Map: subtypeOf / supertypeOf"
+    },
+    {
+      "id": "te171",
+      "fromNode": "central",
+      "toNode": "t6",
+      "label": "1 | rule 1 | Settled: Map: subtypeOf / supertypeOf"
+    },
+    {
+      "id": "se172",
+      "fromNode": "s23",
+      "toNode": "central",
+      "label": "1 | rule 1 | Settled: Map: subtypeOf / supertypeOf"
+    },
+    {
+      "id": "te173",
+      "fromNode": "central",
+      "toNode": "t21",
+      "label": "1 | rule 1 | Settled: Map: subtypeOf / supertypeOf"
+    },
+    {
+      "id": "se174",
+      "fromNode": "s8",
+      "toNode": "central",
+      "label": "1 | rule 1 | Settled: Map: subtypeOf / supertypeOf"
+    },
+    {
+      "id": "te175",
+      "fromNode": "central",
+      "toNode": "t22",
+      "label": "1 | rule 1 | Settled: Map: subtypeOf / supertypeOf"
+    },
+    {
+      "id": "se176",
+      "fromNode": "s8",
+      "toNode": "central",
+      "label": "1 | rule 1 | Settled: Map: subtypeOf / supertypeOf"
+    },
+    {
+      "id": "te177",
+      "fromNode": "central",
+      "toNode": "t0",
+      "label": "1 | rule 1 | Settled: Map: subtypeOf / supertypeOf"
+    },
+    {
+      "id": "se178",
+      "fromNode": "s13",
+      "toNode": "central",
+      "label": "1 | rule 1 | Settled: Map: subtypeOf / supertypeOf"
+    },
+    {
+      "id": "te179",
+      "fromNode": "central",
+      "toNode": "t6",
+      "label": "1 | rule 1 | Settled: Map: subtypeOf / supertypeOf"
+    },
+    {
+      "id": "se180",
+      "fromNode": "s0",
+      "toNode": "central",
+      "label": "1 | rule 1 | Settled: Map: subtypeOf / supertypeOf"
+    },
+    {
+      "id": "te181",
+      "fromNode": "central",
+      "toNode": "t14",
+      "label": "1 | rule 1 | Settled: Map: subtypeOf / supertypeOf"
+    },
+    {
+      "id": "se182",
+      "fromNode": "s7",
+      "toNode": "central",
+      "label": "1 | rule 1 | Settled: Map: subtypeOf / supertypeOf"
+    },
+    {
+      "id": "te183",
+      "fromNode": "central",
+      "toNode": "t8",
+      "label": "1 | rule 1 | Settled: Map: subtypeOf / supertypeOf"
+    },
+    {
+      "id": "se184",
+      "fromNode": "s7",
+      "toNode": "central",
+      "label": "1 | rule 1 | Settled: Map: subtypeOf / supertypeOf"
+    },
+    {
+      "id": "te185",
+      "fromNode": "central",
+      "toNode": "t10",
+      "label": "1 | rule 1 | Settled: Map: subtypeOf / supertypeOf"
+    },
+    {
+      "id": "se186",
+      "fromNode": "s6",
+      "toNode": "central",
+      "label": "1 | rule 1 | Settled: Map: subtypeOf / supertypeOf"
+    },
+    {
+      "id": "te187",
+      "fromNode": "central",
+      "toNode": "t8",
+      "label": "1 | rule 1 | Settled: Map: subtypeOf / supertypeOf"
+    },
+    {
+      "id": "se188",
+      "fromNode": "s6",
+      "toNode": "central",
+      "label": "1 | rule 1 | Settled: Map: subtypeOf / supertypeOf"
+    },
+    {
+      "id": "te189",
+      "fromNode": "central",
+      "toNode": "t12",
+      "label": "1 | rule 1 | Settled: Map: subtypeOf / supertypeOf"
+    },
+    {
+      "id": "se190",
+      "fromNode": "s10",
+      "toNode": "central",
+      "label": "1 | rule 1 | Settled: Map: subtypeOf / supertypeOf"
+    },
+    {
+      "id": "te191",
+      "fromNode": "central",
+      "toNode": "t13",
+      "label": "1 | rule 1 | Settled: Map: subtypeOf / supertypeOf"
+    },
+    {
+      "id": "se192",
+      "fromNode": "s12",
+      "toNode": "central",
+      "label": "1 | rule 1 | Settled: Map: subtypeOf / supertypeOf"
+    },
+    {
+      "id": "te193",
+      "fromNode": "central",
+      "toNode": "t24",
+      "label": "1 | rule 1 | Settled: Map: subtypeOf / supertypeOf"
+    },
+    {
+      "id": "se194",
+      "fromNode": "s12",
+      "toNode": "central",
+      "label": "1 | rule 1 | Settled: Map: subtypeOf / supertypeOf"
+    },
+    {
+      "id": "te195",
+      "fromNode": "central",
+      "toNode": "t21",
+      "label": "1 | rule 1 | Settled: Map: subtypeOf / supertypeOf"
+    },
+    {
+      "id": "se196",
+      "fromNode": "s9",
+      "toNode": "central",
+      "label": "1 | rule 1 | Settled: Map: subtypeOf / supertypeOf"
+    },
+    {
+      "id": "te197",
+      "fromNode": "central",
+      "toNode": "t0",
+      "label": "1 | rule 1 | Settled: Map: subtypeOf / supertypeOf"
+    },
+    {
+      "id": "se198",
+      "fromNode": "s15",
+      "toNode": "central",
+      "label": "1 | rule 1 | Settled: Map: subtypeOf / supertypeOf"
+    },
+    {
+      "id": "te199",
+      "fromNode": "central",
+      "toNode": "t18",
+      "label": "1 | rule 1 | Settled: Map: subtypeOf / supertypeOf"
+    },
+    {
+      "id": "se200",
+      "fromNode": "s15",
+      "toNode": "central",
+      "label": "1 | rule 1 | Settled: Map: subtypeOf / supertypeOf"
+    },
+    {
+      "id": "te201",
+      "fromNode": "central",
+      "toNode": "t8",
+      "label": "1 | rule 1 | Settled: Map: subtypeOf / supertypeOf"
+    },
+    {
+      "id": "se202",
+      "fromNode": "s15",
+      "toNode": "central",
+      "label": "1 | rule 1 | Settled: Map: subtypeOf / supertypeOf"
+    },
+    {
+      "id": "te203",
+      "fromNode": "central",
+      "toNode": "t0",
+      "label": "1 | rule 1 | Settled: Map: subtypeOf / supertypeOf"
+    },
+    {
+      "id": "se204",
+      "fromNode": "s15",
+      "toNode": "central",
+      "label": "1 | rule 1 | Settled: Map: subtypeOf / supertypeOf"
+    },
+    {
+      "id": "te205",
+      "fromNode": "central",
+      "toNode": "t13",
+      "label": "1 | rule 1 | Settled: Map: subtypeOf / supertypeOf"
+    },
+    {
+      "id": "se206",
+      "fromNode": "s15",
+      "toNode": "central",
+      "label": "1 | rule 1 | Settled: Map: subtypeOf / supertypeOf"
+    },
+    {
+      "id": "te207",
+      "fromNode": "central",
+      "toNode": "t9",
+      "label": "1 | rule 1 | Settled: Map: subtypeOf / supertypeOf"
+    },
+    {
+      "id": "se208",
+      "fromNode": "s17",
+      "toNode": "central",
+      "label": "1 | rule 1 | Settled: Map: subtypeOf / supertypeOf"
+    },
+    {
+      "id": "te209",
+      "fromNode": "central",
+      "toNode": "t6",
+      "label": "1 | rule 1 | Settled: Map: subtypeOf / supertypeOf"
+    },
+    {
+      "id": "se210",
+      "fromNode": "s3",
+      "toNode": "central",
+      "label": "1 | rule 1 | Settled: Map: subtypeOf / supertypeOf"
+    },
+    {
+      "id": "te211",
+      "fromNode": "central",
+      "toNode": "t4",
+      "label": "1 | rule 1 | Settled: Map: subtypeOf / supertypeOf"
+    },
+    {
+      "id": "se212",
+      "fromNode": "s3",
+      "toNode": "central",
+      "label": "1 | rule 1 | Settled: Map: subtypeOf / supertypeOf"
+    },
+    {
+      "id": "te213",
+      "fromNode": "central",
+      "toNode": "t0",
+      "label": "1 | rule 1 | Settled: Map: subtypeOf / supertypeOf"
+    },
+    {
+      "id": "ve214",
+      "fromNode": "central",
+      "toNode": "v0",
+      "label": "no stereotype"
+    }
+  ]
+}

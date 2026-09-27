@@ -1,0 +1,10 @@
+filters:
+  and:
+    - 'file.inFolder("99_System/10_EA Native Translator/05_Translation Rules/Matrix Rules")'
+views:
+  - type: table
+    name: All Matrix Rules
+    order:
+      - file.name
+      - type
+      - status

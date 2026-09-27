@@ -1,0 +1,117 @@
+{
+  "nodes": [
+    {
+      "id": "central",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/01_EA Elements/Requirement/EA Stereotype - performanceRequirement.md",
+      "x": 0,
+      "y": 0,
+      "width": 430,
+      "height": 260
+    },
+    {
+      "id": "c0",
+      "type": "text",
+      "text": "**Outgoing**\\nDependency «deriveReqt»",
+      "x": 600,
+      "y": -650,
+      "width": 300,
+      "height": 130
+    },
+    {
+      "id": "e0",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/01_EA Elements/Requirement/EA Stereotype - requirement.md",
+      "x": 1150,
+      "y": -750,
+      "width": 350,
+      "height": 155
+    },
+    {
+      "id": "c1",
+      "type": "text",
+      "text": "**Incoming**\\nDependency «satisfy»",
+      "x": -920,
+      "y": -650,
+      "width": 300,
+      "height": 130
+    },
+    {
+      "id": "e1",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/01_EA Elements/State/EA Stereotype - System State.md",
+      "x": -1470,
+      "y": -750,
+      "width": 350,
+      "height": 155
+    },
+    {
+      "id": "c2",
+      "type": "text",
+      "text": "**Incoming**\\nRealisation",
+      "x": -920,
+      "y": -440,
+      "width": 300,
+      "height": 130
+    },
+    {
+      "id": "e2",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/01_EA Elements/Class/EA Stereotype - Hardware Component.md",
+      "x": -1470,
+      "y": -565,
+      "width": 350,
+      "height": 155
+    },
+    {
+      "id": "e3",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/01_EA Elements/Class/EA Stereotype - Module.md",
+      "x": -1470,
+      "y": -380,
+      "width": 350,
+      "height": 155
+    }
+  ],
+  "edges": [
+    {
+      "id": "ce0",
+      "fromNode": "central",
+      "toNode": "c0"
+    },
+    {
+      "id": "ce1",
+      "fromNode": "c1",
+      "toNode": "central"
+    },
+    {
+      "id": "ce2",
+      "fromNode": "c2",
+      "toNode": "central"
+    },
+    {
+      "id": "pe3",
+      "fromNode": "c0",
+      "toNode": "e0",
+      "label": "3 | rule 23 | Settled: Map: derivedFrom / derivedBy"
+    },
+    {
+      "id": "pe4",
+      "fromNode": "e1",
+      "toNode": "c1",
+      "label": "1 | rule 17 | Deferred: Deferred: State/StateMachine satisfaction scope"
+    },
+    {
+      "id": "pe5",
+      "fromNode": "e2",
+      "toNode": "c2",
+      "label": "1 | rule 18 | Settled: Map: Requirement appliesTo source element"
+    },
+    {
+      "id": "pe6",
+      "fromNode": "e3",
+      "toNode": "c2",
+      "label": "1 | rule 18 | Settled: Map: Requirement appliesTo source element"
+    }
+  ]
+}
