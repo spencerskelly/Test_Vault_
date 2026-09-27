@@ -3,6 +3,8 @@ uid:
 type: Info
 status: Draft
 ---
+[[Ampure_Data::Cross-Vault Resolver Target]]
+
 
 # Cross-Vault Link Test
 
