@@ -1,0 +1,64 @@
+{
+  "nodes": [
+    {
+      "id": "central",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/01_EA Elements/Event/README_Event.md",
+      "x": 0,
+      "y": 0,
+      "width": 420,
+      "height": 260
+    },
+    {
+      "id": "c0",
+      "type": "text",
+      "text": "**Outgoing**\\nStateFlow",
+      "x": 650,
+      "y": -400,
+      "width": 320,
+      "height": 150
+    },
+    {
+      "id": "e0",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/01_EA Elements/State/EA Stereotype - System State.md",
+      "x": 1200,
+      "y": -600,
+      "width": 360,
+      "height": 180
+    },
+    {
+      "id": "c1",
+      "type": "text",
+      "text": "**Incoming**\\nStateFlow",
+      "x": -650,
+      "y": -400,
+      "width": 320,
+      "height": 150
+    }
+  ],
+  "edges": [
+    {
+      "id": "ec0",
+      "fromNode": "central",
+      "toNode": "c0"
+    },
+    {
+      "id": "ec1",
+      "fromNode": "c1",
+      "toNode": "central"
+    },
+    {
+      "id": "ee2",
+      "fromNode": "c0",
+      "toNode": "e0",
+      "label": "1 | rule 47 | Deferred: Deferred: transition evidence"
+    },
+    {
+      "id": "ee3",
+      "fromNode": "e0",
+      "toNode": "c1",
+      "label": "1 | rule 47 | Deferred: Deferred: transition evidence"
+    }
+  ]
+}

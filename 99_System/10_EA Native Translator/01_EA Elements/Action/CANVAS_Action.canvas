@@ -1,0 +1,400 @@
+{
+  "nodes": [
+    {
+      "id": "central",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/01_EA Elements/Action/README_Action.md",
+      "x": 0,
+      "y": 0,
+      "width": 420,
+      "height": 260
+    },
+    {
+      "id": "c0",
+      "type": "text",
+      "text": "**Incoming**\\nAbstraction «allocate»",
+      "x": -650,
+      "y": -400,
+      "width": 320,
+      "height": 150
+    },
+    {
+      "id": "e0",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/01_EA Elements/Issue/README_Issue.md",
+      "x": -1200,
+      "y": -600,
+      "width": 360,
+      "height": 180
+    },
+    {
+      "id": "c1",
+      "type": "text",
+      "text": "**Outgoing**\\nAbstraction «allocate»",
+      "x": 650,
+      "y": -400,
+      "width": 320,
+      "height": 150
+    },
+    {
+      "id": "e1",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/01_EA Elements/ProxyConnector/README_ProxyConnector.md",
+      "x": 1200,
+      "y": -380,
+      "width": 360,
+      "height": 180
+    },
+    {
+      "id": "e2",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/01_EA Elements/InformationItem/README_InformationItem.md",
+      "x": -1200,
+      "y": -160,
+      "width": 360,
+      "height": 180
+    },
+    {
+      "id": "e3",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/01_EA Elements/Port/EA Element - No Stereotype.md",
+      "x": 1200,
+      "y": 60,
+      "width": 360,
+      "height": 180
+    },
+    {
+      "id": "c2",
+      "type": "text",
+      "text": "**Outgoing**\\nControlFlow",
+      "x": 650,
+      "y": -140,
+      "width": 320,
+      "height": 150
+    },
+    {
+      "id": "e4",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/01_EA Elements/Action/README_Action.md",
+      "x": 1200,
+      "y": 280,
+      "width": 360,
+      "height": 180
+    },
+    {
+      "id": "c3",
+      "type": "text",
+      "text": "**Incoming**\\nControlFlow",
+      "x": -650,
+      "y": -140,
+      "width": 320,
+      "height": 150
+    },
+    {
+      "id": "e5",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/01_EA Elements/Decision/README_Decision.md",
+      "x": -1200,
+      "y": 500,
+      "width": 360,
+      "height": 180
+    },
+    {
+      "id": "e6",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/01_EA Elements/Object/README_Object.md",
+      "x": 1200,
+      "y": 720,
+      "width": 360,
+      "height": 180
+    },
+    {
+      "id": "e7",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/01_EA Elements/Activity/EA Element - No Stereotype.md",
+      "x": 1200,
+      "y": 940,
+      "width": 360,
+      "height": 180
+    },
+    {
+      "id": "e8",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/01_EA Elements/StateNode/README_StateNode.md",
+      "x": -1200,
+      "y": -560,
+      "width": 360,
+      "height": 180
+    },
+    {
+      "id": "e9",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/01_EA Elements/State/EA Stereotype - System State.md",
+      "x": 1200,
+      "y": -340,
+      "width": 360,
+      "height": 180
+    },
+    {
+      "id": "e10",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/01_EA Elements/Requirement/EA Element - No Stereotype.md",
+      "x": 1200,
+      "y": -120,
+      "width": 360,
+      "height": 180
+    },
+    {
+      "id": "c4",
+      "type": "text",
+      "text": "**Outgoing**\\nDependency",
+      "x": 650,
+      "y": 120,
+      "width": 320,
+      "height": 150
+    },
+    {
+      "id": "e11",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/01_EA Elements/Class/EA Stereotype - Hardware Component.md",
+      "x": 1200,
+      "y": 100,
+      "width": 360,
+      "height": 180
+    },
+    {
+      "id": "e12",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/01_EA Elements/Class/EA Stereotype - Physical Component.md",
+      "x": 1200,
+      "y": 320,
+      "width": 360,
+      "height": 180
+    },
+    {
+      "id": "c5",
+      "type": "text",
+      "text": "**Incoming**\\nDependency «refine»",
+      "x": -650,
+      "y": 120,
+      "width": 320,
+      "height": 150
+    },
+    {
+      "id": "c6",
+      "type": "text",
+      "text": "**Outgoing**\\nDependency «satisfy»",
+      "x": 650,
+      "y": 380,
+      "width": 320,
+      "height": 150
+    },
+    {
+      "id": "e13",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/01_EA Elements/Requirement/EA Stereotype - requirement.md",
+      "x": 1200,
+      "y": 540,
+      "width": 360,
+      "height": 180
+    },
+    {
+      "id": "c7",
+      "type": "text",
+      "text": "**Outgoing**\\nDependency «trace»",
+      "x": 650,
+      "y": 640,
+      "width": 320,
+      "height": 150
+    },
+    {
+      "id": "e14",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/01_EA Elements/Artifact/EA Stereotype - Image.md",
+      "x": 1200,
+      "y": 760,
+      "width": 360,
+      "height": 180
+    }
+  ],
+  "edges": [
+    {
+      "id": "ec0",
+      "fromNode": "c0",
+      "toNode": "central"
+    },
+    {
+      "id": "ec1",
+      "fromNode": "central",
+      "toNode": "c1"
+    },
+    {
+      "id": "ec2",
+      "fromNode": "central",
+      "toNode": "c2"
+    },
+    {
+      "id": "ec3",
+      "fromNode": "c3",
+      "toNode": "central"
+    },
+    {
+      "id": "ec4",
+      "fromNode": "central",
+      "toNode": "c4"
+    },
+    {
+      "id": "ec5",
+      "fromNode": "c5",
+      "toNode": "central"
+    },
+    {
+      "id": "ec6",
+      "fromNode": "central",
+      "toNode": "c6"
+    },
+    {
+      "id": "ec7",
+      "fromNode": "central",
+      "toNode": "c7"
+    },
+    {
+      "id": "ee8",
+      "fromNode": "e0",
+      "toNode": "c0",
+      "label": "20 | rule 53 | Review: Review: allocate endpoint pattern"
+    },
+    {
+      "id": "ee9",
+      "fromNode": "c1",
+      "toNode": "e1",
+      "label": "2 | rule 53 | Review: Review: allocate endpoint pattern"
+    },
+    {
+      "id": "ee10",
+      "fromNode": "e2",
+      "toNode": "c0",
+      "label": "2 | rule 53 | Review: Review: allocate endpoint pattern"
+    },
+    {
+      "id": "ee11",
+      "fromNode": "c1",
+      "toNode": "e3",
+      "label": "1 | rule 53 | Review: Review: allocate endpoint pattern"
+    },
+    {
+      "id": "ee12",
+      "fromNode": "c2",
+      "toNode": "e4",
+      "label": "104 | rule 44 | Deferred: Deferred: local flow detail"
+    },
+    {
+      "id": "ee13",
+      "fromNode": "e5",
+      "toNode": "c3",
+      "label": "9 | rule 44 | Deferred: Deferred: local flow detail"
+    },
+    {
+      "id": "ee14",
+      "fromNode": "c2",
+      "toNode": "e6",
+      "label": "6 | rule 44 | Deferred: Deferred: local flow detail"
+    },
+    {
+      "id": "ee15",
+      "fromNode": "c2",
+      "toNode": "e7",
+      "label": "4 | rule 44 | Deferred: Deferred: local flow detail"
+    },
+    {
+      "id": "ee16",
+      "fromNode": "e6",
+      "toNode": "c3",
+      "label": "4 | rule 44 | Deferred: Deferred: local flow detail"
+    },
+    {
+      "id": "ee17",
+      "fromNode": "e8",
+      "toNode": "c3",
+      "label": "4 | rule 44 | Deferred: Deferred: local flow detail"
+    },
+    {
+      "id": "ee18",
+      "fromNode": "c2",
+      "toNode": "e5",
+      "label": "3 | rule 44 | Deferred: Deferred: local flow detail"
+    },
+    {
+      "id": "ee19",
+      "fromNode": "c2",
+      "toNode": "e8",
+      "label": "3 | rule 44 | Deferred: Deferred: local flow detail"
+    },
+    {
+      "id": "ee20",
+      "fromNode": "c2",
+      "toNode": "e9",
+      "label": "2 | rule 44 | Deferred: Deferred: local flow detail"
+    },
+    {
+      "id": "ee21",
+      "fromNode": "e7",
+      "toNode": "c3",
+      "label": "2 | rule 44 | Deferred: Deferred: local flow detail"
+    },
+    {
+      "id": "ee22",
+      "fromNode": "e9",
+      "toNode": "c3",
+      "label": "2 | rule 44 | Deferred: Deferred: local flow detail"
+    },
+    {
+      "id": "ee23",
+      "fromNode": "c2",
+      "toNode": "e10",
+      "label": "1 | rule 44 | Deferred: Deferred: local flow detail"
+    },
+    {
+      "id": "ee24",
+      "fromNode": "e0",
+      "toNode": "c3",
+      "label": "1 | rule 44 | Deferred: Deferred: local flow detail"
+    },
+    {
+      "id": "ee25",
+      "fromNode": "c4",
+      "toNode": "e11",
+      "label": "2 | rule 58 | Review: Review: Dependency endpoint pattern"
+    },
+    {
+      "id": "ee26",
+      "fromNode": "c4",
+      "toNode": "e12",
+      "label": "1 | rule 58 | Review: Review: Dependency endpoint pattern"
+    },
+    {
+      "id": "ee27",
+      "fromNode": "e2",
+      "toNode": "c5",
+      "label": "2 | rule 65 | Settled: Map: describes / describedBy (non-Requirement refinement)"
+    },
+    {
+      "id": "ee28",
+      "fromNode": "c6",
+      "toNode": "e13",
+      "label": "5 | rule 54 | Review: Review: satisfy endpoint pattern"
+    },
+    {
+      "id": "ee29",
+      "fromNode": "c6",
+      "toNode": "e10",
+      "label": "1 | rule 54 | Review: Review: satisfy endpoint pattern"
+    },
+    {
+      "id": "ee30",
+      "fromNode": "c7",
+      "toNode": "e14",
+      "label": "1 | rule 50 | Review: Review: trace endpoint pattern"
+    }
+  ]
+}

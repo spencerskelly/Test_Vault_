@@ -1,0 +1,124 @@
+{
+  "nodes": [
+    {
+      "id": "central",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/01_EA Elements/MISSING Endpoint/README_MISSING Endpoint.md",
+      "x": 0,
+      "y": 0,
+      "width": 420,
+      "height": 260
+    },
+    {
+      "id": "c0",
+      "type": "text",
+      "text": "**Outgoing**\\nAbstraction «allocate»",
+      "x": 650,
+      "y": -400,
+      "width": 320,
+      "height": 150
+    },
+    {
+      "id": "e0",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/01_EA Elements/MISSING Endpoint/README_MISSING Endpoint.md",
+      "x": 1200,
+      "y": -600,
+      "width": 360,
+      "height": 180
+    },
+    {
+      "id": "c1",
+      "type": "text",
+      "text": "**Outgoing**\\nConnector",
+      "x": 650,
+      "y": -140,
+      "width": 320,
+      "height": 150
+    },
+    {
+      "id": "c2",
+      "type": "text",
+      "text": "**Outgoing**\\nDependency «satisfy»",
+      "x": 650,
+      "y": 120,
+      "width": 320,
+      "height": 150
+    },
+    {
+      "id": "c3",
+      "type": "text",
+      "text": "**Outgoing**\\nGeneralization",
+      "x": 650,
+      "y": 380,
+      "width": 320,
+      "height": 150
+    },
+    {
+      "id": "c4",
+      "type": "text",
+      "text": "**Outgoing**\\nUseCase «extend»",
+      "x": 650,
+      "y": 640,
+      "width": 320,
+      "height": 150
+    }
+  ],
+  "edges": [
+    {
+      "id": "ec0",
+      "fromNode": "central",
+      "toNode": "c0"
+    },
+    {
+      "id": "ec1",
+      "fromNode": "central",
+      "toNode": "c1"
+    },
+    {
+      "id": "ec2",
+      "fromNode": "central",
+      "toNode": "c2"
+    },
+    {
+      "id": "ec3",
+      "fromNode": "central",
+      "toNode": "c3"
+    },
+    {
+      "id": "ec4",
+      "fromNode": "central",
+      "toNode": "c4"
+    },
+    {
+      "id": "ee5",
+      "fromNode": "c0",
+      "toNode": "e0",
+      "label": "2 | rule 71 | Exception: Review — endpoint missing from t_object"
+    },
+    {
+      "id": "ee6",
+      "fromNode": "c1",
+      "toNode": "e0",
+      "label": "1 | rule 71 | Exception: Review — endpoint missing from t_object"
+    },
+    {
+      "id": "ee7",
+      "fromNode": "c2",
+      "toNode": "e0",
+      "label": "4 | rule 71 | Exception: Review — endpoint missing from t_object"
+    },
+    {
+      "id": "ee8",
+      "fromNode": "c3",
+      "toNode": "e0",
+      "label": "1 | rule 71 | Exception: Review — endpoint missing from t_object"
+    },
+    {
+      "id": "ee9",
+      "fromNode": "c4",
+      "toNode": "e0",
+      "label": "1 | rule 71 | Exception: Review — endpoint missing from t_object"
+    }
+  ]
+}
