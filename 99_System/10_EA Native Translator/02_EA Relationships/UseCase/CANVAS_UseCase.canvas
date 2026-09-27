@@ -67,90 +67,90 @@
       "id": "v0",
       "type": "file",
       "file": "99_System/10_EA Native Translator/02_EA Relationships/UseCase/EA Relationship Stereotype - extend.md",
-      "x": 30,
-      "y": -380,
-      "width": 250,
+      "x": -280,
+      "y": -390,
+      "width": 260,
       "height": 130
     },
     {
       "id": "v1",
       "type": "file",
       "file": "99_System/10_EA Native Translator/02_EA Relationships/UseCase/EA Relationship Stereotype - include.md",
-      "x": 310,
-      "y": -380,
-      "width": 250,
+      "x": 20,
+      "y": -390,
+      "width": 260,
       "height": 130
     }
   ],
   "edges": [
     {
-      "id": "se0",
+      "id": "a0",
       "fromNode": "s0",
       "toNode": "central",
       "label": "733 | rule 30 | Settled: Map: optionOf / hasOption"
     },
     {
-      "id": "te1",
+      "id": "b1",
       "fromNode": "central",
       "toNode": "t0",
       "label": "733 | rule 30 | Settled: Map: optionOf / hasOption"
     },
     {
-      "id": "se2",
+      "id": "a2",
       "fromNode": "s1",
       "toNode": "central",
       "label": "2 | rule 60 | Review: Review: extend endpoint pattern"
     },
     {
-      "id": "te3",
+      "id": "b3",
       "fromNode": "central",
       "toNode": "t0",
       "label": "2 | rule 60 | Review: Review: extend endpoint pattern"
     },
     {
-      "id": "se4",
+      "id": "a4",
       "fromNode": "s2",
       "toNode": "central",
       "label": "1 | rule 71 | Exception: Review — endpoint missing from t_object"
     },
     {
-      "id": "te5",
+      "id": "b5",
       "fromNode": "central",
       "toNode": "t1",
       "label": "1 | rule 71 | Exception: Review — endpoint missing from t_object"
     },
     {
-      "id": "se6",
+      "id": "a6",
       "fromNode": "s0",
       "toNode": "central",
       "label": "521 | rule 31 | Review: Review: required constituent Use Case decomposition"
     },
     {
-      "id": "te7",
+      "id": "b7",
       "fromNode": "central",
       "toNode": "t0",
       "label": "521 | rule 31 | Review: Review: required constituent Use Case decomposition"
     },
     {
-      "id": "se8",
+      "id": "a8",
       "fromNode": "s0",
       "toNode": "central",
       "label": "1 | rule 61 | Review: Review: include endpoint pattern"
     },
     {
-      "id": "te9",
+      "id": "b9",
       "fromNode": "central",
       "toNode": "t2",
       "label": "1 | rule 61 | Review: Review: include endpoint pattern"
     },
     {
-      "id": "ve10",
+      "id": "v10",
       "fromNode": "central",
       "toNode": "v0",
       "label": "extend"
     },
     {
-      "id": "ve11",
+      "id": "v11",
       "fromNode": "central",
       "toNode": "v1",
       "label": "include"

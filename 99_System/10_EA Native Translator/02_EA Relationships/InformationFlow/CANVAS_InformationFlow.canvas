@@ -67,75 +67,75 @@
       "id": "v0",
       "type": "file",
       "file": "99_System/10_EA Native Translator/02_EA Relationships/InformationFlow/EA Relationship Stereotype - itemFlow.md",
-      "x": 30,
-      "y": -380,
-      "width": 250,
+      "x": -280,
+      "y": -390,
+      "width": 260,
       "height": 130
     }
   ],
   "edges": [
     {
-      "id": "se0",
+      "id": "a0",
       "fromNode": "s0",
       "toNode": "central",
       "label": "110 | rule 42 | Deferred: Deferred: Item Flow import postponed"
     },
     {
-      "id": "te1",
+      "id": "b1",
       "fromNode": "central",
       "toNode": "t0",
       "label": "110 | rule 42 | Deferred: Deferred: Item Flow import postponed"
     },
     {
-      "id": "se2",
+      "id": "a2",
       "fromNode": "s1",
       "toNode": "central",
       "label": "5 | rule 42 | Deferred: Deferred: Item Flow import postponed"
     },
     {
-      "id": "te3",
+      "id": "b3",
       "fromNode": "central",
       "toNode": "t0",
       "label": "5 | rule 42 | Deferred: Deferred: Item Flow import postponed"
     },
     {
-      "id": "se4",
+      "id": "a4",
       "fromNode": "s0",
       "toNode": "central",
       "label": "4 | rule 42 | Deferred: Deferred: Item Flow import postponed"
     },
     {
-      "id": "te5",
+      "id": "b5",
       "fromNode": "central",
       "toNode": "t1",
       "label": "4 | rule 42 | Deferred: Deferred: Item Flow import postponed"
     },
     {
-      "id": "se6",
+      "id": "a6",
       "fromNode": "s0",
       "toNode": "central",
       "label": "2 | rule 42 | Deferred: Deferred: Item Flow import postponed"
     },
     {
-      "id": "te7",
+      "id": "b7",
       "fromNode": "central",
       "toNode": "t2",
       "label": "2 | rule 42 | Deferred: Deferred: Item Flow import postponed"
     },
     {
-      "id": "se8",
+      "id": "a8",
       "fromNode": "s2",
       "toNode": "central",
       "label": "2 | rule 42 | Deferred: Deferred: Item Flow import postponed"
     },
     {
-      "id": "te9",
+      "id": "b9",
       "fromNode": "central",
       "toNode": "t0",
       "label": "2 | rule 42 | Deferred: Deferred: Item Flow import postponed"
     },
     {
-      "id": "ve10",
+      "id": "v10",
       "fromNode": "central",
       "toNode": "v0",
       "label": "itemFlow"

@@ -273,589 +273,589 @@
   ],
   "edges": [
     {
-      "id": "se0",
+      "id": "a0",
       "fromNode": "s0",
       "toNode": "central",
       "label": "364 | rule 17 | Deferred: Deferred: State/StateMachine satisfaction scope"
     },
     {
-      "id": "te1",
+      "id": "b1",
       "fromNode": "central",
       "toNode": "t0",
       "label": "364 | rule 17 | Deferred: Deferred: State/StateMachine satisfaction scope"
     },
     {
-      "id": "se2",
+      "id": "a2",
       "fromNode": "s0",
       "toNode": "central",
       "label": "340 | rule 17 | Deferred: Deferred: State/StateMachine satisfaction scope"
     },
     {
-      "id": "te3",
+      "id": "b3",
       "fromNode": "central",
       "toNode": "t1",
       "label": "340 | rule 17 | Deferred: Deferred: State/StateMachine satisfaction scope"
     },
     {
-      "id": "se4",
+      "id": "a4",
       "fromNode": "s1",
       "toNode": "central",
       "label": "336 | rule 54 | Review: Review: satisfy endpoint pattern"
     },
     {
-      "id": "te5",
+      "id": "b5",
       "fromNode": "central",
       "toNode": "t0",
       "label": "336 | rule 54 | Review: Review: satisfy endpoint pattern"
     },
     {
-      "id": "se6",
+      "id": "a6",
       "fromNode": "s2",
       "toNode": "central",
       "label": "224 | rule 15 | Settled: Map: satisfies / satisfiedBy"
     },
     {
-      "id": "te7",
+      "id": "b7",
       "fromNode": "central",
       "toNode": "t2",
       "label": "224 | rule 15 | Settled: Map: satisfies / satisfiedBy"
     },
     {
-      "id": "se8",
+      "id": "a8",
       "fromNode": "s1",
       "toNode": "central",
       "label": "196 | rule 54 | Review: Review: satisfy endpoint pattern"
     },
     {
-      "id": "te9",
+      "id": "b9",
       "fromNode": "central",
       "toNode": "t2",
       "label": "196 | rule 54 | Review: Review: satisfy endpoint pattern"
     },
     {
-      "id": "se10",
+      "id": "a10",
       "fromNode": "s2",
       "toNode": "central",
       "label": "185 | rule 15 | Settled: Map: satisfies / satisfiedBy"
     },
     {
-      "id": "te11",
+      "id": "b11",
       "fromNode": "central",
       "toNode": "t0",
       "label": "185 | rule 15 | Settled: Map: satisfies / satisfiedBy"
     },
     {
-      "id": "se12",
+      "id": "a12",
       "fromNode": "s3",
       "toNode": "central",
       "label": "176 | rule 17 | Deferred: Deferred: State/StateMachine satisfaction scope"
     },
     {
-      "id": "te13",
+      "id": "b13",
       "fromNode": "central",
       "toNode": "t0",
       "label": "176 | rule 17 | Deferred: Deferred: State/StateMachine satisfaction scope"
     },
     {
-      "id": "se14",
+      "id": "a14",
       "fromNode": "s1",
       "toNode": "central",
       "label": "160 | rule 54 | Review: Review: satisfy endpoint pattern"
     },
     {
-      "id": "te15",
+      "id": "b15",
       "fromNode": "central",
       "toNode": "t3",
       "label": "160 | rule 54 | Review: Review: satisfy endpoint pattern"
     },
     {
-      "id": "se16",
+      "id": "a16",
       "fromNode": "s2",
       "toNode": "central",
       "label": "88 | rule 15 | Settled: Map: satisfies / satisfiedBy"
     },
     {
-      "id": "te17",
+      "id": "b17",
       "fromNode": "central",
       "toNode": "t3",
       "label": "88 | rule 15 | Settled: Map: satisfies / satisfiedBy"
     },
     {
-      "id": "se18",
+      "id": "a18",
       "fromNode": "s3",
       "toNode": "central",
       "label": "60 | rule 17 | Deferred: Deferred: State/StateMachine satisfaction scope"
     },
     {
-      "id": "te19",
+      "id": "b19",
       "fromNode": "central",
       "toNode": "t1",
       "label": "60 | rule 17 | Deferred: Deferred: State/StateMachine satisfaction scope"
     },
     {
-      "id": "se20",
+      "id": "a20",
       "fromNode": "s0",
       "toNode": "central",
       "label": "53 | rule 17 | Deferred: Deferred: State/StateMachine satisfaction scope"
     },
     {
-      "id": "te21",
+      "id": "b21",
       "fromNode": "central",
       "toNode": "t4",
       "label": "53 | rule 17 | Deferred: Deferred: State/StateMachine satisfaction scope"
     },
     {
-      "id": "se22",
+      "id": "a22",
       "fromNode": "s4",
       "toNode": "central",
       "label": "49 | rule 15 | Settled: Map: satisfies / satisfiedBy"
     },
     {
-      "id": "te23",
+      "id": "b23",
       "fromNode": "central",
       "toNode": "t0",
       "label": "49 | rule 15 | Settled: Map: satisfies / satisfiedBy"
     },
     {
-      "id": "se24",
+      "id": "a24",
       "fromNode": "s4",
       "toNode": "central",
       "label": "31 | rule 15 | Settled: Map: satisfies / satisfiedBy"
     },
     {
-      "id": "te25",
+      "id": "b25",
       "fromNode": "central",
       "toNode": "t2",
       "label": "31 | rule 15 | Settled: Map: satisfies / satisfiedBy"
     },
     {
-      "id": "se26",
+      "id": "a26",
       "fromNode": "s0",
       "toNode": "central",
       "label": "30 | rule 17 | Deferred: Deferred: State/StateMachine satisfaction scope"
     },
     {
-      "id": "te27",
+      "id": "b27",
       "fromNode": "central",
       "toNode": "t3",
       "label": "30 | rule 17 | Deferred: Deferred: State/StateMachine satisfaction scope"
     },
     {
-      "id": "se28",
+      "id": "a28",
       "fromNode": "s5",
       "toNode": "central",
       "label": "22 | rule 15 | Settled: Map: satisfies / satisfiedBy"
     },
     {
-      "id": "te29",
+      "id": "b29",
       "fromNode": "central",
       "toNode": "t0",
       "label": "22 | rule 15 | Settled: Map: satisfies / satisfiedBy"
     },
     {
-      "id": "se30",
+      "id": "a30",
       "fromNode": "s1",
       "toNode": "central",
       "label": "20 | rule 54 | Review: Review: satisfy endpoint pattern"
     },
     {
-      "id": "te31",
+      "id": "b31",
       "fromNode": "central",
       "toNode": "t1",
       "label": "20 | rule 54 | Review: Review: satisfy endpoint pattern"
     },
     {
-      "id": "se32",
+      "id": "a32",
       "fromNode": "s6",
       "toNode": "central",
       "label": "13 | rule 15 | Settled: Map: satisfies / satisfiedBy"
     },
     {
-      "id": "te33",
+      "id": "b33",
       "fromNode": "central",
       "toNode": "t0",
       "label": "13 | rule 15 | Settled: Map: satisfies / satisfiedBy"
     },
     {
-      "id": "se34",
+      "id": "a34",
       "fromNode": "s5",
       "toNode": "central",
       "label": "12 | rule 15 | Settled: Map: satisfies / satisfiedBy"
     },
     {
-      "id": "te35",
+      "id": "b35",
       "fromNode": "central",
       "toNode": "t2",
       "label": "12 | rule 15 | Settled: Map: satisfies / satisfiedBy"
     },
     {
-      "id": "se36",
+      "id": "a36",
       "fromNode": "s0",
       "toNode": "central",
       "label": "9 | rule 17 | Deferred: Deferred: State/StateMachine satisfaction scope"
     },
     {
-      "id": "te37",
+      "id": "b37",
       "fromNode": "central",
       "toNode": "t2",
       "label": "9 | rule 17 | Deferred: Deferred: State/StateMachine satisfaction scope"
     },
     {
-      "id": "se38",
+      "id": "a38",
       "fromNode": "s6",
       "toNode": "central",
       "label": "8 | rule 15 | Settled: Map: satisfies / satisfiedBy"
     },
     {
-      "id": "te39",
+      "id": "b39",
       "fromNode": "central",
       "toNode": "t2",
       "label": "8 | rule 15 | Settled: Map: satisfies / satisfiedBy"
     },
     {
-      "id": "se40",
+      "id": "a40",
       "fromNode": "s2",
       "toNode": "central",
       "label": "8 | rule 15 | Settled: Map: satisfies / satisfiedBy"
     },
     {
-      "id": "te41",
+      "id": "b41",
       "fromNode": "central",
       "toNode": "t1",
       "label": "8 | rule 15 | Settled: Map: satisfies / satisfiedBy"
     },
     {
-      "id": "se42",
+      "id": "a42",
       "fromNode": "s3",
       "toNode": "central",
       "label": "8 | rule 17 | Deferred: Deferred: State/StateMachine satisfaction scope"
     },
     {
-      "id": "te43",
+      "id": "b43",
       "fromNode": "central",
       "toNode": "t3",
       "label": "8 | rule 17 | Deferred: Deferred: State/StateMachine satisfaction scope"
     },
     {
-      "id": "se44",
+      "id": "a44",
       "fromNode": "s6",
       "toNode": "central",
       "label": "7 | rule 15 | Settled: Map: satisfies / satisfiedBy"
     },
     {
-      "id": "te45",
+      "id": "b45",
       "fromNode": "central",
       "toNode": "t3",
       "label": "7 | rule 15 | Settled: Map: satisfies / satisfiedBy"
     },
     {
-      "id": "se46",
+      "id": "a46",
       "fromNode": "s7",
       "toNode": "central",
       "label": "5 | rule 54 | Review: Review: satisfy endpoint pattern"
     },
     {
-      "id": "te47",
+      "id": "b47",
       "fromNode": "central",
       "toNode": "t0",
       "label": "5 | rule 54 | Review: Review: satisfy endpoint pattern"
     },
     {
-      "id": "se48",
+      "id": "a48",
       "fromNode": "s8",
       "toNode": "central",
       "label": "4 | rule 71 | Exception: Review — endpoint missing from t_object"
     },
     {
-      "id": "te49",
+      "id": "b49",
       "fromNode": "central",
       "toNode": "t5",
       "label": "4 | rule 71 | Exception: Review — endpoint missing from t_object"
     },
     {
-      "id": "se50",
+      "id": "a50",
       "fromNode": "s4",
       "toNode": "central",
       "label": "3 | rule 15 | Settled: Map: satisfies / satisfiedBy"
     },
     {
-      "id": "te51",
+      "id": "b51",
       "fromNode": "central",
       "toNode": "t3",
       "label": "3 | rule 15 | Settled: Map: satisfies / satisfiedBy"
     },
     {
-      "id": "se52",
+      "id": "a52",
       "fromNode": "s2",
       "toNode": "central",
       "label": "3 | rule 15 | Settled: Map: satisfies / satisfiedBy"
     },
     {
-      "id": "te53",
+      "id": "b53",
       "fromNode": "central",
       "toNode": "t4",
       "label": "3 | rule 15 | Settled: Map: satisfies / satisfiedBy"
     },
     {
-      "id": "se54",
+      "id": "a54",
       "fromNode": "s3",
       "toNode": "central",
       "label": "3 | rule 17 | Deferred: Deferred: State/StateMachine satisfaction scope"
     },
     {
-      "id": "te55",
+      "id": "b55",
       "fromNode": "central",
       "toNode": "t2",
       "label": "3 | rule 17 | Deferred: Deferred: State/StateMachine satisfaction scope"
     },
     {
-      "id": "se56",
+      "id": "a56",
       "fromNode": "s4",
       "toNode": "central",
       "label": "2 | rule 15 | Settled: Map: satisfies / satisfiedBy"
     },
     {
-      "id": "te57",
+      "id": "b57",
       "fromNode": "central",
       "toNode": "t6",
       "label": "2 | rule 15 | Settled: Map: satisfies / satisfiedBy"
     },
     {
-      "id": "se58",
+      "id": "a58",
       "fromNode": "s4",
       "toNode": "central",
       "label": "2 | rule 15 | Settled: Map: satisfies / satisfiedBy"
     },
     {
-      "id": "te59",
+      "id": "b59",
       "fromNode": "central",
       "toNode": "t1",
       "label": "2 | rule 15 | Settled: Map: satisfies / satisfiedBy"
     },
     {
-      "id": "se60",
+      "id": "a60",
       "fromNode": "s5",
       "toNode": "central",
       "label": "2 | rule 15 | Settled: Map: satisfies / satisfiedBy"
     },
     {
-      "id": "te61",
+      "id": "b61",
       "fromNode": "central",
       "toNode": "t1",
       "label": "2 | rule 15 | Settled: Map: satisfies / satisfiedBy"
     },
     {
-      "id": "se62",
+      "id": "a62",
       "fromNode": "s9",
       "toNode": "central",
       "label": "2 | rule 54 | Review: Review: satisfy endpoint pattern"
     },
     {
-      "id": "te63",
+      "id": "b63",
       "fromNode": "central",
       "toNode": "t0",
       "label": "2 | rule 54 | Review: Review: satisfy endpoint pattern"
     },
     {
-      "id": "se64",
+      "id": "a64",
       "fromNode": "s0",
       "toNode": "central",
       "label": "2 | rule 17 | Deferred: Deferred: State/StateMachine satisfaction scope"
     },
     {
-      "id": "te65",
+      "id": "b65",
       "fromNode": "central",
       "toNode": "t7",
       "label": "2 | rule 17 | Deferred: Deferred: State/StateMachine satisfaction scope"
     },
     {
-      "id": "se66",
+      "id": "a66",
       "fromNode": "s0",
       "toNode": "central",
       "label": "2 | rule 54 | Review: Review: satisfy endpoint pattern"
     },
     {
-      "id": "te67",
+      "id": "b67",
       "fromNode": "central",
       "toNode": "t8",
       "label": "2 | rule 54 | Review: Review: satisfy endpoint pattern"
     },
     {
-      "id": "se68",
+      "id": "a68",
       "fromNode": "s7",
       "toNode": "central",
       "label": "1 | rule 54 | Review: Review: satisfy endpoint pattern"
     },
     {
-      "id": "te69",
+      "id": "b69",
       "fromNode": "central",
       "toNode": "t3",
       "label": "1 | rule 54 | Review: Review: satisfy endpoint pattern"
     },
     {
-      "id": "se70",
+      "id": "a70",
       "fromNode": "s1",
       "toNode": "central",
       "label": "1 | rule 54 | Review: Review: satisfy endpoint pattern"
     },
     {
-      "id": "te71",
+      "id": "b71",
       "fromNode": "central",
       "toNode": "t4",
       "label": "1 | rule 54 | Review: Review: satisfy endpoint pattern"
     },
     {
-      "id": "se72",
+      "id": "a72",
       "fromNode": "s6",
       "toNode": "central",
       "label": "1 | rule 54 | Review: Review: satisfy endpoint pattern"
     },
     {
-      "id": "te73",
+      "id": "b73",
       "fromNode": "central",
       "toNode": "t9",
       "label": "1 | rule 54 | Review: Review: satisfy endpoint pattern"
     },
     {
-      "id": "se74",
+      "id": "a74",
       "fromNode": "s2",
       "toNode": "central",
       "label": "1 | rule 54 | Review: Review: satisfy endpoint pattern"
     },
     {
-      "id": "te75",
+      "id": "b75",
       "fromNode": "central",
       "toNode": "t9",
       "label": "1 | rule 54 | Review: Review: satisfy endpoint pattern"
     },
     {
-      "id": "se76",
+      "id": "a76",
       "fromNode": "s10",
       "toNode": "central",
       "label": "1 | rule 54 | Review: Review: satisfy endpoint pattern"
     },
     {
-      "id": "te77",
+      "id": "b77",
       "fromNode": "central",
       "toNode": "t4",
       "label": "1 | rule 54 | Review: Review: satisfy endpoint pattern"
     },
     {
-      "id": "se78",
+      "id": "a78",
       "fromNode": "s11",
       "toNode": "central",
       "label": "1 | rule 54 | Review: Review: satisfy endpoint pattern"
     },
     {
-      "id": "te79",
+      "id": "b79",
       "fromNode": "central",
       "toNode": "t3",
       "label": "1 | rule 54 | Review: Review: satisfy endpoint pattern"
     },
     {
-      "id": "se80",
+      "id": "a80",
       "fromNode": "s11",
       "toNode": "central",
       "label": "1 | rule 54 | Review: Review: satisfy endpoint pattern"
     },
     {
-      "id": "te81",
+      "id": "b81",
       "fromNode": "central",
       "toNode": "t4",
       "label": "1 | rule 54 | Review: Review: satisfy endpoint pattern"
     },
     {
-      "id": "se82",
+      "id": "a82",
       "fromNode": "s12",
       "toNode": "central",
       "label": "1 | rule 54 | Review: Review: satisfy endpoint pattern"
     },
     {
-      "id": "te83",
+      "id": "b83",
       "fromNode": "central",
       "toNode": "t0",
       "label": "1 | rule 54 | Review: Review: satisfy endpoint pattern"
     },
     {
-      "id": "se84",
+      "id": "a84",
       "fromNode": "s13",
       "toNode": "central",
       "label": "1 | rule 54 | Review: Review: satisfy endpoint pattern"
     },
     {
-      "id": "te85",
+      "id": "b85",
       "fromNode": "central",
       "toNode": "t10",
       "label": "1 | rule 54 | Review: Review: satisfy endpoint pattern"
     },
     {
-      "id": "se86",
+      "id": "a86",
       "fromNode": "s13",
       "toNode": "central",
       "label": "1 | rule 54 | Review: Review: satisfy endpoint pattern"
     },
     {
-      "id": "te87",
+      "id": "b87",
       "fromNode": "central",
       "toNode": "t0",
       "label": "1 | rule 54 | Review: Review: satisfy endpoint pattern"
     },
     {
-      "id": "se88",
+      "id": "a88",
       "fromNode": "s13",
       "toNode": "central",
       "label": "1 | rule 54 | Review: Review: satisfy endpoint pattern"
     },
     {
-      "id": "te89",
+      "id": "b89",
       "fromNode": "central",
       "toNode": "t11",
       "label": "1 | rule 54 | Review: Review: satisfy endpoint pattern"
     },
     {
-      "id": "se90",
+      "id": "a90",
       "fromNode": "s3",
       "toNode": "central",
       "label": "1 | rule 17 | Deferred: Deferred: State/StateMachine satisfaction scope"
     },
     {
-      "id": "te91",
+      "id": "b91",
       "fromNode": "central",
       "toNode": "t12",
       "label": "1 | rule 17 | Deferred: Deferred: State/StateMachine satisfaction scope"
     },
     {
-      "id": "se92",
+      "id": "a92",
       "fromNode": "s0",
       "toNode": "central",
       "label": "1 | rule 54 | Review: Review: satisfy endpoint pattern"
     },
     {
-      "id": "te93",
+      "id": "b93",
       "fromNode": "central",
       "toNode": "t13",
       "label": "1 | rule 54 | Review: Review: satisfy endpoint pattern"
     },
     {
-      "id": "se94",
+      "id": "a94",
       "fromNode": "s0",
       "toNode": "central",
       "label": "1 | rule 17 | Deferred: Deferred: State/StateMachine satisfaction scope"
     },
     {
-      "id": "te95",
+      "id": "b95",
       "fromNode": "central",
       "toNode": "t12",
       "label": "1 | rule 17 | Deferred: Deferred: State/StateMachine satisfaction scope"
     },
     {
-      "id": "se96",
+      "id": "a96",
       "fromNode": "s0",
       "toNode": "central",
       "label": "1 | rule 17 | Deferred: Deferred: State/StateMachine satisfaction scope"
     },
     {
-      "id": "te97",
+      "id": "b97",
       "fromNode": "central",
       "toNode": "t14",
       "label": "1 | rule 17 | Deferred: Deferred: State/StateMachine satisfaction scope"

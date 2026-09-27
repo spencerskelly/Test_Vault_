@@ -427,1119 +427,1119 @@
       "id": "v0",
       "type": "file",
       "file": "99_System/10_EA Native Translator/02_EA Relationships/Aggregation/README_Aggregation.md",
-      "x": 30,
-      "y": -380,
-      "width": 250,
+      "x": -280,
+      "y": -390,
+      "width": 260,
       "height": 130
     }
   ],
   "edges": [
     {
-      "id": "se0",
+      "id": "a0",
       "fromNode": "s0",
       "toNode": "central",
       "label": "371 | rule 2 | Settled: Map: partOf / hasPart"
     },
     {
-      "id": "te1",
+      "id": "b1",
       "fromNode": "central",
       "toNode": "t0",
       "label": "371 | rule 2 | Settled: Map: partOf / hasPart"
     },
     {
-      "id": "se2",
+      "id": "a2",
       "fromNode": "s0",
       "toNode": "central",
       "label": "350 | rule 2 | Settled: Map: partOf / hasPart"
     },
     {
-      "id": "te3",
+      "id": "b3",
       "fromNode": "central",
       "toNode": "t1",
       "label": "350 | rule 2 | Settled: Map: partOf / hasPart"
     },
     {
-      "id": "se4",
+      "id": "a4",
       "fromNode": "s1",
       "toNode": "central",
       "label": "279 | rule 2 | Settled: Map: partOf / hasPart"
     },
     {
-      "id": "te5",
+      "id": "b5",
       "fromNode": "central",
       "toNode": "t2",
       "label": "279 | rule 2 | Settled: Map: partOf / hasPart"
     },
     {
-      "id": "se6",
+      "id": "a6",
       "fromNode": "s2",
       "toNode": "central",
       "label": "195 | rule 2 | Settled: Map: partOf / hasPart"
     },
     {
-      "id": "te7",
+      "id": "b7",
       "fromNode": "central",
       "toNode": "t3",
       "label": "195 | rule 2 | Settled: Map: partOf / hasPart"
     },
     {
-      "id": "se8",
+      "id": "a8",
       "fromNode": "s3",
       "toNode": "central",
       "label": "74 | rule 51 | Review: Review: Aggregation endpoint pattern"
     },
     {
-      "id": "te9",
+      "id": "b9",
       "fromNode": "central",
       "toNode": "t4",
       "label": "74 | rule 51 | Review: Review: Aggregation endpoint pattern"
     },
     {
-      "id": "se10",
+      "id": "a10",
       "fromNode": "s4",
       "toNode": "central",
       "label": "69 | rule 4 | Settled: Map: participants on the Context endpoint"
     },
     {
-      "id": "te11",
+      "id": "b11",
       "fromNode": "central",
       "toNode": "t5",
       "label": "69 | rule 4 | Settled: Map: participants on the Context endpoint"
     },
     {
-      "id": "se12",
+      "id": "a12",
       "fromNode": "s5",
       "toNode": "central",
       "label": "54 | rule 2 | Settled: Map: partOf / hasPart"
     },
     {
-      "id": "te13",
+      "id": "b13",
       "fromNode": "central",
       "toNode": "t6",
       "label": "54 | rule 2 | Settled: Map: partOf / hasPart"
     },
     {
-      "id": "se14",
+      "id": "a14",
       "fromNode": "s6",
       "toNode": "central",
       "label": "54 | rule 2 | Settled: Map: partOf / hasPart"
     },
     {
-      "id": "te15",
+      "id": "b15",
       "fromNode": "central",
       "toNode": "t7",
       "label": "54 | rule 2 | Settled: Map: partOf / hasPart"
     },
     {
-      "id": "se16",
+      "id": "a16",
       "fromNode": "s0",
       "toNode": "central",
       "label": "48 | rule 2 | Settled: Map: partOf / hasPart"
     },
     {
-      "id": "te17",
+      "id": "b17",
       "fromNode": "central",
       "toNode": "t6",
       "label": "48 | rule 2 | Settled: Map: partOf / hasPart"
     },
     {
-      "id": "se18",
+      "id": "a18",
       "fromNode": "s6",
       "toNode": "central",
       "label": "47 | rule 2 | Settled: Map: partOf / hasPart"
     },
     {
-      "id": "te19",
+      "id": "b19",
       "fromNode": "central",
       "toNode": "t0",
       "label": "47 | rule 2 | Settled: Map: partOf / hasPart"
     },
     {
-      "id": "se20",
+      "id": "a20",
       "fromNode": "s4",
       "toNode": "central",
       "label": "44 | rule 2 | Settled: Map: partOf / hasPart"
     },
     {
-      "id": "te21",
+      "id": "b21",
       "fromNode": "central",
       "toNode": "t2",
       "label": "44 | rule 2 | Settled: Map: partOf / hasPart"
     },
     {
-      "id": "se22",
+      "id": "a22",
       "fromNode": "s6",
       "toNode": "central",
       "label": "43 | rule 2 | Settled: Map: partOf / hasPart"
     },
     {
-      "id": "te23",
+      "id": "b23",
       "fromNode": "central",
       "toNode": "t1",
       "label": "43 | rule 2 | Settled: Map: partOf / hasPart"
     },
     {
-      "id": "se24",
+      "id": "a24",
       "fromNode": "s0",
       "toNode": "central",
       "label": "41 | rule 2 | Settled: Map: partOf / hasPart"
     },
     {
-      "id": "te25",
+      "id": "b25",
       "fromNode": "central",
       "toNode": "t7",
       "label": "41 | rule 2 | Settled: Map: partOf / hasPart"
     },
     {
-      "id": "se26",
+      "id": "a26",
       "fromNode": "s7",
       "toNode": "central",
       "label": "41 | rule 2 | Settled: Map: partOf / hasPart"
     },
     {
-      "id": "te27",
+      "id": "b27",
       "fromNode": "central",
       "toNode": "t8",
       "label": "41 | rule 2 | Settled: Map: partOf / hasPart"
     },
     {
-      "id": "se28",
+      "id": "a28",
       "fromNode": "s8",
       "toNode": "central",
       "label": "38 | rule 3 | Settled: Map: parent / child"
     },
     {
-      "id": "te29",
+      "id": "b29",
       "fromNode": "central",
       "toNode": "t9",
       "label": "38 | rule 3 | Settled: Map: parent / child"
     },
     {
-      "id": "se30",
+      "id": "a30",
       "fromNode": "s8",
       "toNode": "central",
       "label": "38 | rule 3 | Settled: Map: parent / child"
     },
     {
-      "id": "te31",
+      "id": "b31",
       "fromNode": "central",
       "toNode": "t10",
       "label": "38 | rule 3 | Settled: Map: parent / child"
     },
     {
-      "id": "se32",
+      "id": "a32",
       "fromNode": "s5",
       "toNode": "central",
       "label": "32 | rule 2 | Settled: Map: partOf / hasPart"
     },
     {
-      "id": "te33",
+      "id": "b33",
       "fromNode": "central",
       "toNode": "t0",
       "label": "32 | rule 2 | Settled: Map: partOf / hasPart"
     },
     {
-      "id": "se34",
+      "id": "a34",
       "fromNode": "s5",
       "toNode": "central",
       "label": "30 | rule 4 | Settled: Map: participants on the Context endpoint"
     },
     {
-      "id": "te35",
+      "id": "b35",
       "fromNode": "central",
       "toNode": "t5",
       "label": "30 | rule 4 | Settled: Map: participants on the Context endpoint"
     },
     {
-      "id": "se36",
+      "id": "a36",
       "fromNode": "s9",
       "toNode": "central",
       "label": "25 | rule 3 | Settled: Map: parent / child"
     },
     {
-      "id": "te37",
+      "id": "b37",
       "fromNode": "central",
       "toNode": "t11",
       "label": "25 | rule 3 | Settled: Map: parent / child"
     },
     {
-      "id": "se38",
+      "id": "a38",
       "fromNode": "s10",
       "toNode": "central",
       "label": "25 | rule 4 | Settled: Map: participants on the Context endpoint"
     },
     {
-      "id": "te39",
+      "id": "b39",
       "fromNode": "central",
       "toNode": "t5",
       "label": "25 | rule 4 | Settled: Map: participants on the Context endpoint"
     },
     {
-      "id": "se40",
+      "id": "a40",
       "fromNode": "s6",
       "toNode": "central",
       "label": "23 | rule 2 | Settled: Map: partOf / hasPart"
     },
     {
-      "id": "te41",
+      "id": "b41",
       "fromNode": "central",
       "toNode": "t6",
       "label": "23 | rule 2 | Settled: Map: partOf / hasPart"
     },
     {
-      "id": "se42",
+      "id": "a42",
       "fromNode": "s11",
       "toNode": "central",
       "label": "22 | rule 3 | Settled: Map: parent / child"
     },
     {
-      "id": "te43",
+      "id": "b43",
       "fromNode": "central",
       "toNode": "t10",
       "label": "22 | rule 3 | Settled: Map: parent / child"
     },
     {
-      "id": "se44",
+      "id": "a44",
       "fromNode": "s2",
       "toNode": "central",
       "label": "22 | rule 4 | Settled: Map: participants on the Context endpoint"
     },
     {
-      "id": "te45",
+      "id": "b45",
       "fromNode": "central",
       "toNode": "t5",
       "label": "22 | rule 4 | Settled: Map: participants on the Context endpoint"
     },
     {
-      "id": "se46",
+      "id": "a46",
       "fromNode": "s0",
       "toNode": "central",
       "label": "20 | rule 4 | Settled: Map: participants on the Context endpoint"
     },
     {
-      "id": "te47",
+      "id": "b47",
       "fromNode": "central",
       "toNode": "t5",
       "label": "20 | rule 4 | Settled: Map: participants on the Context endpoint"
     },
     {
-      "id": "se48",
+      "id": "a48",
       "fromNode": "s12",
       "toNode": "central",
       "label": "16 | rule 2 | Settled: Map: partOf / hasPart"
     },
     {
-      "id": "te49",
+      "id": "b49",
       "fromNode": "central",
       "toNode": "t1",
       "label": "16 | rule 2 | Settled: Map: partOf / hasPart"
     },
     {
-      "id": "se50",
+      "id": "a50",
       "fromNode": "s2",
       "toNode": "central",
       "label": "15 | rule 2 | Settled: Map: partOf / hasPart"
     },
     {
-      "id": "te51",
+      "id": "b51",
       "fromNode": "central",
       "toNode": "t0",
       "label": "15 | rule 2 | Settled: Map: partOf / hasPart"
     },
     {
-      "id": "se52",
+      "id": "a52",
       "fromNode": "s10",
       "toNode": "central",
       "label": "14 | rule 2 | Settled: Map: partOf / hasPart"
     },
     {
-      "id": "te53",
+      "id": "b53",
       "fromNode": "central",
       "toNode": "t6",
       "label": "14 | rule 2 | Settled: Map: partOf / hasPart"
     },
     {
-      "id": "se54",
+      "id": "a54",
       "fromNode": "s13",
       "toNode": "central",
       "label": "12 | rule 51 | Review: Review: Aggregation endpoint pattern"
     },
     {
-      "id": "te55",
+      "id": "b55",
       "fromNode": "central",
       "toNode": "t12",
       "label": "12 | rule 51 | Review: Review: Aggregation endpoint pattern"
     },
     {
-      "id": "se56",
+      "id": "a56",
       "fromNode": "s6",
       "toNode": "central",
       "label": "11 | rule 4 | Settled: Map: participants on the Context endpoint"
     },
     {
-      "id": "te57",
+      "id": "b57",
       "fromNode": "central",
       "toNode": "t5",
       "label": "11 | rule 4 | Settled: Map: participants on the Context endpoint"
     },
     {
-      "id": "se58",
+      "id": "a58",
       "fromNode": "s14",
       "toNode": "central",
       "label": "10 | rule 4 | Settled: Map: participants on the Context endpoint"
     },
     {
-      "id": "te59",
+      "id": "b59",
       "fromNode": "central",
       "toNode": "t5",
       "label": "10 | rule 4 | Settled: Map: participants on the Context endpoint"
     },
     {
-      "id": "se60",
+      "id": "a60",
       "fromNode": "s15",
       "toNode": "central",
       "label": "10 | rule 4 | Settled: Map: participants on the Context endpoint"
     },
     {
-      "id": "te61",
+      "id": "b61",
       "fromNode": "central",
       "toNode": "t5",
       "label": "10 | rule 4 | Settled: Map: participants on the Context endpoint"
     },
     {
-      "id": "se62",
+      "id": "a62",
       "fromNode": "s16",
       "toNode": "central",
       "label": "10 | rule 51 | Review: Review: Aggregation endpoint pattern"
     },
     {
-      "id": "te63",
+      "id": "b63",
       "fromNode": "central",
       "toNode": "t13",
       "label": "10 | rule 51 | Review: Review: Aggregation endpoint pattern"
     },
     {
-      "id": "se64",
+      "id": "a64",
       "fromNode": "s5",
       "toNode": "central",
       "label": "9 | rule 2 | Settled: Map: partOf / hasPart"
     },
     {
-      "id": "te65",
+      "id": "b65",
       "fromNode": "central",
       "toNode": "t14",
       "label": "9 | rule 2 | Settled: Map: partOf / hasPart"
     },
     {
-      "id": "se66",
+      "id": "a66",
       "fromNode": "s7",
       "toNode": "central",
       "label": "9 | rule 2 | Settled: Map: partOf / hasPart"
     },
     {
-      "id": "te67",
+      "id": "b67",
       "fromNode": "central",
       "toNode": "t0",
       "label": "9 | rule 2 | Settled: Map: partOf / hasPart"
     },
     {
-      "id": "se68",
+      "id": "a68",
       "fromNode": "s7",
       "toNode": "central",
       "label": "9 | rule 2 | Settled: Map: partOf / hasPart"
     },
     {
-      "id": "te69",
+      "id": "b69",
       "fromNode": "central",
       "toNode": "t6",
       "label": "9 | rule 2 | Settled: Map: partOf / hasPart"
     },
     {
-      "id": "se70",
+      "id": "a70",
       "fromNode": "s1",
       "toNode": "central",
       "label": "9 | rule 2 | Settled: Map: partOf / hasPart"
     },
     {
-      "id": "te71",
+      "id": "b71",
       "fromNode": "central",
       "toNode": "t15",
       "label": "9 | rule 2 | Settled: Map: partOf / hasPart"
     },
     {
-      "id": "se72",
+      "id": "a72",
       "fromNode": "s17",
       "toNode": "central",
       "label": "8 | rule 2 | Settled: Map: partOf / hasPart"
     },
     {
-      "id": "te73",
+      "id": "b73",
       "fromNode": "central",
       "toNode": "t1",
       "label": "8 | rule 2 | Settled: Map: partOf / hasPart"
     },
     {
-      "id": "se74",
+      "id": "a74",
       "fromNode": "s2",
       "toNode": "central",
       "label": "8 | rule 2 | Settled: Map: partOf / hasPart"
     },
     {
-      "id": "te75",
+      "id": "b75",
       "fromNode": "central",
       "toNode": "t6",
       "label": "8 | rule 2 | Settled: Map: partOf / hasPart"
     },
     {
-      "id": "se76",
+      "id": "a76",
       "fromNode": "s3",
       "toNode": "central",
       "label": "8 | rule 51 | Review: Review: Aggregation endpoint pattern"
     },
     {
-      "id": "te77",
+      "id": "b77",
       "fromNode": "central",
       "toNode": "t16",
       "label": "8 | rule 51 | Review: Review: Aggregation endpoint pattern"
     },
     {
-      "id": "se78",
+      "id": "a78",
       "fromNode": "s18",
       "toNode": "central",
       "label": "6 | rule 51 | Review: Review: Aggregation endpoint pattern"
     },
     {
-      "id": "te79",
+      "id": "b79",
       "fromNode": "central",
       "toNode": "t17",
       "label": "6 | rule 51 | Review: Review: Aggregation endpoint pattern"
     },
     {
-      "id": "se80",
+      "id": "a80",
       "fromNode": "s0",
       "toNode": "central",
       "label": "6 | rule 2 | Settled: Map: partOf / hasPart"
     },
     {
-      "id": "te81",
+      "id": "b81",
       "fromNode": "central",
       "toNode": "t14",
       "label": "6 | rule 2 | Settled: Map: partOf / hasPart"
     },
     {
-      "id": "se82",
+      "id": "a82",
       "fromNode": "s0",
       "toNode": "central",
       "label": "6 | rule 2 | Settled: Map: partOf / hasPart"
     },
     {
-      "id": "te83",
+      "id": "b83",
       "fromNode": "central",
       "toNode": "t2",
       "label": "6 | rule 2 | Settled: Map: partOf / hasPart"
     },
     {
-      "id": "se84",
+      "id": "a84",
       "fromNode": "s5",
       "toNode": "central",
       "label": "6 | rule 2 | Settled: Map: partOf / hasPart"
     },
     {
-      "id": "te85",
+      "id": "b85",
       "fromNode": "central",
       "toNode": "t1",
       "label": "6 | rule 2 | Settled: Map: partOf / hasPart"
     },
     {
-      "id": "se86",
+      "id": "a86",
       "fromNode": "s5",
       "toNode": "central",
       "label": "6 | rule 2 | Settled: Map: partOf / hasPart"
     },
     {
-      "id": "te87",
+      "id": "b87",
       "fromNode": "central",
       "toNode": "t7",
       "label": "6 | rule 2 | Settled: Map: partOf / hasPart"
     },
     {
-      "id": "se88",
+      "id": "a88",
       "fromNode": "s10",
       "toNode": "central",
       "label": "6 | rule 2 | Settled: Map: partOf / hasPart"
     },
     {
-      "id": "te89",
+      "id": "b89",
       "fromNode": "central",
       "toNode": "t15",
       "label": "6 | rule 2 | Settled: Map: partOf / hasPart"
     },
     {
-      "id": "se90",
+      "id": "a90",
       "fromNode": "s7",
       "toNode": "central",
       "label": "6 | rule 4 | Settled: Map: participants on the Context endpoint"
     },
     {
-      "id": "te91",
+      "id": "b91",
       "fromNode": "central",
       "toNode": "t5",
       "label": "6 | rule 4 | Settled: Map: participants on the Context endpoint"
     },
     {
-      "id": "se92",
+      "id": "a92",
       "fromNode": "s4",
       "toNode": "central",
       "label": "6 | rule 2 | Settled: Map: partOf / hasPart"
     },
     {
-      "id": "te93",
+      "id": "b93",
       "fromNode": "central",
       "toNode": "t7",
       "label": "6 | rule 2 | Settled: Map: partOf / hasPart"
     },
     {
-      "id": "se94",
+      "id": "a94",
       "fromNode": "s1",
       "toNode": "central",
       "label": "6 | rule 2 | Settled: Map: partOf / hasPart"
     },
     {
-      "id": "te95",
+      "id": "b95",
       "fromNode": "central",
       "toNode": "t0",
       "label": "6 | rule 2 | Settled: Map: partOf / hasPart"
     },
     {
-      "id": "se96",
+      "id": "a96",
       "fromNode": "s19",
       "toNode": "central",
       "label": "6 | rule 2 | Settled: Map: partOf / hasPart"
     },
     {
-      "id": "te97",
+      "id": "b97",
       "fromNode": "central",
       "toNode": "t18",
       "label": "6 | rule 2 | Settled: Map: partOf / hasPart"
     },
     {
-      "id": "se98",
+      "id": "a98",
       "fromNode": "s0",
       "toNode": "central",
       "label": "5 | rule 2 | Settled: Map: partOf / hasPart"
     },
     {
-      "id": "te99",
+      "id": "b99",
       "fromNode": "central",
       "toNode": "t19",
       "label": "5 | rule 2 | Settled: Map: partOf / hasPart"
     },
     {
-      "id": "se100",
+      "id": "a100",
       "fromNode": "s11",
       "toNode": "central",
       "label": "4 | rule 3 | Settled: Map: parent / child"
     },
     {
-      "id": "te101",
+      "id": "b101",
       "fromNode": "central",
       "toNode": "t9",
       "label": "4 | rule 3 | Settled: Map: parent / child"
     },
     {
-      "id": "se102",
+      "id": "a102",
       "fromNode": "s5",
       "toNode": "central",
       "label": "4 | rule 2 | Settled: Map: partOf / hasPart"
     },
     {
-      "id": "te103",
+      "id": "b103",
       "fromNode": "central",
       "toNode": "t19",
       "label": "4 | rule 2 | Settled: Map: partOf / hasPart"
     },
     {
-      "id": "se104",
+      "id": "a104",
       "fromNode": "s1",
       "toNode": "central",
       "label": "4 | rule 2 | Settled: Map: partOf / hasPart"
     },
     {
-      "id": "te105",
+      "id": "b105",
       "fromNode": "central",
       "toNode": "t8",
       "label": "4 | rule 2 | Settled: Map: partOf / hasPart"
     },
     {
-      "id": "se106",
+      "id": "a106",
       "fromNode": "s14",
       "toNode": "central",
       "label": "3 | rule 51 | Review: Review: Aggregation endpoint pattern"
     },
     {
-      "id": "te107",
+      "id": "b107",
       "fromNode": "central",
       "toNode": "t1",
       "label": "3 | rule 51 | Review: Review: Aggregation endpoint pattern"
     },
     {
-      "id": "se108",
+      "id": "a108",
       "fromNode": "s17",
       "toNode": "central",
       "label": "3 | rule 2 | Settled: Map: partOf / hasPart"
     },
     {
-      "id": "te109",
+      "id": "b109",
       "fromNode": "central",
       "toNode": "t7",
       "label": "3 | rule 2 | Settled: Map: partOf / hasPart"
     },
     {
-      "id": "se110",
+      "id": "a110",
       "fromNode": "s6",
       "toNode": "central",
       "label": "3 | rule 2 | Settled: Map: partOf / hasPart"
     },
     {
-      "id": "te111",
+      "id": "b111",
       "fromNode": "central",
       "toNode": "t14",
       "label": "3 | rule 2 | Settled: Map: partOf / hasPart"
     },
     {
-      "id": "se112",
+      "id": "a112",
       "fromNode": "s20",
       "toNode": "central",
       "label": "3 | rule 4 | Settled: Map: participants on the Context endpoint"
     },
     {
-      "id": "te113",
+      "id": "b113",
       "fromNode": "central",
       "toNode": "t5",
       "label": "3 | rule 4 | Settled: Map: participants on the Context endpoint"
     },
     {
-      "id": "se114",
+      "id": "a114",
       "fromNode": "s4",
       "toNode": "central",
       "label": "3 | rule 2 | Settled: Map: partOf / hasPart"
     },
     {
-      "id": "te115",
+      "id": "b115",
       "fromNode": "central",
       "toNode": "t1",
       "label": "3 | rule 2 | Settled: Map: partOf / hasPart"
     },
     {
-      "id": "se116",
+      "id": "a116",
       "fromNode": "s4",
       "toNode": "central",
       "label": "3 | rule 2 | Settled: Map: partOf / hasPart"
     },
     {
-      "id": "te117",
+      "id": "b117",
       "fromNode": "central",
       "toNode": "t6",
       "label": "3 | rule 2 | Settled: Map: partOf / hasPart"
     },
     {
-      "id": "se118",
+      "id": "a118",
       "fromNode": "s1",
       "toNode": "central",
       "label": "3 | rule 2 | Settled: Map: partOf / hasPart"
     },
     {
-      "id": "te119",
+      "id": "b119",
       "fromNode": "central",
       "toNode": "t7",
       "label": "3 | rule 2 | Settled: Map: partOf / hasPart"
     },
     {
-      "id": "se120",
+      "id": "a120",
       "fromNode": "s21",
       "toNode": "central",
       "label": "3 | rule 51 | Review: Review: Aggregation endpoint pattern"
     },
     {
-      "id": "te121",
+      "id": "b121",
       "fromNode": "central",
       "toNode": "t16",
       "label": "3 | rule 51 | Review: Review: Aggregation endpoint pattern"
     },
     {
-      "id": "se122",
+      "id": "a122",
       "fromNode": "s3",
       "toNode": "central",
       "label": "3 | rule 51 | Review: Review: Aggregation endpoint pattern"
     },
     {
-      "id": "te123",
+      "id": "b123",
       "fromNode": "central",
       "toNode": "t10",
       "label": "3 | rule 51 | Review: Review: Aggregation endpoint pattern"
     },
     {
-      "id": "se124",
+      "id": "a124",
       "fromNode": "s11",
       "toNode": "central",
       "label": "2 | rule 51 | Review: Review: Aggregation endpoint pattern"
     },
     {
-      "id": "te125",
+      "id": "b125",
       "fromNode": "central",
       "toNode": "t17",
       "label": "2 | rule 51 | Review: Review: Aggregation endpoint pattern"
     },
     {
-      "id": "se126",
+      "id": "a126",
       "fromNode": "s11",
       "toNode": "central",
       "label": "2 | rule 3 | Settled: Map: parent / child"
     },
     {
-      "id": "te127",
+      "id": "b127",
       "fromNode": "central",
       "toNode": "t11",
       "label": "2 | rule 3 | Settled: Map: parent / child"
     },
     {
-      "id": "se128",
+      "id": "a128",
       "fromNode": "s17",
       "toNode": "central",
       "label": "2 | rule 2 | Settled: Map: partOf / hasPart"
     },
     {
-      "id": "te129",
+      "id": "b129",
       "fromNode": "central",
       "toNode": "t3",
       "label": "2 | rule 2 | Settled: Map: partOf / hasPart"
     },
     {
-      "id": "se130",
+      "id": "a130",
       "fromNode": "s22",
       "toNode": "central",
       "label": "2 | rule 2 | Settled: Map: partOf / hasPart"
     },
     {
-      "id": "te131",
+      "id": "b131",
       "fromNode": "central",
       "toNode": "t0",
       "label": "2 | rule 2 | Settled: Map: partOf / hasPart"
     },
     {
-      "id": "se132",
+      "id": "a132",
       "fromNode": "s22",
       "toNode": "central",
       "label": "2 | rule 2 | Settled: Map: partOf / hasPart"
     },
     {
-      "id": "te133",
+      "id": "b133",
       "fromNode": "central",
       "toNode": "t7",
       "label": "2 | rule 2 | Settled: Map: partOf / hasPart"
     },
     {
-      "id": "se134",
+      "id": "a134",
       "fromNode": "s10",
       "toNode": "central",
       "label": "2 | rule 2 | Settled: Map: partOf / hasPart"
     },
     {
-      "id": "te135",
+      "id": "b135",
       "fromNode": "central",
       "toNode": "t14",
       "label": "2 | rule 2 | Settled: Map: partOf / hasPart"
     },
     {
-      "id": "se136",
+      "id": "a136",
       "fromNode": "s1",
       "toNode": "central",
       "label": "2 | rule 2 | Settled: Map: partOf / hasPart"
     },
     {
-      "id": "te137",
+      "id": "b137",
       "fromNode": "central",
       "toNode": "t14",
       "label": "2 | rule 2 | Settled: Map: partOf / hasPart"
     },
     {
-      "id": "se138",
+      "id": "a138",
       "fromNode": "s23",
       "toNode": "central",
       "label": "2 | rule 51 | Review: Review: Aggregation endpoint pattern"
     },
     {
-      "id": "te139",
+      "id": "b139",
       "fromNode": "central",
       "toNode": "t1",
       "label": "2 | rule 51 | Review: Review: Aggregation endpoint pattern"
     },
     {
-      "id": "se140",
+      "id": "a140",
       "fromNode": "s2",
       "toNode": "central",
       "label": "2 | rule 2 | Settled: Map: partOf / hasPart"
     },
     {
-      "id": "te141",
+      "id": "b141",
       "fromNode": "central",
       "toNode": "t1",
       "label": "2 | rule 2 | Settled: Map: partOf / hasPart"
     },
     {
-      "id": "se142",
+      "id": "a142",
       "fromNode": "s2",
       "toNode": "central",
       "label": "2 | rule 2 | Settled: Map: partOf / hasPart"
     },
     {
-      "id": "te143",
+      "id": "b143",
       "fromNode": "central",
       "toNode": "t19",
       "label": "2 | rule 2 | Settled: Map: partOf / hasPart"
     },
     {
-      "id": "se144",
+      "id": "a144",
       "fromNode": "s3",
       "toNode": "central",
       "label": "2 | rule 51 | Review: Review: Aggregation endpoint pattern"
     },
     {
-      "id": "te145",
+      "id": "b145",
       "fromNode": "central",
       "toNode": "t9",
       "label": "2 | rule 51 | Review: Review: Aggregation endpoint pattern"
     },
     {
-      "id": "se146",
+      "id": "a146",
       "fromNode": "s18",
       "toNode": "central",
       "label": "1 | rule 51 | Review: Review: Aggregation endpoint pattern"
     },
     {
-      "id": "te147",
+      "id": "b147",
       "fromNode": "central",
       "toNode": "t10",
       "label": "1 | rule 51 | Review: Review: Aggregation endpoint pattern"
     },
     {
-      "id": "se148",
+      "id": "a148",
       "fromNode": "s8",
       "toNode": "central",
       "label": "1 | rule 51 | Review: Review: Aggregation endpoint pattern"
     },
     {
-      "id": "te149",
+      "id": "b149",
       "fromNode": "central",
       "toNode": "t17",
       "label": "1 | rule 51 | Review: Review: Aggregation endpoint pattern"
     },
     {
-      "id": "se150",
+      "id": "a150",
       "fromNode": "s15",
       "toNode": "central",
       "label": "1 | rule 2 | Settled: Map: partOf / hasPart"
     },
     {
-      "id": "te151",
+      "id": "b151",
       "fromNode": "central",
       "toNode": "t6",
       "label": "1 | rule 2 | Settled: Map: partOf / hasPart"
     },
     {
-      "id": "se152",
+      "id": "a152",
       "fromNode": "s24",
       "toNode": "central",
       "label": "1 | rule 2 | Settled: Map: partOf / hasPart"
     },
     {
-      "id": "te153",
+      "id": "b153",
       "fromNode": "central",
       "toNode": "t1",
       "label": "1 | rule 2 | Settled: Map: partOf / hasPart"
     },
     {
-      "id": "se154",
+      "id": "a154",
       "fromNode": "s17",
       "toNode": "central",
       "label": "1 | rule 2 | Settled: Map: partOf / hasPart"
     },
     {
-      "id": "te155",
+      "id": "b155",
       "fromNode": "central",
       "toNode": "t20",
       "label": "1 | rule 2 | Settled: Map: partOf / hasPart"
     },
     {
-      "id": "se156",
+      "id": "a156",
       "fromNode": "s0",
       "toNode": "central",
       "label": "1 | rule 2 | Settled: Map: partOf / hasPart"
     },
     {
-      "id": "te157",
+      "id": "b157",
       "fromNode": "central",
       "toNode": "t3",
       "label": "1 | rule 2 | Settled: Map: partOf / hasPart"
     },
     {
-      "id": "se158",
+      "id": "a158",
       "fromNode": "s6",
       "toNode": "central",
       "label": "1 | rule 2 | Settled: Map: partOf / hasPart"
     },
     {
-      "id": "te159",
+      "id": "b159",
       "fromNode": "central",
       "toNode": "t19",
       "label": "1 | rule 2 | Settled: Map: partOf / hasPart"
     },
     {
-      "id": "se160",
+      "id": "a160",
       "fromNode": "s22",
       "toNode": "central",
       "label": "1 | rule 2 | Settled: Map: partOf / hasPart"
     },
     {
-      "id": "te161",
+      "id": "b161",
       "fromNode": "central",
       "toNode": "t14",
       "label": "1 | rule 2 | Settled: Map: partOf / hasPart"
     },
     {
-      "id": "se162",
+      "id": "a162",
       "fromNode": "s22",
       "toNode": "central",
       "label": "1 | rule 2 | Settled: Map: partOf / hasPart"
     },
     {
-      "id": "te163",
+      "id": "b163",
       "fromNode": "central",
       "toNode": "t6",
       "label": "1 | rule 2 | Settled: Map: partOf / hasPart"
     },
     {
-      "id": "se164",
+      "id": "a164",
       "fromNode": "s10",
       "toNode": "central",
       "label": "1 | rule 2 | Settled: Map: partOf / hasPart"
     },
     {
-      "id": "te165",
+      "id": "b165",
       "fromNode": "central",
       "toNode": "t0",
       "label": "1 | rule 2 | Settled: Map: partOf / hasPart"
     },
     {
-      "id": "se166",
+      "id": "a166",
       "fromNode": "s10",
       "toNode": "central",
       "label": "1 | rule 2 | Settled: Map: partOf / hasPart"
     },
     {
-      "id": "te167",
+      "id": "b167",
       "fromNode": "central",
       "toNode": "t7",
       "label": "1 | rule 2 | Settled: Map: partOf / hasPart"
     },
     {
-      "id": "se168",
+      "id": "a168",
       "fromNode": "s20",
       "toNode": "central",
       "label": "1 | rule 2 | Settled: Map: partOf / hasPart"
     },
     {
-      "id": "te169",
+      "id": "b169",
       "fromNode": "central",
       "toNode": "t1",
       "label": "1 | rule 2 | Settled: Map: partOf / hasPart"
     },
     {
-      "id": "se170",
+      "id": "a170",
       "fromNode": "s7",
       "toNode": "central",
       "label": "1 | rule 2 | Settled: Map: partOf / hasPart"
     },
     {
-      "id": "te171",
+      "id": "b171",
       "fromNode": "central",
       "toNode": "t14",
       "label": "1 | rule 2 | Settled: Map: partOf / hasPart"
     },
     {
-      "id": "se172",
+      "id": "a172",
       "fromNode": "s7",
       "toNode": "central",
       "label": "1 | rule 2 | Settled: Map: partOf / hasPart"
     },
     {
-      "id": "te173",
+      "id": "b173",
       "fromNode": "central",
       "toNode": "t19",
       "label": "1 | rule 2 | Settled: Map: partOf / hasPart"
     },
     {
-      "id": "se174",
+      "id": "a174",
       "fromNode": "s7",
       "toNode": "central",
       "label": "1 | rule 2 | Settled: Map: partOf / hasPart"
     },
     {
-      "id": "te175",
+      "id": "b175",
       "fromNode": "central",
       "toNode": "t2",
       "label": "1 | rule 2 | Settled: Map: partOf / hasPart"
     },
     {
-      "id": "se176",
+      "id": "a176",
       "fromNode": "s1",
       "toNode": "central",
       "label": "1 | rule 2 | Settled: Map: partOf / hasPart"
     },
     {
-      "id": "te177",
+      "id": "b177",
       "fromNode": "central",
       "toNode": "t3",
       "label": "1 | rule 2 | Settled: Map: partOf / hasPart"
     },
     {
-      "id": "se178",
+      "id": "a178",
       "fromNode": "s23",
       "toNode": "central",
       "label": "1 | rule 51 | Review: Review: Aggregation endpoint pattern"
     },
     {
-      "id": "te179",
+      "id": "b179",
       "fromNode": "central",
       "toNode": "t19",
       "label": "1 | rule 51 | Review: Review: Aggregation endpoint pattern"
     },
     {
-      "id": "se180",
+      "id": "a180",
       "fromNode": "s21",
       "toNode": "central",
       "label": "1 | rule 51 | Review: Review: Aggregation endpoint pattern"
     },
     {
-      "id": "te181",
+      "id": "b181",
       "fromNode": "central",
       "toNode": "t4",
       "label": "1 | rule 51 | Review: Review: Aggregation endpoint pattern"
     },
     {
-      "id": "se182",
+      "id": "a182",
       "fromNode": "s3",
       "toNode": "central",
       "label": "1 | rule 51 | Review: Review: Aggregation endpoint pattern"
     },
     {
-      "id": "te183",
+      "id": "b183",
       "fromNode": "central",
       "toNode": "t1",
       "label": "1 | rule 51 | Review: Review: Aggregation endpoint pattern"
     },
     {
-      "id": "ve184",
+      "id": "v184",
       "fromNode": "central",
       "toNode": "v0",
       "label": "no stereotype"

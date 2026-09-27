@@ -57,37 +57,37 @@
   ],
   "edges": [
     {
-      "id": "se0",
+      "id": "a0",
       "fromNode": "s0",
       "toNode": "central",
       "label": "733 | rule 30 | Settled: Map: optionOf / hasOption"
     },
     {
-      "id": "te1",
+      "id": "b1",
       "fromNode": "central",
       "toNode": "t0",
       "label": "733 | rule 30 | Settled: Map: optionOf / hasOption"
     },
     {
-      "id": "se2",
+      "id": "a2",
       "fromNode": "s1",
       "toNode": "central",
       "label": "2 | rule 60 | Review: Review: extend endpoint pattern"
     },
     {
-      "id": "te3",
+      "id": "b3",
       "fromNode": "central",
       "toNode": "t0",
       "label": "2 | rule 60 | Review: Review: extend endpoint pattern"
     },
     {
-      "id": "se4",
+      "id": "a4",
       "fromNode": "s2",
       "toNode": "central",
       "label": "1 | rule 71 | Exception: Review — endpoint missing from t_object"
     },
     {
-      "id": "te5",
+      "id": "b5",
       "fromNode": "central",
       "toNode": "t1",
       "label": "1 | rule 71 | Exception: Review — endpoint missing from t_object"

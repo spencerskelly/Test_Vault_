@@ -138,181 +138,181 @@
   ],
   "edges": [
     {
-      "id": "se0",
+      "id": "a0",
       "fromNode": "s0",
       "toNode": "central",
       "label": "406 | rule 41 | Settled: Map: interfaces / interfaces"
     },
     {
-      "id": "te1",
+      "id": "b1",
       "fromNode": "central",
       "toNode": "t0",
       "label": "406 | rule 41 | Settled: Map: interfaces / interfaces"
     },
     {
-      "id": "se2",
+      "id": "a2",
       "fromNode": "s1",
       "toNode": "central",
       "label": "87 | rule 41 | Settled: Map: interfaces / interfaces"
     },
     {
-      "id": "te3",
+      "id": "b3",
       "fromNode": "central",
       "toNode": "t1",
       "label": "87 | rule 41 | Settled: Map: interfaces / interfaces"
     },
     {
-      "id": "se4",
+      "id": "a4",
       "fromNode": "s0",
       "toNode": "central",
       "label": "27 | rule 41 | Settled: Map: interfaces / interfaces"
     },
     {
-      "id": "te5",
+      "id": "b5",
       "fromNode": "central",
       "toNode": "t2",
       "label": "27 | rule 41 | Settled: Map: interfaces / interfaces"
     },
     {
-      "id": "se6",
+      "id": "a6",
       "fromNode": "s2",
       "toNode": "central",
       "label": "23 | rule 41 | Settled: Map: interfaces / interfaces"
     },
     {
-      "id": "te7",
+      "id": "b7",
       "fromNode": "central",
       "toNode": "t0",
       "label": "23 | rule 41 | Settled: Map: interfaces / interfaces"
     },
     {
-      "id": "se8",
+      "id": "a8",
       "fromNode": "s2",
       "toNode": "central",
       "label": "7 | rule 41 | Settled: Map: interfaces / interfaces"
     },
     {
-      "id": "te9",
+      "id": "b9",
       "fromNode": "central",
       "toNode": "t2",
       "label": "7 | rule 41 | Settled: Map: interfaces / interfaces"
     },
     {
-      "id": "se10",
+      "id": "a10",
       "fromNode": "s3",
       "toNode": "central",
       "label": "6 | rule 41 | Settled: Map: interfaces / interfaces"
     },
     {
-      "id": "te11",
+      "id": "b11",
       "fromNode": "central",
       "toNode": "t3",
       "label": "6 | rule 41 | Settled: Map: interfaces / interfaces"
     },
     {
-      "id": "se12",
+      "id": "a12",
       "fromNode": "s1",
       "toNode": "central",
       "label": "6 | rule 41 | Settled: Map: interfaces / interfaces"
     },
     {
-      "id": "te13",
+      "id": "b13",
       "fromNode": "central",
       "toNode": "t4",
       "label": "6 | rule 41 | Settled: Map: interfaces / interfaces"
     },
     {
-      "id": "se14",
+      "id": "a14",
       "fromNode": "s0",
       "toNode": "central",
       "label": "2 | rule 41 | Settled: Map: interfaces / interfaces"
     },
     {
-      "id": "te15",
+      "id": "b15",
       "fromNode": "central",
       "toNode": "t5",
       "label": "2 | rule 41 | Settled: Map: interfaces / interfaces"
     },
     {
-      "id": "se16",
+      "id": "a16",
       "fromNode": "s0",
       "toNode": "central",
       "label": "2 | rule 41 | Settled: Map: interfaces / interfaces"
     },
     {
-      "id": "te17",
+      "id": "b17",
       "fromNode": "central",
       "toNode": "t6",
       "label": "2 | rule 41 | Settled: Map: interfaces / interfaces"
     },
     {
-      "id": "se18",
+      "id": "a18",
       "fromNode": "s0",
       "toNode": "central",
       "label": "2 | rule 41 | Settled: Map: interfaces / interfaces"
     },
     {
-      "id": "te19",
+      "id": "b19",
       "fromNode": "central",
       "toNode": "t4",
       "label": "2 | rule 41 | Settled: Map: interfaces / interfaces"
     },
     {
-      "id": "se20",
+      "id": "a20",
       "fromNode": "s4",
       "toNode": "central",
       "label": "2 | rule 41 | Settled: Map: interfaces / interfaces"
     },
     {
-      "id": "te21",
+      "id": "b21",
       "fromNode": "central",
       "toNode": "t1",
       "label": "2 | rule 41 | Settled: Map: interfaces / interfaces"
     },
     {
-      "id": "se22",
+      "id": "a22",
       "fromNode": "s5",
       "toNode": "central",
       "label": "1 | rule 71 | Exception: Review — endpoint missing from t_object"
     },
     {
-      "id": "te23",
+      "id": "b23",
       "fromNode": "central",
       "toNode": "t7",
       "label": "1 | rule 71 | Exception: Review — endpoint missing from t_object"
     },
     {
-      "id": "se24",
+      "id": "a24",
       "fromNode": "s1",
       "toNode": "central",
       "label": "1 | rule 41 | Settled: Map: interfaces / interfaces"
     },
     {
-      "id": "te25",
+      "id": "b25",
       "fromNode": "central",
       "toNode": "t0",
       "label": "1 | rule 41 | Settled: Map: interfaces / interfaces"
     },
     {
-      "id": "se26",
+      "id": "a26",
       "fromNode": "s0",
       "toNode": "central",
       "label": "1 | rule 41 | Settled: Map: interfaces / interfaces"
     },
     {
-      "id": "te27",
+      "id": "b27",
       "fromNode": "central",
       "toNode": "t1",
       "label": "1 | rule 41 | Settled: Map: interfaces / interfaces"
     },
     {
-      "id": "se28",
+      "id": "a28",
       "fromNode": "s2",
       "toNode": "central",
       "label": "1 | rule 41 | Settled: Map: interfaces / interfaces"
     },
     {
-      "id": "te29",
+      "id": "b29",
       "fromNode": "central",
       "toNode": "t1",
       "label": "1 | rule 41 | Settled: Map: interfaces / interfaces"

@@ -373,675 +373,675 @@
       "id": "v0",
       "type": "file",
       "file": "99_System/10_EA Native Translator/02_EA Relationships/Association/README_Association.md",
-      "x": 30,
-      "y": -380,
-      "width": 250,
+      "x": -280,
+      "y": -390,
+      "width": 260,
       "height": 130
     }
   ],
   "edges": [
     {
-      "id": "se0",
+      "id": "a0",
       "fromNode": "s0",
       "toNode": "central",
       "label": "210 | rule 34 | Settled: Map: participants on the Use Case endpoint"
     },
     {
-      "id": "te1",
+      "id": "b1",
       "fromNode": "central",
       "toNode": "t0",
       "label": "210 | rule 34 | Settled: Map: participants on the Use Case endpoint"
     },
     {
-      "id": "se2",
+      "id": "a2",
       "fromNode": "s1",
       "toNode": "central",
       "label": "61 | rule 5 | Settled: Map: participants on the Use Case/Context endpoint"
     },
     {
-      "id": "te3",
+      "id": "b3",
       "fromNode": "central",
       "toNode": "t1",
       "label": "61 | rule 5 | Settled: Map: participants on the Use Case/Context endpoint"
     },
     {
-      "id": "se4",
+      "id": "a4",
       "fromNode": "s1",
       "toNode": "central",
       "label": "39 | rule 5 | Settled: Map: participants on the Use Case/Context endpoint"
     },
     {
-      "id": "te5",
+      "id": "b5",
       "fromNode": "central",
       "toNode": "t2",
       "label": "39 | rule 5 | Settled: Map: participants on the Use Case/Context endpoint"
     },
     {
-      "id": "se6",
+      "id": "a6",
       "fromNode": "s2",
       "toNode": "central",
       "label": "29 | rule 5 | Settled: Map: participants on the Use Case/Context endpoint"
     },
     {
-      "id": "te7",
+      "id": "b7",
       "fromNode": "central",
       "toNode": "t0",
       "label": "29 | rule 5 | Settled: Map: participants on the Use Case/Context endpoint"
     },
     {
-      "id": "se8",
+      "id": "a8",
       "fromNode": "s3",
       "toNode": "central",
       "label": "25 | rule 8 | Review: Review: vague Association"
     },
     {
-      "id": "te9",
+      "id": "b9",
       "fromNode": "central",
       "toNode": "t3",
       "label": "25 | rule 8 | Review: Review: vague Association"
     },
     {
-      "id": "se10",
+      "id": "a10",
       "fromNode": "s1",
       "toNode": "central",
       "label": "24 | rule 5 | Settled: Map: participants on the Use Case/Context endpoint"
     },
     {
-      "id": "te11",
+      "id": "b11",
       "fromNode": "central",
       "toNode": "t4",
       "label": "24 | rule 5 | Settled: Map: participants on the Use Case/Context endpoint"
     },
     {
-      "id": "se12",
+      "id": "a12",
       "fromNode": "s1",
       "toNode": "central",
       "label": "20 | rule 5 | Settled: Map: participants on the Use Case/Context endpoint"
     },
     {
-      "id": "te13",
+      "id": "b13",
       "fromNode": "central",
       "toNode": "t5",
       "label": "20 | rule 5 | Settled: Map: participants on the Use Case/Context endpoint"
     },
     {
-      "id": "se14",
+      "id": "a14",
       "fromNode": "s4",
       "toNode": "central",
       "label": "17 | rule 5 | Settled: Map: participants on the Use Case/Context endpoint"
     },
     {
-      "id": "te15",
+      "id": "b15",
       "fromNode": "central",
       "toNode": "t0",
       "label": "17 | rule 5 | Settled: Map: participants on the Use Case/Context endpoint"
     },
     {
-      "id": "se16",
+      "id": "a16",
       "fromNode": "s1",
       "toNode": "central",
       "label": "15 | rule 5 | Settled: Map: participants on the Use Case/Context endpoint"
     },
     {
-      "id": "te17",
+      "id": "b17",
       "fromNode": "central",
       "toNode": "t6",
       "label": "15 | rule 5 | Settled: Map: participants on the Use Case/Context endpoint"
     },
     {
-      "id": "se18",
+      "id": "a18",
       "fromNode": "s1",
       "toNode": "central",
       "label": "14 | rule 5 | Settled: Map: participants on the Use Case/Context endpoint"
     },
     {
-      "id": "te19",
+      "id": "b19",
       "fromNode": "central",
       "toNode": "t3",
       "label": "14 | rule 5 | Settled: Map: participants on the Use Case/Context endpoint"
     },
     {
-      "id": "se20",
+      "id": "a20",
       "fromNode": "s1",
       "toNode": "central",
       "label": "13 | rule 5 | Settled: Map: participants on the Use Case/Context endpoint"
     },
     {
-      "id": "te21",
+      "id": "b21",
       "fromNode": "central",
       "toNode": "t7",
       "label": "13 | rule 5 | Settled: Map: participants on the Use Case/Context endpoint"
     },
     {
-      "id": "se22",
+      "id": "a22",
       "fromNode": "s5",
       "toNode": "central",
       "label": "12 | rule 52 | Review: Review: Association endpoint pattern"
     },
     {
-      "id": "te23",
+      "id": "b23",
       "fromNode": "central",
       "toNode": "t8",
       "label": "12 | rule 52 | Review: Review: Association endpoint pattern"
     },
     {
-      "id": "se24",
+      "id": "a24",
       "fromNode": "s1",
       "toNode": "central",
       "label": "12 | rule 5 | Settled: Map: participants on the Use Case/Context endpoint"
     },
     {
-      "id": "te25",
+      "id": "b25",
       "fromNode": "central",
       "toNode": "t9",
       "label": "12 | rule 5 | Settled: Map: participants on the Use Case/Context endpoint"
     },
     {
-      "id": "se26",
+      "id": "a26",
       "fromNode": "s6",
       "toNode": "central",
       "label": "11 | rule 5 | Settled: Map: participants on the Use Case/Context endpoint"
     },
     {
-      "id": "te27",
+      "id": "b27",
       "fromNode": "central",
       "toNode": "t0",
       "label": "11 | rule 5 | Settled: Map: participants on the Use Case/Context endpoint"
     },
     {
-      "id": "se28",
+      "id": "a28",
       "fromNode": "s2",
       "toNode": "central",
       "label": "8 | rule 8 | Review: Review: vague Association"
     },
     {
-      "id": "te29",
+      "id": "b29",
       "fromNode": "central",
       "toNode": "t4",
       "label": "8 | rule 8 | Review: Review: vague Association"
     },
     {
-      "id": "se30",
+      "id": "a30",
       "fromNode": "s7",
       "toNode": "central",
       "label": "8 | rule 8 | Review: Review: vague Association"
     },
     {
-      "id": "te31",
+      "id": "b31",
       "fromNode": "central",
       "toNode": "t6",
       "label": "8 | rule 8 | Review: Review: vague Association"
     },
     {
-      "id": "se32",
+      "id": "a32",
       "fromNode": "s1",
       "toNode": "central",
       "label": "6 | rule 5 | Settled: Map: participants on the Use Case/Context endpoint"
     },
     {
-      "id": "te33",
+      "id": "b33",
       "fromNode": "central",
       "toNode": "t0",
       "label": "6 | rule 5 | Settled: Map: participants on the Use Case/Context endpoint"
     },
     {
-      "id": "se34",
+      "id": "a34",
       "fromNode": "s3",
       "toNode": "central",
       "label": "5 | rule 8 | Review: Review: vague Association"
     },
     {
-      "id": "te35",
+      "id": "b35",
       "fromNode": "central",
       "toNode": "t4",
       "label": "5 | rule 8 | Review: Review: vague Association"
     },
     {
-      "id": "se36",
+      "id": "a36",
       "fromNode": "s7",
       "toNode": "central",
       "label": "5 | rule 8 | Review: Review: vague Association"
     },
     {
-      "id": "te37",
+      "id": "b37",
       "fromNode": "central",
       "toNode": "t8",
       "label": "5 | rule 8 | Review: Review: vague Association"
     },
     {
-      "id": "se38",
+      "id": "a38",
       "fromNode": "s1",
       "toNode": "central",
       "label": "5 | rule 34 | Settled: Map: participants on the Use Case endpoint"
     },
     {
-      "id": "te39",
+      "id": "b39",
       "fromNode": "central",
       "toNode": "t10",
       "label": "5 | rule 34 | Settled: Map: participants on the Use Case endpoint"
     },
     {
-      "id": "se40",
+      "id": "a40",
       "fromNode": "s1",
       "toNode": "central",
       "label": "5 | rule 5 | Settled: Map: participants on the Use Case/Context endpoint"
     },
     {
-      "id": "te41",
+      "id": "b41",
       "fromNode": "central",
       "toNode": "t11",
       "label": "5 | rule 5 | Settled: Map: participants on the Use Case/Context endpoint"
     },
     {
-      "id": "se42",
+      "id": "a42",
       "fromNode": "s8",
       "toNode": "central",
       "label": "4 | rule 5 | Settled: Map: participants on the Use Case/Context endpoint"
     },
     {
-      "id": "te43",
+      "id": "b43",
       "fromNode": "central",
       "toNode": "t0",
       "label": "4 | rule 5 | Settled: Map: participants on the Use Case/Context endpoint"
     },
     {
-      "id": "se44",
+      "id": "a44",
       "fromNode": "s9",
       "toNode": "central",
       "label": "4 | rule 8 | Review: Review: vague Association"
     },
     {
-      "id": "te45",
+      "id": "b45",
       "fromNode": "central",
       "toNode": "t4",
       "label": "4 | rule 8 | Review: Review: vague Association"
     },
     {
-      "id": "se46",
+      "id": "a46",
       "fromNode": "s10",
       "toNode": "central",
       "label": "4 | rule 5 | Settled: Map: participants on the Use Case/Context endpoint"
     },
     {
-      "id": "te47",
+      "id": "b47",
       "fromNode": "central",
       "toNode": "t0",
       "label": "4 | rule 5 | Settled: Map: participants on the Use Case/Context endpoint"
     },
     {
-      "id": "se48",
+      "id": "a48",
       "fromNode": "s11",
       "toNode": "central",
       "label": "4 | rule 8 | Review: Review: vague Association"
     },
     {
-      "id": "te49",
+      "id": "b49",
       "fromNode": "central",
       "toNode": "t6",
       "label": "4 | rule 8 | Review: Review: vague Association"
     },
     {
-      "id": "se50",
+      "id": "a50",
       "fromNode": "s2",
       "toNode": "central",
       "label": "3 | rule 8 | Review: Review: vague Association"
     },
     {
-      "id": "te51",
+      "id": "b51",
       "fromNode": "central",
       "toNode": "t3",
       "label": "3 | rule 8 | Review: Review: vague Association"
     },
     {
-      "id": "se52",
+      "id": "a52",
       "fromNode": "s1",
       "toNode": "central",
       "label": "3 | rule 5 | Settled: Map: participants on the Use Case/Context endpoint"
     },
     {
-      "id": "te53",
+      "id": "b53",
       "fromNode": "central",
       "toNode": "t8",
       "label": "3 | rule 5 | Settled: Map: participants on the Use Case/Context endpoint"
     },
     {
-      "id": "se54",
+      "id": "a54",
       "fromNode": "s0",
       "toNode": "central",
       "label": "2 | rule 52 | Review: Review: Association endpoint pattern"
     },
     {
-      "id": "te55",
+      "id": "b55",
       "fromNode": "central",
       "toNode": "t12",
       "label": "2 | rule 52 | Review: Review: Association endpoint pattern"
     },
     {
-      "id": "se56",
+      "id": "a56",
       "fromNode": "s12",
       "toNode": "central",
       "label": "2 | rule 5 | Settled: Map: participants on the Use Case/Context endpoint"
     },
     {
-      "id": "te57",
+      "id": "b57",
       "fromNode": "central",
       "toNode": "t0",
       "label": "2 | rule 5 | Settled: Map: participants on the Use Case/Context endpoint"
     },
     {
-      "id": "se58",
+      "id": "a58",
       "fromNode": "s13",
       "toNode": "central",
       "label": "2 | rule 8 | Review: Review: vague Association"
     },
     {
-      "id": "te59",
+      "id": "b59",
       "fromNode": "central",
       "toNode": "t5",
       "label": "2 | rule 8 | Review: Review: vague Association"
     },
     {
-      "id": "se60",
+      "id": "a60",
       "fromNode": "s13",
       "toNode": "central",
       "label": "2 | rule 8 | Review: Review: vague Association"
     },
     {
-      "id": "te61",
+      "id": "b61",
       "fromNode": "central",
       "toNode": "t4",
       "label": "2 | rule 8 | Review: Review: vague Association"
     },
     {
-      "id": "se62",
+      "id": "a62",
       "fromNode": "s9",
       "toNode": "central",
       "label": "2 | rule 8 | Review: Review: vague Association"
     },
     {
-      "id": "te63",
+      "id": "b63",
       "fromNode": "central",
       "toNode": "t1",
       "label": "2 | rule 8 | Review: Review: vague Association"
     },
     {
-      "id": "se64",
+      "id": "a64",
       "fromNode": "s10",
       "toNode": "central",
       "label": "2 | rule 8 | Review: Review: vague Association"
     },
     {
-      "id": "te65",
+      "id": "b65",
       "fromNode": "central",
       "toNode": "t4",
       "label": "2 | rule 8 | Review: Review: vague Association"
     },
     {
-      "id": "se66",
+      "id": "a66",
       "fromNode": "s14",
       "toNode": "central",
       "label": "2 | rule 8 | Review: Review: vague Association"
     },
     {
-      "id": "te67",
+      "id": "b67",
       "fromNode": "central",
       "toNode": "t1",
       "label": "2 | rule 8 | Review: Review: vague Association"
     },
     {
-      "id": "se68",
+      "id": "a68",
       "fromNode": "s11",
       "toNode": "central",
       "label": "2 | rule 5 | Settled: Map: participants on the Use Case/Context endpoint"
     },
     {
-      "id": "te69",
+      "id": "b69",
       "fromNode": "central",
       "toNode": "t0",
       "label": "2 | rule 5 | Settled: Map: participants on the Use Case/Context endpoint"
     },
     {
-      "id": "se70",
+      "id": "a70",
       "fromNode": "s2",
       "toNode": "central",
       "label": "2 | rule 8 | Review: Review: vague Association"
     },
     {
-      "id": "te71",
+      "id": "b71",
       "fromNode": "central",
       "toNode": "t13",
       "label": "2 | rule 8 | Review: Review: vague Association"
     },
     {
-      "id": "se72",
+      "id": "a72",
       "fromNode": "s0",
       "toNode": "central",
       "label": "1 | rule 6 | Settled: Map: affects / affectedBy"
     },
     {
-      "id": "te73",
+      "id": "b73",
       "fromNode": "central",
       "toNode": "t14",
       "label": "1 | rule 6 | Settled: Map: affects / affectedBy"
     },
     {
-      "id": "se74",
+      "id": "a74",
       "fromNode": "s15",
       "toNode": "central",
       "label": "1 | rule 7 | Settled: Map: describes / describedBy"
     },
     {
-      "id": "te75",
+      "id": "b75",
       "fromNode": "central",
       "toNode": "t3",
       "label": "1 | rule 7 | Settled: Map: describes / describedBy"
     },
     {
-      "id": "se76",
+      "id": "a76",
       "fromNode": "s13",
       "toNode": "central",
       "label": "1 | rule 8 | Review: Review: vague Association"
     },
     {
-      "id": "te77",
+      "id": "b77",
       "fromNode": "central",
       "toNode": "t13",
       "label": "1 | rule 8 | Review: Review: vague Association"
     },
     {
-      "id": "se78",
+      "id": "a78",
       "fromNode": "s13",
       "toNode": "central",
       "label": "1 | rule 8 | Review: Review: vague Association"
     },
     {
-      "id": "te79",
+      "id": "b79",
       "fromNode": "central",
       "toNode": "t3",
       "label": "1 | rule 8 | Review: Review: vague Association"
     },
     {
-      "id": "se80",
+      "id": "a80",
       "fromNode": "s13",
       "toNode": "central",
       "label": "1 | rule 8 | Review: Review: vague Association"
     },
     {
-      "id": "te81",
+      "id": "b81",
       "fromNode": "central",
       "toNode": "t7",
       "label": "1 | rule 8 | Review: Review: vague Association"
     },
     {
-      "id": "se82",
+      "id": "a82",
       "fromNode": "s9",
       "toNode": "central",
       "label": "1 | rule 52 | Review: Review: Association endpoint pattern"
     },
     {
-      "id": "te83",
+      "id": "b83",
       "fromNode": "central",
       "toNode": "t15",
       "label": "1 | rule 52 | Review: Review: Association endpoint pattern"
     },
     {
-      "id": "se84",
+      "id": "a84",
       "fromNode": "s10",
       "toNode": "central",
       "label": "1 | rule 8 | Review: Review: vague Association"
     },
     {
-      "id": "te85",
+      "id": "b85",
       "fromNode": "central",
       "toNode": "t16",
       "label": "1 | rule 8 | Review: Review: vague Association"
     },
     {
-      "id": "se86",
+      "id": "a86",
       "fromNode": "s16",
       "toNode": "central",
       "label": "1 | rule 5 | Settled: Map: participants on the Use Case/Context endpoint"
     },
     {
-      "id": "te87",
+      "id": "b87",
       "fromNode": "central",
       "toNode": "t0",
       "label": "1 | rule 5 | Settled: Map: participants on the Use Case/Context endpoint"
     },
     {
-      "id": "se88",
+      "id": "a88",
       "fromNode": "s6",
       "toNode": "central",
       "label": "1 | rule 8 | Review: Review: vague Association"
     },
     {
-      "id": "te89",
+      "id": "b89",
       "fromNode": "central",
       "toNode": "t4",
       "label": "1 | rule 8 | Review: Review: vague Association"
     },
     {
-      "id": "se90",
+      "id": "a90",
       "fromNode": "s6",
       "toNode": "central",
       "label": "1 | rule 8 | Review: Review: vague Association"
     },
     {
-      "id": "te91",
+      "id": "b91",
       "fromNode": "central",
       "toNode": "t2",
       "label": "1 | rule 8 | Review: Review: vague Association"
     },
     {
-      "id": "se92",
+      "id": "a92",
       "fromNode": "s11",
       "toNode": "central",
       "label": "1 | rule 8 | Review: Review: vague Association"
     },
     {
-      "id": "te93",
+      "id": "b93",
       "fromNode": "central",
       "toNode": "t8",
       "label": "1 | rule 8 | Review: Review: vague Association"
     },
     {
-      "id": "se94",
+      "id": "a94",
       "fromNode": "s17",
       "toNode": "central",
       "label": "1 | rule 7 | Settled: Map: describes / describedBy"
     },
     {
-      "id": "te95",
+      "id": "b95",
       "fromNode": "central",
       "toNode": "t5",
       "label": "1 | rule 7 | Settled: Map: describes / describedBy"
     },
     {
-      "id": "se96",
+      "id": "a96",
       "fromNode": "s18",
       "toNode": "central",
       "label": "1 | rule 6 | Settled: Map: affects / affectedBy"
     },
     {
-      "id": "te97",
+      "id": "b97",
       "fromNode": "central",
       "toNode": "t1",
       "label": "1 | rule 6 | Settled: Map: affects / affectedBy"
     },
     {
-      "id": "se98",
+      "id": "a98",
       "fromNode": "s18",
       "toNode": "central",
       "label": "1 | rule 6 | Settled: Map: affects / affectedBy"
     },
     {
-      "id": "te99",
+      "id": "b99",
       "fromNode": "central",
       "toNode": "t5",
       "label": "1 | rule 6 | Settled: Map: affects / affectedBy"
     },
     {
-      "id": "se100",
+      "id": "a100",
       "fromNode": "s19",
       "toNode": "central",
       "label": "1 | rule 52 | Review: Review: Association endpoint pattern"
     },
     {
-      "id": "te101",
+      "id": "b101",
       "fromNode": "central",
       "toNode": "t8",
       "label": "1 | rule 52 | Review: Review: Association endpoint pattern"
     },
     {
-      "id": "se102",
+      "id": "a102",
       "fromNode": "s4",
       "toNode": "central",
       "label": "1 | rule 8 | Review: Review: vague Association"
     },
     {
-      "id": "te103",
+      "id": "b103",
       "fromNode": "central",
       "toNode": "t2",
       "label": "1 | rule 8 | Review: Review: vague Association"
     },
     {
-      "id": "se104",
+      "id": "a104",
       "fromNode": "s1",
       "toNode": "central",
       "label": "1 | rule 5 | Settled: Map: participants on the Use Case/Context endpoint"
     },
     {
-      "id": "te105",
+      "id": "b105",
       "fromNode": "central",
       "toNode": "t17",
       "label": "1 | rule 5 | Settled: Map: participants on the Use Case/Context endpoint"
     },
     {
-      "id": "se106",
+      "id": "a106",
       "fromNode": "s1",
       "toNode": "central",
       "label": "1 | rule 5 | Settled: Map: participants on the Use Case/Context endpoint"
     },
     {
-      "id": "te107",
+      "id": "b107",
       "fromNode": "central",
       "toNode": "t18",
       "label": "1 | rule 5 | Settled: Map: participants on the Use Case/Context endpoint"
     },
     {
-      "id": "se108",
+      "id": "a108",
       "fromNode": "s1",
       "toNode": "central",
       "label": "1 | rule 5 | Settled: Map: participants on the Use Case/Context endpoint"
     },
     {
-      "id": "te109",
+      "id": "b109",
       "fromNode": "central",
       "toNode": "t19",
       "label": "1 | rule 5 | Settled: Map: participants on the Use Case/Context endpoint"
     },
     {
-      "id": "ve110",
+      "id": "v110",
       "fromNode": "central",
       "toNode": "v0",
       "label": "no stereotype"

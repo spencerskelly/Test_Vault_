@@ -21,7 +21,7 @@
     {
       "id": "r2",
       "type": "file",
-      "file": "99_System/10_EA Native Translator/02_EA Relationships/Allocate endpoint precedence/README_Allocate endpoint precedence.md",
+      "file": "99_System/10_EA Native Translator/02_EA Relationships/Association/README_Association.md",
       "x": 920,
       "y": 0,
       "width": 390,
@@ -30,7 +30,7 @@
     {
       "id": "r3",
       "type": "file",
-      "file": "99_System/10_EA Native Translator/02_EA Relationships/Allocate package precedence/README_Allocate package precedence.md",
+      "file": "99_System/10_EA Native Translator/02_EA Relationships/Connector/README_Connector.md",
       "x": 1380,
       "y": 0,
       "width": 390,
@@ -39,7 +39,7 @@
     {
       "id": "r4",
       "type": "file",
-      "file": "99_System/10_EA Native Translator/02_EA Relationships/Allocate remaining after package rules/README_Allocate remaining after package rules.md",
+      "file": "99_System/10_EA Native Translator/02_EA Relationships/ControlFlow/README_ControlFlow.md",
       "x": 0,
       "y": 270,
       "width": 390,
@@ -48,7 +48,7 @@
     {
       "id": "r5",
       "type": "file",
-      "file": "99_System/10_EA Native Translator/02_EA Relationships/Allocate total/README_Allocate total.md",
+      "file": "99_System/10_EA Native Translator/02_EA Relationships/Dependency/README_Dependency.md",
       "x": 460,
       "y": 270,
       "width": 390,
@@ -57,7 +57,7 @@
     {
       "id": "r6",
       "type": "file",
-      "file": "99_System/10_EA Native Translator/02_EA Relationships/Association/README_Association.md",
+      "file": "99_System/10_EA Native Translator/02_EA Relationships/Generalization/README_Generalization.md",
       "x": 920,
       "y": 270,
       "width": 390,
@@ -66,7 +66,7 @@
     {
       "id": "r7",
       "type": "file",
-      "file": "99_System/10_EA Native Translator/02_EA Relationships/Connector/README_Connector.md",
+      "file": "99_System/10_EA Native Translator/02_EA Relationships/InformationFlow/README_InformationFlow.md",
       "x": 1380,
       "y": 270,
       "width": 390,
@@ -75,7 +75,7 @@
     {
       "id": "r8",
       "type": "file",
-      "file": "99_System/10_EA Native Translator/02_EA Relationships/ControlFlow/README_ControlFlow.md",
+      "file": "99_System/10_EA Native Translator/02_EA Relationships/Nesting/README_Nesting.md",
       "x": 0,
       "y": 540,
       "width": 390,
@@ -84,7 +84,7 @@
     {
       "id": "r9",
       "type": "file",
-      "file": "99_System/10_EA Native Translator/02_EA Relationships/Dependency/README_Dependency.md",
+      "file": "99_System/10_EA Native Translator/02_EA Relationships/NoteLink/README_NoteLink.md",
       "x": 460,
       "y": 540,
       "width": 390,
@@ -93,7 +93,7 @@
     {
       "id": "r10",
       "type": "file",
-      "file": "99_System/10_EA Native Translator/02_EA Relationships/Generalization/README_Generalization.md",
+      "file": "99_System/10_EA Native Translator/02_EA Relationships/Realisation/README_Realisation.md",
       "x": 920,
       "y": 540,
       "width": 390,
@@ -102,7 +102,7 @@
     {
       "id": "r11",
       "type": "file",
-      "file": "99_System/10_EA Native Translator/02_EA Relationships/InformationFlow/README_InformationFlow.md",
+      "file": "99_System/10_EA Native Translator/02_EA Relationships/Sequence/README_Sequence.md",
       "x": 1380,
       "y": 540,
       "width": 390,
@@ -111,7 +111,7 @@
     {
       "id": "r12",
       "type": "file",
-      "file": "99_System/10_EA Native Translator/02_EA Relationships/Nesting/README_Nesting.md",
+      "file": "99_System/10_EA Native Translator/02_EA Relationships/StateFlow/README_StateFlow.md",
       "x": 0,
       "y": 810,
       "width": 390,
@@ -120,7 +120,7 @@
     {
       "id": "r13",
       "type": "file",
-      "file": "99_System/10_EA Native Translator/02_EA Relationships/NoteLink/README_NoteLink.md",
+      "file": "99_System/10_EA Native Translator/02_EA Relationships/Usage/README_Usage.md",
       "x": 460,
       "y": 810,
       "width": 390,
@@ -129,63 +129,9 @@
     {
       "id": "r14",
       "type": "file",
-      "file": "99_System/10_EA Native Translator/02_EA Relationships/Realisation/README_Realisation.md",
-      "x": 920,
-      "y": 810,
-      "width": 390,
-      "height": 200
-    },
-    {
-      "id": "r15",
-      "type": "file",
-      "file": "99_System/10_EA Native Translator/02_EA Relationships/Remaining Requirement allocate endpoint types/README_Remaining Requirement allocate endpoint types.md",
-      "x": 1380,
-      "y": 810,
-      "width": 390,
-      "height": 200
-    },
-    {
-      "id": "r16",
-      "type": "file",
-      "file": "99_System/10_EA Native Translator/02_EA Relationships/Sequence/README_Sequence.md",
-      "x": 0,
-      "y": 1080,
-      "width": 390,
-      "height": 200
-    },
-    {
-      "id": "r17",
-      "type": "file",
-      "file": "99_System/10_EA Native Translator/02_EA Relationships/State allocate endpoint spread/README_State allocate endpoint spread.md",
-      "x": 460,
-      "y": 1080,
-      "width": 390,
-      "height": 200
-    },
-    {
-      "id": "r18",
-      "type": "file",
-      "file": "99_System/10_EA Native Translator/02_EA Relationships/StateFlow/README_StateFlow.md",
-      "x": 920,
-      "y": 1080,
-      "width": 390,
-      "height": 200
-    },
-    {
-      "id": "r19",
-      "type": "file",
-      "file": "99_System/10_EA Native Translator/02_EA Relationships/Usage/README_Usage.md",
-      "x": 1380,
-      "y": 1080,
-      "width": 390,
-      "height": 200
-    },
-    {
-      "id": "r20",
-      "type": "file",
       "file": "99_System/10_EA Native Translator/02_EA Relationships/UseCase/README_UseCase.md",
-      "x": 0,
-      "y": 1350,
+      "x": 920,
+      "y": 810,
       "width": 390,
       "height": 200
     }
