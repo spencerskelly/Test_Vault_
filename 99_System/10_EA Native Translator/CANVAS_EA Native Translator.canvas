@@ -1,136 +1,24 @@
 {
-  "nodes": [
-    {
-      "id": "title",
-      "type": "text",
-      "text": "# EA Native Translator\nLiving translator methodology workspace\n\nEA source constructs → Translation Rules → MDSE semantic model",
-      "x": 0,
-      "y": -500,
-      "width": 700,
-      "height": 220
-    },
-    {
-      "id": "eael",
-      "type": "file",
-      "file": "99_System/10_EA Native Translator/01_EA Elements/README_EA Elements.md",
-      "x": -900,
-      "y": -100,
-      "width": 360,
-      "height": 220
-    },
-    {
-      "id": "earel",
-      "type": "file",
-      "file": "99_System/10_EA Native Translator/02_EA Relationships/README_EA Relationships.md",
-      "x": -900,
-      "y": 250,
-      "width": 360,
-      "height": 220
-    },
-    {
-      "id": "rules",
-      "type": "file",
-      "file": "99_System/10_EA Native Translator/05_Translation Rules/README_Translation Rules.md",
-      "x": -150,
-      "y": 80,
-      "width": 420,
-      "height": 260
-    },
-    {
-      "id": "mdseel",
-      "type": "file",
-      "file": "99_System/10_EA Native Translator/03_MDSE Elements/README_MDSE Elements.md",
-      "x": 600,
-      "y": -100,
-      "width": 360,
-      "height": 220
-    },
-    {
-      "id": "mdserel",
-      "type": "file",
-      "file": "99_System/10_EA Native Translator/04_MDSE Relationships/README_MDSE Relationships.md",
-      "x": 600,
-      "y": 250,
-      "width": 360,
-      "height": 220
-    },
-    {
-      "id": "review",
-      "type": "file",
-      "file": "99_System/10_EA Native Translator/06_Reviews/Translator Open Decisions.md",
-      "x": -150,
-      "y": 520,
-      "width": 420,
-      "height": 260
-    },
-    {
-      "id": "fn",
-      "type": "file",
-      "file": "99_System/10_EA Native Translator/03_MDSE Elements/CANVAS - Function Translation.canvas",
-      "x": 1100,
-      "y": -320,
-      "width": 360,
-      "height": 200
-    },
-    {
-      "id": "req",
-      "type": "file",
-      "file": "99_System/10_EA Native Translator/03_MDSE Elements/CANVAS - Requirement Translation.canvas",
-      "x": 1100,
-      "y": 0,
-      "width": 360,
-      "height": 200
-    },
-    {
-      "id": "state",
-      "type": "file",
-      "file": "99_System/10_EA Native Translator/03_MDSE Elements/CANVAS - State Translation.canvas",
-      "x": 1100,
-      "y": 320,
-      "width": 360,
-      "height": 200
-    }
-  ],
-  "edges": [
-    {
-      "id": "e1",
-      "fromNode": "eael",
-      "toNode": "rules"
-    },
-    {
-      "id": "e2",
-      "fromNode": "earel",
-      "toNode": "rules"
-    },
-    {
-      "id": "e3",
-      "fromNode": "rules",
-      "toNode": "mdseel"
-    },
-    {
-      "id": "e4",
-      "fromNode": "rules",
-      "toNode": "mdserel"
-    },
-    {
-      "id": "e5",
-      "fromNode": "rules",
-      "toNode": "review"
-    },
-    {
-      "id": "e6",
-      "fromNode": "mdseel",
-      "toNode": "fn"
-    },
-    {
-      "id": "e7",
-      "fromNode": "mdseel",
-      "toNode": "req"
-    },
-    {
-      "id": "e8",
-      "fromNode": "mdseel",
-      "toNode": "state"
-    }
-  ]
+	"nodes":[
+		{"id":"title","type":"text","text":"# EA Native Translator\nLiving translator methodology workspace\n\nEA source constructs → Translation Rules → MDSE semantic model","x":0,"y":-500,"width":700,"height":220},
+		{"id":"eael","type":"file","file":"99_System/10_EA Native Translator/01_EA Elements/README_EA Elements.md","x":-900,"y":-100,"width":360,"height":220},
+		{"id":"earel","type":"file","file":"99_System/10_EA Native Translator/02_EA Relationships/README_EA Relationships.md","x":-900,"y":250,"width":360,"height":220},
+		{"id":"rules","type":"file","file":"99_System/10_EA Native Translator/05_Translation Rules/README_Translation Rules.md","x":-150,"y":80,"width":420,"height":260},
+		{"id":"mdseel","type":"file","file":"99_System/10_EA Native Translator/03_MDSE Elements/README_MDSE Elements.md","x":600,"y":-100,"width":360,"height":220},
+		{"id":"mdserel","type":"file","file":"99_System/10_EA Native Translator/04_MDSE Relationships/README_MDSE Relationships.md","x":600,"y":250,"width":360,"height":220},
+		{"id":"review","type":"file","file":"99_System/10_EA Native Translator/06_Reviews/Translator Open Decisions.md","x":-150,"y":520,"width":420,"height":260},
+		{"id":"fn","type":"file","file":"99_System/10_EA Native Translator/03_MDSE Elements/CANVAS - Function Translation.canvas","x":1100,"y":-320,"width":360,"height":200},
+		{"id":"req","type":"file","file":"99_System/10_EA Native Translator/03_MDSE Elements/CANVAS - Requirement Translation.canvas","x":1100,"y":0,"width":360,"height":200},
+		{"id":"state","type":"file","file":"99_System/10_EA Native Translator/03_MDSE Elements/CANVAS - State Translation.canvas","x":1100,"y":320,"width":360,"height":200}
+	],
+	"edges":[
+		{"id":"e1","fromNode":"eael","toNode":"rules","fromSide":"right","toSide":"left"},
+		{"id":"e2","fromNode":"earel","toNode":"rules","fromSide":"right","toSide":"left"},
+		{"id":"e3","fromNode":"rules","toNode":"mdseel","fromSide":"right","toSide":"left"},
+		{"id":"e4","fromNode":"rules","toNode":"mdserel","fromSide":"right","toSide":"left"},
+		{"id":"e5","fromNode":"rules","toNode":"review","fromSide":"bottom","toSide":"top"},
+		{"id":"e6","fromNode":"mdseel","toNode":"fn","fromSide":"right","toSide":"left"},
+		{"id":"e7","fromNode":"mdseel","toNode":"req","fromSide":"right","toSide":"left"},
+		{"id":"e8","fromNode":"mdseel","toNode":"state","fromSide":"bottom","toSide":"top"}
+	]
 }

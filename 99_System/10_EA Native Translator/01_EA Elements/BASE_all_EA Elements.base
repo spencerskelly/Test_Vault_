@@ -1,6 +1,6 @@
 filters:
   and:
-    - 'file.inFolder("99_System/10_EA Native Translator")'
+    - file.inFolder("99_System/10_EA Native Translator")
 views:
   - type: table
     name: All translator methodology
