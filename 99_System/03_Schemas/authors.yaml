@@ -1,28 +1,10 @@
-# Author registry for uid generation.
-# code: 13 characters, lowercase letters and hyphens. Rule: last name + first name, letters only, truncated to 13, padded with hyphens on the right (Workspace Decision Log W-10).
-# Optional per person: `timezone` (used for the time in their uids) and `previousCodes` (older codes for the same person, kept when a code is changed; see Definitions/Changing Your Author Code).
-# ea_names: every spelling of this person found in the EA source Author fields (login names and display names).
-# Used by the translator to turn an EA author into the author code at the end of a uid.
-schemaVersion: '1.1'
-# Time zone used for the time in a uid when the person has no `timezone` of their own (an optional field on each author above).
+# Authorship configuration for uid generation.
+# People are not listed here. Each person has a note in 99_System/04_People with their author code, time zone, previous codes and the names they appear under in the EA source (Workspace Decision Log W-25).
+schemaVersion: '2.0'
+# Time zone used for the time in a uid when a person's note has no `timezone`.
 defaultTimezone: America/Los_Angeles
-authors:
-  - {code: skellyspencer, name: Spencer Skelly,  ea_names: [SpencerSkelly, skellys]}
-  - {code: legaspichesca, name: Chesca Legaspi,  ea_names: [legaspic, ChescaLegaspi]}
-  - {code: koerferfloria, name: Florian Koerfer, ea_names: [Florian Koerfer, koerfefl]}
-  - {code: montanoherman, name: Herman Montano,  ea_names: [HermanMontano, montanoh]}
-  - {code: kirchnersilke, name: Silke Kirchner,  ea_names: [kirchnes]}
-  - {code: follmannkarin, name: Karin Follmann,  ea_names: [follmank]}
-  - {code: nishiokagavin, name: Gavin Nishioka,  ea_names: [nishiokag]}
-  - {code: riverajesse--, name: Jesse Rivera,    ea_names: [JesseRivera]}
-  - {code: virziray-----, name: Ray Virzi,       ea_names: [rvirzi]}
-  - {code: brassbenjamin, name: Benjamin Brass,  ea_names: [brassb]}
-# EA authors with no matching person: 722 elements with a blank Author, and one element whose Author is "7.1.0-2".
-# These use the code below (Workspace Decision Log W-12).
-unmapped: {code: sparxeaauthor, ea_names: ['', '7.1.0-2']}
-
 # AI authors. Used only when an AI creates a note without a user's direct instruction.
-# When a user directs the note, even if an AI writes it, the user's code above is used (Workspace Decision Log W-21).
+# When a user directs the note, even if an AI writes it, the user's code from their person note is used (W-21).
 # Standard: [tool name][ai][hyphens], always 13 characters. Tool name is lowercase letters only, cut to 11 letters if longer, so "ai" is never lost.
 # New tool: add it here with the same pattern (for example a tool called Copilot becomes copilotai----).
 ai_authors:
@@ -30,3 +12,6 @@ ai_authors:
   - {code: chatgptai----, tool: ChatGPT (OpenAI)}
   - {code: rovoai-------, tool: Rovo (Atlassian)}
   - {code: geminiai-----, tool: Gemini (Google)}
+# EA authors with no matching person: 722 elements with a blank Author, and one element whose Author is "7.1.0-2".
+# These use the code below (W-12).
+unmapped: {code: sparxeaauthor, ea_names: ['', '7.1.0-2']}

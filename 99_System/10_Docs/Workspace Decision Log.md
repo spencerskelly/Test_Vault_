@@ -66,6 +66,8 @@ This log covers workspace and convention decisions. Translation-rule decisions (
 
 **W-24 · 2026-09-28 · Author registration and changing a code.** MDSE Bootstrap registers each person at install: it asks for their name, derives the author code, saves it locally, and adds the person (code, name, time zone) to `authors.yaml` so AI tools can find it. The plugin's source is not in this repository, so the requirements are written up in `99_System/01_Admin/MDSE Bootstrap - Author Registration Spec.md`, with test cases. `Definitions/Changing Your Author Code.md` explains how a person changes their code if something goes wrong: existing `uid` values are never edited, the old code is kept as `previousCodes`, and only new notes use the new code. The code rule now also removes accents (Müller becomes muller) and turns ß into ss; the first-use snippet was updated and tested for that. Both new notes carry `skellyspencer` (written at Spencer's direction) and are stamped `INFO-00005` and `INFO-00006`.
 
+**W-25 · 2026-09-28 · One note per person.** People are recorded as one note each in `99_System/04_People` (named `First Last`), created from a new `Person` template, instead of a single list. This avoids merge conflicts when several people register at once, lets a person edit their own entry in Obsidian's Properties panel, and leaves room to personalize the interface per person later. Each person note holds `code`, `name`, `timezone`, `previousCodes` and `eaNames` (the names the person appears under in the EA source). The ten people from EA were moved into notes and stamped `INFO-00007` to `INFO-00016` (`skellyspencer`, at Spencer's direction). `authors.yaml` is now configuration only: default time zone, the AI codes, and the code for unknown EA authors. Registration spec, change-your-code guide and AI instructions were updated to match. The translator's EA name mapping will be read from the `eaNames` fields of these notes when the rules are built.
+
 ## Open (raised, not yet decided)
 
 - Where the translator's source-of-truth ruleset lives.
@@ -77,8 +79,8 @@ This log covers workspace and convention decisions. Translation-rule decisions (
 - Whether original EA modified dates should also be kept (creation date and author go into `uid`).
 - Which `status` values mean "a person still needs to review this" for AI-created notes.
 - Whether to add a small stamping script so AI tools compute `uid` and `id` mechanically instead of by written rule.
-- MDSE Bootstrap has to implement the registration spec, and the first-use popup saves a code only locally (the popup does not register the person in `authors.yaml`).
-- Several people registering at once would all edit the same `authors.yaml` and could cause merge conflicts; one file per person would avoid that.
+- MDSE Bootstrap has to implement the registration spec, and the first-use popup saves a code only locally (the popup does not create the person note).
+- What else belongs in a person note to personalize the interface.
 - Backfilling `uid` and `id` on the notes that already exist.
 - The install-time name entry for MDSE Bootstrap: it should create `.obsidian/author-code.txt` using the same rule as the snippet.
 - Where MDSE Bootstrap's source lives, so its install-time name entry can follow the same definition.
