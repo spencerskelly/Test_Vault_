@@ -352,29 +352,29 @@ tConnector:
   handoffNote: Relationship detail.
   nonblank: 319
 - field: DestRole
-  disposition: pending
-  proposedByHandoff: body
-  handoffNote: Relationship detail.
+  disposition: drop
+  decision: W-49
+  note: Dropped (W-49). No row in the extract holds a value.
   nonblank: 0
 - field: SourceRoleType
-  disposition: pending
-  proposedByHandoff: archive / open question
-  handoffNote: Source evidence; use only where needed.
+  disposition: drop
+  decision: W-49
+  note: Dropped (W-49). No row in the extract holds a value.
   nonblank: 0
 - field: DestRoleType
-  disposition: pending
-  proposedByHandoff: archive / open question
-  handoffNote: Source evidence; use only where needed.
+  disposition: drop
+  decision: W-49
+  note: Dropped (W-49). No row in the extract holds a value.
   nonblank: 0
 - field: SourceRoleNote
-  disposition: pending
-  proposedByHandoff: body
-  handoffNote: Preserve.
+  disposition: drop
+  decision: W-49
+  note: Dropped (W-49). No row in the extract holds a value.
   nonblank: 0
 - field: DestRoleNote
-  disposition: pending
-  proposedByHandoff: body
-  handoffNote: Preserve.
+  disposition: drop
+  decision: W-49
+  note: Dropped (W-49). No row in the extract holds a value.
   nonblank: 0
 - field: SourceCard
   disposition: pending
@@ -387,24 +387,24 @@ tConnector:
   handoffNote: Meaningful multiplicity.
   nonblank: 7
 - field: SourceConstraint
-  disposition: pending
-  proposedByHandoff: body
-  handoffNote: Preserve.
+  disposition: drop
+  decision: W-49
+  note: Dropped (W-49). No row in the extract holds a value.
   nonblank: 0
 - field: DestConstraint
-  disposition: pending
-  proposedByHandoff: body
-  handoffNote: Preserve.
+  disposition: drop
+  decision: W-49
+  note: Dropped (W-49). No row in the extract holds a value.
   nonblank: 0
 - field: SourceQualifier
-  disposition: pending
-  proposedByHandoff: body
-  handoffNote: Preserve if meaningful.
+  disposition: drop
+  decision: W-49
+  note: Dropped (W-49). No row in the extract holds a value.
   nonblank: 0
 - field: DestQualifier
-  disposition: pending
-  proposedByHandoff: body
-  handoffNote: Preserve if meaningful.
+  disposition: drop
+  decision: W-49
+  note: Dropped (W-49). No row in the extract holds a value.
   nonblank: 0
 - field: SourceContainment
   disposition: pending
@@ -417,9 +417,9 @@ tConnector:
   handoffNote: Connector-specific evidence.
   nonblank: 21792
 - field: SourceIsAggregate
-  disposition: pending
-  proposedByHandoff: structure
-  handoffNote: Aggregation/composition rule evidence.
+  disposition: drop
+  decision: W-49
+  note: Dropped (W-49). No row in the extract holds a value.
   nonblank: 0
 - field: DestIsAggregate
   disposition: pending
@@ -427,19 +427,19 @@ tConnector:
   handoffNote: Aggregation/composition rule evidence.
   nonblank: 2288
 - field: SourceIsOrdered
-  disposition: pending
-  proposedByHandoff: body / archive
-  handoffNote: Preserve only if engineering-significant.
+  disposition: drop
+  decision: W-49
+  note: Dropped (W-49). No row in the extract holds a value.
   nonblank: 0
 - field: DestIsOrdered
-  disposition: pending
-  proposedByHandoff: body / archive
-  handoffNote: Preserve only if engineering-significant.
+  disposition: drop
+  decision: W-49
+  note: Dropped (W-49). No row in the extract holds a value.
   nonblank: 0
 - field: SourceIsNavigable
-  disposition: pending
-  proposedByHandoff: structure / archive
-  handoffNote: Rule evidence.
+  disposition: drop
+  decision: W-49
+  note: Dropped (W-49). No row in the extract holds a value.
   nonblank: 0
 - field: DestIsNavigable
   disposition: pending
@@ -506,14 +506,14 @@ tConnector:
   proposedByHandoff: archive / drop
   handoffNote: Diagram layout only.
 - field: HeadStyle
-  disposition: pending
-  proposedByHandoff: drop
-  handoffNote: Presentation.
+  disposition: drop
+  decision: W-49
+  note: Dropped (W-49). No row in the extract holds a value.
   nonblank: 0
 - field: LineStyle
-  disposition: pending
-  proposedByHandoff: drop
-  handoffNote: Presentation.
+  disposition: drop
+  decision: W-49
+  note: Dropped (W-49). No row in the extract holds a value.
   nonblank: 0
 - field: RouteStyle
   disposition: pending
@@ -521,9 +521,9 @@ tConnector:
   handoffNote: Presentation.
   nonblank: 21795
 - field: IsBold
-  disposition: pending
-  proposedByHandoff: drop
-  handoffNote: Presentation.
+  disposition: drop
+  decision: W-49
+  note: Dropped (W-49). No row in the extract holds a value.
   nonblank: 0
 - field: LineColor
   disposition: pending
@@ -531,29 +531,29 @@ tConnector:
   handoffNote: Presentation.
   nonblank: 21822
 - field: VirtualInheritance
-  disposition: pending
-  proposedByHandoff: archive
-  handoffNote: Source detail unless an explicit Generalization rule consumes it.
+  disposition: drop
+  decision: W-49
+  note: Dropped (W-49). No row in the extract holds a value.
   nonblank: 0
 - field: LinkAccess
-  disposition: pending
-  proposedByHandoff: drop / archive
-  handoffNote: EA mechanics.
+  disposition: drop
+  decision: W-49
+  note: Dropped (W-49). No row in the extract holds a value.
   nonblank: 0
 - field: IsRoot
-  disposition: pending
-  proposedByHandoff: archive
-  handoffNote: Connector source evidence.
+  disposition: drop
+  decision: W-49
+  note: Dropped (W-49). No row in the extract holds a value.
   nonblank: 0
 - field: IsLeaf
-  disposition: pending
-  proposedByHandoff: archive
-  handoffNote: Connector source evidence.
+  disposition: drop
+  decision: W-49
+  note: Dropped (W-49). No row in the extract holds a value.
   nonblank: 0
 - field: IsSpec
-  disposition: pending
-  proposedByHandoff: archive
-  handoffNote: Connector source evidence.
+  disposition: drop
+  decision: W-49
+  note: Dropped (W-49). No row in the extract holds a value.
   nonblank: 0
 - field: SourceChangeable
   disposition: pending
@@ -581,24 +581,24 @@ tConnector:
   handoffNote: Construct-specific evidence.
   nonblank: 127
 - field: ActionFlags
-  disposition: pending
-  proposedByHandoff: archive
-  handoffNote: Construct-specific evidence.
+  disposition: drop
+  decision: W-49
+  note: Dropped (W-49). No row in the extract holds a value.
   nonblank: 0
 - field: IsSignal
-  disposition: pending
-  proposedByHandoff: archive / open question
-  handoffNote: Only an explicit rule should consume it.
+  disposition: drop
+  decision: W-49
+  note: Dropped (W-49). No row in the extract holds a value.
   nonblank: 0
 - field: IsStimulus
-  disposition: pending
-  proposedByHandoff: archive / open question
-  handoffNote: Only an explicit rule should consume it.
+  disposition: drop
+  decision: W-49
+  note: Dropped (W-49). No row in the extract holds a value.
   nonblank: 0
 - field: DispatchAction
-  disposition: pending
-  proposedByHandoff: archive / open question
-  handoffNote: Only an explicit rule should consume it.
+  disposition: drop
+  decision: W-49
+  note: Dropped (W-49). No row in the extract holds a value.
   nonblank: 0
 - field: Target2
   disposition: pending
@@ -606,14 +606,14 @@ tConnector:
   handoffNote: Only an explicit rule should consume it.
   nonblank: 118
 - field: SourceStereotype
-  disposition: pending
-  proposedByHandoff: archive / structure
-  handoffNote: Endpoint/source-rule evidence.
+  disposition: drop
+  decision: W-49
+  note: Dropped (W-49). No row in the extract holds a value.
   nonblank: 0
 - field: DestStereotype
-  disposition: pending
-  proposedByHandoff: archive / structure
-  handoffNote: Endpoint/source-rule evidence.
+  disposition: drop
+  decision: W-49
+  note: Dropped (W-49). No row in the extract holds a value.
   nonblank: 0
 - field: SourceStyle
   disposition: pending
@@ -626,9 +626,9 @@ tConnector:
   handoffNote: Source evidence.
   nonblank: 21795
 - field: EventFlags
-  disposition: pending
-  proposedByHandoff: archive
-  handoffNote: Construct-specific evidence.
+  disposition: drop
+  decision: W-49
+  note: Dropped (W-49). No row in the extract holds a value.
   nonblank: 0
 tPackage:
 - field: Package_ID
