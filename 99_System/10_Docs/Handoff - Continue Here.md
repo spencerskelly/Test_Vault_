@@ -15,7 +15,7 @@ Written 2026-09-28 for a new AI chat continuing the work on this vault. Read thi
 
 ## Read in this order
 
-1. `99_System/10_Docs/Workspace Decision Log.md`: every decision made here (W-01 to W-44) and the Open list at the bottom. It is the authority for what has been decided.
+1. `99_System/10_Docs/Workspace Decision Log.md`: every decision made here (W-01 to W-45) and the Open list at the bottom. It is the authority for what has been decided.
 2. `99_System/02_AI/AI_INSTRUCTIONS.md`: how an AI creates notes (uid, id, status).
 3. `99_System/03_Schemas/ea-field-dispositions.yaml`, `ea-tag-dispositions.yaml` and `ea-element-mapping.yaml`: the property and element worklists.
 4. `Definitions/Properties`: the property definition notes (`uid`, `id`, `eaType` so far).
@@ -49,7 +49,7 @@ Written 2026-09-28 for a new AI chat continuing the work on this vault. Read thi
 Done: disposition vocabulary; administrative element fields; 69 tags dropped; the `id` tags; `Stakeholder ID` as clause source.
 
 Next, in this order:
-1. The rest of the element fields (13 still `pending` in `ea-field-dispositions.yaml`, each with the handoff's suggestion and a row count; the 21 empty ones were dropped in W-40 and 11 presentation/style fields decided in W-41, Note/Alias/Multiplicity in W-42, changed in W-43, Part block link in W-44).
+1. The rest of the element fields (9 still `pending` in `ea-field-dispositions.yaml`, each with the handoff's suggestion and a row count; the 21 empty ones were dropped in W-40 and 11 presentation/style fields decided in W-41, Note/Alias/Multiplicity in W-42, changed in W-43, Part block link in W-44, four PDATA/NType fields in W-45).
 2. Connector fields (66) and package fields (23).
 3. Diagram fields and the subordinate tables (attributes, operations, linked documents and others). They are not yet in a file.
 4. The 48 pending tags in `ea-tag-dispositions.yaml`. Start with the two `Status` tags: they hold "Draft" on all but one element. Groups: large low-variety tags, comments and knowledge, part and hardware data, FMEA, EA tool leftovers.

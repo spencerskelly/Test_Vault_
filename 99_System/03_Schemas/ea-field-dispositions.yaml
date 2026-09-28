@@ -114,9 +114,9 @@ tObject:
   note: Dropped (W-39).
   nonblank: 32428
 - field: NType
-  disposition: pending
-  proposedByHandoff: archive
-  handoffNote: EA internal subtype discriminator.
+  disposition: archive
+  decision: W-45
+  note: 'Archived (W-45). EA internal subtype code; 12 distinct numbers, no meaning of its own.'
   nonblank: 1392
 - field: Abstract
   disposition: drop
@@ -135,19 +135,19 @@ tObject:
   handoffNote: EA overloaded internal storage; decode only by explicit rule.
   nonblank: 19333
 - field: PDATA2
-  disposition: pending
-  proposedByHandoff: archive / structure
-  handoffNote: Same.
+  disposition: archive
+  decision: W-45
+  note: 'Archived (W-45). Requirements hold only the EA default ''Medium''. GUID references on Ports and Parts wait for the Port and Object mapping.'
   nonblank: 14619
 - field: PDATA3
-  disposition: pending
-  proposedByHandoff: archive / structure
-  handoffNote: Same.
+  disposition: archive
+  decision: W-45
+  note: 'Archived (W-45). Requirements hold only the EA default ''Medium''. GUID references on Ports and Parts wait for the Port and Object mapping.'
   nonblank: 15366
 - field: PDATA4
-  disposition: pending
-  proposedByHandoff: archive / structure
-  handoffNote: Same.
+  disposition: archive
+  decision: W-45
+  note: 'Archived (W-45). 12 values, all on Note elements, such as idref1=36121;.'
   nonblank: 12
 - field: PDATA5
   disposition: drop
