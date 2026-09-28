@@ -302,24 +302,24 @@ tObject:
   nonblank: 0
 tConnector:
 - field: Connector_ID
-  disposition: pending
-  proposedByHandoff: archive
-  handoffNote: Relationship trace / reconciliation only.
+  disposition: structure
+  decision: W-57
+  note: 'Structure (W-57). Joins 4,583 connector tag rows and 37,955 diagram-link rows, all of which resolve; the handoff suggested archive.'
   nonblank: 21822
 - field: ea_guid
-  disposition: pending
-  proposedByHandoff: archive
-  handoffNote: Relationship provenance.
+  disposition: structure
+  decision: W-57
+  note: 'Structure (W-57). Unique on all 21,822 connectors; keys each connector''s ledger row (W-35) and identifies flagged connectors (W-55). The handoff suggested archive.'
   nonblank: 21822
 - field: Connector_Type
-  disposition: pending
-  proposedByHandoff: structure
-  handoffNote: Primary relationship rule discriminator.
+  disposition: structure
+  decision: W-57
+  note: 'Structure (W-57). 15 types; picks the relationship rule.'
   nonblank: 21822
 - field: Stereotype
-  disposition: pending
-  proposedByHandoff: structure
-  handoffNote: Relationship rule discriminator.
+  disposition: structure
+  decision: W-57
+  note: 'Structure (W-57). Filled on 10,542 rows, 12 values (allocate 2,795, satisfy 2,444, deriveReqt 1,417, refine 1,115, trace 775, itemFlow 123 and others); picks the relationship rule. Not a property, because a connector has no note.'
   nonblank: 10542
 - field: Name
   disposition: body
@@ -339,14 +339,14 @@ tConnector:
   note: 'Structure (W-51). Resolves which end is the source. 20,359 rows Source -> Destination, 1,426 Unspecified (Connector and Association), 10 Destination -> Source.'
   nonblank: 21795
 - field: Start_Object_ID
-  disposition: pending
-  proposedByHandoff: structure
-  handoffNote: Endpoint resolution.
+  disposition: structure
+  decision: W-57
+  note: 'Structure (W-57). Resolves the start end; 21,813 of 21,822 resolve.'
   nonblank: 21813
 - field: End_Object_ID
-  disposition: pending
-  proposedByHandoff: structure
-  handoffNote: Endpoint resolution.
+  disposition: structure
+  decision: W-57
+  note: 'Structure (W-57). Resolves the end; 21,813 of 21,822 resolve.'
   nonblank: 21813
 - field: SourceRole
   disposition: archive
