@@ -38,11 +38,13 @@ This log covers workspace and convention decisions. Translation-rule decisions (
 
 **W-11 · 2026-09-28 · Author registry.** Ten people are mapped from the EA Author values to their author codes, recorded in `99_System/03_Schemas/authors.yaml`. Login names and display names of the same person are treated as one author (for example `SpencerSkelly` and `skellys`). Jesse Rivera and Ray Virzi are different people. All ten codes follow the W-10 rule and are unique. Every EA author value is covered except 722 blank authors and one junk value (`7.1.0-2`).
 
+**W-12 · 2026-09-28 · Unknown EA authors.** EA elements with no usable author (722 blank, 1 with the value `7.1.0-2`) get the author code `sparxeaauthor`, meaning "created in Sparx EA, author not recorded". It is not a person and is recorded in `authors.yaml`.
+
 ## Open (raised, not yet decided)
 
 - Where the translator's source-of-truth ruleset lives.
 - What happens to the existing methodology notes (rules, decisions, canvases, bases), including 99 canvas nodes that already point at note paths that do not exist.
 - Disposition of the 121 EA tagged values, starting with where legacy IDs (`id`, `SysML1.4::id`) land.
-- Which author code to use for the 722 blank and 1 junk EA authors, and how to handle timezone and duplicate timestamps in the translated `uid`.
+- How to handle timezone and duplicate timestamps in the translated `uid`.
 - Whether original EA modified dates should also be kept (creation date and author go into `uid`).
 - Where MDSE Bootstrap's source lives, so its install-time name entry can follow the same definition.
