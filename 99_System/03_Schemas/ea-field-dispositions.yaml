@@ -980,25 +980,39 @@ tDiagramObjects:
   note: 'Structure (W-72). Which element is drawn; all 42,966 rows resolve; no element appears twice on one diagram.'
   nonblank: 42966
 - field: RectTop
-  disposition: pending
+  disposition: structure
+  decision: W-73
+  note: 'Structure (W-73). Position and size of the drawn object; all 42,966 rows have a positive size; EA''s vertical axis runs downward as a negative number, so canvas coordinates follow by a fixed sign flip.'
   nonblank: 42966
 - field: RectLeft
-  disposition: pending
+  disposition: structure
+  decision: W-73
+  note: 'Structure (W-73). Position and size of the drawn object (see RectTop).'
   nonblank: 42965
 - field: RectRight
-  disposition: pending
+  disposition: structure
+  decision: W-73
+  note: 'Structure (W-73). Position and size of the drawn object (see RectTop).'
   nonblank: 42966
 - field: RectBottom
-  disposition: pending
+  disposition: structure
+  decision: W-73
+  note: 'Structure (W-73). Position and size of the drawn object (see RectTop).'
   nonblank: 42966
 - field: Sequence
-  disposition: pending
+  disposition: structure
+  decision: W-73
+  note: 'Structure (W-73). Drawing order, unique within each diagram; canvas draws nodes in file order.'
   nonblank: 42966
 - field: ObjectStyle
-  disposition: pending
+  disposition: archive
+  decision: W-73
+  note: 'Archived (W-73). Colours, fonts and display switches per drawn object (41,792 distinct values).'
   nonblank: 42966
 - field: Instance_ID
-  disposition: pending
+  disposition: archive
+  decision: W-73
+  note: 'Archived (W-73). EA internal id of the drawn object; unique on all rows.'
   nonblank: 42966
 # tDiagramLinks: 37955 rows in the extract (t_diagramlinks.csv); added W-67, no handoff suggestions exist for these fields
 tDiagramLinks:
@@ -1013,10 +1027,14 @@ tDiagramLinks:
   note: 'Structure (W-72). Which connector is drawn; all 37,955 rows resolve; 7 connectors appear twice on one diagram.'
   nonblank: 37955
 - field: Geometry
-  disposition: pending
+  disposition: archive
+  decision: W-73
+  note: 'Archived (W-73). Line routing text; canvas lines route themselves.'
   nonblank: 37955
 - field: Style
-  disposition: pending
+  disposition: archive
+  decision: W-73
+  note: 'Archived (W-73). Line colour and style per drawn connector (36,242 distinct values).'
   nonblank: 37955
 - field: Hidden
   disposition: structure
@@ -1024,8 +1042,12 @@ tDiagramLinks:
   note: 'Structure (W-72). 1 on 222 rows: the connector is hidden on that diagram and must not be drawn.'
   nonblank: 222
 - field: Path
-  disposition: pending
+  disposition: archive
+  decision: W-73
+  note: 'Archived (W-73). Bend points on 984 rows; canvas lines route themselves.'
   nonblank: 984
 - field: Instance_ID
-  disposition: pending
+  disposition: archive
+  decision: W-73
+  note: 'Archived (W-73). EA internal id of the drawn connector; unique on all rows.'
   nonblank: 37955
