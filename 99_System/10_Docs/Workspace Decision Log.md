@@ -171,6 +171,8 @@ Stage 2 (W-30) is the review: the changes people make in it are recorded and eit
 
 **W-67 · 2026-09-28 · Diagram fields added to the worklist.** `ea-field-dispositions.yaml` now also lists the three diagram tables, each field `pending` with its count of rows holding a real value: `tDiagram` (29 fields, 2,924 diagrams), `tDiagramObjects` (9 fields, 42,966 rows) and `tDiagramLinks` (7 fields, 37,955 rows). The handoff package gave no suggestions for these, so none are recorded. They matter mainly for the diagrams-only run (W-62). The subordinate tables (attributes, operations, linked documents, tags, constraints and others, one CSV each in `99_System/CSV_EA`) are not yet listed.
 
+**W-68 · 2026-09-28 · Diagram fields that carry nothing are dropped.** Twelve of the 29 `tDiagram` fields are `drop`. Four are empty (0 of 2,924): `ShowDetails`, `Stereotype`, `HTMLPath` and `Locked`. Eight hold one value and nothing else: `Version` (`1.0`, 2,924 rows), `AttPub`, `AttPri` and `AttPro` (`1`, 2,924 each), `Scale` (`100`, 2,924), and `ShowForeign` (`1`, 499), `ShowBorder` (`1`, 1,075) and `ShowPackageContents` (`1`, 1,079), which are a display switch either on or unset. The same rule as W-50 and W-40. The export keeps every column (W-35), and the diagrams-only run (W-62) reads the export. `Orientation` (`P` 1,914, `L` 1,010) and the page size fields `cx` and `cy` vary and are kept for the next question, because the diagram output format is not decided. 17 `tDiagram` fields remain `pending`.
+
 ## Open (raised, not yet decided)
 
 - What makes a vault "ready for finishing touches".

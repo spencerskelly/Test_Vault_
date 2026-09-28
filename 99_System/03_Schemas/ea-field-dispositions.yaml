@@ -837,28 +837,40 @@ tDiagram:
   disposition: pending
   nonblank: 2924
 - field: Version
-  disposition: pending
+  disposition: drop
+  decision: W-68
+  note: 'Dropped (W-68). Holds 1.0 on all 2,924 rows.'
   nonblank: 2924
 - field: Author
   disposition: pending
   nonblank: 2924
 - field: ShowDetails
-  disposition: pending
+  disposition: drop
+  decision: W-68
+  note: 'Dropped (W-68). No row holds a value.'
   nonblank: 0
 - field: Notes
   disposition: pending
   nonblank: 8
 - field: Stereotype
-  disposition: pending
+  disposition: drop
+  decision: W-68
+  note: 'Dropped (W-68). No row holds a value.'
   nonblank: 0
 - field: AttPub
-  disposition: pending
+  disposition: drop
+  decision: W-68
+  note: 'Dropped (W-68). Holds 1 on all 2,924 rows.'
   nonblank: 2924
 - field: AttPri
-  disposition: pending
+  disposition: drop
+  decision: W-68
+  note: 'Dropped (W-68). Holds 1 on all 2,924 rows.'
   nonblank: 2924
 - field: AttPro
-  disposition: pending
+  disposition: drop
+  decision: W-68
+  note: 'Dropped (W-68). Holds 1 on all 2,924 rows.'
   nonblank: 2924
 - field: Orientation
   disposition: pending
@@ -870,7 +882,9 @@ tDiagram:
   disposition: pending
   nonblank: 2924
 - field: Scale
-  disposition: pending
+  disposition: drop
+  decision: W-68
+  note: 'Dropped (W-68). Holds 100 on all 2,924 rows.'
   nonblank: 2924
 - field: CreatedDate
   disposition: pending
@@ -879,22 +893,32 @@ tDiagram:
   disposition: pending
   nonblank: 2924
 - field: HTMLPath
-  disposition: pending
+  disposition: drop
+  decision: W-68
+  note: 'Dropped (W-68). No row holds a value.'
   nonblank: 0
 - field: ShowForeign
-  disposition: pending
+  disposition: drop
+  decision: W-68
+  note: 'Dropped (W-68). Holds 1 on 499 rows and nothing on the rest.'
   nonblank: 499
 - field: ShowBorder
-  disposition: pending
+  disposition: drop
+  decision: W-68
+  note: 'Dropped (W-68). Holds 1 on 1,075 rows and nothing on the rest.'
   nonblank: 1075
 - field: ShowPackageContents
-  disposition: pending
+  disposition: drop
+  decision: W-68
+  note: 'Dropped (W-68). Holds 1 on 1,079 rows and nothing on the rest.'
   nonblank: 1079
 - field: PDATA
   disposition: pending
   nonblank: 2818
 - field: Locked
-  disposition: pending
+  disposition: drop
+  decision: W-68
+  note: 'Dropped (W-68). No row holds a value.'
   nonblank: 0
 - field: ea_guid
   disposition: pending
