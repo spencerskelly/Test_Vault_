@@ -15,7 +15,7 @@ Written 2026-09-28 for a new AI chat continuing the work on this vault. Read thi
 
 ## Read in this order
 
-1. `99_System/10_Docs/Workspace Decision Log.md`: every decision made here (W-01 to W-39) and the Open list at the bottom. It is the authority for what has been decided.
+1. `99_System/10_Docs/Workspace Decision Log.md`: every decision made here (W-01 to W-40) and the Open list at the bottom. It is the authority for what has been decided.
 2. `99_System/02_AI/AI_INSTRUCTIONS.md`: how an AI creates notes (uid, id, status).
 3. `99_System/03_Schemas/ea-field-dispositions.yaml`, `ea-tag-dispositions.yaml` and `ea-element-mapping.yaml`: the property and element worklists.
 4. `Definitions/Properties`: the property definition notes (`uid`, `id`, `eaType` so far).
@@ -42,14 +42,14 @@ Written 2026-09-28 for a new AI chat continuing the work on this vault. Read thi
 - **External documents:** one note per document edition with clause anchors; unconnected clauses fold into it (W-16).
 - **Tags:** 69 of the 121 tags are dropped (W-29). Sequence-style EA `id` values are dropped (W-26). The `Stakeholder ID` tag holds clause numbers. When unsure, keep the value in the body and decide in the cleanup (W-27).
 - **Import process:** two stages (W-30). Run into a fresh vault, review, then accept it or start fresh with better rules; never import over an existing vault (W-36, W-37). Review changes are the git diff against the baseline plus reasons in `99_System/10_Docs/Review Changes Log.md` (W-38). The source reference is a ledger keyed by EA GUID plus a run manifest, with no copied values (W-35).
-- **Field dispositions:** every field ends as `property`, `body`, `structure`, `archive` or `drop` (W-33). Element admin fields are settled (W-39).
+- **Field dispositions:** every field ends as `property`, `body`, `structure`, `archive` or `drop` (W-33). Element admin fields are settled (W-39), and so are the 21 empty element fields (W-40).
 
 ## Where the property work stands
 
 Done: disposition vocabulary; administrative element fields; 69 tags dropped; the `id` tags; `Stakeholder ID` as clause source.
 
 Next, in this order:
-1. The rest of the element fields (48 still `pending` in `ea-field-dispositions.yaml`, each with the handoff's suggestion and a row count).
+1. The rest of the element fields (27 still `pending` in `ea-field-dispositions.yaml`, each with the handoff's suggestion and a row count; the 21 empty ones were dropped in W-40).
 2. Connector fields (66) and package fields (23).
 3. Diagram fields and the subordinate tables (attributes, operations, linked documents and others). They are not yet in a file.
 4. The 48 pending tags in `ea-tag-dispositions.yaml`. Start with the two `Status` tags: they hold "Draft" on all but one element. Groups: large low-variety tags, comments and knowledge, part and hardware data, FMEA, EA tool leftovers.

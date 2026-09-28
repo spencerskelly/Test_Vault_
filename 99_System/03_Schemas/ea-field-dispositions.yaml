@@ -115,14 +115,14 @@ tObject:
   handoffNote: EA internal subtype discriminator.
   nonblank: 1392
 - field: Abstract
-  disposition: pending
-  proposedByHandoff: open question / structure
-  handoffNote: Do not create a generic YAML flag without an explicit rule.
+  disposition: drop
+  decision: W-40
+  note: Dropped (W-40). No row in the extract holds a value.
   nonblank: 0
 - field: Tagged
-  disposition: pending
-  proposedByHandoff: drop
-  handoffNote: Indicates EA tagged-value machinery, not engineering meaning.
+  disposition: drop
+  decision: W-40
+  note: Dropped (W-40). No row in the extract holds a value.
   nonblank: 0
 - field: PDATA1
   disposition: pending
@@ -145,29 +145,29 @@ tObject:
   handoffNote: Same.
   nonblank: 12
 - field: PDATA5
-  disposition: pending
-  proposedByHandoff: archive / structure
-  handoffNote: Same.
+  disposition: drop
+  decision: W-40
+  note: Dropped (W-40). No row in the extract holds a value.
   nonblank: 0
 - field: Concurrency
-  disposition: pending
-  proposedByHandoff: drop
-  handoffNote: No generic MDSE element property.
+  disposition: drop
+  decision: W-40
+  note: Dropped (W-40). No row in the extract holds a value.
   nonblank: 0
 - field: Visibility
-  disposition: pending
-  proposedByHandoff: drop
-  handoffNote: UML implementation detail for current purposes.
+  disposition: drop
+  decision: W-40
+  note: Dropped (W-40). No row in the extract holds a value.
   nonblank: 0
 - field: Persistence
-  disposition: pending
-  proposedByHandoff: drop
-  handoffNote: Ignore unless a future construct-specific rule justifies it.
+  disposition: drop
+  decision: W-40
+  note: Dropped (W-40). No row in the extract holds a value.
   nonblank: 0
 - field: Cardinality
-  disposition: pending
-  proposedByHandoff: body / structure
-  handoffNote: Preserve where engineering-significant.
+  disposition: drop
+  decision: W-40
+  note: Dropped (W-40). No row in the extract holds a value.
   nonblank: 0
 - field: GenType
   disposition: pending
@@ -175,19 +175,19 @@ tObject:
   handoffNote: Code-generation metadata.
   nonblank: 32365
 - field: GenFile
-  disposition: pending
-  proposedByHandoff: drop
-  handoffNote: Code-generation metadata.
+  disposition: drop
+  decision: W-40
+  note: Dropped (W-40). No row in the extract holds a value.
   nonblank: 0
 - field: Header1
-  disposition: pending
-  proposedByHandoff: drop
-  handoffNote: Code-generation / tool metadata.
+  disposition: drop
+  decision: W-40
+  note: Dropped (W-40). No row in the extract holds a value.
   nonblank: 0
 - field: Header2
-  disposition: pending
-  proposedByHandoff: drop
-  handoffNote: Code-generation / tool metadata.
+  disposition: drop
+  decision: W-40
+  note: Dropped (W-40). No row in the extract holds a value.
   nonblank: 0
 - field: Scope
   disposition: pending
@@ -195,19 +195,19 @@ tObject:
   handoffNote: UML/source-tool metadata unless explicitly meaningful.
   nonblank: 33256
 - field: GenOption
-  disposition: pending
-  proposedByHandoff: drop
-  handoffNote: Code-generation metadata.
+  disposition: drop
+  decision: W-40
+  note: Dropped (W-40). No row in the extract holds a value.
   nonblank: 0
 - field: GenLinks
-  disposition: pending
-  proposedByHandoff: drop
-  handoffNote: Code-generation metadata.
+  disposition: drop
+  decision: W-40
+  note: Dropped (W-40). No row in the extract holds a value.
   nonblank: 0
 - field: RunState
-  disposition: pending
-  proposedByHandoff: body
-  handoffNote: Preserve when populated and useful; do not create a generic YAML property.
+  disposition: drop
+  decision: W-40
+  note: Dropped (W-40). No row in the extract holds a value.
   nonblank: 0
 - field: TPos
   disposition: pending
@@ -215,34 +215,34 @@ tObject:
   handoffNote: Not a normal model property.
   nonblank: 118
 - field: IsRoot
-  disposition: pending
-  proposedByHandoff: archive / open question
-  handoffNote: Do not promote generically.
+  disposition: drop
+  decision: W-40
+  note: Dropped (W-40). No row in the extract holds a value.
   nonblank: 0
 - field: IsLeaf
-  disposition: pending
-  proposedByHandoff: archive / open question
-  handoffNote: Do not promote generically.
+  disposition: drop
+  decision: W-40
+  note: Dropped (W-40). No row in the extract holds a value.
   nonblank: 0
 - field: IsSpec
-  disposition: pending
-  proposedByHandoff: archive / open question
-  handoffNote: Do not promote generically.
+  disposition: drop
+  decision: W-40
+  note: Dropped (W-40). No row in the extract holds a value.
   nonblank: 0
 - field: IsActive
-  disposition: pending
-  proposedByHandoff: archive / open question
-  handoffNote: Do not promote generically.
+  disposition: drop
+  decision: W-40
+  note: Dropped (W-40). No row in the extract holds a value.
   nonblank: 0
 - field: StateFlags
-  disposition: pending
-  proposedByHandoff: archive
-  handoffNote: Decode only through an explicit element rule.
+  disposition: drop
+  decision: W-40
+  note: Dropped (W-40). No row in the extract holds a value.
   nonblank: 0
 - field: PackageFlags
-  disposition: pending
-  proposedByHandoff: archive
-  handoffNote: Not working-model metadata.
+  disposition: drop
+  decision: W-40
+  note: Dropped (W-40). No row in the extract holds a value.
   nonblank: 0
 - field: Multiplicity
   disposition: pending
@@ -285,14 +285,14 @@ tObject:
   handoffNote: Presentation only.
   nonblank: 34583
 - field: ActionFlags
-  disposition: pending
-  proposedByHandoff: archive
-  handoffNote: Decode only via explicit rule.
+  disposition: drop
+  decision: W-40
+  note: Dropped (W-40). No row in the extract holds a value.
   nonblank: 0
 - field: EventFlags
-  disposition: pending
-  proposedByHandoff: archive
-  handoffNote: Decode only via explicit rule.
+  disposition: drop
+  decision: W-40
+  note: Dropped (W-40). No row in the extract holds a value.
   nonblank: 0
 tConnector:
 - field: Connector_ID

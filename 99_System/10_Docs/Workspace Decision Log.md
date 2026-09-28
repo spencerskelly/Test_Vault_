@@ -101,6 +101,8 @@ Stage 2 (W-30) is the review: the changes people make in it are recorded and eit
 
 **W-39 · 2026-09-28 · Administrative element fields.** On EA elements: `Author` and `CreatedDate` are `structure` (they build the `uid`, W-09). `ModifiedDate`, `Version`, `Phase`, `Complexity`, `Effort` and `Status` are `drop`. The existing EA status values (`Proposed` on 32,434 elements, `Implemented` on 12) are not carried over, and the vault starts with its own `status`. `ea_guid` is `body`, as the EA GUID line (W-28). All other element, connector and package fields are listed in `99_System/03_Schemas/ea-field-dispositions.yaml` as `pending`, each with the handoff package's suggestion beside it (57 element fields, 66 connector fields, 23 package fields), and the count of rows with a real value. The suggestions are not decisions.
 
+**W-40 · 2026-09-28 · Element fields with no data are dropped.** Of the 48 element fields left `pending` after W-39, 21 have no row with a real value in the extract (0 of 34,583; empty and `0` count as blank): `Abstract`, `Tagged`, `PDATA5`, `Concurrency`, `Visibility`, `Persistence`, `Cardinality`, `GenFile`, `Header1`, `Header2`, `GenOption`, `GenLinks`, `RunState`, `IsRoot`, `IsLeaf`, `IsSpec`, `IsActive`, `StateFlags`, `PackageFlags`, `ActionFlags` and `EventFlags`. All 21 are `drop`, the same rule as the tags that never hold a value (W-29). Nothing is lost: the `.qeax` and CSV export keep every column (W-35), and a fresh import (W-36) can reopen a field if a later export fills it. The handoff's "open question" marks on nine of them came from not checking for data. 27 element fields remain `pending`.
+
 ## Open (raised, not yet decided)
 
 - What makes a vault "ready for finishing touches".
