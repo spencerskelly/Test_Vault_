@@ -28,14 +28,12 @@ elementTypes:
   - rule: R-02
     verdict: fold
     target: imported document anchor
-    count: 10052
   - rule: R-03
     verdict: emit
     as: Requirement
-    count: 2754
   - rule: R-01
     verdict: emit
-  - eaObjectType: Port
+- eaObjectType: Port
   elements: 4387
   stereotypes:
     (none): 4071
@@ -56,14 +54,12 @@ elementTypes:
   - rule: F-01d
     verdict: fold
     target: owning block .ports
-    count: 894
   - rule: F-01du
     verdict: fold
     target: owning block .ports
-    count: 40
   - rule: F-01i
     verdict: suppress
-  - eaObjectType: Part
+- eaObjectType: Part
   elements: 3137
   stereotypes:
     (none): 2377
@@ -85,7 +81,7 @@ elementTypes:
   - rule: F-03n
     verdict: fold
     target: owning block .parts
-  - eaObjectType: InformationItem
+- eaObjectType: InformationItem
   elements: 2825
   stereotypes:
     (none): 2825
@@ -104,8 +100,7 @@ elementTypes:
     target: both attached elements
   - rule: I-04
     verdict: suppress
-    count: 130
-  - eaObjectType: Class
+- eaObjectType: Class
   elements: 2737
   stereotypes:
     Hardware Component: 912
@@ -131,14 +126,11 @@ elementTypes:
   oldToolRules:
   - rule: X-01
     verdict: decompose
-    count: 109
   - rule: X-01N
     verdict: emit
     as: Object
-    count: 2
   - rule: X-01O
     verdict: suppress
-    count: 1
   - rule: X-02
     verdict: emit
     as: Context
@@ -150,62 +142,47 @@ elementTypes:
     as: Object
   - rule: X-05
     verdict: suppress
-    count: 37
   - rule: X-10
     verdict: emit
     as: Object
-    count: 202
   - rule: X-11
     verdict: emit
     as: Object
-    count: 912
   - rule: X-12
     verdict: emit
     as: Object
-    count: 293
   - rule: X-13
     verdict: emit
     as: Object
-    count: 149
   - rule: X-14
     verdict: emit
     as: Object
-    count: 145
   - rule: X-15
     verdict: emit
     as: Object
-    count: 169
   - rule: AC-04
     verdict: suppress
-    count: 6
   - rule: X-20
     verdict: emit
     as: Object
-    count: 8
   - rule: X-21
     verdict: emit
     as: Actor
-    count: 22
   - rule: X-22
     verdict: emit
     as: Object
-    count: 7
   - rule: X-23
     verdict: emit
     as: Object
-    count: 110
   - rule: UC-01
     verdict: emit
     as: Use Case
-    count: 29
   - rule: X-30
     verdict: emit
     as: Object
-    count: 88
   - rule: X-31
     verdict: suppress
-    count: 22
-  - eaObjectType: Activity
+- eaObjectType: Activity
   elements: 1668
   stereotypes:
     (none): 611
@@ -221,18 +198,16 @@ elementTypes:
   - rule: E-03P
     verdict: emit
     as: Procedure
-    count: 3
   - rule: E-03S
     verdict: emit
     as: Step
-    count: 11
   - rule: E-04
     verdict: emit
     as: 'by test: Verification, Plan, Procedure, Step, decide'
   - rule: E-05
     verdict: emit
     as: Function
-  - eaObjectType: UseCase
+- eaObjectType: UseCase
   elements: 1667
   stereotypes:
     (none): 1667
@@ -242,7 +217,7 @@ elementTypes:
   oldToolRules:
   - rule: E-06
     verdict: emit
-  - eaObjectType: Package
+- eaObjectType: Package
   elements: 1386
   stereotypes:
     (none): 1386
@@ -252,7 +227,7 @@ elementTypes:
   oldToolRules:
   - rule: P-01
     verdict: suppress
-  - eaObjectType: State
+- eaObjectType: State
   elements: 1112
   stereotypes:
     System State: 769
@@ -265,28 +240,22 @@ elementTypes:
   - rule: S-01
     verdict: emit
     as: Failure Mode
-    count: 2
   - rule: S-02
     verdict: emit
     as: State
-    count: 121
   - rule: S-02SM
     verdict: emit
     as: State Machine
-    count: 1
   - rule: S-02D
     verdict: emit
     as: Design
-    count: 14
   - rule: S-02C
     verdict: emit
     as: State
-    count: 14
   - rule: S-03
     verdict: emit
     as: Design
-    count: 960
-  - eaObjectType: Signal
+- eaObjectType: Signal
   elements: 623
   stereotypes:
     Logical Signal: 565
@@ -299,8 +268,7 @@ elementTypes:
   oldToolRules:
   - rule: SG-01
     verdict: suppress
-    count: 623
-  - eaObjectType: Object
+- eaObjectType: Object
   elements: 545
   stereotypes:
     (none): 545
@@ -318,8 +286,7 @@ elementTypes:
     as: Object
   - rule: O-04
     verdict: suppress
-    count: 132
-  - eaObjectType: Artifact
+- eaObjectType: Artifact
   elements: 459
   stereotypes:
     Document: 329
@@ -331,19 +298,15 @@ elementTypes:
   oldToolRules:
   - rule: A-01
     verdict: suppress
-    count: 311
   - rule: A-02
     verdict: emit
     as: Document
-    count: 18
   - rule: A-03
     verdict: emit
     as: Artifact
-    count: 129
   - rule: A-04
     verdict: suppress
-    count: 1
-  - eaObjectType: Note
+- eaObjectType: Note
   elements: 431
   stereotypes:
     (none): 431
@@ -357,7 +320,7 @@ elementTypes:
   - rule: N-02
     verdict: collect
     target: one note per diagram
-  - eaObjectType: Action
+- eaObjectType: Action
   elements: 323
   stereotypes:
     (none): 323
@@ -368,11 +331,10 @@ elementTypes:
   - rule: E-03A
     verdict: emit
     as: Step
-    count: 31
   - rule: B-01
     verdict: fold
     target: owning behavior
-  - eaObjectType: Issue
+- eaObjectType: Issue
   elements: 264
   stereotypes:
     (none): 264
@@ -382,7 +344,7 @@ elementTypes:
   oldToolRules:
   - rule: E-06
     verdict: emit
-  - eaObjectType: StateNode
+- eaObjectType: StateNode
   elements: 73
   stereotypes:
     (none): 73
@@ -393,7 +355,7 @@ elementTypes:
   - rule: B-01
     verdict: fold
     target: owning behavior
-  - eaObjectType: Change
+- eaObjectType: Change
   elements: 65
   stereotypes:
     (none): 65
@@ -404,7 +366,7 @@ elementTypes:
   - rule: C-01
     verdict: fold
     target: the Issue it allocates to, else its target element
-  - eaObjectType: Text
+- eaObjectType: Text
   elements: 61
   stereotypes:
     (none): 59
@@ -419,7 +381,7 @@ elementTypes:
   - rule: N-02
     verdict: collect
     target: one note per diagram
-  - eaObjectType: Actor
+- eaObjectType: Actor
   elements: 44
   stereotypes:
     (none): 44
@@ -429,23 +391,18 @@ elementTypes:
   oldToolRules:
   - rule: AC-04
     verdict: suppress
-    count: 6
   - rule: AC-01
     verdict: suppress
-    count: 4
   - rule: AC-02
     verdict: merge
-    count: 14
   - rule: AC-03
     verdict: reroute
     as: Object
-    count: 6
   - rule: AC-05
     verdict: rename
-    count: 1
   - rule: E-06
     verdict: emit
-  - eaObjectType: Boundary
+- eaObjectType: Boundary
   elements: 44
   stereotypes:
     (none): 44
@@ -455,7 +412,7 @@ elementTypes:
   oldToolRules:
   - rule: D-01
     verdict: suppress
-  - eaObjectType: Decision
+- eaObjectType: Decision
   elements: 34
   stereotypes:
     (none): 34
@@ -466,7 +423,7 @@ elementTypes:
   - rule: B-01
     verdict: fold
     target: owning behavior
-  - eaObjectType: ActivityPartition
+- eaObjectType: ActivityPartition
   elements: 28
   stereotypes:
     (none): 28
@@ -477,7 +434,7 @@ elementTypes:
   - rule: B-01
     verdict: fold
     target: owning behavior
-  - eaObjectType: Trigger
+- eaObjectType: Trigger
   elements: 27
   stereotypes:
     (none): 27
@@ -488,7 +445,7 @@ elementTypes:
   - rule: B-01
     verdict: fold
     target: owning behavior
-  - eaObjectType: Synchronization
+- eaObjectType: Synchronization
   elements: 14
   stereotypes:
     (none): 14
@@ -499,7 +456,7 @@ elementTypes:
   - rule: B-01
     verdict: fold
     target: owning behavior
-  - eaObjectType: Sequence
+- eaObjectType: Sequence
   elements: 11
   stereotypes:
     (none): 11
@@ -510,7 +467,7 @@ elementTypes:
   - rule: B-01
     verdict: fold
     target: owning behavior
-  - eaObjectType: ActionPin
+- eaObjectType: ActionPin
   elements: 6
   stereotypes:
     (none): 6
@@ -521,7 +478,7 @@ elementTypes:
   - rule: B-01
     verdict: fold
     target: owning behavior
-  - eaObjectType: ProxyConnector
+- eaObjectType: ProxyConnector
   elements: 5
   stereotypes:
     (none): 5
@@ -532,7 +489,7 @@ elementTypes:
   - rule: B-01
     verdict: fold
     target: owning behavior
-  - eaObjectType: StateMachine
+- eaObjectType: StateMachine
   elements: 2
   stereotypes:
     (none): 2
@@ -542,7 +499,7 @@ elementTypes:
   oldToolRules:
   - rule: E-06
     verdict: emit
-  - eaObjectType: Constraint
+- eaObjectType: Constraint
   elements: 1
   stereotypes:
     (none): 1
@@ -553,7 +510,7 @@ elementTypes:
   - rule: N-01
     verdict: fold
     target: linked element body
-  - eaObjectType: Event
+- eaObjectType: Event
   elements: 1
   stereotypes:
     (none): 1
@@ -564,8 +521,7 @@ elementTypes:
   - rule: FM-01
     verdict: emit
     as: Failure Mode
-    count: 1
-  - eaObjectType: ActivityParameter
+- eaObjectType: ActivityParameter
   elements: 1
   stereotypes:
     (none): 1
@@ -575,4 +531,3 @@ elementTypes:
   oldToolRules:
   - rule: B-02
     verdict: suppress
-    count: 1
