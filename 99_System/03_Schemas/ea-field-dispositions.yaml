@@ -873,13 +873,19 @@ tDiagram:
   note: 'Dropped (W-68). Holds 1 on all 2,924 rows.'
   nonblank: 2924
 - field: Orientation
-  disposition: pending
+  disposition: archive
+  decision: W-69
+  note: 'Archived (W-69). Page orientation: P on 1,914 diagrams, L on 1,010. Revisit if the diagram output format needs it.'
   nonblank: 2924
 - field: cx
-  disposition: pending
+  disposition: archive
+  decision: W-69
+  note: 'Archived (W-69). Page width (6 distinct values). Revisit if the diagram output format needs it.'
   nonblank: 2924
 - field: cy
-  disposition: pending
+  disposition: archive
+  decision: W-69
+  note: 'Archived (W-69). Page height (5 distinct values). Revisit if the diagram output format needs it.'
   nonblank: 2924
 - field: Scale
   disposition: drop
@@ -913,7 +919,9 @@ tDiagram:
   note: 'Dropped (W-68). Holds 1 on 1,079 rows and nothing on the rest.'
   nonblank: 1079
 - field: PDATA
-  disposition: pending
+  disposition: archive
+  decision: W-69
+  note: 'Archived (W-69). Display-option string on 2,818 diagrams; few keys vary (ShowTags=1 on 153, PSize=9 on 66, HideParents=1 on 5). Revisit if the diagram output format needs it.'
   nonblank: 2818
 - field: Locked
   disposition: drop
@@ -924,13 +932,19 @@ tDiagram:
   disposition: pending
   nonblank: 2924
 - field: TPos
-  disposition: pending
+  disposition: archive
+  decision: W-69
+  note: 'Archived (W-69). Manual diagram order in a package (26 rows). Revisit if the diagram output format needs it.'
   nonblank: 26
 - field: Swimlanes
-  disposition: pending
+  disposition: archive
+  decision: W-69
+  note: 'Archived (W-69). Swimlane appearance on 2,818 diagrams; no lane definitions or names. Revisit if the diagram output format needs it.'
   nonblank: 2818
 - field: StyleEx
-  disposition: pending
+  disposition: archive
+  decision: W-69
+  note: 'Archived (W-69). Document and display switches (ExcludeRTF, DocAll, MatrixActive, KanbanActive and others). Revisit if the diagram output format needs it.'
   nonblank: 2924
 # tDiagramObjects: 42966 rows in the extract (t_diagramobjects.csv); added W-67, no handoff suggestions exist for these fields
 tDiagramObjects:
