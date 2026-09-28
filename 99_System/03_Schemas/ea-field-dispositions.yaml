@@ -739,14 +739,14 @@ tPackage:
   handoffNote: Source administration.
   nonblank: 1387
 - field: XMLPath
-  disposition: pending
-  proposedByHandoff: drop
-  handoffNote: EA implementation.
+  disposition: drop
+  decision: W-63
+  note: Dropped (W-63). No row in the extract holds a value.
   nonblank: 0
 - field: IsControlled
-  disposition: pending
-  proposedByHandoff: drop
-  handoffNote: EA implementation/source-control detail.
+  disposition: drop
+  decision: W-63
+  note: Dropped (W-63). No row in the extract holds a value.
   nonblank: 0
 - field: LastLoadDate
   disposition: pending
@@ -764,39 +764,39 @@ tPackage:
   handoffNote: Not treated as engineering revision by default.
   nonblank: 1387
 - field: Protected
-  disposition: pending
-  proposedByHandoff: drop
-  handoffNote: EA tool control.
+  disposition: drop
+  decision: W-63
+  note: Dropped (W-63). No row in the extract holds a value.
   nonblank: 0
 - field: PkgOwner
-  disposition: pending
-  proposedByHandoff: drop
-  handoffNote: EA admin metadata.
+  disposition: drop
+  decision: W-63
+  note: Dropped (W-63). No row in the extract holds a value.
   nonblank: 0
 - field: UMLVersion
-  disposition: pending
-  proposedByHandoff: drop
-  handoffNote: EA/UML implementation.
+  disposition: drop
+  decision: W-63
+  note: Dropped (W-63). No row in the extract holds a value.
   nonblank: 0
 - field: UseDTD
-  disposition: pending
-  proposedByHandoff: drop
-  handoffNote: EA implementation.
+  disposition: drop
+  decision: W-63
+  note: Dropped (W-63). No row in the extract holds a value.
   nonblank: 0
 - field: LogXML
-  disposition: pending
-  proposedByHandoff: drop
-  handoffNote: EA implementation.
+  disposition: drop
+  decision: W-63
+  note: Dropped (W-63). No row in the extract holds a value.
   nonblank: 0
 - field: CodePath
-  disposition: pending
-  proposedByHandoff: drop
-  handoffNote: EA implementation.
+  disposition: drop
+  decision: W-63
+  note: Dropped (W-63). No row in the extract holds a value.
   nonblank: 0
 - field: Namespace
-  disposition: pending
-  proposedByHandoff: drop
-  handoffNote: Unless a future explicit source rule needs it.
+  disposition: drop
+  decision: W-63
+  note: Dropped (W-63). No row in the extract holds a value.
   nonblank: 0
 - field: TPos
   disposition: pending
@@ -809,12 +809,12 @@ tPackage:
   handoffNote: Parser/source evidence only.
   nonblank: 4
 - field: BatchSave
-  disposition: pending
-  proposedByHandoff: drop
-  handoffNote: EA implementation.
+  disposition: drop
+  decision: W-63
+  note: Dropped (W-63). No row in the extract holds a value.
   nonblank: 0
 - field: BatchLoad
-  disposition: pending
-  proposedByHandoff: drop
-  handoffNote: EA implementation.
+  disposition: drop
+  decision: W-63
+  note: Dropped (W-63). No row in the extract holds a value.
   nonblank: 0
