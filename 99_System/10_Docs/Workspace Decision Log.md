@@ -40,11 +40,12 @@ This log covers workspace and convention decisions. Translation-rule decisions (
 
 **W-12 · 2026-09-28 · Unknown EA authors.** EA elements with no usable author (722 blank, 1 with the value `7.1.0-2`) get the author code `sparxeaauthor`, meaning "created in Sparx EA, author not recorded". It is not a person and is recorded in `authors.yaml`.
 
+**W-13 · 2026-09-28 · uid time is local time.** The timestamp in a `uid` (`yyyyMMddHHmmssSSS`) is local time, not UTC, for every note. Translated notes carry EA's recorded creation time exactly as stored; notes created in the vault carry the creator's local time when the template is applied. Reason: simplicity and consistency, with no timezone conversion. Consequences accepted: `uid` order is only approximately chronological across people in different timezones, and a clock change (the repeated hour when daylight saving ends) could produce a duplicate for the same author, which the uniqueness check catches. The translator tool currently defines this as UTC and needs changing. Duplicate timestamps are resolved by advancing one millisecond until unique, with ties ordered by EA GUID so the same EA data always yields the same `uid`.
+
 ## Open (raised, not yet decided)
 
 - Where the translator's source-of-truth ruleset lives.
 - What happens to the existing methodology notes (rules, decisions, canvases, bases), including 99 canvas nodes that already point at note paths that do not exist.
 - Disposition of the 121 EA tagged values, starting with where legacy IDs (`id`, `SysML1.4::id`) land.
-- How to handle timezone and duplicate timestamps in the translated `uid`.
 - Whether original EA modified dates should also be kept (creation date and author go into `uid`).
 - Where MDSE Bootstrap's source lives, so its install-time name entry can follow the same definition.
