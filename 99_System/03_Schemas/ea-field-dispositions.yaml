@@ -1154,3 +1154,44 @@ tDocument:
   decision: W-75
   nonblank: 2
   note: 'Dropped (W-75). Both values are <PGUID> tags.'
+# tXref: 42,052 rows in t_xref, decided by kind (Name column) and item (W-79).
+tXref:
+- kind: Stereotypes
+  disposition: archive
+  decision: W-79
+  rows: 31058
+  note: 'Archived (W-79). Repeats the Stereotype fields (W-47) and adds the profile name.'
+- kind: SMLS
+  disposition: drop
+  decision: W-79
+  rows: 16
+  note: 'Dropped (W-79). XML layout for an EA matrix view.'
+- kind: CustomProperties
+  item: 'DGS grid settings'
+  disposition: drop
+  decision: W-79
+  rows: 2773
+  note: 'Dropped (W-79). Diagram grid settings.'
+- kind: CustomProperties
+  item: '_defaultDiagramType'
+  disposition: drop
+  decision: W-79
+  rows: 2740
+  note: 'Dropped (W-79). Default type for diagrams created in the element.'
+- kind: CustomProperties
+  item: 'all other properties'
+  disposition: pending
+  rows: 3280
+- kind: MOFProps
+  item: 'extensionLocation'
+  disposition: drop
+  decision: W-79
+  rows: 704
+  note: 'Dropped (W-79). UseCase extension point location.'
+- kind: MOFProps
+  item: 'redefinedProperty, conveyed, trigger, event and others'
+  disposition: pending
+  rows: 587
+- kind: DefaultDiagram
+  disposition: pending
+  rows: 894
