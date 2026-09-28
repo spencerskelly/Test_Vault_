@@ -155,6 +155,8 @@ Stage 2 (W-30) is the review: the changes people make in it are recorded and eit
 
 **W-59 · 2026-09-28 · Connector layout and style fields.** Ten are `drop`: `RouteStyle` (21,795 rows), `LineColor` (`-1` on 21,817 of 21,822), `Start_Edge` and `End_Edge` (2,862 each), `PtStartX`, `PtStartY`, `PtEndX` and `PtEndY` (2,926 each), `PDATA5` (20,478, layout text such as `SX=0;SY=0;EX=0;EY=0;EDGE=1;`) and `StateFlags` (127, sequence-diagram display flags such as `Activation=0;`). The real layout is per diagram: `t_diagramlinks.csv` has geometry and style on all 37,955 rows, and a connector can appear on up to 78 diagrams, so a diagram import reads it there, not from these columns. `Target2` (118 numeric values on Generalizations that look like colours) and `StyleEx` (`Classifier=<number>;` on 24 Connectors, none matching an element) are `archive`, because their meaning is not confirmed. The export keeps every column (W-35). 9 connector fields remain `pending`.
 
+**W-60 · 2026-09-28 · `SourceElement`, `DestElement`, `PDATA4` and `SubType`.** `SourceElement`, `DestElement` and `PDATA4` are `drop`: none of them has a row with a value (the W-49 rule, applied to columns found in W-58). `SubType` (2,973 rows) is `archive`: `Extends` (736) and `Includes` (522) match the UseCase `extend` and `include` stereotypes exactly, and `Strong` (1,688) matches `DestIsAggregate` = `2` exactly (W-51); `Weak` (27 rows, among the 600 shared aggregations whose other 573 are blank) is unexplained and stays available in the export (W-35). 5 connector fields remain `pending`: `SeqNo`, `DiagramID`, `PDATA1`, `PDATA2` and `PDATA3`.
+
 ## Open (raised, not yet decided)
 
 - What makes a vault "ready for finishing touches".

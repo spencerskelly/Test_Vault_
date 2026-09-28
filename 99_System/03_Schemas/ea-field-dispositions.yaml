@@ -460,9 +460,9 @@ tConnector:
   note: 'Dropped (W-50). Holds the same value (Public) on every row.'
   nonblank: 21795
 - field: SubType
-  disposition: pending
-  proposedByHandoff: archive / structure
-  handoffNote: Connector-specific parser evidence.
+  disposition: archive
+  decision: W-60
+  note: 'Archived (W-60). Repeats decided fields: Extends and Includes match the extend and include stereotypes exactly, Strong matches DestIsAggregate 2 exactly. Weak (27 rows) is unexplained.'
   nonblank: 2973
 - field: DiagramID
   disposition: pending
@@ -660,12 +660,14 @@ tConnector:
   note: Dropped (W-49). No row in the extract holds a value.
   nonblank: 0
 - field: SourceElement
-  disposition: pending
-  handoffNote: 'Not in the handoff list; added W-58 from the export columns.'
+  disposition: drop
+  decision: W-60
+  note: 'Dropped (W-60). No row in the extract holds a value.'
   nonblank: 0
 - field: DestElement
-  disposition: pending
-  handoffNote: 'Not in the handoff list; added W-58 from the export columns.'
+  disposition: drop
+  decision: W-60
+  note: 'Dropped (W-60). No row in the extract holds a value.'
   nonblank: 0
 - field: PDATA1
   disposition: pending
@@ -680,8 +682,9 @@ tConnector:
   handoffNote: 'Not in the handoff list; added W-58 from the export columns.'
   nonblank: 201
 - field: PDATA4
-  disposition: pending
-  handoffNote: 'Not in the handoff list; added W-58 from the export columns.'
+  disposition: drop
+  decision: W-60
+  note: 'Dropped (W-60). No row in the extract holds a value.'
   nonblank: 0
 - field: PDATA5
   disposition: drop
