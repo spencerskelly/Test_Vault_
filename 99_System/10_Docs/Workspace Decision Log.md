@@ -78,6 +78,16 @@ This log covers workspace and convention decisions. Translation-rule decisions (
 
 ## Open (raised, not yet decided)
 
+- Handoff package (EA_Native_Translator_Handoff_2026-09-28, from another AI session), to be reviewed one topic at a time, nothing adopted yet:
+  1. Import approach: source-faithful "native" import first (type is the EA stereotype, else the EA object type) with semantic cleanup after import, against our class-based types, `id` prefixes and templates.
+  2. Where the rules live: the handoff says the Markdown rule notes are the authority and code follows them.
+  3. EA author, created and modified dates: the handoff ignores them; W-09 to W-13 use them in the `uid`.
+  4. Note properties: the handoff keeps generated YAML to `type` plus relationships; W-06 and W-14 add `uid` and `id` to every note.
+  5. Placement of EA values in the body: the handoff puts them above an "EA Traceability" footer; W-28 puts them below the GUID.
+  6. Tag differences (`Stakeholder ID`, `id`, `Abstraction Layer`, `Priority`, `Object Type`, `In-Links`) and a new REFERENCE disposition for values kept only in the import archive.
+  7. Duplicate note names: a type suffix plus counter such as `-fun-01` in the file name.
+  8. Adopting its property scope (element fields, connector fields, packages, diagrams, subordinate tables), its readiness gate, its consistency checks and its rule-change template.
+  9. Relationship rules and vocabulary it lists (equals, interfaces, verifies, refines, allocate precedence, participants).
 - Where the translator's source-of-truth ruleset lives.
 - What happens to the existing methodology notes (rules, decisions, canvases, bases), including 99 canvas nodes that already point at note paths that do not exist.
 - Disposition of the 48 tags still marked `pending` in `ea-tag-dispositions.yaml`.
