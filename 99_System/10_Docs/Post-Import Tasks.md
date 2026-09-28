@@ -36,7 +36,7 @@ Work that has to be done in the vault after the import (stage 2, Workspace Decis
 
 **What it is.** The import brings in every linked document from EA as an attachment (W-76), including RTF documents and pictures that look like figures and tables from standards (for example `Figure 7.5 Example of a Bottom-Enclosure`, `Table 7.4 Comparative Tracking Index`, `1 Scope`, `5 Definitions`). Whether the vault may hold this content has not been decided.
 
-**How to find them.** `99_System/11_Import/Linked Document Attachments.csv` lists all 376 linked documents with the element they are attached to, the element type, whether the content is text, pictures or an image, and the size. The 235 Artifacts of subtype Document and the 11 design-constraint requirements hold the picture and text documents; the 129 Artifacts of subtype Image hold circuit images that are your own work. It is a snapshot from the current export; the ledger from the accepted run (W-35) replaces it.
+**How to find them.** `99_System/11_Import/Linked Document Attachments.csv` lists all 376 linked documents with the element they are attached to, the element type, whether the content is text, pictures or an image, and the size. The 235 Artifacts of subtype Document and the 11 design-constraint requirements hold the picture and text documents; the 129 Artifacts of subtype Image hold circuit images that are your own work. Attachment files sit in the same folder as their note and are named `<note file name> asset <n>` (W-77), so a search for `asset` lists them. It is a snapshot from the current export; the ledger from the accepted run (W-35) replaces it.
 
 **How to resolve it.**
 1. Decide which documents are third-party content and which are yours.

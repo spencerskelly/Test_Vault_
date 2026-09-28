@@ -1142,13 +1142,13 @@ tDocument:
   placement: attachment
   decision: W-76
   rows: 247
-  note: 'Body (W-76), attachment. Brought in as attachment files linked from the owning note; licensing of standards content decided later.'
+  note: 'Body (W-76, W-77), attachment. Brought in as attachment files linked from the owning note, stored in the note''s own folder and named <note file name> asset <n>; licensing of standards content decided later.'
 - docType: ExtDoc
   disposition: body
   placement: attachment
   decision: W-76
   rows: 129
-  note: 'Body (W-76), attachment. Brought in as attachment files linked from the owning note; licensing of standards content decided later.'
+  note: 'Body (W-76, W-77), attachment. Brought in as attachment files linked from the owning note, stored in the note''s own folder and named <note file name> asset <n>; licensing of standards content decided later.'
 - field: Notes
   disposition: drop
   decision: W-75
