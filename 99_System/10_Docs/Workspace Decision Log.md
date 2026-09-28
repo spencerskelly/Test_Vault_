@@ -82,8 +82,13 @@ This log covers workspace and convention decisions. Translation-rule decisions (
 
 **W-32 · 2026-09-28 · Element mapping worklist.** Every EA element type is mapped for stage 1 one at a time, largest first, and nothing counts as mapped until it is approved here. The worklist is `99_System/03_Schemas/ea-element-mapping.yaml`: 31 EA object types including packages (35,969 elements, 72 combinations of object type and stereotype), each starting as `pending`. What the earlier semantic translator did with each type is listed beside it as evidence only, not as a decision. If every combination is mapped before the import, no note needs a placeholder type such as `Unclassified`; that question is closed unless something stays unmapped.
 
+**W-33 · 2026-09-28 · Field dispositions.** Every source field and tag ends in exactly one of five dispositions: `property` (a property on the note), `body` (a line below the EA GUID), `structure` (used by the translator to build something, and also copied into the source reference), `archive` (kept only in the source reference), or `drop` (kept nowhere). `pending` is a temporary marker, and undecided fields default to `body`. The handoff's REFERENCE is our `archive`; its REVIEW is not a final disposition. `ea-tag-dispositions.yaml` now uses these words (`clause-source` became `structure`).
+
+**W-34 · 2026-09-28 · Source reference.** The source reference is keyed by the EA GUID. Every source element is listed in it, whatever happened to it, including folded, suppressed and dropped ones, with what became of it. Data used through `structure` and data kept as `archive` is copied into it. Until all reviews are complete, its files stay inside the vault, in the workspace. Afterwards they move out of the final vault.
+
 ## Open (raised, not yet decided)
 
+- Whether values kept in the note body are also copied into the source reference, so a later cleanup can never lose them, and the folder name and file layout for the source reference inside the vault.
 - Element mapping (the worklist `99_System/03_Schemas/ea-element-mapping.yaml`, W-32) is parked for a separate chat. Properties from the handoff package come first: disposition vocabulary, element fields, connector fields, package and diagram fields, subordinate tables, the 48 pending tags, and which properties every translated note carries.
 - Handoff package (EA_Native_Translator_Handoff_2026-09-28, from another AI session), to be reviewed one topic at a time, nothing adopted yet:
   1. Import approach. Decided: two stages (W-30) and a temporary `eaType` property (W-31). Still to decide: what `type` holds for elements with no approved MDSE mapping yet, when stage 2 finishes relative to team rollout, and how `id` applies to notes not yet classified.

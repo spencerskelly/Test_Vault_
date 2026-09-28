@@ -1,9 +1,11 @@
-# Disposition of every EA tagged value (tag) for the translator.
-# disposition: drop | body | clause-source | pending
-#   drop           not carried into the vault
-#   body           kept as a line below the EA GUID in the note body (Definitions/EA Source Section)
-#   clause-source  used to build the external id, not repeated in the body
-#   pending        not yet decided; if it stays undecided it defaults to body
+# Disposition of every EA tagged value (tag) for the translator (Workspace Decision Log W-33).
+# disposition: property | body | structure | archive | drop   (pending = not yet decided; if it stays undecided it defaults to body)
+#   property   a property in the note's frontmatter
+#   body       a line below the EA GUID in the note body (Definitions/EA Source Section)
+#   structure  used by the translator to build something (a title, id, link or placement) and copied into the source reference; not put on the note
+#   archive    kept only in the source reference, not in the note
+#   drop       not kept anywhere
+# The source reference is keyed by EA GUID (W-34).
 # populated = rows with any value; realValues = rows with a value other than the placeholders unassigned and <memo>.
 schemaVersion: '1.0'
 tags:
@@ -512,7 +514,7 @@ tags:
     distinct: 0
     note: "Only ever holds a placeholder (unassigned or <memo>)."
   - tag: "Stakeholder ID"
-    disposition: "clause-source"
+    disposition: "structure"
     decision: "W-26"
     populated: 464
     realValues: 464
@@ -764,7 +766,7 @@ tags:
     distinct: 0
     note: "Never has a value."
   - tag: "Webasto MBDV Profile::Stakeholder ID"
-    disposition: "clause-source"
+    disposition: "structure"
     decision: "W-26"
     populated: 757
     realValues: 757
