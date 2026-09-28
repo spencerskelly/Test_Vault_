@@ -1051,3 +1051,65 @@ tDiagramLinks:
   decision: W-73
   note: 'Archived (W-73). EA internal id of the drawn connector; unique on all rows.'
   nonblank: 37955
+# emptyTables: export tables with 0 rows; the whole table is dropped (W-74). Their fields are not listed.
+emptyTables:
+- table: t_attributetag
+  disposition: drop
+  decision: W-74
+  rows: 0
+- table: t_attributeconstraints
+  disposition: drop
+  decision: W-74
+  rows: 0
+- table: t_operationparams
+  disposition: drop
+  decision: W-74
+  rows: 0
+- table: t_operationtag
+  disposition: drop
+  decision: W-74
+  rows: 0
+- table: t_connectorconstraint
+  disposition: drop
+  decision: W-74
+  rows: 0
+- table: t_objectconstraint
+  disposition: drop
+  decision: W-74
+  rows: 0
+- table: t_objecttests
+  disposition: drop
+  decision: W-74
+  rows: 0
+- table: t_objectrisks
+  disposition: drop
+  decision: W-74
+  rows: 0
+- table: t_objectproblems
+  disposition: drop
+  decision: W-74
+  rows: 0
+- table: t_objectmetrics
+  disposition: drop
+  decision: W-74
+  rows: 0
+- table: t_objecteffort
+  disposition: drop
+  decision: W-74
+  rows: 0
+- table: t_issues
+  disposition: drop
+  decision: W-74
+  rows: 0
+- table: t_tasks
+  disposition: drop
+  decision: W-74
+  rows: 0
+- table: t_glossary
+  disposition: drop
+  decision: W-74
+  rows: 0
+- table: t_files
+  disposition: drop
+  decision: W-74
+  rows: 0
