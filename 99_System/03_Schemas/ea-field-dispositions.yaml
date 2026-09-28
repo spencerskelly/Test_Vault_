@@ -719,9 +719,10 @@ tPackage:
   note: 'Structure (W-65). All 1,386 values resolve; one root; at most 12 levels deep.'
   nonblank: 1386
 - field: Notes
-  disposition: pending
-  proposedByHandoff: body
-  handoffNote: Preserve useful package documentation, generally in folder README/reference content.
+  disposition: body
+  placement: main text
+  decision: W-66
+  note: 'Body (W-66), main text. The package description (34 rows), the same content in t_package and t_object; line endings normalised. Whether it becomes a folder note is undecided.'
   nonblank: 34
 - field: ea_guid
   disposition: structure
@@ -729,9 +730,9 @@ tPackage:
   note: 'Structure (W-65). Keys the ledger row (W-35) and matches the package''s element row in t_object (1,386 of 1,387).'
   nonblank: 1387
 - field: CreatedDate
-  disposition: pending
-  proposedByHandoff: drop
-  handoffNote: Source administration.
+  disposition: structure
+  decision: W-66
+  note: 'Structure (W-66). Builds the uid time if a package becomes a note (W-09), from the t_object row; the two tables differ by 1 to 2 seconds on 355 rows.'
   nonblank: 1387
 - field: ModifiedDate
   disposition: drop
@@ -799,9 +800,9 @@ tPackage:
   note: Dropped (W-63). No row in the extract holds a value.
   nonblank: 0
 - field: TPos
-  disposition: pending
-  proposedByHandoff: structure / drop
-  handoffNote: Source order only.
+  disposition: archive
+  decision: W-66
+  note: 'Archived (W-66). EA manual sibling order (48 rows, 14 parents); folders sort by name.'
   nonblank: 48
 - field: PackageFlags
   disposition: drop
