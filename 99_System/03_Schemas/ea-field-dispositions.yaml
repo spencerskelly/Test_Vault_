@@ -504,10 +504,30 @@ tConnector:
   decision: W-53
   note: 'Archived (W-53). Cardinality text; matches DestCard on all 4.'
   nonblank: 4
-- field: edge / coordinate fields
+- field: Start_Edge
   disposition: pending
-  proposedByHandoff: archive / drop
-  handoffNote: Diagram layout only.
+  handoffNote: 'Not in the handoff list; added W-58 from the export columns.'
+  nonblank: 2862
+- field: End_Edge
+  disposition: pending
+  handoffNote: 'Not in the handoff list; added W-58 from the export columns.'
+  nonblank: 2862
+- field: PtStartX
+  disposition: pending
+  handoffNote: 'Not in the handoff list; added W-58 from the export columns.'
+  nonblank: 2926
+- field: PtStartY
+  disposition: pending
+  handoffNote: 'Not in the handoff list; added W-58 from the export columns.'
+  nonblank: 2926
+- field: PtEndX
+  disposition: pending
+  handoffNote: 'Not in the handoff list; added W-58 from the export columns.'
+  nonblank: 2926
+- field: PtEndY
+  disposition: pending
+  handoffNote: 'Not in the handoff list; added W-58 from the export columns.'
+  nonblank: 2926
 - field: HeadStyle
   disposition: drop
   decision: W-49
@@ -633,6 +653,38 @@ tConnector:
   decision: W-49
   note: Dropped (W-49). No row in the extract holds a value.
   nonblank: 0
+- field: SourceElement
+  disposition: pending
+  handoffNote: 'Not in the handoff list; added W-58 from the export columns.'
+  nonblank: 0
+- field: DestElement
+  disposition: pending
+  handoffNote: 'Not in the handoff list; added W-58 from the export columns.'
+  nonblank: 0
+- field: PDATA1
+  disposition: pending
+  handoffNote: 'Not in the handoff list; added W-58 from the export columns.'
+  nonblank: 243
+- field: PDATA2
+  disposition: pending
+  handoffNote: 'Not in the handoff list; added W-58 from the export columns.'
+  nonblank: 232
+- field: PDATA3
+  disposition: pending
+  handoffNote: 'Not in the handoff list; added W-58 from the export columns.'
+  nonblank: 201
+- field: PDATA4
+  disposition: pending
+  handoffNote: 'Not in the handoff list; added W-58 from the export columns.'
+  nonblank: 0
+- field: PDATA5
+  disposition: pending
+  handoffNote: 'Not in the handoff list; added W-58 from the export columns.'
+  nonblank: 20478
+- field: StyleEx
+  disposition: pending
+  handoffNote: 'Not in the handoff list; added W-58 from the export columns.'
+  nonblank: 24
 tPackage:
 - field: Package_ID
   disposition: pending
