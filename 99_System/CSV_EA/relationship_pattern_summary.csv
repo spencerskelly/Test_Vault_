@@ -1,0 +1,991 @@
+Source_Object_Type,Source_Stereotype,Connector_Type,Connector_Stereotype,Target_Object_Type,Target_Stereotype,Count
+Class,Hardware Component,Generalization,,Class,Hardware Component,763
+UseCase,,UseCase,extend,UseCase,,733
+Requirement,requirement,Nesting,,Requirement,requirement,605
+Signal,Logical Signal,Generalization,,Signal,Logical Signal,579
+Requirement,functionalRequirement,Dependency,deriveReqt,Requirement,requirement,560
+Requirement,designConstraint,Dependency,deriveReqt,Requirement,requirement,542
+UseCase,,UseCase,include,UseCase,,521
+Port,,Connector,,Port,,406
+UseCase,,Generalization,,UseCase,,384
+Class,Hardware Component,Aggregation,,Class,Module,371
+State,System State,Dependency,satisfy,Requirement,requirement,364
+Class,Hardware Component,Aggregation,,Class,Hardware Component,350
+State,System State,Dependency,satisfy,Requirement,designConstraint,340
+Activity,,Dependency,satisfy,Requirement,requirement,336
+Requirement,requirement,Dependency,trace,Requirement,requirement,295
+Class,block,Aggregation,,Class,System Partner,279
+Class,Software Component,Realisation,,Requirement,functionalRequirement,277
+State,System State,Abstraction,allocate,Class,Hardware Component,277
+Activity,testCase,Dependency,verify,Requirement,requirement,272
+State,System State,Generalization,,State,System State,260
+Requirement,requirement,Dependency,refine,Requirement,requirement,236
+Activity,Hardware Function,Abstraction,allocate,Class,Hardware Component,231
+Requirement,designConstraint,Dependency,refine,Requirement,designConstraint,228
+Activity,System Function,Dependency,satisfy,Requirement,functionalRequirement,224
+Actor,,Association,,UseCase,,210
+State,System State,Abstraction,allocate,Class,Module,199
+Port,,Connector,BindingConnector,Port,,197
+Activity,,Dependency,satisfy,Requirement,functionalRequirement,196
+Object,,Aggregation,,Object,,195
+Activity,System Function,Generalization,,Activity,System Function,187
+Activity,System Function,Dependency,satisfy,Requirement,requirement,185
+Class,Physical Component,Generalization,,Class,Physical Component,181
+UseCase,,Dependency,refine,Requirement,functionalRequirement,179
+State,,Dependency,satisfy,Requirement,requirement,176
+Activity,,Generalization,,Activity,,173
+Artifact,Document,Dependency,,Requirement,Regulatory Requirement,173
+Activity,,Dependency,satisfy,Requirement,,160
+Note,,NoteLink,,UseCase,,159
+Activity,System Function,Abstraction,allocate,Class,Hardware Component,158
+UseCase,,Dependency,refine,Requirement,requirement,155
+Class,Module,Generalization,,Class,Module,150
+Activity,,Abstraction,allocate,Class,Software Component,139
+Class,Hardware Component,Realisation,,Requirement,designConstraint,129
+Activity,,Abstraction,allocate,Class,Hardware Component,123
+InformationItem,,Dependency,refine,Requirement,requirement,121
+UseCase,,Usage,,Activity,System Function,114
+Activity,,Generalization,,Activity,System Function,113
+Port,,InformationFlow,itemFlow,Port,,110
+State,,StateFlow,,State,,110
+Activity,,ControlFlow,,Activity,,109
+Activity,System Function,Abstraction,allocate,Class,Software Component,108
+Class,Data Interface,Generalization,,Class,Electrical & Material Interface,108
+Action,,ControlFlow,,Action,,104
+Artifact,Image,Dependency,trace,Class,Hardware Component,103
+State,System State,Abstraction,allocate,Class,Physical System Variant,102
+Class,Hardware Component,Realisation,,Requirement,functionalRequirement,93
+Class,Module,Realisation,,Requirement,designConstraint,91
+Class,System Partner,Generalization,,Class,System Partner,90
+Activity,System Function,Dependency,satisfy,Requirement,,88
+Part,,Connector,,Part,,87
+Activity,System Function,Abstraction,allocate,Class,Business Line,80
+Class,Physical Component,Realisation,,Requirement,designConstraint,79
+Requirement,requirement,Dependency,deriveReqt,Requirement,requirement,78
+Object,,Sequence,,Object,,77
+State,System State,Abstraction,allocate,Class,Business Line,76
+Activity,,Abstraction,allocate,Class,Module,75
+State,System State,Abstraction,allocate,Class,Physical Component,75
+State,System State,Aggregation,,State,System State,74
+Class,Physical System Variant,Generalization,,Class,Physical System Variant,70
+UseCase,,Dependency,refine,Requirement,designConstraint,70
+Class,System Partner,Aggregation,,Class,Physical Context,69
+Activity,Hardware Function,Generalization,,Activity,Hardware Function,68
+State,,Abstraction,allocate,Class,Module,68
+Activity,System Function,Abstraction,allocate,Class,Physical System Variant,62
+Requirement,extendedRequirement,Nesting,,Requirement,requirement,62
+Activity,,Abstraction,allocate,Class,Physical System Variant,61
+UseCase,,Association,,Class,Module,61
+State,,Dependency,satisfy,Requirement,designConstraint,60
+Class,Software Component,Generalization,,Class,Software Component,58
+Activity,,Dependency,,Activity,,58
+Activity,System Function,Abstraction,allocate,Class,Module,57
+Class,Physical Component,Aggregation,,Class,Physical Component,56
+Requirement,functionalRequirement,Dependency,deriveReqt,Requirement,,55
+Class,Module,Aggregation,,Class,Physical System Variant,54
+Activity,,Abstraction,allocate,Class,block,54
+UseCase,,Usage,,State,System State,54
+State,System State,Dependency,satisfy,Requirement,extendedRequirement,53
+Class,Physical System Variant,Realisation,,Requirement,designConstraint,51
+Activity,System Function,Dependency,,State,System State,51
+Class,Physical Component,Aggregation,,Class,Module,49
+Activity,,Abstraction,allocate,Class,Business Line,49
+Activity,Hardware Function,Dependency,satisfy,Requirement,requirement,49
+Port,ProxyPort,Connector,BindingConnector,Port,ProxyPort,48
+Activity,System Function,Generalization,,Activity,,48
+Class,Hardware Component,Aggregation,,Class,Physical System Variant,48
+Activity,Hardware Function,Generalization,,Activity,System Function,45
+Class,System Partner,Aggregation,,Class,System Partner,44
+Class,Physical Component,Aggregation,,Class,Hardware Component,43
+Change,,Abstraction,allocate,Issue,,42
+Class,Hardware Component,Aggregation,,Class,Physical Component,41
+Class,Software Component,Aggregation,,Class,Software Component,41
+Issue,,Abstraction,allocate,Activity,,41
+StateNode,,StateFlow,,State,,41
+Requirement,designConstraint,Dependency,deriveReqt,Requirement,,40
+Note,,NoteLink,,Requirement,requirement,40
+Class,Physical Context,Generalization,,Class,Physical Context,39
+Activity,,Dependency,,State,System State,39
+UseCase,,Association,,Object,,39
+Class,Electrical & Material Interface,Generalization,,Class,Electrical & Material Interface,39
+Activity,Hardware Function,Aggregation,,Activity,Hardware Function,38
+Activity,Hardware Function,Aggregation,,Activity,System Function,38
+Class,block,Generalization,,Class,block,36
+Class,Module,Realisation,,Requirement,functionalRequirement,36
+Activity,,Dependency,,Activity,System Function,35
+State,,Abstraction,allocate,Class,Hardware Component,35
+Activity,System Function,Dependency,,Activity,System Function,35
+Class,Electrical & Material Interface,Generalization,,Class,Mechanical Interface,35
+Class,Software Component,Realisation,,Requirement,requirement,33
+Note,,NoteLink,,Activity,System Function,33
+Class,Module,Aggregation,,Class,Module,32
+UseCase,,Usage,,Activity,,32
+Activity,Software Function,Generalization,,Activity,Software Function,32
+Activity,Hardware Function,Dependency,satisfy,Requirement,functionalRequirement,31
+Class,Module,Aggregation,,Class,Physical Context,30
+State,System State,Dependency,satisfy,Requirement,,30
+Requirement,designConstraint,Dependency,deriveReqt,Requirement,Regulatory Requirement,29
+Class,System Partner,Association,,UseCase,,29
+Activity,Software Function,Generalization,,Class,block,28
+Port,,Connector,,Port,ProxyPort,27
+Class,Physical Component,Generalization,,Class,Hardware Component,27
+Activity,Hardware Function,Abstraction,allocate,Class,Software Component,27
+Object,,Generalization,,Class,Software Component,27
+State,System State,Abstraction,allocate,Class,Platform,27
+Issue,,Abstraction,allocate,Object,,27
+Requirement,designConstraint,Dependency,refine,Requirement,requirement,27
+Requirement,requirement,Nesting,,Class,block,27
+Activity,testCase,Dependency,verify,Requirement,functionalRequirement,26
+Issue,,Abstraction,allocate,Activity,System Function,26
+Activity,testCase,Dependency,verify,Requirement,designConstraint,26
+Issue,,Abstraction,allocate,UseCase,,26
+Requirement,requirement,Generalization,,Requirement,requirement,26
+Class,Physical System Variant,Aggregation,,Class,Physical Context,25
+Class,Hardware Component,Generalization,,Class,Module,25
+Activity,System Function,Dependency,,Activity,,25
+Class,Hardware Component,Association,,Class,Hardware Component,25
+InformationItem,,Dependency,,Requirement,requirement,25
+Activity,Software Function,Aggregation,,Activity,Software Function,25
+Requirement,designConstraint,Nesting,,Requirement,designConstraint,25
+Class,Physical Component,Aggregation,,Class,Physical System Variant,24
+Class,Physical System Variant,Realisation,,Requirement,functionalRequirement,24
+UseCase,,Association,,Class,System Partner,24
+State,,StateFlow,,StateNode,,24
+Artifact,Document,Nesting,,InformationItem,,24
+Port,ProxyPort,Connector,,Port,,23
+Class,Physical System Variant,Generalization,,Class,Business Line,23
+State,System State,Dependency,,State,System State,23
+State,System State,Generalization,,State,,23
+State,,Abstraction,allocate,Class,Business Line,22
+InformationItem,,Dependency,trace,Class,Hardware Component,22
+Activity,Software Function,Dependency,satisfy,Requirement,requirement,22
+Object,,Aggregation,,Class,Physical Context,22
+Activity,System Function,Aggregation,,Activity,System Function,22
+State,,Abstraction,allocate,Class,Physical System Variant,21
+InformationItem,,Dependency,trace,Requirement,requirement,21
+Activity,System Function,Abstraction,allocate,Class,block,21
+Decision,,ControlFlow,,Activity,,21
+Class,Hardware Component,Aggregation,,Class,Physical Context,20
+Class,Electrical & Material Interface,Generalization,,Class,Hardware Component,20
+Activity,,Dependency,satisfy,Requirement,designConstraint,20
+Requirement,functionalRequirement,Dependency,deriveReqt,Requirement,functionalRequirement,20
+State,,Abstraction,allocate,Class,Physical Component,20
+Requirement,designConstraint,Dependency,deriveReqt,Requirement,designConstraint,20
+Requirement,designConstraint,Dependency,deriveReqt,Requirement,extendedRequirement,20
+Issue,,Abstraction,allocate,Action,,20
+UseCase,,Association,,Class,Physical System Variant,20
+Class,Module,Sequence,,Part,FlowProperty,19
+Requirement,requirement,Dependency,refine,Requirement,functionalRequirement,18
+Class,Software Component,Realisation,,Requirement,designConstraint,18
+Activity,System Function,Dependency,,Activity,Hardware Function,18
+State,System State,Abstraction,allocate,Object,,18
+Activity,,ControlFlow,,Decision,,18
+Synchronization,,ControlFlow,,Activity,,18
+Activity,,Generalization,,Activity,Hardware Function,17
+Note,,NoteLink,,Requirement,designConstraint,17
+Object,,Association,,UseCase,,17
+Artifact,Document,Nesting,,Requirement,requirement,16
+Issue,,Dependency,trace,Requirement,functionalRequirement,16
+Class,Hardware Component,Generalization,,Class,Physical Component,16
+State,,Abstraction,allocate,Class,block,16
+Class,,Aggregation,,Class,Hardware Component,16
+Class,Module,Generalization,,Class,Hardware Component,15
+UseCase,,Association,,Class,Software Component,15
+Requirement,functionalRequirement,Dependency,refine,Requirement,requirement,15
+Requirement,requirement,Usage,,Requirement,requirement,15
+Object,,Aggregation,,Class,Module,15
+Activity,Hardware Function,Generalization,,Activity,,14
+Class,Physical System Variant,Aggregation,,Class,Physical System Variant,14
+InformationItem,,Dependency,trace,Class,Software Component,14
+State,System State,Abstraction,allocate,Class,block,14
+UseCase,,Association,,Class,Hardware Component,14
+InformationItem,,Abstraction,allocate,Object,,14
+Class,block,Realisation,,Requirement,functionalRequirement,13
+Requirement,functionalRequirement,Dependency,deriveReqt,Requirement,designConstraint,13
+UseCase,,Association,,Class,Physical Component,13
+Activity,Module Function,Dependency,satisfy,Requirement,requirement,13
+Object,,Generalization,,Class,Hardware Component,13
+Class,Data Interface,Generalization,,Class,Generic Physical Interface,13
+Activity,Software Function,Dependency,satisfy,Requirement,functionalRequirement,12
+Activity,,Dependency,,State,,12
+Note,,NoteLink,,Class,Module,12
+Activity,Software Function,Generalization,,Activity,System Function,12
+Activity,System Function,Generalization,,Activity,Hardware Function,12
+Activity,Module Function,Abstraction,allocate,Class,Hardware Component,12
+Change,,Aggregation,,Change,,12
+UseCase,,Association,,Class,Business Line,12
+State,System State,Association,,Class,block,12
+Activity,Module Function,Abstraction,allocate,Class,Software Component,11
+Class,Physical Component,Aggregation,,Class,Physical Context,11
+Issue,,Dependency,trace,UseCase,,11
+Activity,System Function,Abstraction,allocate,Class,Physical Component,11
+Activity,Hardware Function,Abstraction,allocate,Class,Module,11
+State,System State,Abstraction,allocate,State,System State,11
+Class,Physical System Variant,Association,,UseCase,,11
+Requirement,Regulatory Requirement,Nesting,,Requirement,Webasto Requirement,11
+Class,Module,Dependency,trace,Text,,11
+Class,Module,Sequence,,Class,Module,11
+Issue,,Abstraction,allocate,Requirement,,11
+Artifact,Document,Dependency,refine,Requirement,requirement,11
+Class,,Generalization,,Class,Hardware Component,11
+Class,Business Line,Aggregation,,Class,Physical Context,10
+Actor,,Aggregation,,Class,Physical Context,10
+Class,Physical System Variant,Generalization,,Class,Platform,10
+Class,Physical System Variant,Realisation,,Requirement,requirement,10
+Class,Software Component,Dependency,,Class,Software Component,10
+Issue,,Abstraction,allocate,State,System State,10
+UseCase,,Aggregation,,UseCase,,10
+Requirement,requirement,Abstraction,allocate,Class,System Partner,10
+Decision,,ControlFlow,,Issue,,10
+Activity,,ControlFlow,,StateNode,,10
+Requirement,requirement,Dependency,trace,Artifact,Document,10
+Note,,NoteLink,,Requirement,extendedRequirement,10
+State,System State,Dependency,satisfy,Requirement,functionalRequirement,9
+Activity,Hardware Function,Dependency,,State,System State,9
+Class,Software Component,Aggregation,,Class,Physical System Variant,9
+InformationItem,,Dependency,trace,Requirement,functionalRequirement,9
+Class,Hardware Component,Generalization,,Class,Data Interface,9
+Activity,System Function,Abstraction,allocate,Class,Platform,9
+Class,Software Component,Aggregation,,Class,Module,9
+Class,Module,Aggregation,,Class,Business Line,9
+Note,,NoteLink,,Class,Physical Component,9
+Requirement,requirement,Abstraction,allocate,Class,block,9
+Decision,,ControlFlow,,Action,,9
+Class,block,Aggregation,,Class,block,9
+Object,,Realisation,,Requirement,functionalRequirement,8
+Activity,System Function,Dependency,satisfy,Requirement,designConstraint,8
+Class,Module,Realisation,,Requirement,requirement,8
+Class,Electrical & Material Interface,Aggregation,,Class,Hardware Component,8
+Activity,Module Function,Dependency,satisfy,Requirement,functionalRequirement,8
+Issue,,Abstraction,allocate,Requirement,functionalRequirement,8
+Activity,System Function,Dependency,,State,,8
+State,,Dependency,satisfy,Requirement,,8
+State,System State,Abstraction,allocate,Class,System Partner,8
+Class,Platform,Sequence,,Class,Physical System Variant,8
+Requirement,designConstraint,Dependency,trace,Requirement,requirement,8
+Class,Hardware Component,Sequence,,Class,Module,8
+Object,,Sequence,,Class,Hardware Component,8
+Object,,Aggregation,,Class,Physical System Variant,8
+Activity,,ControlFlow,,Synchronization,,8
+StateNode,,ControlFlow,,Activity,,8
+Note,,NoteLink,,Class,Hardware Component,8
+Requirement,,Dependency,trace,State,System State,8
+State,System State,Aggregation,,State,,8
+Object,,Dependency,trace,Text,,8
+Requirement,extendedRequirement,Dependency,trace,Artifact,Document,8
+Class,System Partner,Association,,Class,System Partner,8
+Class,block,Association,,Class,Software Component,8
+Class,block,NoteLink,,Note,,8
+Class,Software Component,NoteLink,,Note,,8
+Port,ProxyPort,Connector,,Port,ProxyPort,7
+Class,Platform,Generalization,,Class,Platform,7
+InformationItem,,Dependency,trace,Class,Physical System Variant,7
+Activity,,Generalization,,Activity,Module Function,7
+Issue,,Abstraction,allocate,Requirement,requirement,7
+State,,Abstraction,allocate,Class,Platform,7
+Activity,,Abstraction,allocate,Class,Platform,7
+Requirement,requirement,Dependency,,Requirement,requirement,7
+Activity,Module Function,Dependency,satisfy,Requirement,,7
+InformationItem,,Dependency,trace,State,,7
+Activity,Hardware Function,Generalization,,Activity,Module Function,7
+Requirement,functionalRequirement,Dependency,trace,Requirement,requirement,7
+Note,,NoteLink,,Requirement,,7
+Artifact,Document,Dependency,trace,Requirement,requirement,7
+State,System State,StateFlow,,State,System State,7
+Class,block,Dependency,trace,Text,,7
+UseCase,,Dependency,refine,Requirement,,7
+Class,Mechanical Interface,Generalization,,Class,Generic Physical Interface,7
+Activity,testCase,Nesting,,Activity,testCase,6
+Class,Hardware Component,Aggregation,,Class,System Partner,6
+Class,block,Aggregation,,Class,Module,6
+Class,Hardware Component,Aggregation,,Class,Business Line,6
+Class,System Partner,Aggregation,,Class,Physical Component,6
+InformationItem,,Dependency,trace,Class,Module,6
+Part,,Connector,,Port,FullPort,6
+Issue,,Dependency,trace,Requirement,designConstraint,6
+Package,,Realisation,,Requirement,requirement,6
+Requirement,functionalRequirement,Dependency,refine,Requirement,functionalRequirement,6
+InformationItem,,Dependency,refine,Requirement,functionalRequirement,6
+State,,Abstraction,allocate,Class,Software Component,6
+Issue,,Abstraction,allocate,Activity,Hardware Function,6
+Class,Module,Aggregation,,Class,Physical Component,6
+Class,Business Line,Generalization,,Class,Business Line,6
+Requirement,requirement,Dependency,deriveReqt,Requirement,designConstraint,6
+Activity,System Function,Abstraction,allocate,Class,Data Interface,6
+Activity,,Aggregation,,Activity,,6
+State,,Generalization,,State,,6
+Class,Physical System Variant,Dependency,trace,InformationItem,,6
+Issue,,Abstraction,allocate,State,,6
+Class,Physical System Variant,Aggregation,,Class,block,6
+Class,Software Component,Aggregation,,Class,Physical Context,6
+State,System State,Dependency,trace,Requirement,requirement,6
+Class,Module,Aggregation,,Class,Hardware Component,6
+Issue,,Abstraction,allocate,Class,Hardware Component,6
+Change,,Nesting,,Change,,6
+Requirement,functionalRequirement,Abstraction,Derive,Requirement,requirement,6
+UseCase,,Association,,UseCase,,6
+Object,,Connector,,Object,,6
+Requirement,,Dependency,trace,Activity,System Function,6
+Activity,Hardware Function,Abstraction,allocate,Class,Physical Component,6
+State,System State,Abstraction,allocate,Class,Electrical & Material Interface,6
+Requirement,requirement,Abstraction,allocate,Activity,,6
+Class,Generic Physical Interface,Generalization,,Class,Generic Physical Interface,6
+Signal,Logical Signal,Aggregation,,Signal,Logical Signal,6
+Requirement,designConstraint,Nesting,,Class,block,6
+Action,,ControlFlow,,Object,,6
+Class,Software Component,Abstraction,allocate,Object,,6
+Class,Hardware Component,Aggregation,,Class,Platform,5
+InformationItem,,Dependency,trace,UseCase,,5
+Requirement,functionalRequirement,Dependency,trace,Requirement,functionalRequirement,5
+Activity,Hardware Function,Abstraction,allocate,Class,Data Interface,5
+Requirement,extendedRequirement,Dependency,deriveReqt,Requirement,requirement,5
+Class,Physical System Variant,Generalization,,Class,Module,5
+Class,Hardware Component,Dependency,,Class,Hardware Component,5
+Class,Data Interface,Realisation,,Requirement,requirement,5
+InformationItem,,Dependency,refine,Class,Hardware Component,5
+Issue,,Dependency,,Requirement,designConstraint,5
+Activity,,Dependency,,Activity,Hardware Function,5
+State,,Generalization,,State,System State,5
+InformationItem,,Abstraction,allocate,State,System State,5
+Issue,,Abstraction,allocate,Activity,testCase,5
+Requirement,functionalRequirement,Dependency,refine,Requirement,designConstraint,5
+Issue,,ControlFlow,,StateNode,,5
+Requirement,requirement,Dependency,trace,InformationItem,,5
+Note,,NoteLink,,State,System State,5
+UseCase,,Association,,Actor,,5
+Activity,Hardware Function,Abstraction,allocate,Class,Physical System Variant,5
+Class,Module,Sequence,,Class,Business Line,5
+Actor,,Generalization,,Actor,,5
+UseCase,,Usage,,Activity,Module Function,5
+Activity,Software Function,Abstraction,allocate,Class,block,5
+UseCase,,Association,,Class,Physical Context,5
+Action,,Dependency,satisfy,Requirement,requirement,5
+Port,,Dependency,,Requirement,designConstraint,5
+Class,Hardware Component,Generalization,,Class,System Partner,5
+Part,,InformationFlow,itemFlow,Port,,5
+Class,Hardware Component,Generalization,,Class,Electrical & Material Interface,5
+Artifact,Document,Nesting,,Artifact,Document,5
+Class,Generic Physical Interface,Abstraction,allocate,Class,System Partner,5
+Class,Hardware Component,Association,,Class,System Partner,5
+Requirement,requirement,Nesting,,Activity,Module Function,5
+State,System State,Generalization,,Class,block,5
+Object,,ControlFlow,,StateNode,,5
+Class,block,Association,,Class,block,5
+Synchronization,,StateFlow,,State,,5
+State,,StateFlow,,Synchronization,,5
+Activity,,Nesting,,Activity,testCase,4
+Activity,testCase,Dependency,,Object,,4
+Class,Physical Component,Generalization,,Class,block,4
+InformationItem,,Dependency,trace,Class,Physical Component,4
+Issue,,Dependency,trace,Class,Physical System Variant,4
+Class,Module,Aggregation,,Class,Platform,4
+Activity,Module Function,Dependency,,State,System State,4
+Class,Physical Component,Realisation,,Requirement,requirement,4
+Class,Software Component,Realisation,,Requirement,extendedRequirement,4
+Class,Hardware Component,Realisation,,Requirement,requirement,4
+State,System State,Dependency,RecoveryRequirement,Requirement,designConstraint,4
+Activity,Software Function,Abstraction,allocate,Class,Software Component,4
+State,System State,Abstraction,allocate,Requirement,designConstraint,4
+InformationItem,,Dependency,trace,Activity,,4
+Requirement,functionalRequirement,Dependency,ASILDecompose,Requirement,requirement,4
+Class,System Partner,Realisation,,Requirement,functionalRequirement,4
+Class,Module,Association,,Class,System Partner,4
+Class,block,Aggregation,,Class,Software Component,4
+Class,Module,Generalization,,Class,Physical Component,4
+Requirement,requirement,Dependency,verify,Requirement,designConstraint,4
+Activity,,Abstraction,allocate,Class,Physical Component,4
+Requirement,designConstraint,Nesting,,Requirement,requirement,4
+Activity,Module Function,Generalization,,Activity,System Function,4
+Activity,System Function,Abstraction,allocate,Class,System Partner,4
+Class,Physical Component,Aggregation,,Class,Business Line,4
+Activity,,Generalization,,Activity,Software Function,4
+Activity,Hardware Function,Dependency,,Activity,Hardware Function,4
+Requirement,Functional,Dependency,deriveReqt,Requirement,requirement,4
+Requirement,designConstraint,Dependency,trace,State,System State,4
+Class,Physical System Variant,Generalization,,Class,Hardware Component,4
+UseCase,,Usage,,State,,4
+Class,block,Generalization,,Class,Software Component,4
+Requirement,requirement,Dependency,trace,Text,,4
+Class,Module,Sequence,,Class,Hardware Component,4
+Class,Hardware Component,Sequence,,Object,,4
+Change,,Abstraction,allocate,Class,Module,4
+Change,,Abstraction,allocate,Object,,4
+Activity,,Realisation,,Change,,4
+Action,,ControlFlow,,Activity,,4
+Decision,,ControlFlow,,Synchronization,,4
+Sequence,,Sequence,,Class,Module,4
+,,Dependency,satisfy,,,4
+Note,,NoteLink,,Class,block,4
+Note,,NoteLink,,Actor,,4
+Class,block,Sequence,,Class,block,4
+Class,Business Line,Sequence,,Class,Module,4
+Class,Module,Sequence,,Class,block,4
+Class,Business Line,Sequence,,Class,Physical System Variant,4
+Activity,,Realisation,,Signal,Software Parameter,4
+State,System State,Nesting,,State,System State,4
+State,System State,Dependency,trace,State,System State,4
+Class,Physical Component,Association,,UseCase,,4
+StateNode,,ControlFlow,,Action,,4
+Text,,Abstraction,allocate,Port,,4
+Activity,System Function,Association,,UseCase,,4
+Port,,InformationFlow,itemFlow,Part,,4
+Object,,Dependency,trace,Requirement,requirement,4
+Activity,System Function,Aggregation,,Activity,Hardware Function,4
+Requirement,requirement,Dependency,,Class,Physical Component,4
+Activity,System Function,Generalization,,Activity,Software Function,4
+Requirement,functionalRequirement,Nesting,,Requirement,requirement,4
+Class,block,Generalization,,Class,Physical System Variant,4
+Object,,ControlFlow,,Action,,4
+Class,Software Component,Association,,Class,Software Component,4
+InformationItem,,Dependency,trace,Object,,3
+Requirement,designConstraint,Realisation,,Class,Physical System Variant,3
+Activity,Module Function,Abstraction,allocate,Class,Physical System Variant,3
+Class,System Partner,Aggregation,,Class,Physical System Variant,3
+Class,block,Aggregation,,Class,Physical Component,3
+Class,Physical Component,Realisation,,Requirement,functionalRequirement,3
+Class,Software Component,Realisation,,Requirement,,3
+Requirement,performanceRequirement,Dependency,deriveReqt,Requirement,requirement,3
+State,,Dependency,RecoveryRequirement,Requirement,designConstraint,3
+InformationItem,,Dependency,trace,Activity,Hardware Function,3
+Activity,Software Function,Abstraction,allocate,Class,Hardware Component,3
+Requirement,requirement,Realisation,,Class,Hardware Component,3
+Class,Physical Component,Generalization,,Class,Module,3
+InformationItem,,Dependency,refine,State,System State,3
+InformationItem,,Dependency,trace,InformationItem,,3
+Issue,,Dependency,trace,InformationItem,,3
+Class,Hardware Component,Realisation,,Requirement,,3
+Requirement,,Dependency,deriveReqt,Requirement,requirement,3
+State,,Dependency,satisfy,Requirement,functionalRequirement,3
+Activity,Hardware Function,Dependency,,Activity,System Function,3
+Class,Physical System Variant,Sequence,,Class,Physical System Variant,3
+Class,System Partner,Sequence,,Class,Physical System Variant,3
+Class,Physical System Variant,Sequence,,Class,Platform,3
+Activity,,Abstraction,allocate,Requirement,functionalRequirement,3
+Requirement,,Dependency,trace,Requirement,requirement,3
+Class,Platform,Sequence,,Class,System Partner,3
+Activity,Hardware Function,Dependency,satisfy,Requirement,,3
+State,,Dependency,RecoveryRequirement,Requirement,requirement,3
+State,System State,Dependency,RecoveryRequirement,Requirement,requirement,3
+UseCase,,Usage,,Activity,Software Function,3
+Class,Platform,Aggregation,,Class,Physical Context,3
+Requirement,,Nesting,,Requirement,,3
+Class,Physical Component,Realisation,,State,System State,3
+State,,Aggregation,,State,,3
+InformationItem,,Abstraction,allocate,Activity,,3
+Activity,Module Function,Abstraction,allocate,Class,block,3
+InformationItem,,Abstraction,allocate,Class,Module,3
+Requirement,requirement,Dependency,,Change,,3
+InformationItem,,Abstraction,allocate,Class,Physical System Variant,3
+Issue,,Abstraction,allocate,Activity,Module Function,3
+Synchronization,,ControlFlow,,Decision,,3
+Class,System Partner,Aggregation,,Class,Hardware Component,3
+Actor,,Aggregation,,Class,Hardware Component,3
+Note,,NoteLink,,State,,3
+Class,Module,Sequence,,Sequence,,3
+Activity,Hardware Function,Abstraction,allocate,Class,Business Line,3
+Requirement,requirement,Dependency,,Class,Hardware Component,3
+UseCase,,Association,,Class,block,3
+Activity,Hardware Function,Abstraction,allocate,Class,block,3
+Class,Physical System Variant,Sequence,,Class,Business Line,3
+Activity,Hardware Function,ControlFlow,,Activity,Hardware Function,3
+UseCase,,Usage,,Activity,Hardware Function,3
+Activity,Module Function,Generalization,,Activity,Module Function,3
+Activity,System Function,Generalization,,Activity,Module Function,3
+Class,System Partner,Sequence,,Class,Module,3
+Activity,System Function,Dependency,satisfy,Requirement,extendedRequirement,3
+Action,,ControlFlow,,StateNode,,3
+Requirement,requirement,Abstraction,trace,Requirement,requirement,3
+State,System State,Aggregation,,Activity,System Function,3
+Activity,System Function,Generalization,,State,System State,3
+Requirement,requirement,Dependency,refine,Requirement,designConstraint,3
+Action,,ControlFlow,,Decision,,3
+Requirement,designConstraint,Dependency,deriveReqt,Artifact,Document,3
+State,System State,Dependency,,Class,Physical Component,3
+Requirement,functionalRequirement,Dependency,deriveReqt,Requirement,extendedRequirement,3
+Note,,NoteLink,,Requirement,functionalRequirement,3
+Class,Electrical & Material Interface,Aggregation,,Class,Physical Component,3
+Requirement,functionalRequirement,Nesting,,Requirement,functionalRequirement,3
+Object,,ControlFlow,,Activity,,3
+Class,System Partner,Association,,Class,Hardware Component,3
+Class,Software Unit,Generalization,,Class,Software Component,3
+Class,Physical Component,NoteLink,,Note,,3
+Class,Hardware Component,NoteLink,,Note,,3
+Class,Module,Association,,Class,Module,2
+Activity,Module Function,Generalization,,Activity,,2
+Activity,,Abstraction,allocate,Class,Data Interface,2
+Requirement,functionalRequirement,Dependency,,Class,Hardware Component,2
+Class,Hardware Component,Realisation,,Requirement,extendedRequirement,2
+Port,,Connector,,Port,FullPort,2
+Class,Platform,Realisation,,Requirement,functionalRequirement,2
+State,,Dependency,,Activity,,2
+InformationItem,,Aggregation,,Class,Hardware Component,2
+Object,,Realisation,,Requirement,requirement,2
+Port,FullPort,Connector,,Part,,2
+Activity,System Function,Abstraction,allocate,Requirement,functionalRequirement,2
+Port,,Connector,BindingConnector,Port,FullPort,2
+Requirement,functionalRequirement,Dependency,,Requirement,designConstraint,2
+Requirement,designConstraint,Realisation,,Class,Physical Component,2
+Note,,NoteLink,,Class,Software Component,2
+InformationItem,,Dependency,refine,Activity,Hardware Function,2
+InformationItem,,Dependency,refine,Activity,System Function,2
+InformationItem,,Dependency,refine,Action,,2
+Class,Software Component,Abstraction,allocate,Class,Hardware Component,2
+Change,,Dependency,trace,UseCase,,2
+State,System State,Abstraction,allocate,Class,Software Component,2
+InformationItem,,Dependency,trace,Activity,System Function,2
+InformationItem,,Dependency,trace,State,System State,2
+UseCase,,Dependency,,Issue,,2
+State,System State,Dependency,,State,,2
+InformationItem,,Dependency,refine,Requirement,designConstraint,2
+Activity,Software Function,Dependency,,State,System State,2
+Requirement,designConstraint,Dependency,deriveReqt,Requirement,functionalRequirement,2
+State,,Dependency,,Class,Physical Component,2
+Class,Platform,Association,,Class,Module,2
+Requirement,requirement,Abstraction,allocate,Class,Hardware Component,2
+Requirement,requirement,Dependency,verify,Requirement,functionalRequirement,2
+Class,Physical System Variant,Sequence,,Class,System Partner,2
+Class,block,Dependency,,Class,Software Component,2
+Activity,Hardware Function,Dependency,,Activity,,2
+Port,,Connector,,InformationItem,,2
+Issue,,Dependency,trace,Class,Hardware Component,2
+Class,Hardware Component,Dependency,trace,Class,Module,2
+Activity,,Abstraction,allocate,Requirement,requirement,2
+Activity,,Abstraction,allocate,Requirement,,2
+Requirement,requirement,Dependency,deriveReqt,Requirement,Regulatory Requirement,2
+Requirement,requirement,Dependency,satisfy,Requirement,requirement,2
+State,System State,Dependency,satisfy,Requirement,Regulatory Requirement,2
+Requirement,extendedRequirement,Dependency,trace,Requirement,requirement,2
+InformationItem,,Nesting,,InformationItem,,2
+Class,Physical System Variant,Aggregation,,Class,Business Line,2
+Activity,Software Function,Dependency,,Activity,System Function,2
+Requirement,requirement,Dependency,deriveReqt,Requirement,extendedRequirement,2
+Port,,Connector,,Class,Module,2
+Activity,System Function,Abstraction,allocate,Requirement,requirement,2
+Class,Hardware Component,Generalization,,Class,Physical Context,2
+Activity,Software Function,Generalization,,Activity,,2
+Activity,Module Function,Abstraction,allocate,Class,Data Interface,2
+Issue,,Abstraction,allocate,Class,Physical Component,2
+Activity,System Function,Dependency,trace,Activity,System Function,2
+Requirement,extendedRequirement,Dependency,trace,Requirement,extendedRequirement,2
+Requirement,designConstraint,Dependency,trace,Class,Hardware Component,2
+Activity,,Abstraction,allocate,Class,System Partner,2
+UseCase,,Abstraction,Refine,Requirement,designConstraint,2
+Issue,,UseCase,extend,UseCase,,2
+State,System State,Dependency,,Class,Hardware Component,2
+Activity,System Function,Abstraction,allocate,Class,Physical Context,2
+Port,ProxyPort,InformationFlow,itemFlow,Port,,2
+,,Abstraction,allocate,,,2
+Object,,Generalization,,Class,block,2
+Change,,Abstraction,allocate,Class,Physical Component,2
+Class,System Partner,Dependency,,Requirement,requirement,2
+Issue,,Abstraction,allocate,Actor,,2
+Activity,System Function,ControlFlow,,Activity,,2
+Actor,,Association,,Activity,,2
+Activity,,ControlFlow,,Activity,System Function,2
+Object,,Aggregation,,Class,Platform,2
+Class,Platform,Generalization,,Class,Business Line,2
+Decision,,ControlFlow,,StateNode,,2
+StateNode,,ControlFlow,,Synchronization,,2
+Activity,,ControlFlow,,Action,,2
+Note,,NoteLink,,Activity,,2
+Note,,NoteLink,,Artifact,Document,2
+Issue,,Abstraction,allocate,Issue,,2
+Synchronization,,ControlFlow,,StateNode,,2
+Note,,NoteLink,,Note,,2
+Activity,System Function,Usage,,UseCase,,2
+Requirement,requirement,Dependency,,State,System State,2
+State,,Abstraction,allocate,State,System State,2
+Activity,,Dependency,trace,UseCase,,2
+Requirement,requirement,Abstraction,allocate,Artifact,Document,2
+Class,Software Component,Association,,UseCase,,2
+Issue,,Dependency,trace,Activity,testCase,2
+State,,Dependency,,Requirement,requirement,2
+Activity,Module Function,Dependency,,Activity,System Function,2
+Class,Business Line,Sequence,,Class,Business Line,2
+InformationItem,,Abstraction,allocate,Issue,,2
+Issue,,Abstraction,allocate,Class,Module,2
+Activity,testCase,Dependency,trace,Text,,2
+Activity,Module Function,Abstraction,allocate,Class,Business Line,2
+Activity,Software Function,Dependency,satisfy,Requirement,designConstraint,2
+Class,block,Dependency,trace,Class,Hardware Component,2
+Change,,Dependency,,Activity,,2
+Activity,System Function,ControlFlow,,Activity,Hardware Function,2
+Class,Business Line,Association,,UseCase,,2
+Class,System Partner,Sequence,,Class,System Partner,2
+Actor,,Sequence,,Class,System Partner,2
+Activity,Hardware Function,Dependency,satisfy,Requirement,designConstraint,2
+Requirement,requirement,Realisation,,Requirement,requirement,2
+Issue,,Dependency,trace,Activity,Software Function,2
+Class,Hardware Component,Dependency,trace,Requirement,requirement,2
+Activity,Hardware Function,Dependency,satisfy,Requirement,Functional,2
+Class,System Partner,Generalization,,Class,Physical Context,2
+Object,,Generalization,,Class,Module,2
+Activity,,Dependency,,Class,Platform,2
+Action,,Dependency,,Class,Hardware Component,2
+Activity,,Dependency,,Class,System Partner,2
+Object,,Aggregation,,Class,Hardware Component,2
+InformationItem,,Abstraction,allocate,Class,Platform,2
+Change,,Dependency,trace,Issue,,2
+InformationItem,,Abstraction,allocate,Action,,2
+ProxyConnector,,Abstraction,allocate,Issue,,2
+Issue,,Usage,,State,System State,2
+Change,,Dependency,trace,Object,,2
+UseCase,,ControlFlow,,Activity,,2
+Object,,Dependency,trace,Requirement,,2
+Object,,Dependency,trace,Artifact,Image,2
+Trigger,,Generalization,,Trigger,,2
+State,,Realisation,,Issue,,2
+Issue,,Generalization,,Issue,,2
+Activity,Module Function,Abstraction,allocate,Class,Module,2
+Class,Physical System Variant,Dependency,trace,Requirement,requirement,2
+Artifact,Document,Dependency,refine,Requirement,designConstraint,2
+Class,Module,Dependency,trace,Class,Physical Component,2
+Activity,,Dependency,,Text,,2
+UseCase,,Dependency,trace,Activity,Module Function,2
+Action,,Abstraction,allocate,ProxyConnector,,2
+Requirement,designConstraint,Dependency,trace,Class,System Partner,2
+State,System State,Dependency,trace,Artifact,Image,2
+StateNode,,StateFlow,,State,System State,2
+Activity,System Function,Generalization,,State,,2
+State,System State,Aggregation,,Activity,Hardware Function,2
+Activity,Hardware Function,Abstraction,allocate,Class,Electrical & Material Interface,2
+Class,Physical Component,Dependency,trace,Requirement,requirement,2
+Class,Physical Component,Association,,Class,System Partner,2
+Requirement,designConstraint,Dependency,,Artifact,Document,2
+State,System State,Dependency,satisfy,State,System State,2
+Requirement,requirement,Nesting,,Artifact,Document,2
+Action,,ControlFlow,,State,System State,2
+State,System State,ControlFlow,,Action,,2
+UseCase,,Dependency,,State,System State,2
+Port,,InformationFlow,itemFlow,Port,ProxyPort,2
+Class,Electrical & Material Interface,Aggregation,,Object,,2
+State,,StateFlow,,State,Fault State,2
+Activity,Software Function,Generalization,,State,System State,2
+Activity,System Function,Generalization,,Class,block,2
+Activity,System Function,Aggregation,,Activity,,2
+Activity,Hardware Function,Generalization,,State,,2
+Class,block,Dependency,,Class,block,2
+Activity,System Function,Aggregation,,Activity,Software Function,2
+Object,,ControlFlow,,Synchronization,,2
+Decision,,ControlFlow,,Object,,2
+Object,,ControlFlow,,Decision,,2
+Activity,,ControlFlow,,Object,,2
+Requirement,designConstraint,Dependency,refine,Requirement,physicalRequirement,2
+Class,System Partner,Association,,Class,Electrical & Material Interface,2
+Class,Electrical & Material Interface,Association,,Class,System Partner,2
+Class,Electrical & Material Interface,Association,,Class,Physical System Variant,2
+Class,block,Usage,Responsibility,Class,Business Line,2
+Class,block,Aggregation,,Class,Business Line,2
+Activity,testCase,Generalization,,Activity,testCase,1
+Activity,,Dependency,,Object,,1
+Issue,,Dependency,,Activity,testCase,1
+Artifact,Image,Dependency,trace,InformationItem,,1
+Class,block,Generalization,,Class,Electrical & Material Interface,1
+Class,System Partner,Generalization,,Class,Hardware Component,1
+InformationItem,,Dependency,trace,Class,Platform,1
+InformationItem,,Aggregation,,Class,Platform,1
+Class,Business Line,Aggregation,,Class,Physical System Variant,1
+Class,Data Interface,Generalization,,Class,Hardware Component,1
+Text,,Dependency,trace,Class,Hardware Component,1
+Class,Physical System Variant,Aggregation,,Class,Physical Component,1
+Class,Hardware Component,Realisation,deriveReqt,Requirement,designConstraint,1
+Class,Module,Realisation,,Requirement,performanceRequirement,1
+Class,Hardware Component,Realisation,,Requirement,performanceRequirement,1
+Class,Data Interface,Dependency,,Class,Hardware Component,1
+Class,Business Line,Realisation,,Requirement,functionalRequirement,1
+Class,block,Generalization,,Class,Business Line,1
+Artifact,Document,Dependency,refine,Requirement,functionalRequirement,1
+Requirement,functionalRequirement,Dependency,,Requirement,functionalRequirement,1
+,,Connector,,,,1
+State,,Dependency,,Requirement,designConstraint,1
+Activity,,Dependency,,Requirement,designConstraint,1
+Class,Software Component,Generalization,,Class,Physical Component,1
+UseCase,,Dependency,refine,Requirement,extendedRequirement,1
+Package,,Realisation,,Requirement,,1
+InformationItem,,Dependency,trace,Actor,,1
+Activity,,Dependency,,Issue,,1
+InformationItem,,Dependency,refine,Requirement,extendedRequirement,1
+Class,Physical Component,Realisation,,Requirement,,1
+Class,Physical System Variant,Realisation,,Requirement,,1
+Class,Module,Nesting,,Class,Physical System Variant,1
+Class,Physical Component,Nesting,,Class,Physical System Variant,1
+Class,Hardware Component,Nesting,,Class,Physical System Variant,1
+Requirement,requirement,Dependency,deriveReqt,Requirement,functionalRequirement,1
+Class,Module,Realisation,refine,Requirement,designConstraint,1
+InformationItem,,Dependency,trace,Class,block,1
+Class,Physical System Variant,Dependency,,Class,Physical Component,1
+InformationItem,,Dependency,refine,Class,Module,1
+InformationItem,,Dependency,refine,Class,Software Component,1
+Activity,System Function,Dependency,,Activity,Module Function,1
+Text,,Dependency,trace,Class,System Partner,1
+Issue,,Abstraction,allocate,InformationItem,,1
+Class,Business Line,Realisation,,Requirement,requirement,1
+Class,Business Line,Realisation,,Requirement,designConstraint,1
+Requirement,requirement,Dependency,,Activity,System Function,1
+Activity,System Function,Dependency,deriveReqt,Requirement,,1
+Activity,System Function,Dependency,trace,Requirement,requirement,1
+Class,Software Component,Aggregation,,Class,System Partner,1
+Activity,,Dependency,,Class,Hardware Component,1
+Class,Hardware Component,Generalization,,Class,block,1
+Requirement,requirement,Dependency,,Activity,,1
+Requirement,designConstraint,Dependency,,State,System State,1
+Class,Software Component,Aggregation,,Class,Platform,1
+Activity,testCase,Dependency,verify,Activity,Hardware Function,1
+Class,Platform,Sequence,,Class,Platform,1
+Class,Module,Generalization,,Class,Physical System Variant,1
+Class,Software Component,Aggregation,,Class,Business Line,1
+Activity,Hardware Function,Dependency,trace,InformationItem,,1
+Activity,System Function,Dependency,trace,InformationItem,,1
+Activity,System Function,Dependency,,Requirement,requirement,1
+UseCase,,Association,,Class,Data Interface,1
+Class,Module,Dependency,trace,InformationItem,,1
+State,System State,Dependency,trace,Requirement,functionalRequirement,1
+Actor,,Dependency,trace,InformationItem,,1
+Requirement,,Dependency,,Activity,,1
+Activity,,Abstraction,allocate,Requirement,designConstraint,1
+Requirement,requirement,Dependency,verify,Activity,,1
+Requirement,Regulatory Requirement,Dependency,,State,,1
+Requirement,designConstraint,Dependency,satisfy,Activity,,1
+Requirement,designConstraint,Dependency,satisfy,State,,1
+Requirement,designConstraint,Dependency,deriveReqt,InformationItem,,1
+Class,Physical Component,Aggregation,,Class,Platform,1
+Activity,System Function,Dependency,,Activity,Software Function,1
+Activity,Software Function,Dependency,,Activity,,1
+,,UseCase,extend,,,1
+Requirement,designConstraint,Dependency,trace,Class,Software Component,1
+State,,Dependency,,State,System State,1
+Class,Physical System Variant,Generalization,,Class,Physical Context,1
+Issue,,Abstraction,allocate,Activity,Software Function,1
+Activity,,Dependency,,Activity,Software Function,1
+Activity,,Dependency,satisfy,Requirement,extendedRequirement,1
+Activity,Software Function,Dependency,trace,Activity,,1
+Requirement,designConstraint,Dependency,,Requirement,designConstraint,1
+Activity,,Abstraction,allocate,Activity,,1
+Requirement,designConstraint,Dependency,,Requirement,requirement,1
+Class,Data Interface,Aggregation,,Class,Hardware Component,1
+Class,Physical System Variant,Association,,Object,,1
+Activity,System Function,Dependency,,Class,Software Component,1
+Issue,,Dependency,,Requirement,requirement,1
+State,System State,Dependency,,Requirement,requirement,1
+Issue,,Dependency,trace,Activity,System Function,1
+Activity,System Function,Abstraction,allocate,Artifact,Document,1
+Requirement,designConstraint,Dependency,trace,Class,Physical Component,1
+UseCase,,Realisation,,Requirement,functionalRequirement,1
+Activity,,Aggregation,,Activity,System Function,1
+Activity,Software Function,Dependency,,Activity,Hardware Function,1
+Requirement,functionalRequirement,Abstraction,Derive,Issue,,1
+UseCase,,Abstraction,Refine,Requirement,functionalRequirement,1
+State,System State,Dependency,,Class,Module,1
+Class,Business Line,Generalization,,Class,Platform,1
+Activity,Software Function,Abstraction,allocate,Class,Module,1
+Requirement,functionalRequirement,Dependency,deriveReqt,Requirement,Regulatory Requirement,1
+Change,,Abstraction,allocate,Activity,,1
+Change,,Abstraction,allocate,Requirement,functionalRequirement,1
+Activity,,Usage,,Activity,System Function,1
+State,,Dependency,,Activity,System Function,1
+Activity,testCase,Dependency,trace,Change,,1
+Requirement,Regulatory Requirement,Dependency,trace,Requirement,requirement,1
+Port,,Connector,,Part,,1
+Part,,Connector,,Port,,1
+Class,Hardware Component,Dependency,trace,Class,Hardware Component,1
+State,System State,Dependency,deriveReqt,Requirement,,1
+Sequence,,Sequence,,Object,,1
+Requirement,Regulatory Requirement,Dependency,deriveReqt,Requirement,requirement,1
+Requirement,requirement,Abstraction,allocate,Object,,1
+Requirement,requirement,Dependency,refine,State,System State,1
+InformationItem,,Abstraction,allocate,Requirement,requirement,1
+Requirement,extendedRequirement,Dependency,trace,Requirement,Webasto Requirement,1
+InformationItem,,Abstraction,allocate,Actor,,1
+Change,,Abstraction,allocate,Actor,,1
+Activity,System Function,ControlFlow,,Activity,System Function,1
+Activity,,ControlFlow,,Activity,Module Function,1
+Change,,Abstraction,allocate,Class,Physical System Variant,1
+Class,block,Aggregation,,Object,,1
+Object,,Abstraction,allocate,Class,Module,1
+Requirement,requirement,Dependency,,Class,Physical System Variant,1
+Activity,,Abstraction,allocate,State,,1
+Port,ProxyPort,Connector,,Part,,1
+Class,Hardware Component,Dependency,satisfy,Requirement,,1
+Activity,System Function,Abstraction,allocate,Activity,System Function,1
+Activity,System Function,Dependency,satisfy,Activity,System Function,1
+Activity,Module Function,Dependency,satisfy,Activity,System Function,1
+Decision,,ControlFlow,,Decision,,1
+State,System State,Dependency,satisfy,Artifact,Document,1
+StateNode,,ControlFlow,,Decision,,1
+Constraint,,NoteLink,,UseCase,,1
+State,System State,Dependency,trace,Artifact,Document,1
+State,System State,Dependency,satisfy,Requirement,Webasto Requirement,1
+InformationItem,,Nesting,,Requirement,Webasto Requirement,1
+UseCase,,Abstraction,allocate,Class,Physical Component,1
+UseCase,,Dependency,,UseCase,,1
+Requirement,designConstraint,Dependency,satisfy,Requirement,requirement,1
+UseCase,,Abstraction,allocate,Activity,System Function,1
+Requirement,requirement,Abstraction,allocate,Class,Physical System Variant,1
+State,,Dependency,satisfy,Requirement,Webasto Requirement,1
+Requirement,requirement,Dependency,,Class,block,1
+Class,Physical System Variant,Dependency,,Activity,Hardware Function,1
+State,System State,Dependency,trace,Class,Physical Component,1
+Class,Physical System Variant,Dependency,,Activity,,1
+InformationItem,,Abstraction,allocate,Class,Hardware Component,1
+Class,Physical System Variant,Aggregation,,Class,Module,1
+State,System State,Abstraction,allocate,State,,1
+UseCase,,Dependency,trace,Requirement,requirement,1
+State,,Dependency,trace,State,System State,1
+State,,Aggregation,,State,System State,1
+InformationItem,,Abstraction,allocate,Activity,Module Function,1
+Requirement,designConstraint,Abstraction,Derive,Requirement,requirement,1
+State,,ControlFlow,,Issue,,1
+Activity,,ControlFlow,,State,,1
+Issue,,ControlFlow,,Action,,1
+Class,block,Sequence,,Class,Module,1
+Class,Physical System Variant,Sequence,,Class,block,1
+Class,block,Sequence,,Class,Software Component,1
+Class,Software Component,Dependency,trace,Text,,1
+State,System State,Dependency,satisfy,Requirement,performanceRequirement,1
+Issue,,Abstraction,allocate,Class,Physical System Variant,1
+UseCase,,UseCase,include,Class,,1
+Activity,Module Function,ControlFlow,,Activity,Hardware Function,1
+Activity,Hardware Function,ControlFlow,,Activity,,1
+Activity,Hardware Function,ControlFlow,,Activity,System Function,1
+Activity,System Function,ControlFlow,,Activity,Module Function,1
+Class,System Partner,Sequence,,Issue,,1
+Activity,System Function,Dependency,RecoveryRequirement,Requirement,requirement,1
+Activity,System Function,Dependency,,Class,Physical System Variant,1
+Boundary,,Dependency,trace,Activity,,1
+Issue,,Dependency,trace,Activity,,1
+Class,Physical Context,Association,,UseCase,,1
+Class,block,Generalization,,Class,Physical Context,1
+State,,Dependency,trace,Activity,Hardware Function,1
+State,System State,Abstraction,allocate,Class,Mechanical Interface,1
+InformationItem,,Association,,Class,Physical System Variant,1
+UseCase,,Association,,Activity,Software Function,1
+Activity,Software Function,Abstraction,allocate,Class,System Partner,1
+State,,Abstraction,allocate,Object,,1
+Issue,,Dependency,trace,Class,System Partner,1
+Class,Physical Component,Generalization,,Class,Software Component,1
+Issue,,Association,,Class,Module,1
+UseCase,,Association,,Class,Platform,1
+Actor,,Association,,Issue,,1
+Issue,,Association,,Class,Physical System Variant,1
+Action,,Dependency,,Class,Physical Component,1
+Note,,NoteLink,,Artifact,Image,1
+Class,Platform,Aggregation,,Class,Hardware Component,1
+Activity,Software Function,Abstraction,allocate,Class,Physical System Variant,1
+Text,,Abstraction,allocate,Object,,1
+Change,,Dependency,trace,InformationItem,,1
+Class,Physical Component,Generalization,,Class,Electrical & Material Interface,1
+State,System State,Dependency,trace,Requirement,designConstraint,1
+StateNode,,ControlFlow,,UseCase,,1
+Activity,,ControlFlow,,UseCase,,1
+Object,,Association,,Object,,1
+Activity,,Realisation,,Class,Electrical & Material Interface,1
+Action,,Dependency,satisfy,Requirement,,1
+Action,,ControlFlow,,Requirement,,1
+Requirement,,Abstraction,allocate,Object,,1
+ProxyConnector,,Dependency,trace,Issue,,1
+Activity,,Realisation,,Object,,1
+Class,Physical System Variant,Dependency,trace,Requirement,designConstraint,1
+Activity,,Dependency,trace,Text,,1
+Action,,Dependency,trace,Artifact,Image,1
+Activity,,Dependency,trace,Artifact,Image,1
+Requirement,,Dependency,trace,State,,1
+State,System State,Dependency,trace,Class,Physical System Variant,1
+Requirement,,Dependency,trace,Activity,,1
+Text,,Abstraction,allocate,InformationItem,,1
+Boundary,,Dependency,trace,Class,Module,1
+Activity,System Function,Abstraction,allocate,Activity,,1
+State,System State,Abstraction,allocate,Activity,System Function,1
+Activity,,Abstraction,allocate,Activity,System Function,1
+InformationItem,,Dependency,trace,Text,,1
+Text,,Dependency,trace,Object,,1
+Object,,Abstraction,allocate,Object,,1
+Class,Hardware Component,Dependency,,Text,,1
+Activity,testCase,Dependency,,InformationItem,,1
+Class,Business Line,Dependency,trace,Requirement,requirement,1
+Requirement,requirement,Dependency,,Text,,1
+Activity,,Dependency,,Requirement,requirement,1
+Class,Physical Component,Dependency,trace,Text,,1
+Activity,testCase,Dependency,,Artifact,Image,1
+UseCase,,Dependency,trace,Activity,,1
+Action,,Abstraction,allocate,Port,,1
+Class,Hardware Component,Abstraction,trace,Artifact,Image,1
+Port,,Connector,BindingConnector,Port,ProxyPort,1
+Port,ProxyPort,Connector,BindingConnector,Port,,1
+Requirement,functionalRequirement,Dependency,trace,State,,1
+Activity,System Function,Abstraction,allocate,Object,,1
+Activity,Hardware Function,Abstraction,allocate,Object,,1
+Requirement,functionalRequirement,Dependency,trace,Activity,System Function,1
+Requirement,functionalRequirement,Dependency,trace,Class,System Partner,1
+Class,Physical Component,Dependency,trace,Artifact,Image,1
+State,System State,StateFlow,,StateNode,,1
+State,,StateFlow,,State,System State,1
+State,System State,Dependency,,Activity,,1
+InformationItem,,Nesting,,Requirement,requirement,1
+Class,Hardware Component,Dependency,trace,Requirement,functionalRequirement,1
+Artifact,Document,Nesting,,Text,,1
+Artifact,Document,Association,,Class,Hardware Component,1
+Class,Module,Association,,Text,,1
+Activity,Hardware Function,Generalization,,State,System State,1
+Class,block,Generalization,,Class,Hardware Component,1
+Class,Module,Generalization,,Class,Electrical & Material Interface,1
+Trigger,,Abstraction,allocate,Requirement,requirement,1
+Class,,Generalization,,Class,Physical Component,1
+State,System State,Aggregation,,Class,Hardware Component,1
+Class,block,Abstraction,allocate,Class,Physical Component,1
+State,System State,StateFlow,,Event,,1
+Event,,StateFlow,,State,System State,1
+,,Generalization,,,,1
+Requirement,extendedRequirement,Dependency,,Requirement,extendedRequirement,1
+Artifact,Document,Dependency,satisfy,Requirement,extendedRequirement,1
+Class,System Partner,Abstraction,allocate,Requirement,requirement,1
+StateNode,,ControlFlow,,State,System State,1
+Decision,,ControlFlow,,State,System State,1
+Activity,System Function,Realisation,,Activity,Hardware Function,1
+State,System State,Generalization,,Class,Hardware Component,1
+Requirement,requirement,Dependency,trace,Class,Hardware Component,1
+Activity,testCase,Dependency,verify,Requirement,extendedRequirement,1
+Class,Physical System Variant,Usage,Responsibility,Class,Physical Context,1
+Requirement,requirement,Abstraction,allocate,State,System State,1
+Port,,Dependency,,Port,,1
+Activity,System Function,Abstraction,allocate,Class,Electrical & Material Interface,1
+Object,,Generalization,,Class,Physical Component,1
+Class,Hardware Component,Aggregation,,Object,,1
+Class,Electrical & Material Interface,Aggregation,,Class,Electrical & Material Interface,1
+Class,Hardware Component,Realisation,,Activity,Hardware Function,1
+Requirement,requirement,Nesting,,Activity,System Function,1
+Requirement,requirement,Nesting,,Activity,Hardware Function,1
+Requirement,extendedRequirement,Nesting,,Class,block,1
+Activity,Software Function,Dependency,,Activity,Software Function,1
+Class,Hardware Component,Abstraction,trace,Requirement,,1
+Requirement,designConstraint,Nesting,,Requirement,functionalRequirement,1
+Activity,Hardware Function,Dependency,trace,State,System State,1
+Requirement,designConstraint,Dependency,trace,Requirement,designConstraint,1
+Requirement,designConstraint,NoteLink,,Note,,1
+Activity,Hardware Function,Aggregation,,Activity,,1
+State,System State,Generalization,,Activity,System Function,1
+Requirement,Webasto Requirement,Abstraction,allocate,UseCase,,1
+UseCase,,ControlFlow,,UseCase,,1
+Actor,,Generalization,,Class,System Partner,1
+Requirement,requirement,Abstraction,allocate,UseCase,,1
+Requirement,designConstraint,Dependency,refine,Requirement,functionalRequirement,1
+Class,Hardware Component,Dependency,satisfy,Requirement,extendedRequirement,1
+Class,Software Component,Generalization,,Class,Platform,1
+Requirement,functionalRequirement,Nesting,,Requirement,designConstraint,1
+Class,Electrical & Material Interface,Association,,Class,Physical Component,1
+Class,Physical Component,Dependency,satisfy,Requirement,requirement,1
+Class,Data Interface,Generalization,,Class,Data Interface,1
+Class,block,Abstraction,allocate,State,System State,1
+Class,Physical Component,Association,,Class,Mechanical Interface,1
+Class,Electrical & Material Interface,Generalization,,Class,Physical Component,1
+Class,Software Component,Association,,Class,block,1
+Class,System Partner,Dependency,,Class,System Partner,1
+Class,Physical System Variant,Association,,Class,System Partner,1
+Class,block,Generalization,,Class,System Partner,1
+Class,Electrical & Material Interface,Association,,Class,Hardware Component,1
+Class,System Partner,Abstraction,allocate,Activity,,1
+Class,Electrical & Material Interface,Association,,Class,Electrical & Material Interface,1
+Note,,Association,,Class,block,1
+Class,block,Nesting,,Class,Software Component,1
+Class,Business Line,Usage,Responsibility,Class,Business Line,1
+State,System State,NoteLink,,Note,,1
+Class,Business Line,NoteLink,,Note,,1

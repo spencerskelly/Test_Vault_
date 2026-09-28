@@ -1,0 +1,10 @@
+Connector_ID,Connector_eaGUID,Connector_Type,Connector_Stereotype,Connector_Name,Direction,Notes,Source_Object_ID,Source_eaGUID,Source_Name,Source_Object_Type,Source_Stereotype,Source_Package_Path,Target_Object_ID,Target_eaGUID,Target_Name,Target_Object_Type,Target_Stereotype,Target_Package_Path,Source_Exists,Target_Exists
+52919,{7281437C-3EB8-4b18-B7F1-6FB0C7651644},Connector,,,Unspecified,,0,,,,,,0,,,,,,no,no
+47988,{488FF25C-0865-403a-B722-C433AB24B7CD},UseCase,extend,,Source -> Destination,,0,,,,,,0,,,,,,no,no
+45329,{8B9CACCD-14D4-4a02-BAD4-55CAB70FA937},Abstraction,allocate,,Source -> Destination,,0,,,,,,0,,,,,,no,no
+42228,{14511753-B8F8-4197-8A7E-0ECB6FB7B022},Dependency,satisfy,,Source -> Destination,,0,,,,,,0,,,,,,no,no
+42231,{9914EB15-B97E-4d9a-B46F-AB0A56C18CF2},Dependency,satisfy,,Source -> Destination,,0,,,,,,0,,,,,,no,no
+42233,{09E9BADE-C565-4edc-A09F-A0AE6D9F7F50},Dependency,satisfy,,Source -> Destination,,0,,,,,,0,,,,,,no,no
+39311,{070A540F-19ED-43c1-BCC9-114882EEB249},Abstraction,allocate,,Source -> Destination,,0,,,,,,0,,,,,,no,no
+30054,{DCD0BC02-C22E-4fe2-91FD-01EC342FFECC},Generalization,,,Source -> Destination,,0,,,,,,0,,,,,,no,no
+14058,{9DECE899-BDCA-4298-8CA2-C7844D29D5C7},Dependency,satisfy,,Source -> Destination,,0,,,,,,0,,,,,,no,no
