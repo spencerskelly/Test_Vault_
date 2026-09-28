@@ -407,14 +407,14 @@ tConnector:
   note: Dropped (W-49). No row in the extract holds a value.
   nonblank: 0
 - field: SourceContainment
-  disposition: pending
-  proposedByHandoff: structure / open question
-  handoffNote: Connector-specific evidence.
+  disposition: drop
+  decision: W-50
+  note: 'Dropped (W-50). Holds the same value (Unspecified) on every row.'
   nonblank: 21792
 - field: DestContainment
-  disposition: pending
-  proposedByHandoff: structure / open question
-  handoffNote: Connector-specific evidence.
+  disposition: drop
+  decision: W-50
+  note: 'Dropped (W-50). Holds the same value (Unspecified) on every row.'
   nonblank: 21792
 - field: SourceIsAggregate
   disposition: drop
@@ -447,14 +447,14 @@ tConnector:
   handoffNote: Rule evidence.
   nonblank: 20896
 - field: SourceAccess
-  disposition: pending
-  proposedByHandoff: drop / archive
-  handoffNote: UML detail; retain only if a later rule needs it.
+  disposition: drop
+  decision: W-50
+  note: 'Dropped (W-50). Holds the same value (Public) on every row.'
   nonblank: 21795
 - field: DestAccess
-  disposition: pending
-  proposedByHandoff: drop / archive
-  handoffNote: Same.
+  disposition: drop
+  decision: W-50
+  note: 'Dropped (W-50). Holds the same value (Public) on every row.'
   nonblank: 21795
 - field: SubType
   disposition: pending
@@ -556,24 +556,24 @@ tConnector:
   note: Dropped (W-49). No row in the extract holds a value.
   nonblank: 0
 - field: SourceChangeable
-  disposition: pending
-  proposedByHandoff: archive / drop
-  handoffNote: Source implementation detail.
+  disposition: drop
+  decision: W-50
+  note: 'Dropped (W-50). Holds the same value (none) on every row.'
   nonblank: 21795
 - field: DestChangeable
-  disposition: pending
-  proposedByHandoff: archive / drop
-  handoffNote: Source implementation detail.
+  disposition: drop
+  decision: W-50
+  note: 'Dropped (W-50). Holds the same value (none) on every row.'
   nonblank: 21795
 - field: SourceTS
-  disposition: pending
-  proposedByHandoff: archive
-  handoffNote: Source timestamp/implementation detail.
+  disposition: drop
+  decision: W-50
+  note: 'Dropped (W-50). Holds the same value (instance) on every row.'
   nonblank: 21792
 - field: DestTS
-  disposition: pending
-  proposedByHandoff: archive
-  handoffNote: Source timestamp/implementation detail.
+  disposition: drop
+  decision: W-50
+  note: 'Dropped (W-50). Holds the same value (instance) on every row.'
   nonblank: 21792
 - field: StateFlags
   disposition: pending
