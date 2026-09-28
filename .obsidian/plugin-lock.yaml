@@ -9,4 +9,4 @@ plugins:
   templater-obsidian: "2.25.0"
   quickadd: "2.23.0"
   table-exporter: "0.3.0"
-  obsidian-git: "PIN_ON_VALIDATED_INSTALL"
+  obsidian-git: "2.40.0"

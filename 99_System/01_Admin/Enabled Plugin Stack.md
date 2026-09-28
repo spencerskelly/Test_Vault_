@@ -32,4 +32,6 @@ Ampure Cross-Vault Resolver and Multi-Vault Navigator were removed on 2026-09-28
 
 Executable community-plugin files are not authoritative vault content. The shared configuration and pinned versions are authoritative. Plugin binaries should be installed/bootstrap-managed on each machine.
 
+Exception: the Obsidian Git binary (2.40.0) stays committed under `.obsidian/plugins/obsidian-git/` because it is in use on the Mac. All other plugin binaries remain per-machine installs.
+
 Plugin-specific `data.json` is local by default unless a setting is explicitly proven to be required shared behavior.
