@@ -734,9 +734,9 @@ tPackage:
   handoffNote: Source administration.
   nonblank: 1387
 - field: ModifiedDate
-  disposition: pending
-  proposedByHandoff: drop
-  handoffNote: Source administration.
+  disposition: drop
+  decision: W-64
+  note: 'Dropped (W-64). Git tracks changes from now on (W-39). Still in the export.'
   nonblank: 1387
 - field: XMLPath
   disposition: drop
@@ -749,19 +749,19 @@ tPackage:
   note: Dropped (W-63). No row in the extract holds a value.
   nonblank: 0
 - field: LastLoadDate
-  disposition: pending
-  proposedByHandoff: drop
-  handoffNote: EA administration.
+  disposition: drop
+  decision: W-64
+  note: 'Dropped (W-64). EA load timestamp (243 rows).'
   nonblank: 243
 - field: LastSaveDate
-  disposition: pending
-  proposedByHandoff: drop
-  handoffNote: EA administration.
+  disposition: drop
+  decision: W-64
+  note: 'Dropped (W-64). EA save timestamp (242 rows).'
   nonblank: 242
 - field: Version
-  disposition: pending
-  proposedByHandoff: drop
-  handoffNote: Not treated as engineering revision by default.
+  disposition: drop
+  decision: W-64
+  note: 'Dropped (W-64). EA default (1.0 on 1,344 rows, 1 on 43), not an engineering revision.'
   nonblank: 1387
 - field: Protected
   disposition: drop
@@ -804,9 +804,9 @@ tPackage:
   handoffNote: Source order only.
   nonblank: 48
 - field: PackageFlags
-  disposition: pending
-  proposedByHandoff: archive
-  handoffNote: Parser/source evidence only.
+  disposition: drop
+  decision: W-64
+  note: 'Dropped (W-64). Checksums such as CRC=a9b064fe; on 4 rows.'
   nonblank: 4
 - field: BatchSave
   disposition: drop

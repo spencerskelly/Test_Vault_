@@ -163,6 +163,8 @@ Stage 2 (W-30) is the review: the changes people make in it are recorded and eit
 
 **W-63 · 2026-09-28 · Package fields with no data are dropped.** Of the 23 package fields, 11 have no row with a real value in the extract (0 of 1,387; empty and `0` count as blank): `XMLPath`, `IsControlled`, `Protected`, `PkgOwner`, `UMLVersion`, `UseDTD`, `LogXML`, `CodePath`, `Namespace`, `BatchSave` and `BatchLoad`. All 11 are `drop`, the same rule as W-29, W-40 and W-49. The export keeps every column (W-35), and a fresh import (W-36) can reopen a field if a later export fills it. `Namespace` is the one the handoff hedged on ("unless a future explicit source rule needs it"); it holds nothing here. All 23 package columns in `t_package.csv` are in the worklist. 12 package fields remain `pending`.
 
+**W-64 · 2026-09-28 · Administrative package fields are dropped.** `ModifiedDate` (1,387 rows, 2012 to 2026-09-06), `LastLoadDate` (243), `LastSaveDate` (242), `Version` (`1.0` on 1,344, `1` on 43) and `PackageFlags` (4 rows of checksums such as `CRC=a9b064fe;`) are `drop`, mirroring W-39 on elements: git tracks changes from now on, and `Version` is EA's default, not an engineering revision. The export keeps every column (W-35). `CreatedDate` is held back: on elements it builds the `uid` (W-09), and whether a package gets a `uid` depends on whether packages become notes or only folders, which the element mapping decides (1,386 package rows also sit in `t_object`). 7 package fields remain `pending`: `Package_ID`, `Name`, `Parent_ID`, `Notes`, `ea_guid`, `CreatedDate` and `TPos`.
+
 ## Open (raised, not yet decided)
 
 - What makes a vault "ready for finishing touches".
