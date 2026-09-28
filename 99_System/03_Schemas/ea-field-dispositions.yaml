@@ -25,9 +25,9 @@ tObject:
   note: 'Property (W-47). Feeds the eaType property (W-31); the stereotype wins when populated (20,529 rows).'
   nonblank: 20529
 - field: Name
-  disposition: pending
-  proposedByHandoff: structure
-  handoffNote: Preserve source name; apply deterministic duplicate-name handling.
+  disposition: structure
+  decision: W-48
+  note: 'Structure (W-48). Becomes the note title and file name. Where the file name differs from the source name (unsafe characters, trimmed spaces, line breaks, duplicate counter), the original is kept as - Name: <original> below the EA GUID. The replacement characters and the duplicate suffix are not decided here.'
   nonblank: 31162
 - field: Alias
   disposition: body
