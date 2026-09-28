@@ -80,6 +80,8 @@ This log covers workspace and convention decisions. Translation-rule decisions (
 
 **W-31 · 2026-09-28 · Temporary `eaType` property.** Translated notes carry an `eaType` property holding the classification the element had in EA: the stereotype if it has one, otherwise the EA object type (71 distinct values across the source; no stereotype spans more than one object type, so nothing is lost). It sits in the properties directly below `type`, `subtype` and `id`, and is there so the MDSE `type` can be set while people can still filter by the original EA type during review. When the full review is complete it moves below the GUID or is removed. Defined in `Definitions/Properties/eaType.md` (stamped `INFO-00018`). Templates for hand-made notes do not include it.
 
+**W-32 · 2026-09-28 · Element mapping worklist.** Every EA element type is mapped for stage 1 one at a time, largest first, and nothing counts as mapped until it is approved here. The worklist is `99_System/03_Schemas/ea-element-mapping.yaml`: 30 EA object types (35,969 elements, 71 stereotype and object-type combinations besides packages), each starting as `pending`. What the earlier semantic translator did with each type is listed beside it as evidence only, not as a decision. If every combination is mapped before the import, no note needs a placeholder type such as `Unclassified`; that question is closed unless something stays unmapped.
+
 ## Open (raised, not yet decided)
 
 - Handoff package (EA_Native_Translator_Handoff_2026-09-28, from another AI session), to be reviewed one topic at a time, nothing adopted yet:
