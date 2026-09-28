@@ -44,3 +44,16 @@ Work that has to be done in the vault after the import (stage 2, Workspace Decis
 3. Before release, check the git history. Files committed in the baseline import stay in history after removal, so a removal may need a history rewrite.
 
 **Done when.** Every row of the snapshot is kept or removed with a reason in the log, and the history question is settled.
+
+## Task 3: Convert `Universal BMID Product Reqs` into note text
+
+**What it is.** The import attaches the linked document `Universal BMID Product Reqs` (19,277 characters) unchanged as an `.rtf` file (W-78). It looks like your own requirements, so the text should be readable and searchable in the vault, which an RTF attachment is not.
+
+**How to find it.** Search for `Universal BMID Product Reqs`, or open the row in `99_System/11_Import/Linked Document Attachments.csv` (`Content` is `text`, `Text_Chars` is 19,277).
+
+**How to resolve it.**
+1. Open the `.rtf` attachment and check the text is yours to publish (Task 2).
+2. Convert it to Markdown and put it in the main text of the note it is attached to, as a reviewed commit.
+3. Keep the `.rtf` attachment or remove it, and add a row to `Review Changes Log.md` keyed by the document's element GUID.
+
+**Done when.** The text is in the note and searchable, and the log row exists.
