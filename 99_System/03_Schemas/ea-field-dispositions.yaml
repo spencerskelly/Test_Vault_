@@ -822,16 +822,24 @@ tPackage:
 # tDiagram: 2924 rows in the extract (t_diagram.csv); added W-67, no handoff suggestions exist for these fields
 tDiagram:
 - field: Diagram_ID
-  disposition: pending
+  disposition: structure
+  decision: W-70
+  note: 'Structure (W-70). Joins a diagram to its objects and links; 2,790 diagrams have objects, 119 are empty.'
   nonblank: 2924
 - field: Package_ID
-  disposition: pending
+  disposition: structure
+  decision: W-70
+  note: 'Structure (W-70). All 2,924 resolve; 1,148 packages hold diagrams; places the diagram in the folder tree (W-04, W-65).'
   nonblank: 2924
 - field: ParentID
-  disposition: pending
+  disposition: structure
+  decision: W-70
+  note: 'Structure (W-70). 1,406 rows, all resolve: the element the diagram belongs to (Requirement 671, UseCase 213, Activity 198, Class 185, State 124, Object 11); the element is drawn on it in 1,317 of them.'
   nonblank: 1406
 - field: Diagram_Type
-  disposition: pending
+  disposition: structure
+  decision: W-70
+  note: 'Structure (W-70). 8 values (Custom 1,230, Logical 1,038, Use Case 267, CompositeStructure 151, Statechart 109, Activity 95, Sequence 24, Package 10); the diagrams-only run selects by it (W-62).'
   nonblank: 2924
 - field: Name
   disposition: pending
@@ -929,7 +937,9 @@ tDiagram:
   note: 'Dropped (W-68). No row holds a value.'
   nonblank: 0
 - field: ea_guid
-  disposition: pending
+  disposition: structure
+  decision: W-70
+  note: 'Structure (W-70). Unique on all 2,924 diagrams; keys the ledger row (W-35).'
   nonblank: 2924
 - field: TPos
   disposition: archive
