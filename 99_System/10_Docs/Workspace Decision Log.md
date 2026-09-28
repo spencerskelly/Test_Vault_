@@ -42,6 +42,8 @@ This log covers workspace and convention decisions. Translation-rule decisions (
 
 **W-13 · 2026-09-28 · uid time is local time.** The timestamp in a `uid` (`yyyyMMddHHmmssSSS`) is local time, not UTC, for every note. Translated notes carry EA's recorded creation time exactly as stored; notes created in the vault carry the creator's local time when the template is applied. Reason: simplicity and consistency, with no timezone conversion. Consequences accepted: `uid` order is only approximately chronological across people in different timezones, and a clock change (the repeated hour when daylight saving ends) could produce a duplicate for the same author, which the uniqueness check catches. The translator tool currently defines this as UTC and needs changing. Duplicate timestamps are resolved by advancing one millisecond until unique, with ties ordered by EA GUID so the same EA data always yields the same `uid`.
 
+**W-14 · 2026-09-28 · id numbering for translated notes.** Every translated note gets an `id`, numbered per class prefix in original EA creation order, oldest first, with ties broken by EA GUID. Numbers are assigned after the translator has decided which elements become notes, so there are no gaps. Same EA data gives the same numbers. Once the migration is final the numbers are permanent; notes created later in the vault continue after the highest migrated number. The tool currently orders by EA GUID and needs changing.
+
 ## Open (raised, not yet decided)
 
 - Where the translator's source-of-truth ruleset lives.
