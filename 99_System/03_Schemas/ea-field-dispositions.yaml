@@ -1,0 +1,742 @@
+# Disposition of every EA source field for the translator (Workspace Decision Log W-33, W-39).
+# disposition: property | body | structure | archive | drop   (pending = not decided yet)
+# proposedByHandoff is the suggestion from the handoff package (EA_Native_Translator_Handoff_2026-09-28), rewritten in our five words.
+# It is NOT a decision. Where the handoff shows two words (for example "body / structure") it was unsure.
+# "open question" means the handoff marked it REVIEW.
+# nonblank = rows with a real (not empty, not 0) value in the extract; tObject counts exclude package rows.
+schemaVersion: '1.0'
+# tObject: 34583 rows in the extract
+# tConnector: 21822 rows in the extract
+# tPackage: 1387 rows in the extract
+tObject:
+- field: Object_ID
+  disposition: pending
+  proposedByHandoff: archive
+  handoffNote: Database-local key; do not expose in normal engineering notes.
+  nonblank: 34583
+- field: Object_Type
+  disposition: pending
+  proposedByHandoff: structure
+  handoffNote: 'Current native rule: when no stereotype exists, use `Object_Type` as imported `type`.'
+  nonblank: 34583
+- field: Stereotype
+  disposition: pending
+  proposedByHandoff: property + structure
+  handoffNote: 'Current native rule: stereotype takes precedence over `Object_Type` when populated. Do not also preserve redundant raw type fields in working YAML.'
+  nonblank: 20529
+- field: Name
+  disposition: pending
+  proposedByHandoff: structure
+  handoffNote: Preserve source name; apply deterministic duplicate-name handling.
+  nonblank: 31162
+- field: Alias
+  disposition: pending
+  proposedByHandoff: body
+  handoffNote: Preserve only when nonblank and useful.
+  nonblank: 103
+- field: Note
+  disposition: pending
+  proposedByHandoff: body
+  handoffNote: High-value engineering content.
+  nonblank: 14907
+- field: Package_ID
+  disposition: pending
+  proposedByHandoff: structure + archive
+  handoffNote: Raw ID is not a permanent note property.
+  nonblank: 34583
+- field: ea_guid
+  disposition: body
+  decision: W-28
+  note: The EA GUID line below the note (W-28).
+  nonblank: 34583
+- field: ParentID
+  disposition: pending
+  proposedByHandoff: structure
+  handoffNote: Source containment is evidence; do not automatically create MDSE semantic relationships.
+  nonblank: 28183
+- field: Classifier
+  disposition: pending
+  proposedByHandoff: structure
+  handoffNote: Use only where the exact EA construct requires classifier semantics.
+  nonblank: 1841
+- field: Classifier_guid
+  disposition: pending
+  proposedByHandoff: archive
+  handoffNote: Internal import evidence.
+  nonblank: 1903
+- field: Diagram_ID
+  disposition: pending
+  proposedByHandoff: archive
+  handoffNote: Does not define semantic type.
+  nonblank: 4
+- field: Author
+  disposition: structure
+  decision: W-09
+  note: Builds the author part of the uid (W-09, W-11).
+  nonblank: 33861
+- field: Version
+  disposition: drop
+  decision: W-39
+  note: Dropped (W-39). EA default, not an engineering revision.
+  nonblank: 34583
+- field: CreatedDate
+  disposition: structure
+  decision: W-09
+  note: Builds the time part of the uid (W-09, W-13).
+  nonblank: 34583
+- field: ModifiedDate
+  disposition: drop
+  decision: W-39
+  note: Dropped (W-39). Git tracks changes from now on.
+  nonblank: 34583
+- field: Status
+  disposition: drop
+  decision: W-39
+  note: Dropped (W-39). Existing EA status values are not carried over; the vault starts with its own status.
+  nonblank: 32446
+- field: Complexity
+  disposition: drop
+  decision: W-39
+  note: Dropped (W-39). EA default.
+  nonblank: 34583
+- field: Effort
+  disposition: drop
+  decision: W-39
+  note: Dropped (W-39). Never used.
+  nonblank: 0
+- field: Phase
+  disposition: drop
+  decision: W-39
+  note: Dropped (W-39).
+  nonblank: 32428
+- field: NType
+  disposition: pending
+  proposedByHandoff: archive
+  handoffNote: EA internal subtype discriminator.
+  nonblank: 1392
+- field: Abstract
+  disposition: pending
+  proposedByHandoff: open question / structure
+  handoffNote: Do not create a generic YAML flag without an explicit rule.
+  nonblank: 0
+- field: Tagged
+  disposition: pending
+  proposedByHandoff: drop
+  handoffNote: Indicates EA tagged-value machinery, not engineering meaning.
+  nonblank: 0
+- field: PDATA1
+  disposition: pending
+  proposedByHandoff: archive / structure
+  handoffNote: EA overloaded internal storage; decode only by explicit rule.
+  nonblank: 19333
+- field: PDATA2
+  disposition: pending
+  proposedByHandoff: archive / structure
+  handoffNote: Same.
+  nonblank: 14619
+- field: PDATA3
+  disposition: pending
+  proposedByHandoff: archive / structure
+  handoffNote: Same.
+  nonblank: 15366
+- field: PDATA4
+  disposition: pending
+  proposedByHandoff: archive / structure
+  handoffNote: Same.
+  nonblank: 12
+- field: PDATA5
+  disposition: pending
+  proposedByHandoff: archive / structure
+  handoffNote: Same.
+  nonblank: 0
+- field: Concurrency
+  disposition: pending
+  proposedByHandoff: drop
+  handoffNote: No generic MDSE element property.
+  nonblank: 0
+- field: Visibility
+  disposition: pending
+  proposedByHandoff: drop
+  handoffNote: UML implementation detail for current purposes.
+  nonblank: 0
+- field: Persistence
+  disposition: pending
+  proposedByHandoff: drop
+  handoffNote: Ignore unless a future construct-specific rule justifies it.
+  nonblank: 0
+- field: Cardinality
+  disposition: pending
+  proposedByHandoff: body / structure
+  handoffNote: Preserve where engineering-significant.
+  nonblank: 0
+- field: GenType
+  disposition: pending
+  proposedByHandoff: drop
+  handoffNote: Code-generation metadata.
+  nonblank: 32365
+- field: GenFile
+  disposition: pending
+  proposedByHandoff: drop
+  handoffNote: Code-generation metadata.
+  nonblank: 0
+- field: Header1
+  disposition: pending
+  proposedByHandoff: drop
+  handoffNote: Code-generation / tool metadata.
+  nonblank: 0
+- field: Header2
+  disposition: pending
+  proposedByHandoff: drop
+  handoffNote: Code-generation / tool metadata.
+  nonblank: 0
+- field: Scope
+  disposition: pending
+  proposedByHandoff: drop
+  handoffNote: UML/source-tool metadata unless explicitly meaningful.
+  nonblank: 33256
+- field: GenOption
+  disposition: pending
+  proposedByHandoff: drop
+  handoffNote: Code-generation metadata.
+  nonblank: 0
+- field: GenLinks
+  disposition: pending
+  proposedByHandoff: drop
+  handoffNote: Code-generation metadata.
+  nonblank: 0
+- field: RunState
+  disposition: pending
+  proposedByHandoff: body
+  handoffNote: Preserve when populated and useful; do not create a generic YAML property.
+  nonblank: 0
+- field: TPos
+  disposition: pending
+  proposedByHandoff: structure / drop
+  handoffNote: Not a normal model property.
+  nonblank: 118
+- field: IsRoot
+  disposition: pending
+  proposedByHandoff: archive / open question
+  handoffNote: Do not promote generically.
+  nonblank: 0
+- field: IsLeaf
+  disposition: pending
+  proposedByHandoff: archive / open question
+  handoffNote: Do not promote generically.
+  nonblank: 0
+- field: IsSpec
+  disposition: pending
+  proposedByHandoff: archive / open question
+  handoffNote: Do not promote generically.
+  nonblank: 0
+- field: IsActive
+  disposition: pending
+  proposedByHandoff: archive / open question
+  handoffNote: Do not promote generically.
+  nonblank: 0
+- field: StateFlags
+  disposition: pending
+  proposedByHandoff: archive
+  handoffNote: Decode only through an explicit element rule.
+  nonblank: 0
+- field: PackageFlags
+  disposition: pending
+  proposedByHandoff: archive
+  handoffNote: Not working-model metadata.
+  nonblank: 0
+- field: Multiplicity
+  disposition: pending
+  proposedByHandoff: body / structure
+  handoffNote: Preserve only where meaningful.
+  nonblank: 73
+- field: Style
+  disposition: pending
+  proposedByHandoff: archive
+  handoffNote: Do not put in working notes.
+  nonblank: 2336
+- field: StyleEx
+  disposition: pending
+  proposedByHandoff: archive
+  handoffNote: Do not put in working notes.
+  nonblank: 1114
+- field: Backcolor
+  disposition: pending
+  proposedByHandoff: drop
+  handoffNote: Presentation only.
+  nonblank: 34583
+- field: BorderStyle
+  disposition: pending
+  proposedByHandoff: drop
+  handoffNote: Presentation only.
+  nonblank: 49
+- field: BorderWidth
+  disposition: pending
+  proposedByHandoff: drop
+  handoffNote: Presentation only.
+  nonblank: 34583
+- field: Fontcolor
+  disposition: pending
+  proposedByHandoff: drop
+  handoffNote: Presentation only.
+  nonblank: 34583
+- field: Bordercolor
+  disposition: pending
+  proposedByHandoff: drop
+  handoffNote: Presentation only.
+  nonblank: 34583
+- field: ActionFlags
+  disposition: pending
+  proposedByHandoff: archive
+  handoffNote: Decode only via explicit rule.
+  nonblank: 0
+- field: EventFlags
+  disposition: pending
+  proposedByHandoff: archive
+  handoffNote: Decode only via explicit rule.
+  nonblank: 0
+tConnector:
+- field: Connector_ID
+  disposition: pending
+  proposedByHandoff: archive
+  handoffNote: Relationship trace / reconciliation only.
+  nonblank: 21822
+- field: ea_guid
+  disposition: pending
+  proposedByHandoff: archive
+  handoffNote: Relationship provenance.
+  nonblank: 21822
+- field: Connector_Type
+  disposition: pending
+  proposedByHandoff: structure
+  handoffNote: Primary relationship rule discriminator.
+  nonblank: 21822
+- field: Stereotype
+  disposition: pending
+  proposedByHandoff: structure
+  handoffNote: Relationship rule discriminator.
+  nonblank: 10542
+- field: Name
+  disposition: pending
+  proposedByHandoff: body
+  handoffNote: Preserve when meaningful.
+  nonblank: 449
+- field: Notes
+  disposition: pending
+  proposedByHandoff: body
+  handoffNote: Preserve meaningful connector documentation.
+  nonblank: 5
+- field: Direction
+  disposition: pending
+  proposedByHandoff: structure
+  handoffNote: Used to resolve source/target semantics.
+  nonblank: 21795
+- field: Start_Object_ID
+  disposition: pending
+  proposedByHandoff: structure
+  handoffNote: Endpoint resolution.
+  nonblank: 21813
+- field: End_Object_ID
+  disposition: pending
+  proposedByHandoff: structure
+  handoffNote: Endpoint resolution.
+  nonblank: 21813
+- field: SourceRole
+  disposition: pending
+  proposedByHandoff: body
+  handoffNote: Relationship detail.
+  nonblank: 319
+- field: DestRole
+  disposition: pending
+  proposedByHandoff: body
+  handoffNote: Relationship detail.
+  nonblank: 0
+- field: SourceRoleType
+  disposition: pending
+  proposedByHandoff: archive / open question
+  handoffNote: Source evidence; use only where needed.
+  nonblank: 0
+- field: DestRoleType
+  disposition: pending
+  proposedByHandoff: archive / open question
+  handoffNote: Source evidence; use only where needed.
+  nonblank: 0
+- field: SourceRoleNote
+  disposition: pending
+  proposedByHandoff: body
+  handoffNote: Preserve.
+  nonblank: 0
+- field: DestRoleNote
+  disposition: pending
+  proposedByHandoff: body
+  handoffNote: Preserve.
+  nonblank: 0
+- field: SourceCard
+  disposition: pending
+  proposedByHandoff: body / structure
+  handoffNote: Meaningful multiplicity.
+  nonblank: 53
+- field: DestCard
+  disposition: pending
+  proposedByHandoff: body / structure
+  handoffNote: Meaningful multiplicity.
+  nonblank: 7
+- field: SourceConstraint
+  disposition: pending
+  proposedByHandoff: body
+  handoffNote: Preserve.
+  nonblank: 0
+- field: DestConstraint
+  disposition: pending
+  proposedByHandoff: body
+  handoffNote: Preserve.
+  nonblank: 0
+- field: SourceQualifier
+  disposition: pending
+  proposedByHandoff: body
+  handoffNote: Preserve if meaningful.
+  nonblank: 0
+- field: DestQualifier
+  disposition: pending
+  proposedByHandoff: body
+  handoffNote: Preserve if meaningful.
+  nonblank: 0
+- field: SourceContainment
+  disposition: pending
+  proposedByHandoff: structure / open question
+  handoffNote: Connector-specific evidence.
+  nonblank: 21792
+- field: DestContainment
+  disposition: pending
+  proposedByHandoff: structure / open question
+  handoffNote: Connector-specific evidence.
+  nonblank: 21792
+- field: SourceIsAggregate
+  disposition: pending
+  proposedByHandoff: structure
+  handoffNote: Aggregation/composition rule evidence.
+  nonblank: 0
+- field: DestIsAggregate
+  disposition: pending
+  proposedByHandoff: structure
+  handoffNote: Aggregation/composition rule evidence.
+  nonblank: 2288
+- field: SourceIsOrdered
+  disposition: pending
+  proposedByHandoff: body / archive
+  handoffNote: Preserve only if engineering-significant.
+  nonblank: 0
+- field: DestIsOrdered
+  disposition: pending
+  proposedByHandoff: body / archive
+  handoffNote: Preserve only if engineering-significant.
+  nonblank: 0
+- field: SourceIsNavigable
+  disposition: pending
+  proposedByHandoff: structure / archive
+  handoffNote: Rule evidence.
+  nonblank: 0
+- field: DestIsNavigable
+  disposition: pending
+  proposedByHandoff: structure / archive
+  handoffNote: Rule evidence.
+  nonblank: 20896
+- field: SourceAccess
+  disposition: pending
+  proposedByHandoff: drop / archive
+  handoffNote: UML detail; retain only if a later rule needs it.
+  nonblank: 21795
+- field: DestAccess
+  disposition: pending
+  proposedByHandoff: drop / archive
+  handoffNote: Same.
+  nonblank: 21795
+- field: SubType
+  disposition: pending
+  proposedByHandoff: archive / structure
+  handoffNote: Connector-specific parser evidence.
+  nonblank: 2973
+- field: DiagramID
+  disposition: pending
+  proposedByHandoff: archive
+  handoffNote: Diagram occurrence/context evidence.
+  nonblank: 209
+- field: SeqNo
+  disposition: pending
+  proposedByHandoff: structure / body
+  handoffNote: Behavioral order only when a flow-specific rule consumes it; never create global Function sequence semantics from it alone.
+  nonblank: 199
+- field: Top_Start_Label
+  disposition: pending
+  proposedByHandoff: body / drop
+  handoffNote: Preserve only if semantic.
+  nonblank: 37
+- field: Top_Mid_Label
+  disposition: pending
+  proposedByHandoff: body / drop
+  handoffNote: Preserve only if semantic.
+  nonblank: 169
+- field: Top_End_Label
+  disposition: pending
+  proposedByHandoff: body / drop
+  handoffNote: Preserve only if semantic.
+  nonblank: 18
+- field: Btm_Start_Label
+  disposition: pending
+  proposedByHandoff: body / drop
+  handoffNote: Preserve only if semantic.
+  nonblank: 15
+- field: Btm_Mid_Label
+  disposition: pending
+  proposedByHandoff: body / drop
+  handoffNote: Preserve only if semantic.
+  nonblank: 10763
+- field: Btm_End_Label
+  disposition: pending
+  proposedByHandoff: body / drop
+  handoffNote: Preserve only if semantic.
+  nonblank: 4
+- field: edge / coordinate fields
+  disposition: pending
+  proposedByHandoff: archive / drop
+  handoffNote: Diagram layout only.
+- field: HeadStyle
+  disposition: pending
+  proposedByHandoff: drop
+  handoffNote: Presentation.
+  nonblank: 0
+- field: LineStyle
+  disposition: pending
+  proposedByHandoff: drop
+  handoffNote: Presentation.
+  nonblank: 0
+- field: RouteStyle
+  disposition: pending
+  proposedByHandoff: drop
+  handoffNote: Presentation.
+  nonblank: 21795
+- field: IsBold
+  disposition: pending
+  proposedByHandoff: drop
+  handoffNote: Presentation.
+  nonblank: 0
+- field: LineColor
+  disposition: pending
+  proposedByHandoff: drop
+  handoffNote: Presentation.
+  nonblank: 21822
+- field: VirtualInheritance
+  disposition: pending
+  proposedByHandoff: archive
+  handoffNote: Source detail unless an explicit Generalization rule consumes it.
+  nonblank: 0
+- field: LinkAccess
+  disposition: pending
+  proposedByHandoff: drop / archive
+  handoffNote: EA mechanics.
+  nonblank: 0
+- field: IsRoot
+  disposition: pending
+  proposedByHandoff: archive
+  handoffNote: Connector source evidence.
+  nonblank: 0
+- field: IsLeaf
+  disposition: pending
+  proposedByHandoff: archive
+  handoffNote: Connector source evidence.
+  nonblank: 0
+- field: IsSpec
+  disposition: pending
+  proposedByHandoff: archive
+  handoffNote: Connector source evidence.
+  nonblank: 0
+- field: SourceChangeable
+  disposition: pending
+  proposedByHandoff: archive / drop
+  handoffNote: Source implementation detail.
+  nonblank: 21795
+- field: DestChangeable
+  disposition: pending
+  proposedByHandoff: archive / drop
+  handoffNote: Source implementation detail.
+  nonblank: 21795
+- field: SourceTS
+  disposition: pending
+  proposedByHandoff: archive
+  handoffNote: Source timestamp/implementation detail.
+  nonblank: 21792
+- field: DestTS
+  disposition: pending
+  proposedByHandoff: archive
+  handoffNote: Source timestamp/implementation detail.
+  nonblank: 21792
+- field: StateFlags
+  disposition: pending
+  proposedByHandoff: archive
+  handoffNote: Construct-specific evidence.
+  nonblank: 127
+- field: ActionFlags
+  disposition: pending
+  proposedByHandoff: archive
+  handoffNote: Construct-specific evidence.
+  nonblank: 0
+- field: IsSignal
+  disposition: pending
+  proposedByHandoff: archive / open question
+  handoffNote: Only an explicit rule should consume it.
+  nonblank: 0
+- field: IsStimulus
+  disposition: pending
+  proposedByHandoff: archive / open question
+  handoffNote: Only an explicit rule should consume it.
+  nonblank: 0
+- field: DispatchAction
+  disposition: pending
+  proposedByHandoff: archive / open question
+  handoffNote: Only an explicit rule should consume it.
+  nonblank: 0
+- field: Target2
+  disposition: pending
+  proposedByHandoff: archive / open question
+  handoffNote: Only an explicit rule should consume it.
+  nonblank: 118
+- field: SourceStereotype
+  disposition: pending
+  proposedByHandoff: archive / structure
+  handoffNote: Endpoint/source-rule evidence.
+  nonblank: 0
+- field: DestStereotype
+  disposition: pending
+  proposedByHandoff: archive / structure
+  handoffNote: Endpoint/source-rule evidence.
+  nonblank: 0
+- field: SourceStyle
+  disposition: pending
+  proposedByHandoff: archive
+  handoffNote: Source evidence.
+  nonblank: 21795
+- field: DestStyle
+  disposition: pending
+  proposedByHandoff: archive
+  handoffNote: Source evidence.
+  nonblank: 21795
+- field: EventFlags
+  disposition: pending
+  proposedByHandoff: archive
+  handoffNote: Construct-specific evidence.
+  nonblank: 0
+tPackage:
+- field: Package_ID
+  disposition: pending
+  proposedByHandoff: structure + archive
+  handoffNote: Hierarchy lookup only.
+  nonblank: 1387
+- field: Name
+  disposition: pending
+  proposedByHandoff: structure
+  handoffNote: Folder/source-navigation name.
+  nonblank: 1387
+- field: Parent_ID
+  disposition: pending
+  proposedByHandoff: structure
+  handoffNote: Reconstruct source package hierarchy.
+  nonblank: 1386
+- field: Notes
+  disposition: pending
+  proposedByHandoff: body
+  handoffNote: Preserve useful package documentation, generally in folder README/reference content.
+  nonblank: 34
+- field: ea_guid
+  disposition: pending
+  proposedByHandoff: archive
+  handoffNote: Package traceability.
+  nonblank: 1387
+- field: CreatedDate
+  disposition: pending
+  proposedByHandoff: drop
+  handoffNote: Source administration.
+  nonblank: 1387
+- field: ModifiedDate
+  disposition: pending
+  proposedByHandoff: drop
+  handoffNote: Source administration.
+  nonblank: 1387
+- field: XMLPath
+  disposition: pending
+  proposedByHandoff: drop
+  handoffNote: EA implementation.
+  nonblank: 0
+- field: IsControlled
+  disposition: pending
+  proposedByHandoff: drop
+  handoffNote: EA implementation/source-control detail.
+  nonblank: 0
+- field: LastLoadDate
+  disposition: pending
+  proposedByHandoff: drop
+  handoffNote: EA administration.
+  nonblank: 243
+- field: LastSaveDate
+  disposition: pending
+  proposedByHandoff: drop
+  handoffNote: EA administration.
+  nonblank: 242
+- field: Version
+  disposition: pending
+  proposedByHandoff: drop
+  handoffNote: Not treated as engineering revision by default.
+  nonblank: 1387
+- field: Protected
+  disposition: pending
+  proposedByHandoff: drop
+  handoffNote: EA tool control.
+  nonblank: 0
+- field: PkgOwner
+  disposition: pending
+  proposedByHandoff: drop
+  handoffNote: EA admin metadata.
+  nonblank: 0
+- field: UMLVersion
+  disposition: pending
+  proposedByHandoff: drop
+  handoffNote: EA/UML implementation.
+  nonblank: 0
+- field: UseDTD
+  disposition: pending
+  proposedByHandoff: drop
+  handoffNote: EA implementation.
+  nonblank: 0
+- field: LogXML
+  disposition: pending
+  proposedByHandoff: drop
+  handoffNote: EA implementation.
+  nonblank: 0
+- field: CodePath
+  disposition: pending
+  proposedByHandoff: drop
+  handoffNote: EA implementation.
+  nonblank: 0
+- field: Namespace
+  disposition: pending
+  proposedByHandoff: drop
+  handoffNote: Unless a future explicit source rule needs it.
+  nonblank: 0
+- field: TPos
+  disposition: pending
+  proposedByHandoff: structure / drop
+  handoffNote: Source order only.
+  nonblank: 48
+- field: PackageFlags
+  disposition: pending
+  proposedByHandoff: archive
+  handoffNote: Parser/source evidence only.
+  nonblank: 4
+- field: BatchSave
+  disposition: pending
+  proposedByHandoff: drop
+  handoffNote: EA implementation.
+  nonblank: 0
+- field: BatchLoad
+  disposition: pending
+  proposedByHandoff: drop
+  handoffNote: EA implementation.
+  nonblank: 0
