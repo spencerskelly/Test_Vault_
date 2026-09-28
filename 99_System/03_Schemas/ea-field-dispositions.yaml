@@ -505,28 +505,34 @@ tConnector:
   note: 'Archived (W-53). Cardinality text; matches DestCard on all 4.'
   nonblank: 4
 - field: Start_Edge
-  disposition: pending
-  handoffNote: 'Not in the handoff list; added W-58 from the export columns.'
+  disposition: drop
+  decision: W-59
+  note: Dropped (W-59). Layout or display data; per-diagram layout is in t_diagramlinks.
   nonblank: 2862
 - field: End_Edge
-  disposition: pending
-  handoffNote: 'Not in the handoff list; added W-58 from the export columns.'
+  disposition: drop
+  decision: W-59
+  note: Dropped (W-59). Layout or display data; per-diagram layout is in t_diagramlinks.
   nonblank: 2862
 - field: PtStartX
-  disposition: pending
-  handoffNote: 'Not in the handoff list; added W-58 from the export columns.'
+  disposition: drop
+  decision: W-59
+  note: Dropped (W-59). Layout or display data; per-diagram layout is in t_diagramlinks.
   nonblank: 2926
 - field: PtStartY
-  disposition: pending
-  handoffNote: 'Not in the handoff list; added W-58 from the export columns.'
+  disposition: drop
+  decision: W-59
+  note: Dropped (W-59). Layout or display data; per-diagram layout is in t_diagramlinks.
   nonblank: 2926
 - field: PtEndX
-  disposition: pending
-  handoffNote: 'Not in the handoff list; added W-58 from the export columns.'
+  disposition: drop
+  decision: W-59
+  note: Dropped (W-59). Layout or display data; per-diagram layout is in t_diagramlinks.
   nonblank: 2926
 - field: PtEndY
-  disposition: pending
-  handoffNote: 'Not in the handoff list; added W-58 from the export columns.'
+  disposition: drop
+  decision: W-59
+  note: Dropped (W-59). Layout or display data; per-diagram layout is in t_diagramlinks.
   nonblank: 2926
 - field: HeadStyle
   disposition: drop
@@ -539,9 +545,9 @@ tConnector:
   note: Dropped (W-49). No row in the extract holds a value.
   nonblank: 0
 - field: RouteStyle
-  disposition: pending
-  proposedByHandoff: drop
-  handoffNote: Presentation.
+  disposition: drop
+  decision: W-59
+  note: Dropped (W-59). Layout or display data; per-diagram layout is in t_diagramlinks.
   nonblank: 21795
 - field: IsBold
   disposition: drop
@@ -549,9 +555,9 @@ tConnector:
   note: Dropped (W-49). No row in the extract holds a value.
   nonblank: 0
 - field: LineColor
-  disposition: pending
-  proposedByHandoff: drop
-  handoffNote: Presentation.
+  disposition: drop
+  decision: W-59
+  note: Dropped (W-59). Layout or display data; per-diagram layout is in t_diagramlinks.
   nonblank: 21822
 - field: VirtualInheritance
   disposition: drop
@@ -599,9 +605,9 @@ tConnector:
   note: 'Dropped (W-50). Holds the same value (instance) on every row.'
   nonblank: 21792
 - field: StateFlags
-  disposition: pending
-  proposedByHandoff: archive
-  handoffNote: Construct-specific evidence.
+  disposition: drop
+  decision: W-59
+  note: Dropped (W-59). Layout or display data; per-diagram layout is in t_diagramlinks.
   nonblank: 127
 - field: ActionFlags
   disposition: drop
@@ -624,9 +630,9 @@ tConnector:
   note: Dropped (W-49). No row in the extract holds a value.
   nonblank: 0
 - field: Target2
-  disposition: pending
-  proposedByHandoff: archive / open question
-  handoffNote: Only an explicit rule should consume it.
+  disposition: archive
+  decision: W-59
+  note: 'Archived (W-59). 118 numeric values on Generalizations that look like colours; not confirmed.'
   nonblank: 118
 - field: SourceStereotype
   disposition: drop
@@ -678,12 +684,14 @@ tConnector:
   handoffNote: 'Not in the handoff list; added W-58 from the export columns.'
   nonblank: 0
 - field: PDATA5
-  disposition: pending
-  handoffNote: 'Not in the handoff list; added W-58 from the export columns.'
+  disposition: drop
+  decision: W-59
+  note: Dropped (W-59). Layout or display data; per-diagram layout is in t_diagramlinks.
   nonblank: 20478
 - field: StyleEx
-  disposition: pending
-  handoffNote: 'Not in the handoff list; added W-58 from the export columns.'
+  disposition: archive
+  decision: W-59
+  note: 'Archived (W-59). Classifier=<number>; on 24 Connectors; none of the numbers matches an element.'
   nonblank: 24
 tPackage:
 - field: Package_ID
