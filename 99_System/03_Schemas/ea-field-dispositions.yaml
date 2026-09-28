@@ -842,7 +842,9 @@ tDiagram:
   note: 'Structure (W-70). 8 values (Custom 1,230, Logical 1,038, Use Case 267, CompositeStructure 151, Statechart 109, Activity 95, Sequence 24, Package 10); the diagrams-only run selects by it (W-62).'
   nonblank: 2924
 - field: Name
-  disposition: pending
+  disposition: structure
+  decision: W-71
+  note: 'Structure (W-71). Diagram title and file name; the original is kept as - Name: <original> below the GUID where the file name differs (W-48). 172 names are shared by 380 diagrams and 268 diagrams share a name within a package (126 groups), so a duplicate rule is needed; 144 names have unsafe characters.'
   nonblank: 2924
 - field: Version
   disposition: drop
@@ -850,7 +852,9 @@ tDiagram:
   note: 'Dropped (W-68). Holds 1.0 on all 2,924 rows.'
   nonblank: 2924
 - field: Author
-  disposition: pending
+  disposition: structure
+  decision: W-71
+  note: 'Structure (W-71). Builds the author part of the uid if a diagram gets one (W-09). All 10 authors are in the person notes' eaNames.'
   nonblank: 2924
 - field: ShowDetails
   disposition: drop
@@ -858,7 +862,10 @@ tDiagram:
   note: 'Dropped (W-68). No row holds a value.'
   nonblank: 0
 - field: Notes
-  disposition: pending
+  disposition: body
+  placement: main text
+  decision: W-71
+  note: 'Body (W-71). Diagram description (8 rows, 4 with HTML markup); one holds an EA element link ($element://{GUID}) the ledger could resolve.'
   nonblank: 8
 - field: Stereotype
   disposition: drop
@@ -901,10 +908,14 @@ tDiagram:
   note: 'Dropped (W-68). Holds 100 on all 2,924 rows.'
   nonblank: 2924
 - field: CreatedDate
-  disposition: pending
+  disposition: structure
+  decision: W-71
+  note: 'Structure (W-71). Builds the time part of the uid if a diagram gets one (W-09, W-13). Creation time plus author repeats on 28 diagrams; the one-millisecond tie-break applies.'
   nonblank: 2924
 - field: ModifiedDate
-  disposition: pending
+  disposition: drop
+  decision: W-71
+  note: 'Dropped (W-71). Git tracks changes from now on (W-39, W-64). Still in the export.'
   nonblank: 2924
 - field: HTMLPath
   disposition: drop
