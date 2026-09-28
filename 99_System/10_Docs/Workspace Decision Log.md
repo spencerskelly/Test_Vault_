@@ -52,6 +52,8 @@ This log covers workspace and convention decisions. Translation-rule decisions (
 
 **W-18 · 2026-09-28 · Retire, don't delete.** A note that is no longer valid is retired, not deleted: it stays in the vault with `status` set to Retired, so its `id` stays reserved and its history stays readable. This is how "an id is never reused" (W-15) is enforced. A validator flags any gap in a class's numbering as a possible accidental deletion. The ID script should also skip retired numbers by design, since retired notes remain in the vault.
 
+**W-19 · 2026-09-28 · Property definitions location.** Property definition notes live in one folder, `Definitions/Properties`, one note per property, named exactly as the property so `[[uid]]` resolves directly. A Base, `Property Dictionary`, lists them all. Each note has: what it is, format, how it is determined, what it impacts, what blank means, what it is not to be confused with, and the decisions behind it. Frontmatter carries the quick facts: which notes it applies to, whether it is required, who or what sets it, and whether it can change. These notes ship with the final vault. First two written: `uid` and `id`. A `Property Definition` template is in `99_System/05_Templates`.
+
 ## Open (raised, not yet decided)
 
 - Where the translator's source-of-truth ruleset lives.
@@ -59,5 +61,6 @@ This log covers workspace and convention decisions. Translation-rule decisions (
 - Disposition of the 121 EA tagged values, starting with where legacy IDs (`id`, `SysML1.4::id`) land.
 - The parsing rule per source document for external designators (each standard and stakeholder document numbers its clauses differently), and what happens when a second edition of a standard arrives, since the clause designators do not include the edition (today there are no duplicates).
 - The EA tag `Stakeholder ID` holds clause numbers inside standards (on 1,040 requirements under the UL, IEC and GB/T packages), not stakeholder identifiers. The `stakeholderId` field in `types.json` inherits the wrong name.
+- Which note keeps its `id` when the sweep finds two notes with the same one.
 - Whether original EA modified dates should also be kept (creation date and author go into `uid`).
 - Where MDSE Bootstrap's source lives, so its install-time name entry can follow the same definition.
