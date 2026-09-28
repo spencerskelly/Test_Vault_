@@ -65,9 +65,9 @@ tObject:
   handoffNote: Internal import evidence.
   nonblank: 1903
 - field: Diagram_ID
-  disposition: pending
-  proposedByHandoff: archive
-  handoffNote: Does not define semantic type.
+  disposition: archive
+  decision: W-41
+  note: Archived (W-41). May be needed if diagrams are imported; revisit if diagram structure needs it.
   nonblank: 4
 - field: Author
   disposition: structure
@@ -170,9 +170,9 @@ tObject:
   note: Dropped (W-40). No row in the extract holds a value.
   nonblank: 0
 - field: GenType
-  disposition: pending
-  proposedByHandoff: drop
-  handoffNote: Code-generation metadata.
+  disposition: drop
+  decision: W-41
+  note: Dropped (W-41). Presentation, code-generation or display-style data; the export keeps it.
   nonblank: 32365
 - field: GenFile
   disposition: drop
@@ -190,9 +190,9 @@ tObject:
   note: Dropped (W-40). No row in the extract holds a value.
   nonblank: 0
 - field: Scope
-  disposition: pending
-  proposedByHandoff: drop
-  handoffNote: UML/source-tool metadata unless explicitly meaningful.
+  disposition: drop
+  decision: W-41
+  note: Dropped (W-41). Presentation, code-generation or display-style data; the export keeps it.
   nonblank: 33256
 - field: GenOption
   disposition: drop
@@ -210,9 +210,9 @@ tObject:
   note: Dropped (W-40). No row in the extract holds a value.
   nonblank: 0
 - field: TPos
-  disposition: pending
-  proposedByHandoff: structure / drop
-  handoffNote: Not a normal model property.
+  disposition: archive
+  decision: W-41
+  note: Archived (W-41). May be needed if diagrams are imported; revisit if diagram structure needs it.
   nonblank: 118
 - field: IsRoot
   disposition: drop
@@ -250,39 +250,39 @@ tObject:
   handoffNote: Preserve only where meaningful.
   nonblank: 73
 - field: Style
-  disposition: pending
-  proposedByHandoff: archive
-  handoffNote: Do not put in working notes.
+  disposition: drop
+  decision: W-41
+  note: Dropped (W-41). Presentation, code-generation or display-style data; the export keeps it.
   nonblank: 2336
 - field: StyleEx
-  disposition: pending
-  proposedByHandoff: archive
-  handoffNote: Do not put in working notes.
+  disposition: drop
+  decision: W-41
+  note: Dropped (W-41). Presentation, code-generation or display-style data; the export keeps it.
   nonblank: 1114
 - field: Backcolor
-  disposition: pending
-  proposedByHandoff: drop
-  handoffNote: Presentation only.
+  disposition: drop
+  decision: W-41
+  note: Dropped (W-41). Presentation, code-generation or display-style data; the export keeps it.
   nonblank: 34583
 - field: BorderStyle
-  disposition: pending
-  proposedByHandoff: drop
-  handoffNote: Presentation only.
+  disposition: drop
+  decision: W-41
+  note: Dropped (W-41). Presentation, code-generation or display-style data; the export keeps it.
   nonblank: 49
 - field: BorderWidth
-  disposition: pending
-  proposedByHandoff: drop
-  handoffNote: Presentation only.
+  disposition: drop
+  decision: W-41
+  note: Dropped (W-41). Presentation, code-generation or display-style data; the export keeps it.
   nonblank: 34583
 - field: Fontcolor
-  disposition: pending
-  proposedByHandoff: drop
-  handoffNote: Presentation only.
+  disposition: drop
+  decision: W-41
+  note: Dropped (W-41). Presentation, code-generation or display-style data; the export keeps it.
   nonblank: 34583
 - field: Bordercolor
-  disposition: pending
-  proposedByHandoff: drop
-  handoffNote: Presentation only.
+  disposition: drop
+  decision: W-41
+  note: Dropped (W-41). Presentation, code-generation or display-style data; the export keeps it.
   nonblank: 34583
 - field: ActionFlags
   disposition: drop
