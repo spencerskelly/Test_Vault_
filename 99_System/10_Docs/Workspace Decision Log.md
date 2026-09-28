@@ -50,6 +50,8 @@ This log covers workspace and convention decisions. Translation-rule decisions (
 
 **W-17 · 2026-09-28 · External requirement ids.** Requirement notes that come from outside (standards and stakeholder documents) use the source's own designator as their `id` whenever one can be derived, written as document plus clause, for example `UL2594_13.1`. Standards with no derivable designator get `STD-#####`, and stakeholder requirements with none get `STK-#####` (five digits, chronological, per W-14 and W-15). Stakeholder requirements take their id from the source document name plus the requirement's own numbering. Evidence: 3,248 of 3,363 regulatory requirement names parse into a standard and a clause, and all 3,248 designators are unique. Stakeholder requirements come from about 9 source documents (GSE_SW alone has 1,877), and most carry their own numbering in the name.
 
+**W-18 · 2026-09-28 · Retire, don't delete.** A note that is no longer valid is retired, not deleted: it stays in the vault with `status` set to Retired, so its `id` stays reserved and its history stays readable. This is how "an id is never reused" (W-15) is enforced. A validator flags any gap in a class's numbering as a possible accidental deletion. The ID script should also skip retired numbers by design, since retired notes remain in the vault.
+
 ## Open (raised, not yet decided)
 
 - Where the translator's source-of-truth ruleset lives.
@@ -57,6 +59,5 @@ This log covers workspace and convention decisions. Translation-rule decisions (
 - Disposition of the 121 EA tagged values, starting with where legacy IDs (`id`, `SysML1.4::id`) land.
 - The parsing rule per source document for external designators (each standard and stakeholder document numbers its clauses differently), and what happens when a second edition of a standard arrives, since the clause designators do not include the edition (today there are no duplicates).
 - The EA tag `Stakeholder ID` holds clause numbers inside standards (on 1,040 requirements under the UL, IEC and GB/T packages), not stakeholder identifiers. The `stakeholderId` field in `types.json` inherits the wrong name.
-- How "never reuse an id" is enforced: the current ID script takes the highest existing number plus one, so deleting the newest note would free its number.
 - Whether original EA modified dates should also be kept (creation date and author go into `uid`).
 - Where MDSE Bootstrap's source lives, so its install-time name entry can follow the same definition.
