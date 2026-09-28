@@ -970,10 +970,14 @@ tDiagram:
 # tDiagramObjects: 42966 rows in the extract (t_diagramobjects.csv); added W-67, no handoff suggestions exist for these fields
 tDiagramObjects:
 - field: Diagram_ID
-  disposition: pending
+  disposition: structure
+  decision: W-72
+  note: 'Structure (W-72). Which diagram a drawn object is on; all 42,966 rows resolve.'
   nonblank: 42966
 - field: Object_ID
-  disposition: pending
+  disposition: structure
+  decision: W-72
+  note: 'Structure (W-72). Which element is drawn; all 42,966 rows resolve; no element appears twice on one diagram.'
   nonblank: 42966
 - field: RectTop
   disposition: pending
@@ -999,10 +1003,14 @@ tDiagramObjects:
 # tDiagramLinks: 37955 rows in the extract (t_diagramlinks.csv); added W-67, no handoff suggestions exist for these fields
 tDiagramLinks:
 - field: DiagramID
-  disposition: pending
+  disposition: structure
+  decision: W-72
+  note: 'Structure (W-72). Which diagram a drawn connector is on; 37,937 of 37,955 resolve (18 point to a diagram not in t_diagram).'
   nonblank: 37937
 - field: ConnectorID
-  disposition: pending
+  disposition: structure
+  decision: W-72
+  note: 'Structure (W-72). Which connector is drawn; all 37,955 rows resolve; 7 connectors appear twice on one diagram.'
   nonblank: 37955
 - field: Geometry
   disposition: pending
@@ -1011,7 +1019,9 @@ tDiagramLinks:
   disposition: pending
   nonblank: 37955
 - field: Hidden
-  disposition: pending
+  disposition: structure
+  decision: W-72
+  note: 'Structure (W-72). 1 on 222 rows: the connector is hidden on that diagram and must not be drawn.'
   nonblank: 222
 - field: Path
   disposition: pending
