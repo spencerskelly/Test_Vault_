@@ -1,6 +1,0 @@
-filters:
-  and:
-    - file.folder == "55_Info"
-views:
-  - type: table
-    name: Contents

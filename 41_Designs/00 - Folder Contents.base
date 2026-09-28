@@ -1,6 +1,0 @@
-filters:
-  and:
-    - file.folder == "41_Designs"
-views:
-  - type: table
-    name: Contents

@@ -1,6 +1,0 @@
-filters:
-  and:
-    - file.folder == "35_States"
-views:
-  - type: table
-    name: Contents

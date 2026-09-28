@@ -1,6 +1,0 @@
-filters:
-  and:
-    - file.folder == "60_Verification/02_Verifications"
-views:
-  - type: table
-    name: Contents
