@@ -121,6 +121,8 @@ Stage 2 (W-30) is the review: the changes people make in it are recorded and eit
 
 **W-45 · 2026-09-28 · `PDATA2`, `PDATA3`, `PDATA4` and `NType` are `archive`.** They stay in the original export only (W-35). Checked before deciding: all 11,986 Requirements hold `Medium` in both `PDATA2` and `PDATA3` and `Proposed` in `PDATA1`, so no real priority, difficulty or status is lost (the `PDATA1` value matches the status dropped in W-39). Outside Requirements, non-GUID values are defaults or codes (`Medium` on Issues and Changes, `Java` on Classes and Activities, numbers on States and Boundaries). `PDATA2` (1,909) and `PDATA3` (3,007) also hold GUID references, mostly on Ports and Parts; they wait for the Port and Object mapping. `PDATA4` (12) holds `idref` links on Note elements. `NType` has 12 distinct numeric codes. `PDATA1` stays `pending` outside Parts (W-44). 9 element fields remain `pending`.
 
+**W-46 · 2026-09-28 · `Object_ID`, `ParentID` and `Package_ID` are `structure`.** The translator uses them and they are not copied into notes (W-35). `Object_ID` is `structure`, not `archive` as the handoff suggested, because connectors point at elements by this number: both ends resolve to an element on 21,813 of 21,822 connectors. `ParentID` (28,183 rows, all resolve) gives context such as the assembly of a Part (W-43); containment does not automatically become a relationship. `Package_ID` (all resolve to a package) places each note in the folder structure that follows the EA model (W-04). The 9 connectors with an unresolved end are for the connector fields topic. 6 element fields remain `pending`.
+
 ## Open (raised, not yet decided)
 
 - What makes a vault "ready for finishing touches".

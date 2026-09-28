@@ -10,9 +10,9 @@ schemaVersion: '1.0'
 # tPackage: 1387 rows in the extract
 tObject:
 - field: Object_ID
-  disposition: pending
-  proposedByHandoff: archive
-  handoffNote: Database-local key; do not expose in normal engineering notes.
+  disposition: structure
+  decision: W-46
+  note: 'Structure (W-46). Connectors point at elements by this number (both ends resolve on 21,813 of 21,822); the handoff suggested archive. Not copied into notes (W-35).'
   nonblank: 34583
 - field: Object_Type
   disposition: pending
@@ -42,9 +42,9 @@ tObject:
   note: 'Decided W-42. The element description; it is the main text at the top of the note body, above the Source: EA section.'
   nonblank: 14907
 - field: Package_ID
-  disposition: pending
-  proposedByHandoff: structure + archive
-  handoffNote: Raw ID is not a permanent note property.
+  disposition: structure
+  decision: W-46
+  note: 'Structure (W-46). All values resolve to a package; places each note in the folder structure that follows the EA model (W-04).'
   nonblank: 34583
 - field: ea_guid
   disposition: body
@@ -52,9 +52,9 @@ tObject:
   note: The EA GUID line below the note (W-28).
   nonblank: 34583
 - field: ParentID
-  disposition: pending
-  proposedByHandoff: structure
-  handoffNote: Source containment is evidence; do not automatically create MDSE semantic relationships.
+  disposition: structure
+  decision: W-46
+  note: 'Structure (W-46). All 28,183 values resolve to an element. Used to find context, such as the assembly of a Part (W-43); containment does not automatically become a relationship.'
   nonblank: 28183
 - field: Classifier
   disposition: pending
