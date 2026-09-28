@@ -1,5 +1,5 @@
 <%*
-const letters = s => String(s || "").toLowerCase().replace(/[^a-z]/g, "");
+const letters = s => String(s || "").normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/ß/g, "ss").toLowerCase().replace(/[^a-z]/g, "");
 const codeFrom = (first, last) => (letters(last) + letters(first)).slice(0, 13).padEnd(13, "-");
 const codeFile = ".obsidian/author-code.txt";
 const adapter = tp.app.vault.adapter;

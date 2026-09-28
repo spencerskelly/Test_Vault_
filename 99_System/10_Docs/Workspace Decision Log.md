@@ -64,6 +64,8 @@ This log covers workspace and convention decisions. Translation-rule decisions (
 
 **W-23 · 2026-09-28 · AI instructions.** `99_System/02_AI/AI_INSTRUCTIONS.md` is the one set of AI instructions, and `AGENTS.md` at the vault root is a short pointer to it. AI tools follow the same note format as templates: copy the class template, fill in `uid` and `id` by hand with the same rules the Templater snippets use, use the directing person's author code when a user directed the note and the AI's own code only when it created the note alone, leave `status` at the template default, and retire instead of deleting. The previous instructions were replaced because they referred to Ruleset 1.19, cross-vault identity, and a drafting folder (`90_Concept/AI_Workspace`) that no longer exists; a person now reviews through `status` instead of a folder. The uid time uses a time zone: the directing person's if listed in `authors.yaml`, otherwise `defaultTimezone` (Pacific time).
 
+**W-24 · 2026-09-28 · Author registration and changing a code.** MDSE Bootstrap registers each person at install: it asks for their name, derives the author code, saves it locally, and adds the person (code, name, time zone) to `authors.yaml` so AI tools can find it. The plugin's source is not in this repository, so the requirements are written up in `99_System/01_Admin/MDSE Bootstrap - Author Registration Spec.md`, with test cases. `Definitions/Changing Your Author Code.md` explains how a person changes their code if something goes wrong: existing `uid` values are never edited, the old code is kept as `previousCodes`, and only new notes use the new code. The code rule now also removes accents (Müller becomes muller) and turns ß into ss; the first-use snippet was updated and tested for that. Both new notes carry `skellyspencer` (written at Spencer's direction) and are stamped `INFO-00005` and `INFO-00006`.
+
 ## Open (raised, not yet decided)
 
 - Where the translator's source-of-truth ruleset lives.
@@ -75,7 +77,8 @@ This log covers workspace and convention decisions. Translation-rule decisions (
 - Whether original EA modified dates should also be kept (creation date and author go into `uid`).
 - Which `status` values mean "a person still needs to review this" for AI-created notes.
 - Whether to add a small stamping script so AI tools compute `uid` and `id` mechanically instead of by written rule.
-- How a new person's author code gets into `authors.yaml`: the first-use popup saves it only on their own machine, and AI tools cannot see it. Per-person time zones are also missing except through `defaultTimezone`.
+- MDSE Bootstrap has to implement the registration spec, and the first-use popup saves a code only locally (the popup does not register the person in `authors.yaml`).
+- Several people registering at once would all edit the same `authors.yaml` and could cause merge conflicts; one file per person would avoid that.
 - Backfilling `uid` and `id` on the notes that already exist.
 - The install-time name entry for MDSE Bootstrap: it should create `.obsidian/author-code.txt` using the same rule as the snippet.
 - Where MDSE Bootstrap's source lives, so its install-time name entry can follow the same definition.
