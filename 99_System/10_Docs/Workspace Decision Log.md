@@ -28,11 +28,17 @@ This log covers workspace and convention decisions. Translation-rule decisions (
 - Templates will not all be identical; they get class-specific fields as the rules are built, and some subtypes will get their own templates.
 
 **W-07 · 2026-09-28 · Working agreement.** Claude may push directly to `main` on `Test_Vault_`, so the team learns first-hand how AI participation works and where it goes wrong. Topics are decided one at a time.
+**W-08 · 2026-09-28 · Property definitions.** Every property gets its own definition note, so someone new to the vault can look up what it means without guessing. Each note states what the property is, how its value is determined, and what it impacts, plus the other fields that remove ambiguity (see the property definition standard once written).
+
+**W-09 · 2026-09-28 · uid from EA history and name entry.**
+- For translated notes, `uid` should carry the original EA creation time and original author, instead of the import time and the person who ran the translator. Feasible: EA has a creation date on every element and an author on nearly all. Detailed rules still to be decided.
+- Each person enters their name once, and the author code is generated from it according to one written definition. Entered through a popup the first time a note is created from a template, and also during install (MDSE Bootstrap) so the standard is followed from the start.
 
 ## Open (raised, not yet decided)
 
 - Where the translator's source-of-truth ruleset lives.
 - What happens to the existing methodology notes (rules, decisions, canvases, bases), including 99 canvas nodes that already point at note paths that do not exist.
 - Disposition of the 121 EA tagged values, starting with where legacy IDs (`id`, `SysML1.4::id`) land.
-- Whether `uid` on translated notes should reflect migration time, or whether the original EA created/modified dates and author should also be kept (`uid` on a translated note records the import, not the original creation).
-- Where each person's 13-character author code for `uid` comes from.
+- How the 13-character author code is derived from a person's name, and the rules for mapping EA author names, timezone and duplicate timestamps into `uid`.
+- Whether original EA modified dates should also be kept (creation date and author go into `uid`).
+- Where MDSE Bootstrap's source lives, so its install-time name entry can follow the same definition.
