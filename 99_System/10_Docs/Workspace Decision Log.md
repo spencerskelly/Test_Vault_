@@ -72,11 +72,12 @@ This log covers workspace and convention decisions. Translation-rule decisions (
 
 **W-27 · 2026-09-28 · What an `id` is, and where other identifiers go.** The `id` property is either an internal identifier defined in this vault (`REQ-00042`, `STD-00042`, `STK-00042`) or an external identifier that shows the document and the section (`UL2594_13.1`). No other value is put in `id`. Identifiers found in EA that might still be useful, such as the `DG_` design-guide identifiers (172) and the `CC` requirement codes (137), are kept in the note body at the bottom, next to the `eaGUID`, until an AI cleanup after import shows whether they add value. The sequence-style values dropped in W-26 are not kept. General rule for the tag review: when a value might be useful and we are not sure, keep it in the body and decide in the cleanup; drop only clear noise (placeholders such as `unassigned` and `<memo>`, and values known to be meaningless). The `designation` property is not used for these codes.
 
+**W-28 · 2026-09-28 · Layout of EA values in the note body.** A translated note ends with a `Source: EA` section. The `EA GUID:` line is first, and every other value taken from EA that is kept in the body goes below it, one line per value as `- <EA tag name>: <value>`, unless a decision says otherwise. Only real values are written: no placeholders, no empty values, and nothing already moved into a property. After review, the cleanup deletes what has no value and leaves the GUID as the last line. Described for newcomers in `Definitions/EA Source Section.md` (stamped `INFO-00017`). The translator's current "Source properties" table becomes these bullet lines.
+
 ## Open (raised, not yet decided)
 
 - Where the translator's source-of-truth ruleset lives.
 - What happens to the existing methodology notes (rules, decisions, canvases, bases), including 99 canvas nodes that already point at note paths that do not exist.
-- The layout of the source identifiers at the bottom of the note body (the `eaGUID` plus kept codes), so that a later AI cleanup can find them reliably.
 - Disposition of the rest of the 121 EA tagged values, using the tag review workbook.
 - The tie-break for the 79 requirements that share a clause number within one standard.
 - The parsing rule per source document for external designators (each standard and stakeholder document numbers its clauses differently), and what happens when a second edition of a standard arrives, since the clause designators do not include the edition (today there are no duplicates).
