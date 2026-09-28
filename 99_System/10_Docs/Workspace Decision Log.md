@@ -97,9 +97,11 @@ This log covers workspace and convention decisions. Translation-rule decisions (
 4. This repeats until the vault needs only finishing touches. The finishing touches are made by hand in that vault, and it is released. It is never re-imported.
 Stage 2 (W-30) is the review: the changes people make in it are recorded and either become rule changes for the next fresh import or, once the vault is accepted, remain as hand-made finishing touches. They do not have to be written as repeatable rules. The ledger and run manifest (W-35) are kept only for the accepted run. After release, `id` numbers are permanent and new notes continue after the highest one.
 
+**W-38 · 2026-09-28 · Recording review changes.** The changes made during a review are recorded as the `git diff` between the baseline import commit and the reviewed vault, so nothing has to be listed by hand. The reasons go in one short file, `99_System/10_Docs/Review Changes Log.md` (stamped `INFO-00019`): one row per reason, keyed by EA GUID where there is one, otherwise the note's `uid`. An AI turns the diff and the reasons into proposed rule changes for the next fresh import. Commit messages are not relied on, because Obsidian Git makes generic "vault backup" commits.
+
 ## Open (raised, not yet decided)
 
-- How changes made during the review are recorded so they can turn into rule changes for the next import, and what makes a vault "ready for finishing touches".
+- What makes a vault "ready for finishing touches".
 - The folder name and layout for the ledger and run manifest inside the vault, and a written note on how the CSV export was produced (the extraction script is not in the repo).
 - Element mapping (the worklist `99_System/03_Schemas/ea-element-mapping.yaml`, W-32) is parked for a separate chat. Properties from the handoff package come first: disposition vocabulary, element fields, connector fields, package and diagram fields, subordinate tables, the 48 pending tags, and which properties every translated note carries.
 - Handoff package (EA_Native_Translator_Handoff_2026-09-28, from another AI session), to be reviewed one topic at a time, nothing adopted yet:
