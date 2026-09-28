@@ -84,6 +84,7 @@ This log covers workspace and convention decisions. Translation-rule decisions (
 
 ## Open (raised, not yet decided)
 
+- Element mapping (the worklist `99_System/03_Schemas/ea-element-mapping.yaml`, W-32) is parked for a separate chat. Properties from the handoff package come first: disposition vocabulary, element fields, connector fields, package and diagram fields, subordinate tables, the 48 pending tags, and which properties every translated note carries.
 - Handoff package (EA_Native_Translator_Handoff_2026-09-28, from another AI session), to be reviewed one topic at a time, nothing adopted yet:
   1. Import approach. Decided: two stages (W-30) and a temporary `eaType` property (W-31). Still to decide: what `type` holds for elements with no approved MDSE mapping yet, when stage 2 finishes relative to team rollout, and how `id` applies to notes not yet classified.
   2. Where the rules live: the handoff says the Markdown rule notes are the authority and code follows them.
