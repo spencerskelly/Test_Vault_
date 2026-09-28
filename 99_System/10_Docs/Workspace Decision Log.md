@@ -123,6 +123,8 @@ Stage 2 (W-30) is the review: the changes people make in it are recorded and eit
 
 **W-46 · 2026-09-28 · `Object_ID`, `ParentID` and `Package_ID` are `structure`.** The translator uses them and they are not copied into notes (W-35). `Object_ID` is `structure`, not `archive` as the handoff suggested, because connectors point at elements by this number: both ends resolve to an element on 21,813 of 21,822 connectors. `ParentID` (28,183 rows, all resolve) gives context such as the assembly of a Part (W-43); containment does not automatically become a relationship. `Package_ID` (all resolve to a package) places each note in the folder structure that follows the EA model (W-04). The 9 connectors with an unresolved end are for the connector fields topic. 6 element fields remain `pending`.
 
+**W-47 · 2026-09-28 · `Object_Type` and `Stereotype` are `property`.** Both feed the temporary `eaType` property defined in W-31: the stereotype when the element has one (20,529 rows), otherwise the object type. The MDSE `type` and `subtype` come from the element mapping (W-32), which uses `eaType` as input. The raw pair stays in the export (W-35). `t_object.csv` has 35,969 rows, 72 distinct `eaType` values, and 1,386 rows with `Object_Type` Package; whether package rows become notes is for the element mapping. 4 element fields remain `pending`.
+
 ## Open (raised, not yet decided)
 
 - What makes a vault "ready for finishing touches".

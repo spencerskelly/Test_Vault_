@@ -15,14 +15,14 @@ tObject:
   note: 'Structure (W-46). Connectors point at elements by this number (both ends resolve on 21,813 of 21,822); the handoff suggested archive. Not copied into notes (W-35).'
   nonblank: 34583
 - field: Object_Type
-  disposition: pending
-  proposedByHandoff: structure
-  handoffNote: 'Current native rule: when no stereotype exists, use `Object_Type` as imported `type`.'
+  disposition: property
+  decision: W-47
+  note: 'Property (W-47). Feeds the eaType property (W-31) when the element has no stereotype.'
   nonblank: 34583
 - field: Stereotype
-  disposition: pending
-  proposedByHandoff: property + structure
-  handoffNote: 'Current native rule: stereotype takes precedence over `Object_Type` when populated. Do not also preserve redundant raw type fields in working YAML.'
+  disposition: property
+  decision: W-47
+  note: 'Property (W-47). Feeds the eaType property (W-31); the stereotype wins when populated (20,529 rows).'
   nonblank: 20529
 - field: Name
   disposition: pending
