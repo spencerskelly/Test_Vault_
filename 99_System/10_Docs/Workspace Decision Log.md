@@ -76,10 +76,12 @@ This log covers workspace and convention decisions. Translation-rule decisions (
 
 **W-29 · 2026-09-28 · Tags with no real value are dropped.** Of the 121 EA tagged values, 69 are dropped: 44 never have a value and 25 only ever hold a placeholder (`unassigned` or `<memo>`). The other 52 carry real values (about 30,700) and are decided in groups. Every tag and its disposition are recorded in `99_System/03_Schemas/ea-tag-dispositions.yaml`. Tags not yet decided are marked `pending`, and default to the body below the EA GUID if left undecided. The `id`, `SysML1.4::id` and both `Stakeholder ID` tags are recorded per W-26 and W-27.
 
+**W-30 · 2026-09-28 · The import runs in two stages.** Stage 1 copies EA faithfully and applies only approved, deterministic rules; the translator does not decide meaning on its own. Stage 2 applies meaning (reclassification, consolidation, cleanup) as separate reviewed changes, each one a git commit that a person approves and can undo. This replaces the earlier approach of deciding meaning during import. Decided from the handoff package review, topic 1. When stage 2 finishes relative to the team starting to use the vault is not yet decided.
+
 ## Open (raised, not yet decided)
 
 - Handoff package (EA_Native_Translator_Handoff_2026-09-28, from another AI session), to be reviewed one topic at a time, nothing adopted yet:
-  1. Import approach: source-faithful "native" import first (type is the EA stereotype, else the EA object type) with semantic cleanup after import, against our class-based types, `id` prefixes and templates.
+  1. Import approach. Decided: two stages (W-30). Still to decide: what `type` holds right after stage 1, when stage 2 finishes relative to team rollout, and how `id` prefixes and templates apply to notes whose type is not yet an MDSE class.
   2. Where the rules live: the handoff says the Markdown rule notes are the authority and code follows them.
   3. EA author, created and modified dates: the handoff ignores them; W-09 to W-13 use them in the `uid`.
   4. Note properties: the handoff keeps generated YAML to `type` plus relationships; W-06 and W-14 add `uid` and `id` to every note.
