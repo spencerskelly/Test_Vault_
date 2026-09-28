@@ -117,6 +117,8 @@ Stage 2 (W-30) is the review: the changes people make in it are recorded and eit
 - **Correction to W-42.** 2,798 Parts resolve to a block through `PDATA1`, not 2,822. The extra 24 have a `Classifier` that points to another Part, and that Part has no block.
 - **Not yet decided.** How a Part's block is chosen when `PDATA1`, `Classifier` and `Classifier_guid` differ; the assembly for the 446 Parts nested under an Object, Activity, State, ActivityPartition, Port or Package rather than a Class or Part; and connectors on Parts. The rule for these belongs to the element mapping (W-32).
 
+**W-44 · 2026-09-28 · The block a Part represents comes from `PDATA1`.** For Part elements, `PDATA1` holds the GUID of the block, and the translator uses it to find the retained block note (`structure`). `Classifier` and `Classifier_guid` are `archive` for Parts: they point to another Part (a part property declared in an assembly), which has the same block in 334 of 335 cases. The one disagreement (a blank-named Part under `pCableManagement`, GUID `{A548A5EC-7148-406c-915D-85345499B6F1}`: `PDATA1` gives "Cable-tie - tighten the power-cables", the path through `Classifier` gives "Cable-tie") takes the `PDATA1` block and is flagged for review, not resolved by a rule. Scope: Parts only. The three fields are still `pending` for other element types and carry a `partsDecision` line in `ea-field-dispositions.yaml`, because `Classifier` and `Classifier_guid` are real type links on other elements (Port 920, Object 545 and 498, UseCase, Action) and `PDATA1` holds unrelated values on Requirements (12,089), Ports (3,432) and Packages (1,386). 13 element fields remain `pending`.
+
 ## Open (raised, not yet decided)
 
 - What makes a vault "ready for finishing touches".

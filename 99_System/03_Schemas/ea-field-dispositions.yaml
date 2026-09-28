@@ -58,11 +58,13 @@ tObject:
   nonblank: 28183
 - field: Classifier
   disposition: pending
+  partsDecision: 'Part elements only, decided W-44: archive (it points to another Part, not the block). Port (920), Object (498) and other types use it as a real type link and are still to decide.'
   proposedByHandoff: structure
   handoffNote: Use only where the exact EA construct requires classifier semantics.
   nonblank: 1841
 - field: Classifier_guid
   disposition: pending
+  partsDecision: 'Part elements only, decided W-44: archive (same reason as Classifier). Port (920), Object (545) and other types are still to decide.'
   proposedByHandoff: archive
   handoffNote: Internal import evidence.
   nonblank: 1903
@@ -128,6 +130,7 @@ tObject:
   nonblank: 0
 - field: PDATA1
   disposition: pending
+  partsDecision: 'Part elements only, decided W-44: holds the GUID of the block the Part represents; used by the translator (structure). Other element types are still to decide.'
   proposedByHandoff: archive / structure
   handoffNote: EA overloaded internal storage; decode only by explicit rule.
   nonblank: 19333
