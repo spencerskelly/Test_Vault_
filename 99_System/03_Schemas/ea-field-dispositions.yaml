@@ -332,9 +332,9 @@ tConnector:
   handoffNote: Preserve meaningful connector documentation.
   nonblank: 5
 - field: Direction
-  disposition: pending
-  proposedByHandoff: structure
-  handoffNote: Used to resolve source/target semantics.
+  disposition: structure
+  decision: W-51
+  note: 'Structure (W-51). Resolves which end is the source. 20,359 rows Source -> Destination, 1,426 Unspecified (Connector and Association), 10 Destination -> Source.'
   nonblank: 21795
 - field: Start_Object_ID
   disposition: pending
@@ -422,9 +422,9 @@ tConnector:
   note: Dropped (W-49). No row in the extract holds a value.
   nonblank: 0
 - field: DestIsAggregate
-  disposition: pending
-  proposedByHandoff: structure
-  handoffNote: Aggregation/composition rule evidence.
+  disposition: structure
+  decision: W-51
+  note: 'Structure (W-51). Only on Aggregation connectors: 2 on 1,688 rows and 1 on 600. By EA convention 2 is composite and 1 is shared; not confirmed in the data.'
   nonblank: 2288
 - field: SourceIsOrdered
   disposition: drop
