@@ -19,6 +19,8 @@ The short, readable identifier people use to talk about a note, for example `REQ
 - **Most notes:** a class prefix, a hyphen, and a five-digit number, for example `REQ-00042`.
 - **Requirements that come from a standard or a stakeholder document:** the source's own designator, for example `UL2594_13.1`. If no designator can be derived, `STD-#####` for standards and `STK-#####` for stakeholder documents.
 
+An `id` is one of two things: an internal identifier defined here, or an external identifier that shows the document and the section. Any other identifier found in the source is not an `id`. It is kept in the note body under the source identifiers at the bottom.
+
 ## How it is determined
 
 - **Note created in the vault:** filled in automatically when the template is applied, using the next number for that class.
