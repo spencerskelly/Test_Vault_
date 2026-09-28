@@ -78,10 +78,12 @@ This log covers workspace and convention decisions. Translation-rule decisions (
 
 **W-30 · 2026-09-28 · The import runs in two stages.** Stage 1 copies EA faithfully and applies only approved, deterministic rules; the translator does not decide meaning on its own. Stage 2 applies meaning (reclassification, consolidation, cleanup) as separate reviewed changes, each one a git commit that a person approves and can undo. This replaces the earlier approach of deciding meaning during import. Decided from the handoff package review, topic 1. When stage 2 finishes relative to the team starting to use the vault is not yet decided.
 
+**W-31 · 2026-09-28 · Temporary `eaType` property.** Translated notes carry an `eaType` property holding the classification the element had in EA: the stereotype if it has one, otherwise the EA object type (71 distinct values across the source; no stereotype spans more than one object type, so nothing is lost). It sits in the properties directly below `type`, `subtype` and `id`, and is there so the MDSE `type` can be set while people can still filter by the original EA type during review. When the full review is complete it moves below the GUID or is removed. Defined in `Definitions/Properties/eaType.md` (stamped `INFO-00018`). Templates for hand-made notes do not include it.
+
 ## Open (raised, not yet decided)
 
 - Handoff package (EA_Native_Translator_Handoff_2026-09-28, from another AI session), to be reviewed one topic at a time, nothing adopted yet:
-  1. Import approach. Decided: two stages (W-30). Still to decide: what `type` holds right after stage 1, when stage 2 finishes relative to team rollout, and how `id` prefixes and templates apply to notes whose type is not yet an MDSE class.
+  1. Import approach. Decided: two stages (W-30) and a temporary `eaType` property (W-31). Still to decide: what `type` holds for elements with no approved MDSE mapping yet, when stage 2 finishes relative to team rollout, and how `id` applies to notes not yet classified.
   2. Where the rules live: the handoff says the Markdown rule notes are the authority and code follows them.
   3. EA author, created and modified dates: the handoff ignores them; W-09 to W-13 use them in the `uid`.
   4. Note properties: the handoff keeps generated YAML to `type` plus relationships; W-06 and W-14 add `uid` and `id` to every note.
