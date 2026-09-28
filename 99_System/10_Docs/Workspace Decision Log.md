@@ -1,4 +1,6 @@
 ---
+uid: 20260927200806000skellyspencer
+id: INFO-00002
 type: Info
 status: Active
 ---
@@ -56,6 +58,8 @@ This log covers workspace and convention decisions. Translation-rule decisions (
 
 **W-20 · 2026-09-28 · How uid and id are stamped.** Templates fill `uid` and `id` automatically through two small Templater snippets in `99_System/08_Scripts/02_Snippets` (`Snippet - uid`, `Snippet - id`); every class template calls them. The uid uses the creator's local clock plus their author code, and adds a millisecond if that uid already exists. The id is the class prefix plus the highest existing number plus one, counting retired notes and `formerIds`, so an id is never reused. Each person's author code is created the first time a template is applied: a popup asks first and last name, shows the derived code, and saves it in a local file, `.obsidian/author-code.txt`, which is git-ignored. The snippets were tested against mock Obsidian objects (19 checks pass); they have not yet been run inside Obsidian. The `Freestyle` template is deliberately bare and stamps nothing. The old `next-id.js` is superseded (it filled gaps and used four digits) and is to be removed once the snippets are confirmed working. Templates now use Templater syntax for the title.
 
+**W-21 · 2026-09-28 · AI authorship.** A note created by an AI without a user's direct instruction gets an AI author code in its `uid`: `claudeai-----` (Claude), `chatgpt------` (ChatGPT), `rovoai-------` (Rovo), `geminiai-----` (Gemini). When a note is created under a user's direct instruction, the user's own code is used, even if an AI writes it. The `status` property is what keeps a person in the loop where needed. Codes are recorded in `authors.yaml`. The four notes written in this session were created at Spencer's direction, so they carry `skellyspencer` and are stamped `INFO-00001` to `INFO-00004` in creation order (uid times are the first-commit times converted to Pacific time). The snippet notes are exempt from stamping because Templater outputs whatever is in them.
+
 ## Open (raised, not yet decided)
 
 - Where the translator's source-of-truth ruleset lives.
@@ -65,7 +69,9 @@ This log covers workspace and convention decisions. Translation-rule decisions (
 - The EA tag `Stakeholder ID` holds clause numbers inside standards (on 1,040 requirements under the UL, IEC and GB/T packages), not stakeholder identifiers. The `stakeholderId` field in `types.json` inherits the wrong name.
 - Which note keeps its `id` when the sweep finds two notes with the same one.
 - Whether original EA modified dates should also be kept (creation date and author go into `uid`).
-- Whose author code goes in the `uid` of a note an AI writes.
+- Which `status` values mean "a person still needs to review this" for AI-created notes.
+- AI tools that write notes directly into the vault cannot run Templater, so they need their own way to produce a correct `uid` and `id` (a small stamping script with the same rules).
+- Whether the `chatgpt------` code should be `chatgptai----` to follow the pattern of the other three.
 - Backfilling `uid` and `id` on the notes that already exist.
 - The install-time name entry for MDSE Bootstrap: it should create `.obsidian/author-code.txt` using the same rule as the snippet.
 - Where MDSE Bootstrap's source lives, so its install-time name entry can follow the same definition.

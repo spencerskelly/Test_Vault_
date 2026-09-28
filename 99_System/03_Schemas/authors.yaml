@@ -17,3 +17,12 @@ authors:
 # EA authors with no matching person: 722 elements with a blank Author, and one element whose Author is "7.1.0-2".
 # These use the code below (Workspace Decision Log W-12).
 unmapped: {code: sparxeaauthor, ea_names: ['', '7.1.0-2']}
+
+# AI authors. Used only when an AI creates a note without a user's direct instruction.
+# When a user directs the note, even if an AI writes it, the user's code above is used (Workspace Decision Log W-21).
+# Pattern: tool name (plus "ai" where it is not already in the name), then hyphens to 13 characters.
+ai_authors:
+  - {code: claudeai-----, tool: Claude (Anthropic)}
+  - {code: chatgpt------, tool: ChatGPT (OpenAI)}
+  - {code: rovoai-------, tool: Rovo (Atlassian)}
+  - {code: geminiai-----, tool: Gemini (Google)}
