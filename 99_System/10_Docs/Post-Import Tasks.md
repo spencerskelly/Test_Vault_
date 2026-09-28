@@ -57,3 +57,17 @@ Work that has to be done in the vault after the import (stage 2, Workspace Decis
 3. Keep the `.rtf` attachment or remove it, and add a row to `Review Changes Log.md` keyed by the document's element GUID.
 
 **Done when.** The text is in the note and searchable, and the log row exists.
+
+## Task 4: Fold unconnected standard and stakeholder requirements into document notes
+
+**What it is.** The import brings in every requirement as its own note (W-81). The earlier plan, and W-16, fold clauses that no other element connects to into the note of their standard or stakeholder document. That is now done here, after the import.
+
+**How to find them.** In `99_System/CSV_EA/requirement_connectivity_audit.csv`, requirements with `Direct_Connectors` and `Child_Connectors` both 0: 9,788 rows in the current export (`requirement` 5,221, `Regulatory Requirement` 3,155, `Webasto Requirement` 1,363, and a few others). Of these, 817 are drawn on a diagram and 7,491 have a note, so check those before folding. The handoff counted 10,052; the two figures are not reconciled. It is a snapshot; the ledger from the accepted run (W-35) replaces it.
+
+**How to resolve them.**
+1. Decide which documents fold and which clauses stay as notes, for example a clause drawn on a diagram or with tagged values worth keeping.
+2. Fold in batches, one reviewed commit per document. Put the clause text in the document note under a clause anchor.
+3. Retire the folded note (`status` Retired), do not delete it (W-18). Its `id` stays reserved and links to it keep working.
+4. Add a row to `Review Changes Log.md` for each batch, keyed by the document.
+
+**Done when.** Every unconnected requirement is either folded, with its note retired and the clause anchor in place, or kept with a reason in the log.

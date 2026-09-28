@@ -1193,5 +1193,7 @@ tXref:
   disposition: pending
   rows: 587
 - kind: DefaultDiagram
-  disposition: pending
+  disposition: structure
+  decision: W-80
   rows: 894
+  note: 'Structure (W-80). Element to default diagram (893 pairs; 877 match the diagram owner ParentID, 16 are default only). Used to write the Default diagram line in the element note when the canvas is created.'
