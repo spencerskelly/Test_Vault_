@@ -44,10 +44,16 @@ This log covers workspace and convention decisions. Translation-rule decisions (
 
 **W-14 · 2026-09-28 · id numbering for translated notes.** Every translated note gets an `id`, numbered per class prefix in original EA creation order, oldest first, with ties broken by EA GUID. Numbers are assigned after the translator has decided which elements become notes, so there are no gaps. Same EA data gives the same numbers. Once the migration is final the numbers are permanent; notes created later in the vault continue after the highest migrated number. The tool currently orders by EA GUID and needs changing.
 
+**W-15 · 2026-09-28 · id format.** Every `id` uses a five-digit number, for example `REQ-00042`, for every class. An `id` is never reused once issued. Five digits leaves room for 99,999 notes per class and keeps text sorting correct. The migration itself needs less: after the tool's fold rules only about 3,936 Requirement notes are emitted.
+
+**W-16 · 2026-09-28 · External documents.** An external document (standard, regulation, stakeholder document) is brought in as one note per document edition, with an anchor for each clause. Links go straight to the clause with the anchor. Clauses that have no relationships fold into the document note; clauses that are connected to other elements become their own notes and link back to the clause anchor. To revisit only if a document proves too large to read whole (the largest, UL 2594, is about 610 clauses, roughly 33,000 tokens).
+
 ## Open (raised, not yet decided)
 
 - Where the translator's source-of-truth ruleset lives.
 - What happens to the existing methodology notes (rules, decisions, canvases, bases), including 99 canvas nodes that already point at note paths that do not exist.
 - Disposition of the 121 EA tagged values, starting with where legacy IDs (`id`, `SysML1.4::id`) land.
+- Which `id` the 2,754 connected external requirements (905 standard, 1,849 stakeholder) receive.
+- How "never reuse an id" is enforced: the current ID script takes the highest existing number plus one, so deleting the newest note would free its number.
 - Whether original EA modified dates should also be kept (creation date and author go into `uid`).
 - Where MDSE Bootstrap's source lives, so its install-time name entry can follow the same definition.
