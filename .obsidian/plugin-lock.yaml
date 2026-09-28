@@ -1,6 +1,5 @@
 schema: 1
 plugins:
-  ampure-cross-vault-resolver: "0.1.0"
   mdse-bootstrap: "0.2.0"
   nodian: "1.4.14"
   breadcrumbs: "4.21.11"

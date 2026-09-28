@@ -8,7 +8,5 @@
   "table-exporter",
   "templater-obsidian",
   "quickadd",
-  "obsidian-git",
-  "ampure-cross-vault-resolver",
-  "multi-vault-navigator"
+  "obsidian-git"
 ]
