@@ -33,13 +33,13 @@ tObject:
   disposition: body
   placement: source section
   decision: W-42
-  note: Decided W-42. Used for several concepts, often a manufacturer part number. Kept as a line below the EA GUID: - Alias: <value>.
+  note: 'Decided W-42. Used for several concepts, often a manufacturer part number. Kept as a line below the EA GUID: - Alias: <value>.'
   nonblank: 103
 - field: Note
   disposition: body
   placement: main text
   decision: W-42
-  note: Decided W-42. The element description; it is the main text at the top of the note body, above the Source: EA section.
+  note: 'Decided W-42. The element description; it is the main text at the top of the note body, above the Source: EA section.'
   nonblank: 14907
 - field: Package_ID
   disposition: pending
@@ -250,7 +250,7 @@ tObject:
   disposition: body
   placement: source section
   decision: W-42
-  note: Decided W-42. Only on Part elements. Held as one line per relationship on the retained block note: quantity for <parent assembly> is: <value>. See W-42 for the Part reading.
+  note: 'Decided W-42. Only on Part elements. Held as one line per relationship on the retained block note: quantity for <parent assembly> is: <value>. See W-42 for the Part reading.'
   nonblank: 73
 - field: Style
   disposition: drop
