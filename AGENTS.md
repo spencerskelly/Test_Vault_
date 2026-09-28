@@ -1,18 +1,11 @@
 # AI / Agent Rules
 
-Before substantial edits, read:
+Read and follow `99_System/02_AI/AI_INSTRUCTIONS.md` before creating or editing any note.
 
-- `99_System/10_Docs/MDSE Modeling Ruleset 1.19.md`
-- `99_System/10_Docs/Vault Architecture and Cross-Vault Rules.md`
-- `99_System/03_Schemas/relationships.yaml`
+The essentials:
 
-Rules:
-
-- Never invent missing source facts.
-- Prefer reuse over duplication.
-- Folder placement is navigation, not semantic authority.
-- Author the forward/owner-side relationship; generated inverse fields are derivative.
-- Use stable `uid` identity for durable cross-vault references.
-- Do not copy Company-owned identities into domain vaults.
-- Draft AI-created model changes under `90_Concept/AI_Workspace` unless explicitly authorized otherwise.
-- AI does not decide to create/split vaults. Users create vaults. AI may flag when scale, access, lifecycle, search, or context quality suggests a split.
+- Create notes from the class template in `99_System/05_Templates`, and fill in `uid` and `id` yourself by the rules in that file. You cannot run Templater, but the result must be identical.
+- Use your author code only for notes you create with no direct user instruction. When a user directs the note, use the user's code.
+- Leave `status` at the template default. A person reviews.
+- Never delete a note; retire it. Never reuse an `id`. Never change an existing `uid` or `id`.
+- Never invent missing source facts. Reuse concepts instead of duplicating them.

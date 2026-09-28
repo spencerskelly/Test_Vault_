@@ -27,7 +27,7 @@ The permanent identity of a note. It never changes, even if the note is renamed,
 
 - **Note created in the vault:** filled in automatically when the template is applied, from the creator's clock and their author code.
 - **Note translated from EA:** the creation time recorded in EA, exactly as stored, and the EA author mapped to their author code. An EA element with no usable author gets `sparxeaauthor`.
-- **Note written by an AI:** if a user directed the note, even when the AI wrote every word, the user's author code is used. If the AI created the note on its own with no direct instruction, the AI's code is used, so these notes can be told apart: `claudeai-----`, `chatgpt------`, `rovoai-------`, `geminiai-----`. The `status` property then shows whether a person has reviewed it.
+- **Note written by an AI:** if a user directed the note, even when the AI wrote every word, the user's author code is used. If the AI created the note on its own with no direct instruction, the AI's code is used, so these notes can be told apart. The pattern is always the tool name, then `ai`, then hyphens to 13 characters, so a new tool follows the same rule: `claudeai-----`, `chatgptai----`, `rovoai-------`, `geminiai-----`. The `status` property then shows whether a person has reviewed it.
 - **Two notes with the same second and author:** one millisecond is added until the `uid` is unique. Ties are ordered by the old EA identifier, so translating the same data always gives the same `uid`.
 
 ## What it impacts

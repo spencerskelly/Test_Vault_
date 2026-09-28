@@ -60,6 +60,10 @@ This log covers workspace and convention decisions. Translation-rule decisions (
 
 **W-21 · 2026-09-28 · AI authorship.** A note created by an AI without a user's direct instruction gets an AI author code in its `uid`: `claudeai-----` (Claude), `chatgpt------` (ChatGPT), `rovoai-------` (Rovo), `geminiai-----` (Gemini). When a note is created under a user's direct instruction, the user's own code is used, even if an AI writes it. The `status` property is what keeps a person in the loop where needed. Codes are recorded in `authors.yaml`. The four notes written in this session were created at Spencer's direction, so they carry `skellyspencer` and are stamped `INFO-00001` to `INFO-00004` in creation order (uid times are the first-commit times converted to Pacific time). The snippet notes are exempt from stamping because Templater outputs whatever is in them.
 
+**W-22 · 2026-09-28 · AI code standard (supersedes the ChatGPT code in W-21).** Every AI author code is the tool name, then `ai`, then hyphens to 13 characters, so a new tool follows the same rule without a decision: `claudeai-----`, `chatgptai----`, `rovoai-------`, `geminiai-----`. Tool names longer than 11 letters are cut to 11 so the `ai` is never lost. The `chatgpt------` code from W-21 is replaced.
+
+**W-23 · 2026-09-28 · AI instructions.** `99_System/02_AI/AI_INSTRUCTIONS.md` is the one set of AI instructions, and `AGENTS.md` at the vault root is a short pointer to it. AI tools follow the same note format as templates: copy the class template, fill in `uid` and `id` by hand with the same rules the Templater snippets use, use the directing person's author code when a user directed the note and the AI's own code only when it created the note alone, leave `status` at the template default, and retire instead of deleting. The previous instructions were replaced because they referred to Ruleset 1.19, cross-vault identity, and a drafting folder (`90_Concept/AI_Workspace`) that no longer exists; a person now reviews through `status` instead of a folder. The uid time uses a time zone: the directing person's if listed in `authors.yaml`, otherwise `defaultTimezone` (Pacific time).
+
 ## Open (raised, not yet decided)
 
 - Where the translator's source-of-truth ruleset lives.
@@ -70,8 +74,8 @@ This log covers workspace and convention decisions. Translation-rule decisions (
 - Which note keeps its `id` when the sweep finds two notes with the same one.
 - Whether original EA modified dates should also be kept (creation date and author go into `uid`).
 - Which `status` values mean "a person still needs to review this" for AI-created notes.
-- AI tools that write notes directly into the vault cannot run Templater, so they need their own way to produce a correct `uid` and `id` (a small stamping script with the same rules).
-- Whether the `chatgpt------` code should be `chatgptai----` to follow the pattern of the other three.
+- Whether to add a small stamping script so AI tools compute `uid` and `id` mechanically instead of by written rule.
+- How a new person's author code gets into `authors.yaml`: the first-use popup saves it only on their own machine, and AI tools cannot see it. Per-person time zones are also missing except through `defaultTimezone`.
 - Backfilling `uid` and `id` on the notes that already exist.
 - The install-time name entry for MDSE Bootstrap: it should create `.obsidian/author-code.txt` using the same rule as the snippet.
 - Where MDSE Bootstrap's source lives, so its install-time name entry can follow the same definition.
