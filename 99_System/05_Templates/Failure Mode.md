@@ -1,6 +1,6 @@
 ---
-uid:
-id:
+uid: <% tp.file.include("[[Snippet - uid]]") %>
+id: <% tp.file.include("[[Snippet - id]]") %>
 type: Failure Mode
 subtype: 
 status: Draft
@@ -11,7 +11,7 @@ aliases: []
 formerIds: []
 ---
 
-# {{title}}
+# <% tp.file.title %>
 
 ## Definition
 

@@ -1,4 +1,6 @@
 ---
+uid: <% tp.file.include("[[Snippet - uid]]") %>
+id: <% tp.file.include("[[Snippet - id]]") %>
 type: Info
 subtype: Property Definition
 status: Active
@@ -8,7 +10,7 @@ required:
 setBy:
 canChange:
 ---
-# 
+# <% tp.file.title %>
 
 One sentence: what this property is.
 
