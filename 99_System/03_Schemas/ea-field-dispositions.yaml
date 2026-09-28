@@ -472,34 +472,34 @@ tConnector:
   handoffNote: Behavioral order only when a flow-specific rule consumes it; never create global Function sequence semantics from it alone.
   nonblank: 199
 - field: Top_Start_Label
-  disposition: pending
-  proposedByHandoff: body / drop
-  handoffNote: Preserve only if semantic.
+  disposition: archive
+  decision: W-53
+  note: 'Archived (W-53). Role name with a +; matches SourceRole on 30 of 37.'
   nonblank: 37
 - field: Top_Mid_Label
-  disposition: pending
-  proposedByHandoff: body / drop
-  handoffNote: Preserve only if semantic.
+  disposition: archive
+  decision: W-53
+  note: 'Archived (W-53). Repeats Name on 69 Connectors; on 79 InformationFlow connectors (no Name) it holds the conveyed signal. Revisit in the relationship mapping.'
   nonblank: 169
 - field: Top_End_Label
-  disposition: pending
-  proposedByHandoff: body / drop
-  handoffNote: Preserve only if semantic.
+  disposition: archive
+  decision: W-53
+  note: 'Archived (W-53). ControlFlow guards such as True and No (18 rows).'
   nonblank: 18
 - field: Btm_Start_Label
-  disposition: pending
-  proposedByHandoff: body / drop
-  handoffNote: Preserve only if semantic.
+  disposition: archive
+  decision: W-53
+  note: 'Archived (W-53). Cardinality text; matches SourceCard on 13 of 15.'
   nonblank: 15
 - field: Btm_Mid_Label
-  disposition: pending
-  proposedByHandoff: body / drop
-  handoffNote: Preserve only if semantic.
+  disposition: archive
+  decision: W-53
+  note: 'Archived (W-53). Stereotype as displayed on the diagram; 10,763 rows.'
   nonblank: 10763
 - field: Btm_End_Label
-  disposition: pending
-  proposedByHandoff: body / drop
-  handoffNote: Preserve only if semantic.
+  disposition: archive
+  decision: W-53
+  note: 'Archived (W-53). Cardinality text; matches DestCard on all 4.'
   nonblank: 4
 - field: edge / coordinate fields
   disposition: pending
