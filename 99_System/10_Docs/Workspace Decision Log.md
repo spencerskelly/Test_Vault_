@@ -34,11 +34,13 @@ This log covers workspace and convention decisions. Translation-rule decisions (
 - For translated notes, `uid` should carry the original EA creation time and original author, instead of the import time and the person who ran the translator. Feasible: EA has a creation date on every element and an author on nearly all. Detailed rules still to be decided.
 - Each person enters their name once, and the author code is generated from it according to one written definition. Entered through a popup the first time a note is created from a template, and also during install (MDSE Bootstrap) so the standard is followed from the start.
 
+**W-10 · 2026-09-28 · Author code rule.** The 13-character author code is the person's last name followed by first name, lowercase letters only, truncated to 13 characters, and padded with hyphens on the right when shorter. Examples: Spencer Skelly gives `skellyspencer`, Chesca Legaspi gives `legaspichesca`, Florian Koerfer gives `koerferfloria`, Jesse Rivera gives `riverajesse--`. This fits the existing `uid` pattern (13 characters, lowercase letters and hyphens).
+
 ## Open (raised, not yet decided)
 
 - Where the translator's source-of-truth ruleset lives.
 - What happens to the existing methodology notes (rules, decisions, canvases, bases), including 99 canvas nodes that already point at note paths that do not exist.
 - Disposition of the 121 EA tagged values, starting with where legacy IDs (`id`, `SysML1.4::id`) land.
-- How the 13-character author code is derived from a person's name, and the rules for mapping EA author names, timezone and duplicate timestamps into `uid`.
+- Mapping EA author names to people (14 distinct names in the source, several are the same person), what to use for blank or junk authors, and how to handle timezone and duplicate timestamps in the translated `uid`.
 - Whether original EA modified dates should also be kept (creation date and author go into `uid`).
 - Where MDSE Bootstrap's source lives, so its install-time name entry can follow the same definition.
