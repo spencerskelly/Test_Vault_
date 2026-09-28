@@ -442,9 +442,9 @@ tConnector:
   note: Dropped (W-49). No row in the extract holds a value.
   nonblank: 0
 - field: DestIsNavigable
-  disposition: pending
-  proposedByHandoff: structure / archive
-  handoffNote: Rule evidence.
+  disposition: archive
+  decision: W-52
+  note: 'Archived (W-52). 316 rows at 0 on normally navigable connectors are unexplained; reopen if the review finds they matter.'
   nonblank: 20896
 - field: SourceAccess
   disposition: drop
@@ -616,14 +616,14 @@ tConnector:
   note: Dropped (W-49). No row in the extract holds a value.
   nonblank: 0
 - field: SourceStyle
-  disposition: pending
-  proposedByHandoff: archive
-  handoffNote: Source evidence.
+  disposition: archive
+  decision: W-52
+  note: 'Archived (W-52). Only the Navigable setting varies, and it follows the connector type; the 10 swapped rows match the 10 reversed Directions.'
   nonblank: 21795
 - field: DestStyle
-  disposition: pending
-  proposedByHandoff: archive
-  handoffNote: Source evidence.
+  disposition: archive
+  decision: W-52
+  note: 'Archived (W-52). Same as SourceStyle.'
   nonblank: 21795
 - field: EventFlags
   disposition: drop
