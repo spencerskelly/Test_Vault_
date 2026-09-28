@@ -31,3 +31,16 @@ Work that has to be done in the vault after the import (stage 2, Workspace Decis
 5. Add a row to `Review Changes Log.md`, keyed by the connector GUID, saying why that port was chosen.
 
 **Done when.** A search for `REVIEW port needed` finds nothing, and every row of the snapshot is either moved or has a reason in the log.
+
+## Task 2: Third-party standards content in attachments
+
+**What it is.** The import brings in every linked document from EA as an attachment (W-76), including RTF documents and pictures that look like figures and tables from standards (for example `Figure 7.5 Example of a Bottom-Enclosure`, `Table 7.4 Comparative Tracking Index`, `1 Scope`, `5 Definitions`). Whether the vault may hold this content has not been decided.
+
+**How to find them.** `99_System/11_Import/Linked Document Attachments.csv` lists all 376 linked documents with the element they are attached to, the element type, whether the content is text, pictures or an image, and the size. The 235 Artifacts of subtype Document and the 11 design-constraint requirements hold the picture and text documents; the 129 Artifacts of subtype Image hold circuit images that are your own work. It is a snapshot from the current export; the ledger from the accepted run (W-35) replaces it.
+
+**How to resolve it.**
+1. Decide which documents are third-party content and which are yours.
+2. For third-party content that may not stay, remove the attachment and its embed, and add a row to `Review Changes Log.md` keyed by the document's element GUID.
+3. Before release, check the git history. Files committed in the baseline import stay in history after removal, so a removal may need a history rewrite.
+
+**Done when.** Every row of the snapshot is kept or removed with a reason in the log, and the history question is settled.
