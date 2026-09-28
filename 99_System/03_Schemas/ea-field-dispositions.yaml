@@ -465,14 +465,14 @@ tConnector:
   note: 'Archived (W-60). Repeats decided fields: Extends and Includes match the extend and include stereotypes exactly, Strong matches DestIsAggregate 2 exactly. Weak (27 rows) is unexplained.'
   nonblank: 2973
 - field: DiagramID
-  disposition: pending
-  proposedByHandoff: archive
-  handoffNote: Diagram occurrence/context evidence.
+  disposition: structure
+  decision: W-61
+  note: 'Structure (W-61). Links a Sequence message to its diagram (they are absent from t_diagramlinks); 10 other rows are context only.'
   nonblank: 209
 - field: SeqNo
-  disposition: pending
-  proposedByHandoff: structure / body
-  handoffNote: Behavioral order only when a flow-specific rule consumes it; never create global Function sequence semantics from it alone.
+  disposition: structure
+  decision: W-61
+  note: 'Structure (W-61). Message order within a diagram (199 Sequence connectors, 14 diagrams, no repeats); needed to order messages when sequence behaviour is mapped.'
   nonblank: 199
 - field: Top_Start_Label
   disposition: archive
@@ -670,16 +670,22 @@ tConnector:
   note: 'Dropped (W-60). No row in the extract holds a value.'
   nonblank: 0
 - field: PDATA1
-  disposition: pending
-  handoffNote: 'Not in the handoff list; added W-58 from the export columns.'
+  disposition: body
+  placement: source section
+  decision: W-61
+  note: 'Body (W-61), source section, real values only. StateFlow trigger (44 rows, 26 distinct) by EA convention; the Sequence default Synchronous (199) is not written.'
   nonblank: 243
 - field: PDATA2
-  disposition: pending
-  handoffNote: 'Not in the handoff list; added W-58 from the export columns.'
+  disposition: body
+  placement: source section
+  decision: W-61
+  note: 'Body (W-61), source section, real values only. StateFlow guard (27 rows) and ControlFlow guard (6) by EA convention; the Sequence default retval=void; (199) is not written.'
   nonblank: 232
 - field: PDATA3
-  disposition: pending
-  handoffNote: 'Not in the handoff list; added W-58 from the export columns.'
+  disposition: body
+  placement: source section
+  decision: W-61
+  note: 'Body (W-61), source section, real values only. StateFlow effect (2 rows) by EA convention; the Sequence default Call (199) is not written.'
   nonblank: 201
 - field: PDATA4
   disposition: drop
