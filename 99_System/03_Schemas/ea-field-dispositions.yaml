@@ -30,14 +30,16 @@ tObject:
   handoffNote: Preserve source name; apply deterministic duplicate-name handling.
   nonblank: 31162
 - field: Alias
-  disposition: pending
-  proposedByHandoff: body
-  handoffNote: Preserve only when nonblank and useful.
+  disposition: body
+  placement: source section
+  decision: W-42
+  note: Decided W-42. Used for several concepts, often a manufacturer part number. Kept as a line below the EA GUID: - Alias: <value>.
   nonblank: 103
 - field: Note
-  disposition: pending
-  proposedByHandoff: body
-  handoffNote: High-value engineering content.
+  disposition: body
+  placement: main text
+  decision: W-42
+  note: Decided W-42. The element description; it is the main text at the top of the note body, above the Source: EA section.
   nonblank: 14907
 - field: Package_ID
   disposition: pending
@@ -245,9 +247,10 @@ tObject:
   note: Dropped (W-40). No row in the extract holds a value.
   nonblank: 0
 - field: Multiplicity
-  disposition: pending
-  proposedByHandoff: body / structure
-  handoffNote: Preserve only where meaningful.
+  disposition: body
+  placement: source section
+  decision: W-42
+  note: Decided W-42. Only on Part elements. Held as one line per relationship on the retained block note: quantity for <parent assembly> is: <value>. See W-42 for the Part reading.
   nonblank: 73
 - field: Style
   disposition: drop
