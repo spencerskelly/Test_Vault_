@@ -74,11 +74,13 @@ This log covers workspace and convention decisions. Translation-rule decisions (
 
 **W-28 · 2026-09-28 · Layout of EA values in the note body.** A translated note ends with a `Source: EA` section. The `EA GUID:` line is first, and every other value taken from EA that is kept in the body goes below it, one line per value as `- <EA tag name>: <value>`, unless a decision says otherwise. Only real values are written: no placeholders, no empty values, and nothing already moved into a property. After review, the cleanup deletes what has no value and leaves the GUID as the last line. Described for newcomers in `Definitions/EA Source Section.md` (stamped `INFO-00017`). The translator's current "Source properties" table becomes these bullet lines.
 
+**W-29 · 2026-09-28 · Tags with no real value are dropped.** Of the 121 EA tagged values, 69 are dropped: 44 never have a value and 25 only ever hold a placeholder (`unassigned` or `<memo>`). The other 52 carry real values (about 30,700) and are decided in groups. Every tag and its disposition are recorded in `99_System/03_Schemas/ea-tag-dispositions.yaml`. Tags not yet decided are marked `pending`, and default to the body below the EA GUID if left undecided. The `id`, `SysML1.4::id` and both `Stakeholder ID` tags are recorded per W-26 and W-27.
+
 ## Open (raised, not yet decided)
 
 - Where the translator's source-of-truth ruleset lives.
 - What happens to the existing methodology notes (rules, decisions, canvases, bases), including 99 canvas nodes that already point at note paths that do not exist.
-- Disposition of the rest of the 121 EA tagged values, using the tag review workbook.
+- Disposition of the 48 tags still marked `pending` in `ea-tag-dispositions.yaml`.
 - The tie-break for the 79 requirements that share a clause number within one standard.
 - The parsing rule per source document for external designators (each standard and stakeholder document numbers its clauses differently), and what happens when a second edition of a standard arrives, since the clause designators do not include the edition (today there are no duplicates).
 - The EA tag `Stakeholder ID` holds clause numbers inside standards (on 1,040 requirements under the UL, IEC and GB/T packages), not stakeholder identifiers. The `stakeholderId` field in `types.json` inherits the wrong name.

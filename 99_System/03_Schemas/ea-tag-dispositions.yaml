@@ -1,0 +1,856 @@
+# Disposition of every EA tagged value (tag) for the translator.
+# disposition: drop | body | clause-source | pending
+#   drop           not carried into the vault
+#   body           kept as a line below the EA GUID in the note body (Definitions/EA Source Section)
+#   clause-source  used to build the external id, not repeated in the body
+#   pending        not yet decided; if it stays undecided it defaults to body
+# populated = rows with any value; realValues = rows with a value other than the placeholders unassigned and <memo>.
+schemaVersion: '1.0'
+tags:
+  - tag: "ASIL"
+    disposition: "drop"
+    decision: "W-29"
+    populated: 530
+    realValues: 0
+    distinct: 0
+    note: "Only ever holds a placeholder (unassigned or <memo>)."
+  - tag: "ASIL-Trace"
+    disposition: "drop"
+    decision: "W-29"
+    populated: 2015
+    realValues: 0
+    distinct: 0
+    note: "Only ever holds a placeholder (unassigned or <memo>)."
+  - tag: "Abstraction Layer"
+    disposition: "pending"
+    decision: ""
+    populated: 2293
+    realValues: 2293
+    distinct: 5
+    note: "Not yet decided. Default if undecided: body, below the EA GUID."
+  - tag: "Allocation"
+    disposition: "drop"
+    decision: "W-29"
+    populated: 4848
+    realValues: 0
+    distinct: 0
+    note: "Only ever holds a placeholder (unassigned or <memo>)."
+  - tag: "Applicability Comment"
+    disposition: "pending"
+    decision: ""
+    populated: 45
+    realValues: 45
+    distinct: 25
+    note: "Not yet decided. Default if undecided: body, below the EA GUID."
+  - tag: "Applicability Status"
+    disposition: "pending"
+    decision: ""
+    populated: 3363
+    realValues: 2992
+    distinct: 2
+    note: "Not yet decided. Default if undecided: body, below the EA GUID."
+  - tag: "Application"
+    disposition: "drop"
+    decision: "W-29"
+    populated: 1936
+    realValues: 0
+    distinct: 0
+    note: "Only ever holds a placeholder (unassigned or <memo>)."
+  - tag: "Application-Trace"
+    disposition: "drop"
+    decision: "W-29"
+    populated: 1485
+    realValues: 0
+    distinct: 0
+    note: "Only ever holds a placeholder (unassigned or <memo>)."
+  - tag: "Brand"
+    disposition: "pending"
+    decision: ""
+    populated: 6
+    realValues: 6
+    distinct: 1
+    note: "Not yet decided. Default if undecided: body, below the EA GUID."
+  - tag: "CMF"
+    disposition: "pending"
+    decision: ""
+    populated: 15
+    realValues: 15
+    distinct: 8
+    note: "Not yet decided. Default if undecided: body, below the EA GUID."
+  - tag: "Cable Compatibility"
+    disposition: "pending"
+    decision: ""
+    populated: 15
+    realValues: 15
+    distinct: 5
+    note: "Not yet decided. Default if undecided: body, below the EA GUID."
+  - tag: "Cable OD"
+    disposition: "drop"
+    decision: "W-29"
+    populated: 0
+    realValues: 0
+    distinct: 0
+    note: "Never has a value."
+  - tag: "Cable Type"
+    disposition: "drop"
+    decision: "W-29"
+    populated: 0
+    realValues: 0
+    distinct: 0
+    note: "Never has a value."
+  - tag: "Category"
+    disposition: "drop"
+    decision: "W-29"
+    populated: 4848
+    realValues: 0
+    distinct: 0
+    note: "Only ever holds a placeholder (unassigned or <memo>)."
+  - tag: "Color"
+    disposition: "drop"
+    decision: "W-29"
+    populated: 1
+    realValues: 0
+    distinct: 0
+    note: "Only ever holds a placeholder (unassigned or <memo>)."
+  - tag: "Compatibility"
+    disposition: "drop"
+    decision: "W-29"
+    populated: 0
+    realValues: 0
+    distinct: 0
+    note: "Never has a value."
+  - tag: "Cost"
+    disposition: "drop"
+    decision: "W-29"
+    populated: 0
+    realValues: 0
+    distinct: 0
+    note: "Never has a value."
+  - tag: "Current Max"
+    disposition: "pending"
+    decision: ""
+    populated: 5
+    realValues: 5
+    distinct: 1
+    note: "Not yet decided. Default if undecided: body, below the EA GUID."
+  - tag: "CurrentOutMax"
+    disposition: "pending"
+    decision: ""
+    populated: 1
+    realValues: 1
+    distinct: 1
+    note: "Not yet decided. Default if undecided: body, below the EA GUID."
+  - tag: "Cybersecurity"
+    disposition: "drop"
+    decision: "W-29"
+    populated: 1485
+    realValues: 0
+    distinct: 0
+    note: "Only ever holds a placeholder (unassigned or <memo>)."
+  - tag: "Cybersecurity-Trace"
+    disposition: "drop"
+    decision: "W-29"
+    populated: 780
+    realValues: 0
+    distinct: 0
+    note: "Only ever holds a placeholder (unassigned or <memo>)."
+  - tag: "DataType"
+    disposition: "drop"
+    decision: "W-29"
+    populated: 0
+    realValues: 0
+    distinct: 0
+    note: "Never has a value."
+  - tag: "Detection"
+    disposition: "pending"
+    decision: ""
+    populated: 1
+    realValues: 1
+    distinct: 1
+    note: "Not yet decided. Default if undecided: body, below the EA GUID."
+  - tag: "Difficulty"
+    disposition: "drop"
+    decision: "W-29"
+    populated: 0
+    realValues: 0
+    distinct: 0
+    note: "Never has a value."
+  - tag: "Dimensions"
+    disposition: "drop"
+    decision: "W-29"
+    populated: 0
+    realValues: 0
+    distinct: 0
+    note: "Never has a value."
+  - tag: "Domain"
+    disposition: "pending"
+    decision: ""
+    populated: 169
+    realValues: 169
+    distinct: 1
+    note: "Not yet decided. Default if undecided: body, below the EA GUID."
+  - tag: "Duration Time in ms"
+    disposition: "drop"
+    decision: "W-29"
+    populated: 0
+    realValues: 0
+    distinct: 0
+    note: "Never has a value."
+  - tag: "Engineering Comment"
+    disposition: "pending"
+    decision: ""
+    populated: 10
+    realValues: 10
+    distinct: 10
+    note: "Not yet decided. Default if undecided: body, below the EA GUID."
+  - tag: "External Reference"
+    disposition: "drop"
+    decision: "W-29"
+    populated: 0
+    realValues: 0
+    distinct: 0
+    note: "Never has a value."
+  - tag: "Finish"
+    disposition: "drop"
+    decision: "W-29"
+    populated: 1
+    realValues: 0
+    distinct: 0
+    note: "Only ever holds a placeholder (unassigned or <memo>)."
+  - tag: "HW time"
+    disposition: "drop"
+    decision: "W-29"
+    populated: 0
+    realValues: 0
+    distinct: 0
+    note: "Never has a value."
+  - tag: "Identifier"
+    disposition: "drop"
+    decision: "W-29"
+    populated: 0
+    realValues: 0
+    distinct: 0
+    note: "Never has a value."
+  - tag: "In-Links"
+    disposition: "pending"
+    decision: ""
+    populated: 16
+    realValues: 16
+    distinct: 14
+    note: "Not yet decided. Default if undecided: body, below the EA GUID."
+  - tag: "Length - Useable"
+    disposition: "drop"
+    decision: "W-29"
+    populated: 0
+    realValues: 0
+    distinct: 0
+    note: "Never has a value."
+  - tag: "Length - in Grid"
+    disposition: "drop"
+    decision: "W-29"
+    populated: 0
+    realValues: 0
+    distinct: 0
+    note: "Never has a value."
+  - tag: "Length - inConnector"
+    disposition: "drop"
+    decision: "W-29"
+    populated: 0
+    realValues: 0
+    distinct: 0
+    note: "Never has a value."
+  - tag: "Length - inCoupler"
+    disposition: "drop"
+    decision: "W-29"
+    populated: 0
+    realValues: 0
+    distinct: 0
+    note: "Never has a value."
+  - tag: "Length - inIC-CPD"
+    disposition: "drop"
+    decision: "W-29"
+    populated: 0
+    realValues: 0
+    distinct: 0
+    note: "Never has a value."
+  - tag: "MFG PN"
+    disposition: "pending"
+    decision: ""
+    populated: 101
+    realValues: 101
+    distinct: 58
+    note: "Not yet decided. Default if undecided: body, below the EA GUID."
+  - tag: "Material"
+    disposition: "pending"
+    decision: ""
+    populated: 2
+    realValues: 1
+    distinct: 1
+    note: "Not yet decided. Default if undecided: body, below the EA GUID."
+  - tag: "Max Current"
+    disposition: "drop"
+    decision: "W-29"
+    populated: 0
+    realValues: 0
+    distinct: 0
+    note: "Never has a value."
+  - tag: "Meter Cost"
+    disposition: "drop"
+    decision: "W-29"
+    populated: 0
+    realValues: 0
+    distinct: 0
+    note: "Never has a value."
+  - tag: "Mfg PN"
+    disposition: "drop"
+    decision: "W-29"
+    populated: 0
+    realValues: 0
+    distinct: 0
+    note: "Never has a value."
+  - tag: "Mgf PN"
+    disposition: "drop"
+    decision: "W-29"
+    populated: 0
+    realValues: 0
+    distinct: 0
+    note: "Never has a value."
+  - tag: "Note"
+    disposition: "drop"
+    decision: "W-29"
+    populated: 0
+    realValues: 0
+    distinct: 0
+    note: "Never has a value."
+  - tag: "Object Type"
+    disposition: "pending"
+    decision: ""
+    populated: 4848
+    realValues: 4848
+    distinct: 3
+    note: "Not yet decided. Default if undecided: body, below the EA GUID."
+  - tag: "Observability"
+    disposition: "drop"
+    decision: "W-29"
+    populated: 0
+    realValues: 0
+    distinct: 0
+    note: "Never has a value."
+  - tag: "Occurence"
+    disposition: "pending"
+    decision: ""
+    populated: 3
+    realValues: 3
+    distinct: 2
+    note: "Not yet decided. Default if undecided: body, below the EA GUID."
+  - tag: "Origin"
+    disposition: "pending"
+    decision: ""
+    populated: 118
+    realValues: 118
+    distinct: 12
+    note: "Not yet decided. Default if undecided: body, below the EA GUID."
+  - tag: "Out-Links"
+    disposition: "drop"
+    decision: "W-29"
+    populated: 0
+    realValues: 0
+    distinct: 0
+    note: "Never has a value."
+  - tag: "PN"
+    disposition: "pending"
+    decision: ""
+    populated: 7
+    realValues: 7
+    distinct: 6
+    note: "Not yet decided. Default if undecided: body, below the EA GUID."
+  - tag: "PN Change Level"
+    disposition: "pending"
+    decision: ""
+    populated: 3
+    realValues: 3
+    distinct: 1
+    note: "Not yet decided. Default if undecided: body, below the EA GUID."
+  - tag: "PartNumber"
+    disposition: "pending"
+    decision: ""
+    populated: 4
+    realValues: 4
+    distinct: 4
+    note: "Not yet decided. Default if undecided: body, below the EA GUID."
+  - tag: "Piece Cost"
+    disposition: "pending"
+    decision: ""
+    populated: 6
+    realValues: 6
+    distinct: 6
+    note: "Not yet decided. Default if undecided: body, below the EA GUID."
+  - tag: "Positions"
+    disposition: "pending"
+    decision: ""
+    populated: 1
+    realValues: 1
+    distinct: 1
+    note: "Not yet decided. Default if undecided: body, below the EA GUID."
+  - tag: "PowerMax"
+    disposition: "pending"
+    decision: ""
+    populated: 1
+    realValues: 1
+    distinct: 1
+    note: "Not yet decided. Default if undecided: body, below the EA GUID."
+  - tag: "Priority"
+    disposition: "pending"
+    decision: ""
+    populated: 7028
+    realValues: 1
+    distinct: 1
+    note: "Not yet decided. Default if undecided: body, below the EA GUID."
+  - tag: "Priority-Trace"
+    disposition: "drop"
+    decision: "W-29"
+    populated: 2188
+    realValues: 0
+    distinct: 0
+    note: "Only ever holds a placeholder (unassigned or <memo>)."
+  - tag: "Product Cost"
+    disposition: "drop"
+    decision: "W-29"
+    populated: 0
+    realValues: 0
+    distinct: 0
+    note: "Never has a value."
+  - tag: "Product Management Comment"
+    disposition: "pending"
+    decision: ""
+    populated: 37
+    realValues: 37
+    distinct: 36
+    note: "Not yet decided. Default if undecided: body, below the EA GUID."
+  - tag: "Quantity"
+    disposition: "pending"
+    decision: ""
+    populated: 10
+    realValues: 10
+    distinct: 5
+    note: "Not yet decided. Default if undecided: body, below the EA GUID."
+  - tag: "Rationale"
+    disposition: "drop"
+    decision: "W-29"
+    populated: 0
+    realValues: 0
+    distinct: 0
+    note: "Never has a value."
+  - tag: "Responsible"
+    disposition: "drop"
+    decision: "W-29"
+    populated: 2188
+    realValues: 0
+    distinct: 0
+    note: "Only ever holds a placeholder (unassigned or <memo>)."
+  - tag: "SC"
+    disposition: "drop"
+    decision: "W-29"
+    populated: 0
+    realValues: 0
+    distinct: 0
+    note: "Never has a value."
+  - tag: "SSDefaultToolbox"
+    disposition: "pending"
+    decision: ""
+    populated: 6
+    realValues: 6
+    distinct: 3
+    note: "Not yet decided. Default if undecided: body, below the EA GUID."
+  - tag: "SW time"
+    disposition: "drop"
+    decision: "W-29"
+    populated: 0
+    realValues: 0
+    distinct: 0
+    note: "Never has a value."
+  - tag: "Sales Comment"
+    disposition: "pending"
+    decision: ""
+    populated: 4
+    realValues: 4
+    distinct: 4
+    note: "Not yet decided. Default if undecided: body, below the EA GUID."
+  - tag: "Severity"
+    disposition: "pending"
+    decision: ""
+    populated: 3
+    realValues: 3
+    distinct: 2
+    note: "Not yet decided. Default if undecided: body, below the EA GUID."
+  - tag: "SignalType"
+    disposition: "pending"
+    decision: ""
+    populated: 10
+    realValues: 10
+    distinct: 2
+    note: "Not yet decided. Default if undecided: body, below the EA GUID."
+  - tag: "Special Characteristic"
+    disposition: "drop"
+    decision: "W-29"
+    populated: 2395
+    realValues: 0
+    distinct: 0
+    note: "Only ever holds a placeholder (unassigned or <memo>)."
+  - tag: "Special Characteristic Comment"
+    disposition: "drop"
+    decision: "W-29"
+    populated: 123
+    realValues: 0
+    distinct: 0
+    note: "Only ever holds a placeholder (unassigned or <memo>)."
+  - tag: "Special Characteristic-Trace"
+    disposition: "drop"
+    decision: "W-29"
+    populated: 3665
+    realValues: 0
+    distinct: 0
+    note: "Only ever holds a placeholder (unassigned or <memo>)."
+  - tag: "Stakeholder ID"
+    disposition: "clause-source"
+    decision: "W-26"
+    populated: 464
+    realValues: 464
+    distinct: 443
+    note: "Holds clause numbers inside standards. Used to build the external id where the name has no clause number. Not repeated in the body."
+  - tag: "Status"
+    disposition: "pending"
+    decision: ""
+    populated: 4848
+    realValues: 4848
+    distinct: 2
+    note: "Not yet decided. Default if undecided: body, below the EA GUID."
+  - tag: "Style"
+    disposition: "pending"
+    decision: ""
+    populated: 13
+    realValues: 13
+    distinct: 9
+    note: "Not yet decided. Default if undecided: body, below the EA GUID."
+  - tag: "Supporting"
+    disposition: "drop"
+    decision: "W-29"
+    populated: 2188
+    realValues: 0
+    distinct: 0
+    note: "Only ever holds a placeholder (unassigned or <memo>)."
+  - tag: "SysML1.1::text"
+    disposition: "drop"
+    decision: "W-29"
+    populated: 2
+    realValues: 0
+    distinct: 0
+    note: "Only ever holds a placeholder (unassigned or <memo>)."
+  - tag: "SysML1.4::id"
+    disposition: "body"
+    decision: "W-26/W-27"
+    populated: 2391
+    realValues: 2391
+    distinct: 2391
+    note: "Dropped on information items (2,254, sequence-style). Kept in the body as \"SysML1.4 id\" on requirements (137, values like CC115)."
+  - tag: "SysML1.4::propertyPath"
+    disposition: "drop"
+    decision: "W-29"
+    populated: 0
+    realValues: 0
+    distinct: 0
+    note: "Never has a value."
+  - tag: "SysML1.4::text"
+    disposition: "drop"
+    decision: "W-29"
+    populated: 2685
+    realValues: 0
+    distinct: 0
+    note: "Only ever holds a placeholder (unassigned or <memo>)."
+  - tag: "Target"
+    disposition: "drop"
+    decision: "W-29"
+    populated: 3665
+    realValues: 0
+    distinct: 0
+    note: "Only ever holds a placeholder (unassigned or <memo>)."
+  - tag: "Target-Trace"
+    disposition: "drop"
+    decision: "W-29"
+    populated: 3665
+    realValues: 0
+    distinct: 0
+    note: "Only ever holds a placeholder (unassigned or <memo>)."
+  - tag: "Type"
+    disposition: "drop"
+    decision: "W-29"
+    populated: 0
+    realValues: 0
+    distinct: 0
+    note: "Never has a value."
+  - tag: "User Story"
+    disposition: "pending"
+    decision: ""
+    populated: 118
+    realValues: 118
+    distinct: 117
+    note: "Not yet decided. Default if undecided: body, below the EA GUID."
+  - tag: "Verdict"
+    disposition: "drop"
+    decision: "W-29"
+    populated: 0
+    realValues: 0
+    distinct: 0
+    note: "Never has a value."
+  - tag: "Verification Comment"
+    disposition: "drop"
+    decision: "W-29"
+    populated: 0
+    realValues: 0
+    distinct: 0
+    note: "Never has a value."
+  - tag: "Verification Criterion"
+    disposition: "drop"
+    decision: "W-29"
+    populated: 0
+    realValues: 0
+    distinct: 0
+    note: "Never has a value."
+  - tag: "VoltageInMax"
+    disposition: "pending"
+    decision: ""
+    populated: 1
+    realValues: 1
+    distinct: 1
+    note: "Not yet decided. Default if undecided: body, below the EA GUID."
+  - tag: "VoltageInMin"
+    disposition: "pending"
+    decision: ""
+    populated: 1
+    realValues: 1
+    distinct: 1
+    note: "Not yet decided. Default if undecided: body, below the EA GUID."
+  - tag: "VoltageOutMax"
+    disposition: "pending"
+    decision: ""
+    populated: 1
+    realValues: 1
+    distinct: 1
+    note: "Not yet decided. Default if undecided: body, below the EA GUID."
+  - tag: "VoltageOutMin"
+    disposition: "pending"
+    decision: ""
+    populated: 1
+    realValues: 1
+    distinct: 1
+    note: "Not yet decided. Default if undecided: body, below the EA GUID."
+  - tag: "Volume"
+    disposition: "drop"
+    decision: "W-29"
+    populated: 0
+    realValues: 0
+    distinct: 0
+    note: "Never has a value."
+  - tag: "Webasto MBDV Profile::Allocation"
+    disposition: "drop"
+    decision: "W-29"
+    populated: 2255
+    realValues: 0
+    distinct: 0
+    note: "Only ever holds a placeholder (unassigned or <memo>)."
+  - tag: "Webasto MBDV Profile::Applicability Comment"
+    disposition: "pending"
+    decision: ""
+    populated: 11
+    realValues: 11
+    distinct: 10
+    note: "Not yet decided. Default if undecided: body, below the EA GUID."
+  - tag: "Webasto MBDV Profile::Applicability Status"
+    disposition: "pending"
+    decision: ""
+    populated: 3733
+    realValues: 684
+    distinct: 2
+    note: "Not yet decided. Default if undecided: body, below the EA GUID."
+  - tag: "Webasto MBDV Profile::Application"
+    disposition: "drop"
+    decision: "W-29"
+    populated: 812
+    realValues: 0
+    distinct: 0
+    note: "Only ever holds a placeholder (unassigned or <memo>)."
+  - tag: "Webasto MBDV Profile::Category"
+    disposition: "drop"
+    decision: "W-29"
+    populated: 2255
+    realValues: 0
+    distinct: 0
+    note: "Only ever holds a placeholder (unassigned or <memo>)."
+  - tag: "Webasto MBDV Profile::Cybersecurity-Trace"
+    disposition: "drop"
+    decision: "W-29"
+    populated: 0
+    realValues: 0
+    distinct: 0
+    note: "Never has a value."
+  - tag: "Webasto MBDV Profile::External Reference"
+    disposition: "pending"
+    decision: ""
+    populated: 2
+    realValues: 2
+    distinct: 2
+    note: "Not yet decided. Default if undecided: body, below the EA GUID."
+  - tag: "Webasto MBDV Profile::Identifier"
+    disposition: "drop"
+    decision: "W-29"
+    populated: 0
+    realValues: 0
+    distinct: 0
+    note: "Never has a value."
+  - tag: "Webasto MBDV Profile::Note"
+    disposition: "drop"
+    decision: "W-29"
+    populated: 0
+    realValues: 0
+    distinct: 0
+    note: "Never has a value."
+  - tag: "Webasto MBDV Profile::Object Type"
+    disposition: "pending"
+    decision: ""
+    populated: 2391
+    realValues: 2391
+    distinct: 4
+    note: "Not yet decided. Default if undecided: body, below the EA GUID."
+  - tag: "Webasto MBDV Profile::Priority"
+    disposition: "pending"
+    decision: ""
+    populated: 2373
+    realValues: 118
+    distinct: 12
+    note: "Not yet decided. Default if undecided: body, below the EA GUID."
+  - tag: "Webasto MBDV Profile::Priority-Trace"
+    disposition: "drop"
+    decision: "W-29"
+    populated: 0
+    realValues: 0
+    distinct: 0
+    note: "Never has a value."
+  - tag: "Webasto MBDV Profile::Rationale"
+    disposition: "drop"
+    decision: "W-29"
+    populated: 0
+    realValues: 0
+    distinct: 0
+    note: "Never has a value."
+  - tag: "Webasto MBDV Profile::Responsible"
+    disposition: "drop"
+    decision: "W-29"
+    populated: 0
+    realValues: 0
+    distinct: 0
+    note: "Never has a value."
+  - tag: "Webasto MBDV Profile::Special Characteristic"
+    disposition: "drop"
+    decision: "W-29"
+    populated: 380
+    realValues: 0
+    distinct: 0
+    note: "Only ever holds a placeholder (unassigned or <memo>)."
+  - tag: "Webasto MBDV Profile::Special Characteristic Comment"
+    disposition: "drop"
+    decision: "W-29"
+    populated: 0
+    realValues: 0
+    distinct: 0
+    note: "Never has a value."
+  - tag: "Webasto MBDV Profile::Stakeholder ID"
+    disposition: "clause-source"
+    decision: "W-26"
+    populated: 757
+    realValues: 757
+    distinct: 482
+    note: "Same as Stakeholder ID."
+  - tag: "Webasto MBDV Profile::Status"
+    disposition: "pending"
+    decision: ""
+    populated: 2391
+    realValues: 2391
+    distinct: 1
+    note: "Not yet decided. Default if undecided: body, below the EA GUID."
+  - tag: "Webasto MBDV Profile::Supporting"
+    disposition: "drop"
+    decision: "W-29"
+    populated: 0
+    realValues: 0
+    distinct: 0
+    note: "Never has a value."
+  - tag: "Webasto MBDV Profile::Verification Comment"
+    disposition: "drop"
+    decision: "W-29"
+    populated: 0
+    realValues: 0
+    distinct: 0
+    note: "Never has a value."
+  - tag: "Webasto MBDV Profile::Verification Criterion"
+    disposition: "drop"
+    decision: "W-29"
+    populated: 0
+    realValues: 0
+    distinct: 0
+    note: "Never has a value."
+  - tag: "Weight (g)"
+    disposition: "pending"
+    decision: ""
+    populated: 2
+    realValues: 2
+    distinct: 2
+    note: "Not yet decided. Default if undecided: body, below the EA GUID."
+  - tag: "direction"
+    disposition: "pending"
+    decision: ""
+    populated: 763
+    realValues: 763
+    distinct: 3
+    note: "Not yet decided. Default if undecided: body, below the EA GUID."
+  - tag: "id"
+    disposition: "body"
+    decision: "W-26/W-27"
+    populated: 5012
+    realValues: 5012
+    distinct: 5012
+    note: "Dropped when the value is a sequence-style number (Regulatory and Webasto requirements, 4,840). Kept in the body as \"EA id\" on design constraints and requirements (172, values like DG_0307_001_02)."
+  - tag: "isEncapsulated"
+    disposition: "drop"
+    decision: "W-29"
+    populated: 0
+    realValues: 0
+    distinct: 0
+    note: "Never has a value."
+  - tag: "risk"
+    disposition: "pending"
+    decision: ""
+    populated: 1
+    realValues: 1
+    distinct: 1
+    note: "Not yet decided. Default if undecided: body, below the EA GUID."
+  - tag: "source"
+    disposition: "pending"
+    decision: ""
+    populated: 2
+    realValues: 2
+    distinct: 1
+    note: "Not yet decided. Default if undecided: body, below the EA GUID."
+  - tag: "text"
+    disposition: "drop"
+    decision: "W-29"
+    populated: 681
+    realValues: 0
+    distinct: 0
+    note: "Only ever holds a placeholder (unassigned or <memo>)."
+  - tag: "verifyMethod"
+    disposition: "pending"
+    decision: ""
+    populated: 2
+    realValues: 2
+    distinct: 2
+    note: "Not yet decided. Default if undecided: body, below the EA GUID."
