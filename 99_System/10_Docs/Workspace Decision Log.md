@@ -169,6 +169,8 @@ Stage 2 (W-30) is the review: the changes people make in it are recorded and eit
 
 **W-66 · 2026-09-28 · Package `Notes`, `CreatedDate` and `TPos`; package fields are settled.** `Notes` (34 rows) is `body`, `placement: main text`: the package description, the same content in `t_package` and `t_object` (the 4 that differ do so only in line endings and trailing whitespace), with line endings normalised. `CreatedDate` (1,387 rows) is `structure`: it builds the `uid` time if a package becomes a note (W-09), taken from the `t_object` row as for elements; the two tables differ by 1 to 2 seconds on 355 rows, always earlier in `t_package`, so there is no real conflict. `TPos` (48 rows, 14 parents) is `archive`: it is EA's manual sibling order, and folders sort by name. All 23 package fields are now decided. Spencer likes the idea of a note for each package or folder that describes what it holds and what it is for, so users understand the folder structure; he is keeping that open to think about, and it is not decided. It decides where the 34 package `Notes` go.
 
+**W-67 · 2026-09-28 · Diagram fields added to the worklist.** `ea-field-dispositions.yaml` now also lists the three diagram tables, each field `pending` with its count of rows holding a real value: `tDiagram` (29 fields, 2,924 diagrams), `tDiagramObjects` (9 fields, 42,966 rows) and `tDiagramLinks` (7 fields, 37,955 rows). The handoff package gave no suggestions for these, so none are recorded. They matter mainly for the diagrams-only run (W-62). The subordinate tables (attributes, operations, linked documents, tags, constraints and others, one CSV each in `99_System/CSV_EA`) are not yet listed.
+
 ## Open (raised, not yet decided)
 
 - What makes a vault "ready for finishing touches".
