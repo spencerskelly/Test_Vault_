@@ -147,6 +147,8 @@ Stage 2 (W-30) is the review: the changes people make in it are recorded and eit
 - **Release.** The vault is not released until stage 2 is complete; nobody works in it before then. This closes the open question of when stage 2 finishes relative to team rollout (W-30).
 - **Not decided.** Whether ports become notes or sections of the block note (element mapping), and the dispositions of connector `Name`, `Notes` and `SourceRole`. 17 connector fields remain `pending`.
 
+**W-56 · 2026-09-28 · Connector `Name`, `Notes` and `SourceRole`.** `Name` (449 rows) and `Notes` (5 rows) are `body`, placed in the source section below the GUID (W-42). For Connector and InformationFlow they are written on both end notes (W-55); for the other types (Sequence 199, ControlFlow 31, StateFlow 10, Association 7, Abstraction 7, Dependency 5, Aggregation 4, Generalization 2) they go on the owner-side note, the one holding the forward relationship. `SourceRole` (319 rows) is `archive`: it equals the Part's name on 314 of 319 rows, which the block link already carries (W-43); the other 5 stay in the export (W-35). The 199 Sequence names come with `SeqNo` and `DiagramID` and are message labels on sequence diagrams; an owner-side line loses their order, which is decided with `SeqNo`. 14 connector fields remain `pending`.
+
 ## Open (raised, not yet decided)
 
 - What makes a vault "ready for finishing touches".

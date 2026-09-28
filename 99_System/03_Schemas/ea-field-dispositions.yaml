@@ -322,14 +322,16 @@ tConnector:
   handoffNote: Relationship rule discriminator.
   nonblank: 10542
 - field: Name
-  disposition: pending
-  proposedByHandoff: body
-  handoffNote: Preserve when meaningful.
+  disposition: body
+  placement: source section
+  decision: W-56
+  note: 'Body (W-56), source section. Real labels such as 5V_CAN and 2.4GHz. Written on both end notes for Connector and InformationFlow (W-55), on the owner-side note for other types.'
   nonblank: 449
 - field: Notes
-  disposition: pending
-  proposedByHandoff: body
-  handoffNote: Preserve meaningful connector documentation.
+  disposition: body
+  placement: source section
+  decision: W-56
+  note: 'Body (W-56), source section. Real descriptions (5 rows); same placement as Name.'
   nonblank: 5
 - field: Direction
   disposition: structure
@@ -347,9 +349,9 @@ tConnector:
   handoffNote: Endpoint resolution.
   nonblank: 21813
 - field: SourceRole
-  disposition: pending
-  proposedByHandoff: body
-  handoffNote: Relationship detail.
+  disposition: archive
+  decision: W-56
+  note: 'Archived (W-56). Equals the Part name on 314 of 319 rows, which the block link already carries (W-43).'
   nonblank: 319
 - field: DestRole
   disposition: drop
