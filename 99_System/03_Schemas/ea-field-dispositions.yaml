@@ -704,19 +704,19 @@ tConnector:
   nonblank: 24
 tPackage:
 - field: Package_ID
-  disposition: pending
-  proposedByHandoff: structure + archive
-  handoffNote: Hierarchy lookup only.
+  disposition: structure
+  decision: W-65
+  note: 'Structure (W-65). With Parent_ID gives the package hierarchy behind the folder tree (W-04).'
   nonblank: 1387
 - field: Name
-  disposition: pending
-  proposedByHandoff: structure
-  handoffNote: Folder/source-navigation name.
+  disposition: structure
+  decision: W-65
+  note: 'Structure (W-65). Names the folder. No blanks and no sibling shares a name; 64 names contain characters unsafe in folder names (replacement rule open, see W-48).'
   nonblank: 1387
 - field: Parent_ID
-  disposition: pending
-  proposedByHandoff: structure
-  handoffNote: Reconstruct source package hierarchy.
+  disposition: structure
+  decision: W-65
+  note: 'Structure (W-65). All 1,386 values resolve; one root; at most 12 levels deep.'
   nonblank: 1386
 - field: Notes
   disposition: pending
@@ -724,9 +724,9 @@ tPackage:
   handoffNote: Preserve useful package documentation, generally in folder README/reference content.
   nonblank: 34
 - field: ea_guid
-  disposition: pending
-  proposedByHandoff: archive
-  handoffNote: Package traceability.
+  disposition: structure
+  decision: W-65
+  note: 'Structure (W-65). Keys the ledger row (W-35) and matches the package''s element row in t_object (1,386 of 1,387).'
   nonblank: 1387
 - field: CreatedDate
   disposition: pending
