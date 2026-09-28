@@ -2,6 +2,11 @@
 uid:
 type: Translation Verification
 status: Working
+decisionState: Working
+decisionOwner: Human
+implementationState: Partial
+verificationState: Fixture Defined
+lastReviewed: 2026-09-27
 decisionArea: "Requirement Verification"
 ---
 # Requirement Verification Cases

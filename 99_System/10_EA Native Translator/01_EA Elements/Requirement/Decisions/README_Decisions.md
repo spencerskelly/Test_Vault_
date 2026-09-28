@@ -1,38 +1,25 @@
 ---
 uid:
 type: Info
-status: Working
+status: Active
 workspace: EA Native Translator
 ---
-# Editing Translator Decisions
+# Requirement Translation Decisions
 
-## What you should edit directly
+These notes are the human-editable authority for Requirement translation decisions.
 
-The notes in this `Decisions` folder are the human-authored authority for unresolved translator choices. Edit them directly in Obsidian.
+Read [[Translator Governance]] before editing.
 
-Recommended workflow:
+## Workflow
 
-1. Open the applicable decision note.
-2. Change the proposed decision/table directly.
-3. Add rationale when useful.
-4. Save and Git push normally.
-5. The next methodology update promotes settled decisions into Translation Rule notes and refreshes review canvases.
+1. Edit the decision content directly.
+2. When you approve the semantic decision, set:
+   `decisionState: Human Approved`
+3. Push normally.
+4. AI/reviewer reconciles the decision into Translation Rules/contracts.
+5. After reconciliation, `implementationState` becomes `Implemented`.
+6. After a fixture/result confirms behavior, `verificationState` becomes `Verified`.
 
-## What not to edit for decisions
+## Do not use canvases as the only decision record
 
-Avoid putting authoritative decisions only in:
-
-- generated EA source inventory notes;
-- generated source connector tables;
-- generated canvases.
-
-Those may be regenerated from the EA evidence and workbook.
-
-## Authority order
-
-1. Settled human decision note
-2. Translation Rule implementing that decision
-3. Generated canvas/view reflecting the notes
-4. Source inventory evidence
-
-If a generated view disagrees with a settled decision note, the decision note wins and the generated view needs regeneration.
+Canvases are visual review surfaces. The authoritative decision must exist in these notes.

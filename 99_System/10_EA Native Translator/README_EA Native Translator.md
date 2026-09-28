@@ -1,39 +1,62 @@
 ---
 uid:
 type: Info
-status: Working
+status: Active
 workspace: EA Native Translator
 ---
 # EA Native Translator
 
 This folder is the living methodology workspace for translating native Sparx Enterprise Architect content into the MDSE vault model.
 
+## Start here
+
+For a new human or AI contributor:
+
+1. [[AI Handoff - EA Native Translator]]
+2. [[Translator Governance]]
+3. [[Translator Definition Tracker]]
+
 ## Authority model
 
-The methodology notes are authoritative. Bases and canvases are views over those notes and may be regenerated. Source documents, spreadsheets, and older handoffs are evidence, not competing authorities.
+Human Approved decisions and implemented methodology contracts are authoritative for target semantics.
+
+Raw EA evidence is authoritative about the source model.
+
+Canvases, Bases, imported references, historical handoffs, and chats are supporting evidence/views and do not override approved decisions.
 
 ## Working principle
 
-Translate engineering meaning rather than mechanically reproducing EA/UML/SysML structures. Apply deterministic mappings where semantics are settled. Where semantics are not settled, preserve migration evidence and flag review rather than guessing.
+The native importer is **source-faithful and deterministic**.
+
+- Define the exact EA source construct first.
+- Preserve source provenance.
+- Apply only approved element/property/relationship mappings.
+- Do not infer engineering meaning from vague EA structure.
+- Where semantic reclassification is valuable, define it explicitly as an approved import rule or post-import refinement.
 
 ## Sections
 
-- [[README_EA Elements]] — EA metaclass/stereotype combinations observed or supported.
+- [[README_EA Elements]] — EA source element constructs.
 - [[README_EA Relationships]] — EA connector families.
-- [[README_MDSE Elements]] — target MDSE element definitions used by the translator.
-- [[README_MDSE Relationships]] — target MDSE relationship definitions relevant to import.
-- [[README_Translation Rules]] — executable methodology decisions connecting source and target.
-- [[README_Reviews]] — open decisions, change log, and review workflow.
-- [[README_References]] — current source references and precedence notes.
+- [[README_MDSE Elements]] — target MDSE type/subtype definitions.
+- [[README_MDSE Relationships]] — target MDSE relationship definitions.
+- [[README_Translation Rules]] — executable source→target mapping rules.
+- [[README_Reviews]] — governance, tracker, readiness, decisions, change history.
+- [[README_References]] — historical/imported references and evidence pointers.
+
+## Source evidence
+
+Raw source evidence is stored in:
+
+`99_System/CSV_EA`
+
+See [[EA Full Source Element Inventory]].
 
 ## Review workflow
 
-1. Identify the EA source construct and endpoint semantics.
-2. Find the applicable Translation Rule.
-3. Follow a settled rule without reinterpretation.
-4. If no settled rule applies, preserve the source evidence using the current unresolved-mapping convention and add a review item.
-5. Promote a repeated pattern to a direct rule only when meaning is consistent enough for deterministic translation.
-
-## Visual review
-
-Open [[CANVAS_EA Native Translator]] for the top-level architecture. Each MDSE target element also has a dedicated translation canvas showing known EA source paths and relationship behavior.
+1. Identify exact EA source data.
+2. Find or create the relevant decision note.
+3. Human approves semantics where a decision is required.
+4. Implement the decision in MDSE contracts/Translation Rules.
+5. Define or update verification fixtures.
+6. Update [[Translator Definition Tracker]] and [[Translator Change Log]].

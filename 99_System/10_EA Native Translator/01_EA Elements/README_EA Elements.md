@@ -1,46 +1,65 @@
 ---
 uid:
 type: Info
-status: Working
+status: Active
 workspace: EA Native Translator
 ---
 # EA Elements
 
-This area is organized by the exact EA `Object_Type`. Stereotype notes and canvases live inside their parent type folder.
+This area is organized by exact EA `Object_Type`. Raw stereotype variants live beneath their source type.
 
 ## Coverage
 
-The r12 workbook provides 65 distinct type/stereotype combinations observed as endpoints across all 21,822 source connectors. Relationship-source coverage is certified complete; isolated/unconnected `t_object` type coverage is not independently enumerated in the workbook.
+The comprehensive EA evidence bundle now supplies a complete raw `t_object` inventory:
 
-## Types
+- 35,969 source elements;
+- 31 raw Object_Types;
+- 72 raw Object_Type/Stereotype combinations.
 
-| EA Object_Type | Endpoint occurrences | Variants |
-|---|---:|---:|
-| [[README_MISSING Endpoint\|<MISSING>]] | 18 | 1 |
-| [[README_Action\|Action]] | 286 | 1 |
-| [[README_Activity\|Activity]] | 6230 | 6 |
-| [[README_Actor\|Actor]] | 254 | 1 |
-| [[README_Artifact\|Artifact]] | 393 | 2 |
-| [[README_Boundary\|Boundary]] | 2 | 1 |
-| [[README_Change\|Change]] | 109 | 1 |
-| [[README_Class\|Class]] | 11724 | 17 |
-| [[README_Constraint\|Constraint]] | 1 | 1 |
-| [[README_Decision\|Decision]] | 78 | 1 |
-| [[README_Event\|Event]] | 2 | 1 |
-| [[README_InformationItem\|InformationItem]] | 388 | 1 |
-| [[README_Issue\|Issue]] | 355 | 1 |
-| [[README_Note\|Note]] | 351 | 1 |
-| [[README_Object\|Object]] | 868 | 1 |
-| [[README_Package\|Package]] | 7 | 1 |
-| [[README_Part\|Part]] | 213 | 2 |
-| [[README_Port\|Port]] | 1692 | 3 |
-| [[README_ProxyConnector\|ProxyConnector]] | 5 | 1 |
-| [[README_Requirement\|Requirement]] | 11023 | 10 |
-| [[README_Sequence\|Sequence]] | 8 | 1 |
-| [[README_Signal\|Signal]] | 1174 | 2 |
-| [[README_State\|State]] | 3582 | 3 |
-| [[README_StateNode\|StateNode]] | 112 | 1 |
-| [[README_Synchronization\|Synchronization]] | 49 | 1 |
-| [[README_Text\|Text]] | 51 | 1 |
-| [[README_Trigger\|Trigger]] | 5 | 1 |
-| [[README_UseCase\|UseCase]] | 4664 | 1 |
+The r12 relationship workbook separately supplies connector-facing effective element combinations and relationship rules.
+
+See [[EA Full Source Element Inventory]].
+
+## Full source types
+
+| EA Object_Type | Source elements |
+|---|---:|
+| Requirement | 13,988 |
+| Port | 4,387 |
+| Part | 3,137 |
+| InformationItem | 2,825 |
+| Class | 2,737 |
+| Activity | 1,668 |
+| UseCase | 1,667 |
+| Package | 1,386 |
+| State | 1,112 |
+| Signal | 623 |
+| Object | 545 |
+| Artifact | 459 |
+| Note | 431 |
+| Action | 323 |
+| Issue | 264 |
+| StateNode | 73 |
+| Change | 65 |
+| Text | 61 |
+| Actor | 44 |
+| Boundary | 44 |
+| Decision | 34 |
+| ActivityPartition | 28 |
+| Trigger | 27 |
+| Synchronization | 14 |
+| Sequence | 11 |
+| ActionPin | 6 |
+| ProxyConnector | 5 |
+| StateMachine | 2 |
+| Constraint | 1 |
+| Event | 1 |
+| ActivityParameter | 1 |
+
+## Special source-integrity view
+
+`MISSING Endpoint` is not an EA Object_Type. It remains a translator/source-integrity construct for connector endpoints that do not resolve to a source object.
+
+## Rule
+
+A source construct appearing in this inventory does not automatically define its MDSE target. Each construct requires an explicit import disposition.

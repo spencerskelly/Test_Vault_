@@ -1,0 +1,30 @@
+{
+  "nodes": [
+    {
+      "id": "source",
+      "type": "file",
+      "file": "99_System/10_EA Native Translator/01_EA Elements/ActivityPartition/README_ActivityPartition.md",
+      "x": 0,
+      "y": 0,
+      "width": 420,
+      "height": 260
+    },
+    {
+      "id": "decision",
+      "type": "text",
+      "text": "## Translation decision required\nNo target semantics are inferred from the source name alone.",
+      "x": 520,
+      "y": 0,
+      "width": 430,
+      "height": 220
+    }
+  ],
+  "edges": [
+    {
+      "id": "e1",
+      "fromNode": "source",
+      "toNode": "decision",
+      "label": "review"
+    }
+  ]
+}

@@ -2,6 +2,11 @@
 uid:
 type: Translation Decision
 status: Working
+decisionState: Working
+decisionOwner: Human
+implementationState: Partial
+verificationState: Not Verified
+lastReviewed: 2026-09-27
 decisionArea: "Requirement Property Mapping"
 ---
 # Requirement Property Mapping

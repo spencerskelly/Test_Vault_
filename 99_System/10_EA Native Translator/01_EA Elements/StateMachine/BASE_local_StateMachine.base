@@ -1,0 +1,6 @@
+filters:
+  and:
+    - file.folder == "99_System/10_EA Native Translator/01_EA Elements/StateMachine"
+views:
+  - type: table
+    name: Contents
