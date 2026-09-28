@@ -1113,3 +1113,38 @@ emptyTables:
   disposition: drop
   decision: W-74
   rows: 0
+# tDocument: 397 rows in t_document (four CSVs); decided by DocType (W-75).
+tDocument:
+- docType: SSDOCSTYLE
+  disposition: drop
+  decision: W-75
+  rows: 5
+  note: 'Dropped (W-75). EA report styles.'
+- docType: Model_Forum
+  disposition: drop
+  decision: W-75
+  rows: 1
+  note: 'Dropped (W-75). An empty forum.'
+- docType: EDisc
+  disposition: body
+  placement: source section
+  decision: W-75
+  rows: 13
+  note: 'Body (W-75). Discussion posts on requirements; one line each on the attached requirement, with author and date.'
+- docType: EPost
+  disposition: body
+  placement: source section
+  decision: W-75
+  rows: 2
+  note: 'Body (W-75). Same as EDisc.'
+- docType: ModelDocument
+  disposition: pending
+  rows: 247
+- docType: ExtDoc
+  disposition: pending
+  rows: 129
+- field: Notes
+  disposition: drop
+  decision: W-75
+  nonblank: 2
+  note: 'Dropped (W-75). Both values are <PGUID> tags.'
