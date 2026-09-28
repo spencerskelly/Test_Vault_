@@ -377,14 +377,15 @@ tConnector:
   note: Dropped (W-49). No row in the extract holds a value.
   nonblank: 0
 - field: SourceCard
-  disposition: pending
-  proposedByHandoff: body / structure
-  handoffNote: Meaningful multiplicity.
+  disposition: body
+  placement: source section
+  decision: W-54
+  note: 'Body (W-54), source section. Written as the quantity line on the assembly (quantity of <child> is: <value>, W-43), one line where a Part and a connector give the same pair. 52 of 53 rows are on Aggregation connectors; the one Association row stays in the export.'
   nonblank: 53
 - field: DestCard
-  disposition: pending
-  proposedByHandoff: body / structure
-  handoffNote: Meaningful multiplicity.
+  disposition: archive
+  decision: W-54
+  note: 'Archived (W-54). Cardinality at the assembly end: 1 on 6 Aggregations and 1..* on one Association; one assembly per child is implied.'
   nonblank: 7
 - field: SourceConstraint
   disposition: drop

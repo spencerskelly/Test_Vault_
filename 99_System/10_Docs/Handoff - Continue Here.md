@@ -15,7 +15,7 @@ Written 2026-09-28 for a new AI chat continuing the work on this vault. Read thi
 
 ## Read in this order
 
-1. `99_System/10_Docs/Workspace Decision Log.md`: every decision made here (W-01 to W-53) and the Open list at the bottom. It is the authority for what has been decided.
+1. `99_System/10_Docs/Workspace Decision Log.md`: every decision made here (W-01 to W-54) and the Open list at the bottom. It is the authority for what has been decided.
 2. `99_System/02_AI/AI_INSTRUCTIONS.md`: how an AI creates notes (uid, id, status).
 3. `99_System/03_Schemas/ea-field-dispositions.yaml`, `ea-tag-dispositions.yaml` and `ea-element-mapping.yaml`: the property and element worklists.
 4. `Definitions/Properties`: the property definition notes (`uid`, `id`, `eaType` so far).
@@ -50,7 +50,7 @@ Done: disposition vocabulary; administrative element fields; 69 tags dropped; th
 
 Next, in this order:
 1. The rest of the element fields (3 still `pending`, all decided for Parts only in `ea-field-dispositions.yaml`, each with the handoff's suggestion and a row count; the 21 empty ones were dropped in W-40 and 11 presentation/style fields decided in W-41, Note/Alias/Multiplicity in W-42, changed in W-43, Part block link in W-44, four PDATA/NType fields in W-45, three ID fields in W-46, the two type fields in W-47, Name in W-48).
-2. Connector fields (66; 28 empty ones dropped in W-49, 19 still pending) and package fields (23).
+2. Connector fields (66; 28 empty ones dropped in W-49, 17 still pending) and package fields (23).
 3. Diagram fields and the subordinate tables (attributes, operations, linked documents and others). They are not yet in a file.
 4. The 48 pending tags in `ea-tag-dispositions.yaml`. Start with the two `Status` tags: they hold "Draft" on all but one element. Groups: large low-variety tags, comments and knowledge, part and hardware data, FMEA, EA tool leftovers.
 5. Which properties every translated note carries.
