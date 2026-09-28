@@ -854,7 +854,7 @@ tDiagram:
 - field: Author
   disposition: structure
   decision: W-71
-  note: 'Structure (W-71). Builds the author part of the uid if a diagram gets one (W-09). All 10 authors are in the person notes' eaNames.'
+  note: 'Structure (W-71). Builds the author part of the uid if a diagram gets one (W-09). All 10 authors are in the person notes'' eaNames.'
   nonblank: 2924
 - field: ShowDetails
   disposition: drop
