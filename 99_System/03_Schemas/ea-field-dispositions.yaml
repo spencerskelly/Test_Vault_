@@ -250,7 +250,7 @@ tObject:
   disposition: body
   placement: source section
   decision: W-42
-  note: 'Decided W-42. Only on Part elements. Held as one line per relationship on the retained block note: quantity for <parent assembly> is: <value>. See W-42 for the Part reading.'
+  note: 'Decided W-42, placement changed in W-43. Only on Part elements. Held on the note of the assembly the Part is nested under, one line per Part: quantity of <part name or block> is: <value>. See W-43.'
   nonblank: 73
 - field: Style
   disposition: drop
