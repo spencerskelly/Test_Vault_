@@ -1179,9 +1179,47 @@ tXref:
   rows: 2740
   note: 'Dropped (W-79). Default type for diagrams created in the element.'
 - kind: CustomProperties
-  item: 'all other properties'
-  disposition: pending
-  rows: 3280
+  item: '_connectorRef'
+  disposition: drop
+  decision: W-84
+  rows: 2055
+  note: 'Dropped (W-84). The placeholder <SOURCE> on all 2,055 rows; none resolves to a connector.'
+- kind: CustomProperties
+  item: 'default'
+  disposition: drop
+  decision: W-84
+  rows: 8
+  note: 'Dropped (W-84). Empty on all 8 rows.'
+- kind: CustomProperties
+  item: 'DiagLinkType'
+  disposition: drop
+  decision: W-84
+  rows: 2
+  note: 'Dropped (W-84). EA navigation cell (2 rows).'
+- kind: CustomProperties
+  item: 'isReference'
+  disposition: archive
+  decision: W-84
+  rows: 1124
+  note: 'Archived (W-84). 0 on 1,095 rows and -1 on 29 (a Part that is a reference, not owned); could matter for hasPart.'
+- kind: CustomProperties
+  item: 'kind'
+  disposition: structure
+  decision: W-84
+  rows: 57
+  note: 'Structure (W-84). What an Action or Trigger is: CallBehavior 20, AcceptEvent 8, blank 16 (Actions 37, Triggers 20). Input to the element mapping.'
+- kind: CustomProperties
+  item: 'isConjugated'
+  disposition: structure
+  decision: W-84
+  rows: 32
+  note: 'Structure (W-84). Port conjugation: -1 on 24, 0 on 8. Input to the element mapping; how ports use it is open.'
+- kind: CustomProperties
+  item: 'isEffect'
+  disposition: structure
+  decision: W-84
+  rows: 2
+  note: 'Structure (W-84). Marks the 2 StateFlow effects that match the effect rows in W-83.'
 - kind: MOFProps
   item: 'extensionLocation'
   disposition: drop
