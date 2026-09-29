@@ -469,3 +469,15 @@ connectorTypes:
     writtenOn: 'the step before, pointing at the step after; follows generated; no review line; 5 self-loops kept'
   guard: '"- Guard: <value> (to [[next step]])" on the step before; 24 connectors (PDATA2 6, Top_End_Label 18)'
   name: 'W-158 line on the step before (31)'
+- eaConnectorType: StateFlow
+  connectors: 200
+  decision: W-175
+  status: settled
+  matrixRule: 'Rule 47, replaced'
+  rules:
+  - pair: any
+    connectors: 200
+    field: precedes
+    writtenOn: 'the state before, pointing at the next state; follows generated; no review line; no Transition notes'
+  lines: '"- Trigger: <value> (to [[next state]])" PDATA1 42; "- Guard: ..." PDATA2 27; "- Effect: ..." PDATA3 2; on the state before'
+  name: 'W-158 line on the state before (10)'
