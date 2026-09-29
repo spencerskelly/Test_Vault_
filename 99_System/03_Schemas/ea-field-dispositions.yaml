@@ -1189,9 +1189,59 @@ tXref:
   rows: 704
   note: 'Dropped (W-79). UseCase extension point location.'
 - kind: MOFProps
-  item: 'redefinedProperty, conveyed, trigger, event and others'
-  disposition: pending
-  rows: 587
+  item: 'conveyed'
+  disposition: structure
+  decision: W-83
+  rows: 79
+  note: 'Structure (W-83). InformationFlow to the Signal it carries; all 79 resolve.'
+- kind: MOFProps
+  item: 'trigger'
+  disposition: structure
+  decision: W-83
+  rows: 44
+  note: 'Structure (W-83). StateFlow to its Trigger object; 42 of 44 resolve.'
+- kind: MOFProps
+  item: 'target'
+  disposition: structure
+  decision: W-83
+  rows: 6
+  note: 'Structure (W-83). Action to ActionPin; all 6 resolve.'
+- kind: MOFProps
+  item: 'entry'
+  disposition: structure
+  decision: W-83
+  rows: 3
+  note: 'Structure (W-83). State to its entry Activity; all 3 resolve.'
+- kind: MOFProps
+  item: 'doActivity'
+  disposition: structure
+  decision: W-83
+  rows: 2
+  note: 'Structure (W-83). State to its doActivity Activity; both resolve.'
+- kind: MOFProps
+  item: 'effect'
+  disposition: structure
+  decision: W-83
+  rows: 2
+  note: 'Structure (W-83). StateFlow to its effect Activity; both resolve.'
+- kind: MOFProps
+  item: 'represents'
+  disposition: structure
+  decision: W-83
+  rows: 1
+  note: 'Structure (W-83). ActivityPartition to the Class it represents; resolves.'
+- kind: MOFProps
+  item: 'redefinedProperty'
+  disposition: archive
+  decision: W-83
+  rows: 430
+  note: 'Archived (W-83). Part to a redefined property; none of the 430 targets is in the export.'
+- kind: MOFProps
+  item: 'event'
+  disposition: archive
+  decision: W-83
+  rows: 20
+  note: 'Archived (W-83). Trigger to an event; none of the 20 targets is in the export.'
 - kind: DefaultDiagram
   disposition: structure
   decision: W-80
