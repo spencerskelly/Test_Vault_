@@ -378,9 +378,11 @@ elementTypes:
   elements: 264
   stereotypes:
     (none): 264
-  disposition: pending
-  mdseType: null
-  decision: null
+  disposition: note
+  mdseType: Issue
+  decision: W-144
+  subtype: null
+  note: 'All 264 Issue elements become Issue notes with a blank subtype; eaType keeps Issue (W-144).'
   oldToolRules:
   - rule: E-06
     verdict: emit
@@ -425,9 +427,11 @@ elementTypes:
   elements: 44
   stereotypes:
     (none): 44
-  disposition: pending
-  mdseType: null
-  decision: null
+  disposition: note
+  mdseType: Actor
+  decision: W-144
+  subtype: null
+  note: 'All 44 Actor elements become Actor notes (W-144).'
   oldToolRules:
   - rule: AC-04
     verdict: suppress
@@ -533,9 +537,11 @@ elementTypes:
   elements: 2
   stereotypes:
     (none): 2
-  disposition: pending
-  mdseType: null
-  decision: null
+  disposition: note
+  mdseType: State Machine
+  decision: W-144
+  subtype: null
+  note: 'Both StateMachine elements become State Machine notes (W-144).'
   oldToolRules:
   - rule: E-06
     verdict: emit
