@@ -76,7 +76,7 @@ elementTypes:
   disposition: pending
   mdseType: null
   decision: null
-  partialDecision: 'The 760 Parts with the stereotype FlowProperty become Item Flow notes, one each, with direction as source and target; they are not merged into blocks and their PDATA1 is a Signal or Class, not a block (W-132). Of the other 2,377 Parts, the 2,055 typed by a Class fold into their blocks (W-43, W-44, W-136): the assembly note gets one hasPart entry per Part, and one source-section line for each Part with data of its own (role name, quantity, tags, style). The other 322 (Activity 142, State 61, Signal 16, missing 98, none 5) are not decided.'
+  partialDecision: 'The 760 Parts with the stereotype FlowProperty become Item Flow notes, one each, with direction as source and target; they are not merged into blocks and their PDATA1 is a Signal or Class, not a block (W-132). Of the other 2,377 Parts, the 2,055 typed by a Class fold into their blocks (W-43, W-44, W-136): the assembly note gets one hasPart entry per Part, and one source-section line for each Part with data of its own (role name, quantity, tags, style). Of the other 322, the 219 typed by an Activity (142), a State (61) or a Signal (16) become a hasPart entry on their owner pointing at the referenced note (W-137); the 103 with no usable block (missing 98, none 5) are not decided.'
   oldToolRules:
   - rule: F-02
     verdict: fold
