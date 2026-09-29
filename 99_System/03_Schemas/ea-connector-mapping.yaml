@@ -481,3 +481,9 @@ connectorTypes:
     writtenOn: 'the state before, pointing at the next state; follows generated; no review line; no Transition notes'
   lines: '"- Trigger: <value> (to [[next state]])" PDATA1 42; "- Guard: ..." PDATA2 27; "- Effect: ..." PDATA3 2; on the state before'
   name: 'W-158 line on the state before (10)'
+- eaConnectorType: Sequence
+  connectors: 199
+  decision: W-176
+  status: settled
+  matrixRule: 'Rule 43'
+  rule: 'no relationship field; the diagram companion note (W-73) lists the messages under **Messages:** in SeqNo order, "<SeqNo>. [[sender]] → [[receiver]]: <message name>"; Notes (4) as an indented line under the message; DiagramID places the message (W-61)'
