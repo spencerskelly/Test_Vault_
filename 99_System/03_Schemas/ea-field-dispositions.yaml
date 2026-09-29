@@ -6,6 +6,7 @@
 # nonblank = rows with a real (not empty, not 0) value in the extract; tObject counts exclude package rows.
 # placement (only on body): main text | source section | attachment. main text is the note's own description at the top of the body; source section is a line below the EA GUID (the default when placement is missing); attachment is a file next to the note (W-42, W-76).
 # Sections: tObject, tConnector, tPackage (fields, W-33 to W-66); tDiagram, tDiagramObjects, tDiagramLinks (W-67 to W-73); emptyTables (W-74); tDocument (W-75, W-76); tXref (W-79 to W-84); tConnectorTag (W-85); tSmallTables (W-86).
+# Added in W-108 (sweep): tSmallColumns (column dispositions for t_attribute and t_operation), tXrefColumns, tDocumentColumns, sourceFiles (role of every file in CSV_EA).
 # Still pending, set aside in W-96 for the element mapping: tObject Classifier, Classifier_guid and PDATA1 (decided for Parts only, W-44). Tags are in ea-tag-dispositions.yaml.
 schemaVersion: '1.0'
 # tObject: 34583 rows in the extract
@@ -1320,3 +1321,602 @@ tSmallTables:
   decision: W-86
   rows: 1
   note: 'Dropped (W-86). One Basic Path with an empty body and no notes.'
+tSmallColumns:
+  t_attribute:
+  - field: Object_ID
+    disposition: structure
+    decision: W-108
+    note: Structure. Joins the row to the Class that owns it.
+    nonblank: 5
+  - field: Name
+    disposition: body
+    decision: W-108
+    note: Body (W-86). The attribute name on the Attribute line.
+    nonblank: 5
+  - field: Scope
+    disposition: archive
+    decision: W-108
+    note: Archived. Public 4, Private 1; no place in the note.
+    nonblank: 5
+  - field: Stereotype
+    disposition: drop
+    decision: W-108
+    note: Empty on all rows.
+    nonblank: 0
+  - field: Containment
+    disposition: drop
+    decision: W-108
+    note: Not Specified on all 5 rows (EA default).
+    nonblank: 5
+  - field: IsStatic
+    disposition: drop
+    decision: W-108
+    note: Empty on all rows.
+    nonblank: 0
+  - field: IsCollection
+    disposition: drop
+    decision: W-108
+    note: Empty on all rows.
+    nonblank: 0
+  - field: IsOrdered
+    disposition: drop
+    decision: W-108
+    note: Empty on all rows.
+    nonblank: 0
+  - field: AllowDuplicates
+    disposition: drop
+    decision: W-108
+    note: Empty on all rows.
+    nonblank: 0
+  - field: LowerBound
+    disposition: drop
+    decision: W-108
+    note: 1 on all 5 rows (EA default).
+    nonblank: 5
+  - field: UpperBound
+    disposition: drop
+    decision: W-108
+    note: 1 on all 5 rows (EA default).
+    nonblank: 5
+  - field: Container
+    disposition: drop
+    decision: W-108
+    note: Empty on all rows.
+    nonblank: 0
+  - field: Notes
+    disposition: drop
+    decision: W-108
+    note: Empty on all rows.
+    nonblank: 0
+  - field: Derived
+    disposition: drop
+    decision: W-108
+    note: Empty on all rows.
+    nonblank: 0
+  - field: ID
+    disposition: drop
+    decision: W-108
+    note: EA internal row number.
+    nonblank: 5
+  - field: Pos
+    disposition: archive
+    decision: W-108
+    note: Archived. EA display order; the Attribute lines follow the row order of the export.
+    nonblank: 2
+  - field: GenOption
+    disposition: drop
+    decision: W-108
+    note: Empty on all rows.
+    nonblank: 0
+  - field: Length
+    disposition: drop
+    decision: W-108
+    note: Empty on all rows.
+    nonblank: 0
+  - field: Precision
+    disposition: drop
+    decision: W-108
+    note: Empty on all rows.
+    nonblank: 0
+  - field: Scale
+    disposition: drop
+    decision: W-108
+    note: Empty on all rows.
+    nonblank: 0
+  - field: Const
+    disposition: drop
+    decision: W-108
+    note: Empty on all rows.
+    nonblank: 0
+  - field: Style
+    disposition: drop
+    decision: W-108
+    note: Empty on all rows.
+    nonblank: 0
+  - field: Classifier
+    disposition: drop
+    decision: W-108
+    note: Empty on all rows.
+    nonblank: 0
+  - field: (unnamed column)
+    disposition: drop
+    decision: W-108
+    note: Empty on all rows.
+    nonblank: 0
+  - field: Type
+    disposition: body
+    decision: W-108
+    note: Body (W-86). The attribute type on the Attribute line (int 3, AL 1, blank 1).
+    nonblank: 4
+  - field: ea_guid
+    disposition: archive
+    decision: W-108
+    note: Archived. Original row identity, in the export only.
+    nonblank: 5
+  - field: StyleEx
+    disposition: drop
+    decision: W-108
+    note: volatile=0; on all 5 rows (EA default).
+    nonblank: 5
+  t_operation:
+  - field: OperationID
+    disposition: drop
+    decision: W-108
+    note: EA internal row number.
+    nonblank: 23
+  - field: Object_ID
+    disposition: structure
+    decision: W-108
+    note: Structure. Joins the row to the State that owns it.
+    nonblank: 23
+  - field: Name
+    disposition: body
+    decision: W-108
+    note: Body (W-86). The action name on the Entry action, Do action or Exit action line.
+    nonblank: 23
+  - field: Scope
+    disposition: drop
+    decision: W-108
+    note: Public on all 23 rows (EA default).
+    nonblank: 23
+  - field: Type
+    disposition: structure
+    decision: W-108
+    note: Structure (W-86). entry 11, do 9, exit 3; picks which of the three labels is written.
+    nonblank: 23
+  - field: ReturnArray
+    disposition: drop
+    decision: W-108
+    note: Empty on all rows.
+    nonblank: 0
+  - field: Stereotype
+    disposition: drop
+    decision: W-108
+    note: Empty on all rows.
+    nonblank: 0
+  - field: IsStatic
+    disposition: drop
+    decision: W-108
+    note: Empty on all rows.
+    nonblank: 0
+  - field: Concurrency
+    disposition: drop
+    decision: W-108
+    note: Sequential on all 23 rows (EA default).
+    nonblank: 23
+  - field: Notes
+    disposition: drop
+    decision: W-108
+    note: Empty on all rows.
+    nonblank: 0
+  - field: Behaviour
+    disposition: archive
+    decision: W-108
+    note: Archived. 6 rows hold a GUID that does not resolve (W-86); nothing can be written from it.
+    nonblank: 6
+  - field: Abstract
+    disposition: drop
+    decision: W-108
+    note: Empty on all rows.
+    nonblank: 0
+  - field: GenOption
+    disposition: drop
+    decision: W-108
+    note: Empty on all rows.
+    nonblank: 0
+  - field: Synchronized
+    disposition: drop
+    decision: W-108
+    note: Empty on all rows.
+    nonblank: 0
+  - field: Pos
+    disposition: archive
+    decision: W-108
+    note: Archived. EA display order (0, 1 or 2); the line order follows Type.
+    nonblank: 11
+  - field: Const
+    disposition: drop
+    decision: W-108
+    note: Empty on all rows.
+    nonblank: 0
+  - field: Style
+    disposition: drop
+    decision: W-108
+    note: Empty on all rows.
+    nonblank: 0
+  - field: Pure
+    disposition: drop
+    decision: W-108
+    note: Empty on all rows.
+    nonblank: 0
+  - field: Throws
+    disposition: drop
+    decision: W-108
+    note: Empty on all rows.
+    nonblank: 0
+  - field: Classifier
+    disposition: drop
+    decision: W-108
+    note: Empty on all rows.
+    nonblank: 0
+  - field: Code
+    disposition: drop
+    decision: W-108
+    note: Empty on all rows.
+    nonblank: 0
+  - field: IsRoot
+    disposition: drop
+    decision: W-108
+    note: Empty on all rows.
+    nonblank: 0
+  - field: IsLeaf
+    disposition: drop
+    decision: W-108
+    note: Empty on all rows.
+    nonblank: 0
+  - field: IsQuery
+    disposition: drop
+    decision: W-108
+    note: Empty on all rows.
+    nonblank: 0
+  - field: StateFlags
+    disposition: drop
+    decision: W-108
+    note: Empty on all rows.
+    nonblank: 0
+  - field: ea_guid
+    disposition: archive
+    decision: W-108
+    note: Archived. Original row identity, in the export only.
+    nonblank: 23
+  - field: StyleEx
+    disposition: drop
+    decision: W-108
+    note: Empty on all rows.
+    nonblank: 0
+tXrefColumns:
+- field: XrefID
+  disposition: archive
+  decision: W-108
+  note: Archived. EA internal row identity.
+  nonblank: 42052
+- field: Name
+  disposition: structure
+  decision: W-108
+  note: 'Structure (W-79). The kind of row: Stereotypes, CustomProperties, MOFProps, DefaultDiagram or SMLS.'
+  nonblank: 42052
+- field: Type
+  disposition: structure
+  decision: W-108
+  note: 'Structure (W-79). What the row belongs to: element property, connector property, diagram properties or SMLS.'
+  nonblank: 42052
+- field: Visibility
+  disposition: drop
+  decision: W-108
+  note: Public on all rows that have a value (EA default).
+  nonblank: 42036
+- field: Namespace
+  disposition: drop
+  decision: W-108
+  note: Empty on all rows.
+  nonblank: 0
+- field: Requirement
+  disposition: drop
+  decision: W-108
+  note: Empty on all rows.
+  nonblank: 0
+- field: (unnamed column)
+  disposition: drop
+  decision: W-108
+  note: Empty on all rows.
+  nonblank: 0
+- field: Behavior
+  disposition: structure
+  decision: W-108
+  note: Structure (W-83). The item name of a MOFProps row, for example extensionLocation, conveyed or trigger.
+  nonblank: 1291
+- field: (unnamed column)
+  disposition: drop
+  decision: W-108
+  note: Empty on all rows.
+  nonblank: 0
+- field: Description
+  disposition: structure
+  decision: W-108
+  note: Structure (W-79, W-84). The property text that is read for the item, for example the name and type of a custom property.
+  nonblank: 41158
+- field: Client
+  disposition: structure
+  decision: W-108
+  note: Structure (W-79). The GUID of the element, connector or diagram the row belongs to.
+  nonblank: 42052
+- field: Supplier
+  disposition: structure
+  decision: W-108
+  note: Structure (W-83). The GUID the row points at; <none> where it points at nothing.
+  nonblank: 37444
+- field: Link
+  disposition: drop
+  decision: W-108
+  note: Empty on all rows.
+  nonblank: 0
+tDocumentColumns:
+- field: DocID
+  disposition: structure
+  decision: W-108
+  note: Structure (W-76). Identifies the linked file. The order of the counter n in `<note file name> asset <n>` when a note has several attachments is not decided.
+  nonblank: 100
+- field: DocName
+  disposition: archive
+  decision: W-108
+  note: Archived. ImageAsset on the 129 images; a free name such as Figure 7.5 on some ModelDocument rows. Note names come from the owning element.
+  nonblank: 100
+- field: Notes
+  disposition: drop
+  decision: W-108
+  note: W-75. Both values are <PGUID> tags.
+  nonblank: 0
+- field: Style
+  disposition: drop
+  decision: W-108
+  note: W-75. Report styles, an EA type GUID on images, and a creation stamp on discussion posts that DocDate already holds.
+  nonblank: 100
+- field: ElementID
+  disposition: structure
+  decision: W-108
+  note: Structure (W-75, W-76). The GUID of the element the document is attached to.
+  nonblank: 100
+- field: ElementType
+  disposition: structure
+  decision: W-108
+  note: Structure (W-76). Gives the file extension of an image (.png) and marks discussion posts (Post).
+  nonblank: 100
+- field: StrContent
+  disposition: body
+  decision: W-108
+  note: Body (W-75). The text of a discussion post (15 rows).
+  nonblank: 0
+- field: BinContent
+  disposition: body
+  decision: W-108
+  note: Body (W-76, W-77, W-78), attachment. The linked file.
+  nonblank: 100
+- field: DocType
+  disposition: structure
+  decision: W-108
+  note: Structure (W-75). The kind of document; picks the rule.
+  nonblank: 100
+- field: Author
+  disposition: body
+  decision: W-108
+  note: 'Body (W-75) on discussion posts (15 rows): written with the post. Archived on the 129 images.'
+  nonblank: 99
+- field: Version
+  disposition: drop
+  decision: W-108
+  note: 1 on the 129 images, blank elsewhere.
+  nonblank: 99
+- field: IsActive
+  disposition: drop
+  decision: W-108
+  note: Mixed numbers with no meaning as an active flag (0 and 1 on some kinds, large numbers on images).
+  nonblank: 100
+- field: Sequence
+  disposition: drop
+  decision: W-108
+  note: Empty on all rows.
+  nonblank: 0
+- field: DocDate
+  disposition: body
+  decision: W-108
+  note: 'Body (W-75) on discussion posts (15 rows): written with the post. Archived on attachments and the rest.'
+  nonblank: 100
+sourceFiles:
+- file: connector_endpoints_enriched.csv
+  role: extraction or analysis output, not an EA table
+  disposition: archive
+  note: Kept for reference; not translated.
+- file: diagram_index.csv
+  role: extraction or analysis output, not an EA table
+  disposition: archive
+  note: Kept for reference; not translated.
+- file: diagram_type_summary.csv
+  role: extraction or analysis output, not an EA table
+  disposition: archive
+  note: Kept for reference; not translated.
+- file: element_connectivity_audit.csv
+  role: extraction or analysis output, not an EA table
+  disposition: archive
+  note: Kept for reference; not translated.
+- file: invalid_connector_endpoints.csv
+  role: extraction or analysis output, not an EA table
+  disposition: archive
+  note: Kept for reference; not translated.
+- file: low_evidence_elements.csv
+  role: extraction or analysis output, not an EA table
+  disposition: archive
+  note: Kept for reference; not translated.
+- file: orphan_req_placements.csv
+  role: extraction or analysis output, not an EA table
+  disposition: archive
+  note: Kept for reference; not translated.
+- file: package_coupling.csv
+  role: extraction or analysis output, not an EA table
+  disposition: archive
+  note: Kept for reference; not translated.
+- file: relationship_pattern_summary.csv
+  role: extraction or analysis output, not an EA table
+  disposition: archive
+  note: Kept for reference; not translated.
+- file: requirement_connectivity_audit.csv
+  role: extraction or analysis output, not an EA table
+  disposition: archive
+  note: Kept for reference; not translated.
+- file: t_attribute.csv
+  role: translator input
+  disposition: structure
+  note: Read by the translator.
+- file: t_attributeconstraints.csv
+  role: EA table, decided
+  disposition: drop
+  note: Decided in W-74, W-85 or W-86; not translated.
+- file: t_attributetag.csv
+  role: EA table, decided
+  disposition: drop
+  note: Decided in W-74, W-85 or W-86; not translated.
+- file: t_connector.csv
+  role: translator input
+  disposition: structure
+  note: Read by the translator.
+- file: t_connectorconstraint.csv
+  role: EA table, decided
+  disposition: drop
+  note: Decided in W-74, W-85 or W-86; not translated.
+- file: t_connectortag.csv
+  role: EA table, decided
+  disposition: drop
+  note: Decided in W-74, W-85 or W-86; not translated.
+- file: t_diagram.csv
+  role: translator input
+  disposition: structure
+  note: Read by the translator.
+- file: t_diagramlinks.csv
+  role: translator input
+  disposition: structure
+  note: Read by the translator.
+- file: t_diagramobjects.csv
+  role: translator input
+  disposition: structure
+  note: Read by the translator.
+- file: t_document_001.csv
+  role: translator input
+  disposition: structure
+  note: Read by the translator.
+- file: t_document_002.csv
+  role: translator input
+  disposition: structure
+  note: Read by the translator.
+- file: t_document_003.csv
+  role: translator input
+  disposition: structure
+  note: Read by the translator.
+- file: t_document_004.csv
+  role: translator input
+  disposition: structure
+  note: Read by the translator.
+- file: t_files.csv
+  role: EA table, decided
+  disposition: drop
+  note: Decided in W-74, W-85 or W-86; not translated.
+- file: t_glossary.csv
+  role: EA table, decided
+  disposition: drop
+  note: Decided in W-74, W-85 or W-86; not translated.
+- file: t_issues.csv
+  role: EA table, decided
+  disposition: drop
+  note: Decided in W-74, W-85 or W-86; not translated.
+- file: t_object.csv
+  role: translator input
+  disposition: structure
+  note: Read by the translator.
+- file: t_objectconstraint.csv
+  role: EA table, decided
+  disposition: drop
+  note: Decided in W-74, W-85 or W-86; not translated.
+- file: t_objecteffort.csv
+  role: EA table, decided
+  disposition: drop
+  note: Decided in W-74, W-85 or W-86; not translated.
+- file: t_objectmetrics.csv
+  role: EA table, decided
+  disposition: drop
+  note: Decided in W-74, W-85 or W-86; not translated.
+- file: t_objectproblems.csv
+  role: EA table, decided
+  disposition: drop
+  note: Decided in W-74, W-85 or W-86; not translated.
+- file: t_objectproperties.csv
+  role: subset view of t_objectproperties_raw.csv
+  disposition: archive
+  note: Kept for reference. Both lack the Notes column (W-102); t_objectproperties.csv also omits the Status tags.
+- file: t_objectproperties_all.csv
+  role: subset view of t_objectproperties_raw.csv
+  disposition: archive
+  note: Kept for reference. Both lack the Notes column (W-102); t_objectproperties.csv also omits the Status tags.
+- file: t_objectproperties_raw.csv
+  role: translator input
+  disposition: structure
+  note: Read by the translator. It is the source of tag values because only this file has the Notes column that holds the text of memo tags (W-102).
+- file: t_objectrisks.csv
+  role: EA table, decided
+  disposition: drop
+  note: Decided in W-74, W-85 or W-86; not translated.
+- file: t_objectscenarios.csv
+  role: EA table, decided
+  disposition: drop
+  note: Decided in W-74, W-85 or W-86; not translated.
+- file: t_objecttests.csv
+  role: EA table, decided
+  disposition: drop
+  note: Decided in W-74, W-85 or W-86; not translated.
+- file: t_operation.csv
+  role: translator input
+  disposition: structure
+  note: Read by the translator.
+- file: t_operationparams.csv
+  role: EA table, decided
+  disposition: drop
+  note: Decided in W-74, W-85 or W-86; not translated.
+- file: t_operationtag.csv
+  role: EA table, decided
+  disposition: drop
+  note: Decided in W-74, W-85 or W-86; not translated.
+- file: t_package.csv
+  role: translator input
+  disposition: structure
+  note: Read by the translator.
+- file: t_tasks.csv
+  role: EA table, decided
+  disposition: drop
+  note: Decided in W-74, W-85 or W-86; not translated.
+- file: t_xref.csv
+  role: translator input
+  disposition: structure
+  note: Read by the translator.
+- file: table_inventory.csv
+  role: extraction or analysis output, not an EA table
+  disposition: archive
+  note: Kept for reference; not translated.
+- file: tagvalue_summary.csv
+  role: extraction or analysis output, not an EA table
+  disposition: archive
+  note: Kept for reference; not translated.
+- file: EVIDENCE_README.md
+  role: extraction output, not an EA table
+  disposition: archive
+  note: Kept for reference; not translated.
+- file: extract_manifest.json
+  role: extraction output, not an EA table
+  disposition: archive
+  note: Kept for reference; not translated.

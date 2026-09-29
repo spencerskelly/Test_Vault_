@@ -11,12 +11,14 @@ The last section of every note that was translated from EA. It traces the note b
 
 ## Layout
 
-The EA GUID comes first. Everything else taken from EA goes below it.
+The section starts with its heading. A `Name` line comes first when one is needed, then the `EA GUID` line. Everything else taken from EA goes below the GUID. Three empty lines separate the section from the rest of the note (W-99). The whole note is laid out in [[Note Layout]].
 
 ```
 ## Source: EA
+Name: <original name>
 EA GUID: {D2B8F0A4-...}
 
+- Part Number: 4050030
 - id: DG_0307_001_02
 - SysML1.4::id: CC115
 - Applicability Comment: Only for DC charging
@@ -24,10 +26,12 @@ EA GUID: {D2B8F0A4-...}
 
 ## Rules
 
-- The line `EA GUID:` is always the first line of the section. It is for tracing back to the original element and is not used for anything else.
-- Below it, one line per value in the form `- <EA tag name>: <value>`, using the tag name exactly as it was in EA.
+- The `Name` line is written only when a name has to be kept (for example, the file name differs from the EA name). Its exact format is not decided.
+- The line `EA GUID:` comes next. It is for tracing back to the original element and is not used for anything else.
+- Below it, one line per value in the form `- <EA tag name>: <value>`, using the tag name exactly as it was in EA, in the order set in [[Note Layout]] (W-101, W-104).
 - A line is written only when EA had a real value. Placeholders such as `unassigned` and `<memo>`, and empty values, are left out.
 - Values that were moved into a property of the note are not repeated here.
+- Values that are written as normal text higher in the note are not repeated here: the Note, `text` wording, `User Story`, `Sales Comment`, `Product Management Comment`, `Engineering Comment`, and any multi-line `Priority` value (W-102, W-104, W-106). No tag line contains a line break.
 
 ## Lines decided since the layout was set
 
@@ -42,10 +46,10 @@ These are the kinds of line the translator writes in this section, or near it, a
 - Connector values (Name, Notes, trigger, guard, effect): on both end notes for Connector and InformationFlow, on the owner-side note for other types (W-55, W-56, W-61).
 - `- REVIEW port needed: ...` on both ends of a flow connector that was drawn on a block instead of a port; it is deleted when the connector is moved to a port (W-55, Task 1 in `Post-Import Tasks.md`).
 
-Two placements sit outside this section. An element's own description (its Note) is the main text at the top of the body, and a package's Notes and a diagram's Notes likewise (W-42, W-66, W-71). A `Default diagram: [[...]]` line sits in a marked block below the main text and above this section, and is written only when the diagram's canvas exists (W-80). Linked documents are attached as files next to the note, named `<note file name> asset <n>`, and are not lines in this section (W-76, W-77, W-78).
+Some placements sit outside this section. An element's own description (its Note) is the main text at the top of the body, and a package's Notes and a diagram's Notes likewise (W-42, W-66, W-71). A `Default diagram: [[...]]` line sits in a marked block below the main text and above this section, and is written only when the diagram's canvas exists (W-80). Linked documents are attached as files next to the note, named `<note file name> asset <n>`, and are not lines in this section (W-76, W-77, W-78).
 
 ## Why it is laid out this way
 
-Everything below the GUID line is unreviewed source data. Once the values have been reviewed, the cleanup deletes what has no value, and the GUID line is left as the last line of the note. Keeping it all in one place, below the GUID, makes that a simple, safe sweep for a person or an AI.
+Everything below the GUID line is unreviewed source data. Once the values have been reviewed, the cleanup deletes what has no value, and the GUID line is left as the last line of the note (the `Name` line goes with the other reviewed values). Keeping it all in one place, below the GUID, makes that a simple, safe sweep for a person or an AI.
 
-Related: [[id]]
+Related: [[Note Layout]], [[id]]

@@ -18,11 +18,11 @@ The classification the element had in EA. It is temporary: it stays while the im
 
 Text, taken from EA. It is the EA stereotype when the element has one, otherwise the EA object type. Examples: `Regulatory Requirement`, `requirement`, `Activity`, `Class`.
 
-This loses nothing: no stereotype is used on more than one EA object type, and the rule gives 71 distinct values for the 71 combinations found in the source.
+This loses nothing: no stereotype is used on more than one EA object type, and the rule gives 72 distinct values for the 72 combinations found in the source.
 
 ## Where it sits
 
-In the properties, directly below `type`, `subtype` and `id`.
+In the properties, directly below `status` and above `tags` (W-97).
 
 ## How it is determined
 

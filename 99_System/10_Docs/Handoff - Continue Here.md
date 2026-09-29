@@ -15,7 +15,7 @@ Written 2026-09-28 for a new AI chat continuing the work on this vault. Read thi
 
 ## Read in this order
 
-1. `99_System/10_Docs/Workspace Decision Log.md`: every decision made here (W-01 to W-106) and the Open list at the bottom. It is the authority for what has been decided.
+1. `99_System/10_Docs/Workspace Decision Log.md`: every decision made here (W-01 to W-108) and the Open list at the bottom. It is the authority for what has been decided.
 2. `99_System/02_AI/AI_INSTRUCTIONS.md`: how an AI creates notes (uid, id, status).
 3. `99_System/03_Schemas/ea-field-dispositions.yaml`, `ea-tag-dispositions.yaml` and `ea-element-mapping.yaml`: the property and element worklists.
 4. `Definitions/Properties`: the property definition notes (`uid`, `id`, `eaType` so far).
@@ -40,7 +40,7 @@ Written 2026-09-28 for a new AI chat continuing the work on this vault. Read thi
 - **Templates and definitions:** templates serve hand-made and translated notes; Templater snippets fill `uid` and `id` (W-06, W-20). Every property gets a definition note in `Definitions/Properties` (W-08, W-19).
 - **EA traceability:** the `EA GUID` line is first in a `Source: EA` section at the bottom of a translated note, and everything else kept from EA goes below it (W-03, W-28). The layout is described in `Definitions/EA Source Section.md`.
 - **External documents:** one note per document edition with clause anchors; unconnected clauses fold into it (W-16).
-- **Tags:** all 121 are decided (W-29 to W-95): 82 dropped, 36 body lines under their EA tag names, 3 structure (W-93). Sequence-style EA `id` values are dropped (W-26). The `Stakeholder ID` tag holds clause numbers. When unsure, keep the value in the body and decide in the cleanup (W-27).
+- **Tags:** all 121 are decided (W-29 to W-95): 80 dropped, 38 body (36 tag lines under their EA tag names, and `text` and `SysML1.4::text` as normal text, W-102), 3 structure (W-93, W-102). Sequence-style EA `id` values are dropped (W-26). The `Stakeholder ID` tag holds clause numbers. When unsure, keep the value in the body and decide in the cleanup (W-27).
 - **Default diagram line:** an element with a default diagram gets a marked `Default diagram: [[...]]` line, written only when the canvas is created, including by a diagrams-only run (W-80). **Requirements:** every one is imported as a note, folding is stage 2 (W-81).
 - **Diagrams-only merge:** a new tool mode may add selected diagram types into an existing vault, additive only and through the accepted ledger (W-62). A diagram is a canvas file plus a companion note (W-73).
 - **Import process:** two stages (W-30). Run into a fresh vault, review, then accept it or start fresh with better rules; never import over an existing vault (W-36, W-37). Review changes are the git diff against the baseline plus reasons in `99_System/10_Docs/Review Changes Log.md` (W-38). The source reference is a ledger keyed by EA GUID plus a run manifest, with no copied values (W-35).
@@ -51,7 +51,7 @@ Written 2026-09-28 for a new AI chat continuing the work on this vault. Read thi
 
 Fields and tags are complete (W-33 to W-96), with one exception set aside for the element mapping.
 
-Done: disposition vocabulary; all element, connector, package and diagram fields except three (W-33 to W-73); all subordinate tables (W-74 to W-86); all 121 tags (82 dropped, 36 body lines under their EA tag names, 3 structure; W-29 to W-95); the W-88 property set (`uid`, `id`, `type`, `subtype`, `status`, `tags` on every note, `eaType` on translated notes; `aliases` and `formerIds` in the body; `control` and `boundary` not approved). Body lines use the exact EA tag name until after the import (W-93).
+Done: disposition vocabulary; all element, connector, package and diagram fields except three (W-33 to W-73); all subordinate tables (W-74 to W-86); all 121 tags (80 dropped, 38 body, 3 structure; W-29 to W-102); the W-88 property set (`uid`, `id`, `type`, `subtype`, `status`, `tags` on every note, `eaType` on translated notes; `aliases` and `formerIds` in the body; `control` and `boundary` not approved). Body lines use the exact EA tag name until after the import (W-93).
 
 Set aside (W-96): `Classifier`, `Classifier_guid` and `PDATA1` on element types other than Part. They are marked `setAside` with counts by type in `ea-field-dispositions.yaml`. Decide them in the element mapping.
 
@@ -60,6 +60,10 @@ Not applied yet (W-88 and the W-96 review): the property set in the templates, `
 ## Decided after the W-96 review (W-97 to W-100)
 
 Property order at the top of every note: `type`, `subtype`, `id`, `uid`, `status`, `eaType`, `tags`; only `tags` holds several values (W-97). The 36 body-line tags are reviewed first so Spencer can set their order (W-98). A `Name` line goes above `EA GUID`, and the `Source: EA` section starts three lines below the other body content (W-99). An element with no approved mapping gets `type: modelCheck` (W-100). The order of body lines is set in W-101 and changed by W-104 and W-105 (four comments become labeled normal text below the Note; the other 32 tag lines stay below the EA GUID) (`order` in `ea-tag-dispositions.yaml`). The `text` tag is kept as normal text below the Note (W-102). Open before the import: multi-line values, the 255-character cut. When a Note and `text` both exist they are separated by one blank line (W-103). None of this is applied yet to templates, snippets, schemas or the translator.
+
+## Layout and sweep (W-107, W-108)
+
+The note layout is written in `Definitions/Note Layout.md`; `Definitions/EA Source Section.md` describes the last section. A sweep of all fields, tags and export files found no missing field; column dispositions for `t_attribute`, `t_operation`, `t_xref` and `t_document`, and a role for every file in `CSV_EA`, were added to `ea-field-dispositions.yaml`. Open from the sweep: whether `Object Type`, `Origin` and `In-Links` are `archive` instead of `drop`, and the counter order for several attachments on one note.
 
 ## Next topic: element mapping
 
