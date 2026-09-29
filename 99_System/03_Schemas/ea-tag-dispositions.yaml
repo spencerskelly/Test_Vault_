@@ -790,6 +790,7 @@ tags:
   - tag: "Webasto MBDV Profile::Priority"
     disposition: "body"
     decision: "W-89"
+    multilinePlacement: "A value that contains a line break (7 rows) is written as normal text between the user section and the Source: EA section, as a bold label on one line and the value on the next line, like the comment texts (W-106). Single-line values stay as tag lines."
     order: 9
     orderGroup: "Requirements"
     populated: 2373
