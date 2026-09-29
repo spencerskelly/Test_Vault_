@@ -148,6 +148,7 @@ tObject:
   disposition: archive
   decision: W-45
   note: 'Archived (W-45). Requirements hold only the EA default ''Medium''. GUID references on Ports and Parts wait for the Port and Object mapping.'
+  portsDecision: 'Port elements only, decided W-122: written as subtypeOf to the Port it names; the 146 links that do not follow the block family are flagged.'
   nonblank: 14619
 - field: PDATA3
   disposition: archive
