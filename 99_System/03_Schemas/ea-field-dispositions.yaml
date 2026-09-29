@@ -31,6 +31,7 @@ tObject:
 - field: Name
   disposition: structure
   decision: W-48
+  unnamedRule: 'W-145: an element with no name is named by its lowercase EA object type and a counter across the vault, in EA creation order, for example note 1, object 1, text 1; Ports and pins follow W-134, Parts with no block W-138.'
   note: 'Structure (W-48). Becomes the note title and file name. Where the file name differs from the source name (unsafe characters, trimmed spaces, line breaks, duplicate counter), the original is kept as - Name: <original> below the EA GUID. The replacement characters and the duplicate suffix are not decided here.'
   nonblank: 31162
 - field: Alias

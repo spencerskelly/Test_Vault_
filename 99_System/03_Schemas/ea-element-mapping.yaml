@@ -95,9 +95,12 @@ elementTypes:
   elements: 2825
   stereotypes:
     (none): 2825
-  disposition: pending
-  mdseType: null
-  decision: null
+  disposition: note
+  mdseType: Requirement
+  decision: W-115
+  mapping:
+  - {rule: 'sits in IPC ! / 03 Product Requirement / Regulatory Requirements', mdseType: Requirement, subtype: standard, elements: 2383, decision: W-115}
+  - {rule: 'sits in any other package', mdseType: Info, subtype: null, elements: 442, decision: W-145}
   partialDecision: The 2,383 InformationItems in the package 03 Product Requirement / Regulatory Requirements become Requirement notes with subtype standard (W-115). The other 442 are not decided.
   oldToolRules:
   - rule: I-01
@@ -350,9 +353,11 @@ elementTypes:
   elements: 431
   stereotypes:
     (none): 431
-  disposition: pending
-  mdseType: null
-  decision: null
+  disposition: note
+  mdseType: Info
+  decision: W-145
+  subtype: null
+  note: 'All 431 Note elements become Info notes with a blank subtype; unnamed ones are named by the general rule of W-145.'
   oldToolRules:
   - rule: N-01
     verdict: fold
@@ -413,9 +418,11 @@ elementTypes:
   stereotypes:
     (none): 59
     NavigationCell: 2
-  disposition: pending
-  mdseType: null
-  decision: null
+  disposition: note
+  mdseType: Info
+  decision: W-145
+  subtype: null
+  note: 'All 61 Text elements become Info notes with a blank subtype (W-145).'
   oldToolRules:
   - rule: N-01
     verdict: fold
@@ -549,9 +556,11 @@ elementTypes:
   elements: 1
   stereotypes:
     (none): 1
-  disposition: pending
-  mdseType: null
-  decision: null
+  disposition: note
+  mdseType: Info
+  decision: W-145
+  subtype: null
+  note: 'The Constraint element becomes an Info note with a blank subtype (W-145).'
   oldToolRules:
   - rule: N-01
     verdict: fold
