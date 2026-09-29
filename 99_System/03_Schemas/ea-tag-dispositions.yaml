@@ -5,6 +5,7 @@
 #   structure  used by the translator to build something (a title, id, link or placement); the rule that used it is recorded in the ledger; not put on the note
 #   archive    stays in the original export only, not in the note
 #   drop       not kept anywhere
+# order / orderGroup: position and group of a body line in the Source: EA section, lowest first (W-101). PN and PartNumber share order 1 (one Part Number line).
 # The source reference is a ledger keyed by EA GUID plus a run manifest; values are not copied (W-35).
 # populated = rows with any value; realValues = rows with a value other than the placeholders unassigned and <memo>.
 schemaVersion: '1.0'
@@ -40,6 +41,8 @@ tags:
   - tag: "Applicability Comment"
     disposition: "body"
     decision: "W-91"
+    order: 10
+    orderGroup: "Requirement text and comments"
     populated: 45
     realValues: 45
     distinct: 25
@@ -68,6 +71,8 @@ tags:
   - tag: "Brand"
     disposition: "body"
     decision: "W-92"
+    order: 5
+    orderGroup: "Identity"
     populated: 6
     realValues: 6
     distinct: 1
@@ -75,6 +80,8 @@ tags:
   - tag: "CMF"
     disposition: "body"
     decision: "W-92"
+    order: 19
+    orderGroup: "Physical and cost"
     populated: 15
     realValues: 15
     distinct: 8
@@ -82,6 +89,8 @@ tags:
   - tag: "Cable Compatibility"
     disposition: "body"
     decision: "W-94"
+    order: 31
+    orderGroup: "Electrical"
     populated: 15
     realValues: 15
     distinct: 5
@@ -131,6 +140,8 @@ tags:
   - tag: "Current Max"
     disposition: "body"
     decision: "W-94"
+    order: 25
+    orderGroup: "Electrical"
     populated: 5
     realValues: 5
     distinct: 1
@@ -138,6 +149,8 @@ tags:
   - tag: "CurrentOutMax"
     disposition: "body"
     decision: "W-94"
+    order: 26
+    orderGroup: "Electrical"
     populated: 1
     realValues: 1
     distinct: 1
@@ -166,6 +179,8 @@ tags:
   - tag: "Detection"
     disposition: "body"
     decision: "W-95"
+    order: 35
+    orderGroup: "Failure mode"
     populated: 1
     realValues: 1
     distinct: 1
@@ -201,6 +216,8 @@ tags:
   - tag: "Engineering Comment"
     disposition: "body"
     decision: "W-91"
+    order: 16
+    orderGroup: "Requirement text and comments"
     populated: 10
     realValues: 10
     distinct: 10
@@ -278,6 +295,8 @@ tags:
   - tag: "MFG PN"
     disposition: "body"
     decision: "W-92"
+    order: 6
+    orderGroup: "Identity"
     populated: 101
     realValues: 101
     distinct: 58
@@ -285,6 +304,8 @@ tags:
   - tag: "Material"
     disposition: "body"
     decision: "W-92"
+    order: 20
+    orderGroup: "Physical and cost"
     populated: 2
     realValues: 1
     distinct: 1
@@ -341,6 +362,8 @@ tags:
   - tag: "Occurence"
     disposition: "body"
     decision: "W-95"
+    order: 34
+    orderGroup: "Failure mode"
     populated: 3
     realValues: 3
     distinct: 2
@@ -362,6 +385,8 @@ tags:
   - tag: "PN"
     disposition: "body"
     decision: "W-92"
+    order: 1
+    orderGroup: "Identity"
     populated: 7
     realValues: 7
     distinct: 6
@@ -369,6 +394,8 @@ tags:
   - tag: "PN Change Level"
     disposition: "body"
     decision: "W-92"
+    order: 2
+    orderGroup: "Identity"
     populated: 3
     realValues: 3
     distinct: 1
@@ -376,6 +403,8 @@ tags:
   - tag: "PartNumber"
     disposition: "body"
     decision: "W-92"
+    order: 1
+    orderGroup: "Identity"
     populated: 4
     realValues: 4
     distinct: 4
@@ -383,6 +412,8 @@ tags:
   - tag: "Piece Cost"
     disposition: "body"
     decision: "W-92"
+    order: 23
+    orderGroup: "Physical and cost"
     populated: 6
     realValues: 6
     distinct: 6
@@ -390,6 +421,8 @@ tags:
   - tag: "Positions"
     disposition: "body"
     decision: "W-92"
+    order: 17
+    orderGroup: "Physical and cost"
     populated: 1
     realValues: 1
     distinct: 1
@@ -397,6 +430,8 @@ tags:
   - tag: "PowerMax"
     disposition: "body"
     decision: "W-94"
+    order: 24
+    orderGroup: "Electrical"
     populated: 1
     realValues: 1
     distinct: 1
@@ -425,6 +460,8 @@ tags:
   - tag: "Product Management Comment"
     disposition: "body"
     decision: "W-91"
+    order: 15
+    orderGroup: "Requirement text and comments"
     populated: 37
     realValues: 37
     distinct: 36
@@ -432,6 +469,8 @@ tags:
   - tag: "Quantity"
     disposition: "body"
     decision: "W-92"
+    order: 22
+    orderGroup: "Physical and cost"
     populated: 10
     realValues: 10
     distinct: 5
@@ -474,6 +513,8 @@ tags:
   - tag: "Sales Comment"
     disposition: "body"
     decision: "W-91"
+    order: 14
+    orderGroup: "Requirement text and comments"
     populated: 4
     realValues: 4
     distinct: 4
@@ -481,6 +522,8 @@ tags:
   - tag: "Severity"
     disposition: "body"
     decision: "W-95"
+    order: 33
+    orderGroup: "Failure mode"
     populated: 3
     realValues: 3
     distinct: 2
@@ -488,6 +531,8 @@ tags:
   - tag: "SignalType"
     disposition: "body"
     decision: "W-94"
+    order: 32
+    orderGroup: "Electrical"
     populated: 10
     realValues: 10
     distinct: 2
@@ -530,6 +575,8 @@ tags:
   - tag: "Style"
     disposition: "body"
     decision: "W-92"
+    order: 18
+    orderGroup: "Physical and cost"
     populated: 13
     realValues: 13
     distinct: 9
@@ -551,10 +598,12 @@ tags:
   - tag: "SysML1.4::id"
     disposition: "body"
     decision: "W-26/W-27"
+    order: 4
+    orderGroup: "Identity"
     populated: 2391
     realValues: 2391
     distinct: 2391
-    note: "Dropped on information items (2,254, sequence-style). Kept in the body as \"SysML1.4 id\" on requirements (137, values like CC115)."
+    note: "Dropped on information items (2,254, sequence-style). Kept in the body as \"SysML1.4::id\" on requirements (137, values like CC115)."
   - tag: "SysML1.4::propertyPath"
     disposition: "drop"
     decision: "W-29"
@@ -593,6 +642,8 @@ tags:
   - tag: "User Story"
     disposition: "body"
     decision: "W-91"
+    order: 13
+    orderGroup: "Requirement text and comments"
     populated: 118
     realValues: 118
     distinct: 117
@@ -621,6 +672,8 @@ tags:
   - tag: "VoltageInMax"
     disposition: "body"
     decision: "W-94"
+    order: 28
+    orderGroup: "Electrical"
     populated: 1
     realValues: 1
     distinct: 1
@@ -628,6 +681,8 @@ tags:
   - tag: "VoltageInMin"
     disposition: "body"
     decision: "W-94"
+    order: 27
+    orderGroup: "Electrical"
     populated: 1
     realValues: 1
     distinct: 1
@@ -635,6 +690,8 @@ tags:
   - tag: "VoltageOutMax"
     disposition: "body"
     decision: "W-94"
+    order: 30
+    orderGroup: "Electrical"
     populated: 1
     realValues: 1
     distinct: 1
@@ -642,6 +699,8 @@ tags:
   - tag: "VoltageOutMin"
     disposition: "body"
     decision: "W-94"
+    order: 29
+    orderGroup: "Electrical"
     populated: 1
     realValues: 1
     distinct: 1
@@ -663,6 +722,8 @@ tags:
   - tag: "Webasto MBDV Profile::Applicability Comment"
     disposition: "body"
     decision: "W-91"
+    order: 11
+    orderGroup: "Requirement text and comments"
     populated: 11
     realValues: 11
     distinct: 10
@@ -698,6 +759,8 @@ tags:
   - tag: "Webasto MBDV Profile::External Reference"
     disposition: "body"
     decision: "W-91"
+    order: 8
+    orderGroup: "Requirement text and comments"
     populated: 2
     realValues: 2
     distinct: 2
@@ -726,6 +789,8 @@ tags:
   - tag: "Webasto MBDV Profile::Priority"
     disposition: "body"
     decision: "W-89"
+    order: 9
+    orderGroup: "Requirement text and comments"
     populated: 2373
     realValues: 118
     distinct: 12
@@ -803,6 +868,8 @@ tags:
   - tag: "Weight (g)"
     disposition: "body"
     decision: "W-92"
+    order: 21
+    orderGroup: "Physical and cost"
     populated: 2
     realValues: 2
     distinct: 2
@@ -817,10 +884,12 @@ tags:
   - tag: "id"
     disposition: "body"
     decision: "W-26/W-27"
+    order: 3
+    orderGroup: "Identity"
     populated: 5012
     realValues: 5012
     distinct: 5012
-    note: "Dropped when the value is a sequence-style number (Regulatory and Webasto requirements, 4,840). Kept in the body as \"EA id\" on design constraints and requirements (172, values like DG_0307_001_02)."
+    note: "Dropped when the value is a sequence-style number (Regulatory and Webasto requirements, 4,840). Kept in the body as \"id\" on design constraints and requirements (172, values like DG_0307_001_02)."
   - tag: "isEncapsulated"
     disposition: "drop"
     decision: "W-29"
@@ -838,6 +907,8 @@ tags:
   - tag: "source"
     disposition: "body"
     decision: "W-91"
+    order: 7
+    orderGroup: "Requirement text and comments"
     populated: 2
     realValues: 2
     distinct: 1
@@ -852,6 +923,8 @@ tags:
   - tag: "verifyMethod"
     disposition: "body"
     decision: "W-95"
+    order: 12
+    orderGroup: "Requirement text and comments"
     populated: 2
     realValues: 2
     distinct: 2
