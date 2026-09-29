@@ -15,7 +15,7 @@ Written 2026-09-28 for a new AI chat continuing the work on this vault. Read thi
 
 ## Read in this order
 
-1. `99_System/10_Docs/Workspace Decision Log.md`: every decision made here (W-01 to W-90) and the Open list at the bottom. It is the authority for what has been decided.
+1. `99_System/10_Docs/Workspace Decision Log.md`: every decision made here (W-01 to W-91) and the Open list at the bottom. It is the authority for what has been decided.
 2. `99_System/02_AI/AI_INSTRUCTIONS.md`: how an AI creates notes (uid, id, status).
 3. `99_System/03_Schemas/ea-field-dispositions.yaml`, `ea-tag-dispositions.yaml` and `ea-element-mapping.yaml`: the property and element worklists.
 4. `Definitions/Properties`: the property definition notes (`uid`, `id`, `eaType` so far).
@@ -53,7 +53,7 @@ Done: disposition vocabulary; all element, connector, package and diagram fields
 
 Next, in this order:
 1. The three element fields still `pending` in `ea-field-dispositions.yaml` (`Classifier`, `Classifier_guid`, `PDATA1`): decided for Parts only (W-44), they wait for the Port and Object mapping for other types.
-2. The 36 pending tags in `ea-tag-dispositions.yaml` (the `Status` and `Object Type` tags were dropped in W-87; the applicability and priority tags were decided in W-89, W-90 for the next four). Spencer wants a new analysis after the import (Task 5 in `Post-Import Tasks.md`). Groups: large low-variety tags, comments and knowledge, part and hardware data, FMEA, EA tool leftovers.
+2. The 28 pending tags in `ea-tag-dispositions.yaml` (the `Status` and `Object Type` tags were dropped in W-87; the applicability and priority tags were decided in W-89, W-90 for the next four, W-91 for the comment tags). Spencer wants a new analysis after the import (Task 5 in `Post-Import Tasks.md`). Groups: large low-variety tags, comments and knowledge, part and hardware data, FMEA, EA tool leftovers.
 3. Done in W-88: every note carries `uid`, `id`, `type`, `subtype`, `status`, `eaType` (translated only) and `tags`; `aliases` and `formerIds` go in the body; `control` and `boundary` are not approved. Its listed consequences are not yet applied.
 4. The open items listed in the Decision Log, chiefly the per-document designator parse rule, the duplicate-name and unsafe-character rules, and the ports question, all needed before the import.
 

@@ -38,12 +38,12 @@ tags:
     distinct: 0
     note: "Only ever holds a placeholder (unassigned or <memo>)."
   - tag: "Applicability Comment"
-    disposition: "pending"
-    decision: ""
+    disposition: "body"
+    decision: "W-91"
     populated: 45
     realValues: 45
     distinct: 25
-    note: "Not yet decided. Default if undecided: body, below the EA GUID."
+    note: "Body (W-91), below the EA GUID as a `- Applicability comment: <text>` line, real values only. Written as is; the comment text is not edited."
   - tag: "Applicability Status"
     disposition: "drop"
     decision: "W-89"
@@ -199,12 +199,12 @@ tags:
     distinct: 0
     note: "Never has a value."
   - tag: "Engineering Comment"
-    disposition: "pending"
-    decision: ""
+    disposition: "body"
+    decision: "W-91"
     populated: 10
     realValues: 10
     distinct: 10
-    note: "Not yet decided. Default if undecided: body, below the EA GUID."
+    note: "Body (W-91), below the EA GUID as a `- Engineering comment: <text>` line, real values only. Written as is; the comment text is not edited."
   - tag: "External Reference"
     disposition: "drop"
     decision: "W-29"
@@ -234,12 +234,12 @@ tags:
     distinct: 0
     note: "Never has a value."
   - tag: "In-Links"
-    disposition: "pending"
-    decision: ""
+    disposition: "drop"
+    decision: "W-91"
     populated: 16
     realValues: 16
     distinct: 14
-    note: "Not yet decided. Default if undecided: body, below the EA GUID."
+    note: "Dropped (W-91). Paths into another EA model (16 rows: Regulatory Requirement 15, InformationItem 1); not usable in this vault."
   - tag: "Length - Useable"
     disposition: "drop"
     decision: "W-29"
@@ -423,12 +423,12 @@ tags:
     distinct: 0
     note: "Never has a value."
   - tag: "Product Management Comment"
-    disposition: "pending"
-    decision: ""
+    disposition: "body"
+    decision: "W-91"
     populated: 37
     realValues: 37
     distinct: 36
-    note: "Not yet decided. Default if undecided: body, below the EA GUID."
+    note: "Body (W-91), below the EA GUID as a `- Product management comment: <text>` line, real values only. Written as is; the comment text is not edited."
   - tag: "Quantity"
     disposition: "pending"
     decision: ""
@@ -472,12 +472,12 @@ tags:
     distinct: 0
     note: "Never has a value."
   - tag: "Sales Comment"
-    disposition: "pending"
-    decision: ""
+    disposition: "body"
+    decision: "W-91"
     populated: 4
     realValues: 4
     distinct: 4
-    note: "Not yet decided. Default if undecided: body, below the EA GUID."
+    note: "Body (W-91), below the EA GUID as a `- Sales comment: <text>` line, real values only. Written as is; the comment text is not edited."
   - tag: "Severity"
     disposition: "pending"
     decision: ""
@@ -591,12 +591,12 @@ tags:
     distinct: 0
     note: "Never has a value."
   - tag: "User Story"
-    disposition: "pending"
-    decision: ""
+    disposition: "body"
+    decision: "W-91"
     populated: 118
     realValues: 118
     distinct: 117
-    note: "Not yet decided. Default if undecided: body, below the EA GUID."
+    note: "Body (W-91), below the EA GUID as a `- User story: <text>` line, real values only. Written as is; the comment text is not edited."
   - tag: "Verdict"
     disposition: "drop"
     decision: "W-29"
@@ -661,12 +661,12 @@ tags:
     distinct: 0
     note: "Only ever holds a placeholder (unassigned or <memo>)."
   - tag: "Webasto MBDV Profile::Applicability Comment"
-    disposition: "pending"
-    decision: ""
+    disposition: "body"
+    decision: "W-91"
     populated: 11
     realValues: 11
     distinct: 10
-    note: "Not yet decided. Default if undecided: body, below the EA GUID."
+    note: "Body (W-91), below the EA GUID as a `- Applicability comment: <text>` line, real values only. Written as is; the comment text is not edited."
   - tag: "Webasto MBDV Profile::Applicability Status"
     disposition: "drop"
     decision: "W-89"
@@ -696,12 +696,12 @@ tags:
     distinct: 0
     note: "Never has a value."
   - tag: "Webasto MBDV Profile::External Reference"
-    disposition: "pending"
-    decision: ""
+    disposition: "body"
+    decision: "W-91"
     populated: 2
     realValues: 2
     distinct: 2
-    note: "Not yet decided. Default if undecided: body, below the EA GUID."
+    note: "Body (W-91), below the EA GUID as a `- External reference: <text>` line, real values only. Written as is; the comment text is not edited."
   - tag: "Webasto MBDV Profile::Identifier"
     disposition: "drop"
     decision: "W-29"
@@ -829,19 +829,19 @@ tags:
     distinct: 0
     note: "Never has a value."
   - tag: "risk"
-    disposition: "pending"
-    decision: ""
+    disposition: "drop"
+    decision: "W-91"
     populated: 1
     realValues: 1
     distinct: 1
-    note: "Not yet decided. Default if undecided: body, below the EA GUID."
+    note: "Dropped (W-91). One row, Low, on one extendedRequirement."
   - tag: "source"
-    disposition: "pending"
-    decision: ""
+    disposition: "body"
+    decision: "W-91"
     populated: 2
     realValues: 2
     distinct: 1
-    note: "Not yet decided. Default if undecided: body, below the EA GUID."
+    note: "Body (W-91), below the EA GUID as a `- Source: <text>` line, real values only. Written as is; the comment text is not edited."
   - tag: "text"
     disposition: "drop"
     decision: "W-29"
