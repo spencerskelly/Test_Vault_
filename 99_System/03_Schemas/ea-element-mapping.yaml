@@ -131,10 +131,11 @@ elementTypes:
     Business Line: 9
     Environmental Interface: 7
     Software Unit: 3
-  disposition: pending
-  mdseType: null
-  decision: null
-  partialDecision: The 423 Class elements with an interface stereotype (Electrical & Material Interface 205, Data Interface 112, Mechanical Interface 69, Generic Physical Interface 30, Environmental Interface 7) become notes of type Port; the subtype is the stereotype in lower case without the word Interface (electrical & material, data, mechanical, generic physical, environmental). Decided W-120. The other Class stereotypes are not decided. oldToolRules X-03 (emit as Interface) is evidence of the old tool only.
+  disposition: note
+  mdseType: Object
+  decision: W-139
+  subtype: null
+  partialDecision: 'The 423 Class elements with an interface stereotype (Electrical & Material Interface 205, Data Interface 112, Mechanical Interface 69, Generic Physical Interface 30, Environmental Interface 7) become Port notes, subtype = the stereotype without the word Interface (W-120). All other Class elements (2,314) become Object notes with a blank subtype, the stereotype staying in eaType (W-139). oldToolRules X-03 (emit as Interface) and the other old rules are evidence of the old tool only.'
   oldToolRules:
   - rule: X-01
     verdict: decompose
