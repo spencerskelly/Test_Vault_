@@ -1,4 +1,4 @@
-schemaVersion: '1.10'
+schemaVersion: '1.11'
 date: '2026-09-29'
 basis: MDSE ruleset 1.21
 commonProperties: [type, subtype, id, uid, status, tags]   # order fixed by W-97; W-88 removed control, boundary, aliases and formerIds
@@ -52,7 +52,7 @@ classes:
 - name: Use Case
   prefix: UC
   folder: 45_Use_Cases
-  subtype: ["what", "where", "why", "when"]
+  subtype: ["what", "where", "why", "when", "who"]
 - name: Actor
   prefix: ACT
   folder: 47_Actors

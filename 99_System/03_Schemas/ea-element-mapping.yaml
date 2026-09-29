@@ -224,9 +224,16 @@ elementTypes:
   elements: 1667
   stereotypes:
     (none): 1667
-  disposition: pending
-  mdseType: null
-  decision: null
+  disposition: note
+  mdseType: Use Case
+  decision: W-140
+  subtypeRule:
+    basis: EA package the element sits in, under IPC ! / 01 Product Use Case (W-140)
+    what: 01 What
+    when: 03 When
+    where: 04 Where
+    who: 00 Who
+    blank: any other package (Mixed Use Digital, directly in 01 Product Use Case, and every package outside it)
   oldToolRules:
   - rule: E-06
     verdict: emit
