@@ -58,8 +58,11 @@ connectorTypes:
     field: equals
     note: 'symmetric and temporary (W-153). Kept for stage 1 to stay mechanical; Post-Import Task 8 turns each into a directional exposes/exposedBy pair (185 have a derivable inner and outer end, 64 need a decision).'
   exception: 'the plain connector with both ends missing from the export writes nothing and is recorded in the ledger (Rule 71, W-57)'
+  duplicates:
+    decision: W-154
+    rule: 'connectors that end on the same pair of notes after the Port merge (either direction) are one link per field; every distinct non-empty Name is kept as its own line, identical names once, unnamed add nothing; every connector GUID stays in the ledger'
+    counts: '22 groups hold 70 connectors (16 plain, 6 binding), so 822 resolved connectors become 774 links; 2 groups have different names; 2 groups repeat the same drawing'
   notDecided:
-  - 'one link per pair when several connectors end on the same pair of notes after the Port merge (70 connectors in 22 groups; 4 plain pairs are drawn both ways; 2 groups hold different names)'
   - 'the line format for a connector Name on both end notes (174 named, 165 distinct names)'
   - 'the assembly and Part context line (W-114)'
   - 'the REVIEW port needed line for the 109 connectors with an end that is not a Port, and for the 87 Part-to-Part cases whose Parts fold away'
