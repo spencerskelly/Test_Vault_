@@ -50,7 +50,7 @@ elementTypes:
   disposition: pending
   mdseType: null
   decision: null
-  note: MDSE now has a Port class (W-113). Part- and Object-owned Ports merge into the block's Port by the W-114 rule; the Port note type and subtype are not yet approved for the mapping.
+  note: MDSE now has a Port class (W-113). Part- and Object-owned Ports merge into the block's Port by the W-114 rule. PDATA1 (typing Class) is written as subtypeOf between Port notes (W-120). The Port note's subtype, PDATA2, Classifier, the ownership link and the instance-side values are not yet decided.
   oldToolRules:
   - rule: F-01
     verdict: fold
@@ -133,7 +133,7 @@ elementTypes:
   disposition: pending
   mdseType: null
   decision: null
-  note: The six interface stereotypes (469 classes) have no MDSE class since W-113 removed Interface; their target (Port, Item Flow or other) is not decided. oldToolRules X-03 (emit as Interface) is evidence of the old tool only.
+  partialDecision: The 423 Class elements with an interface stereotype (Electrical & Material Interface 205, Data Interface 112, Mechanical Interface 69, Generic Physical Interface 30, Environmental Interface 7) become notes of type Port; the subtype is the stereotype in lower case without the word Interface (electrical & material, data, mechanical, generic physical, environmental). Decided W-120. The other Class stereotypes are not decided. oldToolRules X-03 (emit as Interface) is evidence of the old tool only.
   oldToolRules:
   - rule: X-01
     verdict: decompose
