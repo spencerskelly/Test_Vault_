@@ -31,7 +31,7 @@ elementTypes:
     design: [03 Product Requirement / Design Guides, 05 Product Design]
     functional: 04 Product Function
     stakeholder: any other package
-    stereotypeOverride: functionalRequirement gives functional and designConstraint gives design, except inside Engineering Requirements (reading to confirm, W-115)
+    stereotypeOverride: functionalRequirement gives functional and designConstraint gives design, except inside Engineering Requirements, where every element is engineering (W-116)
   oldToolRules:
   - rule: R-02
     verdict: fold
