@@ -139,6 +139,7 @@ tObject:
 - field: PDATA1
   disposition: pending
   partsDecision: 'Part elements only, decided W-44: holds the GUID of the block the Part represents; used by the translator (structure). Other element types are still to decide.'
+  portsDecision: 'Port elements only, decided W-120: the typing Class is written as subtypeOf between Port notes (the interface Classes become Port notes). Other element types are still to decide.'
   proposedByHandoff: archive / structure
   handoffNote: EA overloaded internal storage; decode only by explicit rule.
   nonblank: 19333
