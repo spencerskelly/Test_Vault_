@@ -168,3 +168,17 @@ connectorTypes:
       reviewLine: 'REVIEW modelCheck: satisfy <source type> to <target type>'
       note: '112 links on 89 target notes; State to Requirement 92'
     exception: '4 connectors with an end missing from the export write nothing (Rule 71)'
+  - stereotype: deriveReqt
+    connectors: 1416
+    decision: W-164
+    matrixRule: 'Rules 23, 57'
+    rules:
+    - pair: Requirement to Requirement
+      connectors: 1410
+      field: derivedFrom
+      writtenOn: 'the source (derived requirement); derivedBy generated on the target; 1,408 links'
+    - pair: any other
+      connectors: 6
+      field: derivedFrom
+      writtenOn: 'the source, in the drawn direction'
+      reviewLine: 'REVIEW modelCheck: deriveReqt <source type> to <target type>'
