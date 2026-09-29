@@ -15,3 +15,9 @@ packages:
   folder: none (not a folder in the vault; the vault tree starts at its 10 child packages)
   decision: W-117
   note: Holds only the rows of its 10 child packages, no diagrams, no Notes; Author skellys on its row. Whether a package becomes a note is undecided (W-66).
+- path: IPC ! / 00 Product Abstract
+  packageId: 3982
+  folder: '00 Product Abstract'
+  note: false
+  decision: W-118
+  contents: 6 child packages only; no elements, diagrams or Notes of its own.
