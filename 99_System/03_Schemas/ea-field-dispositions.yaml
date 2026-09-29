@@ -63,6 +63,7 @@ tObject:
 - field: Classifier
   disposition: pending
   partsDecision: 'Part elements only, decided W-44: archive (it points to another Part, not the block). Port (920), Object (498) and other types use it as a real type link and are still to decide.'
+  portsDecision: 'Port elements only, decided W-125: written as a temporary hasClassifier/classifierOf link (441 surviving Ports plus 2 merged ones); the other 477 write nothing.'
   proposedByHandoff: structure
   handoffNote: Use only where the exact EA construct requires classifier semantics.
   nonblank: 1841
