@@ -59,7 +59,7 @@ tObject:
 - field: ParentID
   disposition: structure
   decision: W-46
-  note: 'Structure (W-46). All 28,183 values resolve to an element. Used to find context, such as the assembly of a Part (W-43); containment does not automatically become a relationship.'
+  note: 'Structure (W-46). All 28,183 values resolve to an element. Used to find context, such as the assembly of a Part (W-43); containment does not automatically become a relationship. Changed by W-149: for elements other than Ports and Parts the owner is written as hasChild on the owner (childOf on the child), and as hasPart when both notes are Objects.'
   nonblank: 28183
 - field: Classifier
   disposition: pending
