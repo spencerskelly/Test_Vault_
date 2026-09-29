@@ -328,9 +328,13 @@ elementTypes:
     Document: 329
     Image: 129
     CustomDocument: 1
-  disposition: pending
-  mdseType: null
-  decision: null
+  disposition: note
+  mdseType: Artifact
+  decision: W-143
+  mapping:
+  - {eaType: Document, mdseType: Artifact, subtype: document}
+  - {eaType: Image, mdseType: Artifact, subtype: image}
+  - {eaType: CustomDocument, mdseType: Artifact, subtype: null}
   oldToolRules:
   - rule: A-01
     verdict: suppress
