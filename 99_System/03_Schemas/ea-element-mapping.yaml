@@ -76,6 +76,7 @@ elementTypes:
   disposition: pending
   mdseType: null
   decision: null
+  partialDecision: 'The 760 Parts with the stereotype FlowProperty become Item Flow notes, one each, with direction as source and target; they are not merged into blocks and their PDATA1 is a Signal or Class, not a block (W-132). The other 2,377 Parts fold into their blocks (W-43, W-44); their mapping is not yet decided here.'
   oldToolRules:
   - rule: F-02
     verdict: fold
