@@ -1,0 +1,17 @@
+# Rules for the EA packages, decided one package at a time (Workspace Decision Log W-117 onward).
+# The folder tree of the vault follows the EA package tree (W-04, W-65). Walked top-down, in EA name order.
+# Each entry: path (EA package path), packageId (t_package.Package_ID), decision (log entry), and the rules Spencer sets for what sits in it.
+# The element rules themselves stay in ea-element-mapping.yaml; an entry here only records what is decided for this package.
+schemaVersion: '1.0'
+vaultTreeStartsAt: 'IPC !'
+packages:
+- path: Model
+  packageId: 1
+  folder: none (root; not a folder in the vault)
+  decision: W-117
+  note: No elements of its own, no diagrams, no Notes; no row in t_object.
+- path: Model/IPC !
+  packageId: 3
+  folder: 'IPC !'
+  decision: W-117
+  note: Top folder of the vault tree. Holds only the rows of its 10 child packages, no diagrams, no Notes. Whether a package becomes a note is undecided (W-66).
