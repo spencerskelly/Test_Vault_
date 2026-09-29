@@ -132,7 +132,7 @@ connectorTypes:
 - eaConnectorType: NoteLink
   connectors: 349
   decision: W-161
-  status: partial
+  status: settled
   matrixRule: 'Rule 45 (r12 matrix), replaced'
   rules:
   - case: note linked to one element
@@ -144,6 +144,6 @@ connectorTypes:
   - case: note to note
     connectors: 2
     result: 'describes in the drawn direction between the two Info notes (my reading)'
+  bodyFormat: 'after the comment texts, before the user section: label **EA notes:** then one bullet per note in EA creation order, "- <yyyy-MM-dd>, <author>: <text>" (W-162, Definitions/Note Layout.md item 5)'
   notDecided:
-  - 'where the folded text goes in the body and its label'
   - 'the canvas text card for the 225 folded notes drawn on diagrams (W-73)'
