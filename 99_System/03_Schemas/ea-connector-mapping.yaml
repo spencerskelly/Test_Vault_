@@ -239,3 +239,40 @@ connectorTypes:
       writtenOn: 'the source, in the drawn direction'
       reviewLine: 'REVIEW modelCheck: trace <source type> to <target type>'
       note: '102 links on 82 notes'
+  - stereotype: verify
+    connectors: 333
+    decision: W-168
+    matrixRule: 'Rules 63, 64'
+    rules:
+    - pair: Verification to Requirement
+      connectors: 325
+      field: verifies
+      writtenOn: 'the Verification; verifiedBy generated'
+    - pair: any other
+      connectors: 8
+      field: verifies
+      writtenOn: 'the source, in the drawn direction'
+      reviewLine: 'REVIEW modelCheck: verify <source type> to <target type>'
+      note: '8 links on 7 notes'
+  - stereotype: RecoveryRequirement
+    connectors: 14
+    decision: W-168
+    matrixRule: 'Rule 68'
+    rules:
+    - pair: Design or Function to Requirement
+      connectors: 14
+      field: satisfies
+      writtenOn: 'the source; satisfiedBy generated'
+      reviewLine: 'REVIEW modelCheck: RecoveryRequirement <source type> to <target type>'
+      note: 'kept flagged so the recovery meaning is not lost; lines on 13 notes'
+  - stereotype: ASILDecompose
+    connectors: 4
+    decision: W-168
+    matrixRule: 'Rule 69'
+    rules:
+    - pair: Requirement to Requirement
+      connectors: 4
+      field: derivedFrom
+      writtenOn: 'the source; derivedBy generated'
+      reviewLine: 'REVIEW modelCheck: ASILDecompose Requirement to Requirement'
+      note: 'direction not shown by the data; 4 notes'
