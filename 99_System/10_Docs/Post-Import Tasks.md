@@ -90,6 +90,7 @@ Work that has to be done in the vault after the import (stage 2, Workspace Decis
 7. Shared aggregations written as `hasChild` (W-159): 373 new `hasChild` links from Aggregation, among them the countries grouped into market regions (278 connectors, `block` to `System Partner`) and about 30 real shared parts (Hardware Component and Module pairs). Decide per group: a membership link for regions, `hasPart` for real parts, or keep `hasChild`.
 8. Physical Context participation (W-139, W-159): when a Physical Context note becomes a Context, its `hasPart` and `hasChild` entries (from folded Parts, 211 Parts sit in Physical Context blocks, and 206 Aggregation connectors) become `hasParticipant`.
 9. `REVIEW hasChild: the two notes have different types` (W-159): 23 Aggregation links on 15 notes. Decide the right link for each and remove the line.
+10. `REVIEW modelCheck: realization` (W-160): 40 Realisation connectors kept as `realizedBy`/`realizes` because they fit neither `appliesTo` (Object to Requirement) nor Function to Use Case, 7 of them from a Package folder with no note. Decide the right link for each (for a Function or Design to a Requirement, `satisfies`), and remove the line.
 
 **How to resolve them.** Decide in groups, log each group in the Decision Log, and change the rules for the next fresh import (W-36, W-37). Record any per-note change in `Review Changes Log.md`, keyed by the element GUID.
 

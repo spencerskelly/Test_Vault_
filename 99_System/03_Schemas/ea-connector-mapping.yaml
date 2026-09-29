@@ -106,3 +106,26 @@ connectorTypes:
     where: 'Source: EA section of the whole'
     counts: '23 links on 15 notes'
   fields: 'SourceCard is the quantity line on the assembly (W-43, W-54; 52); SourceRole archived (W-56); Name uses the W-158 line on the whole (4); DestIsAggregate chooses the rule and stays in the export'
+- eaConnectorType: Realisation
+  connectors: 950
+  decision: W-160
+  status: settled
+  matrixRule: 'Rules 18, 19, 48, 55 (r12 matrix)'
+  direction: 'all Source -> Destination; none named; no self-loops'
+  principle: 'a Function or a Design satisfies a requirement; an Object is what a requirement applies to (W-160)'
+  rules:
+  - pair: Object to Requirement
+    connectors: 910
+    field: appliesTo
+    writtenOn: 'the requirement, pointing at the Object; applies generated on the Object; 909 unique links'
+  - pair: Function to Use Case
+    connectors: 0
+    field: realizedBy
+    writtenOn: 'the Use Case; realizes generated on the Function'
+  - pair: any other
+    connectors: 40
+    field: realizedBy
+    writtenOn: 'the target; realizes generated on the source'
+    reviewLine: 'REVIEW modelCheck: realization <source type> to <target type>'
+    note: '40 links on 34 notes; Requirement to Object 8 are drawn the other way and stay here'
+  packageEnds: '7 connectors from 6 packages with no note (W-147) write no field; the requirement gets REVIEW modelCheck: realization from folder <vault folder path>'
