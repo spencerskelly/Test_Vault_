@@ -87,3 +87,17 @@ Work that has to be done in the vault after the import (stage 2, Workspace Decis
 **How to resolve them.** Decide in groups, log each group in the Decision Log, and change the rules for the next fresh import (W-36, W-37). Record any per-note change in `Review Changes Log.md`, keyed by the element GUID.
 
 **Done when.** Each candidate in item 1 is a property or stays a line, and items 2 to 4 are answered in the log.
+
+## Task 6: Clear the Port review flags
+
+**What it is.** The Port rules of the element mapping leave four kinds of Port for a person to check after the import (W-114, W-122, W-123, W-130). The import writes one fixed line for each in the `Source: EA` section of the Port note. Counts are from the current export and will change if the rules change.
+
+**How to find them.** Search the vault for each line:
+- `REVIEW subtypeOf: target port is not on an ancestor block` (146). The `subtypeOf` link follows EA's redefinition link, but the target Port sits on a block with no family link to this one, or on the same block. Confirm it, correct it, or remove it.
+- `REVIEW port: added from an assembly, no matching port on the block` (617). A Part's or Object's Port had no match on its block (no `PDATA3` link and no Port of the same name), so it was added to the block as a Port of its own. Merge it into an existing Port, rename it, or keep it.
+- `REVIEW owner: ActivityPartition has no mapping yet` (42). The Port belongs to an ActivityPartition, which had no mapping when the import ran. Link it to its owner once that element is mapped.
+- `REVIEW block: owner Part has no block` (26). The Part that owns the Port has no `PDATA1`, or its block is not in the export, so the Port stayed with the Part. Find the block, or accept the Part as the owner.
+
+**How to resolve one.** Fix the note, delete the line, and add a row to `Review Changes Log.md`, keyed by the Port's EA GUID, saying why. Fix by rule where a group behaves the same, and log the rule in the Decision Log.
+
+**Done when.** A search for each of the four lines finds nothing, and every fixed note has a reason in the log.
