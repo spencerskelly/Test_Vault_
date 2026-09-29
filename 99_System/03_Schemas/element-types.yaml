@@ -1,5 +1,5 @@
-schemaVersion: '1.5'
-date: '2026-09-28'
+schemaVersion: '1.6'
+date: '2026-09-29'
 basis: MDSE ruleset 1.21
 commonProperties: [type, subtype, id, uid, status, tags]   # order fixed by W-97; W-88 removed control, boundary, aliases and formerIds
 translatedOnlyProperties: [eaType]   # written by the translator, between status and tags (W-31, W-97)
@@ -8,9 +8,9 @@ classes:
   prefix: OBJ
   folder: 10_Objects
   subtype: ["electrical", "circuit", "mechanical", "software", "firmware"]
-- name: Interface
-  prefix: INT
-  folder: 20_Interfaces
+- name: Port
+  prefix: PORT
+  folder: 20_Ports
   subtype: ["electrical & material", "data", "mechanical", "generic physical", "environmental"]
 - name: Item Flow
   prefix: IFLOW

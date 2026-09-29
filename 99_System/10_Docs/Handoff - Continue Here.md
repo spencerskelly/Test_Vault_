@@ -15,7 +15,7 @@ Written 2026-09-28 for a new AI chat continuing the work on this vault. Read thi
 
 ## Read in this order
 
-1. `99_System/10_Docs/Workspace Decision Log.md`: every decision made here (W-01 to W-112) and the Open list at the bottom. It is the authority for what has been decided.
+1. `99_System/10_Docs/Workspace Decision Log.md`: every decision made here (W-01 to W-113) and the Open list at the bottom. It is the authority for what has been decided.
 2. `99_System/02_AI/AI_INSTRUCTIONS.md`: how an AI creates notes (uid, id, status).
 3. `99_System/03_Schemas/ea-field-dispositions.yaml`, `ea-tag-dispositions.yaml` and `ea-element-mapping.yaml`: the property and element worklists.
 4. `Definitions/Properties`: the property definition notes (`uid`, `id`, `eaType` so far).
@@ -60,6 +60,12 @@ Applied in W-112: the property set and order in the templates, `element-types.ya
 ## Decided after the W-96 review (W-97 to W-100)
 
 Property order at the top of every note: `type`, `subtype`, `id`, `uid`, `status`, `eaType`, `tags`; only `tags` holds several values (W-97). The 36 body-line tags are reviewed first so Spencer can set their order (W-98). A `Name` line goes above `EA GUID`, and the `Source: EA` section starts three lines below the other body content (W-99). An element with no approved mapping gets `type: modelCheck` (W-100). The order of body lines is set in W-101 and changed by W-104 and W-105 (four comments become labeled normal text below the Note; the other 32 tag lines stay below the EA GUID) (`order` in `ea-tag-dispositions.yaml`). The `text` tag is kept as normal text below the Note (W-102). Open before the import: multi-line values, the 255-character cut. When a Note and `text` both exist they are separated by one blank line (W-103). None of this is applied yet to templates, snippets, schemas or the translator.
+
+## Decided after W-112
+
+W-113: the MDSE `Interface` class is removed and `Port` (prefix `PORT`, folder `20_Ports`, the five old Interface subtypes) is added. Intent: bring EA in as native as possible, lose no data, merge ports only as far as needed, resolve the rest in the second pass. Next W number is W-114.
+
+Port findings so far (from `t_object`, `t_connector`, `t_xref`; not yet decided): all 4,387 Ports have an owner (Part 1,956, Class 1,903, Object 485, ActivityPartition 42, Actor 1). `PDATA1` = the typing Class (3,432); `PDATA2` = redefinition, mostly a Port on an ancestor block (1,713 of 1,906); `PDATA3` = the Port on the block a Part or Object is typed by (1,697 of the Part-owned or Object-owned Ports match one on their own block); `Classifier` on Ports points at another Port (920). `isConjugated` exists only in `t_xref` CustomProperties for 31 Ports. Merge rule being worked out, one hop only, never up the redefinition chain: an instance Port goes to the Port `PDATA3` names if that Port is on its owner's block, else to the Port with the exact same name on that block, else it is added to the block as a Port of its own; the connectors drawn in the assembly move with it and keep the assembly and Part as context. Modelled result: 4,387 Ports become 2,589, 0 self-loops, 45 connectors duplicate another. 26 Ports have no block and stay. Following the redefinition chain creates false self-loops (55) and must not be used.
 
 ## Layout and sweep (W-107, W-108)
 

@@ -42,6 +42,7 @@ elementTypes:
   disposition: pending
   mdseType: null
   decision: null
+  note: MDSE now has a Port class (W-113). Merge of Part- and Object-owned Ports into the object's Port is not decided; rules are being worked out.
   oldToolRules:
   - rule: F-01
     verdict: fold
@@ -123,6 +124,7 @@ elementTypes:
   disposition: pending
   mdseType: null
   decision: null
+  note: The six interface stereotypes (469 classes) have no MDSE class since W-113 removed Interface; their target (Port, Item Flow or other) is not decided. oldToolRules X-03 (emit as Interface) is evidence of the old tool only.
   oldToolRules:
   - rule: X-01
     verdict: decompose

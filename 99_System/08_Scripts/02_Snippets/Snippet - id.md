@@ -1,5 +1,5 @@
 <%*
-const PREFIX = {"Object":"OBJ","Interface":"INT","Item Flow":"IFLOW","Context":"CTX","Function":"FUNC","Functional Flow":"FFLOW","State":"STATE","State Machine":"SM","Transition":"TRANS","Requirement":"REQ","Design":"DES","Use Case":"UC","Actor":"ACT","Failure Mode":"FM","Issue":"ISS","Info":"INFO","Step":"STEP","Verification":"VER","Procedure":"PROC","Setup":"SETUP","Plan":"PLAN","Result":"RES","Document":"DOC","Artifact":"ART","Property Definition":"INFO","Person":"INFO"};
+const PREFIX = {"Object":"OBJ","Port":"PORT","Item Flow":"IFLOW","Context":"CTX","Function":"FUNC","Functional Flow":"FFLOW","State":"STATE","State Machine":"SM","Transition":"TRANS","Requirement":"REQ","Design":"DES","Use Case":"UC","Actor":"ACT","Failure Mode":"FM","Issue":"ISS","Info":"INFO","Step":"STEP","Verification":"VER","Procedure":"PROC","Setup":"SETUP","Plan":"PLAN","Result":"RES","Document":"DOC","Artifact":"ART","Property Definition":"INFO","Person":"INFO"};
 const templateName = tp.config.template_file ? tp.config.template_file.basename : "";
 const prefix = PREFIX[templateName.split(" - ")[0]];
 if (prefix) {
