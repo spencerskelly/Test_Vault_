@@ -20,7 +20,7 @@ The former property `kind` is deprecated. The former top-level MDSE type `Thing`
 | MDSE type | Prefix | Folder | Approved subtypes |
 |---|---|---|---|
 | Object | OBJ | `10_Objects` | `electrical`, `circuit`, `mechanical`, `software`, `firmware` |
-| Port | PORT | `20_Ports` | `electrical & material`, `data`, `mechanical`, `generic physical`, `environmental` |
+| Port | PORT | `20_Ports` | `electrical & material`, `data`, `mechanical`, `generic physical`, `environmental`, `proxy`, `full` |
 | Item Flow | IFLOW | `21_Item_Flows` | `information`, `energy`, `material` |
 | Context | CTX | `25_Contexts` | — |
 | Function | FUNC | `30_Functions` | `system`, `hardware`, `software`, `module` |
