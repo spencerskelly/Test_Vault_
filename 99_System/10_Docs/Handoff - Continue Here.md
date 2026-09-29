@@ -69,6 +69,13 @@ The note layout is written in `Definitions/Note Layout.md`; `Definitions/EA Sour
 
 Element mapping: which MDSE type and subtype each EA object type becomes. The worklist is `ea-element-mapping.yaml` (31 object types, largest first, all `pending`), with what the earlier translator did as evidence (`oldToolRules`). It should also settle the three set-aside fields, the `type` value for elements with no approved mapping (handoff review item 1), whether Ports are notes or sections of the block note, the relationship vocabulary (`effect`, `entry`, `doActivity`, `represents`, `conveys`, `target`, and `direction` on flows), the fate of States, Classes and Packages, and the sequence-diagram rule. The chat needs `EA_to_MDSE_Consolidated_v2_6_0.zip` uploaded again, for the earlier tool's rules. The first proposal to fold unconnected requirements into document notes is replaced (W-81).
 
+### Plan for the element mapping (proposal, nothing approved)
+
+1. **Proposal sheet first.** Before asking anything, compute for all 72 `eaType` values: row count, sample names, connectors in and out, populated tags and fields, `Classifier` and `PDATA1` values, and a proposed `type` and `subtype` with the evidence. Approve by family with exceptions: requirements and specs; structure (Class, Part, Object, Port, InformationItem, Signal); behavior (Activity, Action, State, StateNode, Decision, ActivityPartition, Trigger, Synchronization, Sequence, ActionPin, StateMachine, Event, ActivityParameter); other (Package, Artifact, Note, Text, Issue, Change, Actor, Boundary, Constraint, UseCase, ProxyConnector).
+2. **Ports (recommendation, not decided).** Each Port (4,387) becomes its own note with subtype Port, placed with its owning block, with a Dataview table on the block note listing its ports. Reasons: connectors end on port objects, so endpoints stay valid; it matches the requirement approach (own note in stage 1, fold in stage 2); `Classifier` (920 typed Ports) gives the type link. To check first: how the owner block is found (probably `ParentID`), Ports with no owner, `isConjugated` values, and consistency with Parts merging into blocks (W-43, W-44).
+3. **Templates.** One per type, with a subtype variant only where fields or sections differ, generated from `element-types.yaml`; each follows `Definitions/Note Layout.md`.
+4. **Dry run.** Every EA row lands in exactly one mapping row, none unmapped (unmapped gets `type: modelCheck`, W-100), and totals per type match the export.
+
 ## Not yet verified or still open
 
 - The Templater snippets pass 21 tests against mock objects but have not been run in Obsidian. The core Templates plugin should be turned off so it does not compete with Templater.
