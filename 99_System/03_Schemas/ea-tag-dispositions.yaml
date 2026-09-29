@@ -24,12 +24,12 @@ tags:
     distinct: 0
     note: "Only ever holds a placeholder (unassigned or <memo>)."
   - tag: "Abstraction Layer"
-    disposition: "pending"
-    decision: ""
+    disposition: "drop"
+    decision: "W-90"
     populated: 2293
     realValues: 2293
     distinct: 5
-    note: "Not yet decided. Default if undecided: body, below the EA GUID."
+    note: "Dropped (W-90). Fixed by the element type on all 2,293 rows (16 types, no exceptions); adds nothing beyond eaType."
   - tag: "Allocation"
     disposition: "drop"
     decision: "W-29"
@@ -185,12 +185,12 @@ tags:
     distinct: 0
     note: "Never has a value."
   - tag: "Domain"
-    disposition: "pending"
-    decision: ""
+    disposition: "drop"
+    decision: "W-90"
     populated: 169
     realValues: 169
     distinct: 1
-    note: "Not yet decided. Default if undecided: body, below the EA GUID."
+    note: "Dropped (W-90). One value, Multi, on 169 Module rows; the other 297 are blank."
   - tag: "Duration Time in ms"
     disposition: "drop"
     decision: "W-29"
@@ -346,12 +346,12 @@ tags:
     distinct: 2
     note: "Not yet decided. Default if undecided: body, below the EA GUID."
   - tag: "Origin"
-    disposition: "pending"
-    decision: ""
+    disposition: "drop"
+    decision: "W-90"
     populated: 118
     realValues: 118
     distinct: 12
-    note: "Not yet decided. Default if undecided: body, below the EA GUID."
+    note: "Dropped (W-90). 118 real values on Requirement (Field Service 45, Customer/Market 41 and others) in inconsistent spelling; Spencer chose not to keep them."
   - tag: "Out-Links"
     disposition: "drop"
     decision: "W-29"
@@ -808,12 +808,12 @@ tags:
     distinct: 2
     note: "Not yet decided. Default if undecided: body, below the EA GUID."
   - tag: "direction"
-    disposition: "pending"
-    decision: ""
+    disposition: "structure"
+    decision: "W-90"
     populated: 763
     realValues: 763
     distinct: 3
-    note: "Not yet decided. Default if undecided: body, below the EA GUID."
+    note: "Structure (W-90). FlowProperty only (763: inout 496, out 171, in 96). Not copied into notes; used by the translator when it maps flows."
   - tag: "id"
     disposition: "body"
     decision: "W-26/W-27"
