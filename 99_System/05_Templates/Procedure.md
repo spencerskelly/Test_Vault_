@@ -1,14 +1,10 @@
 ---
-uid: <% tp.file.include("[[Snippet - uid]]") %>
-id: <% tp.file.include("[[Snippet - id]]") %>
 type: Procedure
 subtype: test
+id: <% tp.file.include("[[Snippet - id]]") %>
+uid: <% tp.file.include("[[Snippet - uid]]") %>
 status: Draft
-control:
-boundary:
 tags: []
-aliases: []
-formerIds: []
 ---
 
 # <% tp.file.title %>

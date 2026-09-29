@@ -17,7 +17,7 @@ The order of everything in a note that was translated from EA. Every translated 
 3. **`text` wording.** Where EA held a `text` or `SysML1.4::text` value, it follows the Note after one blank line, with no label. Where the Note is empty, it is the Note (W-102, W-103).
 4. **Comment texts.** `User Story`, `Sales Comment`, `Product Management Comment` and `Engineering Comment`, in that order, as normal text. Each has its own label (W-104, W-105, W-106).
 5. **User section.** Room for information people add. Its name and content are not decided; the translator writes nothing here.
-6. **Aliases.** Other names for the note, directly below the user section (W-110). Its heading and line format are not decided.
+6. **Aliases and `formerIds`.** Other names for the note and its earlier `id` values, directly below the user section (W-110, W-111). Their heading and line format are not decided.
 7. **Multi-line `Priority` values.** A `Webasto MBDV Profile::Priority` value that contains a line break, as normal text with a label (W-106).
 8. **`Source: EA`.** The traceability section, always last. Three empty lines come before it (W-99).
 
@@ -60,7 +60,7 @@ tags:
 
 <user section, empty for now>
 
-<aliases>
+<aliases and formerIds>
 
 **Webasto MBDV Profile::Priority:**
 <first line>
@@ -91,8 +91,7 @@ Below the `EA GUID` line, one line per value as `- <EA tag name>: <value>` (W-28
 
 ## Not decided yet
 
-- The name and content of the user section, and the heading and line format of the aliases.
-- Where `formerIds` goes (W-88 moved it to the body; W-110 places only the aliases).
+- The name and content of the user section, and the heading and line format of the aliases and `formerIds`.
 - Where the `Default diagram` block (W-80) sits among the seven parts.
 - The exact format of the `Name` line, and where it sits against the `Source: EA` heading (W-99).
 - The order of other lines in `Source: EA` relative to the tag lines (connector values, `Alias`, `Designator`, `quantity of`, discussion posts, State and Class lines, `REVIEW port needed`).

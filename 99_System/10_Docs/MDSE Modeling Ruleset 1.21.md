@@ -29,6 +29,8 @@ Use `subtypeOf` only for a reusable invariant semantic distinction. Use `instanc
 
 ## 3. Product control
 
+> Note (2026-09-28, W-88, W-112): `control` and `boundary` are not properties of a note. They are not approved, carry no values and are not written by templates or the translator. This section is kept as written until the ruleset is reissued.
+
 `control` is independent from type and boundary. Do not create subtypes just to represent control, ownership, location, or lifecycle.
 
 ## 4. Relationships

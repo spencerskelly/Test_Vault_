@@ -1,9 +1,10 @@
 ---
-uid: <% tp.file.include("[[Snippet - uid]]") %>
-id: <% tp.file.include("[[Snippet - id]]") %>
 type: Info
 subtype: Property Definition
+id: <% tp.file.include("[[Snippet - id]]") %>
+uid: <% tp.file.include("[[Snippet - uid]]") %>
 status: Active
+tags: []
 property:
 appliesTo:
 required:

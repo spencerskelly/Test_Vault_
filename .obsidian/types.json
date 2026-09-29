@@ -5,8 +5,6 @@
     "type": "text",
     "subtype": "text",
     "status": "text",
-    "control": "text",
-    "boundary": "text",
     "origin": "text",
     "outcome": "text",
     "applicabilityStatus": "text",
@@ -18,7 +16,6 @@
     "severity": "number",
     "occurrence": "number",
     "detection": "number",
-    "aliases": "aliases",
     "tags": "tags",
     "addressedBy": "multitext",
     "addresses": "multitext",
@@ -51,7 +48,6 @@
     "exercises": "multitext",
     "finalState": "multitext",
     "flowsOn": "multitext",
-    "formerIds": "multitext",
     "hasBehavior": "multitext",
     "hasContext": "multitext",
     "hasDesign": "multitext",
@@ -120,6 +116,7 @@
     "usesSetup": "multitext",
     "verifiedBy": "multitext",
     "verifies": "multitext",
-    "conflictsWith": "multitext"
+    "conflictsWith": "multitext",
+    "eaType": "text"
   }
 }

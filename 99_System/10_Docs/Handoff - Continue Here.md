@@ -15,7 +15,7 @@ Written 2026-09-28 for a new AI chat continuing the work on this vault. Read thi
 
 ## Read in this order
 
-1. `99_System/10_Docs/Workspace Decision Log.md`: every decision made here (W-01 to W-110) and the Open list at the bottom. It is the authority for what has been decided.
+1. `99_System/10_Docs/Workspace Decision Log.md`: every decision made here (W-01 to W-112) and the Open list at the bottom. It is the authority for what has been decided.
 2. `99_System/02_AI/AI_INSTRUCTIONS.md`: how an AI creates notes (uid, id, status).
 3. `99_System/03_Schemas/ea-field-dispositions.yaml`, `ea-tag-dispositions.yaml` and `ea-element-mapping.yaml`: the property and element worklists.
 4. `Definitions/Properties`: the property definition notes (`uid`, `id`, `eaType` so far).
@@ -55,7 +55,7 @@ Done: disposition vocabulary; all element, connector, package and diagram fields
 
 Set aside (W-96): `Classifier`, `Classifier_guid` and `PDATA1` on element types other than Part. They are marked `setAside` with counts by type in `ea-field-dispositions.yaml`. Decide them in the element mapping.
 
-Not applied yet (W-88 and the W-96 review): the property set in the templates, `element-types.yaml`, `types.json`, the `id` snippet, `next-id.js`, AI_INSTRUCTIONS and Ruleset 1.21 section 3, and the translator. Open rules found in the review: multi-line tag values on a body line, the order of lines in the `Source: EA` section, the line format for connector values on an end note, and where the definitions of kept body lines are written.
+Applied in W-112: the property set and order in the templates, `element-types.yaml`, `types.json`, the `id` snippet, `next-id.js`, AI_INSTRUCTIONS and a note in Ruleset 1.21 section 3. Not applied: existing notes and the translator. Open rules found in the review: multi-line tag values on a body line, the order of lines in the `Source: EA` section, the line format for connector values on an end note, and where the definitions of kept body lines are written.
 
 ## Decided after the W-96 review (W-97 to W-100)
 

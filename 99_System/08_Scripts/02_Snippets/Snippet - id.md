@@ -7,10 +7,8 @@ if (prefix) {
   let max = 0;
   for (const f of tp.app.vault.getMarkdownFiles()) {
     const fm = tp.app.metadataCache.getFileCache(f)?.frontmatter;
-    for (const c of [fm?.id, ...(Array.isArray(fm?.formerIds) ? fm.formerIds : [])]) {
-      const m = String(c ?? "").match(re);
-      if (m) max = Math.max(max, Number(m[1]));
-    }
+    const m = String(fm?.id ?? "").match(re);
+    if (m) max = Math.max(max, Number(m[1]));
   }
   tR += `${prefix}-${String(max + 1).padStart(5, "0")}`;
 }

@@ -3,7 +3,7 @@ module.exports = async function nextId(tp, prefix, width = 4) {
   const pattern = new RegExp(`^${prefix}-(\\d+)$`, "i");
   for (const file of tp.app.vault.getMarkdownFiles()) {
     const frontmatter = tp.app.metadataCache.getFileCache(file)?.frontmatter;
-    const candidates = [frontmatter?.id, ...(frontmatter?.formerIds ?? [])];
+    const candidates = [frontmatter?.id];
     for (const candidate of candidates) {
       const match = String(candidate ?? "").match(pattern);
       if (match) used.add(Number(match[1]));
