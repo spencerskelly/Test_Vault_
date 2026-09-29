@@ -72,17 +72,18 @@ Work that has to be done in the vault after the import (stage 2, Workspace Decis
 
 **Done when.** Every unconnected requirement is either folded, with its note retired and the clause anchor in place, or kept with a reason in the log.
 
-## Task 5: New analysis of the tagged values
+## Task 5: Review the tag lines after the import
 
-**What it is.** Four tags were dropped without carrying anything into the notes (W-87): `Status`, `Webasto MBDV Profile::Status`, `Object Type` and `Webasto MBDV Profile::Object Type`. 5 other tags are still undecided and default to a line in the source section below the GUID (W-29). Spencer decided to run a new analysis on the imported vault before settling them.
+**What it is.** Every tag now has a rule (W-29 to W-95): 82 are dropped, 36 become body lines under their EA tag name (W-93), and 3 are structure. Some body lines will become properties (W-94, W-95). This task reviews the imported lines and settles which properties are needed. It also answers the two questions W-87 left open.
 
-**How to find them.** `99_System/CSV_EA/tagvalue_summary.csv` lists every tag with its row count, and `t_objectproperties_all.csv` holds every value, including the `Status` tags that the trimmed `t_objectproperties.csv` leaves out. `99_System/03_Schemas/ea-tag-dispositions.yaml` shows which tags are decided.
+**How to find them.** `99_System/03_Schemas/ea-tag-dispositions.yaml` lists every tag and its decision. Search the vault for the line name, for example `Current Max:`. `99_System/CSV_EA/tagvalue_summary.csv` lists every tag with its row count, and `t_objectproperties_all.csv` holds every value, including the `Status` tags that the trimmed `t_objectproperties.csv` leaves out.
 
 **What to check.**
-1. Whether the `Heading` value of `Object Type` (1,491 elements) is needed to fold headings into document notes (Task 4).
-2. Whether the one `Discontinued` requirement should be Retired.
-3. For each of the 5 pending tags, whether its values are worth a body line or a property, or should be dropped.
+1. Which body lines become properties (the ratings, `SignalType`, and the FMEA scores `Severity`, `Occurence` and `Detection` are the candidates), and their final names. Line names stay as the EA tag names until then (W-93).
+2. Whether the `Heading` value of `Object Type` (1,491 elements) is needed to fold headings into document notes (Task 4).
+3. Whether the one `Discontinued` requirement should be Retired.
+4. The values kept as written that need a check: `Current Max` of `320A` on an A160 part, `x/0` in `Cable Compatibility`, the MoSCoW legend written as a `Webasto MBDV Profile::Priority` line and the format legend in `User Story`, and the unexplained `Style` and `Quantity`.
 
-**How to resolve them.** Decide the tags in groups, log each group in the Decision Log, and change the rules for the next fresh import (W-36, W-37). Record any per-note change in `Review Changes Log.md`, keyed by the element GUID.
+**How to resolve them.** Decide in groups, log each group in the Decision Log, and change the rules for the next fresh import (W-36, W-37). Record any per-note change in `Review Changes Log.md`, keyed by the element GUID.
 
-**Done when.** No tag is `pending` in `ea-tag-dispositions.yaml`, and the two checks above are answered in the log.
+**Done when.** Each candidate in item 1 is a property or stays a line, and items 2 to 4 are answered in the log.

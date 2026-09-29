@@ -164,12 +164,12 @@ tags:
     distinct: 0
     note: "Never has a value."
   - tag: "Detection"
-    disposition: "pending"
-    decision: ""
+    disposition: "body"
+    decision: "W-95"
     populated: 1
     realValues: 1
     distinct: 1
-    note: "Not yet decided. Default if undecided: body, below the EA GUID."
+    note: "Body (W-95), below the EA GUID as a `- Detection: <value>` line (EA tag name, W-93), real values only. May become a property later (FMEA scores, Failure Mode); decided with the element mapping."
   - tag: "Difficulty"
     disposition: "drop"
     decision: "W-29"
@@ -339,12 +339,12 @@ tags:
     distinct: 0
     note: "Never has a value."
   - tag: "Occurence"
-    disposition: "pending"
-    decision: ""
+    disposition: "body"
+    decision: "W-95"
     populated: 3
     realValues: 3
     distinct: 2
-    note: "Not yet decided. Default if undecided: body, below the EA GUID."
+    note: "Body (W-95), below the EA GUID as a `- Occurence: <value>` line (EA tag name, W-93), real values only. May become a property later (FMEA scores, Failure Mode); decided with the element mapping."
   - tag: "Origin"
     disposition: "drop"
     decision: "W-90"
@@ -458,12 +458,12 @@ tags:
     distinct: 0
     note: "Never has a value."
   - tag: "SSDefaultToolbox"
-    disposition: "pending"
-    decision: ""
+    disposition: "drop"
+    decision: "W-95"
     populated: 6
     realValues: 6
     distinct: 3
-    note: "Not yet decided. Default if undecided: body, below the EA GUID."
+    note: "Dropped (W-95). EA toolbox setting on 6 Packages (SysML1.4 requirements, activity and interaction toolboxes); tool state, not model content."
   - tag: "SW time"
     disposition: "drop"
     decision: "W-29"
@@ -479,12 +479,12 @@ tags:
     distinct: 4
     note: "Body (W-91), below the EA GUID as a `- Sales Comment: <text>` line (EA tag name, W-93), real values only. Written as is; the comment text is not edited."
   - tag: "Severity"
-    disposition: "pending"
-    decision: ""
+    disposition: "body"
+    decision: "W-95"
     populated: 3
     realValues: 3
     distinct: 2
-    note: "Not yet decided. Default if undecided: body, below the EA GUID."
+    note: "Body (W-95), below the EA GUID as a `- Severity: <value>` line (EA tag name, W-93), real values only. May become a property later (FMEA scores, Failure Mode); decided with the element mapping."
   - tag: "SignalType"
     disposition: "body"
     decision: "W-94"
@@ -850,9 +850,9 @@ tags:
     distinct: 0
     note: "Only ever holds a placeholder (unassigned or <memo>)."
   - tag: "verifyMethod"
-    disposition: "pending"
-    decision: ""
+    disposition: "body"
+    decision: "W-95"
     populated: 2
     realValues: 2
     distinct: 2
-    note: "Not yet decided. Default if undecided: body, below the EA GUID."
+    note: "Body (W-95), below the EA GUID as a `- verifyMethod: <value>` line (EA tag name, W-93), real values only. May become a property later (FMEA scores, Failure Mode); decided with the element mapping."
