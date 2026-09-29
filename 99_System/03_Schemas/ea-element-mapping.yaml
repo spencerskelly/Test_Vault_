@@ -42,7 +42,7 @@ elementTypes:
   disposition: pending
   mdseType: null
   decision: null
-  note: MDSE now has a Port class (W-113). Merge of Part- and Object-owned Ports into the object's Port is not decided; rules are being worked out.
+  note: MDSE now has a Port class (W-113). Part- and Object-owned Ports merge into the block's Port by the W-114 rule; the Port note type and subtype are not yet approved for the mapping.
   oldToolRules:
   - rule: F-01
     verdict: fold
