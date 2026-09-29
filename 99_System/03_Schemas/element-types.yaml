@@ -1,4 +1,4 @@
-schemaVersion: '1.9'
+schemaVersion: '1.10'
 date: '2026-09-29'
 basis: MDSE ruleset 1.21
 commonProperties: [type, subtype, id, uid, status, tags]   # order fixed by W-97; W-88 removed control, boundary, aliases and formerIds
@@ -8,7 +8,7 @@ classes:
 - name: Object
   prefix: OBJ
   folder: 10_Objects
-  subtype: ["electrical", "circuit", "mechanical", "software", "firmware"]
+  subtype: ["electrical", "circuit", "mechanical", "software", "firmware", "part"]
 - name: Port
   prefix: PORT
   folder: 20_Ports
