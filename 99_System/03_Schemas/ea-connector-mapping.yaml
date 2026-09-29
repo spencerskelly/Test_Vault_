@@ -182,3 +182,26 @@ connectorTypes:
       field: derivedFrom
       writtenOn: 'the source, in the drawn direction'
       reviewLine: 'REVIEW modelCheck: deriveReqt <source type> to <target type>'
+  - stereotype: refine
+    connectors: 1114
+    decision: W-165
+    matrixRule: 'Rules 20, 21, 22, 56, 65; Rule 20 replaced'
+    rules:
+    - pair: Requirement to Requirement
+      connectors: 541
+      field: refines
+      writtenOn: 'the source; refinedBy generated on the target; 539 links'
+    - pair: Use Case to Requirement
+      connectors: 412
+      field: drives
+      writtenOn: 'the Use Case; drivenBy generated on the requirement; 412 links'
+    - pair: Info or Artifact to Requirement
+      connectors: 144
+      field: describes
+      writtenOn: 'the Info or Artifact; describedBy generated on the requirement; 144 links'
+    - pair: any other
+      connectors: 17
+      field: refines
+      writtenOn: 'the source, in the drawn direction'
+      reviewLine: 'REVIEW modelCheck: refine <source type> to <target type>'
+      note: '17 links on 16 notes'
