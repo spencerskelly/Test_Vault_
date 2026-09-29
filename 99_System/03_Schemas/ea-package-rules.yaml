@@ -3,7 +3,7 @@
 # Each entry: path (EA package path), packageId (t_package.Package_ID), decision (log entry), and the rules Spencer sets for what sits in it.
 # The element rules themselves stay in ea-element-mapping.yaml; an entry here only records what is decided for this package.
 schemaVersion: '1.0'
-vaultTreeStartsAt: 'IPC !'
+vaultTreeStartsAt: the ten packages under IPC ! (W-117); Model and IPC ! are not folders
 packages:
 - path: Model
   packageId: 1
@@ -12,6 +12,6 @@ packages:
   note: No elements of its own, no diagrams, no Notes; no row in t_object.
 - path: Model/IPC !
   packageId: 3
-  folder: 'IPC !'
+  folder: none (not a folder in the vault; the vault tree starts at its 10 child packages)
   decision: W-117
-  note: Top folder of the vault tree. Holds only the rows of its 10 child packages, no diagrams, no Notes. Whether a package becomes a note is undecided (W-66).
+  note: Holds only the rows of its 10 child packages, no diagrams, no Notes; Author skellys on its row. Whether a package becomes a note is undecided (W-66).
