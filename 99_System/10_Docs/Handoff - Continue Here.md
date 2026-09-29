@@ -71,6 +71,8 @@ W-115: Requirement subtype comes from the EA package path (old rule R-01) with a
 
 W-117: the vault folder tree starts at `IPC !` (no `Model` folder). Requirements are now worked through one EA package at a time, top-down in EA name order, with the decided rules kept in `99_System/03_Schemas/ea-package-rules.yaml`. Done so far: `Model`, `IPC !`. Next: `00 Product Abstract` (Package_ID 3982), then `00 Product Definition`, `01 Product Use Case`, `02 Product Context`, `03 Product Requirement`, `04 Product Function`, `05 Product Design`, `06 Product Validation`, `07 Product Assembly`, `09 Product in Progress`.
 
+W-117: the vault folder tree starts at the ten packages under `IPC !` (`Model` and `IPC !` are not folders). Working method now: one EA package at a time, top down in EA name order; for each Spencer is shown the package, the rules that already apply, and the element types and stereotypes inside, and then sets the rules. Done: `Model`, `IPC !`. Next: `00 Product Abstract`.
+
 ## Layout and sweep (W-107, W-108)
 
 The note layout is written in `Definitions/Note Layout.md`; `Definitions/EA Source Section.md` describes the last section. A sweep of all fields, tags and export files found no missing field; column dispositions for `t_attribute`, `t_operation`, `t_xref` and `t_document`, and a role for every file in `CSV_EA`, were added to `ea-field-dispositions.yaml`. `Object Type` (both), `Origin` and `In-Links` stay `drop` (W-109). Open from the sweep: the counter order for several attachments on one note.

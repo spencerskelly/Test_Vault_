@@ -235,6 +235,7 @@ elementTypes:
   disposition: pending
   mdseType: null
   decision: null
+  note: The vault folder tree starts at the ten packages under IPC ! (W-117); Model and IPC ! are not folders. Whether a package becomes a note is undecided (W-66).
   oldToolRules:
   - rule: P-01
     verdict: suppress
