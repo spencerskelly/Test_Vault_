@@ -504,6 +504,7 @@ tConnector:
 - field: Top_End_Label
   disposition: archive
   decision: W-53
+  changedBy: 'W-174: on ControlFlow connectors the 18 values are guards and are written as a Guard line on the step before (body)'
   note: 'Archived (W-53). ControlFlow guards such as True and No (18 rows).'
   nonblank: 18
 - field: Btm_Start_Label

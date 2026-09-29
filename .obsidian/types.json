@@ -43,6 +43,8 @@
     "refinedBy": "multitext",
     "references": "multitext",
     "referencedBy": "multitext",
+    "precedes": "multitext",
+    "follows": "multitext",
     "describedBy": "multitext",
     "describes": "multitext",
     "designOf": "multitext",
