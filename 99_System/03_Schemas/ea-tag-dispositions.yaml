@@ -612,12 +612,13 @@ tags:
     distinct: 0
     note: "Never has a value."
   - tag: "SysML1.4::text"
-    disposition: "drop"
-    decision: "W-29"
+    disposition: "body"
+    placement: "main text"
+    decision: "W-102"
     populated: 2685
-    realValues: 0
-    distinct: 0
-    note: "Only ever holds a placeholder (unassigned or <memo>)."
+    realValues: 49
+    distinct: 49
+    note: "Body (W-102, reverses W-29). The wording is in the Notes column of t_objectproperties_raw.csv, not in Value (which shows <memo>). Written as normal text in the body directly below the element Note; when the Note is empty it is the main text. Real wording on 49 rows (testCase 38, InformationItem 6 not already in the Note; see W-102)."
   - tag: "Target"
     disposition: "drop"
     decision: "W-29"
@@ -914,12 +915,13 @@ tags:
     distinct: 1
     note: "Body (W-91), below the EA GUID as a `- source: <text>` line (EA tag name, W-93), real values only. Written as is; the comment text is not edited."
   - tag: "text"
-    disposition: "drop"
-    decision: "W-29"
+    disposition: "body"
+    placement: "main text"
+    decision: "W-102"
     populated: 681
-    realValues: 0
-    distinct: 0
-    note: "Only ever holds a placeholder (unassigned or <memo>)."
+    realValues: 351
+    distinct: 351
+    note: "Body (W-102, reverses W-29). The wording is in the Notes column of t_objectproperties_raw.csv, not in Value (which shows <memo>). Written as normal text in the body directly below the element Note; when the Note is empty it is the main text. Real wording on 351 rows (including those already in the Note); 383 rows of text and SysML1.4::text together are not already in the element Note (261 with an empty Note, 122 with different wording)."
   - tag: "verifyMethod"
     disposition: "body"
     decision: "W-95"
