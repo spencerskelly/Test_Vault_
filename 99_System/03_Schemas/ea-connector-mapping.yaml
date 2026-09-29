@@ -62,7 +62,16 @@ connectorTypes:
     decision: W-154
     rule: 'connectors that end on the same pair of notes after the Port merge (either direction) are one link per field; every distinct non-empty Name is kept as its own line, identical names once, unnamed add nothing; every connector GUID stays in the ledger'
     counts: '22 groups hold 70 connectors (16 plain, 6 binding), so 822 resolved connectors become 774 links; 2 groups have different names; 2 groups repeat the same drawing'
+  blockLevelEnds:
+    decision: W-155
+    rule: 'a connector with an end that is not a Port is written as drawn and gets the W-55 line "- REVIEW port needed: Connector <name or unnamed> to [[other end]]" in the Source: EA section of both end notes; identical lines on one note are written once'
+    counts: '109 connectors (94 with no Port end, 15 with one); 108 resolve, 1 has both ends missing; 101 distinct flag entries'
+  partEnds:
+    decision: W-155
+    rule: 'a Part end resolves to the block note that types the Part (PDATA1, a Class): 182 ends; the 3 Parts with no block resolve to the Object note with subtype part (W-138); no self-loops'
+  context:
+    decision: W-155
+    rule: 'no assembly or Part context line is written (changes W-114); where a connection was drawn stays in the diagram canvases (W-73)'
+  linkCount: '822 resolved connectors become 766 links after Parts resolve to blocks (W-154 counted 774 before that)'
   notDecided:
   - 'the line format for a connector Name on both end notes (174 named, 165 distinct names)'
-  - 'the assembly and Part context line (W-114)'
-  - 'the REVIEW port needed line for the 109 connectors with an end that is not a Port, and for the 87 Part-to-Part cases whose Parts fold away'
