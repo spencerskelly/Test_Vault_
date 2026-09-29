@@ -40,7 +40,7 @@ Written 2026-09-28 for a new AI chat continuing the work on this vault. Read thi
 - **Templates and definitions:** templates serve hand-made and translated notes; Templater snippets fill `uid` and `id` (W-06, W-20). Every property gets a definition note in `Definitions/Properties` (W-08, W-19).
 - **EA traceability:** the `EA GUID` line is first in a `Source: EA` section at the bottom of a translated note, and everything else kept from EA goes below it (W-03, W-28). The layout is described in `Definitions/EA Source Section.md`.
 - **External documents:** one note per document edition with clause anchors; unconnected clauses fold into it (W-16).
-- **Tags:** 69 of the 121 tags are dropped (W-29). Sequence-style EA `id` values are dropped (W-26). The `Stakeholder ID` tag holds clause numbers. When unsure, keep the value in the body and decide in the cleanup (W-27).
+- **Tags:** all 121 are decided (W-29 to W-95): 82 dropped, 36 body lines under their EA tag names, 3 structure (W-93). Sequence-style EA `id` values are dropped (W-26). The `Stakeholder ID` tag holds clause numbers. When unsure, keep the value in the body and decide in the cleanup (W-27).
 - **Default diagram line:** an element with a default diagram gets a marked `Default diagram: [[...]]` line, written only when the canvas is created, including by a diagrams-only run (W-80). **Requirements:** every one is imported as a note, folding is stage 2 (W-81).
 - **Diagrams-only merge:** a new tool mode may add selected diagram types into an existing vault, additive only and through the accepted ledger (W-62). A diagram is a canvas file plus a companion note (W-73).
 - **Import process:** two stages (W-30). Run into a fresh vault, review, then accept it or start fresh with better rules; never import over an existing vault (W-36, W-37). Review changes are the git diff against the baseline plus reasons in `99_System/10_Docs/Review Changes Log.md` (W-38). The source reference is a ledger keyed by EA GUID plus a run manifest, with no copied values (W-35).
@@ -49,17 +49,17 @@ Written 2026-09-28 for a new AI chat continuing the work on this vault. Read thi
 
 ## Where the property work stands
 
-Done: disposition vocabulary; all element, connector, package and diagram fields except three (W-33 to W-73, listed below); all subordinate tables (W-74 to W-86); 69 tags dropped; the `id` tags; `Stakeholder ID` as clause source.
+Fields and tags are complete (W-33 to W-96), with one exception set aside for the element mapping.
 
-Next, in this order:
-1. The three element fields still `pending` in `ea-field-dispositions.yaml` (`Classifier`, `Classifier_guid`, `PDATA1`): decided for Parts only (W-44), they wait for the Port and Object mapping for other types.
-2. Done in W-29 to W-95: all 121 tags are decided (82 drop, 36 body under their EA tag names, 3 structure). Which body lines become properties is reviewed after the import (Task 5 in `Post-Import Tasks.md`). Where the definitions of the kept body lines are written is not decided.
-3. Done in W-88: every note carries `uid`, `id`, `type`, `subtype`, `status`, `eaType` (translated only) and `tags`; `aliases` and `formerIds` go in the body; `control` and `boundary` are not approved. Its listed consequences are not yet applied.
-4. The open items listed in the Decision Log, chiefly the per-document designator parse rule, the duplicate-name and unsafe-character rules, and the ports question, all needed before the import.
+Done: disposition vocabulary; all element, connector, package and diagram fields except three (W-33 to W-73); all subordinate tables (W-74 to W-86); all 121 tags (82 dropped, 36 body lines under their EA tag names, 3 structure; W-29 to W-95); the W-88 property set (`uid`, `id`, `type`, `subtype`, `status`, `tags` on every note, `eaType` on translated notes; `aliases` and `formerIds` in the body; `control` and `boundary` not approved). Body lines use the exact EA tag name until after the import (W-93).
 
-## Parked for a separate chat
+Set aside (W-96): `Classifier`, `Classifier_guid` and `PDATA1` on element types other than Part. They are marked `setAside` with counts by type in `ea-field-dispositions.yaml`. Decide them in the element mapping.
 
-Element mapping: which MDSE type each EA object type becomes. The worklist is `ea-element-mapping.yaml` (31 object types, largest first, all `pending`), with what the earlier translator did as evidence. The first proposal was: every EA Requirement becomes an MDSE Requirement note, except unconnected standard and stakeholder requirements (10,052), which fold into their document note. That is replaced for this import: every requirement is imported as its own note (13,988) and folding happens in stage 2 (W-81, Task 4). That chat will need `EA_to_MDSE_Consolidated_v2_6_0.zip` uploaded again, for the earlier tool's rules.
+Not applied yet (W-88 and the W-96 review): the property set in the templates, `element-types.yaml`, `types.json`, the `id` snippet, `next-id.js`, AI_INSTRUCTIONS and Ruleset 1.21 section 3, and the translator. Open rules found in the review: multi-line tag values on a body line, the order of lines in the `Source: EA` section, the line format for connector values on an end note, and where the definitions of kept body lines are written.
+
+## Next topic: element mapping
+
+Element mapping: which MDSE type and subtype each EA object type becomes. The worklist is `ea-element-mapping.yaml` (31 object types, largest first, all `pending`), with what the earlier translator did as evidence (`oldToolRules`). It should also settle the three set-aside fields, the `type` value for elements with no approved mapping (handoff review item 1), whether Ports are notes or sections of the block note, the relationship vocabulary (`effect`, `entry`, `doActivity`, `represents`, `conveys`, `target`, and `direction` on flows), the fate of States, Classes and Packages, and the sequence-diagram rule. The chat needs `EA_to_MDSE_Consolidated_v2_6_0.zip` uploaded again, for the earlier tool's rules. The first proposal to fold unconnected requirements into document notes is replaced (W-81).
 
 ## Not yet verified or still open
 

@@ -6,7 +6,7 @@
 # nonblank = rows with a real (not empty, not 0) value in the extract; tObject counts exclude package rows.
 # placement (only on body): main text | source section | attachment. main text is the note's own description at the top of the body; source section is a line below the EA GUID (the default when placement is missing); attachment is a file next to the note (W-42, W-76).
 # Sections: tObject, tConnector, tPackage (fields, W-33 to W-66); tDiagram, tDiagramObjects, tDiagramLinks (W-67 to W-73); emptyTables (W-74); tDocument (W-75, W-76); tXref (W-79 to W-84); tConnectorTag (W-85); tSmallTables (W-86).
-# Still pending: tObject Classifier, Classifier_guid and PDATA1 (decided for Parts only, W-44). Tags are in ea-tag-dispositions.yaml.
+# Still pending, set aside in W-96 for the element mapping: tObject Classifier, Classifier_guid and PDATA1 (decided for Parts only, W-44). Tags are in ea-tag-dispositions.yaml.
 schemaVersion: '1.0'
 # tObject: 34583 rows in the extract
 # tConnector: 21822 rows in the extract
@@ -65,12 +65,16 @@ tObject:
   proposedByHandoff: structure
   handoffNote: Use only where the exact EA construct requires classifier semantics.
   nonblank: 1841
+  setAside: 'W-96: waits for the element mapping (Port and Object rules); Parts are decided (W-44)'
+  byType: 'Port 920, Object 498, Part 359 (decided W-44), UseCase 23, ActivityPartition 22, Action 18, Sequence 1'
 - field: Classifier_guid
   disposition: pending
   partsDecision: 'Part elements only, decided W-44: archive (same reason as Classifier). Port (920), Object (545) and other types are still to decide.'
   proposedByHandoff: archive
   handoffNote: Internal import evidence.
   nonblank: 1903
+  setAside: 'W-96: waits for the element mapping (Port and Object rules); Parts are decided (W-44)'
+  byType: 'Port 920, Object 545, Part 360 (decided W-44), UseCase 24, ActivityPartition 23, Action 22, ProxyConnector 5, Sequence 3'
 - field: Diagram_ID
   disposition: archive
   decision: W-41
@@ -137,6 +141,8 @@ tObject:
   proposedByHandoff: archive / structure
   handoffNote: EA overloaded internal storage; decode only by explicit rule.
   nonblank: 19333
+  setAside: 'W-96: waits for the element mapping (Port and Object rules); Parts are decided (W-44)'
+  byType: 'Requirement 12,089, Port 3,432, Part 2,896 (decided W-44), Issue 264, State 253, Object 166, Activity 118, others; the 1,386 Package rows are excluded from nonblank, which reconciles my 20,719 with 19,333'
 - field: PDATA2
   disposition: archive
   decision: W-45

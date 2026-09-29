@@ -17,8 +17,8 @@ The EA GUID comes first. Everything else taken from EA goes below it.
 ## Source: EA
 EA GUID: {D2B8F0A4-...}
 
-- EA id: DG_0307_001_02
-- SysML1.4 id: CC115
+- id: DG_0307_001_02
+- SysML1.4::id: CC115
 - Applicability Comment: Only for DC charging
 ```
 
