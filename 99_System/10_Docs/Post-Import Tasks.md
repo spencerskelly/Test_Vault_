@@ -74,14 +74,14 @@ Work that has to be done in the vault after the import (stage 2, Workspace Decis
 
 ## Task 5: New analysis of the tagged values
 
-**What it is.** Four tags were dropped without carrying anything into the notes (W-87): `Status`, `Webasto MBDV Profile::Status`, `Object Type` and `Webasto MBDV Profile::Object Type`. 44 other tags are still undecided and default to a line in the source section below the GUID (W-29). Spencer decided to run a new analysis on the imported vault before settling them.
+**What it is.** Four tags were dropped without carrying anything into the notes (W-87): `Status`, `Webasto MBDV Profile::Status`, `Object Type` and `Webasto MBDV Profile::Object Type`. 40 other tags are still undecided and default to a line in the source section below the GUID (W-29). Spencer decided to run a new analysis on the imported vault before settling them.
 
 **How to find them.** `99_System/CSV_EA/tagvalue_summary.csv` lists every tag with its row count, and `t_objectproperties_all.csv` holds every value, including the `Status` tags that the trimmed `t_objectproperties.csv` leaves out. `99_System/03_Schemas/ea-tag-dispositions.yaml` shows which tags are decided.
 
 **What to check.**
 1. Whether the `Heading` value of `Object Type` (1,491 elements) is needed to fold headings into document notes (Task 4).
 2. Whether the one `Discontinued` requirement should be Retired.
-3. For each of the 44 pending tags, whether its values are worth a body line or a property, or should be dropped.
+3. For each of the 40 pending tags, whether its values are worth a body line or a property, or should be dropped.
 
 **How to resolve them.** Decide the tags in groups, log each group in the Decision Log, and change the rules for the next fresh import (W-36, W-37). Record any per-note change in `Review Changes Log.md`, keyed by the element GUID.
 

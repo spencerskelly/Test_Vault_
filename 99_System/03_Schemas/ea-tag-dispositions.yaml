@@ -45,12 +45,12 @@ tags:
     distinct: 25
     note: "Not yet decided. Default if undecided: body, below the EA GUID."
   - tag: "Applicability Status"
-    disposition: "pending"
-    decision: ""
+    disposition: "drop"
+    decision: "W-89"
     populated: 3363
     realValues: 2992
     distinct: 2
-    note: "Not yet decided. Default if undecided: body, below the EA GUID."
+    note: "Dropped (W-89). Unreliable: Applicable 2,972, unassigned 371, n.a. 20, all on Regulatory Requirement."
   - tag: "Application"
     disposition: "drop"
     decision: "W-29"
@@ -402,12 +402,12 @@ tags:
     distinct: 1
     note: "Not yet decided. Default if undecided: body, below the EA GUID."
   - tag: "Priority"
-    disposition: "pending"
-    decision: ""
+    disposition: "drop"
+    decision: "W-89"
     populated: 7028
     realValues: 1
     distinct: 1
-    note: "Not yet decided. Default if undecided: body, below the EA GUID."
+    note: "Dropped (W-89). unassigned on 7,027 of 7,029 rows; one Low and one blank."
   - tag: "Priority-Trace"
     disposition: "drop"
     decision: "W-29"
@@ -668,12 +668,12 @@ tags:
     distinct: 10
     note: "Not yet decided. Default if undecided: body, below the EA GUID."
   - tag: "Webasto MBDV Profile::Applicability Status"
-    disposition: "pending"
-    decision: ""
+    disposition: "drop"
+    decision: "W-89"
     populated: 3733
     realValues: 684
     distinct: 2
-    note: "Not yet decided. Default if undecided: body, below the EA GUID."
+    note: "Dropped (W-89). Unreliable: unassigned 3,049, n.a. 678, Applicable 6."
   - tag: "Webasto MBDV Profile::Application"
     disposition: "drop"
     decision: "W-29"
@@ -724,12 +724,12 @@ tags:
     distinct: 4
     note: "Dropped (W-87). Information 2,254, Requirement 123, Heading 13, information 1 on 2,391 rows; a new analysis is run after import."
   - tag: "Webasto MBDV Profile::Priority"
-    disposition: "pending"
-    decision: ""
+    disposition: "body"
+    decision: "W-89"
     populated: 2373
     realValues: 118
     distinct: 12
-    note: "Not yet decided. Default if undecided: body, below the EA GUID."
+    note: "Body (W-89), below the EA GUID as a Priority line. Real values only (118 rows, all Requirement); unassigned (2,255) and blank (18) write nothing."
   - tag: "Webasto MBDV Profile::Priority-Trace"
     disposition: "drop"
     decision: "W-29"
