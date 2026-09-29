@@ -378,3 +378,33 @@ connectorTypes:
       connectors: 1
       field: describes
       writtenOn: 'turned around: the Artifact (W-166 applied to an Artifact)'
+- eaConnectorType: UseCase
+  connectors: 1258
+  decision: W-171
+  status: settled
+  matrixRule: 'Rules 30, 31, 60, 61'
+  direction: '8 connectors are marked Destination -> Source; the tool follows Direction (W-51)'
+  exception: '1 connector with an end missing from the export writes nothing (Rule 71)'
+  stereotypes:
+  - stereotype: extend
+    connectors: 736
+    rules:
+    - pair: Use Case to Use Case
+      connectors: 733
+      field: optionOf
+      writtenOn: 'the extending (source) Use Case, pointing at the base; hasOption generated'
+    - pair: Issue to Use Case
+      connectors: 2
+      field: affects
+      writtenOn: 'the Issue (W-166)'
+  - stereotype: include
+    connectors: 522
+    rules:
+    - pair: Use Case to Use Case
+      connectors: 521
+      field: hasChild
+      writtenOn: 'the including (source) Use Case; childOf generated; 47 repeat a placement link and add nothing, 473 new links'
+    - pair: Use Case to Object
+      connectors: 1
+      field: hasChild
+      reviewLine: 'REVIEW hasChild: the two notes have different types'
