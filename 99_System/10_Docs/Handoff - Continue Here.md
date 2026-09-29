@@ -15,7 +15,7 @@ Written 2026-09-28 for a new AI chat continuing the work on this vault. Read thi
 
 ## Read in this order
 
-1. `99_System/10_Docs/Workspace Decision Log.md`: every decision made here (W-01 to W-114) and the Open list at the bottom. It is the authority for what has been decided.
+1. `99_System/10_Docs/Workspace Decision Log.md`: every decision made here (W-01 to W-115) and the Open list at the bottom. It is the authority for what has been decided.
 2. `99_System/02_AI/AI_INSTRUCTIONS.md`: how an AI creates notes (uid, id, status).
 3. `99_System/03_Schemas/ea-field-dispositions.yaml`, `ea-tag-dispositions.yaml` and `ea-element-mapping.yaml`: the property and element worklists.
 4. `Definitions/Properties`: the property definition notes (`uid`, `id`, `eaType` so far).
@@ -63,9 +63,11 @@ Property order at the top of every note: `type`, `subtype`, `id`, `uid`, `status
 
 ## Decided after W-112
 
-W-113: the MDSE `Interface` class is removed and `Port` (prefix `PORT`, folder `20_Ports`, the five old Interface subtypes) is added. Intent: bring EA in as native as possible, lose no data, merge ports only as far as needed, resolve the rest in the second pass. The Port merge rule (one hop, PDATA3, then exact name, then add, else stay) is W-114. Next W number is W-115.
+W-113: the MDSE `Interface` class is removed and `Port` (prefix `PORT`, folder `20_Ports`, the five old Interface subtypes) is added. Intent: bring EA in as native as possible, lose no data, merge ports only as far as needed, resolve the rest in the second pass. The Port merge rule (one hop, PDATA3, then exact name, then add, else stay) is W-114. Next W number is W-116.
 
 Port findings so far (from `t_object`, `t_connector`, `t_xref`; not yet decided): all 4,387 Ports have an owner (Part 1,956, Class 1,903, Object 485, ActivityPartition 42, Actor 1). `PDATA1` = the typing Class (3,432); `PDATA2` = redefinition, mostly a Port on an ancestor block (1,713 of 1,906); `PDATA3` = the Port on the block a Part or Object is typed by (1,697 of the Part-owned or Object-owned Ports match one on their own block); `Classifier` on Ports points at another Port (920). `isConjugated` exists only in `t_xref` CustomProperties for 31 Ports. Merge rule (approved, W-114), one hop only, never up the redefinition chain: an instance Port goes to the Port `PDATA3` names if that Port is on its owner's block, else to the Port with the exact same name on that block, else it is added to the block as a Port of its own; the connectors drawn in the assembly move with it and keep the assembly and Part as context. Modelled result: 4,387 Ports become 2,589, 0 self-loops, 45 connectors duplicate another. 26 Ports have no block and stay. Following the redefinition chain creates false self-loops (55) and must not be used.
+
+W-115: Requirement subtype comes from the EA package path (old rule R-01) with a new subtype `engineering` for the Engineering Requirements folder (2,469); the 2,383 InformationItems in the Regulatory Requirements folder become Requirement notes with subtype `standard`. 16,371 requirement notes in all. Reading to confirm: the functionalRequirement and designConstraint stereotype override does not apply inside the Engineering folder. Still open for Requirement: the template default subtype and the designator parse rule.
 
 ## Layout and sweep (W-107, W-108)
 

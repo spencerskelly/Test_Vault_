@@ -21,9 +21,17 @@ elementTypes:
     Functional: 2
     performanceRequirement: 1
     physicalRequirement: 1
-  disposition: pending
-  mdseType: null
-  decision: null
+  disposition: note
+  mdseType: Requirement
+  decision: W-115
+  subtypeRule:
+    basis: EA package path of the element, first match wins (old tool rule R-01, D-049, with W-115 changes)
+    engineering: 03 Product Requirement / Engineering Requirements
+    standard: 03 Product Requirement / Regulatory Requirements
+    design: [03 Product Requirement / Design Guides, 05 Product Design]
+    functional: 04 Product Function
+    stakeholder: any other package
+    stereotypeOverride: functionalRequirement gives functional and designConstraint gives design, except inside Engineering Requirements (reading to confirm, W-115)
   oldToolRules:
   - rule: R-02
     verdict: fold
@@ -89,6 +97,7 @@ elementTypes:
   disposition: pending
   mdseType: null
   decision: null
+  partialDecision: The 2,383 InformationItems in the package 03 Product Requirement / Regulatory Requirements become Requirement notes with subtype standard (W-115). The other 442 are not decided.
   oldToolRules:
   - rule: I-01
     verdict: fold

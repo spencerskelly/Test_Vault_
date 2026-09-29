@@ -28,7 +28,7 @@ The former property `kind` is deprecated. The former top-level MDSE type `Thing`
 | State | STATE | `35_States` | — |
 | State Machine | SM | `36_State_Machines` | — |
 | Transition | TRANS | `37_Transitions` | — |
-| Requirement | REQ | `40_Requirements` | `functional`, `design`, `standard`, `stakeholder` |
+| Requirement | REQ | `40_Requirements` | `functional`, `design`, `standard`, `stakeholder`, `engineering` |
 | Design | DES | `41_Designs` | `characteristic`, `decision` |
 | Use Case | UC | `45_Use_Cases` | `what`, `where`, `why`, `when` |
 | Actor | ACT | `47_Actors` | — |

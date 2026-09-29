@@ -1,4 +1,4 @@
-schemaVersion: '1.6'
+schemaVersion: '1.7'
 date: '2026-09-29'
 basis: MDSE ruleset 1.21
 commonProperties: [type, subtype, id, uid, status, tags]   # order fixed by W-97; W-88 removed control, boundary, aliases and formerIds
@@ -43,7 +43,7 @@ classes:
 - name: Requirement
   prefix: REQ
   folder: 40_Requirements
-  subtype: ["functional", "design", "standard", "stakeholder"]
+  subtype: ["functional", "design", "standard", "stakeholder", "engineering"]
 - name: Design
   prefix: DES
   folder: 41_Designs
