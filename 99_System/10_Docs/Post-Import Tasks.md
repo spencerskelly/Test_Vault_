@@ -13,7 +13,7 @@ Work that has to be done in the vault after the import (stage 2, Workspace Decis
 
 **What it is.** In EA some users drew a flow connector (type Connector or InformationFlow) on a block or a Part, when it belongs on a port of that block. The import keeps each connector on the object where it was drawn (W-55) because no rule can choose the port. In the current export 118 connectors are affected: 94 Connectors with no end on a port, 15 Connectors with one end on a port, and 9 InformationFlow connectors with one end on a port.
 
-**Review table (W-156).** The import writes a table of the affected connectors in `99_System/11_Import`, one row per connector keyed by GUID, with the ends as drawn (element, owner, assembly), the notes they resolved to and the candidate Ports on each block end, so no one needs to open EA. It replaces the hand-made snapshot below.
+**Review table (W-156).** The import writes a table of the affected connectors in `99_System/11_Import`, one row per connector keyed by GUID, with the ends as drawn (element, owner, assembly), the notes they resolved to and the candidate Ports on each block end, so no one needs to open EA. The table is `Review - Block-Level Flow Connectors.csv` (provisional name, W-157), and it replaces the hand-made snapshot below. The line on the notes ends with the connector GUID: `REVIEW port needed: Connector <name or unnamed> to [[other end]]: connector {GUID}`.
 
 **How to find them.**
 - Search the vault for `REVIEW port needed`. The import writes that line in the `Source: EA` section of both end notes of each affected connector.
@@ -85,7 +85,7 @@ Work that has to be done in the vault after the import (stage 2, Workspace Decis
 2. Whether the `Heading` value of `Object Type` (1,491 elements) is needed to fold headings into document notes (Task 4).
 3. Whether the one `Discontinued` requirement should be Retired.
 4. The values kept as written that need a check: `Current Max` of `320A` on an A160 part, `x/0` in `Cable Compatibility`, the MoSCoW legend written as a `Webasto MBDV Profile::Priority` line and the format legend in `User Story`, and the unexplained `Style` and `Quantity`.
-5. The 252 `REVIEW nesting direction` lines (independent `Nesting` connectors written as `hasChild`/`childOf`, W-151; 200 add a parent that placement never showed, 52 give a child a second parent). Each line holds the connector GUID (W-152). Look the connector up in EA, check the direction, fix or remove the link, and remove the line.
+5. The 252 `REVIEW nesting direction` lines (independent `Nesting` connectors written as `hasChild`/`childOf`, W-151; 200 add a parent that placement never showed, 52 give a child a second parent). Each line holds the connector GUID (W-152), the key to its row in `Review - Nesting Direction.csv` in `99_System/11_Import`, which holds both ends as drawn (W-157). Check the direction, fix or remove the link, and remove the line.
 6. The `REVIEW subtypeOf: the two notes have different types` lines (W-152): 88 Generalization connectors, 87 links, on 81 notes, mostly Port and Object (39) and Function to Object (30). Decide for each whether it is a real "kind of" link, needs a different link (for example `hasPart` or `realizedBy`) or goes, and remove the line.
 
 **How to resolve them.** Decide in groups, log each group in the Decision Log, and change the rules for the next fresh import (W-36, W-37). Record any per-note change in `Review Changes Log.md`, keyed by the element GUID.
@@ -98,7 +98,7 @@ Work that has to be done in the vault after the import (stage 2, Workspace Decis
 
 **How to find them.** Search the vault for each line:
 - `REVIEW subtypeOf: target port is not on an ancestor block` (146). The `subtypeOf` link follows EA's redefinition link, but the target Port sits on a block with no family link to this one, or on the same block. Confirm it, correct it, or remove it.
-- `REVIEW port: added from an assembly, no matching port on the block` (617). A Part's or Object's Port had no match on its block (no `PDATA3` link and no Port of the same name), so it was added to the block as a Port of its own. Merge it into an existing Port, rename it, or keep it.
+- `REVIEW port: added from an assembly, no matching port on the block: port {GUID}` (617). A Part's or Object's Port had no match on its block (no `PDATA3` link and no Port of the same name), so it was added to the block as a Port of its own. `Review - Added Ports.csv` in `99_System/11_Import` (W-157) lists every instance Port folded into the note with its Part and assembly. Merge it into an existing Port, rename it, or keep it.
 - `REVIEW owner: ActivityPartition has no mapping yet` (42). The Port belongs to an ActivityPartition, which had no mapping when the import ran. Link it to its owner once that element is mapped.
 - `REVIEW block: owner Part has no block` (26). The Part that owns the Port has no `PDATA1`, or its block is not in the export, so the Port stayed with the Part. Find the block, or accept the Part as the owner.
 
@@ -129,7 +129,7 @@ Work that has to be done in the vault after the import (stage 2, Workspace Decis
 - 64 have no such structure and need a decision one by one: 17 join Parts in different assemblies, 29 involve an Object (Part and Object 15 and 14), 10 join two Objects, 7 join an Object and a Class, and 1 joins two Parts of the same assembly. Some may not be exposures at all and become `interfaces`.
 - After the Port merge (W-114) the inner end is the block's own Port. 17 of the 154 inner block Ports connect to more than one outer Port, because the block is used in several assemblies, so the fields are lists. The assembly and Part context of each connector is kept on the line still to be defined (W-114), and it says which instance was wired to which outer Port.
 
-**How to find them.** Search the properties for `equals`. The review table in `99_System/11_Import` (W-156) lists the 249 connectors by GUID with both ends as drawn and the derived outer and inner Port.
+**How to find them.** Search the properties for `equals`. The review table `Review - Equals Direction.csv` in `99_System/11_Import` (W-156, W-157) lists the 249 connectors by GUID with both ends as drawn and the derived outer and inner Port.
 
 **How to resolve one.** Decide which Port is outer and which is inner (assembly containment, or the context line). Write `exposes` on the outer Port and let `exposedBy` be generated on the inner one, or change the pair to `interfaces` when it is not an exposure. Remove `equals` from both notes. Record the reason in `Review Changes Log.md`, keyed by the connector GUID, and log the naming decision in the Decision Log once.
 

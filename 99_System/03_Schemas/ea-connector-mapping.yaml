@@ -64,7 +64,7 @@ connectorTypes:
     counts: '22 groups hold 70 connectors (16 plain, 6 binding), so 822 resolved connectors become 774 links; 2 groups have different names; 2 groups repeat the same drawing'
   blockLevelEnds:
     decision: W-155
-    rule: 'a connector with an end that is not a Port is written as drawn and gets the W-55 line "- REVIEW port needed: Connector <name or unnamed> to [[other end]]" in the Source: EA section of both end notes; identical lines on one note are written once'
+    rule: 'a connector with an end that is not a Port is written as drawn and gets the line "- REVIEW port needed: Connector <name or unnamed> to [[other end]]: connector {GUID}" (W-55, W-157) in the Source: EA section of both end notes; the evidence is in Review - Block-Level Flow Connectors.csv (W-156, W-157)'
     counts: '109 connectors (94 with no Port end, 15 with one); 108 resolve, 1 has both ends missing; 101 distinct flag entries'
   partEnds:
     decision: W-155
