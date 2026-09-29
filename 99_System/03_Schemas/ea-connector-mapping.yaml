@@ -311,3 +311,70 @@ connectorTypes:
       writtenOn: 'the source, in the drawn direction'
       reviewLine: 'REVIEW modelCheck: dependency <source type> to <target type>'
       note: '115 links on 95 notes'
+- eaConnectorType: Abstraction
+  connectors: 2811
+  decision: W-170
+  status: settled
+  matrixRule: 'Rules 10 to 14, 53, 66, 67, 72 to 79; package-context Rules 72 and 73 not used'
+  direction: '1 connector is marked Destination -> Source; the tool follows Direction (W-51)'
+  exception: '2 connectors with an end missing from the export write nothing (Rule 71)'
+  stereotypes:
+  - stereotype: allocate
+    connectors: 2795
+    rules:
+    - pair: Function to Object
+      connectors: 1362
+      field: performs
+      writtenOn: 'turned around: the Object, pointing at the Function; performedBy generated; 1,348 links'
+    - pair: Design to Object
+      connectors: 968
+      field: hasDesign
+      writtenOn: 'the Object, pointing at the Design; designOf generated; 956 links'
+    - pair: Issue to any
+      connectors: 213
+      field: affects
+      writtenOn: 'the Issue (W-166)'
+    - pair: Info or Artifact to any
+      connectors: 44
+      field: describes
+      writtenOn: 'the Info or Artifact (W-166)'
+    - pair: Requirement and Object, either direction
+      connectors: 25
+      field: appliesTo
+      writtenOn: 'the requirement (W-167)'
+    - pair: any other
+      connectors: 181
+      field: tracesTo
+      writtenOn: 'the source, in the drawn direction'
+      reviewLine: 'REVIEW modelCheck: allocate <source type> to <target type>'
+      note: '180 links on 123 notes'
+  - stereotype: Refine
+    connectors: 3
+    rules:
+    - pair: Use Case to Requirement
+      field: drives
+      writtenOn: 'the Use Case (W-165)'
+  - stereotype: Derive
+    connectors: 8
+    rules:
+    - pair: Requirement to Requirement
+      connectors: 7
+      field: derivedFrom
+      writtenOn: 'the source (W-164)'
+    - pair: Requirement to Issue
+      connectors: 1
+      field: derivedFrom
+      reviewLine: 'REVIEW modelCheck: Derive Requirement to Issue'
+  - stereotype: trace
+    connectors: 5
+    rules:
+    - pair: Requirement to Requirement
+      connectors: 3
+      field: references
+    - pair: Object to Requirement
+      connectors: 1
+      field: appliesTo
+    - pair: Object to Artifact
+      connectors: 1
+      field: describes
+      writtenOn: 'turned around: the Artifact (W-166 applied to an Artifact)'
