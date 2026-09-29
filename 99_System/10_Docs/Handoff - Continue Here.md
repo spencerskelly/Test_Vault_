@@ -49,13 +49,13 @@ Written 2026-09-28 for a new AI chat continuing the work on this vault. Read thi
 
 ## Where the property work stands
 
-Done: disposition vocabulary; administrative element fields; 69 tags dropped; the `id` tags; `Stakeholder ID` as clause source.
+Done: disposition vocabulary; all element, connector, package and diagram fields except three (W-33 to W-73, listed below); all subordinate tables (W-74 to W-86); 69 tags dropped; the `id` tags; `Stakeholder ID` as clause source.
 
 Next, in this order:
-1. The rest of the element fields (3 still `pending`, all decided for Parts only in `ea-field-dispositions.yaml`, each with the handoff's suggestion and a row count; the 21 empty ones were dropped in W-40 and 11 presentation/style fields decided in W-41, Note/Alias/Multiplicity in W-42, changed in W-43, Part block link in W-44, four PDATA/NType fields in W-45, three ID fields in W-46, the two type fields in W-47, Name in W-48).
-2. Diagram fields (in `ea-field-dispositions.yaml` since W-67: `tDiagram`, `tDiagramObjects`, `tDiagramLinks`) and the subordinate tables (all decided: W-74 to W-86). Package and connector fields are all decided (W-49 to W-66); the folder-note idea is open.
-3. The 48 pending tags in `ea-tag-dispositions.yaml`. Start with the two `Status` tags: they hold "Draft" on all but one element. Groups: large low-variety tags, comments and knowledge, part and hardware data, FMEA, EA tool leftovers.
-4. Which properties every translated note carries.
+1. The three element fields still `pending` in `ea-field-dispositions.yaml` (`Classifier`, `Classifier_guid`, `PDATA1`): decided for Parts only (W-44), they wait for the Port and Object mapping for other types.
+2. The 48 pending tags in `ea-tag-dispositions.yaml`. Start with the two `Status` tags: they hold "Draft" on all but one element. Groups: large low-variety tags, comments and knowledge, part and hardware data, FMEA, EA tool leftovers.
+3. Which properties every translated note carries.
+4. The open items listed in the Decision Log, chiefly the per-document designator parse rule, the duplicate-name and unsafe-character rules, and the ports question, all needed before the import.
 
 ## Parked for a separate chat
 
