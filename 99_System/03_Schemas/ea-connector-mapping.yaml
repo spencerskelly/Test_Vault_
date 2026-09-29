@@ -149,7 +149,7 @@ connectorTypes:
   - 'the canvas text card for the 225 folded notes drawn on diagrams (W-73)'
 - eaConnectorType: Dependency
   connectors: 6762
-  status: partial
+  status: settled
   note: 'decided one stereotype at a time: satisfy 2444, deriveReqt 1416, refine 1114, trace 770, none 667, verify 333, RecoveryRequirement 14, ASILDecompose 4'
   stereotypes:
   - stereotype: satisfy
@@ -276,3 +276,38 @@ connectorTypes:
       writtenOn: 'the source; derivedBy generated'
       reviewLine: 'REVIEW modelCheck: ASILDecompose Requirement to Requirement'
       note: 'direction not shown by the data; 4 notes'
+  - stereotype: none
+    connectors: 667
+    decision: W-169
+    matrixRule: 'Rules 27, 58'
+    rules:
+    - pair: Function to Function, or Function to Design
+      connectors: 317
+      field: dependsOn
+      writtenOn: 'the source; dependencyOf generated; no flag'
+    - pair: Artifact to Requirement
+      connectors: 173
+      field: describes
+      writtenOn: 'the Artifact (W-165, W-166)'
+    - pair: Requirement to Requirement
+      connectors: 38
+      field: references
+      writtenOn: 'the source (W-167)'
+    - pair: Requirement and Object, either direction
+      connectors: 13
+      field: appliesTo
+      writtenOn: 'the requirement (W-167)'
+    - pair: Issue to any
+      connectors: 7
+      field: affects
+      writtenOn: 'the Issue (W-166)'
+    - pair: Object to Info
+      connectors: 1
+      field: describes
+      writtenOn: 'turned around: the Info note (W-166)'
+    - pair: any other
+      connectors: 118
+      field: dependsOn
+      writtenOn: 'the source, in the drawn direction'
+      reviewLine: 'REVIEW modelCheck: dependency <source type> to <target type>'
+      note: '115 links on 95 notes'
