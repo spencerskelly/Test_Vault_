@@ -5,7 +5,7 @@
 #   structure  used by the translator to build something (a title, id, link or placement); the rule that used it is recorded in the ledger; not put on the note
 #   archive    stays in the original export only, not in the note
 #   drop       not kept anywhere
-# order / orderGroup: position and group of an inline tag line, lowest first (W-101, changed by W-104). PN and PartNumber share order 1 (one Part Number line). textOrder: the four comment tags that are written as normal text below the Note instead of as tag lines (W-104).
+# order / orderGroup: position and group of an inline tag line, lowest first (W-101; W-104 moved four tags out, W-105 keeps the rest below the EA GUID). PN and PartNumber share order 1 (one Part Number line). textOrder: the four comment tags that are written as normal text below the Note instead of as tag lines (W-104).
 # The source reference is a ledger keyed by EA GUID plus a run manifest; values are not copied (W-35).
 # populated = rows with any value; realValues = rows with a value other than the placeholders unassigned and <memo>.
 schemaVersion: '1.0'
@@ -221,7 +221,7 @@ tags:
     populated: 10
     realValues: 10
     distinct: 10
-    note: "Body (W-104, changes W-91): written as normal text below the Note and any `text` wording, above the inline tag lines; real values only. Order among the four: User Story, Sales Comment, Product Management Comment, Engineering Comment. How each is told apart is not decided."
+    note: "Body (W-104, changes W-91): written as normal text below the Note and any `text` wording, above the inline tag lines; real values only. Order among the four: User Story, Sales Comment, Product Management Comment, Engineering Comment. Each starts with a short bold label with the tag name (W-105)."
   - tag: "External Reference"
     disposition: "drop"
     decision: "W-29"
@@ -465,7 +465,7 @@ tags:
     populated: 37
     realValues: 37
     distinct: 36
-    note: "Body (W-104, changes W-91): written as normal text below the Note and any `text` wording, above the inline tag lines; real values only. Order among the four: User Story, Sales Comment, Product Management Comment, Engineering Comment. How each is told apart is not decided."
+    note: "Body (W-104, changes W-91): written as normal text below the Note and any `text` wording, above the inline tag lines; real values only. Order among the four: User Story, Sales Comment, Product Management Comment, Engineering Comment. Each starts with a short bold label with the tag name (W-105)."
   - tag: "Quantity"
     disposition: "body"
     decision: "W-92"
@@ -518,7 +518,7 @@ tags:
     populated: 4
     realValues: 4
     distinct: 4
-    note: "Body (W-104, changes W-91): written as normal text below the Note and any `text` wording, above the inline tag lines; real values only. Order among the four: User Story, Sales Comment, Product Management Comment, Engineering Comment. How each is told apart is not decided."
+    note: "Body (W-104, changes W-91): written as normal text below the Note and any `text` wording, above the inline tag lines; real values only. Order among the four: User Story, Sales Comment, Product Management Comment, Engineering Comment. Each starts with a short bold label with the tag name (W-105)."
   - tag: "Severity"
     disposition: "body"
     decision: "W-95"
@@ -648,7 +648,7 @@ tags:
     populated: 118
     realValues: 118
     distinct: 117
-    note: "Body (W-104, changes W-91): written as normal text below the Note and any `text` wording, above the inline tag lines; real values only. Order among the four: User Story, Sales Comment, Product Management Comment, Engineering Comment. How each is told apart is not decided."
+    note: "Body (W-104, changes W-91): written as normal text below the Note and any `text` wording, above the inline tag lines; real values only. Order among the four: User Story, Sales Comment, Product Management Comment, Engineering Comment. Each starts with a short bold label with the tag name (W-105)."
   - tag: "Verdict"
     disposition: "drop"
     decision: "W-29"

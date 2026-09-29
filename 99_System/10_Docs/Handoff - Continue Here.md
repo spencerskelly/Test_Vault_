@@ -15,7 +15,7 @@ Written 2026-09-28 for a new AI chat continuing the work on this vault. Read thi
 
 ## Read in this order
 
-1. `99_System/10_Docs/Workspace Decision Log.md`: every decision made here (W-01 to W-104) and the Open list at the bottom. It is the authority for what has been decided.
+1. `99_System/10_Docs/Workspace Decision Log.md`: every decision made here (W-01 to W-105) and the Open list at the bottom. It is the authority for what has been decided.
 2. `99_System/02_AI/AI_INSTRUCTIONS.md`: how an AI creates notes (uid, id, status).
 3. `99_System/03_Schemas/ea-field-dispositions.yaml`, `ea-tag-dispositions.yaml` and `ea-element-mapping.yaml`: the property and element worklists.
 4. `Definitions/Properties`: the property definition notes (`uid`, `id`, `eaType` so far).
@@ -59,7 +59,7 @@ Not applied yet (W-88 and the W-96 review): the property set in the templates, `
 
 ## Decided after the W-96 review (W-97 to W-100)
 
-Property order at the top of every note: `type`, `subtype`, `id`, `uid`, `status`, `eaType`, `tags`; only `tags` holds several values (W-97). The 36 body-line tags are reviewed first so Spencer can set their order (W-98). A `Name` line goes above `EA GUID`, and the `Source: EA` section starts three lines below the other body content (W-99). An element with no approved mapping gets `type: modelCheck` (W-100). The order of body lines is set in W-101 and changed by W-104 (four comments become normal text, the other tag lines sit above `Source: EA`) (`order` in `ea-tag-dispositions.yaml`). The `text` tag is kept as normal text below the Note (W-102). Open before the import: multi-line values, the 255-character cut. When a Note and `text` both exist they are separated by one blank line (W-103). None of this is applied yet to templates, snippets, schemas or the translator.
+Property order at the top of every note: `type`, `subtype`, `id`, `uid`, `status`, `eaType`, `tags`; only `tags` holds several values (W-97). The 36 body-line tags are reviewed first so Spencer can set their order (W-98). A `Name` line goes above `EA GUID`, and the `Source: EA` section starts three lines below the other body content (W-99). An element with no approved mapping gets `type: modelCheck` (W-100). The order of body lines is set in W-101 and changed by W-104 and W-105 (four comments become labeled normal text below the Note; the other 32 tag lines stay below the EA GUID) (`order` in `ea-tag-dispositions.yaml`). The `text` tag is kept as normal text below the Note (W-102). Open before the import: multi-line values, the 255-character cut. When a Note and `text` both exist they are separated by one blank line (W-103). None of this is applied yet to templates, snippets, schemas or the translator.
 
 ## Next topic: element mapping
 
