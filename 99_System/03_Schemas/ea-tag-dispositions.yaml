@@ -66,19 +66,19 @@ tags:
     distinct: 0
     note: "Only ever holds a placeholder (unassigned or <memo>)."
   - tag: "Brand"
-    disposition: "pending"
-    decision: ""
+    disposition: "body"
+    decision: "W-92"
     populated: 6
     realValues: 6
     distinct: 1
-    note: "Not yet decided. Default if undecided: body, below the EA GUID."
+    note: "Body (W-92), below the EA GUID as a `- Brand: <value>` line, real values only."
   - tag: "CMF"
-    disposition: "pending"
-    decision: ""
+    disposition: "body"
+    decision: "W-92"
     populated: 15
     realValues: 15
     distinct: 8
-    note: "Not yet decided. Default if undecided: body, below the EA GUID."
+    note: "Body (W-92), below the EA GUID as a `- CMF: <value>` line, real values only."
   - tag: "Cable Compatibility"
     disposition: "pending"
     decision: ""
@@ -276,19 +276,19 @@ tags:
     distinct: 0
     note: "Never has a value."
   - tag: "MFG PN"
-    disposition: "pending"
-    decision: ""
+    disposition: "body"
+    decision: "W-92"
     populated: 101
     realValues: 101
     distinct: 58
-    note: "Not yet decided. Default if undecided: body, below the EA GUID."
+    note: "Body (W-92), below the EA GUID as a `- Manufacturer part number: <value>` line, real values only."
   - tag: "Material"
-    disposition: "pending"
-    decision: ""
+    disposition: "body"
+    decision: "W-92"
     populated: 2
     realValues: 1
     distinct: 1
-    note: "Not yet decided. Default if undecided: body, below the EA GUID."
+    note: "Body (W-92), below the EA GUID as a `- Material: <value>` line, real values only. The placeholder unassigned writes nothing."
   - tag: "Max Current"
     disposition: "drop"
     decision: "W-29"
@@ -360,40 +360,40 @@ tags:
     distinct: 0
     note: "Never has a value."
   - tag: "PN"
-    disposition: "pending"
-    decision: ""
+    disposition: "body"
+    decision: "W-92"
     populated: 7
     realValues: 7
     distinct: 6
-    note: "Not yet decided. Default if undecided: body, below the EA GUID."
+    note: "Body (W-92), below the EA GUID as a `- Part number: <value>` line, real values only. PN and PartNumber share this one line; they never occur on the same element."
   - tag: "PN Change Level"
-    disposition: "pending"
-    decision: ""
+    disposition: "body"
+    decision: "W-92"
     populated: 3
     realValues: 3
     distinct: 1
-    note: "Not yet decided. Default if undecided: body, below the EA GUID."
+    note: "Body (W-92), below the EA GUID as a `- PN change level: <value>` line, real values only."
   - tag: "PartNumber"
-    disposition: "pending"
-    decision: ""
+    disposition: "body"
+    decision: "W-92"
     populated: 4
     realValues: 4
     distinct: 4
-    note: "Not yet decided. Default if undecided: body, below the EA GUID."
+    note: "Body (W-92), below the EA GUID as a `- Part number: <value>` line, real values only. PN and PartNumber share this one line; they never occur on the same element."
   - tag: "Piece Cost"
-    disposition: "pending"
-    decision: ""
+    disposition: "body"
+    decision: "W-92"
     populated: 6
     realValues: 6
     distinct: 6
-    note: "Not yet decided. Default if undecided: body, below the EA GUID."
+    note: "Body (W-92), below the EA GUID as a `- Piece cost: <value>` line, real values only."
   - tag: "Positions"
-    disposition: "pending"
-    decision: ""
+    disposition: "body"
+    decision: "W-92"
     populated: 1
     realValues: 1
     distinct: 1
-    note: "Not yet decided. Default if undecided: body, below the EA GUID."
+    note: "Body (W-92), below the EA GUID as a `- Positions: <value>` line, real values only."
   - tag: "PowerMax"
     disposition: "pending"
     decision: ""
@@ -430,12 +430,12 @@ tags:
     distinct: 36
     note: "Body (W-91), below the EA GUID as a `- Product management comment: <text>` line, real values only. Written as is; the comment text is not edited."
   - tag: "Quantity"
-    disposition: "pending"
-    decision: ""
+    disposition: "body"
+    decision: "W-92"
     populated: 10
     realValues: 10
     distinct: 5
-    note: "Not yet decided. Default if undecided: body, below the EA GUID."
+    note: "Body (W-92), below the EA GUID as a `- Quantity: <value>` line, real values only."
   - tag: "Rationale"
     disposition: "drop"
     decision: "W-29"
@@ -528,12 +528,12 @@ tags:
     distinct: 2
     note: "Dropped (W-87). Draft on 4,847 of 4,848 rows and Discontinued on 1; a new analysis is run after import."
   - tag: "Style"
-    disposition: "pending"
-    decision: ""
+    disposition: "body"
+    decision: "W-92"
     populated: 13
     realValues: 13
     distinct: 9
-    note: "Not yet decided. Default if undecided: body, below the EA GUID."
+    note: "Body (W-92), below the EA GUID as a `- Style: <value>` line, real values only."
   - tag: "Supporting"
     disposition: "drop"
     decision: "W-29"
@@ -801,12 +801,12 @@ tags:
     distinct: 0
     note: "Never has a value."
   - tag: "Weight (g)"
-    disposition: "pending"
-    decision: ""
+    disposition: "body"
+    decision: "W-92"
     populated: 2
     realValues: 2
     distinct: 2
-    note: "Not yet decided. Default if undecided: body, below the EA GUID."
+    note: "Body (W-92), below the EA GUID as a `- Weight (g): <value>` line, real values only."
   - tag: "direction"
     disposition: "structure"
     decision: "W-90"
