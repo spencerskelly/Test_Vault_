@@ -408,3 +408,28 @@ connectorTypes:
       connectors: 1
       field: hasChild
       reviewLine: 'REVIEW hasChild: the two notes have different types'
+- eaConnectorType: Association
+  connectors: 603
+  decision: W-172
+  status: settled
+  matrixRule: 'Rules 5, 6, 7, 8, 34, 52'
+  direction: 'Unspecified on all 603'
+  rules:
+  - pair: Use Case with an Object, Actor, Function or Port
+    connectors: 494
+    field: participants
+    writtenOn: 'the Use Case only; one-way, no inverse (W-172); 494 links on 330 Use Cases'
+  - pair: Issue with any
+    connectors: 3
+    field: affects
+    writtenOn: 'the Issue (W-166)'
+  - pair: Info or Artifact with an Object
+    connectors: 4
+    field: describes
+    writtenOn: 'the Info or Artifact (W-166)'
+  - pair: any other
+    connectors: 102
+    field: tracesTo
+    writtenOn: 'the drawn start, pointing at the drawn end'
+    reviewLine: 'REVIEW modelCheck: association <start type> to <end type>'
+    note: '102 links on 65 notes'

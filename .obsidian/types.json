@@ -107,6 +107,7 @@
     "satisfiedBy": "multitext",
     "satisfies": "multitext",
     "scopeRequirements": "multitext",
+    "participants": "multitext",
     "sequence": "multitext",
     "source": "multitext",
     "sourceOf": "multitext",
