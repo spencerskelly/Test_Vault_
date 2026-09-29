@@ -274,9 +274,11 @@ elementTypes:
     Physical Signal: 46
     Environmental Effect: 8
     Software Parameter: 4
-  disposition: pending
-  mdseType: null
-  decision: null
+  disposition: note
+  mdseType: Item Flow
+  decision: W-131
+  subtype: null
+  note: 'All 623 Signal elements become Item Flow notes with a blank subtype; the EA stereotype stays in eaType (W-131). Old tool rule SG-01 (suppress) is evidence of the old tool only.'
   oldToolRules:
   - rule: SG-01
     verdict: suppress
