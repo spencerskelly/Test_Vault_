@@ -101,3 +101,18 @@ Work that has to be done in the vault after the import (stage 2, Workspace Decis
 **How to resolve one.** Fix the note, delete the line, and add a row to `Review Changes Log.md`, keyed by the Port's EA GUID, saying why. Fix by rule where a group behaves the same, and log the rule in the Decision Log.
 
 **Done when.** A search for each of the four lines finds nothing, and every fixed note has a reason in the log.
+
+## Task 7: Resolve the provisional mappings
+
+**What it is.** Stage 1 is mechanical (W-30), so several mappings are deliberately provisional and kept visible. This task settles them in stage 2, using `eaType` and the package as evidence. The counts are from the current export.
+
+**What to resolve**
+1. `modelCheck` notes (666: 632 of 13 small types, subtype = the EA type, and 34 Package notes, W-146, W-147). Decide the type of each group (Step, Transition, Functional Flow, Failure Mode, a folded line or something else) and change `type` and `subtype`.
+2. Blank or mechanical calls to check from `eaType`: Object from Class (2,314; `Physical Context` 43 may be Context, `System Partner` 182 may be Actor, W-139); Design and State from State (954 and 158; the 2 `Fault State` may be Failure Mode, W-142); Function with no stereotype (611, W-141); Verification from `testCase` (527, could be Procedure); Artifact from Document and Image (W-143); the Issue subtype (264, W-144); the 357 Use Cases with a blank subtype (W-140); the Design subtype `characteristic`; the 103 `part` Objects (W-138).
+3. The temporary `hasClassifier` links (about 1,560: Port `Classifier` 443, Port typing not to a Port note 99, Object `Classifier` 498, FlowProperty typing 524; W-125, W-127, W-135, W-132). Turn each into `copyOf`, `hasPart`, `subtypeOf` or another link, then remove the pair.
+4. `hasChild` (about 20,400 links, W-149). Keep it, or replace it on a pair with a more precise link (a requirement decomposition, a comment link). Requirement under Requirement is 70% of them.
+
+**How to resolve them.** Decide in groups, log each group in the Decision Log, and change the rules for the next fresh import (W-36, W-37). Record any per-note change in `Review Changes Log.md`, keyed by the element GUID.
+
+**Done when.** Nothing has type `modelCheck`, `hasClassifier` is gone, and each group above has a log entry.
+

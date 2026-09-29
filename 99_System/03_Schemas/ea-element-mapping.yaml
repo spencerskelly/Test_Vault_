@@ -47,9 +47,11 @@ elementTypes:
     (none): 4071
     ProxyPort: 303
     FullPort: 13
-  disposition: pending
-  mdseType: null
-  decision: null
+  disposition: note
+  mdseType: Port
+  decision: W-113
+  subtypeRule: 'from the EA stereotype: ProxyPort gives proxy, FullPort gives full, no stereotype gives a blank subtype (W-128)'
+  decisions: [W-113, W-114, W-120, W-121, W-122, W-123, W-125, W-127, W-128, W-129, W-130, W-134]
   note: 'MDSE now has a Port class (W-113). Part- and Object-owned Ports merge into the block''s Port by the W-114 rule. PDATA1 (typing Class) is written as subtypeOf between Port notes (W-120). Differences on a merged instance Port are kept as lines on the block Port note (W-121; format not decided). The Port note''s subtype comes from the EA stereotype: proxy for ProxyPort, full for FullPort, blank for plain (W-128). PDATA2 is subtypeOf (W-122), the owner link is hasPort (W-123), Classifier is the temporary hasClassifier (W-125).'
   oldToolRules:
   - rule: F-01
@@ -73,9 +75,15 @@ elementTypes:
   stereotypes:
     (none): 2377
     FlowProperty: 760
-  disposition: pending
-  mdseType: null
-  decision: null
+  disposition: note
+  mdseType: Object
+  decision: W-136
+  mapping:
+  - {rule: 'stereotype FlowProperty (760)', result: 'Item Flow note, one each (W-132)'}
+  - {rule: 'PDATA1 names a Class (2,055)', result: 'folded into the assembly as a hasPart entry, plus a source-section line when the Part has data of its own (W-136)'}
+  - {rule: 'PDATA1 names an Activity, State or Signal (219)', result: 'folded into the owner as a hasChild entry (W-137, W-149)'}
+  - {rule: 'no usable block: PDATA1 missing from the export or empty (103)', result: 'Object note, subtype part, unnamed ones part 1, part 2 (W-138)'}
+  decisions: [W-43, W-44, W-54, W-132, W-136, W-137, W-138]
   partialDecision: 'The 760 Parts with the stereotype FlowProperty become Item Flow notes, one each, with direction as source and target; they are not merged into blocks and their PDATA1 is a Signal or Class, not a block (W-132). Of the other 2,377 Parts, the 2,055 typed by a Class fold into their blocks (W-43, W-44, W-136): the assembly note gets one hasPart entry per Part, and one source-section line for each Part with data of its own (role name, quantity, tags, style). Of the other 322, the 219 typed by an Activity (142), a State (61) or a Signal (16) become a hasChild entry on their owner pointing at the referenced note (W-137, changed from hasPart by W-149); the 103 with no usable block (missing 98, none 5) become Object notes with subtype part, unnamed ones named part 1, part 2 and so on (W-138).'
   oldToolRules:
   - rule: F-02
