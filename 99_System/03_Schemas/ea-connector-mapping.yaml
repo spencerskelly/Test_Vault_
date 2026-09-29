@@ -129,3 +129,21 @@ connectorTypes:
     reviewLine: 'REVIEW modelCheck: realization <source type> to <target type>'
     note: '40 links on 34 notes; Requirement to Object 8 are drawn the other way and stay here'
   packageEnds: '7 connectors from 6 packages with no note (W-147) write no field; the requirement gets REVIEW modelCheck: realization from folder <vault folder path>'
+- eaConnectorType: NoteLink
+  connectors: 349
+  decision: W-161
+  status: partial
+  matrixRule: 'Rule 45 (r12 matrix), replaced'
+  rules:
+  - case: note linked to one element
+    notes: 250
+    result: 'the note text is written into the element body; no Info note (amends W-145); 177 elements, up to 16 notes on one; 1 empty writes nothing'
+  - case: note linked to several elements
+    notes: 38
+    result: 'Info note (W-145) with describes to each element, describedBy generated; 94 links; field always on the note'
+  - case: note to note
+    connectors: 2
+    result: 'describes in the drawn direction between the two Info notes (my reading)'
+  notDecided:
+  - 'where the folded text goes in the body and its label'
+  - 'the canvas text card for the 225 folded notes drawn on diagrams (W-73)'
