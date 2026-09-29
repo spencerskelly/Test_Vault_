@@ -127,6 +127,8 @@
     "verifiedBy": "multitext",
     "verifies": "multitext",
     "conflictsWith": "multitext",
+    "interfaces": "multitext",
+    "equals": "multitext",
     "eaType": "text"
   }
 }

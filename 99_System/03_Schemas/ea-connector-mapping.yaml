@@ -42,3 +42,24 @@ connectorTypes:
   reviewLine: 'REVIEW nesting direction: connector {GUID}'
   where: 'Source: EA section of the parent note; wording provisional'
   task: 'Post-Import Task 7, item 5'
+- eaConnectorType: Connector
+  connectors: 823
+  decision: W-153
+  status: partial
+  matrixRule: 'Rule 41 (no stereotype, 574), Rule 40 (BindingConnector, 249), Rule 71 (1 exception)'
+  direction: 'Unspecified on all 823; both fields are symmetric and written on both end notes'
+  rules:
+  - stereotype: none
+    connectors: 574
+    field: interfaces
+    note: 'symmetric; new field (W-153)'
+  - stereotype: BindingConnector
+    connectors: 249
+    field: equals
+    note: 'symmetric and temporary (W-153). Kept for stage 1 to stay mechanical; Post-Import Task 8 turns each into a directional exposes/exposedBy pair (185 have a derivable inner and outer end, 64 need a decision).'
+  exception: 'the plain connector with both ends missing from the export writes nothing and is recorded in the ledger (Rule 71, W-57)'
+  notDecided:
+  - 'one link per pair when several connectors end on the same pair of notes after the Port merge (70 connectors in 22 groups; 4 plain pairs are drawn both ways; 2 groups hold different names)'
+  - 'the line format for a connector Name on both end notes (174 named, 165 distinct names)'
+  - 'the assembly and Part context line (W-114)'
+  - 'the REVIEW port needed line for the 109 connectors with an end that is not a Port, and for the 87 Part-to-Part cases whose Parts fold away'

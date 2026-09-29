@@ -118,3 +118,17 @@ Work that has to be done in the vault after the import (stage 2, Workspace Decis
 
 **Done when.** Nothing has type `modelCheck`, `hasClassifier` is gone, and each group above has a log entry.
 
+## Task 8: Update the `equals` relationships
+
+**What it is.** In EA a `BindingConnector` joins two ports. Stage 1 writes each one as the symmetric field `equals` on both end notes (W-153), because that is what the connector says and it keeps the import mechanical (W-30). What Spencer means by it is that one port is also exposed at a higher layer: a circuit's antenna port, the PCBA's antenna port and the product's antenna port are the same antenna at different levels. That is a direction (outer and inner), so `equals` is replaced in stage 2 by a directional pair. The name is not fixed; the working proposal is `exposes` on the outer Port and `exposedBy` on the inner Port (`extends` is not used, because it already means UML extend and inheritance). The counts are from the current export.
+
+**What to resolve.** 249 BindingConnectors.
+- 185 have a clear inner and outer end: one end is a Port of an assembly block, the other is a Port of a Part inside that block (99 drawn inner to outer, 86 outer to inner, so the connector's order says nothing). Direction comes from that structure.
+- 64 have no such structure and need a decision one by one: 17 join Parts in different assemblies, 29 involve an Object (Part and Object 15 and 14), 10 join two Objects, 7 join an Object and a Class, and 1 joins two Parts of the same assembly. Some may not be exposures at all and become `interfaces`.
+- After the Port merge (W-114) the inner end is the block's own Port. 17 of the 154 inner block Ports connect to more than one outer Port, because the block is used in several assemblies, so the fields are lists. The assembly and Part context of each connector is kept on the line still to be defined (W-114), and it says which instance was wired to which outer Port.
+
+**How to find them.** Search the properties for `equals`. The ledger (W-35) lists the 249 connectors by GUID.
+
+**How to resolve one.** Decide which Port is outer and which is inner (assembly containment, or the context line). Write `exposes` on the outer Port and let `exposedBy` be generated on the inner one, or change the pair to `interfaces` when it is not an exposure. Remove `equals` from both notes. Record the reason in `Review Changes Log.md`, keyed by the connector GUID, and log the naming decision in the Decision Log once.
+
+**Done when.** No note has an `equals` field, and the name of the directional pair is logged.
