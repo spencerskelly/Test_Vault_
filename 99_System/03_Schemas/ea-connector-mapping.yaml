@@ -72,6 +72,10 @@ connectorTypes:
   context:
     decision: W-155
     rule: 'no assembly or Part context line is written (changes W-114); where a connection was drawn stays in the diagram canvases (W-73)'
+  review:
+    decision: W-156
+    rule: 'every REVIEW line must be resolvable from the vault alone; the note line carries a fixed phrase, a short reason and the GUID; the evidence (ends as drawn with owner and assembly, resolved notes, candidate Ports, derived direction) is in a review table in 99_System/11_Import, regenerated each run'
+    equalsDerived: '245 of 249 get a derived outer and inner Port as evidence (185 one level, 60 multi-level, not spot-checked); 4 have none'
   linkCount: '822 resolved connectors become 766 links after Parts resolve to blocks (W-154 counted 774 before that)'
   notDecided:
   - 'the line format for a connector Name on both end notes (174 named, 165 distinct names)'

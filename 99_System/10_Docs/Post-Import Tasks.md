@@ -13,6 +13,8 @@ Work that has to be done in the vault after the import (stage 2, Workspace Decis
 
 **What it is.** In EA some users drew a flow connector (type Connector or InformationFlow) on a block or a Part, when it belongs on a port of that block. The import keeps each connector on the object where it was drawn (W-55) because no rule can choose the port. In the current export 118 connectors are affected: 94 Connectors with no end on a port, 15 Connectors with one end on a port, and 9 InformationFlow connectors with one end on a port.
 
+**Review table (W-156).** The import writes a table of the affected connectors in `99_System/11_Import`, one row per connector keyed by GUID, with the ends as drawn (element, owner, assembly), the notes they resolved to and the candidate Ports on each block end, so no one needs to open EA. It replaces the hand-made snapshot below.
+
 **How to find them.**
 - Search the vault for `REVIEW port needed`. The import writes that line in the `Source: EA` section of both end notes of each affected connector.
 - `99_System/11_Import/Block-Level Flow Connectors.csv` lists the 118 by connector GUID, with the two ends, how many ports each end has available, and a category. It is a snapshot made from the current export; the ledger from the accepted import run (W-35) replaces it.
@@ -122,12 +124,12 @@ Work that has to be done in the vault after the import (stage 2, Workspace Decis
 
 **What it is.** In EA a `BindingConnector` joins two ports. Stage 1 writes each one as the symmetric field `equals` on both end notes (W-153), because that is what the connector says and it keeps the import mechanical (W-30). What Spencer means by it is that one port is also exposed at a higher layer: a circuit's antenna port, the PCBA's antenna port and the product's antenna port are the same antenna at different levels. That is a direction (outer and inner), so `equals` is replaced in stage 2 by a directional pair. The name is not fixed; the working proposal is `exposes` on the outer Port and `exposedBy` on the inner Port (`extends` is not used, because it already means UML extend and inheritance). The counts are from the current export.
 
-**What to resolve.** 249 BindingConnectors.
+**What to resolve.** 249 BindingConnectors. The import derives a direction for 245 of them and writes it in the review table (W-156): 185 from one level of containment, 60 more by following containment over several levels (not yet spot-checked); 4 have no containment path and need a decision.
 - 185 have a clear inner and outer end: one end is a Port of an assembly block, the other is a Port of a Part inside that block (99 drawn inner to outer, 86 outer to inner, so the connector's order says nothing). Direction comes from that structure.
 - 64 have no such structure and need a decision one by one: 17 join Parts in different assemblies, 29 involve an Object (Part and Object 15 and 14), 10 join two Objects, 7 join an Object and a Class, and 1 joins two Parts of the same assembly. Some may not be exposures at all and become `interfaces`.
 - After the Port merge (W-114) the inner end is the block's own Port. 17 of the 154 inner block Ports connect to more than one outer Port, because the block is used in several assemblies, so the fields are lists. The assembly and Part context of each connector is kept on the line still to be defined (W-114), and it says which instance was wired to which outer Port.
 
-**How to find them.** Search the properties for `equals`. The ledger (W-35) lists the 249 connectors by GUID.
+**How to find them.** Search the properties for `equals`. The review table in `99_System/11_Import` (W-156) lists the 249 connectors by GUID with both ends as drawn and the derived outer and inner Port.
 
 **How to resolve one.** Decide which Port is outer and which is inner (assembly containment, or the context line). Write `exposes` on the outer Port and let `exposedBy` be generated on the inner one, or change the pair to `interfaces` when it is not an exposure. Remove `equals` from both notes. Record the reason in `Review Changes Log.md`, keyed by the connector GUID, and log the naming decision in the Decision Log once.
 
