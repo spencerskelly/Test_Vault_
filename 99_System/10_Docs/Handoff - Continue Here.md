@@ -15,7 +15,7 @@ Written 2026-09-28 for a new AI chat continuing the work on this vault. Read thi
 
 ## Read in this order
 
-1. `99_System/10_Docs/Workspace Decision Log.md`: every decision made here (W-01 to W-108) and the Open list at the bottom. It is the authority for what has been decided.
+1. `99_System/10_Docs/Workspace Decision Log.md`: every decision made here (W-01 to W-109) and the Open list at the bottom. It is the authority for what has been decided.
 2. `99_System/02_AI/AI_INSTRUCTIONS.md`: how an AI creates notes (uid, id, status).
 3. `99_System/03_Schemas/ea-field-dispositions.yaml`, `ea-tag-dispositions.yaml` and `ea-element-mapping.yaml`: the property and element worklists.
 4. `Definitions/Properties`: the property definition notes (`uid`, `id`, `eaType` so far).
@@ -63,7 +63,7 @@ Property order at the top of every note: `type`, `subtype`, `id`, `uid`, `status
 
 ## Layout and sweep (W-107, W-108)
 
-The note layout is written in `Definitions/Note Layout.md`; `Definitions/EA Source Section.md` describes the last section. A sweep of all fields, tags and export files found no missing field; column dispositions for `t_attribute`, `t_operation`, `t_xref` and `t_document`, and a role for every file in `CSV_EA`, were added to `ea-field-dispositions.yaml`. Open from the sweep: whether `Object Type`, `Origin` and `In-Links` are `archive` instead of `drop`, and the counter order for several attachments on one note.
+The note layout is written in `Definitions/Note Layout.md`; `Definitions/EA Source Section.md` describes the last section. A sweep of all fields, tags and export files found no missing field; column dispositions for `t_attribute`, `t_operation`, `t_xref` and `t_document`, and a role for every file in `CSV_EA`, were added to `ea-field-dispositions.yaml`. `Object Type` (both), `Origin` and `In-Links` stay `drop` (W-109). Open from the sweep: the counter order for several attachments on one note.
 
 ## Next topic: element mapping
 

@@ -256,7 +256,7 @@ tags:
     populated: 16
     realValues: 16
     distinct: 14
-    note: "Dropped (W-91). Paths into another EA model (16 rows: Regulatory Requirement 15, InformationItem 1); not usable in this vault."
+    note: "Dropped (W-91). Paths into another EA model (16 rows: Regulatory Requirement 15, InformationItem 1); not usable in this vault. Confirmed as drop in W-109 after the values were reviewed."
   - tag: "Length - Useable"
     disposition: "drop"
     decision: "W-29"
@@ -351,7 +351,7 @@ tags:
     populated: 4848
     realValues: 4848
     distinct: 3
-    note: "Dropped (W-87). Requirement 3,362, Heading 1,478, Information 8 on 4,848 requirements; a new analysis is run after import."
+    note: "Dropped (W-87). Requirement 3,362, Heading 1,478, Information 8 on 4,848 requirements; a new analysis is run after import. Confirmed as drop in W-109 after the values were reviewed."
   - tag: "Observability"
     disposition: "drop"
     decision: "W-29"
@@ -374,7 +374,7 @@ tags:
     populated: 118
     realValues: 118
     distinct: 12
-    note: "Dropped (W-90). 118 real values on Requirement (Field Service 45, Customer/Market 41 and others) in inconsistent spelling; Spencer chose not to keep them."
+    note: "Dropped (W-90). 118 real values on Requirement (Field Service 45, Customer/Market 41 and others) in inconsistent spelling; Spencer chose not to keep them. Confirmed as drop in W-109 after the values were reviewed."
   - tag: "Out-Links"
     disposition: "drop"
     decision: "W-29"
@@ -786,7 +786,7 @@ tags:
     populated: 2391
     realValues: 2391
     distinct: 4
-    note: "Dropped (W-87). Information 2,254, Requirement 123, Heading 13, information 1 on 2,391 rows; a new analysis is run after import."
+    note: "Dropped (W-87). Information 2,254, Requirement 123, Heading 13, information 1 on 2,391 rows; a new analysis is run after import. Confirmed as drop in W-109 after the values were reviewed."
   - tag: "Webasto MBDV Profile::Priority"
     disposition: "body"
     decision: "W-89"
