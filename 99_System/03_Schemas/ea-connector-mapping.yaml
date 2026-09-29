@@ -2,6 +2,8 @@
 # Counts are from the export t_connector.csv (21,822 connectors). Endpoint types are
 # the MDSE types after the element mapping (ea-element-mapping.yaml), not EA types.
 # Rules are added type by type as Spencer approves them. Types not listed are not decided.
+# Connector Name line, every type (W-158): "- Connector name: <name> (to [[other end]])" in the Source: EA section,
+# on both end notes for Connector and InformationFlow, on the owner-side note for the other types (W-55, W-56).
 schemaVersion: '1.0'
 date: '2026-09-29'
 connectorTypes:
@@ -20,7 +22,7 @@ connectorTypes:
     exception: 1
     sourceNotesWithSeveralParents: 401
   exception: 'connector {DCD0BC02-C22E-4fe2-91FD-01EC342FFECC}, both ends at object 0, writes no link, recorded in the ledger (Rule 71, W-57)'
-  name: 'the 2 named connectors (AC, DC) are written on the source note as "- Connector name (to [[<target>]]): <name>" in the source section (W-56); wording provisional'
+  name: 'the 2 named connectors (AC, DC) are written on the source note as "- Connector name: <name> (to [[<target>]])" in the source section (W-56, W-158)'
   guid: 'no GUID line; the ledger keys every connector by GUID (W-35, W-57)'
   mixedTypes:
     connectors: 88
@@ -45,7 +47,7 @@ connectorTypes:
 - eaConnectorType: Connector
   connectors: 823
   decision: W-153
-  status: partial
+  status: settled
   matrixRule: 'Rule 41 (no stereotype, 574), Rule 40 (BindingConnector, 249), Rule 71 (1 exception)'
   direction: 'Unspecified on all 823; both fields are symmetric and written on both end notes'
   rules:
@@ -77,5 +79,6 @@ connectorTypes:
     rule: 'every REVIEW line must be resolvable from the vault alone; the note line carries a fixed phrase, a short reason and the GUID; the evidence (ends as drawn with owner and assembly, resolved notes, candidate Ports, derived direction) is in a review table in 99_System/11_Import, regenerated each run'
     equalsDerived: '245 of 249 get a derived outer and inner Port as evidence (185 one level, 60 multi-level, not spot-checked); 4 have none'
   linkCount: '822 resolved connectors become 766 links after Parts resolve to blocks (W-154 counted 774 before that)'
-  notDecided:
-  - 'the line format for a connector Name on both end notes (174 named, 165 distinct names)'
+  name:
+    decision: W-158
+    rule: '"- Connector name: <name> (to [[other end]])" on both end notes, one line per distinct name; unnamed write nothing (174 named, 165 distinct names)'
