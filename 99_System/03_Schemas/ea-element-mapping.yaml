@@ -50,7 +50,7 @@ elementTypes:
   disposition: pending
   mdseType: null
   decision: null
-  note: MDSE now has a Port class (W-113). Part- and Object-owned Ports merge into the block's Port by the W-114 rule. PDATA1 (typing Class) is written as subtypeOf between Port notes (W-120). Differences on a merged instance Port are kept as lines on the block Port note (W-121; format not decided). The Port note's subtype comes from the EA stereotype: proxy for ProxyPort, full for FullPort, blank for plain (W-128). PDATA2 is subtypeOf (W-122), the owner link is hasPort (W-123), Classifier is the temporary hasClassifier (W-125).
+  note: 'MDSE now has a Port class (W-113). Part- and Object-owned Ports merge into the block''s Port by the W-114 rule. PDATA1 (typing Class) is written as subtypeOf between Port notes (W-120). Differences on a merged instance Port are kept as lines on the block Port note (W-121; format not decided). The Port note''s subtype comes from the EA stereotype: proxy for ProxyPort, full for FullPort, blank for plain (W-128). PDATA2 is subtypeOf (W-122), the owner link is hasPort (W-123), Classifier is the temporary hasClassifier (W-125).'
   oldToolRules:
   - rule: F-01
     verdict: fold
