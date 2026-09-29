@@ -261,9 +261,13 @@ elementTypes:
     System State: 769
     (none): 341
     Fault State: 2
-  disposition: pending
-  mdseType: null
-  decision: null
+  disposition: note
+  mdseType: State
+  decision: W-142
+  mapping:
+  - {rule: 'element sits in the package IPC ! / 05 Product Design or below it', mdseType: Design, subtype: null, elements: 954}
+  - {rule: 'element sits in any other package', mdseType: State, subtype: null, elements: 158}
+  note: 'Subtype blank in both (reading to confirm, W-142). eaType keeps System State, Fault State or the object type.'
   oldToolRules:
   - rule: S-01
     verdict: emit
