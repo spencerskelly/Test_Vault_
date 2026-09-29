@@ -147,3 +147,24 @@ connectorTypes:
   bodyFormat: 'after the comment texts, before the user section: label **EA notes:** then one bullet per note in EA creation order, "- <yyyy-MM-dd>, <author>: <text>" (W-162, Definitions/Note Layout.md item 5)'
   notDecided:
   - 'the canvas text card for the 225 folded notes drawn on diagrams (W-73)'
+- eaConnectorType: Dependency
+  connectors: 6762
+  status: partial
+  note: 'decided one stereotype at a time: satisfy 2444, deriveReqt 1416, refine 1114, trace 770, none 667, verify 333, RecoveryRequirement 14, ASILDecompose 4'
+  stereotypes:
+  - stereotype: satisfy
+    connectors: 2444
+    decision: W-163
+    matrixRule: 'Rules 15, 16, 17, 54, 71'
+    rules:
+    - pair: Function or Design to Requirement
+      connectors: 2328
+      field: satisfies
+      writtenOn: 'the Function or Design; satisfiedBy generated on the requirement'
+    - pair: any other
+      connectors: 112
+      field: satisfies
+      writtenOn: 'the source, in the drawn direction'
+      reviewLine: 'REVIEW modelCheck: satisfy <source type> to <target type>'
+      note: '112 links on 89 target notes; State to Requirement 92'
+    exception: '4 connectors with an end missing from the export write nothing (Rule 71)'
