@@ -1292,3 +1292,22 @@ tConnectorTag:
   decision: W-85
   rows: 4583
   note: 'Dropped (W-85). Five property names on 1,238 connectors, with no value on any row.'
+# Small subordinate tables, decided by table (W-86).
+tSmallTables:
+- table: t_operation
+  disposition: body
+  placement: source section
+  decision: W-86
+  rows: 23
+  note: 'Body (W-86). One line per row on the owning State note: Entry action, Do action or Exit action followed by the name. 6 rows have a Behaviour value that is not resolved.'
+- table: t_attribute
+  disposition: body
+  placement: source section
+  decision: W-86
+  rows: 5
+  note: 'Body (W-86). One line per row on the owning Class note: Attribute, name and type. Includes the profile stereotype row (W-27: keep uncertain values in the body and decide in the cleanup).'
+- table: t_objectscenarios
+  disposition: drop
+  decision: W-86
+  rows: 1
+  note: 'Dropped (W-86). One Basic Path with an empty body and no notes.'
