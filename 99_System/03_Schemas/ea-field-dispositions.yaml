@@ -1223,10 +1223,11 @@ tXref:
   note: 'Structure (W-84). What an Action or Trigger is: CallBehavior 20, AcceptEvent 8, blank 16 (Actions 37, Triggers 20). Input to the element mapping.'
 - kind: CustomProperties
   item: 'isConjugated'
-  disposition: structure
-  decision: W-84
+  disposition: body
+  placement: source section
+  decision: W-129
   rows: 32
-  note: 'Structure (W-84). Port conjugation: -1 on 24, 0 on 8. Input to the element mapping; how ports use it is open.'
+  note: 'Body (W-129), changed from structure (W-84). Port conjugation: -1 on 24 rows, 0 on 8; the 32 rows are on 31 Ports (one Port has the same 0 row twice). Written as - isConjugated: true or false on the 21 Port notes that survive; the other 10 Ports merge into block Ports that hold the same value. The other Ports have no recorded value and write nothing.'
 - kind: CustomProperties
   item: 'isEffect'
   disposition: structure
