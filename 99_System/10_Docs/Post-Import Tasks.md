@@ -83,7 +83,8 @@ Work that has to be done in the vault after the import (stage 2, Workspace Decis
 2. Whether the `Heading` value of `Object Type` (1,491 elements) is needed to fold headings into document notes (Task 4).
 3. Whether the one `Discontinued` requirement should be Retired.
 4. The values kept as written that need a check: `Current Max` of `320A` on an A160 part, `x/0` in `Cable Compatibility`, the MoSCoW legend written as a `Webasto MBDV Profile::Priority` line and the format legend in `User Story`, and the unexplained `Style` and `Quantity`.
-5. The 252 `REVIEW nesting direction` lines (independent `Nesting` connectors written as `hasChild`/`childOf`, W-151; 200 add a parent that placement never showed, 52 give a child a second parent). Check the direction of each, fix or remove the link, and remove the line.
+5. The 252 `REVIEW nesting direction` lines (independent `Nesting` connectors written as `hasChild`/`childOf`, W-151; 200 add a parent that placement never showed, 52 give a child a second parent). Each line holds the connector GUID (W-152). Look the connector up in EA, check the direction, fix or remove the link, and remove the line.
+6. The `REVIEW subtypeOf: the two notes have different types` lines (W-152): 88 Generalization connectors, 87 links, on 81 notes, mostly Port and Object (39) and Function to Object (30). Decide for each whether it is a real "kind of" link, needs a different link (for example `hasPart` or `realizedBy`) or goes, and remove the line.
 
 **How to resolve them.** Decide in groups, log each group in the Decision Log, and change the rules for the next fresh import (W-36, W-37). Record any per-note change in `Review Changes Log.md`, keyed by the element GUID.
 

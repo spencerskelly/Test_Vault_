@@ -1,0 +1,44 @@
+# EA connector rules, decided by connector type (W-152). One entry per Connector_Type.
+# Counts are from the export t_connector.csv (21,822 connectors). Endpoint types are
+# the MDSE types after the element mapping (ea-element-mapping.yaml), not EA types.
+# Rules are added type by type as Spencer approves them. Types not listed are not decided.
+schemaVersion: '1.0'
+date: '2026-09-29'
+connectorTypes:
+- eaConnectorType: Generalization
+  connectors: 3974
+  decision: W-152
+  matrixRule: 'Rule 1 (r12 matrix), Rule 71 for the exception'
+  source: 'specific element (source), all drawn Source -> Destination, no stereotype, no Notes'
+  forward: subtypeOf
+  inverse: supertypeOf
+  writtenOn: 'subtypeOf on the source note; supertypeOf generated on the destination note; both are lists (W-126)'
+  counts:
+    resolved: 3973
+    uniqueLinks: 3967
+    duplicatePairsWrittenOnce: 6
+    exception: 1
+    sourceNotesWithSeveralParents: 401
+  exception: 'connector {DCD0BC02-C22E-4fe2-91FD-01EC342FFECC}, both ends at object 0, writes no link, recorded in the ledger (Rule 71, W-57)'
+  name: 'the 2 named connectors (AC, DC) are written on the source note as "- Connector name (to [[<target>]]): <name>" in the source section (W-56); wording provisional'
+  guid: 'no GUID line; the ledger keys every connector by GUID (W-35, W-57)'
+  mixedTypes:
+    connectors: 88
+    uniqueLinks: 87
+    sourceNotes: 81
+    reviewLine: 'REVIEW subtypeOf: the two notes have different types'
+    where: 'Source: EA section of the source note'
+    task: 'Post-Import Task 7, item 6'
+- eaConnectorType: Nesting
+  connectors: 836
+  decision: W-151
+  amendedBy: W-152
+  note: 'No connector note or link of its own. 584 repeat a ParentID link and write nothing. The 252 independent ones are written as hasChild on the end note (parent) and childOf on the start note (child), or hasPart/partOf when both notes are Objects (W-149).'
+  counts:
+    repeatParentId: 584
+    independent: 252
+    childHasNoParentId: 200
+    childHasOtherParentId: 52
+  reviewLine: 'REVIEW nesting direction: connector {GUID}'
+  where: 'Source: EA section of the parent note; wording provisional'
+  task: 'Post-Import Task 7, item 5'
