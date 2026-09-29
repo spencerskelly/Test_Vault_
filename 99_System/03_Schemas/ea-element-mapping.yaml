@@ -369,9 +369,11 @@ elementTypes:
   elements: 323
   stereotypes:
     (none): 323
-  disposition: pending
-  mdseType: null
-  decision: null
+  disposition: note
+  mdseType: modelCheck
+  decision: W-146
+  subtype: Action
+  note: 'type modelCheck, subtype = eaType, so the note shows what it was and that it has to be updated (W-146).'
   oldToolRules:
   - rule: E-03A
     verdict: emit
@@ -395,9 +397,11 @@ elementTypes:
   elements: 73
   stereotypes:
     (none): 73
-  disposition: pending
-  mdseType: null
-  decision: null
+  disposition: note
+  mdseType: modelCheck
+  decision: W-146
+  subtype: StateNode
+  note: 'type modelCheck, subtype = eaType, so the note shows what it was and that it has to be updated (W-146).'
   oldToolRules:
   - rule: B-01
     verdict: fold
@@ -406,9 +410,11 @@ elementTypes:
   elements: 65
   stereotypes:
     (none): 65
-  disposition: pending
-  mdseType: null
-  decision: null
+  disposition: note
+  mdseType: modelCheck
+  decision: W-146
+  subtype: Change
+  note: 'type modelCheck, subtype = eaType, so the note shows what it was and that it has to be updated (W-146).'
   oldToolRules:
   - rule: C-01
     verdict: fold
@@ -457,9 +463,11 @@ elementTypes:
   elements: 44
   stereotypes:
     (none): 44
-  disposition: pending
-  mdseType: null
-  decision: null
+  disposition: note
+  mdseType: modelCheck
+  decision: W-146
+  subtype: Boundary
+  note: 'type modelCheck, subtype = eaType, so the note shows what it was and that it has to be updated (W-146).'
   oldToolRules:
   - rule: D-01
     verdict: suppress
@@ -467,9 +475,11 @@ elementTypes:
   elements: 34
   stereotypes:
     (none): 34
-  disposition: pending
-  mdseType: null
-  decision: null
+  disposition: note
+  mdseType: modelCheck
+  decision: W-146
+  subtype: Decision
+  note: 'type modelCheck, subtype = eaType, so the note shows what it was and that it has to be updated (W-146).'
   oldToolRules:
   - rule: B-01
     verdict: fold
@@ -478,9 +488,11 @@ elementTypes:
   elements: 28
   stereotypes:
     (none): 28
-  disposition: pending
-  mdseType: null
-  decision: null
+  disposition: note
+  mdseType: modelCheck
+  decision: W-146
+  subtype: ActivityPartition
+  note: 'type modelCheck, subtype = eaType, so the note shows what it was and that it has to be updated (W-146).'
   oldToolRules:
   - rule: B-01
     verdict: fold
@@ -489,9 +501,11 @@ elementTypes:
   elements: 27
   stereotypes:
     (none): 27
-  disposition: pending
-  mdseType: null
-  decision: null
+  disposition: note
+  mdseType: modelCheck
+  decision: W-146
+  subtype: Trigger
+  note: 'type modelCheck, subtype = eaType, so the note shows what it was and that it has to be updated (W-146).'
   oldToolRules:
   - rule: B-01
     verdict: fold
@@ -500,9 +514,11 @@ elementTypes:
   elements: 14
   stereotypes:
     (none): 14
-  disposition: pending
-  mdseType: null
-  decision: null
+  disposition: note
+  mdseType: modelCheck
+  decision: W-146
+  subtype: Synchronization
+  note: 'type modelCheck, subtype = eaType, so the note shows what it was and that it has to be updated (W-146).'
   oldToolRules:
   - rule: B-01
     verdict: fold
@@ -511,9 +527,11 @@ elementTypes:
   elements: 11
   stereotypes:
     (none): 11
-  disposition: pending
-  mdseType: null
-  decision: null
+  disposition: note
+  mdseType: modelCheck
+  decision: W-146
+  subtype: Sequence
+  note: 'type modelCheck, subtype = eaType, so the note shows what it was and that it has to be updated (W-146).'
   oldToolRules:
   - rule: B-01
     verdict: fold
@@ -522,9 +540,11 @@ elementTypes:
   elements: 6
   stereotypes:
     (none): 6
-  disposition: pending
-  mdseType: null
-  decision: null
+  disposition: note
+  mdseType: modelCheck
+  decision: W-146
+  subtype: ActionPin
+  note: 'type modelCheck, subtype = eaType, so the note shows what it was and that it has to be updated (W-146).'
   oldToolRules:
   - rule: B-01
     verdict: fold
@@ -533,9 +553,11 @@ elementTypes:
   elements: 5
   stereotypes:
     (none): 5
-  disposition: pending
-  mdseType: null
-  decision: null
+  disposition: note
+  mdseType: modelCheck
+  decision: W-146
+  subtype: ProxyConnector
+  note: 'type modelCheck, subtype = eaType, so the note shows what it was and that it has to be updated (W-146).'
   oldToolRules:
   - rule: B-01
     verdict: fold
@@ -569,9 +591,11 @@ elementTypes:
   elements: 1
   stereotypes:
     (none): 1
-  disposition: pending
-  mdseType: null
-  decision: null
+  disposition: note
+  mdseType: modelCheck
+  decision: W-146
+  subtype: Event
+  note: 'type modelCheck, subtype = eaType, so the note shows what it was and that it has to be updated (W-146).'
   oldToolRules:
   - rule: FM-01
     verdict: emit
@@ -580,9 +604,11 @@ elementTypes:
   elements: 1
   stereotypes:
     (none): 1
-  disposition: pending
-  mdseType: null
-  decision: null
+  disposition: note
+  mdseType: modelCheck
+  decision: W-146
+  subtype: ActivityParameter
+  note: 'type modelCheck, subtype = eaType, so the note shows what it was and that it has to be updated (W-146).'
   oldToolRules:
   - rule: B-02
     verdict: suppress
