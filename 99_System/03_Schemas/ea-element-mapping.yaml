@@ -287,9 +287,11 @@ elementTypes:
   elements: 545
   stereotypes:
     (none): 545
-  disposition: pending
-  mdseType: null
-  decision: null
+  disposition: note
+  mdseType: Object
+  decision: W-135
+  subtype: null
+  note: 'Each of the 545 Objects becomes its own Object note with a blank subtype; Classifier is the temporary hasClassifier link to the blueprint note (498), a blueprint ID missing from the export is kept as a source-section line (47), PDATA1 writes nothing where it repeats Classifier (160 of 166). Folding into the blueprint is stage 2 (W-135). Old tool rules O-01, O-02, O-04 (suppress, fold) are evidence of the old tool only.'
   oldToolRules:
   - rule: O-01
     verdict: suppress

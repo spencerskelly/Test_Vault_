@@ -64,6 +64,7 @@ tObject:
   disposition: pending
   partsDecision: 'Part elements only, decided W-44: archive (it points to another Part, not the block). Port (920), Object (498) and other types use it as a real type link and are still to decide.'
   portsDecision: 'Port elements only, decided W-125: written as a temporary hasClassifier/classifierOf link (441 surviving Ports plus 2 merged ones); the other 477 write nothing.'
+  objectsDecision: 'Object elements only, decided W-135: written as the temporary hasClassifier link to the blueprint note (498 resolve); the 47 whose blueprint is not in the export keep the value as a source-section line.'
   proposedByHandoff: structure
   handoffNote: Use only where the exact EA construct requires classifier semantics.
   nonblank: 1841
@@ -72,6 +73,7 @@ tObject:
 - field: Classifier_guid
   disposition: pending
   partsDecision: 'Part elements only, decided W-44: archive (same reason as Classifier). Port (920), Object (545) and other types are still to decide.'
+  objectsDecision: 'Object elements only, decided W-135: the same blueprint as Classifier (545 non-blank, 498 resolve); not written separately.'
   proposedByHandoff: archive
   handoffNote: Internal import evidence.
   nonblank: 1903
@@ -141,6 +143,7 @@ tObject:
   disposition: pending
   partsDecision: 'Part elements only, decided W-44: holds the GUID of the block the Part represents; used by the translator (structure). Other element types are still to decide.'
   portsDecision: 'Port elements only, decided W-120: the typing Class is written as subtypeOf between Port notes (the interface Classes become Port notes); the 99 links whose target is not a Port note (97 Hardware Component, 2 Physical Signal) are written as the temporary hasClassifier (W-127); the 5 whose GUID is not in the export are kept as a line in the source section (W-127). Other element types are still to decide.'
+  objectsDecision: 'Object elements only, decided W-135: repeats the Classifier blueprint on 160 of 166, so nothing is written there; the other 6 (3 that differ, 3 with no resolvable Classifier) keep a source-section line.'
   proposedByHandoff: archive / structure
   handoffNote: EA overloaded internal storage; decode only by explicit rule.
   nonblank: 19333
