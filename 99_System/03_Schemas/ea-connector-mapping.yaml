@@ -114,20 +114,20 @@ connectorTypes:
   direction: 'all Source -> Destination; none named; no self-loops'
   principle: 'a Function or a Design satisfies a requirement; an Object is what a requirement applies to (W-160)'
   rules:
-  - pair: Object to Requirement
-    connectors: 910
+  - pair: Object to Requirement, or Requirement to Object (W-167)
+    connectors: 918
     field: appliesTo
-    writtenOn: 'the requirement, pointing at the Object; applies generated on the Object; 909 unique links'
+    writtenOn: 'the requirement, pointing at the Object; applies generated on the Object; 917 unique links; no flag'
   - pair: Function to Use Case
     connectors: 0
     field: realizedBy
     writtenOn: 'the Use Case; realizes generated on the Function'
   - pair: any other
-    connectors: 40
+    connectors: 32
     field: realizedBy
     writtenOn: 'the target; realizes generated on the source'
     reviewLine: 'REVIEW modelCheck: realization <source type> to <target type>'
-    note: '40 links on 34 notes; Requirement to Object 8 are drawn the other way and stay here'
+    note: '32 links on 29 notes (W-167 moved the 8 Requirement to Object connectors to appliesTo)'
   packageEnds: '7 connectors from 6 packages with no note (W-147) write no field; the requirement gets REVIEW modelCheck: realization from folder <vault folder path>'
 - eaConnectorType: NoteLink
   connectors: 349
@@ -208,7 +208,8 @@ connectorTypes:
   - stereotype: trace
     connectors: 770
     decision: W-166
-    status: partial
+    amendedBy: W-167
+    status: settled
     matrixRule: 'Rules 24, 25, 26, 50'
     direction: '1 connector is marked Destination -> Source; the tool follows Direction (W-51)'
     rules:
@@ -230,8 +231,8 @@ connectorTypes:
       writtenOn: 'the requirement, pointing at the Object; applies generated; no flag'
     - pair: Requirement to Requirement
       connectors: 336
-      field: tracesTo
-      note: 'one requirement mentioning another; field not decided (W-166)'
+      field: references
+      writtenOn: 'the source (the requirement that mentions the other); referencedBy generated; no flag (W-167)'
     - pair: any other
       connectors: 103
       field: tracesTo
