@@ -204,9 +204,16 @@ elementTypes:
     Hardware Function: 157
     Software Function: 108
     Module Function: 13
-  disposition: pending
-  mdseType: null
-  decision: null
+  disposition: note
+  mdseType: Function
+  decision: W-141
+  mapping:
+  - {eaType: System Function, mdseType: Function, subtype: system}
+  - {eaType: Hardware Function, mdseType: Function, subtype: hardware}
+  - {eaType: Software Function, mdseType: Function, subtype: software}
+  - {eaType: Module Function, mdseType: Function, subtype: module}
+  - {eaType: Activity, mdseType: Function, subtype: null}
+  - {eaType: testCase, mdseType: Verification, subtype: test}
   oldToolRules:
   - rule: E-03P
     verdict: emit
