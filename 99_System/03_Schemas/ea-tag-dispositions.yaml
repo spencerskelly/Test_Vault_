@@ -5,7 +5,7 @@
 #   structure  used by the translator to build something (a title, id, link or placement); the rule that used it is recorded in the ledger; not put on the note
 #   archive    stays in the original export only, not in the note
 #   drop       not kept anywhere
-# order / orderGroup: position and group of a body line in the Source: EA section, lowest first (W-101). PN and PartNumber share order 1 (one Part Number line).
+# order / orderGroup: position and group of an inline tag line, lowest first (W-101, changed by W-104). PN and PartNumber share order 1 (one Part Number line). textOrder: the four comment tags that are written as normal text below the Note instead of as tag lines (W-104).
 # The source reference is a ledger keyed by EA GUID plus a run manifest; values are not copied (W-35).
 # populated = rows with any value; realValues = rows with a value other than the placeholders unassigned and <memo>.
 schemaVersion: '1.0'
@@ -42,7 +42,7 @@ tags:
     disposition: "body"
     decision: "W-91"
     order: 10
-    orderGroup: "Requirement text and comments"
+    orderGroup: "Requirements"
     populated: 45
     realValues: 45
     distinct: 25
@@ -80,7 +80,7 @@ tags:
   - tag: "CMF"
     disposition: "body"
     decision: "W-92"
-    order: 19
+    order: 15
     orderGroup: "Physical and cost"
     populated: 15
     realValues: 15
@@ -89,7 +89,7 @@ tags:
   - tag: "Cable Compatibility"
     disposition: "body"
     decision: "W-94"
-    order: 31
+    order: 27
     orderGroup: "Electrical"
     populated: 15
     realValues: 15
@@ -140,7 +140,7 @@ tags:
   - tag: "Current Max"
     disposition: "body"
     decision: "W-94"
-    order: 25
+    order: 21
     orderGroup: "Electrical"
     populated: 5
     realValues: 5
@@ -149,7 +149,7 @@ tags:
   - tag: "CurrentOutMax"
     disposition: "body"
     decision: "W-94"
-    order: 26
+    order: 22
     orderGroup: "Electrical"
     populated: 1
     realValues: 1
@@ -179,7 +179,7 @@ tags:
   - tag: "Detection"
     disposition: "body"
     decision: "W-95"
-    order: 35
+    order: 31
     orderGroup: "Failure mode"
     populated: 1
     realValues: 1
@@ -215,13 +215,13 @@ tags:
     note: "Never has a value."
   - tag: "Engineering Comment"
     disposition: "body"
+    placement: "main text"
+    textOrder: 4
     decision: "W-91"
-    order: 16
-    orderGroup: "Requirement text and comments"
     populated: 10
     realValues: 10
     distinct: 10
-    note: "Body (W-91), below the EA GUID as a `- Engineering Comment: <text>` line (EA tag name, W-93), real values only. Written as is; the comment text is not edited."
+    note: "Body (W-104, changes W-91): written as normal text below the Note and any `text` wording, above the inline tag lines; real values only. Order among the four: User Story, Sales Comment, Product Management Comment, Engineering Comment. How each is told apart is not decided."
   - tag: "External Reference"
     disposition: "drop"
     decision: "W-29"
@@ -304,7 +304,7 @@ tags:
   - tag: "Material"
     disposition: "body"
     decision: "W-92"
-    order: 20
+    order: 16
     orderGroup: "Physical and cost"
     populated: 2
     realValues: 1
@@ -362,7 +362,7 @@ tags:
   - tag: "Occurence"
     disposition: "body"
     decision: "W-95"
-    order: 34
+    order: 30
     orderGroup: "Failure mode"
     populated: 3
     realValues: 3
@@ -412,7 +412,7 @@ tags:
   - tag: "Piece Cost"
     disposition: "body"
     decision: "W-92"
-    order: 23
+    order: 19
     orderGroup: "Physical and cost"
     populated: 6
     realValues: 6
@@ -421,7 +421,7 @@ tags:
   - tag: "Positions"
     disposition: "body"
     decision: "W-92"
-    order: 17
+    order: 13
     orderGroup: "Physical and cost"
     populated: 1
     realValues: 1
@@ -430,7 +430,7 @@ tags:
   - tag: "PowerMax"
     disposition: "body"
     decision: "W-94"
-    order: 24
+    order: 20
     orderGroup: "Electrical"
     populated: 1
     realValues: 1
@@ -459,17 +459,17 @@ tags:
     note: "Never has a value."
   - tag: "Product Management Comment"
     disposition: "body"
+    placement: "main text"
+    textOrder: 3
     decision: "W-91"
-    order: 15
-    orderGroup: "Requirement text and comments"
     populated: 37
     realValues: 37
     distinct: 36
-    note: "Body (W-91), below the EA GUID as a `- Product Management Comment: <text>` line (EA tag name, W-93), real values only. Written as is; the comment text is not edited."
+    note: "Body (W-104, changes W-91): written as normal text below the Note and any `text` wording, above the inline tag lines; real values only. Order among the four: User Story, Sales Comment, Product Management Comment, Engineering Comment. How each is told apart is not decided."
   - tag: "Quantity"
     disposition: "body"
     decision: "W-92"
-    order: 22
+    order: 18
     orderGroup: "Physical and cost"
     populated: 10
     realValues: 10
@@ -512,17 +512,17 @@ tags:
     note: "Never has a value."
   - tag: "Sales Comment"
     disposition: "body"
+    placement: "main text"
+    textOrder: 2
     decision: "W-91"
-    order: 14
-    orderGroup: "Requirement text and comments"
     populated: 4
     realValues: 4
     distinct: 4
-    note: "Body (W-91), below the EA GUID as a `- Sales Comment: <text>` line (EA tag name, W-93), real values only. Written as is; the comment text is not edited."
+    note: "Body (W-104, changes W-91): written as normal text below the Note and any `text` wording, above the inline tag lines; real values only. Order among the four: User Story, Sales Comment, Product Management Comment, Engineering Comment. How each is told apart is not decided."
   - tag: "Severity"
     disposition: "body"
     decision: "W-95"
-    order: 33
+    order: 29
     orderGroup: "Failure mode"
     populated: 3
     realValues: 3
@@ -531,7 +531,7 @@ tags:
   - tag: "SignalType"
     disposition: "body"
     decision: "W-94"
-    order: 32
+    order: 28
     orderGroup: "Electrical"
     populated: 10
     realValues: 10
@@ -575,7 +575,7 @@ tags:
   - tag: "Style"
     disposition: "body"
     decision: "W-92"
-    order: 18
+    order: 14
     orderGroup: "Physical and cost"
     populated: 13
     realValues: 13
@@ -642,13 +642,13 @@ tags:
     note: "Never has a value."
   - tag: "User Story"
     disposition: "body"
+    placement: "main text"
+    textOrder: 1
     decision: "W-91"
-    order: 13
-    orderGroup: "Requirement text and comments"
     populated: 118
     realValues: 118
     distinct: 117
-    note: "Body (W-91), below the EA GUID as a `- User Story: <text>` line (EA tag name, W-93), real values only. Written as is; the comment text is not edited."
+    note: "Body (W-104, changes W-91): written as normal text below the Note and any `text` wording, above the inline tag lines; real values only. Order among the four: User Story, Sales Comment, Product Management Comment, Engineering Comment. How each is told apart is not decided."
   - tag: "Verdict"
     disposition: "drop"
     decision: "W-29"
@@ -673,7 +673,7 @@ tags:
   - tag: "VoltageInMax"
     disposition: "body"
     decision: "W-94"
-    order: 28
+    order: 24
     orderGroup: "Electrical"
     populated: 1
     realValues: 1
@@ -682,7 +682,7 @@ tags:
   - tag: "VoltageInMin"
     disposition: "body"
     decision: "W-94"
-    order: 27
+    order: 23
     orderGroup: "Electrical"
     populated: 1
     realValues: 1
@@ -691,7 +691,7 @@ tags:
   - tag: "VoltageOutMax"
     disposition: "body"
     decision: "W-94"
-    order: 30
+    order: 26
     orderGroup: "Electrical"
     populated: 1
     realValues: 1
@@ -700,7 +700,7 @@ tags:
   - tag: "VoltageOutMin"
     disposition: "body"
     decision: "W-94"
-    order: 29
+    order: 25
     orderGroup: "Electrical"
     populated: 1
     realValues: 1
@@ -724,7 +724,7 @@ tags:
     disposition: "body"
     decision: "W-91"
     order: 11
-    orderGroup: "Requirement text and comments"
+    orderGroup: "Requirements"
     populated: 11
     realValues: 11
     distinct: 10
@@ -761,7 +761,7 @@ tags:
     disposition: "body"
     decision: "W-91"
     order: 8
-    orderGroup: "Requirement text and comments"
+    orderGroup: "Requirements"
     populated: 2
     realValues: 2
     distinct: 2
@@ -791,7 +791,7 @@ tags:
     disposition: "body"
     decision: "W-89"
     order: 9
-    orderGroup: "Requirement text and comments"
+    orderGroup: "Requirements"
     populated: 2373
     realValues: 118
     distinct: 12
@@ -869,7 +869,7 @@ tags:
   - tag: "Weight (g)"
     disposition: "body"
     decision: "W-92"
-    order: 21
+    order: 17
     orderGroup: "Physical and cost"
     populated: 2
     realValues: 2
@@ -909,7 +909,7 @@ tags:
     disposition: "body"
     decision: "W-91"
     order: 7
-    orderGroup: "Requirement text and comments"
+    orderGroup: "Requirements"
     populated: 2
     realValues: 2
     distinct: 1
@@ -926,7 +926,7 @@ tags:
     disposition: "body"
     decision: "W-95"
     order: 12
-    orderGroup: "Requirement text and comments"
+    orderGroup: "Requirements"
     populated: 2
     realValues: 2
     distinct: 2
