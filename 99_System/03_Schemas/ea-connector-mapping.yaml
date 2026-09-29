@@ -82,3 +82,27 @@ connectorTypes:
   name:
     decision: W-158
     rule: '"- Connector name: <name> (to [[other end]])" on both end notes, one line per distinct name; unnamed write nothing (174 named, 165 distinct names)'
+- eaConnectorType: Aggregation
+  connectors: 2288
+  decision: W-159
+  status: settled
+  matrixRule: 'Rules 2, 3, 4 and 51 (r12 matrix); Rule 3 parent/child and Rule 4 participants have no field and are replaced'
+  direction: 'all Source -> Destination: source is the part, destination the whole; the forward field is written on the whole'
+  rules:
+  - aggregation: composite (DestIsAggregate 2, 1688)
+    pair: Object to Object
+    field: hasPart
+  - aggregation: composite (DestIsAggregate 2)
+    pair: any other
+    field: hasChild
+  - aggregation: shared (DestIsAggregate 1, 600)
+    pair: any
+    field: hasChild
+    note: 'grouped under, no ownership; regions of countries 278, Physical Context 57, about 30 real shared parts; Post-Import Task 7'
+  precedence: 'an existing link on the pair (folded Part hasPart, W-136, or ParentID placement, W-149) wins and the connector writes nothing: 1,837 connectors (composite 1,551, shared 286)'
+  counts: '451 connectors add 450 new links: hasPart 77, hasChild 373; no self-loops, no pair drawn both ways, no pair with both composite and shared'
+  mixedTypes:
+    reviewLine: 'REVIEW hasChild: the two notes have different types'
+    where: 'Source: EA section of the whole'
+    counts: '23 links on 15 notes'
+  fields: 'SourceCard is the quantity line on the assembly (W-43, W-54; 52); SourceRole archived (W-56); Name uses the W-158 line on the whole (4); DestIsAggregate chooses the rule and stays in the export'
