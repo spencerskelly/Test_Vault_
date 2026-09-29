@@ -1285,3 +1285,10 @@ tXref:
   decision: W-80
   rows: 894
   note: 'Structure (W-80). Element to default diagram (893 pairs; 877 match the diagram owner ParentID, 16 are default only). Used to write the Default diagram line in the element note when the canvas is created.'
+# tConnectorTag: t_connectortag has 4,583 rows, all with empty VALUE and NOTES; the whole table is dropped (W-85).
+tConnectorTag:
+- table: t_connectortag
+  disposition: drop
+  decision: W-85
+  rows: 4583
+  note: 'Dropped (W-85). Five property names on 1,238 connectors, with no value on any row.'
