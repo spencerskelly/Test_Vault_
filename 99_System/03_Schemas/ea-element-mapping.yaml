@@ -251,9 +251,13 @@ elementTypes:
   elements: 1386
   stereotypes:
     (none): 1386
-  disposition: pending
-  mdseType: null
-  decision: null
+  disposition: note
+  mdseType: modelCheck
+  decision: W-147
+  subtype: Package
+  mapping:
+  - {rule: 'the package has a Notes description', result: 'a folder, plus a modelCheck note with subtype Package named like the package inside that folder', packages: 34}
+  - {rule: 'any other package', result: 'a folder only, no note', packages: 1352}
   note: The vault folder tree starts at the ten packages under IPC ! (W-117); Model and IPC ! are not folders. Whether a package becomes a note is undecided (W-66).
   oldToolRules:
   - rule: P-01
