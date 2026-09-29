@@ -12,7 +12,7 @@ The order of everything in a note that was translated from EA. Every translated 
 
 ## Order
 
-1. **Properties.** `type`, `subtype`, `id`, `uid`, `status`, `eaType`, `tags`, in that order (W-97). Only `tags` may hold more than one value.
+1. **Properties.** `type`, `subtype`, `id`, `uid`, `status`, `eaType`, `tags`, in that order (W-97), then the relationship fields, in the order they appear in `relationships.yaml` (W-126). `tags` and the relationship fields may hold more than one value; the other properties hold one each.
 2. **Note.** The element's own description, as normal text (W-42). A package's or a diagram's Notes go here too.
 3. **`text` wording.** Where EA held a `text` or `SysML1.4::text` value, it follows the Note after one blank line, with no label. Where the Note is empty, it is the Note (W-102, W-103).
 4. **Comment texts.** `User Story`, `Sales Comment`, `Product Management Comment` and `Engineering Comment`, in that order, as normal text. Each has its own label (W-104, W-105, W-106).
@@ -47,6 +47,7 @@ uid: <uid>
 status: <status>
 eaType: <EA stereotype, else EA object type>
 tags:
+<relationship fields, in the order of relationships.yaml, when the note has them>
 ---
 <Note text>
 

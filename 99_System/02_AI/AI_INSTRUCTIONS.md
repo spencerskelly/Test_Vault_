@@ -6,7 +6,7 @@ Before substantial work, read `99_System/10_Docs/MDSE Modeling Ruleset 1.21.md`,
 
 ## Creating a note
 
-1. **Classify first.** Choose the class, then copy the matching template from `99_System/05_Templates` (for example `Requirement.md`). Keep its properties, their order (`type`, `subtype`, `id`, `uid`, `status`, `tags`, W-97) and its headings exactly. Do not add or drop properties. Only `tags` may hold more than one value. If no class fits, ask the user.
+1. **Classify first.** Choose the class, then copy the matching template from `99_System/05_Templates` (for example `Requirement.md`). Keep its properties, their order (`type`, `subtype`, `id`, `uid`, `status`, `tags`, W-97) and its headings exactly. Do not add or drop properties, except that relationship fields from `99_System/03_Schemas/relationships.yaml` follow `tags` (W-126). Only `tags` and the relationship fields may hold more than one value. If no class fits, ask the user.
 2. **Fill in `uid`** yourself. It is 30 characters, no spaces: `yyyyMMddHHmmssSSS` followed by a 13-character author code.
    - **Time:** local time now, to the millisecond, not UTC. Use the `timezone` in the directing person's note in `99_System/04_People` if it has one; otherwise `defaultTimezone` in `authors.yaml`.
    - **Author code, if a user directed the note:** that user's `code`, from their note in `99_System/04_People`. This applies even if you wrote every word. If you do not know who the user is, ask. A person may have `previousCodes` in their note: notes carrying those codes are also theirs.
