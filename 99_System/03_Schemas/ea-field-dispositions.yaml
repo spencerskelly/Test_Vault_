@@ -4,6 +4,9 @@
 # It is NOT a decision. Where the handoff shows two words (for example "body / structure") it was unsure.
 # "open question" means the handoff marked it REVIEW.
 # nonblank = rows with a real (not empty, not 0) value in the extract; tObject counts exclude package rows.
+# placement (only on body): main text | source section | attachment. main text is the note's own description at the top of the body; source section is a line below the EA GUID (the default when placement is missing); attachment is a file next to the note (W-42, W-76).
+# Sections: tObject, tConnector, tPackage (fields, W-33 to W-66); tDiagram, tDiagramObjects, tDiagramLinks (W-67 to W-73); emptyTables (W-74); tDocument (W-75, W-76); tXref (W-79 to W-84); tConnectorTag (W-85); tSmallTables (W-86).
+# Still pending: tObject Classifier, Classifier_guid and PDATA1 (decided for Parts only, W-44). Tags are in ea-tag-dispositions.yaml.
 schemaVersion: '1.0'
 # tObject: 34583 rows in the extract
 # tConnector: 21822 rows in the extract

@@ -325,12 +325,12 @@ tags:
     distinct: 0
     note: "Never has a value."
   - tag: "Object Type"
-    disposition: "pending"
-    decision: ""
+    disposition: "drop"
+    decision: "W-87"
     populated: 4848
     realValues: 4848
     distinct: 3
-    note: "Not yet decided. Default if undecided: body, below the EA GUID."
+    note: "Dropped (W-87). Requirement 3,362, Heading 1,478, Information 8 on 4,848 requirements; a new analysis is run after import."
   - tag: "Observability"
     disposition: "drop"
     decision: "W-29"
@@ -521,12 +521,12 @@ tags:
     distinct: 443
     note: "Holds clause numbers inside standards. Used to build the external id where the name has no clause number. Not repeated in the body."
   - tag: "Status"
-    disposition: "pending"
-    decision: ""
+    disposition: "drop"
+    decision: "W-87"
     populated: 4848
     realValues: 4848
     distinct: 2
-    note: "Not yet decided. Default if undecided: body, below the EA GUID."
+    note: "Dropped (W-87). Draft on 4,847 of 4,848 rows and Discontinued on 1; a new analysis is run after import."
   - tag: "Style"
     disposition: "pending"
     decision: ""
@@ -717,12 +717,12 @@ tags:
     distinct: 0
     note: "Never has a value."
   - tag: "Webasto MBDV Profile::Object Type"
-    disposition: "pending"
-    decision: ""
+    disposition: "drop"
+    decision: "W-87"
     populated: 2391
     realValues: 2391
     distinct: 4
-    note: "Not yet decided. Default if undecided: body, below the EA GUID."
+    note: "Dropped (W-87). Information 2,254, Requirement 123, Heading 13, information 1 on 2,391 rows; a new analysis is run after import."
   - tag: "Webasto MBDV Profile::Priority"
     disposition: "pending"
     decision: ""
@@ -773,12 +773,12 @@ tags:
     distinct: 482
     note: "Same as Stakeholder ID."
   - tag: "Webasto MBDV Profile::Status"
-    disposition: "pending"
-    decision: ""
+    disposition: "drop"
+    decision: "W-87"
     populated: 2391
     realValues: 2391
     distinct: 1
-    note: "Not yet decided. Default if undecided: body, below the EA GUID."
+    note: "Dropped (W-87). Draft on all 2,391 rows."
   - tag: "Webasto MBDV Profile::Supporting"
     disposition: "drop"
     decision: "W-29"
