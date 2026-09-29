@@ -80,12 +80,12 @@ tags:
     distinct: 8
     note: "Body (W-92), below the EA GUID as a `- CMF: <value>` line (EA tag name, W-93), real values only."
   - tag: "Cable Compatibility"
-    disposition: "pending"
-    decision: ""
+    disposition: "body"
+    decision: "W-94"
     populated: 15
     realValues: 15
     distinct: 5
-    note: "Not yet decided. Default if undecided: body, below the EA GUID."
+    note: "Body (W-94), below the EA GUID as a `- Cable Compatibility: <value>` line (EA tag name, W-93), real values only. May become a property later; not decided which."
   - tag: "Cable OD"
     disposition: "drop"
     decision: "W-29"
@@ -129,19 +129,19 @@ tags:
     distinct: 0
     note: "Never has a value."
   - tag: "Current Max"
-    disposition: "pending"
-    decision: ""
+    disposition: "body"
+    decision: "W-94"
     populated: 5
     realValues: 5
     distinct: 1
-    note: "Not yet decided. Default if undecided: body, below the EA GUID."
+    note: "Body (W-94), below the EA GUID as a `- Current Max: <value>` line (EA tag name, W-93), real values only. May become a property later; not decided which."
   - tag: "CurrentOutMax"
-    disposition: "pending"
-    decision: ""
+    disposition: "body"
+    decision: "W-94"
     populated: 1
     realValues: 1
     distinct: 1
-    note: "Not yet decided. Default if undecided: body, below the EA GUID."
+    note: "Body (W-94), below the EA GUID as a `- CurrentOutMax: <value>` line (EA tag name, W-93), real values only. May become a property later; not decided which."
   - tag: "Cybersecurity"
     disposition: "drop"
     decision: "W-29"
@@ -395,12 +395,12 @@ tags:
     distinct: 1
     note: "Body (W-92), below the EA GUID as a `- Positions: <value>` line (EA tag name, W-93), real values only."
   - tag: "PowerMax"
-    disposition: "pending"
-    decision: ""
+    disposition: "body"
+    decision: "W-94"
     populated: 1
     realValues: 1
     distinct: 1
-    note: "Not yet decided. Default if undecided: body, below the EA GUID."
+    note: "Body (W-94), below the EA GUID as a `- PowerMax: <value>` line (EA tag name, W-93), real values only. May become a property later; not decided which."
   - tag: "Priority"
     disposition: "drop"
     decision: "W-89"
@@ -486,12 +486,12 @@ tags:
     distinct: 2
     note: "Not yet decided. Default if undecided: body, below the EA GUID."
   - tag: "SignalType"
-    disposition: "pending"
-    decision: ""
+    disposition: "body"
+    decision: "W-94"
     populated: 10
     realValues: 10
     distinct: 2
-    note: "Not yet decided. Default if undecided: body, below the EA GUID."
+    note: "Body (W-94), below the EA GUID as a `- SignalType: <value>` line (EA tag name, W-93), real values only. May become a property later; not decided which."
   - tag: "Special Characteristic"
     disposition: "drop"
     decision: "W-29"
@@ -619,33 +619,33 @@ tags:
     distinct: 0
     note: "Never has a value."
   - tag: "VoltageInMax"
-    disposition: "pending"
-    decision: ""
+    disposition: "body"
+    decision: "W-94"
     populated: 1
     realValues: 1
     distinct: 1
-    note: "Not yet decided. Default if undecided: body, below the EA GUID."
+    note: "Body (W-94), below the EA GUID as a `- VoltageInMax: <value>` line (EA tag name, W-93), real values only. May become a property later; not decided which."
   - tag: "VoltageInMin"
-    disposition: "pending"
-    decision: ""
+    disposition: "body"
+    decision: "W-94"
     populated: 1
     realValues: 1
     distinct: 1
-    note: "Not yet decided. Default if undecided: body, below the EA GUID."
+    note: "Body (W-94), below the EA GUID as a `- VoltageInMin: <value>` line (EA tag name, W-93), real values only. May become a property later; not decided which."
   - tag: "VoltageOutMax"
-    disposition: "pending"
-    decision: ""
+    disposition: "body"
+    decision: "W-94"
     populated: 1
     realValues: 1
     distinct: 1
-    note: "Not yet decided. Default if undecided: body, below the EA GUID."
+    note: "Body (W-94), below the EA GUID as a `- VoltageOutMax: <value>` line (EA tag name, W-93), real values only. May become a property later; not decided which."
   - tag: "VoltageOutMin"
-    disposition: "pending"
-    decision: ""
+    disposition: "body"
+    decision: "W-94"
     populated: 1
     realValues: 1
     distinct: 1
-    note: "Not yet decided. Default if undecided: body, below the EA GUID."
+    note: "Body (W-94), below the EA GUID as a `- VoltageOutMin: <value>` line (EA tag name, W-93), real values only. May become a property later; not decided which."
   - tag: "Volume"
     disposition: "drop"
     decision: "W-29"
