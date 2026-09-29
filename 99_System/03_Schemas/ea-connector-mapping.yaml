@@ -433,3 +433,27 @@ connectorTypes:
     writtenOn: 'the drawn start, pointing at the drawn end'
     reviewLine: 'REVIEW modelCheck: association <start type> to <end type>'
     note: '102 links on 65 notes'
+- eaConnectorType: Usage
+  connectors: 239
+  decision: W-173
+  status: settled
+  matrixRule: 'Rules 28, 29, 49, 59, 70'
+  rules:
+  - pair: Use Case to Function or Design
+    connectors: 214
+    field: realizedBy
+    writtenOn: 'the Use Case; realizes generated on the Function or Design; 213 links'
+  - pair: Requirement to Requirement
+    connectors: 15
+    field: dependsOn
+    writtenOn: 'the source; dependencyOf generated; no flag'
+  - pair: Issue to State
+    connectors: 2
+    field: affects
+    writtenOn: 'the Issue (W-166)'
+  - pair: any other
+    connectors: 8
+    field: dependsOn
+    writtenOn: 'the source, in the drawn direction'
+    reviewLine: 'REVIEW modelCheck: usage <source type> to <target type>'
+    note: '8 links on 6 notes, including the 4 Responsibility connectors'
