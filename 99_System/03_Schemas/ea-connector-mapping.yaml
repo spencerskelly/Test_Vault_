@@ -205,3 +205,36 @@ connectorTypes:
       writtenOn: 'the source, in the drawn direction'
       reviewLine: 'REVIEW modelCheck: refine <source type> to <target type>'
       note: '17 links on 16 notes'
+  - stereotype: trace
+    connectors: 770
+    decision: W-166
+    status: partial
+    matrixRule: 'Rules 24, 25, 26, 50'
+    direction: '1 connector is marked Destination -> Source; the tool follows Direction (W-51)'
+    rules:
+    - pair: Info or Artifact to any
+      connectors: 224
+      field: describes
+      writtenOn: 'the Info or Artifact; describedBy generated'
+    - pair: Object to Info
+      connectors: 35
+      field: describes
+      writtenOn: 'turned around: the Info note, pointing at the Object; no flag'
+    - pair: Issue to any
+      connectors: 49
+      field: affects
+      writtenOn: 'the Issue; affectedBy generated'
+    - pair: Object to Requirement, or Requirement to Object
+      connectors: 23
+      field: appliesTo
+      writtenOn: 'the requirement, pointing at the Object; applies generated; no flag'
+    - pair: Requirement to Requirement
+      connectors: 336
+      field: tracesTo
+      note: 'one requirement mentioning another; field not decided (W-166)'
+    - pair: any other
+      connectors: 103
+      field: tracesTo
+      writtenOn: 'the source, in the drawn direction'
+      reviewLine: 'REVIEW modelCheck: trace <source type> to <target type>'
+      note: '102 links on 82 notes'
