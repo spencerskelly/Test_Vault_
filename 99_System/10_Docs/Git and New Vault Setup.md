@@ -2,7 +2,7 @@
 
 ## Purpose
 
-Create a new vault from this ZIP and publish it as its own GitHub repository.
+Status (W-261): the ZIP procedure below predates the base vault path (W-249) and is not current. A script that builds the base vault will replace it; it is not written yet. The Git safety defaults and the tracked and untracked lists below still apply.
 
 ## Prerequisites
 
@@ -22,7 +22,6 @@ Create a new vault from this ZIP and publish it as its own GitHub repository.
 7. Confirm `main` is the default branch.
 8. In Obsidian, verify Source Control / Obsidian Git sees a clean repository.
 9. Commit and push any intentional initialization changes.
-10. Run the cross-vault test from `00_Home`.
 
 ## Git safety defaults
 

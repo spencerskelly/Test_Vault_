@@ -1,28 +1,18 @@
-# Ampure Vault Base
+# Test_Vault_
 
-Reusable starter for GitHub-backed Obsidian vaults.
+A workspace, not the vault that will be built. It defines the EA-to-MDSE translator and the conventions the real vault will follow (W-01). The real vault is generated later from the Sparx EA file.
 
-This base combines:
+## Start here
 
-- the current engineering MDSE structure and relationship model;
-- the company-vault authority and cross-vault rules maintained in `Ampure_Data`;
-- Git-safe Obsidian configuration;
-- vault identity via `.vault.yaml`;
-- a clean test surface for vault-to-vault linking.
+1. `99_System/10_Docs/Handoff - Continue Here.md`: where the work stands and what is next.
+2. `99_System/10_Docs/Translator Definition.md`: what the stage 1 translator must do. Kept current.
+3. `99_System/10_Docs/Workspace Decision Log.md`: every decision, and the Open list at the end.
 
-## First use
+## Folders
 
-1. Copy/unzip this package into a **new folder**.
-2. Initialize `.vault.yaml` using `99_System/09_Tools/Initialize-Vault.sh` on macOS/Linux or `Initialize-Vault.ps1` on Windows.
-3. Open the folder as an Obsidian vault.
-4. Install/enable the plugins listed in `99_System/01_Admin/Enabled Plugin Stack.md`.
-5. Create the GitHub repository and publish this folder.
-6. Open `00_Home/Cross-Vault Link Test.md`.
-
-Do not reuse a populated `.vault.yaml` from another vault.
-
-## Authority
-
-- `Ampure_Data` is the common company vault and owns enterprise-wide shared identities.
-- Engineering/product-line vaults own detailed technical definitions.
-- Shared information is referenced, not copied, unless there is a specific approved reason.
+- `99_System/03_Schemas`: the class, relationship, element, connector, field, tag and package rules, as YAML.
+- `99_System/05_Templates`, `08_Scripts`: the class templates and the id and uid snippets.
+- `99_System/10_Docs`: the decision log, handoff, Translator Definition, Post-Import Tasks and Ruleset 1.22.
+- `99_System/CSV_EA`: evidence extracted from the EA file, used to define the rules. The import reads the EA file itself (W-247).
+- `Definitions`: the note layout and the `Source: EA` section.
+- `MDSE Workbench`: a separate product-definition workspace. It is not authoritative for model semantics.
