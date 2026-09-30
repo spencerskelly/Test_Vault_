@@ -22,7 +22,7 @@ The order of everything in a note that was translated from EA. Every translated 
 8. **Multi-line `Priority` values.** A `Webasto MBDV Profile::Priority` value that contains a line break, as normal text with a label (W-106).
 9. **`Source: EA`.** The traceability section, always last. Three empty lines come before it (W-99).
 
-Attachments are files next to the note, not lines in it (W-76, W-77).
+Attachments are files next to the note, not lines in it (W-76, W-77). Each is named `<note file name> asset <n>`; the counter starts at 1 on every note, also when there is only one file, and follows the order of the pictures inside the source RTF (W-210).
 
 ## Labels
 
