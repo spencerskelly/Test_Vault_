@@ -10,6 +10,7 @@ connectorTypes:
 - eaConnectorType: Generalization
   connectors: 3974
   decision: W-152
+  status: settled
   matrixRule: 'Rule 1 (r12 matrix), Rule 71 for the exception'
   source: 'specific element (source), all drawn Source -> Destination, no stereotype, no Notes'
   forward: subtypeOf
@@ -35,6 +36,7 @@ connectorTypes:
   connectors: 836
   decision: W-151
   amendedBy: W-152
+  status: settled
   note: 'No connector note or link of its own. 584 repeat a ParentID link and write nothing. The 252 independent ones are written as hasChild on the end note (parent) and childOf on the start note (child), or hasPart/partOf when both notes are Objects (W-149).'
   counts:
     repeatParentId: 584
@@ -503,3 +505,6 @@ connectorTypes:
     writtenOn: 'pointing at the conveyed Item Flow note; one-way; where a Port would get both transmits and receives for one item it gets exchanges once instead (W-178): transmits 51, receives 60, exchanges 18'
   blockLevel: '9 connectors keep REVIEW port needed with the GUID and the review table (W-55, W-157)'
   name: 'W-158 line on both ends (10)'
+# Relationship rows in t_xref (W-83) not yet mapped (W-183): entry 3 and doActivity 2 (State to Activity),
+# represents 1 (ActivityPartition to Class), target 6 (Action to ActionPin). conveyed is used by InformationFlow
+# (W-177); trigger and effect are written as StateFlow lines (W-175).
