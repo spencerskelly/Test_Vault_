@@ -24,6 +24,10 @@ The order of everything in a note that was translated from EA. Every translated 
 
 Attachments are files next to the note, not lines in it (W-76, W-77). Each is named `<note file name> asset <n>`; the counter starts at 1 on every note, also when there is only one file, and follows the order of the pictures inside the source RTF (W-210).
 
+## Diagram companion note (W-212, W-213)
+
+A diagram's companion note is class `Diagram`. Its body follows the same order. Where the canvas exists, the line `Canvas: [[<canvas file name>.canvas]]` comes directly after the Note (the diagram's `Notes` text) and before the `**Messages:**` list of a sequence diagram (W-176). The line is a link, not an embed, and is not written when there is no canvas: the diagram has no drawn object, or is a sequence diagram (no canvas form yet).
+
 ## Labels
 
 A label is the EA tag name in bold with a colon, on its own line. The value starts on the next line and may run over several lines, written as it was in EA. A blank line separates one labeled text from the next.
