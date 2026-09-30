@@ -7,7 +7,7 @@ status: Draft
 
 What the stage 1 translator must do, in one place. It is kept current: any decision that changes a stage 1 rule updates this file in the same commit (W-247). Rules are stated once and cite their decision number. The tables live in the YAML files in `99_System/03_Schemas`, which stay the machine-readable authority; this file says which file holds what and does not copy the tables, so there is one place to change. Where this file and a YAML file disagree, that is a fault to fix, not a choice.
 
-Current through W-251.
+Current through W-252.
 
 ## 1. Purpose and scope
 
@@ -15,7 +15,7 @@ Current through W-251.
 - Two stages (W-30). **Stage 1** is direct and mechanical: it applies only approved, deterministic rules, decides no meaning, and loses nothing. The EA type stays in `eaType` and stage 2 corrects it. **Stage 2** applies meaning (reclassification, folding, cleanup) as separate reviewed git commits. The work list for stage 2 is `Post-Import Tasks.md`.
 - Every run goes into a fresh vault. It never imports over an existing vault (W-36, W-37). Only validated runs are committed (W-35).
 - The fresh vault has MDSE Bootstrap and the plugins installed and enabled before the run (W-248). The translator does not install plugins (my reading of W-248). Once the tool works, that vault is set up for testing (W-248).
-- Path to a testable vault (W-249): a script builds a base vault once from the workspace; the tool fills a copy of it and does not create the vault, the plugin settings or Bootstrap; the tool reads the person notes, `authors.yaml` and the templates from that base vault, not from the workspace. Each test run is a disposable copy, checked by section 10, opened in Obsidian and discarded. Every test run is a full run; the tool has no package filter (W-251).
+- Path to a testable vault (W-249): a script builds a base vault once from the workspace; the tool fills a copy of it and does not create the vault, the plugin settings or Bootstrap; the tool reads the person notes, `authors.yaml` and the templates from that base vault, not from the workspace. Each test run is a disposable copy, checked by section 10, opened in Obsidian and discarded. The tool takes a package filter (W-252): it opens the `.qeax` read-only, numbers every note from the whole model (W-14) and writes only the selected packages, so a slice keeps its final ids and its numbers have gaps. A full run is the same tool with no filter. Not decided: how packages are selected, links and folds that cross the edge of a slice, and what the ledger holds for a slice.
 - The result must be usable by people and AI together. Every review line must be resolvable from the vault alone (W-156). The vault is not released until stage 2 is complete (W-55).
 - Stage 1 output is a vault, a ledger, a run manifest and review tables (section 3).
 
@@ -115,7 +115,7 @@ An off-pattern pair keeps the EA meaning and gets `REVIEW modelCheck: <stereotyp
 
 1. Every element, connector, diagram and package lands in exactly one outcome and one rule; the ledger has one row each (W-148, W-178, W-215).
 2. No two notes share an `id`, a `uid` or a file name.
-3. Every `[[link]]` the tool writes resolves to a note or an attachment in the run.
+3. Every `[[link]]` the tool writes resolves to a note or an attachment in the run. In a slice run, links to notes outside the slice are not decided (W-252).
 4. Every YAML and JSON file in the vault parses; every relationship field written is in `relationships.yaml`.
 5. The counts in the run manifest match this file's counts, or the difference is listed.
 6. A run that fails any check is discarded, not committed (W-35).
@@ -128,4 +128,4 @@ Reclassify `modelCheck` notes, split Object, Design or State by `eaType`, fold r
 
 ## 12. Open, not yet a rule
 
-The Open list at the end of `Workspace Decision Log.md` is the list. Relevant here: `.vault.yaml` in the base vault, the four header-only import files, what the `.qeax` reading shows about the 254 to 255 character values and the unexplained count differences, whether third-party standards content may stay in the vault, and the `formerIds` readers (`AI_INSTRUCTIONS`, `Note Layout`, `element-types.yaml`, W-207).
+The Open list at the end of `Workspace Decision Log.md` is the list. Relevant here: the package filter (how packages are selected, links and folds across the edge of a slice, the ledger for a slice; W-252), `.vault.yaml` in the base vault, the four header-only import files, what the `.qeax` reading shows about the 254 to 255 character values and the unexplained count differences, whether third-party standards content may stay in the vault, and the `formerIds` readers (`AI_INSTRUCTIONS`, `Note Layout`, `element-types.yaml`, W-207).
