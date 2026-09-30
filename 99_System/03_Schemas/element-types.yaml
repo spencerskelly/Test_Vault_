@@ -1,4 +1,4 @@
-schemaVersion: '1.14'
+schemaVersion: '1.15'
 date: '2026-09-30'
 basis: MDSE ruleset 1.21
 commonProperties: [type, subtype, id, uid, status, tags]   # order fixed by W-97; W-88 removed control, boundary, aliases and formerIds
@@ -20,7 +20,7 @@ classes:
 - name: Function
   prefix: FUNC
   folder: 30_Functions
-  subtype: ["hardware", "software"]
+  subtype: []
 - name: Functional Flow
   prefix: FFLOW
   folder: 31_Functional_Flows
