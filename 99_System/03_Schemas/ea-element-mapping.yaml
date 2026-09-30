@@ -146,7 +146,7 @@ elementTypes:
   mdseType: Object
   decision: W-139
   subtype: null
-  partialDecision: 'The 423 Class elements with an interface stereotype (Electrical & Material Interface 205, Data Interface 112, Mechanical Interface 69, Generic Physical Interface 30, Environmental Interface 7) become Port notes, subtype = the stereotype without the word Interface (W-120). All other Class elements (2,314) become Object notes with a blank subtype, the stereotype staying in eaType (W-139). oldToolRules X-03 (emit as Interface) and the other old rules are evidence of the old tool only.'
+  partialDecision: 'The 423 Class elements with an interface stereotype (Electrical & Material Interface 205, Data Interface 112, Mechanical Interface 69, Generic Physical Interface 30, Environmental Interface 7) become Port notes with a blank subtype, the stereotype staying in eaType (W-120, W-237). All other Class elements (2,314) become Object notes with a blank subtype, the stereotype staying in eaType (W-139). oldToolRules X-03 (emit as Interface) and the other old rules are evidence of the old tool only.'
   oldToolRules:
   - rule: X-01
     verdict: decompose
@@ -158,6 +158,7 @@ elementTypes:
   - rule: X-02
     verdict: emit
     as: Context
+    note: 'the Context class was removed (W-237); a Physical Context is an Object (W-239)'
   - rule: X-03
     verdict: emit
     as: Interface
@@ -218,11 +219,12 @@ elementTypes:
   disposition: note
   mdseType: Function
   decision: W-141
+  note: 'Function has no subtypes (W-238); the EA stereotype stays in eaType, so a Function from a System, Hardware, Software or Module Function keeps its EA name there.'
   mapping:
-  - {eaType: System Function, mdseType: Function, subtype: system}
-  - {eaType: Hardware Function, mdseType: Function, subtype: hardware}
-  - {eaType: Software Function, mdseType: Function, subtype: software}
-  - {eaType: Module Function, mdseType: Function, subtype: module}
+  - {eaType: System Function, mdseType: Function, subtype: null}
+  - {eaType: Hardware Function, mdseType: Function, subtype: null}
+  - {eaType: Software Function, mdseType: Function, subtype: null}
+  - {eaType: Module Function, mdseType: Function, subtype: null}
   - {eaType: Activity, mdseType: Function, subtype: null}
   - {eaType: testCase, mdseType: Verification, subtype: test}
   oldToolRules:
@@ -346,9 +348,10 @@ elementTypes:
   disposition: note
   mdseType: Artifact
   decision: W-143
+  note: 'Artifact has no subtypes (W-237); the EA type stays in eaType (Document, Image or CustomDocument).'
   mapping:
-  - {eaType: Document, mdseType: Artifact, subtype: document}
-  - {eaType: Image, mdseType: Artifact, subtype: image}
+  - {eaType: Document, mdseType: Artifact, subtype: null}
+  - {eaType: Image, mdseType: Artifact, subtype: null}
   - {eaType: CustomDocument, mdseType: Artifact, subtype: null}
   oldToolRules:
   - rule: A-01

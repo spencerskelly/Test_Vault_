@@ -480,7 +480,7 @@ connectorTypes:
   - pair: any
     connectors: 200
     field: precedes
-    writtenOn: 'the state before, pointing at the next state; follows generated; no review line; no Transition notes'
+    writtenOn: 'the state before, pointing at the next state; follows generated; no review line; Transition is not a class (W-237)'
   lines: '"- Trigger: <value> (to [[next state]])" PDATA1 42; "- Guard: ..." PDATA2 27; "- Effect: ..." PDATA3 2; on the state before'
   name: 'W-158 line on the state before (10)'
 - eaConnectorType: Sequence
