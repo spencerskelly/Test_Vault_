@@ -138,8 +138,9 @@ connectorTypes:
   matrixRule: 'Rule 45 (r12 matrix), replaced'
   rules:
   - case: note linked to one element
-    notes: 250
-    result: 'the note text is written into the element body; no Info note (amends W-145); 177 elements, up to 16 notes on one; 1 empty writes nothing'
+    notes: 247
+    connectors: 250
+    result: 'the note text is written into the element body; no Info note (amends W-145). The accepted v0.2 whole-model plan shows 247 unique Note elements represented by 250 folded NoteLink connector rows; W-274 corrects the earlier count without changing the W-161 rule.'
   - case: note linked to several elements
     notes: 38
     result: 'Info note (W-145) with describes to each element, describedBy generated; 94 links; field always on the note'
