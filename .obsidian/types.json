@@ -69,8 +69,6 @@
     "hasResult": "multitext",
     "initialState": "multitext",
     "markets": "multitext",
-    "operatingState": "multitext",
-    "operatingStateOf": "multitext",
     "optionOf": "multitext",
     "partOf": "multitext",
     "participatesIn": "multitext",
