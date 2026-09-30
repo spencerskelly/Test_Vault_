@@ -7,14 +7,15 @@ status: Draft
 
 What the stage 1 translator must do, in one place. It is kept current: any decision that changes a stage 1 rule updates this file in the same commit (W-247). Rules are stated once and cite their decision number. The tables live in the YAML files in `99_System/03_Schemas`, which stay the machine-readable authority; this file says which file holds what and does not copy the tables, so there is one place to change. Where this file and a YAML file disagree, that is a fault to fix, not a choice.
 
-Current through W-248.
+Current through W-249.
 
 ## 1. Purpose and scope
 
 - The translator reads Sparx EA and writes the MDSE vault. EA is being retired; the vault becomes the single source of engineering knowledge (handoff, W-01).
 - Two stages (W-30). **Stage 1** is direct and mechanical: it applies only approved, deterministic rules, decides no meaning, and loses nothing. The EA type stays in `eaType` and stage 2 corrects it. **Stage 2** applies meaning (reclassification, folding, cleanup) as separate reviewed git commits. The work list for stage 2 is `Post-Import Tasks.md`.
 - Every run goes into a fresh vault. It never imports over an existing vault (W-36, W-37). Only validated runs are committed (W-35).
-- The fresh vault has MDSE Bootstrap and the plugins installed and enabled before the run (W-248). The translator does not install plugins (my reading of W-248). Once the tool works, that vault is set up for testing (W-248; not designed yet).
+- The fresh vault has MDSE Bootstrap and the plugins installed and enabled before the run (W-248). The translator does not install plugins (my reading of W-248). Once the tool works, that vault is set up for testing (W-248).
+- Path to a testable vault (W-249): a script builds a base vault once from the workspace; the tool fills a copy of it and does not create the vault, the plugin settings or Bootstrap; the tool reads the person notes, `authors.yaml` and the templates from that base vault, not from the workspace. Each test run is a disposable copy, checked by section 10, opened in Obsidian and discarded. The first runs cover a slice of packages, so the tool takes a package filter; the filter has no rule in this file yet.
 - The result must be usable by people and AI together. Every review line must be resolvable from the vault alone (W-156). The vault is not released until stage 2 is complete (W-55).
 - Stage 1 output is a vault, a ledger, a run manifest and review tables (section 3).
 
@@ -126,4 +127,4 @@ Reclassify `modelCheck` notes, split Object, Design or State by `eaType`, fold r
 
 ## 12. Open, not yet a rule
 
-The Open list at the end of `Workspace Decision Log.md` is the list. Relevant here: what the fresh vault already holds before a run (person notes with `eaNames`, `authors.yaml`, templates, definitions) and where the tool reads them from (W-248), the four header-only import files, what the `.qeax` reading shows about the 254 to 255 character values and the unexplained count differences, whether third-party standards content may stay in the vault, and the `formerIds` readers (`AI_INSTRUCTIONS`, `Note Layout`, `element-types.yaml`, W-207).
+The Open list at the end of `Workspace Decision Log.md` is the list. Relevant here: what the base vault holds (W-249; the contents are proposed, not approved) and how the package filter works, the four header-only import files, what the `.qeax` reading shows about the 254 to 255 character values and the unexplained count differences, whether third-party standards content may stay in the vault, and the `formerIds` readers (`AI_INSTRUCTIONS`, `Note Layout`, `element-types.yaml`, W-207).
