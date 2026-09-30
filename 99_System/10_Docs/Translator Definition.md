@@ -7,7 +7,7 @@ status: Draft
 
 What the stage 1 translator must do, in one place. It is kept current: any decision that changes a stage 1 rule updates this file in the same commit (W-247). Rules are stated once and cite their decision number. The tables live in the YAML files in `99_System/03_Schemas`, which stay the machine-readable authority; this file says which file holds what and does not copy the tables, so there is one place to change. Where this file and a YAML file disagree, that is a fault to fix, not a choice.
 
-Current through W-256.
+Current through W-257.
 
 ## 1. Purpose and scope
 
@@ -26,6 +26,7 @@ Current through W-256.
 - Tables the import uses, with the rule file that decides each field: `t_object` and `t_package` (elements and packages), `t_connector` (connectors), `t_objectproperties` (tags, including the `Notes` column, which only the `t_objectproperties_raw.csv` extract kept as a separate file), `t_xref` (relationship kinds such as `conveyed`, `trigger`, `entry`, `doActivity`, `represents`, `target`), `t_operation` (State actions, W-86), `t_attribute` (Class attributes, W-86, W-108), `t_diagram`, `t_diagramobjects`, `t_diagramlinks` (diagrams), `t_document` (linked documents as attachments).
 - **Base vault contents (W-250).** The tool fills a copy of a base vault built by a script. The base vault has: `.obsidian` without `workspace.json`, plugin `data.json` and `author-code.txt`; `.gitignore`, `.gitattributes`, `AGENTS.md`; `Definitions`; in `99_System`: `02_AI`, `04_People`, `05_Templates`, `08_Scripts`, `09_Tools`, the `Enabled Plugin Stack` note, the Bootstrap spec and Ruleset 1.21; in `03_Schemas` only `authors.yaml`, `element-types.yaml` and `relationships.yaml`. It does not have `CSV_EA`, `10_EA Native Translator`, the Decision Log, the handoff, this file, the mapping and disposition YAML files (tool inputs), the import outputs, `MDSE Workbench`, the README or the cross-vault files. Not decided: `.vault.yaml`.
 - Every field and every table has a disposition (`property`, `body`, `structure`, `archive` or `drop`, W-33): `ea-field-dispositions.yaml`. Empty tables are dropped (W-74). `t_connectortag` is dropped, since it holds five names and no values (W-85). Tags: `ea-tag-dispositions.yaml` (121 decided: 80 drop, 38 body, 3 structure).
+- **Source counts for check 5 (W-257).** Rows in the CSV bundle's `extract_manifest.json`: `t_object` 35,969 (of these 1,386 are Packages), `t_connector` 21,822, `t_package` 1,387 (the root `Model` has no `t_object` row), `t_diagram` 2,924, `t_diagramobjects` 42,966, `t_diagramlinks` 37,955, `t_objectproperties` 249,892, `t_xref` 42,052, `t_document` 397, `t_operation` 23, `t_attribute` 5. Counts by EA object type and connector type are in sections 5 and 6. The tool reads these counts from the `.qeax` and writes them to the run manifest beside the expected ones.
 - The counts in this file come from the CSV bundle. The tool must compare its own counts with them in the run manifest. Not verified against the `.qeax` yet: the counts throughout, the values that stop at 254 to 255 characters (User Story 25 of 118, Product Management Comment 20 of 37 and three others; whether EA or the extraction cut them is answered by reading the `.qeax`), and the open count differences listed in the Open list of the Decision Log.
 
 ## 3. Output
@@ -33,7 +34,7 @@ Current through W-256.
 All in `99_System/11_Import`, regenerated on every run, read-only evidence (W-35, W-215, W-216).
 
 - `Ledger.csv`: one row per element, connector, diagram and package, sorted by EA GUID. Columns `ea_guid, source_kind, ea_type, ea_name, outcome, rule, uid, id, folded_into_uid`. `outcome` is `note`, `folded`, `link`, `canvas` or `not carried`, and in a slice run only also `outside slice` (W-254); `rule` is the decision number.
-- `Run Manifest.md`: date, tool version, input identity (file name and size) and counts by outcome; for a slice run, also the links that leave the slice (W-253).
+- `Run Manifest.md`: date, tool version, input identity (file name and size), the source counts read from the `.qeax` beside the expected ones (W-257) and counts by outcome; for a slice run, also the links that leave the slice (W-253).
 - Four review tables, each starting `ea_guid, ea_type, ea_name, category`, with no status column (decisions go in `Review Changes Log.md` by the same GUID, W-38): `Review - Block-Level Flow Connectors.csv` (W-217), `Review - Added Ports.csv` (W-218), `Review - Nesting Direction.csv` (W-219), `Review - Equals Direction.csv` (W-220).
 - Not decided: what happens to the four header-only files `Identity Registry.csv`, `Model Checks.csv`, `Pending Relationships.csv` and `Transformation Log.csv` (W-215).
 
@@ -117,10 +118,10 @@ An off-pattern pair keeps the EA meaning and gets `REVIEW modelCheck: <stereotyp
 2. No two notes share an `id`, a `uid` or a file name.
 3. Every `[[link]]` the tool writes resolves to a note or an attachment in the run. In a slice run, a link to a note outside the slice is accepted when its target is in the model; the run manifest lists those links (W-253).
 4. Every YAML and JSON file in the vault parses; every relationship field written is in `relationships.yaml`.
-5. The counts in the run manifest match this file's counts, or the difference is listed.
+5. The source counts the tool read from the whole `.qeax` (section 2) match the counts in this file, or the difference is listed in the run manifest. This applies to every run, full or slice (W-257).
 6. A run that fails any check is discarded, not committed (W-35).
 
-Checks 1 and 6 follow earlier decisions; checks 2 to 5 are approved (W-256). Check 5 as written does not fit a slice run: the counts in this file are for the whole model (open, W-256).
+Checks 1 and 6 follow earlier decisions; checks 2 to 5 are approved (W-256). Check 5 compares whole-model source counts, so it holds for a slice run too (W-257).
 
 ## 11. What stage 1 does not do
 
