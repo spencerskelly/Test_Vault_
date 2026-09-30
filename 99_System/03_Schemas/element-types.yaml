@@ -1,4 +1,4 @@
-schemaVersion: '1.15'
+schemaVersion: '1.16'
 date: '2026-09-30'
 basis: MDSE ruleset 1.21
 commonProperties: [type, subtype, id, uid, status, tags]   # order fixed by W-97; W-88 removed control, boundary, aliases and formerIds
@@ -7,91 +7,69 @@ translatedOnlyProperties: [eaType]   # written by the translator, between status
 classes:
 - name: Object
   prefix: OBJ
-  folder: 10_Objects
   subtype: ["electrical", "circuit", "mechanical", "software", "firmware", "part"]
 - name: Port
   prefix: PORT
-  folder: 20_Ports
   subtype: ["proxy", "full"]
 - name: Item Flow
   prefix: IFLOW
-  folder: 21_Item_Flows
   subtype: ["information", "energy", "material"]
 - name: Function
   prefix: FUNC
-  folder: 30_Functions
   subtype: []
 - name: Functional Flow
   prefix: FFLOW
-  folder: 31_Functional_Flows
   subtype: []
 - name: State
   prefix: STATE
-  folder: 35_States
   subtype: []
 - name: State Machine
   prefix: SM
-  folder: 36_State_Machines
   subtype: []
 - name: Requirement
   prefix: REQ
-  folder: 40_Requirements
   subtype: ["functional", "design", "standard", "stakeholder", "engineering"]
 - name: Design
   prefix: DES
-  folder: 41_Designs
   subtype: []
 - name: Use Case
   prefix: UC
-  folder: 45_Use_Cases
   subtype: ["what", "where", "why", "when", "who"]
 - name: Actor
   prefix: ACT
-  folder: 47_Actors
   subtype: []
 - name: Failure Mode
   prefix: FM
-  folder: 50_Failure_Modes
   subtype: []
 - name: Issue
   prefix: ISS
-  folder: 51_Issues
   subtype: ["engineering issue", "lifecycle risk"]
 - name: Info
   prefix: INFO
-  folder: 55_Info
   subtype: []
 - name: Step
   prefix: STEP
-  folder: 60_Verification/01_Steps
   subtype: []
 - name: Verification
   prefix: VER
-  folder: 60_Verification/02_Verifications
   subtype: ["test", "analysis", "inspection", "demonstration"]
 - name: Procedure
   prefix: PROC
-  folder: 60_Verification/03_Procedures
   subtype: ["test", "assembly", "configuration", "commissioning", "calibration", "maintenance", "repair", "decommissioning"]
 - name: Setup
   prefix: SETUP
-  folder: 60_Verification/04_Setups
   subtype: []
 - name: Plan
   prefix: PLAN
-  folder: 60_Verification/05_Plans
   subtype: []
 - name: Result
   prefix: RES
-  folder: 60_Verification/06_Results
   subtype: []
 - name: Document
   prefix: DOC
-  folder: 70_Documents
   subtype: []
 - name: Artifact
   prefix: ART
-  folder: 71_Artifacts
   subtype: []
 - name: modelCheck
   prefix: MC
