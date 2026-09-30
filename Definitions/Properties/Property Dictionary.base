@@ -1,7 +1,6 @@
 filters:
   and:
     - file.folder == "Definitions/Properties"
-    - subtype == "Property Definition"
 views:
   - type: table
     name: Property Dictionary

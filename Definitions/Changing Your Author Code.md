@@ -1,8 +1,6 @@
 ---
 uid: 20260928090456000skellyspencer
 id: INFO-00005
-type: Info
-subtype: Guide
 status: Active
 ---
 # Changing Your Author Code

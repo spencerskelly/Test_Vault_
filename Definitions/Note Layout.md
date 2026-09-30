@@ -1,6 +1,4 @@
 ---
-type: Info
-subtype: Guide
 id: INFO-00022
 uid: 20260928221439139skellyspencer
 status: Active

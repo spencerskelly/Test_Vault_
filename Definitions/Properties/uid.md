@@ -1,8 +1,6 @@
 ---
 uid: 20260927224829001skellyspencer
 id: INFO-00004
-type: Info
-subtype: Property Definition
 status: Active
 property: uid
 appliesTo: Every note created in the vault

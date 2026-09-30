@@ -1,8 +1,6 @@
 ---
 uid: 20260928101352000skellyspencer
 id: INFO-00017
-type: Info
-subtype: Guide
 status: Active
 ---
 # EA Source Section

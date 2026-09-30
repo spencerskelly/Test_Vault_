@@ -1,8 +1,6 @@
 ---
 uid: 20260928114132000skellyspencer
 id: INFO-00018
-type: Info
-subtype: Property Definition
 status: Active
 property: eaType
 appliesTo: Notes translated from EA, temporarily
