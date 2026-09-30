@@ -7,7 +7,7 @@ status: Draft
 
 What the stage 1 translator must do, in one place. It is kept current: any decision that changes a stage 1 rule updates this file in the same commit (W-247). Rules are stated once and cite their decision number. The tables live in the YAML files in `99_System/03_Schemas`, which stay the machine-readable authority; this file says which file holds what and does not copy the tables, so there is one place to change. Where this file and a YAML file disagree, that is a fault to fix, not a choice.
 
-Current through W-255.
+Current through W-256.
 
 ## 1. Purpose and scope
 
@@ -120,7 +120,7 @@ An off-pattern pair keeps the EA meaning and gets `REVIEW modelCheck: <stereotyp
 5. The counts in the run manifest match this file's counts, or the difference is listed.
 6. A run that fails any check is discarded, not committed (W-35).
 
-Checks 1 and 6 follow earlier decisions. Checks 2 to 5 are my proposal and are not yet approved.
+Checks 1 and 6 follow earlier decisions; checks 2 to 5 are approved (W-256). Check 5 as written does not fit a slice run: the counts in this file are for the whole model (open, W-256).
 
 ## 11. What stage 1 does not do
 
