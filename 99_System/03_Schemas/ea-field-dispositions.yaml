@@ -62,7 +62,8 @@ tObject:
   note: 'Structure (W-46). All 28,183 values resolve to an element. Used to find context, such as the assembly of a Part (W-43); containment does not automatically become a relationship. Changed by W-149: for elements other than Ports and Parts the owner is written as hasChild on the owner (childOf on the child), and as hasPart when both notes are Objects. W-151 adds the 252 independent Nesting connectors as the same link, with a REVIEW nesting direction line that holds the connector GUID (W-152). W-178: no placement link is written where the child is subtypeOf its owner (799: hasChild 781, hasPart 18).'
   nonblank: 28183
 - field: Classifier
-  disposition: pending
+  disposition: structure
+  otherTypesDecision: 'Other element types, decided W-180: a temporary hasClassifier link (W-125) on UseCase 23 (to a Use Case), ActivityPartition 22 (to an Object), Action 18 (to a Function 16 or Verification 2) and Sequence 1 (to an Actor); all 64 resolve. Resolved in stage 2 (Post-Import Task 7).'
   partsDecision: 'Part elements only, decided W-44: archive (it points to another Part, not the block). Port (920), Object (498) and other types use it as a real type link and are still to decide.'
   portsDecision: 'Port elements only, decided W-125: written as a temporary hasClassifier/classifierOf link (441 surviving Ports plus 2 merged ones); the other 477 write nothing.'
   objectsDecision: 'Object elements only, decided W-135: written as the temporary hasClassifier link to the blueprint note (498 resolve); the 47 whose blueprint is not in the export keep the value as a source-section line.'
@@ -72,7 +73,8 @@ tObject:
   setAside: 'W-96: waits for the element mapping (Port and Object rules); Parts are decided (W-44)'
   byType: 'Port 920, Object 498, Part 359 (decided W-44), UseCase 23, ActivityPartition 22, Action 18, Sequence 1'
 - field: Classifier_guid
-  disposition: pending
+  disposition: archive
+  otherTypesDecision: 'Other element types, decided W-180: repeats Classifier on all 64 where both are set, so nothing is written; on 14 with no Classifier the GUID is not in the export (ProxyConnector 5, Action 4, Sequence 2, ActivityPartition 1, UseCase 1, ActivityParameter 1) and is kept as a source-section line "- Classifier_guid: {GUID}", as W-135 does for Objects.'
   partsDecision: 'Part elements only, decided W-44: archive (same reason as Classifier). Port (920), Object (545) and other types are still to decide.'
   objectsDecision: 'Object elements only, decided W-135: the same blueprint as Classifier (545 non-blank, 498 resolve); not written separately.'
   proposedByHandoff: archive
@@ -141,7 +143,8 @@ tObject:
   note: Dropped (W-40). No row in the extract holds a value.
   nonblank: 0
 - field: PDATA1
-  disposition: pending
+  disposition: archive
+  otherTypesDecision: 'Other element types, decided W-180: Requirement 12,089, Issue 264 and Change 65 hold Proposed (the EA status, dropped as in W-39 and W-45); State 1,111 (0 or 1) and Boundary 44 (1) hold EA flags, archived; Activity 118: 105 hold the ID of the diagram the Activity owns (103 resolve, 2 not in the export), covered by the diagram rules (W-70, W-80), and 13 hold 0 or 1, archived; ActivityPartition 6 repeat the Classifier block, nothing written.'
   partsDecision: 'Part elements only, decided W-44: holds the GUID of the block the Part represents; used by the translator (structure). Other element types are still to decide.'
   portsDecision: 'Port elements only, decided W-120: the typing Class is written as subtypeOf between Port notes (the interface Classes become Port notes); the 99 links whose target is not a Port note (97 Hardware Component, 2 Physical Signal) are written as the temporary hasClassifier (W-127); the 5 whose GUID is not in the export are kept as a line in the source section (W-127). Other element types are still to decide.'
   objectsDecision: 'Object elements only, decided W-135: repeats the Classifier blueprint on 160 of 166, so nothing is written there; the other 6 (3 that differ, 3 with no resolvable Classifier) keep a source-section line.'
