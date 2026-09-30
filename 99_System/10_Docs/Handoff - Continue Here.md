@@ -5,7 +5,7 @@ status: Active
 ---
 # Handoff: Continue Here
 
-Rewritten 2026-09-29 (W-183), updated through W-270 for a new AI chat continuing the work on this vault. Read this note first, then the Workspace Decision Log.
+Rewritten 2026-09-29 (W-183), updated through W-271 for a new AI chat continuing the work on this vault. Read this note first, then the Workspace Decision Log.
 
 ## What this vault is
 
@@ -28,7 +28,7 @@ Rewritten 2026-09-29 (W-183), updated through W-270 for a new AI chat continuing
 - Short and direct, no praise. Tell him if there is a more efficient way to work.
 - Nothing is applied until he approves it. If you apply consequences of an approved decision, say so and list them.
 - Keep `Translator Definition.md` current: any decision that changes a stage 1 rule updates it in the same commit (W-247).
-- Log every decision as the next W number (next is W-271) in the Decision Log, update the worklist YAML and this handoff, then commit and push to `main`. He allows pushing to `main` and pulls each change into Obsidian.
+- Log every decision as the next W number (next is W-272) in the Decision Log, update the worklist YAML and this handoff, then commit and push to `main`. He allows pushing to `main` and pulls each change into Obsidian.
 - Commit only when every edit applied and every YAML and JSON file parses. Make each scripted edit fail on an anchor that matches zero or several times, and stop the commit if any edit failed (twice in the last chat a commit went out missing an edit; once an anchor matched Task 5 instead of Task 7). Quote long YAML text values (a colon followed by a space has broken a file twice). Use quoted heredocs (`<<'EOF'`). Check that a referenced source file or column exists before relying on it. Stay with EA names until after the import (W-93).
 - Never write an access token into a file. After cloning, reset the remote URL to the token-free form and push with the token in the command only. Set a repo-local git identity before the first commit. Check `git log` for commits you did not make before adding a decision number.
 
@@ -116,13 +116,13 @@ The note layout is written in `Definitions/Note Layout.md`; `Definitions/EA Sour
 
 ## Not yet verified or still open
 
-- Values of `User Story` (25 of 118), `Product Management Comment` (20 of 37) and three others stop at 254 to 255 characters; not known whether EA or the export cuts them (needs the `.qeax`).
+- Values of `User Story` (25 of 118), `Product Management Comment` (20 of 37) and three others stopped at 254 to 255 characters in the CSV evidence. Native importer v0.1 now checks those properties directly in the `.qeax` (W-271); it still needs to be run on the actual source to answer whether EA or the old extraction caused the boundary.
 - The handoff's 10,052 unconnected requirements against 9,788 from the audit file (W-81); W-26's count of 79 shared clauses could not be reproduced; `SubType` "Weak" (27 rows) and the 6 `t_operation` Behaviour values.
 - The Templater snippets pass mock tests but have not been run in Obsidian. The core Templates plugin should be turned off so it does not compete with Templater. `next-id.js` is superseded and should be removed once the snippets work.
 - MDSE Bootstrap must implement `99_System/01_Admin/MDSE Bootstrap - Author Registration Spec.md`. Its source is not in this repository.
 - Dataview is kept, but the functions that need it are not listed yet.
 - The 79 methodology rule notes and their canvases are in `99_System/archive/10_EA Native Translator` (W-264), with 99 canvas nodes that point at notes that do not exist. The archive is evidence only; the translator's rules live in `Translator Definition.md` (W-247).
-- The translator tool (v2.6.0) still uses `Thing`, `kind`, UTC time and GUID-ordered ids, and needs updating.
+- The earlier translator tool (v2.6.0) still uses `Thing`, `kind`, UTC time and GUID-ordered ids and is legacy evidence, not the native implementation. The native implementation has started at `99_System/09_Tools/EA_to_MDSE_Native_Importer_v0.1.html` (W-271); v0.1 is a read-only QEAX preflight and does not yet generate notes.
 - The handoff package review (from another AI session) has items still to go through; they are in the Open list.
 - The Person template holds list properties (`previousCodes`, `eaNames`), against the rule that only `tags` and the relationship fields hold several values.
 - The multi-level containment rule that derives 60 of the 64 `equals` directions (W-156) has not been spot-checked.
