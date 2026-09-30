@@ -39,7 +39,7 @@ These are the kinds of line the translator writes in this section, or near it, a
 
 - `- Name: <original>` when the file name differs from the EA name, for example unsafe characters or a duplicate counter (W-48, W-71).
 - `- Alias: <value>`, often a manufacturer part number (W-42).
-- `- Designator: <value>` on a requirement whose external designator is shared with another note and so could not be its `id` (W-82).
+- No `- Designator:` line is written; standards take `STD-#####` and the designator stays in the note name (W-203, replacing W-82).
 - `quantity of <child> is: <value>` on an assembly, one line per Part or connector that gives a quantity (W-43, W-54).
 - A discussion post on a requirement, one line each with author and date (W-75).
 - `- Entry action:`, `- Do action:` or `- Exit action:` followed by the name, on a State (W-86), and `- Attribute: <name> (<type>)` on a Class (W-86). Links from `t_xref` are lines on both ends (W-194): `- Entry action:`, `- Do action:`, `- Represents:`, `- Target pin:` and the inverse forms `- Entry action of:`, `- Do action of:`, `- Represented by:`, `- Target pin of:`.
