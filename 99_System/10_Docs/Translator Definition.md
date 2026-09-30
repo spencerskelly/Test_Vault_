@@ -129,4 +129,4 @@ Reclassify `modelCheck` notes, split Object, Design or State by `eaType`, fold r
 
 ## 12. Open, not yet a rule
 
-The Open list at the end of `Workspace Decision Log.md` is the list. Relevant here: the package filter (the ledger for a slice; W-252, W-254), `.vault.yaml` in the base vault, the four header-only import files, what the `.qeax` reading shows about the 254 to 255 character values and the unexplained count differences, whether third-party standards content may stay in the vault, and the `formerIds` readers (`AI_INSTRUCTIONS`, `Note Layout`, `element-types.yaml`, W-207).
+The Open list at the end of `Workspace Decision Log.md` is the list. Relevant here: the package filter (the ledger for a slice; W-252, W-254), `.vault.yaml` in the base vault, the four header-only import files, what the `.qeax` reading shows about the 254 to 255 character values and the unexplained count differences, whether third-party standards content may stay in the vault.

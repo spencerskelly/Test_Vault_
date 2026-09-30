@@ -12,7 +12,7 @@ Before substantial work, read `99_System/10_Docs/MDSE Modeling Ruleset 1.21.md`,
    - **Author code, if a user directed the note:** that user's `code`, from their note in `99_System/04_People`. This applies even if you wrote every word. If you do not know who the user is, ask. A person may have `previousCodes` in their note: notes carrying those codes are also theirs.
    - **Author code, if you created the note on your own with no direct instruction:** your own code from `ai_authors` in `authors.yaml`. If your tool is not listed, add it: tool name (lowercase letters, at most 11), then `ai`, then hyphens to 13 characters.
    - **If another note already has that exact `uid`,** add one millisecond until it is unique.
-3. **Fill in `id`** yourself: the class prefix, a hyphen, and a five-digit number. Find the highest number used for that prefix across every note in the vault, including retired notes, then add one. (Earlier ids kept in `formerIds` are not scanned yet; where they are written is not decided, W-111.) Prefixes are in `element-types.yaml`. Never reuse a number.
+3. **Fill in `id`** yourself: the class prefix, a hyphen, and a five-digit number. Find the highest number used for that prefix across every note in the vault, including retired notes, and the earlier ids listed under `## Former ids` in any note (W-207), then add one. Prefixes are in `element-types.yaml`. Never reuse a number.
 4. **Check before saving:** `uid` matches `^\d{17}[a-z-]{13}$`, and `id` matches `^[A-Z]+-\d{5}$`.
 
 Examples of a filled note header:
