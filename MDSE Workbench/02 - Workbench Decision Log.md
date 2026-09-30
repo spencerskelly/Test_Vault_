@@ -652,13 +652,17 @@ The creation service reads the class templates in `99_System/05_Templates` and t
 Acceptance test: create each common class both ways and compare the headers; they must match.
 
 ### WB-085 — Who writes inverse relationship fields
-**Status:** Open (question for Spencer)
+**Status:** Settled 2026-09-30 by workspace decision W-275 (trial of option B, judged after the first test slice)
 
-AI_INSTRUCTIONS say to author the forward (owner-side) relationship and treat generated inverse fields as derivative. Workbench writes only the owner-side field (WB-045, WB-046).
+Workbench writes the inverse with every forward field it writes: a paired field's inverse on the other note, a symmetric field on both notes, nothing for a one-way field. The forward field is the authority.
 
-Open question: which mechanism produces the inverse fields in the vault today, and does the plugin-independence rule (WB-003) allow Workbench to depend on it? Proposal: Workbench never double-writes inverse fields. If a plugin generates them, the compatibility check (WB-069) records that dependency. Phase 0 verifies that the inverse appears after a Workbench write.
+- **Workbench action** (inspector, modal, Canvas): inverse written in the same transaction; one Undo reverses both.
+- **Hand edit on this machine:** inverse written about a second after typing stops, from the difference between the old and new forward list in the index.
+- **Pull, outside AI edit, or edit while Obsidian was closed:** not rewritten automatically (that would make every machine write the same edits and cause merge conflicts). Shown as a "missing inverse" Review finding with a one-click fix; a **Regenerate inverses** command repairs everything.
 
-*Finding (2026-09-30, W-272):* `relationships.yaml` names Nodian as the generator, but Nodian 1.4.14 only syncs when both notes carry the pair's tag; MDSE notes have `tags: []`, and Nodian's pairs are local per machine. As the repository stands, nothing generates inverse fields. The answer is a model-governance decision (Workspace Decision Log, Open list); Workbench follows it.
+Consequences: a relationship edit changes the source note and each target note; stable ordering (WB-086) keeps the added lines mergeable. Workbench does not depend on Nodian. Earlier text (before W-275): Workbench would write only the owner side and depend on a plugin for inverses; superseded.
+
+---
 
 ### WB-086 — Git and external change
 **Status:** Proposed

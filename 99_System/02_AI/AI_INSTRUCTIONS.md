@@ -40,5 +40,5 @@ uid: 20260928101530123claudeai-----   (Claude created it on its own)
 ## Relationships
 
 - Use only relationships defined in `relationships.yaml`.
-- Author the forward (owner-side) relationship. Generated inverse fields are derivative.
+- Author the forward (owner-side) relationship and, in the same edit, write its inverse per `relationships.yaml`: a paired field gets its inverse field on the other note; a symmetric field is written on both notes; a one-way field gets nothing. Inverse fields are derivative: the forward field wins when they disagree (W-275).
 - Folder placement is navigation, not meaning.

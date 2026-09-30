@@ -7,7 +7,7 @@ status: Draft
 
 What the stage 1 translator must do, in one place. It is kept current: any decision that changes a stage 1 rule updates this file in the same commit (W-247). Rules are stated once and cite their decision number. The tables live in the YAML files in `99_System/03_Schemas`, which stay the machine-readable authority; this file says which file holds what and does not copy the tables, so there is one place to change. Where this file and a YAML file disagree, that is a fault to fix, not a choice.
 
-Current through W-274.
+Current through W-275.
 
 ## 1. Purpose and scope
 
@@ -74,7 +74,7 @@ The accepted v0.2 whole-model plan produces 30,298 element-derived MDSE entities
 
 ## 6. Connectors
 
-Every connector has exactly one rule (W-178); 9 have an end missing from the export and write nothing (W-57). The rules are in `ea-connector-mapping.yaml` (15 connector types, W-151 to W-179). `Direction` decides which end is the source (W-51). Part ends resolve to their block, Port ends to the merged Port (W-114, W-155). Forward fields are written on the owner side; inverses are generated (`relationships.yaml`, 63 fields).
+Every connector has exactly one rule (W-178); 9 have an end missing from the export and write nothing (W-57). The rules are in `ea-connector-mapping.yaml` (15 connector types, W-151 to W-179). `Direction` decides which end is the source (W-51). Part ends resolve to their block, Port ends to the merged Port (W-114, W-155). Forward fields are written on the owner side; the tool writes each inverse on the other note in the same run (`relationships.yaml`, 63 fields; W-275).
 
 | EA connector | Becomes | Decision |
 |---|---|---|

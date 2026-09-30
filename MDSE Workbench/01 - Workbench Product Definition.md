@@ -33,7 +33,7 @@ Should not need to:
 
 - know YAML syntax;
 - know schema implementation;
-- know Nodian internals;
+- know how inverse fields are kept in sync;
 - manually build routine Canvas views;
 - understand Git for ordinary modeling actions.
 

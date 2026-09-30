@@ -97,7 +97,7 @@ Important interface behavior:
 - engineer sees the relationship in the natural visual direction;
 - Workbench resolves the canonical owner-side storage direction;
 - authoritative YAML is updated immediately after confirmation;
-- derived inverse behavior follows the vault's current synchronization rules.
+- Workbench writes the derived inverse with the forward field (WB-085, W-275).
 
 Workbench does not invent a separate graph database as the model of record.
 
@@ -211,9 +211,9 @@ The index is the performance-critical part. Design for the full translated vault
 - Each semantic transaction records a before-state hash per note; Undo refuses with an explanation if a note changed since.
 - Write relationship lists in a stable order to reduce merge conflicts.
 
-## Inverse relationship fields *(open, WB-085)*
+## Inverse relationship fields *(settled, WB-085, W-275 trial)*
 
-Workbench writes only the owner-side field. It must not also write the inverse. Which mechanism generates inverse fields today, and whether Workbench may depend on it, is an open question; the compatibility check records the dependency if one exists.
+Workbench writes the inverse with each forward field it writes, and writes inverses after hand edits made on the same machine. Changes from pulls or outside AI edits are reported as missing-inverse findings, not rewritten automatically, so machines do not race each other. The forward field is the authority; the inverse is regenerated from it. No dependency on Nodian.
 
 ## Creation parity *(proposed, WB-084)*
 

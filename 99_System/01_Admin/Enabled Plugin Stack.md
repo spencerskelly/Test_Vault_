@@ -7,7 +7,7 @@ Active community plugins. Versions are pinned in `.obsidian/plugin-lock.yaml`; t
 | Plugin | Role |
 |---|---|
 | MDSE Bootstrap | On a new machine, installs the vault's plugins automatically from the pinned list. This is how the vault is rolled out to the team. Its source is not in this repo. |
-| Nodian | paired relationship inverse synchronization |
+| Nodian | Pinned but not relied on (W-275 trial). Its pairs need a class tag on both notes, which MDSE notes do not carry, and its pairs are local per machine. Inverses are written by the translator, Workbench or the regenerate script. Removal is decided after the trial. |
 | Breadcrumbs | semantic relationship navigation |
 | Dataview | dashboards and health queries; kept for functions core Bases cannot do. No Dataview queries exist in the vault yet, so the specific functions still need to be listed here. |
 | Fileclass | typed property/schema editing |

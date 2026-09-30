@@ -45,7 +45,7 @@ Status of the ordering below: the capability set is approved direction; the **re
 
 ### Relationship service (surface-independent)
 - schema-valid relationship choices for selected endpoints;
-- canonical owner-side writeback, immediately after confirmation;
+- canonical owner-side writeback, immediately after confirmation, with the inverse written in the same transaction (WB-085);
 - batch one-to-many / many-to-one with valid/invalid preview;
 - relationship removal confirmation;
 - in-session semantic Undo/Redo with before-state check (WB-086);
@@ -78,7 +78,7 @@ Workbench should feel like one plugin but use clear internal services.
 - **Model Core** — vault scan/index; identity resolution; schema/config loading; relationship registry; validation; model-health findings; incremental cache update and rebuild.
 - **Create** — dashboard create actions; schema-driven forms; naming/duplicate checks; placement; note creation (reads the vault templates, WB-084).
 - **Explore** — element picker; View Profile selection; traversal; path finding; context expansion; View Options.
-- **Relationships** — validation, owner-side writeback, batch preview, transactions, Undo/Redo. No UI in this module.
+- **Relationships** — validation, owner-side writeback and inverse writes, missing-inverse detection, batch preview, transactions, Undo/Redo. No UI in this module.
 - **Canvas** — Canvas generation; deterministic layout; provenance styling; View Mode / Model Edit; generated/curated behavior.
 - **Review** — model-health categories; finding list; filtering; focused finding modal; resolution actions.
 
@@ -108,11 +108,11 @@ Purpose: replace the riskiest assumptions with measurements before building more
 - plugin skeleton, config loading, compatibility check, model index, diagnostics;
 - index the real translated vault and record the numbers against WB-081;
 - generate one read-only Structure Canvas for a real element;
-- write one relationship by hand through a throwaway command and confirm the inverse field appears (WB-085);
+- write one relationship and its inverse through a throwaway command, and time a full missing-inverse scan of the real vault (WB-085);
 - probe whether Canvas edge/selection events can be used without unsupported patching (WB-080);
 - confirm the build and release pipeline produces an installable plugin that MDSE Bootstrap could pin (WB-088).
 
-**Exit (gate R0):** a short written finding in the decision log: targets met or plan recorded; inverse-field behavior known; Canvas-edit go/no-go for V1.
+**Exit (gate R0):** a short written finding in the decision log: targets met or plan recorded; inverse writing and scanning shown to work; Canvas-edit go/no-go for V1.
 
 ### M1 — Explore, read-only
 Element picker (name, type, id); Structure profile; native Canvas generation; deterministic layout; refresh; stale detection; omission indicators.
@@ -155,7 +155,7 @@ If M0 shows Canvas editing is low-risk, M6 may move before M5. If not, V1.0 is M
 | Platform | Desktop only for V1 (proposed) | WB-087 |
 | Distribution | Separate plugin repo; GitHub Releases; pinned by MDSE Bootstrap; semantic versions | WB-088 |
 | Parity | Workbench-created notes match template-created notes | WB-084 |
-| Independence | Correctness does not depend on community plugins, except as recorded in WB-085 | WB-003 |
+| Independence | Correctness does not depend on community plugins; Workbench writes inverses itself | WB-003, WB-085 |
 
 ## Risk register
 
@@ -165,7 +165,7 @@ If M0 shows Canvas editing is low-risk, M6 may move before M5. If not, V1.0 is M
 | Index too slow or large at full scale | Unusable on the real vault | Performance gate in M0; disposable cache; incremental updates |
 | Path enumeration explodes | Views hang or flood | Node cap outranks depth (WB-082) |
 | Creation drifts from templates | Notes differ by how they were made | One creation spec, parity test (WB-084) |
-| Inverse fields written twice or not at all | Inconsistent relationships | Single owner-side writer; verify in M0 (WB-085) |
+| Inverse fields missing or out of date | Inconsistent relationships | Written with the forward field; missing-inverse finding and Regenerate command (WB-085) |
 | Merge conflicts on relationship lists | Lost or duplicated relationships | Stable ordering; external-change handling (WB-086) |
 | GPL code copied from a reference plugin | Licensing obligations | Study patterns only; check each project's license before reuse |
 | Design keeps growing before code exists | Nothing ships | Implementation details decided during build (WB-089); M0 starts now |
