@@ -36,7 +36,7 @@ EA GUID: {D2B8F0A4-...}
 ## Order below the GUID (W-208)
 
 1. The element's own EA values: the `Alias` line, then the tag lines in the order set in [[Note Layout]].
-2. Values from EA structure on the element: `quantity of`, then the State action lines and the Class `Attribute:` lines, then the link lines (`Represents:`, `Target pin:` and the inverse forms).
+2. Values from EA structure on the element: `quantity of`, then the State action lines and the Class `Attribute:` lines, then the link lines (`Represents:`, `Target pin:` and the inverse forms), then the merged-Port lines (`Instance name in`, `Instance type in`, `Instance stereotype in`, `Instance redefinition in`).
 3. Connector values.
 4. Discussion posts.
 5. `REVIEW port needed`, always the last line of the section.
@@ -51,6 +51,7 @@ These are the kinds of line the translator writes in this section, or near it, a
 - `quantity of <child> is: <value>` on an assembly, one line per Part or connector that gives a quantity (W-43, W-54).
 - A discussion post on a requirement, one line each with author and date (W-75).
 - `- Entry action:`, `- Do action:` or `- Exit action:` followed by the name, on a State (W-86), and `- Attribute: <name> (<type>)` on a Class (W-86). Links from `t_xref` are lines on both ends (W-194): `- Entry action:`, `- Do action:`, `- Represents:`, `- Target pin:` and the inverse forms `- Entry action of:`, `- Do action of:`, `- Represented by:`, `- Target pin of:`.
+- On a block Port note, one line per real value that differed on a merged instance Port (W-121, W-211): `- Instance name in [[<assembly>]]: <value>`, `- Instance type in [[<assembly>]]: [[<Port note>]]`, `- Instance stereotype in [[<assembly>]]: <value>`, `- Instance redefinition in [[<assembly>]]: [[<Port note>]]`, with `(part <name>)` after the assembly link when the Part has a role name.
 - Connector values (Name, Notes, trigger, guard, effect): on both end notes for Connector and InformationFlow, on the owner-side note for other types (W-55, W-56, W-61).
 - `- REVIEW port needed: ...` on both ends of a flow connector that was drawn on a block instead of a port; it is deleted when the connector is moved to a port (W-55, Task 1 in `Post-Import Tasks.md`).
 

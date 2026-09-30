@@ -7,7 +7,7 @@ status: Active
 ---
 # Handoff: Continue Here
 
-Rewritten 2026-09-29 (W-183), updated through W-210 for a new AI chat continuing the work on this vault. Read this note first, then the Workspace Decision Log.
+Rewritten 2026-09-29 (W-183), updated through W-211 for a new AI chat continuing the work on this vault. Read this note first, then the Workspace Decision Log.
 
 ## What this vault is
 
@@ -15,7 +15,7 @@ Rewritten 2026-09-29 (W-183), updated through W-210 for a new AI chat continuing
 
 ## Read in this order
 
-1. `99_System/10_Docs/Workspace Decision Log.md`: every decision (W-01 to W-210) and the Open list at the bottom. It is the authority for what has been decided.
+1. `99_System/10_Docs/Workspace Decision Log.md`: every decision (W-01 to W-211) and the Open list at the bottom. It is the authority for what has been decided.
 2. `Definitions/Note Layout.md` and `Definitions/EA Source Section.md`.
 3. `99_System/03_Schemas/`: `ea-element-mapping.yaml` (all 31 EA object types), `ea-connector-mapping.yaml` (all 15 connector types, W-151 to W-179), `relationships.yaml` (schemaVersion 1.23), `element-types.yaml` (25 classes), `ea-field-dispositions.yaml`, `ea-tag-dispositions.yaml`, `ea-package-rules.yaml`.
 4. `99_System/10_Docs/Post-Import Tasks.md` (Tasks 1 to 8; Task 7 has 12 items).
@@ -29,7 +29,7 @@ Rewritten 2026-09-29 (W-183), updated through W-210 for a new AI chat continuing
 - Show a real example from the export when a rule is hard to picture; he often asks for one.
 - Short and direct, no praise. Tell him if there is a more efficient way to work.
 - Nothing is applied until he approves it. If you apply consequences of an approved decision, say so and list them.
-- Log every decision as the next W number (next is W-211) in the Decision Log, update the worklist YAML and this handoff, then commit and push to `main`. He allows pushing to `main` and pulls each change into Obsidian.
+- Log every decision as the next W number (next is W-212) in the Decision Log, update the worklist YAML and this handoff, then commit and push to `main`. He allows pushing to `main` and pulls each change into Obsidian.
 - Commit only when every edit applied and every YAML and JSON file parses. Make each scripted edit fail on an anchor that matches zero or several times, and stop the commit if any edit failed (twice in the last chat a commit went out missing an edit; once an anchor matched Task 5 instead of Task 7). Quote long YAML text values (a colon followed by a space has broken a file twice). Use quoted heredocs (`<<'EOF'`). Check that a referenced source file or column exists before relying on it. Stay with EA names until after the import (W-93).
 - Never write an access token into a file. After cloning, reset the remote URL to the token-free form and push with the token in the command only. Set a repo-local git identity before the first commit. Check `git log` for commits you did not make before adding a decision number.
 
@@ -104,7 +104,7 @@ Principles that came out of this: only a Function or a Design satisfies a requir
 
 1. **Done (W-194):** the 4 unmapped `t_xref` kinds (12 rows) are body lines on both ends. No merge with the W-86 `t_operation` State lines (W-195): both are written as defined. Inverse wording still unconfirmed.
 2. **Naming:** unsafe means only what the system rejects (W-196: `\ / : * ? " < > |`, control characters, trailing space or period); replacement rules settled (W-197, in `Definitions/Note Layout.md`); every note in a duplicate-name group takes the `id` as suffix (W-198, W-199); standards take `STD-#####` and stakeholder requirements `STK-#####`, with no designator parsing (W-203, W-204, replacing W-201 and W-202); `[ ] # ^` are also replaced (W-205); still open: diagram duplicates (they wait for item 4).
-3. **Layout gaps:** done: user section (W-206), aliases and `formerIds` format (W-207), order of the `Source: EA` lines (W-208), definitions of kept body lines (W-209). Attachment counter done (W-210). Still open: the line format for values kept on a merged Port (W-121).
+3. **Layout gaps:** done: user section (W-206), aliases and `formerIds` format (W-207), order of the `Source: EA` lines (W-208), definitions of kept body lines (W-209). All done: attachment counter (W-210), merged Port lines (W-211). Still open from it: the connector context of W-114.
 4. **Diagrams:** the companion note's class, `id` prefix and body beyond the message list (W-73, W-176), and the canvas text card for the 225 folded notes drawn on diagrams (W-161).
 5. **Review tables and ledger:** the exact columns and names of the review tables in `99_System/11_Import` (W-156, W-157; the names are provisional), and the folder and layout for the ledger and run manifest inside the vault (W-35).
 6. **Templates.** Spencer chose to list only the few relationship fields each class nearly always has (W-182). The proposed list waits for his approval: Requirement `derivedFrom`, `appliesTo`; Object `subtypeOf`, `hasPart`, `hasPort`; Port `interfaces`, `subtypeOf`; Item Flow `subtypeOf`; Use Case `participants`, `drives`, `optionOf`; Function `satisfies`, `subtypeOf`, `precedes`; Design `satisfies`, `subtypeOf`; Verification `verifies`; Info and Artifact `describes`; Issue `affects`; State `precedes`; Actor `subtypeOf`; State Machine `hasChild`; Transition `source`, `target`, `trigger`; Context `participants`; Failure Mode `affects`; none for Plan, Result, Step, Procedure, Setup, Document, Functional Flow and modelCheck; `hasChild` on none (it comes from placement). Then: `Port.md` defaults to `electrical & material` (translated Ports are `proxy`, `full` or blank); subtype variants only where fields or sections differ; the legacy `folder` values in `element-types.yaml` (W-04); the Person template's list properties.
