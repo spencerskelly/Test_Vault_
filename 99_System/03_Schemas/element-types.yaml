@@ -1,5 +1,5 @@
-schemaVersion: '1.13'
-date: '2026-09-29'
+schemaVersion: '1.14'
+date: '2026-09-30'
 basis: MDSE ruleset 1.21
 commonProperties: [type, subtype, id, uid, status, tags]   # order fixed by W-97; W-88 removed control, boundary, aliases and formerIds
 relationshipFields: after tags, in the order of relationships.yaml; may hold lists (W-126)
@@ -12,19 +12,15 @@ classes:
 - name: Port
   prefix: PORT
   folder: 20_Ports
-  subtype: ["electrical & material", "data", "mechanical", "generic physical", "environmental", "proxy", "full"]
+  subtype: ["proxy", "full"]
 - name: Item Flow
   prefix: IFLOW
   folder: 21_Item_Flows
   subtype: ["information", "energy", "material"]
-- name: Context
-  prefix: CTX
-  folder: 25_Contexts
-  subtype: []
 - name: Function
   prefix: FUNC
   folder: 30_Functions
-  subtype: ["system", "hardware", "software", "module"]
+  subtype: ["hardware", "software"]
 - name: Functional Flow
   prefix: FFLOW
   folder: 31_Functional_Flows
@@ -37,10 +33,6 @@ classes:
   prefix: SM
   folder: 36_State_Machines
   subtype: []
-- name: Transition
-  prefix: TRANS
-  folder: 37_Transitions
-  subtype: []
 - name: Requirement
   prefix: REQ
   folder: 40_Requirements
@@ -48,7 +40,7 @@ classes:
 - name: Design
   prefix: DES
   folder: 41_Designs
-  subtype: ["characteristic", "decision"]
+  subtype: []
 - name: Use Case
   prefix: UC
   folder: 45_Use_Cases
@@ -68,7 +60,7 @@ classes:
 - name: Info
   prefix: INFO
   folder: 55_Info
-  subtype: ["need", "objective", "concern", "decision", "assumption", "rationale", "finding", "analysis", "trade study", "calculation", "milestone", "lesson learned"]
+  subtype: []
 - name: Step
   prefix: STEP
   folder: 60_Verification/01_Steps
@@ -96,11 +88,11 @@ classes:
 - name: Document
   prefix: DOC
   folder: 70_Documents
-  subtype: ["standard", "specification", "report", "drawing"]
+  subtype: []
 - name: Artifact
   prefix: ART
   folder: 71_Artifacts
-  subtype: ["image", "document"]
+  subtype: []
 - name: modelCheck
   prefix: MC
   folder: null   # no folder of its own: translated notes stay in their EA package folders (W-117, W-181)
