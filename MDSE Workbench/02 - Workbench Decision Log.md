@@ -418,6 +418,8 @@ Long term: direct Canvas property editing is a goal.
 
 Relationship picker shows only relationships valid for the selected endpoints according to the current schema.
 
+*Dependency (2026-09-30):* the schema does not yet state which classes each relationship may connect. Workspace decision W-272 puts those rules in `relationships.yaml`; they are not written yet. Until they are, WB-053 cannot be implemented.
+
 ### WB-054 — `newRelationship` escape hatch
 **Status:** Settled
 
@@ -655,6 +657,8 @@ Acceptance test: create each common class both ways and compare the headers; the
 AI_INSTRUCTIONS say to author the forward (owner-side) relationship and treat generated inverse fields as derivative. Workbench writes only the owner-side field (WB-045, WB-046).
 
 Open question: which mechanism produces the inverse fields in the vault today, and does the plugin-independence rule (WB-003) allow Workbench to depend on it? Proposal: Workbench never double-writes inverse fields. If a plugin generates them, the compatibility check (WB-069) records that dependency. Phase 0 verifies that the inverse appears after a Workbench write.
+
+*Finding (2026-09-30, W-272):* `relationships.yaml` names Nodian as the generator, but Nodian 1.4.14 only syncs when both notes carry the pair's tag; MDSE notes have `tags: []`, and Nodian's pairs are local per machine. As the repository stands, nothing generates inverse fields. The answer is a model-governance decision (Workspace Decision Log, Open list); Workbench follows it.
 
 ### WB-086 — Git and external change
 **Status:** Proposed
