@@ -7,7 +7,7 @@ status: Draft
 
 What the stage 1 translator must do, in one place. It is kept current: any decision that changes a stage 1 rule updates this file in the same commit (W-247). Rules are stated once and cite their decision number. The tables live in the YAML files in `99_System/03_Schemas`, which stay the machine-readable authority; this file says which file holds what and does not copy the tables, so there is one place to change. Where this file and a YAML file disagree, that is a fault to fix, not a choice.
 
-Current through W-270.
+Current through W-271.
 
 ## 1. Purpose and scope
 
@@ -128,5 +128,7 @@ Checks 1 and 6 follow earlier decisions; checks 2 to 5 are approved (W-256). Che
 Reclassify `modelCheck` notes, split Object, Design or State by `eaType`, fold requirements, resolve `hasClassifier` and `equals`, move block-level flow connectors to ports, or decide any meaning. These are stage 2: `Post-Import Tasks.md` (W-30).
 
 ## 12. Open, not yet a rule
+
+Implementation status (W-271): the native tool is a developer-only local HTML application. `99_System/09_Tools/EA_to_MDSE_Native_Importer_v0.1.html` is the first build; it is read-only preflight only, uses the prior proven streaming SQLite reader, checks the W-268 source baseline directly in the `.qeax`, investigates the 254–255-character values, and generates diagnostics but no MDSE notes. This changes no Stage-1 mapping rule. The next implementation step is translation planning, followed by the `02 Product Context` note-producing slice.
 
 The Open list at the end of `Workspace Decision Log.md` is the list. Relevant here: the package filter (the ledger for a slice; W-252, W-254), the four header-only import files, what the `.qeax` reading shows about the 254 to 255 character values and the unexplained count differences, whether third-party standards content may stay in the vault.
