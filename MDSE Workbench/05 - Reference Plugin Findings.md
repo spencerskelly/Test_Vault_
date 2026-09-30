@@ -126,6 +126,10 @@ Useful reference for:
 
 Workbench should read its own governed MDSE schema directly for core behavior.
 
+## License check before reuse
+
+Only Advanced Canvas is recorded above as GPL. Before any code or close pattern from a reference project is reused, check that project's license and record the result here; attribution and license terms apply even for permissive licenses.
+
 ## Design conclusion
 
 The public plugin ecosystem shows that the major technical building blocks are feasible:
@@ -153,3 +157,7 @@ The value is integrating them into one controlled engineering interface with:
 Prefer inspiration and permissively licensed reusable patterns where appropriate.
 
 Do not make the correctness of the MDSE model depend on a collection of independently changing community plugins.
+
+## Note for the release path
+
+These references show the building blocks are feasible, not that the Canvas-editing ones are stable. Canvas edge and selection events depend on internals Obsidian does not officially expose (see [[02 - Workbench Decision Log#WB-080 — Relationship service first; Canvas Model Edit is release-gated|WB-080]]). Phase 0 tests this before V1 commits to it.

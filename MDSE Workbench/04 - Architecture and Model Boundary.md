@@ -1,5 +1,7 @@
 # Architecture and Model Boundary
 
+Sections marked *(proposed)* at the end depend on decisions in [[02 - Workbench Decision Log]] (WB-080 to WB-090) that are not yet approved.
+
 ## Core rule
 
 **Workbench is an interface to the MDSE model.**
@@ -197,3 +199,27 @@ If incompatible:
 The simplest reliable architecture is:
 
 > Obsidian files are the model. Workbench makes them easier to use.
+
+## Performance *(proposed, WB-081)*
+
+The index is the performance-critical part. Design for the full translated vault (up to about 60,000 notes): build the index off the UI thread or in small chunks, update incrementally from file events, persist a rebuildable cache, and never render an unbounded graph (node cap outranks depth, WB-082). Measure on the real vault in Phase 0.
+
+## External change and Git *(proposed, WB-086)*
+
+- Workbench edits files; it does not run Git or commit.
+- Changes from pulls, AI tools or hand edits arrive as file events; update the index incrementally, rebuild after a large change set or on demand.
+- Each semantic transaction records a before-state hash per note; Undo refuses with an explanation if a note changed since.
+- Write relationship lists in a stable order to reduce merge conflicts.
+
+## Inverse relationship fields *(open, WB-085)*
+
+Workbench writes only the owner-side field. It must not also write the inverse. Which mechanism generates inverse fields today, and whether Workbench may depend on it, is an open question; the compatibility check records the dependency if one exists.
+
+## Creation parity *(proposed, WB-084)*
+
+The creation service reads the vault's class templates and the `uid`/`id`/author-code rules rather than duplicating them, so a Workbench-created note equals a template-created one. Both the template and Workbench therefore change together when the rule changes.
+
+## Platform, distribution and versioning *(proposed, WB-087, WB-088)*
+
+Desktop only for V1. Plugin source lives in its own repository; releases are GitHub Releases pinned by MDSE Bootstrap. The vault holds only vault-side configuration (View Profiles, schema/compatibility declaration).
+

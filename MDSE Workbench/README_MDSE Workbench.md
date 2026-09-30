@@ -20,18 +20,13 @@ The normal engineer should be able to use the vault without understanding schema
 
 ## Start here
 
-1. [[01 - Workbench Product Definition]]
-2. [[02 - Dashboard Interface Definition]]
-3. [[03 - Workbench Decision Log]]
-4. [[04 - V1 Build Outline]]
-5. [[05 - Canvas and View Experience]]
-6. [[06 - Review Experience]]
-7. [[07 - Architecture and Model Boundary]]
-8. [[08 - Roadmap and Revision Strategy]]
-9. [[09 - Continuation Handoff]]
-10. [[10 - Open Decisions]]
-11. [[11 - Reference Plugin Findings]]
-12. [[12 - Change Log]]
+1. [[01 - Workbench Product Definition]] — what Workbench is, plus the dashboard, Canvas/view and Review experience (Parts A to C)
+2. [[02 - Workbench Decision Log]] — every decision (`WB-` IDs), open questions, proposals awaiting approval, history
+3. [[03 - Build Outline and Roadmap]] — V1 scope, release path (M0 to M7), risks, acceptance scenarios, later roadmap
+4. [[04 - Architecture and Model Boundary]] — how Workbench relates to the model and the vault
+5. [[05 - Reference Plugin Findings]] — what existing plugins showed, and license cautions
+
+History is in the Git log and the Decision Log's History section; there is no separate change log or handoff note.
 
 ## Authority
 
@@ -69,12 +64,21 @@ Where a future capability is already valuable, V1 should preserve an architectur
 
 ## Known ruleset reconciliation item
 
-MDSE Modeling Ruleset 1.21 currently says every model-facing folder contains a Views and Bases note, Folder Contents base, and Folder Map canvas.
+MDSE Modeling Ruleset 1.22 (section 9) currently says every model-facing folder contains a Views and Bases note, Folder Contents base, and Folder Map canvas.
 
 The newer Workbench direction intentionally moves away from requiring a prebuilt Canvas in every folder and uses generated views instead.
 
-This folder therefore contains a README and local Base only. The navigation rule should be reconciled separately in the modeling ruleset; this Workbench package does not silently change model governance.
+This folder therefore contains a README and local Base only. The navigation rule should be reconciled separately in the modeling ruleset ([[02 - Workbench Decision Log#WB-079 — Folder-navigation ruleset reconciliation|WB-079]]); this Workbench package does not silently change model governance.
+
+## Resuming design work
+
+- **Do not restart with metamodel design.** The goal is a good interface to the existing model. A drift into property inheritance was stopped; it is model governance, not a Workbench requirement (WB-070, WB-071).
+- **Method:** one focused question at a time; explain the impact; offer clear options; recommend the simplest scalable one; record the decision; move on. Do not reopen settled decisions without new information.
+- **Implementation details** (WB-072 to WB-078) are decided during the build, not one at a time up front (WB-089, proposed).
+- **Whenever the UI needs a model fact,** read it from the governed schema/configuration rather than embedding a copy in the plugin.
+- **A good next step** either resolves an open decision or implements and tests one user journey or milestone. A poor next step adds model complexity that does not improve the engineer's interface.
+- **Next:** approve or amend the release-path proposals (WB-080 to WB-090), decide Sequential Review (WB-063), then start the M0 spike described in [[03 - Build Outline and Roadmap]].
 
 ## Status
 
-Initial consolidated definition created 2026-09-30 from the Workbench/dashboard design discussion.
+Initial consolidated definition created 2026-09-30 from the Workbench/dashboard design discussion. Consolidated and extended with release-path proposals the same day (see the Decision Log History). Proposals are not direction until approved.
