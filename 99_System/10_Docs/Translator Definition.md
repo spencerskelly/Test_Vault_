@@ -7,7 +7,7 @@ status: Draft
 
 What the stage 1 translator must do, in one place. It is kept current: any decision that changes a stage 1 rule updates this file in the same commit (W-247). Rules are stated once and cite their decision number. The tables live in the YAML files in `99_System/03_Schemas`, which stay the machine-readable authority; this file says which file holds what and does not copy the tables, so there is one place to change. Where this file and a YAML file disagree, that is a fault to fix, not a choice.
 
-Current through W-273.
+Current through W-274.
 
 ## 1. Purpose and scope
 
@@ -66,11 +66,11 @@ Every EA element has exactly one rule (W-148); the input is `eaType`. The rules 
 | State 1,112 | Design (954, under `05 Product Design`) or State (158); blank subtypes | W-142, W-237 |
 | Artifact 459 | Artifact, blank subtype | W-143, W-237 |
 | Issue 264, Actor 44, StateMachine 2 | Issue, Actor, State Machine; blank subtypes | W-144 |
-| Note 431, Text 61, Constraint 1 | Info, blank subtype. A Note linked to one element folds into that element's body (250) | W-145, W-161 |
+| Note 431, Text 61, Constraint 1 | Info, blank subtype, except a Note linked to one unique element folds into that element's body. The accepted v0.2 plan folds 247 unique Note elements through 250 NoteLink connector rows; 184 Notes remain Info | W-145, W-161, W-274 |
 | 13 small types, 632 (Action 323, StateNode 73, Change 65, Boundary 44, Decision 34, ActivityPartition 28, Trigger 27, Synchronization 14, Sequence 11, ActionPin 6, ProxyConnector 5, Event 1, ActivityParameter 1) | modelCheck, subtype = the EA type, `MC-#####` | W-146, W-181 |
 | Package 1,386 | A folder; a modelCheck note, subtype `Package`, only for the 34 with a Notes description | W-147 |
 
-About 30,295 notes result (W-161).
+The accepted v0.2 whole-model plan produces 30,298 element-derived MDSE entities, including 34 package notes; 2,924 diagram companion notes are separate (W-274). The difference from the earlier W-161 count is a bookkeeping correction: 250 folded NoteLink connector rows represent 247 unique Note elements.
 
 ## 6. Connectors
 
@@ -129,6 +129,6 @@ Reclassify `modelCheck` notes, split Object, Design or State by `eaType`, fold r
 
 ## 12. Open, not yet a rule
 
-Implementation status (W-271, W-273): the native tool is a developer-only local HTML application. v0.1 established the read-only direct-QEAX preflight. `99_System/09_Tools/EA_to_MDSE_Native_Importer_v0.2.html` keeps that preflight, fixes recognition of single-quoted EA SQLite column names, treats the verified 255-character source loss as advisory, and adds a read-only whole-model Stage-1 translation planner. The planner constructs package paths, classifies every source element/connector/package/diagram, resolves connector endpoints through folds and Port merges/groups, checks rule coverage, and exports plan JSON/CSV; it still writes no MDSE notes. W-114 does not select a canonical source identity where several instance Ports combine into one newly-added Port entity, so v0.2 groups those cases and reports the unresolved canonical identity instead of inventing it. The next implementation step is to run v0.2 on the actual QEAX, resolve any planner findings, then build the `02 Product Context` note-producing slice.
+Implementation status (W-271, W-273, W-274): the native tool is a developer-only local HTML application. v0.1 established the read-only direct-QEAX preflight. `99_System/09_Tools/EA_to_MDSE_Native_Importer_v0.2.html` keeps that preflight, fixes recognition of single-quoted EA SQLite column names, treats the verified 255-character source loss as advisory, and adds a read-only whole-model Stage-1 translation planner. Spencer ran v0.2 on the actual QEAX and the whole-model plan passed in 1,948 ms with no failures or warnings (W-274). It classified 35,969 elements, 21,822 connectors, 1,387 packages, 2,924 diagrams and 42,052 xrefs, producing 30,298 element-derived MDSE entities plus 2,924 diagram companion notes. v0.2 is now the accepted planning baseline and is not modified after that acceptance run; it still writes no MDSE notes. Its only informational finding is the 27 multi-source W-114 added-Port groups for which the canonical source identity is not yet decided. Settle that identity rule before final whole-model uid/id assignment, then add the `02 Product Context` note-producing slice.
 
-The Open list at the end of `Workspace Decision Log.md` is the list. Relevant here: the package filter (the ledger for a slice; W-252, W-254), the four header-only import files, the canonical source identity for a W-114 added-Port group with several source Ports (W-273), the remaining unexplained audit-count differences that are not source-baseline counts, the W-272 relationship endpoint-rule format, and whether third-party standards content may stay in the vault.
+The Open list at the end of `Workspace Decision Log.md` is the list. Relevant here: the package filter (the ledger for a slice; W-252, W-254), the four header-only import files, the canonical source identity for the 27 W-114 added-Port groups with several source Ports (W-273, W-274), the remaining unexplained audit-count differences that are not source-baseline counts, the W-272 relationship endpoint-rule format, and whether third-party standards content may stay in the vault.
