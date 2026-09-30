@@ -487,3 +487,19 @@ connectorTypes:
   status: settled
   matrixRule: 'Rule 43'
   rule: 'no relationship field; the diagram companion note (W-73) lists the messages under **Messages:** in SeqNo order, "<SeqNo>. [[sender]] → [[receiver]]: <message name>"; Notes (4) as an indented line under the message; DiagramID places the message (W-61)'
+- eaConnectorType: InformationFlow
+  connectors: 123
+  decision: W-177
+  status: settled
+  matrixRule: 'Rule 42, replaced'
+  rules:
+  - pair: any
+    connectors: 123
+    field: interfaces
+    writtenOn: 'both end Ports (W-153, W-154)'
+  - pair: conveys an item (t_xref conveyed, W-83)
+    connectors: 79
+    field: 'transmits on the source Port, receives on the target Port'
+    writtenOn: 'pointing at the conveyed Item Flow note; one-way; none is exchanges in this export'
+  blockLevel: '9 connectors keep REVIEW port needed with the GUID and the review table (W-55, W-157)'
+  name: 'W-158 line on both ends (10)'
