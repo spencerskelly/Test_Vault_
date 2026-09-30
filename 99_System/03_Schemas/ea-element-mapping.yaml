@@ -79,7 +79,7 @@ elementTypes:
   mdseType: Object
   decision: W-136
   mapping:
-  - {rule: 'stereotype FlowProperty (760)', result: 'Item Flow note, one each (W-132)'}
+  - {rule: 'stereotype FlowProperty (760)', result: 'Item Flow note, one each (W-132); its direction becomes transmits (out 171), receives (in 96) or exchanges (inout 485) on the owning Port, replacing source/target (W-177); 8 with no Port owner write none'}
   - {rule: 'PDATA1 names a Class (2,055)', result: 'folded into the assembly as a hasPart entry, plus a source-section line when the Part has data of its own (W-136)'}
   - {rule: 'PDATA1 names an Activity, State or Signal (219)', result: 'folded into the owner as a hasChild entry (W-137, W-149)'}
   - {rule: 'no usable block: PDATA1 missing from the export or empty (103)', result: 'Object note, subtype part, unnamed ones part 1, part 2 (W-138)'}
