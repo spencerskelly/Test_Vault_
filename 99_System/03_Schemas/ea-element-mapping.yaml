@@ -371,8 +371,9 @@ elementTypes:
   disposition: note
   mdseType: Info
   decision: W-145
+  decisions: [W-145, W-161, W-274]
   subtype: null
-  note: 'All 431 Note elements become Info notes with a blank subtype; unnamed ones are named by the general rule of W-145.'
+  note: 'Base mapping is Info with a blank subtype (W-145). The NoteLink rule W-161 overrides it when the Note is linked to one unique element: the accepted v0.2 whole-model plan folds 247 Note elements into their linked element body and leaves 184 Note elements as Info notes. The 247 folded Notes are represented by 250 NoteLink connector rows; W-274 corrects the earlier count without changing the rule.'
   oldToolRules:
   - rule: N-01
     verdict: fold
