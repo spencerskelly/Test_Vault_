@@ -500,6 +500,6 @@ connectorTypes:
   - pair: conveys an item (t_xref conveyed, W-83)
     connectors: 79
     field: 'transmits on the source Port, receives on the target Port'
-    writtenOn: 'pointing at the conveyed Item Flow note; one-way; none is exchanges in this export'
+    writtenOn: 'pointing at the conveyed Item Flow note; one-way; where a Port would get both transmits and receives for one item it gets exchanges once instead (W-178): transmits 51, receives 60, exchanges 18'
   blockLevel: '9 connectors keep REVIEW port needed with the GUID and the review table (W-55, W-157)'
   name: 'W-158 line on both ends (10)'
