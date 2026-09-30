@@ -7,7 +7,7 @@ status: Active
 ---
 # Handoff: Continue Here
 
-Rewritten 2026-09-29 (W-183), updated through W-205 for a new AI chat continuing the work on this vault. Read this note first, then the Workspace Decision Log.
+Rewritten 2026-09-29 (W-183), updated through W-206 for a new AI chat continuing the work on this vault. Read this note first, then the Workspace Decision Log.
 
 ## What this vault is
 
@@ -15,7 +15,7 @@ Rewritten 2026-09-29 (W-183), updated through W-205 for a new AI chat continuing
 
 ## Read in this order
 
-1. `99_System/10_Docs/Workspace Decision Log.md`: every decision (W-01 to W-205) and the Open list at the bottom. It is the authority for what has been decided.
+1. `99_System/10_Docs/Workspace Decision Log.md`: every decision (W-01 to W-206) and the Open list at the bottom. It is the authority for what has been decided.
 2. `Definitions/Note Layout.md` and `Definitions/EA Source Section.md`.
 3. `99_System/03_Schemas/`: `ea-element-mapping.yaml` (all 31 EA object types), `ea-connector-mapping.yaml` (all 15 connector types, W-151 to W-179), `relationships.yaml` (schemaVersion 1.23), `element-types.yaml` (25 classes), `ea-field-dispositions.yaml`, `ea-tag-dispositions.yaml`, `ea-package-rules.yaml`.
 4. `99_System/10_Docs/Post-Import Tasks.md` (Tasks 1 to 8; Task 7 has 12 items).
@@ -29,7 +29,7 @@ Rewritten 2026-09-29 (W-183), updated through W-205 for a new AI chat continuing
 - Show a real example from the export when a rule is hard to picture; he often asks for one.
 - Short and direct, no praise. Tell him if there is a more efficient way to work.
 - Nothing is applied until he approves it. If you apply consequences of an approved decision, say so and list them.
-- Log every decision as the next W number (next is W-206) in the Decision Log, update the worklist YAML and this handoff, then commit and push to `main`. He allows pushing to `main` and pulls each change into Obsidian.
+- Log every decision as the next W number (next is W-207) in the Decision Log, update the worklist YAML and this handoff, then commit and push to `main`. He allows pushing to `main` and pulls each change into Obsidian.
 - Commit only when every edit applied and every YAML and JSON file parses. Make each scripted edit fail on an anchor that matches zero or several times, and stop the commit if any edit failed (twice in the last chat a commit went out missing an edit; once an anchor matched Task 5 instead of Task 7). Quote long YAML text values (a colon followed by a space has broken a file twice). Use quoted heredocs (`<<'EOF'`). Check that a referenced source file or column exists before relying on it. Stay with EA names until after the import (W-93).
 - Never write an access token into a file. After cloning, reset the remote URL to the token-free form and push with the token in the command only. Set a repo-local git identity before the first commit. Check `git log` for commits you did not make before adding a decision number.
 
