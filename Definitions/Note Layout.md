@@ -104,6 +104,5 @@ A note file name and a package folder name are the EA name with these changes, i
 
 - Where the `Default diagram` block (W-80) sits among the seven parts.
 - The exact format of the `Name` line, and where it sits against the `Source: EA` heading (W-99).
-- The `Definitions` of the kept body lines (W-93).
 
 Related: [[EA Source Section]], [[id]], [[uid]], [[eaType]]

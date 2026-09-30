@@ -56,6 +56,33 @@ These are the kinds of line the translator writes in this section, or near it, a
 
 Some placements sit outside this section. An element's own description (its Note) is the main text at the top of the body, and a package's Notes and a diagram's Notes likewise (W-42, W-66, W-71). A `Default diagram: [[...]]` line sits in a marked block below the main text and above this section, and is written only when the diagram's canvas exists (W-80). Linked documents are attached as files next to the note, named `<note file name> asset <n>`, and are not lines in this section (W-76, W-77, W-78).
 
+## Definitions of the kept body lines (W-93, W-209)
+
+One table for the tag values kept in the model. The first 16 rows are inline lines below the GUID, written as `- <name>: <value>`; the last four are comment texts written as labeled normal text higher in the note (W-104, W-105). Counts are rows with a real value in `t_objectproperties_raw.csv` (empty values, `unassigned` and `<memo>` placeholders left out; for memo tags the text in `Notes`). The meaning column holds only what Spencer has said; the rest is blank until he gives it. The table is temporary: it is removed with the lines it defines when the review cleanup deletes them.
+
+| Line | Meaning | Rows | Example value |
+|---|---|---|---|
+| `Webasto MBDV Profile::Priority` | MoSCoW priority of a requirement; some values also carry the MoSCoW legend (W-106). | 118 | This column categorizes requirements usi |
+| `Applicability Comment` | No meaning given yet. | 45 | IP54, IP55 |
+| `Webasto MBDV Profile::Applicability Comment` | No meaning given yet. | 11 | Is it one measure or all? |
+| `source` | No meaning given yet. | 2 | UL 2594 |
+| `Webasto MBDV Profile::External Reference` | No meaning given yet. | 2 | Annex A |
+| `MFG PN` | No meaning given yet. | 101 | 6374G1 |
+| `Part Number` | No meaning given yet. | 11 | 5910203 |
+| `PN Change Level` | No meaning given yet. | 3 | A |
+| `Brand` | No meaning given yet. | 6 | Anderson Power Product |
+| `CMF` | No meaning given yet. | 15 | FASSON 72825T,50 MICRON WHITE PET TC/S33 |
+| `Material` | No meaning given yet. | 1 | PC |
+| `Weight (g)` | No meaning given yet. | 2 | 1 |
+| `Piece Cost` | Cost of one piece, in US dollars (Spencer, W-93). | 6 | 15.99 |
+| `Quantity` | Likely the number of pieces in a kit; 10 rows, not confirmed for each (Spencer, W-93). | 10 | 4 |
+| `Positions` | No meaning given yet. | 1 | 6 |
+| `Style` | No meaning given yet. | 13 | DV |
+| `User Story` | No meaning given yet. | 118 | This column explains why the requirement |
+| `Sales Comment` | No meaning given yet. | 4 | We'll want to add the ability for users  |
+| `Product Management Comment` | No meaning given yet. | 37 | This objective aligns with market demand |
+| `Engineering Comment` | No meaning given yet. | 10 | Maybe we can follow the ProCore edge dis |
+
 ## Why it is laid out this way
 
 Everything below the GUID line is unreviewed source data. Once the values have been reviewed, the cleanup deletes what has no value, and the GUID line is left as the last line of the note (the `Name` line goes with the other reviewed values). Keeping it all in one place, below the GUID, makes that a simple, safe sweep for a person or an AI.
