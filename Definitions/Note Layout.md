@@ -96,6 +96,10 @@ Below the `EA GUID` line, one line per value as `- <EA tag name>: <value>` (W-28
 
 `PN` and `PartNumber` share one `- Part Number:` line; they never occur on the same element.
 
+## File names (W-196, W-197)
+
+A note file name and a package folder name are the EA name with these changes, in order: `/` to `-`; `:` to ` -`; `?` and `*` removed; `"` to `''`; `<` to `(` and `>` to `)`; `|` and `\` to `-`; each run of line breaks, control characters and spaces to one space; leading spaces and trailing spaces and periods trimmed. `#`, `^`, `[` and `]` stay. When the file name differs from the EA name, the `Name:` line keeps the original (W-48). The duplicate-name suffix is not decided.
+
 ## Not decided yet
 
 - The name and content of the user section, and the heading and line format of the aliases and `formerIds`.
