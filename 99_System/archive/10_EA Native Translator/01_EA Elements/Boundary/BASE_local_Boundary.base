@@ -1,0 +1,10 @@
+filters:
+  and:
+    - 'file.inFolder("99_System/archive/10_EA Native Translator/01_EA Elements/Boundary")'
+views:
+  - type: table
+    name: Boundary local
+    order:
+      - file.name
+      - type
+      - status

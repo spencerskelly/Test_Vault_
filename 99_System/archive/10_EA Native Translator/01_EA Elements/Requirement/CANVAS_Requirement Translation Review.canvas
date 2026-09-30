@@ -1,0 +1,246 @@
+{
+  "nodes": [
+    {
+      "id": "title",
+      "type": "text",
+      "text": "# Requirement Translation Review\nLeft = EA source\nCenter = decision\nRight = MDSE type/subtype result",
+      "x": 0,
+      "y": -850,
+      "width": 760,
+      "height": 220
+    },
+    {
+      "id": "req",
+      "type": "file",
+      "file": "99_System/archive/10_EA Native Translator/01_EA Elements/Requirement/README_Requirement.md",
+      "x": -1200,
+      "y": -300,
+      "width": 380,
+      "height": 220
+    },
+    {
+      "id": "fr",
+      "type": "file",
+      "file": "99_System/archive/10_EA Native Translator/01_EA Elements/Requirement/EA Stereotype - functionalRequirement.md",
+      "x": -1200,
+      "y": 0,
+      "width": 380,
+      "height": 180
+    },
+    {
+      "id": "f2",
+      "type": "file",
+      "file": "99_System/archive/10_EA Native Translator/01_EA Elements/Requirement/EA Stereotype - Functional.md",
+      "x": -1200,
+      "y": 220,
+      "width": 380,
+      "height": 180
+    },
+    {
+      "id": "dc",
+      "type": "file",
+      "file": "99_System/archive/10_EA Native Translator/01_EA Elements/Requirement/EA Stereotype - designConstraint.md",
+      "x": -1200,
+      "y": 440,
+      "width": 380,
+      "height": 180
+    },
+    {
+      "id": "gen",
+      "type": "file",
+      "file": "99_System/archive/10_EA Native Translator/01_EA Elements/Requirement/EA Stereotype - requirement.md",
+      "x": -1200,
+      "y": 660,
+      "width": 380,
+      "height": 180
+    },
+    {
+      "id": "perf",
+      "type": "file",
+      "file": "99_System/archive/10_EA Native Translator/01_EA Elements/Requirement/EA Stereotype - performanceRequirement.md",
+      "x": -1200,
+      "y": 880,
+      "width": 380,
+      "height": 180
+    },
+    {
+      "id": "reg",
+      "type": "file",
+      "file": "99_System/archive/10_EA Native Translator/01_EA Elements/Requirement/EA Stereotype - Regulatory Requirement.md",
+      "x": -1200,
+      "y": 1100,
+      "width": 380,
+      "height": 180
+    },
+    {
+      "id": "subtypeDecision",
+      "type": "file",
+      "file": "99_System/archive/10_EA Native Translator/01_EA Elements/Requirement/Decisions/Requirement Subtype Mapping.md",
+      "x": -250,
+      "y": 250,
+      "width": 460,
+      "height": 300
+    },
+    {
+      "id": "propDecision",
+      "type": "file",
+      "file": "99_System/archive/10_EA Native Translator/01_EA Elements/Requirement/Decisions/Requirement Property Mapping.md",
+      "x": -250,
+      "y": 650,
+      "width": 460,
+      "height": 260
+    },
+    {
+      "id": "relDecision",
+      "type": "file",
+      "file": "99_System/archive/10_EA Native Translator/01_EA Elements/Requirement/Decisions/Requirement Relationship Mapping.md",
+      "x": -250,
+      "y": 1010,
+      "width": 460,
+      "height": 280
+    },
+    {
+      "id": "verifyDecision",
+      "type": "file",
+      "file": "99_System/archive/10_EA Native Translator/01_EA Elements/Requirement/Decisions/Requirement Verification Cases.md",
+      "x": -250,
+      "y": 1370,
+      "width": 460,
+      "height": 260
+    },
+    {
+      "id": "taxonomy",
+      "type": "file",
+      "file": "99_System/archive/10_EA Native Translator/03_MDSE Elements/MDSE Type and Subtype Taxonomy.md",
+      "x": 750,
+      "y": -50,
+      "width": 440,
+      "height": 240
+    },
+    {
+      "id": "mdseReq",
+      "type": "file",
+      "file": "99_System/archive/10_EA Native Translator/03_MDSE Elements/MDSE Element - Requirement.md",
+      "x": 750,
+      "y": 270,
+      "width": 420,
+      "height": 260
+    },
+    {
+      "id": "functional",
+      "type": "text",
+      "text": "**Proposed Settled**\n`type: Requirement`\n`subtype: functional`",
+      "x": 750,
+      "y": 620,
+      "width": 420,
+      "height": 170
+    },
+    {
+      "id": "design",
+      "type": "text",
+      "text": "**Proposed Settled**\n`type: Requirement`\n`subtype: design`",
+      "x": 750,
+      "y": 840,
+      "width": 420,
+      "height": 170
+    },
+    {
+      "id": "preserve",
+      "type": "text",
+      "text": "**Preserve / Review**\n`type: Requirement`\n`subtype:` blank\nEA stereotype retained as provenance",
+      "x": 750,
+      "y": 1060,
+      "width": 420,
+      "height": 200
+    }
+  ],
+  "edges": [
+    {
+      "id": "e0",
+      "fromNode": "req",
+      "toNode": "subtypeDecision",
+      "label": "all EA Requirements"
+    },
+    {
+      "id": "e1",
+      "fromNode": "fr",
+      "toNode": "subtypeDecision",
+      "label": "stereotype"
+    },
+    {
+      "id": "e2",
+      "fromNode": "f2",
+      "toNode": "subtypeDecision",
+      "label": "stereotype"
+    },
+    {
+      "id": "e3",
+      "fromNode": "dc",
+      "toNode": "subtypeDecision",
+      "label": "stereotype"
+    },
+    {
+      "id": "e4",
+      "fromNode": "gen",
+      "toNode": "subtypeDecision",
+      "label": "preserve"
+    },
+    {
+      "id": "e5",
+      "fromNode": "perf",
+      "toNode": "subtypeDecision",
+      "label": "review"
+    },
+    {
+      "id": "e6",
+      "fromNode": "reg",
+      "toNode": "subtypeDecision",
+      "label": "review"
+    },
+    {
+      "id": "e7",
+      "fromNode": "subtypeDecision",
+      "toNode": "taxonomy",
+      "label": "must use approved taxonomy"
+    },
+    {
+      "id": "e8",
+      "fromNode": "subtypeDecision",
+      "toNode": "mdseReq",
+      "label": "always Requirement"
+    },
+    {
+      "id": "e9",
+      "fromNode": "subtypeDecision",
+      "toNode": "functional"
+    },
+    {
+      "id": "e10",
+      "fromNode": "subtypeDecision",
+      "toNode": "design"
+    },
+    {
+      "id": "e11",
+      "fromNode": "subtypeDecision",
+      "toNode": "preserve"
+    },
+    {
+      "id": "e12",
+      "fromNode": "mdseReq",
+      "toNode": "propDecision",
+      "label": "fields"
+    },
+    {
+      "id": "e13",
+      "fromNode": "mdseReq",
+      "toNode": "relDecision",
+      "label": "relationships"
+    },
+    {
+      "id": "e14",
+      "fromNode": "relDecision",
+      "toNode": "verifyDecision",
+      "label": "verification"
+    }
+  ]
+}

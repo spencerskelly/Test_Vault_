@@ -1,0 +1,10 @@
+filters:
+  and:
+    - 'file.inFolder("99_System/archive/10_EA Native Translator/02_EA Relationships/Dependency")'
+views:
+  - type: table
+    name: Dependency all
+    order:
+      - file.name
+      - type
+      - status

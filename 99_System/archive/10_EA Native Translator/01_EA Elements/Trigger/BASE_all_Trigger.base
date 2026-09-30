@@ -1,0 +1,10 @@
+filters:
+  and:
+    - 'file.inFolder("99_System/archive/10_EA Native Translator/01_EA Elements/Trigger")'
+views:
+  - type: table
+    name: Trigger all
+    order:
+      - file.name
+      - type
+      - status

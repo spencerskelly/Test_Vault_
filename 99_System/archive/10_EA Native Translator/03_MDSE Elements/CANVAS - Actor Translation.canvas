@@ -1,0 +1,14 @@
+{
+	"nodes":[
+		{"id":"target","type":"file","file":"99_System/archive/10_EA Native Translator/03_MDSE Elements/MDSE Element - Actor.md","x":0,"y":0,"width":420,"height":280},
+		{"id":"s0","type":"file","file":"99_System/archive/10_EA Native Translator/01_EA Elements/EA Element - Actor.md","x":-650,"y":-260,"width":360,"height":220},
+		{"id":"r0","type":"file","file":"99_System/archive/10_EA Native Translator/02_EA Relationships/EA Relationship - Association.md","x":1100,"y":-350,"width":380,"height":210},
+		{"id":"r1","type":"file","file":"99_System/archive/10_EA Native Translator/02_EA Relationships/EA Relationship - Generalization.md","x":1100,"y":-120,"width":380,"height":210},
+		{"id":"summary","type":"text","text":"## Current translation paths\\nLiving/person role → Actor\\nNon-living systems/devices modeled as EA Actor become external Things\\nActor specialization may use subtypeOf","x":520,"y":200,"width":520,"height":300}
+	],
+	"edges":[
+		{"id":"es0","fromNode":"s0","fromSide":"right","toNode":"target","toSide":"left"},
+		{"id":"er0","fromNode":"target","fromSide":"right","toNode":"r0","toSide":"left"},
+		{"id":"er1","fromNode":"target","fromSide":"right","toNode":"r1","toSide":"left"}
+	]
+}

@@ -1,0 +1,44 @@
+{
+  "nodes": [
+    {
+      "id": "central",
+      "type": "file",
+      "file": "99_System/archive/10_EA Native Translator/01_EA Elements/Part/EA Stereotype - FlowProperty.md",
+      "x": 0,
+      "y": 0,
+      "width": 430,
+      "height": 260
+    },
+    {
+      "id": "c0",
+      "type": "text",
+      "text": "**Incoming**\\nSequence",
+      "x": -920,
+      "y": -650,
+      "width": 300,
+      "height": 130
+    },
+    {
+      "id": "e0",
+      "type": "file",
+      "file": "99_System/archive/10_EA Native Translator/01_EA Elements/Class/EA Stereotype - Module.md",
+      "x": -1470,
+      "y": -750,
+      "width": 350,
+      "height": 155
+    }
+  ],
+  "edges": [
+    {
+      "id": "ce0",
+      "fromNode": "c0",
+      "toNode": "central"
+    },
+    {
+      "id": "pe1",
+      "fromNode": "e0",
+      "toNode": "c0",
+      "label": "19 | rule 43 | Deferred: Deferred: local sequence/behavior detail"
+    }
+  ]
+}

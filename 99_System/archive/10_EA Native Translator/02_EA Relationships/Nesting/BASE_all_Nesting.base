@@ -1,0 +1,10 @@
+filters:
+  and:
+    - 'file.inFolder("99_System/archive/10_EA Native Translator/02_EA Relationships/Nesting")'
+views:
+  - type: table
+    name: Nesting all
+    order:
+      - file.name
+      - type
+      - status

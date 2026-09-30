@@ -1,0 +1,94 @@
+{
+  "nodes": [
+    {
+      "id": "target",
+      "type": "file",
+      "file": "99_System/archive/10_EA Native Translator/03_MDSE Elements/MDSE Element - Mechanical.md",
+      "x": 0,
+      "y": 0,
+      "width": 420,
+      "height": 280
+    },
+    {
+      "id": "summary",
+      "type": "text",
+      "text": "## Current translation paths\\nSemantic source classification first\\nGeneralization → subtypeOf\\nThing Aggregation → partOf",
+      "x": 500,
+      "y": 0,
+      "width": 520,
+      "height": 300
+    },
+    {
+      "id": "s0",
+      "type": "file",
+      "file": "99_System/archive/10_EA Native Translator/01_EA Elements/EA Element - Class - Physical Component.md",
+      "x": -650,
+      "y": -260,
+      "width": 360,
+      "height": 220
+    },
+    {
+      "id": "s1",
+      "type": "file",
+      "file": "99_System/archive/10_EA Native Translator/01_EA Elements/EA Element - Port.md",
+      "x": -650,
+      "y": 0,
+      "width": 360,
+      "height": 220
+    },
+    {
+      "id": "r0",
+      "type": "file",
+      "file": "99_System/archive/10_EA Native Translator/02_EA Relationships/EA Relationship - Generalization.md",
+      "x": 1100,
+      "y": -350,
+      "width": 380,
+      "height": 210
+    },
+    {
+      "id": "r1",
+      "type": "file",
+      "file": "99_System/archive/10_EA Native Translator/02_EA Relationships/EA Relationship - Aggregation.md",
+      "x": 1100,
+      "y": -120,
+      "width": 380,
+      "height": 210
+    },
+    {
+      "id": "r2",
+      "type": "file",
+      "file": "99_System/archive/10_EA Native Translator/02_EA Relationships/EA Relationship - Realisation.md",
+      "x": 1100,
+      "y": 110,
+      "width": 380,
+      "height": 210
+    }
+  ],
+  "edges": [
+    {
+      "id": "es0",
+      "fromNode": "s0",
+      "toNode": "target"
+    },
+    {
+      "id": "es1",
+      "fromNode": "s1",
+      "toNode": "target"
+    },
+    {
+      "id": "er0",
+      "fromNode": "target",
+      "toNode": "r0"
+    },
+    {
+      "id": "er1",
+      "fromNode": "target",
+      "toNode": "r1"
+    },
+    {
+      "id": "er2",
+      "fromNode": "target",
+      "toNode": "r2"
+    }
+  ]
+}

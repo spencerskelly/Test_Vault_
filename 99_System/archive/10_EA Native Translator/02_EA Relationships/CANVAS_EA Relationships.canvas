@@ -1,0 +1,140 @@
+{
+  "nodes": [
+    {
+      "id": "r0",
+      "type": "file",
+      "file": "99_System/archive/10_EA Native Translator/02_EA Relationships/Abstraction/README_Abstraction.md",
+      "x": 0,
+      "y": 0,
+      "width": 390,
+      "height": 200
+    },
+    {
+      "id": "r1",
+      "type": "file",
+      "file": "99_System/archive/10_EA Native Translator/02_EA Relationships/Aggregation/README_Aggregation.md",
+      "x": 460,
+      "y": 0,
+      "width": 390,
+      "height": 200
+    },
+    {
+      "id": "r2",
+      "type": "file",
+      "file": "99_System/archive/10_EA Native Translator/02_EA Relationships/Association/README_Association.md",
+      "x": 920,
+      "y": 0,
+      "width": 390,
+      "height": 200
+    },
+    {
+      "id": "r3",
+      "type": "file",
+      "file": "99_System/archive/10_EA Native Translator/02_EA Relationships/Connector/README_Connector.md",
+      "x": 1380,
+      "y": 0,
+      "width": 390,
+      "height": 200
+    },
+    {
+      "id": "r4",
+      "type": "file",
+      "file": "99_System/archive/10_EA Native Translator/02_EA Relationships/ControlFlow/README_ControlFlow.md",
+      "x": 0,
+      "y": 270,
+      "width": 390,
+      "height": 200
+    },
+    {
+      "id": "r5",
+      "type": "file",
+      "file": "99_System/archive/10_EA Native Translator/02_EA Relationships/Dependency/README_Dependency.md",
+      "x": 460,
+      "y": 270,
+      "width": 390,
+      "height": 200
+    },
+    {
+      "id": "r6",
+      "type": "file",
+      "file": "99_System/archive/10_EA Native Translator/02_EA Relationships/Generalization/README_Generalization.md",
+      "x": 920,
+      "y": 270,
+      "width": 390,
+      "height": 200
+    },
+    {
+      "id": "r7",
+      "type": "file",
+      "file": "99_System/archive/10_EA Native Translator/02_EA Relationships/InformationFlow/README_InformationFlow.md",
+      "x": 1380,
+      "y": 270,
+      "width": 390,
+      "height": 200
+    },
+    {
+      "id": "r8",
+      "type": "file",
+      "file": "99_System/archive/10_EA Native Translator/02_EA Relationships/Nesting/README_Nesting.md",
+      "x": 0,
+      "y": 540,
+      "width": 390,
+      "height": 200
+    },
+    {
+      "id": "r9",
+      "type": "file",
+      "file": "99_System/archive/10_EA Native Translator/02_EA Relationships/NoteLink/README_NoteLink.md",
+      "x": 460,
+      "y": 540,
+      "width": 390,
+      "height": 200
+    },
+    {
+      "id": "r10",
+      "type": "file",
+      "file": "99_System/archive/10_EA Native Translator/02_EA Relationships/Realisation/README_Realisation.md",
+      "x": 920,
+      "y": 540,
+      "width": 390,
+      "height": 200
+    },
+    {
+      "id": "r11",
+      "type": "file",
+      "file": "99_System/archive/10_EA Native Translator/02_EA Relationships/Sequence/README_Sequence.md",
+      "x": 1380,
+      "y": 540,
+      "width": 390,
+      "height": 200
+    },
+    {
+      "id": "r12",
+      "type": "file",
+      "file": "99_System/archive/10_EA Native Translator/02_EA Relationships/StateFlow/README_StateFlow.md",
+      "x": 0,
+      "y": 810,
+      "width": 390,
+      "height": 200
+    },
+    {
+      "id": "r13",
+      "type": "file",
+      "file": "99_System/archive/10_EA Native Translator/02_EA Relationships/Usage/README_Usage.md",
+      "x": 460,
+      "y": 810,
+      "width": 390,
+      "height": 200
+    },
+    {
+      "id": "r14",
+      "type": "file",
+      "file": "99_System/archive/10_EA Native Translator/02_EA Relationships/UseCase/README_UseCase.md",
+      "x": 920,
+      "y": 810,
+      "width": 390,
+      "height": 200
+    }
+  ],
+  "edges": []
+}

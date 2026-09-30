@@ -1,0 +1,10 @@
+filters:
+  and:
+    - 'file.inFolder("99_System/archive/10_EA Native Translator/02_EA Relationships/Connector")'
+views:
+  - type: table
+    name: Connector local
+    order:
+      - file.name
+      - type
+      - status

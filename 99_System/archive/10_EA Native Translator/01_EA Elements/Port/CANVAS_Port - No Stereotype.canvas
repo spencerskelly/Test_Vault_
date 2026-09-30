@@ -1,0 +1,352 @@
+{
+  "nodes": [
+    {
+      "id": "central",
+      "type": "file",
+      "file": "99_System/archive/10_EA Native Translator/01_EA Elements/Port/EA Element - No Stereotype.md",
+      "x": 0,
+      "y": 0,
+      "width": 430,
+      "height": 260
+    },
+    {
+      "id": "c0",
+      "type": "text",
+      "text": "**Incoming**\\nAbstraction «allocate»",
+      "x": -920,
+      "y": -650,
+      "width": 300,
+      "height": 130
+    },
+    {
+      "id": "e0",
+      "type": "file",
+      "file": "99_System/archive/10_EA Native Translator/01_EA Elements/Text/README_Text.md",
+      "x": -1470,
+      "y": -750,
+      "width": 350,
+      "height": 155
+    },
+    {
+      "id": "e1",
+      "type": "file",
+      "file": "99_System/archive/10_EA Native Translator/01_EA Elements/Action/README_Action.md",
+      "x": -1470,
+      "y": -565,
+      "width": 350,
+      "height": 155
+    },
+    {
+      "id": "c1",
+      "type": "text",
+      "text": "**Outgoing**\\nConnector",
+      "x": 600,
+      "y": -650,
+      "width": 300,
+      "height": 130
+    },
+    {
+      "id": "e2",
+      "type": "file",
+      "file": "99_System/archive/10_EA Native Translator/01_EA Elements/Port/EA Element - No Stereotype.md",
+      "x": 1150,
+      "y": -750,
+      "width": 350,
+      "height": 155
+    },
+    {
+      "id": "e3",
+      "type": "file",
+      "file": "99_System/archive/10_EA Native Translator/01_EA Elements/Port/EA Stereotype - ProxyPort.md",
+      "x": 1150,
+      "y": -565,
+      "width": 350,
+      "height": 155
+    },
+    {
+      "id": "c2",
+      "type": "text",
+      "text": "**Incoming**\\nConnector",
+      "x": -920,
+      "y": -440,
+      "width": 300,
+      "height": 130
+    },
+    {
+      "id": "e4",
+      "type": "file",
+      "file": "99_System/archive/10_EA Native Translator/01_EA Elements/Port/EA Stereotype - ProxyPort.md",
+      "x": -1470,
+      "y": -380,
+      "width": 350,
+      "height": 155
+    },
+    {
+      "id": "e5",
+      "type": "file",
+      "file": "99_System/archive/10_EA Native Translator/01_EA Elements/Class/EA Stereotype - Module.md",
+      "x": 1150,
+      "y": -380,
+      "width": 350,
+      "height": 155
+    },
+    {
+      "id": "e6",
+      "type": "file",
+      "file": "99_System/archive/10_EA Native Translator/01_EA Elements/InformationItem/README_InformationItem.md",
+      "x": 1150,
+      "y": -195,
+      "width": 350,
+      "height": 155
+    },
+    {
+      "id": "e7",
+      "type": "file",
+      "file": "99_System/archive/10_EA Native Translator/01_EA Elements/Port/EA Stereotype - FullPort.md",
+      "x": 1150,
+      "y": -10,
+      "width": 350,
+      "height": 155
+    },
+    {
+      "id": "e8",
+      "type": "file",
+      "file": "99_System/archive/10_EA Native Translator/01_EA Elements/Part/EA Element - No Stereotype.md",
+      "x": -1470,
+      "y": -195,
+      "width": 350,
+      "height": 155
+    },
+    {
+      "id": "e9",
+      "type": "file",
+      "file": "99_System/archive/10_EA Native Translator/01_EA Elements/Part/EA Element - No Stereotype.md",
+      "x": 1150,
+      "y": 175,
+      "width": 350,
+      "height": 155
+    },
+    {
+      "id": "c3",
+      "type": "text",
+      "text": "**Outgoing**\\nConnector «BindingConnector»",
+      "x": 600,
+      "y": -440,
+      "width": 300,
+      "height": 130
+    },
+    {
+      "id": "c4",
+      "type": "text",
+      "text": "**Incoming**\\nConnector «BindingConnector»",
+      "x": -920,
+      "y": -230,
+      "width": 300,
+      "height": 130
+    },
+    {
+      "id": "c5",
+      "type": "text",
+      "text": "**Outgoing**\\nDependency",
+      "x": 600,
+      "y": -230,
+      "width": 300,
+      "height": 130
+    },
+    {
+      "id": "e10",
+      "type": "file",
+      "file": "99_System/archive/10_EA Native Translator/01_EA Elements/Requirement/EA Stereotype - designConstraint.md",
+      "x": 1150,
+      "y": 360,
+      "width": 350,
+      "height": 155
+    },
+    {
+      "id": "c6",
+      "type": "text",
+      "text": "**Outgoing**\\nInformationFlow «itemFlow»",
+      "x": 600,
+      "y": -20,
+      "width": 300,
+      "height": 130
+    },
+    {
+      "id": "c7",
+      "type": "text",
+      "text": "**Incoming**\\nInformationFlow «itemFlow»",
+      "x": -920,
+      "y": -20,
+      "width": 300,
+      "height": 130
+    }
+  ],
+  "edges": [
+    {
+      "id": "ce0",
+      "fromNode": "c0",
+      "toNode": "central"
+    },
+    {
+      "id": "ce1",
+      "fromNode": "central",
+      "toNode": "c1"
+    },
+    {
+      "id": "ce2",
+      "fromNode": "c2",
+      "toNode": "central"
+    },
+    {
+      "id": "ce3",
+      "fromNode": "central",
+      "toNode": "c3"
+    },
+    {
+      "id": "ce4",
+      "fromNode": "c4",
+      "toNode": "central"
+    },
+    {
+      "id": "ce5",
+      "fromNode": "central",
+      "toNode": "c5"
+    },
+    {
+      "id": "ce6",
+      "fromNode": "central",
+      "toNode": "c6"
+    },
+    {
+      "id": "ce7",
+      "fromNode": "c7",
+      "toNode": "central"
+    },
+    {
+      "id": "pe8",
+      "fromNode": "e0",
+      "toNode": "c0",
+      "label": "4 | rule 53 | Review: Review: allocate endpoint pattern"
+    },
+    {
+      "id": "pe9",
+      "fromNode": "e1",
+      "toNode": "c0",
+      "label": "1 | rule 53 | Review: Review: allocate endpoint pattern"
+    },
+    {
+      "id": "pe10",
+      "fromNode": "c1",
+      "toNode": "e2",
+      "label": "406 | rule 41 | Settled: Map: interfaces / interfaces"
+    },
+    {
+      "id": "pe11",
+      "fromNode": "c1",
+      "toNode": "e3",
+      "label": "27 | rule 41 | Settled: Map: interfaces / interfaces"
+    },
+    {
+      "id": "pe12",
+      "fromNode": "e4",
+      "toNode": "c2",
+      "label": "23 | rule 41 | Settled: Map: interfaces / interfaces"
+    },
+    {
+      "id": "pe13",
+      "fromNode": "c1",
+      "toNode": "e5",
+      "label": "2 | rule 41 | Settled: Map: interfaces / interfaces"
+    },
+    {
+      "id": "pe14",
+      "fromNode": "c1",
+      "toNode": "e6",
+      "label": "2 | rule 41 | Settled: Map: interfaces / interfaces"
+    },
+    {
+      "id": "pe15",
+      "fromNode": "c1",
+      "toNode": "e7",
+      "label": "2 | rule 41 | Settled: Map: interfaces / interfaces"
+    },
+    {
+      "id": "pe16",
+      "fromNode": "e8",
+      "toNode": "c2",
+      "label": "1 | rule 41 | Settled: Map: interfaces / interfaces"
+    },
+    {
+      "id": "pe17",
+      "fromNode": "c1",
+      "toNode": "e9",
+      "label": "1 | rule 41 | Settled: Map: interfaces / interfaces"
+    },
+    {
+      "id": "pe18",
+      "fromNode": "c3",
+      "toNode": "e2",
+      "label": "197 | rule 40 | Settled: Map: equals / equals"
+    },
+    {
+      "id": "pe19",
+      "fromNode": "c3",
+      "toNode": "e7",
+      "label": "2 | rule 40 | Settled: Map: equals / equals"
+    },
+    {
+      "id": "pe20",
+      "fromNode": "c3",
+      "toNode": "e3",
+      "label": "1 | rule 40 | Settled: Map: equals / equals"
+    },
+    {
+      "id": "pe21",
+      "fromNode": "e4",
+      "toNode": "c4",
+      "label": "1 | rule 40 | Settled: Map: equals / equals"
+    },
+    {
+      "id": "pe22",
+      "fromNode": "c5",
+      "toNode": "e10",
+      "label": "5 | rule 58 | Review: Review: Dependency endpoint pattern"
+    },
+    {
+      "id": "pe23",
+      "fromNode": "c5",
+      "toNode": "e2",
+      "label": "1 | rule 58 | Review: Review: Dependency endpoint pattern"
+    },
+    {
+      "id": "pe24",
+      "fromNode": "c6",
+      "toNode": "e2",
+      "label": "110 | rule 42 | Deferred: Deferred: Item Flow import postponed"
+    },
+    {
+      "id": "pe25",
+      "fromNode": "e8",
+      "toNode": "c7",
+      "label": "5 | rule 42 | Deferred: Deferred: Item Flow import postponed"
+    },
+    {
+      "id": "pe26",
+      "fromNode": "c6",
+      "toNode": "e9",
+      "label": "4 | rule 42 | Deferred: Deferred: Item Flow import postponed"
+    },
+    {
+      "id": "pe27",
+      "fromNode": "c6",
+      "toNode": "e3",
+      "label": "2 | rule 42 | Deferred: Deferred: Item Flow import postponed"
+    },
+    {
+      "id": "pe28",
+      "fromNode": "e4",
+      "toNode": "c7",
+      "label": "2 | rule 42 | Deferred: Deferred: Item Flow import postponed"
+    }
+  ]
+}

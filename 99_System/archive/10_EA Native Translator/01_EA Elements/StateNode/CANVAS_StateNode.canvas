@@ -1,0 +1,317 @@
+{
+  "nodes": [
+    {
+      "id": "central",
+      "type": "file",
+      "file": "99_System/archive/10_EA Native Translator/01_EA Elements/StateNode/README_StateNode.md",
+      "x": 0,
+      "y": 0,
+      "width": 430,
+      "height": 260
+    },
+    {
+      "id": "c0",
+      "type": "text",
+      "text": "**Incoming**\\nControlFlow",
+      "x": -920,
+      "y": -650,
+      "width": 300,
+      "height": 130
+    },
+    {
+      "id": "e0",
+      "type": "file",
+      "file": "99_System/archive/10_EA Native Translator/01_EA Elements/Activity/EA Element - No Stereotype.md",
+      "x": -1470,
+      "y": -750,
+      "width": 350,
+      "height": 155
+    },
+    {
+      "id": "c1",
+      "type": "text",
+      "text": "**Outgoing**\\nControlFlow",
+      "x": 600,
+      "y": -650,
+      "width": 300,
+      "height": 130
+    },
+    {
+      "id": "e1",
+      "type": "file",
+      "file": "99_System/archive/10_EA Native Translator/01_EA Elements/Activity/EA Element - No Stereotype.md",
+      "x": 1150,
+      "y": -750,
+      "width": 350,
+      "height": 155
+    },
+    {
+      "id": "e2",
+      "type": "file",
+      "file": "99_System/archive/10_EA Native Translator/01_EA Elements/Issue/README_Issue.md",
+      "x": -1470,
+      "y": -565,
+      "width": 350,
+      "height": 155
+    },
+    {
+      "id": "e3",
+      "type": "file",
+      "file": "99_System/archive/10_EA Native Translator/01_EA Elements/Object/README_Object.md",
+      "x": -1470,
+      "y": -380,
+      "width": 350,
+      "height": 155
+    },
+    {
+      "id": "e4",
+      "type": "file",
+      "file": "99_System/archive/10_EA Native Translator/01_EA Elements/Action/README_Action.md",
+      "x": 1150,
+      "y": -565,
+      "width": 350,
+      "height": 155
+    },
+    {
+      "id": "e5",
+      "type": "file",
+      "file": "99_System/archive/10_EA Native Translator/01_EA Elements/Action/README_Action.md",
+      "x": -1470,
+      "y": -195,
+      "width": 350,
+      "height": 155
+    },
+    {
+      "id": "e6",
+      "type": "file",
+      "file": "99_System/archive/10_EA Native Translator/01_EA Elements/Decision/README_Decision.md",
+      "x": -1470,
+      "y": -10,
+      "width": 350,
+      "height": 155
+    },
+    {
+      "id": "e7",
+      "type": "file",
+      "file": "99_System/archive/10_EA Native Translator/01_EA Elements/Synchronization/README_Synchronization.md",
+      "x": 1150,
+      "y": -380,
+      "width": 350,
+      "height": 155
+    },
+    {
+      "id": "e8",
+      "type": "file",
+      "file": "99_System/archive/10_EA Native Translator/01_EA Elements/Synchronization/README_Synchronization.md",
+      "x": -1470,
+      "y": 175,
+      "width": 350,
+      "height": 155
+    },
+    {
+      "id": "e9",
+      "type": "file",
+      "file": "99_System/archive/10_EA Native Translator/01_EA Elements/Decision/README_Decision.md",
+      "x": 1150,
+      "y": -195,
+      "width": 350,
+      "height": 155
+    },
+    {
+      "id": "e10",
+      "type": "file",
+      "file": "99_System/archive/10_EA Native Translator/01_EA Elements/State/EA Stereotype - System State.md",
+      "x": 1150,
+      "y": -10,
+      "width": 350,
+      "height": 155
+    },
+    {
+      "id": "e11",
+      "type": "file",
+      "file": "99_System/archive/10_EA Native Translator/01_EA Elements/UseCase/README_UseCase.md",
+      "x": 1150,
+      "y": 175,
+      "width": 350,
+      "height": 155
+    },
+    {
+      "id": "c2",
+      "type": "text",
+      "text": "**Outgoing**\\nStateFlow",
+      "x": 600,
+      "y": -440,
+      "width": 300,
+      "height": 130
+    },
+    {
+      "id": "e12",
+      "type": "file",
+      "file": "99_System/archive/10_EA Native Translator/01_EA Elements/State/EA Element - No Stereotype.md",
+      "x": 1150,
+      "y": 360,
+      "width": 350,
+      "height": 155
+    },
+    {
+      "id": "c3",
+      "type": "text",
+      "text": "**Incoming**\\nStateFlow",
+      "x": -920,
+      "y": -440,
+      "width": 300,
+      "height": 130
+    },
+    {
+      "id": "e13",
+      "type": "file",
+      "file": "99_System/archive/10_EA Native Translator/01_EA Elements/State/EA Element - No Stereotype.md",
+      "x": -1470,
+      "y": 360,
+      "width": 350,
+      "height": 155
+    },
+    {
+      "id": "e14",
+      "type": "file",
+      "file": "99_System/archive/10_EA Native Translator/01_EA Elements/State/EA Stereotype - System State.md",
+      "x": -1470,
+      "y": 545,
+      "width": 350,
+      "height": 155
+    },
+    {
+      "id": "v0",
+      "type": "file",
+      "file": "99_System/archive/10_EA Native Translator/01_EA Elements/StateNode/README_StateNode.md",
+      "x": -50,
+      "y": -360,
+      "width": 230,
+      "height": 130
+    }
+  ],
+  "edges": [
+    {
+      "id": "ce0",
+      "fromNode": "c0",
+      "toNode": "central"
+    },
+    {
+      "id": "ce1",
+      "fromNode": "central",
+      "toNode": "c1"
+    },
+    {
+      "id": "ce2",
+      "fromNode": "central",
+      "toNode": "c2"
+    },
+    {
+      "id": "ce3",
+      "fromNode": "c3",
+      "toNode": "central"
+    },
+    {
+      "id": "pe4",
+      "fromNode": "e0",
+      "toNode": "c0",
+      "label": "10 | rule 44 | Deferred: Deferred: local flow detail"
+    },
+    {
+      "id": "pe5",
+      "fromNode": "c1",
+      "toNode": "e1",
+      "label": "8 | rule 44 | Deferred: Deferred: local flow detail"
+    },
+    {
+      "id": "pe6",
+      "fromNode": "e2",
+      "toNode": "c0",
+      "label": "5 | rule 44 | Deferred: Deferred: local flow detail"
+    },
+    {
+      "id": "pe7",
+      "fromNode": "e3",
+      "toNode": "c0",
+      "label": "5 | rule 44 | Deferred: Deferred: local flow detail"
+    },
+    {
+      "id": "pe8",
+      "fromNode": "c1",
+      "toNode": "e4",
+      "label": "4 | rule 44 | Deferred: Deferred: local flow detail"
+    },
+    {
+      "id": "pe9",
+      "fromNode": "e5",
+      "toNode": "c0",
+      "label": "3 | rule 44 | Deferred: Deferred: local flow detail"
+    },
+    {
+      "id": "pe10",
+      "fromNode": "e6",
+      "toNode": "c0",
+      "label": "2 | rule 44 | Deferred: Deferred: local flow detail"
+    },
+    {
+      "id": "pe11",
+      "fromNode": "c1",
+      "toNode": "e7",
+      "label": "2 | rule 44 | Deferred: Deferred: local flow detail"
+    },
+    {
+      "id": "pe12",
+      "fromNode": "e8",
+      "toNode": "c0",
+      "label": "2 | rule 44 | Deferred: Deferred: local flow detail"
+    },
+    {
+      "id": "pe13",
+      "fromNode": "c1",
+      "toNode": "e9",
+      "label": "1 | rule 44 | Deferred: Deferred: local flow detail"
+    },
+    {
+      "id": "pe14",
+      "fromNode": "c1",
+      "toNode": "e10",
+      "label": "1 | rule 44 | Deferred: Deferred: local flow detail"
+    },
+    {
+      "id": "pe15",
+      "fromNode": "c1",
+      "toNode": "e11",
+      "label": "1 | rule 44 | Deferred: Deferred: local flow detail"
+    },
+    {
+      "id": "pe16",
+      "fromNode": "c2",
+      "toNode": "e12",
+      "label": "41 | rule 47 | Deferred: Deferred: transition evidence"
+    },
+    {
+      "id": "pe17",
+      "fromNode": "e13",
+      "toNode": "c3",
+      "label": "24 | rule 47 | Deferred: Deferred: transition evidence"
+    },
+    {
+      "id": "pe18",
+      "fromNode": "c2",
+      "toNode": "e10",
+      "label": "2 | rule 47 | Deferred: Deferred: transition evidence"
+    },
+    {
+      "id": "pe19",
+      "fromNode": "e14",
+      "toNode": "c3",
+      "label": "1 | rule 47 | Deferred: Deferred: transition evidence"
+    },
+    {
+      "id": "ve20",
+      "fromNode": "central",
+      "toNode": "v0",
+      "label": "no stereotype"
+    }
+  ]
+}

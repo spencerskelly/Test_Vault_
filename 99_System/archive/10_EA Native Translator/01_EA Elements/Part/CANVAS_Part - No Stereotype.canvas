@@ -1,0 +1,173 @@
+{
+  "nodes": [
+    {
+      "id": "central",
+      "type": "file",
+      "file": "99_System/archive/10_EA Native Translator/01_EA Elements/Part/EA Element - No Stereotype.md",
+      "x": 0,
+      "y": 0,
+      "width": 430,
+      "height": 260
+    },
+    {
+      "id": "c0",
+      "type": "text",
+      "text": "**Outgoing**\\nConnector",
+      "x": 600,
+      "y": -650,
+      "width": 300,
+      "height": 130
+    },
+    {
+      "id": "e0",
+      "type": "file",
+      "file": "99_System/archive/10_EA Native Translator/01_EA Elements/Part/EA Element - No Stereotype.md",
+      "x": 1150,
+      "y": -750,
+      "width": 350,
+      "height": 155
+    },
+    {
+      "id": "e1",
+      "type": "file",
+      "file": "99_System/archive/10_EA Native Translator/01_EA Elements/Port/EA Stereotype - FullPort.md",
+      "x": 1150,
+      "y": -565,
+      "width": 350,
+      "height": 155
+    },
+    {
+      "id": "c1",
+      "type": "text",
+      "text": "**Incoming**\\nConnector",
+      "x": -920,
+      "y": -650,
+      "width": 300,
+      "height": 130
+    },
+    {
+      "id": "e2",
+      "type": "file",
+      "file": "99_System/archive/10_EA Native Translator/01_EA Elements/Port/EA Stereotype - FullPort.md",
+      "x": -1470,
+      "y": -750,
+      "width": 350,
+      "height": 155
+    },
+    {
+      "id": "e3",
+      "type": "file",
+      "file": "99_System/archive/10_EA Native Translator/01_EA Elements/Port/EA Element - No Stereotype.md",
+      "x": 1150,
+      "y": -380,
+      "width": 350,
+      "height": 155
+    },
+    {
+      "id": "e4",
+      "type": "file",
+      "file": "99_System/archive/10_EA Native Translator/01_EA Elements/Port/EA Element - No Stereotype.md",
+      "x": -1470,
+      "y": -565,
+      "width": 350,
+      "height": 155
+    },
+    {
+      "id": "e5",
+      "type": "file",
+      "file": "99_System/archive/10_EA Native Translator/01_EA Elements/Port/EA Stereotype - ProxyPort.md",
+      "x": -1470,
+      "y": -380,
+      "width": 350,
+      "height": 155
+    },
+    {
+      "id": "c2",
+      "type": "text",
+      "text": "**Outgoing**\\nInformationFlow «itemFlow»",
+      "x": 600,
+      "y": -440,
+      "width": 300,
+      "height": 130
+    },
+    {
+      "id": "c3",
+      "type": "text",
+      "text": "**Incoming**\\nInformationFlow «itemFlow»",
+      "x": -920,
+      "y": -440,
+      "width": 300,
+      "height": 130
+    }
+  ],
+  "edges": [
+    {
+      "id": "ce0",
+      "fromNode": "central",
+      "toNode": "c0"
+    },
+    {
+      "id": "ce1",
+      "fromNode": "c1",
+      "toNode": "central"
+    },
+    {
+      "id": "ce2",
+      "fromNode": "central",
+      "toNode": "c2"
+    },
+    {
+      "id": "ce3",
+      "fromNode": "c3",
+      "toNode": "central"
+    },
+    {
+      "id": "pe4",
+      "fromNode": "c0",
+      "toNode": "e0",
+      "label": "87 | rule 41 | Settled: Map: interfaces / interfaces"
+    },
+    {
+      "id": "pe5",
+      "fromNode": "c0",
+      "toNode": "e1",
+      "label": "6 | rule 41 | Settled: Map: interfaces / interfaces"
+    },
+    {
+      "id": "pe6",
+      "fromNode": "e2",
+      "toNode": "c1",
+      "label": "2 | rule 41 | Settled: Map: interfaces / interfaces"
+    },
+    {
+      "id": "pe7",
+      "fromNode": "c0",
+      "toNode": "e3",
+      "label": "1 | rule 41 | Settled: Map: interfaces / interfaces"
+    },
+    {
+      "id": "pe8",
+      "fromNode": "e4",
+      "toNode": "c1",
+      "label": "1 | rule 41 | Settled: Map: interfaces / interfaces"
+    },
+    {
+      "id": "pe9",
+      "fromNode": "e5",
+      "toNode": "c1",
+      "label": "1 | rule 41 | Settled: Map: interfaces / interfaces"
+    },
+    {
+      "id": "pe10",
+      "fromNode": "c2",
+      "toNode": "e3",
+      "label": "5 | rule 42 | Deferred: Deferred: Item Flow import postponed"
+    },
+    {
+      "id": "pe11",
+      "fromNode": "e4",
+      "toNode": "c3",
+      "label": "4 | rule 42 | Deferred: Deferred: Item Flow import postponed"
+    }
+  ]
+}

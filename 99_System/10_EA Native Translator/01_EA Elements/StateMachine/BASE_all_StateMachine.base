@@ -1,6 +1,0 @@
-filters:
-  and:
-    - file.path.contains("99_System/10_EA Native Translator/01_EA Elements/StateMachine")
-views:
-  - type: table
-    name: All
