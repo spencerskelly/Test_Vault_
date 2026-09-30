@@ -419,6 +419,8 @@ Stage 2 (W-30) is the review: the changes people make in it are recorded and eit
 
 **W-191 · 2026-09-29 · `supersedes`/`supersededBy` is kept and defined.** Spencer's decision, eighth group of the relationship review (W-184). Spencer's definition: it is for elements that have been replaced by another note. Nothing in the import writes it. That the forward field `supersedes` sits on the replacing note and the inverse on the replaced note is my reading, following the other pairs, and is not confirmed. Applied as consequences: `relationships.yaml` (schemaVersion 1.22) has a `supersedes` guidance entry; the field counts are unchanged (63).
 
+**W-192 · 2026-09-29 · `conflictsWith` is kept; the relationship review (W-184 to W-192) is finished.** Spencer's decision: he is not sure it will be needed, but it may help with understanding. It already had a one-line meaning in the symmetric list of `relationships.yaml` (mutual compatibility conflict; generated mirror is derivative), which I had wrongly described as an older version; nothing in the import writes it. Result of the review (W-184 to W-192): 54 fields removed in seven groups (W-184 to W-190; 117 before, 63 after), `supersedes`/`supersededBy` defined (W-191), `conflictsWith` kept (W-192). `relationships.yaml` (schemaVersion 1.23) has 25 paired pairs, 1 temporary pair (`hasClassifier`), 3 symmetric fields (`conflictsWith`, `interfaces`, `equals`) and 8 one-way fields (`participants`, `transmits`, `receives`, `exchanges`, `sequence`, `initialState`, `finalState`, `trigger`), 63 in all; `.obsidian/types.json` has 88 properties. Every remaining field has a rule or a written meaning; that `initialState`, `finalState` and `conflictsWith` have no rule in the import is accepted.
+
 ## Open (raised, not yet decided)
 
 - What makes a vault "ready for finishing touches".
@@ -472,4 +474,3 @@ Stage 2 (W-30) is the review: the changes people make in it are recorded and eit
 - NoteLink (W-161, W-162): the canvas text card for the 225 folded notes drawn on diagrams; a note-to-note link where one of the notes folds.
 - `t_xref` relationship kinds not yet mapped (W-83, W-183): `entry` 3 and `doActivity` 2 (State to Activity), `represents` 1 (ActivityPartition to Class), `target` 6 (Action to ActionPin).
 - Templates (W-182): approve the list of relationship fields per template.
-- Relationship review (W-184), fields with no rule in the mappings, still to confirm one group at a time: the one-way State Machine fields `initialState` and `finalState` stay (W-185 to W-187 removed the paired State Machine fields); `conflictsWith`. The import produces no Verification, Procedure, Setup, Plan, Result, Failure Mode, Step, Context, Transition or Functional Flow notes.

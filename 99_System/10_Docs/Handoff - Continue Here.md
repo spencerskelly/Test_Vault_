@@ -7,7 +7,7 @@ status: Active
 ---
 # Handoff: Continue Here
 
-Rewritten 2026-09-29 (W-183), updated through W-191 for a new AI chat continuing the work on this vault. Read this note first, then the Workspace Decision Log.
+Rewritten 2026-09-29 (W-183), updated through W-192 for a new AI chat continuing the work on this vault. Read this note first, then the Workspace Decision Log.
 
 ## What this vault is
 
@@ -15,9 +15,9 @@ Rewritten 2026-09-29 (W-183), updated through W-191 for a new AI chat continuing
 
 ## Read in this order
 
-1. `99_System/10_Docs/Workspace Decision Log.md`: every decision (W-01 to W-191) and the Open list at the bottom. It is the authority for what has been decided.
+1. `99_System/10_Docs/Workspace Decision Log.md`: every decision (W-01 to W-192) and the Open list at the bottom. It is the authority for what has been decided.
 2. `Definitions/Note Layout.md` and `Definitions/EA Source Section.md`.
-3. `99_System/03_Schemas/`: `ea-element-mapping.yaml` (all 31 EA object types), `ea-connector-mapping.yaml` (all 15 connector types, W-151 to W-179), `relationships.yaml` (schemaVersion 1.22), `element-types.yaml` (25 classes), `ea-field-dispositions.yaml`, `ea-tag-dispositions.yaml`, `ea-package-rules.yaml`.
+3. `99_System/03_Schemas/`: `ea-element-mapping.yaml` (all 31 EA object types), `ea-connector-mapping.yaml` (all 15 connector types, W-151 to W-179), `relationships.yaml` (schemaVersion 1.23), `element-types.yaml` (25 classes), `ea-field-dispositions.yaml`, `ea-tag-dispositions.yaml`, `ea-package-rules.yaml`.
 4. `99_System/10_Docs/Post-Import Tasks.md` (Tasks 1 to 8; Task 7 has 12 items).
 5. `99_System/02_AI/AI_INSTRUCTIONS.md` and `MDSE Modeling Ruleset 1.21` (its section 3 is out of date, see the Open list).
 6. The EA export is in `99_System/CSV_EA` (`t_objectproperties_raw.csv` is the tag source, because only it has the Notes column; `t_xref.csv` holds the `conveyed`, `trigger` and other relationship rows). The `.qeax` and the translator source (v2.6.0) are not in the repository; ask for `EA_to_MDSE_Consolidated_v2_6_0.zip` if the earlier tool's rules are needed. The r12 relationship matrix notes in `99_System/10_EA Native Translator` are evidence only; the connector mapping replaces them.
@@ -29,7 +29,7 @@ Rewritten 2026-09-29 (W-183), updated through W-191 for a new AI chat continuing
 - Show a real example from the export when a rule is hard to picture; he often asks for one.
 - Short and direct, no praise. Tell him if there is a more efficient way to work.
 - Nothing is applied until he approves it. If you apply consequences of an approved decision, say so and list them.
-- Log every decision as the next W number (next is W-192) in the Decision Log, update the worklist YAML and this handoff, then commit and push to `main`. He allows pushing to `main` and pulls each change into Obsidian.
+- Log every decision as the next W number (next is W-193) in the Decision Log, update the worklist YAML and this handoff, then commit and push to `main`. He allows pushing to `main` and pulls each change into Obsidian.
 - Commit only when every edit applied and every YAML and JSON file parses. Make each scripted edit fail on an anchor that matches zero or several times, and stop the commit if any edit failed (twice in the last chat a commit went out missing an edit; once an anchor matched Task 5 instead of Task 7). Quote long YAML text values (a colon followed by a space has broken a file twice). Use quoted heredocs (`<<'EOF'`). Check that a referenced source file or column exists before relying on it. Stay with EA names until after the import (W-93).
 - Never write an access token into a file. After cloning, reset the remote URL to the token-free form and push with the token in the command only. Set a repo-local git identity before the first commit. Check `git log` for commits you did not make before adding a decision number.
 
@@ -98,15 +98,16 @@ All 21,822 connectors have a rule, and a rebuild of the export with every rule p
 
 Principles that came out of this: only a Function or a Design satisfies a requirement; a requirement applies to an Object (W-160). Off-pattern pairs keep the EA meaning and get `REVIEW modelCheck: <stereotype> <source type> to <target type>` (W-160 onward). Every review line must be resolvable from the vault alone, with a review table in `99_System/11_Import` keyed by GUID where the notes cannot hold the evidence (W-156, W-157). Connector names use `- Connector name: <name> (to [[other end]])` (W-158). Where a placement child is `subtypeOf` its owner, no placement link is written (W-178). New fields since W-150: `interfaces`, `equals` (symmetric), `refines`/`refinedBy`, `drives`/`drivenBy`, `references`/`referencedBy`, `precedes`/`follows`, and one-way `participants`, `transmits`, `receives`, `exchanges`. Long generated lists (`applies` up to 133 on one Object) are judged after the import (W-179, Task 7 item 12). Flow elements (Actions, Decisions and the rest) stay `modelCheck` notes because most will be deleted and ids are never reused (W-174).
 
+**Relationship review finished (W-184 to W-192).** 54 fields were removed in seven groups (117 before, 63 after), `supersedes`/`supersededBy` was defined and `conflictsWith` kept. `relationships.yaml` (schemaVersion 1.23) now has 63 fields: 25 paired pairs, 1 temporary pair, 3 symmetric and 8 one-way; `types.json` has 88 properties.
+
 ## Next steps, in the order I recommend
 
-1. **Relationship review (W-184).** Spencer asked for each relationship field to be confirmed as in use and correct. Done: `carries`/`flowsOn`, `instanceOf`/`hasInstance`, `connects`/`connectedBy` (W-184) and `hasStateMachine`, `hasState`, `hasTransition` (W-185) and `startState`, `endState` (W-186) and `operatingState` (W-187) and `hasBehavior`, `subject`, `hasContext` (W-188) and `hasParticipant` (W-189, Contexts use `participants`) and the 28 verification and failure fields (W-190) removed; `supersedes`/`supersededBy` kept and defined (W-191). Still to confirm one group at a time, before the templates: the group named in the Open list (`initialState` and `finalState` stay; `conflictsWith`).
-2. **Templates.** Spencer chose to list only the few relationship fields each class nearly always has (W-182). The proposed list waits for his approval: Requirement `derivedFrom`, `appliesTo`; Object `subtypeOf`, `hasPart`, `hasPort`; Port `interfaces`, `subtypeOf`; Item Flow `subtypeOf`; Use Case `participants`, `drives`, `optionOf`; Function `satisfies`, `subtypeOf`, `precedes`; Design `satisfies`, `subtypeOf`; Verification `verifies`; Info and Artifact `describes`; Issue `affects`; State `precedes`; Actor `subtypeOf`; State Machine `hasChild`; Transition `source`, `target`, `trigger`; Context `participants`; Failure Mode `affects`; none for Plan, Result, Step, Procedure, Setup, Document, Functional Flow and modelCheck; `hasChild` on none (it comes from placement). Then: `Port.md` defaults to `electrical & material` (translated Ports are `proxy`, `full` or blank); subtype variants only where fields or sections differ; the legacy `folder` values in `element-types.yaml` (W-04); the Person template's list properties.
-3. **The 4 unmapped `t_xref` relationship kinds** (12 rows): `entry` and `doActivity` (State to Activity), `represents` (ActivityPartition to Class), `target` (Action to ActionPin).
-4. **Naming:** the unsafe-character replacement and the duplicate-name suffix (W-48, W-65), and the designator parse rule per source document (W-82).
-5. **Layout gaps:** the user section's name and content, the aliases and `formerIds` format, the order of the `Source: EA` lines (tag lines, connector name lines, Guard/Trigger/Effect lines, review lines), where the definitions of kept body lines go, the counter order for several attachments on one note, and the line format for values kept on a merged Port (W-121).
-6. **Diagrams:** the companion note's class, `id` prefix and body beyond the message list (W-73, W-176), and the canvas text card for the 225 folded notes drawn on diagrams (W-161).
-7. **Schema and docs left out of date:** `Ruleset 1.21` section 3, the translator (v2.6.0), the `Definitions/Properties` notes for the relationship fields (only `uid`, `id` and `eaType` exist), `MDSE Element - Interface.md` and its canvas, the 18 unused properties in `types.json`, and whether `hasFlow` stays next to the pin direction fields (W-177).
+1. **Templates.** Spencer chose to list only the few relationship fields each class nearly always has (W-182). The proposed list waits for his approval: Requirement `derivedFrom`, `appliesTo`; Object `subtypeOf`, `hasPart`, `hasPort`; Port `interfaces`, `subtypeOf`; Item Flow `subtypeOf`; Use Case `participants`, `drives`, `optionOf`; Function `satisfies`, `subtypeOf`, `precedes`; Design `satisfies`, `subtypeOf`; Verification `verifies`; Info and Artifact `describes`; Issue `affects`; State `precedes`; Actor `subtypeOf`; State Machine `hasChild`; Transition `source`, `target`, `trigger`; Context `participants`; Failure Mode `affects`; none for Plan, Result, Step, Procedure, Setup, Document, Functional Flow and modelCheck; `hasChild` on none (it comes from placement). Then: `Port.md` defaults to `electrical & material` (translated Ports are `proxy`, `full` or blank); subtype variants only where fields or sections differ; the legacy `folder` values in `element-types.yaml` (W-04); the Person template's list properties.
+2. **The 4 unmapped `t_xref` relationship kinds** (12 rows): `entry` and `doActivity` (State to Activity), `represents` (ActivityPartition to Class), `target` (Action to ActionPin).
+3. **Naming:** the unsafe-character replacement and the duplicate-name suffix (W-48, W-65), and the designator parse rule per source document (W-82).
+4. **Layout gaps:** the user section's name and content, the aliases and `formerIds` format, the order of the `Source: EA` lines (tag lines, connector name lines, Guard/Trigger/Effect lines, review lines), where the definitions of kept body lines go, the counter order for several attachments on one note, and the line format for values kept on a merged Port (W-121).
+5. **Diagrams:** the companion note's class, `id` prefix and body beyond the message list (W-73, W-176), and the canvas text card for the 225 folded notes drawn on diagrams (W-161).
+6. **Schema and docs left out of date:** `Ruleset 1.21` section 3, the translator (v2.6.0), the `Definitions/Properties` notes for the relationship fields (only `uid`, `id` and `eaType` exist), `MDSE Element - Interface.md` and its canvas, the 18 unused properties in `types.json`, and whether `hasFlow` stays next to the pin direction fields (W-177).
 
 ## Layout and sweep (W-107, W-108)
 
