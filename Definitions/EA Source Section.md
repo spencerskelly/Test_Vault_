@@ -33,6 +33,14 @@ EA GUID: {D2B8F0A4-...}
 - Values that were moved into a property of the note are not repeated here.
 - Values that are written as normal text higher in the note are not repeated here: the Note, `text` wording, `User Story`, `Sales Comment`, `Product Management Comment`, `Engineering Comment`, and any multi-line `Priority` value (W-102, W-104, W-106). No tag line contains a line break.
 
+## Order below the GUID (W-208)
+
+1. The element's own EA values: the `Alias` line, then the tag lines in the order set in [[Note Layout]].
+2. Values from EA structure on the element: `quantity of`, then the State action lines and the Class `Attribute:` lines, then the link lines (`Represents:`, `Target pin:` and the inverse forms).
+3. Connector values.
+4. Discussion posts.
+5. `REVIEW port needed`, always the last line of the section.
+
 ## Lines decided since the layout was set
 
 These are the kinds of line the translator writes in this section, or near it, as decided in the Workspace Decision Log. Each is written only when EA had a real value.
