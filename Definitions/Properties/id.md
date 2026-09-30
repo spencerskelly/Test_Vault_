@@ -14,15 +14,15 @@ The short, readable identifier people use to talk about a note, for example `REQ
 
 ## Format
 
-- **Most notes:** a class prefix, a hyphen, and a five-digit number, for example `REQ-00042`.
-- **Requirements that come from a standard or a stakeholder document:** the source's own designator, for example `UL2594_13.1`. If no designator can be derived, `STD-#####` for standards and `STK-#####` for stakeholder documents.
+- **Every note:** a class prefix, a hyphen, and a five-digit number, for example `OBJ-00042`.
+- **Requirements:** by subtype, `STD-#####` for a standard, `STK-#####` for a stakeholder requirement, and `REQ-#####` for the others (W-203). No designator is read from the source: a designator such as `UL 2594 24.1.0-01` stays in the note's name.
 
-An `id` is one of two things: an internal identifier defined here, or an external identifier that shows the document and the section. Any other identifier found in the source is not an `id`. It is kept in the note body under the source identifiers at the bottom.
+An `id` is always an internal identifier defined here. Any other identifier found in the source is not an `id`. It is kept in the note body under the source identifiers at the bottom.
 
 ## How it is determined
 
 - **Note created in the vault:** filled in automatically when the template is applied, using the next number for that class.
-- **Note translated from EA:** numbered in original creation order within each class, oldest first, so `REQ-00001` is the oldest requirement. The same EA data always gives the same numbers.
+- **Note translated from EA:** numbered in original creation order within each prefix, oldest first, so `REQ-00001` is the oldest requirement that is neither a standard nor a stakeholder requirement. The same EA data always gives the same numbers.
 - After migration the numbers are permanent. New notes continue after the highest migrated number.
 
 ## What it impacts
