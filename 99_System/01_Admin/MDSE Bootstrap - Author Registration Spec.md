@@ -1,8 +1,6 @@
 ---
 uid: 20260928090456001skellyspencer
 id: INFO-00006
-type: Info
-subtype: Specification
 status: Active
 ---
 # MDSE Bootstrap: Author Registration

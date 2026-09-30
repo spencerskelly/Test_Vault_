@@ -1,8 +1,6 @@
 ---
 uid: 20260928092023008skellyspencer
 id: INFO-00015
-type: Info
-subtype: Person
 status: Active
 code: virziray-----
 name: Ray Virzi

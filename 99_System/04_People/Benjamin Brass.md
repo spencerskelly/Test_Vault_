@@ -1,8 +1,6 @@
 ---
 uid: 20260928092023009skellyspencer
 id: INFO-00016
-type: Info
-subtype: Person
 status: Active
 code: brassbenjamin
 name: Benjamin Brass

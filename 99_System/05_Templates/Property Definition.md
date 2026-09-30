@@ -1,6 +1,4 @@
 ---
-type: Info
-subtype: Property Definition
 id: <% tp.file.include("[[Snippet - id]]") %>
 uid: <% tp.file.include("[[Snippet - uid]]") %>
 status: Active

@@ -1,7 +1,6 @@
 ---
 uid: 20260927191823000skellyspencer
 id: INFO-00001
-type: Info
 status: Archived
 ---
 # Archived Plugins

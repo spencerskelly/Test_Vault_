@@ -1,8 +1,6 @@
 ---
 uid: 20260928122756000skellyspencer
 id: INFO-00019
-type: Info
-subtype: Log
 status: Active
 ---
 # Review Changes Log

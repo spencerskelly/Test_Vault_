@@ -1,8 +1,6 @@
 ---
 uid: 20260928092023006skellyspencer
 id: INFO-00013
-type: Info
-subtype: Person
 status: Active
 code: nishiokagavin
 name: Gavin Nishioka

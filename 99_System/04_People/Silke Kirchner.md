@@ -1,8 +1,6 @@
 ---
 uid: 20260928092023004skellyspencer
 id: INFO-00011
-type: Info
-subtype: Person
 status: Active
 code: kirchnersilke
 name: Silke Kirchner

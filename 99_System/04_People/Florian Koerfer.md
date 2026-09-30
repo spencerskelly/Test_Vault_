@@ -1,8 +1,6 @@
 ---
 uid: 20260928092023002skellyspencer
 id: INFO-00009
-type: Info
-subtype: Person
 status: Active
 code: koerferfloria
 name: Florian Koerfer

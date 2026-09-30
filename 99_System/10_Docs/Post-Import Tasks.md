@@ -1,8 +1,6 @@
 ---
 uid: 20260928142805000skellyspencer
 id: INFO-00021
-type: Info
-subtype: Guide
 status: Draft
 ---
 # Post-Import Tasks

@@ -1,8 +1,6 @@
 ---
 uid: 20260928092023000skellyspencer
 id: INFO-00007
-type: Info
-subtype: Person
 status: Active
 code: skellyspencer
 name: Spencer Skelly
