@@ -17,7 +17,7 @@ Rewritten 2026-09-29 (W-183), updated through W-212 for a new AI chat continuing
 
 1. `99_System/10_Docs/Workspace Decision Log.md`: every decision (W-01 to W-212) and the Open list at the bottom. It is the authority for what has been decided.
 2. `Definitions/Note Layout.md` and `Definitions/EA Source Section.md`.
-3. `99_System/03_Schemas/`: `ea-element-mapping.yaml` (all 31 EA object types), `ea-connector-mapping.yaml` (all 15 connector types, W-151 to W-179), `relationships.yaml` (schemaVersion 1.23), `element-types.yaml` (25 classes), `ea-field-dispositions.yaml`, `ea-tag-dispositions.yaml`, `ea-package-rules.yaml`.
+3. `99_System/03_Schemas/`: `ea-element-mapping.yaml` (all 31 EA object types), `ea-connector-mapping.yaml` (all 15 connector types, W-151 to W-179), `relationships.yaml` (schemaVersion 1.23), `element-types.yaml` (26 classes, `Diagram` added in W-212), `ea-field-dispositions.yaml`, `ea-tag-dispositions.yaml`, `ea-package-rules.yaml`.
 4. `99_System/10_Docs/Post-Import Tasks.md` (Tasks 1 to 8; Task 7 has 12 items).
 5. `99_System/02_AI/AI_INSTRUCTIONS.md` and `MDSE Modeling Ruleset 1.21` (its section 3 is out of date, see the Open list).
 6. The EA export is in `99_System/CSV_EA` (`t_objectproperties_raw.csv` is the tag source, because only it has the Notes column; `t_xref.csv` holds the `conveyed`, `trigger` and other relationship rows). The `.qeax` and the translator source (v2.6.0) are not in the repository; ask for `EA_to_MDSE_Consolidated_v2_6_0.zip` if the earlier tool's rules are needed. The r12 relationship matrix notes in `99_System/10_EA Native Translator` are evidence only; the connector mapping replaces them.
