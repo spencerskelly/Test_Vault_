@@ -1112,6 +1112,18 @@ async function analyze() {
 function resetAll() {
   selectedFile = null;
   lastReport = null;
+  if (typeof lastPlan !== "undefined") lastPlan = null;
+  ["downloadPlanJson","downloadPlanCsv"].forEach(function(id){ const b=el(id); if(b)b.disabled=true; });
+  if(el("plan"))el("plan").disabled=true;
+  if(el("planStatus")){el("planStatus").textContent="Run preflight first";el("planStatus").className="badge";}
+  if(el("plannedTotal"))el("plannedTotal").textContent="—";
+  if(el("plannedNotes"))el("plannedNotes").textContent="—";
+  if(el("plannerResult")){el("plannerResult").textContent="—";el("plannerResult").className="stat";}
+  if(el("plannerResultDetail"))el("plannerResultDetail").textContent="No plan yet";
+  if(el("elementPlanSummary"))el("elementPlanSummary").innerHTML="";
+  if(el("connectorPlanSummary"))el("connectorPlanSummary").innerHTML="";
+  if(el("portPlanSummary"))el("portPlanSummary").innerHTML="";
+  if(el("plannerIssues"))el("plannerIssues").innerHTML='<div class="issue muted">No plan yet.</div>';
   el("file").value = "";
   el("fileName").textContent = "Choose the EA .qea/.qeax source";
   el("overall").textContent = "—"; el("overall").className = "stat";
@@ -1465,7 +1477,7 @@ function classifyElements(objects,connectors,pkg,portResolution){
       const links=noteLinks.get(id)||[];
       const realTargets=links.filter(x=>x.other&&trim2(x.other.Object_Type)!=="Note");
       const uniqueTargets=new Set(realTargets.map(x=>n2(x.other.Object_ID)));
-      if(uniqueTargets.size===1&&links.length===1){
+      if(uniqueTargets.size===1&&links.length>0&&links.every(x=>x.other&&trim2(x.other.Object_Type)!=="Note"&&n2(x.other.Object_ID)===Array.from(uniqueTargets)[0])){
         p.outcome="folded";p.rule="W-161";p.targetKey=planKey("object",Array.from(uniqueTargets)[0]);
       }else{p.outcome="note";p.mdseType="Info";p.rule="W-145/W-161";}
     } else if(t==="Text"||t==="Constraint"){
@@ -1754,7 +1766,7 @@ async function buildTranslationPlan(){
     const packagePlans=packages.map(p=>{
       const names=pkg.names(p.Package_ID), top=names.join(" > ");
       if(top==="Model"||top==="Model > IPC !")return {sourceKind:"package",sourceId:n2(p.Package_ID),eaGuid:trim2(p.ea_guid),eaType:"Package",eaName:trim2(p.Name),packagePath:top,outcome:"not carried",rule:"W-117"};
-      return {sourceKind:"package",sourceId:n2(p.Package_ID),eaGuid:trim2(p.ea_guid),eaType:"Package",eaName:trim2(p.Name),packagePath:top,outcome:trim2(p.Notes)?"folder + package note":"folder",mdseType:trim2(p.Notes)?"modelCheck":"",subtype:trim2(p.Notes)?"Package":"",rule:trim2(p.Notes)?"W-117/W-147":"W-117"};
+      return {sourceKind:"package",sourceId:n2(p.Package_ID),eaGuid:trim2(p.ea_guid),eaType:"Package",eaName:trim2(p.Name),packagePath:top,outcome:"folder",rule:"W-117",detail:trim2(p.Notes)?"matching t_object Package row owns the optional W-147 package note":"folder only"};
     });
     const diagramPlans=diagrams.map(d=>({sourceKind:"diagram",sourceId:n2(d.Diagram_ID),eaGuid:trim2(d.ea_guid),eaType:trim2(d.Diagram_Type),eaName:trim2(d.Name),packagePath:pkg.fullPath(d.Package_ID),outcome:trim2(d.Diagram_Type)==="Sequence"?"companion note only":"companion note + canvas",mdseType:"Diagram",subtype:trim2(d.Diagram_Type).toLowerCase(),rule:trim2(d.Diagram_Type)==="Sequence"?"W-73/W-176":"W-73/W-212/W-213" }));
 
@@ -1795,7 +1807,7 @@ async function buildTranslationPlan(){
       if(p.outcome==="note"||p.outcome==="note+folder")emittedElementEntityKeys.add("element:"+p.sourceId);
       if(p.outcome==="added-port-group")emittedElementEntityKeys.add(p.targetKey);
     }
-    const packageNoteCount=packagePlans.filter(p=>p.mdseType==="modelCheck").length;
+    const packageNoteCount=elementPlans.filter(p=>p.eaType==="Package"&&(p.outcome==="note+folder")).length;
     const diagramNoteCount=diagramPlans.length;
 
     const result=issues.some(i=>i.severity==="fail")?"FAIL":issues.some(i=>i.severity==="warn")?"WARN":"PASS";
