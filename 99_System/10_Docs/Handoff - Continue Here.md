@@ -5,7 +5,7 @@ status: Active
 ---
 # Handoff: Continue Here
 
-Rewritten 2026-09-29 (W-183), updated through W-243 for a new AI chat continuing the work on this vault. Read this note first, then the Workspace Decision Log.
+Rewritten 2026-09-29 (W-183), updated through W-245 for a new AI chat continuing the work on this vault. Read this note first, then the Workspace Decision Log.
 
 ## What this vault is
 
@@ -13,7 +13,7 @@ Rewritten 2026-09-29 (W-183), updated through W-243 for a new AI chat continuing
 
 ## Read in this order
 
-1. `99_System/10_Docs/Workspace Decision Log.md`: every decision (W-01 to W-243) and the Open list at the bottom. It is the authority for what has been decided.
+1. `99_System/10_Docs/Workspace Decision Log.md`: every decision (W-01 to W-245) and the Open list at the bottom. It is the authority for what has been decided.
 2. `Definitions/Note Layout.md` and `Definitions/EA Source Section.md`.
 3. `99_System/03_Schemas/`: `ea-element-mapping.yaml` (all 31 EA object types), `ea-connector-mapping.yaml` (all 15 connector types, W-151 to W-179), `relationships.yaml` (schemaVersion 1.23), `element-types.yaml` (26 classes, `Diagram` added in W-212), `ea-field-dispositions.yaml`, `ea-tag-dispositions.yaml`, `ea-package-rules.yaml`.
 4. `99_System/10_Docs/Post-Import Tasks.md` (Tasks 1 to 8; Task 7 has 12 items).
