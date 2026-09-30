@@ -1262,22 +1262,25 @@ tXref:
   note: 'Structure (W-83). StateFlow to its Trigger object; 42 of 44 resolve.'
 - kind: MOFProps
   item: 'target'
-  disposition: structure
-  decision: W-83
+  disposition: body
+  placement: source section, on both ends
+  decision: W-194
   rows: 6
-  note: 'Structure (W-83). Action to ActionPin; all 6 resolve.'
+  note: 'Body (W-194). Action to ActionPin; all 6 resolve. A line on each end: `- Target pin: [[pin]]` on the Action, `- Target pin of: [[Action]]` on the ActionPin (inverse wording is a reading, W-194).'
 - kind: MOFProps
   item: 'entry'
-  disposition: structure
-  decision: W-83
+  disposition: body
+  placement: source section, on both ends
+  decision: W-194
   rows: 3
-  note: 'Structure (W-83). State to its entry Activity; all 3 resolve.'
+  note: 'Body (W-194). State to its entry Activity; all 3 resolve. `- Entry action: [[Activity]]` on the State, `- Entry action of: [[State]]` on the Activity. Overlaps the t_operation row of W-86 (open, W-194).'
 - kind: MOFProps
   item: 'doActivity'
-  disposition: structure
-  decision: W-83
+  disposition: body
+  placement: source section, on both ends
+  decision: W-194
   rows: 2
-  note: 'Structure (W-83). State to its doActivity Activity; both resolve.'
+  note: 'Body (W-194). State to its doActivity Activity; both resolve. `- Do action: [[Activity]]` on the State, `- Do action of: [[State]]` on the Activity. Overlaps the t_operation row of W-86 (open, W-194).'
 - kind: MOFProps
   item: 'effect'
   disposition: structure
@@ -1286,10 +1289,11 @@ tXref:
   note: 'Structure (W-83). StateFlow to its effect Activity; both resolve.'
 - kind: MOFProps
   item: 'represents'
-  disposition: structure
-  decision: W-83
+  disposition: body
+  placement: source section, on both ends
+  decision: W-194
   rows: 1
-  note: 'Structure (W-83). ActivityPartition to the Class it represents; resolves.'
+  note: 'Body (W-194). ActivityPartition to the Class it represents; resolves. `- Represents: [[Class]]` on the ActivityPartition, `- Represented by: [[ActivityPartition]]` on the Class.'
 - kind: MOFProps
   item: 'redefinedProperty'
   disposition: archive

@@ -505,6 +505,7 @@ connectorTypes:
     writtenOn: 'pointing at the conveyed Item Flow note; one-way; where a Port would get both transmits and receives for one item it gets exchanges once instead (W-178): transmits 51, receives 60, exchanges 18'
   blockLevel: '9 connectors keep REVIEW port needed with the GUID and the review table (W-55, W-157)'
   name: 'W-158 line on both ends (10)'
-# Relationship rows in t_xref (W-83) not yet mapped (W-183): entry 3 and doActivity 2 (State to Activity),
-# represents 1 (ActivityPartition to Class), target 6 (Action to ActionPin). conveyed is used by InformationFlow
+# Relationship rows in t_xref (W-83) mapped in W-194 as body lines on both ends, no relationship field:
+# entry 3 and doActivity 2 (State to Activity), represents 1 (ActivityPartition to Class), target 6 (Action to ActionPin).
+# See ea-field-dispositions.yaml for the line formats. conveyed is used by InformationFlow
 # (W-177); trigger and effect are written as StateFlow lines (W-175).

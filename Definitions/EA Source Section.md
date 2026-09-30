@@ -42,7 +42,7 @@ These are the kinds of line the translator writes in this section, or near it, a
 - `- Designator: <value>` on a requirement whose external designator is shared with another note and so could not be its `id` (W-82).
 - `quantity of <child> is: <value>` on an assembly, one line per Part or connector that gives a quantity (W-43, W-54).
 - A discussion post on a requirement, one line each with author and date (W-75).
-- `- Entry action:`, `- Do action:` or `- Exit action:` followed by the name, on a State (W-86), and `- Attribute: <name> (<type>)` on a Class (W-86).
+- `- Entry action:`, `- Do action:` or `- Exit action:` followed by the name, on a State (W-86), and `- Attribute: <name> (<type>)` on a Class (W-86). Links from `t_xref` are lines on both ends (W-194): `- Entry action:`, `- Do action:`, `- Represents:`, `- Target pin:` and the inverse forms `- Entry action of:`, `- Do action of:`, `- Represented by:`, `- Target pin of:`.
 - Connector values (Name, Notes, trigger, guard, effect): on both end notes for Connector and InformationFlow, on the owner-side note for other types (W-55, W-56, W-61).
 - `- REVIEW port needed: ...` on both ends of a flow connector that was drawn on a block instead of a port; it is deleted when the connector is moved to a port (W-55, Task 1 in `Post-Import Tasks.md`).
 
