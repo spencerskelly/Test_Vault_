@@ -1,8 +1,8 @@
-# MDSE Modeling Ruleset 1.21
+# MDSE Modeling Ruleset 1.22
 
 ## Status
 
-Superseded by Ruleset 1.22 (W-260). Retained until step 4 of W-246 removes it.
+Current modeling ruleset for the MDSE vault. Reissued from 1.21 (W-260): the cross-vault sections, `instanceOf` and the `control` and `boundary` note are removed; section numbers are kept so that references still resolve. The rules the translator follows are in `Translator Definition.md`.
 
 ## 1. Model meaning before structure
 
@@ -17,7 +17,9 @@ The primary reusable engineering-entity type is **Object**. The former top-level
 `Object` may represent physical hardware, software, firmware, or other reusable engineering entities according to its approved subtype. In translator material, use **EA Object** for the Sparx EA metaclass and **MDSE Object** for the MDSE type whenever ambiguity is possible.
 
 
-Every modeled note uses `type` for its primary MDSE semantic class and `subtype` for an approved specialization/classification within that type.
+Every model note (a note made from a class template in `99_System/05_Templates`) uses `type` for its primary MDSE semantic class and `subtype` for an approved specialization/classification within that type.
+
+Notes in `99_System` are reference and system notes and carry no `type` or `subtype` (W-243).
 
 The former property name `kind` is deprecated and must not be used in new notes.
 
@@ -25,13 +27,11 @@ The former property name `kind` is deprecated and must not be used in new notes.
 
 ## 2. Generalization
 
-Use `subtypeOf` only for a reusable invariant semantic distinction. Use `instanceOf` for concrete occurrences, deployed/location-specific objects, configured realizations, or cases where the difference is ordinary data/configuration.
+Use `subtypeOf` only for a reusable invariant semantic distinction. Where the difference is ordinary data or configuration, it is not a `subtypeOf`; there is no `instanceOf` field (W-184).
 
 ## 3. Product control
 
-> Note (2026-09-28, W-88, W-112): `control` and `boundary` are not properties of a note. They are not approved, carry no values and are not written by templates or the translator. This section is kept as written until the ruleset is reissued.
-
-`control` is independent from type and boundary. Do not create subtypes just to represent control, ownership, location, or lifecycle.
+Removed in 1.22. `control` and `boundary` are not properties of a note (W-88, W-112).
 
 ## 4. Relationships
 
@@ -71,38 +71,11 @@ Keep fewer than 25 modeled elements in an immediate folder when a durable semant
 
 ## 10. Company/domain authority
 
-`Ampure_Data` is the common company vault.
-
-Company-owned enterprise identities include, when designated:
-
-- People
-- Organizations
-- Business Areas
-- Roles
-- common Processes
-- enterprise Product / Product Line identity
-
-Engineering/product-line vaults own detailed technical structure, requirements, designs, tests, issues, configurations, and other domain semantics.
-
-Reference authoritative elements across vaults; do not fork identities for convenience.
+Removed in 1.22. The vault is one vault with no cross-vault links (W-01).
 
 ## 11. Cross-vault identity
 
-Every note has an immutable 30-character `uid`. Every vault has an immutable `vault_uid` in `.vault.yaml`.
-
-Canonical durable note reference:
-
-```text
-uid:<30-character-id>
-```
-
-Canonical section reference:
-
-```text
-uid:<30-character-id>#<section-anchor>
-```
-
-Paths and vault names are current-location metadata, not durable identity.
+Removed in 1.22 (W-01). Every note still has an immutable 30-character `uid` (W-13); its format is in `AI_INSTRUCTIONS.md`.
 
 ## 12. Vault creation and splitting
 
@@ -112,13 +85,9 @@ When scale, access, lifecycle, ownership, search quality, or AI context becomes 
 
 ## 13. Cross-vault views
 
-For system/reference-level navigation across vaults:
-
-- link to an authoritative `.base` view when one exists;
-- otherwise link to the target README/index.
-
-For semantic note-to-note relationships, target the specific note UID directly.
+Removed in 1.22 (W-01).
 
 ## 14. Integrity before handoff
 
-Before handoff: YAML parses; IDs/UIDs are unique; links resolve where accessible; inverses are synchronized; subtype semantics are defensible; Functions have performers where applicable; requirement basis/satisfaction/verification gaps are visible.
+The checks a translator run must pass are in `Translator Definition.md` section 10. For hand-made work before handoff: YAML parses; ids and uids are unique; links resolve; inverses are synchronized; Functions have performers where applicable; requirement basis, satisfaction and verification gaps are visible.
+

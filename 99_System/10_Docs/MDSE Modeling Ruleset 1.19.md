@@ -2,7 +2,7 @@
 
 ## Status
 
-Current reusable modeling ruleset for new Ampure vaults.
+Superseded. Retained until step 4 of W-246 removes it.
 
 ## 1. Model meaning before structure
 
