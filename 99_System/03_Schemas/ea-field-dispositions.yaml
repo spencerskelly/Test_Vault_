@@ -1273,14 +1273,14 @@ tXref:
   placement: source section, on both ends
   decision: W-194
   rows: 3
-  note: 'Body (W-194). State to its entry Activity; all 3 resolve. `- Entry action: [[Activity]]` on the State, `- Entry action of: [[State]]` on the Activity. Overlaps the t_operation row of W-86 (open, W-194).'
+  note: 'Body (W-194). State to its entry Activity; all 3 resolve. `- Entry action: [[Activity]]` on the State, `- Entry action of: [[State]]` on the Activity. Written as defined next to the W-86 t_operation line, no merge rule (W-195).'
 - kind: MOFProps
   item: 'doActivity'
   disposition: body
   placement: source section, on both ends
   decision: W-194
   rows: 2
-  note: 'Body (W-194). State to its doActivity Activity; both resolve. `- Do action: [[Activity]]` on the State, `- Do action of: [[State]]` on the Activity. Overlaps the t_operation row of W-86 (open, W-194).'
+  note: 'Body (W-194). State to its doActivity Activity; both resolve. `- Do action: [[Activity]]` on the State, `- Do action of: [[State]]` on the Activity. Written as defined next to the W-86 t_operation line, no merge rule (W-195).'
 - kind: MOFProps
   item: 'effect'
   disposition: structure
