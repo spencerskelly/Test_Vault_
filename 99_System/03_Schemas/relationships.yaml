@@ -1,4 +1,4 @@
-schemaVersion: '1.31'
+schemaVersion: '1.32'
 date: '2026-09-30'
 storage: Author forward/owner-side fields. Inverse fields are persisted in YAML and written with the forward field by the translator, Workbench or the regenerate script (W-275); the forward field wins when they disagree.
 paired:
@@ -27,8 +27,6 @@ paired:
 - {forward: verifies, inverse: verifiedBy, from: [Verification], to: [Requirement]}
 - {forward: realizedBy, inverse: realizes, from: [Use Case], to: [Function, Design]}
 - {forward: optionOf, inverse: hasOption, from: [Use Case], to: [Use Case]}
-- {forward: source, inverse: sourceOf}
-- {forward: target, inverse: targetOf}
 - {forward: affects, inverse: affectedBy, from: [Issue, Failure Mode, Use Case], to: any}
 temporaryPairs:
 - forward: hasClassifier
@@ -52,10 +50,10 @@ oneWay:
 - {field: transmits, from: [Port], to: [Item Flow]}
 - {field: receives, from: [Port], to: [Item Flow]}
 - {field: exchanges, from: [Port], to: [Item Flow]}
-- {field: sequence}
-- {field: initialState}
-- {field: finalState}
+- {field: initialState, from: [State Machine], to: [State]}
+- {field: finalState, from: [State Machine], to: [State]}
 guidance:
+  states: 'initialState and finalState are one-way, written on a State Machine and pointing at the State it starts in and the States it can end in; finalState may hold several values. Nothing in the import writes them; Post-Import Task 7 item 14 replaces the initial and final node notes with them (W-285).'
   affects: 'affects/affectedBy: the source has an impact on a target that exists anyway, good or bad (for example an Issue or Failure Mode on the element it harms, or normal use in a Use Case on the parts it loads or wears); written on the source, affectedBy generated. drives is different: the target exists or happens because of the source. To design against an impact, prefer Use Case drives Requirement, applied to the element (W-284).'
   triggeredBy: 'triggeredBy/triggers: what starts a behavior. triggeredBy is written on the triggered Function, Design or State and points at the Function, Design, State or Item Flow (a signal or event) that starts it; triggers is generated (W-282). It is element-level: it does not say which transition a trigger belongs to; the transition-level trigger, guard and effect text stays as source-section lines on the state before (W-175). Guards stay as text for now (W-282).'
   exposes: 'exposes/exposedBy: one Port is also exposed at a higher level of the system; exposes is written on the outer Port and points at the inner Port, exposedBy is generated (W-281). Post-Import Task 8 turns the temporary equals into exposes, or into interfaces when it is not an exposure.'
@@ -69,9 +67,8 @@ guidance:
   precedes: 'precedes/follows is the order of steps in a flow: precedes is written on the step before, pointing at the step after; follows is generated. Used for EA ControlFlow (W-174) and StateFlow (W-175); a guard, trigger or effect is a source-section line on the step before.'
   data: 'transmits, receives and exchanges say what data a Port sends, takes in, or both, and point at the Item Flow note for that data (W-177). The Port already connects to something (interfaces); these fields define what is exchanged with it. transmits is the source or out end, receives the target or in end; for an inout flow both Ports get exchanges. One-way: nothing is written back on the Item Flow note, which shows the Ports in its backlinks and can be queried.'
   tracesTo: Migration/legacy escape hatch only. Prefer stronger semantic relationships.
-  source_target: source/target are used by Item Flow (the Transition class was removed, W-237).
   composition: 'hasPart/partOf is for Object notes only, the assembly and block relationship (W-149). hasChild/childOf is the generic parent and child link for every other nesting, written on the owner; it carries the EA owner (ParentID) of an element (W-149) and the 252 independent Nesting connectors (W-151); no placement link is written where the child is subtypeOf its owner (W-178).'
-  flow: 'hasFlow/flowOf is ownership: a Port note has the Item Flow notes made from its pins; direction is carried by source/target on the Item Flow note (W-133).'
+  flow: 'hasFlow/flowOf is ownership: a Port note has the Item Flow notes made from its pins; direction is carried by transmits, receives or exchanges on the Port (W-177).'
   copy: copyOf/hasCopy says a note is a copy of another element and lets a reader trace back to the original note. It is general, not limited to Ports (W-124).
   supersedes: 'supersedes/supersededBy is for a note that has been replaced by another note: supersedes is written on the replacing note and points at the note it replaces; supersededBy is generated on the replaced note (W-191). Nothing in the import writes it.'
   crossVault: Relationship semantics do not change across vault boundaries. Store durable note references by uid when the target is in another vault.

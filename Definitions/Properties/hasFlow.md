@@ -10,7 +10,7 @@ canChange:
 ---
 # hasFlow
 
-hasFlow/flowOf is ownership: a Port note has the Item Flow notes made from its pins; direction is carried by source/target on the Item Flow note (W-133).
+hasFlow/flowOf is ownership: a Port note has the Item Flow notes made from its pins; direction is carried by `transmits`, `receives` or `exchanges` on the Port (W-177).
 
 ## Direction
 

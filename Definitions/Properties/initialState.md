@@ -10,7 +10,7 @@ canChange:
 ---
 # initialState
 
-No meaning given yet.
+The State a State Machine starts in. One-way, written on the State Machine, State Machine to State (W-285). Nothing in the import writes it; Post-Import Task 7 item 14 replaces the initial node notes with it.
 
 ## Direction
 

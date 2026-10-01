@@ -10,7 +10,7 @@ canChange:
 ---
 # finalState
 
-No meaning given yet.
+A State a State Machine can end in. One-way, written on the State Machine, State Machine to State; it may hold several values (W-285). Nothing in the import writes it; Post-Import Task 7 item 14 replaces the final node notes with it.
 
 ## Direction
 
