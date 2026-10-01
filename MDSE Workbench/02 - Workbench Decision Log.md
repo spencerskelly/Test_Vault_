@@ -565,9 +565,9 @@ When an interface requirement exposes a real schema gap, record it for separate 
 These are build-time choices, not product questions. Decide them with the working plugin in hand ([[#WB-089 — Decide implementation details during the build]]), not one at a time up front.
 
 ### WB-072 — Exact V1 standard View Profile set
-**Status:** Open
+**Status:** Settled in practice 2026-10-01 for the views that fit the current engine: eleven are built (Structure, Functional, Requirements, Where Used, Interfaces, Verification, Design, Scenario, Behavior, Failure and risk, Evidence; WB-097, WB-098, WB-102). Still open: Impact (change impact, needs a longer walk grouped by distance), Compare, the allocation and trace matrices and the gap lists, which need new engine capabilities.
 
-Committed minimum: Structure, Behavior, Requirements. Likely additions: Interfaces, Verification, Impact. Choose by implementation effort and the first real test slice.
+Original text: Committed minimum: Structure, Behavior, Requirements. Likely additions: Interfaces, Verification, Impact. Choose by implementation effort and the first real test slice.
 
 ### WB-073 — Generated-view folder/path
 **Status:** Open (direction settled in WB-036)
@@ -948,4 +948,7 @@ Plugin 0.1.13. Spencer reported that "all the canvas views are gone from the plu
 
 ### 2026-10-01 — Report resolved; View… button built (WB-104)
 Spencer's report that "all the canvas views are gone from the plugin" was not a defect: a canvas was the active tab and no note was selected, and the Explore commands appear only for a Markdown note. All views are there. Plugin 0.1.14 adds **View…** to the popup so a view can be started from a card on a canvas. Still open: whether property and relationship edits keep using Obsidian's YAML rewrite (explained to Spencer on 2026-10-01; recommended keeping it for now and checking one real git diff first); Tests 4 and 5 and the checks of the popup, editing and the eleven views in Obsidian.
+
+### 2026-10-01 — Review of all repositories, test sheet
+Checked the four repositories: `Test_Vault_`, `MDSE_Workbench`, `20260930` and the clean base vault (`Test_Vault_-base-vault-2026-09-30-rel133-v051`). Each local copy equals its remote `main`, nothing is uncommitted, every remote is the token-free address, and no tracked file contains a token. The plugin in `20260930` is byte for byte the 0.1.14 build; the base vault holds schema 1.35 and importer v0.5.2 (the vault's own schema copy in `20260930` stays at 1.33 on purpose). `MDSE_Workbench`: README, release notes (they still described the Phase 0 spike) and the lock file version brought up to date. **The CI and release workflows are still in `ci-workflows/`**: this session's plugin-repo token has no Workflows permission, and GitHub refused the push; with such a token, move both files to `.github/workflows/` (they parse and the commands they run work here, but neither has run on GitHub). Workspace: the Handoff, Translator Definition and Decision Log already describe schema 1.35 and W-292; this note's roadmap now has a "where the build stands" paragraph, WB-072 is updated, and [[06 - Test Sheet]] lists every outstanding check in the order that finds problems fastest. No release has been tagged.
 

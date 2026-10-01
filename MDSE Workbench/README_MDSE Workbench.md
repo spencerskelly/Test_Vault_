@@ -25,6 +25,7 @@ The normal engineer should be able to use the vault without understanding schema
 3. [[03 - Build Outline and Roadmap]] — V1 scope, release path (M0 to M7), risks, acceptance scenarios, later roadmap
 4. [[04 - Architecture and Model Boundary]] — how Workbench relates to the model and the vault
 5. [[05 - Reference Plugin Findings]] — what existing plugins showed, and license cautions
+6. [[06 - Test Sheet]] — the checks to run in Obsidian against the current plugin build, in order
 
 History is in the Git log and the Decision Log's History section; there is no separate change log or handoff note.
 
