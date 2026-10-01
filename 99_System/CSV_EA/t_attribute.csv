@@ -1,6 +1,0 @@
-Object_ID,Name,Scope,Stereotype,Containment,IsStatic,IsCollection,IsOrdered,AllowDuplicates,LowerBound,UpperBound,Container,Notes,Derived,ID,Pos,GenOption,Length,Precision,Scale,Const,Style,Classifier,,Type,ea_guid,StyleEx
-29093,Abstraction Layer,Private,,Not Specified,0,0,0,0,1,1,,,0,644,0,,0,0,0,0,,,,AL,{371AC5C4-994E-4bf6-AFC3-A6AB29A91C23},volatile=0;
-29093,Webasto MBDV Profile::Business Line(UML::Class),Public,,Not Specified,0,0,0,0,1,1,,,0,645,29,,0,0,0,0,,,,,{3A4E1DDC-6A1C-4530-A9D5-F13C86EEB569},volatile=0;
-29076,Part Number,Public,,Not Specified,0,0,0,0,1,1,,,,646,0,,0,0,0,0,,,,int,{C7B87979-4921-4365-BE81-AD82D328B784},volatile=0;
-27642,Cable OD Min,Public,,Not Specified,0,0,0,0,1,1,,,,1534,0,,0,0,0,0,,,,int,{517F3621-055B-48d3-B434-CDC00E2D2A4F},volatile=0;
-27642,Cable OD Max,Public,,Not Specified,0,0,0,0,1,1,,,,1535,1,,0,0,0,0,,,,int,{130DC22D-F43A-4fe7-A163-893C31648B5B},volatile=0;
