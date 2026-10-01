@@ -43,3 +43,14 @@ uid: 20260928101530123claudeai-----   (Claude created it on its own)
 - Create a relationship only between classes its endpoint rule in `relationships.yaml` allows (`from`, `to`, `sameClass`, `excludePairs`; W-272, W-277). A relationship with no rule yet is not restricted. Use `tracesTo` only when two notes are related and no relationship fits yet; it is provisional and comes back as a Review finding to be replaced (W-288).
 - Author the forward (owner-side) relationship and, in the same edit, write its inverse per `relationships.yaml`: a paired field gets its inverse field on the other note; a symmetric field is written on both notes; a one-way field gets nothing. Inverse fields are derivative: the forward field wins when they disagree (W-275).
 - Folder placement is navigation, not meaning.
+
+## Local occurrences
+
+- Reuse the authoritative Object/Port/Item Flow definition rather than duplicating it for each contextual use (W-293, W-294).
+- When a reusable Object/assembly is used inside another Object/system and that specific use must be distinguished, model the use as a local part occurrence owned by the containing context. Its reusable semantic source is `definition`, not `subtypeOf`.
+- A contextual endpoint occurrence belongs to the Object/part occurrence on which it exists. A local connection belongs to the lowest meaningful common configuration context that brings its endpoint occurrences together. Local flows belong to that connection.
+- A Requirement may keep `appliesTo` when its true target is an addressable local occurrence. Do not invent a new relationship solely because the target is contained.
+- Local endpoint/flow roles are `transmit`, `receive`, `exchange` or `unspecified`.
+- Do **not** invent or manually standardize the contained-record Markdown syntax yet. The final local-ID token format, anchor/address syntax, canonical block fields and manual-authoring contract remain open. Until those are frozen, use the importer/Workbench-approved representation or ask.
+- Do not create a standalone note merely to preserve a contextual occurrence if stable local addressability is sufficient; promote an occurrence only when an approved independent lifecycle/reuse/ownership/navigation need justifies it.
+
