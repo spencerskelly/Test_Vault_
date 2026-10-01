@@ -22,6 +22,8 @@
     "applies": "multitext",
     "appliesTo": "multitext",
     "childOf": "multitext",
+    "hasState": "multitext",
+    "stateOf": "multitext",
     "classifierOf": "multitext",
     "copyOf": "multitext",
     "dependencyOf": "multitext",
