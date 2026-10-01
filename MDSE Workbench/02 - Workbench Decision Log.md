@@ -721,6 +721,11 @@ A relationship link in a view whose target note does not exist is drawn as an un
 
 Each build's `main.js`, `manifest.json` and `styles.css` are committed to `.obsidian/plugins/mdse-workbench/` in `spencerskelly/20260930` on `main`, after the same files are pushed to `MDSE_Workbench`. `data.json` stays ignored by the vault's `.gitignore`. `community-plugins.json` and `plugin-lock.yaml` are not touched. After a pull, Obsidian has to reload the plugin to run the new build. This is a test-vault convenience; the release pipeline and MDSE Bootstrap pinning (WB-088) replace it. First commit: 0.1.2.
 
+### WB-094 — No inverse is written for a link that breaks its rule
+**Status:** Approved 2026-10-01, my reading (Spencer confirmed the rule is right and that the links are modeling errors; he did not answer the question about the fix itself)
+
+In Review, a Missing Inverses finding whose own link breaks its endpoint rule no longer shows **Write missing inverse**; the window says the link breaks its rule and to fix the link or leave it for the post-import review. The finding and its count stay. Reason: writing the inverse would copy a modeling error to the other note, and the writer already refuses it. Built in plugin 0.1.3.
+
 ---
 
 ## How to use this log
@@ -827,3 +832,8 @@ Not yet run: a Requirement (largest has 117 structure children) and a Use Case (
 ### 2026-10-01 — Quantity seen; undefined cards decided (WB-092)
 Spencer saw WB-091 in Obsidian (0.1.1): `hasPart ×6` on Cable Jacket and `×27` on Wire - Strip and Strip. He decided that missing notes show as undefined (WB-092), replacing my proposal of a separate "+N not in this vault" card. On the cable in `20260930` (Node): 17 cards, 12 of them undefined ports, and "+24 more" for the rest. Of the 3,141 elements with a Structure view, 583 show at least one undefined card. Open, raised by Spencer's screenshot: the relationship name appears only on the first link of a group; two-line names are clipped at a 60 px card height.
 
+
+
+### 2026-10-01 — First Review test: the five missing inverses are modeling errors
+Spencer saw "Not changed: subtypeOf connects two notes of the same class only" from **Write missing inverse**. All five Missing Inverses findings in `20260930` are a State with `subtypeOf` to a Failure Mode (Damaged Package, Incorrect Part, Undamaged Package, Unknown Quality, Unkown Part), links that already break the rule. Spencer: this is likely a modeling error from quick building, not a missing inverse. So Write missing inverse cannot be tested on this vault, and the inverse write and Undo are tested through Replace relationship instead. WB-094. Open, for the model side: whether these five go to the post-import review list (Post-Import Tasks, Task 7).
+\n
