@@ -767,3 +767,27 @@ The schema had no `newRelationship` field. Spencer chose to add the capability a
 **Gate R0 (WB-090) is not yet decided.** Still to check: a relationship written from a note (inverse written in the same step, Undo works, Undo refuses after an outside edit); the relationship written from the Canvas menu item; the release pipeline (the access token cannot write workflow files; CI and release sit in `ci-workflows/` in the plugin repository).
 
 **Process note:** a commit of the 60,000-note test vault to the plugin repository replaced the source; `main` was force-reset to `1ad0b35`. The test vault belongs in its own repository (or is regenerated with `npm run bench:generate`), never in the plugin repository or in this vault.
+
+### 2026-10-01 — Gate R0 (WB-090): go, with two open items
+Spencer: "let's call this a pass" (plugin 0.0.5, 60,000-note synthetic vault, in Obsidian).
+
+**Passed**
+- **Performance (WB-081):** met with wide margin (index build 1.17 s against 60 s).
+- **Inverse writing (WB-085):** relating two notes from the Canvas right-click menu wrote the forward link and its inverse on both notes.
+- **Canvas edit feasibility (WB-080):** the `canvas:selection-menu` hook worked on this Obsidian version and wrote the relationship. Go for V1 Canvas Model Edit, kept behind a recheck at each Obsidian version the pilot uses, because the event is undocumented.
+- **Undo (WB-086):** the Workbench command restored both notes. After a hand edit it refused with a "Not undone" message; Spencer saw the longer message but did not capture its exact text, so the refusal is recorded as user-reported.
+
+**Found and fixed**
+- **Open hang on a large vault (0.0.4):** the plugin waited only 5 s for Obsidian's cache, then indexed while Obsidian was still caching a new 60,000-note vault. The first open took about 10 minutes and Obsidian offered to reopen the vault. Workbench now does nothing until the cache is done and the vault has been quiet for 8 s, with no fixed timeout. After the cache existed, reopening took 5 to 10 seconds. The fix was not tested against a fresh cache on its own.
+- **Notices vanished (0.0.5):** undo and error notices now stay for 15 s.
+
+**Guidance recorded**
+- Cmd/Ctrl-Z is not Workbench undo. It reverts one open note and can leave a relationship half-written. Use **Undo last relationship change**, ideally with a hotkey. Undo history is in memory and clears on restart. README updated.
+
+**Still open (not gating R0)**
+- Release pipeline: CI and release workflows are still in `ci-workflows/` until a token can write workflow files.
+- The test vault belongs in its own repository, never in the plugin repository or this vault.
+- Canvas hook behavior across Obsidian updates (see above).
+- R1 pilot scope: first slice is `02 Product Context` (W-267), tested in the imported vault, not the synthetic one.
+- Importer: the shared-aggregation → `includes` change is still to be made before the importer writes notes.
+
