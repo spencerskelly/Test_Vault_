@@ -44,7 +44,7 @@ Read `EA Native Importer Comprehensive Handoff - 2026-10-01.md` for the full rep
 - Short and direct, no praise. Tell him if there is a more efficient way to work.
 - Nothing is applied until he approves it. If you apply consequences of an approved decision, say so and list them.
 - Keep `Translator Definition.md` current: any decision that changes a stage 1 rule updates it in the same commit (W-247).
-- Log every decision as the next W number (next is W-293) in the Decision Log, update the worklist YAML and this handoff, then commit and push to `main`. He allows pushing to `main` and pulls each change into Obsidian.
+- Log every decision as the next W number (next is W-298) in the Decision Log, update the worklist YAML and this handoff, then commit and push to `main`. He allows pushing to `main` and pulls each change into Obsidian.
 - Commit only when every edit applied and every YAML and JSON file parses. Make each scripted edit fail on an anchor that matches zero or several times, and stop the commit if any edit failed (twice in the last chat a commit went out missing an edit; once an anchor matched Task 5 instead of Task 7). Quote long YAML text values (a colon followed by a space has broken a file twice). Use quoted heredocs (`<<'EOF'`). Check that a referenced source file or column exists before relying on it. Stay with EA names until after the import (W-93).
 - Never write an access token into a file. After cloning, reset the remote URL to the token-free form and push with the token in the command only. Set a repo-local git identity before the first commit. Check `git log` for commits you did not make before adding a decision number.
 
@@ -73,11 +73,11 @@ All 35,969 EA elements have a rule. The accepted native importer v0.2 whole-mode
 | Requirement (13,988) | Requirement | Subtype from the EA package path: standard, engineering (Engineering Requirements folder, all 2,469), design, functional, stakeholder (W-115, W-116). Every requirement is its own note; folding is stage 2 (W-81, Task 4). |
 | InformationItem (2,825) | Requirement/standard (2,383 in the Regulatory Requirements folder) or Info (442) | W-115, W-145 |
 | Port (4,387) | Port | Instance Ports of Parts and Objects merge into the block's Port by a one-hop rule (W-114): `PDATA3`, else exact name, else added, else stays. 2,589 Port notes. Subtype `proxy`, `full` or blank (W-128). |
-| Class (2,737) | Port (423 interface Classes, subtype = the stereotype, W-120) or Object (2,314, blank subtype, W-139) | Physical Context and System Partner are not split out |
-| Part (3,137) | Item Flow (760 FlowProperty pins, W-132), folded into the assembly as `hasPart` (2,055 typed by a Class, W-136), folded into the owner as `hasChild` (219, W-137, W-149), Object/`part` (103 with no block, W-138) | Role names, quantities and tags of a folded Part are kept as a source-section line |
+| Class (2,737) | Port (423 interface Classes, **blank Port subtype**; EA interface stereotype retained in `eaType`, W-120/W-237) or Object (2,314, blank subtype, W-139) | Physical Context and System Partner are not split out |
+| Part (3,137) | Item Flow (760 FlowProperty pins, W-132); typed reusable Parts still resolve to the reusable Object definition for note reduction, while W-293/W-294 preserve contextual typed Parts as stable local part occurrences; untyped Parts may remain Object/`part` | Repeated identical `hasPart` targets do not encode quantity; local occurrence/multiplicity evidence is preserved separately |
 | Object (545) | Object | `Classifier` is a temporary `hasClassifier` link (W-135) |
 | Signal (623) | Item Flow | Blank subtype (W-131) |
-| Activity (1,668) | Function (Function stereotypes to their subtype, no stereotype blank) or Verification/test (`testCase`) | W-141 |
+| Activity (1,668) | Function with blank subtype, or Verification/test (`testCase`) | W-141, W-238 |
 | UseCase (1,667) | Use Case | Subtype from the folder: what, when, where, who (`who` was added), else blank (W-140) |
 | State (1,112) | Design (954, in `05 Product Design`) or State (158) | Blank subtypes (W-142) |
 | Artifact (459) | Artifact | document, image, or blank (W-143) |
