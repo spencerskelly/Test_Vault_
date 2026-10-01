@@ -2038,7 +2038,7 @@ function endpointRuleAllows(field,fromType,toType){
   return true;
 }
 function collectEndpointFindings(graph,entities){
-  const findings=[];
+  const findings=[],seen=new Set();
   for(const [ownerKey,fm] of graph.entries()){
     const owner=entities.get(ownerKey);if(!owner)continue;
     for(const [field,targets] of fm.entries()){
@@ -2046,6 +2046,11 @@ function collectEndpointFindings(graph,entities){
       for(const targetKey of targets){
         const target=entities.get(targetKey);if(!target)continue;
         if(!endpointRuleAllows(field,owner.mdseType,target.mdseType)){
+          const symmetric=REL_SYMMETRIC.has(field);
+          const pair=symmetric?[ownerKey,targetKey].sort().join("|"):ownerKey+"|"+targetKey;
+          const key=field+"|"+pair;
+          if(seen.has(key))continue;
+          seen.add(key);
           findings.push({
             ownerKey,targetKey,field,
             fromType:owner.mdseType,toType:target.mdseType,
