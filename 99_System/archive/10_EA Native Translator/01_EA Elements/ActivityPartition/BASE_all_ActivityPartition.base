@@ -1,6 +1,0 @@
-filters:
-  and:
-    - file.path.contains("99_System/archive/10_EA Native Translator/01_EA Elements/ActivityPartition")
-views:
-  - type: table
-    name: All
