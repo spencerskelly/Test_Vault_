@@ -59,7 +59,7 @@ summary{cursor:pointer;font-weight:650}
 <body>
 <div class="wrap">
   <h1>EA → MDSE Native Importer v0.5.2</h1>
-  <p class="sub">Developer-only, offline native QEAX importer. v0.5 adds human-oriented file naming and an explicit whole-model assessment mode, synchronized to MDSE relationship schema <code>1.34</code>.</p>
+  <p class="sub">Developer-only, offline native QEAX importer. v0.5 adds human-oriented file naming and an explicit whole-model assessment mode, synchronized to MDSE relationship schema <code>1.35</code>.</p>
 
   <div class="card">
     <h2>Source</h2>
@@ -192,7 +192,7 @@ summary{cursor:pointer;font-weight:650}
       <button id="generateSlice" class="primary" disabled>Generate assessment vault</button>
       <span id="sliceStatus" class="badge">Build a PASS plan first</span>
     </div>
-    <p class="small muted">Use a fresh disposable base-vault copy. Do not select <code>Test_Vault_</code> or an existing imported vault. Build the PASS plan first, then choose the output folder immediately before Generate. v0.5.2 requires <code>relationships.yaml</code> schemaVersion 1.34 and refuses an existing model root.</p>
+    <p class="small muted">Use a fresh disposable base-vault copy. Do not select <code>Test_Vault_</code> or an existing imported vault. Build the PASS plan first, then choose the output folder immediately before Generate. v0.5.2 requires <code>relationships.yaml</code> schemaVersion 1.35 and refuses an existing model root.</p>
   </div>
 
   <div class="grid3">
@@ -652,7 +652,7 @@ function parseColumns(rawSql) {
 /* =====================================================================
    EA -> MDSE Native Importer v0.5.2
    Developer-only QEAX preflight, whole-model planner and structural assessment renderer.
-   Baselines: accepted v0.2 plan (W-274), inverse-writing trial (W-275), canonical added-Port identity (W-276), relationship schema 1.34 (W-277–W-288, W-291), naming/full-model assessment W-289.
+   Baselines: accepted v0.2 plan (W-274), inverse-writing trial (W-275), canonical added-Port identity (W-276), relationship schema 1.35 (W-277–W-288, W-291, W-292), naming/full-model assessment W-289.
    ===================================================================== */
 
 const BUILD = {
@@ -1616,6 +1616,15 @@ function buildPlacementPairs(objects,connectors,elementCtx,portResolution){
   return {placement,subtypePairs};
 }
 
+/* Ownership field by owner and child class (W-149, W-291, W-292): Object to Object is hasPart, Object to State or
+   State Machine and State Machine to State are hasState (never hasChild), everything else is the generic hasChild. */
+function ownerField(ownerType,childType){
+  if(ownerType==="Object"&&childType==="Object")return "hasPart";
+  if(ownerType==="Object"&&(childType==="State"||childType==="State Machine"))return "hasState";
+  if(ownerType==="State Machine"&&childType==="State")return "hasState";
+  return "hasChild";
+}
+
 function classifyConnector(c,elementCtx,portResolution,placementCtx,conveyed){
   const type=trim2(c.Connector_Type), st=trim2(c.Stereotype);
   const [sId,tId]=directedRawEnds(c);
@@ -1629,7 +1638,7 @@ function classifyConnector(c,elementCtx,portResolution,placementCtx,conveyed){
   if(type==="Nesting"){
     const rawStart=elementCtx.byId.get(n2(c.Start_Object_ID)),rawEnd=elementCtx.byId.get(n2(c.End_Object_ID));
     if(rawStart&&rawEnd&&n2(rawStart.ParentID)===n2(rawEnd.Object_ID)){base.outcome="repeat placement";base.rule="W-151";return base;}
-    base.field=s.type==="Object"&&t.type==="Object"?"hasPart":"hasChild";base.rule="W-151/W-152";base.review=true;return base;
+    base.field=ownerField(t.type,s.type);base.rule="W-151/W-152";base.review=true;return base;
   }
   if(type==="Connector"){
     base.field=st==="BindingConnector"?"equals":"interfaces";base.rule=st==="BindingConnector"?"W-153":"W-153/W-155";
@@ -1640,7 +1649,7 @@ function classifyConnector(c,elementCtx,portResolution,placementCtx,conveyed){
     if(placementCtx.placement.has(pairKey(whole.key,part.key))){base.outcome="repeat existing link";base.rule="W-159/W-277";return base;}
     if(aggregation===1)base.field="includes";
     else if(aggregation===2&&whole.type==="Object"&&part.type==="Object")base.field="hasPart";
-    else base.field="hasChild";
+    else base.field=ownerField(whole.type,part.type)==="hasState"?"hasState":"hasChild";
     base.rule=aggregation===1?"W-159/W-277":"W-159";
     base.review=base.field==="hasChild"&&whole.type!==part.type;
     return base;
@@ -1937,7 +1946,7 @@ async function buildTranslationPlan(){
    before diagrams, attachments and the remaining evidence tables are added.
    ===================================================================== */
 
-const REL_SCHEMA_VERSION="1.34";
+const REL_SCHEMA_VERSION="1.35";
 const REL_PAIRS={
   subtypeOf:"supertypeOf",
   hasPart:"partOf",
@@ -2010,8 +2019,8 @@ const REL_RULES={
   hasPort:{from:"any",to:["Port"]},
   hasFlow:{from:["Port"],to:["Item Flow"]},
   exposes:{from:["Port"],to:["Port"]},
-  hasChild:{from:"any",to:"any",excludePairs:[["Object","Object"]]},
-  hasState:{from:["Object","State Machine"],to:["State"]},
+  hasChild:{from:"any",to:"any",excludePairs:[["Object","Object"],["Object","State"],["Object","State Machine"],["State Machine","State"]]},
+  hasState:{from:["Object","State Machine"],to:["State","State Machine"],excludePairs:[["State Machine","State Machine"]]},
   includes:{from:"any",to:"any"},
   copyOf:{from:"any",to:"any",sameClass:true},
   dependsOn:{from:"any",to:"any"},
@@ -2432,7 +2441,7 @@ function buildRelationshipGraph(ctx,entityCtx,limitations){
     const child=resolveEndpoint(raw.Object_ID,ctx.elementCtx,ctx.portResolution),owner=resolveEndpoint(raw.ParentID,ctx.elementCtx,ctx.portResolution);
     if(!entities.has(child.key)||!entities.has(owner.key)||child.key===owner.key)continue;
     if(ctx.placementCtx.subtypePairs.has(pairKey(child.key,owner.key)))continue;
-    addForwardRel(graph,owner.key,owner.type==="Object"&&child.type==="Object"?"hasPart":"hasChild",child.key,false);
+    addForwardRel(graph,owner.key,ownerField(owner.type,child.type),child.key,false);
   }
 
   // Parts: preserve one relationship entry per Part.
@@ -2440,7 +2449,7 @@ function buildRelationshipGraph(ctx,entityCtx,limitations){
     if(trim2(raw.Object_Type)!=="Part"||trim2(raw.Stereotype)==="FlowProperty"||!n2(raw.ParentID))continue;
     const child=resolveEndpoint(raw.Object_ID,ctx.elementCtx,ctx.portResolution),owner=resolveEndpoint(raw.ParentID,ctx.elementCtx,ctx.portResolution);
     if(!entities.has(child.key)||!entities.has(owner.key)||child.key===owner.key)continue;
-    addForwardRel(graph,owner.key,owner.type==="Object"&&child.type==="Object"?"hasPart":"hasChild",child.key,true);
+    addForwardRel(graph,owner.key,ownerField(owner.type,child.type),child.key,true);
   }
 
   // Port ownership and direct Port structural fields.

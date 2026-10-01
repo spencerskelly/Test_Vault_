@@ -10,11 +10,11 @@ canChange:
 ---
 # hasState
 
-A State that an Object or a State Machine has. Written on the Object or State Machine, pointing at the State (W-291, restoring the pair removed in W-185). Nothing in the import writes it yet: States placed under an owner stay `hasChild` (W-149) until the placement rule is decided.
+A State or State Machine that an Object has, and a State that a State Machine has. Written on the Object or State Machine (W-291, W-292, restoring the pair removed in W-185). It is never `hasChild`: `hasChild` excludes Object to State, Object to State Machine and State Machine to State. The import writes it wherever an Object owns a State or State Machine, or a State Machine owns a State.
 
 ## Direction
 
-Written on the note that holds the field, an Object or a State Machine. The inverse `stateOf` is generated on the State and kept out of the way (W-126).
+Written on the note that holds the field, an Object or a State Machine. The inverse `stateOf` is generated on the State or State Machine and kept out of the way (W-126).
 
 ## Where it sits
 

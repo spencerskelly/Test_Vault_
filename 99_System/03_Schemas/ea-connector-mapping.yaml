@@ -37,7 +37,7 @@ connectorTypes:
   decision: W-151
   amendedBy: W-152
   status: settled
-  note: 'No connector note or link of its own. 584 repeat a ParentID link and write nothing. The 252 independent ones are written as hasChild on the end note (parent) and childOf on the start note (child), or hasPart/partOf when both notes are Objects (W-149).'
+  note: 'No connector note or link of its own. 584 repeat a ParentID link and write nothing. The 252 independent ones are written as hasChild on the end note (parent) and childOf on the start note (child), or hasPart/partOf when both notes are Objects (W-149), or hasState/stateOf when an Object owns a State or State Machine or a State Machine owns a State (W-292).'
   counts:
     repeatParentId: 584
     independent: 252
@@ -94,6 +94,9 @@ connectorTypes:
   - aggregation: composite (DestIsAggregate 2, 1688)
     pair: Object to Object
     field: hasPart
+  - aggregation: composite (DestIsAggregate 2)
+    pair: Object owns State or State Machine; State Machine owns State (W-292)
+    field: hasState
   - aggregation: composite (DestIsAggregate 2)
     pair: any other
     field: hasChild
