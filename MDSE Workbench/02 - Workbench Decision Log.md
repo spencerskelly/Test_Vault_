@@ -786,6 +786,11 @@ First run on `20260930` (Node, 19,379 links; views that give more than the start
 
 Built in plugin 0.1.12; 31 tests pass, including a check that every step of every view uses a field and classes that exist in the schema and one scenario test per view. Not tested in Obsidian.
 
+### WB-103 — `satisfies` leaves the Functional view
+**Status:** Approved 2026-10-01 (Spencer: "for now, satisfies stays out of functional view, it gets too large")
+
+The Functional view (WB-097) no longer follows `satisfies`: it shows the functions an Object performs, their sub-functions and order, and for a Function its performer, parent, sub-functions and neighbors in the flow. The requirements a function satisfies are in the Requirements view (WB-098) and the Verification view (WB-102). "For now": it can come back as an option. In the first run on `20260930`, `satisfies` was 39 of the 80 notes shown for `GSE Charger`. Closes the open question carried since WB-097. Built in plugin 0.1.13.
+
 ---
 
 ## How to use this log
@@ -932,4 +937,7 @@ Plugin 0.1.11. To check in Obsidian: Edit on a note; save a status and a tag; ch
 
 ### 2026-10-01 — Eight more views built (WB-102, trial)
 Plugin 0.1.12. To try in Obsidian after pulling and reloading: open a note and run **Explore view of current note…**; for example Where Used on `Wire - Strip and Strip`, Interfaces on `Product`, Verification on `TP0004 - Battery Charge Test (Wired)`, Design on `GSE Charger`, Scenario on `View data from all chargers on tarmac`, Behavior on `Pre-Charge`, Evidence on `UL 486 A-B Table 9 Dielectric-withstand test seque…`. Still open and unanswered: whether `satisfies` stays in the Functional view; whether property and relationship edits should keep going through Obsidian's YAML rewrite or become line edits.
+
+### 2026-10-01 — `satisfies` out of the Functional view (WB-103); two reports to follow up
+Plugin 0.1.13. Spencer reported that "all the canvas views are gone from the plugin"; the symptom is not pinned down. Checked: the built plugin loads in a simulated Obsidian and registers all 19 commands; nothing in the plugin deletes files; no commit to `20260930` removed a canvas (the only generated canvas ever committed is the cable Structure view, from Spencer's own commit); the view commands appear only while a Markdown note is the active file, not while a canvas is. Spencer also asked for the YAML rewrite (WB-101, risk 1) to be explained plainly before deciding between keeping it and writing line edits.
 
