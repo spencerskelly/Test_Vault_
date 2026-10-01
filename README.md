@@ -4,9 +4,10 @@ A workspace, not the vault that will be built. It defines the EA-to-MDSE transla
 
 ## Start here
 
-1. `99_System/10_Docs/Handoff - Continue Here.md`: where the work stands and what is next.
-2. `99_System/10_Docs/Translator Definition.md`: what the stage 1 translator must do. Kept current.
-3. `99_System/10_Docs/Workspace Decision Log.md`: every decision, and the Open list at the end.
+1. `99_System/10_Docs/EA Native Importer Comprehensive Handoff - 2026-10-01.md`: current importer/occurrence/repository audit and next-chat continuation point.
+2. `99_System/10_Docs/Handoff - Continue Here.md`: ongoing workspace handoff and reading order.
+3. `99_System/10_Docs/Translator Definition.md`: what the stage 1 translator must do. Kept current.
+4. `99_System/10_Docs/Workspace Decision Log.md`: every decision, and the Open list at the end.
 
 ## Folders
 
