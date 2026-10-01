@@ -17,7 +17,7 @@ It consolidates:
 - the exact authority/baseline to continue from;
 - the work that must be merged before another accepted full import.
 
-This file does not replace the historical Workspace Decision Log. The new approved decisions are also recorded there as W-293 through W-296. The Translator Definition and Ruleset are updated in the same work so this is not a parallel ruleset.
+This file does not replace the historical Workspace Decision Log. The new approved decisions are also recorded there as W-293 through W-297. The Translator Definition and Ruleset are updated in the same work so this is not a parallel ruleset.
 
 ## 1. Authoritative continuation point
 
@@ -218,7 +218,75 @@ A bare reusable `Assembly UID / J4` cannot distinguish them. The contextual part
 
 This is the reason local part occurrence identity is required.
 
-## 5. Experimental importer implementation
+## 5. Approved full-import usability and governance amendments
+
+These decisions were made during the full-scale `20260930` review and are now adopted into the authoritative workspace as W-297.
+
+### 5.1 Folder/navigation strategy
+
+- Folder structure is navigation, not semantics.
+- Do not split folders by count alone and do not create arbitrary overflow buckets.
+- Aim for approximately 5–6 meaningful levels in ordinary model content.
+- Preserve deeper hierarchy when formal/source structure genuinely needs it.
+- Collapse a one-child intermediate folder only when it has no independent information/navigation value.
+- Do not generate README/Base/Canvas scaffolding for every folder.
+- Automatically generate the standard navigation set only for primary MDSE top-level domain folders; lower-level navigation artifacts are exception-based.
+- Package notes are exception-based; packages normally become folders only.
+
+### 5.2 Human naming and collision handling
+
+- Soft target: about 40 characters for folder names.
+- Soft target: about 80 characters for filenames.
+- These are not truncation limits.
+- Filename and visible engineering title are separate.
+- Port filenames use `i<shortest unambiguous owner label> - <Port Name>`.
+- Requirement `_r` is collision-specific, not universal.
+- Use EA Name by default.
+- Use EA Alias only when Name is clearly unsuitable/machine-noise; preserve the original Name as provenance.
+- Reserved infrastructure prefixes: `Template -`, `Rule -`, `README_`, `BASE_`, `CANVAS_`.
+- Collision checking covers imported/model content, system/infrastructure files, and user-authored notes.
+- Prefer meaningful source/context discrimination before blind numeric suffixes.
+
+### 5.3 Path preflight
+
+Before any model write:
+1. apply normal human naming;
+2. use approved Alias substitution where justified;
+3. remove repeated parent context;
+4. strip source/package mechanics;
+5. apply established readable abbreviations;
+6. remove redundant structural wording;
+7. shorten formal-navigation folders only where authoritative notes retain the full identifier/title;
+8. recalculate repository-relative paths;
+9. block the run if an unresolved path remains over the final hard limit.
+
+The final hard repository-relative path limit remains open.
+
+Do not create `unnamed/` for a known root package.
+
+### 5.4 Housekeeping and run completion
+
+Importer/bootstrap housekeeping should:
+- initialize/validate `.vault.yaml`;
+- remove tracked OS junk such as `.DS_Store`;
+- enforce the reserved infrastructure namespace;
+- update the root README appropriately;
+- record housekeeping actions.
+
+A run is complete only when every planned entity ends in one terminal state:
+- written;
+- intentionally transformed/suppressed;
+- failed.
+
+There must be zero unexplained remainder.
+
+A partial writer is `INCOMPLETE / FAIL`, regardless of how many files exist.
+
+Keep the Run Manifest concise and human-readable; detailed path/collision/naming/transformation/model-check evidence belongs in separate audit outputs.
+
+Repeating the same semantic relationship target does not express quantity. Preserve occurrence/quantity evidence separately.
+
+## 6. Experimental importer implementation
 
 ### 5.1 v0.6
 
@@ -299,7 +367,7 @@ Open PR:
 
 Treat this branch as an implementation/evidence branch only.
 
-## 6. Critical regression found by repository audit
+## 7. Critical regression found by repository audit
 
 v0.5.2 and relationship schema 1.35 contain W-291/W-292:
 
@@ -321,7 +389,7 @@ v0.6.1, because it was built from the 1.33 line:
 
 Therefore v0.6.1 is **not** a valid successor to v0.5.2 as-is.
 
-## 7. Base-vault validation difference
+## 8. Base-vault validation difference
 
 v0.5.2 has stronger base-vault identity checks than v0.6.1.
 
@@ -338,7 +406,7 @@ v0.6/v0.6.1 retained only part of that logic and therefore should not replace it
 
 The next importer must preserve the v0.5.2 safety behavior and add the occurrence implementation to it.
 
-## 8. Real QEAX validation results
+## 9. Real QEAX validation results
 
 Source tested repeatedly:
 
@@ -370,7 +438,7 @@ Observed result multiple times:
 
 The EA source has not been the cause of the failed attempts in this session.
 
-## 9. Faults exposed during real run attempts
+## 10. Faults exposed during real run attempts
 
 ### F-01 - schema/importer mismatch
 
@@ -459,9 +527,9 @@ Before this handoff update:
 
 These are documentation faults being corrected with this handoff.
 
-## 10. Repository audit - all currently accessible repositories
+## 11. Repository audit - all currently accessible repositories
 
-### 10.1 `spencerskelly/Test_Vault_`
+### 11.1 `spencerskelly/Test_Vault_`
 
 Role: **authoritative translator/methodology workspace**.
 
@@ -480,7 +548,7 @@ Branches also retain historical base-vault snapshots (1.32/v0.4, 1.33/v0.5, 1.33
 
 Use this repo as the new-chat authority.
 
-### 10.2 `spencerskelly/Test_Vault_-base-vault-2026-09-30-rel133-v051`
+### 11.2 `spencerskelly/Test_Vault_-base-vault-2026-09-30-rel133-v051`
 
 Role: **current clean disposable base-vault repository**.
 
@@ -491,7 +559,7 @@ Despite its name:
 
 Use a disposable copy, not the repo working copy itself.
 
-### 10.3 `spencerskelly/20260930`
+### 11.3 `spencerskelly/20260930`
 
 Role: first large populated assessment/reference artifact.
 
@@ -511,7 +579,7 @@ Branch `handoff/full-import-2026-10-01`:
 
 Do not treat main or the experimental branch as the current translator authority.
 
-### 10.4 `spencerskelly/261001`
+### 11.4 `spencerskelly/261001`
 
 Role: **partial/reference import artifact, not an accepted v0.6 run**.
 
@@ -527,7 +595,7 @@ Conclusion:
 - README/version claim is not sufficient evidence of a successful occurrence import;
 - treat as incomplete/reference only.
 
-### 10.5 `spencerskelly/MDSE_Workbench`
+### 11.5 `spencerskelly/MDSE_Workbench`
 
 Role: Workbench plugin implementation.
 
@@ -542,7 +610,7 @@ Reviewed main:
 Future requirement:
 - after the real merged importer output validates the body record shape, extend Workbench indexing and Interface/Flow Canvas generation.
 
-### 10.6 `spencerskelly/EA_Model_Evidence`
+### 11.6 `spencerskelly/EA_Model_Evidence`
 
 Role: source evidence repository.
 
@@ -558,7 +626,7 @@ It is evidence, not semantic authority.
 
 Keep using it to answer source-pattern questions.
 
-### 10.7 `spencerskelly/EA_Model_Import`
+### 11.7 `spencerskelly/EA_Model_Import`
 
 Role: older generated-model/import artifact.
 
@@ -566,7 +634,7 @@ Contains the old `Model/...` hierarchy and generated files, not the current nati
 
 Treat as historical evidence only.
 
-### 10.8 `spencerskelly/EA_Import`
+### 11.8 `spencerskelly/EA_Import`
 
 Role: older MDSE/import workspace.
 
@@ -577,7 +645,7 @@ Reviewed:
 
 Historical only; do not use as the current translator baseline.
 
-### 10.9 `spencerskelly/PosiBattery`
+### 11.9 `spencerskelly/PosiBattery`
 
 Role: older product vault/model.
 
@@ -588,7 +656,7 @@ Reviewed:
 
 Historical/product-specific model; not current translator authority.
 
-### 10.10 `spencerskelly/Ampure_Data`
+### 11.10 `spencerskelly/Ampure_Data`
 
 Role: company/common organizational vault.
 
@@ -600,7 +668,7 @@ Current separation:
 
 Stable MDSE methodology changes may later need deliberate promotion into `Ampure_Data/Rules/MDSE`, but do not silently synchronize experimental importer syntax into it.
 
-## 11. Current Workbench implication
+## 12. Current Workbench implication
 
 The approved occurrence model depends on Workbench eventually understanding contained records.
 
@@ -620,12 +688,12 @@ Required future capabilities:
 
 Do not implement this until the merged importer produces real-model body records worth freezing.
 
-## 12. Required next implementation sequence
+## 13. Required next implementation sequence
 
 Recommended next-chat sequence:
 
 1. Read this file.
-2. Read Workspace Decision Log W-291 through W-296.
+2. Read Workspace Decision Log W-291 through W-297.
 3. Read current Translator Definition.
 4. Read relationships.yaml 1.35 and element-types.yaml 1.16.
 5. Diff v0.5.2 against experimental v0.6.1.
@@ -661,7 +729,7 @@ Recommended next-chat sequence:
 15. Only then run a whole-model write into a new disposable base-vault copy.
 16. Accept no run without complete Run Manifest/Ledger reconciliation.
 
-## 13. Acceptance criteria for the next real occurrence test
+## 14. Acceptance criteria for the next real occurrence test
 
 A representative real-model sample must demonstrate:
 
@@ -680,7 +748,7 @@ A representative real-model sample must demonstrate:
 - no invalid Port subtype values;
 - Workbench not required to understand the raw Markdown for the test to be human-readable.
 
-## 14. Still-open modeling/implementation questions
+## 15. Still-open modeling/implementation questions
 
 Do not silently decide these:
 
@@ -696,7 +764,7 @@ Do not silently decide these:
 - final hard repository-relative path limit;
 - remaining full-import renderer work: diagrams/canvases, attachments, final review tables, full source evidence rendering, hard planned-vs-terminal reconciliation, housekeeping.
 
-## 15. Do not reopen without new evidence
+## 16. Do not reopen without new evidence
 
 Keep these settled unless a real example creates a conflict:
 
@@ -720,9 +788,9 @@ Keep these settled unless a real example creates a conflict:
 - one reusable Actor per role unless the role is meaningfully different.
 - no silent assumptions when source meaning is absent.
 
-## 16. Copy-ready prompt for the next chat
+## 17. Copy-ready prompt for the next chat
 
-> Continue the MDSE native EA -> Obsidian importer work from `spencerskelly/Test_Vault_` main. First read `99_System/10_Docs/EA Native Importer Comprehensive Handoff - 2026-10-01.md`, then `Handoff - Continue Here.md`, Workspace Decision Log W-291 through W-296, Translator Definition, relationships.yaml 1.35 and element-types.yaml 1.16.
+> Continue the MDSE native EA -> Obsidian importer work from `spencerskelly/Test_Vault_` main. First read `99_System/10_Docs/EA Native Importer Comprehensive Handoff - 2026-10-01.md`, then `Handoff - Continue Here.md`, Workspace Decision Log W-291 through W-297, Translator Definition, relationships.yaml 1.35 and element-types.yaml 1.16.
 >
 > Treat `Test_Vault_` main as the translator authority. The accepted implementation baseline is v0.5.2 / relationship schema 1.35. The occurrence/interface/flow work in `spencerskelly/20260930` branch `handoff/full-import-2026-10-01` (v0.6/v0.6.1) is experimental code to merge forward, not the baseline.
 >
@@ -732,7 +800,7 @@ Keep these settled unless a real example creates a conflict:
 >
 > Preserve the established working style: identify the exact semantic need, compare reasonable options, recommend the simplest scalable structure, ask one focused question at a time when a decision is actually needed, and update the Decision Log + Translator Definition + handoff in the same change when an approved Stage-1 rule changes.
 
-## 17. Bottom line
+## 18. Bottom line
 
 The occurrence architecture is promising and the key reuse case works in isolated code.
 
