@@ -726,6 +726,11 @@ Each build's `main.js`, `manifest.json` and `styles.css` are committed to `.obsi
 
 In Review, a Missing Inverses finding whose own link breaks its endpoint rule no longer shows **Write missing inverse**; the window says the link breaks its rule and to fix the link or leave it for the post-import review. The finding and its count stay. Reason: writing the inverse would copy a modeling error to the other note, and the writer already refuses it. Built in plugin 0.1.3.
 
+### WB-095 — Relationship name on every link; taller cards
+**Status:** Approved 2026-10-01 (Spencer: "yes", to the proposal)
+
+Every edge in a Structure view carries its relationship name (`hasPart`, `hasPort`, `hasState`), with the quantity after it where a note is listed more than once (`hasPart ×27`). Before, the name appeared only on the first link of a group, which read as if it belonged to that one link. Cards are 80 px high instead of 60, and the row spacing is 100 px, so a name that wraps to two lines is no longer clipped. Built in plugin 0.1.5. Open: `hasFlow` edges still use the same red as undefined cards.
+
 ---
 
 ## How to use this log
@@ -848,4 +853,7 @@ Spencer restored the pair in the Workspace Decision Log (W-291): written on an O
 
 ### 2026-10-01 — `hasState` in the Structure view; schema 1.35 (W-292)
 Spencer's rule (W-292): an Object `hasState` a State or State Machine and never `hasChild`. Because `hasChild` no longer carries those links, the Structure profile follows `hasState` (after `hasChild`), otherwise States under an Object would disappear from the view. Built in plugin 0.1.4; the fixtures and README follow schema 1.35 and the tests cover the pair, the `hasChild` exclusions and the view (14 tests pass). The populated `20260930` has no `hasState` links and a 1.33 schema copy, so nothing changes in what you see there. Not tested in Obsidian.
+
+### 2026-10-01 — WB-095 built
+Plugin 0.1.5 has the relationship name on every link and 80 px cards (14 tests pass). Not tested in Obsidian. Still to run by Spencer: Replace relationship and Undo (Test 4), the cable Structure view (Test 5).
 
