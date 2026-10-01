@@ -1,4 +1,4 @@
-schemaVersion: '1.30'
+schemaVersion: '1.31'
 date: '2026-09-30'
 storage: Author forward/owner-side fields. Inverse fields are persisted in YAML and written with the forward field by the translator, Workbench or the regenerate script (W-275); the forward field wins when they disagree.
 paired:
@@ -18,7 +18,7 @@ paired:
 - {forward: precedes, inverse: follows, from: any, to: any, sameClass: true}
 - {forward: triggeredBy, inverse: triggers, from: [Function, Design, State], to: [Function, Design, State, Item Flow]}
 - {forward: supersedes, inverse: supersededBy, from: any, to: any, sameClass: true}
-- {forward: describes, inverse: describedBy, from: [Info, Artifact], to: any}
+- {forward: describes, inverse: describedBy, from: [Info, Artifact, Document], to: any}
 - {forward: tracesTo, inverse: tracesFrom, from: any, to: any, importOnly: true}
 - {forward: performs, inverse: performedBy, from: [Object], to: [Function]}
 - {forward: hasDesign, inverse: designOf, from: [Object, Document], to: [Design]}
@@ -29,7 +29,7 @@ paired:
 - {forward: optionOf, inverse: hasOption, from: [Use Case], to: [Use Case]}
 - {forward: source, inverse: sourceOf}
 - {forward: target, inverse: targetOf}
-- {forward: affects, inverse: affectedBy, from: [Issue, Failure Mode], to: any}
+- {forward: affects, inverse: affectedBy, from: [Issue, Failure Mode, Use Case], to: any}
 temporaryPairs:
 - forward: hasClassifier
   inverse: classifierOf
@@ -56,6 +56,7 @@ oneWay:
 - {field: initialState}
 - {field: finalState}
 guidance:
+  affects: 'affects/affectedBy: the source has an impact on a target that exists anyway, good or bad (for example an Issue or Failure Mode on the element it harms, or normal use in a Use Case on the parts it loads or wears); written on the source, affectedBy generated. drives is different: the target exists or happens because of the source. To design against an impact, prefer Use Case drives Requirement, applied to the element (W-284).'
   triggeredBy: 'triggeredBy/triggers: what starts a behavior. triggeredBy is written on the triggered Function, Design or State and points at the Function, Design, State or Item Flow (a signal or event) that starts it; triggers is generated (W-282). It is element-level: it does not say which transition a trigger belongs to; the transition-level trigger, guard and effect text stays as source-section lines on the state before (W-175). Guards stay as text for now (W-282).'
   exposes: 'exposes/exposedBy: one Port is also exposed at a higher level of the system; exposes is written on the outer Port and points at the inner Port, exposedBy is generated (W-281). Post-Import Task 8 turns the temporary equals into exposes, or into interfaces when it is not an exposure.'
   endpoints: 'Endpoint rules (W-272, W-277): from is the class of the note the field is written on, to is the class of the note it points at; any means every class; sameClass means both notes have the same class; excludePairs lists [from, to] pairs that must use another field. The rules say what a person or AI may create; the translator writes links as drawn in EA and an off-rule link is a Review finding, not an error. A relationship with no from/to has no rule written yet. importOnly means only the translator writes it: a person, AI or Workbench does not create new links of that relationship (W-283).'

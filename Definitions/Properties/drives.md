@@ -10,7 +10,7 @@ canChange:
 ---
 # drives
 
-drives/drivenBy links an element to the requirement it gives rise to: drives is written on the element, drivenBy generated on the requirement. First used for Use Case to Requirement (W-165); Spencer intends it for other relationships to requirements later.
+drives/drivenBy: the source gives rise to or causes the target; the target exists or happens because of the source. Any class to any class (W-283). First used for Use Case to Requirement (W-165). It differs from `affects`, where the source has an impact on a target that exists anyway (W-284).
 
 ## Direction
 

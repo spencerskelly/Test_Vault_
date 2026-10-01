@@ -10,7 +10,7 @@ canChange:
 ---
 # affects
 
-No meaning given yet.
+affects/affectedBy: the source has an impact on a target that exists anyway, good or bad. Written by an Issue, a Failure Mode or a Use Case (normal use that loads or wears a part) on the element it affects (W-166, W-240, W-284). It differs from `drives`, where the target exists or happens because of the source.
 
 ## Direction
 

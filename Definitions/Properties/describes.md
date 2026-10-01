@@ -10,7 +10,7 @@ canChange:
 ---
 # describes
 
-No meaning given yet.
+describes/describedBy: an Info, Artifact or Document note describes another note (W-161, W-166, W-284). Written on the describing note.
 
 ## Direction
 
