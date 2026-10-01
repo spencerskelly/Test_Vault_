@@ -3,7 +3,7 @@ uid: 20260930133525636skellyspencer
 id: INFO-00033
 status: Active
 property: copyOf
-appliesTo: 
+usedOn: see relationships.yaml
 required: No
 setBy: Translator (translated notes) or by hand; the inverse is generated
 canChange: 

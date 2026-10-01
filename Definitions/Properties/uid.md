@@ -3,7 +3,7 @@ uid: 20260927224829001skellyspencer
 id: INFO-00004
 status: Active
 property: uid
-appliesTo: Every note created in the vault
+usedOn: Every note created in the vault
 required: Always
 setBy: Template (hand-made notes) or translator (translated notes)
 canChange: Never

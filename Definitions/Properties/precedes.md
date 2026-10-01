@@ -3,7 +3,7 @@ uid: 20260930133525642skellyspencer
 id: INFO-00039
 status: Active
 property: precedes
-appliesTo: 
+usedOn: see relationships.yaml
 required: No
 setBy: Translator (translated notes) or by hand; the inverse is generated
 canChange: 

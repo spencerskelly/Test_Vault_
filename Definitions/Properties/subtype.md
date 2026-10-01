@@ -3,7 +3,7 @@ uid: 20260930133525628skellyspencer
 id: INFO-00025
 status: Active
 property: subtype
-appliesTo: Model notes whose class lists subtypes
+usedOn: Model notes whose class lists subtypes
 required: No
 setBy: Template (hand-made notes) or translator (translated notes)
 canChange: No meaning given yet.

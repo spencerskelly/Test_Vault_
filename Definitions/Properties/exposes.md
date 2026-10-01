@@ -3,7 +3,7 @@ uid: 20260930174529866skellyspencer
 id: INFO-00066
 status: Active
 property: exposes
-appliesTo: 
+usedOn: see relationships.yaml
 required: No
 setBy: By hand (Post-Import Task 8 and new modeling); the inverse is generated
 canChange: 

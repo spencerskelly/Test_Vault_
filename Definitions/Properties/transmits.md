@@ -3,7 +3,7 @@ uid: 20260930133525661skellyspencer
 id: INFO-00058
 status: Active
 property: transmits
-appliesTo: 
+usedOn: see relationships.yaml
 required: No
 setBy: Translator (translated notes) or by hand
 canChange: 

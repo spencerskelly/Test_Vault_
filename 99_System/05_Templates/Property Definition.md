@@ -4,7 +4,7 @@ uid: <% tp.file.include("[[Snippet - uid]]") %>
 status: Active
 tags: []
 property:
-appliesTo:
+usedOn:
 required:
 setBy:
 canChange:

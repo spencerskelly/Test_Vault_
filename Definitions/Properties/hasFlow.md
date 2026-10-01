@@ -3,7 +3,7 @@ uid: 20260930133525634skellyspencer
 id: INFO-00031
 status: Active
 property: hasFlow
-appliesTo: 
+usedOn: see relationships.yaml
 required: No
 setBy: Translator (translated notes) or by hand; the inverse is generated
 canChange: 

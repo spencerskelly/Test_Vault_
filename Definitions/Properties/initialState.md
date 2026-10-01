@@ -3,7 +3,7 @@ uid: 20260930133525665skellyspencer
 id: INFO-00062
 status: Active
 property: initialState
-appliesTo: 
+usedOn: see relationships.yaml
 required: No
 setBy: Translator (translated notes) or by hand
 canChange: 

@@ -3,7 +3,7 @@ uid: 20260928114132000skellyspencer
 id: INFO-00018
 status: Active
 property: eaType
-appliesTo: Notes translated from EA, temporarily
+usedOn: Notes translated from EA, temporarily
 required: Always on translated notes until review is complete
 setBy: Translator
 canChange: No, it records the source

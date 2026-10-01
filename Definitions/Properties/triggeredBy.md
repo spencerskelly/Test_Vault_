@@ -3,7 +3,7 @@ uid: 20260930174840943skellyspencer
 id: INFO-00067
 status: Active
 property: triggeredBy
-appliesTo: 
+usedOn: see relationships.yaml
 required: No
 setBy: By hand; the inverse is generated
 canChange: 

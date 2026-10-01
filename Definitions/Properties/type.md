@@ -3,7 +3,7 @@ uid: 20260930133525627skellyspencer
 id: INFO-00024
 status: Active
 property: type
-appliesTo: Model notes
+usedOn: Model notes
 required: Always on a model note
 setBy: Template (hand-made notes) or translator (translated notes)
 canChange: In stage 2, when a note is reclassified

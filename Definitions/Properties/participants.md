@@ -3,7 +3,7 @@ uid: 20260930133525660skellyspencer
 id: INFO-00057
 status: Active
 property: participants
-appliesTo: 
+usedOn: see relationships.yaml
 required: No
 setBy: Translator (translated notes) or by hand
 canChange: 

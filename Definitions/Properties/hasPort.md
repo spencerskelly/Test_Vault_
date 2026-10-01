@@ -3,7 +3,7 @@ uid: 20260930133525633skellyspencer
 id: INFO-00030
 status: Active
 property: hasPort
-appliesTo: 
+usedOn: see relationships.yaml
 required: No
 setBy: Translator (translated notes) or by hand; the inverse is generated
 canChange: 

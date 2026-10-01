@@ -3,7 +3,7 @@ uid: 20260930133525639skellyspencer
 id: INFO-00036
 status: Active
 property: refines
-appliesTo: 
+usedOn: see relationships.yaml
 required: No
 setBy: Translator (translated notes) or by hand; the inverse is generated
 canChange: 

@@ -3,7 +3,7 @@ uid: 20260930133525630skellyspencer
 id: INFO-00027
 status: Active
 property: tags
-appliesTo: Every note that has the property
+usedOn: Every note that has the property
 required: No
 setBy: Template (empty); by hand
 canChange: No meaning given yet.

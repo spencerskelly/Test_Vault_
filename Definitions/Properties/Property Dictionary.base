@@ -6,7 +6,7 @@ views:
     name: Property Dictionary
     order:
       - file.name
-      - appliesTo
+      - usedOn
       - required
       - setBy
       - canChange

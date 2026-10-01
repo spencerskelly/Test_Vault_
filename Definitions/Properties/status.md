@@ -3,7 +3,7 @@ uid: 20260930133525629skellyspencer
 id: INFO-00026
 status: Active
 property: status
-appliesTo: Every note that has the property
+usedOn: Every note that has the property
 required: Always
 setBy: Template; a person changes it
 canChange: A person

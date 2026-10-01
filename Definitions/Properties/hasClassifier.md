@@ -3,7 +3,7 @@ uid: 20260930133525656skellyspencer
 id: INFO-00053
 status: Active
 property: hasClassifier
-appliesTo: 
+usedOn: see relationships.yaml
 required: No
 setBy: Translator; resolved in stage 2
 canChange: 
