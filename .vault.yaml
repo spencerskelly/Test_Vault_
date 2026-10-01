@@ -1,5 +1,5 @@
 # This file MUST be initialized once when a new vault is created.
 # Do not copy a real vault_uid from another vault.
-vault_uid: 20260924202800000skellyspencer
-name: Test_Vault_
+vault_uid: UNINITIALIZED
+name: MDSE_Base_Vault
 default_branch: main

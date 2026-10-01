@@ -1,9 +1,0 @@
-{
-  "id": "ampure-cross-vault-resolver",
-  "name": "Ampure Cross-Vault Resolver",
-  "version": "0.1.1",
-  "minAppVersion": "1.5.0",
-  "description": "Resolves durable uid: links across accessible sibling Obsidian vaults and adds cross-vault results to the [[ link workflow.",
-  "author": "Ampure",
-  "isDesktopOnly": true
-}
