@@ -768,6 +768,24 @@ The popup (WB-099) has two collapsed dropdowns: **Properties** (the note's prope
 
 Built in plugin 0.1.11. Verified in a simulated Obsidian (a DOM test with a fake vault, 28 checks: view mode, edit mode controls, saving status, tags and subtype, refusal of id, a relationship field and an unknown property, text save keeping the properties, the refusal on a changed note, removing a repeated link with its inverse and a missing link, two undos, and the discard prompt), and by 26 unit tests; not yet in Obsidian itself. Known effects and risks: (1) **Property and relationship writes go through Obsidian's `processFrontMatter`, which rewrites the whole properties block in its own YAML style** (for example `type: "State"` becomes `type: State`), so the first edit of an imported note changes more lines than the one edited; this was already true of relationship edits since 0.0.x and is now visible for properties too. (2) Typing in the popup's boxes might also reach canvas shortcuts (Delete on a selected card): key events are stopped at the box, but whether Obsidian's global keymap sees them first is not verified. (3) `status` has no agreed value list.
 
+### WB-102 — Eight more standard views and a view picker
+**Status:** Trial 2026-10-01 (Spencer asked for every view that could be built with the current engine; the step lists below are my design and not yet seen by him). Extends WB-072 (the V1 standard set) from three views to eleven.
+
+New views, each with its own command and an entry in **Explore view of current note…** (a picker that lists the views able to start from the note's type, each with a one-line description). All use two levels unless stated, 12 children per note and 80 notes, arrows in the stored direction, a relationship label on every link, undefined cards for missing notes where the schema fixes the class at that end (WB-092, WB-097), and refresh through the profile stored with the view.
+- **Where Used** (any note; three levels): parents through `hasPart`, `includes`, `hasChild`, `hasState`, `hasPort`; Objects that `performs` a Function; Objects or Documents with a `hasDesign`; Use Cases that `realizedBy` or have `participants`; `dependsOn`.
+- **Interfaces** (Object, Port, Item Flow; three levels): `hasPort` both ways, `interfaces` (symmetric, drawn without an arrowhead), `exposes` both ways, `transmits`, `receives`, `exchanges`, `hasFlow` both ways. From an Object it reaches the owner of the port each port faces.
+- **Verification** (Requirement, Verification, Function, Design, State): `verifies` both ways and `satisfies` both ways, so a verification shows what else it covers and who satisfies it.
+- **Design** (Object, Document, Design): `hasDesign` both ways, sub-designs (`hasChild`), what each Design `satisfies`.
+- **Scenario** (Use Case): `participants`, `realizedBy`, included Use Cases (`hasChild`), `optionOf` both ways, `drives`, and `precedes` among the realizing Functions.
+- **Behavior** (State Machine, State, Object): `hasState` both ways, `initialState`, `finalState`, nested States (`hasChild`), `precedes` both ways, `triggeredBy` both ways.
+- **Failure and risk** (any note): `affects` both ways, `drives` for Issues and Failure Modes, then the requirements a Function satisfies and the Object that performs it.
+- **Evidence** (any note): `describes` both ways for Info, Artifact and Document, notes of those classes under the note (`hasChild`), and Documents a Requirement `references`.
+The engine gained one step option, `noArrow` (a symmetric link carries no arrowhead; JSON Canvas `toEnd: none`), a `description` on every profile, and a 12-color palette (still no red, one color per relationship).
+
+First run on `20260930` (Node, 19,379 links; views that give more than the start note): Where Used from 58% of Objects, 70% of Functions and 93% of Requirements; Interfaces from 12% of Objects (206) and 53% of Ports (467), none from Item Flows; Verification from 5% of Requirements (503), 96% of Verifications (54) and 36% of Functions; Design from 11% of Objects (201) and 78% of Designs (478), with 4 hitting the 80-note limit (`GSE Charger` at 80 notes and 92 more); Scenario from 54% of Use Cases (115); Behavior from 59% of States (47), none from the 2 State Machines or any Object; Failure and risk from 15 of 25 Issues, 327 Functions and 7 Objects; Evidence from 283 Requirements, 327 of 334 Artifacts and 28 Objects. Why some are empty: the slice has no Port to Item Flow links (the importer still has to write `transmits`, `receives` and `exchanges`), no State Machine or Object `hasState` links (this slice predates W-292, so its 12 States under a StateMachine are still `hasChild`; they appear after the next import with schema 1.35), and no Failure Mode notes. Coverage-style questions ("which requirements have no verifier") are not answered by these views; they are the gap lists, not built.
+
+Built in plugin 0.1.12; 31 tests pass, including a check that every step of every view uses a field and classes that exist in the schema and one scenario test per view. Not tested in Obsidian.
+
 ---
 
 ## How to use this log
@@ -911,4 +929,7 @@ Plugin 0.1.10, 24 tests pass (the new one covers relationship rows, quantity and
 
 ### 2026-10-01 — Editing in the popup built (WB-101)
 Plugin 0.1.11. To check in Obsidian: Edit on a note; save a status and a tag; change a subtype; edit the text and save; remove one relationship and Undo; add one with **Add relationship…**; try Delete and Backspace in a box while a card is selected (the card must stay); look at the git diff of a note after a property edit to see how much YAML Obsidian rewrote.
+
+### 2026-10-01 — Eight more views built (WB-102, trial)
+Plugin 0.1.12. To try in Obsidian after pulling and reloading: open a note and run **Explore view of current note…**; for example Where Used on `Wire - Strip and Strip`, Interfaces on `Product`, Verification on `TP0004 - Battery Charge Test (Wired)`, Design on `GSE Charger`, Scenario on `View data from all chargers on tarmac`, Behavior on `Pre-Charge`, Evidence on `UL 486 A-B Table 9 Dielectric-withstand test seque…`. Still open and unanswered: whether `satisfies` stays in the Functional view; whether property and relationship edits should keep going through Obsidian's YAML rewrite or become line edits.
 
