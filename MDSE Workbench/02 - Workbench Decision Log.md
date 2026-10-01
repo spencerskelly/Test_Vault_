@@ -751,6 +751,11 @@ Command "Explore requirements view of current note". It starts from a Requiremen
 
 Clicking a note on a generated view (a canvas in the views folder, or one Workbench generated) opens a floating, non-modal panel at the top right with the note's name, its type, subtype, id and status, its other properties (collapsed, links clickable), and its rendered text. It stays on screen while the canvas is used and follows the next note clicked. A link inside it opens that note in the same panel, ‹ goes back, **Open note** opens the note in a tab, × or Esc closes it, and it closes when another tab is activated. It can be resized. Clicking an undefined card says the note still has to be defined. Shift, Ctrl, Cmd and Alt clicks and drags (more than 5 px) are ignored, and the click is only observed, never stopped, so selecting and moving cards behaves as before. A setting turns it off. It does not apply to other canvases. Technique: a capture-phase click listener finds the card element and maps it to its note through Obsidian's own card objects (`canvas.nodes`, `nodeEl`, `file`), which are undocumented; if that fails it reads the card's `translate(x, y)` and matches it to the node in the canvas file. Same risk class as the selection-menu hook: recheck on each Obsidian version. **Check Canvas support** now reports whether the card elements are reachable. Built in plugin 0.1.9; 23 tests cover the pure parts (text without properties, card position, node match, undefined name, property rows), not the Obsidian side.
 
+### WB-100 — Relationships dropdown in the note details popup
+**Status:** Approved 2026-10-01 (Spencer, answering whether the popup should list relationships: "can relationships be a dropdown like properties is?")
+
+The popup (WB-099) has two collapsed dropdowns: **Properties** (the note's properties other than relationships) and **Relationships** (every relationship field the note holds, forward and inverse, from its own properties; the stored inverses already give both directions). Each summary shows a total, and a field with several entries shows its count (`hasPart (33)`). A note listed several times appears once with its quantity (`Wire ×27`, as on the canvas, WB-091). A link to a note that does not exist is shown in red, not clickable, with the tooltip "undefined" (WB-092); other links open in the popup. Both stay closed until opened. Built in plugin 0.1.10.
+
 ---
 
 ## How to use this log
@@ -888,4 +893,7 @@ Plugin 0.1.8, 22 tests pass, not tested in Obsidian. The slice has 9,888 Require
 
 ### 2026-10-01 — Note details popup built (WB-099)
 Plugin 0.1.9. Not tested in Obsidian: it depends on Canvas internals, so the first test decides whether the primary path or the fallback works. If clicking does nothing, run **Check Canvas support** and note the "Card elements" row.
+
+### 2026-10-01 — Relationships dropdown built (WB-100)
+Plugin 0.1.10, 24 tests pass (the new one covers relationship rows, quantity and keeping relationships out of Properties). Not tested in Obsidian. The first test of the popup (WB-099) is still outstanding.
 
