@@ -711,6 +711,11 @@ Product questions that change what an engineer sees still go one at a time. Impl
 
 A child listed N times in one relationship field is one card with the count on its edge (`hasPart ×6` on `Cable Jacket`, `×27` on `Wire - Strip and Strip`). Cards stay one per distinct note, and links stay one per distinct target, so Review counts do not change. Evidence: in `20260930`, 276 repeated entries in 86 notes (`hasPart` 208, `hasChild` 68); `Cable - 2 twisted pair Strip and Strip` lists `Wire - Strip and Strip` 27 times and `Cable Jacket` 6 times (I first wrote 25 from a quick read of the file; corrected after Spencer's screenshot showed ×27). Seen in Obsidian 0.1.1: the counts display. A quantity change marks a view stale. Built in plugin 0.1.1.
 
+### WB-092 — Missing notes are shown as undefined
+**Status:** Approved 2026-10-01 (Spencer: "any missing notes should be shown as undefined")
+
+A relationship link in a view whose target note does not exist is drawn as an undefined card: red, the link text in bold, the word *undefined* under it, not openable. It counts as a node (the node cap and 12-children limit apply) and keeps its quantity (`×2`). It is not an omission: it does not feed "+N more". Today these cards appear because the imported slice is partial; once the whole model is imported, the same cards show what still has to be defined, which is the to-do list. Applies to the relationships in the view profile (the Structure profile now). Review's Broken References count is unchanged. Built in plugin 0.1.2.
+
 ---
 
 ## How to use this log
@@ -813,4 +818,7 @@ Spencer: "let's call this a pass" (plugin 0.0.5, 60,000-note synthetic vault, in
 2. Omissions outside the slice are not shown: 1,955 of 14,541 structure links (13%) point at notes not in this vault (`hasChild` 1,087, `hasPort` 654, `hasPart` 212, `includes` 2), and the "+N more" count ignores them. The cable shows 2 parts and no sign of its 34 ports. Not yet decided.
 3. Long names: 1 of 5 cable cards had a name too long for the 300 px card. Spencer is addressing long names in the importer.
 Not yet run: a Requirement (largest has 117 structure children) and a Use Case (largest 49).
+
+### 2026-10-01 — Quantity seen; undefined cards decided (WB-092)
+Spencer saw WB-091 in Obsidian (0.1.1): `hasPart ×6` on Cable Jacket and `×27` on Wire - Strip and Strip. He decided that missing notes show as undefined (WB-092), replacing my proposal of a separate "+N not in this vault" card. On the cable in `20260930` (Node): 17 cards, 12 of them undefined ports, and "+24 more" for the rest. Of the 3,141 elements with a Structure view, 583 show at least one undefined card. Open, raised by Spencer's screenshot: the relationship name appears only on the first link of a group; two-line names are clipped at a 60 px card height.
 
