@@ -408,6 +408,7 @@ connectorTypes:
       connectors: 521
       field: hasChild
       writtenOn: 'the including (source) Use Case; childOf generated; 47 repeat a placement link and add nothing, 473 new links'
+      note: 'kept as hasChild (W-278): EA modeling did not separate ownership from membership, so each link is reviewed after import and becomes includes where the included Use Case is shared (Post-Import Task 7, item 13)'
     - pair: Use Case to Object
       connectors: 1
       field: hasChild
