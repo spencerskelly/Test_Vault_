@@ -51,8 +51,8 @@ elementTypes:
   mdseType: Port
   decision: W-113
   subtypeRule: 'from the EA stereotype: ProxyPort gives proxy, FullPort gives full, no stereotype gives a blank subtype (W-128)'
-  decisions: [W-113, W-114, W-120, W-121, W-122, W-123, W-125, W-127, W-128, W-129, W-130, W-134]
-  note: 'MDSE now has a Port class (W-113). Part- and Object-owned Ports merge into the block''s Port by the W-114 rule. PDATA1 (typing Class) is written as subtypeOf between Port notes (W-120). Differences on a merged instance Port are kept as lines on the block Port note (W-121; format not decided). The Port note''s subtype comes from the EA stereotype: proxy for ProxyPort, full for FullPort, blank for plain (W-128). PDATA2 is subtypeOf (W-122), the owner link is hasPort (W-123), Classifier is the temporary hasClassifier (W-125).'
+  decisions: [W-113, W-114, W-120, W-121, W-122, W-123, W-125, W-127, W-128, W-129, W-130, W-134, W-276]
+  note: 'MDSE now has a Port class (W-113). Part- and Object-owned Ports merge into the block''s Port by the W-114 rule. PDATA1 (typing Class) is written as subtypeOf between Port notes (W-120). Differences on a merged instance Port are kept as lines on the block Port note (W-121; format not decided). The Port note''s subtype comes from the EA stereotype: proxy for ProxyPort, full for FullPort, blank for plain (W-128). For a W-114.3 group that emits one added Port from several source Ports, the earliest CreatedDate source, tied by EA GUID, supplies canonical uid/id identity and the primary EA GUID; other sources remain ledger/evidence rows (W-276). PDATA2 is subtypeOf (W-122), the owner link is hasPort (W-123), Classifier is the temporary hasClassifier (W-125).'
   oldToolRules:
   - rule: F-01
     verdict: fold
