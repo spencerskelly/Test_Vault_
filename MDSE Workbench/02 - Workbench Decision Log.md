@@ -736,6 +736,11 @@ Every edge in a Structure view carries its relationship name (`hasPart`, `hasPor
 
 Each relationship in the Structure view has its own edge color and none is the red of undefined cards (WB-092). With `hasState` added there are seven relationships, and the old six-color list gave `exposes` the red and `hasFlow` the same green as `hasPart`. Now: `hasPart` green, `hasChild` cyan, `hasState` purple, `includes` orange, `hasPort` yellow, `exposes` grey, `hasFlow` brown (the last two are fixed hex colors, because Canvas has only six preset colors and red is reserved). Built in plugin 0.1.6.
 
+### WB-097 — Functional view, from an Object or a Function
+**Status:** Trial 2026-10-01 (Spencer chose the starting point: one view that works from either an Object or a Function; the contents below are my design and not yet seen by him)
+
+Command "Explore functional view of current note"; it starts only from an Object or a Function. From an Object: the functions it performs (`performs`), their sub-functions (`hasChild`, Function only), what precedes or follows them (`precedes`), and the requirements they satisfy (`satisfies`). From a Function: who performs it, its parent function (start note only), its sub-functions, what comes before and after it, and the requirements it satisfies. Two levels, 12 children per note, 80 notes, as for Structure. Arrows follow the stored direction, so a performer points at its function and a predecessor at its successor. A function also performed by another Object shows that Object (shared allocation); an Object reached from a function does not pull in its other functions. A missing requirement or function shows as an undefined card (WB-092); a missing `hasChild` target does not, because its class is unknown. A Function's `hasChild` to a State, Requirement or Info is not followed. The generated canvas is `<name> - Functional.canvas`; refresh and stale checks use the profile stored with the view. Built in plugin 0.1.7. The engine gained per-step filters (source type, target type, start note only) and reverse-direction edges, so later profiles can reuse them.
+
 ---
 
 ## How to use this log
@@ -864,4 +869,7 @@ Plugin 0.1.5 has the relationship name on every link and 80 px cards (14 tests p
 
 ### 2026-10-01 — WB-096 built
 Plugin 0.1.6: seven distinct edge colors, red only for undefined cards (15 tests pass). Not tested in Obsidian.
+
+### 2026-10-01 — Functional view built (WB-097, trial); first run on `20260930`
+Plugin 0.1.7, 19 tests pass, not tested in Obsidian. Node run on `20260930`: 224 Objects perform functions (median 2, most 33) and 84 Functions have sub-functions (most 13). Small elements read well: `Antenna - WiFi` 3 notes; `Manage Communication w- LIN Bus` (a Function) 13 notes with 2 undefined, 5 performers, its parent and 4 sub-functions. Large ones hit the limits: `GSE Charger` stops at 80 notes (27 undefined, 103 more not shown) and the canvas is 7,280 px tall, with 39 of the 80 notes being satisfied requirements; `Process Signal` has 34 performing Objects, so 12 show and 48 are "more". 134 of the 224 Objects that perform functions hit a limit. Open: whether `satisfies` belongs in the Functional view, since it is the main cause of crowding and a Requirements view would show it better; and whether co-performers of a function should be shown.
 
