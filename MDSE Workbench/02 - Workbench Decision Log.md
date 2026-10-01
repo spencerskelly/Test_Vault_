@@ -846,3 +846,6 @@ My earlier finding and the Post-Import Tasks item 15 were wrong, and Spencer's r
 ### 2026-10-01 — `hasState`/`stateOf` restored in the schema (W-291)
 Spencer restored the pair in the Workspace Decision Log (W-291): written on an Object or a State Machine, pointing at a State (my reading of the endpoints). Workbench reads the schema from the vault at run time, so it needs no code change (minimum schema version 1.25). The plugin's test fixtures and README follow schema 1.34 and a unit test covers the pair. Not done: the populated `20260930` keeps its copy of `relationships.yaml` at 1.33, so Workbench in that vault does not offer `hasState` until its schema file is updated; I did not touch it because it is the import evidence set.
 
+### 2026-10-01 — `hasState` in the Structure view; schema 1.35 (W-292)
+Spencer's rule (W-292): an Object `hasState` a State or State Machine and never `hasChild`. Because `hasChild` no longer carries those links, the Structure profile follows `hasState` (after `hasChild`), otherwise States under an Object would disappear from the view. Built in plugin 0.1.4; the fixtures and README follow schema 1.35 and the tests cover the pair, the `hasChild` exclusions and the view (14 tests pass). The populated `20260930` has no `hasState` links and a 1.33 schema copy, so nothing changes in what you see there. Not tested in Obsidian.
+
