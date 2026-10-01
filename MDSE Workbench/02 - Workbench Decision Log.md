@@ -754,3 +754,16 @@ Sequential Review is option B (Previous / Next through the filtered queue, advan
 
 ### 2026-09-30 — The provisional relationship is `tracesTo`
 The schema had no `newRelationship` field. Spencer chose to add the capability and to use the existing trace relationship for it ("A, but we can also just use the existing trace relationship as the 'newrelationship'"). Workspace decision W-288 makes `tracesTo` provisional (creatable, every link a Review finding). WB-054 to WB-056 keep their behavior with `tracesTo`; the Review category is renamed Provisional Relationships. Applied: WB-054 note; Part C and the dashboard mock-ups in [[01 - Workbench Product Definition]]; M4 and the acceptance scenario in [[03 - Build Outline and Roadmap]].
+
+### 2026-09-30 — M0 spike: first results (plugin 0.0.3, synthetic 60,000-note vault, in Obsidian)
+**Performance (WB-081): passes with wide margin.** Index build 1.17 s (target under 60 s); findings scan 212 ms; 60,000 model notes, 107,526 links, all resolved; schema 1.33 and 1.16 read correctly. Whole-window JavaScript heap 363 MB, which includes Obsidian's own cache; Workbench's index alone measured about 80 MB in Node (target under 300 MB). Structure view builds in under 20 ms.
+
+**Canvas feasibility (WB-080): partly answered, encouraging.** On a generated canvas, right-clicking two selected notes shows "Relate selected notes (Workbench)", so Obsidian's selection-menu event for Canvas works on this Obsidian version. Not yet tested: whether choosing it writes the relationship from the canvas, and whether it holds across Obsidian updates. The event is undocumented, so the gate stays: relationship editing from notes ships first; Canvas Model Edit ships in V1 only if these two tests pass.
+
+**Startup bug found and fixed (0.0.2):** the first build froze Obsidian because first-time caching of a new vault fires one change event per note and each batch started a full rebuild. Changes before or during a build are now buffered, bursts schedule one quiet rebuild, and builds never overlap.
+
+**Readability fix (0.0.3):** the first Structure view was a grid with a label on every edge and was hard to read. It is now a left-to-right tree: 12 children per note, an 80-note limit shared evenly per level, one label per relationship group, "+N more" shown.
+
+**Gate R0 (WB-090) is not yet decided.** Still to check: a relationship written from a note (inverse written in the same step, Undo works, Undo refuses after an outside edit); the relationship written from the Canvas menu item; the release pipeline (the access token cannot write workflow files; CI and release sit in `ci-workflows/` in the plugin repository).
+
+**Process note:** a commit of the 60,000-note test vault to the plugin repository replaced the source; `main` was force-reset to `1ad0b35`. The test vault belongs in its own repository (or is regenerated with `npm run bench:generate`), never in the plugin repository or in this vault.

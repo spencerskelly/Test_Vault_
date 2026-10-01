@@ -77,7 +77,7 @@ This folder therefore contains a README and local Base only. The navigation rule
 - **Implementation details** (WB-072 to WB-078) are decided during the build, not one at a time up front (WB-089).
 - **Whenever the UI needs a model fact,** read it from the governed schema/configuration rather than embedding a copy in the plugin.
 - **A good next step** either resolves an open decision or implements and tests one user journey or milestone. A poor next step adds model complexity that does not improve the engineer's interface.
-- **Now:** the M0 spike is in the plugin repository `spencerskelly/MDSE_Workbench` (WB-088), started 2026-09-30. Its README lists the M0 questions, the commands that answer them and the first measurements on a synthetic 60,000-note vault. Gate R0 (WB-090) is decided from the numbers **Show diagnostics** reports inside Obsidian and from the Canvas probe.
+- **Now:** the M0 spike is in the plugin repository `spencerskelly/MDSE_Workbench` (WB-088), started 2026-09-30. Its README lists the M0 questions, the commands that answer them and the first measurements on a synthetic 60,000-note vault. First results are in the Decision Log (2026-09-30): performance passes; the Canvas selection menu works; gate R0 is not yet decided (write-from-note and write-from-Canvas tests, and the release pipeline, remain).
 
 ## Status
 
