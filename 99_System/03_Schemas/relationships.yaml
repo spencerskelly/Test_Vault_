@@ -1,4 +1,4 @@
-schemaVersion: '1.29'
+schemaVersion: '1.30'
 date: '2026-09-30'
 storage: Author forward/owner-side fields. Inverse fields are persisted in YAML and written with the forward field by the translator, Workbench or the regenerate script (W-275); the forward field wins when they disagree.
 paired:
@@ -13,13 +13,13 @@ paired:
 - {forward: dependsOn, inverse: dependencyOf, from: any, to: any}
 - {forward: derivedFrom, inverse: derivedBy, from: [Requirement], to: [Requirement]}
 - {forward: refines, inverse: refinedBy, from: [Requirement], to: [Requirement]}
-- {forward: drives, inverse: drivenBy, from: any, to: [Requirement]}
+- {forward: drives, inverse: drivenBy, from: any, to: any}
 - {forward: references, inverse: referencedBy, from: [Requirement], to: [Requirement, Document]}
 - {forward: precedes, inverse: follows, from: any, to: any, sameClass: true}
 - {forward: triggeredBy, inverse: triggers, from: [Function, Design, State], to: [Function, Design, State, Item Flow]}
-- {forward: supersedes, inverse: supersededBy}
-- {forward: describes, inverse: describedBy}
-- {forward: tracesTo, inverse: tracesFrom}
+- {forward: supersedes, inverse: supersededBy, from: any, to: any, sameClass: true}
+- {forward: describes, inverse: describedBy, from: [Info, Artifact], to: any}
+- {forward: tracesTo, inverse: tracesFrom, from: any, to: any, importOnly: true}
 - {forward: performs, inverse: performedBy, from: [Object], to: [Function]}
 - {forward: hasDesign, inverse: designOf, from: [Object, Document], to: [Design]}
 - {forward: appliesTo, inverse: applies, from: [Requirement], to: any}
@@ -29,7 +29,7 @@ paired:
 - {forward: optionOf, inverse: hasOption, from: [Use Case], to: [Use Case]}
 - {forward: source, inverse: sourceOf}
 - {forward: target, inverse: targetOf}
-- {forward: affects, inverse: affectedBy}
+- {forward: affects, inverse: affectedBy, from: [Issue, Failure Mode], to: any}
 temporaryPairs:
 - forward: hasClassifier
   inverse: classifierOf
@@ -38,6 +38,7 @@ temporaryPairs:
   meaning: 'The element named by the EA Classifier field of a Port, or by the PDATA1 typing link of a Port when the target is not a Port note (a Hardware Component or a Signal). Written by the translator on the Port note; inverse generated. Temporary (W-125, W-127): kept to keep the import clean and resolved in a later stage into copyOf/hasCopy or another relationship, then removed.'
 symmetric:
 - field: conflictsWith
+  between: any
   meaning: Mutual compatibility conflict; generated mirror is derivative. Kept though nothing writes it yet (W-192).
 - field: interfaces
   between: [Port]
@@ -57,11 +58,11 @@ oneWay:
 guidance:
   triggeredBy: 'triggeredBy/triggers: what starts a behavior. triggeredBy is written on the triggered Function, Design or State and points at the Function, Design, State or Item Flow (a signal or event) that starts it; triggers is generated (W-282). It is element-level: it does not say which transition a trigger belongs to; the transition-level trigger, guard and effect text stays as source-section lines on the state before (W-175). Guards stay as text for now (W-282).'
   exposes: 'exposes/exposedBy: one Port is also exposed at a higher level of the system; exposes is written on the outer Port and points at the inner Port, exposedBy is generated (W-281). Post-Import Task 8 turns the temporary equals into exposes, or into interfaces when it is not an exposure.'
-  endpoints: 'Endpoint rules (W-272, W-277): from is the class of the note the field is written on, to is the class of the note it points at; any means every class; sameClass means both notes have the same class; excludePairs lists [from, to] pairs that must use another field. The rules say what a person or AI may create; the translator writes links as drawn in EA and an off-rule link is a Review finding, not an error. A relationship with no from/to has no rule written yet.'
+  endpoints: 'Endpoint rules (W-272, W-277): from is the class of the note the field is written on, to is the class of the note it points at; any means every class; sameClass means both notes have the same class; excludePairs lists [from, to] pairs that must use another field. The rules say what a person or AI may create; the translator writes links as drawn in EA and an off-rule link is a Review finding, not an error. A relationship with no from/to has no rule written yet. importOnly means only the translator writes it: a person, AI or Workbench does not create new links of that relationship (W-283).'
   includes: 'includes/includedIn is membership without ownership: the whole includes a member it does not own, and a member may be included in several wholes. Written on the whole. hasChild is ownership (one parent); hasPart is Object assembly (W-277).'
   connector: 'interfaces and equals are symmetric fields written on both end notes (W-153). equals is temporary and is resolved after the import (Post-Import Task 8).'
   refine: 'refines/refinedBy is between two requirements: the source requirement adds precision to the target (W-165).'
-  drives: 'drives/drivenBy links an element to the requirement it gives rise to: drives is written on the element, drivenBy generated on the requirement. First used for Use Case to Requirement (W-165); Spencer intends it for other relationships to requirements later.'
+  drives: 'drives/drivenBy: the element on which it is written gives rise to or causes the other; drives is written on the source, drivenBy generated. First used for Use Case to Requirement (W-165); any to any since W-283 so it also covers causes.'
   references: 'references/referencedBy: one note mentions another, written on the note that mentions it. First used for requirements that mention other requirements (W-167); general enough for a requirement that cites a standard clause or a document.'
   participants: 'participants is one-way, written only on the Use Case, listing the Objects, Actors, Functions and Ports that take part in it; nothing is written back on them, so their properties are not overloaded (W-172).'
   precedes: 'precedes/follows is the order of steps in a flow: precedes is written on the step before, pointing at the step after; follows is generated. Used for EA ControlFlow (W-174) and StateFlow (W-175); a guard, trigger or effect is a source-section line on the step before.'
