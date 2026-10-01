@@ -40,5 +40,6 @@ uid: 20260928101530123claudeai-----   (Claude created it on its own)
 ## Relationships
 
 - Use only relationships defined in `relationships.yaml`.
+- Create a relationship only between classes its endpoint rule in `relationships.yaml` allows (`from`, `to`, `sameClass`, `excludePairs`; W-272, W-277). A relationship with no rule yet is not restricted.
 - Author the forward (owner-side) relationship and, in the same edit, write its inverse per `relationships.yaml`: a paired field gets its inverse field on the other note; a symmetric field is written on both notes; a one-way field gets nothing. Inverse fields are derivative: the forward field wins when they disagree (W-275).
 - Folder placement is navigation, not meaning.

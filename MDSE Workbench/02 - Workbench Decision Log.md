@@ -418,7 +418,7 @@ Long term: direct Canvas property editing is a goal.
 
 Relationship picker shows only relationships valid for the selected endpoints according to the current schema.
 
-*Dependency (2026-09-30):* the schema does not yet state which classes each relationship may connect. Workspace decision W-272 puts those rules in `relationships.yaml`; they are not written yet. Until they are, WB-053 cannot be implemented.
+*Dependency (2026-09-30):* the schema does not yet state which classes each relationship may connect. Workspace decision W-272 puts those rules in `relationships.yaml`. W-277 wrote the format and family 1 (structure); a relationship with no rule yet is not restricted. WB-053 can be built against the format now; it is complete once every family is written.
 
 ### WB-054 — `newRelationship` escape hatch
 **Status:** Settled

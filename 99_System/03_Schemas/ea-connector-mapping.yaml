@@ -99,10 +99,11 @@ connectorTypes:
     field: hasChild
   - aggregation: shared (DestIsAggregate 1, 600)
     pair: any
-    field: hasChild
-    note: 'grouped under, no ownership; regions of countries 278, Physical Context 57, about 30 real shared parts; Post-Import Task 7'
+    field: includes
+    amendedBy: W-277
+    note: 'grouped under, no ownership, so includes/includedIn rather than hasChild (W-277); regions of countries 278, Physical Context 57, about 30 real shared parts; Post-Import Task 7'
   precedence: 'an existing link on the pair (folded Part hasPart, W-136, or ParentID placement, W-149) wins and the connector writes nothing: 1,837 connectors (composite 1,551, shared 286)'
-  counts: '451 connectors add 450 new links: hasPart 77, hasChild 373; no self-loops, no pair drawn both ways, no pair with both composite and shared'
+  counts: '451 connectors add 450 new links: hasPart 77, hasChild 373 counted before W-277 moved shared aggregation to includes (split to be recounted by the planner); no self-loops, no pair drawn both ways, no pair with both composite and shared'
   mixedTypes:
     reviewLine: 'REVIEW hasChild: the two notes have different types'
     where: 'Source: EA section of the whole'

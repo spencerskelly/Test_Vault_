@@ -7,7 +7,7 @@ status: Draft
 
 What the stage 1 translator must do, in one place. It is kept current: any decision that changes a stage 1 rule updates this file in the same commit (W-247). Rules are stated once and cite their decision number. The tables live in the YAML files in `99_System/03_Schemas`, which stay the machine-readable authority; this file says which file holds what and does not copy the tables, so there is one place to change. Where this file and a YAML file disagree, that is a fault to fix, not a choice.
 
-Current through W-276.
+Current through W-277.
 
 ## 1. Purpose and scope
 
@@ -81,7 +81,7 @@ Every connector has exactly one rule (W-178); 9 have an end missing from the exp
 | Nesting 836 | Nothing where it repeats placement (584); the other 252 `hasChild` with `REVIEW nesting direction: connector {GUID}` | W-151, W-152 |
 | Generalization 3,974 | `subtypeOf`; mixed types flagged | W-152 |
 | Connector 823 | `interfaces`; BindingConnector a temporary `equals`; one link per pair; block-level ends `REVIEW port needed` | W-153 to W-158 |
-| Aggregation 2,288 | Composite Object pairs `hasPart`, all else `hasChild`; an existing link wins | W-159 |
+| Aggregation 2,288 | Composite: Object pairs `hasPart`, all else `hasChild`; shared: `includes`; an existing link wins | W-159, W-277 |
 | Realisation 950 | A requirement `appliesTo` an Object; Function realizes Use Case; else `realizedBy` flagged | W-160, W-167 |
 | NoteLink 349 | A note on one element folds into its body under `**EA notes:**`; a note on several stays Info with `describes` | W-161, W-162 |
 | Dependency 6,762 | By stereotype: `satisfy` (`satisfies`), `deriveReqt` (`derivedFrom`), `refine` (`refines`, `drives`, `describes`), `trace` (`describes`, `affects`, `appliesTo`, `references`), `verify` (`verifies`); none: `dependsOn`; off-pattern flagged | W-163 to W-169 |
