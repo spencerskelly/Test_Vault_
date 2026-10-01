@@ -482,7 +482,7 @@ Clicking a dashboard Review category opens a dedicated Review screen inside Work
 Clicking an individual finding opens a focused modal that explains the finding, presents relevant resolution actions, and allows opening source/target notes.
 
 ### WB-063 — Sequential Review
-**Status:** Open (recommendation: B)
+**Status:** Approved 2026-09-30: B, in V1 (Spencer: "b")
 
 When a user opens a Review finding, should Workbench support moving through the current filtered queue?
 
@@ -490,7 +490,7 @@ When a user opens a Review finding, should Workbench support moving through the 
 - **B — Previous / Next:** show `← Previous   4 of 17   Next →`; after a successful resolution, optionally advance to the next unresolved finding.
 - **C — Batch resolution:** multi-select and bulk semantic correction.
 
-Recommendation: **B**, without broad batch editing in V1. It improves cleanup sessions and needs no new model concept. The roadmap previously listed it as V1.x; if approved, it is V1 (small cost, high cleanup value).
+Decided: **B** in V1, without batch editing. Post-import cleanup works through hundreds of findings of the same kind (REVIEW lines, Use Case include links), and B makes that a fast loop with no bulk-editing risk and no new model concept. C may come later, once the patterns are clear.
 
 ---
 
@@ -746,3 +746,6 @@ Spencer approved WB-080 to WB-084 and WB-086 to WB-090 as written ("approved"). 
 
 ### 2026-09-30 — WB-087 amended
 Desktop only stays the supported scope, and the code is written to run on mobile where it can (Spencer: "have it ready the best we can, but expect this to run on desktop only"). My reading: no phone testing or sync trial in Phase 0. Applied: WB-087; the Platform row in [[03 - Build Outline and Roadmap]]; the platform section in [[04 - Architecture and Model Boundary]].
+
+### 2026-09-30 — WB-063 decided
+Sequential Review is option B (Previous / Next through the filtered queue, advancing after a resolution) in V1. Applied: WB-063; Part C of [[01 - Workbench Product Definition]]; the Review list in [[03 - Build Outline and Roadmap]]; the README. No open product decision remains before the Phase 0 spike.

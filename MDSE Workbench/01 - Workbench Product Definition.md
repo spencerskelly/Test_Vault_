@@ -742,7 +742,7 @@ Prefer a lightweight view-state notification rather than a governance finding un
 
 ### Sequential review
 
-**Open — [[02 - Workbench Decision Log#WB-063 — Sequential Review|WB-063]].** Recommendation: support Previous / Next through the filtered queue (`← Previous   4 of 17   Next →`) and advance after a resolution, without broad batch editing. Not yet approved.
+**Decided — [[02 - Workbench Decision Log#WB-063 — Sequential Review|WB-063]].** Previous / Next through the filtered queue (`← Previous   4 of 17   Next →`), advancing to the next unresolved finding after a resolution; no batch editing in V1.
 
 ### Batch review
 

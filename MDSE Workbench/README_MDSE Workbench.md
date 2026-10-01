@@ -77,7 +77,7 @@ This folder therefore contains a README and local Base only. The navigation rule
 - **Implementation details** (WB-072 to WB-078) are decided during the build, not one at a time up front (WB-089).
 - **Whenever the UI needs a model fact,** read it from the governed schema/configuration rather than embedding a copy in the plugin.
 - **A good next step** either resolves an open decision or implements and tests one user journey or milestone. A poor next step adds model complexity that does not improve the engineer's interface.
-- **Next:** decide Sequential Review (WB-063), then start the M0 spike described in [[03 - Build Outline and Roadmap]] (release path approved 2026-09-30).
+- **Next:** start the M0 spike described in [[03 - Build Outline and Roadmap]]. The release path (WB-080 to WB-090) and Sequential Review (WB-063) were decided 2026-09-30; no open product decision blocks it.
 
 ## Status
 

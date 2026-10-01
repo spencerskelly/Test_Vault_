@@ -62,7 +62,7 @@ Status: the capability set and the release path (milestones, gates, Canvas-edit 
 - focused finding modal, open source/target;
 - straightforward resolution actions;
 - `newRelationship` replacement with an existing valid relationship;
-- Previous / Next if WB-063 is approved.
+- Previous / Next through the filtered queue (WB-063).
 
 ### Model/index foundation
 - schema/config loader;
