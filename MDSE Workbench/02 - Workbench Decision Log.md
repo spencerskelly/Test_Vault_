@@ -421,6 +421,8 @@ Relationship picker shows only relationships valid for the selected endpoints ac
 *Dependency (2026-09-30):* the schema does not yet state which classes each relationship may connect. Workspace decision W-272 puts those rules in `relationships.yaml`. W-277 wrote the format and family 1 (structure); a relationship with no rule yet is not restricted. WB-053 can be built against the format now; it is complete once every family is written. *Update:* every relationship has a rule as of W-285. `importOnly` relationships (`tracesTo`) are never offered for new links.
 
 ### WB-054 — `newRelationship` escape hatch
+
+*Implemented by `tracesTo` (2026-09-30, workspace decision W-288): the vault's existing trace relationship is the provisional relationship; no separate `newRelationship` field exists. Read `newRelationship` below as `tracesTo`.*
 **Status:** Settled
 
 A provisional `newRelationship` may be used when the engineer knows two elements are related but no approved relationship is known.
@@ -749,3 +751,6 @@ Desktop only stays the supported scope, and the code is written to run on mobile
 
 ### 2026-09-30 — WB-063 decided
 Sequential Review is option B (Previous / Next through the filtered queue, advancing after a resolution) in V1. Applied: WB-063; Part C of [[01 - Workbench Product Definition]]; the Review list in [[03 - Build Outline and Roadmap]]; the README. No open product decision remains before the Phase 0 spike.
+
+### 2026-09-30 — The provisional relationship is `tracesTo`
+The schema had no `newRelationship` field. Spencer chose to add the capability and to use the existing trace relationship for it ("A, but we can also just use the existing trace relationship as the 'newrelationship'"). Workspace decision W-288 makes `tracesTo` provisional (creatable, every link a Review finding). WB-054 to WB-056 keep their behavior with `tracesTo`; the Review category is renamed Provisional Relationships. Applied: WB-054 note; Part C and the dashboard mock-ups in [[01 - Workbench Product Definition]]; M4 and the acceptance scenario in [[03 - Build Outline and Roadmap]].

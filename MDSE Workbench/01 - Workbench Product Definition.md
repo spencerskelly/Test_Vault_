@@ -203,7 +203,7 @@ Selected:
                         [ View Options... ]
 
 REVIEW
-New Relationships      7
+Provisional Relationships 7
 Model Errors            3
 Incomplete Elements    12
 Broken References       2
@@ -289,7 +289,7 @@ The default path should not require these choices.
 
 The dashboard shows categorized whole-vault findings, such as:
 
-- New Relationships;
+- Provisional Relationships;
 - Model Errors;
 - Incomplete Elements;
 - Broken References;
@@ -628,7 +628,7 @@ Example:
 ```text
 REVIEW
 
-New Relationships        7
+Provisional Relationships   7
 Model Errors              3
 Incomplete Elements      12
 Broken References         2
@@ -678,13 +678,13 @@ The modal should explain the issue in context and present only relevant actions.
 For a provisional relationship:
 
 ```text
-New Relationship
+Provisional Relationship
 
 Source:
 Temperature Sensor
 
 Current relationship:
-newRelationship
+tracesTo
 
 Target:
 Thermal Requirement
@@ -698,9 +698,9 @@ Valid replacements:
 [Cancel] [Replace Relationship]
 ```
 
-### newRelationship behavior
+### Provisional relationship (`tracesTo`) behavior
 
-`newRelationship` is intentionally available when an engineer knows two elements are related but does not know the approved semantic relationship.
+`tracesTo` (the vault's provisional relationship, workspace decision W-288) is intentionally available when an engineer knows two elements are related but does not know the approved semantic relationship.
 
 #### Resolve
 
@@ -714,7 +714,7 @@ The Review modal must not become a schema-authoring interface.
 
 #### Explanation
 
-No explanation is required to create `newRelationship`.
+No explanation is required to create `tracesTo`.
 
 ### Other finding types
 

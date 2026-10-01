@@ -61,7 +61,7 @@ Status: the capability set and the release path (milestones, gates, Canvas-edit 
 - dedicated Review screen, filters/search;
 - focused finding modal, open source/target;
 - straightforward resolution actions;
-- `newRelationship` replacement with an existing valid relationship;
+- `tracesTo` replacement with an existing valid relationship;
 - Previous / Next through the filtered queue (WB-063).
 
 ### Model/index foundation
@@ -127,7 +127,7 @@ Relationship service; endpoint validation; canonical writeback; removal prompt; 
 **Exit:** an engineer safely adds and corrects relationships from a note, and an undo after an outside edit fails safely.
 
 ### M4 — Review
-Finding categories/counts; Review screen; filters; focused modal; `newRelationship` resolution.
+Finding categories/counts; Review screen; filters; focused modal; `tracesTo` resolution.
 **Exit:** unresolved/model-health items can be worked without manual queries.
 
 ### M5 — More views
@@ -181,8 +181,8 @@ Open Workbench → search/select PCBA → Structure → generated Canvas opens w
 ### Add a relationship
 From a note (or, after M6, a generated Canvas in Model Edit) → select source and target → Create Relationship → choose a valid relationship → confirm → authoritative model updates immediately, the inverse appears, and Undo restores the before-state.
 
-### Resolve `newRelationship`
-Workbench Review → New Relationships → open finding → choose an existing valid replacement → confirm → finding clears.
+### Resolve a provisional relationship (`tracesTo`)
+Workbench Review → Provisional Relationships → open finding → choose an existing valid replacement → confirm → finding clears.
 
 ### Preserve an important view
 Generate quick view → adjust/annotate → Save as Curated View before refresh → curated Canvas becomes a normal intentional vault artifact.
