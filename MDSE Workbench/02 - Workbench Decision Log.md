@@ -707,9 +707,9 @@ Product questions that change what an engineer sees still go one at a time. Impl
 - **R2 — Team release:** pilot findings resolved; compatibility check and Bootstrap install verified on a fresh vault.
 
 ### WB-091 — Quantity in the Structure view
-**Status:** Trial 2026-10-01 (my reading of "let's see what the quantity looks like"; Spencer has not yet seen it in Obsidian)
+**Status:** Trial 2026-10-01 (my reading of "let's see what the quantity looks like"; Spencer has seen it in Obsidian, no decision yet)
 
-A child listed N times in one relationship field is one card with the count on its edge (`hasPart ×25`, then `×6` on the next group's first link). Cards stay one per distinct note, and links stay one per distinct target, so Review counts do not change. Evidence: in `20260930`, 276 repeated entries in 86 notes (`hasPart` 208, `hasChild` 68); `Cable - 2 twisted pair Strip and Strip` lists `Wire - Strip and Strip` 25 times. A quantity change marks a view stale. Built in plugin 0.1.1.
+A child listed N times in one relationship field is one card with the count on its edge (`hasPart ×6` on `Cable Jacket`, `×27` on `Wire - Strip and Strip`). Cards stay one per distinct note, and links stay one per distinct target, so Review counts do not change. Evidence: in `20260930`, 276 repeated entries in 86 notes (`hasPart` 208, `hasChild` 68); `Cable - 2 twisted pair Strip and Strip` lists `Wire - Strip and Strip` 27 times and `Cable Jacket` 6 times (I first wrote 25 from a quick read of the file; corrected after Spencer's screenshot showed ×27). Seen in Obsidian 0.1.1: the counts display. A quantity change marks a view stale. Built in plugin 0.1.1.
 
 ---
 
