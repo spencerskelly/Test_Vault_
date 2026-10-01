@@ -791,6 +791,11 @@ Built in plugin 0.1.12; 31 tests pass, including a check that every step of ever
 
 The Functional view (WB-097) no longer follows `satisfies`: it shows the functions an Object performs, their sub-functions and order, and for a Function its performer, parent, sub-functions and neighbors in the flow. The requirements a function satisfies are in the Requirements view (WB-098) and the Verification view (WB-102). "For now": it can come back as an option. In the first run on `20260930`, `satisfies` was 39 of the 80 notes shown for `GSE Charger`. Closes the open question carried since WB-097. Built in plugin 0.1.13.
 
+### WB-104 — View… button in the note details popup
+**Status:** Approved 2026-10-01 (Spencer: "I'd love the view popup", to the proposal)
+
+The popup (WB-099) has a **View…** button, between Edit and Open note. It opens the same picker as the command **Explore view of current note…** for the note the popup shows: only the views that can start from that note's type, each with a line of description. Choosing one generates the canvas and opens it in a new tab. Reason: the Explore commands only appear while a Markdown note is the active tab, so from a canvas a view of a card needed the note to be opened first; now a card is clicked, **View…** is pressed and the view opens. The popup stays open and follows the next card clicked on the new canvas. Not shown for an undefined card, which has no note. Built in plugin 0.1.14; checked in a simulated DOM (the button is there and calls the picker with the note shown), not in Obsidian.
+
 ---
 
 ## How to use this log
@@ -940,4 +945,7 @@ Plugin 0.1.12. To try in Obsidian after pulling and reloading: open a note and r
 
 ### 2026-10-01 — `satisfies` out of the Functional view (WB-103); two reports to follow up
 Plugin 0.1.13. Spencer reported that "all the canvas views are gone from the plugin"; the symptom is not pinned down. Checked: the built plugin loads in a simulated Obsidian and registers all 19 commands; nothing in the plugin deletes files; no commit to `20260930` removed a canvas (the only generated canvas ever committed is the cable Structure view, from Spencer's own commit); the view commands appear only while a Markdown note is the active file, not while a canvas is. Spencer also asked for the YAML rewrite (WB-101, risk 1) to be explained plainly before deciding between keeping it and writing line edits.
+
+### 2026-10-01 — Report resolved; View… button built (WB-104)
+Spencer's report that "all the canvas views are gone from the plugin" was not a defect: a canvas was the active tab and no note was selected, and the Explore commands appear only for a Markdown note. All views are there. Plugin 0.1.14 adds **View…** to the popup so a view can be started from a card on a canvas. Still open: whether property and relationship edits keep using Obsidian's YAML rewrite (explained to Spencer on 2026-10-01; recommended keeping it for now and checking one real git diff first); Tests 4 and 5 and the checks of the popup, editing and the eleven views in Obsidian.
 
