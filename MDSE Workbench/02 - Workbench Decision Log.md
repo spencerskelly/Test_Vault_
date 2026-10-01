@@ -836,4 +836,3 @@ Spencer saw WB-091 in Obsidian (0.1.1): `hasPart ×6` on Cable Jacket and `×27`
 
 ### 2026-10-01 — First Review test: the five missing inverses are modeling errors
 Spencer saw "Not changed: subtypeOf connects two notes of the same class only" from **Write missing inverse**. All five Missing Inverses findings in `20260930` are a State with `subtypeOf` to a Failure Mode (Damaged Package, Incorrect Part, Undamaged Package, Unknown Quality, Unkown Part), links that already break the rule. Spencer: this is likely a modeling error from quick building, not a missing inverse. So Write missing inverse cannot be tested on this vault, and the inverse write and Undo are tested through Replace relationship instead. WB-094. Open, for the model side: whether these five go to the post-import review list (Post-Import Tasks, Task 7).
-\n
