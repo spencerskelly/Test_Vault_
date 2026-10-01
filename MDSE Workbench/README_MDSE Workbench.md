@@ -21,7 +21,7 @@ The normal engineer should be able to use the vault without understanding schema
 ## Start here
 
 1. [[01 - Workbench Product Definition]] — what Workbench is, plus the dashboard, Canvas/view and Review experience (Parts A to C)
-2. [[02 - Workbench Decision Log]] — every decision (`WB-` IDs), open questions, proposals awaiting approval, history
+2. [[02 - Workbench Decision Log]] — every decision (`WB-` IDs), open questions, history
 3. [[03 - Build Outline and Roadmap]] — V1 scope, release path (M0 to M7), risks, acceptance scenarios, later roadmap
 4. [[04 - Architecture and Model Boundary]] — how Workbench relates to the model and the vault
 5. [[05 - Reference Plugin Findings]] — what existing plugins showed, and license cautions
@@ -74,11 +74,11 @@ This folder therefore contains a README and local Base only. The navigation rule
 
 - **Do not restart with metamodel design.** The goal is a good interface to the existing model. A drift into property inheritance was stopped; it is model governance, not a Workbench requirement (WB-070, WB-071).
 - **Method:** one focused question at a time; explain the impact; offer clear options; recommend the simplest scalable one; record the decision; move on. Do not reopen settled decisions without new information.
-- **Implementation details** (WB-072 to WB-078) are decided during the build, not one at a time up front (WB-089, proposed).
+- **Implementation details** (WB-072 to WB-078) are decided during the build, not one at a time up front (WB-089).
 - **Whenever the UI needs a model fact,** read it from the governed schema/configuration rather than embedding a copy in the plugin.
 - **A good next step** either resolves an open decision or implements and tests one user journey or milestone. A poor next step adds model complexity that does not improve the engineer's interface.
-- **Next:** approve or amend the release-path proposals (WB-080 to WB-090), decide Sequential Review (WB-063), then start the M0 spike described in [[03 - Build Outline and Roadmap]].
+- **Next:** decide Sequential Review (WB-063), then start the M0 spike described in [[03 - Build Outline and Roadmap]] (release path approved 2026-09-30).
 
 ## Status
 
-Initial consolidated definition created 2026-09-30 from the Workbench/dashboard design discussion. Consolidated and extended with release-path proposals the same day (see the Decision Log History). Proposals are not direction until approved.
+Initial consolidated definition created 2026-09-30 from the Workbench/dashboard design discussion. Consolidated and extended with release-path proposals the same day (see the Decision Log History). The release-path proposals were approved the same day.

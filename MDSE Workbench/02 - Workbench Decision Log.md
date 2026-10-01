@@ -236,7 +236,7 @@ Engineers may request deeper traversal.
 
 Within the chosen bounds, show all valid connecting paths rather than arbitrarily picking one shortest path.
 
-*Amendment proposed 2026-09-30: [[#WB-082 — Node cap outranks depth]] (bounds include a node cap that wins over depth).*
+*Amended 2026-09-30 by [[#WB-082 — Node cap outranks depth]]: bounds include a node cap that wins over depth.*
 
 ### WB-028 — Oversized view handling
 **Status:** V1
@@ -606,19 +606,19 @@ Ruleset 1.22 section 9 still requires a Views and Bases note, a base and a canva
 
 ## L. Release-path proposals (2026-09-30)
 
-Written after a review of this folder for the path to a first release. **All are Proposed or Open until approved.**
+Written after a review of this folder for the path to a first release. Approved by Spencer on 2026-09-30 ("approved", all ten as written); WB-085 was settled separately by workspace decision W-275.
 
 ### WB-080 — Relationship service first; Canvas Model Edit is release-gated
-**Status:** Proposed
+**Status:** Approved 2026-09-30
 
 Build the relationship service (validation, canonical owner-side writeback, batch preview, undo) first and expose it through a command/modal on notes. Canvas Model Edit (WB-039 to WB-043, WB-046, WB-047, WB-050) is a second surface over the same service.
 
 Why: Canvas editing relies on Canvas internals Obsidian does not officially expose; the reference work (note [[05 - Reference Plugin Findings]]) depends on patching, and the most capable reference is GPL. Generated read-only Canvas is low risk; edit-in-Canvas is not.
 
-If approved: Phase 0 probes Canvas edit feasibility; V1 ships with Canvas Model Edit only if the probe is low-risk, otherwise it ships in the next release. Behavior in WB-039 to WB-050 does not change, only timing. Those decisions keep their current status until this is approved.
+Phase 0 probes Canvas edit feasibility; V1 ships with Canvas Model Edit only if the probe is low-risk, otherwise it ships in the next release. Behavior in WB-039 to WB-050 does not change, only timing: Canvas Model Edit ships in V1 only if the Phase 0 probe is low-risk.
 
 ### WB-081 — Performance gate in Phase 0
-**Status:** Proposed
+**Status:** Approved 2026-09-30
 
 Phase 0 measures Workbench on the real translated vault before feature work continues. Starting targets (placeholders to revise after the first measurement):
 
@@ -631,21 +631,21 @@ Phase 0 measures Workbench on the real translated vault before feature work cont
 If a target cannot be met, the finding goes to the decision log before more is built on the index design.
 
 ### WB-082 — Node cap outranks depth
-**Status:** Proposed (amends WB-027)
+**Status:** Approved 2026-09-30 (amends WB-027)
 
 Traversal is bounded by depth **and** a node cap, and the cap wins. When the cap is reached, keep nodes nearest the start first, then by the profile's relationship order; report omitted counts per branch (WB-028). Path enumeration is capped so dense graphs cannot explode.
 
 For multiple starting elements (WB-025): compute the bounded paths that connect the selected elements first (shared context), then expand around each element on request.
 
 ### WB-083 — Duplicate note names: id suffix (already settled in the workspace)
-**Status:** Settled elsewhere; Workbench consequence proposed
+**Status:** Settled elsewhere (W-198, W-199); Workbench consequence approved 2026-09-30
 
 Workspace decisions W-198 and W-199 give every note in a duplicate-name group an id suffix, so note names stay unique (WB-018 holds).
 
-Workbench consequence (proposed): the element picker and Review modals show **type and id beside the name**, and link resolution uses `uid`/`id`, never the name alone (WB-064, WB-065).
+Workbench consequence (approved): the element picker and Review modals show **type and id beside the name**, and link resolution uses `uid`/`id`, never the name alone (WB-064, WB-065).
 
 ### WB-084 — One creation spec shared with templates
-**Status:** Proposed
+**Status:** Approved 2026-09-30
 
 The creation service reads the class templates in `99_System/05_Templates` and the rules in `99_System/02_AI/AI_INSTRUCTIONS.md` (property order, `uid`, `id`, author code from `.obsidian/author-code.txt`) instead of carrying its own definition. A note created by Workbench must have the same header as one created from the template by hand.
 
@@ -665,7 +665,7 @@ Consequences: a relationship edit changes the source note and each target note; 
 ---
 
 ### WB-086 — Git and external change
-**Status:** Proposed
+**Status:** Approved 2026-09-30
 
 - Workbench never runs Git or commits in V1. People and AI tooling commit; Workbench only edits files.
 - Changes made outside Workbench (a pull, an AI push, hand edits) are picked up from vault file events and update the index incrementally. After a large change set, or on demand (**Rebuild index**), the index is rebuilt.
@@ -674,12 +674,12 @@ Consequences: a relationship edit changes the source note and each target note; 
 - The generated-view folder stays excluded from Git (WB-036).
 
 ### WB-087 — Platform support
-**Status:** Open (proposal: desktop only for V1)
+**Status:** Approved 2026-09-30: desktop only for V1
 
-Decide whether Obsidian mobile is supported. Proposal: desktop only for V1; set `isDesktopOnly` in the plugin manifest; revisit after the pilot.
+Obsidian mobile is not supported in V1: set `isDesktopOnly` in the plugin manifest; revisit after the pilot.
 
 ### WB-088 — Distribution, versioning and build
-**Status:** Proposed
+**Status:** Approved 2026-09-30
 
 - The plugin's source lives in its own repository, not in the vault. The vault holds only vault-side configuration: View Profiles and the schema/compatibility declaration (WB-069).
 - Releases are GitHub Releases containing `main.js`, `manifest.json` and `styles.css`, with semantic versioning and `minAppVersion`.
@@ -688,12 +688,12 @@ Decide whether Obsidian mobile is supported. Proposal: desktop only for V1; set 
 - Because the final vault leaves out methodology material, this folder's design notes belong in the plugin repository once that exists; the vault keeps a short pointer.
 
 ### WB-089 — Decide implementation details during the build
-**Status:** Proposed
+**Status:** Approved 2026-09-30
 
 Product questions that change what an engineer sees still go one at a time. Implementation-level items (WB-072 to WB-078) are decided with the working plugin in hand and recorded here when settled. The roadmap and architecture already hold enough direction to start the Phase 0 spike.
 
 ### WB-090 — Release gates
-**Status:** Proposed
+**Status:** Approved 2026-09-30
 
 - **R0 — Go/No-go after Phase 0:** performance targets (WB-081) met or a plan recorded; inverse-field behavior verified (WB-085); Canvas edit feasibility decided (WB-080).
 - **R1 — Pilot:** two or three engineers use the plugin on a real test slice (the first slice is `02 Product Context`, W-267) and run the acceptance scenarios in [[03 - Build Outline and Roadmap]].
@@ -735,3 +735,6 @@ The pause point before this review was the Sequential Review question (WB-063). 
 
 ### Former open-item IDs
 `O-001` → WB-063 · `O-002` → WB-072 · `O-003` → WB-073 · `O-004` → WB-074 · `O-005` → WB-075 · `O-006` → WB-076 · `O-007` → WB-077 · `O-008` → WB-078 · `O-009` → WB-079.
+
+### 2026-09-30 — Release-path proposals approved
+Spencer approved WB-080 to WB-084 and WB-086 to WB-090 as written ("approved"). WB-027 is amended by WB-082; WB-039 to WB-050 keep their behavior and follow the Canvas-edit gate in WB-080. Applied: statuses here; the release path in [[03 - Build Outline and Roadmap]]; the release gate note in [[01 - Workbench Product Definition]]; the section markers in [[04 - Architecture and Model Boundary]]; the README.

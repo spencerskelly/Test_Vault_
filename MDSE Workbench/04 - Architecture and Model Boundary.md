@@ -1,6 +1,6 @@
 # Architecture and Model Boundary
 
-Sections marked *(proposed)* at the end depend on decisions in [[02 - Workbench Decision Log]] (WB-080 to WB-090) that are not yet approved.
+The sections at the end follow decisions WB-080 to WB-090 in [[02 - Workbench Decision Log]], approved 2026-09-30.
 
 ## Core rule
 
@@ -200,11 +200,11 @@ The simplest reliable architecture is:
 
 > Obsidian files are the model. Workbench makes them easier to use.
 
-## Performance *(proposed, WB-081)*
+## Performance *(WB-081)*
 
 The index is the performance-critical part. Design for the full translated vault (up to about 60,000 notes): build the index off the UI thread or in small chunks, update incrementally from file events, persist a rebuildable cache, and never render an unbounded graph (node cap outranks depth, WB-082). Measure on the real vault in Phase 0.
 
-## External change and Git *(proposed, WB-086)*
+## External change and Git *(WB-086)*
 
 - Workbench edits files; it does not run Git or commit.
 - Changes from pulls, AI tools or hand edits arrive as file events; update the index incrementally, rebuild after a large change set or on demand.
@@ -215,11 +215,11 @@ The index is the performance-critical part. Design for the full translated vault
 
 Workbench writes the inverse with each forward field it writes, and writes inverses after hand edits made on the same machine. Changes from pulls or outside AI edits are reported as missing-inverse findings, not rewritten automatically, so machines do not race each other. The forward field is the authority; the inverse is regenerated from it. No dependency on Nodian.
 
-## Creation parity *(proposed, WB-084)*
+## Creation parity *(WB-084)*
 
 The creation service reads the vault's class templates and the `uid`/`id`/author-code rules rather than duplicating them, so a Workbench-created note equals a template-created one. Both the template and Workbench therefore change together when the rule changes.
 
-## Platform, distribution and versioning *(proposed, WB-087, WB-088)*
+## Platform, distribution and versioning *(WB-087, WB-088)*
 
 Desktop only for V1. Plugin source lives in its own repository; releases are GitHub Releases pinned by MDSE Bootstrap. The vault holds only vault-side configuration (View Profiles, schema/compatibility declaration).
 

@@ -4,7 +4,7 @@
 
 Deliver the smallest Workbench release that makes the MDSE vault substantially easier for an engineer to use every day, and prove the interface and semantic-editing pattern before investing in advanced automation.
 
-Status of the ordering below: the capability set is approved direction; the **release path** (milestones, gates, Canvas-edit gating) is proposed in [[02 - Workbench Decision Log#WB-080 — Relationship service first; Canvas Model Edit is release-gated|WB-080]] to [[02 - Workbench Decision Log#WB-090 — Release gates|WB-090]] and needs approval.
+Status: the capability set and the release path (milestones, gates, Canvas-edit gating, WB-080 to WB-090) are approved direction (2026-09-30).
 
 ## V1 capability set
 
@@ -97,7 +97,7 @@ resolveFinding(...)
 
 Exact APIs can change; the separation is what matters.
 
-## Release path (proposed)
+## Release path
 
 Each milestone has an exit criterion. A milestone is not done until its exit criterion is shown on the real translated vault, not only on a small sample.
 
@@ -152,7 +152,7 @@ If M0 shows Canvas editing is low-risk, M6 may move before M5. If not, V1.0 is M
 | Safety | Never corrupt authoritative notes; plugin failure leaves Markdown/YAML usable | testing priorities |
 | Compatibility | Schema declares version; incompatible vault disables unsafe edits with a clear message | WB-069 |
 | Git | Workbench never commits; external changes picked up; undo checks before-state | WB-086 |
-| Platform | Desktop only for V1 (proposed) | WB-087 |
+| Platform | Desktop only for V1 | WB-087 |
 | Distribution | Separate plugin repo; GitHub Releases; pinned by MDSE Bootstrap; semantic versions | WB-088 |
 | Parity | Workbench-created notes match template-created notes | WB-084 |
 | Independence | Correctness does not depend on community plugins; Workbench writes inverses itself | WB-003, WB-085 |

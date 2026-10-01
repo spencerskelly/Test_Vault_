@@ -507,7 +507,7 @@ View Mode is the safe default.
 
 ### Model Edit mode
 
-> **Release gate (proposed, [[02 - Workbench Decision Log#WB-080 — Relationship service first; Canvas Model Edit is release-gated|WB-080]]):** the relationship service ships first and is usable from a command/modal on notes. Canvas Model Edit depends on Canvas internals Obsidian does not officially expose, so it ships in V1 only if the Phase 0 spike shows it is low-risk. The behavior below is unchanged either way.
+> **Release gate ([[02 - Workbench Decision Log#WB-080 — Relationship service first; Canvas Model Edit is release-gated|WB-080]]):** the relationship service ships first and is usable from a command/modal on notes. Canvas Model Edit depends on Canvas internals Obsidian does not officially expose, so it ships in V1 only if the Phase 0 spike shows it is low-risk. The behavior below is unchanged either way.
 
 The engineer explicitly enables **Model Editing** on the current Canvas.
 
