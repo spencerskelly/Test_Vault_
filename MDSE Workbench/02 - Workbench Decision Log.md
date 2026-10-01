@@ -789,5 +789,5 @@ Spencer: "let's call this a pass" (plugin 0.0.5, 60,000-note synthetic vault, in
 - The test vault belongs in its own repository, never in the plugin repository or this vault.
 - Canvas hook behavior across Obsidian updates (see above).
 - R1 pilot scope: first slice is `02 Product Context` (W-267), tested in the imported vault, not the synthetic one.
-- Importer: the shared-aggregation → `includes` change is still to be made before the importer writes notes.
+- Importer: correction, 2026-10-01. The shared-aggregation → `includes` change (W-277, W-287) is already in importer v0.5.1: the planner writes `includes` for `DestIsAggregate` = 1 and the writer adds the `includedIn` inverse. Checked by reading the code; not run against the `.qeax`. The line above this correction in the first R0 entry, which listed it as still to be made, was carried over from an earlier chat's list without checking.
 
