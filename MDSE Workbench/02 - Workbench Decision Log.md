@@ -674,9 +674,14 @@ Consequences: a relationship edit changes the source note and each target note; 
 - The generated-view folder stays excluded from Git (WB-036).
 
 ### WB-087 — Platform support
-**Status:** Approved 2026-09-30: desktop only for V1
+**Status:** Approved 2026-09-30, amended the same day: desktop only, with mobile-ready code
 
-Obsidian mobile is not supported in V1: set `isDesktopOnly` in the plugin manifest; revisit after the pilot.
+Spencer: "have it ready the best we can, but expect this to run on desktop only."
+
+- **Supported:** desktop only. The manifest sets `isDesktopOnly: true`; no mobile testing or mobile sync work is planned.
+- **Mobile-ready code:** use only Obsidian's own APIs (vault, metadata cache, Canvas files), never Node or Electron (file system, paths, child processes); layouts that fit a narrow screen (inspector as a drawer); select-then-command interactions rather than drag-only ones; a compact, incremental index. Checked in code review.
+- **Why:** turning mobile on later should be a decision, not a rewrite. The main blocker is outside Workbench: Obsidian Git is unstable on mobile and limited by memory, so a large vault on phones needs another sync method, and MDSE Bootstrap's mobile support is unknown.
+- Revisit after the pilot.
 
 ### WB-088 — Distribution, versioning and build
 **Status:** Approved 2026-09-30
@@ -738,3 +743,6 @@ The pause point before this review was the Sequential Review question (WB-063). 
 
 ### 2026-09-30 — Release-path proposals approved
 Spencer approved WB-080 to WB-084 and WB-086 to WB-090 as written ("approved"). WB-027 is amended by WB-082; WB-039 to WB-050 keep their behavior and follow the Canvas-edit gate in WB-080. Applied: statuses here; the release path in [[03 - Build Outline and Roadmap]]; the release gate note in [[01 - Workbench Product Definition]]; the section markers in [[04 - Architecture and Model Boundary]]; the README.
+
+### 2026-09-30 — WB-087 amended
+Desktop only stays the supported scope, and the code is written to run on mobile where it can (Spencer: "have it ready the best we can, but expect this to run on desktop only"). My reading: no phone testing or sync trial in Phase 0. Applied: WB-087; the Platform row in [[03 - Build Outline and Roadmap]]; the platform section in [[04 - Architecture and Model Boundary]].

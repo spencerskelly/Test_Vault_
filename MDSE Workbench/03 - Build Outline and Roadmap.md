@@ -152,7 +152,7 @@ If M0 shows Canvas editing is low-risk, M6 may move before M5. If not, V1.0 is M
 | Safety | Never corrupt authoritative notes; plugin failure leaves Markdown/YAML usable | testing priorities |
 | Compatibility | Schema declares version; incompatible vault disables unsafe edits with a clear message | WB-069 |
 | Git | Workbench never commits; external changes picked up; undo checks before-state | WB-086 |
-| Platform | Desktop only for V1 | WB-087 |
+| Platform | Desktop only (`isDesktopOnly: true`); code written mobile-ready: Obsidian APIs only, no Node or Electron, narrow-screen layouts, select-then-command | WB-087 |
 | Distribution | Separate plugin repo; GitHub Releases; pinned by MDSE Bootstrap; semantic versions | WB-088 |
 | Parity | Workbench-created notes match template-created notes | WB-084 |
 | Independence | Correctness does not depend on community plugins; Workbench writes inverses itself | WB-003, WB-085 |

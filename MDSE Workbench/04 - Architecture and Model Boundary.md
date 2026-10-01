@@ -221,5 +221,5 @@ The creation service reads the vault's class templates and the `uid`/`id`/author
 
 ## Platform, distribution and versioning *(WB-087, WB-088)*
 
-Desktop only for V1. Plugin source lives in its own repository; releases are GitHub Releases pinned by MDSE Bootstrap. The vault holds only vault-side configuration (View Profiles, schema/compatibility declaration).
+Desktop only, with mobile-ready code: only Obsidian's own APIs (no Node or Electron), narrow-screen layouts, select-then-command interactions, a compact index (WB-087). Plugin source lives in its own repository; releases are GitHub Releases pinned by MDSE Bootstrap. The vault holds only vault-side configuration (View Profiles, schema/compatibility declaration).
 
