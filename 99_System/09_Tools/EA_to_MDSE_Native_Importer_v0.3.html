@@ -2332,7 +2332,11 @@ function renderEntityMarkdown(e,graph,entityCtx,tagMap,foldedNotes,externalSet,s
   const fn=formatFoldedNotes(foldedNotes.get(e.key)||[]);
   if(fn.length)lines.push("**EA notes:**",...fn,"");
 
-  lines.push("## Notes","","","","## Source: EA");
+  lines.push("## Notes","");
+  const multilinePriority=tags.filter(x=>x.name==="Webasto MBDV Profile::Priority"&&/[\r\n]/.test(x.value));
+  for(const t of multilinePriority)lines.push("**Webasto MBDV Profile::Priority:**",t.value.trim(),"");
+
+  lines.push("","","## Source: EA");
   if(trim2(e.raw.Name)&&e.fileName!==trim2(e.raw.Name))lines.push("Name: "+trim2(e.raw.Name));
   lines.push("EA GUID: "+trim2(e.eaGuid));
 
@@ -2344,11 +2348,6 @@ function renderEntityMarkdown(e,graph,entityCtx,tagMap,foldedNotes,externalSet,s
       const label=(name==="PN"||name==="PartNumber")?"Part Number":name;
       lines.push("- "+label+": "+t.value.replace(/\r?\n/g," "));
     }
-  }
-  const multilinePriority=tags.filter(x=>x.name==="Webasto MBDV Profile::Priority"&&/[\r\n]/.test(x.value));
-  if(multilinePriority.length){
-    // Note Layout puts multi-line Priority above Source: EA. v0.3 records the omission
-    // rather than moving it to the wrong location after the source section has started.
   }
   return lines.join("\n").replace(/\n+$/,"")+"\n";
 }
@@ -2447,7 +2446,16 @@ async function generateSlice(){
     const graph=buildRelationshipGraph(lastPlannerContext,entityCtx,limitations);
     for(const [k,fm] of graph.entries())for(const [field,targets] of fm.entries()){
       if(!REL_ALLOWED.has(field))validation.push("unknown relationship field "+field);
-      for(const t of targets)if(!entities.has(t))validation.push("unresolved relationship entity "+k+" "+field+" "+t);
+      for(const t of targets){
+        if(!entities.has(t)){validation.push("unresolved relationship entity "+k+" "+field+" "+t);continue;}
+        if(REL_PAIRS[field]){
+          const inv=(graph.get(t)&&graph.get(t).get(REL_PAIRS[field]))||[];
+          if(!inv.includes(k))validation.push("missing inverse "+t+" "+REL_PAIRS[field]+" "+k);
+        }else if(REL_SYMMETRIC.has(field)){
+          const mirror=(graph.get(t)&&graph.get(t).get(field))||[];
+          if(!mirror.includes(k))validation.push("missing symmetric mirror "+t+" "+field+" "+k);
+        }
+      }
     }
     if(validation.length)throw new Error("Slice validation failed before writing: "+validation.slice(0,8).join("; "));
 
