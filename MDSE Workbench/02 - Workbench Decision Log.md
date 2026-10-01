@@ -706,6 +706,11 @@ Product questions that change what an engineer sees still go one at a time. Impl
 - **R1 — Pilot:** two or three engineers use the plugin on a real test slice (the first slice is `02 Product Context`, W-267) and run the acceptance scenarios in [[03 - Build Outline and Roadmap]].
 - **R2 — Team release:** pilot findings resolved; compatibility check and Bootstrap install verified on a fresh vault.
 
+### WB-091 — Quantity in the Structure view
+**Status:** Trial 2026-10-01 (my reading of "let's see what the quantity looks like"; Spencer has not yet seen it in Obsidian)
+
+A child listed N times in one relationship field is one card with the count on its edge (`hasPart ×25`, then `×6` on the next group's first link). Cards stay one per distinct note, and links stay one per distinct target, so Review counts do not change. Evidence: in `20260930`, 276 repeated entries in 86 notes (`hasPart` 208, `hasChild` 68); `Cable - 2 twisted pair Strip and Strip` lists `Wire - Strip and Strip` 25 times. A quantity change marks a view stale. Built in plugin 0.1.1.
+
 ---
 
 ## How to use this log
@@ -799,4 +804,13 @@ Spencer: "let's call this a pass" (plugin 0.0.5, 60,000-note synthetic vault, in
 **Raised by Spencer, not decided (no WB number yet):** an engineering home that opens by default, with a search box, the last 10 viewed notes, and a discipline switch (mechanical, electrical, systems, validation) that decides which action buttons show (for example Create a mechanical or electrical Object; Create a Plan, or relate a Verification to a Requirement). Review stays as the diagnostic screen. My reading: the discipline picks buttons and does not filter notes, so no `discipline` property is needed; the buttons would live in a vault YAML next to `relationships.yaml`. Create (M2) is not built, so a home first would show Create greyed out. Spencer: "maybe I'm skipping ahead"; the order is open.
 
 **Other ideas offered, not decided:** traceability gaps per discipline (requirements nothing satisfies, functions with no verification), "changed since you last looked" after a pull, "my notes" by the author code in `uid`.
+
+### 2026-10-01 — M1 started: first run on real elements; quantity (WB-091 trial)
+**Review screen, 0.1.0 in Obsidian on `20260930`:** the header counts match the diagnostics numbers recorded above (242 provisional, 5 missing inverses, 6 inverses with no forward link, 240 off-rule, 7,184 broken). Spencer's screenshot; the Replace, Write inverse and Undo checks were still to be run.
+
+**M1 first run (Node, read-only, 16,390 notes, 19,379 links):** four real elements through the Structure profile. Southern Africa, Assemble Wiring to PCBA and Ergonomic Design read well. The cable element did not: its 33 structure links showed 4 children.
+1. Quantity is lost: repeated links collapse to one card (276 repeated entries in 86 notes). Trial fix: WB-091.
+2. Omissions outside the slice are not shown: 1,955 of 14,541 structure links (13%) point at notes not in this vault (`hasChild` 1,087, `hasPort` 654, `hasPart` 212, `includes` 2), and the "+N more" count ignores them. The cable shows 2 parts and no sign of its 34 ports. Not yet decided.
+3. Long names: 1 of 5 cable cards had a name too long for the 300 px card. Spencer is addressing long names in the importer.
+Not yet run: a Requirement (largest has 117 structure children) and a Use Case (largest 49).
 
