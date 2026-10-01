@@ -121,10 +121,11 @@ Work that has to be done in the vault after the import (stage 2, Workspace Decis
 12. Long inverse lists (W-178, W-179): after the import, look at the notes with the longest generated lists (`applies` up to 133 on `SW PCE25 CTRL`, `supertypeOf` up to 127 on `lsWarning`) and decide whether any field becomes one-way, like `participants` (W-172).
 13. Use Case include written as `hasChild` (W-278): 473 new links from EA Use Case include (W-171). EA modeling did not separate ownership from membership. For each link decide: `hasChild` where the base Use Case owns the included one, `includes` where the included Use Case is shared by several bases. Both relationships are allowed between Use Cases until then.
 14. Initial and final nodes (W-285): the EA initial and final nodes of state machines are `modelCheck` notes linked by `precedes` (45 from StateFlow, W-175). Write `initialState` and `finalState` on the State Machine, pointing at the States the nodes link to, then retire the node notes.
+15. `subtypeOf` from a State to a Failure Mode (found by Workbench Review in `20260930`): 5 links on 5 State notes in `07 Product Assembly/Gen2 Assembly/Mode` (Damaged Package, Incorrect Part, Undamaged Package, Unknown Quality, Unkown Part), each pointing at the Failure Mode note `Failure Mode`. `subtypeOf` connects two notes of the same class only, so the links break the endpoint rule, Review lists them as Missing Inverses, and no inverse can be written. They carry no `REVIEW` line from the import. Spencer's reading: a modeling error from quick building. Decide for each whether the note is really a Failure Mode, or the link goes or becomes another relationship, then fix the link.
 
 **How to resolve them.** Decide in groups, log each group in the Decision Log, and change the rules for the next fresh import (W-36, W-37). Record any per-note change in `Review Changes Log.md`, keyed by the element GUID.
 
-**Done when.** Nothing has type `modelCheck`, `hasClassifier` is gone, no review line named in items 5, 6, 9, 10 and 11 remains, and each group above has a log entry.
+**Done when.** Nothing has type `modelCheck`, `hasClassifier` is gone, no review line named in items 5, 6, 9, 10 and 11 remains, the five links of item 15 are fixed, and each group above has a log entry.
 
 ## Task 8: Update the `equals` relationships
 
