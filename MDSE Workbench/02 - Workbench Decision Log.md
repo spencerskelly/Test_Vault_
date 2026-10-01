@@ -716,6 +716,11 @@ A child listed N times in one relationship field is one card with the count on i
 
 A relationship link in a view whose target note does not exist is drawn as an undefined card: red, the link text in bold, the word *undefined* under it, not openable. It counts as a node (the node cap and 12-children limit apply) and keeps its quantity (`×2`). It is not an omission: it does not feed "+N more". Today these cards appear because the imported slice is partial; once the whole model is imported, the same cards show what still has to be defined, which is the to-do list. Applies to the relationships in the view profile (the Structure profile now). Review's Broken References count is unchanged. Built in plugin 0.1.2.
 
+### WB-093 — Plugin builds are committed into the test vault
+**Status:** Approved 2026-10-01 (Spencer asked whether builds could be written straight to the vault so he can pull)
+
+Each build's `main.js`, `manifest.json` and `styles.css` are committed to `.obsidian/plugins/mdse-workbench/` in `spencerskelly/20260930` on `main`, after the same files are pushed to `MDSE_Workbench`. `data.json` stays ignored by the vault's `.gitignore`. `community-plugins.json` and `plugin-lock.yaml` are not touched. After a pull, Obsidian has to reload the plugin to run the new build. This is a test-vault convenience; the release pipeline and MDSE Bootstrap pinning (WB-088) replace it. First commit: 0.1.2.
+
 ---
 
 ## How to use this log
