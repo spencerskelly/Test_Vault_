@@ -98,9 +98,19 @@ Below the `EA GUID` line, one line per value as `- <EA tag name>: <value>` (W-28
 
 `PN` and `PartNumber` share one `- Part Number:` line; they never occur on the same element.
 
-## File names (W-196, W-197)
+## File names (W-196, W-197, W-205, W-289)
 
-A note file name and a package folder name are the EA name with these changes, in order: `/` to `-`; `:` to ` -`; `?` and `*` removed; `"` to `''`; `<` to `(` and `>` to `)`; `|` and `\` to `-`; `[` to `(`, `]` to `)`, `#` to `no.`, `^` removed (W-205); each run of line breaks, control characters and spaces to one space; leading spaces and trailing spaces and periods trimmed. When the file name differs from the EA name, the `Name:` line keeps the original (W-48). Where two or more notes would get the same file name, case ignored, across the vault, every one of those notes adds its `id` after the name, one space between, for example `Start charge ACT-00456`; a note with a unique name keeps it (W-198, W-199). The `id` is whatever the note gets: always an internal one such as `ACT-00456` or `STD-00456` (W-203). Ports, pins and unnamed elements keep their own counters (W-134, W-138, W-145). A diagram's companion note is class `Diagram`, id `DIA-#####`, so diagram names follow the same rule (W-212).
+A note file name and a package folder name are the EA name with these changes, in order: `/` to `-`; `:` to ` -`; `?` and `*` removed; `"` to `''`; `<` to `(` and `>` to `)`; `|` and `\` to `-`; `[` to `(`, `]` to `)`, `#` to `no.`, `^` removed (W-205); each run of line breaks, control characters and spaces to one space; leading spaces and trailing spaces and periods trimmed. When the file name differs from the EA name, the `Name:` line keeps the original (W-48).
+
+W-289 supersedes the duplicate-id filename suffix of W-198/W-199 while keeping whole-vault, case-insensitive collision detection:
+
+- **Port:** `i<owner> - <port name>`. If two Ports still collide, append `_<connecting object>` when exactly one clear connected Object distinguishes that Port. If a collision remains, or there is not exactly one clear connected Object, append deterministic `_1`, `_2`, ... .
+- **Requirement:** if its natural filename collides, append `_r`; if that still collides, append `_r_1`, `_r_2`, ... .
+- **Other notes:** unresolved collisions use deterministic `_1`, `_2`, ... . The oldest EA source keeps the unsuffixed human candidate.
+- The model `id` stays in YAML and is not used as the ordinary duplicate filename suffix.
+- Pins and unnamed elements keep their existing generated-name rules (W-134, W-138, W-145).
+
+A diagram companion note follows the same collision framework once diagram rendering is implemented (W-212).
 
 ## Not decided yet
 
