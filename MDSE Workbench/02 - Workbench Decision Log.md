@@ -729,7 +729,12 @@ In Review, a Missing Inverses finding whose own link breaks its endpoint rule no
 ### WB-095 — Relationship name on every link; taller cards
 **Status:** Approved 2026-10-01 (Spencer: "yes", to the proposal)
 
-Every edge in a Structure view carries its relationship name (`hasPart`, `hasPort`, `hasState`), with the quantity after it where a note is listed more than once (`hasPart ×27`). Before, the name appeared only on the first link of a group, which read as if it belonged to that one link. Cards are 80 px high instead of 60, and the row spacing is 100 px, so a name that wraps to two lines is no longer clipped. Built in plugin 0.1.5. Open: `hasFlow` edges still use the same red as undefined cards.
+Every edge in a Structure view carries its relationship name (`hasPart`, `hasPort`, `hasState`), with the quantity after it where a note is listed more than once (`hasPart ×27`). Before, the name appeared only on the first link of a group, which read as if it belonged to that one link. Cards are 80 px high instead of 60, and the row spacing is 100 px, so a name that wraps to two lines is no longer clipped. Built in plugin 0.1.5. The `hasFlow` red conflict is closed by WB-096.
+
+### WB-096 — One edge color per relationship; red only for undefined cards
+**Status:** Approved 2026-10-01 (Spencer: "yes", to the proposal)
+
+Each relationship in the Structure view has its own edge color and none is the red of undefined cards (WB-092). With `hasState` added there are seven relationships, and the old six-color list gave `exposes` the red and `hasFlow` the same green as `hasPart`. Now: `hasPart` green, `hasChild` cyan, `hasState` purple, `includes` orange, `hasPort` yellow, `exposes` grey, `hasFlow` brown (the last two are fixed hex colors, because Canvas has only six preset colors and red is reserved). Built in plugin 0.1.6.
 
 ---
 
@@ -856,4 +861,7 @@ Spencer's rule (W-292): an Object `hasState` a State or State Machine and never 
 
 ### 2026-10-01 — WB-095 built
 Plugin 0.1.5 has the relationship name on every link and 80 px cards (14 tests pass). Not tested in Obsidian. Still to run by Spencer: Replace relationship and Undo (Test 4), the cable Structure view (Test 5).
+
+### 2026-10-01 — WB-096 built
+Plugin 0.1.6: seven distinct edge colors, red only for undefined cards (15 tests pass). Not tested in Obsidian.
 
