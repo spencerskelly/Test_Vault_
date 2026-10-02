@@ -268,3 +268,57 @@ Stage 1 import must not infer configurability from the mere existence of reusabl
 The importer must never express one configurable position by relating the owning assembly to every candidate subtype. The local occurrence remains the single contextual position; candidates are derived from the reusable `subtypeOf` hierarchy.
 
 W-314 is currently a semantic decision. The deployed Local Model body contract remains schema 0.1 until a separate implementation change advances `local-model.yaml` and the importer/parser/writer together.
+
+
+## v0.8.0 implementation amendment — 2026-10-02
+
+This section supersedes older translator details where they conflict.
+
+### Release contract
+
+The next accepted native importer is `EA_to_MDSE_Native_Importer_v0.8.0.html`, paired with a newly generated clean base declaring `mdse_release: "0.8.0"`.
+
+Required schemas:
+- relationships 1.35;
+- element-types 1.17;
+- local-model 0.2.
+
+The import is clean. v0.8 does not migrate a v0.7-generated populated vault in place.
+
+### EA lineage and identity
+
+For this import, `sourceModelId = EA8647`. Authoritative source identity is `EA8647 + EA GUID`.
+
+First allocation uses EA Created exactly as stored, no timezone conversion. Missing milliseconds are `000`; missing/unusable author uses `skellyspencer`; missing Created allocation begins at `20260911000000001`. Use +1 ms collision handling and EA GUID lexical tie-breaking. Every allocated 30-character token is checked against note UIDs and all Local Model tokens.
+
+Derived local records inherit the causing source's seed. Source Map identity is authoritative on rerun.
+
+### Rerun ownership
+
+Refresh only declared EA-owned translated fields and source-provenanced relationships. Preserve MDSE identity, existing file path/name, MDSE-only relationships and human-added content. Log overwritten human edits in EA-owned fields. Remove and log EA-owned relationships removed from EA. Preserve and flag entities whose source disappears.
+
+### Local Model
+
+Write only schema 0.2. Standard part/endpoint usage is represented by omission of `usage`. Do not infer variant/option from specialization descendants. Do not infer `abstract` from EA without an approved deterministic source rule.
+
+BindingConnector with reconstructable context becomes temporary local `equals` evidence. If context/endpoints cannot be reconstructed deterministically, preserve it in review evidence only.
+
+### Naming/path
+
+The duplicate filename rule based on MDSE `id` is superseded.
+
+Use `~2`, `~3` for duplicates; `~a`, `~b`, ... for forced name alterations; and combined forms such as `~a~2`. Apply the same convention to folders.
+
+Normalize/shorten redundant folders first. Maximum generated repository-relative path is 212 characters. Any unresolved planned path above 212 blocks writing.
+
+### Attachments and diagrams
+
+A failed approved attachment write is non-blocking and explicitly reconciled as a failed attachment import.
+
+Initial diagram artifacts are deferred, but every source diagram must reconcile. Any unreconciled source diagram blocks acceptance.
+
+### Evidence
+
+The v0.8 evidence package uses Run Manifest, Ledger/terminal reconciliation, Local Model Source Map, naming/path reviews, semantic/connector reviews, attachment reconciliation and diagram reconciliation.
+
+Do not emit the four legacy empty CSVs unless a unique future need is approved.
