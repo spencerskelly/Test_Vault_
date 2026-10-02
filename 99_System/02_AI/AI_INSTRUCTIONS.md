@@ -45,7 +45,7 @@ uid: 20260928101530123claudeai-----   (Claude created it on its own)
 - Create a relationship only between classes its endpoint rule in `relationships.yaml` allows (`from`, `to`, `sameClass`, `excludePairs`; W-272, W-277). A relationship with no rule yet is not restricted. Use `tracesTo` only when two notes are related and no relationship fits yet; it is provisional and comes back as a Review finding to be replaced (W-288).
 - Author the forward (owner-side) relationship and, in the same edit, write its inverse per `relationships.yaml`: a paired field gets its inverse field on the other note; a symmetric field is written on both notes; a one-way field gets nothing. Inverse fields are derivative: the forward field wins when they disagree (W-275).
 - Folder placement is navigation, not meaning.
-- Keep model-content folders at or below 75 generated model files. When a folder would exceed 75, create a meaningful semantic or navigational subdivision based on actual engineering/source structure; never create arbitrary numbered overflow buckets.
+- Keep model-content folders at or below 75 generated model files. Prefer a meaningful semantic or navigational subdivision based on actual engineering/source structure. If no clear split is available, deterministic `folder_1`, `folder_2`, etc. mechanical subdivision is acceptable so work can continue.
 
 ## Local occurrences
 
