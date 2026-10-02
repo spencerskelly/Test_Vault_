@@ -1,13 +1,13 @@
-# Workbench Test Sheet (plugin 0.1.14)
+# Workbench Test Sheet (plugin 0.1.15)
 
-> **Occurrence-model safety note (W-298 / WB-105):** 0.1.14 predates the governed Local Model interface. It does not index Local Model body records and its text editor treats the post-frontmatter body as one editable block. Do **not** use 0.1.14 body editing on notes containing `## Local Model` records. This sheet remains a regression test for the pre-occurrence plugin; the next pilot sheet must use the synchronized importer/base output and the occurrence-aware Workbench build. W-302 defines the next build's boundary as `<!-- MDSE:LOCAL-MODEL START schema=0.1 -->` through `<!-- MDSE:LOCAL-MODEL END -->`; parser tests must include missing, duplicate, nested and mismatched marker cases.
+> **Occurrence-model safety note (W-298 / WB-105):** 0.1.15 still does not index Local Model records. It now refuses ordinary body editing when a governed Local Model START marker is present; WB-106 is still required for parsing/indexing and occurrence-aware views. This sheet remains a regression test for the pre-occurrence plugin; the next pilot sheet must use the synchronized importer/base output and the occurrence-aware Workbench build. W-319 defines 0.2 as canonical new output while Workbench must read 0.1 and 0.2. Parser tests must include missing, duplicate, nested and mismatched marker cases.
 
 Run in `20260930`. About 50 minutes. The steps are ordered so the biggest unknowns come first; if a step fails, note it and carry on unless it says **stop**. Tick `[x]` on pass; write what happened next to a failure.
 
 Counts below come from a run outside Obsidian on the same notes. Obsidian may differ by a note or two (it resolves duplicate note names its own way); a difference of more than a few is a finding.
 
 ## 0. Setup (2 min)
-- [ ] Pull `20260930`. Settings → Community plugins: MDSE Workbench shows **0.1.14**. Turn it off and on.
+- [ ] Pull `20260930`. Settings → Community plugins: MDSE Workbench shows **0.1.15**. Turn it off and on.
 - [ ] Open any Markdown note (commands in this sheet only appear while a note is the active tab, not while a canvas is).
 - [ ] Wait until Workbench has finished indexing (a diagnostics run in step 1 says so).
 
@@ -25,7 +25,7 @@ Open each note, run the command (or **Explore view of current note…** and pick
 
 | View | Note | Expect |
 |---|---|---|
-| Structure | `Cable - 2 twisted pair Strip and Strip` | 17 notes, 12 undefined, `hasPart ×6` and `×27` |
+| Structure | `Cable - 2 twisted pair Strip and Strip` | 17 notes, 12 undefined, `hasPart (duplicate ×6)` and `(duplicate ×27)` |
 | Functional | `Antenna - WiFi` | 3 notes |
 | Functional | `Manage Communication w- LIN Bus` | 11 notes, +3 more, no requirements |
 | Requirements | `2.4.6.19 Minimum EQ Minutes` | 15 notes, +26 more |
@@ -47,7 +47,7 @@ Open each note, run the command (or **Explore view of current note…** and pick
 
 ## 4. The popup (8 min)
 On the cable view:
-- [ ] Open **Relationships** in the popup: `hasPart (2)`, the wire shows `×27`, the jacket `×6`, undefined ports are red and not clickable. **Properties** opens too.
+- [ ] Open **Relationships** in the popup: `hasPart (2)`, the wire shows `(duplicate ×27)`, the jacket `(duplicate ×6)`, undefined ports are red and not clickable. **Properties** opens too.
 - [ ] Click a link in the popup: it shows that note; **‹** goes back. **Open note** opens the note in a tab (the popup closes). Esc closes it.
 - [ ] Drag a card, and shift-click two cards: the popup does **not** open.
 - [ ] Click a red undefined card: the popup says it is undefined.
@@ -64,6 +64,10 @@ Use `Antenna - WiFi`. This changes the note; run `git restore` on it afterwards.
 - [ ] **Key safety:** select a card on the canvas, click in the text box in the popup and press **Delete** and **Backspace**: the card must **not** be deleted from the canvas. ______
 - [ ] Type in the text box and click another card: it asks before discarding.
 - [ ] **Git check:** open the git diff of `Antenna - WiFi`. How many lines changed besides the ones you edited? ______ (this decides whether to keep Obsidian's property rewrite.)
+
+## 5A. Governed Local Model safety
+- [ ] On a test note that contains a governed Local Model START marker, entering Edit must not present the ordinary body text editor. It should explain that region-aware editing is part of WB-106.
+- [ ] Confirm the note is unchanged.
 
 ## 6. Review (10 min)
 - [ ] **Open Review** (ribbon icon): counts as in step 1.
