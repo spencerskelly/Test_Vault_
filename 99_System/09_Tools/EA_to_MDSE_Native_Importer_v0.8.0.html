@@ -3164,6 +3164,345 @@ function formatFoldedNotes(list){
   return lines;
 }
 
+
+function evidenceBucket(map,key){
+  if(!key)return null;
+  if(!map.has(key))map.set(key,{structure:[],connectors:[],discussions:[],reviews:[],_seen:new Set()});
+  return map.get(key);
+}
+function addEvidence(map,key,group,line){
+  if(!key||!line)return;
+  const b=evidenceBucket(map,key);if(!b)return;
+  const dedupe=group+"|"+line;
+  if(b._seen.has(dedupe))return;
+  b._seen.add(dedupe);b[group].push(line);
+}
+function rawGuidEntity(ctx,entityCtx,guid){
+  const ng=normGuid(guid);if(!ng)return null;
+  for(const raw of ctx.objects){
+    if(normGuid(raw.ea_guid)!==ng)continue;
+    const r=resolveEndpoint(raw.Object_ID,ctx.elementCtx,ctx.portResolution);
+    return r&&entityCtx.entities.has(r.key)?entityCtx.entities.get(r.key):null;
+  }
+  return null;
+}
+function rawIdEntity(ctx,entityCtx,id){
+  const r=resolveEndpoint(id,ctx.elementCtx,ctx.portResolution);
+  return r&&entityCtx.entities.has(r.key)?entityCtx.entities.get(r.key):null;
+}
+function entityLink(e){return e?"[["+(e.linkTarget||e.fileName)+"]]":"";}
+function relationOwnerKeyForEvidence(p){
+  if(!p)return "";
+  const f=p.field||"";
+  if(p.eaType==="Nesting"||p.eaType==="Aggregation")return p.targetKey;
+  if(p.eaType==="Realisation"){
+    if(f==="appliesTo")return p.sourceType==="Requirement"?p.sourceKey:p.targetKey;
+    if(f==="realizedBy")return p.sourceType==="Use Case"?p.sourceKey:(p.targetType==="Use Case"?p.targetKey:p.targetKey);
+    return p.targetKey;
+  }
+  if(p.eaType==="Dependency"||p.eaType==="Abstraction"){
+    if(f==="appliesTo")return p.sourceType==="Requirement"?p.sourceKey:p.targetKey;
+    if(f==="describes")return (p.sourceType==="Info"||p.sourceType==="Artifact")?p.sourceKey:p.targetKey;
+    if(f==="affects")return p.sourceType==="Issue"?p.sourceKey:p.targetKey;
+    if(f==="performs"||f==="hasDesign")return p.sourceType==="Object"?p.sourceKey:p.targetKey;
+    return p.sourceKey;
+  }
+  if(p.eaType==="UseCase"){
+    if(f==="affects")return p.sourceType==="Issue"?p.sourceKey:p.targetKey;
+    return p.sourceKey;
+  }
+  if(p.eaType==="Association"){
+    if(f==="participants")return p.sourceType==="Use Case"?p.sourceKey:p.targetKey;
+    if(f==="affects")return p.sourceType==="Issue"?p.sourceKey:p.targetKey;
+    if(f==="describes")return (p.sourceType==="Info"||p.sourceType==="Artifact")?p.sourceKey:p.targetKey;
+    return p.sourceKey;
+  }
+  if(p.eaType==="Usage"){
+    if(f==="realizedBy")return p.sourceType==="Use Case"?p.sourceKey:p.targetKey;
+    if(f==="affects")return p.sourceType==="Issue"?p.sourceKey:p.targetKey;
+    return p.sourceKey;
+  }
+  return p.sourceKey;
+}
+function otherKeyForOwner(p,ownerKey){
+  if(!p||!ownerKey)return "";
+  return ownerKey===p.sourceKey?p.targetKey:p.sourceKey;
+}
+function reviewModelCheckPhrase(p,raw){
+  const st=trim2(raw&&raw.Stereotype),lower=st.toLowerCase();
+  if(p.eaType==="Realisation")return "realization "+p.sourceType+" to "+p.targetType;
+  if(p.eaType==="Dependency"){
+    if(lower==="satisfy")return "satisfy "+p.sourceType+" to "+p.targetType;
+    if(lower==="derivereqt")return "deriveReqt "+p.sourceType+" to "+p.targetType;
+    if(lower==="refine")return "refine "+p.sourceType+" to "+p.targetType;
+    if(lower==="trace")return "trace "+p.sourceType+" to "+p.targetType;
+    if(lower==="verify")return "verify "+p.sourceType+" to "+p.targetType;
+    if(lower==="recoveryrequirement")return "RecoveryRequirement "+p.sourceType+" to "+p.targetType;
+    if(lower==="asildecompose")return "ASILDecompose "+p.sourceType+" to "+p.targetType;
+    return "dependency "+p.sourceType+" to "+p.targetType;
+  }
+  if(p.eaType==="Abstraction"){
+    const label=lower==="allocate"?"allocate":lower==="derive"?"derive":lower==="refine"?"refine":lower==="trace"?"trace":"abstraction";
+    return label+" "+p.sourceType+" to "+p.targetType;
+  }
+  if(p.eaType==="Association")return "association "+p.sourceType+" to "+p.targetType;
+  if(p.eaType==="Usage")return "usage "+p.sourceType+" to "+p.targetType;
+  if(p.eaType==="UseCase")return (st||"use-case connector")+" "+p.sourceType+" to "+p.targetType;
+  return (p.eaType||"relationship")+" "+p.sourceType+" to "+p.targetType;
+}
+function portBlockRaw(ctx,portRaw){
+  if(!portRaw)return null;
+  const owner=ctx.byId.get(n2(portRaw.ParentID));
+  if(!owner)return null;
+  const ot=trim2(owner.Object_Type);
+  if(ot==="Class")return owner;
+  if(ot==="Part"){
+    const b=ctx.byGuid.get(trim2(owner.PDATA1));
+    return b&&trim2(b.Object_Type)==="Class"?b:null;
+  }
+  if(ot==="Object"){
+    const b=ctx.byId.get(n2(owner.Classifier));
+    return b&&trim2(b.Object_Type)==="Class"?b:null;
+  }
+  return null;
+}
+function classAncestorSet(ctx){
+  const parent=new Map();
+  for(const con of ctx.connectors||[]){
+    if(trim2(con.Connector_Type)!=="Generalization")continue;
+    const [s,t]=directedRawEnds(con);
+    const sr=ctx.byId.get(s),tr=ctx.byId.get(t);
+    if(!sr||!tr||trim2(sr.Object_Type)!=="Class"||trim2(tr.Object_Type)!=="Class")continue;
+    mapPush(parent,s,t);
+  }
+  return parent;
+}
+function isClassAncestor(parentMap,specificId,targetAncestorId){
+  specificId=n2(specificId);targetAncestorId=n2(targetAncestorId);
+  if(!specificId||!targetAncestorId||specificId===targetAncestorId)return false;
+  const seen=new Set([specificId]),q=[specificId];
+  while(q.length){
+    const cur=q.shift();
+    for(const n of parentMap.get(cur)||[]){
+      if(n===targetAncestorId)return true;
+      if(!seen.has(n)){seen.add(n);q.push(n);}
+    }
+  }
+  return false;
+}
+function assemblyContextForPort(ctx,entityCtx,portRaw){
+  const owner=ctx.byId.get(n2(portRaw&&portRaw.ParentID));if(!owner)return {link:"",role:""};
+  let assembly=null,role="";
+  if(trim2(owner.Object_Type)==="Part"){
+    role=trim2(owner.Name);
+    assembly=rawIdEntity(ctx,entityCtx,owner.ParentID);
+  }else if(trim2(owner.Object_Type)==="Object"){
+    assembly=rawIdEntity(ctx,entityCtx,owner.Object_ID);
+  }else{
+    assembly=rawIdEntity(ctx,entityCtx,owner.Object_ID);
+  }
+  return {link:entityLink(assembly),role};
+}
+function sourcePortTargetEntity(ctx,entityCtx,rawGuid){
+  if(!trim2(rawGuid))return null;
+  return rawGuidEntity(ctx,entityCtx,rawGuid);
+}
+async function buildSourceEvidence(ctx,entityCtx,endpointFindings){
+  const out=new Map(),entities=entityCtx.entities;
+  const planByConnector=new Map((ctx.connectorPlans||[]).map(p=>[n2(p.sourceId),p]));
+
+  // Group 2: Part/source-card quantities.
+  for(const raw of ctx.objects||[]){
+    if(trim2(raw.Object_Type)!=="Part"||trim2(raw.Stereotype)==="FlowProperty"||!trim2(raw.Multiplicity))continue;
+    const owner=rawIdEntity(ctx,entityCtx,raw.ParentID),child=rawIdEntity(ctx,entityCtx,raw.Object_ID);
+    if(owner&&child)addEvidence(out,owner.key,"structure","- quantity of "+entityLink(child)+" is: "+trim2(raw.Multiplicity));
+  }
+  for(const con of ctx.connectors||[]){
+    if(trim2(con.Connector_Type)!=="Aggregation"||!trim2(con.SourceCard))continue;
+    const owner=rawIdEntity(ctx,entityCtx,con.End_Object_ID),child=rawIdEntity(ctx,entityCtx,con.Start_Object_ID);
+    if(owner&&child)addEvidence(out,owner.key,"structure","- quantity of "+entityLink(child)+" is: "+trim2(con.SourceCard));
+  }
+
+  const reader=await SQLiteReader.open(selectedFile);
+  if(reader.has("t_operation")){
+    for await(const row of reader.scan("t_operation")){
+      const e=rawIdEntity(ctx,entityCtx,row.Object_ID);if(!e)continue;
+      const kind=trim2(row.Type).toLowerCase(),name=trim2(row.Name);if(!name)continue;
+      const label=kind==="entry"?"Entry action":(kind==="do"||kind==="doactivity")?"Do action":kind==="exit"?"Exit action":"";
+      if(label)addEvidence(out,e.key,"structure","- "+label+": "+name);
+    }
+  }
+  if(reader.has("t_attribute")){
+    for await(const row of reader.scan("t_attribute")){
+      const e=rawIdEntity(ctx,entityCtx,row.Object_ID);if(!e)continue;
+      const name=trim2(row.Name);if(!name)continue;
+      addEvidence(out,e.key,"structure","- Attribute: "+name+" ("+trim2(row.Type)+")");
+    }
+  }
+
+  // W-194 xref evidence on both ends, independently of frontmatter relationships.
+  const xKinds=new Set(["entry","doactivity","represents","target"]);
+  for(const x of ctx.xrefs||[]){
+    const vals=[trim2(x.Behavior),trim2(x.Name),trim2(x.Type)].map(v=>v.toLowerCase());
+    const kind=vals.find(v=>xKinds.has(v));if(!kind)continue;
+    const a=rawGuidEntity(ctx,entityCtx,x.Client),b=rawGuidEntity(ctx,entityCtx,x.Supplier);
+    if(!a||!b)continue;
+    if(kind==="entry"||kind==="doactivity"){
+      const state=a.mdseType==="State"?a:(b.mdseType==="State"?b:null),act=state===a?b:a;
+      if(state&&act){
+        const label=kind==="entry"?"Entry action":"Do action";
+        addEvidence(out,state.key,"structure","- "+label+": "+entityLink(act));
+        addEvidence(out,act.key,"structure","- "+label+" of: "+entityLink(state));
+      }
+    }else if(kind==="represents"){
+      const partition=(trim2(a.raw.Object_Type)==="ActivityPartition")?a:(trim2(b.raw.Object_Type)==="ActivityPartition"?b:null),other=partition===a?b:a;
+      if(partition&&other){
+        addEvidence(out,partition.key,"structure","- Represents: "+entityLink(other));
+        addEvidence(out,other.key,"structure","- Represented by: "+entityLink(partition));
+      }
+    }else if(kind==="target"){
+      const action=trim2(a.raw.Object_Type)==="Action"?a:(trim2(b.raw.Object_Type)==="Action"?b:null),pin=action===a?b:a;
+      if(action&&pin){
+        addEvidence(out,action.key,"structure","- Target pin: "+entityLink(pin));
+        addEvidence(out,pin.key,"structure","- Target pin of: "+entityLink(action));
+      }
+    }
+  }
+
+  // W-121/W-211 merged-instance evidence and W-157 added-Port review lines.
+  const portRows=(ctx.objects||[]).filter(r=>trim2(r.Object_Type)==="Port").slice().sort(sourceOrder);
+  for(const raw of portRows){
+    const q=ctx.portResolution.info.get(n2(raw.Object_ID));if(!q)continue;
+    const target=entities.get(q.resolvedKey);if(!target)continue;
+    if(q.outcome==="added-port-group"){
+      addEvidence(out,target.key,"reviews","- REVIEW port: added from an assembly, no matching port on the block: port "+trim2(raw.ea_guid));
+    }
+    if(q.outcome==="note"&&q.rule.includes("W-130")){
+      const owner=ctx.byId.get(n2(raw.ParentID));
+      if(owner&&trim2(owner.Object_Type)==="ActivityPartition"){
+        addEvidence(out,target.key,"reviews","- REVIEW owner: parent is ActivityPartition, not a block: port "+trim2(raw.ea_guid));
+      }else if(owner&&trim2(owner.Object_Type)==="Part"){
+        addEvidence(out,target.key,"reviews","- REVIEW block: owner Part has no resolvable block: port "+trim2(raw.ea_guid));
+      }
+    }
+    if(q.outcome!=="merged"&&q.outcome!=="added-port-group")continue;
+    const baseRaw=q.outcome==="merged"?ctx.byId.get(n2(q.targetObjectId)):target.raw;
+    if(!baseRaw||n2(baseRaw.Object_ID)===n2(raw.Object_ID))continue;
+    const context=assemblyContextForPort(ctx,entityCtx,raw);
+    const suffix=context.role?" (part "+context.role+")":"";
+    const where=(context.link||"[[unresolved assembly]]")+suffix;
+    if(trim2(raw.Name)&&trim2(raw.Name)!==trim2(baseRaw.Name))
+      addEvidence(out,target.key,"structure","- Instance name in "+where+": "+trim2(raw.Name));
+    if(trim2(raw.PDATA1)&&trim2(raw.PDATA1)!==trim2(baseRaw.PDATA1)){
+      const t=sourcePortTargetEntity(ctx,entityCtx,raw.PDATA1);
+      addEvidence(out,target.key,"structure","- Instance type in "+where+": "+(t?entityLink(t):trim2(raw.PDATA1)));
+    }
+    if(trim2(raw.Stereotype)&&trim2(raw.Stereotype)!==trim2(baseRaw.Stereotype))
+      addEvidence(out,target.key,"structure","- Instance stereotype in "+where+": "+trim2(raw.Stereotype));
+    if(trim2(raw.PDATA2)&&trim2(raw.PDATA2)!==trim2(baseRaw.PDATA2)){
+      const t=sourcePortTargetEntity(ctx,entityCtx,raw.PDATA2);
+      addEvidence(out,target.key,"structure","- Instance redefinition in "+where+": "+(t?entityLink(t):trim2(raw.PDATA2)));
+    }
+  }
+
+  // W-122/W-130: surviving Port redefinition target must be on an ancestor block.
+  const classParents=classAncestorSet(ctx);
+  for(const e of entities.values()){
+    if(e.mdseType!=="Port")continue;
+    const raw=e.raw,p2=ctx.byGuid.get(trim2(raw&&raw.PDATA2));if(!p2||trim2(p2.Object_Type)!=="Port")continue;
+    const currentBlock=portBlockRaw(ctx,raw),targetBlock=ctx.byId.get(n2(p2.ParentID));
+    if(!currentBlock||!targetBlock||trim2(targetBlock.Object_Type)!=="Class"||!isClassAncestor(classParents,currentBlock.Object_ID,targetBlock.Object_ID)){
+      addEvidence(out,e.key,"reviews","- REVIEW subtypeOf: target Port owner is not an ancestor block");
+    }
+  }
+
+  // Group 3: connector Name/Notes and State/Control flow source values.
+  function connectorOwnerKeys(p,raw){
+    if(!p)return [];
+    if(p.eaType==="Connector"||p.eaType==="InformationFlow")return [p.sourceKey,p.targetKey].filter(k=>entities.has(k));
+    const owner=relationOwnerKeyForEvidence(p);
+    return owner&&entities.has(owner)?[owner]:[];
+  }
+  for(const con of ctx.connectors||[]){
+    const p=planByConnector.get(n2(con.Connector_ID));if(!p)continue;
+    const ownerKeys=connectorOwnerKeys(p,con);
+    for(const ownerKey of ownerKeys){
+      const otherKey=otherKeyForOwner(p,ownerKey),other=entities.get(otherKey),to=other?entityLink(other):"[[unresolved end]]";
+      if(trim2(con.Name)&&trim2(con.Connector_Type)!=="Sequence")
+        addEvidence(out,ownerKey,"connectors","- Connector name: "+trim2(con.Name)+" (to "+to+")");
+      if(trim2(con.Notes)&&trim2(con.Connector_Type)!=="Sequence")
+        addEvidence(out,ownerKey,"connectors","- Connector notes: "+trim2(con.Notes).replace(/\r?\n/g," ")+" (to "+to+")");
+      const ct=trim2(con.Connector_Type);
+      if(ct==="StateFlow"){
+        if(trim2(con.PDATA1))addEvidence(out,ownerKey,"connectors","- Trigger: "+trim2(con.PDATA1));
+        if(trim2(con.PDATA2))addEvidence(out,ownerKey,"connectors","- Guard: "+trim2(con.PDATA2));
+        if(trim2(con.PDATA3))addEvidence(out,ownerKey,"connectors","- Effect: "+trim2(con.PDATA3));
+      }else if(ct==="ControlFlow"){
+        const guard=[con.PDATA1,con.PDATA2,con.PDATA3].map(trim2).find(Boolean);
+        if(guard)addEvidence(out,ownerKey,"connectors","- Guard: "+guard);
+      }
+    }
+  }
+
+  // Group 4: discussion posts.
+  if(reader.has("t_document")){
+    for await(const row of reader.scan("t_document")){
+      const dt=trim2(row.DocType);if(dt!=="EDisc"&&dt!=="EPost")continue;
+      const e=ownerEntityForDocument(row,ctx,entityCtx);if(!e)continue;
+      const author=trim2(row.Author)||"unknown",date=trim2(row.DocDate||row.CreatedDate||row.DateCreated).slice(0,10);
+      const body=textValue(row.StrContent||row.Notes||row.DocName).replace(/\s+/g," ").trim();
+      if(body)addEvidence(out,e.key,"discussions","- Discussion post: "+author+(date?" "+date:"")+": "+body);
+    }
+  }
+
+  // Group 5: review lines. Block-level flow review always goes on both end notes.
+  for(const con of ctx.connectors||[]){
+    const p=planByConnector.get(n2(con.Connector_ID));if(!p)continue;
+    const ct=trim2(con.Connector_Type),sr=ctx.byId.get(n2(con.Start_Object_ID)),er=ctx.byId.get(n2(con.End_Object_ID));
+    const blockFlow=(ct==="Connector"||ct==="InformationFlow")&&trim2(con.Stereotype)!=="BindingConnector"
+      &&(!(sr&&trim2(sr.Object_Type)==="Port")||!(er&&trim2(er.Object_Type)==="Port"));
+    if(blockFlow){
+      for(const ownerKey of [p.sourceKey,p.targetKey]){
+        if(!entities.has(ownerKey))continue;
+        const otherKey=ownerKey===p.sourceKey?p.targetKey:p.sourceKey,other=entities.get(otherKey);
+        addEvidence(out,ownerKey,"reviews","- REVIEW port needed: "+ct+" "+(trim2(con.Name)||"unnamed")+" to "+(other?entityLink(other):"[[unresolved end]]")+": connector "+trim2(con.ea_guid));
+      }
+    }
+    if(!p.review||blockFlow||trim2(con.Stereotype)==="BindingConnector")continue;
+    let reviewKey="";
+    if(p.eaType==="Generalization"){
+      reviewKey=p.sourceKey;
+      if(entities.has(reviewKey))addEvidence(out,reviewKey,"reviews","- REVIEW subtypeOf: the two notes have different types");
+      continue;
+    }
+    if(p.eaType==="Nesting"){
+      reviewKey=p.targetKey;
+      if(entities.has(reviewKey))addEvidence(out,reviewKey,"reviews","- REVIEW nesting direction: connector "+trim2(con.ea_guid));
+      continue;
+    }
+    if(p.eaType==="Aggregation"){
+      reviewKey=p.targetKey;
+      if(entities.has(reviewKey))addEvidence(out,reviewKey,"reviews","- REVIEW "+(p.field||"hasChild")+": the two notes have different types");
+      continue;
+    }
+    reviewKey=entities.has(p.targetKey)?p.targetKey:(entities.has(p.sourceKey)?p.sourceKey:"");
+    if(reviewKey){
+      if(p.eaType==="Realisation"&&p.sourceType==="Folder"){
+        addEvidence(out,reviewKey,"reviews","- REVIEW modelCheck: realization from folder "+String(p.sourceKey||"").replace(/^folder:/,""));
+      }else{
+        addEvidence(out,reviewKey,"reviews","- REVIEW modelCheck: "+reviewModelCheckPhrase(p,con));
+      }
+    }
+  }
+  for(const x of endpointFindings||[]){
+    if(!entities.has(x.ownerKey))continue;
+    addEvidence(out,x.ownerKey,"reviews","- REVIEW modelCheck: "+x.field+" "+x.fromType+" to "+x.toType);
+  }
+
+  for(const b of out.values())delete b._seen;
+  return out;
+}
+
 function renderEntityMarkdown(e,graph,entityCtx,tagMap,foldedNotes,externalSet,sliceKeys,localModel,sourceEvidence){
   const lines=["---","type: "+yamlScalar(e.mdseType),"subtype: "+yamlScalar(e.subtype||""),"id: "+yamlScalar(e.id),"uid: "+yamlScalar(e.uid),"status: Draft","eaType: "+yamlScalar(eaTypeOf(e)),"tags: []"];
   lines.push(...relationYaml(e,graph,entityCtx.entities,externalSet,sliceKeys,localModel));
@@ -3823,11 +4162,12 @@ async function generateSlice(){
       });
     }
 
+    const sourceEvidence=await buildSourceEvidence(lastPlannerContext,entityCtx,endpointFindings);
     const files=[],externalSet=new Set();let relValues=0,modelRoots=new Set();
     for(const k of Array.from(sliceKeys).sort()){
       const e=entities.get(k),pp=allPaths.get(k);
       const fm=graph.get(k);if(fm)for(const a of fm.values())relValues+=a.length;
-      files.push({path:pp.path,text:renderEntityMarkdown(e,graph,entityCtx,tagMap,foldedNotes,externalSet,sliceKeys,localModel),entity:e});
+      files.push({path:pp.path,text:renderEntityMarkdown(e,graph,entityCtx,tagMap,foldedNotes,externalSet,sliceKeys,localModel,sourceEvidence),entity:e});
       const root=pp.path.split("/")[0];if(root)modelRoots.add(root);
     }
     for(const root of modelRoots){
