@@ -1,3 +1,6 @@
+> [!WARNING]
+> **SUPERSEDED by [[MDSE Modeling Ruleset 1.23]].** Retained as historical evidence only. Do not use 1.22 for current importer/Workbench implementation.
+
 # MDSE Modeling Ruleset 1.22
 
 ## Status
