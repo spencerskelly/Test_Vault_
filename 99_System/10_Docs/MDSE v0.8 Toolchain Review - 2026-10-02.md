@@ -201,3 +201,21 @@ Therefore:
 The **decisions and instructions are now reconciled**. Remaining risk is implementation work, not unresolved semantics.
 
 Do not restart design from old importer/base/assessment artifacts. Continue from the 2026-10-02 reconciliation, Ruleset 1.23, W-315 through W-319 and the WB-106 implementation contract.
+
+
+## W-321 resolution — 2026-10-02
+
+The follow-up consistency review found remaining drift inside files registered as current. W-321 resolves it by eliminating manually duplicated runtime-base contracts.
+
+Resolved:
+- Translator Definition active text now matches element-types 1.17, Local Model 0.2, EA8647 identity, W-318 naming and Source Map rerun authority.
+- relationships.yaml no longer points local exposure at Local Model 0.1.
+- `mdse-release.yaml` owns one positive runtime-base include list.
+- `build-base.py` produces the lean runtime artifact from that list.
+- `check-release.py --base` verifies the artifact against the authority workspace.
+- vault initialization preserves `mdse_release`.
+- unavailable MDSE Bootstrap is removed from the v0.8 runtime baseline rather than left as an unresolvable dependency.
+- Current State and the release manifest are explicitly workspace-only and are not duplicated into engineering vaults.
+- Workbench keeps only portable schema fixtures required for independent tests: current schema copies plus a frozen Local Model 0.1 compatibility fixture.
+
+Remaining work is implementation: importer v0.8.0, WB-106, then pinning the WB-106-capable Workbench and issuing the clean base.
