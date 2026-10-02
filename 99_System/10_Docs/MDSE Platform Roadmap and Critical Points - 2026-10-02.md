@@ -11,13 +11,13 @@ Found in the 2026-10-02 review. Checked: Workbench typecheck, 31 tests and build
 2. **Two copies of the rules.** The importer embeds the relationship fields; Workbench reads `relationships.yaml`. Found in this review: Workbench test fixtures had drifted from the authority schemas. Fixed by W-320 (fixtures synced, drift check added). Proposal: one shared `mdse-core` package (schema loader, endpoint rules, ModelRef, Local Model parser, ID allocator, inverse regeneration CLI) used by both tools.
 3. **Identity and Source Map cannot be repaired afterwards.** Test determinism (two runs byte-identical), collisions (1 ms rule, GUID ordering across notes and local records) and keep the Source Map in the vault under git.
 4. **Local Model regions versus hand editing.** Workbench 0.1.15 blocks body edits on governed notes. WB-106 needs region-aware editing; add a health check for broken START/END markers, also as a pre-commit or CI check.
-5. **MDSE Bootstrap has no retrievable source.** Locate or publish it, or defer it from the base. Pin a WB-106-capable Workbench in `plugin-lock.yaml`. CI and release workflows sit in `ci-workflows/` and do not run (a deliberate decision, WB log).
+5. **Runtime plugin deployment.** W-321 defers MDSE Bootstrap from the v0.8 runtime baseline because no retrievable implementation exists. The final issued base still must pin/enable a WB-106-capable Workbench release; plugin installation is an environment/deployment concern rather than a reason to duplicate plugin binaries in the model vault. CI/release workflows remain inactive until separately enabled.
 6. **Review volume.** Every `tracesTo` and 252 nesting-direction items are findings; batch preview and batch resolve (M3) are not built. Estimate the finding count from the acceptance sample before accepting a whole import.
 7. **Obsidian performance at 30,000+ notes is unmeasured on the team's hardware** (Dataview, Breadcrumbs, Nodian, Fileclass). Open the 60k synthetic vault on the weakest machine before rollout.
 8. **Documentation volume.** The Decision Log is about 437 KB. Addressed in part by [[00 - Current State]], the manifest and the checker; further step: archive old decisions into a dated file and keep short structured entries.
 9. **Persisted inverse fields** mean one edit touches two notes; branches can diverge. Run inverse regenerate-and-verify in CI once the shared core exists.
 
-Suggested order: items 1, 2, 5 first, then the v0.8 importer on the shared core against the slice fixtures; WB-106 in parallel once the shared Local Model parser exists; measure items 6 and 7 before pilot gate R1.
+Suggested order: items 1, 2 and runtime plugin deployment first; then the v0.8 importer against the slice fixtures, with WB-106 in parallel once the shared Local Model parser exists; issue the final base only after both are release-ready; measure items 6 and 7 before pilot gate R1.
 
 ## Part 2. Roadmap (direction, not commitment)
 
