@@ -24,7 +24,7 @@ limits:
 tools:
   importer:
     release: null
-    planned: "99_System/09_Tools/EA_to_MDSE_Native_Importer_v0.8.0.html"
+    candidate: "99_System/09_Tools/EA_to_MDSE_Native_Importer_v0.8.0.html"
     acceptedFallback: "99_System/09_Tools/EA_to_MDSE_Native_Importer_v0.5.2.html"
     evidenceOnly: "99_System/09_Tools/EA_to_MDSE_Native_Importer_v0.7.html"
   cleanBase:
