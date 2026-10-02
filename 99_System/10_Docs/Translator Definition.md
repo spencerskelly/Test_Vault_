@@ -34,7 +34,7 @@ Current through W-297.
 All in `99_System/11_Import`, regenerated on every run, read-only evidence (W-35, W-215, W-216).
 
 - `Ledger.csv`: one row per element, connector, diagram and package, sorted by EA GUID. Columns `ea_guid, source_kind, ea_type, ea_name, outcome, rule, uid, id, folded_into_uid`. `outcome` is `note`, `folded`, `link`, `canvas` or `not carried`, and in a slice run only also `outside slice` (W-254); `rule` is the decision number.
-- `Run Manifest.md`: date, importer release, base-vault `mdse_release`, relationship-schema version, element-schema version, input identity (file name and size), the source counts read from the `.qeax` beside the expected ones (W-257) and counts by outcome; for a slice run, also the links that leave the slice (W-253). Importer/base release mismatch is blocking from W-299 onward.
+- `Run Manifest.md`: date, importer release, base-vault `mdse_release`, relationship-schema version, element-schema version, input identity (file name and size), the source counts read from the `.qeax` beside the expected ones (W-257) and counts by outcome; for a slice run, also the links that leave the slice (W-253). Importer/base release mismatch is blocking from W-299 onward. For v0.8.0 initial import, the manifest also reports all source diagrams as deferred by scope and records that no diagram files were written (W-300).
 - Four review tables, each starting `ea_guid, ea_type, ea_name, category`, with no status column (decisions go in `Review Changes Log.md` by the same GUID, W-38): `Review - Block-Level Flow Connectors.csv` (W-217), `Review - Added Ports.csv` (W-218), `Review - Nesting Direction.csv` (W-219), `Review - Equals Direction.csv` (W-220).
 - Not decided: what happens to the four header-only files `Identity Registry.csv`, `Model Checks.csv`, `Pending Relationships.csv` and `Transformation Log.csv` (W-215).
 
@@ -138,7 +138,7 @@ A named source occurrence alone does not require a standalone Markdown note if t
 
 ## 8. Diagrams and attachments
 
-- A diagram is a canvas file plus a companion note (W-73). The companion note is class `Diagram`, `DIA-#####`, subtype the EA diagram type (custom, logical, use case, composite structure, statechart, activity, sequence, package; W-212). It carries `Canvas: [[...canvas]]` when the canvas exists (W-213). A folded EA note drawn on a diagram becomes a canvas text card holding its text (W-214). A sequence diagram has no canvas; its companion note lists the messages (W-176).
+- A diagram is a canvas file plus a companion note (W-73). The companion note is class `Diagram`, `DIA-#####`, subtype the EA diagram type (custom, logical, use case, composite structure, statechart, activity, sequence, package; W-212). It carries `Canvas: [[...canvas]]` when the canvas exists (W-213). A folded EA note drawn on a diagram becomes a canvas text card holding its text (W-214). A sequence diagram has no canvas; its companion note lists the messages (W-176). **W-300 release scope:** the initial v0.8.0 keepable import does not create any diagram notes or Canvas files. All source diagrams are reconciled as intentionally deferred. After the semantic model + attachments import is accepted, an additive diagram pass may be run against that vault with user-selectable diagram categories/types; only selected diagrams are added.
 - An element with a default diagram gets a `Default diagram: [[...]]` line, written only when the canvas exists (W-80). A diagrams-only run may add diagrams to an existing vault, additive and through the ledger (W-62).
 - Linked documents in `t_document` become files next to the note, named `<note file name> asset <n>`, the counter from 1 on every note, in the order of the pictures in the source RTF (W-76 to W-78, W-210). Not checked: that the byte order of pictures in an RTF matches the page order.
 
@@ -149,7 +149,7 @@ A named source occurrence alone does not require a standalone Markdown note if t
 
 ## 10. Checks the tool must pass before a run is kept
 
-1. Every element, connector, diagram and package lands in exactly one outcome and one rule; the ledger has one row each (W-148, W-178, W-215).
+1. Every element, connector, diagram and package lands in exactly one outcome and one rule; the ledger has one row each (W-148, W-178, W-215). For the initial v0.8.0 import, every diagram must reconcile explicitly as intentionally deferred rather than written (W-300).
 2. No two notes share an `id`, a `uid` or a file name.
 3. Every `[[link]]` the tool writes resolves to a note or an attachment in the run. In a slice run, a link to a note outside the slice is accepted when its target is in the model; the run manifest lists those links (W-253).
 4. Every YAML and JSON file in the vault parses; every relationship field written is in `relationships.yaml`. In the v0.4 structural acceptance writer, paired inverses and symmetric mirrors must also match before writing; endpoint-rule violations are reported as Review findings and do not fail the run (W-275, W-277, W-287).

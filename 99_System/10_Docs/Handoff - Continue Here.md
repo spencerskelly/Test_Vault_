@@ -5,7 +5,7 @@ status: Active
 ---
 # Handoff: Continue Here
 
-Rewritten 2026-09-29 (W-183), updated through W-299 on 2026-10-01 for a new AI chat continuing the work on this vault. Read the 2026-10-01 continuation section below first, then the comprehensive importer handoff and Workspace Decision Log.
+Rewritten 2026-09-29 (W-183), updated through W-300 on 2026-10-01 for a new AI chat continuing the work on this vault. Read the 2026-10-01 continuation section below first, then the comprehensive importer handoff and Workspace Decision Log.
 
 ## What this vault is
 
@@ -14,7 +14,7 @@ Rewritten 2026-09-29 (W-183), updated through W-299 on 2026-10-01 for a new AI c
 ## Read in this order
 
 1. `99_System/10_Docs/EA Native Importer Comprehensive Handoff - 2026-10-01.md`: current importer/occurrence/repository state and the copy-ready next-chat prompt.
-2. `99_System/10_Docs/Workspace Decision Log.md`: every decision (W-01 to W-299) and the Open list at the bottom. It is the authority for what has been decided.
+2. `99_System/10_Docs/Workspace Decision Log.md`: every decision (W-01 to W-300) and the Open list at the bottom. It is the authority for what has been decided.
 3. `99_System/10_Docs/Translator Definition.md` (the single statement of what stage 1 must do, W-247; keep it current), then `Definitions/Note Layout.md` and `Definitions/EA Source Section.md`.
 4. `99_System/03_Schemas/`: `ea-element-mapping.yaml` (all 31 EA object types), `ea-connector-mapping.yaml` (all 15 connector types, W-151 to W-179), `relationships.yaml` (schemaVersion 1.35), `element-types.yaml` (24 model classes plus system definitions; `Diagram` added in W-212), `ea-field-dispositions.yaml`, `ea-tag-dispositions.yaml`, `ea-package-rules.yaml`.
 5. `99_System/10_Docs/Post-Import Tasks.md` (Tasks 1 to 8; Task 7 includes the state cleanup work added later).
@@ -30,6 +30,7 @@ The immediate continuation baseline is now explicit:
 - **Accepted importer baseline:** `EA_to_MDSE_Native_Importer_v0.5.2.html`.
 - **Current merge candidate:** `EA_to_MDSE_Native_Importer_v0.7.html` on `Test_Vault_` main. It was built from v0.5.2/schema 1.35 and merges the W-293/W-294 local occurrence code forward while preserving W-291/W-292 `hasState/stateOf`, v0.5.2 base-vault identity checks, stale-state invalidation, and output-handle hardening. Static JavaScript and invariant checks pass; it is **not yet an accepted importer baseline** until real-QEAX validation and the remaining W-297 acceptance work are complete.
 - **Matched release rule (W-299):** do not create another loosely paired importer/base snapshot. The next newly issued pair will be v0.8.0: `EA_to_MDSE_Native_Importer_v0.8.0.html` plus a clean base whose `.vault.yaml` contains `mdse_release: "0.8.0"`. The importer must block a mismatch. Relationship schema 1.35 and element schema 1.16 remain independently versioned unless separately changed.
+- **Initial-import diagram scope (W-300):** v0.8.0 must import the complete semantic model and all approved attachments, but it writes no diagrams during the initial keepable import. Every source diagram is reconciled as intentionally deferred. After acceptance, diagrams are added through an additive category/type-selectable pass against the existing vault.
 - **Current clean base-vault repo:** `spencerskelly/Test_Vault_-base-vault-2026-09-30-rel133-v051` main. The repo name is stale; the content is schema 1.35 / v0.5.2.
 - **Occurrence experiment:** `spencerskelly/20260930` branch `handoff/full-import-2026-10-01`, importer v0.6/v0.6.1. It proves the W-293/W-294 local part/endpoint/connection/flow direction but was built from the older relationship-1.33 line.
 - **Do not continue directly from v0.6.1.** W-296 has now been implemented as the v0.7 merge candidate. Treat v0.6/v0.6.1 only as implementation evidence; preserve v0.5.2 as the accepted fallback until v0.7 passes real-model acceptance.
