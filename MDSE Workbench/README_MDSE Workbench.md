@@ -18,7 +18,18 @@ V1 centers on three activities:
 
 The normal engineer should be able to use the vault without understanding schema files, plugin internals, Git mechanics, or formal SysML tooling.
 
-**Local Model interface (WB-105 / W-298):** addressable part occurrences, endpoints, connections, flows and local applicability stay inside their owning note but appear in Workbench as a separate **Local Model** dropdown/surface. They are not ordinary note text and are not flattened into frontmatter relationships. Workbench may index and display them read-only before the body contract is final; ordinary text editing must not modify that governed region.
+**Local Model interface (WB-105 / W-298):** addressable part occurrences, endpoints, connections, flows and local applicability stay inside their owning note but appear in Workbench as a separate **Local Model** dropdown/surface. They are not ordinary note text and are not flattened into frontmatter relationships. The body contract is governed by `local-model.yaml` 0.2, with reader compatibility for 0.1. Workbench 0.1.15 still does not index those records; WB-106 adds the parser/index/view foundation. Ordinary text editing must never modify the governed region.
+
+## Current v0.8 contract
+
+Model-side authority is `MDSE v0.8 Cross-Repository Reconciliation - 2026-10-02.md` plus Workspace Decision Log W-315 through W-319.
+
+Current target:
+- relationships 1.35;
+- element-types 1.17;
+- Local Model writer 0.2, reader 0.1 + 0.2;
+- globally unique 30-character identity tokens across notes and local reference points;
+- Workbench WB-106 before a full v0.8 import is accepted.
 
 ## Start here
 
@@ -67,7 +78,7 @@ Where a future capability is already valuable, V1 should preserve an architectur
 
 ## Known ruleset reconciliation item
 
-MDSE Modeling Ruleset 1.22 (section 9) currently says every model-facing folder contains a Views and Bases note, Folder Contents base, and Folder Map canvas.
+MDSE Modeling Ruleset 1.23 (section 9) currently says every model-facing folder contains a Views and Bases note, Folder Contents base, and Folder Map canvas.
 
 The newer Workbench direction intentionally moves away from requiring a prebuilt Canvas in every folder and uses generated views instead.
 
@@ -80,7 +91,7 @@ This folder therefore contains a README and local Base only. The navigation rule
 - **Implementation details** (WB-072 to WB-078) are decided during the build, not one at a time up front (WB-089).
 - **Whenever the UI needs a model fact,** read it from the governed schema/configuration rather than embedding a copy in the plugin.
 - **A good next step** either resolves an open decision or implements and tests one user journey or milestone. A poor next step adds model complexity that does not improve the engineer's interface.
-- **Now:** the M0 spike is in the plugin repository `spencerskelly/MDSE_Workbench` (WB-088), started 2026-09-30. Its README lists the M0 questions, the commands that answer them and the first measurements on a synthetic 60,000-note vault. First results are in the Decision Log (2026-09-30): performance passes; the Canvas selection menu works; gate R0 is decided: go (2026-10-01). Open items: the release pipeline, Canvas hook rechecks per Obsidian version, and the R1 pilot setup.
+- **Now:** standalone Workbench 0.1.15 is in `spencerskelly/MDSE_Workbench`. It contains the immediate W-310/W-319 safety corrections; `WB106_IMPLEMENTATION_CONTRACT.md` is the next coding handoff. Its README lists the M0 questions, the commands that answer them and the first measurements on a synthetic 60,000-note vault. First results are in the Decision Log (2026-09-30): performance passes; the Canvas selection menu works; gate R0 is decided: go (2026-10-01). Open items: the release pipeline, Canvas hook rechecks per Obsidian version, and the R1 pilot setup.
 
 ## Status
 
