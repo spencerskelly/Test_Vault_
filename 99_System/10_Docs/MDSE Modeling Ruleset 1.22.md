@@ -285,6 +285,7 @@ A local part occurrence:
 - has its own stable local ID;
 - uses `definition` to reference the reusable Object/assembly definition;
 - may carry a local engineering identifier/name and multiplicity;
+- uses `multiplicity` only for copies that are intentionally interchangeable in the current model context; any copy needing separate connections, Requirement applicability, state, override, flow or other local addressability is modeled as its own local occurrence (W-310);
 - inherits invariant structure and interface definitions from its reusable definition;
 - provides the context needed to distinguish two uses of the same reusable assembly in one product;
 - does not require a standalone Markdown note solely because it is a contextual use.

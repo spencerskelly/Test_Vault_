@@ -88,6 +88,8 @@ This does not promote v0.7 or retroactively rename historical base artifacts. v0
 
 **W-309 regulatory-folder normalization:** if a regulatory folder directly contains an element with the same section/title wording, retain the full title on the note and reduce the folder name to the section number/designator only. This is navigation compression, not a semantic change, and is allowed only when the resulting folder remains unambiguous among its siblings.
 
+**W-310 multiplicity:** grouped local multiplicity is allowed only when copies are intentionally indistinguishable in the local context. Distinctly connected/configured/scoped copies are separate local part occurrences. If a grouped set later needs per-copy context, split/materialize it rather than overloading multiplicity.
+
 ## 3. Approved semantic model: reusable definition vs contextual occurrence
 
 ### 3.1 Reusable Object/assembly definitions

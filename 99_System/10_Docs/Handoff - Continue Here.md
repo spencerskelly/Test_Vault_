@@ -5,7 +5,7 @@ status: Active
 ---
 # Handoff: Continue Here
 
-Rewritten 2026-09-29 (W-183), updated through W-309 on 2026-10-01 for a new AI chat continuing the work on this vault. Read the 2026-10-01 continuation section below first, then the comprehensive importer handoff and Workspace Decision Log.
+Rewritten 2026-09-29 (W-183), updated through W-310 on 2026-10-01 for a new AI chat continuing the work on this vault. Read the 2026-10-01 continuation section below first, then the comprehensive importer handoff and Workspace Decision Log.
 
 ## What this vault is
 
@@ -14,7 +14,7 @@ Rewritten 2026-09-29 (W-183), updated through W-309 on 2026-10-01 for a new AI c
 ## Read in this order
 
 1. `99_System/10_Docs/EA Native Importer Comprehensive Handoff - 2026-10-01.md`: current importer/occurrence/repository state and the copy-ready next-chat prompt.
-2. `99_System/10_Docs/Workspace Decision Log.md`: every decision (W-01 to W-309) and the Open list at the bottom. It is the authority for what has been decided.
+2. `99_System/10_Docs/Workspace Decision Log.md`: every decision (W-01 to W-310) and the Open list at the bottom. It is the authority for what has been decided.
 3. `99_System/10_Docs/Translator Definition.md` (the single statement of what stage 1 must do, W-247; keep it current), then `Definitions/Note Layout.md` and `Definitions/EA Source Section.md`.
 4. `99_System/03_Schemas/`: `ea-element-mapping.yaml` (all 31 EA object types), `ea-connector-mapping.yaml` (all 15 connector types, W-151 to W-179), `relationships.yaml` (schemaVersion 1.35), `element-types.yaml` (24 model classes plus system definitions; `Diagram` added in W-212), `ea-field-dispositions.yaml`, `ea-tag-dispositions.yaml`, `ea-package-rules.yaml`.
 5. `99_System/10_Docs/Post-Import Tasks.md` (Tasks 1 to 8; Task 7 includes the state cleanup work added later).
@@ -44,6 +44,7 @@ The immediate continuation baseline is now explicit:
 - **Connector path gate (W-307):** the 88 known >260-character paths under `Connector ASM - Industrial` must be eliminated in v0.8 planning by semantic placement/Local Model reuse and meaningful naming, not blind truncation. Only after that correction do we choose the vault-wide hard path limit.
 - **Connector folder first-pass (W-308):** remove repeated parent wording from lower folder names and omit redundant model-number folder labels when the note beneath already carries that model identity. Remeasure before using more invasive Local Model/path remedies.
 - **Regulatory folder first-pass (W-309):** where a regulatory folder and its directly contained element repeat the same section/title, keep the full element title and reduce the folder to the section number/designator only, provided sibling navigation stays unambiguous.
+- **Multiplicity (W-310):** use one local part with `multiplicity: N` only for contextually interchangeable copies. Any copy needing its own connection, Requirement, state, override, flow or other addressable context becomes a separate `part-*` occurrence.
 
 Read `EA Native Importer Comprehensive Handoff - 2026-10-01.md` for the full repository audit, fault log, semantic decisions, experimental implementation history, acceptance criteria and next-chat prompt.
 
@@ -55,7 +56,7 @@ Read `EA Native Importer Comprehensive Handoff - 2026-10-01.md` for the full rep
 - Short and direct, no praise. Tell him if there is a more efficient way to work.
 - Nothing is applied until he approves it. If you apply consequences of an approved decision, say so and list them.
 - Keep `Translator Definition.md` current: any decision that changes a stage 1 rule updates it in the same commit (W-247).
-- Log every decision as the next W number (next is W-310) in the Decision Log, update the worklist YAML and this handoff, then commit and push to `main`. He allows pushing to `main` and pulls each change into Obsidian.
+- Log every decision as the next W number (next is W-311) in the Decision Log, update the worklist YAML and this handoff, then commit and push to `main`. He allows pushing to `main` and pulls each change into Obsidian.
 - Commit only when every edit applied and every YAML and JSON file parses. Make each scripted edit fail on an anchor that matches zero or several times, and stop the commit if any edit failed (twice in the last chat a commit went out missing an edit; once an anchor matched Task 5 instead of Task 7). Quote long YAML text values (a colon followed by a space has broken a file twice). Use quoted heredocs (`<<'EOF'`). Check that a referenced source file or column exists before relying on it. Stay with EA names until after the import (W-93).
 - Never write an access token into a file. After cloning, reset the remote URL to the token-free form and push with the token in the command only. Set a repo-local git identity before the first commit. Check `git log` for commits you did not make before adding a decision number.
 
