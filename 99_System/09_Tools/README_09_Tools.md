@@ -52,3 +52,13 @@ See `MDSE v0.8 Toolchain Review - 2026-10-02.md` for the code-gap audit.
 | `Initialize-Vault.sh`, `Initialize-Vault.ps1` | current helpers | Initialize `.vault.yaml` once in a new disposable or real vault. |
 
 The machine-checkable version of this table is `99_System/03_Schemas/mdse-release.yaml`; run `python3 99_System/09_Tools/check-release.py` after any change to tools, schemas or docs. Registry of current files: [[00 - Current State]].
+
+
+## Base build and release alignment (W-321)
+
+- `build-base.py <output>` generates the lean runtime base from the one positive include list in `mdse-release.yaml`.
+- `check-release.py --base <output>` verifies the generated base contains exactly the governed runtime set, the same schemas, and `mdse_release`.
+- `check-release.py --workbench <clone>` verifies Workbench version plus current schema fixtures and the frozen Local Model 0.1 compatibility fixture.
+- Current State and `mdse-release.yaml` stay in the methodology workspace; they are not duplicated into engineering vaults.
+- `Initialize-Vault.sh/.ps1` preserve `mdse_release`.
+- MDSE Bootstrap is deferred from the v0.8 runtime baseline while no retrievable implementation exists.
