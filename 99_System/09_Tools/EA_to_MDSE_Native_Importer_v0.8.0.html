@@ -192,7 +192,7 @@ summary{cursor:pointer;font-weight:650}
       <button id="generateSlice" class="primary" disabled>Generate assessment vault</button>
       <span id="sliceStatus" class="badge">Build a PASS plan first</span>
     </div>
-    <p class="small muted">Use a fresh generated MDSE 0.8.0 base. Do not select <code>Test_Vault_</code> or an existing imported model. Build a PASS plan first, then select the output. The importer requires relationships 1.35, element-types 1.17, Local Model 0.2, and the pinned MDSE Bootstrap + Workbench runtime stack.</p>
+    <p class="small muted">Use a fresh generated MDSE 0.8.0 base. Do not select <code>Test_Vault_</code> or an existing imported model. Build a PASS plan first, then select the output. The importer requires relationships 1.35, element-types 1.17, Local Model 0.2, and the pinned MDSE Bootstrap + Workbench runtime stack. Generated model folders are capped at 75 model files; if a planned folder exceeds that limit, the importer stops for a meaningful semantic/navigation split rather than inventing overflow buckets.</p>
   </div>
 
   <div class="grid3">
@@ -1956,6 +1956,7 @@ const LOCAL_MODEL_SCHEMA_VERSION="0.2";
 const MDSE_RELEASE="0.8.0";
 const SOURCE_MODEL_ID="EA8647";
 const MAX_GENERATED_PATH=212;
+const MAX_MODEL_FILES_PER_FOLDER=75;
 const FALLBACK_ID_STAMP="20260911000000001";
 const REL_PAIRS={
   subtypeOf:"supertypeOf",
@@ -2457,6 +2458,22 @@ function pathPlanForEntity(e,folderMap){
   }
   if(path.length>MAX_GENERATED_PATH)throw new Error("Generated path remains over "+MAX_GENERATED_PATH+" characters: "+path);
   return {path,folder,file,changed,shortened,originalFolder:e.vaultPath||""};
+}
+
+function folderCapacityViolations(items){
+  const counts=new Map();
+  for(const item of items){
+    if(!item||!item.pp||!item.e)continue;
+    const folder=item.pp.folder||"";
+    const key=folder.toLowerCase();
+    if(!counts.has(key))counts.set(key,{folder:folder||"(vault root)",count:0,samples:[]});
+    const row=counts.get(key);
+    row.count++;
+    if(row.samples.length<5)row.samples.push(item.e.fileName||item.e.title||item.e.key||"(unnamed)");
+  }
+  return Array.from(counts.values())
+    .filter(x=>x.count>MAX_MODEL_FILES_PER_FOLDER)
+    .sort((a,b)=>b.count-a.count||a.folder.localeCompare(b.folder));
 }
 
 function addRawRel(graph,ownerKey,field,targetKey,allowDuplicate){
@@ -4211,8 +4228,15 @@ async function generateSlice(){
         }
       });
     }
+    const plannedItems=Array.from(plannedByPath.values()).flat();
+    const folderViolations=folderCapacityViolations(plannedItems.filter(item=>sliceKeys.has(item.e.key)));
+    if(folderViolations.length){
+      const detail=folderViolations.slice(0,8).map(x=>x.folder+" ("+x.count+")").join(", ");
+      throw new Error("FOLDER-CAPACITY-EXCEEDED: generated model folders may contain at most "+MAX_MODEL_FILES_PER_FOLDER+" model files. Add a meaningful semantic/navigation subdivision before import; arbitrary overflow buckets are not allowed. "+detail);
+    }
+
     const pathSet=new Set();
-    for(const item of Array.from(plannedByPath.values()).flat()){
+    for(const item of plannedItems){
       const e=item.e,pp=item.pp,low=pp.path.toLowerCase();
       if(pp.path.length>MAX_GENERATED_PATH)throw new Error("Generated path exceeds "+MAX_GENERATED_PATH+": "+pp.path);
       if(pathSet.has(low))throw new Error("Case-insensitive whole-model output path collision after duplicate handling: "+pp.path);
