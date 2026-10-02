@@ -890,3 +890,123 @@ The full theory and examples are in `MDSE v0.8 Design Check - 2026-10-01.md`, se
 10. Defer `allowedDefinitions` and cross-variant compatibility syntax until a real product case requires them.
 
 Do not use configurability as a reason to create new top-level element types, new relationship types, or new occurrence kinds. Function/Use Case/State usage semantics can follow W-314 once those contextual occurrence records are independently justified.
+
+## Copy/paste handover prompt after W-314
+
+Continue the MDSE native EA → Obsidian and MDSE Workbench design from the authoritative `spencerskelly/Test_Vault_` main repository. Do not restart the methodology or reopen settled decisions unless current source evidence creates a real conflict.
+
+Start by reading, in this order:
+
+1. `99_System/10_Docs/MDSE v0.8 Design Check - 2026-10-01.md`, especially **Local Model Usage and Configuration Theory (W-314)**.
+2. `99_System/10_Docs/EA Native Importer Comprehensive Handoff - 2026-10-01.md`, including the W-314 continuation.
+3. `99_System/10_Docs/Workspace Decision Log.md` through **W-314**.
+4. `99_System/10_Docs/Translator Definition.md`.
+5. the current MDSE Modeling Ruleset.
+6. `99_System/03_Schemas/relationships.yaml`.
+7. `99_System/03_Schemas/element-types.yaml`.
+8. `99_System/03_Schemas/local-model.yaml`.
+9. `MDSE Workbench/01 - Workbench Product Definition.md`.
+10. `MDSE Workbench/03 - Build Outline and Roadmap.md`.
+11. `MDSE Workbench/04 - Architecture and Model Boundary.md`.
+12. the standalone `spencerskelly/MDSE_Workbench` repository and its current code before proposing code changes.
+
+Treat those sources as authoritative over older generated vaults and historical translator documents.
+
+### Settled Local Model architecture
+
+- Reusable engineering definitions remain first-class notes.
+- Contextual occurrences that need identity live in the owning note's Local Model.
+- Local parts reference reusable Objects through `definition`.
+- Local endpoints reference reusable Ports/interfaces through `definition`.
+- Local flows reference reusable Item Flows through `definition`.
+- Stable local IDs are native Obsidian block IDs.
+- Contextual topology belongs to the context that creates it, not to reusable definitions.
+- Structural and behavioral architecture should reuse definitions rather than duplicate them.
+- `subtypeOf / supertypeOf` remains reusable definition-level generalization.
+- The Local Model is native Markdown in a governed body region and Workbench remains a view/editor over that model, not a second database.
+
+### Settled W-314 usage/configuration semantics
+
+The contextual Local Model occurrence field is:
+
+```yaml
+usage: standard | variant | option
+```
+
+Omitted `usage` means `standard`.
+
+- `standard`: occurrence is required and uses the stated concrete `definition`.
+- `variant`: occurrence is required and resolves to exactly one allowable concrete definition from the specialization family rooted at the stated `definition`.
+- `option`: occurrence may be absent; when present it resolves to the stated concrete definition or an allowable concrete specialization.
+- Candidate definitions are derived transitively from the existing `subtypeOf` hierarchy; do not duplicate candidate lists on the occurrence.
+- A non-abstract root is selectable along with its non-abstract descendants.
+- `abstract: true` on a reusable definition means the definition may organize/generalize concrete definitions but cannot itself be the effective definition of an occurrence. Absence means false. Abstractness is not inherited.
+- Optionality and variant behavior belong to the local occurrence, never intrinsically to the reusable definition.
+- Do not connect an assembly to every subtype simply to express a variant position.
+- Do not create top-level Variant, Variant Point, Option or configuration relationship types for this mechanism.
+- The same usage concept may later apply to part, endpoint/Port, Function, Use Case and State occurrences when those contextual occurrence kinds are independently justified.
+- Do not automatically extend `usage` to connections, flows, transitions or topology.
+- The base reusable architecture stays unresolved and must not be mutated merely to explore a configuration.
+- Temporary Workbench selections may be session state.
+- Persisted named configurations, when implemented, must store selections separately from the base Local Model and identify occurrences by stable native block-link addresses.
+- No persisted selection entry means unresolved. `present: false` explicitly omits an option.
+- A completed configuration resolves every variant and explicitly includes/excludes every option.
+- Product/model-number codes belong to product/configuration knowledge, not reusable component definitions.
+- Defer `allowedDefinitions` and cross-variant compatibility syntax until a real engineering example requires them.
+
+### Important current implementation state
+
+W-314 is a settled semantic decision, but the executable schema/code changes have **not** yet been made.
+
+- `local-model.yaml` is still the deployed 0.1 contract.
+- The managed region is still `schema=0.1`.
+- `element-types.yaml` does not yet implement definition-level `abstract`.
+- `relationships.yaml` requires no W-314 change.
+- The native importer does not yet read/write `usage` and must not infer configurability.
+- Standalone Workbench does not yet implement W-314.
+- The exact persisted named-configuration Markdown format remains open.
+
+Do not silently treat the documentation examples using `schema=0.2` as already-deployed syntax.
+
+### Importer constraints
+
+The importer must not:
+
+- infer `usage: variant` merely because a definition has subtypes;
+- infer `usage: option` from EA Use Case `optionOf`;
+- equate an EA connector named `Usage` with Local Model `usage`;
+- place contextual optional/variant semantics on reusable definitions;
+- connect the owner to every candidate specialization.
+
+Until a deterministic source rule is approved, imported occurrences remain standard by omission and uncertain configuration evidence should be preserved for review rather than guessed.
+
+### Workbench direction
+
+Preserve the dependency order:
+
+1. complete the WB-106 Local Model foundation: shared parser, ModelRef identity, block-fragment preservation, governed-region protection and occurrence-aware views;
+2. advance the shared Local Model schema intentionally;
+3. add `usage` and `abstract` reading/indexing;
+4. derive candidate families by transitive specialization traversal;
+5. add validation and read-only variation-space information;
+6. add temporary configuration selection without mutating the base model;
+7. decide the exact persisted named-configuration Markdown representation;
+8. add persisted configuration editing;
+9. add Generic Architecture, Variation Space, Configured Architecture, Configuration Comparison and configuration-filtered Canvas views;
+10. add product-specific smart model-number generation/reverse decoding only after configuration resolution is reliable.
+
+### Next task
+
+First inspect the live schemas and standalone Workbench code for the smallest compatible implementation of W-314. Then propose the exact schema changes and migration/backward-compatibility behavior **before modifying code**.
+
+Specifically resolve:
+
+1. the exact `local-model.yaml` 0.2 representation of optional `usage` on currently supported occurrence records;
+2. whether the marker version must move to `schema=0.2` at the same time and how 0.1 notes are read;
+3. the exact `element-types.yaml` representation for optional definition-level `abstract`;
+4. the property-definition documentation required by the vault's property-governance rules;
+5. importer/parser behavior for old and new Local Model records;
+6. Workbench candidate-resolution and validation behavior;
+7. what must remain deferred until the persisted configuration format is separately approved.
+
+Recommend the smallest approach that scales. Do not add new element types, relationships or persistence layers unless current semantics truly cannot express the engineering need.
