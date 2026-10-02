@@ -3707,6 +3707,22 @@ async function attachmentReconciliation(ctx,entityCtx,sliceKeys,wholeModel){
   }
   return {csv:rowsCsv(rows),counts,files};
 }
+
+function sourceCountManifestLines(report){
+  const lines=["","## Source-count reconciliation"];
+  lines.push("- Preflight: "+report.result+"; detailed expected/actual values: [[Source Count Reconciliation.csv]]");
+  for(const name of Object.keys(EXPECTED_TABLES)){
+    const d=report.tableDiagnostics&&report.tableDiagnostics[name];
+    const actual=d&&d.present?d.rows:"missing";
+    lines.push("- "+name+": expected "+EXPECTED_TABLES[name]+", actual "+actual);
+  }
+  const exact=(expected,actual)=>Object.keys(expected).every(k=>Number(expected[k])===Number((actual||{})[k]||0))
+    &&Object.keys(actual||{}).every(k=>Object.prototype.hasOwnProperty.call(expected,k));
+  lines.push("- Element-type counts: "+(exact(EXPECTED_ELEMENT_TYPES,report.elementTypes)?"MATCH":"DIFF"));
+  lines.push("- Connector-type counts: "+(exact(EXPECTED_CONNECTOR_TYPES,report.connectorTypes)?"MATCH":"DIFF"));
+  lines.push("- Diagram-type counts: "+(exact(EXPECTED_DIAGRAM_TYPES,report.diagramTypes)?"MATCH":"DIFF"));
+  return lines;
+}
 async function generateSlice(){
   if(sliceBusy||!lastPlannerContext||!lastPlan||lastPlan.result!=="PASS"||!outputDirHandle)return;
   sliceBusy=true;el("generateSlice").disabled=true;el("sliceStatus").className="badge";el("sliceStatus").textContent="Validating output";
@@ -3854,6 +3870,7 @@ async function generateSlice(){
       "- Diagram artifacts written: 0",
       "- Diagram disposition: deferred by v0.8 scope",
       "- Links to notes outside scope: "+externalSet.size,
+      ...sourceCountManifestLines(lastReport),
       "",
       "## Release-candidate limitation",
       "- Linked documents are imported mechanically under W-76 to W-78/W-210 when the payload is positively identifiable. Any unreadable, unrecognized or over-length asset remains an explicit failed attachment import; W-319 makes those failures non-blocking but they must be reviewed before release acceptance.",
@@ -3872,6 +3889,7 @@ async function generateSlice(){
     const evidence={
       "99_System/11_Import/Ledger.csv":ledger,
       "99_System/11_Import/Run Manifest.md":manifest,
+      "99_System/11_Import/Source Count Reconciliation.csv":countsCsv(lastReport),
       "99_System/11_Import/Local Model Source Map.csv":sourceMap,
       "99_System/11_Import/Review - Duplicate Names.csv":duplicateCsv,
       "99_System/11_Import/Review - Altered Names and Paths.csv":alteredCsv,
