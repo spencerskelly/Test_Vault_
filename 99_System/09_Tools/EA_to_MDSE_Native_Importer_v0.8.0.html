@@ -3132,7 +3132,7 @@ function ledgerCsvV03(ctx,entityCtx,sliceKeys,selected){
   for(const p of ctx.packagePlans)rows.push([p.eaGuid,"package",p.eaType,p.eaName,pkgIds.has(n2(p.sourceId))?p.outcome:(p.outcome==="not carried"?"not carried":"outside slice"),p.rule,"","",""]);
   for(const p of ctx.diagramPlans){
     const inside=pathSelected((p.packagePath||"").replace(/^Model > IPC ! > /,""),selected);
-    rows.push([p.eaGuid,"diagram",p.eaType,p.eaName,inside?"not carried":"outside slice",p.rule,"","",""]);
+    rows.push([p.eaGuid,"diagram",p.eaType,p.eaName,inside?"deferred by v0.8 scope":"outside slice",p.rule,"","",""]);
   }
   return rows.map(r=>r.map(csvQuote).join(",")).join("\n")+"\n";
 }
@@ -3244,17 +3244,77 @@ async function chooseOutputFolder(){
   }
 }
 
+
+function rowsCsv(rows){return rows.map(r=>r.map(csvQuote).join(",")).join("\n")+"\n";}
+function duplicateNameReviewCsv(entityCtx){
+  const rows=[["ea_guid","ea_type","ea_name","folder","file_name","marker"]];
+  for(const r of entityCtx.nameReviews||[]){
+    if(!r.duplicate)continue;
+    rows.push([r.eaGuid,r.eaType,r.eaName,r.folder,r.fileName,r.duplicate]);
+  }
+  return rowsCsv(rows);
+}
+function alteredPathReviewCsv(entityCtx,pathReviews){
+  const rows=[["ea_guid","ea_type","ea_name","source_folder","output_path","name_alteration","path_shortened"]];
+  for(const r of entityCtx.nameReviews||[]){
+    if(!r.alteration)continue;
+    rows.push([r.eaGuid,r.eaType,r.eaName,r.folder,r.fileName,r.alteration,""]);
+  }
+  for(const r of pathReviews||[]){
+    rows.push([r.eaGuid,r.eaType,r.eaName,r.sourceFolder,r.outputPath,r.changed?"folder/path normalization":"",r.shortened?"yes":""]);
+  }
+  return rowsCsv(rows);
+}
+function semanticReviewCsv(endpointFindings,localModel){
+  const rows=[["source_guid","category","relationship","from_type","from_name","to_type","to_name","detail"]];
+  for(const x of endpointFindings||[])rows.push(["",x.reason,x.field,x.fromType,x.ownerName,x.toType,x.targetName,"relationship endpoint review"]);
+  for(const w of localModel.warnings||[]){
+    const g=(w.match(/\{[0-9A-Fa-f-]{36}\}/)||[""])[0];
+    rows.push([g,w.startsWith("BindingConnector")?"binding connector":"local model","","","","","",w]);
+  }
+  return rowsCsv(rows);
+}
+function diagramReconciliationCsv(ctx,selected){
+  const rows=[["ea_guid","ea_type","ea_name","package_path","status","detail"]];
+  for(const p of ctx.diagramPlans||[]){
+    const pp=(p.packagePath||"").replace(/^Model > IPC ! > /,"");
+    const inside=pathSelected(pp,selected);
+    rows.push([p.eaGuid,p.eaType,p.eaName,pp,inside?"deferred by v0.8 scope":"outside slice",inside?"initial v0.8 semantic import writes no diagram artifacts":""]);
+  }
+  return rowsCsv(rows);
+}
+async function attachmentReconciliation(ctx,entityCtx,sliceKeys){
+  const rows=[["doc_id","doc_type","element_guid","element_name","status","source_bytes","detail"]];
+  const counts={total:0,inScope:0,failed:0,outside:0};
+  const byGuid=new Map();
+  for(const e of entityCtx.entities.values())if(e.eaGuid)byGuid.set(normGuid(e.eaGuid),e);
+  const reader=await SQLiteReader.open(selectedFile);
+  if(!reader.has("t_document"))return {csv:rowsCsv(rows),counts};
+  for await(const row of reader.scan("t_document")){
+    counts.total++;
+    const docId=trim2(row.DocID||row.DocumentID||row.ElementID||"");
+    const candidateGuids=[row.DocID,row.ElementID,row.ElementGUID,row.Element_GUID].map(normGuid).filter(Boolean);
+    let e=null,eg="";
+    for(const g of candidateGuids){if(byGuid.has(g)){e=byGuid.get(g);eg=e.eaGuid;break;}}
+    const inside=!!(e&&sliceKeys.has(e.key));
+    const bytes=row.BinContent instanceof Uint8Array?row.BinContent.length:(row.StrContent?String(row.StrContent).length:0);
+    if(!inside){
+      counts.outside++;
+      rows.push([docId,trim2(row.DocType),eg,e?trim2(e.raw.Name):"","outside slice",bytes,""]);
+      continue;
+    }
+    counts.inScope++;counts.failed++;
+    rows.push([docId,trim2(row.DocType),eg,trim2(e.raw.Name),"failed attachment import",bytes,
+      "EA t_document payload is reconciled but safe binary/RTF asset extraction is not implemented in this candidate"]);
+  }
+  return {csv:rowsCsv(rows),counts};
+}
 async function generateSlice(){
   if(sliceBusy||!lastPlannerContext||!lastPlan||lastPlan.result!=="PASS"||!outputDirHandle)return;
   sliceBusy=true;el("generateSlice").disabled=true;el("sliceStatus").className="badge";el("sliceStatus").textContent="Validating output";
-  const started=performance.now(),limitations=new Set([
-    "v0.7 does not render diagram companion notes/canvases.",
-    "v0.7 does not extract t_document attachments.",
-    "v0.7 does not generate the four final review tables.",
-    "v0.7 renders the core Note/comment/tag subset needed for structural acceptance, not every retained Stage-1 source-evidence line."
-  ]);
+  const started=performance.now();
   try{
-    if(!(await requireBaseVault(outputDirHandle)))throw new Error("Selected output folder is not an initialized/unpacked base-vault copy: .vault.yaml is missing.");
+    if(!(await requireBaseVault(outputDirHandle)))throw new Error("Selected output folder is not a generated MDSE "+MDSE_RELEASE+" base.");
     const wholeModel=!!el("wholeModel").checked;
     const selected=wholeModel?"":trim2(el("slicePath").value);
     if(!wholeModel&&!selected)throw new Error("Package path is blank.");
@@ -3263,20 +3323,21 @@ async function generateSlice(){
       if(matches.length!==1)throw new Error("Package path must match exactly one EA package; '"+selected+"' matched "+matches.length+".");
     }
 
-    el("sliceStatus").textContent="Assigning whole-model identity";
+    el("sliceStatus").textContent="Assigning global identity";
     const reservedIdentityTokens=await scanExistingIdentityTokens(outputDirHandle);
     const entityCtx=buildEntityContext(lastPlannerContext,reservedIdentityTokens),entities=entityCtx.entities;
     beginLocalIdentityAllocation(entityCtx);
-    const idSeen=new Set(),uidSeen=new Set(),fileSeen=new Set(),validation=[];
+
+    const idSeen=new Set(),uidSeen=new Set(),validation=[];
     for(const e of entities.values()){
       if(!e.id||idSeen.has(e.id))validation.push("duplicate/missing id "+(e.id||e.key)); else idSeen.add(e.id);
       if(!e.uid||uidSeen.has(e.uid))validation.push("duplicate/missing uid "+(e.uid||e.key)); else uidSeen.add(e.uid);
-      const fk=e.fileName.toLowerCase();if(fileSeen.has(fk))validation.push("duplicate file name "+e.fileName);else fileSeen.add(fk);
     }
     const sliceKeys=new Set(Array.from(entities.values()).filter(e=>pathSelected(e.vaultPath,selected)).map(e=>e.key));
     if(!sliceKeys.size)throw new Error(wholeModel?"No emitted notes are planned for the model.":"No emitted notes fall under "+selected+".");
 
-    el("sliceStatus").textContent="Building relationships";
+    el("sliceStatus").textContent="Building relationships and Local Model";
+    const limitations=new Set();
     const graph=buildRelationshipGraph(lastPlannerContext,entityCtx,limitations);
     const endpointFindings=collectEndpointFindings(graph,entities);
     for(const [k,fm] of graph.entries())for(const [field,targets] of fm.entries()){
@@ -3292,108 +3353,129 @@ async function generateSlice(){
         }
       }
     }
-    if(validation.length)throw new Error("Assessment validation failed before writing: "+validation.slice(0,8).join("; "));
+    if(validation.length)throw new Error("Validation failed before writing: "+validation.slice(0,8).join("; "));
 
     const localModel=buildLocalOccurrenceModel(lastPlannerContext,entityCtx);
 
     const sourceIds=new Set();
     for(const k of sliceKeys)for(const id of entities.get(k).sourceIds||[])sourceIds.add(id);
     el("sliceStatus").textContent="Reading retained source values";
-    const tagMap=await collectSliceTags(sourceIds), foldedNotes=foldedEaNotes(lastPlannerContext,entityCtx);
+    const tagMap=await collectSliceTags(sourceIds),foldedNotes=foldedEaNotes(lastPlannerContext,entityCtx);
 
-    const files=[],externalSet=new Set();let relValues=0;
+    const folderMap=buildFolderPathMap(entities),files=[],externalSet=new Set(),pathReviews=[];
+    let relValues=0;
     for(const k of Array.from(sliceKeys).sort()){
-      const e=entities.get(k);
-      const folder=(e.vaultPath||"").split(" > ").map(sanitizeName).filter(Boolean).join("/");
-      const path=(folder?folder+"/":"")+e.fileName+".md";
+      const e=entities.get(k),pp=pathPlanForEntity(e,folderMap);
       const fm=graph.get(k);if(fm)for(const a of fm.values())relValues+=a.length;
-      files.push({path,text:renderEntityMarkdown(e,graph,entityCtx,tagMap,foldedNotes,externalSet,sliceKeys,localModel),entity:e});
+      files.push({path:pp.path,text:renderEntityMarkdown(e,graph,entityCtx,tagMap,foldedNotes,externalSet,sliceKeys,localModel),entity:e});
+      if(pp.changed||pp.shortened)pathReviews.push({
+        eaGuid:e.eaGuid,eaType:trim2(e.raw.Object_Type),eaName:trim2(e.raw.Name),
+        sourceFolder:pp.originalFolder,outputPath:pp.path,changed:pp.changed,shortened:pp.shortened
+      });
     }
+
     const pathSet=new Set(),modelRoots=new Set();
     for(const f of files){
+      if(f.path.length>MAX_GENERATED_PATH)throw new Error("Generated path exceeds "+MAX_GENERATED_PATH+": "+f.path);
       const low=f.path.toLowerCase();if(pathSet.has(low))throw new Error("Case-insensitive output path collision: "+f.path);pathSet.add(low);
       const root=f.path.split("/")[0];if(root)modelRoots.add(root);
     }
     for(const root of modelRoots){
-      if(await directoryExists(outputDirHandle,root))throw new Error("Refusing to import over an existing model: output already contains folder '"+root+"'. Use a fresh disposable base-vault copy.");
+      if(await directoryExists(outputDirHandle,root))throw new Error("Refusing to import over an existing model folder '"+root+"'. Use a fresh generated base.");
     }
 
+    el("sliceStatus").textContent="Reconciling attachments and diagrams";
+    const attachments=await attachmentReconciliation(lastPlannerContext,entityCtx,sliceKeys);
+    const diagramCsv=diagramReconciliationCsv(lastPlannerContext,selected);
+    const sourceMap=localModelSourceMapCsv(localModel,entityCtx);
     const ledger=ledgerCsvV03(lastPlannerContext,entityCtx,sliceKeys,selected);
+    const duplicateCsv=duplicateNameReviewCsv(entityCtx);
+    const alteredCsv=alteredPathReviewCsv(entityCtx,pathReviews);
+    const semanticCsv=semanticReviewCsv(endpointFindings,localModel);
+
     const manifest=[
       "---","status: Test","---","# Run Manifest","",
       "- Importer: "+BUILD.name+" "+BUILD.version,
+      "- MDSE release: "+MDSE_RELEASE,
       "- Generated: "+new Date().toISOString(),
+      "- Source model: "+SOURCE_MODEL_ID,
       "- Source: "+lastReport.source.name+" ("+lastReport.source.size+" bytes)",
-      "- Planner baseline: v0.2 accepted under W-274; v0.7 preserves v0.5.2 identity/state/base-vault safeguards and adds W-293/W-294 local occurrences",
       "- Scope: "+(wholeModel?"WHOLE MODEL":selected),
-      "- Result: PASS (structural acceptance scope)",
-      "- Whole-model source elements: "+lastPlan.counts.elements,
-      "- Whole-model source connectors: "+lastPlan.counts.connectors,
-      "- Whole-model planned element entities: "+lastPlan.notes.elementEntities,
-      "- Added-Port groups canonicalized by W-276: "+lastPlan.portPlan.addedPortGroups,
-      "- Multi-source added-Port groups: "+lastPlan.portPlan.multiSourceAddedPortGroups,
-      "- Relationship schema: "+REL_SCHEMA_VERSION,
-      "- Relationship review findings: "+endpointFindings.length,
-      "- Local occurrence body schema: "+localModel.schemaVersion,
-      "- Local part occurrences: "+localModel.stats.parts,
-      "- Local endpoint occurrences: "+localModel.stats.endpoints,
-      "- Local connections: "+localModel.stats.connections,
-      "- Local conveyed flows: "+localModel.stats.flows,
-      "- Local Requirement applicability records: "+localModel.stats.localRequirementLinks,
-      "- Unresolved conveyed xrefs: "+localModel.stats.unresolvedConveyedXrefs,
-      "- Local occurrence warnings: "+localModel.stats.warnings,
-      "- Naming rule natural: "+(entityCtx.namingStats.natural||0),
-      "- Naming rule Port i-prefix: "+Object.entries(entityCtx.namingStats).filter(([k])=>k.startsWith("port-interface-prefix")).reduce((a,[,v])=>a+v,0),
-      "- Naming rule Requirement _r: "+Object.entries(entityCtx.namingStats).filter(([k])=>k.startsWith("requirement-r")).reduce((a,[,v])=>a+v,0),
-      "- Naming rule Port connecting-object: "+Object.entries(entityCtx.namingStats).filter(([k])=>k.startsWith("port-connected-object")).reduce((a,[,v])=>a+v,0),
-      "- Naming rules with numeric collision suffix: "+Object.entries(entityCtx.namingStats).filter(([k])=>k.includes("+numeric")).reduce((a,[,v])=>a+v,0),
+      "- Result: PASS (implementation candidate)",
+      "- Relationships schema: "+REL_SCHEMA_VERSION,
+      "- Element-types schema: "+ELEMENT_SCHEMA_VERSION,
+      "- Local Model schema: "+LOCAL_BODY_SCHEMA,
+      "- Maximum generated path: "+MAX_GENERATED_PATH,
       "- Notes written: "+files.length,
-      "- Relationship values written on slice notes: "+relValues,
-      "- Links from written notes to planned notes outside scope: "+externalSet.size,
+      "- Relationship values written: "+relValues,
+      "- Local parts: "+localModel.stats.parts,
+      "- Local endpoints: "+localModel.stats.endpoints,
+      "- Local connections: "+localModel.stats.connections,
+      "- Local flows: "+localModel.stats.flows,
+      "- Relationship review findings: "+endpointFindings.length,
+      "- Local Model warnings: "+localModel.stats.warnings,
+      "- Attachment source rows: "+attachments.counts.total,
+      "- Attachments in scope: "+attachments.counts.inScope,
+      "- Failed attachment imports (non-blocking): "+attachments.counts.failed,
+      "- Source diagrams: "+(lastPlannerContext.diagramPlans||[]).length,
+      "- Diagram artifacts written: 0",
+      "- Diagram disposition: deferred by v0.8 scope",
+      "- Links to notes outside scope: "+externalSet.size,
       "",
-      "## External scope links",
-      ...(externalSet.size?Array.from(externalSet).sort().map(x=>"- "+x):["- None"]),
-      "",
-      "## Relationship review findings",
-      ...(endpointFindings.length?endpointFindings.map(x=>"- ["+x.reason+"] "+x.field+": "+x.fromType+" [["+(x.ownerName)+"]] → "+x.toType+" [["+(x.targetName)+"]]"):["- None"]),
-      "",
-      "## Local occurrence warnings",
-      ...(localModel.warnings.length?localModel.warnings.map(x=>"- "+x):["- None"]),
-      "",
-      "## v0.8.0 implementation candidate limitations",
-      ...Array.from(limitations).sort().map(x=>"- "+x),
-      "",
-      "This output is for structural acceptance only and is not a release vault."
+      "## Release-candidate limitation",
+      "- Linked-document rows are reconciled, but this candidate does not yet decode/write EA t_document binary/RTF assets. Each affected row is explicitly marked failed attachment import; W-319 makes those failures non-blocking but they must be resolved before release acceptance.",
+      "- Workbench WB-106 remains the keepability gate for the first whole-model import.",
+      ""
     ].join("\n")+"\n";
 
     el("sliceStatus").textContent="Writing "+fmt(files.length)+" notes";
     let n=0;
-    for(const f of files){await writeTextPath(outputDirHandle,f.path,f.text);n++;if(n%50===0){el("sliceStatus").textContent="Writing notes "+fmt(n)+"/"+fmt(files.length);await tick();}}
-    await writeTextPath(outputDirHandle,"99_System/11_Import/Ledger.csv",ledger);
-    await writeTextPath(outputDirHandle,"99_System/11_Import/Run Manifest.md",manifest);
+    for(const f of files){
+      await writeTextPath(outputDirHandle,f.path,f.text);
+      n++;if(n%50===0){el("sliceStatus").textContent="Writing notes "+fmt(n)+"/"+fmt(files.length);await tick();}
+    }
+    const evidence={
+      "99_System/11_Import/Ledger.csv":ledger,
+      "99_System/11_Import/Run Manifest.md":manifest,
+      "99_System/11_Import/Local Model Source Map.csv":sourceMap,
+      "99_System/11_Import/Review - Duplicate Names.csv":duplicateCsv,
+      "99_System/11_Import/Review - Altered Names and Paths.csv":alteredCsv,
+      "99_System/11_Import/Review - Semantic and Connectors.csv":semanticCsv,
+      "99_System/11_Import/Attachment Reconciliation.csv":attachments.csv,
+      "99_System/11_Import/Diagram Reconciliation.csv":diagramCsv
+    };
+    for(const [p,t] of Object.entries(evidence))await writeTextPath(outputDirHandle,p,t);
 
     const durationMs=Math.round(performance.now()-started);
-    lastSliceReport={result:"PASS",scope:wholeModel?"WHOLE MODEL":selected,notes:files.length,relationshipValues:relValues,externalLinks:externalSet.size,relationshipReviewFindings:endpointFindings.length,relationshipSchema:REL_SCHEMA_VERSION,localOccurrenceSchema:localModel.schemaVersion,localOccurrenceStats:localModel.stats,namingStats:entityCtx.namingStats,durationMs,limitations:Array.from(limitations)};
+    lastSliceReport={
+      result:"PASS",scope:wholeModel?"WHOLE MODEL":selected,notes:files.length,
+      relationshipValues:relValues,externalLinks:externalSet.size,
+      relationshipReviewFindings:endpointFindings.length,
+      relationshipSchema:REL_SCHEMA_VERSION,elementSchema:ELEMENT_SCHEMA_VERSION,
+      localOccurrenceSchema:localModel.schemaVersion,localOccurrenceStats:localModel.stats,
+      namingStats:entityCtx.namingStats,pathReviews:pathReviews.length,
+      attachmentCounts:attachments.counts,durationMs
+    };
     el("sliceNotes").textContent=fmt(files.length);el("sliceNotesDetail").textContent=wholeModel?"WHOLE MODEL":selected;
-    el("sliceLinks").textContent=fmt(relValues);el("sliceLinksDetail").textContent=fmt(externalSet.size)+" outbound · "+fmt(endpointFindings.length)+" relationship review";
+    el("sliceLinks").textContent=fmt(relValues);el("sliceLinksDetail").textContent=fmt(externalSet.size)+" outbound · "+fmt(endpointFindings.length)+" review";
     el("sliceResult").textContent="PASS";el("sliceResult").className="stat good";
-    el("sliceResultDetail").textContent=(durationMs/1000).toFixed(1)+" s · structural acceptance scope";
+    el("sliceResultDetail").textContent=(durationMs/1000).toFixed(1)+" s · v0.8.0 candidate";
     el("sliceStatus").textContent="PASS";el("sliceStatus").className="badge good";
-    log("Assessment renderer PASS: "+files.length+" notes written for "+(wholeModel?"WHOLE MODEL":selected)+"; "+relValues+" relationship values; "+localModel.stats.parts+" part occurrences, "+localModel.stats.endpoints+" endpoints, "+localModel.stats.connections+" connections and "+localModel.stats.flows+" local flows.");
+    log("v0.8.0 candidate PASS: "+files.length+" notes; "+localModel.stats.parts+" parts, "+localModel.stats.endpoints+" endpoints, "+localModel.stats.connections+" connections, "+localModel.stats.flows+" flows; "+attachments.counts.failed+" attachment failures reconciled.");
   }catch(err){
     console.error(err);el("sliceResult").textContent="FAIL";el("sliceResult").className="stat bad";
     el("sliceResultDetail").textContent=err.message||String(err);
     const stale=err&&(err.name==="InvalidStateError"||err.name==="NotFoundError");
     if(stale){
-      outputDirHandle=null;
-      el("outputName").textContent="No output folder selected";
+      outputDirHandle=null;el("outputName").textContent="No output folder selected";
       el("sliceStatus").textContent="Output folder changed or disappeared — choose it again";
-    }else{
-      el("sliceStatus").textContent="FAIL";
-    }
+    }else el("sliceStatus").textContent="FAIL";
     el("sliceStatus").className="badge bad";
-    log("SLICE ERROR: "+(err.stack||err));
-  }finally{sliceBusy=false;el("generateSlice").disabled=!(lastPlan&&lastPlan.result==="PASS"&&outputDirHandle);}
+    log("IMPORT ERROR: "+(err.stack||err));
+  }finally{
+    sliceBusy=false;
+    el("generateSlice").disabled=!(lastPlan&&lastPlan.result==="PASS"&&outputDirHandle);
+  }
 }
 
 el("chooseOutput").addEventListener("click",chooseOutputFolder);
