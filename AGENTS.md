@@ -1,6 +1,6 @@
 # AI / Agent Rules
 
-First read `99_System/10_Docs/00 - Current State.md`. It names the current rules, the tool status and which files are historical. If a file you find disagrees with it, the Current State registry wins.
+If `99_System/10_Docs/00 - Current State.md` exists, read it first; it governs the methodology workspace. A lean generated engineering vault intentionally omits that registry, so there start from `99_System/02_AI/AI_INSTRUCTIONS.md`, Ruleset 1.23 and the runtime schemas.
 
 Read and follow `99_System/02_AI/AI_INSTRUCTIONS.md` before creating or editing any note.
 
