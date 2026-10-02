@@ -1520,7 +1520,7 @@ function classifyElements(objects,connectors,pkg,portResolution){
       }else{p.outcome="note";p.mdseType="Info";p.rule="W-145";}
     } else if(t==="Class"){
       p.outcome="note";
-      if(INTERFACE_CLASS_STEREOTYPES.has(st)){p.mdseType="Port";p.rule="W-120/schema-1.16";p.subtype="";}
+      if(INTERFACE_CLASS_STEREOTYPES.has(st)){p.mdseType="Port";p.rule="W-120/schema-1.17";p.subtype="";}
       else{p.mdseType="Object";p.rule="W-139";}
     } else if(t==="Activity"){
       p.outcome="note";
@@ -2714,7 +2714,11 @@ function buildLocalOccurrenceModel(ctx,entityCtx){
 
     const q=ctx.portResolution.info.get(id);
     let definitionKey="";
-    if(q&&(q.outcome==="merged"||q.outcome==="added-port-group")&&q.resolvedKey&&entities.has(q.resolvedKey))definitionKey=q.resolvedKey;
+    if(q&&q.resolvedKey&&entities.has(q.resolvedKey))definitionKey=q.resolvedKey;
+    if(!definitionKey){
+      warnings.push("Endpoint occurrence "+trim2(raw.ea_guid)+" has no reusable Port definition; local endpoint record suppressed.");
+      return null;
+    }
     const localId=stableLocalId("ep",raw,raw.Object_ID),path=parentPath.concat([localId]);
     const st=trim2(raw.Stereotype);
     const rec={
@@ -2782,6 +2786,10 @@ function buildLocalOccurrenceModel(ctx,entityCtx){
   const connectionsByPair=new Map();
   function makeConnection(c,a,b,origin){
     if(!a||!b)return null;
+    if(a.kind!=="endpoint"||b.kind!=="endpoint"){
+      warnings.push("Connection "+trim2(c.ea_guid)+" does not resolve to two contextual endpoint occurrences; no Local Model connection written.");
+      return null;
+    }
     if(!a.ownerKey||a.ownerKey!==b.ownerKey){
       warnings.push("Connection "+trim2(c.ea_guid)+" spans unresolved/common contexts: "+(a&&a.refKey)+" <> "+(b&&b.refKey));
       return null;
@@ -2833,6 +2841,10 @@ function buildLocalOccurrenceModel(ctx,entityCtx){
     for(const item of conveyedItems){
       const rr=resolveEndpoint(item.Object_ID,ctx.elementCtx,ctx.portResolution);
       const defKey=rr&&entities.has(rr.key)?rr.key:"";
+      if(!defKey){
+        warnings.push("InformationFlow "+trim2(c.ea_guid)+" conveyed item "+trim2(item.ea_guid)+" has no reusable Item Flow definition; no invalid Local Model flow record written.");
+        continue;
+      }
       const localId=stableLocalId("flow",c,item.Object_ID);
       if(conn.flows.some(x=>x.localId===localId&&x.definitionKey===defKey))continue;
       conn.flows.push({
@@ -2981,10 +2993,10 @@ function localModelSourceMapCsv(localModel,entityCtx){
   const rows=[["source_model_id","source_key","owner_uid","local_id","local_kind","ea_guid","ea_source_kind","ea_owner_guid"]];
   const entities=entityCtx.entities;
   function ownerUid(k){const e=entities.get(k);return e?e.uid:"";}
-  function add(ownerKey,localId,kind,guid,sourceKind,ownerGuid){
+  function add(ownerKey,localId,kind,guid,sourceKind,ownerGuid,sourceKey){
     if(!localId)return;
-    const g=trim2(guid);
-    rows.push([SOURCE_MODEL_ID,g?SOURCE_MODEL_ID+"|"+g:"",ownerUid(ownerKey),localId,kind,g,sourceKind||"",ownerGuid||""]);
+    const g=trim2(guid),ou=ownerUid(ownerKey);
+    rows.push([SOURCE_MODEL_ID,sourceKey||(g?SOURCE_MODEL_ID+"|"+g:""),ou,localId,kind,g,sourceKind||"",ownerGuid||""]);
   }
   for(const [owner,list] of localModel.partsByOwner.entries())for(const r of list)add(owner,r.localId,"part",r.sourceGuid,"t_object","");
   for(const [owner,list] of localModel.endpointsByOwner.entries())for(const r of list)add(owner,r.localId,"endpoint",r.sourceGuid,"t_object","");
@@ -2992,7 +3004,11 @@ function localModelSourceMapCsv(localModel,entityCtx){
     for(const r of list){
       if(r.sourceGuids.length)for(const g of r.sourceGuids)add(owner,r.localId,"connection",g,"t_connector","");
       else add(owner,r.localId,"connection","","derived","");
-      for(const fl of r.flows)add(owner,fl.localId,"flow",fl.sourceGuid||fl.sourceItemGuid,"t_connector",fl.sourceItemGuid||"");
+      for(const fl of r.flows){
+        const g=trim2(fl.sourceGuid),dg=trim2(fl.sourceItemGuid);
+        const key=[SOURCE_MODEL_ID,g,"flow",ownerUid(owner),dg].join("|");
+        add(owner,fl.localId,"flow",g||dg,"t_connector",dg,key);
+      }
     }
   }
   return rows.map(r=>r.map(csvQuote).join(",")).join("\n")+"\n";
