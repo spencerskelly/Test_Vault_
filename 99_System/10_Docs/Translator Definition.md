@@ -125,11 +125,10 @@ Stage 1 must preserve the distinction between a reusable definition and a contex
 - **Requirements:** existing `appliesTo` semantics may target an addressable local occurrence when that occurrence is genuinely the requirement scope. No new relationship is introduced solely because the target is contained.
 - **Storage direction:** first-class note semantics remain in frontmatter. Exact occurrence/connection/flow allocation is represented as structured, addressable, human-readable Markdown body records owned by the containing note. These records form a governed **Local Model** region distinct from ordinary narrative text (W-298). Canonical v0.8 writing uses `<!-- MDSE:LOCAL-MODEL START schema=0.2 -->` through `<!-- MDSE:LOCAL-MODEL END -->`; Workbench readers retain 0.1 compatibility. The comments are parser/editor boundaries only. Missing, duplicate, nested or mismatched boundaries are model-health errors. Canonical record fields, native block-ID/address syntax, identity-token rules and usage semantics are governed by `local-model.yaml` 0.2 and W-315/W-319; they are no longer open. Promotion of a local occurrence to a note remains an explicit modeling decision and is not inferred by the importer.
 
-Conceptual durable addresses:
-- part occurrence = owner note UID + part local ID;
-- endpoint occurrence = owner note UID + containing part-occurrence path + endpoint local ID;
-- connection = owner note UID + connection local ID;
-- flow = owner note UID + connection local ID + flow local ID.
+Conceptual durable addresses use the same Workbench/Local Model seam for every local kind:
+- local record = owner note UID + local ID.
+
+The local ID already carries the persistent globally unique 30-character token. Part/parent nesting and the carrying connection are semantic/context links, not additional identity components (W-315, WB-106).
 
 **Superseded by W-315 (Ruleset 1.23 section 16.1, Local Model 0.2):** the short tokens of W-303 (`part-a7c31f` and similar) are no longer used. Every local record takes one 30-character identity token from the same globally unique namespace as note `uid` values, wrapped in a kind prefix: `part-<token>`, `ep-<token>`, `conn-<token>`, `flow-<token>`. The kind prefix names the current representation; the token is the persistent identity and is never reused. Allocation, rerun reuse (Local Model Source Map) and collision rules are in `MDSE v0.8 Cross-Repository Reconciliation - 2026-10-02.md`, section "Settled identity rules".
 
