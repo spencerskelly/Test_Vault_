@@ -701,142 +701,142 @@ Stable MDSE methodology changes may later need deliberate promotion into `Ampure
 
 ## 12. Current Workbench implication
 
-The approved occurrence model depends on Workbench eventually understanding contained records.
+Workbench 0.1.14 is still note/frontmatter/path based. The target architecture is now fully defined enough to implement read/navigation support without waiting for another Local Model syntax decision.
 
-Workbench 0.1.14 currently indexes note/frontmatter relationships.
+Read these authorities together:
+- Workspace decisions W-298, W-302 to W-306, W-310 to W-313;
+- `99_System/03_Schemas/local-model.yaml` schema 0.1;
+- `MDSE v0.8 Design Check - 2026-10-01.md`;
+- Workbench decision WB-106.
 
-Required future capabilities:
-- parse local part records;
-- parse local endpoint records;
-- parse connection records;
-- parse connection-owned flows;
-- resolve local addresses;
-- validate duplicate/missing local IDs;
-- navigate Requirement targets to local occurrences;
-- generate selectable Interface and Flow views;
-- show a reusable definition once while showing distinct contextual occurrences in each configuration;
-- support nested interface member expansion (connector -> pins/contacts).
+Required before the first potentially keepable v0.8 import is accepted:
+- parse Local Model managed regions and schema 0.1 records;
+- index a durable ModelRef for notes and local records;
+- preserve `#^local-id` fragments in local-target links;
+- show the Local Model dropdown;
+- navigate occurrences to reusable definitions and back;
+- make Structure, Interfaces, Where Used and Requirements occurrence-aware where needed;
+- protect the governed Local Model region from ordinary body editing;
+- add local model-health findings.
 
-Do not implement this until the merged importer produces real-model body records worth freezing.
+Structured Local Model editing is deliberately later.
 
-## 13. Required next implementation sequence
+The current plugin's repeated-relationship `×N` behavior is not engineering quantity and must be removed/relabelled as duplicate-source evidence. W-310 quantity comes from Local Model multiplicity.
 
-Recommended next-chat sequence:
+## 13. Current canonical Local Model design
 
-1. Read this file.
-2. Read Workspace Decision Log W-291 through W-297.
+The canonical body contract is `local-model.yaml` 0.1.
+
+Core rules:
+- readable headings;
+- stable local IDs as native Obsidian block IDs;
+- native Obsidian block links for persisted local references;
+- `definition` points to reusable first-class Object/Port/Item Flow notes;
+- inherited interface members materialize only when independently addressed;
+- each assembly owns the connections below its boundary;
+- a parent connects to a child boundary endpoint, not to the child's internal endpoint;
+- boundary `exposes` inner;
+- EA BindingConnector/temporary local `equals` stays review evidence until meaning is confirmed;
+- flows are connection-scoped and authored once;
+- grouped multiplicity means contextually interchangeable copies only;
+- EA provenance stays in `Local Model Source Map.csv`, not engineering records.
+
+See `MDSE v0.8 Design Check - 2026-10-01.md` for the complete worked example and conformance matrix.
+
+## 14. v0.7 code audit against the target
+
+v0.7 is a merge/assessment candidate, not the v0.8 writer.
+
+Useful code already present:
+- direct QEAX read/planning;
+- schema 1.35 line;
+- local part/endpoint/connection/flow extraction;
+- deterministic source-derived local IDs;
+- conveyed InformationFlow allocation;
+- source multiplicity preservation;
+- some native block-link display behavior;
+- v0.5.2 safety lineage.
+
+Must change for v0.8:
+- add W-302 managed markers;
+- replace bold prototype records with canonical headings + fields;
+- block ID must equal local ID, not a separate `loc-...` anchor;
+- remove EA GUID/source fields from Local Model records;
+- persist local references as native block links, not raw address strings;
+- implement W-305 lazy inherited-member materialization;
+- preserve BindingConnector context as temporary local `equals` evidence rather than only note-level collapsed meaning where reconstructable;
+- enforce/report W-310 multiplicity semantics;
+- implement W-308 connector and W-309 regulatory folder normalization;
+- drive the 88 Industrial connector >260-character paths to zero before selecting the global hard limit;
+- import approved `t_document` attachments;
+- intentionally defer/reconcile diagrams and support later type-selectable additive diagram passes;
+- generate final review/evidence outputs and Local Model Source Map;
+- enforce v0.8.0 importer/base release pairing.
+
+Do not patch an assessment vault after generation to simulate these rules. Change the planner/writer and rerun.
+
+## 15. Required next implementation sequence
+
+1. Read `MDSE v0.8 Design Check - 2026-10-01.md`.
+2. Read Workspace Decision Log W-293 through W-313.
 3. Read current Translator Definition.
-4. Read relationships.yaml 1.35 and element-types.yaml 1.16.
-5. Diff v0.5.2 against experimental v0.6.1.
-6. Create the next importer from **v0.5.2**, not from v0.6.1.
-7. Preserve all v0.5.2 behaviors:
-   - schema 1.35;
-   - `hasState/stateOf`;
-   - `ownerField()` state placement;
-   - clean-base README validation;
-   - translator-workspace rejection;
-   - stale-state invalidation;
-   - filesystem path diagnostics;
-   - fresh-model-root refusal;
-   - W-289 human naming;
-   - W-275 inverse/mirror validation;
-   - W-288 provisional-link Review behavior.
-8. Merge occurrence features from v0.6.1:
-   - local parts;
-   - local endpoints;
-   - local connections;
-   - conveyed local flows;
-   - local Requirement applicability;
-   - multiplicity preservation;
-   - interface-Class Port subtype fix;
-   - body-record diagnostics;
-   - stale macOS output-handle recovery.
-9. Run JavaScript syntax/static consistency checks.
-10. Refresh a **canonical base vault** to the same importer/schema pair.
-11. Do not use the minimal v0.6 ZIP.
-12. Run real QEAX preflight and plan.
-13. Start with the selected representative package slice if useful, but identity/naming must still be computed from the whole model.
-14. Inspect actual generated body records before freezing syntax.
-15. Only then run a whole-model write into a new disposable base-vault copy.
-16. Accept no run without complete Run Manifest/Ledger reconciliation.
+4. Read `relationships.yaml` 1.35, `element-types.yaml` 1.16 and `local-model.yaml` 0.1.
+5. Treat v0.5.2 as accepted fallback/safety baseline and v0.7 as code evidence/merge candidate.
+6. Build `EA_to_MDSE_Native_Importer_v0.8.0.html`; do not issue another unsynchronized interim importer/base pair.
+7. Implement the canonical Local Model writer and source map first.
+8. Implement assembly-owned connections and contextual BindingConnector temporary-`equals` preservation.
+9. Implement W-308/W-309 naming normalization in planning, then remeasure path statistics and confirm zero Industrial connector paths >260.
+10. Implement attachments and final evidence/reconciliation.
+11. Implement initial diagram deferral plus additive type-selectable diagram pass.
+12. Produce a clean base vault with `mdse_release: "0.8.0"` and include `local-model.yaml`.
+13. Run syntax/static checks and real QEAX preflight/plan.
+14. Before a whole-model write, validate representative real source cases from section 16.
+15. In parallel or immediately after the canonical output is stable, update Workbench to the WB-106 read/navigation gate.
+16. Do not accept/keep the whole-model run until importer and Workbench gates both pass.
 
-## 14. Acceptance criteria for the next real occurrence test
+## 16. Acceptance cases
 
-A representative real-model sample must demonstrate:
+The real source acceptance sample must demonstrate:
 
-- one reusable assembly used in two different product/system contexts;
-- different integration partners on the same inherited endpoint;
-- two occurrences of one reusable assembly in a single system, if the source contains a suitable case;
-- inherited connector/interface member structure;
-- a connection owned by the correct configuration context;
-- multiple flows on one connection where present;
-- correct transmit/receive/exchange/unspecified roles;
-- Requirement applicability to a local occurrence when present in source evidence;
-- source multiplicity retained;
-- stable local IDs independent of visible J/P identifiers;
-- zero silent loss of conveyed InformationFlow items;
-- state ownership still follows W-292;
-- no invalid Port subtype values;
-- Workbench not required to understand the raw Markdown for the test to be human-readable.
+1. reusable assembly used in two product/system contexts;
+2. two uses of one reusable assembly in one system where available;
+3. assembly with at least two internal parts;
+4. internal part-to-part endpoint connection;
+5. multiple flows on one connection;
+6. outward boundary endpoint linked to an internal endpoint by temporary `equals`, then reviewable to `exposes`;
+7. parent assembly connected to the child's boundary endpoint;
+8. nested pin/contact/sub-interface materialized only because it is independently addressed;
+9. Requirement `appliesTo` a local part/endpoint via native block link;
+10. grouped interchangeable multiplicity and independently addressable repeated parts;
+11. connector and regulatory folder normalization;
+12. meaningful Alias replacing a machine/noise URL name;
+13. at least one approved linked-document attachment;
+14. all EA diagrams reconciled as intentionally deferred in the initial run;
+15. stable local IDs across a rerun with unchanged source identity;
+16. zero silent loss of conveyed InformationFlow items;
+17. state ownership still follows W-292;
+18. no invalid Port subtype values;
+19. no unexplained terminal-state remainder.
 
-## 15. Still-open modeling/implementation questions
+## 17. Remaining decisions
 
 Do not silently decide these:
+- exact opaque local-ID token length/collision-extension rule;
+- final hard repository-relative path limit after corrected v0.8 planning;
+- promotion rule if a previously local-only record later needs to become a reusable first-class definition;
+- fallback preservation for a BindingConnector whose assembly context cannot be reconstructed;
+- disposition of the four legacy/header-only import CSVs if final evidence makes them redundant.
 
-- exact local-ID token format;
-- literal block-anchor/local-address syntax;
-- canonical body-record fields/order;
-- manual-authoring rules for contained records;
-- promotion criterion from local record to standalone note;
-- quantity representation when several identical physical occurrences have no individual semantic distinction;
-- local override semantics for inherited interface members;
-- exact Workbench indexing/storage contract;
-- whether note-level `interfaces`, `hasFlow`, `transmits`, `receives`, `exchanges` remain persisted summaries after local records become authoritative;
-- final hard repository-relative path limit;
-- remaining full-import renderer work: diagrams/canvases, attachments, final review tables, full source evidence rendering, hard planned-vs-terminal reconciliation, housekeeping.
+These are narrower than the older open list; managed-region syntax, local record kinds, native block references, multiplicity, assembly connection ownership and exposure semantics are now settled.
 
-## 16. Do not reopen without new evidence
+## 18. Copy-ready continuation prompt
 
-Keep these settled unless a real example creates a conflict:
+Use `Handoff Prompt - MDSE v0.8 Implementation.md`. It is the current concise prompt for a new chat and supersedes the older prompt that ended at W-297.
 
-- Object is the primary reusable engineering entity type.
-- `subtypeOf` is only true reusable invariant specialization.
-- no `instanceOf` relationship.
-- Requirement `appliesTo` is scope/applicability.
-- only Function/Design `satisfies` Requirement.
-- Verification `verifies` Requirement.
-- State/State Machine does not directly satisfy Requirement.
-- Function = modeled-product-controlled behavior.
-- Use Case = externally controlled scenario/behavior.
-- Use Case nesting is not automatically semantic.
-- `extend` -> `optionOf`.
-- Use Case -> Function Usage is `realizedBy` when implementing, `dependsOn` when only prerequisite.
-- EA Requirement nesting/ownership is context evidence, not automatic semantics.
-- Generalization -> `subtypeOf`.
-- Object structural Aggregation -> `partOf/hasPart`.
-- author forward/owner-side relationship; inverse is derivative/synchronized.
-- W-292 `hasState/stateOf` ownership semantics.
-- one reusable Actor per role unless the role is meaningfully different.
-- no silent assumptions when source meaning is absent.
+## 19. Bottom line
 
-## 17. Copy-ready prompt for the next chat
+The target MDSE is now:
 
-> Continue the MDSE native EA -> Obsidian importer work from `spencerskelly/Test_Vault_` main. First read `99_System/10_Docs/EA Native Importer Comprehensive Handoff - 2026-10-01.md`, then `Handoff - Continue Here.md`, Workspace Decision Log W-291 through W-297, Translator Definition, relationships.yaml 1.35 and element-types.yaml 1.16.
->
-> Treat `Test_Vault_` main as the translator authority. The accepted implementation baseline is v0.5.2 / relationship schema 1.35. The occurrence/interface/flow work in `spencerskelly/20260930` branch `handoff/full-import-2026-10-01` (v0.6/v0.6.1) is experimental code to merge forward, not the baseline.
->
-> The next importer must start from v0.5.2 and merge the W-293/W-294 local part/endpoint/connection/flow model from v0.6.1 without regressing W-291/W-292 `hasState/stateOf`, base-vault identity checks, stale-state invalidation or other v0.5.2 safeguards.
->
-> Do not use `20260930`, `261001`, or the minimal v0.6 ZIP as an accepted output/baseline. Both large repos are partial/reference artifacts with no complete Run Manifest/Ledger reconciliation, and 261001 sampled notes do not contain the new Local Model records.
->
-> Preserve the established working style: identify the exact semantic need, compare reasonable options, recommend the simplest scalable structure, ask one focused question at a time when a decision is actually needed, and update the Decision Log + Translator Definition + handoff in the same change when an approved Stage-1 rule changes.
+> reusable first-class definitions + contextual Local Model occurrences + assembly-owned connections + connection-owned flows + explicit boundary exposure + native Obsidian navigation.
 
-## 18. Bottom line
-
-The occurrence architecture is promising and the key reuse case works in isolated code.
-
-The real next milestone is **not another ad-hoc run**. It is one clean merged importer:
-- v0.5.2 / schema 1.35 safety and state semantics;
-- v0.6.1 occurrence/interface/flow preservation;
-- one canonical clean base vault paired to that importer;
-- then a real QEAX run with complete reconciliation evidence.
+The model design should not be weakened to match v0.7 or Workbench 0.1.14. Those implementations now need to catch up to the model.
