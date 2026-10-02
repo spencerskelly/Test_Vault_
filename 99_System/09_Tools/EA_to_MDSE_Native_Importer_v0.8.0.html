@@ -1641,8 +1641,12 @@ function classifyConnector(c,elementCtx,portResolution,placementCtx,conveyed){
     base.field=ownerField(t.type,s.type);base.rule="W-151/W-152";base.review=true;return base;
   }
   if(type==="Connector"){
-    base.field=st==="BindingConnector"?"equals":"interfaces";base.rule=st==="BindingConnector"?"W-153":"W-153/W-155";
-    base.review=s.type!=="Port"||t.type!=="Port";return base;
+    if(st==="BindingConnector"){
+      base.outcome="local binding evidence";base.field="";base.rule="W-311/W-319";base.review=true;
+      base.detail="BindingConnector is preserved in the owning Local Model as temporary equals when contextual endpoints resolve; otherwise review evidence only.";
+      return base;
+    }
+    base.field="interfaces";base.rule="W-153/W-155";base.review=s.type!=="Port"||t.type!=="Port";return base;
   }
   if(type==="Aggregation"){
     const whole=t,part=s, aggregation=n2(c.DestIsAggregate);
@@ -2675,6 +2679,7 @@ function buildLocalOccurrenceModel(ctx,entityCtx){
       identifier:trim2(raw.Name)||"part",definitionKey:(p.targetKey&&entities.has(p.targetKey))?p.targetKey:"",
       multiplicity:trim2(raw.Multiplicity),ownerKey,parentPath:parentPath.slice()
     };
+    if(parentPath.length)warnings.push("Nested Part occurrence "+trim2(raw.ea_guid)+" is addressable but Local Model 0.2 has no parent field on part records; review placement before acceptance.");
     partBySource.set(id,rec);push(partsByOwner,ownerKey,rec);return rec;
   }
 
@@ -3378,13 +3383,34 @@ async function generateSlice(){
     el("sliceStatus").textContent="Reading retained source values";
     const tagMap=await collectSliceTags(sourceIds),foldedNotes=foldedEaNotes(lastPlannerContext,entityCtx);
 
-    const folderMap=buildFolderPathMap(entities),pathReviews=[],allPaths=new Map();
-    const pathSet=new Set();
+    const folderMap=buildFolderPathMap(entities),pathReviews=[],allPaths=new Map(),plannedByPath=new Map();
     for(const e of Array.from(entities.values()).sort(compareEntity)){
       const pp=pathPlanForEntity(e,folderMap);
+      const key=pp.path.toLowerCase();
+      if(!plannedByPath.has(key))plannedByPath.set(key,[]);
+      plannedByPath.get(key).push({e,pp});
+    }
+    for(const list of plannedByPath.values()){
+      list.sort((a,b)=>compareEntity(a.e,b.e));
+      list.forEach((item,i)=>{
+        const e=item.e,pp=item.pp;
+        if(i){
+          const slash=pp.path.lastIndexOf("/"),dir=slash>=0?pp.path.slice(0,slash+1):"",name=pp.path.slice(slash+1).replace(/\.md$/i,"");
+          const suffix="~"+(i+1),room=MAX_GENERATED_PATH-dir.length-3-suffix.length;
+          const stem=name.slice(0,Math.max(1,room)).replace(/[ .]+$/g,"");
+          pp.path=dir+stem+suffix+".md";pp.file=stem+suffix+".md";pp.changed=true;
+          if(sliceKeys.has(e.key))entityCtx.nameReviews.push({
+            eaGuid:e.eaGuid,eaType:trim2(e.raw.Object_Type),eaName:trim2(e.raw.Name),
+            folder:e.vaultPath||"",fileName:stem+suffix,alteration:"",duplicate:suffix
+          });
+        }
+      });
+    }
+    const pathSet=new Set();
+    for(const item of Array.from(plannedByPath.values()).flat()){
+      const e=item.e,pp=item.pp,low=pp.path.toLowerCase();
       if(pp.path.length>MAX_GENERATED_PATH)throw new Error("Generated path exceeds "+MAX_GENERATED_PATH+": "+pp.path);
-      const low=pp.path.toLowerCase();
-      if(pathSet.has(low))throw new Error("Case-insensitive whole-model output path collision: "+pp.path);
+      if(pathSet.has(low))throw new Error("Case-insensitive whole-model output path collision after duplicate handling: "+pp.path);
       pathSet.add(low);allPaths.set(e.key,pp);e.outputPath=pp.path;e.linkTarget=pp.path.replace(/\.md$/i,"");
       if((pp.changed||pp.shortened)&&sliceKeys.has(e.key))pathReviews.push({
         eaGuid:e.eaGuid,eaType:trim2(e.raw.Object_Type),eaName:trim2(e.raw.Name),
