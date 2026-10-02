@@ -12,6 +12,6 @@ ai_authors:
   - {code: chatgptai----, tool: ChatGPT (OpenAI)}
   - {code: rovoai-------, tool: Rovo (Atlassian)}
   - {code: geminiai-----, tool: Gemini (Google)}
-# EA authors with no matching person: 722 elements with a blank Author, and one element whose Author is "7.1.0-2".
-# These use the code below (W-12).
+# Generic/historical unmapped-EA-author fallback (W-12).
+# W-316 explicitly overrides this for the EA8647 v0.8 import: missing/unusable author uses skellyspencer for that import only.
 unmapped: {code: sparxeaauthor, ea_names: ['', '7.1.0-2']}
