@@ -9,22 +9,29 @@ fi
 NAME="$1"
 AUTHOR="$2"
 
-case "$AUTHOR" in
-  ??????*) ;;
-  *) echo "Author code must be exactly 13 lowercase ASCII/dash characters."; exit 1 ;;
-esac
-if [ "${#AUTHOR}" -ne 13 ]; then
-  echo "Author code must be exactly 13 characters."
+if [ "${#AUTHOR}" -ne 13 ] || ! printf "%s" "$AUTHOR" | grep -Eq '^[a-z-]{13}$'; then
+  echo "Author code must be exactly 13 lowercase ASCII letters/dashes."
   exit 1
 fi
 
-if ! printf "%s" "$AUTHOR" | grep -Eq '^[a-z-]{13}$'; then
-  echo "Author code must contain only lowercase a-z and '-'."
+if [ ! -f ".vault.yaml" ]; then
+  echo ".vault.yaml is missing. Start from a generated MDSE base vault."
   exit 1
 fi
-
-if [ -f ".vault.yaml" ] && ! grep -q "UNINITIALIZED" ".vault.yaml"; then
+if ! grep -q "UNINITIALIZED" ".vault.yaml"; then
   echo ".vault.yaml already appears initialized. Refusing to overwrite."
+  exit 1
+fi
+
+RELEASE=$(python3 - <<'PY'
+import re
+text=open(".vault.yaml", encoding="utf-8").read()
+m=re.search(r'(?m)^mdse_release:\s*["\']?([^"\'#\r\n]+)', text)
+print(m.group(1).strip() if m else "")
+PY
+)
+if [ -z "$RELEASE" ]; then
+  echo ".vault.yaml has no mdse_release. Refusing to initialize an unpaired base."
   exit 1
 fi
 
@@ -39,6 +46,8 @@ cat > .vault.yaml <<EOF
 vault_uid: ${TS}${AUTHOR}
 name: ${NAME}
 default_branch: main
+mdse_release: "${RELEASE}"
 EOF
 
 echo "Initialized vault UID: ${TS}${AUTHOR}"
+echo "Preserved MDSE release: ${RELEASE}"
