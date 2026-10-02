@@ -35,9 +35,9 @@ Active community plugins. Versions are pinned in `.obsidian/plugin-lock.yaml`; t
 
 Core Obsidian Canvas, Properties, Bases, Graph, backlinks, templates, and file recovery are enabled. Bases is the primary tool for tables and folder views.
 
-## Archived
+## Historical plugins
 
-Ampure Cross-Vault Resolver and Multi-Vault Navigator were removed on 2026-09-28 when the vault became a single vault. What they did, why they existed, and how to restore them: see `Archived Plugins/Archived Plugins.md`.
+Ampure Cross-Vault Resolver and Multi-Vault Navigator were removed when the model returned to a single-vault design. Historical source/details remain only in the methodology workspace archive and are intentionally not copied into the lean engineering base.
 
 ## Packaging rule
 
