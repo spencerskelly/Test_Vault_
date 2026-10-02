@@ -1,146 +1,128 @@
 # Handoff Prompt — MDSE v0.8 Implementation
 
-Copy the prompt below into a new chat.
+Use this prompt to continue implementation in a new chat.
 
----
+## Authority
 
-Continue the MDSE native EA → Obsidian work from **`spencerskelly/Test_Vault_` main**. Do not reopen settled methodology without conflicting real evidence.
+Work from `spencerskelly/Test_Vault_` main as the semantic/importer authority and `spencerskelly/MDSE_Workbench` main as the plugin implementation.
 
-Read first:
-1. `99_System/10_Docs/MDSE v0.8 Design Check - 2026-10-01.md`
-2. `99_System/10_Docs/EA Native Importer Comprehensive Handoff - 2026-10-01.md`
-3. Workspace Decision Log W-293 through W-313
+Read in this order:
+1. `99_System/10_Docs/MDSE v0.8 Cross-Repository Reconciliation - 2026-10-02.md`
+2. `99_System/10_Docs/MDSE Modeling Ruleset 1.23.md`
+3. Workspace Decision Log through W-319
 4. `Translator Definition.md`
-5. `MDSE Modeling Ruleset 1.22.md`
-6. `relationships.yaml` 1.35
-7. `element-types.yaml` 1.16
-8. `local-model.yaml` 0.1
-9. Workbench WB-105/WB-106 and Architecture and Model Boundary
-10. `spencerskelly/MDSE_Workbench` main
+5. `relationships.yaml` 1.35
+6. `element-types.yaml` 1.17
+7. `local-model.yaml` 0.2
+8. `AI_INSTRUCTIONS.md`
+9. MDSE Workbench product/architecture/roadmap notes and the standalone plugin code.
 
-## Goal
+Do not use `20260930`, `261001`, or the old base-vault repository as continuation authorities. They are reference/assessment artifacts only.
 
-Build the first potentially keepable synchronized release pair:
-- `EA_to_MDSE_Native_Importer_v0.8.0.html`
-- clean base vault with `mdse_release: "0.8.0"`
+## Current target
 
-Initial v0.8 imports the complete Stage-1 semantic model plus approved attachments. It creates no diagrams; all diagrams reconcile as intentionally deferred. A later idempotent pass imports selected EA diagram types.
+Matched MDSE/base/importer release:
+- `mdse_release: 0.8.0`
+- relationships 1.35
+- element-types 1.17
+- local-model 0.2
+- importer: `EA_to_MDSE_Native_Importer_v0.8.0.html`
 
-## Do not change these model rules
+Workbench is independently versioned. Current 0.1.14 predates Local Model support.
 
-- reusable engineering definitions are first-class notes;
-- contextual uses are Local Model records owned by the containing note;
-- part occurrence → Object `definition`;
-- endpoint occurrence → Port/interface `definition`;
-- flow occurrence → Item Flow `definition`;
-- every assembly owns connections formed below its boundary;
-- parent assemblies connect to child boundary endpoints, not through to child internals;
-- boundary endpoint `exposes` inner endpoint when confirmed;
-- EA BindingConnector remains temporary `equals` review evidence until engineering meaning is confirmed;
-- flows are authored once under the connection that carries them;
-- Requirement `appliesTo` may target a local occurrence;
-- only Function/Design `satisfies` Requirement;
-- Verification `verifies` Requirement;
-- repeated YAML relationship targets are not quantity;
-- `multiplicity: N` is only for contextually interchangeable copies.
+## Settled model
 
-## Canonical Local Model
+Reusable definitions are first-class notes. Contextual uses are Local Model occurrences.
 
-Use `local-model.yaml` schema 0.1 and W-302 markers.
+- part -> Object definition
+- endpoint -> Port definition
+- flow -> Item Flow definition
+- contextual connections belong to the assembly/context that forms them
+- flows belong to one local connection
+- persisted local references are native Obsidian block links
+- Local Model records use kind-prefixed native block IDs
+- `definition` is occurrence-to-definition semantics; it is not `subtypeOf`
+- `subtypeOf/supertypeOf` remains reusable-definition specialization
+- Requirements may `appliesTo` addressable local records
+- repeated note-level relationship targets never mean quantity
 
-Stable IDs:
-- `part-*`
-- `ep-*`
-- `conn-*`
-- `flow-*`
+## Identity
 
-The local ID is also the native Obsidian block ID. Human headings stay readable.
+Every independently referenceable entity uses one globally unique 30-character identity token namespace.
 
-Persist local references as native block links:
-- `part: [[#^part-id|Part]]`
-- `parent: [[#^ep-id|Interface]]`
-- `endpointA/B: [[#^ep-id|Interface]]`
-- `exposes: [[#^ep-id|Inner Interface]]`
-- temporary local `equals` uses the same form.
+Notes store the token in `uid`. Local Model records store it in:
+- `part-<token>`
+- `ep-<token>`
+- `conn-<token>`
+- `flow-<token>`
 
-`definition` stays a normal note link.
+For EA8647 first import:
+- source key = `EA8647 + EA GUID`;
+- EA creation time exactly as written; no timezone conversion;
+- missing milliseconds -> `000`;
+- missing/unusable author -> `skellyspencer`;
+- missing creation time starts at `20260911000000001`;
+- +1 ms collision handling;
+- same-seed ordering by EA GUID lexical order;
+- derived locals use causing-source seed and deterministic local ordering;
+- Source Map is authoritative after allocation;
+- Source Map identity conflicts are hard errors and never auto-repaired.
 
-EA provenance does not go in Local Model engineering records. Write it to `99_System/11_Import/Local Model Source Map.csv`.
+## Local Model 0.2 / W-314
 
-Inherited pins/contacts/sub-interfaces stay implicit until independently addressed.
+Part and endpoint occurrences may carry `usage: standard | variant | option`; omission means standard.
 
-## Importer
+`abstract: true` is a sparse optional reusable-definition property. Absence is false; abstractness is not inherited.
 
-Accepted fallback/safety baseline: v0.5.2 / relationship schema 1.35.
-Current assessment candidate: v0.7.
+Candidates for variant/present option are the concrete transitive `subtypeOf` family rooted at the occurrence definition. Do not persist candidate lists.
 
-Build v0.8 from the safe baseline/candidate work, but do not preserve v0.7's obsolete Local Model rendering.
+Do not put usage on connections or flows.
 
-Required corrections:
-- W-302 managed markers;
-- canonical headings/fields;
-- block ID = local ID, no separate `loc-...` anchor;
-- no EA GUID lines in Local Model;
-- native block links instead of bare local addresses;
-- lazy inherited-member materialization;
-- contextual temporary BindingConnector `equals`;
-- W-310 multiplicity semantics;
-- W-308 connector folder normalization;
-- W-309 regulatory folder normalization;
-- zero Industrial connector model-note paths >260 characters after normalization before choosing the global hard limit;
-- meaningful Alias for URL/machine-noise names;
-- complete approved `t_document` attachment handling;
-- initial diagram deferral and later selectable diagram pass;
-- final review/evidence outputs and terminal reconciliation;
-- importer/base v0.8.0 compatibility check.
+## Naming/path
 
-Do not fix path problems with blind truncation or opaque filename hashes.
+- duplicate: `~2`, `~3`, ...
+- forced alteration: `~a`, `~b`, ... using lowercase Excel-column sequencing
+- both: `~a~2`
+- same convention for files and folders
+- numeric markers -> duplicate review
+- alphabetic markers -> altered-name review
+- old ID-based duplicate filename rule is superseded
+- maximum repository-relative path = 212 characters
+- shorten redundant folders before filenames
+- a folder containing an identically named authoritative note may reduce to the shortest unambiguous identifier/designator
+- remaining >212 after normalization is blocking
 
-## Workbench keepability gate
+## Reruns
 
-Workbench 0.1.14 is still note/path based. Before keeping the v0.8 full import it must:
-- parse Local Model schema 0.1;
-- index note and local-record identity through ModelRef;
-- preserve `#^local-id` fragments in semantic links;
-- show/navigate the Local Model dropdown;
-- make Structure, Interfaces, Where Used and Requirements occurrence-aware;
-- protect the governed Local Model region from ordinary body editing;
-- report malformed markers, duplicate IDs, broken local links, invalid definitions/endpoints, orphan flows and unresolved local applicability;
-- stop showing repeated relationship entries as engineering quantity.
+EA-owned translated fields/relationships may refresh. MDSE identity, existing file path/name, MDSE-only relationships and human-added content are preserved.
 
-Structured Local Model editing may follow later.
+Removed EA-owned relationships are removed and logged. Disappeared EA entities are preserved and flagged, not deleted. Human edits overwritten in EA-owned fields are logged.
 
-## Real-source acceptance examples
+## Attachments / diagrams
 
-Prove with actual EA data:
-- reusable assembly used in multiple contexts;
-- two internal parts with an internal endpoint connection;
-- multiple flows on one connection;
-- boundary endpoint with temporary `equals` to an internal endpoint and review path to `exposes`;
-- parent connection to child boundary endpoint;
-- nested interface member materialized only when addressed;
-- Requirement targeting a local record;
-- grouped multiplicity and individually addressable repeated parts;
-- connector/regulatory path normalization;
-- approved attachment;
-- diagrams reconciled but omitted;
-- stable local IDs on rerun;
-- no conveyed-flow loss;
-- W-292 state ownership unchanged;
-- no invalid Port subtypes;
-- zero unexplained source remainder.
+Failed approved attachment import is non-blocking but explicitly logged.
 
-## Still open
+Initial diagram generation is deferred, but every source diagram must reconcile. Unreconciled diagrams are blocking.
 
-Do not silently decide:
-- exact opaque local-ID suffix/collision rule;
-- final global path limit after corrected planning;
-- promotion rule from local occurrence to reusable first-class definition;
-- fallback when BindingConnector assembly context cannot be reconstructed;
-- disposition of redundant legacy/header-only import CSVs.
+## Retired import outputs
 
-If one becomes blocking, explain the exact engineering need, options/tradeoffs, recommend the simplest scalable choice, and ask one focused question.
+Do not recreate empty legacy:
+- Identity Registry.csv
+- Model Checks.csv
+- Pending Relationships.csv
+- Transformation Log.csv
 
-Next workspace decision number: **W-314**.
+unless a future unique use is explicitly approved.
 
-The goal is not just a successful import. It is a durable MDSE that remains understandable in native Obsidian, preserves reuse and contextual identity, and lets Workbench safely navigate and analyze the model.
+## Implementation order
+
+1. Build canonical v0.8 importer writer/source map against schemas 1.35/1.17/0.2.
+2. Implement 212-character path/naming planner and remeasure real QEAX.
+3. Complete attachment, diagram-reconciliation and final evidence outputs.
+4. Produce a new clean v0.8 base; do not mutate the old base repo into the release.
+5. Validate representative real EA cases.
+6. Implement Workbench WB-106: ModelRef, Local Model 0.1/0.2 parser, block-fragment preservation, region protection, findings, and occurrence-aware core views.
+7. Then add W-314 read-only variation, candidate resolution and temporary session configuration.
+8. Do not define persisted named configurations/model numbers/compatibility matrices until the later configuration phase.
+
+The first whole-model run is eligible to keep only after both the importer/base gates and WB-106 read/navigation gate pass.
