@@ -18,6 +18,8 @@ V1 centers on three activities:
 
 The normal engineer should be able to use the vault without understanding schema files, plugin internals, Git mechanics, or formal SysML tooling.
 
+**Local Model interface (WB-105 / W-298):** addressable part occurrences, endpoints, connections, flows and local applicability stay inside their owning note but appear in Workbench as a separate **Local Model** dropdown/surface. They are not ordinary note text and are not flattened into frontmatter relationships. Workbench may index and display them read-only before the body contract is final; ordinary text editing must not modify that governed region.
+
 ## Start here
 
 1. [[01 - Workbench Product Definition]] — what Workbench is, plus the dashboard, Canvas/view and Review experience (Parts A to C)

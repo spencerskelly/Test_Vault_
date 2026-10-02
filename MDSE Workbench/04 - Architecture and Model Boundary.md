@@ -88,6 +88,21 @@ Never rely on file path alone as permanent identity.
 
 Ambiguous links must be treated as errors rather than guessed.
 
+## Addressable Local Model
+
+W-293/W-294 and W-298 add model content below the file-backed note level without changing the rule that the vault files are authoritative.
+
+Workbench therefore indexes two addressable kinds:
+
+- **note element** — durable identity is the note `uid`; file path is current location metadata, not permanent identity;
+- **local model record** — durable identity is the owning note UID plus its governed local address (part occurrence, endpoint occurrence, connection or connection-scoped flow).
+
+The core index/traversal APIs should operate on an addressable model reference rather than assuming every node is a `TFile` path. This is also the correct seam for later cross-vault resolution.
+
+Local Model records remain structured, human-readable Markdown in the owning note body. They are a governed region separate from ordinary narrative text. The Workbench popup presents them in a separate **Local Model** section. Read-only parsing/indexing comes first; structured edits are enabled only after the canonical local-body contract is frozen. The general text editor must never rewrite the governed region.
+
+Definition links from a local record point to reusable file-backed MDSE elements. Context-specific wiring/flow remains on the local records rather than being flattened into duplicate note-level relationships.
+
 ## Writing relationships
 
 Workbench should use the relationship vocabulary and storage rules defined by the current schema.

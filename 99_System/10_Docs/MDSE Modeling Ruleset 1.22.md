@@ -268,6 +268,8 @@ Authoritative local endpoint and local flow records live as **structured, addres
 
 Frontmatter remains focused on note-level MDSE semantics and note-level relationships. Local occurrence detail remains human-readable without plugins and may be parsed/validated/edited by MDSE tooling.
 
+The Local Model is a **governed body region**, distinct from ordinary narrative text (W-298). MDSE interfaces must present Local Model records separately from normal note text, Properties and note-level Relationships. General text editing must not replace or rewrite the governed Local Model region. Tooling may index and display the Local Model read-only before the final body contract is frozen; structured Local Model editing is enabled only after its canonical record/marker contract is validated.
+
 A local occurrence uses the field **`definition`** to reference its reusable semantic definition. This is intentionally distinct from `subtypeOf`: the local occurrence is an installed/contextual occurrence of that reusable definition, not a reusable specialization of it.
 
 Examples:
@@ -338,3 +340,16 @@ A connection or local flow may address a nested member of an endpoint occurrence
 Local body records must therefore be indexed by MDSE tooling for navigation, validation, relationship exploration, and generated Canvas views; frontmatter-only indexing is insufficient for this model.
 
 
+
+
+### 15.8 Synchronized importer/base releases
+
+From W-299 onward, each newly issued native importer intended for use is paired with one clean base-vault release using the **same semantic release version**.
+
+- the importer declares its release version;
+- the clean base vault declares the same value in `.vault.yaml` as `mdse_release`;
+- the importer checks the two values before planning or writing and refuses a mismatch;
+- the Run Manifest records importer release, base release, relationship-schema version and element-schema version separately;
+- relationship and element schemas keep their own independent version numbers.
+
+Existing historical artifacts are not retroactively renamed. The first newly issued synchronized pair after the v0.7 merge candidate is v0.8.0.

@@ -103,6 +103,8 @@ Exact APIs can change; the separation is what matters.
 
 Each milestone has an exit criterion. A milestone is not done until its exit criterion is shown on the real translated vault, not only on a small sample.
 
+**W-298/WB-105 occurrence-aware prerequisite before R1.** The current 0.1.14 model index is frontmatter/note-only and its text editor treats the whole body as editable. Before pilot against the next real import, Workbench must: parse/index the governed Local Model read-only; use durable note/local references rather than file path as semantic identity; protect the Local Model from ordinary body editing; expose the Local Model dropdown; and make the high-value Structure, Interfaces, Where Used and Requirements views able to navigate local records. Structured Local Model editing is deliberately later than read-only indexing and waits for the canonical body contract.
+
 ### M0 — Spike and feasibility (Phase 0)
 
 Purpose: replace the riskiest assumptions with measurements before building more.
@@ -133,8 +135,8 @@ Finding categories/counts; Review screen; filters; focused modal; `tracesTo` res
 **Exit:** unresolved/model-health items can be worked without manual queries.
 
 ### M5 — More views
-Behavior and Requirements (and approved others, WB-072); multi-start behavior; Expand/Collapse.
-**Exit:** several common engineering questions work through the same traversal engine.
+Behavior and Requirements (and approved others, WB-072); multi-start behavior; Expand/Collapse. After W-298/WB-105, the same traversal engine must also accept addressable Local Model records so Structure, Interfaces, Where Used and Requirements can show contextual occurrences without inventing duplicate notes.
+**Exit:** several common engineering questions work through the same traversal engine, including local occurrence context on a current importer output.
 
 ### M6 — Canvas Model Edit (gated by WB-080)
 Explicit Model Edit mode; selection + Create Relationship; Canvas node removal semantics; edit-mode reset on reopen.

@@ -29,7 +29,7 @@ Continue from:
 - Relationship schema: **1.35**
 - Element schema: **1.16**
 - Current accepted native importer baseline: **v0.5.2**
-- Current Workbench: **0.1.14**, in separate repo `spencerskelly/MDSE_Workbench`
+- Current Workbench: **0.1.14**, in separate repo `spencerskelly/MDSE_Workbench` (predates W-298 Local Model indexing/edit separation)
 
 `Test_Vault_` is the translator/methodology workspace, not an import output target.
 
@@ -62,6 +62,15 @@ The target merger can be called v0.7 (recommended), but the version number itsel
 ### 2.1 Implementation update after handoff
 
 `99_System/09_Tools/EA_to_MDSE_Native_Importer_v0.7.html` now exists on `spencerskelly/Test_Vault_` main as the first merge candidate built from v0.5.2/schema 1.35. The merge carries forward the W-293/W-294 local part, endpoint, connection and flow implementation from the experimental v0.6.1 code while preserving W-291/W-292 `hasState/stateOf`, `ownerField()`, the v0.5.2 clean-base README/workspace rejection checks, source/plan stale-state invalidation, and output-folder handle hardening. Static JavaScript syntax and merge-invariant checks passed. This does **not** promote v0.7 to the accepted importer baseline: real-QEAX validation is still required, and the remaining W-297 acceptance mechanisms (including the still-open hard repository-relative path limit) must be completed before an accepted full import.
+
+### 2.2 Interface and release-pair update
+
+Two additional approved decisions now govern the next accepted build.
+
+- **W-298 — Local Model interface boundary.** Local part/endpoint/connection/flow/applicability records remain structured addressable Markdown in the containing note, but they are a governed Local Model region rather than ordinary narrative text. Workbench presents that content in its own **Local Model** dropdown/surface. Ordinary text editing must not rewrite the Local Model. Read-only parsing/indexing may precede the final authoring contract; structured Local Model editing waits until the canonical body schema/markers are frozen.
+- **W-299 — synchronized importer/base release.** The next newly issued importer and clean base vault use one shared release number, **v0.8.0**. The importer is `EA_to_MDSE_Native_Importer_v0.8.0.html`; the clean base declares `mdse_release: "0.8.0"` in `.vault.yaml`. The importer refuses a version mismatch before planning/writing. Relationship schema and element schema retain independent versions and are recorded separately in the Run Manifest.
+
+This does not promote v0.7 or retroactively rename historical base artifacts. v0.7 remains the current merge candidate until the remaining acceptance work is completed.
 
 ## 3. Approved semantic model: reusable definition vs contextual occurrence
 

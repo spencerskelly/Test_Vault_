@@ -583,11 +583,29 @@ V1 path:
 
 Future inline creation should reuse the same service.
 
-### Ordinary property editing
+### Note details and editing
 
-V1: open the note.
+The generated-view note popup is the normal lightweight detail/edit surface (WB-099 to WB-105). It keeps the underlying note authoritative while avoiding unnecessary tab changes.
 
-Future: expose safe property editing directly from Canvas.
+For a normal model note the popup separates:
+
+- rendered/narrative note text;
+- **Properties**;
+- **Relationships**;
+- **Local Model** when governed local records exist.
+
+**Local Model** is not another frontmatter relationship group. It is the structured view of addressable local part occurrences, endpoints/interfaces, connections, connection-scoped flows and local relationship/applicability targets owned inside the note.
+
+In View mode these sections are inspectable and Local Model records are read-only. In Edit mode:
+
+- ordinary narrative text may be edited without exposing or replacing the governed Local Model region;
+- ordinary properties use their governed editors;
+- note-level relationships use the relationship service;
+- Local Model editing uses structured controls inside the Local Model section only after the canonical body schema/marker contract is frozen.
+
+Until that Local Model contract is frozen, Workbench may parse, index, navigate and display local records but keeps them read-only. Raw text editing must never be a back door around the structured Local Model contract.
+
+The same separation applies when the popup is launched from Canvas: graphical presentation may change, but storage authority and edit services do not.
 
 ### Groups
 
