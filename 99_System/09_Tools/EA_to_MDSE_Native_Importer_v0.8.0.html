@@ -3694,6 +3694,19 @@ function vaultReleaseFromText(txt){
   const m=String(txt||"").match(/^mdse_release:\s*["']?([^"'#\r\n]+)["']?/m);
   return m?m[1].trim():"";
 }
+function pluginIdsFromLock(txt){
+  const out=[];
+  const lines=String(txt||"").split(/\r?\n/);
+  let inPlugins=false;
+  for(const line of lines){
+    if(/^plugins:\s*$/.test(line)){inPlugins=true;continue;}
+    if(!inPlugins)continue;
+    if(/^\S/.test(line))break;
+    const m=/^  ([a-z0-9][a-z0-9-]*):\s*$/.exec(line);
+    if(m)out.push(m[1]);
+  }
+  return out;
+}
 
 async function requireBaseVault(root){
   try{
@@ -3712,16 +3725,23 @@ async function requireBaseVault(root){
     if(schemaVersionFromText(local)!==LOCAL_MODEL_SCHEMA_VERSION)throw new Error("Base Local Model schema mismatch.");
 
     const lock=await readTextPath(root,".obsidian/plugin-lock.yaml");
+    if(!/^schema:\s*2\s*$/m.test(lock))throw new Error("Base plugin-lock.yaml is not controlled-release schema 2.");
+    const locked=pluginIdsFromLock(lock);
     const enabledText=await readTextPath(root,".obsidian/community-plugins.json");
     let enabled=[];
     try{enabled=JSON.parse(enabledText);}catch(e){throw new Error("Base community-plugins.json is invalid JSON.");}
     if(!Array.isArray(enabled)||!enabled.length)throw new Error("Base has no enabled runtime plugin list.");
-    for(const id of ["mdse-bootstrap","mdse-workbench"]){
-      if(!lock.includes(id)||!enabled.includes(id))throw new Error("Base runtime plugin stack is missing "+id+".");
+    const lockedSet=new Set(locked),enabledSet=new Set(enabled);
+    if(!locked.length)throw new Error("Base plugin lock contains no runtime plugins.");
+    if(lockedSet.size!==enabledSet.size||locked.some(id=>!enabledSet.has(id))||enabled.some(id=>!lockedSet.has(id))){
+      throw new Error("Base enabled-plugin list does not exactly match plugin-lock.yaml.");
     }
-    for(const id of enabled){
-      if(!(await fileExists(root,".obsidian/plugins/"+id+"/manifest.json")))throw new Error("Enabled plugin payload is missing manifest.json: "+id);
-      if(!(await fileExists(root,".obsidian/plugins/"+id+"/main.js")))throw new Error("Enabled plugin payload is missing main.js: "+id);
+    for(const id of ["mdse-bootstrap","mdse-workbench"]){
+      if(!lockedSet.has(id))throw new Error("Base runtime plugin stack is missing "+id+".");
+    }
+    for(const id of locked){
+      if(!(await fileExists(root,".obsidian/plugins/"+id+"/manifest.json")))throw new Error("Locked plugin payload is missing manifest.json: "+id);
+      if(!(await fileExists(root,".obsidian/plugins/"+id+"/main.js")))throw new Error("Locked plugin payload is missing main.js: "+id);
     }
     return true;
   }catch(e){
