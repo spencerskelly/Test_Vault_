@@ -13,13 +13,15 @@ Rewritten 2026-09-29 (W-183), updated through W-313 on 2026-10-01 for a new AI c
 
 ## Read in this order
 
-1. `99_System/10_Docs/EA Native Importer Comprehensive Handoff - 2026-10-01.md`: current importer/occurrence/repository state and the copy-ready next-chat prompt.
-2. `99_System/10_Docs/Workspace Decision Log.md`: every decision (W-01 to W-313) and the Open list at the bottom. It is the authority for what has been decided.
-3. `99_System/10_Docs/Translator Definition.md` (the single statement of what stage 1 must do, W-247; keep it current), then `Definitions/Note Layout.md` and `Definitions/EA Source Section.md`.
-4. `99_System/03_Schemas/`: `ea-element-mapping.yaml` (all 31 EA object types), `ea-connector-mapping.yaml` (all 15 connector types, W-151 to W-179), `relationships.yaml` (schemaVersion 1.35), `element-types.yaml` (24 model classes plus system definitions; `Diagram` added in W-212), `local-model.yaml` (Local Model body schema 0.1, W-313), `ea-field-dispositions.yaml`, `ea-tag-dispositions.yaml`, `ea-package-rules.yaml`.
-5. `99_System/10_Docs/Post-Import Tasks.md` (Tasks 1 to 8; Task 7 includes the state cleanup work added later).
-6. `99_System/02_AI/AI_INSTRUCTIONS.md` and `MDSE Modeling Ruleset 1.22` (reissued in W-260 and amended through W-297/full-import review).
-7. The import reads the `.qeax` directly (W-247); the CSV bundle in `99_System/CSV_EA` was used to define the rules. The bundle is in `99_System/CSV_EA` (`t_objectproperties_raw.csv` is the tag source, because only it has the Notes column; `t_xref.csv` holds the `conveyed`, `trigger` and other relationship rows). The `.qeax` and the translator source (v2.6.0) are not in the repository; ask for `EA_to_MDSE_Consolidated_v2_6_0.zip` if the earlier tool's rules are needed. The r12 relationship matrix notes in `99_System/archive/10_EA Native Translator` are evidence only; the connector mapping replaces them.
+1. `99_System/10_Docs/MDSE v0.8 Design Check - 2026-10-01.md`: current target architecture, code-conformance findings and keepability gates.
+2. `99_System/10_Docs/EA Native Importer Comprehensive Handoff - 2026-10-01.md`: current importer/occurrence/repository state.
+3. `99_System/10_Docs/Handoff Prompt - MDSE v0.8 Implementation.md`: concise copy-ready continuation prompt.
+4. `99_System/10_Docs/Workspace Decision Log.md`: every decision (W-01 to W-313) and the Open list at the bottom. It is the authority for what has been decided.
+5. `99_System/10_Docs/Translator Definition.md` (the single statement of what stage 1 must do, W-247; keep it current), then `Definitions/Note Layout.md` and `Definitions/EA Source Section.md`.
+6. `99_System/03_Schemas/`: `ea-element-mapping.yaml` (all 31 EA object types), `ea-connector-mapping.yaml` (all 15 connector types, W-151 to W-179), `relationships.yaml` (schemaVersion 1.35), `element-types.yaml` (24 model classes plus system definitions; `Diagram` added in W-212), `local-model.yaml` (Local Model body schema 0.1, W-313), `ea-field-dispositions.yaml`, `ea-tag-dispositions.yaml`, `ea-package-rules.yaml`.
+7. `99_System/10_Docs/Post-Import Tasks.md` (Tasks 1 to 8; Task 7 includes the state cleanup work added later).
+8. `99_System/02_AI/AI_INSTRUCTIONS.md` and `MDSE Modeling Ruleset 1.22` (reissued in W-260 and amended through W-297/full-import review).
+9. The import reads the `.qeax` directly (W-247); the CSV bundle in `99_System/CSV_EA` was used to define the rules. The bundle is in `99_System/CSV_EA` (`t_objectproperties_raw.csv` is the tag source, because only it has the Notes column; `t_xref.csv` holds the `conveyed`, `trigger` and other relationship rows). The `.qeax` and the translator source (v2.6.0) are not in the repository; ask for `EA_to_MDSE_Consolidated_v2_6_0.zip` if the earlier tool's rules are needed. The r12 relationship matrix notes in `99_System/archive/10_EA Native Translator` are evidence only; the connector mapping replaces them.
 
 ## 2026-10-01 continuation update
 
