@@ -1,18 +1,21 @@
-# MDSE release manifest (W-320). Machine-readable twin of "00 - Current State.md".
-# Edit this file in the same commit as any change to a schema version, tool status or document status.
-# Verify with: python3 99_System/09_Tools/check-release.py [--workbench <path to MDSE_Workbench clone>]
-manifestVersion: 1
+# MDSE release manifest (W-320, W-321).
+# Single machine-readable authority for release alignment and the lean runtime-base build.
+# This file stays in the methodology workspace; it is NOT copied into generated engineering vaults.
+# Verify with:
+#   python3 99_System/09_Tools/check-release.py [--workbench <path>] [--base <path>]
+manifestVersion: 2
 mdseRelease: "0.8.0"
-releaseStatus: pre-release   # base vault and importer for 0.8.0 are not built yet
+releaseStatus: pre-release
 date: "2026-10-02"
 sourceModelId: EA8647
 
 schemas:
-  relationships: "1.35"      # 99_System/03_Schemas/relationships.yaml
-  elementTypes: "1.17"       # 99_System/03_Schemas/element-types.yaml
-  localModel: "0.2"          # 99_System/03_Schemas/local-model.yaml (readers accept 0.1 + 0.2)
+  relationships: "1.35"
+  elementTypes: "1.17"
+  localModel: "0.2"
 
 ruleset: "99_System/10_Docs/MDSE Modeling Ruleset 1.23.md"
+
 limits:
   maxGeneratedPathLength: 212
   duplicateMarker: "~2"
@@ -20,21 +23,25 @@ limits:
 
 tools:
   importer:
-    release: null                                   # no release-conformant importer exists yet
+    release: null
     planned: "99_System/09_Tools/EA_to_MDSE_Native_Importer_v0.8.0.html"
     acceptedFallback: "99_System/09_Tools/EA_to_MDSE_Native_Importer_v0.5.2.html"
     evidenceOnly: "99_System/09_Tools/EA_to_MDSE_Native_Importer_v0.7.html"
   cleanBase:
-    repo: null                                      # new 0.8.0 base not yet generated
+    repo: null
+    builder: "99_System/09_Tools/build-base.py"
     obsoleteReference: "spencerskelly/Test_Vault_-base-vault-2026-09-30-rel133-v051"
   workbench:
     repo: "spencerskelly/MDSE_Workbench"
     version: "0.1.15"
-    nextGate: "WB-106"                              # Local Model read/navigation; keepability gate for the first kept import
-    fixturesFrom: "99_System/03_Schemas"            # test/fixtures must equal these schema files (checked)
+    nextGate: "WB-106"
+    runtimePluginId: "mdse-workbench"
+    requiredForRelease: true
+    fixturesFrom: "99_System/03_Schemas"
   bootstrap:
-    pinned: "0.2.0"
-    sourceAvailable: false                          # no retrievable source or release found (2026-10-02 review)
+    status: deferred
+    sourceAvailable: false
+    reason: "No retrievable source or release is available. W-321 removes it from the v0.8 runtime baseline until that changes."
 
 repos:
   authority: "spencerskelly/Test_Vault_"
@@ -44,8 +51,53 @@ repos:
     - "spencerskelly/261001"
     - "spencerskelly/Test_Vault_-base-vault-2026-09-30-rel133-v051"
 
+# W-321: the engineering vault is a lean runtime artifact, not another methodology workspace.
+# Positive include lists avoid carrying workspace-only material accidentally.
+runtimeBase:
+  policy: lean
+  copyReleaseManifest: false
+  copyCurrentState: false
+  generatedFiles:
+    - ".vault.yaml"
+    - "README.md"
+  includeFiles:
+    - ".gitattributes"
+    - ".gitignore"
+    - "AGENTS.md"
+    - ".obsidian/app.json"
+    - ".obsidian/appearance.json"
+    - ".obsidian/community-plugins.json"
+    - ".obsidian/core-plugins.json"
+    - ".obsidian/plugin-lock.yaml"
+    - ".obsidian/templates.json"
+    - ".obsidian/types.json"
+    - "99_System/01_Admin/Enabled Plugin Stack.md"
+    - "99_System/03_Schemas/authors.yaml"
+    - "99_System/03_Schemas/element-types.yaml"
+    - "99_System/03_Schemas/local-model.yaml"
+    - "99_System/03_Schemas/relationships.yaml"
+    - "99_System/09_Tools/Initialize-Vault.ps1"
+    - "99_System/09_Tools/Initialize-Vault.sh"
+    - "99_System/10_Docs/MDSE Modeling Ruleset 1.23.md"
+  includeTrees:
+    - ".obsidian/plugins/obsidian-git"
+    - "Definitions"
+    - "99_System/02_AI"
+    - "99_System/04_People"
+    - "99_System/05_Templates"
+    - "99_System/08_Scripts"
+  conditionalFiles:
+    - "99_System/09_Tools/EA_to_MDSE_Native_Importer_v0.8.0.html"
+  forbiddenPaths:
+    - "99_System/03_Schemas/mdse-release.yaml"
+    - "99_System/10_Docs/00 - Current State.md"
+    - "99_System/10_Docs/Translator Definition.md"
+    - "99_System/10_Docs/Workspace Decision Log.md"
+    - "99_System/CSV_EA"
+    - "99_System/archive"
+    - "MDSE Workbench"
+
 # Status vocabulary: current | reference | proposal | historical | superseded | retired
-# historical/superseded/retired files must carry a callout banner naming supersededBy (checked).
 documents:
   - {path: "99_System/10_Docs/00 - Current State.md", status: current}
   - {path: "99_System/10_Docs/MDSE v0.8 Cross-Repository Reconciliation - 2026-10-02.md", status: current}
