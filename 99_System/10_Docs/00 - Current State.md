@@ -6,7 +6,7 @@
 
 | Item | Value |
 |---|---|
-| MDSE release target | **0.8.0** (pre-release: base vault and importer not built yet) |
+| MDSE release target | **0.8.0** (pre-release: controlled base packaging and importer candidate built; acceptance gates remain) |
 | Relationships schema | 1.35 (`99_System/03_Schemas/relationships.yaml`) |
 | Element-types schema | 1.17 (`99_System/03_Schemas/element-types.yaml`) |
 | Local Model | 0.2 writer; readers accept 0.1 and 0.2 (`99_System/03_Schemas/local-model.yaml`) |
@@ -43,7 +43,7 @@
 
 | Tool | Status | Next step |
 |---|---|---|
-| Importer v0.8.0 | **not built** | Build from the v0.5.2 lineage plus useful v0.7 code, per the Reconciliation build order. No release-conformant importer exists. |
+| Importer v0.8.0 | **implementation candidate built** | Static JavaScript parse and contract audit pass. Next: run on the real QEAX against a generated controlled base; resolve/accept attachment failures; do not mark release-conformant until acceptance gates pass. |
 | Importer v0.5.2 | accepted fallback and safety lineage | Starting point for v0.8.0 |
 | Importer v0.7 | evidence only, never accepted | Do not use to generate a model to keep |
 | Importers v0.1 to v0.5.1 | history | See `99_System/09_Tools/README_09_Tools.md` |
