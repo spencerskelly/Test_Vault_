@@ -94,10 +94,10 @@ W-293/W-294 and W-298 add model content below the file-backed note level without
 
 Workbench therefore indexes two addressable kinds:
 
-W-303 fixes the local-reference token style used by local records: `part-*`, `ep-*`, `conn-*`, and `flow-*`. These tokens are durable and opaque; visible engineering names are display data rather than identity.
+W-315 fixes the local-reference token style and namespace: `part-*`, `ep-*`, `conn-*`, and `flow-*` wrap a globally unique 30-character identity token. The prefix is local representation metadata; the token is persistent identity and may not duplicate any note UID or other local token. Visible engineering names are display data.
 
 - **note element** — durable identity is the note `uid`; file path is current location metadata, not permanent identity;
-- **local model record** — durable identity is the owning note UID plus its governed local address (part occurrence, endpoint occurrence, connection or connection-scoped flow).
+- **local model record** — persistent identity token is embedded in its kind-prefixed local ID; the semantic address remains owner UID + local ID so context/ownership is explicit.
 
 The core index/traversal APIs should operate on an addressable model reference rather than assuming every node is a `TFile` path. This is also the correct seam for later cross-vault resolution.
 
@@ -105,9 +105,9 @@ For v0.8 keepability (WB-106), this is no longer optional architecture debt: the
 
 W-306 makes Obsidian-native-first a Workbench architecture constraint: core Obsidian/standard Markdown/YAML first, broad plugin compatibility second, custom Workbench-only representation last. Workbench adds semantics and safety on top of native model content.
 
-W-313 adds `99_System/03_Schemas/local-model.yaml` schema 0.1 as the machine-readable Local Model contract. Importer and Workbench must consume the same format rules rather than maintaining separate private parsers.
+W-313/W-319 make `99_System/03_Schemas/local-model.yaml` the shared machine-readable contract. New writing is schema 0.2; Workbench must read 0.1 and 0.2 rather than maintaining a private body syntax.
 
-Local Model records remain structured, human-readable Markdown in the owning note body. They are a governed region separate from ordinary narrative text. W-302 defines exactly one managed region per note, beginning `<!-- MDSE:LOCAL-MODEL START schema=0.1 -->` beneath `## Local Model` and ending `<!-- MDSE:LOCAL-MODEL END -->`. The Workbench popup presents the records in a separate **Local Model** section. The parser owns only content inside those markers. Missing/duplicate/nested/mismatched markers become findings and disable structured edits. The general text editor must never rewrite the governed region.
+Local Model records remain structured, human-readable Markdown in the owning note body. They are a governed region separate from ordinary narrative text. W-302/W-319 define exactly one managed region per note. Canonical new output begins `<!-- MDSE:LOCAL-MODEL START schema=0.2 -->` beneath `## Local Model` and ends `<!-- MDSE:LOCAL-MODEL END -->`; historical 0.1 regions remain readable. The Workbench popup presents the records in a separate **Local Model** section. The parser owns only content inside those markers. Missing/duplicate/nested/mismatched markers become findings and disable structured edits. The general text editor must never rewrite the governed region.
 
 Each materialized local record exposes a native Obsidian block ID equal to its stable local ID (`^part-*`, `^ep-*`, `^conn-*`, `^flow-*`). Standard links such as `[[Owner Note#^ep-42bd90|J4]]` therefore navigate directly to the record without Workbench, while Workbench interprets the address semantically. Core Graph still treats the owner note as the graph node; that limitation is accepted.
 
@@ -268,4 +268,13 @@ Configured views are derived presentations over the same authoritative notes and
 
 Workbench validation must reject or flag abstract effective definitions, out-of-family selections and selections invalidated by later hierarchy changes. It must never silently repair a saved configuration by choosing a different subtype.
 
-W-314 does not yet change the deployed schema. Workbench must continue treating `local-model.yaml` 0.1 as the executable contract until the shared schema is intentionally advanced.
+W-319 implements the schema advance: `local-model.yaml` 0.2 and `element-types.yaml` 1.17 are now the executable write/configuration contracts. Workbench still implements WB-106 first, with read compatibility for Local Model 0.1 and 0.2, before adding W-314 variation UI.
+
+
+## 2026-10-02 standalone implementation note
+
+Workbench 0.1.15 resolves two immediate contradictions only:
+- repeated note-level relationship targets are presented as duplicate evidence, never engineering quantity;
+- ordinary body editing is refused when a governed Local Model marker is present.
+
+The remaining Local Model architecture above is not yet implemented in the index. `WB106_IMPLEMENTATION_CONTRACT.md` in the standalone Workbench repository is the coding contract for that next step.
