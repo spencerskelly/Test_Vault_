@@ -78,6 +78,8 @@ This does not promote v0.7 or retroactively rename historical base artifacts. v0
 
 **W-303 local identity:** v0.8.0 uses stable type-prefixed local IDs (`part-*`, `ep-*`, `conn-*`, `flow-*`). Imported IDs are deterministically derived from immutable EA source identity/provenance rather than sequence position or mutable names, so a re-import preserves the address of the same source occurrence. Visible engineering identifiers remain separate display data.
 
+**W-304 canonical records/source trace:** Local Model records use heading + named-field Markdown. Part occurrences reference reusable Object definitions. Nested/sub-interfaces are recursive endpoint records using the same endpoint schema with a `parent` address. Connections own flow records exactly once; Workbench/indexing surfaces those flows from each participating endpoint. EA GUIDs/source-only provenance are removed from engineering note records and written instead to `99_System/11_Import/Local Model Source Map.csv`, keyed by owner UID + local ID.
+
 ## 3. Approved semantic model: reusable definition vs contextual occurrence
 
 ### 3.1 Reusable Object/assembly definitions

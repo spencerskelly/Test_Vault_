@@ -293,7 +293,7 @@ Invariant structure and connections that are true for every use of the reusable 
 
 Therefore the same reusable assembly may be used in Product 1 and Product 2 while the same inherited endpoint (for example J4) connects to different partners in each product. A connection references the **part occurrence + inherited/local endpoint**, not merely the reusable assembly definition.
 
-The local-ID format is settled by W-303 and the managed-region boundary by W-302. The remaining block/anchor syntax, canonical record fields, first-class-note promotion criteria, and structured-authoring details remain **OPEN**. Importer v0.6 remains historical assessment evidence; v0.8.0 must follow the settled identity and boundary rules.
+The local-ID format is settled by W-303, the managed-region boundary by W-302, and the canonical heading + named-field record pattern by W-304. Part occurrences reuse Object/assembly definitions; endpoint occurrences reuse Port/interface definitions; nested pins/contacts/sub-interfaces are recursive endpoint records using `parent` rather than a new model kind. Connection-scoped flows are authored once on the carrying connection and are indexed/displayed from every participating interface. EA source identifiers/provenance are not Local Model engineering fields; import traceability lives in `99_System/11_Import/Local Model Source Map.csv`. Remaining open items are exact anchor/link rendering, first-class-note promotion criteria, and structured-authoring UX.
 
 #### 15.7.1 Port/flow preservation requirements from current-model audit
 
@@ -301,7 +301,7 @@ The 2026-10-01 Port audit found that the current v0.5 model is not sufficient to
 
 Preserve these facts in the replacement local-occurrence model:
 
-- a local endpoint retains its local/source identifier, reusable `definition`, endpoint kind, owning Object, and source provenance;
+- a local endpoint retains its local engineering identifier, reusable `definition`, endpoint kind, and owning/context address; EA-only source provenance is retained in the Local Model Source Map rather than the engineering record;
 - source Port multiplicity/quantity evidence must not be discarded merely because local occurrences are collapsed into body records;
 - the connection between two local endpoints must be independently identifiable/addressable from either endpoint;
 - each local flow is allocated to a **specific connection**, not merely to one of the participating endpoints;
