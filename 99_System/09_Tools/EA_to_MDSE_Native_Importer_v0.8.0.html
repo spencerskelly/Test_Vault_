@@ -2153,6 +2153,16 @@ function sanitizeName(v){
   s=s.replace(/[\x00-\x1f\x7f]+/g," ").replace(/\s+/g," ").trim().replace(/[ .]+$/g,"");
   return s||"unnamed";
 }
+function sanitizeNameInfo(v){
+  const original=str(v).replace(/\s+/g," ").trim();
+  const safe=sanitizeName(original);
+  return {original,safe,altered:safe!==original};
+}
+function alphaSuffix(n){
+  let out="",x=Number(n)||1;
+  while(x>0){x--;out=String.fromCharCode(97+(x%26))+out;x=Math.floor(x/26);}
+  return out;
+}
 function pathSelected(vaultPath,selected){
   if(!selected)return true;
   return vaultPath===selected||vaultPath.startsWith(selected+" > ");
@@ -2297,58 +2307,128 @@ function buildEntityContext(ctx,reservedIdentityTokens){
     return Array.from(found);
   }
 
-  // W-289: keep ids in YAML; filenames are human-oriented.
+  // W-318: human-readable filenames with explicit alteration and duplicate markers.
+  const alteredGroups=new Map();
   for(const e of entities.values()){
-    e.baseFileName=sanitizeName(e.naturalName);
-    e.fileCandidate=e.baseFileName;
-    e.nameRule=(e.mdseType==="Port")?"port-interface-prefix":"natural";
+    const info=sanitizeNameInfo(e.naturalName);
+    e.baseFileName=info.safe;
+    e.nameOriginal=info.original;
+    e.nameAltered=info.altered;
+    e.fileCandidate=info.safe;
+    e.nameRule=info.altered?"altered":"natural";
+    const folder=(e.vaultPath||"").toLowerCase();
+    if(info.altered)mapPush(alteredGroups,folder+"|"+info.safe.toLowerCase(),e);
+  }
+  // Distinct source names that sanitize to one base get ~a, ~b...; exact duplicates share
+  // the same alteration letter and are separated later with ~2, ~3...
+  for(const list of alteredGroups.values()){
+    const byOriginal=new Map();
+    for(const e of list)mapPush(byOriginal,(e.nameOriginal||"").toLowerCase(),e);
+    const originals=Array.from(byOriginal.entries()).sort((x,y)=>{
+      const xa=x[1].slice().sort(compareEntity)[0],ya=y[1].slice().sort(compareEntity)[0];
+      return compareEntity(xa,ya);
+    });
+    originals.forEach(([k,items],i)=>{
+      for(const e of items)e.fileCandidate=e.baseFileName+"~"+alphaSuffix(i+1);
+    });
   }
 
-  const naturalGroups=new Map();
-  for(const e of entities.values())mapPush(naturalGroups,e.fileCandidate.toLowerCase(),e);
-  for(const list of naturalGroups.values()){
-    if(list.length<2)continue;
-    for(const e of list){
-      if(e.mdseType==="Requirement"){
-        e.fileCandidate=e.baseFileName+"_r";
-        e.nameRule="requirement-r";
-      }else if(e.mdseType==="Port"){
-        const connected=connectedObjectKeysForPort(e);
-        if(connected.length===1){
-          const obj=entities.get(connected[0]),label=sanitizeName(obj?obj.naturalName:"");
-          if(label){
-            e.fileCandidate=e.baseFileName+"_"+label;
-            e.nameRule="port-connected-object";
-          }
-        }
-      }
-    }
-  }
-
-  // Anything still duplicated gets deterministic _1, _2 ... suffixes.
+  // Duplicate numbering is scoped to the target folder.
   const candidateGroups=new Map();
-  for(const e of entities.values())mapPush(candidateGroups,e.fileCandidate.toLowerCase(),e);
-  const reservedFileNames=new Set();
-  for(const [k,list] of candidateGroups.entries())if(list.length===1)reservedFileNames.add(k);
-  const usedFileNames=new Set(reservedFileNames);
-  for(const [k,list] of candidateGroups.entries()){
-    if(list.length===1){list[0].fileName=list[0].fileCandidate;continue;}
+  for(const e of entities.values())mapPush(candidateGroups,(e.vaultPath||"").toLowerCase()+"|"+e.fileCandidate.toLowerCase(),e);
+  for(const list of candidateGroups.values()){
     list.sort(compareEntity);
-    for(let i=0;i<list.length;i++){
-      const e=list[i];let candidate=e.fileCandidate;
-      if(i>0||usedFileNames.has(candidate.toLowerCase())){
-        let n=i>0?i:1;
-        do{candidate=e.fileCandidate+"_"+n;n++;}while(usedFileNames.has(candidate.toLowerCase()));
-        e.nameRule=e.nameRule+"+numeric";
-      }
-      e.fileName=candidate;usedFileNames.add(candidate.toLowerCase());
+    list.forEach((e,i)=>{
+      e.fileName=e.fileCandidate+(i?"~"+(i+1):"");
+      if(i)e.nameRule+=(e.nameRule?"+":"")+"duplicate";
+    });
+  }
+
+  const namingStats={},nameReviews=[];
+  for(const e of entities.values()){
+    namingStats[e.nameRule]=(namingStats[e.nameRule]||0)+1;
+    if(e.nameAltered||e.fileName!==e.baseFileName){
+      nameReviews.push({
+        eaGuid:e.eaGuid,eaType:trim2(e.raw.Object_Type),eaName:trim2(e.raw.Name),
+        folder:e.vaultPath||"",fileName:e.fileName,
+        alteration:e.nameAltered?"filesystem alteration":"",
+        duplicate:/duplicate/.test(e.nameRule)?e.fileName.match(/~\d+$/)?.[0]||"":""
+      });
     }
   }
 
-  const namingStats={};
-  for(const e of entities.values())namingStats[e.nameRule]=(namingStats[e.nameRule]||0)+1;
+  return {entities,portOwner,namingStats,nameReviews,usedIdentityTokens:used,identityBaseCounts:baseCount};
+}
 
-  return {entities,portOwner,namingStats,usedIdentityTokens:used,identityBaseCounts:baseCount};
+// Build normalized folder paths once for the whole model. The folder is navigation;
+// the note remains the authoritative carrier of the full engineering name.
+function buildFolderPathMap(entities){
+  const nodes=new Map();
+  for(const e of entities.values()){
+    const segs=(e.vaultPath||"").split(" > ").filter(Boolean);
+    let parent="";
+    for(const seg of segs){
+      const key=parent?parent+" > "+seg:seg;
+      if(!nodes.has(key))nodes.set(key,{key,parent,seg,depth:(parent?parent.split(" > ").length:0)+1});
+      parent=key;
+    }
+  }
+  const byParent=new Map();
+  for(const n of nodes.values())mapPush(byParent,n.parent,n);
+  const mapped=new Map();
+  const parents=Array.from(byParent.keys()).sort((a,b)=>(a.split(" > ").length-b.split(" > ").length)||a.localeCompare(b));
+  for(const parent of parents){
+    const siblings=byParent.get(parent).slice().sort((a,b)=>a.seg.localeCompare(b.seg)||a.key.localeCompare(b.key));
+    const safeGroups=new Map();
+    for(const n of siblings){
+      let raw=n.seg;
+      // W-308 targeted removal of repeated Industrial connector context.
+      if(/Connector ASM\s*-\s*Industrial/i.test(parent)){
+        raw=raw.replace(/\bIndustrial\b/gi,"").replace(/\bConnector\s+ASM\b/gi,"").replace(/\s+/g," ").trim();
+      }
+      if(/\bAnderson\b/i.test(parent))raw=raw.replace(/\bAnderson\b/gi,"").replace(/\s+/g," ").trim();
+      let info=sanitizeNameInfo(raw||n.seg);
+      n.info=info;
+      mapPush(safeGroups,info.safe.toLowerCase(),n);
+    }
+    for(const list of safeGroups.values()){
+      list.sort((a,b)=>a.key.localeCompare(b.key));
+      list.forEach((n,i)=>{
+        let label=n.info.safe;
+        if(n.info.altered)label+="~"+alphaSuffix(i+1);
+        else if(i)label+="~"+(i+1);
+        const parentMapped=n.parent?(mapped.get(n.parent)||""):"";
+        mapped.set(n.key,parentMapped?parentMapped+"/"+label:label);
+      });
+    }
+  }
+  return mapped;
+}
+function pathPlanForEntity(e,folderMap){
+  let folder=folderMap.get(e.vaultPath||"")||"";
+  const rawSegs=(e.vaultPath||"").split(" > ").filter(Boolean);
+  const outSegs=folder.split("/").filter(Boolean);
+  let changed=outSegs.join("/")!==rawSegs.map(sanitizeName).join("/");
+  if(rawSegs.length&&outSegs.length){
+    const lastRaw=rawSegs[rawSegs.length-1],safeLast=sanitizeName(lastRaw);
+    if(e.fileName.toLowerCase()===safeLast.toLowerCase()||e.fileName.toLowerCase().startsWith(safeLast.toLowerCase()+" ")){
+      const sec=/^(?:section\s+)?([0-9]+(?:\.[0-9]+)*)\b/i.exec(lastRaw);
+      if(sec){outSegs[outSegs.length-1]=sec[1];changed=true;}
+      else{outSegs.pop();changed=true;}
+    }
+  }
+  folder=outSegs.join("/");
+  let file=e.fileName+".md",path=(folder?folder+"/":"")+file,shortened=false;
+  if(path.length>MAX_GENERATED_PATH){
+    const room=MAX_GENERATED_PATH-(folder?folder.length+1:0)-3; // .md
+    if(room<8)throw new Error("Folder path alone leaves no readable filename within "+MAX_GENERATED_PATH+" characters: "+path);
+    let base=e.fileName;
+    const reserve=2; // ~a
+    base=base.slice(0,Math.max(1,room-reserve)).replace(/[ .]+$/g,"");
+    file=base+"~a.md";path=(folder?folder+"/":"")+file;shortened=true;changed=true;
+  }
+  if(path.length>MAX_GENERATED_PATH)throw new Error("Generated path remains over "+MAX_GENERATED_PATH+" characters: "+path);
+  return {path,folder,file,changed,shortened,originalFolder:e.vaultPath||""};
 }
 
 function addRawRel(graph,ownerKey,field,targetKey,allowDuplicate){
