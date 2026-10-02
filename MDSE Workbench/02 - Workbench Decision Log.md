@@ -706,8 +706,8 @@ Product questions that change what an engineer sees still go one at a time. Impl
 - **R1 — Pilot:** two or three engineers use the plugin on a real test slice (the first slice is `02 Product Context`, W-267) and run the acceptance scenarios in [[03 - Build Outline and Roadmap]].
 - **R2 — Team release:** pilot findings resolved; compatibility check and Bootstrap install verified on a fresh vault.
 
-### WB-091 — Quantity in the Structure view
-**Status:** Trial 2026-10-01 (my reading of "let's see what the quantity looks like"; Spencer has seen it in Obsidian, no decision yet)
+### WB-091 — Repeated relationship-list count (superseded as quantity)
+**Status:** Superseded by WB-105 / W-297 / W-310 on 2026-10-01
 
 A child listed N times in one relationship field is one card with the count on its edge (`hasPart ×6` on `Cable Jacket`, `×27` on `Wire - Strip and Strip`). Cards stay one per distinct note, and links stay one per distinct target, so Review counts do not change. **Update 2026-10-01:** W-297 says repeating the same relationship target does not express quantity, and the next importer deduplicates repeated Part links. So `×27` shows how many times a link is listed in the notes as they stand today, not a quantity. Open: relabel it (for example "listed 27×") or hide it until the occurrence model gives a real quantity. Original text: Evidence: in `20260930`, 276 repeated entries in 86 notes (`hasPart` 208, `hasChild` 68); `Cable - 2 twisted pair Strip and Strip` lists `Wire - Strip and Strip` 27 times and `Cable Jacket` 6 times (I first wrote 25 from a quick read of the file; corrected after Spencer's screenshot showed ×27). Seen in Obsidian 0.1.1: the counts display. A quantity change marks a view stale. Built in plugin 0.1.1.
 
@@ -808,6 +808,26 @@ A note that contains addressable local part occurrences, endpoint occurrences, c
 - **Safety:** a Workbench version that does not understand the Local Model contract must not rewrite that region.
 
 This amends WB-100 (two dropdowns become three when Local Model data exists) and WB-101 (the text editor no longer means the entire post-frontmatter body once Local Model records exist). W-302 now settles the managed-region syntax: one region bounded by `<!-- MDSE:LOCAL-MODEL START schema=0.1 -->` and `<!-- MDSE:LOCAL-MODEL END -->`. The local-record field/local-ID contract remains model governance.
+
+### WB-106 — Local Model read/navigation is a keepability gate for v0.8
+**Status:** Approved 2026-10-01
+
+The first complete import that may be kept must not depend on raw Markdown inspection for occurrence structure. Before that run is accepted, Workbench must:
+
+- parse `local-model.yaml` schema 0.1 records and W-302 managed-region markers;
+- index note and local-record identity through an addressable ModelRef rather than file path alone;
+- preserve native `#^local-id` fragments when resolving note-level links to local targets;
+- show the Local Model dropdown from WB-105;
+- navigate local parts/endpoints/connections/flows and their reusable definitions;
+- make Structure, Interfaces, Where Used and Requirements occurrence-aware where the Local Model changes the answer;
+- protect the governed Local Model region from ordinary body editing;
+- report malformed markers, duplicate local IDs, broken local block links, invalid definitions/endpoints, orphan flows and unresolved local applicability.
+
+Structured Local Model authoring is not part of this gate and may follow after the read/index contract is proven on the real imported model.
+
+Repeated relationship entries must not be rendered as engineering quantity. True quantity comes from Local Model multiplicity under W-310.
+
+---
 
 ---
 
