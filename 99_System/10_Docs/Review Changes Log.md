@@ -20,3 +20,19 @@ One row per reason, not one per note. If the same change was made on many notes,
 
 | Date | Element | Change | Why | Rule to change |
 |---|---|---|---|---|
+
+
+## 2026-10-02 — v0.8 cross-repository reconciliation
+
+- Issued MDSE Modeling Ruleset 1.23.
+- Advanced element-types to 1.17 and Local Model to 0.2.
+- Added sparse optional `abstract` property definition.
+- Settled one global 30-character reference identity-token namespace.
+- Settled EA8647 source lineage, first-allocation and rerun identity rules.
+- Replaced ID-based duplicate filename handling with `~2` and forced alteration with `~a` sequencing.
+- Set repository-relative hard limit to 212 characters and expanded folder-shortening rules.
+- Settled rerun field ownership, source deletion behavior and relationship removal.
+- Made failed attachment import non-blocking but reconciled; kept diagram creation deferred with mandatory reconciliation.
+- Retired four empty legacy import CSVs.
+- Refreshed the v0.8 implementation handoff and translator definition.
+- Added `MDSE v0.8 Cross-Repository Reconciliation - 2026-10-02.md` as the continuation contract.
