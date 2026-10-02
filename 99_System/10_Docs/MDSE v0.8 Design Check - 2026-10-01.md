@@ -383,3 +383,303 @@ The target is:
 > reusable first-class definitions + contextual Local Model occurrences + assembly-owned connections + connection-owned flows + explicit boundary exposure + native Obsidian navigation.
 
 The importer preserves this structure mechanically. Workbench makes it easy to understand and review. Obsidian Markdown remains the model.
+
+## Local Model Usage and Configuration Theory (W-314)
+
+### Purpose
+
+The Local Model must represent not only **which reusable definition occupies a contextual position**, but also whether that position is fixed, configurable, or optional. This must be done without turning the reusable definition hierarchy into product-specific configuration data and without introducing a separate Variant Point element or configuration relationship vocabulary.
+
+The governing separation is:
+
+> **Definition = what an engineering concept is. Occurrence = how that definition is used in this context. Configuration = how configurable occurrences are resolved for one named or temporary product realization.**
+
+This creates three layers that remain intentionally distinct.
+
+### Layer 1 — reusable definitions
+
+Reusable notes carry invariant engineering meaning. They may form true specialization hierarchies using the existing `subtypeOf / supertypeOf` relationship.
+
+Example:
+
+```text
+Power Module [abstract]
+├── 24–48 V Power Module
+└── 48–96 V Power Module
+```
+
+`Power Module` expresses the common reusable family. `24–48 V Power Module` and `48–96 V Power Module` are reusable specializations.
+
+A future optional frontmatter property `abstract: true` means that the reusable definition exists to organize/generalize other definitions but is not itself a valid effective definition for a contextual occurrence. Absence of `abstract` means false. Abstractness is not inherited: Workbench traverses through abstract descendants to find concrete descendants.
+
+A non-abstract family root remains selectable alongside its concrete descendants. Therefore specialization and abstractness remain separate decisions.
+
+### Layer 2 — contextual Local Model occurrences
+
+An owning Object/system/assembly creates local positions. Each position has its own stable local block identity and a `definition` link to the reusable concept it uses.
+
+W-314 adds the semantic field:
+
+```yaml
+usage: standard | variant | option
+```
+
+Omission means `standard`.
+
+The values mean:
+
+| usage | Presence | Effective definition |
+|---|---|---|
+| `standard` | required | exactly the stated `definition`; that definition must be concrete |
+| `variant` | required | exactly one concrete candidate from the specialization family rooted at the stated `definition` |
+| `option` | may be absent | when present, one concrete candidate from the stated definition's specialization family |
+
+For `variant` and present `option` occurrences, the candidate family is derived transitively from the existing `subtypeOf` hierarchy. It consists of the root when the root is non-abstract plus every non-abstract descendant. Candidate lists are not duplicated on the occurrence.
+
+This is contextual configuration semantics, not generalization. A local occurrence is not a subtype of its definition. Its `definition` field means "this contextual position uses this reusable engineering definition/family."
+
+### Example assembly
+
+```markdown
+---
+type: Object
+subtype: electrical
+id: OBJ-00100
+uid: 20261001140000000skellyspencer
+status: Active
+tags: []
+---
+
+# Industrial Charger
+
+## Local Model
+
+<!-- MDSE:LOCAL-MODEL START schema=0.2 -->
+
+### Part Occurrences
+
+#### Power Module
+- definition: [[Power Module]]
+- usage: variant
+
+^part-power-module
+
+#### Cold Weather Heater
+- definition: [[Cold Weather Heater]]
+- usage: option
+
+^part-cold-weather-heater
+
+<!-- MDSE:LOCAL-MODEL END -->
+```
+
+The assembly has one Power Module position, not a relationship to every Power Module subtype. The position is required but unresolved until a concrete candidate is selected. The heater position may be absent.
+
+### Example abstract family definition
+
+```markdown
+---
+type: Object
+subtype: electrical
+id: OBJ-00101
+uid: 20261001140100000skellyspencer
+status: Active
+tags: []
+abstract: true
+supertypeOf:
+  - "[[48–96 V Power Module]]"
+---
+
+# Power Module
+
+Generic reusable definition for charger power modules.
+```
+
+`abstract: true` prevents `Power Module` itself from becoming the effective installed definition while still allowing it to be the family root stated by the local variant occurrence.
+
+### Example concrete specialization
+
+```markdown
+---
+type: Object
+subtype: electrical
+id: OBJ-00102
+uid: 20261001140200000skellyspencer
+status: Active
+tags: []
+subtypeOf:
+  - "[[Power Module]]"
+---
+
+# 48–96 V Power Module
+```
+
+This note is concrete because `abstract` is absent. It is therefore a candidate for the Industrial Charger's Power Module occurrence.
+
+### Example reusable option definition
+
+```markdown
+---
+type: Object
+subtype: electrical
+id: OBJ-00103
+uid: 20261001140300000skellyspencer
+status: Active
+tags: []
+---
+
+# Cold Weather Heater
+```
+
+Nothing on the heater definition says "optional." Optionality belongs only to the contextual occurrence:
+
+```yaml
+definition: [[Cold Weather Heater]]
+usage: option
+```
+
+The same heater could be required elsewhere:
+
+```yaml
+definition: [[Cold Weather Heater]]
+usage: standard
+```
+
+This prevents product-specific usage semantics from contaminating reusable definitions.
+
+### Layer 3 — configuration resolution
+
+The base reusable architecture should remain unresolved. Selecting a variant or excluding an option for exploration must not rewrite the assembly's Local Model.
+
+Workbench therefore needs two configuration states:
+
+1. **temporary configuration state** — selections held in Workbench memory while an engineer explores;
+2. **persisted named configuration** — a future native Markdown artifact that records selections separately from the base architecture.
+
+A persisted selection identifies the local configurable position by its stable native block link, for example:
+
+```markdown
+- occurrence: [[Industrial Charger#^part-power-module|Power Module]]
+- definition: [[48–96 V Power Module]]
+```
+
+An omitted option is explicit:
+
+```markdown
+- occurrence: [[Industrial Charger#^part-cold-weather-heater|Cold Weather Heater]]
+- present: false
+```
+
+No entry is **unresolved**, not absent. A completed configuration resolves every `variant` and explicitly includes or excludes every `option`.
+
+The exact persisted-configuration document/schema is deliberately not frozen by W-314. It must be decided before Workbench writes named configurations. That design must remain native Markdown and must not become a second database.
+
+### Applicability beyond parts
+
+The semantics are intentionally general:
+
+- **part occurrence** — choose which reusable Object/assembly fills a structural position;
+- **endpoint/Port occurrence** — choose which reusable Port/interface definition fills an interface position;
+- **Function occurrence** — choose which reusable Function specialization fills a behavioral position;
+- **Use Case occurrence** — choose which reusable Use Case specialization applies in a scenario position;
+- **State occurrence** — choose which reusable State specialization fills a state-context position.
+
+This does **not** require all five occurrence record kinds to exist now. The Local Model should gain a new occurrence kind only when that kind is independently valuable for engineering traceability/context. Configurability alone is not sufficient reason to invent one.
+
+Do not automatically put `usage` on connections, flows, transitions or topology. If a part or endpoint is absent in a configuration, topology involving that occurrence is naturally filtered from the configured view. If later evidence shows a connection itself must vary independently of its endpoint selections, model that case explicitly rather than pre-building a generalized topology-variation language.
+
+### Relationship to existing semantics
+
+These concepts must remain distinct:
+
+- `subtypeOf` — reusable definition-level "kind of";
+- `definition` — local occurrence references reusable engineering meaning;
+- `usage: variant` — contextual required selection from a reusable specialization family;
+- `usage: option` — contextual position may be omitted;
+- Use Case `optionOf` — existing note-level Use Case semantic relationship; not Local Model optionality;
+- EA `Usage` connector — source connector semantics; never interpreted as Local Model `usage` merely because the word is the same.
+
+A definition having subtypes does **not** make every occurrence of it a variant. Variant/option semantics must be explicit or deterministically supported by source evidence.
+
+### Base-model/schema impact
+
+W-314 settles the semantics but does not silently change the currently deployed schemas.
+
+Expected implementation work:
+
+1. advance `local-model.yaml` from schema 0.1 to 0.2;
+2. add optional `usage` to the occurrence records that are currently supported for configuration, beginning with part and endpoint occurrences;
+3. default omitted `usage` to `standard`;
+4. do not add `usage` to connection or flow records;
+5. update the managed-region marker to `schema=0.2` when the schema implementation lands;
+6. add optional definition-level `abstract` support to the element/property schema and write its property definition;
+7. leave `relationships.yaml` unchanged;
+8. preserve backward/read compatibility deliberately rather than silently interpreting 0.1 content as 0.2 when unsafe.
+
+No new top-level Variant, Variant Point, Option, Configuration Position, or configuration relationship type is required by this design.
+
+### Importer impact
+
+The importer must preserve the same semantic boundary.
+
+It must **not**:
+
+- infer `usage: variant` solely because the reusable definition has `subtypeOf` descendants;
+- infer `usage: option` from an EA Use Case `optionOf` relationship;
+- equate an EA connector named `Usage` with Local Model `usage`;
+- attach optional/variant meaning to the reusable definition when the meaning belongs to one local occurrence;
+- connect an owning assembly to every candidate specialization.
+
+Until a deterministic EA source rule is approved, imported local occurrences default to `standard` by omission. Any source evidence that appears to encode true configurability should be preserved for review rather than guessed.
+
+### Workbench impact
+
+Workbench's eventual configuration behavior is a view/editor over this native model, not a second model.
+
+Required capabilities, in dependency order:
+
+1. parse/index the Local Model and preserve stable local block identities;
+2. read `usage` and definition-level `abstract`;
+3. traverse incoming `subtypeOf` relationships transitively to derive candidate descendants because `subtypeOf` is authored specific → general;
+4. reject abstract effective definitions;
+5. expose read-only variation information before adding editing;
+6. provide configuration mode with dropdown selection for `variant` and include/exclude behavior for `option`;
+7. hold unsaved selections in session state without mutating the base Local Model;
+8. define and then support a native Markdown persisted-configuration format;
+9. generate configured architecture, variation-space, configuration-comparison and configuration-filtered Canvas views from the same authoritative model;
+10. add product-specific model-number encoding/decoding only after configuration semantics work independently.
+
+Useful validation findings include:
+
+- `standard` occurrence references an abstract definition;
+- configured `variant` has no selection;
+- selected definition is outside the root specialization family;
+- selected definition is abstract;
+- abstract family root has no concrete descendants;
+- configured `option` lacks explicit present/absent state in a completed configuration;
+- a stored selection becomes invalid after the reusable specialization hierarchy changes.
+
+The last case must become a finding. Workbench must never silently substitute a different candidate.
+
+### Theory summary
+
+The mechanism scales because each concern has one home:
+
+```text
+Reusable definition hierarchy
+        │
+        │ definition / specialization family
+        ▼
+Contextual Local Model position
+        │
+        │ usage = standard | variant | option
+        ▼
+Configuration resolution
+        │
+        ├─ temporary Workbench selection
+        └─ persisted named configuration
+```
+
+This allows reusable engineering definitions, product architecture, product variants/options and later commercial configuration rules to coexist without duplicating definitions or overloading relationships.
+
+A later user-facing procedure should explain how engineers create and resolve these positions through Workbench. That procedure is intentionally deferred until the underlying schema and Workbench interaction are implemented and tested.
