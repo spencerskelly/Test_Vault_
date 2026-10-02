@@ -89,6 +89,7 @@
     "conflictsWith": "multitext",
     "interfaces": "multitext",
     "equals": "multitext",
-    "eaType": "text"
+    "eaType": "text",
+    "abstract": "checkbox"
   }
 }
