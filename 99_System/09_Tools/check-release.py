@@ -144,6 +144,31 @@ else:
     if not wb106 or wv!=wb106:
         (fail if man["releaseStatus"]=="release" and man["tools"]["workbench"]["requiredForRelease"] else warn)(
             f"pinned Workbench {wv} is not the WB-106-capable release required for an issued base")
+candidate=man["tools"]["importer"].get("candidate")
+if candidate:
+    cp=full(ROOT,candidate)
+    if not os.path.isfile(cp):
+        fail(f"importer candidate missing: {candidate}")
+    else:
+        itxt=read(candidate)
+        required_importer_tokens=[
+            'version: "0.8.0"',
+            'const REL_SCHEMA_VERSION="1.35"',
+            'const ELEMENT_SCHEMA_VERSION="1.17"',
+            'const LOCAL_MODEL_SCHEMA_VERSION="0.2"',
+            'const MDSE_RELEASE="0.8.0"',
+            'const SOURCE_MODEL_ID="EA8647"',
+            'const MAX_GENERATED_PATH=212',
+            '<!-- MDSE:LOCAL-MODEL START schema=0.2 -->',
+            'Local Model Source Map.csv',
+            'Attachment Reconciliation.csv',
+            'Diagram Reconciliation.csv',
+            'Review - Equals Direction.csv',
+        ]
+        missing=[x for x in required_importer_tokens if x not in itxt]
+        (ok if not missing else fail)(f"importer candidate static contract tokens present{'' if not missing else ': '+', '.join(missing)}")
+        if 'schema=0.1' in itxt or 'return ("loc-"' in itxt:
+            fail("importer candidate contains superseded Local Model marker/anchor behavior")
 if man["tools"]["importer"]["release"] is None:
     (fail if man["releaseStatus"]=="release" else warn)("no release-conformant importer yet")
 if man["tools"]["cleanBase"]["repo"] is None:
