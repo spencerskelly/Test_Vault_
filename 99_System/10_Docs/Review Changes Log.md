@@ -64,5 +64,5 @@ One row per reason, not one per note. If the same change was made on many notes,
 - Added pre-write Local Model schema validation and prevented invalid endpoint/connection/flow records.
 - Added Run Manifest, Ledger, Source Map, duplicate/altered-name reviews, semantic review, four named stage-2 review tables, attachment reconciliation and diagram reconciliation.
 - Initial diagrams remain intentionally deferred.
-- Linked-document rows are reconciled, but binary/RTF extraction is not yet implemented; in-scope failures are explicitly recorded as `failed attachment import` and are non-blocking under W-319.
+- Linked-document extraction is implemented mechanically under W-76 to W-78/W-210: ExtDoc image payloads are written directly; ModelDocument RTF `\\binN` picture payloads are written in source order; text-only ModelDocument RTF is attached unchanged. Unreadable/unknown payloads remain explicit non-blocking `failed attachment import` rows under W-319.
 - Candidate source parses statically. Release status remains pre-release and importer `release` remains null until the real QEAX acceptance run and WB-106 gate.
