@@ -99,11 +99,11 @@ Exact APIs can change; the separation is what matters.
 
 ## Release path
 
-**Where the build stands (2026-10-01, plugin 0.1.14).** Built. Spencer has seen these work in Obsidian: the Review header counts, the Structure view with quantity labels, the Functional and Requirements views, the note popup and its Relationships dropdown (so the click detection works on his Obsidian version). Not yet confirmed there: editing in the popup, the view picker and the eight newer views, Replace relationship and Undo, and the Canvas selection menu on later versions (see [[06 - Test Sheet]]): M0 (gate R0 decided go); M1 (eleven views from a note or from a popup button, stale check, omission and undefined indicators); M3 in command form (relationship service, relate command, Replace relationship, one Undo for every Workbench edit; batch preview is not built); M4 (Review screen, filters, finding window; `tracesTo` resolution through Replace relationship); M5 (the standard views, WB-097, WB-098, WB-102; multi-start and Expand/Collapse are not built); a first part of M6 as a popup on a generated view (edit text, ordinary properties and relationships, WB-099 to WB-101), not yet on the Canvas itself. Not built: M2 Create, Canvas Model Edit proper, M7 hardening and pilot. The release pipeline files exist but are not switched on (see the Decision Log).
+**Where the build stands (2026-10-02, plugin 0.1.15).** Built. Spencer has seen these work in Obsidian: the Review header counts, the Structure view (legacy repeated links are now labeled explicitly as duplicate evidence), the Functional and Requirements views, the note popup and its Relationships dropdown (so the click detection works on his Obsidian version). Not yet confirmed there: editing in the popup, the view picker and the eight newer views, Replace relationship and Undo, and the Canvas selection menu on later versions (see [[06 - Test Sheet]]): M0 (gate R0 decided go); M1 (eleven views from a note or from a popup button, stale check, omission and undefined indicators); M3 in command form (relationship service, relate command, Replace relationship, one Undo for every Workbench edit; batch preview is not built); M4 (Review screen, filters, finding window; `tracesTo` resolution through Replace relationship); M5 (the standard views, WB-097, WB-098, WB-102; multi-start and Expand/Collapse are not built); a first part of M6 as a popup on a generated view (edit text, ordinary properties and relationships, WB-099 to WB-101), not yet on the Canvas itself. Not built: M2 Create, Canvas Model Edit proper, M7 hardening and pilot. The release pipeline files exist but are not switched on (see the Decision Log).
 
 Each milestone has an exit criterion. A milestone is not done until its exit criterion is shown on the real translated vault, not only on a small sample.
 
-**WB-106 v0.8 keepability prerequisite before R1.** The current 0.1.14 model index is frontmatter/note/path-only and its text editor still treats the whole body as editable. Before the first potentially keepable v0.8 import is accepted, Workbench must parse `local-model.yaml` schema 0.1 read-only; index durable note/local ModelRefs; preserve `#^local-id` fragments; protect the governed Local Model region from ordinary body editing; expose the Local Model dropdown; add local model-health findings; and make Structure, Interfaces, Where Used and Requirements occurrence-aware. Repeated relationship entries are not quantity. Structured Local Model editing is deliberately later than this read/navigation gate.
+**WB-106 v0.8 keepability prerequisite before R1.** Workbench 0.1.15 is still frontmatter/note/path-only. It now refuses ordinary body editing when a governed Local Model marker exists, but before the first potentially keepable v0.8 import is accepted it must load `local-model.yaml`, read both schema 0.1 and 0.2, index durable note/local ModelRefs, preserve `#^local-id` fragments, expose the Local Model surface, add local model-health findings, and make Structure, Interfaces, Where Used and Requirements occurrence-aware. Repeated relationship entries are duplicate evidence, not quantity. Structured Local Model authoring is deliberately later than this read/navigation gate.
 
 ### M0 — Spike and feasibility (Phase 0)
 
@@ -251,7 +251,7 @@ Workbench is succeeding if it becomes more capable while the everyday workflow s
 
 **W-314 configuration follow-on.** After the WB-106 Local Model foundation can safely parse/index the governed body contract, add configuration support incrementally rather than combining it with the parser rewrite:
 
-1. read `usage` and definition-level `abstract` after the shared schemas advance;
+1. after WB-106, read the now-governed `usage` and definition-level `abstract` fields from Local Model 0.2 / element-types 1.17;
 2. derive transitive concrete candidate families from `subtypeOf`;
 3. expose read-only variation-space information and findings;
 4. add temporary variant/option selections in Workbench session state without mutating base architecture;
@@ -260,3 +260,8 @@ Workbench is succeeding if it becomes more capable while the everyday workflow s
 7. add model-number rules only after the configuration state is independently correct.
 
 This follow-on does not require new relationship types or a second persistence database. It must not delay the basic WB-106 read/navigation safety work by coupling configuration editing into the first Local Model parser.
+
+
+### 2026-10-02 continuation boundary
+
+For the next standalone plugin implementation, use `WB106_IMPLEMENTATION_CONTRACT.md` in `spencerskelly/MDSE_Workbench`. The schema advance is complete; WB-106 remains first. Do not combine persisted configuration editing with the parser/index rewrite.
