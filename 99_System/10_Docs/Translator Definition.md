@@ -132,20 +132,65 @@ W-303 fixes the local-ID style for v0.8.0: type-prefixed opaque stable tokens su
 
 A named source occurrence alone does not require a standalone Markdown note if these facts can be retained and addressed reliably in the containing model.
 
-### 6.1 Canonical Local Model record pattern (W-304)
+### 6.1 Canonical Local Model record pattern (W-304, amended by W-306)
 
-v0.8.0 uses heading + named-field Markdown records inside the W-302 managed region. The stable local ID is part of the heading; human-facing names are display data. Empty/meaningless fields are omitted.
+v0.8.0 uses engineering-readable headings plus named-field Markdown records inside the W-302 managed region. Each materialized record ends with a native Obsidian block ID equal to its stable W-303 local ID. The block ID is the persisted navigation anchor and durable local token; the visible heading may change without breaking incoming links. Empty/meaningless fields are omitted.
 
-- **Part occurrence:** `#### part-* — <name>` with `definition`, optional `name`, optional `multiplicity`, and other approved contextual fields. `definition` points to the reusable Object/assembly so invariant structure is reused rather than copied.
-- **Endpoint occurrence:** `#### ep-* — <name>` with either `part: <part-id/path>` or `parent: <endpoint-id/path>` as applicable, `definition` to the reusable Port/interface definition, and optional local name/multiplicity/kind. Nested pins/contacts/sub-interfaces are endpoint records using the same schema recursively; they are not a new model kind. W-305 refines this: inherited members remain implicit through the reusable definition and are materialized as local `ep-*` records only when the local context must address them independently (connection, local override, Requirement target, context-specific attribute/multiplicity, or another explicit local reference).
-- **Connection:** `#### conn-*` with participating endpoint addresses. It is owned by the lowest meaningful common Object/system/configuration context already defined by W-294.
-- **Flow:** `##### flow-* — <name>` nested under its carrying connection, with `definition` to the reusable Item Flow and endpoint role fields (`transmit`, `receive`, `exchange`, `unspecified`). The authoritative flow record exists once on the connection. Indexing/Workbench presents those flows from each participating endpoint/interface so interface-centric views remain complete without duplicated flow storage.
+- **Part occurrence:** a readable heading such as `#### Main Controller`, with `definition`, optional `name`, optional `multiplicity`, and other approved contextual fields, followed by `^part-*`. `definition` points to the reusable Object/assembly so invariant structure is reused rather than copied.
+- **Endpoint occurrence:** a readable heading such as `#### J4`, with either `part: <part-id/path>` or `parent: <endpoint-id/path>` as applicable, `definition` to the reusable Port/interface definition, and optional local name/multiplicity/kind, followed by `^ep-*`. W-305 applies: inherited pins/contacts/sub-interfaces remain implicit until the local context must address them independently.
+- **Connection:** a readable heading (for example `#### J4 to P2` when helpful) with participating endpoint addresses, followed by `^conn-*`. It is owned by the lowest meaningful common Object/system/configuration context already defined by W-294.
+- **Flow:** a readable nested heading such as `##### CAN_H`, under its carrying connection, with `definition` to the reusable Item Flow and endpoint role fields (`transmit`, `receive`, `exchange`, `unspecified`), followed by `^flow-*`. The authoritative flow record exists once on the connection. Indexing/Workbench presents those flows from each participating endpoint/interface so interface-centric views remain complete without duplicated flow storage.
+
+Example:
+
+```markdown
+### Part Occurrences
+
+#### Main Controller
+- definition: [[Main Control PCBA]]
+- multiplicity: 1
+
+^part-a7c31f
+
+### Local Interfaces
+
+#### J4
+- part: part-a7c31f
+- definition: [[8-Pin Circular Connector]]
+
+^ep-42bd90
+
+#### Pin 2
+- parent: ep-42bd90
+- definition: [[Connector Pin]]
+
+^ep-51c8ad
+
+### Connections
+
+#### J4 Pin 2 to P2
+- endpointA: ep-51c8ad
+- endpointB: ep-d08371
+
+^conn-917e2a
+
+##### CAN_H
+- definition: [[CAN_H]]
+- endpointA: transmit
+- endpointB: receive
+
+^flow-6cc318
+```
+
+Cross-note semantic links use ordinary Obsidian block-link syntax, for example `[[Control Assembly#^ep-42bd90|J4]]`. The durable semantic address remains owner note UID + governed local ID/path; the native block link is its persisted Obsidian navigation representation.
 
 EA-only provenance does not appear in these Local Model records. The importer writes `99_System/11_Import/Local Model Source Map.csv`, keyed by owner note UID + local ID, with the EA source identity/provenance needed for audit or return to EA. This file is import evidence only and is not required to interpret or operate the MDSE model after migration.
 
 Minimum source-map columns for v0.8.0: `owner_uid,local_id,local_kind,ea_guid,ea_source_kind,ea_owner_guid`. Additional source-only columns may be added when required to disambiguate provenance, but none become Local Model engineering fields.
 
+### 6.2 Representation policy (W-306)
 
+Prefer core Obsidian mechanisms and standard Markdown/YAML whenever they preserve the required MDSE meaning. Prefer broad plugin compatibility next. Workbench-only syntax/storage is a last resort. Workbench may provide richer semantic interpretation and views, but basic reading and navigation must remain useful in core Obsidian wherever practical.
 
 ## 7. Fields, tags, packages
 
