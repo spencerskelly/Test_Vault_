@@ -2607,7 +2607,7 @@ function localAnchor(parts){
 }
 function mdInline(v){return trim2(v).replace(/\r?\n/g," ").replace(/\s+/g," ").trim();}
 function entityWiki(entities,key){
-  const e=entities.get(key);return e?"[["+e.fileName+"]]":"";
+  const e=entities.get(key);return e?"[["+(e.linkTarget||e.fileName)+"]]":"";
 }
 function complementRole(role){
   if(role==="transmit")return "receive";
@@ -2750,7 +2750,7 @@ function buildLocalOccurrenceModel(ctx,entityCtx){
     if(ref.kind==="note")return ref.address;
     if(ownerEntity&&ref.ownerKey===ownerEntity.key)return "[[#^"+ref.anchor+"|"+ref.address+"]]";
     const o=entities.get(ref.ownerKey);
-    return o?"[["+o.fileName+"#^"+ref.anchor+"|"+o.fileName+" / "+ref.address+"]]":"`"+ref.address+"`";
+    return o?"[["+(o.linkTarget||o.fileName)+"#^"+ref.anchor+"|"+o.fileName+" / "+ref.address+"]]":"`"+ref.address+"`";
   }
   function pairForRefs(a,b){return [a.refKey,b.refKey].sort().join("<->");}
   function optionalConnectorDefinition(c){
@@ -2815,11 +2815,11 @@ function buildLocalOccurrenceModel(ctx,entityCtx){
       if(trim2(c.ea_guid)&&!conn.sourceGuids.includes(trim2(c.ea_guid)))conn.sourceGuids.push(trim2(c.ea_guid));
     }
     if(!conn)continue;
-    const conveyedItems=conveyed.byConnector.get(normGuid(c.ea_guid))||[];
+    const conveyedItems=(conveyed.byConnector.get(normGuid(c.ea_guid))||[]).slice().sort((a,b)=>normGuid(a.ea_guid).localeCompare(normGuid(b.ea_guid))||n2(a.Object_ID)-n2(b.Object_ID));
     for(const item of conveyedItems){
       const rr=resolveEndpoint(item.Object_ID,ctx.elementCtx,ctx.portResolution);
       const defKey=rr&&entities.has(rr.key)?rr.key:"";
-      const localId=stableLocalId("flow",item,item.Object_ID);
+      const localId=stableLocalId("flow",c,item.Object_ID);
       if(conn.flows.some(x=>x.localId===localId&&x.definitionKey===defKey))continue;
       conn.flows.push({
         localId,anchor:localAnchor([conn.localId,localId]),identifier:trim2(item.Name)||"flow",
@@ -3014,12 +3014,12 @@ function relationYaml(entity,graph,entities,externalSet,sliceKeys,localModel){
     lines.push(field+":");
     for(const k of targets){
       const t=entities.get(k);if(!t)continue;
-      lines.push("  - "+yamlScalar("[["+t.fileName+"]]"));
+      lines.push("  - "+yamlScalar("[["+(t.linkTarget||t.fileName)+"]]"));
       if(!sliceKeys.has(k))externalSet.add(entity.fileName+" | "+field+" | "+t.fileName);
     }
     for(const r of localTargets){
       const t=entities.get(r.targetOwnerKey);if(!t)continue;
-      const link="[["+t.fileName+"#^"+r.targetAnchor+"]]";
+      const link="[["+(t.linkTarget||t.fileName)+"#^"+r.targetAnchor+"]]";
       lines.push("  - "+yamlScalar(link));
       if(!sliceKeys.has(r.targetOwnerKey))externalSet.add(entity.fileName+" | appliesTo | "+t.fileName+"#^"+r.targetAnchor);
     }
@@ -3283,7 +3283,7 @@ function diagramReconciliationCsv(ctx,selected){
   }
   return rowsCsv(rows);
 }
-async function attachmentReconciliation(ctx,entityCtx,sliceKeys){
+async function attachmentReconciliation(ctx,entityCtx,sliceKeys,wholeModel){
   const rows=[["doc_id","doc_type","element_guid","element_name","status","source_bytes","detail"]];
   const counts={total:0,inScope:0,failed:0,outside:0};
   const byGuid=new Map();
@@ -3299,8 +3299,14 @@ async function attachmentReconciliation(ctx,entityCtx,sliceKeys){
     const inside=!!(e&&sliceKeys.has(e.key));
     const bytes=row.BinContent instanceof Uint8Array?row.BinContent.length:(row.StrContent?String(row.StrContent).length:0);
     if(!inside){
-      counts.outside++;
-      rows.push([docId,trim2(row.DocType),eg,e?trim2(e.raw.Name):"","outside slice",bytes,""]);
+      if(wholeModel){
+        counts.failed++;
+        rows.push([docId,trim2(row.DocType),eg,e?trim2(e.raw.Name):"","failed attachment import",bytes,
+          e?"owner did not resolve into emitted whole-model scope":"no owning EA element resolved for document row"]);
+      }else{
+        counts.outside++;
+        rows.push([docId,trim2(row.DocType),eg,e?trim2(e.raw.Name):"","outside slice",bytes,""]);
+      }
       continue;
     }
     counts.inScope++;counts.failed++;
@@ -3362,30 +3368,33 @@ async function generateSlice(){
     el("sliceStatus").textContent="Reading retained source values";
     const tagMap=await collectSliceTags(sourceIds),foldedNotes=foldedEaNotes(lastPlannerContext,entityCtx);
 
-    const folderMap=buildFolderPathMap(entities),files=[],externalSet=new Set(),pathReviews=[];
-    let relValues=0;
-    for(const k of Array.from(sliceKeys).sort()){
-      const e=entities.get(k),pp=pathPlanForEntity(e,folderMap);
-      const fm=graph.get(k);if(fm)for(const a of fm.values())relValues+=a.length;
-      files.push({path:pp.path,text:renderEntityMarkdown(e,graph,entityCtx,tagMap,foldedNotes,externalSet,sliceKeys,localModel),entity:e});
-      if(pp.changed||pp.shortened)pathReviews.push({
+    const folderMap=buildFolderPathMap(entities),pathReviews=[],allPaths=new Map();
+    const pathSet=new Set();
+    for(const e of Array.from(entities.values()).sort(compareEntity)){
+      const pp=pathPlanForEntity(e,folderMap);
+      if(pp.path.length>MAX_GENERATED_PATH)throw new Error("Generated path exceeds "+MAX_GENERATED_PATH+": "+pp.path);
+      const low=pp.path.toLowerCase();
+      if(pathSet.has(low))throw new Error("Case-insensitive whole-model output path collision: "+pp.path);
+      pathSet.add(low);allPaths.set(e.key,pp);e.outputPath=pp.path;e.linkTarget=pp.path.replace(/\.md$/i,"");
+      if((pp.changed||pp.shortened)&&sliceKeys.has(e.key))pathReviews.push({
         eaGuid:e.eaGuid,eaType:trim2(e.raw.Object_Type),eaName:trim2(e.raw.Name),
         sourceFolder:pp.originalFolder,outputPath:pp.path,changed:pp.changed,shortened:pp.shortened
       });
     }
 
-    const pathSet=new Set(),modelRoots=new Set();
-    for(const f of files){
-      if(f.path.length>MAX_GENERATED_PATH)throw new Error("Generated path exceeds "+MAX_GENERATED_PATH+": "+f.path);
-      const low=f.path.toLowerCase();if(pathSet.has(low))throw new Error("Case-insensitive output path collision: "+f.path);pathSet.add(low);
-      const root=f.path.split("/")[0];if(root)modelRoots.add(root);
+    const files=[],externalSet=new Set();let relValues=0,modelRoots=new Set();
+    for(const k of Array.from(sliceKeys).sort()){
+      const e=entities.get(k),pp=allPaths.get(k);
+      const fm=graph.get(k);if(fm)for(const a of fm.values())relValues+=a.length;
+      files.push({path:pp.path,text:renderEntityMarkdown(e,graph,entityCtx,tagMap,foldedNotes,externalSet,sliceKeys,localModel),entity:e});
+      const root=pp.path.split("/")[0];if(root)modelRoots.add(root);
     }
     for(const root of modelRoots){
       if(await directoryExists(outputDirHandle,root))throw new Error("Refusing to import over an existing model folder '"+root+"'. Use a fresh generated base.");
     }
 
     el("sliceStatus").textContent="Reconciling attachments and diagrams";
-    const attachments=await attachmentReconciliation(lastPlannerContext,entityCtx,sliceKeys);
+    const attachments=await attachmentReconciliation(lastPlannerContext,entityCtx,sliceKeys,wholeModel);
     const diagramCsv=diagramReconciliationCsv(lastPlannerContext,selected);
     const sourceMap=localModelSourceMapCsv(localModel,entityCtx);
     const ledger=ledgerCsvV03(lastPlannerContext,entityCtx,sliceKeys,selected);
