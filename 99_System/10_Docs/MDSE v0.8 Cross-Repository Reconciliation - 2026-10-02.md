@@ -28,7 +28,7 @@ Current target:
 ### MDSE_Workbench
 This is the live plugin implementation. It remains independently versioned from MDSE releases.
 
-The current 0.1.14 implementation is a pre-Local-Model spike. It is not the keepability build. WB-106 is the next implementation gate.
+The current 0.1.15 source is a safety/alignment build: repeated relationships are not shown as quantity and ordinary body editing is blocked on governed Local Model notes. It is not the keepability build. WB-106 is the next implementation gate.
 
 ### Old base-vault repository
 `Test_Vault_-base-vault-2026-09-30-rel133-v051` is reference only. It must not be issued as the v0.8 base.
