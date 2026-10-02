@@ -192,7 +192,7 @@ summary{cursor:pointer;font-weight:650}
       <button id="generateSlice" class="primary" disabled>Generate assessment vault</button>
       <span id="sliceStatus" class="badge">Build a PASS plan first</span>
     </div>
-    <p class="small muted">Use a fresh generated MDSE 0.8.0 base. Do not select <code>Test_Vault_</code> or an existing imported model. Build a PASS plan first, then select the output. The importer requires relationships 1.35, element-types 1.17, Local Model 0.2, and the pinned MDSE Bootstrap + Workbench runtime stack. Generated model folders are capped at 75 model files; if a planned folder exceeds that limit, the importer stops for a meaningful semantic/navigation split rather than inventing overflow buckets.</p>
+    <p class="small muted">Use a fresh generated MDSE 0.8.0 base. Do not select <code>Test_Vault_</code> or an existing imported model. Build a PASS plan first, then select the output. The importer requires relationships 1.35, element-types 1.17, Local Model 0.2, and the pinned MDSE Bootstrap + Workbench runtime stack. Generated model folders are capped at 75 model files. Existing meaningful source/navigation subdivisions are preserved; when a folder still exceeds 75, the importer deterministically creates mechanical fallback subfolders such as <code>folder_1</code>, <code>folder_2</code>, etc.</p>
   </div>
 
   <div class="grid3">
@@ -2460,20 +2460,43 @@ function pathPlanForEntity(e,folderMap){
   return {path,folder,file,changed,shortened,originalFolder:e.vaultPath||""};
 }
 
-function folderCapacityViolations(items){
-  const counts=new Map();
+function applyMechanicalFolderCapacity(items){
+  const groups=new Map();
   for(const item of items){
     if(!item||!item.pp||!item.e)continue;
     const folder=item.pp.folder||"";
     const key=folder.toLowerCase();
-    if(!counts.has(key))counts.set(key,{folder:folder||"(vault root)",count:0,samples:[]});
-    const row=counts.get(key);
-    row.count++;
-    if(row.samples.length<5)row.samples.push(item.e.fileName||item.e.title||item.e.key||"(unnamed)");
+    if(!groups.has(key))groups.set(key,{folder,items:[]});
+    groups.get(key).items.push(item);
   }
-  return Array.from(counts.values())
-    .filter(x=>x.count>MAX_MODEL_FILES_PER_FOLDER)
-    .sort((a,b)=>b.count-a.count||a.folder.localeCompare(b.folder));
+  const splits=[];
+  for(const g of groups.values()){
+    if(g.items.length<=MAX_MODEL_FILES_PER_FOLDER)continue;
+    g.items.sort((a,b)=>compareEntity(a.e,b.e)||a.pp.path.localeCompare(b.pp.path));
+    const total=Math.ceil(g.items.length/MAX_MODEL_FILES_PER_FOLDER);
+    g.items.forEach((item,i)=>{
+      const bucket=Math.floor(i/MAX_MODEL_FILES_PER_FOLDER)+1;
+      const sub="folder_"+bucket;
+      const newFolder=g.folder?g.folder+"/"+sub:sub;
+      let file=item.pp.file;
+      let path=newFolder+"/"+file;
+      if(path.length>MAX_GENERATED_PATH){
+        const room=MAX_GENERATED_PATH-newFolder.length-1-3;
+        if(room<8)throw new Error("Mechanical folder split leaves no readable filename within "+MAX_GENERATED_PATH+" characters: "+path);
+        const base=file.replace(/\.md$/i,"");
+        file=shortenedFileName(base,room)+".md";
+        path=newFolder+"/"+file;
+        item.pp.shortened=true;
+      }
+      item.pp.folder=newFolder;
+      item.pp.file=file;
+      item.pp.path=path;
+      item.pp.changed=true;
+      item.pp.mechanicalSplit=true;
+    });
+    splits.push({folder:g.folder||"(vault root)",count:g.items.length,buckets:total});
+  }
+  return splits.sort((a,b)=>b.count-a.count||a.folder.localeCompare(b.folder));
 }
 
 function addRawRel(graph,ownerKey,field,targetKey,allowDuplicate){
@@ -4229,10 +4252,9 @@ async function generateSlice(){
       });
     }
     const plannedItems=Array.from(plannedByPath.values()).flat();
-    const folderViolations=folderCapacityViolations(plannedItems.filter(item=>sliceKeys.has(item.e.key)));
-    if(folderViolations.length){
-      const detail=folderViolations.slice(0,8).map(x=>x.folder+" ("+x.count+")").join(", ");
-      throw new Error("FOLDER-CAPACITY-EXCEEDED: generated model folders may contain at most "+MAX_MODEL_FILES_PER_FOLDER+" model files. Add a meaningful semantic/navigation subdivision before import; arbitrary overflow buckets are not allowed. "+detail);
+    const mechanicalSplits=applyMechanicalFolderCapacity(plannedItems.filter(item=>sliceKeys.has(item.e.key)));
+    if(mechanicalSplits.length){
+      log("Mechanical folder subdivision applied: "+mechanicalSplits.map(x=>x.folder+" "+x.count+" files -> "+x.buckets+" folders").join("; "));
     }
 
     const pathSet=new Set();
