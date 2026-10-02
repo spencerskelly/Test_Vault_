@@ -19,6 +19,10 @@ const used = new Set();
 for (const f of tp.app.vault.getMarkdownFiles()) {
   const u = tp.app.metadataCache.getFileCache(f)?.frontmatter?.uid;
   if (u) used.add(String(u));
+  try {
+    const body = await tp.app.vault.cachedRead(f);
+    for (const m of body.matchAll(/\^(?:part|ep|conn|flow)-(\d{17}[a-z-]{13})\b/g)) used.add(m[1]);
+  } catch (e) {}
 }
 const pad = (n, l = 2) => String(n).padStart(l, "0");
 const stamp = d => `${d.getFullYear()}${pad(d.getMonth() + 1)}${pad(d.getDate())}${pad(d.getHours())}${pad(d.getMinutes())}${pad(d.getSeconds())}${pad(d.getMilliseconds(), 3)}`;
