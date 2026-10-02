@@ -603,7 +603,7 @@ In View mode these sections are inspectable and Local Model records are read-onl
 - note-level relationships use the relationship service;
 - Local Model editing uses structured controls inside the Local Model section only after the canonical body schema/marker contract is frozen.
 
-W-302 freezes the v0.8.0 Local Model region boundary as `<!-- MDSE:LOCAL-MODEL START schema=0.1 -->` through `<!-- MDSE:LOCAL-MODEL END -->`. Workbench owns only the content inside those markers as Local Model data; the comments are not engineering semantics. Raw text editing must never be a back door around this governed region. Structured Local Model field editing still waits for the remaining record-field/local-ID contract.
+W-319 advances the canonical v0.8.0 Local Model writer boundary to `<!-- MDSE:LOCAL-MODEL START schema=0.2 -->` through `<!-- MDSE:LOCAL-MODEL END -->`. Workbench must read both 0.1 and 0.2. The comments are parser/editor boundaries, not engineering semantics. Raw text editing must never rewrite the governed region. The record/local-ID contract is now governed by `local-model.yaml`; structured authoring remains later than WB-106.
 
 The same separation applies when the popup is launched from Canvas: graphical presentation may change, but storage authority and edit services do not.
 
@@ -819,3 +819,18 @@ Future high-value views include:
 Model-number generation/reverse decoding may later use the same resolved configuration state, but commercial codes belong to product/configuration knowledge and must not be written as intrinsic properties of reusable component definitions.
 
 The user-facing step-by-step workflow is intentionally deferred until schema support and the configuration interaction have been implemented and tested.
+
+
+## 2026-10-02 v0.8 alignment
+
+The model-side contract is now settled by W-315 through W-319.
+
+- relationships 1.35;
+- element-types 1.17;
+- Local Model writer 0.2; reader compatibility 0.1 + 0.2;
+- one globally unique 30-character identity-token namespace across notes and Local Model reference points;
+- part/endpoint `usage` and sparse reusable-definition `abstract` are governed;
+- repeated note-level links are duplicate evidence, never quantity;
+- WB-106 remains the keepability gate before a full v0.8 import can be accepted.
+
+Standalone Workbench 0.1.15 is a safety/alignment build: it labels repeated links as duplicate evidence and refuses ordinary body editing on notes containing a governed Local Model marker. It does not yet implement the WB-106 parser/index/view foundation.
