@@ -665,6 +665,44 @@ The markers are tooling/editing boundaries only; they do not carry engineering s
 
 **W-303 · 2026-10-01 · Local Model records use type-prefixed stable local IDs independent of visible engineering names.** v0.8.0 local records use stable owner-scoped IDs with a type prefix and opaque token, for example `part-a7c31f`, `ep-42bd90`, `conn-917e2a`, and `flow-6cc318`. Imported records derive the token deterministically from immutable EA source identity/provenance so re-importing the same source occurrence yields the same local ID even if ordering or visible names change. Visible identifiers such as J4 or P2 and local engineering names remain separate display/edit fields and are never the durable identity. Future Workbench-created local records use the same prefixes with generated stable tokens. The token is opaque to users and must not encode sequence position or mutable engineering meaning. Durable addresses remain owner UID plus local ID, with endpoint/member and connection/flow scoping as already approved.
 
+**W-304 · 2026-10-01 · v0.8.0 freezes the canonical Local Model record pattern and keeps EA provenance out of engineering notes.** Local Model records use Markdown headings plus named fields. The stable local ID is in the record heading, optionally followed by the human-facing name. Canonical record kinds remain part occurrence, endpoint occurrence, connection and connection-scoped flow; do not add a separate kind merely for a nested/sub-interface. A nested interface/member is another endpoint record using the same endpoint schema plus a `parent` address to its containing endpoint. This recursive endpoint pattern supports connectors, pins, contacts, terminal positions, mating features and other sub-interfaces at any required depth. Part occurrences keep `definition` links to reusable Object/assembly notes so the same definition can be reused in new assemblies/products without duplicating invariant structure. Endpoint occurrences keep `definition` links to reusable Port/interface definitions and may be local to a part occurrence or nested under another endpoint. Connections reference the participating local endpoint addresses. Flows remain authored once, under the specific connection that carries them, with a reusable `definition` plus endpoint roles (`transmit`, `receive`, `exchange`, `unspecified`). Workbench/indexing must expose those connection-owned flows from each participating interface/sub-interface so an engineer can see what flows on that interface without duplicating authoritative flow records. EA GUIDs, EA object/connector identifiers and other EA-only provenance are **not written into Local Model note records**. Instead the importer writes `99_System/11_Import/Local Model Source Map.csv`, keyed by owner note UID + local ID, containing the source EA identity/provenance needed to return to EA. This source map is import evidence, not engineering semantics, and Workbench does not require it for normal model operation. The managed region therefore remains compact and reusable after EA is retired.
+
+Canonical shape:
+
+```markdown
+### Part Occurrences
+
+#### part-a7c31f — Main Control PCBA
+- definition: [[Main Control PCBA]]
+- name: Main Controller
+- multiplicity: 1
+
+### Local Interfaces
+
+#### ep-42bd90 — J4
+- part: part-a7c31f
+- definition: [[8-Pin Circular Connector]]
+- name: J4
+
+#### ep-51c8ad — Pin 2
+- parent: ep-42bd90
+- definition: [[Connector Pin]]
+- name: Pin 2
+
+### Connections
+
+#### conn-917e2a
+- endpointA: ep-51c8ad
+- endpointB: ep-d08371
+
+##### flow-6cc318 — CAN_H
+- definition: [[CAN_H]]
+- endpointA: transmit
+- endpointB: receive
+```
+
+Optional fields are written only when meaningful; do not emit empty placeholders. Exact anchor/link rendering may be implemented by Workbench/importer so long as the durable semantic address remains owner UID + governed local ID/path.
+
 ## Open (raised, not yet decided)
 - Inverse fields (W-275, W-287, trial of option B): v0.4 validates every persisted paired inverse and symmetric mirror before a slice is written. Still open: the standalone regenerate script (language, location, when it runs) and whether Nodian is removed after the `02 Product Context` trial.
 - Relationship endpoint rules (W-272 to W-287): done for every relationship and embedded in native importer v0.4. Shared Aggregation now writes `includes` (W-277, W-287); off-rule imported links remain Review findings rather than errors.

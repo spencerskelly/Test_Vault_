@@ -35,6 +35,7 @@ All in `99_System/11_Import`, regenerated on every run, read-only evidence (W-35
 
 - `Ledger.csv`: one row per element, connector, diagram and package, sorted by EA GUID. Columns `ea_guid, source_kind, ea_type, ea_name, outcome, rule, uid, id, folded_into_uid`. `outcome` is `note`, `folded`, `link`, `canvas` or `not carried`, and in a slice run only also `outside slice` (W-254); `rule` is the decision number.
 - `Run Manifest.md`: date, importer release, base-vault `mdse_release`, relationship-schema version, element-schema version, input identity (file name and size), the source counts read from the `.qeax` beside the expected ones (W-257) and counts by outcome; for a slice run, also the links that leave the slice (W-253). Importer/base release mismatch is blocking from W-299 onward. For v0.8.0 initial import, the manifest also reports all source diagrams as deferred by scope and records that no diagram files were written (W-300).
+- `Local Model Source Map.csv`: W-304 import evidence mapping each imported local record back to EA without putting EA provenance in engineering notes. Minimum columns: `owner_uid,local_id,local_kind,ea_guid,ea_source_kind,ea_owner_guid`. It is regenerated with the import evidence and is not model authority.
 - Four review tables, each starting `ea_guid, ea_type, ea_name, category`, with no status column (decisions go in `Review Changes Log.md` by the same GUID, W-38): `Review - Block-Level Flow Connectors.csv` (W-217), `Review - Added Ports.csv` (W-218), `Review - Nesting Direction.csv` (W-219), `Review - Equals Direction.csv` (W-220).
 - Not decided: what happens to the four header-only files `Identity Registry.csv`, `Model Checks.csv`, `Pending Relationships.csv` and `Transformation Log.csv` (W-215).
 
@@ -130,6 +131,20 @@ Conceptual durable addresses:
 W-303 fixes the local-ID style for v0.8.0: type-prefixed opaque stable tokens such as `part-a7c31f`, `ep-42bd90`, `conn-917e2a`, and `flow-6cc318`. Imported tokens are deterministically derived from immutable EA source identity/provenance; source ordering and visible engineering names do not participate in identity. Workbench-created local records use the same prefixes with generated stable tokens.
 
 A named source occurrence alone does not require a standalone Markdown note if these facts can be retained and addressed reliably in the containing model.
+
+### 6.1 Canonical Local Model record pattern (W-304)
+
+v0.8.0 uses heading + named-field Markdown records inside the W-302 managed region. The stable local ID is part of the heading; human-facing names are display data. Empty/meaningless fields are omitted.
+
+- **Part occurrence:** `#### part-* — <name>` with `definition`, optional `name`, optional `multiplicity`, and other approved contextual fields. `definition` points to the reusable Object/assembly so invariant structure is reused rather than copied.
+- **Endpoint occurrence:** `#### ep-* — <name>` with either `part: <part-id/path>` or `parent: <endpoint-id/path>` as applicable, `definition` to the reusable Port/interface definition, and optional local name/multiplicity/kind. Nested pins/contacts/sub-interfaces are endpoint records using the same schema recursively; they are not a new model kind.
+- **Connection:** `#### conn-*` with participating endpoint addresses. It is owned by the lowest meaningful common Object/system/configuration context already defined by W-294.
+- **Flow:** `##### flow-* — <name>` nested under its carrying connection, with `definition` to the reusable Item Flow and endpoint role fields (`transmit`, `receive`, `exchange`, `unspecified`). The authoritative flow record exists once on the connection. Indexing/Workbench presents those flows from each participating endpoint/interface so interface-centric views remain complete without duplicated flow storage.
+
+EA-only provenance does not appear in these Local Model records. The importer writes `99_System/11_Import/Local Model Source Map.csv`, keyed by owner note UID + local ID, with the EA source identity/provenance needed for audit or return to EA. This file is import evidence only and is not required to interpret or operate the MDSE model after migration.
+
+Minimum source-map columns for v0.8.0: `owner_uid,local_id,local_kind,ea_guid,ea_source_kind,ea_owner_guid`. Additional source-only columns may be added when required to disambiguate provenance, but none become Local Model engineering fields.
+
 
 
 ## 7. Fields, tags, packages
