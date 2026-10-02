@@ -4,7 +4,7 @@ This folder contains native importer history and vault initialization helpers.
 
 ## Current v0.8 direction
 
-There is **no release-conformant v0.8 importer file yet**.
+A **v0.8.0 implementation candidate now exists**, but it is not yet release-conformant.
 
 Use these as code/history references only:
 - v0.5.2 — accepted safety/base-validation lineage;
@@ -12,11 +12,7 @@ Use these as code/history references only:
 
 Do not use v0.7 to generate a model intended to keep.
 
-The next issued importer is:
-
-`EA_to_MDSE_Native_Importer_v0.8.0.html`
-
-and it must follow:
+Candidate file: `EA_to_MDSE_Native_Importer_v0.8.0.html`. It follows:
 1. `../10_Docs/MDSE v0.8 Cross-Repository Reconciliation - 2026-10-02.md`
 2. `../10_Docs/Translator Definition.md`
 3. Workspace Decision Log through W-319
@@ -48,7 +44,7 @@ See `MDSE v0.8 Toolchain Review - 2026-10-02.md` for the code-gap audit.
 | `EA_to_MDSE_Native_Importer_v0.3.html`, `v0.4.html`, `v0.5.html`, `v0.5.1.html` | history | Intermediate builds. Superseded by v0.5.2. |
 | `EA_to_MDSE_Native_Importer_v0.5.2.html` | accepted safety lineage (fallback) | Base-vault identity checks, stale-state invalidation, `hasState/stateOf`, schema 1.35. Starting point for v0.8.0. |
 | `EA_to_MDSE_Native_Importer_v0.7.html` | merge candidate, never accepted | Occurrence/QEAX code evidence. Not release-conformant (14 gaps listed in the Toolchain Review). Do not generate a model to keep. |
-| `EA_to_MDSE_Native_Importer_v0.8.0.html` | planned, not built | The release importer. Build order is in the Reconciliation document. |
+| `EA_to_MDSE_Native_Importer_v0.8.0.html` | implementation candidate; acceptance pending | Release/schema/plugin gates, Local Model 0.2, W-318 naming/path preflight, evidence package and stage-2 review views implemented. Real QEAX acceptance, linked-document extraction disposition and WB-106 keepability gate remain. |
 | `Initialize-Vault.sh`, `Initialize-Vault.ps1` | current helpers | Initialize `.vault.yaml` once in a new disposable or real vault. |
 
 The machine-checkable version of this table is `99_System/03_Schemas/mdse-release.yaml`; run `python3 99_System/09_Tools/check-release.py` after any change to tools, schemas or docs. Registry of current files: [[00 - Current State]].
