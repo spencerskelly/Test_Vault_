@@ -24,7 +24,7 @@ Current through W-297.
 - **The import reads the `.qeax` file directly** (W-247). The CSV files in `99_System/CSV_EA` were used to define the rules; they are not an input to the import. Reading the source file avoids a translation error in an extraction step.
 - The CSV files are an evidence bundle that an earlier tool build (2.6.0) extracted from `EA_2026_09_06_endgame.qeax`. They keep EA's table and column names, and the rules cite those names (`t_object.Object_Type`, `t_connector.Connector_Type`). The rules apply to the same tables in the `.qeax`.
 - Tables the import uses, with the rule file that decides each field: `t_object` and `t_package` (elements and packages), `t_connector` (connectors), `t_objectproperties` (tags, including the `Notes` column, which only the `t_objectproperties_raw.csv` extract kept as a separate file), `t_xref` (relationship kinds such as `conveyed`, `trigger`, `entry`, `doActivity`, `represents`, `target`), `t_operation` (State actions, W-86), `t_attribute` (Class attributes, W-86, W-108), `t_diagram`, `t_diagramobjects`, `t_diagramlinks` (diagrams), `t_document` (linked documents as attachments).
-- **Base vault contents (W-250, W-270, W-287, W-289, W-291, W-292, W-296).** The tool fills a copy of a clean base vault. The approved content list is unchanged: `.obsidian` without `workspace.json`, plugin `data.json` and `author-code.txt`; `.gitignore`, `.gitattributes`, `AGENTS.md`; `Definitions`; in `99_System`: `02_AI`, `04_People`, `05_Templates`, `08_Scripts`, `09_Tools`, the `Enabled Plugin Stack` note, the Bootstrap spec and Ruleset 1.22; in `03_Schemas` only `authors.yaml`, `element-types.yaml` and `relationships.yaml`, plus folder navigation. It excludes `CSV_EA`, `99_System/archive`, the Decision Log, the handoff, this file, mapping/disposition YAML files, import outputs and `MDSE Workbench`. `.vault.yaml` ships `UNINITIALIZED` and is initialized once for the disposable copy. The current clean base repository is `spencerskelly/Test_Vault_-base-vault-2026-09-30-rel133-v051` main. Its repository name is stale; its actual README/content is relationship schemaVersion **1.35** with native importer **v0.5.2** (W-291, W-292). v0.5.2 requires schema 1.35, requires the root README to identify an MDSE Base Vault, rejects the `Test_Vault_` translator workspace, resets stale browser/planner/output state and refuses any target that already contains a model root folder it intends to create (W-290, W-296). Historical base branches under `Test_Vault_` remain evidence only. **Release pairing from W-299:** existing artifacts are not retroactively renamed, but the next newly issued importer/base pair is v0.8.0. The clean base will declare `mdse_release: "0.8.0"` in `.vault.yaml`, the importer will declare the same release, and a mismatch blocks planning/writing. Relationship and element schema versions remain independent.
+- **Base vault contents (W-250, W-270, W-287, W-289, W-291, W-292, W-296).** The tool fills a copy of a clean base vault. The approved content list is unchanged: `.obsidian` without `workspace.json`, plugin `data.json` and `author-code.txt`; `.gitignore`, `.gitattributes`, `AGENTS.md`; `Definitions`; in `99_System`: `02_AI`, `04_People`, `05_Templates`, `08_Scripts`, `09_Tools`, the `Enabled Plugin Stack` note, the Bootstrap spec and Ruleset 1.22; in `03_Schemas` only `authors.yaml`, `element-types.yaml`, `relationships.yaml` and `local-model.yaml`, plus folder navigation. It excludes `CSV_EA`, `99_System/archive`, the Decision Log, the handoff, this file, mapping/disposition YAML files, import outputs and `MDSE Workbench`. `.vault.yaml` ships `UNINITIALIZED` and is initialized once for the disposable copy. The current clean base repository is `spencerskelly/Test_Vault_-base-vault-2026-09-30-rel133-v051` main. Its repository name is stale; its actual README/content is relationship schemaVersion **1.35** with native importer **v0.5.2** (W-291, W-292). v0.5.2 requires schema 1.35, requires the root README to identify an MDSE Base Vault, rejects the `Test_Vault_` translator workspace, resets stale browser/planner/output state and refuses any target that already contains a model root folder it intends to create (W-290, W-296). Historical base branches under `Test_Vault_` remain evidence only. **Release pairing from W-299:** existing artifacts are not retroactively renamed, but the next newly issued importer/base pair is v0.8.0. The clean base will declare `mdse_release: "0.8.0"` in `.vault.yaml`, the importer will declare the same release, and a mismatch blocks planning/writing. Relationship and element schema versions remain independent.
 - Every field and every table has a disposition (`property`, `body`, `structure`, `archive` or `drop`, W-33): `ea-field-dispositions.yaml`. Empty tables are dropped (W-74). `t_connectortag` is dropped, since it holds five names and no values (W-85). Tags: `ea-tag-dispositions.yaml` (121 decided: 80 drop, 38 body, 3 structure).
 - **Source counts for check 5 (W-257).** Rows in the CSV bundle's `extract_manifest.json`: `t_object` 35,969 (of these 1,386 are Packages), `t_connector` 21,822, `t_package` 1,387 (the root `Model` has no `t_object` row), `t_diagram` 2,924, `t_diagramobjects` 42,966, `t_diagramlinks` 37,955, `t_objectproperties` 249,892, `t_xref` 42,052, `t_document` 397, `t_operation` 23, `t_attribute` 5. Diagrams by EA diagram type (`diagram_type_summary.csv`): Custom 1,230, Logical 1,038, Use Case 267, CompositeStructure 151, Statechart 109, Activity 95, Sequence 24, Package 10. Counts by EA object type and connector type are in sections 5 and 6. The tool reads these counts from the `.qeax` and writes them to the run manifest beside the expected ones.
 - The counts in this file originated in the CSV evidence bundle and were verified directly against `EA_2026_09_06_endgame.qeax` by native importer v0.1 (W-273): all 11 translator-used table counts, all 31 EA object-type counts, all 15 connector-type counts and all 8 diagram-type counts match exactly. The tool still compares every run against this baseline and fails on any difference (W-268). The 254–255-character question is also closed: `User Story`, `Product Management Comment`, `Sales Comment` and `Engineering Comment` already stop at that boundary in the QEAX itself and have no continuation in tagged-value Notes. Stage 1 preserves those values exactly, never reconstructs missing text, and reports the condition only as a source-data advisory (W-273).
@@ -135,61 +135,74 @@ W-303 fixes the local-ID style for v0.8.0: type-prefixed opaque stable tokens su
 
 A named source occurrence alone does not require a standalone Markdown note if these facts can be retained and addressed reliably in the containing model.
 
-### 6.1 Canonical Local Model record pattern (W-304, amended by W-306)
+### 6.1 Canonical Local Model record pattern (W-304, W-306, W-311 to W-313)
 
-v0.8.0 uses engineering-readable headings plus named-field Markdown records inside the W-302 managed region. Each materialized record ends with a native Obsidian block ID equal to its stable W-303 local ID. The block ID is the persisted navigation anchor and durable local token; the visible heading may change without breaking incoming links. Empty/meaningless fields are omitted.
+v0.8.0 uses engineering-readable headings plus named-field Markdown records inside the W-302 managed region. Each materialized record ends with a native Obsidian block ID equal to its stable W-303 local ID. All persisted references between local records use native Obsidian block links under W-312; bare local-ID strings are not the canonical persisted reference form.
 
-- **Part occurrence:** a readable heading such as `#### Main Controller`, with `definition`, optional `name`, optional `multiplicity`, and other approved contextual fields, followed by `^part-*`. `definition` points to the reusable Object/assembly so invariant structure is reused rather than copied. W-310 constrains `multiplicity`: use it only for genuinely interchangeable copies that require no individual local address. If any copy has distinct connections, Requirements, states, attributes/overrides, flows or other contextual relationships, represent those copies as separate `part-*` occurrences.
-- **Endpoint occurrence:** a readable heading such as `#### J4`, with either `part: <part-id/path>` or `parent: <endpoint-id/path>` as applicable, `definition` to the reusable Port/interface definition, and optional local name/multiplicity/kind, followed by `^ep-*`. W-305 applies: inherited pins/contacts/sub-interfaces remain implicit until the local context must address them independently.
-- **Connection:** a readable heading (for example `#### J4 to P2` when helpful) with participating endpoint addresses, followed by `^conn-*`. It is owned by the lowest meaningful common Object/system/configuration context already defined by W-294.
-- **Flow:** a readable nested heading such as `##### CAN_H`, under its carrying connection, with `definition` to the reusable Item Flow and endpoint role fields (`transmit`, `receive`, `exchange`, `unspecified`), followed by `^flow-*`. The authoritative flow record exists once on the connection. Indexing/Workbench presents those flows from each participating endpoint/interface so interface-centric views remain complete without duplicated flow storage.
+The machine-readable authority for this body format is `99_System/03_Schemas/local-model.yaml` schema 0.1 (W-313).
+
+- **Part occurrence:** readable heading, `definition` to reusable Object/assembly, optional `identifier` and `multiplicity`, followed by `^part-*`. W-310 permits multiplicity only for contextually interchangeable copies.
+- **Endpoint occurrence:** readable heading, `definition` to reusable Port/interface, optional `part` link to a local part occurrence or `parent` link to a local endpoint occurrence, optional `exposes` or temporary `equals`, optional identifier/multiplicity/kind, followed by `^ep-*`. `part` and `parent` are mutually exclusive. An endpoint with neither is on the owning assembly boundary. W-305 still applies: inherited nested members remain implicit until local addressability is required.
+- **Connection:** readable heading with `endpointA` and `endpointB` native block links, followed by `^conn-*`. Under W-311 the owning note is the assembly/context that forms the connection.
+- **Flow:** readable nested heading under its carrying connection, `definition` to reusable Item Flow, endpoint role fields (`transmit`, `receive`, `exchange`, `unspecified`), followed by `^flow-*`. The authoritative flow occurrence exists once on the connection.
 
 Example:
 
 ```markdown
 ### Part Occurrences
 
-#### Main Controller
-- definition: [[Main Control PCBA]]
-- multiplicity: 1
+#### Power Board
+- definition: [[Power Board]]
 
-^part-a7c31f
+^part-power-board
+
+#### Logic Board
+- definition: [[Logic Board]]
+
+^part-logic-board
 
 ### Local Interfaces
 
-#### J4
-- part: part-a7c31f
-- definition: [[8-Pin Circular Connector]]
+#### Power Board J2
+- part: [[#^part-power-board|Power Board]]
+- definition: [[CAN Interface]]
 
-^ep-42bd90
+^ep-power-j2
 
-#### Pin 2
-- parent: ep-42bd90
-- definition: [[Connector Pin]]
+#### Logic Board J4
+- part: [[#^part-logic-board|Logic Board]]
+- definition: [[CAN Interface]]
 
-^ep-51c8ad
+^ep-logic-j4
+
+#### CAN
+- definition: [[CAN Interface]]
+- exposes: [[#^ep-logic-j4|Logic Board J4]]
+
+^ep-can
 
 ### Connections
 
-#### J4 Pin 2 to P2
-- endpointA: ep-51c8ad
-- endpointB: ep-d08371
+#### Power Board J2 to Logic Board J4
+- endpointA: [[#^ep-power-j2|Power Board J2]]
+- endpointB: [[#^ep-logic-j4|Logic Board J4]]
 
-^conn-917e2a
+^conn-internal-can
 
 ##### CAN_H
 - definition: [[CAN_H]]
 - endpointA: transmit
 - endpointB: receive
 
-^flow-6cc318
+^flow-can-h
 ```
 
-Cross-note semantic links use ordinary Obsidian block-link syntax, for example `[[Control Assembly#^ep-42bd90|J4]]`. The durable semantic address remains owner note UID + governed local ID/path; the native block link is its persisted Obsidian navigation representation.
+W-311 distinguishes a physical/local connection from boundary exposure. The parent assembly connects to a child assembly's boundary endpoint; it does not reach through the child to an internal endpoint. A boundary endpoint can `exposes` an inner endpoint.
 
-EA-only provenance does not appear in these Local Model records. The importer writes `99_System/11_Import/Local Model Source Map.csv`, keyed by owner note UID + local ID, with the EA source identity/provenance needed for audit or return to EA. This file is import evidence only and is not required to interpret or operate the MDSE model after migration.
+EA BindingConnector remains mechanical Stage-1 evidence. When its assembly context can be reconstructed, materialize the participating contextual endpoints and preserve a temporary local `equals` relationship for review. Structural inner/outer evidence may be written to review output, but the importer does not automatically change `equals` to `exposes`. Review confirms `exposes`, a peer connection/interface interpretation, or another approved meaning.
 
-Minimum source-map columns for v0.8.0: `owner_uid,local_id,local_kind,ea_guid,ea_source_kind,ea_owner_guid`. Additional source-only columns may be added when required to disambiguate provenance, but none become Local Model engineering fields.
+EA-only provenance does not appear in Local Model engineering records. The importer writes `99_System/11_Import/Local Model Source Map.csv`, keyed by owner note UID + local ID. Minimum columns remain `owner_uid,local_id,local_kind,ea_guid,ea_source_kind,ea_owner_guid`; additional source-only columns may be added when needed.
+
 
 ### 6.2 Representation policy (W-306)
 
@@ -217,7 +230,7 @@ Prefer core Obsidian mechanisms and standard Markdown/YAML whenever they preserv
 1. Every element, connector, diagram and package lands in exactly one outcome and one rule; the ledger has one row each (W-148, W-178, W-215). For the initial v0.8.0 import, every diagram must reconcile explicitly as intentionally deferred rather than written (W-300).
 2. No two notes share an `id`, a `uid` or a file name.
 3. Every `[[link]]` the tool writes resolves to a note or an attachment in the run. In a slice run, a link to a note outside the slice is accepted when its target is in the model; the run manifest lists those links (W-253).
-4. Every YAML and JSON file in the vault parses; every relationship field written is in `relationships.yaml`. In the v0.4 structural acceptance writer, paired inverses and symmetric mirrors must also match before writing; endpoint-rule violations are reported as Review findings and do not fail the run (W-275, W-277, W-287).
+4. Every YAML and JSON file in the vault parses; every relationship field written is in `relationships.yaml`; every governed Local Model record validates against `local-model.yaml`. In the v0.4 structural acceptance writer, paired inverses and symmetric mirrors must also match before writing; endpoint-rule violations are reported as Review findings and do not fail the run (W-275, W-277, W-287).
 5. The source counts the tool read from the whole `.qeax` match the counts in this file exactly: the table rows listed in section 2, the elements by EA object type (section 5), the connectors by EA connector type (section 6) and the diagrams by EA diagram type (section 2). Any difference fails the check and the run is discarded; the manifest lists the differences, a person updates the counts in this file from it, and the run is repeated. This applies to every run, full or slice (W-257, W-268).
 6. Before any model write, validate the complete planned repository-relative paths after approved shortening and fail on any unresolved path over the final hard limit; the exact hard limit is still open (W-297).
 7. Reconcile every planned entity to one terminal state: written, intentionally transformed/suppressed, or failed. There must be zero unexplained remainder. A partial writer is `INCOMPLETE / FAIL`; file creation alone is not completion. Keep the Run Manifest concise and put detailed path/collision/transformation/model-check evidence in separate audit outputs (W-297).
