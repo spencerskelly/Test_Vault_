@@ -2,7 +2,7 @@
 
 For every AI tool that creates or edits notes in this vault (Claude, ChatGPT, Rovo, Gemini, or any other). AI tools cannot run Templater, so you do by hand exactly what the template snippets do. The result must look the same as a note created from a template.
 
-Before substantial work, read `99_System/10_Docs/00 - Current State.md` (which names the current rules and the files that are historical), then `99_System/10_Docs/MDSE Modeling Ruleset 1.23.md`, `99_System/03_Schemas/relationships.yaml`, `99_System/03_Schemas/element-types.yaml`, `99_System/03_Schemas/authors.yaml` (AI codes and the default time zone) and the person notes in `99_System/04_People` (each person's author code and time zone). Property meanings are in `Definitions/Properties`.
+Before substantial work: if `99_System/10_Docs/00 - Current State.md` exists, read it first (this is the methodology workspace). A lean generated engineering vault intentionally omits that registry; there, start with `99_System/10_Docs/MDSE Modeling Ruleset 1.23.md`, `99_System/03_Schemas/relationships.yaml`, `99_System/03_Schemas/element-types.yaml`, `99_System/03_Schemas/authors.yaml` (AI codes and the default time zone) and the person notes in `99_System/04_People` (each person's author code and time zone). Property meanings are in `Definitions/Properties`.
 
 ## Creating a note
 
