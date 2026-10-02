@@ -230,7 +230,8 @@ The first v0.8 base vault and importer are a matched pair:
 - importer declares the same release and refuses a mismatch;
 - relationships 1.35;
 - element-types 1.17;
-- local-model 0.2.
+- local-model 0.2;
+- the **issued** base pins/enables a WB-106-capable Workbench release (W-321). Candidate bases generated during development may omit that pin but are not releasable.
 
 The v0.8 importer is a clean-import tool. It does not migrate v0.7-generated model output in place.
 
@@ -272,12 +273,11 @@ Do not block the v0.8 base/importer for:
 
 ## Implementation order
 
-1. Keep this workspace as semantic authority.
-2. Implement/validate schemas 1.17 and 0.2.
-3. Build the canonical v0.8 importer writer and Source Map.
-4. Implement the 212-character planner and naming/folder rules.
-5. Complete attachments, diagram reconciliation and evidence.
-6. Produce a new clean v0.8 base from the authority; do not repurpose the old base repo in place.
-7. Validate representative real EA cases.
-8. Complete WB-106.
-9. Only then run a whole-model import eligible to keep.
+1. Keep this workspace as semantic authority and keep `mdse-release.yaml` current.
+2. Build the canonical v0.8 importer writer/identity allocator/Source Map against 1.35/1.17/0.2.
+3. Implement the 212-character planner, attachments, diagram reconciliation and final evidence.
+4. Generate disposable candidate bases with `build-base.py` as needed for tests; do not hand-curate them.
+5. Complete Workbench WB-106 using the shared runtime schemas and portable fixtures.
+6. Release/pin the WB-106-capable Workbench, mark importer v0.8.0 release-conformant, update the release manifest/plugin baseline, generate the final clean base and verify Workbench + base together with `check-release.py`.
+7. Validate representative real EA cases and then run the whole-model import eligible to keep.
+8. Add W-314 variation/session configuration after the Local Model foundation is stable.
