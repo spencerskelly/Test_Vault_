@@ -103,7 +103,7 @@ Exact APIs can change; the separation is what matters.
 
 Each milestone has an exit criterion. A milestone is not done until its exit criterion is shown on the real translated vault, not only on a small sample.
 
-**W-298/WB-105 occurrence-aware prerequisite before R1.** The current 0.1.14 model index is frontmatter/note-only and its text editor treats the whole body as editable. Before pilot against the next real import, Workbench must: parse/index the governed Local Model read-only; use durable note/local references rather than file path as semantic identity; protect the Local Model from ordinary body editing; expose the Local Model dropdown; and make the high-value Structure, Interfaces, Where Used and Requirements views able to navigate local records. Structured Local Model editing is deliberately later than read-only indexing and waits for the canonical body contract.
+**WB-106 v0.8 keepability prerequisite before R1.** The current 0.1.14 model index is frontmatter/note/path-only and its text editor still treats the whole body as editable. Before the first potentially keepable v0.8 import is accepted, Workbench must parse `local-model.yaml` schema 0.1 read-only; index durable note/local ModelRefs; preserve `#^local-id` fragments; protect the governed Local Model region from ordinary body editing; expose the Local Model dropdown; add local model-health findings; and make Structure, Interfaces, Where Used and Requirements occurrence-aware. Repeated relationship entries are not quantity. Structured Local Model editing is deliberately later than this read/navigation gate.
 
 ### M0 — Spike and feasibility (Phase 0)
 
