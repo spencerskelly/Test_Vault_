@@ -127,6 +127,8 @@ Conceptual durable addresses:
 - connection = owner note UID + connection local ID;
 - flow = owner note UID + connection local ID + flow local ID.
 
+W-303 fixes the local-ID style for v0.8.0: type-prefixed opaque stable tokens such as `part-a7c31f`, `ep-42bd90`, `conn-917e2a`, and `flow-6cc318`. Imported tokens are deterministically derived from immutable EA source identity/provenance; source ordering and visible engineering names do not participate in identity. Workbench-created local records use the same prefixes with generated stable tokens.
+
 A named source occurrence alone does not require a standalone Markdown note if these facts can be retained and addressed reliably in the containing model.
 
 
