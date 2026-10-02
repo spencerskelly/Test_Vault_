@@ -2887,6 +2887,9 @@ function buildLocalOccurrenceModel(ctx,entityCtx){
   };
 }
 
+function localRefLink(localModel,ref,ownerEntity){
+  return localModel.refDisplay(ref,ownerEntity);
+}
 function renderLocalOccurrenceSections(e,localModel,entityCtx,externalSet,sliceKeys){
   if(!localModel)return [];
   const entities=entityCtx.entities,lines=[];
@@ -2895,85 +2898,101 @@ function renderLocalOccurrenceSections(e,localModel,entityCtx,externalSet,sliceK
   const connections=localModel.connectionsByOwner.get(e.key)||[];
   const localReqs=localModel.requirementLinksByOwner.get(e.key)||[];
   if(!parts.length&&!endpoints.length&&!connections.length&&!localReqs.length)return lines;
-  lines.push("## Local Model","","> Generated local-occurrence records · schema "+localModel.schemaVersion+" · importer v0.8.0 implementation candidate format.","");
+
+  lines.push("## Local Model","<!-- MDSE:LOCAL-MODEL START schema=0.2 -->","");
 
   if(parts.length){
     lines.push("### Part Occurrences","");
     for(const r of parts){
-      lines.push("**Part `"+r.localId+"` — "+mdInline(r.identifier)+"** ^"+r.anchor);
-      lines.push("- address: `"+r.path.join("/")+"`");
-      if(r.parentPath.length)lines.push("- parent occurrence: `"+r.parentPath.join("/")+"`");
+      lines.push("#### "+(mdInline(r.identifier)||"Part occurrence"));
       if(r.definitionKey){
         lines.push("- definition: "+entityWiki(entities,r.definitionKey));
         if(!sliceKeys.has(r.definitionKey))externalSet.add(e.fileName+" | local definition | "+entities.get(r.definitionKey).fileName);
       }
-      if(r.multiplicity)lines.push("- multiplicity: `"+mdInline(r.multiplicity)+"`");
-      lines.push("- source EA GUID: `"+r.sourceGuid+"`","");
+      if(r.multiplicity)lines.push("- multiplicity: "+mdInline(r.multiplicity));
+      lines.push("^"+r.localId,"");
     }
   }
 
   if(endpoints.length){
     lines.push("### Local Interfaces","");
     for(const r of endpoints){
-      lines.push("**Endpoint `"+r.localId+"` — "+mdInline(r.identifier)+"** ^"+r.anchor);
-      lines.push("- address: `"+r.path.join("/")+"`");
-      if(r.parentPath.length)lines.push("- parent occurrence: `"+r.parentPath.join("/")+"`");
-      lines.push("- endpoint kind: `"+mdInline(r.endpointKind)+"`");
+      lines.push("#### "+(mdInline(r.identifier)||"Local interface"));
       if(r.definitionKey){
         lines.push("- definition: "+entityWiki(entities,r.definitionKey));
         if(!sliceKeys.has(r.definitionKey))externalSet.add(e.fileName+" | local interface definition | "+entities.get(r.definitionKey).fileName);
       }
-      if(r.multiplicity)lines.push("- multiplicity: `"+mdInline(r.multiplicity)+"`");
-      lines.push("- source EA GUID: `"+r.sourceGuid+"`","");
+      const parentId=r.parentPath&&r.parentPath.length?r.parentPath[r.parentPath.length-1]:"";
+      if(parentId){
+        if(parentId.startsWith("part-"))lines.push("- part: [[#^"+parentId+"]]");
+        else if(parentId.startsWith("ep-"))lines.push("- parent: [[#^"+parentId+"]]");
+      }
+      if(r.multiplicity)lines.push("- multiplicity: "+mdInline(r.multiplicity));
+      if(r.endpointKind)lines.push("- kind: "+mdInline(r.endpointKind));
+      lines.push("^"+r.localId,"");
     }
   }
 
   if(connections.length){
     lines.push("### Connections","");
-    for(const c of connections){
-      lines.push("**Connection `"+c.localId+"`"+(c.identifier?" — "+mdInline(c.identifier):"")+"** ^"+c.anchor);
-      lines.push("- endpoint A: "+localModel.refDisplay(c.endpointA,e));
-      lines.push("- endpoint B: "+localModel.refDisplay(c.endpointB,e));
-      if(c.definitionKey){
-        lines.push("- definition: "+entityWiki(entities,c.definitionKey));
-        if(!sliceKeys.has(c.definitionKey))externalSet.add(e.fileName+" | local connection definition | "+entities.get(c.definitionKey).fileName);
+    for(const conn of connections){
+      lines.push("#### "+(mdInline(conn.identifier)||"Connection"));
+      lines.push("- endpointA: "+localRefLink(localModel,conn.endpointA,e));
+      lines.push("- endpointB: "+localRefLink(localModel,conn.endpointB,e));
+      if(conn.definitionKey){
+        lines.push("- definition: "+entityWiki(entities,conn.definitionKey));
+        if(!sliceKeys.has(conn.definitionKey))externalSet.add(e.fileName+" | local connection definition | "+entities.get(conn.definitionKey).fileName);
       }
-      lines.push("- source: `"+c.origin+"`");
-      for(const g of c.sourceGuids)if(g)lines.push("- source EA GUID: `"+g+"`");
-      lines.push("");
-      if(c.flows.length){
-        lines.push("#### Flows on "+c.localId,"");
-        for(const fl of c.flows){
-          lines.push("**Flow `"+fl.localId+"` — "+mdInline(fl.identifier)+"** ^"+fl.anchor);
-          lines.push("- connection: [[#^"+c.anchor+"|"+c.localId+"]]");
-          if(fl.definitionKey){
-            lines.push("- definition: "+entityWiki(entities,fl.definitionKey));
-            if(!sliceKeys.has(fl.definitionKey))externalSet.add(e.fileName+" | local flow definition | "+entities.get(fl.definitionKey).fileName);
-          }
-          lines.push("- endpoint A role: `"+fl.roleA+"`");
-          lines.push("- endpoint B role: `"+complementRole(fl.roleA)+"` (derived)");
-          if(fl.sourceGuid)lines.push("- source EA InformationFlow: `"+fl.sourceGuid+"`");
-          if(fl.sourceItemGuid)lines.push("- source conveyed item: `"+fl.sourceItemGuid+"`");
-          lines.push("");
+      lines.push("^"+conn.localId,"");
+      for(const fl of conn.flows){
+        lines.push("##### "+(mdInline(fl.identifier)||"Flow"));
+        if(fl.definitionKey){
+          lines.push("- definition: "+entityWiki(entities,fl.definitionKey));
+          if(!sliceKeys.has(fl.definitionKey))externalSet.add(e.fileName+" | local flow definition | "+entities.get(fl.definitionKey).fileName);
         }
+        lines.push("- endpointA: "+fl.roleA);
+        lines.push("- endpointB: "+complementRole(fl.roleA));
+        lines.push("^"+fl.localId,"");
       }
     }
   }
 
+  lines.push("<!-- MDSE:LOCAL-MODEL END -->","");
+
   if(localReqs.length){
-    lines.push("### Local Relationships","");
+    lines.push("### Local Applicability Links","");
     for(const r of localReqs){
       const targetOwner=entities.get(r.targetOwnerKey);
       const target=targetOwner
         ? "[["+targetOwner.fileName+"#^"+r.targetAnchor+"|"+targetOwner.fileName+" / "+r.targetAddress+"]]"
-        : "`"+r.targetAddress+"`";
-      lines.push("- **"+r.relation+"** → "+target);
-      if(r.sourceGuid)lines.push("  - source EA connector: `"+r.sourceGuid+"`");
+        : String(r.targetAddress||"");
+      lines.push("- "+r.relation+": "+target);
       if(targetOwner&&!sliceKeys.has(r.targetOwnerKey))externalSet.add(e.fileName+" | local "+r.relation+" | "+targetOwner.fileName+" / "+r.targetAddress);
     }
     lines.push("");
   }
   return lines;
+}
+
+function localModelSourceMapCsv(localModel,entityCtx){
+  const rows=[["source_model_id","source_key","owner_uid","local_id","local_kind","ea_guid","ea_source_kind","ea_owner_guid"]];
+  const entities=entityCtx.entities;
+  function ownerUid(k){const e=entities.get(k);return e?e.uid:"";}
+  function add(ownerKey,localId,kind,guid,sourceKind,ownerGuid){
+    if(!localId)return;
+    const g=trim2(guid);
+    rows.push([SOURCE_MODEL_ID,g?SOURCE_MODEL_ID+"|"+g:"",ownerUid(ownerKey),localId,kind,g,sourceKind||"",ownerGuid||""]);
+  }
+  for(const [owner,list] of localModel.partsByOwner.entries())for(const r of list)add(owner,r.localId,"part",r.sourceGuid,"t_object","");
+  for(const [owner,list] of localModel.endpointsByOwner.entries())for(const r of list)add(owner,r.localId,"endpoint",r.sourceGuid,"t_object","");
+  for(const [owner,list] of localModel.connectionsByOwner.entries()){
+    for(const r of list){
+      if(r.sourceGuids.length)for(const g of r.sourceGuids)add(owner,r.localId,"connection",g,"t_connector","");
+      else add(owner,r.localId,"connection","","derived","");
+      for(const fl of r.flows)add(owner,fl.localId,"flow",fl.sourceGuid||fl.sourceItemGuid,"t_connector",fl.sourceItemGuid||"");
+    }
+  }
+  return rows.map(r=>r.map(csvQuote).join(",")).join("\n")+"\n";
 }
 
 function realTagValue(row){
