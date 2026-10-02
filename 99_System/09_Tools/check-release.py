@@ -164,11 +164,22 @@ if candidate:
             'Attachment Reconciliation.csv',
             'Diagram Reconciliation.csv',
             'Review - Equals Direction.csv',
+            'function filenameMarkerParts(name)',
+            'function shortenedFileName(name,maxChars)',
+            'function duplicateMarkedFileName(name,n,maxChars)',
+            'function derivedSourceKey(sourceGuid,kind,ownerKey,definitionGuid)',
+            'ownerEaGuid(ownerKey)',
         ]
         missing=[x for x in required_importer_tokens if x not in itxt]
         (ok if not missing else fail)(f"importer candidate static contract tokens present{'' if not missing else ': '+', '.join(missing)}")
         if 'schema=0.1' in itxt or 'return ("loc-"' in itxt:
             fail("importer candidate contains superseded Local Model marker/anchor behavior")
+        if 'source_model_id","source_key","owner_uid","local_id","local_kind","ea_guid","ea_source_kind","ea_owner_guid' not in itxt:
+            fail("importer candidate Source Map header does not match Local Model 0.2 contract")
+        if 'sourceKey||(g?SOURCE_MODEL_ID+"|"+g:""),ou,localId,kind,g,sourceKind||"",ownerGuid||""' in itxt:
+            fail("importer candidate still contains superseded blank/misused ea_owner_guid Source Map writer")
+        if 'base+"~a.md"' in itxt:
+            fail("importer candidate path shortening can discard existing alteration/duplicate markers")
 if man["tools"]["importer"]["release"] is None:
     (fail if man["releaseStatus"]=="release" else warn)("no release-conformant importer yet")
 if man["tools"]["cleanBase"]["repo"] is None:
