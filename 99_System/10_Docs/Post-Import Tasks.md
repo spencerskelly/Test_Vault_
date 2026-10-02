@@ -126,17 +126,38 @@ Work that has to be done in the vault after the import (stage 2, Workspace Decis
 
 **Done when.** Nothing has type `modelCheck`, `hasClassifier` is gone, no review line named in items 5, 6, 9, 10 and 11 remains, and each group above has a log entry.
 
-## Task 8: Update the `equals` relationships
+## Task 8: Resolve temporary EA `equals` / BindingConnector evidence
 
-**What it is.** In EA a `BindingConnector` joins two ports. Stage 1 writes each one as the symmetric field `equals` on both end notes (W-153), because that is what the connector says and it keeps the import mechanical (W-30). What Spencer means by it is that one port is also exposed at a higher layer: a circuit's antenna port, the PCBA's antenna port and the product's antenna port are the same antenna at different levels. That is a direction (outer and inner), so `equals` is replaced in stage 2 by a directional pair. The name is not fixed; the working proposal is `exposes` on the outer Port and `exposedBy` on the inner Port (`extends` is not used, because it already means UML extend and inheritance). The counts are from the current export.
+**What it is.** EA `BindingConnector` says two interface endpoints are bound, but it does not by itself prove the MDSE engineering meaning. W-311 keeps Stage 1 mechanical: do not automatically convert a BindingConnector to exposure merely because containment suggests an outer and inner end.
 
-**What to resolve.** 249 BindingConnectors. The import derives a direction for 245 of them and writes it in the review table (W-156): 185 from one level of containment, 60 more by following containment over several levels (not yet spot-checked); 4 have no containment path and need a decision.
-- 185 have a clear inner and outer end: one end is a Port of an assembly block, the other is a Port of a Part inside that block (99 drawn inner to outer, 86 outer to inner, so the connector's order says nothing). Direction comes from that structure.
-- 64 have no such structure and need a decision one by one: 17 join Parts in different assemblies, 29 involve an Object (Part and Object 15 and 14), 10 join two Objects, 7 join an Object and a Class, and 1 joins two Parts of the same assembly. Some may not be exposures at all and become `interfaces`.
-- After the Port merge (W-114) the inner end is the block's own Port. 17 of the 154 inner block Ports connect to more than one outer Port, because the block is used in several assemblies, so the fields are lists. The assembly and Part context of each connector is kept on the line still to be defined (W-114), and it says which instance was wired to which outer Port.
+In the Local Model methodology, the common intended pattern is:
 
-**How to find them.** Search the properties for `equals`. The review table `Review - Equals Direction.csv` in `99_System/11_Import` (W-156, W-157) lists the 249 connectors by GUID with both ends as drawn and the derived outer and inner Port. Its columns are `ea_guid, ea_type, ea_name, category, start_element, start_owner, start_assembly, end_element, end_owner, end_assembly, start_note, end_note, derived_outer_note, derived_inner_note, containment_path, connector_values` (W-220); `category` is one level of containment (185), several levels (60) or no containment path (4).
+```text
+assembly boundary endpoint --exposes--> internal endpoint
+```
 
-**How to resolve one.** Decide which Port is outer and which is inner (assembly containment, or the context line). Write `exposes` on the outer Port and let `exposedBy` be generated on the inner one (the pair is in `relationships.yaml`, W-281), or change the pair to `interfaces` when it is not an exposure. Remove `equals` from both notes. Record the reason in `Review Changes Log.md`, keyed by the connector GUID, and log the naming decision in the Decision Log once.
+The parent assembly connects to the boundary endpoint; it does not reach through the child assembly to the internal endpoint.
 
-**Done when.** No note has an `equals` field, and the name of the directional pair is logged.
+**Stage-1 preservation.** Where the assembly context can be reconstructed, materialize/address the contextual endpoint occurrences and preserve the unresolved BindingConnector as temporary local `equals` evidence using the W-312 native block-link representation. The review evidence retains the EA connector GUID, ends as drawn, ownership/assembly context, and any structurally derived outer/inner candidates. If the source context cannot be reconstructed safely, preserve the unresolved evidence in the review output rather than inventing a local exposure.
+
+The first-class relationship vocabulary is already settled: confirmed exposure is `exposes` on the outer interface and `exposedBy` on the inner interface (W-281/W-311). `equals` remains temporary.
+
+**What to resolve.** Current source evidence contains 249 BindingConnectors:
+- 185 have a one-level containment pattern that provides an outer/inner candidate;
+- 60 more have an outer/inner candidate derived by following several containment levels and still require spot-checking;
+- 4 have no containment path.
+
+These are structural candidates, not automatic semantic decisions. Some BindingConnectors may represent peer interface/connection meaning rather than boundary exposure.
+
+**How to find them.** Use the temporary `equals` findings in Workbench/Review plus `Review - Equals Direction.csv` in `99_System/11_Import`. The review table keeps the connector GUID, both ends as drawn, owner/assembly evidence, candidate direction where derivable, containment path and connector values.
+
+**How to resolve one.**
+1. Open the owning assembly context and both endpoint definitions/occurrences.
+2. Confirm what the connector means in that assembly.
+3. If it is boundary exposure, replace temporary `equals` with `exposes` from the boundary endpoint to the inner endpoint; `exposedBy` is the inverse meaning.
+4. If it is a peer connection/interface relationship, resolve it to the appropriate local connection/interface semantics instead.
+5. If meaning is still unclear, leave it unresolved and visible rather than guessing.
+6. Record the reviewed change by EA connector GUID in `Review Changes Log.md`.
+
+**Done when.** No temporary `equals` remains in the accepted/released model unless an explicitly approved unresolved-review policy says otherwise, and every source BindingConnector is reconciled to a reviewed outcome.
+
