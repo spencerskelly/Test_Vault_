@@ -86,6 +86,8 @@ This does not promote v0.7 or retroactively rename historical base artifacts. v0
 
 **W-308 first remediation pass:** normalize only the connector navigation folders first: remove child wording already supplied by parent context (`Connector ASM`, `Industrial`, `Anderson`, etc.) and omit a model-number folder when the model note beneath already carries that identity and sibling ambiguity is not introduced. Then rerun path statistics before deciding which remaining items require Local Model conversion or other semantic restructuring.
 
+**W-309 regulatory-folder normalization:** if a regulatory folder directly contains an element with the same section/title wording, retain the full title on the note and reduce the folder name to the section number/designator only. This is navigation compression, not a semantic change, and is allowed only when the resulting folder remains unambiguous among its siblings.
+
 ## 3. Approved semantic model: reusable definition vs contextual occurrence
 
 ### 3.1 Reusable Object/assembly definitions

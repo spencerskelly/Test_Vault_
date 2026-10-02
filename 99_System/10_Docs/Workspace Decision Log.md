@@ -719,6 +719,8 @@ Example intent:
 
 After this normalization, remeasure the connector paths. Only remaining offenders require semantic-placement/Local Model conversion or further meaningful shortening under W-307.
 
+**W-309 · 2026-10-01 · Regulatory folders that duplicate the directly contained element title collapse to the regulatory section number.** When a regulatory folder exists primarily to contain an element directly beneath it with the same section/title wording, keep the full regulatory engineering title on the element note and shorten the folder to the section designator/number only. The folder remains a navigation aid rather than a second copy of the element name. Examples: a folder `7.4.2 Electrical Properties` containing the element `7.4.2 Electrical Properties` becomes folder `7.4.2`; a folder `9.7.4.3 Verification of ...` containing the same-titled element becomes folder `9.7.4.3`. Apply only when the section designator is clear and unique within the parent context; do not shorten a folder if the number alone would create sibling ambiguity or lose necessary navigation context. The note title, regulatory hierarchy semantics and relationships remain unchanged.
+
 ## Open (raised, not yet decided)
 - Inverse fields (W-275, W-287, trial of option B): v0.4 validates every persisted paired inverse and symmetric mirror before a slice is written. Still open: the standalone regenerate script (language, location, when it runs) and whether Nodian is removed after the `02 Product Context` trial.
 - Relationship endpoint rules (W-272 to W-287): done for every relationship and embedded in native importer v0.4. Shared Aggregation now writes `includes` (W-277, W-287); off-rule imported links remain Review findings rather than errors.
