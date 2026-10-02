@@ -74,6 +74,8 @@ This does not promote v0.7 or retroactively rename historical base artifacts. v0
 
 **W-300 release scope:** the v0.8.0 keepable import is complete for semantic model content and linked-document attachments, but diagram creation is intentionally excluded from the initial run. All 2,924 source diagrams remain part of reconciliation evidence and are marked deferred by scope. A later additive diagram pass selects categories/types and adds only the requested diagram companion notes/Canvas artifacts without changing the accepted semantic model.
 
+**W-302 Local Model boundary:** each note may contain at most one governed `## Local Model` region. It starts with `<!-- MDSE:LOCAL-MODEL START schema=0.1 -->` and ends with `<!-- MDSE:LOCAL-MODEL END -->`. The markers are not semantic data; they make the human-readable records safely parseable and protect them from ordinary body editing.
+
 ## 3. Approved semantic model: reusable definition vs contextual occurrence
 
 ### 3.1 Reusable Object/assembly definitions

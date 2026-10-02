@@ -807,7 +807,7 @@ A note that contains addressable local part occurrences, endpoint occurrences, c
 - **Quantity/context:** repeated note-level relationship entries are not treated as occurrence quantity. Occurrence count, multiplicity and connection-specific context come from Local Model records.
 - **Safety:** a Workbench version that does not understand the Local Model contract must not rewrite that region.
 
-This amends WB-100 (two dropdowns become three when Local Model data exists) and WB-101 (the text editor no longer means the entire post-frontmatter body once Local Model records exist). It does not decide the final Markdown marker syntax or local-record field contract; those remain model-governance decisions.
+This amends WB-100 (two dropdowns become three when Local Model data exists) and WB-101 (the text editor no longer means the entire post-frontmatter body once Local Model records exist). W-302 now settles the managed-region syntax: one region bounded by `<!-- MDSE:LOCAL-MODEL START schema=0.1 -->` and `<!-- MDSE:LOCAL-MODEL END -->`. The local-record field/local-ID contract remains model governance.
 
 ---
 

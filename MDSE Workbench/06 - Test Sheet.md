@@ -1,6 +1,6 @@
 # Workbench Test Sheet (plugin 0.1.14)
 
-> **Occurrence-model safety note (W-298 / WB-105):** 0.1.14 predates the governed Local Model interface. It does not index Local Model body records and its text editor treats the post-frontmatter body as one editable block. Do **not** use 0.1.14 body editing on notes containing `## Local Model` records. This sheet remains a regression test for the pre-occurrence plugin; the next pilot sheet must use the synchronized importer/base output and the occurrence-aware Workbench build.
+> **Occurrence-model safety note (W-298 / WB-105):** 0.1.14 predates the governed Local Model interface. It does not index Local Model body records and its text editor treats the post-frontmatter body as one editable block. Do **not** use 0.1.14 body editing on notes containing `## Local Model` records. This sheet remains a regression test for the pre-occurrence plugin; the next pilot sheet must use the synchronized importer/base output and the occurrence-aware Workbench build. W-302 defines the next build's boundary as `<!-- MDSE:LOCAL-MODEL START schema=0.1 -->` through `<!-- MDSE:LOCAL-MODEL END -->`; parser tests must include missing, duplicate, nested and mismatched marker cases.
 
 Run in `20260930`. About 50 minutes. The steps are ordered so the biggest unknowns come first; if a step fails, note it and carry on unless it says **stop**. Tick `[x]` on pass; write what happened next to a failure.
 

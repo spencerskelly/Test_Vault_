@@ -603,7 +603,7 @@ In View mode these sections are inspectable and Local Model records are read-onl
 - note-level relationships use the relationship service;
 - Local Model editing uses structured controls inside the Local Model section only after the canonical body schema/marker contract is frozen.
 
-Until that Local Model contract is frozen, Workbench may parse, index, navigate and display local records but keeps them read-only. Raw text editing must never be a back door around the structured Local Model contract.
+W-302 freezes the v0.8.0 Local Model region boundary as `<!-- MDSE:LOCAL-MODEL START schema=0.1 -->` through `<!-- MDSE:LOCAL-MODEL END -->`. Workbench owns only the content inside those markers as Local Model data; the comments are not engineering semantics. Raw text editing must never be a back door around this governed region. Structured Local Model field editing still waits for the remaining record-field/local-ID contract.
 
 The same separation applies when the popup is launched from Canvas: graphical presentation may change, but storage authority and edit services do not.
 

@@ -99,7 +99,7 @@ Workbench therefore indexes two addressable kinds:
 
 The core index/traversal APIs should operate on an addressable model reference rather than assuming every node is a `TFile` path. This is also the correct seam for later cross-vault resolution.
 
-Local Model records remain structured, human-readable Markdown in the owning note body. They are a governed region separate from ordinary narrative text. The Workbench popup presents them in a separate **Local Model** section. Read-only parsing/indexing comes first; structured edits are enabled only after the canonical local-body contract is frozen. The general text editor must never rewrite the governed region.
+Local Model records remain structured, human-readable Markdown in the owning note body. They are a governed region separate from ordinary narrative text. W-302 defines exactly one managed region per note, beginning `<!-- MDSE:LOCAL-MODEL START schema=0.1 -->` beneath `## Local Model` and ending `<!-- MDSE:LOCAL-MODEL END -->`. The Workbench popup presents the records in a separate **Local Model** section. The parser owns only content inside those markers. Missing/duplicate/nested/mismatched markers become findings and disable structured edits. The general text editor must never rewrite the governed region.
 
 Definition links from a local record point to reusable file-backed MDSE elements. Context-specific wiring/flow remains on the local records rather than being flattened into duplicate note-level relationships.
 

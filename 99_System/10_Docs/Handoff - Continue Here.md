@@ -5,7 +5,7 @@ status: Active
 ---
 # Handoff: Continue Here
 
-Rewritten 2026-09-29 (W-183), updated through W-301 on 2026-10-01 for a new AI chat continuing the work on this vault. Read the 2026-10-01 continuation section below first, then the comprehensive importer handoff and Workspace Decision Log.
+Rewritten 2026-09-29 (W-183), updated through W-302 on 2026-10-01 for a new AI chat continuing the work on this vault. Read the 2026-10-01 continuation section below first, then the comprehensive importer handoff and Workspace Decision Log.
 
 ## What this vault is
 
@@ -14,7 +14,7 @@ Rewritten 2026-09-29 (W-183), updated through W-301 on 2026-10-01 for a new AI c
 ## Read in this order
 
 1. `99_System/10_Docs/EA Native Importer Comprehensive Handoff - 2026-10-01.md`: current importer/occurrence/repository state and the copy-ready next-chat prompt.
-2. `99_System/10_Docs/Workspace Decision Log.md`: every decision (W-01 to W-301) and the Open list at the bottom. It is the authority for what has been decided.
+2. `99_System/10_Docs/Workspace Decision Log.md`: every decision (W-01 to W-302) and the Open list at the bottom. It is the authority for what has been decided.
 3. `99_System/10_Docs/Translator Definition.md` (the single statement of what stage 1 must do, W-247; keep it current), then `Definitions/Note Layout.md` and `Definitions/EA Source Section.md`.
 4. `99_System/03_Schemas/`: `ea-element-mapping.yaml` (all 31 EA object types), `ea-connector-mapping.yaml` (all 15 connector types, W-151 to W-179), `relationships.yaml` (schemaVersion 1.35), `element-types.yaml` (24 model classes plus system definitions; `Diagram` added in W-212), `ea-field-dispositions.yaml`, `ea-tag-dispositions.yaml`, `ea-package-rules.yaml`.
 5. `99_System/10_Docs/Post-Import Tasks.md` (Tasks 1 to 8; Task 7 includes the state cleanup work added later).
@@ -36,7 +36,7 @@ The immediate continuation baseline is now explicit:
 - **Occurrence experiment:** `spencerskelly/20260930` branch `handoff/full-import-2026-10-01`, importer v0.6/v0.6.1. It proves the W-293/W-294 local part/endpoint/connection/flow direction but was built from the older relationship-1.33 line.
 - **Do not continue directly from v0.6.1.** W-296 has now been implemented as the v0.7 merge candidate. Treat v0.6/v0.6.1 only as implementation evidence; preserve v0.5.2 as the accepted fallback until v0.7 passes real-model acceptance.
 - **Do not use `20260930`, `261001`, or the minimal v0.6 ZIP as accepted output baselines.** They are partial/reference artifacts; complete Run Manifest/Ledger reconciliation is absent, and sampled `261001` notes contain no local occurrence body records.
-- **Workbench:** 0.1.14 already follows schema 1.35 note-level semantics but does not yet index local body occurrences. W-298 now fixes the interface boundary: Local Model becomes its own structured dropdown/surface; ordinary text editing must not modify that governed region, and Local Model editing remains read-only until the canonical body contract is frozen. Extend it only after the merged importer produces real-model records worth freezing.
+- **Workbench:** 0.1.14 already follows schema 1.35 note-level semantics but does not yet index local body occurrences. W-298 fixes the interface boundary: Local Model becomes its own structured dropdown/surface; ordinary text editing must not modify that governed region. W-302 fixes the v0.8.0 managed boundary as `<!-- MDSE:LOCAL-MODEL START schema=0.1 -->` through `<!-- MDSE:LOCAL-MODEL END -->`; the remaining local-record field/address contract is still to be finalized. Extend it only after the merged importer produces real-model records worth freezing.
 
 Read `EA Native Importer Comprehensive Handoff - 2026-10-01.md` for the full repository audit, fault log, semantic decisions, experimental implementation history, acceptance criteria and next-chat prompt.
 
