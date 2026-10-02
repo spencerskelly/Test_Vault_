@@ -3259,6 +3259,16 @@ async function writeTextPath(root,path,text){
     throw new Error("Filesystem write failed for '"+path+"': "+(e&&e.name?e.name+": ":"")+(e&&e.message?e.message:String(e)));
   }
 }
+async function writeBinaryPath(root,path,bytes){
+  try{
+    const parts=path.split("/"),name=parts.pop(),d=await dirFor(root,parts,true);
+    const h=await d.getFileHandle(name,{create:true}),w=await h.createWritable();
+    await w.write(bytes);await w.close();
+  }catch(e){
+    throw new Error("Filesystem binary write failed for '"+path+"': "+(e&&e.name?e.name+": ":"")+(e&&e.message?e.message:String(e)));
+  }
+}
+
 async function readTextPath(root,path){
   try{
     const parts=path.split("/"),name=parts.pop(),d=await dirFor(root,parts,false);
@@ -3546,37 +3556,156 @@ function diagramReconciliationCsv(ctx,selected){
   }
   return rowsCsv(rows);
 }
+
+function blobBytes(v){
+  if(v instanceof Uint8Array)return v;
+  if(v instanceof ArrayBuffer)return new Uint8Array(v);
+  if(Array.isArray(v))return new Uint8Array(v);
+  return null;
+}
+function asciiPrefix(bytes,n){
+  if(!bytes)return "";
+  const lim=Math.min(bytes.length,n||512);let s="";
+  for(let i=0;i<lim;i++){const b=bytes[i];s+=b>=32&&b<127?String.fromCharCode(b):" ";}
+  return s;
+}
+function looksLikeRtf(bytes){
+  const p=asciiPrefix(bytes,128).trimStart().toLowerCase();
+  return p.startsWith("{\\rtf");
+}
+function imageExtension(bytes,context){
+  if(!bytes||!bytes.length)return "";
+  const b=bytes;
+  if(b.length>=8&&b[0]===0x89&&b[1]===0x50&&b[2]===0x4e&&b[3]===0x47&&b[4]===0x0d&&b[5]===0x0a&&b[6]===0x1a&&b[7]===0x0a)return ".png";
+  if(b.length>=3&&b[0]===0xff&&b[1]===0xd8&&b[2]===0xff)return ".jpg";
+  if(b.length>=2&&b[0]===0x42&&b[1]===0x4d)return ".bmp";
+  if(b.length>=4&&b[0]===0xd7&&b[1]===0xcd&&b[2]===0xc6&&b[3]===0x9a)return ".wmf";
+  const s=String(context||"").toLowerCase();
+  if(s.includes("\\pngblip"))return ".png";
+  if(s.includes("\\jpegblip")||s.includes("\\jpgblip"))return ".jpg";
+  if(s.includes("\\emfblip"))return ".emf";
+  if(s.includes("\\wmetafile"))return ".wmf";
+  return "";
+}
+function extractRtfBinAssets(bytes){
+  const out=[];if(!bytes)return out;
+  for(let i=0;i+4<bytes.length;){
+    if(bytes[i]===0x5c&&bytes[i+1]===0x62&&bytes[i+2]===0x69&&bytes[i+3]===0x6e){
+      let j=i+4,digits="";
+      while(j<bytes.length&&bytes[j]>=0x30&&bytes[j]<=0x39){digits+=String.fromCharCode(bytes[j]);j++;}
+      const n=Number(digits);
+      if(digits&&Number.isFinite(n)&&n>=0){
+        if(bytes[j]===0x20)j++;
+        if(j+n<=bytes.length){
+          const contextStart=Math.max(0,i-300),context=asciiPrefix(bytes.slice(contextStart,i),300);
+          const payload=bytes.slice(j,j+n),ext=imageExtension(payload,context);
+          out.push({bytes:payload,ext:ext||".bin",identified:!!ext});
+          i=j+n;continue;
+        }
+      }
+    }
+    i++;
+  }
+  return out;
+}
+function ownerEntityForDocument(row,ctx,entityCtx){
+  const byGuid=new Map(),bySourceId=new Map();
+  for(const e of entityCtx.entities.values()){
+    if(e.eaGuid)byGuid.set(normGuid(e.eaGuid),e);
+    for(const id of e.sourceIds||[])bySourceId.set(n2(id),e);
+  }
+  for(const v of [row.Element_GUID,row.ElementGUID,row.ElementID,row.DocID]){
+    const g=normGuid(v);if(g&&byGuid.has(g))return byGuid.get(g);
+  }
+  const id=n2(row.ElementID);
+  if(id&&bySourceId.has(id))return bySourceId.get(id);
+  if(id){
+    const rr=resolveEndpoint(id,ctx.elementCtx,ctx.portResolution);
+    if(rr&&entityCtx.entities.has(rr.key))return entityCtx.entities.get(rr.key);
+  }
+  return null;
+}
+function assetPathForEntity(entity,counter,ext){
+  const notePath=entity.outputPath||((entity.linkTarget||entity.fileName)+".md");
+  const slash=notePath.lastIndexOf("/"),dir=slash>=0?notePath.slice(0,slash+1):"";
+  const noteFile=(slash>=0?notePath.slice(slash+1):notePath).replace(/\.md$/i,"");
+  return dir+noteFile+" asset "+counter+ext;
+}
 async function attachmentReconciliation(ctx,entityCtx,sliceKeys,wholeModel){
-  const rows=[["doc_id","doc_type","element_guid","element_name","status","source_bytes","detail"]];
-  const counts={total:0,inScope:0,failed:0,outside:0};
-  const byGuid=new Map();
-  for(const e of entityCtx.entities.values())if(e.eaGuid)byGuid.set(normGuid(e.eaGuid),e);
-  const reader=await SQLiteReader.open(selectedFile);
-  if(!reader.has("t_document"))return {csv:rowsCsv(rows),counts};
+  const rows=[["doc_id","doc_type","element_guid","element_name","status","source_bytes","asset_paths","detail"]];
+  const counts={total:0,approved:0,inScope:0,written:0,filesWritten:0,failed:0,outside:0,skipped:0};
+  const files=[],counterByOwner=new Map(),reader=await SQLiteReader.open(selectedFile);
+  if(!reader.has("t_document"))return {csv:rowsCsv(rows),counts,files};
+
   for await(const row of reader.scan("t_document")){
     counts.total++;
-    const docId=trim2(row.DocID||row.DocumentID||row.ElementID||"");
-    const candidateGuids=[row.DocID,row.ElementID,row.ElementGUID,row.Element_GUID].map(normGuid).filter(Boolean);
-    let e=null,eg="";
-    for(const g of candidateGuids){if(byGuid.has(g)){e=byGuid.get(g);eg=e.eaGuid;break;}}
+    const docType=trim2(row.DocType),docId=trim2(row.DocID||row.DocumentID||"");
+    if(!["ExtDoc","ModelDocument"].includes(docType)){
+      counts.skipped++;
+      rows.push([docId,docType,"","","intentionally skipped/out of scope",0,"","W-76 attachment scope covers ExtDoc and ModelDocument only"]);
+      continue;
+    }
+    counts.approved++;
+    const e=ownerEntityForDocument(row,ctx,entityCtx);
     const inside=!!(e&&sliceKeys.has(e.key));
-    const bytes=row.BinContent instanceof Uint8Array?row.BinContent.length:(row.StrContent?String(row.StrContent).length:0);
+    const source=blobBytes(row.BinContent) || (typeof row.StrContent==="string"?new TextEncoder().encode(row.StrContent):null);
+    const sourceBytes=source?source.length:0;
     if(!inside){
       if(wholeModel){
         counts.failed++;
-        rows.push([docId,trim2(row.DocType),eg,e?trim2(e.raw.Name):"","failed attachment import",bytes,
-          e?"owner did not resolve into emitted whole-model scope":"no owning EA element resolved for document row"]);
+        rows.push([docId,docType,e?e.eaGuid:"",e?trim2(e.raw.Name):"","failed attachment import",sourceBytes,"",
+          e?"owning entity was not emitted into whole-model scope":"no owning EA element resolved for linked document"]);
       }else{
         counts.outside++;
-        rows.push([docId,trim2(row.DocType),eg,e?trim2(e.raw.Name):"","outside slice",bytes,""]);
+        rows.push([docId,docType,e?e.eaGuid:"",e?trim2(e.raw.Name):"","outside slice",sourceBytes,"",""]);
       }
       continue;
     }
-    counts.inScope++;counts.failed++;
-    rows.push([docId,trim2(row.DocType),eg,trim2(e.raw.Name),"failed attachment import",bytes,
-      "EA t_document payload is reconciled but safe binary/RTF asset extraction is not implemented in this candidate"]);
+    counts.inScope++;
+    if(!source||!source.length){
+      counts.failed++;
+      rows.push([docId,docType,e.eaGuid,trim2(e.raw.Name),"failed attachment import",sourceBytes,"","linked document payload is empty or unreadable"]);
+      continue;
+    }
+
+    let assets=[],failure="";
+    if(docType==="ExtDoc"){
+      const ext=imageExtension(source,"");
+      if(ext)assets=[{bytes:source,ext,identified:true}];
+      else failure="ExtDoc payload is not a recognized image format";
+    }else{
+      if(!looksLikeRtf(source))failure="ModelDocument payload is not recognizable RTF";
+      else{
+        const bins=extractRtfBinAssets(source);
+        if(bins.length)assets=bins;
+        else assets=[{bytes:source,ext:".rtf",identified:true}]; // W-78 text-only RTF unchanged
+      }
+    }
+    if(failure||!assets.length||assets.some(a=>!a.identified)){
+      counts.failed++;
+      rows.push([docId,docType,e.eaGuid,trim2(e.raw.Name),"failed attachment import",sourceBytes,"",failure||"one or more RTF binary assets had an unrecognized format"]);
+      continue;
+    }
+
+    let counter=counterByOwner.get(e.key)||0,paths=[],pathFailure="";
+    for(const a of assets){
+      counter++;
+      const ap=assetPathForEntity(e,counter,a.ext);
+      if(ap.length>MAX_GENERATED_PATH){pathFailure="attachment path exceeds "+MAX_GENERATED_PATH+" characters: "+ap;break;}
+      if(paths.some(x=>x.toLowerCase()===ap.toLowerCase())){pathFailure="attachment path collision: "+ap;break;}
+      paths.push(ap);
+    }
+    if(pathFailure){
+      counts.failed++;
+      rows.push([docId,docType,e.eaGuid,trim2(e.raw.Name),"failed attachment import",sourceBytes,paths.join("; "),pathFailure]);
+      continue;
+    }
+    counterByOwner.set(e.key,counter);
+    assets.forEach((a,i)=>files.push({path:paths[i],bytes:a.bytes,ownerKey:e.key,docId}));
+    counts.written++;counts.filesWritten+=assets.length;
+    rows.push([docId,docType,e.eaGuid,trim2(e.raw.Name),"written",sourceBytes,paths.join("; "),""]);
   }
-  return {csv:rowsCsv(rows),counts};
+  return {csv:rowsCsv(rows),counts,files};
 }
 async function generateSlice(){
   if(sliceBusy||!lastPlannerContext||!lastPlan||lastPlan.result!=="PASS"||!outputDirHandle)return;
@@ -3715,15 +3844,19 @@ async function generateSlice(){
       "- Relationship review findings: "+endpointFindings.length,
       "- Local Model warnings: "+localModel.stats.warnings,
       "- Attachment source rows: "+attachments.counts.total,
+      "- Approved linked-document rows: "+attachments.counts.approved,
       "- Attachments in scope: "+attachments.counts.inScope,
+      "- Attachment documents written: "+attachments.counts.written,
+      "- Attachment files written: "+attachments.counts.filesWritten,
       "- Failed attachment imports (non-blocking): "+attachments.counts.failed,
+      "- Non-attachment t_document rows skipped: "+attachments.counts.skipped,
       "- Source diagrams: "+(lastPlannerContext.diagramPlans||[]).length,
       "- Diagram artifacts written: 0",
       "- Diagram disposition: deferred by v0.8 scope",
       "- Links to notes outside scope: "+externalSet.size,
       "",
       "## Release-candidate limitation",
-      "- Linked-document rows are reconciled, but this candidate does not yet decode/write EA t_document binary/RTF assets. Each affected row is explicitly marked failed attachment import; W-319 makes those failures non-blocking but they must be resolved before release acceptance.",
+      "- Linked documents are imported mechanically under W-76 to W-78/W-210 when the payload is positively identifiable. Any unreadable, unrecognized or over-length asset remains an explicit failed attachment import; W-319 makes those failures non-blocking but they must be reviewed before release acceptance.",
       "- Workbench WB-106 remains the keepability gate for the first whole-model import.",
       ""
     ].join("\n")+"\n";
@@ -3734,6 +3867,8 @@ async function generateSlice(){
       await writeTextPath(outputDirHandle,f.path,f.text);
       n++;if(n%50===0){el("sliceStatus").textContent="Writing notes "+fmt(n)+"/"+fmt(files.length);await tick();}
     }
+    for(const a of attachments.files)await writeBinaryPath(outputDirHandle,a.path,a.bytes);
+
     const evidence={
       "99_System/11_Import/Ledger.csv":ledger,
       "99_System/11_Import/Run Manifest.md":manifest,
