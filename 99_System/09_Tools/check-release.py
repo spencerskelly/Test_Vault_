@@ -45,6 +45,20 @@ a=ap.parse_args()
 
 man=yaml.safe_load(read("99_System/03_Schemas/mdse-release.yaml"))
 
+# Manifest/build-contract self-consistency.
+builder=man["tools"]["cleanBase"]["builder"]
+(ok if os.path.isfile(full(ROOT,builder)) else fail)(f"base builder exists: {builder}")
+rb=man["runtimeBase"]
+for p in rb["includeFiles"]:
+    (ok if os.path.isfile(full(ROOT,p)) else fail)(f"runtime include file exists: {p}")
+for p in rb["includeTrees"]:
+    (ok if os.path.isdir(full(ROOT,p)) else fail)(f"runtime include tree exists: {p}")
+for p in rb.get("forbiddenPaths",[]):
+    if p in rb["includeFiles"] or p in rb["includeTrees"]:
+        fail(f"runtime contract both includes and forbids: {p}")
+if man["runtimeBase"].get("copyReleaseManifest") is not False or man["runtimeBase"].get("copyCurrentState") is not False:
+    fail("lean runtime base must not copy Current State or mdse-release.yaml")
+
 schema_paths={"relationships":"relationships.yaml","elementTypes":"element-types.yaml","localModel":"local-model.yaml"}
 for key, fn in schema_paths.items():
     m=re.search(r"^schemaVersion:\s*['\"]?([0-9.]+)", read("99_System/03_Schemas/"+fn), re.M)
@@ -105,9 +119,9 @@ bootstrap=man["tools"]["bootstrap"]
 if bootstrap["sourceAvailable"] is False:
     (fail if "mdse-bootstrap" in lock or "mdse-bootstrap" in enabled else ok)("unavailable mdse-bootstrap is absent from runtime plugin baseline")
 wbid=man["tools"]["workbench"]["runtimePluginId"]
-if wbid not in lock:
+if wbid not in lock or wbid not in enabled:
     (fail if man["releaseStatus"]=="release" and man["tools"]["workbench"]["requiredForRelease"] else warn)(
-        "plugin-lock.yaml does not yet pin the WB-106-capable Workbench release")
+        "runtime baseline does not yet pin and enable the WB-106-capable Workbench release")
 if man["tools"]["importer"]["release"] is None:
     (fail if man["releaseStatus"]=="release" else warn)("no release-conformant importer yet")
 if man["tools"]["cleanBase"]["repo"] is None:
@@ -181,8 +195,9 @@ if a.base:
         txt=read_at(base,"README.md")
         (ok if "MDSE Base Vault" in txt and man["mdseRelease"] in txt else fail)("base README identifies release")
     block=read_at(base,".obsidian/plugin-lock.yaml") if os.path.exists(full(base,".obsidian/plugin-lock.yaml")) else ""
-    if man["releaseStatus"]=="release" and wbid not in block:
-        fail("issued base does not pin required Workbench")
+    base_enabled=read_at(base,".obsidian/community-plugins.json") if os.path.exists(full(base,".obsidian/community-plugins.json")) else ""
+    if man["releaseStatus"]=="release" and (wbid not in block or wbid not in base_enabled):
+        fail("issued base does not pin and enable required Workbench")
     if bootstrap["sourceAvailable"] is False and "mdse-bootstrap" in block:
         fail("issued base contains unavailable Bootstrap")
 
