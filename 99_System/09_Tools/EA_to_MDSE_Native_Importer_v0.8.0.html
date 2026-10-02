@@ -3019,7 +3019,7 @@ function relationYaml(entity,graph,entities,externalSet,sliceKeys,localModel){
     }
     for(const r of localTargets){
       const t=entities.get(r.targetOwnerKey);if(!t)continue;
-      const link="[[ "+t.fileName+"#^"+r.targetAnchor+" ]]".replace("[[ ","[[").replace(" ]] ","]]");
+      const link="[["+t.fileName+"#^"+r.targetAnchor+"]]";
       lines.push("  - "+yamlScalar(link));
       if(!sliceKeys.has(r.targetOwnerKey))externalSet.add(entity.fileName+" | appliesTo | "+t.fileName+"#^"+r.targetAnchor);
     }
