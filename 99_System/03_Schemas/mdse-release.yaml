@@ -18,6 +18,7 @@ ruleset: "99_System/10_Docs/MDSE Modeling Ruleset 1.23.md"
 
 limits:
   maxGeneratedPathLength: 212
+  maxModelFilesPerFolder: 75
   duplicateMarker: "~2"
   alterationMarker: "~a"
 
