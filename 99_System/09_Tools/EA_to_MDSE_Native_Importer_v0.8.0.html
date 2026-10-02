@@ -3280,6 +3280,162 @@ function alteredPathReviewCsv(entityCtx,pathReviews){
   }
   return rowsCsv(rows);
 }
+
+function rawElementLabel(raw){
+  if(!raw)return "";
+  return trim2(raw.Name)||((trim2(raw.Object_Type)||"element")+" "+n2(raw.Object_ID));
+}
+function resolvedEntityForRaw(ctx,entityCtx,id){
+  const r=resolveEndpoint(id,ctx.elementCtx,ctx.portResolution);
+  return r&&entityCtx.entities.has(r.key)?entityCtx.entities.get(r.key):null;
+}
+function resolvedNoteForRaw(ctx,entityCtx,id){
+  const e=resolvedEntityForRaw(ctx,entityCtx,id);
+  return e?(e.linkTarget||e.fileName):"";
+}
+function sourceOwnerChain(ctx,id){
+  const raw=ctx.byId.get(n2(id));if(!raw)return {owner:null,assembly:null};
+  const owner=ctx.byId.get(n2(raw.ParentID))||null;
+  const assembly=owner?ctx.byId.get(n2(owner.ParentID))||null:null;
+  return {owner,assembly};
+}
+function candidatePortEntities(ctx,entityCtx,id){
+  const e=resolvedEntityForRaw(ctx,entityCtx,id);if(!e)return [];
+  const out=[];
+  for(const [portKey,ownerKey] of entityCtx.portOwner.entries()){
+    if(ownerKey===e.key&&entityCtx.entities.has(portKey))out.push(entityCtx.entities.get(portKey));
+  }
+  return out.sort(compareEntity);
+}
+async function connectorDiagramMap(ctx){
+  const out=new Map(),reader=await SQLiteReader.open(selectedFile);
+  if(!reader.has("t_diagramlinks"))return out;
+  const diagrams=new Map((ctx.diagrams||[]).map(d=>[n2(d.Diagram_ID),d]));
+  for await(const row of reader.scan("t_diagramlinks")){
+    const cid=n2(row.ConnectorID!=null?row.ConnectorID:row.Connector_ID);
+    const did=n2(row.DiagramID!=null?row.DiagramID:row.Diagram_ID);
+    if(!cid||!did)continue;
+    const d=diagrams.get(did),label=d?(trim2(d.Name)||("Diagram "+did)):("Diagram "+did);
+    if(!out.has(cid))out.set(cid,[]);
+    if(!out.get(cid).includes(label))out.get(cid).push(label);
+  }
+  for(const list of out.values())list.sort((a,b)=>a.localeCompare(b));
+  return out;
+}
+function blockLevelFlowReviewCsv(ctx,entityCtx,connectorDiagrams){
+  const rows=[[
+    "ea_guid","ea_type","ea_name","category",
+    "start_element","start_owner","start_assembly","start_note","start_candidate_ports",
+    "end_element","end_owner","end_assembly","end_note","end_candidate_ports",
+    "connector_values","diagrams"
+  ]];
+  for(const con of ctx.connectors||[]){
+    const ct=trim2(con.Connector_Type),st=trim2(con.Stereotype);
+    if(!["Connector","InformationFlow"].includes(ct)||st==="BindingConnector")continue;
+    const sr=ctx.byId.get(n2(con.Start_Object_ID)),er=ctx.byId.get(n2(con.End_Object_ID));
+    const startBlock=!(sr&&trim2(sr.Object_Type)==="Port"),endBlock=!(er&&trim2(er.Object_Type)==="Port");
+    if(!startBlock&&!endBlock)continue;
+    const sc=sourceOwnerChain(ctx,con.Start_Object_ID),ec=sourceOwnerChain(ctx,con.End_Object_ID);
+    const sp=startBlock?candidatePortEntities(ctx,entityCtx,con.Start_Object_ID):[];
+    const ep=endBlock?candidatePortEntities(ctx,entityCtx,con.End_Object_ID):[];
+    let category="";
+    if(!sr||!er)category="End missing from the export";
+    else{
+      const blockCounts=[];
+      if(startBlock)blockCounts.push(sp.length);
+      if(endBlock)blockCounts.push(ep.length);
+      if(blockCounts.length&&blockCounts.every(n=>n===0))category="Create ports";
+      else if(blockCounts.length&&blockCounts.every(n=>n===1))category="Single candidate at each block-level end";
+      else category="Choose port";
+    }
+    const values=[trim2(con.Name),trim2(con.Notes)].filter(Boolean).join(" | ");
+    rows.push([
+      trim2(con.ea_guid),ct,trim2(con.Name),category,
+      rawElementLabel(sr),rawElementLabel(sc.owner),rawElementLabel(sc.assembly),resolvedNoteForRaw(ctx,entityCtx,con.Start_Object_ID),sp.map(x=>x.linkTarget||x.fileName).join("; "),
+      rawElementLabel(er),rawElementLabel(ec.owner),rawElementLabel(ec.assembly),resolvedNoteForRaw(ctx,entityCtx,con.End_Object_ID),ep.map(x=>x.linkTarget||x.fileName).join("; "),
+      values,(connectorDiagrams.get(n2(con.Connector_ID))||[]).join("; ")
+    ]);
+  }
+  return rowsCsv(rows);
+}
+function addedPortsReviewCsv(ctx,entityCtx){
+  const rows=[["ea_guid","ea_type","ea_name","category","note","owner","assembly","block_note","block_ports"]];
+  const directPortsByOwner=new Map();
+  for(const raw of ctx.objects||[])if(trim2(raw.Object_Type)==="Port")mapPush(directPortsByOwner,n2(raw.ParentID),raw);
+  for(const raw of ctx.objects||[]){
+    if(trim2(raw.Object_Type)!=="Port")continue;
+    const q=ctx.portResolution.info.get(n2(raw.Object_ID));
+    if(!q||q.outcome!=="added-port-group")continue;
+    const owner=ctx.byId.get(n2(raw.ParentID))||null,assembly=owner?ctx.byId.get(n2(owner.ParentID))||null:null;
+    const block=ctx.byId.get(n2(q.blockObjectId))||null;
+    const blockPorts=block?(directPortsByOwner.get(n2(block.Object_ID))||[]):[],
+          same=trim2(raw.Name)?blockPorts.filter(p=>trim2(p.Name)===trim2(raw.Name)):[];
+    let category="";
+    if(!trim2(raw.Name))category="unnamed instance Port";
+    else if(!blockPorts.length)category="named and the block has no Ports";
+    else if(same.length>1)category="named and several Ports on the block have that name";
+    else category="named and no match among the block's Ports";
+    const target=entityCtx.entities.get(q.resolvedKey);
+    rows.push([
+      trim2(raw.ea_guid),trim2(raw.Object_Type),trim2(raw.Name),category,
+      target?(target.linkTarget||target.fileName):"",rawElementLabel(owner),rawElementLabel(assembly),
+      block?resolvedNoteForRaw(ctx,entityCtx,block.Object_ID):"",
+      blockPorts.map(p=>trim2(p.Name)||("port "+n2(p.Object_ID))).join("; ")
+    ]);
+  }
+  return rowsCsv(rows);
+}
+function nestingDirectionReviewCsv(ctx,entityCtx,connectorDiagrams){
+  const rows=[["ea_guid","ea_type","ea_name","category","start_element","end_element","start_note","end_note","link_written","child_other_parent","diagrams"]];
+  const byConnectorId=new Map((ctx.connectors||[]).map(x=>[n2(x.Connector_ID),x]));
+  for(const p of ctx.connectorPlans||[]){
+    if(p.eaType!=="Nesting"||!p.review)continue;
+    const con=byConnectorId.get(n2(p.sourceId));if(!con)continue;
+    const s=ctx.byId.get(n2(con.Start_Object_ID)),e=ctx.byId.get(n2(con.End_Object_ID));
+    const other=s&&n2(s.ParentID)&&n2(s.ParentID)!==n2(con.End_Object_ID)?ctx.byId.get(n2(s.ParentID)):null;
+    const category=other?"child has another source owner":"independent nesting direction";
+    rows.push([
+      p.eaGuid,p.eaType,p.eaName,category,rawElementLabel(s),rawElementLabel(e),
+      resolvedNoteForRaw(ctx,entityCtx,con.Start_Object_ID),resolvedNoteForRaw(ctx,entityCtx,con.End_Object_ID),
+      p.field||"",rawElementLabel(other),(connectorDiagrams.get(n2(con.Connector_ID))||[]).join("; ")
+    ]);
+  }
+  return rowsCsv(rows);
+}
+function prefixPath(a,b){
+  if(!a||!b||a.length>b.length)return false;
+  for(let i=0;i<a.length;i++)if(a[i]!==b[i])return false;
+  return true;
+}
+function equalsDirectionReviewCsv(ctx,entityCtx,localModel,connectorDiagrams){
+  const rows=[[
+    "ea_guid","ea_type","ea_name","category","start_element","end_element",
+    "owner_note","start_local","end_local","candidate_outer","candidate_inner",
+    "containment_path","connector_values","diagrams"
+  ]];
+  for(const con of ctx.connectors||[]){
+    if(trim2(con.Connector_Type)!=="Connector"||trim2(con.Stereotype)!=="BindingConnector")continue;
+    const sRaw=ctx.byId.get(n2(con.Start_Object_ID)),eRaw=ctx.byId.get(n2(con.End_Object_ID));
+    const s=localModel.endpointBySource.get(n2(con.Start_Object_ID))||null;
+    const e=localModel.endpointBySource.get(n2(con.End_Object_ID))||null;
+    const sameOwner=!!(s&&e&&s.ownerKey&&s.ownerKey===e.ownerKey),owner=sameOwner?entityCtx.entities.get(s.ownerKey):null;
+    let outer="",inner="",containment="";
+    if(sameOwner){
+      const sp=s.path.slice(0,-1),ep=e.path.slice(0,-1);
+      if(prefixPath(sp,ep)&&sp.length<ep.length){outer=s.localId;inner=e.localId;containment=sp.join("/")+" -> "+ep.join("/");}
+      else if(prefixPath(ep,sp)&&ep.length<sp.length){outer=e.localId;inner=s.localId;containment=ep.join("/")+" -> "+sp.join("/");}
+    }
+    const values=[trim2(con.Name),trim2(con.Notes)].filter(Boolean).join(" | ");
+    rows.push([
+      trim2(con.ea_guid),trim2(con.Connector_Type),trim2(con.Name),
+      sameOwner?"temporary local equals":"unresolved contextual owner/endpoints",
+      rawElementLabel(sRaw),rawElementLabel(eRaw),owner?(owner.linkTarget||owner.fileName):"",
+      s?s.localId:"",e?e.localId:"",outer,inner,containment,values,
+      (connectorDiagrams.get(n2(con.Connector_ID))||[]).join("; ")
+    ]);
+  }
+  return rowsCsv(rows);
+}
 function semanticReviewCsv(endpointFindings,localModel){
   const rows=[["source_guid","category","relationship","from_type","from_name","to_type","to_name","detail"]];
   for(const x of endpointFindings||[])rows.push(["",x.reason,x.field,x.fromType,x.ownerName,x.toType,x.targetName,"relationship endpoint review"]);
@@ -3431,12 +3587,17 @@ async function generateSlice(){
 
     el("sliceStatus").textContent="Reconciling attachments and diagrams";
     const attachments=await attachmentReconciliation(lastPlannerContext,entityCtx,sliceKeys,wholeModel);
+    const connectorDiagrams=await connectorDiagramMap(lastPlannerContext);
     const diagramCsv=diagramReconciliationCsv(lastPlannerContext,selected);
     const sourceMap=localModelSourceMapCsv(localModel,entityCtx);
     const ledger=ledgerCsvV03(lastPlannerContext,entityCtx,sliceKeys,selected);
     const duplicateCsv=duplicateNameReviewCsv(entityCtx);
     const alteredCsv=alteredPathReviewCsv(entityCtx,pathReviews);
     const semanticCsv=semanticReviewCsv(endpointFindings,localModel);
+    const blockFlowCsv=blockLevelFlowReviewCsv(lastPlannerContext,entityCtx,connectorDiagrams);
+    const addedPortsCsv=addedPortsReviewCsv(lastPlannerContext,entityCtx);
+    const nestingCsv=nestingDirectionReviewCsv(lastPlannerContext,entityCtx,connectorDiagrams);
+    const equalsCsv=equalsDirectionReviewCsv(lastPlannerContext,entityCtx,localModel,connectorDiagrams);
 
     const manifest=[
       "---","status: Test","---","# Run Manifest","",
@@ -3486,6 +3647,10 @@ async function generateSlice(){
       "99_System/11_Import/Review - Duplicate Names.csv":duplicateCsv,
       "99_System/11_Import/Review - Altered Names and Paths.csv":alteredCsv,
       "99_System/11_Import/Review - Semantic and Connectors.csv":semanticCsv,
+      "99_System/11_Import/Review - Block-Level Flow Connectors.csv":blockFlowCsv,
+      "99_System/11_Import/Review - Added Ports.csv":addedPortsCsv,
+      "99_System/11_Import/Review - Nesting Direction.csv":nestingCsv,
+      "99_System/11_Import/Review - Equals Direction.csv":equalsCsv,
       "99_System/11_Import/Attachment Reconciliation.csv":attachments.csv,
       "99_System/11_Import/Diagram Reconciliation.csv":diagramCsv
     };
