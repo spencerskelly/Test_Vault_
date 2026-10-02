@@ -2,16 +2,16 @@
 
 For every AI tool that creates or edits notes in this vault (Claude, ChatGPT, Rovo, Gemini, or any other). AI tools cannot run Templater, so you do by hand exactly what the template snippets do. The result must look the same as a note created from a template.
 
-Before substantial work, read `99_System/10_Docs/MDSE Modeling Ruleset 1.22.md`, `99_System/03_Schemas/relationships.yaml`, `99_System/03_Schemas/element-types.yaml`, `99_System/03_Schemas/authors.yaml` (AI codes and the default time zone) and the person notes in `99_System/04_People` (each person's author code and time zone). Property meanings are in `Definitions/Properties`.
+Before substantial work, read `99_System/10_Docs/MDSE Modeling Ruleset 1.23.md`, `99_System/03_Schemas/relationships.yaml`, `99_System/03_Schemas/element-types.yaml`, `99_System/03_Schemas/authors.yaml` (AI codes and the default time zone) and the person notes in `99_System/04_People` (each person's author code and time zone). Property meanings are in `Definitions/Properties`.
 
 ## Creating a note
 
-1. **Classify first.** Choose the class, then copy the matching template from `99_System/05_Templates` (for example `Requirement.md`). Keep its properties, their order (`type`, `subtype`, `id`, `uid`, `status`, `tags`, W-97) and its headings exactly. Do not add or drop properties, except that relationship fields from `99_System/03_Schemas/relationships.yaml` follow `tags` (W-126). Only `tags` and the relationship fields may hold more than one value. If no class fits, ask the user.
+1. **Classify first.** Choose the class, then copy the matching template from `99_System/05_Templates` (for example `Requirement.md`). Keep its properties, their order (`type`, `subtype`, `id`, `uid`, `status`, `tags`, W-97) and its headings exactly. Do not add or drop properties except governed sparse optional properties declared by `element-types.yaml` and relationship fields from `relationships.yaml`. Optional properties follow `tags` and precede relationship fields; omit a default-valued sparse property when its schema says `omitWhenDefault`. Only `tags` and the relationship fields may hold more than one value. If no class fits, ask the user.
 2. **Fill in `uid`** yourself. It is 30 characters, no spaces: `yyyyMMddHHmmssSSS` followed by a 13-character author code.
    - **Time:** local time now, to the millisecond, not UTC. Use the `timezone` in the directing person's note in `99_System/04_People` if it has one; otherwise `defaultTimezone` in `authors.yaml`.
    - **Author code, if a user directed the note:** that user's `code`, from their note in `99_System/04_People`. This applies even if you wrote every word. If you do not know who the user is, ask. A person may have `previousCodes` in their note: notes carrying those codes are also theirs.
    - **Author code, if you created the note on your own with no direct instruction:** your own code from `ai_authors` in `authors.yaml`. If your tool is not listed, add it: tool name (lowercase letters, at most 11), then `ai`, then hyphens to 13 characters.
-   - **If another note already has that exact `uid`,** add one millisecond until it is unique.
+   - **If another note or Local Model record already uses that 30-character identity token,** add one millisecond until it is globally unique in the vault.
 3. **Fill in `id`** yourself: the class prefix, a hyphen, and a five-digit number. Find the highest number used for that prefix across every note in the vault, including retired notes, and the earlier ids listed under `## Former ids` in any note (W-207), then add one. Prefixes are in `element-types.yaml`. Never reuse a number.
 4. **Check before saving:** `uid` matches `^\d{17}[a-z-]{13}$`, and `id` matches `^[A-Z]+-\d{5}$`.
 
@@ -51,6 +51,19 @@ uid: 20260928101530123claudeai-----   (Claude created it on its own)
 - A contextual endpoint occurrence belongs to the Object/part occurrence on which it exists. A local connection belongs to the lowest meaningful common configuration context that brings its endpoint occurrences together. Local flows belong to that connection.
 - A Requirement may keep `appliesTo` when its true target is an addressable local occurrence. Do not invent a new relationship solely because the target is contained.
 - Local endpoint/flow roles are `transmit`, `receive`, `exchange` or `unspecified`.
-- Do **not** invent or manually standardize the contained-record Markdown syntax yet. The final local-ID token format, anchor/address syntax, canonical block fields and manual-authoring contract remain open. Until those are frozen, use the importer/Workbench-approved representation or ask.
-- Do not create a standalone note merely to preserve a contextual occurrence if stable local addressability is sufficient; promote an occurrence only when an approved independent lifecycle/reuse/ownership/navigation need justifies it.
+- Use `local-model.yaml` as the canonical contained-record contract. New Local Model writing uses schema 0.2. Local IDs are native block IDs `part-<token>`, `ep-<token>`, `conn-<token>`, or `flow-<token>`, where `<token>` is a globally unique 30-character identity token. Part/endpoint `usage` may be `standard`, `variant`, or `option`; omission means `standard`. Do not put `usage` on connections or flows.
+- Do not create a standalone note merely to preserve a contextual occurrence if stable local addressability is sufficient; promotion of a local occurrence to a note is an explicit modeling decision, never an importer inference.
 
+
+
+## Sparse optional properties
+
+`element-types.yaml` may declare governed sparse optional properties. Currently:
+- `abstract: true` may be used on a reusable definition when the definition organizes/generalizes a specialization family but is not itself a selectable effective definition.
+- absence means false;
+- explicit `abstract: false` is valid but canonical writing omits it;
+- abstractness is not inherited.
+
+## Identity namespace
+
+The 30-character token used by a note `uid` and by a Local Model block ID belongs to one global identity namespace. Never allocate a token already used by any note or Local Model record. The local kind prefix is representation metadata, not a separate uniqueness namespace.
