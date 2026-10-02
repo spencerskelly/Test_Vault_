@@ -649,6 +649,20 @@ Stage 2 (W-30) is the review: the changes people make in it are recorded and eit
 
 **W-301 · 2026-10-01 · Deferred diagram import is selected by native EA diagram type.** The additive post-import diagram pass introduced by W-300 uses the preserved EA diagram types as the primary selection categories. The selectable categories are: Custom, Logical, Use Case, CompositeStructure, Statechart, Activity, Sequence, and Package. The user may select one or more categories for a pass. Selection by higher-level engineering/domain context is not required for v0.8.0. Re-running the diagram pass must be idempotent for diagrams already imported and must not alter accepted semantic model content.
 
+**W-302 · 2026-10-01 · v0.8.0 Local Model uses explicit managed-region markers.** The canonical Local Model body region is bounded by HTML comment markers immediately under the `## Local Model` heading:
+
+```markdown
+## Local Model
+
+<!-- MDSE:LOCAL-MODEL START schema=0.1 -->
+
+...structured Local Model records...
+
+<!-- MDSE:LOCAL-MODEL END -->
+```
+
+The markers are tooling/editing boundaries only; they do not carry engineering semantics. The authoritative model content remains the structured human-readable Markdown records inside the region. Workbench, importer and other MDSE tooling use these markers to parse the governed Local Model safely, exclude it from ordinary text editing, and detect the local-body schema version. Content outside the markers is ordinary note body content and is not part of the Local Model. Missing, duplicated, nested or mismatched Local Model boundary markers are model-health errors and block structured Local Model editing. A note may contain at most one managed Local Model region in v0.8.0.
+
 ## Open (raised, not yet decided)
 - Inverse fields (W-275, W-287, trial of option B): v0.4 validates every persisted paired inverse and symmetric mirror before a slice is written. Still open: the standalone regenerate script (language, location, when it runs) and whether Nodian is removed after the `02 Product Context` trial.
 - Relationship endpoint rules (W-272 to W-287): done for every relationship and embedded in native importer v0.4. Shared Aggregation now writes `includes` (W-277, W-287); off-rule imported links remain Review findings rather than errors.
