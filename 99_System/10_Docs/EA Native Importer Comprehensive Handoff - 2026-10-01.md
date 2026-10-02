@@ -80,6 +80,8 @@ This does not promote v0.7 or retroactively rename historical base artifacts. v0
 
 **W-304 canonical records/source trace:** Local Model records use heading + named-field Markdown. Part occurrences reference reusable Object definitions. Nested/sub-interfaces are recursive endpoint records using the same endpoint schema with a `parent` address. Connections own flow records exactly once; Workbench/indexing surfaces those flows from each participating endpoint. EA GUIDs/source-only provenance are removed from engineering note records and written instead to `99_System/11_Import/Local Model Source Map.csv`, keyed by owner UID + local ID.
 
+**W-305 inherited members:** reusable nested interface members are not expanded into local records automatically. They remain available through the reusable endpoint definition and are materialized locally only when connection, requirement scope, local override or another context-specific reference requires a stable local address.
+
 ## 3. Approved semantic model: reusable definition vs contextual occurrence
 
 ### 3.1 Reusable Object/assembly definitions
