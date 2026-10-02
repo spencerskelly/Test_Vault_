@@ -1,3 +1,22 @@
+# 2026-10-02 CURRENT CONTINUATION
+
+Start with `MDSE v0.8 Cross-Repository Reconciliation - 2026-10-02.md` and `Handoff Prompt - MDSE v0.8 Implementation.md`.
+
+Current authority/target:
+- Ruleset 1.23
+- relationships 1.35
+- element-types 1.17
+- local-model 0.2
+- mdse/base/importer target 0.8.0
+- repository-relative path limit 212
+- duplicate marker `~2`; alteration marker `~a`
+- EA source lineage `EA8647`
+- old base, `20260930`, and `261001` are reference only
+
+The historical handoff below is retained as evidence. Where it conflicts with W-315 through W-319 or the 2026-10-02 reconciliation, the newer decisions govern.
+
+---
+
 ---
 uid: 20260928123124000skellyspencer
 id: INFO-00020
@@ -20,7 +39,7 @@ Rewritten 2026-09-29 (W-183), updated through W-313 on 2026-10-01 for a new AI c
 5. `99_System/10_Docs/Translator Definition.md` (the single statement of what stage 1 must do, W-247; keep it current), then `Definitions/Note Layout.md` and `Definitions/EA Source Section.md`.
 6. `99_System/03_Schemas/`: `ea-element-mapping.yaml` (all 31 EA object types), `ea-connector-mapping.yaml` (all 15 connector types, W-151 to W-179), `relationships.yaml` (schemaVersion 1.35), `element-types.yaml` (24 model classes plus system definitions; `Diagram` added in W-212), `local-model.yaml` (Local Model body schema 0.1, W-313), `ea-field-dispositions.yaml`, `ea-tag-dispositions.yaml`, `ea-package-rules.yaml`.
 7. `99_System/10_Docs/Post-Import Tasks.md` (Tasks 1 to 8; Task 7 includes the state cleanup work added later).
-8. `99_System/02_AI/AI_INSTRUCTIONS.md` and `MDSE Modeling Ruleset 1.22` (reissued in W-260 and amended through W-297/full-import review).
+8. `99_System/02_AI/AI_INSTRUCTIONS.md` and `MDSE Modeling Ruleset 1.23` (reissued in W-260 and amended through W-297/full-import review).
 9. The import reads the `.qeax` directly (W-247); the CSV bundle in `99_System/CSV_EA` was used to define the rules. The bundle is in `99_System/CSV_EA` (`t_objectproperties_raw.csv` is the tag source, because only it has the Notes column; `t_xref.csv` holds the `conveyed`, `trigger` and other relationship rows). The `.qeax` and the translator source (v2.6.0) are not in the repository; ask for `EA_to_MDSE_Consolidated_v2_6_0.zip` if the earlier tool's rules are needed. The r12 relationship matrix notes in `99_System/archive/10_EA Native Translator` are evidence only; the connector mapping replaces them.
 
 ## 2026-10-01 continuation update
@@ -31,7 +50,7 @@ The immediate continuation baseline is now explicit:
 - **Relationship schema:** 1.35.
 - **Accepted importer baseline:** `EA_to_MDSE_Native_Importer_v0.5.2.html`.
 - **Current merge candidate:** `EA_to_MDSE_Native_Importer_v0.7.html` on `Test_Vault_` main. It was built from v0.5.2/schema 1.35 and merges the W-293/W-294 local occurrence code forward while preserving W-291/W-292 `hasState/stateOf`, v0.5.2 base-vault identity checks, stale-state invalidation, and output-handle hardening. Static JavaScript and invariant checks pass; it is **not yet an accepted importer baseline** until real-QEAX validation and the remaining W-297 acceptance work are complete.
-- **Matched release rule (W-299):** do not create another loosely paired importer/base snapshot. The next newly issued pair will be v0.8.0: `EA_to_MDSE_Native_Importer_v0.8.0.html` plus a clean base whose `.vault.yaml` contains `mdse_release: "0.8.0"`. The importer must block a mismatch. Relationship schema 1.35 and element schema 1.16 remain independently versioned unless separately changed.
+- **Matched release rule (W-299):** do not create another loosely paired importer/base snapshot. The next newly issued pair will be v0.8.0: `EA_to_MDSE_Native_Importer_v0.8.0.html` plus a clean base whose `.vault.yaml` contains `mdse_release: "0.8.0"`. The importer must block a mismatch. Relationship schema 1.35 and element schema 1.17 remain independently versioned unless separately changed.
 - **Initial-import diagram scope (W-300):** v0.8.0 must import the complete semantic model and all approved attachments, but it writes no diagrams during the initial keepable import. Every source diagram is reconciled as intentionally deferred. After acceptance, diagrams are added through an additive category/type-selectable pass against the existing vault.
 - **Diagram selection (W-301):** the later additive pass selects by preserved EA type: Custom, Logical, Use Case, CompositeStructure, Statechart, Activity, Sequence, and Package. Multi-select is allowed; re-running must not duplicate already imported diagrams.
 - **Current clean base-vault repo:** `spencerskelly/Test_Vault_-base-vault-2026-09-30-rel133-v051` main. The repo name is stale; the content is schema 1.35 / v0.5.2.
