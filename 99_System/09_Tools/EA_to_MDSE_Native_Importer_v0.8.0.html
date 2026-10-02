@@ -2913,6 +2913,75 @@ function buildLocalOccurrenceModel(ctx,entityCtx){
   };
 }
 
+function validateLocalModel(localModel,entityCtx){
+  const errors=[],entities=entityCtx.entities,tokenSeen=new Set();
+  for(const e of entities.values())if(e.uid)tokenSeen.add(e.uid);
+  const localByOwner=new Map();
+  const idRe=/^(part|ep|conn|flow)-(\d{17}[a-z-]{13})$/;
+  function reg(owner,id,kind){
+    const m=idRe.exec(id||"");
+    if(!m){errors.push(kind+" has invalid local ID: "+id);return;}
+    if(m[1]!==kind){errors.push(kind+" has wrong local ID prefix: "+id);}
+    if(tokenSeen.has(m[2]))errors.push("global identity token collision: "+m[2]);
+    tokenSeen.add(m[2]);
+    if(!localByOwner.has(owner))localByOwner.set(owner,new Map());
+    const map=localByOwner.get(owner);
+    if(map.has(id))errors.push("duplicate local ID under "+owner+": "+id);else map.set(id,kind);
+  }
+  for(const [owner,list] of localModel.partsByOwner.entries())for(const r of list)reg(owner,r.localId,"part");
+  for(const [owner,list] of localModel.endpointsByOwner.entries())for(const r of list)reg(owner,r.localId,"ep");
+  for(const [owner,list] of localModel.connectionsByOwner.entries()){
+    for(const r of list){
+      reg(owner,r.localId,"conn");
+      for(const fl of r.flows)reg(owner,fl.localId,"flow");
+    }
+  }
+  function defType(key){const e=entities.get(key);return e?e.mdseType:"";}
+  for(const [owner,list] of localModel.partsByOwner.entries()){
+    for(const r of list){
+      if(defType(r.definitionKey)!=="Object")errors.push("part "+r.localId+" definition is not an Object");
+      if(r.parentPath&&r.parentPath.length) {
+        const parent=r.parentPath[r.parentPath.length-1],k=localByOwner.get(owner)&&localByOwner.get(owner).get(parent);
+        if(k!=="part")errors.push("part "+r.localId+" nested parent does not resolve to a part: "+parent);
+      }
+    }
+  }
+  for(const [owner,list] of localModel.endpointsByOwner.entries()){
+    for(const r of list){
+      if(defType(r.definitionKey)!=="Port")errors.push("endpoint "+r.localId+" definition is not a Port");
+      if(r.parentPath&&r.parentPath.length){
+        const parent=r.parentPath[r.parentPath.length-1],k=localByOwner.get(owner)&&localByOwner.get(owner).get(parent);
+        if(k!=="part"&&k!=="ep")errors.push("endpoint "+r.localId+" parent/part does not resolve: "+parent);
+      }
+      for(const x of r.equalsRefs||[]){
+        const k=localByOwner.get(owner)&&localByOwner.get(owner).get(x.anchor);
+        if(k!=="ep")errors.push("endpoint "+r.localId+" equals target is not a local endpoint: "+x.anchor);
+      }
+    }
+  }
+  for(const [owner,list] of localModel.connectionsByOwner.entries()){
+    for(const r of list){
+      for(const ref of [r.endpointA,r.endpointB]){
+        const k=localByOwner.get(owner)&&localByOwner.get(owner).get(ref&&ref.anchor);
+        if(!ref||ref.kind!=="endpoint"||k!=="ep")errors.push("connection "+r.localId+" endpoint does not resolve to local endpoint");
+      }
+      for(const fl of r.flows){
+        if(defType(fl.definitionKey)!=="Item Flow")errors.push("flow "+fl.localId+" definition is not an Item Flow");
+        if(!["transmit","receive","exchange","unspecified"].includes(fl.roleA))errors.push("flow "+fl.localId+" has invalid endpointA role "+fl.roleA);
+        if(!["transmit","receive","exchange","unspecified"].includes(complementRole(fl.roleA)))errors.push("flow "+fl.localId+" has invalid endpointB role");
+      }
+    }
+  }
+  for(const [req,list] of localModel.requirementLinksByOwner.entries()){
+    if(defType(req)!=="Requirement")errors.push("local applicability owner is not a Requirement: "+req);
+    for(const r of list){
+      const k=localByOwner.get(r.targetOwnerKey)&&localByOwner.get(r.targetOwnerKey).get(r.targetAnchor);
+      if(k!=="part"&&k!=="ep")errors.push("Requirement appliesTo target does not resolve to a local part/endpoint: "+r.targetAnchor);
+    }
+  }
+  return errors;
+}
+
 function localRefLink(localModel,ref,ownerEntity){
   return localModel.refDisplay(ref,ownerEntity);
 }
@@ -3549,6 +3618,8 @@ async function generateSlice(){
     if(validation.length)throw new Error("Validation failed before writing: "+validation.slice(0,8).join("; "));
 
     const localModel=buildLocalOccurrenceModel(lastPlannerContext,entityCtx);
+    const localErrors=validateLocalModel(localModel,entityCtx);
+    if(localErrors.length)throw new Error("Local Model 0.2 validation failed before writing: "+localErrors.slice(0,12).join("; "));
 
     const sourceIds=new Set();
     for(const k of sliceKeys)for(const id of entities.get(k).sourceIds||[])sourceIds.add(id);
