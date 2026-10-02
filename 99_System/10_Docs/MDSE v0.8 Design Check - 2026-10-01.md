@@ -98,7 +98,7 @@ Local Model content is a governed Markdown region:
 ```markdown
 ## Local Model
 
-<!-- MDSE:LOCAL-MODEL START schema=0.1 -->
+<!-- MDSE:LOCAL-MODEL START schema=0.2 -->
 
 ...records...
 
@@ -117,7 +117,7 @@ Example:
 ```markdown
 ## Local Model
 
-<!-- MDSE:LOCAL-MODEL START schema=0.1 -->
+<!-- MDSE:LOCAL-MODEL START schema=0.2 -->
 
 ### Part Occurrences
 
@@ -275,7 +275,7 @@ The relationship vocabulary is sufficient for the current design:
 
 No new note-level relationship is required for assembly exposure.
 
-### element-types.yaml 1.16
+### element-types.yaml 1.17
 
 No new first-class element type is required for local part, endpoint, connection or flow records.
 
@@ -309,7 +309,7 @@ The first import we might keep must satisfy all of these:
 - no unexplained source remainder.
 
 ### Local Model
-- canonical schema 0.1 markers/records;
+- canonical schema 0.2 markers/records;
 - stable block IDs;
 - native block links between local records;
 - source map external to engineering records;
@@ -607,7 +607,7 @@ W-314 settles the semantics but does not silently change the currently deployed 
 
 Expected implementation work:
 
-1. advance `local-model.yaml` from schema 0.1 to 0.2;
+1. advance `local-model.yaml` from schema 0.2 to 0.2;
 2. add optional `usage` to the occurrence records that are currently supported for configuration, beginning with part and endpoint occurrences;
 3. default omitted `usage` to `standard`;
 4. do not add `usage` to connection or flow records;
@@ -683,3 +683,22 @@ Configuration resolution
 This allows reusable engineering definitions, product architecture, product variants/options and later commercial configuration rules to coexist without duplicating definitions or overloading relationships.
 
 A later user-facing procedure should explain how engineers create and resolve these positions through Workbench. That procedure is intentionally deferred until the underlying schema and Workbench interaction are implemented and tested.
+
+
+## 2026-10-02 implementation resolution
+
+The 2026-10-02 cross-repository reconciliation advances the implementation contract without changing the core architecture above.
+
+- canonical writer Local Model version is now 0.2;
+- Workbench must read both 0.1 and 0.2;
+- element-types is 1.17 with sparse optional `abstract`;
+- relationships remains 1.35;
+- the local 30-character token shares a global uniqueness namespace with note UIDs;
+- EA8647 first-import identity and Source Map rerun rules are settled;
+- repository-relative path limit is 212 characters;
+- duplicate and altered-name suffixes are `~2` and `~a` families rather than ID-based suffixes;
+- failed attachment import is non-blocking but reconciled;
+- diagram creation remains deferred, while diagram reconciliation is mandatory;
+- the four legacy empty import CSVs are retired.
+
+See `MDSE v0.8 Cross-Repository Reconciliation - 2026-10-02.md` and Ruleset 1.23 for the final implementation rules.
