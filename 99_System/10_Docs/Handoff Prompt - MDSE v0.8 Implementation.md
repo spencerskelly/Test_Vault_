@@ -10,7 +10,7 @@ Read in this order:
 0. `99_System/10_Docs/00 - Current State.md` (registry of current vs historical files)
 1. `99_System/10_Docs/MDSE v0.8 Cross-Repository Reconciliation - 2026-10-02.md`
 2. `99_System/10_Docs/MDSE Modeling Ruleset 1.23.md`
-3. Workspace Decision Log through W-321
+3. Workspace Decision Log through W-322
 4. `Translator Definition.md`
 5. `relationships.yaml` 1.35
 6. `element-types.yaml` 1.17
@@ -22,7 +22,7 @@ Do not use `20260930`, `261001`, or the old base-vault repository as continuatio
 
 ## Lean runtime base
 
-Do not manually curate or copy the methodology workspace into the engineering vault. `mdse-release.yaml` is the one machine-readable build authority; `build-base.py` generates the positive runtime file set and `check-release.py --base` verifies it. The generated base does not contain Current State or the release manifest. Its `.vault.yaml` contains `mdse_release: 0.8.0`, and initialization must preserve it. MDSE Bootstrap is deferred from the v0.8 runtime baseline until a retrievable implementation exists. The final issued base must pin a WB-106-capable Workbench release.
+Do not manually curate or copy the methodology workspace into the engineering vault. `mdse-release.yaml` is the one machine-readable build authority; `build-base.py` generates the positive runtime file set and `check-release.py --base` verifies it. The generated base does not contain Current State or the release manifest. Its `.vault.yaml` contains `mdse_release: 0.8.0`, and initialization must preserve it. The base is a controlled plugin release (W-322): all runtime plugins ship inside it, pinned and hashed in `.obsidian/plugin-lock.yaml`, with generated settings; MDSE Bootstrap 0.3.0 (`MDSE Bootstrap/`) checks it and registers authors. Never hand-edit generated files (`06_Fileclasses`, the lock, plugin `data.json`); regenerate with the scripts in `99_System/09_Tools/`. The final issued base must pin a WB-106-capable Workbench release.
 
 ## Current target
 

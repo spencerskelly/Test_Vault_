@@ -1,0 +1,15 @@
+{
+  "data_version": 2,
+  "command_timeout": 15,
+  "templates_folder": "99_System/05_Templates",
+  "templates_pairs": [],
+  "trigger_on_file_creation_mode": "none",
+  "auto_jump_to_cursor": false,
+  "user_scripts_folder": "",
+  "folder_templates": [],
+  "file_templates": [],
+  "syntax_highlighting": true,
+  "enabled_templates_hotkeys": [],
+  "startup_templates": [],
+  "ignore_folders_on_creation": []
+}

@@ -1,0 +1,16 @@
+{
+  "commitMessage": "{{hostname}}: {{numFiles}} files, {{date}}",
+  "autoCommitMessage": "{{hostname}}: {{numFiles}} files, {{date}}",
+  "autoSaveInterval": 0,
+  "autoPushInterval": 0,
+  "autoPullInterval": 0,
+  "autoPullOnBoot": true,
+  "pullBeforePush": true,
+  "syncMethod": "merge",
+  "disablePush": false,
+  "disablePopupsForNoChanges": true,
+  "listChangedFilesInMessageBody": true,
+  "showStatusBar": true,
+  "showBranchStatusBar": true,
+  "changedFilesInStatusBar": true
+}

@@ -1,0 +1,9 @@
+{
+  "id": "mdse-bootstrap",
+  "name": "MDSE Bootstrap",
+  "version": "0.3.0",
+  "minAppVersion": "1.5.0",
+  "description": "Checks that this MDSE vault runs the controlled plugin release, and registers each person's author code on first use.",
+  "author": "Spencer Skelly",
+  "isDesktopOnly": true
+}

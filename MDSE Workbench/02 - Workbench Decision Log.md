@@ -1022,3 +1022,10 @@ The Workbench test fixtures `relationships.yaml` and `element-types.yaml` had dr
 **Status:** Decided and implemented for fixtures/documentation; no plugin behavior changed and version remains 0.1.15.
 
 Workbench does not copy the methodology release registry into its code. Runtime/model semantics continue to come from the vault schemas. For portable independent tests, duplication is limited to schema fixtures that are necessary: `relationships.yaml`, `element-types.yaml`, and current `local-model.yaml` are exact copies of the authority schemas; `local-model-0.1.yaml` is a frozen historical fixture used only to test backward compatibility. The authority release checker compares current fixtures exactly and verifies the historical fixture remains schema 0.1. W-321 keeps the deployed engineering vault lean and requires the final v0.8 base to pin a WB-106-capable Workbench release. WB-106 itself remains the next behavior gate.
+
+### WB-110 — 2026-10-02 distribution through the controlled base release
+
+**Status:** Decided (W-322). Amends WB-088.
+
+Workbench reaches engineers inside the base vault, not by per-machine install: the built `main.js`, `manifest.json` and `styles.css` are vendored in the methodology workspace (`99_System/09_Tools/runtime-plugins/mdse-workbench/`), pinned and hashed in `.obsidian/plugin-lock.yaml`, and MDSE Bootstrap 0.3.0 reports any difference. Pre-release bases pin 0.1.15. To ship a new Workbench build: build in `MDSE_Workbench`, copy the three files into the payload, run `update-plugin-lock.py`, set the version in `mdse-release.yaml`, and run `check-release.py --workbench <clone>`. The issued 0.8.0 base pins the WB-106 release (`wb106Version`). Workbench `data.json` (generated-view registry) and `Workbench Views/` are git-ignored in the base.
+

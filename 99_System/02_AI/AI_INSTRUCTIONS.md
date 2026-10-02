@@ -30,6 +30,8 @@ uid: 20260928101530123claudeai-----   (Claude created it on its own)
 
 ## Do not
 
+- Do not edit generated release files: `99_System/06_Fileclasses/`, `.obsidian/plugin-lock.yaml`, `.obsidian/community-plugins.json` or any plugin `data.json`. They come from the schemas through the release scripts (W-322). Never add, update or remove plugins.
+
 - Change an existing note's `uid` or `id`.
 - Stamp `uid` or `id` on material brought in from outside (standards, external documents). It keeps its own identification.
 - Add an `eaGUID` to a new note. It appears only at the bottom of notes translated from EA.

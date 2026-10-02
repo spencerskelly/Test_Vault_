@@ -61,4 +61,16 @@ The machine-checkable version of this table is `99_System/03_Schemas/mdse-releas
 - `check-release.py --workbench <clone>` verifies Workbench version plus current schema fixtures and the frozen Local Model 0.1 compatibility fixture.
 - Current State and `mdse-release.yaml` stay in the methodology workspace; they are not duplicated into engineering vaults.
 - `Initialize-Vault.sh/.ps1` preserve `mdse_release`.
-- MDSE Bootstrap is deferred from the v0.8 runtime baseline while no retrievable implementation exists.
+- W-322 replaces the W-321 Bootstrap deferral: see the controlled plugin release section below.
+
+## Controlled plugin release (W-322)
+
+| File | Role |
+|---|---|
+| `runtime-plugins/<id>/` | Vendored plugin code for all 11 runtime plugins, plus generated governed `data.json` |
+| `build-plugin-config.py` | Generates governed settings, `../06_Fileclasses/` and its link-target Base from the schemas (`--check` to verify) |
+| `update-plugin-lock.py` | Generates `.obsidian/plugin-lock.yaml` (schema 2, hashes) and `.obsidian/community-plugins.json` (`--check` to verify) |
+| `build-base.py` | Also copies every locked plugin into the base and writes the base `.gitignore` |
+| `check-release.py` | Also runs both `--check`s, verifies payload hashes and Bootstrap/Workbench versions, and the plugins inside a built base |
+
+Bootstrap source and docs live in `MDSE Bootstrap/` at the workspace root. How to change a plugin version: `MDSE Bootstrap/README_MDSE Bootstrap.md`.

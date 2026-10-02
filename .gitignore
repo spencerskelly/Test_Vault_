@@ -5,3 +5,5 @@
 .DS_Store
 Thumbs.db
 .obsidian/author-code.txt
+MDSE Bootstrap/plugin/node_modules/
+MDSE Bootstrap/plugin/main.js

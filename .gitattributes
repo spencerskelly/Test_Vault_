@@ -1,2 +1,5 @@
 # Auto detect text files and perform LF normalization
 * text=auto
+# W-322: plugin files are hashed by MDSE Bootstrap; never convert their line endings.
+.obsidian/plugins/** -text
+99_System/09_Tools/runtime-plugins/** -text

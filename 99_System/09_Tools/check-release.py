@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""MDSE release consistency check (W-320, W-321).
+"""MDSE release consistency check (W-320, W-321, W-322).
 
 Usage:
   python3 99_System/09_Tools/check-release.py
@@ -8,7 +8,7 @@ Usage:
 
 PyYAML is required. Exit code 1 on any FAIL.
 """
-import argparse, json, os, re, sys
+import argparse, hashlib, json, os, re, subprocess, sys
 
 try:
     import yaml
@@ -116,12 +116,34 @@ t=read("99_System/10_Docs/00 - Current State.md")
 lock=read(".obsidian/plugin-lock.yaml")
 enabled=read(".obsidian/community-plugins.json")
 bootstrap=man["tools"]["bootstrap"]
-if bootstrap["sourceAvailable"] is False:
-    (fail if "mdse-bootstrap" in lock or "mdse-bootstrap" in enabled else ok)("unavailable mdse-bootstrap is absent from runtime plugin baseline")
 wbid=man["tools"]["workbench"]["runtimePluginId"]
-if wbid not in lock or wbid not in enabled:
-    (fail if man["releaseStatus"]=="release" and man["tools"]["workbench"]["requiredForRelease"] else warn)(
-        "runtime baseline does not yet pin and enable the WB-106-capable Workbench release")
+
+# W-322 controlled plugin release: generated config and lock are current; payload matches the lock.
+rp=man["runtimePlugins"]
+for script in (rp["configGenerator"], rp["lockGenerator"]):
+    r=subprocess.run([sys.executable, full(ROOT,script), "--check"], capture_output=True, text=True)
+    (ok if r.returncode==0 else fail)(f"{os.path.basename(script)} --check" + ("" if r.returncode==0 else ": "+" ".join(r.stdout.split()[-12:])))
+plock=yaml.safe_load(lock)
+def sha(path):
+    with open(path,"rb") as fh: return hashlib.sha256(fh.read()).hexdigest()
+if plock.get("schema")!=2:
+    fail("plugin-lock.yaml is not schema 2")
+else:
+    (ok if json.loads(enabled)==list(plock["plugins"]) else fail)("community-plugins.json enables exactly the locked plugins")
+    for pid, meta in plock["plugins"].items():
+        d=full(ROOT, rp["payload"]+"/"+pid)
+        bad=[f for f,h in meta["sha256"].items() if not os.path.isfile(os.path.join(d,f)) or sha(os.path.join(d,f))!=h]
+        (ok if not bad else fail)(f"payload {pid} {meta['version']} matches lock" + (f" (differs: {', '.join(bad)})" if bad else ""))
+    bv=plock["plugins"].get("mdse-bootstrap",{}).get("version")
+    srcv=json.load(open(full(ROOT,bootstrap["source"]+"/manifest.json")))["version"]
+    pkgv=json.load(open(full(ROOT,bootstrap["source"]+"/package.json")))["version"]
+    (ok if bv==srcv==pkgv==bootstrap["version"] else fail)(f"Bootstrap lock {bv}, source manifest {srcv}, package {pkgv}, release manifest {bootstrap['version']}")
+    wv=plock["plugins"].get(wbid,{}).get("version")
+    (ok if wv==man["tools"]["workbench"]["version"] else fail)(f"Workbench lock {wv} vs release manifest {man['tools']['workbench']['version']}")
+    wb106=man["tools"]["workbench"].get("wb106Version")
+    if not wb106 or wv!=wb106:
+        (fail if man["releaseStatus"]=="release" and man["tools"]["workbench"]["requiredForRelease"] else warn)(
+            f"pinned Workbench {wv} is not the WB-106-capable release required for an issued base")
 if man["tools"]["importer"]["release"] is None:
     (fail if man["releaseStatus"]=="release" else warn)("no release-conformant importer yet")
 if man["tools"]["cleanBase"]["repo"] is None:
@@ -172,6 +194,13 @@ if a.base:
         elif man["releaseStatus"]=="release": fail(f"release runtime file missing from authority: {p}")
         else: warn(f"pre-release runtime file not built yet: {p}")
     expected.update(rb["generatedFiles"])
+    plugin_files={}
+    for pid in (plock.get("plugins") or {}):
+        d=rp["payload"]+"/"+pid
+        for n in os.listdir(full(ROOT,d)):
+            if n in ("main.js","manifest.json","styles.css","data.json"):
+                plugin_files[f".obsidian/plugins/{pid}/{n}"]=d+"/"+n
+    expected.update(plugin_files)
 
     actual=set()
     for d,dirs,names in os.walk(base):
@@ -184,7 +213,10 @@ if a.base:
     if extra: fail("base has ungoverned extra files: "+", ".join(extra[:20]))
     else: ok("base contains no ungoverned extra files")
 
-    for p in sorted(expected-set(rb["generatedFiles"])):
+    for p,src in sorted(plugin_files.items()):
+        if p in actual:
+            (ok if sha(full(base,p))==sha(full(ROOT,src)) else fail)(f"base plugin file equals release payload: {p}")
+    for p in sorted(expected-set(rb["generatedFiles"])-set(plugin_files)):
         if p in actual and os.path.exists(full(ROOT,p)):
             (ok if norm(read_at(base,p))==norm(read(p)) else fail)(f"base file equals authority: {p}")
 
@@ -198,8 +230,9 @@ if a.base:
     base_enabled=read_at(base,".obsidian/community-plugins.json") if os.path.exists(full(base,".obsidian/community-plugins.json")) else ""
     if man["releaseStatus"]=="release" and (wbid not in block or wbid not in base_enabled):
         fail("issued base does not pin and enable required Workbench")
-    if bootstrap["sourceAvailable"] is False and "mdse-bootstrap" in block:
-        fail("issued base contains unavailable Bootstrap")
+    (ok if "mdse-bootstrap" in block and "mdse-bootstrap" in base_enabled else fail)("base pins and enables MDSE Bootstrap")
+    gi=read_at(base,".gitignore") if os.path.exists(full(base,".gitignore")) else ""
+    (ok if ".obsidian/plugins/*/data.json" not in gi and "Workbench Views/" in gi else fail)("base .gitignore tracks governed plugin settings and ignores generated views")
 
 print(f"\n{len(fails)} fail, {len(warns)} warn")
 sys.exit(1 if fails else 0)

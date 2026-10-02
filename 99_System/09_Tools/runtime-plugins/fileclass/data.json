@@ -1,0 +1,12 @@
+{
+  "classFilesPath": "99_System/06_Fileclasses/",
+  "fileClassAlias": "type",
+  "globalFileClass": "",
+  "basesFolder": "",
+  "insertFieldsOnBind": false,
+  "openFieldsOnCreate": false,
+  "reorderOnInsert": false,
+  "unknownKeysPosition": "bottom",
+  "enableSchemaLog": false,
+  "enableCanvasEngine": false
+}

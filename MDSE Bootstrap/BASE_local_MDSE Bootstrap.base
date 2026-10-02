@@ -1,0 +1,9 @@
+filters:
+  and:
+    - file.inFolder("MDSE Bootstrap")
+    - file.ext == "md"
+views:
+  - type: table
+    name: Bootstrap documents
+    order:
+      - file.name

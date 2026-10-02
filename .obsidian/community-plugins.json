@@ -1,11 +1,13 @@
 [
-  "breadcrumbs",
-  "dataview",
-  "nodian",
-  "fileclass",
-  "advanced-canvas",
-  "table-exporter",
+  "mdse-bootstrap",
+  "mdse-workbench",
   "templater-obsidian",
+  "fileclass",
+  "breadcrumbs",
+  "obsidian-git",
+  "dataview",
+  "advanced-canvas",
+  "nodian",
   "quickadd",
-  "obsidian-git"
+  "table-exporter"
 ]

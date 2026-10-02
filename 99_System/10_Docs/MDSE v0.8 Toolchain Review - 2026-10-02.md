@@ -152,6 +152,9 @@ A new clean base must be produced from the current authority and must contain/de
 
 ## Bootstrap / plugin packaging finding
 
+> [!NOTE]
+> Later on 2026-10-02 this finding was resolved by W-322 (controlled plugin release, MDSE Bootstrap 0.3.0). See [[00 - Current State]].
+
 The authority vault pins `mdse-bootstrap: "0.2.0"` in `.obsidian/plugin-lock.yaml`, and `MDSE Bootstrap - Author Registration Spec.md` defines expected author-registration behavior.
 
 However:

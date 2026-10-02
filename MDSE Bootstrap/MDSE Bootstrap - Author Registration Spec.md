@@ -5,11 +5,11 @@ status: Active
 ---
 # MDSE Bootstrap: Author Registration
 
-What MDSE Bootstrap must do so every person has an author code before creating a note, and so AI tools can find it. Decisions W-24 and W-25 in the Workspace Decision Log. The plugin's source is not in this repository, so this note is the specification for whoever maintains it.
+What MDSE Bootstrap must do so every person has an author code before creating a note, and so AI tools can find it. Decisions W-24 and W-25 in the Workspace Decision Log. Implemented by MDSE Bootstrap 0.3.0 (W-322); source in `MDSE Bootstrap/plugin/`, overview in [[README_MDSE Bootstrap]].
 
 ## When
 
-On install of the vault on a new computer, after the plugins are installed and before the person creates a note.
+On the first open of the vault on a computer, once Restricted mode is off (the plugins ship inside the vault, W-322), and before the person creates a note. A person can rerun it with **MDSE Bootstrap: Register author code**.
 
 ## Steps
 
@@ -39,3 +39,9 @@ The first-use popup in `Snippet - uid` uses the same rule, so a person created e
 ## If the person needs to change their code
 
 See `Definitions/Changing Your Author Code.md`.
+
+## Implementation notes (0.3.0)
+
+- Step 4 accepts a code that already belongs to a person note with the same name: that is the same person on a new computer. The note is not recreated (step 6).
+- Step 6 creates the note with Templater's create-from-template so `uid` and `id` come from `Snippet - uid` and `Snippet - id`; Bootstrap then sets `code`, `name` and `timezone` (the computer's IANA time zone).
+- Step 7 is a notice asking the person to commit and sync; Bootstrap does not run Git itself.
