@@ -121,13 +121,12 @@ unless a future unique use is explicitly approved.
 
 ## Implementation order
 
-1. Build canonical v0.8 importer writer/source map against schemas 1.35/1.17/0.2.
-2. Implement 212-character path/naming planner and remeasure real QEAX.
-3. Complete attachment, diagram-reconciliation and final evidence outputs.
-4. Produce a new clean v0.8 base; do not mutate the old base repo into the release.
-5. Validate representative real EA cases.
-6. Implement Workbench WB-106: ModelRef, Local Model 0.1/0.2 parser, block-fragment preservation, region protection, findings, and occurrence-aware core views.
-7. Then add W-314 read-only variation, candidate resolution and temporary session configuration.
-8. Do not define persisted named configurations/model numbers/compatibility matrices until the later configuration phase.
+1. Build the canonical v0.8 importer core/writer/source map against schemas 1.35/1.17/0.2.
+2. Implement the 212-character path/naming planner and complete attachment, diagram-reconciliation and evidence outputs.
+3. Use `build-base.py` at any time to create disposable **candidate** bases for importer/Workbench testing; validate them with `check-release.py --base`.
+4. Implement Workbench WB-106: ModelRef, Local Model 0.1/0.2 parser, block-fragment preservation, region protection, findings, and occurrence-aware core views.
+5. When importer v0.8.0 and a WB-106-capable Workbench release are ready, pin/enable Workbench in the runtime plugin files, update `mdse-release.yaml`, generate the **final issued** base, and run `check-release.py --workbench ... --base ...`.
+6. Validate representative real EA cases, then run the whole-model import eligible to keep.
+7. After WB-106, add W-314 read-only variation, candidate resolution and temporary session configuration; persisted named configurations/model numbers/compatibility matrices remain later.
 
-The first whole-model run is eligible to keep only after both the importer/base gates and WB-106 read/navigation gate pass.
+The first whole-model run is eligible to keep only after the importer, final-base and WB-106 gates all pass.
