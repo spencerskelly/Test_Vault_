@@ -252,3 +252,20 @@ The creation service reads the vault's class templates and the `uid`/`id`/author
 
 Desktop only, with mobile-ready code: only Obsidian's own APIs (no Node or Electron), narrow-screen layouts, select-then-command interactions, a compact index (WB-087). Plugin source lives in its own repository; releases are GitHub Releases pinned by MDSE Bootstrap. The vault holds only vault-side configuration (View Profiles, schema/compatibility declaration).
 
+## Contextual usage and configuration boundary (W-314)
+
+Workbench must preserve the W-314 three-layer boundary:
+
+1. reusable definition hierarchy;
+2. contextual Local Model occurrence;
+3. configuration resolution.
+
+The base Local Model stores `definition` plus contextual `usage` (`standard | variant | option`, omission = `standard`). Reusable definitions may later expose `abstract: true`. Workbench derives variant candidates from the transitive `subtypeOf` hierarchy and must not persist duplicate candidate lists merely for UI convenience.
+
+A Workbench configuration session is a derived working state, not authoritative replacement model content. Selecting a concrete variant or excluding an option must not rewrite the base occurrence. If the engineer chooses to save a named configuration, Workbench will eventually write a separate native Markdown representation after that format is governed. Until that format is settled, configuration exploration may remain transient only.
+
+Configured views are derived presentations over the same authoritative notes and Local Model. An absent option causes dependent contextual topology to disappear from the configured view through normal occurrence filtering; it does not require a second connection/flow variation language.
+
+Workbench validation must reject or flag abstract effective definitions, out-of-family selections and selections invalidated by later hierarchy changes. It must never silently repair a saved configuration by choosing a different subtype.
+
+W-314 does not yet change the deployed schema. Workbench must continue treating `local-model.yaml` 0.1 as the executable contract until the shared schema is intentionally advanced.
