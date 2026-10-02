@@ -2552,7 +2552,6 @@ function buildRelationshipGraph(ctx,entityCtx,limitations){
     if(!(e.synthetic||trim2(e.raw.Object_Type)==="Port"))continue;
     const ownerKey=e.synthetic?e.ownerKey:entityCtx.portOwner.get(e.key);
     if(ownerKey&&entities.has(ownerKey))addForwardRel(graph,ownerKey,"hasPort",e.key,false);
-    if(e.synthetic)continue;
     const p2=ctx.byGuid.get(trim2(e.raw.PDATA2));
     if(p2){
       const tr=resolveEndpoint(p2.Object_ID,ctx.elementCtx,ctx.portResolution);
@@ -3165,7 +3164,7 @@ function formatFoldedNotes(list){
   return lines;
 }
 
-function renderEntityMarkdown(e,graph,entityCtx,tagMap,foldedNotes,externalSet,sliceKeys,localModel){
+function renderEntityMarkdown(e,graph,entityCtx,tagMap,foldedNotes,externalSet,sliceKeys,localModel,sourceEvidence){
   const lines=["---","type: "+yamlScalar(e.mdseType),"subtype: "+yamlScalar(e.subtype||""),"id: "+yamlScalar(e.id),"uid: "+yamlScalar(e.uid),"status: Draft","eaType: "+yamlScalar(eaTypeOf(e)),"tags: []"];
   lines.push(...relationYaml(e,graph,entityCtx.entities,externalSet,sliceKeys,localModel));
   const heading=trim2(e.raw.Name)||e.naturalName||e.fileName;
@@ -3190,7 +3189,8 @@ function renderEntityMarkdown(e,graph,entityCtx,tagMap,foldedNotes,externalSet,s
   for(const t of multilinePriority)lines.push("**Webasto MBDV Profile::Priority:**",t.value.trim(),"");
 
   lines.push("","","## Source: EA");
-  if(trim2(e.raw.Name)&&e.fileName!==trim2(e.raw.Name))lines.push("Name: "+trim2(e.raw.Name));
+  const finalFile=(e.outputPath?e.outputPath.split("/").pop().replace(/\.md$/i,""):e.fileName);
+  if(trim2(e.raw.Name)&&finalFile!==trim2(e.raw.Name))lines.push("Name: "+trim2(e.raw.Name));
   lines.push("EA GUID: "+trim2(e.eaGuid));
 
   if(trim2(e.raw.Alias))lines.push("- Alias: "+trim2(e.raw.Alias));
@@ -3201,6 +3201,10 @@ function renderEntityMarkdown(e,graph,entityCtx,tagMap,foldedNotes,externalSet,s
       const label=(name==="PN"||name==="PartNumber")?"Part Number":name;
       lines.push("- "+label+": "+t.value.replace(/\r?\n/g," "));
     }
+  }
+  const ev=sourceEvidence&&sourceEvidence.get(e.key);
+  if(ev){
+    lines.push(...ev.structure,...ev.connectors,...ev.discussions,...ev.reviews);
   }
   return lines.join("\n").replace(/\n+$/,"")+"\n";
 }
