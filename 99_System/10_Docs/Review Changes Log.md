@@ -50,3 +50,19 @@ One row per reason, not one per note. If the same change was made on many notes,
 - Deferred unavailable MDSE Bootstrap from the v0.8 runtime plugin baseline.
 - Established the final-base gate that a WB-106-capable Workbench release must be pinned before issue.
 - Made AGENTS/AI instructions work both in the methodology workspace and the lean runtime base.
+
+
+## 2026-10-02 — importer v0.8.0 implementation candidate
+
+- Created `EA_to_MDSE_Native_Importer_v0.8.0.html` from the v0.5.2 safety lineage carried through the v0.7 occurrence merge.
+- Added exact base release/schema gates and required enabled-plugin payload checks.
+- Implemented EA8647 global note/local identity allocation and Local Model 0.2 native block IDs.
+- Replaced the v0.7 Local Model body with the canonical governed 0.2 region and separate Local Model Source Map.
+- Persisted Requirement `appliesTo` local targets as native block links in frontmatter.
+- Implemented W-318 `~a` alteration / `~2` duplicate naming, normalized folder planning and 212-character whole-model preflight.
+- Preserved reconstructable BindingConnector evidence as temporary local `equals`; unresolved context remains review-only.
+- Added pre-write Local Model schema validation and prevented invalid endpoint/connection/flow records.
+- Added Run Manifest, Ledger, Source Map, duplicate/altered-name reviews, semantic review, four named stage-2 review tables, attachment reconciliation and diagram reconciliation.
+- Initial diagrams remain intentionally deferred.
+- Linked-document rows are reconciled, but binary/RTF extraction is not yet implemented; in-scope failures are explicitly recorded as `failed attachment import` and are non-blocking under W-319.
+- Candidate source parses statically. Release status remains pre-release and importer `release` remains null until the real QEAX acceptance run and WB-106 gate.
