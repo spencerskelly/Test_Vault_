@@ -12,7 +12,7 @@ Use these as code/history references only:
 
 Do not use v0.7 to generate a model intended to keep.
 
-Candidate file: `EA_to_MDSE_Native_Importer/v0.8.1/EA_to_MDSE_Native_Importer_v0.8.1.html`. It follows:
+Candidate file: `EA_to_MDSE_Native_Importer/v0.8.2/EA_to_MDSE_Native_Importer_v0.8.2.html`. It follows:
 1. `../10_Docs/MDSE v0.8 Cross-Repository Reconciliation - 2026-10-02.md`
 2. `../10_Docs/Translator Definition.md`
 3. Workspace Decision Log through W-319
@@ -44,7 +44,7 @@ See `MDSE v0.8 Toolchain Review - 2026-10-02.md` for the code-gap audit.
 | `EA_to_MDSE_Native_Importer_v0.3.html`, `v0.4.html`, `v0.5.html`, `v0.5.1.html` | history | Intermediate builds. Superseded by v0.5.2. |
 | `EA_to_MDSE_Native_Importer_v0.5.2.html` | accepted safety lineage (fallback) | Base-vault identity checks, stale-state invalidation, `hasState/stateOf`, schema 1.35. Starting point for v0.8.0. |
 | `EA_to_MDSE_Native_Importer_v0.7.html` | merge candidate, never accepted | Occurrence/QEAX code evidence. Not release-conformant (14 gaps listed in the Toolchain Review). Do not generate a model to keep. |
-| `EA_to_MDSE_Native_Importer/v0.8.1/EA_to_MDSE_Native_Importer_v0.8.1.html` | hardened implementation candidate; acceptance pending | Release/schema/plugin gates, Local Model 0.2, W-318 naming/path preflight with marker preservation, authoritative Source Map provenance, governed linked-document extraction, Source EA evidence, evidence package and stage-2 review views implemented. Real QEAX acceptance and the WB-106 keepability gate remain. |
+| `EA_to_MDSE_Native_Importer/v0.8.2/EA_to_MDSE_Native_Importer_v0.8.2.html` | hardened implementation candidate; acceptance pending | Release/schema/plugin gates, Local Model 0.2, W-318 naming/path preflight with marker preservation, authoritative Source Map provenance, governed linked-document extraction, Source EA evidence, evidence package and stage-2 review views implemented. Real QEAX acceptance and the WB-106 keepability gate remain. |
 | `Initialize-Vault.sh`, `Initialize-Vault.ps1` | current helpers | Initialize `.vault.yaml` once in a new disposable or real vault. |
 
 The machine-checkable version of this table is `99_System/03_Schemas/mdse-release.yaml`; run `python3 99_System/09_Tools/check-release.py` after any change to tools, schemas or docs. Registry of current files: [[00 - Current State]].
@@ -80,3 +80,8 @@ Starting with v0.8.0, each importer version lives in its own folder under `EA_to
 ### v0.8.1 fixes
 
 The first real v0.8.0 whole-model attempt passed QEAX preflight and planning, then exposed two implementation issues. v0.8.1 suppresses invalid Local Model part records when an EA Part folds to a non-Object semantic definition, preserving those cases as note-level/source evidence instead; and it checks required base marker files before reading them so selecting a non-base folder produces a clear validation result. v0.8.0 remains frozen in its own version folder for comparison.
+
+
+### v0.8.2 path normalization
+
+The next real EA8647 run passed preflight and whole-model planning but found a 236-character path whose folder hierarchy alone left too little room for a readable filename. v0.8.2 keeps the 212-character limit and collapses a deepest navigation folder when that folder repeats the complete note name as its trailing engineering label (for example `Access Control - Authorize from List/Authorize from List.md`). The note name remains unchanged and the path alteration is recorded for review. v0.8.1 remains frozen for comparison.
