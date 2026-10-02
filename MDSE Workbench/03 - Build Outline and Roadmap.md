@@ -248,3 +248,15 @@ Native drag-to-connect; inline Canvas element creation; direct Canvas property e
 - **Backward compatibility.** Future improvements are new views or gestures over stable services: modal creation → richer workflow on the same creation service; select + command → drag-to-connect on the same relationship service; one-click profile → View Options on the same view engine; frozen curated view → later sync using preserved metadata.
 
 Workbench is succeeding if it becomes more capable while the everyday workflow stays understandable to an engineer who does not care how the model is implemented.
+
+**W-314 configuration follow-on.** After the WB-106 Local Model foundation can safely parse/index the governed body contract, add configuration support incrementally rather than combining it with the parser rewrite:
+
+1. read `usage` and definition-level `abstract` after the shared schemas advance;
+2. derive transitive concrete candidate families from `subtypeOf`;
+3. expose read-only variation-space information and findings;
+4. add temporary variant/option selections in Workbench session state without mutating base architecture;
+5. govern the persisted named-configuration Markdown format before adding save/write support;
+6. add configured architecture, comparison and filtered Canvas views;
+7. add model-number rules only after the configuration state is independently correct.
+
+This follow-on does not require new relationship types or a second persistence database. It must not delay the basic WB-106 read/navigation safety work by coupling configuration editing into the first Local Model parser.
