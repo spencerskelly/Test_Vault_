@@ -154,7 +154,7 @@ if candidate:
     else:
         itxt=read(candidate)
         required_importer_tokens=[
-            'version: "0.8.1"',
+            'version: "0.8.2"',
             'const REL_SCHEMA_VERSION="1.35"',
             'const ELEMENT_SCHEMA_VERSION="1.17"',
             'const LOCAL_MODEL_SCHEMA_VERSION="0.2"',
@@ -166,6 +166,7 @@ if candidate:
             'folder_1',
             'definitionEntity.mdseType!=="Object"',
             'if(!(await fileExists(root,".vault.yaml")))return false;',
+            'const folderRepeatsFile=',
             '<!-- MDSE:LOCAL-MODEL START schema=0.2 -->',
             'Local Model Source Map.csv',
             'Attachment Reconciliation.csv',
