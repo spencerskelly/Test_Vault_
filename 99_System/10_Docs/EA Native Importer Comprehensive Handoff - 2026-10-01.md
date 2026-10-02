@@ -567,10 +567,12 @@ Role: **authoritative translator/methodology workspace**.
 Current main:
 - relationship schema 1.35;
 - element schema 1.16;
-- importer v0.5.2;
+- accepted fallback importer v0.5.2 plus v0.7 assessment/merge candidate;
 - complete EA evidence bundle;
-- Workspace Decision Log through W-292 before this update;
-- Translator Definition;
+- Workspace Decision Log through W-313;
+- Translator Definition aligned to Local Model schema 0.1;
+- `MDSE v0.8 Design Check - 2026-10-01.md`;
+- `local-model.yaml` schema 0.1;
 - Ruleset 1.22;
 - archived older native-translator rule material;
 - MDSE Workbench design workspace.
@@ -636,7 +638,7 @@ Reviewed main:
 - element fixture schema 1.16;
 - Structure view already follows `hasState`;
 - Interface view is still based on note/frontmatter relationships;
-- Workbench does **not** yet parse/index the proposed local body occurrence records.
+- Workbench does **not** yet parse/index Local Model schema 0.1 records; WB-106 makes that read/navigation capability a v0.8 keepability gate.
 
 Future requirement:
 - after the real merged importer output validates the body record shape, extend Workbench indexing and Interface/Flow Canvas generation.
