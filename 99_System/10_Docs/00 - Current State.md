@@ -19,7 +19,7 @@
 2. [[MDSE v0.8 Cross-Repository Reconciliation - 2026-10-02]]: the implementation contract (identity, reruns, naming, Local Model 0.2, evidence set, gates, build order).
 3. [[MDSE Modeling Ruleset 1.23]]: what the model means and how imports are governed.
 4. [[Translator Definition]]: what the stage 1 importer must do.
-5. [[Workspace Decision Log]]: every decision (W-01 to W-320); newest last. Where a log entry marks an earlier one superseded, the later one governs.
+5. [[Workspace Decision Log]]: every decision (W-01 to W-321); newest last. Where a log entry marks an earlier one superseded, the later one governs.
 6. [[Handoff Prompt - MDSE v0.8 Implementation]]: copy-ready prompt for a new AI chat.
 7. For AI tools creating or editing notes: `99_System/02_AI/AI_INSTRUCTIONS.md`.
 
@@ -45,11 +45,15 @@
 | Importer v0.5.2 | accepted fallback and safety lineage | Starting point for v0.8.0 |
 | Importer v0.7 | evidence only, never accepted | Do not use to generate a model to keep |
 | Importers v0.1 to v0.5.1 | history | See `99_System/09_Tools/README_09_Tools.md` |
-| Clean 0.8.0 base vault | **not built** | Generate from this workspace; must declare `mdse_release: "0.8.0"`. The old base repository is obsolete. |
+| Clean 0.8.0 base vault | **not issued** | Generate deterministically with `build-base.py`; validate with `check-release.py --base`. It is a lean runtime artifact and carries `mdse_release: "0.8.0"` in `.vault.yaml`. |
 | MDSE Workbench 0.1.15 | built; typecheck, 31 tests and build pass (2026-10-02) | WB-106: Local Model reader, ModelRef, block fragments, occurrence-aware views |
-| MDSE Bootstrap 0.2.0 | pinned in `plugin-lock.yaml`; **no source or release found** | Locate or publish the source, or defer it from the base plugin set |
+| MDSE Bootstrap | **deferred from v0.8 runtime baseline**; no source/release found | Reconsider only when a retrievable implementation exists (W-321) |
 
-Workbench is not yet pinned in `plugin-lock.yaml`; the base must pin a WB-106-capable release.
+Workbench is not yet pinned in `plugin-lock.yaml`; the **final issued** base must pin a WB-106-capable release. Pre-release base builds may omit it but are not releasable.
+
+## Runtime-base alignment
+
+W-321 removes the old manually curated base-content list. `mdse-release.yaml` now contains the one positive include list used by `build-base.py`. The generated engineering vault intentionally omits this Current State registry, the release manifest, Translator Definition, Decision Log, EA evidence, archives and Workbench design notes. Runtime consumers instead share the actual schemas: relationships 1.35, element-types 1.17 and Local Model 0.2. Initialization preserves the base's `mdse_release`.
 
 ## File status registry
 
@@ -79,5 +83,5 @@ Workbench is not yet pinned in `plugin-lock.yaml`; the base must pin a WB-106-ca
 2. In the same commit: update the authority document and schema it changes, and set "Current through W-n" in the Translator Definition.
 3. If a file is replaced, put a callout banner at its top (`> [!WARNING] SUPERSEDED by [[...]]`, or `> [!NOTE] HISTORICAL ...`) and list it in `mdse-release.yaml` with `supersededBy`. Move it to `99_System/archive/` only when nothing current links to it.
 4. If a schema version, tool status or document status changes, update `mdse-release.yaml` and the tables on this page.
-5. Run `python3 99_System/09_Tools/check-release.py` (add `--workbench <clone path>` when Workbench is involved). It must pass before commit.
+5. Run `python3 99_System/09_Tools/check-release.py` (add `--workbench <clone path>` and/or `--base <generated-base path>` when those artifacts are involved). It must pass before commit.
 6. Never edit a historical or superseded file's content to match new rules. Add the pointer; leave the evidence.
