@@ -6,7 +6,6 @@ Active community plugins. Versions are pinned in `.obsidian/plugin-lock.yaml`; t
 
 | Plugin | Role |
 |---|---|
-| MDSE Bootstrap | On a new machine, installs the vault's plugins automatically from the pinned list. This is how the vault is rolled out to the team. Its source is not in this repo. |
 | Nodian | Pinned but not relied on (W-275 trial). Its pairs need a class tag on both notes, which MDSE notes do not carry, and its pairs are local per machine. Inverses are written by the translator, Workbench or the regenerate script. Removal is decided after the trial. |
 | Breadcrumbs | semantic relationship navigation |
 | Dataview | dashboards and health queries; kept for functions core Bases cannot do. No Dataview queries exist in the vault yet, so the specific functions still need to be listed here. |
@@ -14,6 +13,18 @@ Active community plugins. Versions are pinned in `.obsidian/plugin-lock.yaml`; t
 | Advanced Canvas | model/architecture visualization |
 | Templater | templates and ID helpers |
 | Obsidian Git | visible Git sync/recovery during current rollout |
+
+## Planned runtime addition
+
+| Plugin | Role |
+|---|---|
+| MDSE Workbench | Required in the final v0.8 issued base once WB-106 is complete and a release is pinned. Not yet enabled in the pre-release baseline. |
+
+## Deferred
+
+| Plugin | Reason |
+|---|---|
+| MDSE Bootstrap | Deferred by W-321 because no retrievable source/release is available. Its specification remains in the methodology workspace, but the v0.8 runtime base does not enable or pin an unavailable plugin. |
 
 ## Optional but approved
 
@@ -30,7 +41,7 @@ Ampure Cross-Vault Resolver and Multi-Vault Navigator were removed on 2026-09-28
 
 ## Packaging rule
 
-Executable community-plugin files are not authoritative vault content. The shared configuration and pinned versions are authoritative. Plugin binaries should be installed/bootstrap-managed on each machine.
+Executable community-plugin files are not authoritative vault content. The shared configuration and pinned versions are authoritative. Plugin binaries should be installed through the normal approved deployment mechanism on each machine; no unavailable bootstrap plugin is assumed.
 
 Exception: the Obsidian Git binary (2.40.0) stays committed under `.obsidian/plugins/obsidian-git/` because it is in use on the Mac. All other plugin binaries remain per-machine installs.
 
