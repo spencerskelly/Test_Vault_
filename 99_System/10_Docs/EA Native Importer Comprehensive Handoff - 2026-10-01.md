@@ -82,6 +82,8 @@ This does not promote v0.7 or retroactively rename historical base artifacts. v0
 
 **W-305 inherited members:** reusable nested interface members are not expanded into local records automatically. They remain available through the reusable endpoint definition and are materialized locally only when connection, requirement scope, local override or another context-specific reference requires a stable local address.
 
+**W-307 connector-path acceptance target:** the current 20260930 assessment has 89 model-note paths over 260 characters, 88 beneath `Connector ASM - Industrial`. v0.8.0 must drive that connector count to zero through corrected semantic placement, reusable-definition/local-occurrence handling and meaningful naming before the project chooses a global hard path limit. Blind truncation/hash renaming is not an acceptable fix.
+
 ## 3. Approved semantic model: reusable definition vs contextual occurrence
 
 ### 3.1 Reusable Object/assembly definitions
