@@ -117,6 +117,7 @@ It is **implementation evidence only** and is not release-conformant. Specific a
 - repeated links no longer presented as quantity;
 - body editing blocked on governed Local Model notes;
 - element schema test fixture advanced to 1.17;
+- generic `optionalProperties` are read from element-types and ordered after `tags` / before relationship fields, so `abstract` is not reordered incorrectly during ordinary frontmatter edits;
 - standalone WB-106 implementation contract added.
 
 ### Still required for WB-106
@@ -159,6 +160,8 @@ However:
 - the old cross-vault resolver is archived and is not part of the current single-vault v0.8 design.
 
 This is a **base-packaging dependency**, not a model-semantic conflict.
+
+The current authority plugin lock also does not yet pin an MDSE Workbench release. If WB-106 is a keepability gate, the final base packaging must pin the WB-106-capable Workbench release rather than 0.1.15.
 
 Before issuing the clean v0.8 base, either:
 1. verify a retrievable/pinned mdse-bootstrap 0.2.0 release/package that conforms to the spec; or
