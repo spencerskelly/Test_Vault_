@@ -2755,6 +2755,25 @@ function buildLocalOccurrenceModel(ctx,entityCtx){
     }
     return "";
   }
+  // W-311/W-319: preserve BindingConnector as temporary local equals only when
+  // both contextual endpoint occurrences resolve safely to one owning context.
+  for(const bc of (ctx.connectors||[]).slice().sort((a,b)=>normGuid(a.ea_guid).localeCompare(normGuid(b.ea_guid))||n2(a.Connector_ID)-n2(b.Connector_ID))){
+    if(trim2(bc.Connector_Type)!=="Connector"||trim2(bc.Stereotype)!=="BindingConnector")continue;
+    const a=refForRaw(bc.Start_Object_ID),b=refForRaw(bc.End_Object_ID);
+    if(a&&b&&a.kind==="endpoint"&&b.kind==="endpoint"&&a.ownerKey&&a.ownerKey===b.ownerKey){
+      const ar=endpointBySource.get(n2(a.sourceId)),br=endpointBySource.get(n2(b.sourceId));
+      if(ar&&br){
+        if(!ar.equalsRefs)ar.equalsRefs=[];
+        if(!br.equalsRefs)br.equalsRefs=[];
+        if(!ar.equalsRefs.some(x=>x.refKey===b.refKey))ar.equalsRefs.push(b);
+        if(!br.equalsRefs.some(x=>x.refKey===a.refKey))br.equalsRefs.push(a);
+        warnings.push("BindingConnector "+trim2(bc.ea_guid)+" preserved as temporary local equals under "+a.ownerKey+".");
+        continue;
+      }
+    }
+    warnings.push("BindingConnector "+trim2(bc.ea_guid)+" has unresolved contextual owner/endpoints; evidence retained without invented topology.");
+  }
+
   const connectionsByPair=new Map();
   function makeConnection(c,a,b,origin){
     if(!a||!b)return null;
@@ -2775,11 +2794,7 @@ function buildLocalOccurrenceModel(ctx,entityCtx){
 
   const orderedConnectors=(ctx.connectors||[]).slice().sort((a,b)=>normGuid(a.ea_guid).localeCompare(normGuid(b.ea_guid))||n2(a.Connector_ID)-n2(b.Connector_ID));
   for(const c of orderedConnectors){
-    if(trim2(c.Connector_Type)!=="Connector")continue;
-    if(trim2(c.Stereotype)==="BindingConnector"){
-      warnings.push("BindingConnector "+trim2(c.ea_guid)+" retained for semantic review; no local topology was invented.");
-      continue;
-    }
+    if(trim2(c.Connector_Type)!=="Connector"||trim2(c.Stereotype)==="BindingConnector")continue;
     const a=refForRaw(c.Start_Object_ID),b=refForRaw(c.End_Object_ID);makeConnection(c,a,b,"Connector");
   }
 
@@ -2920,6 +2935,7 @@ function renderLocalOccurrenceSections(e,localModel,entityCtx,externalSet,sliceK
         if(parentId.startsWith("part-"))lines.push("- part: [[#^"+parentId+"]]");
         else if(parentId.startsWith("ep-"))lines.push("- parent: [[#^"+parentId+"]]");
       }
+      if(r.equalsRefs&&r.equalsRefs.length)lines.push("- equals: "+r.equalsRefs.map(x=>localRefLink(localModel,x,e)).join(", "));
       if(r.multiplicity)lines.push("- multiplicity: "+mdInline(r.multiplicity));
       if(r.endpointKind)lines.push("- kind: "+mdInline(r.endpointKind));
       lines.push("^"+r.localId,"");
