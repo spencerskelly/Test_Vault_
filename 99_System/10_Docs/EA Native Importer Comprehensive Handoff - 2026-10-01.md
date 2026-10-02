@@ -84,6 +84,8 @@ This does not promote v0.7 or retroactively rename historical base artifacts. v0
 
 **W-307 connector-path acceptance target:** the current 20260930 assessment has 89 model-note paths over 260 characters, 88 beneath `Connector ASM - Industrial`. v0.8.0 must drive that connector count to zero through corrected semantic placement, reusable-definition/local-occurrence handling and meaningful naming before the project chooses a global hard path limit. Blind truncation/hash renaming is not an acceptable fix.
 
+**W-308 first remediation pass:** normalize only the connector navigation folders first: remove child wording already supplied by parent context (`Connector ASM`, `Industrial`, `Anderson`, etc.) and omit a model-number folder when the model note beneath already carries that identity and sibling ambiguity is not introduced. Then rerun path statistics before deciding which remaining items require Local Model conversion or other semantic restructuring.
+
 ## 3. Approved semantic model: reusable definition vs contextual occurrence
 
 ### 3.1 Reusable Object/assembly definitions
