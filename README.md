@@ -4,16 +4,19 @@ A workspace, not the vault that will be built. It defines the EA-to-MDSE transla
 
 ## Start here
 
-1. `99_System/10_Docs/EA Native Importer Comprehensive Handoff - 2026-10-01.md`: current importer/occurrence/repository audit and next-chat continuation point.
-2. `99_System/10_Docs/Handoff - Continue Here.md`: ongoing workspace handoff and reading order.
-3. `99_System/10_Docs/Translator Definition.md`: what the stage 1 translator must do. Kept current.
-4. `99_System/10_Docs/Workspace Decision Log.md`: every decision, and the Open list at the end.
+1. `99_System/10_Docs/MDSE v0.8 Cross-Repository Reconciliation - 2026-10-02.md`: current cross-repository authority and implementation contract.
+2. `99_System/10_Docs/Handoff Prompt - MDSE v0.8 Implementation.md`: concise continuation/build prompt.
+3. `99_System/10_Docs/Translator Definition.md`: current Stage-1/native importer contract.
+4. `99_System/10_Docs/Workspace Decision Log.md`: decisions through W-319.
+5. `99_System/10_Docs/MDSE Modeling Ruleset 1.23.md`: current modeling/import governance.
+
+Current target: MDSE/base/importer 0.8.0, relationships 1.35, element-types 1.17, Local Model 0.2.
 
 ## Folders
 
 - `99_System/03_Schemas`: the class, relationship, element, connector, field, tag and package rules, as YAML.
 - `99_System/05_Templates`, `08_Scripts`: the class templates and the id and uid snippets.
-- `99_System/10_Docs`: the decision log, handoff, Translator Definition, Post-Import Tasks and Ruleset 1.22.
+- `99_System/10_Docs`: the decision log, handoff, Translator Definition, Post-Import Tasks and Ruleset 1.23.
 - `99_System/CSV_EA`: evidence extracted from the EA file, used to define the rules. The import reads the EA file itself (W-247).
 - `Definitions`: the note layout and the `Source: EA` section.
 - `MDSE Workbench`: a separate product-definition workspace. It is not authoritative for model semantics.
