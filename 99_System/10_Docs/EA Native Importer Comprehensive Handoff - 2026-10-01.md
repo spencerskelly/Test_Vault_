@@ -1,3 +1,6 @@
+> [!WARNING]
+> **SUPERSEDED AS THE CONTINUATION ENTRY POINT.** Retained as detailed 2026-10-01 evidence. Continue from [[MDSE v0.8 Cross-Repository Reconciliation - 2026-10-02]] and [[Handoff Prompt - MDSE v0.8 Implementation]]. W-315 through W-319, Ruleset 1.23, element-types 1.17 and Local Model 0.2 govern where this handoff differs.
+
 ---
 id: INFO-00069
 uid: 20261001170000000skellyspencer
