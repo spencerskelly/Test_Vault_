@@ -2413,6 +2413,26 @@ function buildFolderPathMap(entities){
   }
   return mapped;
 }
+function filenameMarkerParts(name){
+  name=String(name||"");
+  const m=/^(.*?)(~[a-z]+)?(~\d+)?$/i.exec(name);
+  return {stem:(m&&m[1])||name,alteration:(m&&m[2])||"",duplicate:(m&&m[3])||""};
+}
+function shortenedFileName(name,maxChars){
+  const p=filenameMarkerParts(name);
+  const alteration=p.alteration||"~a";
+  const suffix=alteration+p.duplicate;
+  const room=Math.max(1,maxChars-suffix.length);
+  const stem=p.stem.slice(0,room).replace(/[ .]+$/g,"")||"x";
+  return stem+suffix;
+}
+function duplicateMarkedFileName(name,n,maxChars){
+  const p=filenameMarkerParts(name);
+  const suffix=(p.alteration||"")+(n>1?"~"+n:"");
+  const room=Math.max(1,maxChars-suffix.length);
+  const stem=p.stem.slice(0,room).replace(/[ .]+$/g,"")||"x";
+  return stem+suffix;
+}
 function pathPlanForEntity(e,folderMap){
   let folder=folderMap.get(e.vaultPath||"")||"";
   const rawSegs=(e.vaultPath||"").split(" > ").filter(Boolean);
@@ -2430,12 +2450,10 @@ function pathPlanForEntity(e,folderMap){
   folder=outSegs.join("/");
   let file=e.fileName+".md",path=(folder?folder+"/":"")+file,shortened=false;
   if(path.length>MAX_GENERATED_PATH){
-    const room=MAX_GENERATED_PATH-(folder?folder.length+1:0)-3; // .md
+    const room=MAX_GENERATED_PATH-(folder?folder.length+1:0)-3; // filename chars before .md
     if(room<8)throw new Error("Folder path alone leaves no readable filename within "+MAX_GENERATED_PATH+" characters: "+path);
-    let base=e.fileName;
-    const reserve=2; // ~a
-    base=base.slice(0,Math.max(1,room-reserve)).replace(/[ .]+$/g,"");
-    file=base+"~a.md";path=(folder?folder+"/":"")+file;shortened=true;changed=true;
+    const shortenedName=shortenedFileName(e.fileName,room);
+    file=shortenedName+".md";path=(folder?folder+"/":"")+file;shortened=true;changed=true;
   }
   if(path.length>MAX_GENERATED_PATH)throw new Error("Generated path remains over "+MAX_GENERATED_PATH+" characters: "+path);
   return {path,folder,file,changed,shortened,originalFolder:e.vaultPath||""};
@@ -2596,6 +2614,10 @@ function beginLocalIdentityAllocation(entityCtx){
   };
 }
 function stableLocalId(prefix,raw,fallback){
+  // Allocation is deterministic because all calling collections are source-GUID sorted;
+  // connections are allocated before their connector-scoped flows, and conveyed flow
+  // definitions are source-GUID sorted. The shared baseCount/used pool spans note UIDs
+  // and every local kind, so the 30-character token is vault-global.
   if(!localIdentityState)throw new Error("Local identity allocator was not initialized.");
   const ts=stamp17(raw&&raw.CreatedDate)||FALLBACK_ID_STAMP;
   const code=authorCode(raw),base=ts+code;
@@ -3066,22 +3088,41 @@ function renderLocalOccurrenceSections(e,localModel,entityCtx,externalSet,sliceK
 function localModelSourceMapCsv(localModel,entityCtx){
   const rows=[["source_model_id","source_key","owner_uid","local_id","local_kind","ea_guid","ea_source_kind","ea_owner_guid"]];
   const entities=entityCtx.entities;
-  function ownerUid(k){const e=entities.get(k);return e?e.uid:"";}
-  function add(ownerKey,localId,kind,guid,sourceKind,ownerGuid,sourceKey){
-    if(!localId)return;
-    const g=trim2(guid),ou=ownerUid(ownerKey);
-    rows.push([SOURCE_MODEL_ID,sourceKey||(g?SOURCE_MODEL_ID+"|"+g:""),ou,localId,kind,g,sourceKind||"",ownerGuid||""]);
+  function ownerEntity(k){return entities.get(k)||null;}
+  function ownerUid(k){const e=ownerEntity(k);return e?e.uid:"";}
+  function ownerEaGuid(k){const e=ownerEntity(k);return e?trim2(e.eaGuid||(e.raw&&e.raw.ea_guid)):"";}
+  function directSourceKey(g){return g?SOURCE_MODEL_ID+"|"+g:"";}
+  function derivedSourceKey(sourceGuid,kind,ownerKey,definitionGuid){
+    return [SOURCE_MODEL_ID,trim2(sourceGuid),kind,ownerEaGuid(ownerKey),trim2(definitionGuid)].join("|");
   }
-  for(const [owner,list] of localModel.partsByOwner.entries())for(const r of list)add(owner,r.localId,"part",r.sourceGuid,"t_object","");
-  for(const [owner,list] of localModel.endpointsByOwner.entries())for(const r of list)add(owner,r.localId,"endpoint",r.sourceGuid,"t_object","");
+  function add(ownerKey,localId,kind,guid,sourceKind,sourceKey){
+    if(!localId)return;
+    const g=trim2(guid);
+    rows.push([
+      SOURCE_MODEL_ID,
+      sourceKey||directSourceKey(g),
+      ownerUid(ownerKey),
+      localId,
+      kind,
+      g,
+      sourceKind||"",
+      ownerEaGuid(ownerKey)
+    ]);
+  }
+  for(const [owner,list] of localModel.partsByOwner.entries()){
+    for(const r of list)add(owner,r.localId,"part",r.sourceGuid,"t_object",directSourceKey(trim2(r.sourceGuid)));
+  }
+  for(const [owner,list] of localModel.endpointsByOwner.entries()){
+    for(const r of list)add(owner,r.localId,"endpoint",r.sourceGuid,"t_object",directSourceKey(trim2(r.sourceGuid)));
+  }
   for(const [owner,list] of localModel.connectionsByOwner.entries()){
     for(const r of list){
-      if(r.sourceGuids.length)for(const g of r.sourceGuids)add(owner,r.localId,"connection",g,"t_connector","");
-      else add(owner,r.localId,"connection","","derived","");
+      if(r.sourceGuids.length){
+        for(const g of r.sourceGuids)add(owner,r.localId,"connection",g,"t_connector",directSourceKey(trim2(g)));
+      }else add(owner,r.localId,"connection","","derived",derivedSourceKey("","connection",owner,""));
       for(const fl of r.flows){
         const g=trim2(fl.sourceGuid),dg=trim2(fl.sourceItemGuid);
-        const key=[SOURCE_MODEL_ID,g,"flow",ownerUid(owner),dg].join("|");
-        add(owner,fl.localId,"flow",g||dg,"t_connector",dg,key);
+        add(owner,fl.localId,"flow",g||dg,"t_connector",derivedSourceKey(g,"flow",owner,dg));
       }
     }
   }
@@ -4140,12 +4181,12 @@ async function generateSlice(){
         const e=item.e,pp=item.pp;
         if(i){
           const slash=pp.path.lastIndexOf("/"),dir=slash>=0?pp.path.slice(0,slash+1):"",name=pp.path.slice(slash+1).replace(/\.md$/i,"");
-          const suffix="~"+(i+1),room=MAX_GENERATED_PATH-dir.length-3-suffix.length;
-          const stem=name.slice(0,Math.max(1,room)).replace(/[ .]+$/g,"");
-          pp.path=dir+stem+suffix+".md";pp.file=stem+suffix+".md";pp.changed=true;
+          const room=MAX_GENERATED_PATH-dir.length-3;
+          const finalName=duplicateMarkedFileName(name,i+1,room);
+          pp.path=dir+finalName+".md";pp.file=finalName+".md";pp.changed=true;
           if(sliceKeys.has(e.key))entityCtx.nameReviews.push({
             eaGuid:e.eaGuid,eaType:trim2(e.raw.Object_Type),eaName:trim2(e.raw.Name),
-            folder:e.vaultPath||"",fileName:stem+suffix,alteration:"",duplicate:suffix
+            folder:e.vaultPath||"",fileName:finalName,alteration:filenameMarkerParts(finalName).alteration||"",duplicate:"~"+(i+1)
           });
         }
       });
