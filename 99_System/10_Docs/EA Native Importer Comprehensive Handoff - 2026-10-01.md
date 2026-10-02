@@ -59,6 +59,10 @@ Reason:
 
 The target merger can be called v0.7 (recommended), but the version number itself is not a semantic decision.
 
+### 2.1 Implementation update after handoff
+
+`99_System/09_Tools/EA_to_MDSE_Native_Importer_v0.7.html` now exists on `spencerskelly/Test_Vault_` main as the first merge candidate built from v0.5.2/schema 1.35. The merge carries forward the W-293/W-294 local part, endpoint, connection and flow implementation from the experimental v0.6.1 code while preserving W-291/W-292 `hasState/stateOf`, `ownerField()`, the v0.5.2 clean-base README/workspace rejection checks, source/plan stale-state invalidation, and output-folder handle hardening. Static JavaScript syntax and merge-invariant checks passed. This does **not** promote v0.7 to the accepted importer baseline: real-QEAX validation is still required, and the remaining W-297 acceptance mechanisms (including the still-open hard repository-relative path limit) must be completed before an accepted full import.
+
 ## 3. Approved semantic model: reusable definition vs contextual occurrence
 
 ### 3.1 Reusable Object/assembly definitions
