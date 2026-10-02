@@ -2896,8 +2896,7 @@ function renderLocalOccurrenceSections(e,localModel,entityCtx,externalSet,sliceK
   const parts=localModel.partsByOwner.get(e.key)||[];
   const endpoints=localModel.endpointsByOwner.get(e.key)||[];
   const connections=localModel.connectionsByOwner.get(e.key)||[];
-  const localReqs=localModel.requirementLinksByOwner.get(e.key)||[];
-  if(!parts.length&&!endpoints.length&&!connections.length&&!localReqs.length)return lines;
+  if(!parts.length&&!endpoints.length&&!connections.length)return lines;
 
   lines.push("## Local Model","<!-- MDSE:LOCAL-MODEL START schema=0.2 -->","");
 
@@ -2959,18 +2958,7 @@ function renderLocalOccurrenceSections(e,localModel,entityCtx,externalSet,sliceK
 
   lines.push("<!-- MDSE:LOCAL-MODEL END -->","");
 
-  if(localReqs.length){
-    lines.push("### Local Applicability Links","");
-    for(const r of localReqs){
-      const targetOwner=entities.get(r.targetOwnerKey);
-      const target=targetOwner
-        ? "[["+targetOwner.fileName+"#^"+r.targetAnchor+"|"+targetOwner.fileName+" / "+r.targetAddress+"]]"
-        : String(r.targetAddress||"");
-      lines.push("- "+r.relation+": "+target);
-      if(targetOwner&&!sliceKeys.has(r.targetOwnerKey))externalSet.add(e.fileName+" | local "+r.relation+" | "+targetOwner.fileName+" / "+r.targetAddress);
-    }
-    lines.push("");
-  }
+
   return lines;
 }
 
@@ -3016,19 +3004,29 @@ async function collectSliceTags(sourceIds){
 }
 
 function yamlScalar(v){return JSON.stringify(str(v));}
-function relationYaml(entity,graph,entities,externalSet,sliceKeys){
+function relationYaml(entity,graph,entities,externalSet,sliceKeys,localModel){
   const fm=graph.get(entity.key)||new Map(), lines=[];
+  const localApplies=(localModel&&localModel.requirementLinksByOwner.get(entity.key))||[];
   for(const field of REL_ORDER){
-    const targets=fm.get(field);if(!targets||!targets.length)continue;
+    const targets=fm.get(field)||[];
+    const localTargets=field==="appliesTo"?localApplies:[];
+    if(!targets.length&&!localTargets.length)continue;
     lines.push(field+":");
     for(const k of targets){
       const t=entities.get(k);if(!t)continue;
       lines.push("  - "+yamlScalar("[["+t.fileName+"]]"));
       if(!sliceKeys.has(k))externalSet.add(entity.fileName+" | "+field+" | "+t.fileName);
     }
+    for(const r of localTargets){
+      const t=entities.get(r.targetOwnerKey);if(!t)continue;
+      const link="[[ "+t.fileName+"#^"+r.targetAnchor+" ]]".replace("[[ ","[[").replace(" ]] ","]]");
+      lines.push("  - "+yamlScalar(link));
+      if(!sliceKeys.has(r.targetOwnerKey))externalSet.add(entity.fileName+" | appliesTo | "+t.fileName+"#^"+r.targetAnchor);
+    }
   }
   return lines;
 }
+
 function eaTypeOf(e){
   if(e.synthetic&&e.members){
     const real=e.members.map(x=>trim2(x.Stereotype)).filter(Boolean);
@@ -3063,7 +3061,7 @@ function formatFoldedNotes(list){
 
 function renderEntityMarkdown(e,graph,entityCtx,tagMap,foldedNotes,externalSet,sliceKeys,localModel){
   const lines=["---","type: "+yamlScalar(e.mdseType),"subtype: "+yamlScalar(e.subtype||""),"id: "+yamlScalar(e.id),"uid: "+yamlScalar(e.uid),"status: Draft","eaType: "+yamlScalar(eaTypeOf(e)),"tags: []"];
-  lines.push(...relationYaml(e,graph,entityCtx.entities,externalSet,sliceKeys));
+  lines.push(...relationYaml(e,graph,entityCtx.entities,externalSet,sliceKeys,localModel));
   const heading=trim2(e.raw.Name)||e.naturalName||e.fileName;
   lines.push("---","","# "+heading,"");
   const note=textValue(e.raw.Note).trim();if(note){lines.push(note,"");}
