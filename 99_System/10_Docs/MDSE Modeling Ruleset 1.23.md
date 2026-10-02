@@ -69,7 +69,7 @@ Verification defines reusable intent; Procedure orders activities; Setup defines
 
 Folder structure is for human navigation; it does not create semantic relationships.
 
-Do not split a folder based on element count alone. Split only where a meaningful semantic or navigational subdivision exists. Do not create arbitrary overflow buckets such as numbered groups solely to reduce folder counts.
+Do not split a folder based on element count alone while it remains within the governed capacity. A model-content folder may contain at most **75 generated model files**. Prefer a meaningful semantic or navigational subdivision based on actual engineering or source structure. If no clear subdivision is available, deterministic mechanical subfolders such as `folder_1`, `folder_2`, etc. are allowed so import can continue; each generated subfolder must remain at or below the 75-file limit.
 
 Aim for approximately 5–6 meaningful folder levels below the vault root for normal MDSE content. Deeper structure is allowed when it preserves useful formal/source structure, including regulatory hierarchies, document hierarchy, or real architecture.
 

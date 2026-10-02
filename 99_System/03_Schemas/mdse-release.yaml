@@ -18,13 +18,14 @@ ruleset: "99_System/10_Docs/MDSE Modeling Ruleset 1.23.md"
 
 limits:
   maxGeneratedPathLength: 212
+  maxModelFilesPerFolder: 75
   duplicateMarker: "~2"
   alterationMarker: "~a"
 
 tools:
   importer:
     release: null
-    candidate: "99_System/09_Tools/EA_to_MDSE_Native_Importer_v0.8.0.html"
+    candidate: "99_System/09_Tools/EA_to_MDSE_Native_Importer/v0.8.0/EA_to_MDSE_Native_Importer_v0.8.0.html"
     acceptedFallback: "99_System/09_Tools/EA_to_MDSE_Native_Importer_v0.5.2.html"
     evidenceOnly: "99_System/09_Tools/EA_to_MDSE_Native_Importer_v0.7.html"
   cleanBase:
@@ -98,7 +99,7 @@ runtimeBase:
     - "99_System/06_Fileclasses"
     - "99_System/08_Scripts"
   conditionalFiles:
-    - "99_System/09_Tools/EA_to_MDSE_Native_Importer_v0.8.0.html"
+    - "99_System/09_Tools/EA_to_MDSE_Native_Importer/v0.8.0/EA_to_MDSE_Native_Importer_v0.8.0.html"
   forbiddenPaths:
     - "99_System/03_Schemas/mdse-release.yaml"
     - "99_System/10_Docs/00 - Current State.md"
