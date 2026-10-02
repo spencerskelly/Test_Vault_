@@ -251,3 +251,20 @@ Implementation status (W-271, W-273, W-274, W-276, W-287, W-288, W-289, W-290, W
 Implementation update, 2026-10-01: `99_System/09_Tools/EA_to_MDSE_Native_Importer_v0.7.html` is now the merge candidate created from v0.5.2/schema 1.35. It carries the W-293/W-294 local part/endpoint/connection/flow renderer and conveyed-flow extraction while retaining `ownerField()` W-291/W-292 state ownership, schema 1.35 relationship constants, the clean-base README/workspace rejection checks, source/plan stale-state invalidation, and immediate output-folder validation. Static JavaScript parsing and merge-invariant checks pass. v0.7 is not yet the accepted baseline: it still needs the actual QEAX run, and W-297 path-limit/housekeeping/terminal-reconciliation acceptance behavior is not fully implemented; the exact hard repository-relative path limit remains an open decision. W-298 also requires the Local Model to be treated as a governed body region separate from ordinary text editing. W-299 establishes that the first newly issued synchronized importer/base pair after this candidate will be v0.8.0; v0.7 is not retroactively paired or promoted by that numbering decision.
 
 The Open list at the end of `Workspace Decision Log.md` is the list. Relevant here: the first v0.5 whole-model assessment and its naming/folder/performance findings, the remaining renderer gaps, the package filter beyond one path (W-252, W-254), the four header-only import files, unexplained audit-count differences that are not source-baseline counts, the standalone inverse-regeneration workflow/Nodian trial, and whether third-party standards content may stay in the vault.
+
+### Local Model configuration usage (W-314)
+
+Local Model `usage` is contextual configuration semantics, not an EA connector-type mapping.
+
+When schema support is implemented:
+
+- omission means `standard`;
+- `variant` means a required local position whose effective reusable definition must be one concrete member of the specialization family rooted at the stated `definition`;
+- `option` means the local position may be absent and, when present, uses a concrete member of that same family;
+- definition-level `abstract: true` excludes that reusable definition from being an effective occurrence selection.
+
+Stage 1 import must not infer configurability from the mere existence of reusable subtypes. It must not map EA Use Case `optionOf`, an EA `Usage` connector, or ordinary generalization directly to Local Model `usage`. Until an approved deterministic source rule exists, imported occurrences remain `standard` by omission and ambiguous configurability evidence is retained for review.
+
+The importer must never express one configurable position by relating the owning assembly to every candidate subtype. The local occurrence remains the single contextual position; candidates are derived from the reusable `subtypeOf` hierarchy.
+
+W-314 is currently a semantic decision. The deployed Local Model body contract remains schema 0.1 until a separate implementation change advances `local-model.yaml` and the importer/parser/writer together.
