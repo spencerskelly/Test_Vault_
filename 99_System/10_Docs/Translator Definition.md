@@ -269,6 +269,8 @@ The importer must never express one configurable position by relating the owning
 W-314 is implemented in schema form by W-319: Local Model 0.2 adds `usage: standard | variant | option` on part and endpoint records (omission means `standard`) and element-types 1.17 adds sparse optional `abstract: true`. The importer writes 0.2 only; Workbench readers accept 0.1 and 0.2. Candidate definitions are derived from `subtypeOf`; persisted named configurations remain deferred.
 
 
+Implementation update, 2026-10-02: `99_System/09_Tools/EA_to_MDSE_Native_Importer_v0.8.0.html` now exists as the release candidate implementation. It carries the v0.5.2 safety lineage and v0.7 occurrence work forward, validates the 0.8.0 controlled base plus relationships 1.35 / element-types 1.17 / Local Model 0.2, allocates global note/local identity tokens, writes canonical Local Model 0.2 records and Source Map evidence, enforces W-318 naming and 212-character path preflight, reconciles deferred diagrams, writes the final evidence/review views and explicitly reconciles linked-document extraction failures. It is **not yet accepted/release-conformant**: it still requires a real QEAX run, linked-document acceptance/resolution, and the WB-106 keepability gate before the first whole-model import is kept.
+
 ## v0.8.0 implementation amendment — 2026-10-02
 
 This section supersedes older translator details where they conflict.
