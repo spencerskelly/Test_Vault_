@@ -1015,3 +1015,10 @@ WB-106 remains the next required implementation: ModelRef identity, Local Model 
 **Status:** Decided and implemented (2026-10-02); no plugin behavior changed, version stays 0.1.15.
 
 The Workbench test fixtures `relationships.yaml` and `element-types.yaml` had drifted from the authority schemas in `99_System/03_Schemas` (wording changes from W-311/W-314/W-319 and the element-types 1.17 optional-property text). They were copied over; typecheck, 31 tests and the production build pass. Rule: the fixtures are a verbatim copy of the authority schemas. `99_System/09_Tools/check-release.py --workbench <clone>` (W-320) fails when they differ or when the Workbench version in `package.json`, `manifest.json` and `mdse-release.yaml` disagree. The Workbench README now points to `00 - Current State` and states the fixture and CI rules. Workbench CI remains inactive until switched on by a separate decision; run `npm run build` and `npm test` before each push.
+
+
+### WB-109 — 2026-10-02 W-321 runtime-contract fixture boundary
+
+**Status:** Decided and implemented for fixtures/documentation; no plugin behavior changed and version remains 0.1.15.
+
+Workbench does not copy the methodology release registry into its code. Runtime/model semantics continue to come from the vault schemas. For portable independent tests, duplication is limited to schema fixtures that are necessary: `relationships.yaml`, `element-types.yaml`, and current `local-model.yaml` are exact copies of the authority schemas; `local-model-0.1.yaml` is a frozen historical fixture used only to test backward compatibility. The authority release checker compares current fixtures exactly and verifies the historical fixture remains schema 0.1. W-321 keeps the deployed engineering vault lean and requires the final v0.8 base to pin a WB-106-capable Workbench release. WB-106 itself remains the next behavior gate.
