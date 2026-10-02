@@ -842,3 +842,51 @@ The target MDSE is now:
 > reusable first-class definitions + contextual Local Model occurrences + assembly-owned connections + connection-owned flows + explicit boundary exposure + native Obsidian navigation.
 
 The model design should not be weakened to match v0.7 or Workbench 0.1.14. Those implementations now need to catch up to the model.
+
+## W-314 continuation — contextual usage and configuration
+
+W-314 adds an accepted semantic layer on top of the Local Model occurrence architecture without changing the deployed importer/schema yet.
+
+The key rule is:
+
+> Reusable definitions describe engineering kinds; Local Model occurrences describe contextual positions; configurations resolve variant/optional positions without mutating either the reusable definition or the base occurrence.
+
+Accepted occurrence field:
+
+```yaml
+usage: standard | variant | option
+```
+
+Omitted means `standard`. `variant` is required and resolves to one concrete definition from the transitive specialization family rooted at `definition`. `option` may be absent; when present it resolves the same way. A future reusable-definition property `abstract: true` makes a family/root definition non-selectable while still allowing it to organize concrete descendants.
+
+The full theory and examples are in `MDSE v0.8 Design Check - 2026-10-01.md`, section **Local Model Usage and Configuration Theory (W-314)**.
+
+### Impact status at this handoff
+
+| Area | Status after W-314 | Required next implementation |
+|---|---|---|
+| Modeling semantics | accepted | preserve W-314 without reopening |
+| `relationships.yaml` | no change required | none for W-314 |
+| `local-model.yaml` | still 0.1 | plan 0.2 with optional `usage` on part/endpoint occurrences |
+| managed Local Model marker | still `schema=0.1` | move with schema 0.2, not before |
+| `element-types.yaml` | no `abstract` support yet | add optional definition-level property in a governed way |
+| property dictionary | no `abstract` definition yet | add when property becomes implemented |
+| native importer | no configuration inference | parse/write new schema only after shared contract changes |
+| Workbench 0.1.14 | no W-314 implementation | implement after WB-106 Local Model foundation |
+| persisted named configurations | concept accepted, exact format open | decide native Markdown representation before save/write support |
+| model-number rules | deferred | add later as product/configuration knowledge |
+
+### Next design/implementation sequence
+
+1. Freeze the exact `local-model.yaml` 0.2 field contract and backward-compatibility behavior.
+2. Freeze how `abstract` is declared in `element-types.yaml` and its property definition.
+3. Update the shared Local Model schema/marker and importer contract together.
+4. Update Workbench schema loading, Local Model parser/index and candidate resolver.
+5. Add read-only variation-space information and validation.
+6. Add temporary configuration selection in Workbench without base-model mutation.
+7. Decide the persisted named-configuration Markdown format.
+8. Add persisted configuration editing and configured/compare/filter views.
+9. Only then consider product-specific model-number generation/reverse decoding.
+10. Defer `allowedDefinitions` and cross-variant compatibility syntax until a real product case requires them.
+
+Do not use configurability as a reason to create new top-level element types, new relationship types, or new occurrence kinds. Function/Use Case/State usage semantics can follow W-314 once those contextual occurrence records are independently justified.
