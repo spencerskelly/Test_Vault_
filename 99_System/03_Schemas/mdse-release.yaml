@@ -25,7 +25,7 @@ limits:
 tools:
   importer:
     release: null
-    candidate: "99_System/09_Tools/EA_to_MDSE_Native_Importer/v0.8.1/EA_to_MDSE_Native_Importer_v0.8.1.html"
+    candidate: "99_System/09_Tools/EA_to_MDSE_Native_Importer/v0.8.2/EA_to_MDSE_Native_Importer_v0.8.2.html"
     acceptedFallback: "99_System/09_Tools/EA_to_MDSE_Native_Importer_v0.5.2.html"
     evidenceOnly: "99_System/09_Tools/EA_to_MDSE_Native_Importer_v0.7.html"
   cleanBase:
@@ -99,7 +99,7 @@ runtimeBase:
     - "99_System/06_Fileclasses"
     - "99_System/08_Scripts"
   conditionalFiles:
-    - "99_System/09_Tools/EA_to_MDSE_Native_Importer/v0.8.1/EA_to_MDSE_Native_Importer_v0.8.1.html"
+    - "99_System/09_Tools/EA_to_MDSE_Native_Importer/v0.8.2/EA_to_MDSE_Native_Importer_v0.8.2.html"
   forbiddenPaths:
     - "99_System/03_Schemas/mdse-release.yaml"
     - "99_System/10_Docs/00 - Current State.md"
