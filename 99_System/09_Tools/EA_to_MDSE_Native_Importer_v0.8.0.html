@@ -2386,6 +2386,11 @@ function buildFolderPathMap(entities){
     const safeGroups=new Map();
     for(const n of siblings){
       let raw=n.seg;
+      const parentNode=n.parent?nodes.get(n.parent):null,parentSeg=parentNode?parentNode.seg:"";
+      if(parentSeg){
+        const escParent=parentSeg.replace(/[.*+?^${}()|[\]\\]/g,"\\$&");
+        raw=raw.replace(new RegExp("^"+escParent+"(?:\\s*[-–—:/]\\s*|\\s+)","i"),"").trim()||raw;
+      }
       // W-308 targeted removal of repeated Industrial connector context.
       if(/Connector ASM\s*-\s*Industrial/i.test(parent)){
         raw=raw.replace(/\bIndustrial\b/gi,"").replace(/\bConnector\s+ASM\b/gi,"").replace(/\s+/g," ").trim();
@@ -2416,7 +2421,8 @@ function pathPlanForEntity(e,folderMap){
   if(rawSegs.length&&outSegs.length){
     const lastRaw=rawSegs[rawSegs.length-1],safeLast=sanitizeName(lastRaw);
     if(e.fileName.toLowerCase()===safeLast.toLowerCase()||e.fileName.toLowerCase().startsWith(safeLast.toLowerCase()+" ")){
-      const sec=/^(?:section\s+)?([0-9]+(?:\.[0-9]+)*)\b/i.exec(lastRaw);
+      const sec=/\b(?:section|sec\.?|clause|paragraph|para\.?)\s*([0-9]+(?:\.[0-9A-Za-z-]+)*)\b/i.exec(lastRaw)
+        || /^([0-9]+(?:\.[0-9A-Za-z-]+)*)\b/.exec(lastRaw);
       if(sec){outSegs[outSegs.length-1]=sec[1];changed=true;}
       else{outSegs.pop();changed=true;}
     }
