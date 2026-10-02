@@ -28,9 +28,10 @@ The immediate continuation baseline is now explicit:
 - **Translator authority:** `spencerskelly/Test_Vault_` main.
 - **Relationship schema:** 1.35.
 - **Accepted importer baseline:** `EA_to_MDSE_Native_Importer_v0.5.2.html`.
+- **Current merge candidate:** `EA_to_MDSE_Native_Importer_v0.7.html` on `Test_Vault_` main. It was built from v0.5.2/schema 1.35 and merges the W-293/W-294 local occurrence code forward while preserving W-291/W-292 `hasState/stateOf`, v0.5.2 base-vault identity checks, stale-state invalidation, and output-handle hardening. Static JavaScript and invariant checks pass; it is **not yet an accepted importer baseline** until real-QEAX validation and the remaining W-297 acceptance work are complete.
 - **Current clean base-vault repo:** `spencerskelly/Test_Vault_-base-vault-2026-09-30-rel133-v051` main. The repo name is stale; the content is schema 1.35 / v0.5.2.
 - **Occurrence experiment:** `spencerskelly/20260930` branch `handoff/full-import-2026-10-01`, importer v0.6/v0.6.1. It proves the W-293/W-294 local part/endpoint/connection/flow direction but was built from the older relationship-1.33 line.
-- **Do not continue directly from v0.6.1.** The next importer starts from v0.5.2/schema 1.35 and merges the occurrence implementation forward (W-296).
+- **Do not continue directly from v0.6.1.** W-296 has now been implemented as the v0.7 merge candidate. Treat v0.6/v0.6.1 only as implementation evidence; preserve v0.5.2 as the accepted fallback until v0.7 passes real-model acceptance.
 - **Do not use `20260930`, `261001`, or the minimal v0.6 ZIP as accepted output baselines.** They are partial/reference artifacts; complete Run Manifest/Ledger reconciliation is absent, and sampled `261001` notes contain no local occurrence body records.
 - **Workbench:** 0.1.14 already follows schema 1.35 note-level semantics but does not yet index local body occurrences. Extend it only after the merged importer produces real-model records worth freezing.
 
