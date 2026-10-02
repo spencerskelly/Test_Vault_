@@ -2727,7 +2727,11 @@ function buildLocalOccurrenceModel(ctx,entityCtx){
     endpointBySource.set(id,rec);push(endpointsByOwner,ownerKey,rec);return rec;
   }
 
-  for(const raw of ctx.objects)if(trim2(raw.Object_Type)==="Port")endpointOccurrence(raw.Object_ID);
+  const localRawOrder=(ctx.objects||[]).slice().sort((a,b)=>normGuid(a.ea_guid).localeCompare(normGuid(b.ea_guid))||n2(a.Object_ID)-n2(b.Object_ID));
+  for(const raw of localRawOrder){
+    if(trim2(raw.Object_Type)==="Part"&&trim2(raw.Stereotype)!=="FlowProperty")foldedPartOccurrence(raw.Object_ID);
+    if(trim2(raw.Object_Type)==="Port")endpointOccurrence(raw.Object_ID);
+  }
 
   function refForRaw(id){
     id=n2(id);
@@ -2775,9 +2779,13 @@ function buildLocalOccurrenceModel(ctx,entityCtx){
     return rec;
   }
 
-  const orderedConnectors=(ctx.connectors||[]).slice().sort((a,b)=>n2(a.Connector_ID)-n2(b.Connector_ID));
+  const orderedConnectors=(ctx.connectors||[]).slice().sort((a,b)=>normGuid(a.ea_guid).localeCompare(normGuid(b.ea_guid))||n2(a.Connector_ID)-n2(b.Connector_ID));
   for(const c of orderedConnectors){
-    if(trim2(c.Connector_Type)!=="Connector"||trim2(c.Stereotype)==="BindingConnector")continue;
+    if(trim2(c.Connector_Type)!=="Connector")continue;
+    if(trim2(c.Stereotype)==="BindingConnector"){
+      warnings.push("BindingConnector "+trim2(c.ea_guid)+" retained for semantic review; no local topology was invented.");
+      continue;
+    }
     const a=refForRaw(c.Start_Object_ID),b=refForRaw(c.End_Object_ID);makeConnection(c,a,b,"Connector");
   }
 
