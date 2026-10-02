@@ -154,7 +154,7 @@ if candidate:
     else:
         itxt=read(candidate)
         required_importer_tokens=[
-            'version: "0.8.0"',
+            'version: "0.8.1"',
             'const REL_SCHEMA_VERSION="1.35"',
             'const ELEMENT_SCHEMA_VERSION="1.17"',
             'const LOCAL_MODEL_SCHEMA_VERSION="0.2"',
@@ -164,6 +164,8 @@ if candidate:
             'const MAX_MODEL_FILES_PER_FOLDER=75',
             'function applyMechanicalFolderCapacity(items)',
             'folder_1',
+            'definitionEntity.mdseType!=="Object"',
+            'if(!(await fileExists(root,".vault.yaml")))return false;',
             '<!-- MDSE:LOCAL-MODEL START schema=0.2 -->',
             'Local Model Source Map.csv',
             'Attachment Reconciliation.csv',
