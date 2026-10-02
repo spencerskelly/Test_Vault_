@@ -76,6 +76,8 @@ This does not promote v0.7 or retroactively rename historical base artifacts. v0
 
 **W-302 Local Model boundary:** each note may contain at most one governed `## Local Model` region. It starts with `<!-- MDSE:LOCAL-MODEL START schema=0.1 -->` and ends with `<!-- MDSE:LOCAL-MODEL END -->`. The markers are not semantic data; they make the human-readable records safely parseable and protect them from ordinary body editing.
 
+**W-303 local identity:** v0.8.0 uses stable type-prefixed local IDs (`part-*`, `ep-*`, `conn-*`, `flow-*`). Imported IDs are deterministically derived from immutable EA source identity/provenance rather than sequence position or mutable names, so a re-import preserves the address of the same source occurrence. Visible engineering identifiers remain separate display data.
+
 ## 3. Approved semantic model: reusable definition vs contextual occurrence
 
 ### 3.1 Reusable Object/assembly definitions

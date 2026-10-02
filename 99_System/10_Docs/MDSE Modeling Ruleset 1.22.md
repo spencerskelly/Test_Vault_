@@ -251,6 +251,8 @@ A named EA occurrence does not require a standalone Markdown note merely to pres
 
 Every local endpoint and local flow receives a stable internal local identity separate from its visible engineering identifier/name. The stable local identity must remain unchanged when the human-facing identifier is renamed, so existing references can remain valid.
 
+W-303 defines the v0.8.0 local-ID style for all local record kinds: `part-*`, `ep-*`, `conn-*`, and `flow-*` followed by an opaque stable token. Imported tokens are deterministic from immutable EA source identity/provenance. Do not use ordinal numbering or mutable engineering names as durable identity. Future Workbench-created local records follow the same prefixes with generated stable tokens.
+
 Local identity is contextual rather than vault-global.
 
 - A local **part occurrence** is durably identified by owning note UID + part local ID.
@@ -291,7 +293,7 @@ Invariant structure and connections that are true for every use of the reusable 
 
 Therefore the same reusable assembly may be used in Product 1 and Product 2 while the same inherited endpoint (for example J4) connects to different partners in each product. A connection references the **part occurrence + inherited/local endpoint**, not merely the reusable assembly definition.
 
-The exact local-ID format, block/anchor syntax, remaining canonical block fields, first-class-note promotion criteria, and final tooling implementation remain **OPEN**. Importer v0.6 may use an explicitly versioned assessment body format to exercise these approved semantics against the real EA model, but that trial syntax is not yet the final authoring contract.
+The local-ID format is settled by W-303 and the managed-region boundary by W-302. The remaining block/anchor syntax, canonical record fields, first-class-note promotion criteria, and structured-authoring details remain **OPEN**. Importer v0.6 remains historical assessment evidence; v0.8.0 must follow the settled identity and boundary rules.
 
 #### 15.7.1 Port/flow preservation requirements from current-model audit
 

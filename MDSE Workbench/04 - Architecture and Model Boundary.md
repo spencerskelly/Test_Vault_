@@ -94,6 +94,8 @@ W-293/W-294 and W-298 add model content below the file-backed note level without
 
 Workbench therefore indexes two addressable kinds:
 
+W-303 fixes the local-reference token style used by local records: `part-*`, `ep-*`, `conn-*`, and `flow-*`. These tokens are durable and opaque; visible engineering names are display data rather than identity.
+
 - **note element** — durable identity is the note `uid`; file path is current location metadata, not permanent identity;
 - **local model record** — durable identity is the owning note UID plus its governed local address (part occurrence, endpoint occurrence, connection or connection-scoped flow).
 

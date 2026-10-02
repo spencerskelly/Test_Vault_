@@ -5,7 +5,7 @@ status: Active
 ---
 # Handoff: Continue Here
 
-Rewritten 2026-09-29 (W-183), updated through W-302 on 2026-10-01 for a new AI chat continuing the work on this vault. Read the 2026-10-01 continuation section below first, then the comprehensive importer handoff and Workspace Decision Log.
+Rewritten 2026-09-29 (W-183), updated through W-303 on 2026-10-01 for a new AI chat continuing the work on this vault. Read the 2026-10-01 continuation section below first, then the comprehensive importer handoff and Workspace Decision Log.
 
 ## What this vault is
 
@@ -14,7 +14,7 @@ Rewritten 2026-09-29 (W-183), updated through W-302 on 2026-10-01 for a new AI c
 ## Read in this order
 
 1. `99_System/10_Docs/EA Native Importer Comprehensive Handoff - 2026-10-01.md`: current importer/occurrence/repository state and the copy-ready next-chat prompt.
-2. `99_System/10_Docs/Workspace Decision Log.md`: every decision (W-01 to W-302) and the Open list at the bottom. It is the authority for what has been decided.
+2. `99_System/10_Docs/Workspace Decision Log.md`: every decision (W-01 to W-303) and the Open list at the bottom. It is the authority for what has been decided.
 3. `99_System/10_Docs/Translator Definition.md` (the single statement of what stage 1 must do, W-247; keep it current), then `Definitions/Note Layout.md` and `Definitions/EA Source Section.md`.
 4. `99_System/03_Schemas/`: `ea-element-mapping.yaml` (all 31 EA object types), `ea-connector-mapping.yaml` (all 15 connector types, W-151 to W-179), `relationships.yaml` (schemaVersion 1.35), `element-types.yaml` (24 model classes plus system definitions; `Diagram` added in W-212), `ea-field-dispositions.yaml`, `ea-tag-dispositions.yaml`, `ea-package-rules.yaml`.
 5. `99_System/10_Docs/Post-Import Tasks.md` (Tasks 1 to 8; Task 7 includes the state cleanup work added later).
@@ -37,6 +37,7 @@ The immediate continuation baseline is now explicit:
 - **Do not continue directly from v0.6.1.** W-296 has now been implemented as the v0.7 merge candidate. Treat v0.6/v0.6.1 only as implementation evidence; preserve v0.5.2 as the accepted fallback until v0.7 passes real-model acceptance.
 - **Do not use `20260930`, `261001`, or the minimal v0.6 ZIP as accepted output baselines.** They are partial/reference artifacts; complete Run Manifest/Ledger reconciliation is absent, and sampled `261001` notes contain no local occurrence body records.
 - **Workbench:** 0.1.14 already follows schema 1.35 note-level semantics but does not yet index local body occurrences. W-298 fixes the interface boundary: Local Model becomes its own structured dropdown/surface; ordinary text editing must not modify that governed region. W-302 fixes the v0.8.0 managed boundary as `<!-- MDSE:LOCAL-MODEL START schema=0.1 -->` through `<!-- MDSE:LOCAL-MODEL END -->`; the remaining local-record field/address contract is still to be finalized. Extend it only after the merged importer produces real-model records worth freezing.
+- **Local IDs (W-303):** v0.8.0 local records use stable type-prefixed opaque IDs (`part-*`, `ep-*`, `conn-*`, `flow-*`) independent of visible engineering names. Imported IDs are deterministic from immutable EA source identity/provenance; future Workbench-created local records use the same prefixes with generated stable tokens.
 
 Read `EA Native Importer Comprehensive Handoff - 2026-10-01.md` for the full repository audit, fault log, semantic decisions, experimental implementation history, acceptance criteria and next-chat prompt.
 
@@ -48,7 +49,7 @@ Read `EA Native Importer Comprehensive Handoff - 2026-10-01.md` for the full rep
 - Short and direct, no praise. Tell him if there is a more efficient way to work.
 - Nothing is applied until he approves it. If you apply consequences of an approved decision, say so and list them.
 - Keep `Translator Definition.md` current: any decision that changes a stage 1 rule updates it in the same commit (W-247).
-- Log every decision as the next W number (next is W-298) in the Decision Log, update the worklist YAML and this handoff, then commit and push to `main`. He allows pushing to `main` and pulls each change into Obsidian.
+- Log every decision as the next W number (next is W-304) in the Decision Log, update the worklist YAML and this handoff, then commit and push to `main`. He allows pushing to `main` and pulls each change into Obsidian.
 - Commit only when every edit applied and every YAML and JSON file parses. Make each scripted edit fail on an anchor that matches zero or several times, and stop the commit if any edit failed (twice in the last chat a commit went out missing an edit; once an anchor matched Task 5 instead of Task 7). Quote long YAML text values (a colon followed by a space has broken a file twice). Use quoted heredocs (`<<'EOF'`). Check that a referenced source file or column exists before relying on it. Stay with EA names until after the import (W-93).
 - Never write an access token into a file. After cloning, reset the remote URL to the token-free form and push with the token in the command only. Set a repo-local git identity before the first commit. Check `git log` for commits you did not make before adding a decision number.
 
