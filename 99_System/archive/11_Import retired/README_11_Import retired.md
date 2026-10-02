@@ -1,0 +1,2 @@
+> [!NOTE]
+> **RETIRED (W-319).** These four header-only files were planned evidence outputs that were never populated. They are not written by importer v0.8.0. Current evidence set: Run Manifest, Ledger, Local Model Source Map, duplicate-name review, altered-name/path review, semantic/connector review, attachment reconciliation, diagram reconciliation (see [[MDSE v0.8 Cross-Repository Reconciliation - 2026-10-02]]). Registry: [[00 - Current State]].

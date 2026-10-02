@@ -10,7 +10,7 @@ canChange: No meaning given yet.
 ---
 # subtype
 
-An approved specialization within the `type` (Ruleset 1.22 section 1.1). It is not the relationship `subtypeOf`, which links two notes that are a true reusable specialization of each other.
+An approved specialization within the `type` (Ruleset 1.23 section 1.1). It is not the relationship `subtypeOf`, which links two notes that are a true reusable specialization of each other.
 
 ## Format
 

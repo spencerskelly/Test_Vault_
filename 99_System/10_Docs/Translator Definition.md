@@ -7,7 +7,7 @@ status: Draft
 
 What the stage 1 translator must do, in one place. It is kept current: any decision that changes a stage 1 rule updates this file in the same commit (W-247). Rules are stated once and cite their decision number. The tables live in the YAML files in `99_System/03_Schemas`, which stay the machine-readable authority; this file says which file holds what and does not copy the tables, so there is one place to change. Where this file and a YAML file disagree, that is a fault to fix, not a choice.
 
-Current through W-297.
+Current through W-320. Release target 0.8.0; the registry of current files is [[00 - Current State]].
 
 ## 1. Purpose and scope
 
@@ -37,7 +37,7 @@ All in `99_System/11_Import`, regenerated on every run, read-only evidence (W-35
 - `Run Manifest.md`: date, importer release, base-vault `mdse_release`, relationship-schema version, element-schema version, input identity (file name and size), the source counts read from the `.qeax` beside the expected ones (W-257) and counts by outcome; for a slice run, also the links that leave the slice (W-253). Importer/base release mismatch is blocking from W-299 onward. For v0.8.0 initial import, the manifest also reports all source diagrams as deferred by scope and records that no diagram files were written (W-300).
 - `Local Model Source Map.csv`: W-304 import evidence mapping each imported local record back to EA without putting EA provenance in engineering notes. Minimum columns: `owner_uid,local_id,local_kind,ea_guid,ea_source_kind,ea_owner_guid`. It is regenerated with the import evidence and is not model authority.
 - Four review tables, each starting `ea_guid, ea_type, ea_name, category`, with no status column (decisions go in `Review Changes Log.md` by the same GUID, W-38): `Review - Block-Level Flow Connectors.csv` (W-217), `Review - Added Ports.csv` (W-218), `Review - Nesting Direction.csv` (W-219), `Review - Equals Direction.csv` (W-220).
-- Not decided: what happens to the four header-only files `Identity Registry.csv`, `Model Checks.csv`, `Pending Relationships.csv` and `Transformation Log.csv` (W-215).
+- Settled (W-319): the four header-only files `Identity Registry.csv`, `Model Checks.csv`, `Pending Relationships.csv` and `Transformation Log.csv` are retired and are not written by v0.8.0. The copies in this workspace are archived under `99_System/archive/11_Import retired/`.
 
 ## 4. Notes
 
@@ -131,7 +131,7 @@ Conceptual durable addresses:
 - connection = owner note UID + connection local ID;
 - flow = owner note UID + connection local ID + flow local ID.
 
-W-303 fixes the local-ID style for v0.8.0: type-prefixed opaque stable tokens such as `part-a7c31f`, `ep-42bd90`, `conn-917e2a`, and `flow-6cc318`. Imported tokens are deterministically derived from immutable EA source identity/provenance; source ordering and visible engineering names do not participate in identity. Workbench-created local records use the same prefixes with generated stable tokens.
+**Superseded by W-315 (Ruleset 1.23 section 16.1, Local Model 0.2):** the short tokens of W-303 (`part-a7c31f` and similar) are no longer used. Every local record takes one 30-character identity token from the same globally unique namespace as note `uid` values, wrapped in a kind prefix: `part-<token>`, `ep-<token>`, `conn-<token>`, `flow-<token>`. The kind prefix names the current representation; the token is the persistent identity and is never reused. Allocation, rerun reuse (Local Model Source Map) and collision rules are in `MDSE v0.8 Cross-Repository Reconciliation - 2026-10-02.md`, section "Settled identity rules".
 
 A named source occurrence alone does not require a standalone Markdown note if these facts can be retained and addressed reliably in the containing model.
 
@@ -139,7 +139,7 @@ A named source occurrence alone does not require a standalone Markdown note if t
 
 v0.8.0 uses engineering-readable headings plus named-field Markdown records inside the W-302 managed region. Each materialized record ends with a native Obsidian block ID equal to its stable W-303 local ID. All persisted references between local records use native Obsidian block links under W-312; bare local-ID strings are not the canonical persisted reference form.
 
-The machine-readable authority for this body format is `99_System/03_Schemas/local-model.yaml` schema 0.1 (W-313).
+The machine-readable authority for this body format is `99_System/03_Schemas/local-model.yaml`. Schema 0.2 is the writer contract (W-319); readers must accept 0.1 and 0.2.
 
 - **Part occurrence:** readable heading, `definition` to reusable Object/assembly, optional `identifier` and `multiplicity`, followed by `^part-*`. W-310 permits multiplicity only for contextually interchangeable copies.
 - **Endpoint occurrence:** readable heading, `definition` to reusable Port/interface, optional `part` link to a local part occurrence or `parent` link to a local endpoint occurrence, optional `exposes` or temporary `equals`, optional identifier/multiplicity/kind, followed by `^ep-*`. `part` and `parent` are mutually exclusive. An endpoint with neither is on the owning assembly boundary. W-305 still applies: inherited nested members remain implicit until local addressability is required.
@@ -267,7 +267,7 @@ Stage 1 import must not infer configurability from the mere existence of reusabl
 
 The importer must never express one configurable position by relating the owning assembly to every candidate subtype. The local occurrence remains the single contextual position; candidates are derived from the reusable `subtypeOf` hierarchy.
 
-W-314 is currently a semantic decision. The deployed Local Model body contract remains schema 0.1 until a separate implementation change advances `local-model.yaml` and the importer/parser/writer together.
+W-314 is implemented in schema form by W-319: Local Model 0.2 adds `usage: standard | variant | option` on part and endpoint records (omission means `standard`) and element-types 1.17 adds sparse optional `abstract: true`. The importer writes 0.2 only; Workbench readers accept 0.1 and 0.2. Candidate definitions are derived from `subtypeOf`; persisted named configurations remain deferred.
 
 
 ## v0.8.0 implementation amendment — 2026-10-02

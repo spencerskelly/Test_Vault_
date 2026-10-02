@@ -22,6 +22,9 @@ uid: 20260928123124000skellyspencer
 id: INFO-00020
 status: Active
 ---
+> [!WARNING]
+> **Everything below this line is historical background (written through W-313 on 2026-10-01).** Where it conflicts with the section above, [[MDSE v0.8 Cross-Repository Reconciliation - 2026-10-02]], [[MDSE Modeling Ruleset 1.23]] or [[00 - Current State]], those govern. Section "Read in this order" below is superseded by the list in [[00 - Current State]].
+
 # Handoff: Continue Here
 
 Rewritten 2026-09-29 (W-183), updated through W-313 on 2026-10-01 for a new AI chat continuing the work on this vault. Read the 2026-10-01 continuation section below first, then the comprehensive importer handoff and Workspace Decision Log.
@@ -33,7 +36,7 @@ Rewritten 2026-09-29 (W-183), updated through W-313 on 2026-10-01 for a new AI c
 ## Read in this order
 
 1. `99_System/10_Docs/MDSE v0.8 Design Check - 2026-10-01.md`: current target architecture, code-conformance findings and keepability gates.
-2. `99_System/10_Docs/EA Native Importer Comprehensive Handoff - 2026-10-01.md`: current importer/occurrence/repository state.
+2. `99_System/10_Docs/EA Native Importer Comprehensive Handoff - 2026-10-01.md`: SUPERSEDED 2026-10-02, detailed historical evidence only.
 3. `99_System/10_Docs/Handoff Prompt - MDSE v0.8 Implementation.md`: concise copy-ready continuation prompt.
 4. `99_System/10_Docs/Workspace Decision Log.md`: every decision (W-01 to W-313) and the Open list at the bottom. It is the authority for what has been decided.
 5. `99_System/10_Docs/Translator Definition.md` (the single statement of what stage 1 must do, W-247; keep it current), then `Definitions/Note Layout.md` and `Definitions/EA Source Section.md`.

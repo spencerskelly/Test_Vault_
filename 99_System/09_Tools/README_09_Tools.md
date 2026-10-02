@@ -38,3 +38,17 @@ The matched clean base must declare `mdse_release: "0.8.0"`. v0.8 is a clean imp
 - all source diagrams must reconcile although initial diagram creation is deferred.
 
 See `MDSE v0.8 Toolchain Review - 2026-10-02.md` for the code-gap audit.
+
+## File status (W-320)
+
+| File | Status | Use |
+|---|---|---|
+| `EA_to_MDSE_Native_Importer_v0.1.html` | history | Established direct-QEAX preflight and the source-count baseline (W-273). Do not run for a model. |
+| `EA_to_MDSE_Native_Importer_v0.2.html` | accepted planning baseline, immutable | Whole-model planner, passed on the real QEAX (W-274). Reference for planner behavior. |
+| `EA_to_MDSE_Native_Importer_v0.3.html`, `v0.4.html`, `v0.5.html`, `v0.5.1.html` | history | Intermediate builds. Superseded by v0.5.2. |
+| `EA_to_MDSE_Native_Importer_v0.5.2.html` | accepted safety lineage (fallback) | Base-vault identity checks, stale-state invalidation, `hasState/stateOf`, schema 1.35. Starting point for v0.8.0. |
+| `EA_to_MDSE_Native_Importer_v0.7.html` | merge candidate, never accepted | Occurrence/QEAX code evidence. Not release-conformant (14 gaps listed in the Toolchain Review). Do not generate a model to keep. |
+| `EA_to_MDSE_Native_Importer_v0.8.0.html` | planned, not built | The release importer. Build order is in the Reconciliation document. |
+| `Initialize-Vault.sh`, `Initialize-Vault.ps1` | current helpers | Initialize `.vault.yaml` once in a new disposable or real vault. |
+
+The machine-checkable version of this table is `99_System/03_Schemas/mdse-release.yaml`; run `python3 99_System/09_Tools/check-release.py` after any change to tools, schemas or docs. Registry of current files: [[00 - Current State]].

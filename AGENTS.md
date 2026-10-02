@@ -1,5 +1,7 @@
 # AI / Agent Rules
 
+First read `99_System/10_Docs/00 - Current State.md`. It names the current rules, the tool status and which files are historical. If a file you find disagrees with it, the Current State registry wins.
+
 Read and follow `99_System/02_AI/AI_INSTRUCTIONS.md` before creating or editing any note.
 
 The essentials:

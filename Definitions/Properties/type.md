@@ -10,7 +10,7 @@ canChange: In stage 2, when a note is reclassified
 ---
 # type
 
-The primary MDSE semantic class of a model note (Ruleset 1.22 section 1.1).
+The primary MDSE semantic class of a model note (Ruleset 1.23 section 1.1).
 
 ## Format
 

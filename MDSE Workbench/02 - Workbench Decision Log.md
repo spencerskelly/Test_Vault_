@@ -1009,3 +1009,9 @@ Standalone plugin 0.1.15 implements only the immediate safe corrections:
 2. ordinary body editing is refused when a governed Local Model marker is present.
 
 WB-106 remains the next required implementation: ModelRef identity, Local Model 0.1/0.2 parser, block-fragment preservation, Local Model findings/surface, and occurrence-aware Structure/Interfaces/Where Used/Requirements. The standalone repo's `WB106_IMPLEMENTATION_CONTRACT.md` is the implementation handoff.
+
+### WB-108 — 2026-10-02 fixture synchronization and authority pointers
+
+**Status:** Decided and implemented (2026-10-02); no plugin behavior changed, version stays 0.1.15.
+
+The Workbench test fixtures `relationships.yaml` and `element-types.yaml` had drifted from the authority schemas in `99_System/03_Schemas` (wording changes from W-311/W-314/W-319 and the element-types 1.17 optional-property text). They were copied over; typecheck, 31 tests and the production build pass. Rule: the fixtures are a verbatim copy of the authority schemas. `99_System/09_Tools/check-release.py --workbench <clone>` (W-320) fails when they differ or when the Workbench version in `package.json`, `manifest.json` and `mdse-release.yaml` disagree. The Workbench README now points to `00 - Current State` and states the fixture and CI rules. Workbench CI remains inactive until switched on by a separate decision; run `npm run build` and `npm test` before each push.

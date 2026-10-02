@@ -1,3 +1,6 @@
+> [!NOTE]
+> **HISTORICAL (2026-10-01 design evidence).** Its open points were settled on 2026-10-02 by W-315 to W-319. Current authority: [[MDSE v0.8 Cross-Repository Reconciliation - 2026-10-02]] and [[MDSE Modeling Ruleset 1.23]]. Registry of current files: [[00 - Current State]].
+
 # MDSE v0.8 Design Check — 2026-10-01
 
 ## Purpose

@@ -7,9 +7,10 @@ Use this prompt to continue implementation in a new chat.
 Work from `spencerskelly/Test_Vault_` main as the semantic/importer authority and `spencerskelly/MDSE_Workbench` main as the plugin implementation.
 
 Read in this order:
+0. `99_System/10_Docs/00 - Current State.md` (registry of current vs historical files)
 1. `99_System/10_Docs/MDSE v0.8 Cross-Repository Reconciliation - 2026-10-02.md`
 2. `99_System/10_Docs/MDSE Modeling Ruleset 1.23.md`
-3. Workspace Decision Log through W-319
+3. Workspace Decision Log through W-320
 4. `Translator Definition.md`
 5. `relationships.yaml` 1.35
 6. `element-types.yaml` 1.17

@@ -4,6 +4,9 @@ type: Info
 status: Active
 workspace: EA Native Translator
 ---
+> [!WARNING]
+> **ARCHIVED (W-246, W-320).** This folder is the retired old translator workspace, kept as evidence. It has no authority. Current rules: [[Translator Definition]], [[MDSE Modeling Ruleset 1.23]]; registry: [[00 - Current State]].
+
 # EA Native Translator
 
 This folder is the living methodology workspace for translating native Sparx Enterprise Architect content into the MDSE vault model.

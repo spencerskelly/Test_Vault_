@@ -1,0 +1,67 @@
+# MDSE release manifest (W-320). Machine-readable twin of "00 - Current State.md".
+# Edit this file in the same commit as any change to a schema version, tool status or document status.
+# Verify with: python3 99_System/09_Tools/check-release.py [--workbench <path to MDSE_Workbench clone>]
+manifestVersion: 1
+mdseRelease: "0.8.0"
+releaseStatus: pre-release   # base vault and importer for 0.8.0 are not built yet
+date: "2026-10-02"
+sourceModelId: EA8647
+
+schemas:
+  relationships: "1.35"      # 99_System/03_Schemas/relationships.yaml
+  elementTypes: "1.17"       # 99_System/03_Schemas/element-types.yaml
+  localModel: "0.2"          # 99_System/03_Schemas/local-model.yaml (readers accept 0.1 + 0.2)
+
+ruleset: "99_System/10_Docs/MDSE Modeling Ruleset 1.23.md"
+limits:
+  maxGeneratedPathLength: 212
+  duplicateMarker: "~2"
+  alterationMarker: "~a"
+
+tools:
+  importer:
+    release: null                                   # no release-conformant importer exists yet
+    planned: "99_System/09_Tools/EA_to_MDSE_Native_Importer_v0.8.0.html"
+    acceptedFallback: "99_System/09_Tools/EA_to_MDSE_Native_Importer_v0.5.2.html"
+    evidenceOnly: "99_System/09_Tools/EA_to_MDSE_Native_Importer_v0.7.html"
+  cleanBase:
+    repo: null                                      # new 0.8.0 base not yet generated
+    obsoleteReference: "spencerskelly/Test_Vault_-base-vault-2026-09-30-rel133-v051"
+  workbench:
+    repo: "spencerskelly/MDSE_Workbench"
+    version: "0.1.15"
+    nextGate: "WB-106"                              # Local Model read/navigation; keepability gate for the first kept import
+    fixturesFrom: "99_System/03_Schemas"            # test/fixtures must equal these schema files (checked)
+  bootstrap:
+    pinned: "0.2.0"
+    sourceAvailable: false                          # no retrievable source or release found (2026-10-02 review)
+
+repos:
+  authority: "spencerskelly/Test_Vault_"
+  workbench: "spencerskelly/MDSE_Workbench"
+  referenceOnly:
+    - "spencerskelly/20260930"
+    - "spencerskelly/261001"
+    - "spencerskelly/Test_Vault_-base-vault-2026-09-30-rel133-v051"
+
+# Status vocabulary: current | reference | proposal | historical | superseded | retired
+# historical/superseded/retired files must carry a callout banner naming supersededBy (checked).
+documents:
+  - {path: "99_System/10_Docs/00 - Current State.md", status: current}
+  - {path: "99_System/10_Docs/MDSE v0.8 Cross-Repository Reconciliation - 2026-10-02.md", status: current}
+  - {path: "99_System/10_Docs/MDSE Modeling Ruleset 1.23.md", status: current}
+  - {path: "99_System/10_Docs/Translator Definition.md", status: current}
+  - {path: "99_System/10_Docs/Workspace Decision Log.md", status: current}
+  - {path: "99_System/10_Docs/Handoff Prompt - MDSE v0.8 Implementation.md", status: current}
+  - {path: "99_System/02_AI/AI_INSTRUCTIONS.md", status: current}
+  - {path: "99_System/10_Docs/MDSE v0.8 Toolchain Review - 2026-10-02.md", status: reference}
+  - {path: "99_System/10_Docs/Post-Import Tasks.md", status: reference}
+  - {path: "99_System/10_Docs/Review Changes Log.md", status: reference}
+  - {path: "99_System/10_Docs/MDSE Platform Roadmap and Critical Points - 2026-10-02.md", status: proposal}
+  - {path: "99_System/10_Docs/Handoff - Continue Here.md", status: historical, supersededBy: "99_System/10_Docs/00 - Current State.md"}
+  - {path: "99_System/10_Docs/MDSE v0.8 Design Check - 2026-10-01.md", status: historical, supersededBy: "99_System/10_Docs/MDSE v0.8 Cross-Repository Reconciliation - 2026-10-02.md"}
+  - {path: "99_System/10_Docs/EA Native Importer Comprehensive Handoff - 2026-10-01.md", status: superseded, supersededBy: "99_System/10_Docs/MDSE v0.8 Cross-Repository Reconciliation - 2026-10-02.md"}
+  - {path: "99_System/10_Docs/MDSE Modeling Ruleset 1.22.md", status: superseded, supersededBy: "99_System/10_Docs/MDSE Modeling Ruleset 1.23.md"}
+  - {path: "99_System/10_Docs/Git and New Vault Setup.md", status: superseded, supersededBy: "99_System/10_Docs/00 - Current State.md"}
+  - {path: "99_System/archive/10_EA Native Translator/README_EA Native Translator.md", status: retired, supersededBy: "99_System/10_Docs/Translator Definition.md"}
+  - {path: "99_System/archive/11_Import retired/README_11_Import retired.md", status: retired, supersededBy: "99_System/10_Docs/MDSE v0.8 Cross-Repository Reconciliation - 2026-10-02.md"}
