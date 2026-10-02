@@ -59,7 +59,7 @@ summary{cursor:pointer;font-weight:650}
 <body>
 <div class="wrap">
   <h1>EA → MDSE Native Importer v0.8.0</h1>
-  <p class="sub">Developer-only, offline native QEAX importer. v0.7 starts from the accepted v0.5.2 / relationship-schema 1.35 baseline and merges the W-293/W-294 local part, endpoint, connection and flow occurrence model forward without changing note-level relationship semantics.</p>
+  <p class="sub">Offline native QEAX importer candidate for MDSE 0.8.0. It preserves the accepted v0.5.2 safety lineage, carries the v0.7 occurrence work forward, and writes against relationships 1.35, element-types 1.17 and Local Model 0.2.</p>
 
   <div class="card">
     <h2>Source</h2>
@@ -179,8 +179,8 @@ summary{cursor:pointer;font-weight:650}
 
 
   <div class="card">
-    <h2>Structural assessment renderer</h2>
-    <p class="small muted">v0.7 writes either one package slice or the complete planned model into a fresh disposable copy of the approved base vault. It renders local part occurrences, contextual endpoints, local connections, conveyed InformationFlow allocations and local Requirement applicability evidence in note bodies. It remains an assessment build: diagrams, attachments, the four final review tables, Workbench local-record indexing and some retained EA source-value lines are not yet complete.</p>
+    <h2>MDSE 0.8.0 import renderer</h2>
+    <p class="small muted">Writes one package slice or the complete planned model into a fresh generated MDSE 0.8.0 base. The base release and all three runtime schemas are validated before writing. Local parts, endpoints, connections and flows use governed Local Model 0.2 records. Diagram artifacts are intentionally deferred; linked-document rows are reconciled and any extraction failure is logged explicitly.</p>
     <div class="row">
       <label class="small"><strong>Package path</strong></label>
       <input id="slicePath" type="text" value="02 Product Context" style="min-width:360px;padding:7px 9px;border:1px solid #b8c0cc;border-radius:7px">
@@ -192,7 +192,7 @@ summary{cursor:pointer;font-weight:650}
       <button id="generateSlice" class="primary" disabled>Generate assessment vault</button>
       <span id="sliceStatus" class="badge">Build a PASS plan first</span>
     </div>
-    <p class="small muted">Use a fresh disposable base-vault copy. Do not select <code>Test_Vault_</code> or an existing imported vault. Build the PASS plan first, then choose and validate the output folder immediately before Generate. v0.7 requires <code>relationships.yaml</code> schemaVersion 1.35 and preserves the v0.5.2 workspace/base-vault identity checks.</p>
+    <p class="small muted">Use a fresh generated MDSE 0.8.0 base. Do not select <code>Test_Vault_</code> or an existing imported model. Build a PASS plan first, then select the output. The importer requires relationships 1.35, element-types 1.17, Local Model 0.2, and the pinned MDSE Bootstrap + Workbench runtime stack.</p>
   </div>
 
   <div class="grid3">
@@ -2136,7 +2136,7 @@ function addStampMs(stamp,inc){
   const p=n=>String(n).padStart(2,"0"), p3=n=>String(n).padStart(3,"0");
   return dt.getUTCFullYear()+p(dt.getUTCMonth()+1)+p(dt.getUTCDate())+p(dt.getUTCHours())+p(dt.getUTCMinutes())+p(dt.getUTCSeconds())+p3(dt.getUTCMilliseconds());
 }
-function authorCode(raw){return AUTHOR_CODES[trim2(raw&&raw.Author)]||"skellyspencer";}
+function authorCode(raw){const v=AUTHOR_CODES[trim2(raw&&raw.Author)]||"";return (!v||v==="sparxeaauthor")?"skellyspencer":v;}
 function idPrefix(entity){
   if(entity.mdseType==="Requirement"){
     if(entity.subtype==="standard")return "STD";
@@ -2567,15 +2567,9 @@ function buildRelationshipGraph(ctx,entityCtx,limitations){
 }
 
 /* =====================================================================
-   v0.7 local occurrence model.
-   Body schema is explicit and versioned for real-model assessment before
-   Workbench indexing freezes the authoring syntax.
-
-   Identity:
-     part       owner note UID + part local_id
-     endpoint   owner note UID + containing part path + endpoint local_id
-     connection owner note UID + connection local_id
-     flow       owner note UID + connection local_id + flow local_id
+   MDSE 0.8.0 Local Model implementation.
+   Local records use schema 0.2 native block IDs. The 30-character token
+   is globally unique with note UIDs; semantic address is owner UID + local ID.
    ===================================================================== */
 const LOCAL_BODY_SCHEMA="0.2";
 
