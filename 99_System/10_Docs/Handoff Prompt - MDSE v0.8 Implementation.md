@@ -28,7 +28,7 @@ Matched MDSE/base/importer release:
 - local-model 0.2
 - importer: `EA_to_MDSE_Native_Importer_v0.8.0.html`
 
-Workbench is independently versioned. Current 0.1.14 predates Local Model support.
+Workbench is independently versioned. Current 0.1.15 still predates WB-106 Local Model parsing/indexing; it contains only the immediate safety/alignment fixes.
 
 ## Settled model
 
