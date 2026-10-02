@@ -785,3 +785,37 @@ Review succeeds when:
 3. each finding explains enough context to act;
 4. straightforward corrections happen without manual YAML editing;
 5. unresolved methodology gaps remain visible instead of being guessed away.
+
+### Variation and configuration experience (W-314)
+
+The Local Model eventually exposes contextual usage without turning variant management into a separate modeling subsystem.
+
+For each configurable occurrence Workbench should show:
+
+- the occurrence's visible name and stable local identity;
+- stated reusable definition/family root;
+- `usage`: standard, variant or option;
+- whether the root is abstract;
+- the concrete candidates derived from the specialization hierarchy;
+- current temporary or persisted selection, when one exists;
+- any configuration validity finding.
+
+Expected interaction:
+
+- `standard` — no configuration choice;
+- `variant` — required dropdown/select control over allowable concrete candidates;
+- `option` — present/absent control; when present, a definition selector if more than one concrete candidate exists.
+
+These controls operate on a configuration state, not by editing the base architecture's `definition`. The unresolved reusable product architecture should remain reusable and inspectable.
+
+Future high-value views include:
+
+- **Generic Architecture** — unresolved base Local Model;
+- **Variation Space** — configurable positions plus their derived candidate families;
+- **Configured Architecture** — one resolved temporary or named configuration;
+- **Configuration Comparison** — compare two resolved configurations by changed/absent occurrences;
+- **Configuration-filtered Canvas** — render only occurrences/topology present in the selected configuration.
+
+Model-number generation/reverse decoding may later use the same resolved configuration state, but commercial codes belong to product/configuration knowledge and must not be written as intrinsic properties of reusable component definitions.
+
+The user-facing step-by-step workflow is intentionally deferred until schema support and the configuration interaction have been implemented and tested.
