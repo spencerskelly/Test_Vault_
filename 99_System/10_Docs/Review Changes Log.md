@@ -66,3 +66,13 @@ One row per reason, not one per note. If the same change was made on many notes,
 - Initial diagrams remain intentionally deferred.
 - Linked-document extraction is implemented mechanically under W-76 to W-78/W-210: ExtDoc image payloads are written directly; ModelDocument RTF `\\binN` picture payloads are written in source order; text-only ModelDocument RTF is attached unchanged. Unreadable/unknown payloads remain explicit non-blocking `failed attachment import` rows under W-319.
 - Candidate source parses statically. Release status remains pre-release and importer `release` remains null until the real QEAX acceptance run and WB-106 gate.
+
+
+## 2026-10-02 — Importer v0.8.0 candidate hardening
+
+- Reviewed the post-W-322 importer candidate against the controlled plugin base and current Local Model/identity contracts.
+- Confirmed importer/base gating requires MDSE 0.8.0, relationships 1.35, element-types 1.17, Local Model 0.2, enabled Bootstrap and Workbench, and installed plugin payloads.
+- Corrected Local Model Source Map provenance: `ea_owner_guid` now records the actual EA owning-context GUID rather than blank/definition data; derived flow source keys use source connector GUID + occurrence kind + owning-context EA GUID + definition GUID.
+- Corrected path shortening so existing `~a` alteration and `~2` duplicate semantics are preserved. A shortened duplicate becomes the governed combined form (for example `~a~2`) rather than losing or stacking markers incorrectly.
+- Extended static release checks to guard both corrections.
+- Candidate remains pre-release pending real-QEAX acceptance and the WB-106 keepability gate.
