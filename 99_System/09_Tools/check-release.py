@@ -44,6 +44,8 @@ ap.add_argument("--base")
 a=ap.parse_args()
 
 man=yaml.safe_load(read("99_System/03_Schemas/mdse-release.yaml"))
+if man.get("limits",{}).get("maxModelFilesPerFolder") != 75:
+    fail("release manifest maxModelFilesPerFolder must be 75")
 
 # Manifest/build-contract self-consistency.
 builder=man["tools"]["cleanBase"]["builder"]
@@ -159,6 +161,9 @@ if candidate:
             'const MDSE_RELEASE="0.8.0"',
             'const SOURCE_MODEL_ID="EA8647"',
             'const MAX_GENERATED_PATH=212',
+            'const MAX_MODEL_FILES_PER_FOLDER=75',
+            'function folderCapacityViolations(items)',
+            'FOLDER-CAPACITY-EXCEEDED',
             '<!-- MDSE:LOCAL-MODEL START schema=0.2 -->',
             'Local Model Source Map.csv',
             'Attachment Reconciliation.csv',
