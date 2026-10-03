@@ -175,12 +175,17 @@ Industrial connector normalization removes repeated `Connector ASM`, `Industrial
 
 Regulatory folders that directly contain a note with the same section/title retain the full title on the note and reduce the folder to the section/designator where unambiguous.
 
-### Path limit
-Maximum repository-relative generated path: **212 characters**.
+### Path limit (amended by W-324)
+No name or folder is shortened for length. Semantic folder shortening above stays; it is by meaning.
 
-After approved folder normalization, shorten only the filename if needed, preserving the leftmost human-readable portion and reserving room for alteration/duplicate markers and `.md`.
+Hard stop: **400 characters** repository-relative. A planned path over 400 blocks the run and is never cut.
 
-Any remaining path over 212 characters is a blocking preflight error.
+Forced cut: a file name over 255 bytes cannot exist on a filesystem; it is cut at a word boundary, keeps `~a`, and is listed in the altered-name review. A folder component over 255 bytes blocks the run.
+
+Review only: paths over 212 characters are listed in `Review - Long Paths.csv` and shortened after the import (Post-Import Tasks, Task 9).
+
+### Link targets (W-324)
+Links go to the file name; a name that is not unique in the vault takes the shortest unique trailing path. Evidence CSVs keep full paths.
 
 Approved name/folder transformations are non-blocking and logged.
 
@@ -275,7 +280,7 @@ Do not block the v0.8 base/importer for:
 
 1. Keep this workspace as semantic authority and keep `mdse-release.yaml` current.
 2. Build the canonical v0.8 importer writer/identity allocator/Source Map against 1.35/1.17/0.2.
-3. Implement the 212-character planner, attachments, diagram reconciliation and final evidence.
+3. Implement the path planner (400-character hard stop, no length-driven shortening, W-324), attachments, diagram reconciliation and final evidence.
 4. Generate disposable candidate bases with `build-base.py` as needed for tests; do not hand-curate them.
 5. Complete Workbench WB-106 using the shared runtime schemas and portable fixtures.
 6. Release/pin the WB-106-capable Workbench, mark importer v0.8.0 release-conformant, update the release manifest/plugin baseline, generate the final clean base and verify Workbench + base together with `check-release.py`.

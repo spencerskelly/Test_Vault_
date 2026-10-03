@@ -11,7 +11,7 @@
 | Element-types schema | 1.17 (`99_System/03_Schemas/element-types.yaml`) |
 | Local Model | 0.2 writer; readers accept 0.1 and 0.2 (`99_System/03_Schemas/local-model.yaml`) |
 | Source model lineage | EA8647 |
-| Generated path limit | 212 characters; duplicate marker `~2`; alteration marker `~a` |
+| Generated path rule | hard stop 400 characters, nothing shortened for length (W-324); duplicate marker `~2`; alteration marker `~a` |
 
 ## Read in this order
 
@@ -43,7 +43,7 @@
 
 | Tool | Status | Next step |
 |---|---|---|
-| Importer v0.8.5 | **implementation candidate built; whole-model semantic write succeeded (v0.8.3 run)** | Run the decode-only attachment check on the real QEAX with `attachment_benchmark.json` (target 376 documents, 390 files, zero residual; W-323), then a full fresh-base run. Do not mark release-conformant until acceptance gates and WB-106 pass. |
+| Importer v0.8.6 | **implementation candidate built; whole-model semantic write succeeded (v0.8.3 run)** | Run the decode-only attachment check on the real QEAX with `attachment_benchmark.json` (376 documents, 390 files, zero residual; W-323), then a full fresh-base run. W-324: no length-driven shortening, links by file name, `Review - Long Paths.csv` feeds Post-Import Task 9. Do not mark release-conformant until acceptance gates and WB-106 pass. |
 | Importer v0.5.2 | accepted fallback and safety lineage | Starting point for v0.8.0 |
 | Importer v0.7 | evidence only, never accepted | Do not use to generate a model to keep |
 | Importers v0.1 to v0.5.1 | history | See `99_System/09_Tools/README_09_Tools.md` |

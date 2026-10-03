@@ -8,7 +8,7 @@ Current authority/target:
 - element-types 1.17
 - local-model 0.2
 - mdse/base/importer target 0.8.0
-- repository-relative path limit 212
+- repository-relative path hard stop 400, no length-driven shortening (W-324)
 - duplicate marker `~2`; alteration marker `~a`
 - EA source lineage `EA8647`
 - old base, `20260930`, and `261001` are reference only

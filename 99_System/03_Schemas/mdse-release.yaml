@@ -17,7 +17,9 @@ schemas:
 ruleset: "99_System/10_Docs/MDSE Modeling Ruleset 1.23.md"
 
 limits:
-  maxGeneratedPathLength: 212
+  maxGeneratedPathLength: 400            # W-324: hard stop only; nothing is shortened for length
+  fsComponentMaxBytes: 255               # W-324: the only forced cut (filesystem limit per name)
+  longPathReviewThreshold: 212           # W-324: review report only (Post-Import Task 9)
   maxModelFilesPerFolder: 75
   duplicateMarker: "~2"
   alterationMarker: "~a"
@@ -25,8 +27,8 @@ limits:
 tools:
   importer:
     release: null
-    candidate: "99_System/09_Tools/EA_to_MDSE_Native_Importer/v0.8.5/EA_to_MDSE_Native_Importer_v0.8.5.html"
-    attachmentBenchmark: "99_System/09_Tools/EA_to_MDSE_Native_Importer/v0.8.5/attachment_benchmark.json"
+    candidate: "99_System/09_Tools/EA_to_MDSE_Native_Importer/v0.8.6/EA_to_MDSE_Native_Importer_v0.8.6.html"
+    attachmentBenchmark: "99_System/09_Tools/EA_to_MDSE_Native_Importer/v0.8.6/attachment_benchmark.json"
     acceptedFallback: "99_System/09_Tools/EA_to_MDSE_Native_Importer_v0.5.2.html"
     evidenceOnly: "99_System/09_Tools/EA_to_MDSE_Native_Importer_v0.7.html"
   cleanBase:
@@ -100,7 +102,7 @@ runtimeBase:
     - "99_System/06_Fileclasses"
     - "99_System/08_Scripts"
   conditionalFiles:
-    - "99_System/09_Tools/EA_to_MDSE_Native_Importer/v0.8.5/EA_to_MDSE_Native_Importer_v0.8.5.html"
+    - "99_System/09_Tools/EA_to_MDSE_Native_Importer/v0.8.6/EA_to_MDSE_Native_Importer_v0.8.6.html"
   forbiddenPaths:
     - "99_System/03_Schemas/mdse-release.yaml"
     - "99_System/10_Docs/00 - Current State.md"

@@ -1,0 +1,10 @@
+{
+  "schema": "attachment-benchmark/1",
+  "sourceModel": "EA8647",
+  "linkedDocuments": 376,
+  "modelDocuments": 247,
+  "extDocs": 129,
+  "attachmentFiles": 390,
+  "expectedEmptyDocIds": [],
+  "derivedFrom": "Governed source analysis cited in the v0.8.4 README and W-76 to W-78/W-210: 247 ModelDocument + 129 ExtDoc approved linked documents producing 390 attachment files. Totals only; no per-document expectation exists. Add a doc_id to expectedEmptyDocIds only after a documented decision that the source payload is genuinely empty."
+}

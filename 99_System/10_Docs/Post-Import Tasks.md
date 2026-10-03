@@ -161,3 +161,17 @@ These are structural candidates, not automatic semantic decisions. Some BindingC
 
 **Done when.** No temporary `equals` remains in the accepted/released model unless an explicitly approved unresolved-review policy says otherwise, and every source BindingConnector is reconciled to a reviewed outcome.
 
+## Task 9: Shorten paths
+
+**What it is.** The import no longer shortens any name or folder for length (W-324). Its hard stop is 400 characters, so some paths are long. Long paths matter when the vault is shared: a path over about 260 characters, counting the folder the vault sits in, does not work on Windows without special settings, and Git on Windows refuses to check such a file out. This task shortens them by rule, before the vault goes to the team on Windows. Working on a Mac only, nothing here blocks you until then.
+
+**How to find them.** `99_System/11_Import/Review - Long Paths.csv` lists every note and attachment path over 212 characters, longest first, with `uid`, `id`, EA GUID, length, path and link target. 212 was the earlier limit and stays as the review line; the Run Manifest gives the counts. Attachments are listed separately because their file name adds ` asset <n>.<ext>` to the note name.
+
+**How to resolve them.**
+1. Look at where the characters are. In the EA8647 extract about 450 of the 517 raw paths over 212 sit under one subtree, `Connector ASM - Industrial`, and most are 8 to 11 folders deep. Fix by rule, not note by note.
+2. Candidate rules, easiest first. Extend the folder rules in the Reconciliation (leading words repeated from the parent, folders with one child and no note). Cut over-long names at a word boundary and keep the full name in the note's `Name:` line. Flatten the deepest chains (ports, signals and states under connector variants), since containment is already carried by the relationship fields and the Local Model. Flattening makes some names clash, which then take `~2`.
+3. Decide each rule in a group, log it in the Decision Log, and put it into the importer so the next fresh import produces the short names (W-36, W-37). Do not rename note by note by hand.
+4. Rename and move inside Obsidian, which keeps "Automatically update internal links" on, or by a script that reads the `uid` and path from `Review - Long Paths.csv` and the Ledger. Most links use only the file name and do not change. A link that carries a path (written only where a name is not unique) changes when a folder in that path is renamed, so a script must rewrite those. The Run Manifest says how many there are.
+5. Record each rule in `Review Changes Log.md`.
+
+**Done when.** No path in the vault is longer than the team's agreed limit, which this task sets once it is known where the vault sits on the team's Windows machines. `Review - Long Paths.csv` from a fresh import under the new rules has no rows over that limit, and every link still resolves.

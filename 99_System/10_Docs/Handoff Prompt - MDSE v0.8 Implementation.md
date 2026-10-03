@@ -92,10 +92,11 @@ Do not put usage on connections or flows.
 - numeric markers -> duplicate review
 - alphabetic markers -> altered-name review
 - old ID-based duplicate filename rule is superseded
-- maximum repository-relative path = 212 characters
+- no length-driven shortening (W-324); hard stop 400 characters; only the 255-byte filesystem limit forces a cut
 - shorten redundant folders before filenames
 - a folder containing an identically named authoritative note may reduce to the shortest unambiguous identifier/designator
-- remaining >212 after normalization is blocking
+- a path over 400 blocks; paths over 212 go to `Review - Long Paths.csv` for Post-Import Task 9
+- links go to the file name, or the shortest unique path where the name is not unique (W-324)
 
 ## Reruns
 
@@ -122,7 +123,7 @@ unless a future unique use is explicitly approved.
 ## Implementation order
 
 1. Build the canonical v0.8 importer core/writer/source map against schemas 1.35/1.17/0.2.
-2. Implement the 212-character path/naming planner and complete attachment, diagram-reconciliation and evidence outputs.
+2. Implement the path/naming planner (W-324) and complete attachment, diagram-reconciliation and evidence outputs.
 3. Use `build-base.py` at any time to create disposable **candidate** bases for importer/Workbench testing; validate them with `check-release.py --base`.
 4. Implement Workbench WB-106: ModelRef, Local Model 0.1/0.2 parser, block-fragment preservation, region protection, findings, and occurrence-aware core views.
 5. When importer v0.8.0 and a WB-106-capable Workbench release are ready, pin/enable Workbench in the runtime plugin files, update `mdse-release.yaml`, generate the **final issued** base, and run `check-release.py --workbench ... --base ...`.

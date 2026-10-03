@@ -76,3 +76,10 @@ One row per reason, not one per note. If the same change was made on many notes,
 - Corrected path shortening so existing `~a` alteration and `~2` duplicate semantics are preserved. A shortened duplicate becomes the governed combined form (for example `~a~2`) rather than losing or stacking markers incorrectly.
 - Extended static release checks to guard both corrections.
 - Candidate remains pre-release pending real-QEAX acceptance and the WB-106 keepability gate.
+
+## 2026-10-02 — Importer v0.8.6 (W-324)
+
+- Removed every length-driven shortening rule from the importer: the filename cut to a path limit, the `folder_N` folder compaction and duplicate-marker truncation. The hard stop is now 400 characters (blocking, never cut). A file name over 255 bytes is the only forced cut.
+- Links now go to the file name, or the shortest unique path where the name is not unique. v0.8.0 to v0.8.5 wrote full vault paths.
+- Added `Review - Long Paths.csv` (paths over 212 characters) and Post-Import Task 9.
+- The decode-only attachment check refuses to run without the benchmark file.

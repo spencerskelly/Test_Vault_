@@ -208,7 +208,11 @@ Preflight order:
 
 After approved shortening, any path still over the final hard repository-relative limit is a blocking preflight error. The importer must not begin writing until every path has a deterministic human-readable destination.
 
-Maximum generated repository-relative path is **212 characters**. After approved folder normalization and deterministic filename alteration, any planned path over 212 characters is a blocking preflight error.
+**Amended by W-324.** No name or folder is shortened to fit a length. The approved shortening above is by meaning only. The hard repository-relative stop is **400 characters**; a planned path over 400 blocks the run and is never cut. The only forced cut is the filesystem component limit: a file name over 255 bytes cannot exist and is cut at a word boundary with `~a`; a folder name over 255 bytes blocks the run. Paths longer than 212 characters are listed for review in `Review - Long Paths.csv` and shortened after the import (Post-Import Tasks, Task 9).
+
+### 15.4a Link targets (W-324)
+
+A link written by the importer or by hand goes to the file name: `[[File name]]`. Only when that name is not unique in the vault (case-insensitive) is the shortest trailing path that is unique used, as Obsidian's shortest-path format writes it (`newLinkFormat: shortest`). A full path is never written unless it is the shortest unique one. Identity stays `uid`/`id` in the note, never in a link.
 
 ### 15.5 Root-package placement and housekeeping
 

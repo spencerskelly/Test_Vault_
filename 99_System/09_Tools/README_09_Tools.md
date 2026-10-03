@@ -12,10 +12,10 @@ Use these as code/history references only:
 
 Do not use v0.7 to generate a model intended to keep.
 
-Candidate file: `EA_to_MDSE_Native_Importer/v0.8.5/EA_to_MDSE_Native_Importer_v0.8.5.html`. It follows:
+Candidate file: `EA_to_MDSE_Native_Importer/v0.8.6/EA_to_MDSE_Native_Importer_v0.8.6.html`. It follows:
 1. `../10_Docs/MDSE v0.8 Cross-Repository Reconciliation - 2026-10-02.md`
 2. `../10_Docs/Translator Definition.md`
-3. Workspace Decision Log through W-323
+3. Workspace Decision Log through W-324
 4. relationships 1.35
 5. element-types 1.17
 6. local-model 0.2
@@ -29,7 +29,7 @@ The matched clean base must declare `mdse_release: "0.8.0"`. v0.8 is a clean imp
 - Local Model Source Map authoritative on rerun;
 - duplicate name marker `~2`;
 - forced alteration marker `~a`;
-- maximum generated repository-relative path 212;
+- no length-driven shortening; hard stop 400 characters; 255-byte filesystem limit forces a cut (W-324);
 - attachment failures non-blocking but reconciled;
 - all source diagrams must reconcile although initial diagram creation is deferred.
 
@@ -44,7 +44,7 @@ See `MDSE v0.8 Toolchain Review - 2026-10-02.md` for the code-gap audit.
 | `EA_to_MDSE_Native_Importer_v0.3.html`, `v0.4.html`, `v0.5.html`, `v0.5.1.html` | history | Intermediate builds. Superseded by v0.5.2. |
 | `EA_to_MDSE_Native_Importer_v0.5.2.html` | accepted safety lineage (fallback) | Base-vault identity checks, stale-state invalidation, `hasState/stateOf`, schema 1.35. Starting point for v0.8.0. |
 | `EA_to_MDSE_Native_Importer_v0.7.html` | merge candidate, never accepted | Occurrence/QEAX code evidence. Not release-conformant (14 gaps listed in the Toolchain Review). Do not generate a model to keep. |
-| `EA_to_MDSE_Native_Importer/v0.8.5/EA_to_MDSE_Native_Importer_v0.8.5.html` | hardened implementation candidate; acceptance pending | Release/schema/plugin gates, Local Model 0.2, W-318 naming/path preflight with marker preservation, authoritative Source Map provenance, governed linked-document extraction, Source EA evidence, evidence package and stage-2 review views implemented. Real QEAX acceptance and the WB-106 keepability gate remain. |
+| `EA_to_MDSE_Native_Importer/v0.8.6/EA_to_MDSE_Native_Importer_v0.8.6.html` | hardened implementation candidate; acceptance pending | Release/schema/plugin gates, Local Model 0.2, W-318 naming/path preflight with marker preservation, authoritative Source Map provenance, governed linked-document extraction, Source EA evidence, evidence package and stage-2 review views implemented. Real QEAX acceptance and the WB-106 keepability gate remain. |
 | `Initialize-Vault.sh`, `Initialize-Vault.ps1` | current helpers | Initialize `.vault.yaml` once in a new disposable or real vault. |
 
 The machine-checkable version of this table is `99_System/03_Schemas/mdse-release.yaml`; run `python3 99_System/09_Tools/check-release.py` after any change to tools, schemas or docs. Registry of current files: [[00 - Current State]].
@@ -99,3 +99,7 @@ The first complete semantic whole-model write exposed that all 376 approved t_do
 ### v0.8.5 decode-only attachment check
 
 v0.8.5 adds a decode-only mode that decodes all approved linked documents from the real `.qeax` without writing a vault, using the same path-planning and attachment code as the whole-model write. It reports PASS only against `attachment_benchmark.json` (376 documents, 390 files, zero residual) and downloads a per-document CSV. The ZIP decoder now verifies CRC32 and size, reads sizes from the central directory, and fails explicitly on encrypted, ZIP64, unsupported-method or ambiguous multi-entry archives (W-323).
+
+### v0.8.6 no length-driven shortening, links by file name
+
+W-324 removes every rule that cut a name or folder to fit a length: the 212-character filename cut, the v0.8.3 `folder_N` compaction and duplicate-marker truncation. The hard stop is 400 characters and blocks without cutting; a file name over 255 bytes is the only forced cut. Links go to the file name, or the shortest unique path where the name is not unique (v0.8.0 to v0.8.5 wrote full paths). `Review - Long Paths.csv` lists paths over 212 characters for Post-Import Task 9. The v0.8.2 and v0.8.3 sections above describe behavior that W-324 supersedes.

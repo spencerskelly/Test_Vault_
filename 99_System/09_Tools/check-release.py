@@ -154,27 +154,30 @@ if candidate:
     else:
         itxt=read(candidate)
         required_importer_tokens=[
-            'version: "0.8.5"',
+            'version: "0.8.6"',
             'const REL_SCHEMA_VERSION="1.35"',
             'const ELEMENT_SCHEMA_VERSION="1.17"',
             'const LOCAL_MODEL_SCHEMA_VERSION="0.2"',
             'const MDSE_RELEASE="0.8.0"',
             'const SOURCE_MODEL_ID="EA8647"',
-            'const MAX_GENERATED_PATH=212',
+            f'const MAX_GENERATED_PATH={man["limits"]["maxGeneratedPathLength"]};',
+            f'const FS_COMPONENT_MAX_BYTES={man["limits"]["fsComponentMaxBytes"]};',
+            f'const LONG_PATH_REVIEW_THRESHOLD={man["limits"]["longPathReviewThreshold"]};',
+            'function assignLinkTargets(entities,existingStems)',
+            'async function scanExistingNoteStems(root)',
+            'function longPathReviewCsv(entities,sliceKeys,attachmentFiles)',
+            'function fitFileNameToFilesystem(name,maxBytes)',
+            'Review - Long Paths.csv',
             'const MAX_MODEL_FILES_PER_FOLDER=75',
             'function applyMechanicalFolderCapacity(items)',
             'folder_1',
             'definitionEntity.mdseType!=="Object"',
             'if(!(await fileExists(root,".vault.yaml")))return false;',
             'const folderRepeatsFile=',
-            'const MIN_READABLE_FILE_CHARS=8;',
-            'folderLimit=MAX_GENERATED_PATH-MIN_READABLE_FILE_CHARS-4',
-            'function rebuildMapped()',
-            'label="folder_"+ordinal',
             'async function unzipEaPayload',
             'class PayloadError',
             'function crc32(bytes)',
-            'function planOutputPaths(entities,sliceKeys,entityCtx)',
+            'function planOutputPaths(entities,sliceKeys,entityCtx,existingStems)',
             'async function decodeOnlyCheck()',
             'function attachmentVerdict(result,bench)',
             'async function unwrapEaDocumentPayload',
@@ -186,14 +189,13 @@ if candidate:
             'Diagram Reconciliation.csv',
             'Review - Equals Direction.csv',
             'function filenameMarkerParts(name)',
-            'function shortenedFileName(name,maxChars)',
-            'function duplicateMarkedFileName(name,n,maxChars)',
+            'function duplicateMarkedFileName(name,n,maxBytes)',
             'function derivedSourceKey(sourceGuid,kind,ownerKey,definitionGuid)',
             'ownerEaGuid(ownerKey)',
         ]
         missing=[x for x in required_importer_tokens if x not in itxt]
         (ok if not missing else fail)(f"importer candidate static contract tokens present{'' if not missing else ': '+', '.join(missing)}")
-        shared_plan=itxt.count('planOutputPaths(entities,sliceKeys,entityCtx)')
+        shared_plan=itxt.count('planOutputPaths(entities,sliceKeys,entityCtx,')
         shared_att=itxt.count('attachmentReconciliation(lastPlannerContext,entityCtx,sliceKeys,')
         (ok if shared_plan>=3 and shared_att>=2 else fail)(f"decode-only check shares path planning and attachment reconciliation with the whole-model write (planOutputPaths x{shared_plan}, attachmentReconciliation calls x{shared_att})")
         bpath=man["tools"]["importer"].get("attachmentBenchmark")
@@ -206,6 +208,12 @@ if candidate:
                 (ok if good else fail)(f"attachment benchmark valid ({bm.get('linkedDocuments')} documents, {bm.get('attachmentFiles')} files)")
             except Exception as ex:
                 fail(f"attachment benchmark unreadable: {ex}")
+        for banned in ('MIN_READABLE_FILE_CHARS','folderLimit','function shortenedFileName','function rebuildMapped','compactGuard'):
+            if banned in itxt:
+                fail(f"importer candidate still contains a length-driven shortening rule (W-324): {banned}")
+        for banned in ('e.linkTarget=pp.path.replace',):
+            if banned in itxt:
+                fail(f"importer candidate writes full-path link targets (W-324): {banned}")
         if 'schema=0.1' in itxt or 'return ("loc-"' in itxt:
             fail("importer candidate contains superseded Local Model marker/anchor behavior")
         if 'source_model_id","source_key","owner_uid","local_id","local_kind","ea_guid","ea_source_kind","ea_owner_guid' not in itxt:
