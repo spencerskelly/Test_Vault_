@@ -20,10 +20,11 @@
 3. [[MDSE v0.8 Cross-Repository Reconciliation - 2026-10-02]]: the implementation contract (identity, reruns, naming, Local Model 0.2, evidence set, gates, build order).
 4. [[MDSE Modeling Ruleset 1.23]]: what the model means and how imports are governed.
 5. [[Translator Definition]]: what the stage 1 importer must do.
-6. [[Workspace Decision Log]]: every decision (W-01 to W-326); newest last. Where a log entry marks an earlier one superseded, the later one governs.
-7. [[Handoff Prompt - MDSE v0.8 Implementation]]: copy-ready prompts for a new AI chat (general, and Workbench).
-8. [[Post-Import Tasks]]: the work done in the vault after an import, Tasks 1 to 9.
-9. For AI tools creating or editing notes: `99_System/02_AI/AI_INSTRUCTIONS.md`.
+6. [[Workspace Decision Log]]: every decision (W-01 to W-328); newest last. Where a log entry marks an earlier one superseded, the later one governs.
+7. [[MDSE Tool Definitions and Boundaries]]: authoritative ownership/boundary map for Workbench, Bootstrap, importer, base/release tooling and deferred cross-vault infrastructure.
+8. [[Handoff Prompt - MDSE v0.8 Implementation]]: copy-ready prompts for a new AI chat (general, and Workbench).
+9. [[Post-Import Tasks]]: the work done in the vault after an import, Tasks 1 to 9.
+10. For AI tools creating or editing notes: `99_System/02_AI/AI_INSTRUCTIONS.md`.
 
 ## Where each rule lives
 
@@ -36,10 +37,11 @@
 | Identity (`uid`, local tokens), reruns, source ownership | Reconciliation, "Settled identity rules" and "Source ownership and reruns"; Ruleset 1.23 section 16 |
 | File and folder naming, path limit | Reconciliation, "Naming and path rules"; Ruleset 1.23 sections 15 and 16 |
 | Run completion and evidence | Translator Definition, checks 1 to 9; Reconciliation, "Evidence package" |
+| Tool ownership and boundaries | [[MDSE Tool Definitions and Boundaries]] |
 | Workbench product direction | `MDSE Workbench/` folder (`WB-` decisions) |
-| Workbench code, next build | repo `spencerskelly/MDSE_Workbench`, `WB106_IMPLEMENTATION_CONTRACT.md` |
+| Workbench implementation/code | repo `spencerskelly/MDSE_Workbench`; `WB106_IMPLEMENTATION_CONTRACT.md` is the current implementation boundary |
 | Runtime plugins, versions, settings | `.obsidian/plugin-lock.yaml` (generated), `99_System/01_Admin/Enabled Plugin Stack.md`, generators in `99_System/09_Tools/` |
-| Bootstrap behavior | `MDSE Bootstrap/` (README, Author Registration Spec, Base First-Open Test Sheet) |
+| Bootstrap behavior and source | `MDSE Bootstrap/` in this repository (README, plugin source, Author Registration Spec, Base First-Open Test Sheet) |
 
 ## Tools
 
@@ -62,7 +64,7 @@ W-321 removes the old manually curated base-content list. `mdse-release.yaml` no
 
 ## File status registry
 
-**Current:** the files in "Read in this order", `Definitions/`, `99_System/03_Schemas/`, `99_System/05_Templates/`, `MDSE Bootstrap/`, `MDSE Workbench/` (Workbench product direction).
+**Current:** the files in "Read in this order", [[MDSE Tool Definitions and Boundaries]], `Definitions/`, `99_System/03_Schemas/`, `99_System/05_Templates/`, `MDSE Bootstrap/`, `MDSE Workbench/` (Workbench product direction).
 
 **Generated (never edit by hand; change the schemas or payload and regenerate):** `99_System/06_Fileclasses/`, `.obsidian/plugin-lock.yaml`, `.obsidian/community-plugins.json`, `99_System/09_Tools/runtime-plugins/*/data.json`.
 

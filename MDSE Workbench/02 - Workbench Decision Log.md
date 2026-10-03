@@ -690,7 +690,7 @@ Spencer: "have it ready the best we can, but expect this to run on desktop only.
 
 - The plugin's source lives in its own repository, not in the vault. The vault holds only vault-side configuration: View Profiles and the schema/compatibility declaration (WB-069).
 - Releases are GitHub Releases containing `main.js`, `manifest.json` and `styles.css`, with semantic versioning and `minAppVersion`.
-- MDSE Bootstrap installs a pinned Workbench version with the other pinned plugins.
+- The controlled base ships the pinned Workbench build with the other runtime plugins; MDSE Bootstrap verifies the shipped release and completes per-person setup. It does not download or install Workbench.
 - Build with TypeScript and esbuild following the official Obsidian sample plugin; CI on GitHub Actions. No local build toolchain is assumed: use a cloud development environment (for example GitHub Codespaces) so the work does not depend on one computer.
 - Because the final vault leaves out methodology material, this folder's design notes belong in the plugin repository once that exists; the vault keeps a short pointer.
 
@@ -704,7 +704,7 @@ Product questions that change what an engineer sees still go one at a time. Impl
 
 - **R0 — Go/No-go after Phase 0:** performance targets (WB-081) met or a plan recorded; inverse-field behavior verified (WB-085); Canvas edit feasibility decided (WB-080).
 - **R1 — Pilot:** two or three engineers use the plugin on a real test slice (the first slice is `02 Product Context`, W-267) and run the acceptance scenarios in [[03 - Build Outline and Roadmap]].
-- **R2 — Team release:** pilot findings resolved; compatibility check and Bootstrap install verified on a fresh vault.
+- **R2 — Team release:** pilot findings resolved; compatibility check and Bootstrap release/first-open verification passed on a fresh vault.
 
 ### WB-091 — Repeated relationship-list count (superseded as quantity)
 **Status:** Superseded by W-310; display correction implemented in Workbench 0.1.15 on 2026-10-02
@@ -744,7 +744,7 @@ Command "Explore functional view of current note"; it starts only from an Object
 ### WB-098 — Requirements view
 **Status:** Trial 2026-10-01 (Spencer asked for a requirements view after the Functional view "works great"; the contents below are my design and not yet seen by him)
 
-Command "Explore requirements view of current note". It starts from a Requirement, or from an Object, Function, Design, State, Use Case or Verification. From a Requirement: where it sits (the owner element and the parent requirement, start note only), its sub-requirements (`hasChild`), what it is derived from (`derivedFrom`) and what is derived from it, what it refines (`refines`) and what refines it, what it `references` (Requirement or Document), what satisfies it (`satisfies`: Function, Design, State), what verifies it (Verification), what it `appliesTo`, and the Use Case that drives it. From the other types: the requirements they hold under them (`hasChild`), satisfy, verify or drive, and the requirements that apply to them (`appliesTo`), each of which opens one more level as a Requirement. Two levels, 12 children per note, 80 notes. Arrows follow the stored direction. A missing requirement (satisfied, verified, driven, derived from or refined) shows as an undefined card; a missing `hasChild`, `references` or `appliesTo` target does not, because its class is unknown. The other requirements a satisfier or verifier also covers are not pulled in. Built in plugin 0.1.8; the palette has nine colors for the eight relationships used.
+Command "Explore requirements view of current note". It starts from a Requirement, or from an Object, Function, Design, State, Use Case or Verification. From a Requirement: where it sits (the owner element and the parent requirement, start note only), its sub-requirements (`hasChild`), what it is derived from (`derivedFrom`) and what is derived from it, what it refines (`refines`) and what refines it, what it `references` (Requirement or Document), what satisfies it (`satisfies`: Function, Design), what verifies it (Verification), what it `appliesTo`, and the Use Case that drives it. From the other types: the requirements they hold under them (`hasChild`), satisfy, verify or drive, and the requirements that apply to them (`appliesTo`), each of which opens one more level as a Requirement. Two levels, 12 children per note, 80 notes. Arrows follow the stored direction. A missing requirement (satisfied, verified, driven, derived from or refined) shows as an undefined card; a missing `hasChild`, `references` or `appliesTo` target does not, because its class is unknown. The other requirements a satisfier or verifier also covers are not pulled in. Built in plugin 0.1.8; the palette has nine colors for the eight relationships used.
 
 ### WB-099 — Note details popup on a generated view
 **Status:** Approved 2026-10-01 (Spencer: clicking a note in the canvas should open a popup with its contents, "I don't want to have to open the note"); first build, not yet tested in Obsidian
@@ -774,7 +774,7 @@ Built in plugin 0.1.11. Verified in a simulated Obsidian (a DOM test with a fake
 New views, each with its own command and an entry in **Explore view of current note…** (a picker that lists the views able to start from the note's type, each with a one-line description). All use two levels unless stated, 12 children per note and 80 notes, arrows in the stored direction, a relationship label on every link, undefined cards for missing notes where the schema fixes the class at that end (WB-092, WB-097), and refresh through the profile stored with the view.
 - **Where Used** (any note; three levels): parents through `hasPart`, `includes`, `hasChild`, `hasState`, `hasPort`; Objects that `performs` a Function; Objects or Documents with a `hasDesign`; Use Cases that `realizedBy` or have `participants`; `dependsOn`.
 - **Interfaces** (Object, Port, Item Flow; three levels): `hasPort` both ways, `interfaces` (symmetric, drawn without an arrowhead), `exposes` both ways, `transmits`, `receives`, `exchanges`, `hasFlow` both ways. From an Object it reaches the owner of the port each port faces.
-- **Verification** (Requirement, Verification, Function, Design, State): `verifies` both ways and `satisfies` both ways, so a verification shows what else it covers and who satisfies it.
+- **Verification** (Requirement, Verification, Function, Design, State): `verifies` both ways; `satisfies` only through Function/Design; a State reaches scoped Requirements through inverse `appliesTo`. A verification therefore shows what else it covers and the valid satisfiers of those Requirements.
 - **Design** (Object, Document, Design): `hasDesign` both ways, sub-designs (`hasChild`), what each Design `satisfies`.
 - **Scenario** (Use Case): `participants`, `realizedBy`, included Use Cases (`hasChild`), `optionOf` both ways, `drives`, and `precedes` among the realizing Functions.
 - **Behavior** (State Machine, State, Object): `hasState` both ways, `initialState`, `finalState`, nested States (`hasChild`), `precedes` both ways, `triggeredBy` both ways.

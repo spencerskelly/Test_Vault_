@@ -22,6 +22,8 @@ Authoritative sources remain the current vault model governance, including:
 
 ### Workbench product/interface
 
+This folder registers the Workbench product/interface decisions alongside the other MDSE tool definitions. The standalone `spencerskelly/MDSE_Workbench` repository is the authoritative Workbench implementation source. Cross-tool ownership and boundaries are summarized in [[MDSE Tool Definitions and Boundaries]].
+
 This folder defines how Workbench should expose and operate on those semantics.
 
 If the interface definition and the current model schema conflict, the model schema remains authoritative until a separate governance decision changes it.
@@ -99,7 +101,7 @@ W-315 fixes the local-reference token style and namespace: `part-*`, `ep-*`, `co
 - **note element** — durable identity is the note `uid`; file path is current location metadata, not permanent identity;
 - **local model record** — persistent identity token is embedded in its kind-prefixed local ID; the semantic address remains owner UID + local ID so context/ownership is explicit.
 
-The core index/traversal APIs should operate on an addressable model reference rather than assuming every node is a `TFile` path. This is also the correct seam for later cross-vault resolution.
+The core index, traversal, Details, Inherited and Review/navigation APIs should operate on one common addressable `ModelRef` rather than assuming every subject is a `TFile` path. A `ModelRef` may identify a note or a local record. This common reference seam is the default implementation rule for new Workbench behavior and is also the correct seam for later cross-vault resolution.
 
 For v0.8 keepability (WB-106), this is no longer optional architecture debt: the index must preserve note UID identity and local owner-UID + kind + local-ID identity, including block fragments from frontmatter links such as Requirement `appliesTo`.
 

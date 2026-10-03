@@ -59,7 +59,7 @@ Do not silently fill missing source information. Preserve ambiguity and create a
 
 ## 7. Requirements
 
-Requirement `appliesTo` defines scope. Function and Design may use `satisfies`. Verification uses `verifies`.
+Requirement `appliesTo` defines scope, including scope to a State or State Machine. Only Function and Design may use `satisfies`; State and State Machine never satisfy a Requirement. Verification uses `verifies`.
 
 ## 8. Verification
 

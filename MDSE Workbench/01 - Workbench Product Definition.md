@@ -162,9 +162,9 @@ V1 succeeds when an engineer can:
 The intended tool split is:
 
 - **MDSE Workbench** — everyday engineer interface.
-- **MDSE Bootstrap** — setup/configuration verification.
-- **MDSE Translator** — EA/native import and migration.
-- **Cross-Vault Resolver** — cross-vault infrastructure.
+- **MDSE Bootstrap** — controlled-release startup, plugin/configuration verification and per-person initialization.
+- **MDSE Translator / Importer** — EA/native import and migration.
+- **Cross-vault infrastructure** — deferred for the current v0.8 single-vault effort; the archived UID resolver remains reference material for the future return of cross-vault resolution.
 
 Workbench should be internally modular, but it should feel like one primary plugin to the engineer.
 
