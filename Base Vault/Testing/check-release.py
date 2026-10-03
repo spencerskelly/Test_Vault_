@@ -272,6 +272,16 @@ if a.workbench:
     mv=json.load(open(full(wb,"manifest.json")))["version"]
     (ok if pv==mv==man["tools"]["workbench"]["version"] else fail)(
         f"Workbench package {pv}, manifest {mv}, release manifest {man['tools']['workbench']['version']}")
+    guide_rel="docs/User Guide/MDSE Workbench User Guide.md"
+    guide_base=man["tools"]["workbench"].get("userGuide")
+    guide_path=full(wb,guide_rel)
+    if not os.path.isfile(guide_path):
+        fail(f"Workbench user guide missing: {guide_rel}")
+    elif not guide_base or not os.path.isfile(full(ROOT,guide_base)):
+        fail(f"Base Vault Workbench user guide missing: {guide_base}")
+    else:
+        (ok if norm(read_at(wb,guide_rel))==norm(read(guide_base)) else fail)(
+            "Workbench user guide equals Base Vault release copy")
 
 if a.base:
     base=os.path.abspath(a.base)
