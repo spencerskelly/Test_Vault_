@@ -1,3 +1,6 @@
+> [!WARNING] ARCHIVED 2026-10-03 (W-326). SUPERSEDED by [[00 - Current State]] and [[Handoff Prompt - MDSE v0.8 Implementation]]
+> The "current continuation" section below was current on 2026-10-02 only. Start from Current State and the plan instead. Evidence only.
+
 # 2026-10-02 CURRENT CONTINUATION
 
 Start with `MDSE v0.8 Cross-Repository Reconciliation - 2026-10-02.md` and `Handoff Prompt - MDSE v0.8 Implementation.md`.

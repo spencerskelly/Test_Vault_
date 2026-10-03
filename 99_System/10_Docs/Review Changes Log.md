@@ -87,3 +87,7 @@ One row per reason, not one per note. If the same change was made on many notes,
 ## 2026-10-03 — Release chain alignment (W-325)
 
 - Vendored Workbench 0.1.16 and regenerated `plugin-lock.yaml`. Bootstrap 0.3.0 unchanged (rebuild identical to payload). Base rebuilt with importer v0.8.6.
+
+## 2026-10-03 — Documentation clean-up and plan (W-326)
+
+- Added [[MDSE Plan - Path to a Golden Model]]. Archived retired importers (v0.1 to v0.7, v0.8.0 to v0.8.5), seven superseded documents, the archived-plugin record and `vault-registry.yaml`, each with a banner and an archive README row. Updated Current State, README, tools README, Translator Definition, Handoff Prompt, Workbench README and Post-Import Tasks to match.

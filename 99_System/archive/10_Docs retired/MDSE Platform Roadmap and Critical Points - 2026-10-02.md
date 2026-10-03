@@ -1,3 +1,6 @@
+> [!WARNING] ARCHIVED 2026-10-03 (W-326). SUPERSEDED by [[MDSE Plan - Path to a Golden Model]]
+> This proposal's open points and roadmap are carried into the plan (sections 9 and 11). Evidence only.
+
 # MDSE Platform Roadmap and Critical Points — 2026-10-02
 
 > [!NOTE]

@@ -1,3 +1,6 @@
+> [!WARNING] ARCHIVED 2026-10-03 (W-326). SUPERSEDED by [[MDSE Plan - Path to a Golden Model]] and [[00 - Current State]]
+> A code-gap audit as of 2026-10-02. Most gaps it lists are closed (importer v0.8.x, Workbench 0.1.16); the open ones are tracked in the plan. Evidence only.
+
 # MDSE v0.8 Toolchain Review — 2026-10-02
 
 ## Scope

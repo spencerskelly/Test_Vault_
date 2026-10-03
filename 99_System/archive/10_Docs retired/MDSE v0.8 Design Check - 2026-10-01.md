@@ -1,3 +1,5 @@
+> [!NOTE] ARCHIVED 2026-10-03 (W-326). Moved to `99_System/archive/10_Docs retired/`; no current file depends on it. See [[00 - Current State]].
+
 > [!NOTE]
 > **HISTORICAL (2026-10-01 design evidence).** Its open points were settled on 2026-10-02 by W-315 to W-319. Current authority: [[MDSE v0.8 Cross-Repository Reconciliation - 2026-10-02]] and [[MDSE Modeling Ruleset 1.23]]. Registry of current files: [[00 - Current State]].
 

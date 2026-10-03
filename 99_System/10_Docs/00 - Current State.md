@@ -1,6 +1,6 @@
 # Current State
 
-**Last verified: 2026-10-02. Read this first, human or AI.** It says what is current, what is historical, where each rule lives and what is not built yet. If any other file disagrees with this page, this page and the files it names as current win. The machine-readable twin is `99_System/03_Schemas/mdse-release.yaml`.
+**Last verified: 2026-10-03. Read this first, human or AI.** It says what is current, what is historical, where each rule lives and what is not built yet. If any other file disagrees with this page, this page and the files it names as current win. The machine-readable twin is `99_System/03_Schemas/mdse-release.yaml`.
 
 ## Target and status
 
@@ -16,12 +16,14 @@
 ## Read in this order
 
 1. This page.
-2. [[MDSE v0.8 Cross-Repository Reconciliation - 2026-10-02]]: the implementation contract (identity, reruns, naming, Local Model 0.2, evidence set, gates, build order).
-3. [[MDSE Modeling Ruleset 1.23]]: what the model means and how imports are governed.
-4. [[Translator Definition]]: what the stage 1 importer must do.
-5. [[Workspace Decision Log]]: every decision (W-01 to W-322); newest last. Where a log entry marks an earlier one superseded, the later one governs.
-6. [[Handoff Prompt - MDSE v0.8 Implementation]]: copy-ready prompt for a new AI chat.
-7. For AI tools creating or editing notes: `99_System/02_AI/AI_INSTRUCTIONS.md`.
+2. [[MDSE Plan - Path to a Golden Model]]: the plan from here to a golden model (gates, run procedure, post-import order, improvements per component, decisions needed).
+3. [[MDSE v0.8 Cross-Repository Reconciliation - 2026-10-02]]: the implementation contract (identity, reruns, naming, Local Model 0.2, evidence set, gates, build order).
+4. [[MDSE Modeling Ruleset 1.23]]: what the model means and how imports are governed.
+5. [[Translator Definition]]: what the stage 1 importer must do.
+6. [[Workspace Decision Log]]: every decision (W-01 to W-326); newest last. Where a log entry marks an earlier one superseded, the later one governs.
+7. [[Handoff Prompt - MDSE v0.8 Implementation]]: copy-ready prompts for a new AI chat (general, and Workbench).
+8. [[Post-Import Tasks]]: the work done in the vault after an import, Tasks 1 to 9.
+9. For AI tools creating or editing notes: `99_System/02_AI/AI_INSTRUCTIONS.md`.
 
 ## Where each rule lives
 
@@ -44,9 +46,7 @@
 | Tool | Status | Next step |
 |---|---|---|
 | Importer v0.8.6 | **implementation candidate built; whole-model semantic write succeeded (v0.8.3 run)** | Run the decode-only attachment check on the real QEAX with `attachment_benchmark.json` (376 documents, 390 files, zero residual; W-323), then a full fresh-base run. W-324: no length-driven shortening, links by file name, `Review - Long Paths.csv` feeds Post-Import Task 9. Do not mark release-conformant until acceptance gates and WB-106 pass. |
-| Importer v0.5.2 | accepted fallback and safety lineage | Starting point for v0.8.0 |
-| Importer v0.7 | evidence only, never accepted | Do not use to generate a model to keep |
-| Importers v0.1 to v0.5.1 | history | See `99_System/09_Tools/README_09_Tools.md` |
+| Importers v0.1 to v0.7, v0.8.0 to v0.8.5 | archived (W-326) | `99_System/archive/09_Tools retired importers/` with a README of their roles. None may generate a model. |
 | Clean 0.8.0 base vault | **not issued** | Generate deterministically with `build-base.py`; validate with `check-release.py --base`. It is a lean runtime artifact and carries `mdse_release: "0.8.0"` in `.vault.yaml`. |
 | MDSE Workbench 0.1.16 | built; typecheck, 52 tests and build pass (2026-10-03). Reads Local Model 0.1/0.2, `ModelRef`, findings report (**Check Local Model**); writes links Obsidian-style (W-324, W-325, WB-111, WB-112) | WB-106 remainder: occurrence-aware Structure, Interfaces, Where Used and Requirements views, Local Model popup (WB-105), Review integration |
 | MDSE Bootstrap 0.3.0 | built (W-322); 6 tests pass; in every base | Run the [[Base First-Open Test Sheet]] in Obsidian. Source and docs: `MDSE Bootstrap/` |
@@ -62,25 +62,25 @@ W-321 removes the old manually curated base-content list. `mdse-release.yaml` no
 
 ## File status registry
 
-**Current:** the files in "Read in this order", `Definitions/`, `99_System/03_Schemas/`, `99_System/05_Templates/`, `MDSE Bootstrap/`.
+**Current:** the files in "Read in this order", `Definitions/`, `99_System/03_Schemas/`, `99_System/05_Templates/`, `MDSE Bootstrap/`, `MDSE Workbench/` (Workbench product direction).
 
 **Generated (never edit by hand; change the schemas or payload and regenerate):** `99_System/06_Fileclasses/`, `.obsidian/plugin-lock.yaml`, `.obsidian/community-plugins.json`, `99_System/09_Tools/runtime-plugins/*/data.json`.
 
-**Reference (valid support, not rule authority):** [[MDSE v0.8 Toolchain Review - 2026-10-02]] (code-gap audit), [[Post-Import Tasks]], [[Review Changes Log]].
+**Reference (valid support, not rule authority):** [[Review Changes Log]]; `99_System/CSV_EA/` (EA evidence used to define the rules); `99_System/11_Import/` snapshots named by [[Post-Import Tasks]].
 
-**Proposal (not decided):** [[MDSE Platform Roadmap and Critical Points - 2026-10-02]].
-
-**Historical or superseded (each carries a banner pointing to what governs now):**
+**Archived (`99_System/archive/`, no authority, see its README):** old translator workspace `10_EA Native Translator/`; four retired empty CSVs `11_Import retired/`; `08_Scripts retired/`; retired importers v0.1 to v0.7 and v0.8.0 to v0.8.5 `09_Tools retired importers/`; `01_Admin Archived Plugins/`; `03_Schemas retired/vault-registry.yaml`; and these documents in `10_Docs retired/` (W-326):
 
 | File | Governed now by |
 |---|---|
-| [[Handoff - Continue Here]] (top section current, body historical) | this page, [[Handoff Prompt - MDSE v0.8 Implementation]] |
+| [[Handoff - Continue Here]] | this page, [[MDSE Plan - Path to a Golden Model]], [[Handoff Prompt - MDSE v0.8 Implementation]] |
 | [[EA Native Importer Comprehensive Handoff - 2026-10-01]] | [[MDSE v0.8 Cross-Repository Reconciliation - 2026-10-02]] |
 | [[MDSE v0.8 Design Check - 2026-10-01]] | [[MDSE v0.8 Cross-Repository Reconciliation - 2026-10-02]] |
 | [[MDSE Modeling Ruleset 1.22]] | [[MDSE Modeling Ruleset 1.23]] |
-| [[Git and New Vault Setup]] | `Initialize-Vault.sh/.ps1`; clean 0.8.0 base once built |
+| [[Git and New Vault Setup]] | `Initialize-Vault.sh/.ps1`; the issued 0.8.0 base |
+| [[MDSE v0.8 Toolchain Review - 2026-10-02]] | [[MDSE Plan - Path to a Golden Model]] |
+| [[MDSE Platform Roadmap and Critical Points - 2026-10-02]] | [[MDSE Plan - Path to a Golden Model]] |
 
-**Archived (`99_System/archive/`, no authority, see its README):** old translator workspace `10_EA Native Translator/`; four retired empty CSVs in `11_Import retired/`.
+Links to archived files keep working: Obsidian resolves them by file name.
 
 **Outside this workspace:** repos `20260930`, `261001` and `Test_Vault_-base-vault-2026-09-30-rel133-v051` are reference only and carry warnings; do not patch them into a 0.8.0 model.
 
@@ -92,3 +92,4 @@ W-321 removes the old manually curated base-content list. `mdse-release.yaml` no
 4. If a schema version, tool status or document status changes, update `mdse-release.yaml` and the tables on this page.
 5. Run `python3 99_System/09_Tools/check-release.py` (add `--workbench <clone path>` and/or `--base <generated-base path>` when those artifacts are involved). It must pass before commit.
 6. Never edit a historical or superseded file's content to match new rules. Add the pointer; leave the evidence.
+7. After a run or a decision that changes a step, update the run log and the item tables in [[MDSE Plan - Path to a Golden Model]].

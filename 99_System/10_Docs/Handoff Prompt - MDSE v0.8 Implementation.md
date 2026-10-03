@@ -1,6 +1,12 @@
 # Handoff Prompt — MDSE v0.8 Implementation
 
-Use this prompt to continue implementation in a new chat.
+Use this file to start a new chat. Section "Starting a Workbench chat" is a copy-ready prompt for Workbench work; the rest is the general context for any continuation.
+
+## Starting a Workbench chat
+
+Copy this into the new chat, with a fresh fine-grained GitHub token for each repository the chat must push to (`MDSE_Workbench` always; `Test_Vault_` too if the chat will vendor the build into the base):
+
+> Continue MDSE Workbench development. Code: `spencerskelly/MDSE_Workbench` (main). Authority and release chain: `spencerskelly/Test_Vault_` (main). Read first, in this order: `Test_Vault_/99_System/10_Docs/00 - Current State.md`; `Test_Vault_/99_System/10_Docs/MDSE Plan - Path to a Golden Model.md` section 9, Workbench items W1 to W6; `MDSE_Workbench/WB106_IMPLEMENTATION_CONTRACT.md`, including "Implementation status (0.1.16)"; `MDSE_Workbench/RELEASE_NOTES.md`; `Test_Vault_/MDSE Workbench/02 - Workbench Decision Log.md` from WB-105 onward. The goal is to finish WB-106 in this order: W1 occurrence-aware Structure, Interfaces, Where Used and Requirements views, using `LocalModelIndex.occurrencesOf`, `recordsOf` and `refForLink` in `src/core/localmodel.ts`; W2 read-only Local Model popup (WB-105); W3 Local Model findings in Review. Keep `src/core` free of Obsidian imports and add a test for each view. Then release (W4): bump the version, `npm run build`, copy `main.js`, `manifest.json` and `styles.css` into `Test_Vault_/99_System/09_Tools/runtime-plugins/mdse-workbench/`, run `update-plugin-lock.py`, set `version` and `wb106Version` in `mdse-release.yaml`, run `check-release.py --workbench <clone>` and `build-base.py` plus `check-release.py --base`, log `WB-n` and `W-n` decisions, update Current State, the plan and the Workbench test sheet. Pass tokens only as command headers, never into a file or git config. Ask one question at a time; analyse the data before asking.
 
 ## Authority
 
@@ -8,9 +14,9 @@ Work from `spencerskelly/Test_Vault_` main as the semantic/importer authority an
 
 Read in this order:
 0. `99_System/10_Docs/00 - Current State.md` (registry of current vs historical files)
-1. `99_System/10_Docs/MDSE v0.8 Cross-Repository Reconciliation - 2026-10-02.md`
-2. `99_System/10_Docs/MDSE Modeling Ruleset 1.23.md`
-3. Workspace Decision Log through W-322
+1. `99_System/10_Docs/MDSE Plan - Path to a Golden Model.md` (what to do next, gates, run log, decisions needed)
+2. `99_System/10_Docs/MDSE v0.8 Cross-Repository Reconciliation - 2026-10-02.md`
+3. `99_System/10_Docs/MDSE Modeling Ruleset 1.23.md` and Workspace Decision Log through W-326
 4. `Translator Definition.md`
 5. `relationships.yaml` 1.35
 6. `element-types.yaml` 1.17
@@ -31,7 +37,7 @@ Matched MDSE/base/importer release:
 - relationships 1.35
 - element-types 1.17
 - local-model 0.2
-- importer: `EA_to_MDSE_Native_Importer_v0.8.0.html`
+- importer: `99_System/09_Tools/EA_to_MDSE_Native_Importer/v0.8.6/EA_to_MDSE_Native_Importer_v0.8.6.html` (candidate; older importers are archived and may not generate a model)
 
 Workbench is independently versioned. Current 0.1.16 reads Local Model 0.1/0.2, gives records `ModelRef` identity and writes a findings report (WB-111); it writes links Obsidian-style (WB-112). WB-106 is not complete: the occurrence-aware views, the Local Model popup and Review integration remain.
 
@@ -122,12 +128,6 @@ unless a future unique use is explicitly approved.
 
 ## Implementation order
 
-1. Build the canonical v0.8 importer core/writer/source map against schemas 1.35/1.17/0.2.
-2. Implement the path/naming planner (W-324) and complete attachment, diagram-reconciliation and evidence outputs.
-3. Use `build-base.py` at any time to create disposable **candidate** bases for importer/Workbench testing; validate them with `check-release.py --base`.
-4. Implement Workbench WB-106: ModelRef, Local Model 0.1/0.2 parser, block-fragment preservation, region protection, findings, and occurrence-aware core views.
-5. When importer v0.8.0 and a WB-106-capable Workbench release are ready, pin/enable Workbench in the runtime plugin files, update `mdse-release.yaml`, generate the **final issued** base, and run `check-release.py --workbench ... --base ...`.
-6. Validate representative real EA cases, then run the whole-model import eligible to keep.
-7. After WB-106, add W-314 read-only variation, candidate resolution and temporary session configuration; persisted named configurations/model numbers/compatibility matrices remain later.
+The order of work, the gates and the open decisions are in [[MDSE Plan - Path to a Golden Model]]. In short: verify the v0.8.6 run (plan sections 4 and 5); finish WB-106 and release it (W1 to W4); add the importer's run diff, determinism check, headless validation and tests (I1 to I4); put the rule-level post-import decisions into the importer (plan section 6); then make the keep run, do the note-level post-import work and work through the golden checklist (plan section 7).
 
 The first whole-model run is eligible to keep only after the importer, final-base and WB-106 gates all pass.

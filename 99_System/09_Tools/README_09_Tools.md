@@ -1,26 +1,18 @@
 # 09_Tools — Current status
 
-This folder contains native importer history and vault initialization helpers.
+This folder holds the current importer, the base build and release-check scripts, the vendored runtime plugins and the vault initialization helpers. Older importers are in `99_System/archive/09_Tools retired importers/` (W-326); none may generate a model.
 
-## Current v0.8 direction
+## Current importer
 
-A **v0.8.0 implementation candidate now exists**, but it is not yet release-conformant.
-
-Use these as code/history references only:
-- v0.5.2 — accepted safety/base-validation lineage;
-- v0.7 — occurrence/QEAX assessment and merge evidence.
-
-Do not use v0.7 to generate a model intended to keep.
-
-Candidate file: `EA_to_MDSE_Native_Importer/v0.8.6/EA_to_MDSE_Native_Importer_v0.8.6.html`. It follows:
+`EA_to_MDSE_Native_Importer/v0.8.6/EA_to_MDSE_Native_Importer_v0.8.6.html` (candidate; acceptance pending), with `attachment_benchmark.json` and a README in the same folder. It follows:
 1. `../10_Docs/MDSE v0.8 Cross-Repository Reconciliation - 2026-10-02.md`
 2. `../10_Docs/Translator Definition.md`
-3. Workspace Decision Log through W-324
+3. Workspace Decision Log through W-326
 4. relationships 1.35
 5. element-types 1.17
 6. local-model 0.2
 
-The matched clean base must declare `mdse_release: "0.8.0"`. v0.8 is a clean import; do not migrate/patch a v0.7-generated vault in place.
+The matched clean base must declare `mdse_release: "0.8.0"`. v0.8 is a clean import into a fresh base; it is never run over an existing vault. What to do before and after each run: [[MDSE Plan - Path to a Golden Model]], sections 4 and 5.
 
 ## Important current rules
 
@@ -33,18 +25,15 @@ The matched clean base must declare `mdse_release: "0.8.0"`. v0.8 is a clean imp
 - attachment failures non-blocking but reconciled;
 - all source diagrams must reconcile although initial diagram creation is deferred.
 
-See `MDSE v0.8 Toolchain Review - 2026-10-02.md` for the code-gap audit.
+Open improvements to the importer are listed in [[MDSE Plan - Path to a Golden Model]], section 9.
 
 ## File status (W-320)
 
 | File | Status | Use |
 |---|---|---|
-| `EA_to_MDSE_Native_Importer_v0.1.html` | history | Established direct-QEAX preflight and the source-count baseline (W-273). Do not run for a model. |
-| `EA_to_MDSE_Native_Importer_v0.2.html` | accepted planning baseline, immutable | Whole-model planner, passed on the real QEAX (W-274). Reference for planner behavior. |
-| `EA_to_MDSE_Native_Importer_v0.3.html`, `v0.4.html`, `v0.5.html`, `v0.5.1.html` | history | Intermediate builds. Superseded by v0.5.2. |
-| `EA_to_MDSE_Native_Importer_v0.5.2.html` | accepted safety lineage (fallback) | Base-vault identity checks, stale-state invalidation, `hasState/stateOf`, schema 1.35. Starting point for v0.8.0. |
-| `EA_to_MDSE_Native_Importer_v0.7.html` | merge candidate, never accepted | Occurrence/QEAX code evidence. Not release-conformant (14 gaps listed in the Toolchain Review). Do not generate a model to keep. |
 | `EA_to_MDSE_Native_Importer/v0.8.6/EA_to_MDSE_Native_Importer_v0.8.6.html` | hardened implementation candidate; acceptance pending | Release/schema/plugin gates, Local Model 0.2, W-318 naming/path preflight with marker preservation, authoritative Source Map provenance, governed linked-document extraction, Source EA evidence, evidence package and stage-2 review views implemented. Real QEAX acceptance and the WB-106 keepability gate remain. |
+| `build-base.py`, `check-release.py`, `update-plugin-lock.py`, `build-plugin-config.py` | current scripts | Base build, release alignment, plugin lock, governed plugin settings. |
+| `99_System/archive/09_Tools retired importers/` | archived (W-326) | v0.1 to v0.7 and v0.8.0 to v0.8.5; roles in its README. |
 | `Initialize-Vault.sh`, `Initialize-Vault.ps1` | current helpers | Initialize `.vault.yaml` once in a new disposable or real vault. |
 
 The machine-checkable version of this table is `99_System/03_Schemas/mdse-release.yaml`; run `python3 99_System/09_Tools/check-release.py` after any change to tools, schemas or docs. Registry of current files: [[00 - Current State]].
@@ -103,3 +92,7 @@ v0.8.5 adds a decode-only mode that decodes all approved linked documents from t
 ### v0.8.6 no length-driven shortening, links by file name
 
 W-324 removes every rule that cut a name or folder to fit a length: the 212-character filename cut, the v0.8.3 `folder_N` compaction and duplicate-marker truncation. The hard stop is 400 characters and blocks without cutting; a file name over 255 bytes is the only forced cut. Links go to the file name, or the shortest unique path where the name is not unique (v0.8.0 to v0.8.5 wrote full paths). `Review - Long Paths.csv` lists paths over 212 characters for Post-Import Task 9. The v0.8.2 and v0.8.3 sections above describe behavior that W-324 supersedes.
+
+### Importer history (W-326)
+
+The version sections above (v0.8.2 to v0.8.6) describe how the v0.8 line developed. Everything older than v0.8.6 is archived; the sections stay as the change history.

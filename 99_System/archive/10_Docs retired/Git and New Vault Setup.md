@@ -1,3 +1,5 @@
+> [!NOTE] ARCHIVED 2026-10-03 (W-326). Moved to `99_System/archive/10_Docs retired/`; no current file depends on it. See [[00 - Current State]].
+
 > [!WARNING]
 > **SUPERSEDED PROCEDURE (W-261, W-320).** The ZIP steps below predate the base-vault path. A new vault now starts from the matched clean 0.8.0 base (not yet built; see [[00 - Current State]]) and is initialized with `99_System/09_Tools/Initialize-Vault.sh` or `Initialize-Vault.ps1`. Only the Git safety defaults and the tracked/untracked lists below remain valid.
 

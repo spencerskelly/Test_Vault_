@@ -6,7 +6,7 @@
 manifestVersion: 2
 mdseRelease: "0.8.0"
 releaseStatus: pre-release
-date: "2026-10-02"
+date: "2026-10-03"
 sourceModelId: EA8647
 
 schemas:
@@ -29,8 +29,7 @@ tools:
     release: null
     candidate: "99_System/09_Tools/EA_to_MDSE_Native_Importer/v0.8.6/EA_to_MDSE_Native_Importer_v0.8.6.html"
     attachmentBenchmark: "99_System/09_Tools/EA_to_MDSE_Native_Importer/v0.8.6/attachment_benchmark.json"
-    acceptedFallback: "99_System/09_Tools/EA_to_MDSE_Native_Importer_v0.5.2.html"
-    evidenceOnly: "99_System/09_Tools/EA_to_MDSE_Native_Importer_v0.7.html"
+    history: "99_System/archive/09_Tools retired importers"   # v0.1 to v0.7 and v0.8.0 to v0.8.5 (W-326); none may generate a model
   cleanBase:
     repo: null
     builder: "99_System/09_Tools/build-base.py"
@@ -117,24 +116,26 @@ runtimeBase:
 # Status vocabulary: current | reference | proposal | historical | superseded | retired
 documents:
   - {path: "99_System/10_Docs/00 - Current State.md", status: current}
+  - {path: "99_System/10_Docs/MDSE Plan - Path to a Golden Model.md", status: current}
   - {path: "99_System/10_Docs/MDSE v0.8 Cross-Repository Reconciliation - 2026-10-02.md", status: current}
   - {path: "99_System/10_Docs/MDSE Modeling Ruleset 1.23.md", status: current}
   - {path: "99_System/10_Docs/Translator Definition.md", status: current}
   - {path: "99_System/10_Docs/Workspace Decision Log.md", status: current}
   - {path: "99_System/10_Docs/Handoff Prompt - MDSE v0.8 Implementation.md", status: current}
+  - {path: "99_System/10_Docs/Post-Import Tasks.md", status: current}
   - {path: "99_System/02_AI/AI_INSTRUCTIONS.md", status: current}
   - {path: "MDSE Bootstrap/README_MDSE Bootstrap.md", status: current}
   - {path: "MDSE Bootstrap/MDSE Bootstrap - Author Registration Spec.md", status: current}
   - {path: "MDSE Bootstrap/Base First-Open Test Sheet.md", status: current}
   - {path: "99_System/01_Admin/Enabled Plugin Stack.md", status: current}
-  - {path: "99_System/10_Docs/MDSE v0.8 Toolchain Review - 2026-10-02.md", status: reference}
-  - {path: "99_System/10_Docs/Post-Import Tasks.md", status: reference}
   - {path: "99_System/10_Docs/Review Changes Log.md", status: reference}
-  - {path: "99_System/10_Docs/MDSE Platform Roadmap and Critical Points - 2026-10-02.md", status: proposal}
-  - {path: "99_System/10_Docs/Handoff - Continue Here.md", status: historical, supersededBy: "99_System/10_Docs/00 - Current State.md"}
-  - {path: "99_System/10_Docs/MDSE v0.8 Design Check - 2026-10-01.md", status: historical, supersededBy: "99_System/10_Docs/MDSE v0.8 Cross-Repository Reconciliation - 2026-10-02.md"}
-  - {path: "99_System/10_Docs/EA Native Importer Comprehensive Handoff - 2026-10-01.md", status: superseded, supersededBy: "99_System/10_Docs/MDSE v0.8 Cross-Repository Reconciliation - 2026-10-02.md"}
-  - {path: "99_System/10_Docs/MDSE Modeling Ruleset 1.22.md", status: superseded, supersededBy: "99_System/10_Docs/MDSE Modeling Ruleset 1.23.md"}
-  - {path: "99_System/10_Docs/Git and New Vault Setup.md", status: superseded, supersededBy: "99_System/10_Docs/00 - Current State.md"}
+  - {path: "99_System/archive/10_Docs retired/Handoff - Continue Here.md", status: retired, supersededBy: "99_System/10_Docs/00 - Current State.md"}
+  - {path: "99_System/archive/10_Docs retired/MDSE v0.8 Design Check - 2026-10-01.md", status: retired, supersededBy: "99_System/10_Docs/MDSE v0.8 Cross-Repository Reconciliation - 2026-10-02.md"}
+  - {path: "99_System/archive/10_Docs retired/EA Native Importer Comprehensive Handoff - 2026-10-01.md", status: retired, supersededBy: "99_System/10_Docs/MDSE v0.8 Cross-Repository Reconciliation - 2026-10-02.md"}
+  - {path: "99_System/archive/10_Docs retired/MDSE Modeling Ruleset 1.22.md", status: retired, supersededBy: "99_System/10_Docs/MDSE Modeling Ruleset 1.23.md"}
+  - {path: "99_System/archive/10_Docs retired/Git and New Vault Setup.md", status: retired, supersededBy: "99_System/10_Docs/00 - Current State.md"}
+  - {path: "99_System/archive/10_Docs retired/MDSE v0.8 Toolchain Review - 2026-10-02.md", status: retired, supersededBy: "99_System/10_Docs/MDSE Plan - Path to a Golden Model.md"}
+  - {path: "99_System/archive/10_Docs retired/MDSE Platform Roadmap and Critical Points - 2026-10-02.md", status: retired, supersededBy: "99_System/10_Docs/MDSE Plan - Path to a Golden Model.md"}
+  - {path: "99_System/archive/09_Tools retired importers/README_retired importers.md", status: retired, supersededBy: "99_System/10_Docs/00 - Current State.md"}
   - {path: "99_System/archive/10_EA Native Translator/README_EA Native Translator.md", status: retired, supersededBy: "99_System/10_Docs/Translator Definition.md"}
   - {path: "99_System/archive/11_Import retired/README_11_Import retired.md", status: retired, supersededBy: "99_System/10_Docs/MDSE v0.8 Cross-Repository Reconciliation - 2026-10-02.md"}

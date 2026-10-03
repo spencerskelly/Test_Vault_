@@ -1,3 +1,5 @@
+> [!NOTE] ARCHIVED 2026-10-03 (W-326). Moved to `99_System/archive/10_Docs retired/`; no current file depends on it. See [[00 - Current State]].
+
 > [!WARNING]
 > **SUPERSEDED by [[MDSE Modeling Ruleset 1.23]].** Retained as historical evidence only. Do not use 1.22 for current importer/Workbench implementation.
 

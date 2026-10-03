@@ -1,3 +1,5 @@
+> [!NOTE] ARCHIVED 2026-10-03 (W-326). Moved to `99_System/archive/10_Docs retired/`; no current file depends on it. See [[00 - Current State]].
+
 > [!WARNING]
 > **SUPERSEDED AS THE CONTINUATION ENTRY POINT.** Retained as detailed 2026-10-01 evidence. Continue from [[MDSE v0.8 Cross-Repository Reconciliation - 2026-10-02]] and [[Handoff Prompt - MDSE v0.8 Implementation]]. W-315 through W-319, Ruleset 1.23, element-types 1.17 and Local Model 0.2 govern where this handoff differs.
 

@@ -5,7 +5,7 @@ status: Draft
 ---
 # Post-Import Tasks
 
-Work that has to be done in the vault after the import (stage 2, Workspace Decision Log W-30 and W-37) and before it is released. The vault is not released until every task here is finished (W-55). Each fix is a separate commit, and the reason goes in `99_System/10_Docs/Review Changes Log.md` (W-38). Add new tasks at the bottom as they are decided.
+Work that has to be done in the vault after the import (stage 2, Workspace Decision Log W-30 and W-37) and before it is released. The vault is not released until every task here is finished (W-55). Each fix is a separate commit, and the reason goes in `99_System/10_Docs/Review Changes Log.md` (W-38). Add new tasks at the bottom as they are decided. Which parts are settled by importer rules before a run is kept, and which are done note by note after it, is in [[MDSE Plan - Path to a Golden Model]], section 6 (the freeze point).
 
 ## Task 1: Flow connectors attached to a block instead of a port
 

@@ -22,7 +22,7 @@ The normal engineer should be able to use the vault without understanding schema
 
 ## Current v0.8 contract
 
-Model-side authority is `MDSE v0.8 Cross-Repository Reconciliation - 2026-10-02.md` plus Workspace Decision Log W-315 through W-319.
+Model-side authority is `MDSE v0.8 Cross-Repository Reconciliation - 2026-10-02.md` plus Workspace Decision Log W-315 through W-319 (Local Model), W-324 (links by file name) and W-325 (release chain). Next Workbench steps: [[MDSE Plan - Path to a Golden Model]], section 9.
 
 Current target:
 - relationships 1.35;

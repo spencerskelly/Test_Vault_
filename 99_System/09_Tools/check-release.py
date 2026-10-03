@@ -226,9 +226,12 @@ if man["tools"]["importer"]["release"] is None:
     (fail if man["releaseStatus"]=="release" else warn)("no release-conformant importer yet")
 if man["tools"]["cleanBase"]["repo"] is None:
     (fail if man["releaseStatus"]=="release" else warn)("clean 0.8.0 base repository not issued yet")
-for k in ("acceptedFallback","evidenceOnly"):
-    p=man["tools"]["importer"][k]
-    if not os.path.exists(full(ROOT,p)): fail(f"importer file missing: {p}")
+hist=man["tools"]["importer"].get("history")
+(ok if hist and os.path.isdir(full(ROOT,hist)) else fail)(f"retired importers archived at {hist} (W-326)")
+leftover=[f for f in os.listdir(full(ROOT,"99_System/09_Tools")) if f.startswith("EA_to_MDSE_Native_Importer_v")]
+cand_dir=os.path.dirname(man["tools"]["importer"]["candidate"])
+others=[d for d in os.listdir(full(ROOT,"99_System/09_Tools/EA_to_MDSE_Native_Importer")) if "99_System/09_Tools/EA_to_MDSE_Native_Importer/"+d!=cand_dir]
+(ok if not leftover and not others else fail)(f"only the candidate importer is in 09_Tools (others: {leftover+others})")
 
 if a.workbench:
     wb=os.path.abspath(a.workbench)
