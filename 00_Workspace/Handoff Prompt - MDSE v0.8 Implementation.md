@@ -1,10 +1,10 @@
 # Handoff Prompt — MDSE v0.8 Implementation
 
-**Current through W-338, 2026-10-03.** Use this file to start the next chat. The immediate priority is **Workbench WB-106**, not another Base Vault build.
+**Current through W-339, 2026-10-03.** Use this file to start the next chat. The immediate priority is **Workbench WB-106**, not another Base Vault build.
 
 ## Copy-ready continuation prompt
 
-> Continue the MDSE v0.8 golden-model/toolchain work. Authorities: `spencerskelly/Test_Vault_` (main) for shared MDSE semantics, importer, Bootstrap, Base/release tooling and golden-model governance; `spencerskelly/MDSE_Workbench` (main) for Workbench implementation and its product-definition docs. Read first: `Test_Vault_/00_Workspace/00 - Current State.md`; `Test_Vault_/00_Workspace/MDSE Plan - Path to a Golden Model.md`; `Test_Vault_/00_Workspace/MDSE Tool Definitions and Boundaries.md`; `Test_Vault_/00_Workspace/Workspace Decision Log.md` through W-338; `Test_Vault_/99_System/10_Docs/MDSE Modeling Ruleset 1.23.md`; `Test_Vault_/Importer/Definition/Translator Definition.md`; and the current Workbench docs under `MDSE_Workbench/docs/Definition/`. Do not create a new integration vault yet. W-337 deliberately pauses that until Workbench WB-106 and importer v0.8.6 are aligned enough for a meaningful integrated test. Start with Workbench WB-106: finish occurrence-aware Structure, Interfaces, Where Used and Requirements views, then the read-only Local Model popup and Review integration. Preserve the settled occurrence model: reusable definitions are notes; contextual uses are Local Model records; no fake notes; occurrence clicks open occurrence details; inheritance comes from subtypeOf/instanceOf/occurrence→definition, never partOf. Once WB-106 is releasable, align importer v0.8.6, then build one fresh integration vault for Bootstrap first-open persistence + importer + Workbench validation.
+> Continue the MDSE v0.8 golden-model/toolchain work. Authorities: `spencerskelly/Test_Vault_` (main) for shared MDSE semantics, importer, Bootstrap, Base/release tooling and golden-model governance; `spencerskelly/MDSE_Workbench` (main) for Workbench implementation and its product-definition docs. Read first: `Test_Vault_/00_Workspace/00 - Current State.md`; `Test_Vault_/00_Workspace/MDSE Plan - Path to a Golden Model.md`; `Test_Vault_/00_Workspace/MDSE Tool Definitions and Boundaries.md`; `Test_Vault_/00_Workspace/Workspace Decision Log.md` through W-339; `Test_Vault_/99_System/10_Docs/MDSE Modeling Ruleset 1.23.md`; `Test_Vault_/Importer/Definition/Translator Definition.md`; and the current Workbench docs under `MDSE_Workbench/docs/Definition/`. Do not create a new integration vault yet. W-337 deliberately pauses that until Workbench WB-106 and importer v0.8.6 are aligned enough for a meaningful integrated test. Start with Workbench WB-106 as expanded by W-339/WB-114: the 0.1.17 standalone candidate already completed the original occurrence-aware Structure, Interfaces, Where Used, Requirements, read-only Local Model popup and Review gate. Continue the structured editor architecture now on standalone `main`: one semantic transaction/history service, Local Model 0.2 structured editing, distinct context-vs-definition edit surfaces, schema-driven impact review, and guarded structural transactions. Preserve the settled occurrence model: reusable definitions are notes; contextual uses are Local Model records; no fake notes; occurrence clicks open occurrence details; inheritance comes from subtypeOf/instanceOf/occurrence→definition, never partOf. Once WB-106 is releasable, align importer v0.8.6, then build one fresh integration vault for Bootstrap first-open persistence + importer + Workbench validation.
 
 ## Current release target
 
@@ -13,7 +13,7 @@
 - element-types: **1.17**
 - Local Model: **0.2**
 - importer: **v0.8.6 candidate**
-- Workbench runtime: **0.1.16**; WB-106 incomplete
+- Workbench base pin: **0.1.16**; standalone 0.1.17 completed the old read/navigation gate; WB-106 editor expansion is in progress (W-339/WB-114)
 - Bootstrap official runtime: **0.3.0**
 - Bootstrap candidate: **0.3.1**
 - Base tooling: **v0.8.0-r2**
@@ -52,7 +52,7 @@ Still required in the integrated candidate vault:
 
 ## Workbench continuation
 
-Current runtime 0.1.16 already has Local Model 0.1/0.2 parsing, `ModelRef`, occurrence indexing/findings and Obsidian-style link writing. WB-106 is not complete. Finish occurrence-aware views first. Use Workbench's current docs/tests as implementation authority and keep `src/core` free of Obsidian imports.
+Base runtime 0.1.16 remains unchanged. Standalone 0.1.17 completed the original WB-106 occurrence-aware read/navigation gate. W-339/WB-114 expands WB-106 into a full structured editor before the next integration vault. Current standalone implementation through WB-122 adds the pure semantic transaction core, Local Model 0.2 record patch/create planners, the governed UID/local-token allocator, an Obsidian edit-service adapter, and a corrected unified semantic history seam. Next: expose occurrence-local editing plus the full Definition dropdown, then guided structural transactions. Use Workbench's current docs/tests as implementation authority and keep `src/core` free of Obsidian imports.
 
 Do not claim a new Workbench release is pinned in Test_Vault_ until its built artifacts are vendored, the plugin lock is regenerated, the release manifest is updated, and release checks pass.
 

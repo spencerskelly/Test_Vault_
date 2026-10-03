@@ -32,11 +32,11 @@ Add one row per real run. "Decision" is accept-for-review, restart (fix rules, r
 |---|---|---|---|---|
 | 2026-10-02 | v0.8.3 | whole model | 30,298 notes, 2,030 parts, 2,484 endpoints, 460 connections, 53 flows; preflight and plan PASS. All 376 attachments failed: EA stores linked documents as ZIP. | Restart. Decoder fixed in v0.8.4, hardened in v0.8.5 (W-323). |
 | 2026-10-02 | v0.8.5 | decode-only | 376 decoded, 367 OK, 9 `PATH_ERROR` (attachment paths 221 to 262 characters over the old 212 limit); benchmark file not loaded. | Restart. W-324 removed length-driven rules (v0.8.6); decode-only now refuses to run without the benchmark. |
-| next | Workbench WB-106 + importer v0.8.6 alignment | implementation/release alignment | Do not create another candidate vault until these two gates are ready enough to make the vault a meaningful integration test (W-337). |
+| 2026-10-03 | Workbench 0.1.17 + WB-114 editor expansion | implementation | 0.1.17 completed the original occurrence-aware read/navigation gate. WB-114 to WB-122 establish the structured-editor architecture and initial core services; no new base pin yet. | Continue editor surface/structural transactions, then release-align with importer v0.8.6 before creating the integration vault (W-337, W-339). |
 
 ### Current stopping point — 2026-10-03
 
-Base/Bootstrap work is paused at a stable candidate boundary (W-337). Do not create another integration vault solely for Bootstrap testing. Resume with Workbench WB-106 first, then importer v0.8.6 alignment. Once both are ready, build one fresh integration vault for Bootstrap first-open persistence, importer execution, Workbench validation, and the remaining golden-model gates.
+Base/Bootstrap work is paused at a stable candidate boundary (W-337). Do not create another integration vault solely for Bootstrap testing. Resume with the expanded Workbench WB-106 structured-editor gate first, then importer v0.8.6 alignment. Once both are ready, build one fresh integration vault for Bootstrap first-open persistence, importer execution, Workbench validation, and the remaining golden-model gates.
 
 ## 3. Gates
 
@@ -148,15 +148,15 @@ Priority: **P1** needed for G2/G3; **P2** needed for G4/G5; **P3** after golden.
 
 | # | P | Item | Done when |
 |---|---|---|---|
-| W1 | P1 | **Occurrence-aware views (WB-106):** Structure shows part occurrences and their definitions; Interfaces shows local endpoints, exposure, connections and connection-scoped flows; Where Used includes occurrences that use a definition (`LocalModelIndex.occurrencesOf`); Requirements resolves `appliesTo` to a local record (`refForLink`). Local records render as derived text cards on Canvas; no notes are created for them. | Tests for each view; shown on the real import |
-| W2 | P1 | **Local Model popup (WB-105):** read-only list of a note's parts, endpoints, connections and flows, with navigation to definitions and to records in other notes. Editing stays off. | Works on a real note with all four kinds |
-| W3 | P1 | **Review integration:** Local Model findings in Review with counts and filters (the report command stays). | Review lists them with Previous/Next |
-| W4 | P1 | **Release:** set `wb106Version`, vendor the build into `runtime-plugins/mdse-workbench/`, run `update-plugin-lock.py` and `check-release.py --workbench`. | Base pins the WB-106 release |
-| W5 | P1 | Measure index, views and Check Local Model on the real import (and on the slowest machine). | Numbers in the Workbench Decision Log |
-| W6 | P2 | **Headless CLI** over the pure core (`src/core`): the same checks without Obsidian, for I3 and CI (X1). | `node` command validates a vault folder |
-| W7 | P2 | Batch review (M3/M4) sized to the finding counts from the first kept run; region-aware body editing (edit text outside the governed region). | Exit criteria in `MDSE_Workbench/docs/Definition/03 - Build Outline and Roadmap.md` |
-| W8 | P2 | Create (M2). | M2 exit criterion |
-| W9 | P3 | W-314 variation: read-only variation UI and session configuration on top of the candidate code already in 0.1.16; Canvas Model Edit (M6). | Per Reconciliation, "Workbench gate" |
+| W1 | P1 | **Original occurrence-aware WB-106 baseline.** Structure, Interfaces, Where Used, Requirements, local Canvas nodes, read-only local details and Review integration. | **Implemented in standalone 0.1.17 candidate (WB-113).** Validate again on the next real import. |
+| W2 | P1 | **Structured editor foundation (W-339/WB-114).** Pure transaction/history core, Local Model 0.2 patch/create planners, governed identity allocator, Obsidian storage adapter, one semantic undo/redo history. | **Foundation implemented through WB-122; editor surface not released yet.** |
+| W3 | P1 | **Occurrence/context editor.** Local data first; full reusable Definition under a dropdown; definition relationships nested; definition edits use a separate canonical-note mode. | Edit real part/endpoint/connection/flow records without raw Markdown and preserve ownership boundaries. |
+| W4 | P1 | **Guided structural transactions.** Multi-object edits stage Review/Apply/Cancel, allow temporary invalidity, and block Apply on required integrity failures; lifecycle/impact review follows schema rules. | Restructure/reconnect a representative assembly with validation, cancel and semantic undo/redo. |
+| W5 | P1 | **Release:** build the editor-capable Workbench candidate, set `wb106Version`, vendor it into `runtime-plugins/mdse-workbench/`, run `update-plugin-lock.py` and `check-release.py --workbench`. | Base pins the expanded WB-106 release. |
+| W6 | P1 | Measure index, views, Local Model checks and editor operations on the real import (and on the slowest machine). | Numbers in the Workbench Decision Log. |
+| W7 | P2 | **Headless CLI** over the pure core (`src/core`): the same checks without Obsidian, for I3 and CI (X1). | `node` command validates a vault folder. |
+| W8 | P2 | Batch review (M3/M4) sized to the finding counts from the first kept run; region-aware body editing outside the governed region. | Exit criteria in Workbench roadmap. |
+| W9 | P3 | W-314 persisted configuration/variation and broader Canvas gestures beyond the base editor. | Separate approved scope after the expanded WB-106 gate. |
 
 ### Bootstrap
 
