@@ -8,11 +8,11 @@ The MDSE base vault is a **controlled release**: every person opens the same vau
 
 It does three things:
 
-1. **Safe activation repair (W-330).** After Obsidian's required **Trust author and enable plugins** step, Bootstrap enables locked community plugins, enables required core plugins and disables explicitly prohibited core plugins. It does not download/replace plugin code, rewrite governed settings, or disable unrelated extra community plugins.
+1. **Safe activation repair (W-330).** After Obsidian's required **Trust author and enable plugins** step, Bootstrap enables a disabled locked community plugin only when its version and every locked file already match the release; it enables required core plugins and disables explicitly prohibited core plugins. It does not download/replace plugin code, rewrite governed settings, or disable unrelated extra community plugins.
 2. **Release check.** On every start it compares the vault with `.obsidian/plugin-lock.yaml`: each plugin's version and the SHA-256 of its locked runtime files; governed plugins also lock `data.json`; that each locked plugin is enabled and nothing else is; the Obsidian version (`obsidianMinVersion`); required core plugins on (`bases`, `canvas`, `properties`, `file-explorer`, `command-palette`) and core Templates off; `mdse_release` and the vault identity in `.vault.yaml`; that the vault is a Git repository; that an author code is registered. The status bar shows **MDSE: release OK**, or the number of problems; click it for the table. Command: **MDSE Bootstrap: Show release check**.
 3. **Author registration**, as specified in [[MDSE Bootstrap - Author Registration Spec]]. On first open on a computer it asks for first and last name, proposes the code, rejects a code that is taken or reserved, writes `.obsidian/author-code.txt` and creates the person note from the `Person` template through Templater (so `uid` and `id` come from the same snippets as every other note). A person whose note already exists keeps their code. Command: **MDSE Bootstrap: Register author code**.
 
-It never downloads, replaces or updates plugin files and never silently repairs governed configuration content. Safe activation state is repaired automatically; file/configuration drift is reported and restored from the controlled vault/Git.
+It never downloads, replaces or updates plugin files and never silently repairs governed configuration content. Safe activation state is repaired automatically only for intact locked plugins. A disabled plugin with file/configuration drift stays disabled and is reported for restoration from the controlled vault/Git.
 
 ## How the controlled release is built
 

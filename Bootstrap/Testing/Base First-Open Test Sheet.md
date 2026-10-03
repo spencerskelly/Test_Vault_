@@ -25,3 +25,5 @@ Run on a freshly built base (`build-base.py`) before it is shared, on macOS and 
 | 18 | Safe repair: turn on core Templates | Bootstrap turns it back off |
 | 19 | Extra community plugin enabled | Bootstrap reports it as extra but does not automatically disable/uninstall it |
 | 20 | Modify governed `data.json` or a locked plugin file | Bootstrap does not overwrite the change; release check reports drift requiring Git restoration |
+
+| 21 | Disable a locked community plugin, then modify one of its locked files before running Bootstrap | Bootstrap does **not** re-enable it; release check reports the file/configuration drift |

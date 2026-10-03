@@ -38,7 +38,7 @@ export default class MdseBootstrap extends Plugin {
     this.addCommand({ id: "show-release-check", name: "Show release check", callback: async () => {
       await this.repairActivation();
       await this.runCheck(false);
-      new CheckModal(this.app, this.last, () => this.runCheck(true)).open();
+      new CheckModal(this.app, this.last, async () => { await this.repairActivation(); return this.runCheck(true); }).open();
     } });
     this.addCommand({ id: "register-author", name: "Register author code", callback: () => this.openRegistration(true) });
 
