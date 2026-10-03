@@ -1,12 +1,12 @@
 # Base First-Open Test Sheet
 
-Run on a freshly built base (`build-base.py`) before it is shared, on macOS and on Windows, with Obsidian at or above `obsidianMinVersion` in `.obsidian/plugin-lock.yaml` (currently 1.13.0). Record the date, machine and result of each line. W-322, amended by W-330.
+Run on an **initialized candidate/model repository made from a validated clean Base Vault artifact**, not on the raw `build-base.py` output (W-334). Before this sheet: `check-release.py --base` has passed on the clean artifact, `.vault.yaml` has been initialized once by the release owner, and Git is initialized; use a remote for rows that exercise pull/push. Run on macOS and Windows with Obsidian at or above `obsidianMinVersion` in `.obsidian/plugin-lock.yaml` (currently 1.13.0). Record the date, machine and result of each line. W-322, amended by W-330/W-334.
 
 | # | Check | Expected |
 |---|---|---|
 | 1 | Open the folder as a vault | Obsidian offers **Trust author and enable plugins** |
 | 2 | Trust and enable | No "plugin failed to load" notices; Bootstrap starts and all locked community plugins are enabled |
-| 3 | Status bar after a few seconds | **MDSE: release OK**, or only warnings for vault identity (pre-initialization) |
+| 3 | Status bar after a few seconds | No release/configuration errors. Before author registration the expected remaining warning is the missing per-computer author code; vault identity and Git are already valid at this stage |
 | 4 | Registration popup | Asks for name; proposes the code; **Register** creates `99_System/04_People/First Last.md` with `code`, `name`, `timezone`, a `uid` ending in the code and an `INFO-` id |
 | 5 | Register again with the same name | Accepted; reports the person note already exists; no second note |
 | 6 | Try a code used by another person or `claudeai-----` | Rejected with a reason |

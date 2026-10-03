@@ -49,11 +49,12 @@ Add one row per real run. "Decision" is accept-for-review, restart (fix rules, r
 
 1. **Revoke the GitHub tokens** pasted into earlier chats; issue fresh per-repo tokens when a chat needs one.
 2. **Check Obsidian on the Mac.** The base requires Obsidian 1.13.0 or later (`obsidianMinVersion` in `.obsidian/plugin-lock.yaml`). Newer Obsidian builds can drop older macOS versions; confirm 1.13.0 or later installs and starts on this Mac before relying on it for first-open tests. If it does not, record it as a risk and decide whether the lock's minimum can be lower.
-3. **Build a fresh base:** `python3 "Base Vault/Tools/v0.8.0-r2/build-base.py" <empty folder>`, then `python3 "Base Vault/Testing/check-release.py" --base <that folder>`. It must report 0 fail.
-4. **First-open on the Mac:** open the base in Obsidian and run the macOS rows of the [[Base First-Open Test Sheet]]. Record date and result in the sheet.
-5. **Decode-only check:** open `Importer/Tools/v0.8.6/EA_to_MDSE_Native_Importer_v0.8.6.html`, load the `.qeax`, preflight, build the plan, load `Importer/Testing/v0.8.6/attachment_benchmark.json`, run **Decode-only attachment check**. Expected: `docs 376/376 | files 390/390 | residual 0 | PASS`. If not PASS, stop and bring the CSV back.
-6. **Whole-model run** into the fresh base.
-7. **In the imported vault:** Workbench **Rebuild index**, then **Check Local Model (write findings report)**, then the 0.1.16 steps at the end of `MDSE Workbench/06 - Test Sheet.md`. Note the Review screen counts.
+3. **Build a fresh base artifact:** `python3 "Base Vault/Tools/v0.8.0-r2/build-base.py" <empty folder>`, then `python3 "Base Vault/Testing/check-release.py" --base <that folder>`. It must report 0 fail. At this stage `vault_uid` is intentionally `UNINITIALIZED` and there is no `.git` repository (W-334).
+4. **Prepare the candidate model repository:** copy/use that validated artifact, run `Initialize-Vault.sh` or `Initialize-Vault.ps1` once, initialize/connect Git for the candidate repository, and commit the clean initialized starting point. Ordinary engineers never perform this release-owner step.
+5. **First-open on the Mac:** open the initialized candidate repository in Obsidian and run the macOS rows of `Bootstrap/Testing/Base First-Open Test Sheet.md`. Record date and result in the sheet.
+6. **Decode-only check:** open `Importer/Tools/v0.8.6/EA_to_MDSE_Native_Importer_v0.8.6.html`, load the `.qeax`, preflight, build the plan, load `Importer/Testing/v0.8.6/attachment_benchmark.json`, run **Decode-only attachment check**. Expected: `docs 376/376 | files 390/390 | residual 0 | PASS`. If not PASS, stop and bring the CSV back.
+7. **Whole-model run** into the initialized candidate repository.
+8. **In the imported vault:** Workbench **Rebuild index**, then **Check Local Model (write findings report)**, then the 0.1.16 steps at the end of `MDSE Workbench/06 - Test Sheet.md`. Note the Review screen counts.
 
 ## 5. Every run (G1): what to check and bring back
 

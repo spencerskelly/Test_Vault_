@@ -20,7 +20,7 @@
 3. [[MDSE v0.8 Cross-Repository Reconciliation - 2026-10-02]]: the implementation contract (identity, reruns, naming, Local Model 0.2, evidence set, gates, build order).
 4. [[MDSE Modeling Ruleset 1.23]]: what the model means and how imports are governed.
 5. [[Translator Definition]]: what the stage 1 importer must do.
-6. [[Workspace Decision Log]]: every decision (W-01 to W-333); newest last. Where a log entry marks an earlier one superseded, the later one governs.
+6. [[Workspace Decision Log]]: every decision (W-01 to W-334); newest last. Where a log entry marks an earlier one superseded, the later one governs.
 7. [[MDSE Tool Definitions and Boundaries]]: authoritative ownership/boundary map for Workbench, Bootstrap, importer, base/release tooling and deferred cross-vault infrastructure.
 8. [[Handoff Prompt - MDSE v0.8 Implementation]]: copy-ready prompts for a new AI chat (general, and Workbench).
 9. [[Post-Import Tasks]]: the work done in the vault after an import, Tasks 1 to 9.
