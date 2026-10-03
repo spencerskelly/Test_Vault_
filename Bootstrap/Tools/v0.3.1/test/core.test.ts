@@ -1,6 +1,6 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
-import { checkCode, compareVersions, deriveCode, evaluate, parseLock, summarize, type ReleaseState } from "../src/core";
+import { activationPlan, checkCode, compareVersions, deriveCode, evaluate, parseLock, summarize, type ReleaseState } from "../src/core";
 
 test("author codes match the Author Registration Spec test cases", () => {
   const cases: [string, string, string][] = [
@@ -99,4 +99,18 @@ test("drift is reported: changed file, wrong version, disabled, missing, extra p
 test("lock validation", () => {
   assert.throws(() => parseLock({ schema: 1, plugins: {} }), /schema 1/);
   assert.throws(() => parseLock({ schema: 2, plugins: { x: { version: "1", sha256: { "main.js": "a" } } } }), /must lock main\.js and manifest\.json/);
+});
+
+
+test("W-330 activation repair plans only enable locked/required and disable explicitly prohibited plugins", () => {
+  const p = activationPlan(
+    LOCK,
+    new Set(["mdse-bootstrap", "calendar"]),
+    { bases: false, canvas: true, templates: true },
+  );
+  assert.deepEqual(p, {
+    enableCommunity: ["dataview"],
+    enableCore: ["bases"],
+    disableCore: ["templates"],
+  });
 });

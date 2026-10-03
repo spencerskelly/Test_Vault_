@@ -1,6 +1,6 @@
 import { App, Modal, Notice, Plugin, Setting, TFile, TFolder, apiVersion, normalizePath, parseYaml } from "obsidian";
 import {
-  Finding, InstalledPlugin, PersonRecord, ReleaseState, checkCode, deriveCode, evaluate, hex, isValidCode, parseLock, summarize,
+  Finding, InstalledPlugin, PersonRecord, ReleaseState, activationPlan, checkCode, deriveCode, evaluate, hex, isValidCode, parseLock, summarize,
 } from "./core";
 
 const CODE_FILE = ".obsidian/author-code.txt";        // same literal as Snippet - uid
@@ -13,6 +13,13 @@ interface PluginsApi {
   manifests: Record<string, { version: string; dir?: string }>;
   enabledPlugins: Set<string>;
   plugins: Record<string, unknown>;
+  enablePlugin?(id: string): Promise<void> | void;
+}
+
+interface InternalPluginsApi {
+  getPluginById(id: string): { enabled: boolean } | null;
+  enablePlugin?(id: string): Promise<void> | void;
+  disablePlugin?(id: string): Promise<void> | void;
 }
 
 export default class MdseBootstrap extends Plugin {
@@ -23,9 +30,13 @@ export default class MdseBootstrap extends Plugin {
     this.status = this.addStatusBarItem();
     this.status.setText("MDSE: checking…");
     this.status.addClass("mod-clickable");
-    this.registerDomEvent(this.status, "click", () => new CheckModal(this.app, this.last, () => this.runCheck(true)).open());
+    this.registerDomEvent(this.status, "click", () => new CheckModal(this.app, this.last, async () => {
+      await this.repairActivation();
+      return this.runCheck(true);
+    }).open());
 
     this.addCommand({ id: "show-release-check", name: "Show release check", callback: async () => {
+      await this.repairActivation();
       await this.runCheck(false);
       new CheckModal(this.app, this.last, () => this.runCheck(true)).open();
     } });
@@ -33,6 +44,7 @@ export default class MdseBootstrap extends Plugin {
 
     this.app.workspace.onLayoutReady(() => {
       window.setTimeout(async () => {
+        await this.repairActivation();
         await this.runCheck(true);
         if (!(await this.readCode())) this.openRegistration(false);
       }, START_DELAY_MS);
@@ -41,6 +53,34 @@ export default class MdseBootstrap extends Plugin {
 
   private plugins(): PluginsApi {
     return (this.app as unknown as { plugins: PluginsApi }).plugins;
+  }
+
+  private internalPlugins(): InternalPluginsApi {
+    return (this.app as unknown as { internalPlugins: InternalPluginsApi }).internalPlugins;
+  }
+
+  private async repairActivation(): Promise<void> {
+    try {
+      const a = this.app.vault.adapter;
+      const cfg = this.app.vault.configDir;
+      const lock = parseLock(parseYaml(await a.read(normalizePath(`${cfg}/plugin-lock.yaml`))));
+      const internal = this.internalPlugins();
+      const coreEnabled: Record<string, boolean> = {};
+      for (const id of [...lock.requiredCorePlugins, ...lock.disabledCorePlugins]) coreEnabled[id] = !!internal.getPluginById(id)?.enabled;
+      const plan = activationPlan(lock, new Set(this.plugins().enabledPlugins), coreEnabled);
+
+      for (const id of plan.enableCommunity) {
+        if (typeof this.plugins().enablePlugin === "function") await this.plugins().enablePlugin!(id);
+      }
+      for (const id of plan.enableCore) {
+        if (typeof internal.enablePlugin === "function") await internal.enablePlugin(id);
+      }
+      for (const id of plan.disableCore) {
+        if (typeof internal.disablePlugin === "function") await internal.disablePlugin(id);
+      }
+    } catch {
+      // runCheck reports malformed/missing lock and any activation state that remains wrong.
+    }
   }
 
   async runCheck(notify: boolean): Promise<Finding[]> {
@@ -64,7 +104,7 @@ export default class MdseBootstrap extends Plugin {
       let vaultText = "";
       try { vaultText = await a.read(".vault.yaml"); } catch { /* reported below */ }
       const rel = /^mdse_release:\s*["']?([^"'#\r\n]+)/m.exec(vaultText);
-      const internal = (this.app as unknown as { internalPlugins: { getPluginById(id: string): { enabled: boolean } | null } }).internalPlugins;
+      const internal = this.internalPlugins();
       const coreEnabled: Record<string, boolean> = {};
       for (const id of [...lock.requiredCorePlugins, ...lock.disabledCorePlugins]) coreEnabled[id] = !!internal.getPluginById(id)?.enabled;
       const state: ReleaseState = {

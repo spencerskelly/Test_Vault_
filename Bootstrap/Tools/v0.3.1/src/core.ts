@@ -1,9 +1,10 @@
 /**
  * MDSE Bootstrap core (W-322). Pure functions only: no Obsidian imports, so they run under node:test.
  *
- * The runtime authority is the vault's `.obsidian/plugin-lock.yaml` (schema 2). Bootstrap never installs,
- * downloads or changes plugins; the controlled release ships every plugin inside the vault. It reports
- * drift from the lock and registers each person's author code (Author Registration Spec, W-24, W-25).
+ * The runtime authority is the vault's `.obsidian/plugin-lock.yaml` (schema 2). Bootstrap never downloads,
+ * replaces, or updates plugin code or governed settings; the controlled release ships those files. It may safely
+ * repair activation state by enabling locked community plugins, enabling required core plugins, and disabling
+ * explicitly prohibited core plugins, then reports remaining drift and registers the author code (W-330).
  */
 
 export type Level = "ok" | "warn" | "error";
@@ -35,6 +36,21 @@ export interface InstalledPlugin {
   version: string | null;
   /** SHA-256 per locked file name; null when the file is missing. */
   sha256: Record<string, string | null>;
+}
+
+export interface ActivationPlan {
+  enableCommunity: string[];
+  enableCore: string[];
+  disableCore: string[];
+}
+
+/** W-330: repair activation only. Never add/remove plugin files and never rewrite governed settings. */
+export function activationPlan(lock: PluginLock, enabled: Set<string>, coreEnabled: Record<string, boolean>): ActivationPlan {
+  return {
+    enableCommunity: Object.keys(lock.plugins).filter((id) => !enabled.has(id)).sort(),
+    enableCore: lock.requiredCorePlugins.filter((id) => !coreEnabled[id]).sort(),
+    disableCore: lock.disabledCorePlugins.filter((id) => !!coreEnabled[id]).sort(),
+  };
 }
 
 export interface ReleaseState {
