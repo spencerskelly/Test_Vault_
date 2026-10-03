@@ -2,7 +2,7 @@
 """MDSE release consistency check (W-320, W-321, W-322).
 
 Usage:
-  python3 99_System/09_Tools/check-release.py
+  python3 "Base Vault/Testing/check-release.py"
       [--workbench PATH_TO_MDSE_WORKBENCH]
       [--base PATH_TO_GENERATED_BASE]
 
@@ -43,7 +43,7 @@ ap.add_argument("--workbench")
 ap.add_argument("--base")
 a=ap.parse_args()
 
-man=yaml.safe_load(read("99_System/03_Schemas/mdse-release.yaml"))
+man=yaml.safe_load(read("Base Vault/Definition/mdse-release.yaml"))
 if man.get("limits",{}).get("maxModelFilesPerFolder") != 75:
     fail("release manifest maxModelFilesPerFolder must be 75")
 
@@ -53,6 +53,8 @@ builder=man["tools"]["cleanBase"]["builder"]
 rb=man["runtimeBase"]
 for p in rb["includeFiles"]:
     (ok if os.path.isfile(full(ROOT,p)) else fail)(f"runtime include file exists: {p}")
+for m in rb.get("mappedFiles",[]):
+    (ok if os.path.isfile(full(ROOT,m["source"])) else fail)(f"runtime mapped source exists: {m['source']} -> {m['target']}")
 for p in rb["includeTrees"]:
     (ok if os.path.isdir(full(ROOT,p)) else fail)(f"runtime include tree exists: {p}")
 for p in rb.get("forbiddenPaths",[]):
@@ -87,14 +89,15 @@ for d in man["documents"]:
         if re.search(r"^> \[!WARNING\].*SUPERSEDED",head,re.M):
             fail(f"current file has a SUPERSEDED banner: {p}")
 
-for fn in sorted(os.listdir(full(ROOT,"99_System/10_Docs"))):
-    if fn.endswith(".md") and not fn.startswith("00 - Views") and not fn.startswith("00 - Folder"):
-        p="99_System/10_Docs/"+fn
-        (ok if p in registered else fail)(f"10_Docs file registered: {fn}")
+for folder in ("00_Workspace","Importer/Definition"):
+    for fn in sorted(os.listdir(full(ROOT,folder))):
+        if fn.endswith(".md") and fn != "README.md":
+            p=folder+"/"+fn
+            (ok if p in registered else fail)(f"current tool/workspace document registered: {p}")
 
-log=read("99_System/10_Docs/Workspace Decision Log.md")
+log=read("00_Workspace/Workspace Decision Log.md")
 latest=max(int(n) for n in re.findall(r"^\*\*W-(\d+)\b",log,re.M))
-td=read("99_System/10_Docs/Translator Definition.md")
+td=read("Importer/Definition/Translator Definition.md")
 m=re.search(r"Current through W-(\d+)",td)
 (ok if m and int(m.group(1))==latest else fail)(f"Translator Definition current through W-{m.group(1) if m else '?'}; Decision Log latest W-{latest}")
 
@@ -108,11 +111,11 @@ stale={
 for needle,label in stale.items():
     (fail if needle in td else ok)(f"Translator Definition has no {label}")
 
-for p in ("README.md","99_System/10_Docs/00 - Current State.md"):
+for p in ("README.md","00_Workspace/00 - Current State.md"):
     t=read(p)
     for v in (man["mdseRelease"],man["schemas"]["relationships"],man["schemas"]["elementTypes"],man["schemas"]["localModel"]):
         (ok if v in t else fail)(f"{os.path.basename(p)} mentions {v}")
-t=read("99_System/10_Docs/00 - Current State.md")
+t=read("00_Workspace/00 - Current State.md")
 (ok if f"W-{latest}" in t else fail)(f"Current State mentions W-{latest}")
 
 lock=read(".obsidian/plugin-lock.yaml")
@@ -228,10 +231,9 @@ if man["tools"]["cleanBase"]["repo"] is None:
     (fail if man["releaseStatus"]=="release" else warn)("clean 0.8.0 base repository not issued yet")
 hist=man["tools"]["importer"].get("history")
 (ok if hist and os.path.isdir(full(ROOT,hist)) else fail)(f"retired importers archived at {hist} (W-326)")
-leftover=[f for f in os.listdir(full(ROOT,"99_System/09_Tools")) if f.startswith("EA_to_MDSE_Native_Importer_v")]
 cand_dir=os.path.dirname(man["tools"]["importer"]["candidate"])
-others=[d for d in os.listdir(full(ROOT,"99_System/09_Tools/EA_to_MDSE_Native_Importer")) if "99_System/09_Tools/EA_to_MDSE_Native_Importer/"+d!=cand_dir]
-(ok if not leftover and not others else fail)(f"only the candidate importer is in 09_Tools (others: {leftover+others})")
+others=[d for d in os.listdir(full(ROOT,"Importer/Tools")) if "Importer/Tools/"+d!=cand_dir]
+(ok if not others else fail)(f"only the candidate importer revision is in Importer/Tools (others: {others})")
 
 if a.workbench:
     wb=os.path.abspath(a.workbench)
@@ -268,6 +270,8 @@ if a.base:
 
     rb=man["runtimeBase"]
     expected=set(rb["includeFiles"])
+    mapped={m["target"]:m["source"] for m in rb.get("mappedFiles",[])}
+    expected.update(mapped)
     for tree in rb["includeTrees"]:
         expected.update(files_under(ROOT,tree))
     for p in rb.get("conditionalFiles",[]):
@@ -298,8 +302,9 @@ if a.base:
         if p in actual:
             (ok if sha(full(base,p))==sha(full(ROOT,src)) else fail)(f"base plugin file equals release payload: {p}")
     for p in sorted(expected-set(rb["generatedFiles"])-set(plugin_files)):
-        if p in actual and os.path.exists(full(ROOT,p)):
-            (ok if norm(read_at(base,p))==norm(read(p)) else fail)(f"base file equals authority: {p}")
+        src=mapped.get(p,p)
+        if p in actual and os.path.exists(full(ROOT,src)):
+            (ok if norm(read_at(base,p))==norm(read(src)) else fail)(f"base file equals authority: {p}")
 
     for p in rb.get("forbiddenPaths",[]):
         if os.path.exists(full(base,p)): fail(f"workspace-only path leaked into base: {p}")
