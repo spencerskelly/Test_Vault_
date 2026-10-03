@@ -58,7 +58,7 @@ Base/Bootstrap work is paused at a stable candidate boundary (W-337). Do not cre
 5. **First-open on the Mac:** open the initialized candidate repository in Obsidian and run the macOS rows of `Bootstrap/Testing/Base First-Open Test Sheet.md`. Record date and result in the sheet.
 6. **Decode-only check:** open `Importer/Tools/v0.8.6/EA_to_MDSE_Native_Importer_v0.8.6.html`, load the `.qeax`, preflight, build the plan, load `Importer/Testing/v0.8.6/attachment_benchmark.json`, run **Decode-only attachment check**. Expected: `docs 376/376 | files 390/390 | residual 0 | PASS`. If not PASS, stop and bring the CSV back.
 7. **Whole-model run** into the initialized candidate repository.
-8. **In the imported vault:** Workbench **Rebuild index**, then **Check Local Model (write findings report)**, then the 0.1.16 steps at the end of `MDSE Workbench/06 - Test Sheet.md`. Note the Review screen counts.
+8. **In the imported vault:** Workbench **Rebuild index**, then **Check Local Model (write findings report)**, then the 0.1.16 steps at the end of `MDSE_Workbench/docs/Testing/06 - Test Sheet.md`. Note the Review screen counts.
 
 ## 5. Every run (G1): what to check and bring back
 
@@ -154,7 +154,7 @@ Priority: **P1** needed for G2/G3; **P2** needed for G4/G5; **P3** after golden.
 | W4 | P1 | **Release:** set `wb106Version`, vendor the build into `runtime-plugins/mdse-workbench/`, run `update-plugin-lock.py` and `check-release.py --workbench`. | Base pins the WB-106 release |
 | W5 | P1 | Measure index, views and Check Local Model on the real import (and on the slowest machine). | Numbers in the Workbench Decision Log |
 | W6 | P2 | **Headless CLI** over the pure core (`src/core`): the same checks without Obsidian, for I3 and CI (X1). | `node` command validates a vault folder |
-| W7 | P2 | Batch review (M3/M4) sized to the finding counts from the first kept run; region-aware body editing (edit text outside the governed region). | Exit criteria in `MDSE Workbench/03 - Build Outline and Roadmap.md` |
+| W7 | P2 | Batch review (M3/M4) sized to the finding counts from the first kept run; region-aware body editing (edit text outside the governed region). | Exit criteria in `MDSE_Workbench/docs/Definition/03 - Build Outline and Roadmap.md` |
 | W8 | P2 | Create (M2). | M2 exit criterion |
 | W9 | P3 | W-314 variation: read-only variation UI and session configuration on top of the candidate code already in 0.1.16; Canvas Model Edit (M6). | Per Reconciliation, "Workbench gate" |
 
