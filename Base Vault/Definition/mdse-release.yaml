@@ -42,6 +42,7 @@ tools:
     runtimePluginId: "mdse-workbench"
     requiredForRelease: true
     fixturesFrom: "99_System/03_Schemas"
+    userGuide: "Base Vault/Definition/MDSE Workbench User Guide.md"  # W-341; exact copy of standalone Workbench guide
   bootstrap:
     status: active                                  # rebuilt by W-322 (replaces the unavailable 0.2.0 of W-321)
     version: "0.3.0"
@@ -100,6 +101,7 @@ runtimeBase:
     - "99_System/08_Scripts"
   mappedFiles:
     - {source: "Base Vault/Definition/Enabled Plugin Stack.md", target: "99_System/01_Admin/Enabled Plugin Stack.md"}
+    - {source: "Base Vault/Definition/MDSE Workbench User Guide.md", target: "99_System/01_Admin/MDSE Workbench User Guide.md"}
     - {source: "Base Vault/Initialization/Initialize-Vault.ps1", target: "Initialize-Vault.ps1"}
     - {source: "Base Vault/Initialization/Initialize-Vault.sh", target: "Initialize-Vault.sh"}
   conditionalFiles: []
@@ -132,6 +134,7 @@ documents:
   - {path: "Bootstrap/Definition/Author Registration Spec.md", status: current}
   - {path: "Bootstrap/Testing/Base First-Open Test Sheet.md", status: current}
   - {path: "Base Vault/Definition/Enabled Plugin Stack.md", status: current}
+  - {path: "Base Vault/Definition/MDSE Workbench User Guide.md", status: current}
   - {path: "00_Workspace/Review Changes Log.md", status: reference}
   - {path: "00_Workspace/History/Retired Documents/Handoff - Continue Here.md", status: retired, supersededBy: "00_Workspace/00 - Current State.md"}
   - {path: "00_Workspace/History/Retired Documents/MDSE v0.8 Design Check - 2026-10-01.md", status: retired, supersededBy: "00_Workspace/MDSE v0.8 Cross-Repository Reconciliation - 2026-10-02.md"}
