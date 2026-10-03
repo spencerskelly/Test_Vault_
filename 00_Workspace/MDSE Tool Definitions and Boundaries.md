@@ -1,6 +1,6 @@
 # MDSE Tool Definitions and Boundaries
 
-**Status: current through W-341, 2026-10-03.** This page is the comparison map for the MDSE toolchain. It does not replace each tool's detailed definition; it says where authority lives, what each tool owns, and what it must not own.
+**Status: current through W-342, 2026-10-03.** This page is the comparison map for the MDSE toolchain. It does not replace each tool's detailed definition; it says where authority lives, what each tool owns, and what it must not own.
 
 ## Authority rule
 
