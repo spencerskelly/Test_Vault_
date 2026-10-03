@@ -1,6 +1,6 @@
 # Current State
 
-**Last verified: 2026-10-03. Read this first, human or AI.** It says what is current, what is historical, where each rule lives and what is not built yet. If any other file disagrees with this page, this page and the files it names as current win. The machine-readable twin is `99_System/03_Schemas/mdse-release.yaml`.
+**Last verified: 2026-10-03. Read this first, human or AI.** It says what is current, what is historical, where each rule lives and what is not built yet. If any other file disagrees with this page, this page and the files it names as current win. The machine-readable release authority is `Base Vault/Definition/mdse-release.yaml`.
 
 ## Target and status
 
@@ -20,7 +20,7 @@
 3. [[MDSE v0.8 Cross-Repository Reconciliation - 2026-10-02]]: the implementation contract (identity, reruns, naming, Local Model 0.2, evidence set, gates, build order).
 4. [[MDSE Modeling Ruleset 1.23]]: what the model means and how imports are governed.
 5. [[Translator Definition]]: what the stage 1 importer must do.
-6. [[Workspace Decision Log]]: every decision (W-01 to W-336); newest last. Where a log entry marks an earlier one superseded, the later one governs.
+6. [[Workspace Decision Log]]: every decision (W-01 to W-338); newest last. Where a log entry marks an earlier one superseded, the later one governs.
 7. [[MDSE Tool Definitions and Boundaries]]: authoritative ownership/boundary map for Workbench, Bootstrap, importer, base/release tooling and deferred cross-vault infrastructure.
 8. [[Handoff Prompt - MDSE v0.8 Implementation]]: copy-ready prompts for a new AI chat (general, and Workbench).
 9. [[Post-Import Tasks]]: the work done in the vault after an import, Tasks 1 to 9.
@@ -38,10 +38,10 @@
 | File and folder naming, path limit | Reconciliation, "Naming and path rules"; Ruleset 1.23 sections 15 and 16 |
 | Run completion and evidence | Translator Definition, checks 1 to 9; Reconciliation, "Evidence package" |
 | Tool ownership and boundaries | [[MDSE Tool Definitions and Boundaries]] |
-| Workbench product direction | `MDSE Workbench/` folder (`WB-` decisions) |
+| Workbench product direction | `spencerskelly/MDSE_Workbench/docs/Definition/` (`WB-` decisions and implementation contract) |
 | Workbench implementation/code | repo `spencerskelly/MDSE_Workbench`; `WB106_IMPLEMENTATION_CONTRACT.md` is the current implementation boundary |
-| Runtime plugins, versions, settings | `.obsidian/plugin-lock.yaml` (generated), `99_System/01_Admin/Enabled Plugin Stack.md`, generators in `99_System/09_Tools/` |
-| Bootstrap behavior and source | `MDSE Bootstrap/` in this repository (README, plugin source, Author Registration Spec, Base First-Open Test Sheet) |
+| Runtime plugins, versions, settings | `.obsidian/plugin-lock.yaml` (generated), `Base Vault/Definition/Enabled Plugin Stack.md`, generators in `Base Vault/Tools/v0.8.0-r2/` |
+| Bootstrap behavior and source | `Bootstrap/Definition/`, `Bootstrap/Tools/`, and `Bootstrap/Testing/` |
 
 ## Tools
 
@@ -49,9 +49,9 @@
 |---|---|---|
 | Importer v0.8.6 | **implementation candidate built; whole-model semantic write succeeded (v0.8.3 run)** | Run the decode-only attachment check on the real QEAX with `attachment_benchmark.json` (376 documents, 390 files, zero residual; W-323), then a full fresh-base run. W-324: no length-driven shortening, links by file name, `Review - Long Paths.csv` feeds Post-Import Task 9. Do not mark release-conformant until acceptance gates and WB-106 pass. |
 | Importers v0.1 to v0.7, v0.8.0 to v0.8.5 | archived (W-326) | `99_System/archive/09_Tools retired importers/` with a README of their roles. None may generate a model. |
-| Clean 0.8.0 base vault | **not issued** | Generate deterministically with `Base Vault/Tools/v0.8.0-r2/build-base.py`; validate with `Base Vault/Testing/check-release.py --base`. Importer stays external (W-332). It is a lean runtime artifact and carries `mdse_release: "0.8.0"` in `.vault.yaml`. |
+| Clean 0.8.0 base vault | **candidate build path validated; not issued** | A 0.3.1-candidate base built successfully and `check-release.py --base` completed with **0 fail / 4 expected pre-release warnings** on 2026-10-03. Initializer defects were fixed in source and syntax-gated (W-336). Do not create the next integration vault until Workbench/Importer alignment is ready (W-337). |
 | MDSE Workbench 0.1.16 | built; typecheck, 52 tests and build pass (2026-10-03). Reads Local Model 0.1/0.2, `ModelRef`, findings report (**Check Local Model**); writes links Obsidian-style (W-324, W-325, WB-111, WB-112) | WB-106 remainder: occurrence-aware Structure, Interfaces, Where Used and Requirements views, Local Model popup (WB-105), Review integration |
-| MDSE Bootstrap 0.3.0 | pinned runtime release (W-322); 6 tests previously passed; in every pre-release base | W-330 option B is implemented as **0.3.1 candidate** in `Bootstrap/Tools/v0.3.1`; run automated build/tests and `Bootstrap/Testing/Base First-Open Test Sheet.md` before promoting it into the Base Vault runtime payload |
+| MDSE Bootstrap 0.3.0 | pinned runtime release; **0.3.1 candidate built and unit-tested** | 0.3.1 builds successfully on macOS 11.7.11, all 9 tests pass, and candidate payload/lock validation passes. First-open persistence testing is deliberately deferred until the integrated Workbench/Importer candidate vault is worth creating (W-337). |
 | Runtime plugins (11) | vendored, pinned, hashed, configured (W-322) | `Base Vault/Runtime/Plugins/`; lock `.obsidian/plugin-lock.yaml`; see `Base Vault/Definition/Enabled Plugin Stack.md` |
 
 Workbench 0.1.16 is pinned and enabled in pre-release bases (WB-106 is not complete; `wb106Version` stays unset until the occurrence-aware views are done). The **final issued** base must pin the WB-106-capable release (`wb106Version` in `mdse-release.yaml`); `check-release.py` fails a release build until then.
@@ -89,9 +89,9 @@ Links to archived files keep working: Obsidian resolves them by file name.
 ## Keeping this true (change protocol)
 
 1. A decision is appended to the Workspace Decision Log as `W-n`.
-2. In the same commit: update the authority document and schema it changes, and set "Current through W-n" in the Translator Definition.
+2. In the same commit: update the owning authority document/schema. Only advance the Translator Definition's `Current through W-n` marker when the decision actually changes importer/stage-1 behavior (W-335).
 3. If a file is replaced, put a callout banner at its top (`> [!WARNING] SUPERSEDED by [[...]]`, or `> [!NOTE] HISTORICAL ...`) and list it in `mdse-release.yaml` with `supersededBy`. Move it to `99_System/archive/` only when nothing current links to it.
 4. If a schema version, tool status or document status changes, update `mdse-release.yaml` and the tables on this page.
-5. Run `python3 99_System/09_Tools/check-release.py` (add `--workbench <clone path>` and/or `--base <generated-base path>` when those artifacts are involved). It must pass before commit.
+5. Run `python3 "Base Vault/Testing/check-release.py"` (add `--workbench <clone path>` and/or `--base <generated-base path>` when those artifacts are involved). It must pass before commit.
 6. Never edit a historical or superseded file's content to match new rules. Add the pointer; leave the evidence.
 7. After a run or a decision that changes a step, update the run log and the item tables in [[MDSE Plan - Path to a Golden Model]].
