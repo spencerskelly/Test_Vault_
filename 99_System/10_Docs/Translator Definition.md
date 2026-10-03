@@ -7,7 +7,7 @@ status: Draft
 
 What the stage 1 translator must do, in one place. It is kept current: any decision that changes a stage 1 rule updates this file in the same commit (W-247). Rules are stated once and cite their decision number. The tables live in the YAML files in `99_System/03_Schemas`, which stay the machine-readable authority; this file says which file holds what and does not copy the tables, so there is one place to change. Where this file and a YAML file disagree, that is a fault to fix, not a choice.
 
-Current through W-322. Release target 0.8.0; the registry of current files is [[00 - Current State]].
+Current through W-323. Release target 0.8.0; the registry of current files is [[00 - Current State]].
 
 ## 1. Purpose and scope
 
@@ -217,7 +217,7 @@ Prefer core Obsidian mechanisms and standard Markdown/YAML whenever they preserv
 
 - A diagram is a canvas file plus a companion note (W-73). The companion note is class `Diagram`, `DIA-#####`, subtype the EA diagram type (custom, logical, use case, composite structure, statechart, activity, sequence, package; W-212). It carries `Canvas: [[...canvas]]` when the canvas exists (W-213). A folded EA note drawn on a diagram becomes a canvas text card holding its text (W-214). A sequence diagram has no canvas; its companion note lists the messages (W-176). **W-300 release scope:** the initial v0.8.0 keepable import does not create any diagram notes or Canvas files. All source diagrams are reconciled as intentionally deferred. After the semantic model + attachments import is accepted, an additive diagram pass may be run against that vault. **W-301 selection:** the user may choose one or more preserved EA diagram types—Custom, Logical, Use Case, CompositeStructure, Statechart, Activity, Sequence, and Package. Only selected diagrams are added; re-running must not duplicate diagrams already imported and must not alter accepted semantic model content.
 - An element with a default diagram gets a `Default diagram: [[...]]` line, written only when the canvas exists (W-80). A diagrams-only run may add diagrams to an existing vault, additive and through the ledger (W-62).
-- Linked documents in `t_document` become files next to the note, named `<note file name> asset <n>`, the counter from 1 on every note, in the order of the pictures in the source RTF (W-76 to W-78, W-210). Not checked: that the byte order of pictures in an RTF matches the page order.
+- Linked documents in `t_document` become files next to the note, named `<note file name> asset <n>`, the counter from 1 on every note, in the order of the pictures in the source RTF (W-76 to W-78, W-210). Not checked: that the byte order of pictures in an RTF matches the page order. `BinContent` is a ZIP payload that is unwrapped and CRC-checked before extraction; every row ends in one outcome (W-323).
 
 ## 9. Review lines and modelCheck
 
@@ -315,6 +315,8 @@ Normalize/shorten redundant folders first. Maximum generated repository-relative
 ### Attachments and diagrams
 
 A failed approved attachment write is non-blocking and explicitly reconciled as a failed attachment import.
+
+Attachment acceptance (W-323): a decode-only run on the real `.qeax` must report PASS against `attachment_benchmark.json` (376 approved documents, 376 decoded OK, 390 attachment files, zero residual) before a full run is kept for attachments. The same summary line is written to the Run Manifest of every full run.
 
 Initial diagram artifacts are deferred, but every source diagram must reconcile. Any unreconciled source diagram blocks acceptance.
 

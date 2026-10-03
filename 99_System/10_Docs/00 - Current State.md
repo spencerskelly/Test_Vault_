@@ -43,7 +43,7 @@
 
 | Tool | Status | Next step |
 |---|---|---|
-| Importer v0.8.0 | **hardened implementation candidate built** | Static JavaScript parse/contract audit plus Source Map/path-marker hardening complete. Next: run on the real QEAX against a generated controlled base; confirm linked-document reconciliation/extraction counts and residual findings; do not mark release-conformant until acceptance gates pass. |
+| Importer v0.8.5 | **implementation candidate built; whole-model semantic write succeeded (v0.8.3 run)** | Run the decode-only attachment check on the real QEAX with `attachment_benchmark.json` (target 376 documents, 390 files, zero residual; W-323), then a full fresh-base run. Do not mark release-conformant until acceptance gates and WB-106 pass. |
 | Importer v0.5.2 | accepted fallback and safety lineage | Starting point for v0.8.0 |
 | Importer v0.7 | evidence only, never accepted | Do not use to generate a model to keep |
 | Importers v0.1 to v0.5.1 | history | See `99_System/09_Tools/README_09_Tools.md` |

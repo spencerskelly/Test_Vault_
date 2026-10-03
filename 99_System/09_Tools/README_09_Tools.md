@@ -12,10 +12,10 @@ Use these as code/history references only:
 
 Do not use v0.7 to generate a model intended to keep.
 
-Candidate file: `EA_to_MDSE_Native_Importer/v0.8.4/EA_to_MDSE_Native_Importer_v0.8.4.html`. It follows:
+Candidate file: `EA_to_MDSE_Native_Importer/v0.8.5/EA_to_MDSE_Native_Importer_v0.8.5.html`. It follows:
 1. `../10_Docs/MDSE v0.8 Cross-Repository Reconciliation - 2026-10-02.md`
 2. `../10_Docs/Translator Definition.md`
-3. Workspace Decision Log through W-319
+3. Workspace Decision Log through W-323
 4. relationships 1.35
 5. element-types 1.17
 6. local-model 0.2
@@ -44,7 +44,7 @@ See `MDSE v0.8 Toolchain Review - 2026-10-02.md` for the code-gap audit.
 | `EA_to_MDSE_Native_Importer_v0.3.html`, `v0.4.html`, `v0.5.html`, `v0.5.1.html` | history | Intermediate builds. Superseded by v0.5.2. |
 | `EA_to_MDSE_Native_Importer_v0.5.2.html` | accepted safety lineage (fallback) | Base-vault identity checks, stale-state invalidation, `hasState/stateOf`, schema 1.35. Starting point for v0.8.0. |
 | `EA_to_MDSE_Native_Importer_v0.7.html` | merge candidate, never accepted | Occurrence/QEAX code evidence. Not release-conformant (14 gaps listed in the Toolchain Review). Do not generate a model to keep. |
-| `EA_to_MDSE_Native_Importer/v0.8.4/EA_to_MDSE_Native_Importer_v0.8.4.html` | hardened implementation candidate; acceptance pending | Release/schema/plugin gates, Local Model 0.2, W-318 naming/path preflight with marker preservation, authoritative Source Map provenance, governed linked-document extraction, Source EA evidence, evidence package and stage-2 review views implemented. Real QEAX acceptance and the WB-106 keepability gate remain. |
+| `EA_to_MDSE_Native_Importer/v0.8.5/EA_to_MDSE_Native_Importer_v0.8.5.html` | hardened implementation candidate; acceptance pending | Release/schema/plugin gates, Local Model 0.2, W-318 naming/path preflight with marker preservation, authoritative Source Map provenance, governed linked-document extraction, Source EA evidence, evidence package and stage-2 review views implemented. Real QEAX acceptance and the WB-106 keepability gate remain. |
 | `Initialize-Vault.sh`, `Initialize-Vault.ps1` | current helpers | Initialize `.vault.yaml` once in a new disposable or real vault. |
 
 The machine-checkable version of this table is `99_System/03_Schemas/mdse-release.yaml`; run `python3 99_System/09_Tools/check-release.py` after any change to tools, schemas or docs. Registry of current files: [[00 - Current State]].
@@ -95,3 +95,7 @@ After normalized/redundant folder handling, an overlong folder hierarchy no long
 ### v0.8.4 attachment decoding
 
 The first complete semantic whole-model write exposed that all 376 approved t_document attachments were being treated as raw content even though EA stores linked-document BinContent in ZIP payloads. v0.8.4 unwraps the EA ZIP payload before applying the existing image/RTF extraction rules and reports the active BUILD.version in its completion log. The governed target is 376 linked documents producing 390 attachment files, subject to explicit reconciliation of any residual failures.
+
+### v0.8.5 decode-only attachment check
+
+v0.8.5 adds a decode-only mode that decodes all approved linked documents from the real `.qeax` without writing a vault, using the same path-planning and attachment code as the whole-model write. It reports PASS only against `attachment_benchmark.json` (376 documents, 390 files, zero residual) and downloads a per-document CSV. The ZIP decoder now verifies CRC32 and size, reads sizes from the central directory, and fails explicitly on encrypted, ZIP64, unsupported-method or ambiguous multi-entry archives (W-323).

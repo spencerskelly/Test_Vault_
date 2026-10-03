@@ -154,7 +154,7 @@ if candidate:
     else:
         itxt=read(candidate)
         required_importer_tokens=[
-            'version: "0.8.4"',
+            'version: "0.8.5"',
             'const REL_SCHEMA_VERSION="1.35"',
             'const ELEMENT_SCHEMA_VERSION="1.17"',
             'const LOCAL_MODEL_SCHEMA_VERSION="0.2"',
@@ -171,7 +171,12 @@ if candidate:
             'folderLimit=MAX_GENERATED_PATH-MIN_READABLE_FILE_CHARS-4',
             'function rebuildMapped()',
             'label="folder_"+ordinal',
-            'async function unzipFirstFile',
+            'async function unzipEaPayload',
+            'class PayloadError',
+            'function crc32(bytes)',
+            'function planOutputPaths(entities,sliceKeys,entityCtx)',
+            'async function decodeOnlyCheck()',
+            'function attachmentVerdict(result,bench)',
             'async function unwrapEaDocumentPayload',
             'sourceRaw=blobBytes',
             'v"+BUILD.version+" candidate PASS',
@@ -188,6 +193,19 @@ if candidate:
         ]
         missing=[x for x in required_importer_tokens if x not in itxt]
         (ok if not missing else fail)(f"importer candidate static contract tokens present{'' if not missing else ': '+', '.join(missing)}")
+        shared_plan=itxt.count('planOutputPaths(entities,sliceKeys,entityCtx)')
+        shared_att=itxt.count('attachmentReconciliation(lastPlannerContext,entityCtx,sliceKeys,')
+        (ok if shared_plan>=3 and shared_att>=2 else fail)(f"decode-only check shares path planning and attachment reconciliation with the whole-model write (planOutputPaths x{shared_plan}, attachmentReconciliation calls x{shared_att})")
+        bpath=man["tools"]["importer"].get("attachmentBenchmark")
+        if not bpath or not os.path.isfile(full(ROOT,bpath)):
+            fail(f"attachment benchmark missing: {bpath}")
+        else:
+            try:
+                bm=json.load(open(full(ROOT,bpath),encoding="utf-8"))
+                good=all(isinstance(bm.get(k),int) and bm[k]>=0 for k in ("linkedDocuments","modelDocuments","extDocs","attachmentFiles")) and bm["modelDocuments"]+bm["extDocs"]==bm["linkedDocuments"] and isinstance(bm.get("expectedEmptyDocIds"),list)
+                (ok if good else fail)(f"attachment benchmark valid ({bm.get('linkedDocuments')} documents, {bm.get('attachmentFiles')} files)")
+            except Exception as ex:
+                fail(f"attachment benchmark unreadable: {ex}")
         if 'schema=0.1' in itxt or 'return ("loc-"' in itxt:
             fail("importer candidate contains superseded Local Model marker/anchor behavior")
         if 'source_model_id","source_key","owner_uid","local_id","local_kind","ea_guid","ea_source_kind","ea_owner_guid' not in itxt:
