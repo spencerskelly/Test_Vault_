@@ -2,7 +2,7 @@
 """Build the lean MDSE runtime base from the W-321 release manifest.
 
 Usage:
-  python3 "Base Vault/Tools/v0.8.0/build-base.py" OUTPUT_DIRECTORY
+  python3 "Base Vault/Tools/v0.8.0-r2/build-base.py" OUTPUT_DIRECTORY
 
 The output directory must not already contain files. The positive include list comes only
 from Base Vault/Definition/mdse-release.yaml. Workspace-only methodology files are never
@@ -41,6 +41,8 @@ def copy_tree(src_root,dst_root,p):
         out=dst if rel=="." else os.path.join(dst,rel)
         os.makedirs(out,exist_ok=True)
         for n in names:
+            if n in (".DS_Store","Thumbs.db"):
+                continue
             shutil.copy2(os.path.join(d,n),os.path.join(out,n))
 
 ap=argparse.ArgumentParser()
@@ -66,7 +68,7 @@ for p in rb["includeFiles"]:
 for m in rb.get("mappedFiles",[]):
     copy_file_as(ROOT,out,m["source"],m["target"]); copied+=1
 for p in rb["includeTrees"]:
-    before=sum(len(ns) for _,_,ns in os.walk(full(ROOT,p)))
+    before=sum(sum(1 for n in ns if n not in (".DS_Store","Thumbs.db")) for _,_,ns in os.walk(full(ROOT,p)))
     copy_tree(ROOT,out,p); copied+=before
 
 for p in rb.get("conditionalFiles",[]):
