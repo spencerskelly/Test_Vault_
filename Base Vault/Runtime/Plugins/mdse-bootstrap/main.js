@@ -26,6 +26,21 @@ module.exports = __toCommonJS(main_exports);
 var import_obsidian = require("obsidian");
 
 // src/core.ts
+function installedMatchesLock(plugin, installed) {
+  if (!installed || installed.version !== plugin.version) return false;
+  for (const [file, want] of Object.entries(plugin.sha256)) {
+    const got = installed.sha256[file];
+    if (!got || got.toLowerCase() !== want.toLowerCase()) return false;
+  }
+  return true;
+}
+function activationPlan(lock, enabled, coreEnabled, installed) {
+  return {
+    enableCommunity: Object.entries(lock.plugins).filter(([id, plugin]) => !enabled.has(id) && installedMatchesLock(plugin, installed[id])).map(([id]) => id).sort(),
+    enableCore: lock.requiredCorePlugins.filter((id) => !coreEnabled[id]).sort(),
+    disableCore: lock.disabledCorePlugins.filter((id) => !!coreEnabled[id]).sort()
+  };
+}
 var CODE_RE = /^[a-z-]{13}$/;
 function deriveCode(first, last) {
   const letters = (s) => String(s || "").normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/ß/g, "ss").toLowerCase().replace(/[^a-z]/g, "");
@@ -111,7 +126,7 @@ function evaluate(s) {
   }
   for (const id of s.lock.disabledCorePlugins) {
     const on = !!s.coreEnabled[id];
-    add(on ? "warn" : "ok", "core", id, on ? "core plugin should be off (use Templater for templates)" : "off");
+    add(on ? "error" : "ok", "core", id, on ? "core plugin must be off (use Templater for templates)" : "off");
   }
   add(s.isGitRepo ? "ok" : "warn", "git", "Git", s.isGitRepo ? "vault is a Git repository" : "vault is not a Git repository; changes cannot be shared");
   return f;
@@ -154,14 +169,22 @@ var MdseBootstrap = class extends import_obsidian.Plugin {
     this.status = this.addStatusBarItem();
     this.status.setText("MDSE: checking\u2026");
     this.status.addClass("mod-clickable");
-    this.registerDomEvent(this.status, "click", () => new CheckModal(this.app, this.last, () => this.runCheck(true)).open());
+    this.registerDomEvent(this.status, "click", () => new CheckModal(this.app, this.last, async () => {
+      await this.repairActivation();
+      return this.runCheck(true);
+    }).open());
     this.addCommand({ id: "show-release-check", name: "Show release check", callback: async () => {
+      await this.repairActivation();
       await this.runCheck(false);
-      new CheckModal(this.app, this.last, () => this.runCheck(true)).open();
+      new CheckModal(this.app, this.last, async () => {
+        await this.repairActivation();
+        return this.runCheck(true);
+      }).open();
     } });
     this.addCommand({ id: "register-author", name: "Register author code", callback: () => this.openRegistration(true) });
     this.app.workspace.onLayoutReady(() => {
       window.setTimeout(async () => {
+        await this.repairActivation();
         await this.runCheck(true);
         if (!await this.readCode()) this.openRegistration(false);
       }, START_DELAY_MS);
@@ -170,38 +193,71 @@ var MdseBootstrap = class extends import_obsidian.Plugin {
   plugins() {
     return this.app.plugins;
   }
+  internalPlugins() {
+    return this.app.internalPlugins;
+  }
+  async scanInstalled(lock) {
+    const a = this.app.vault.adapter;
+    const cfg = this.app.vault.configDir;
+    const installed = {};
+    for (const [id, p] of Object.entries(lock.plugins)) {
+      const dir = (0, import_obsidian.normalizePath)(`${cfg}/plugins/${id}`);
+      let version = null;
+      try {
+        version = String(JSON.parse(await a.read(`${dir}/manifest.json`)).version);
+      } catch {
+        version = null;
+      }
+      const sha256 = {};
+      for (const file of Object.keys(p.sha256)) {
+        try {
+          sha256[file] = hex(await crypto.subtle.digest("SHA-256", await a.readBinary(`${dir}/${file}`)));
+        } catch {
+          sha256[file] = null;
+        }
+      }
+      installed[id] = { version, sha256 };
+    }
+    return installed;
+  }
+  async repairActivation() {
+    try {
+      const a = this.app.vault.adapter;
+      const cfg = this.app.vault.configDir;
+      const lock = parseLock((0, import_obsidian.parseYaml)(await a.read((0, import_obsidian.normalizePath)(`${cfg}/plugin-lock.yaml`))));
+      const internal = this.internalPlugins();
+      const coreEnabled = {};
+      for (const id of [...lock.requiredCorePlugins, ...lock.disabledCorePlugins]) coreEnabled[id] = !!internal.getPluginById(id)?.enabled;
+      const installed = await this.scanInstalled(lock);
+      const plan = activationPlan(lock, new Set(this.plugins().enabledPlugins), coreEnabled, installed);
+      for (const id of plan.enableCommunity) {
+        const plugins = this.plugins();
+        if (typeof plugins.enablePluginAndSave === "function") await plugins.enablePluginAndSave(id);
+        else if (typeof plugins.enablePlugin === "function") await plugins.enablePlugin(id);
+      }
+      for (const id of plan.enableCore) {
+        if (typeof internal.enablePlugin === "function") await internal.enablePlugin(id);
+      }
+      for (const id of plan.disableCore) {
+        if (typeof internal.disablePlugin === "function") await internal.disablePlugin(id);
+      }
+    } catch {
+    }
+  }
   async runCheck(notify) {
     const a = this.app.vault.adapter;
     const cfg = this.app.vault.configDir;
     let findings;
     try {
       const lock = parseLock((0, import_obsidian.parseYaml)(await a.read((0, import_obsidian.normalizePath)(`${cfg}/plugin-lock.yaml`))));
-      const installed = {};
-      for (const [id, p] of Object.entries(lock.plugins)) {
-        const dir = (0, import_obsidian.normalizePath)(`${cfg}/plugins/${id}`);
-        let version = null;
-        try {
-          version = String(JSON.parse(await a.read(`${dir}/manifest.json`)).version);
-        } catch {
-          version = null;
-        }
-        const sha256 = {};
-        for (const file of Object.keys(p.sha256)) {
-          try {
-            sha256[file] = hex(await crypto.subtle.digest("SHA-256", await a.readBinary(`${dir}/${file}`)));
-          } catch {
-            sha256[file] = null;
-          }
-        }
-        installed[id] = { version, sha256 };
-      }
+      const installed = await this.scanInstalled(lock);
       let vaultText = "";
       try {
         vaultText = await a.read(".vault.yaml");
       } catch {
       }
       const rel = /^mdse_release:\s*["']?([^"'#\r\n]+)/m.exec(vaultText);
-      const internal = this.app.internalPlugins;
+      const internal = this.internalPlugins();
       const coreEnabled = {};
       for (const id of [...lock.requiredCorePlugins, ...lock.disabledCorePlugins]) coreEnabled[id] = !!internal.getPluginById(id)?.enabled;
       const state = {

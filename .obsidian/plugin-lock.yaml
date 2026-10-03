@@ -6,12 +6,12 @@ requiredCorePlugins: [bases, canvas, properties, file-explorer, command-palette]
 disabledCorePlugins: [templates]
 plugins:
   mdse-bootstrap:
-    version: "0.3.0"
-    source: "Test_Vault_ Bootstrap/Tools/v0.3.0 (built)"
+    version: "0.3.1"
+    source: "Test_Vault_ Bootstrap controlled build"
     settings: default
     sha256:
-      main.js: 5c508061e18c26bd3431b3d0238d2fa7b15b0a3774438dfb69b5777717a02d29
-      manifest.json: 2e78f9bccd44a1fcca17b6ce2bb071a69d423eb1e93b50a08bc4d4085bea2114
+      main.js: 16339af93abe34dc053ac2a8a60db7c081f7b07d584aa4b8d942fd9081eb0c62
+      manifest.json: 15586ffbfabee6a99d6b51777558ad2a36184eefa4b9ff782eb325350b61833a
       styles.css: dd7ba34452810f9d39ea03395fae66469decb386de83e6ab66d7a345e42ca645
   mdse-workbench:
     version: "0.1.16"
