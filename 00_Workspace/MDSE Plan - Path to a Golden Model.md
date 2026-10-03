@@ -150,13 +150,14 @@ Priority: **P1** needed for G2/G3; **P2** needed for G4/G5; **P3** after golden.
 |---|---|---|---|
 | W1 | P1 | **Original occurrence-aware WB-106 baseline.** Structure, Interfaces, Where Used, Requirements, local Canvas nodes, read-only local details and Review integration. | **Implemented in standalone 0.1.17 candidate (WB-113).** Validate again on the next real import. |
 | W2 | P1 | **Structured editor foundation (W-339/WB-114).** Pure transaction/history core, Local Model 0.2 patch/create planners, governed identity allocator, Obsidian storage adapter, one semantic undo/redo history. | **Foundation implemented through WB-122; editor surface not released yet.** |
-| W3 | P1 | **Occurrence/context editor.** Local data first; full reusable Definition under a dropdown; definition relationships nested; definition edits use a separate canonical-note mode. | Edit real part/endpoint/connection/flow records without raw Markdown and preserve ownership boundaries. |
-| W4 | P1 | **Guided structural transactions.** Multi-object edits stage Review/Apply/Cancel, allow temporary invalidity, and block Apply on required integrity failures; lifecycle/impact review follows schema rules. | Restructure/reconnect a representative assembly with validation, cancel and semantic undo/redo. |
-| W5 | P1 | **Release:** build the editor-capable Workbench candidate, set `wb106Version`, vendor it into `runtime-plugins/mdse-workbench/`, run `update-plugin-lock.py` and `check-release.py --workbench`. | Base pins the expanded WB-106 release. |
-| W6 | P1 | Measure index, views, Local Model checks and editor operations on the real import (and on the slowest machine). | Numbers in the Workbench Decision Log. |
-| W7 | P2 | **Headless CLI** over the pure core (`src/core`): the same checks without Obsidian, for I3 and CI (X1). | `node` command validates a vault folder. |
-| W8 | P2 | Batch review (M3/M4) sized to the finding counts from the first kept run; region-aware body editing outside the governed region. | Exit criteria in Workbench roadmap. |
-| W9 | P3 | W-314 persisted configuration/variation and broader Canvas gestures beyond the base editor. | Separate approved scope after the expanded WB-106 gate. |
+| W3 | P1 | **Internal Structure (W-340/WB-123).** One occurrence-owning Object as a boundary; parts/endpoints/connections/flows inside; compact boundary interfaces; curated layout is presentation only and preserved on refresh. | Core layout is on standalone main; visually validate on representative assemblies and confirm refresh preserves manual placement. |
+| W4 | P1 | **Occurrence/context editor.** Local data first; full reusable Definition under a dropdown; definition relationships nested; definition edits use a separate canonical-note mode. | Edit real part/endpoint/connection/flow records without raw Markdown and preserve ownership boundaries. |
+| W5 | P1 | **Guided structural transactions.** Multi-object edits stage Review/Apply/Cancel, allow temporary invalidity, and block Apply on required integrity failures; lifecycle/impact review follows schema rules. | Restructure/reconnect a representative assembly with validation, cancel and semantic undo/redo. |
+| W6 | P1 | **Release:** build the editor-capable Workbench candidate, set `wb106Version`, vendor it into `runtime-plugins/mdse-workbench/`, run `update-plugin-lock.py` and `check-release.py --workbench`. | Base pins the expanded WB-106 release. |
+| W7 | P1 | Measure index, views, Local Model checks and editor operations on the real import (and on the slowest machine). | Numbers in the Workbench Decision Log. |
+| W8 | P2 | **Headless CLI** over the pure core (`src/core`): the same checks without Obsidian, for I3 and CI (X1). | `node` command validates a vault folder. |
+| W9 | P2 | Batch review (M3/M4) sized to the finding counts from the first kept run; region-aware body editing outside the governed region. | Exit criteria in Workbench roadmap. |
+| W10 | P3 | W-314 persisted configuration/variation and broader Canvas gestures beyond the base editor. | Separate approved scope after the expanded WB-106 gate. |
 
 ### Bootstrap
 
