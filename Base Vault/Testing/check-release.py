@@ -270,8 +270,14 @@ if a.workbench:
         (ok if m and m.group(1)=="0.1" else fail)("Workbench historical Local Model fixture is schema 0.1")
     pv=json.load(open(full(wb,"package.json")))["version"]
     mv=json.load(open(full(wb,"manifest.json")))["version"]
-    (ok if pv==mv==man["tools"]["workbench"]["version"] else fail)(
-        f"Workbench package {pv}, manifest {mv}, release manifest {man['tools']['workbench']['version']}")
+    pinned=man["tools"]["workbench"]["version"]
+    candidate_wb=man["tools"]["workbench"].get("candidateVersion")
+    if pv==mv==pinned:
+        ok(f"Workbench package/manifest {pv} match pinned release manifest")
+    elif man["releaseStatus"]!="release" and candidate_wb and pv==mv==candidate_wb:
+        warn(f"Workbench package/manifest {pv} match candidateVersion; pinned Base runtime remains {pinned}")
+    else:
+        fail(f"Workbench package {pv}, manifest {mv}, pinned {pinned}, candidate {candidate_wb}")
     guide_rel="docs/User Guide/MDSE Workbench User Guide.md"
     guide_base=man["tools"]["workbench"].get("userGuide")
     guide_path=full(wb,guide_rel)
