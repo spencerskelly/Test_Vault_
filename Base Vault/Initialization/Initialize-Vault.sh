@@ -24,10 +24,13 @@ if ! grep -q "UNINITIALIZED" ".vault.yaml"; then
 fi
 
 RELEASE=$(python3 - <<'PY'
-import re
 text=open(".vault.yaml", encoding="utf-8").read()
-m=re.search(r"(?m)^mdse_release:\\s*[\"']?([^\"'#\\r\\n]+)", text)
-print(m.group(1).strip() if m else "")
+value=""
+for line in text.splitlines():
+    if line.lstrip().startswith("mdse_release:"):
+        value=line.split(":",1)[1].split("#",1)[0].strip().strip("\"'")
+        break
+print(value)
 PY
 )
 if [ -z "$RELEASE" ]; then
