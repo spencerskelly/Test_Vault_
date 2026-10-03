@@ -38,6 +38,7 @@ plugins:
       main.js: 2ef2199710b4b9a2b9e2307ba6218b591557667e4fa11b09906844f0bcc78d64
       manifest.json: d40f1802e1fa1fa1b2245cc52f56b8030a947747a733cf67eae03d4a452b312b
       styles.css: da16243f2e928592e05e5b31db5620f9bcd00ffc45a92453d30c53953e5c5ccb
+      data.json: 1bfc926d4532b641d440be621b87455fdeebd58db8cee2986f48ba55adb1d654
   breadcrumbs:
     version: "4.21.11"
     source: "github.com/michaelpporter/breadcrumbs release"
