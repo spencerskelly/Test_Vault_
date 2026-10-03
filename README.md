@@ -1,28 +1,29 @@
 # Test_Vault_
 
-A workspace, not the vault that will be built. It defines the EA-to-MDSE translator and the conventions the real vault will follow (W-01). The real vault is generated later from the Sparx EA file.
+Development workspace for the MDSE toolchain and the initial golden-model effort. This repository is intentionally **not** the engineering vault delivered to end users; it defines, builds and tests the tools and release that create that vault.
 
 ## Start here
 
-1. `99_System/10_Docs/00 - Current State.md`: the registry. It lists what is current, what is historical or superseded, tool status and where each rule lives. Start here.
-2. `99_System/10_Docs/MDSE Plan - Path to a Golden Model.md`: the plan to a golden model: gates, what to do before and after each run, post-import order, improvements per component, decisions needed.
-3. `99_System/10_Docs/MDSE v0.8 Cross-Repository Reconciliation - 2026-10-02.md`: current cross-repository authority and implementation contract.
-4. `99_System/10_Docs/MDSE Modeling Ruleset 1.23.md`: current modeling/import governance.
-5. `99_System/10_Docs/Translator Definition.md`: current Stage-1/native importer contract.
-6. `99_System/10_Docs/Workspace Decision Log.md`: decisions through W-326.
-7. `99_System/10_Docs/Handoff Prompt - MDSE v0.8 Implementation.md`: copy-ready prompts for a new AI chat (general and Workbench).
+1. `00_Workspace/00 - Current State.md` — current authority/status registry.
+2. `00_Workspace/MDSE Plan - Path to a Golden Model.md` — gates and path to the first accepted model.
+3. `00_Workspace/MDSE Tool Definitions and Boundaries.md` — ownership and contracts between tools.
+4. `00_Workspace/Workspace Decision Log.md` — cross-tool/model decisions.
+5. `99_System/10_Docs/MDSE Modeling Ruleset 1.23.md` — shared model semantics.
+6. The owning tool folder/repository for implementation detail.
 
-Current target: MDSE/base/importer 0.8.0, relationships 1.35, element-types 1.17, Local Model 0.2. Machine-readable manifest: `99_System/03_Schemas/mdse-release.yaml`. Build the lean base with `build-base.py`; verify authority/Workbench/base alignment with `check-release.py`.
+## Tool-development areas
 
-## Folders
+- **Workbench** — standalone repository `spencerskelly/MDSE_Workbench`; long-lived implementation + product-definition space.
+- **Importer/** — importer definition, versioned tools, testing evidence and history.
+- **Bootstrap/** — Bootstrap definition, versioned source and first-open testing.
+- **Base Vault/** — release definition, build tools, runtime payload, release tests and initialization.
+- **Cross-Vault/** — deferred future cross-vault capability and retained prior implementation evidence.
+- **00_Workspace/** — cross-tool current state, roadmap, release reconciliation, decisions and handoffs.
+- **99_System/** — shared MDSE semantic/runtime core. Do not use it as a generic dumping ground for tool implementations.
+- **Definitions/** — shared MDSE definition notes used by the model/runtime.
 
-- `99_System/03_Schemas`: the class, relationship, element, connector, field, tag and package rules, as YAML.
-- `99_System/05_Templates`, `08_Scripts`: the class templates and the id and uid snippets.
-- `99_System/09_Tools`: the current importer (`EA_to_MDSE_Native_Importer/v0.8.6/`), base build and release-check scripts, vendored runtime plugins.
-- `99_System/10_Docs`: Current State registry, the plan, decision log, handoff prompt, Translator Definition, Post-Import Tasks, Review Changes Log and Ruleset 1.23.
-- `99_System/archive`: retired material with no authority (old importers, superseded documents, retired plugins); see its README.
-- `99_System/CSV_EA`: evidence extracted from the EA file, used to define the rules. The import reads the EA file itself (W-247).
-- `Definitions`: the note layout and the `Source: EA` section.
-- `MDSE Workbench`: a separate product-definition workspace. It is not authoritative for model semantics.
-- `MDSE Bootstrap`: the Bootstrap plugin source and its docs (controlled plugin release, author registration, base test sheet; W-322).
-- `99_System/06_Fileclasses`: generated Fileclass schemas (do not edit).
+## Development convention
+
+`main` is the normal working truth. Tool revisions live in explicit version folders (for example `Importer/Tools/v0.8.6`, `Bootstrap/Tools/v0.3.1`). Use branches only when isolation is genuinely useful; do not use long-lived branches as the normal way to present options or retain versions.
+
+Machine-readable release authority: `Base Vault/Definition/mdse-release.yaml`.

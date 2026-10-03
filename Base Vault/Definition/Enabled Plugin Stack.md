@@ -40,4 +40,4 @@ Ampure Cross-Vault Resolver and Multi-Vault Navigator were removed when the mode
 
 ## Packaging rule (W-322, supersedes the W-321 per-machine rule)
 
-Plugin code ships in the base. The authority is the workspace payload `99_System/09_Tools/runtime-plugins/` plus the generated lock; `build-base.py` copies it into `.obsidian/plugins/`. Plugin files are marked `-text` in `.gitattributes` so line endings never change their hashes. See `MDSE Bootstrap/README_MDSE Bootstrap.md` for how to change a version.
+Plugin code ships in the base. The authority is the workspace payload `Base Vault/Runtime/Plugins/` plus the generated lock; `build-base.py` copies it into `.obsidian/plugins/`. Plugin files are marked `-text` in `.gitattributes` so line endings never change their hashes. See `Bootstrap/Definition/README.md` for how to change a version.

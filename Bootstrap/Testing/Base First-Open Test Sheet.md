@@ -1,11 +1,11 @@
 # Base First-Open Test Sheet
 
-Run on a freshly built base (`build-base.py`) before it is shared, on macOS and on Windows, with Obsidian at or above `obsidianMinVersion` in `.obsidian/plugin-lock.yaml` (currently 1.13.0). Record the date, machine and result of each line. W-322.
+Run on a freshly built base (`build-base.py`) before it is shared, on macOS and on Windows, with Obsidian at or above `obsidianMinVersion` in `.obsidian/plugin-lock.yaml` (currently 1.13.0). Record the date, machine and result of each line. W-322, amended by W-330.
 
 | # | Check | Expected |
 |---|---|---|
 | 1 | Open the folder as a vault | Obsidian offers **Trust author and enable plugins** |
-| 2 | Trust and enable | No "plugin failed to load" notices; 11 community plugins listed as enabled |
+| 2 | Trust and enable | No "plugin failed to load" notices; Bootstrap starts and all locked community plugins are enabled |
 | 3 | Status bar after a few seconds | **MDSE: release OK**, or only warnings for vault identity (pre-initialization) |
 | 4 | Registration popup | Asks for name; proposes the code; **Register** creates `99_System/04_People/First Last.md` with `code`, `name`, `timezone`, a `uid` ending in the code and an `INFO-` id |
 | 5 | Register again with the same name | Accepted; reports the person note already exists; no second note |
@@ -19,3 +19,9 @@ Run on a freshly built base (`build-base.py`) before it is shared, on macOS and 
 | 13 | Obsidian Git | Pulls on start; Commit-and-sync works against the remote |
 | 14 | MDSE Workbench | **Show diagnostics** runs; Review screen opens |
 | 15 | Drift test: edit one byte of `.obsidian/plugins/dataview/main.js`, run **Show release check** | dataview reported as differing; restore with `git checkout` |
+
+| 16 | Safe repair: disable one locked community plugin, then run **MDSE Bootstrap: Show release check** | Bootstrap re-enables it before reporting release state |
+| 17 | Safe repair: turn off one required core plugin | Bootstrap re-enables it |
+| 18 | Safe repair: turn on core Templates | Bootstrap turns it back off |
+| 19 | Extra community plugin enabled | Bootstrap reports it as extra but does not automatically disable/uninstall it |
+| 20 | Modify governed `data.json` or a locked plugin file | Bootstrap does not overwrite the change; release check reports drift requiring Git restoration |
