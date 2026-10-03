@@ -11,6 +11,8 @@
 
 ## Stage 2 — candidate model repository
 
+**Do not enter this stage during the current 2026-10-03 stopping point.** W-337 defers the next candidate repository until Workbench WB-106 and importer v0.8.6 are aligned enough to make it a meaningful integration test.
+
 From a validated clean artifact:
 
 1. Make the candidate working copy.
