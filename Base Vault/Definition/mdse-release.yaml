@@ -45,7 +45,8 @@ tools:
   bootstrap:
     status: active                                  # rebuilt by W-322 (replaces the unavailable 0.2.0 of W-321)
     version: "0.3.0"
-    source: "Bootstrap/Tools/v0.3.0"               # docs and specs: MDSE Bootstrap/
+    source: "Bootstrap/Tools/v0.3.0"               # pinned runtime source
+    candidateSource: "Bootstrap/Tools/v0.3.1"       # W-330 safe activation repair; not promoted yet
     sourceAvailable: true
     role: "safe activation repair + controlled-release check against plugin-lock.yaml; author registration (Author Registration Spec)"
 

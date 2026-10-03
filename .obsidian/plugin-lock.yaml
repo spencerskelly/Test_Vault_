@@ -7,7 +7,7 @@ disabledCorePlugins: [templates]
 plugins:
   mdse-bootstrap:
     version: "0.3.0"
-    source: "Test_Vault_ MDSE Bootstrap/plugin (built)"
+    source: "Test_Vault_ Bootstrap/Tools/v0.3.0 (built)"
     settings: default
     sha256:
       main.js: 5c508061e18c26bd3431b3d0238d2fa7b15b0a3774438dfb69b5777717a02d29
