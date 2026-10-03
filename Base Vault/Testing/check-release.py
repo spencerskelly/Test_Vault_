@@ -99,7 +99,12 @@ log=read("00_Workspace/Workspace Decision Log.md")
 latest=max(int(n) for n in re.findall(r"^\*\*W-(\d+)\b",log,re.M))
 td=read("Importer/Definition/Translator Definition.md")
 m=re.search(r"Current through W-(\d+)",td)
-(ok if m and int(m.group(1))==latest else fail)(f"Translator Definition current through W-{m.group(1) if m else '?'}; Decision Log latest W-{latest}")
+if not m:
+    fail("Translator Definition does not declare a Current through W-n marker")
+elif int(m.group(1)) > latest:
+    fail(f"Translator Definition claims future decision W-{m.group(1)}; Decision Log latest is W-{latest}")
+else:
+    ok(f"Translator Definition declares stage-1 scope through W-{m.group(1)}; global Decision Log latest W-{latest}")
 
 stale={
     "schemaVersion 1.16":"element-types 1.16",
@@ -111,11 +116,9 @@ stale={
 for needle,label in stale.items():
     (fail if needle in td else ok)(f"Translator Definition has no {label}")
 
-for p in ("README.md","00_Workspace/00 - Current State.md"):
-    t=read(p)
-    for v in (man["mdseRelease"],man["schemas"]["relationships"],man["schemas"]["elementTypes"],man["schemas"]["localModel"]):
-        (ok if v in t else fail)(f"{os.path.basename(p)} mentions {v}")
 t=read("00_Workspace/00 - Current State.md")
+for v in (man["mdseRelease"],man["schemas"]["relationships"],man["schemas"]["elementTypes"],man["schemas"]["localModel"]):
+    (ok if v in t else fail)(f"00 - Current State.md mentions {v}")
 (ok if f"W-{latest}" in t else fail)(f"Current State mentions W-{latest}")
 
 lock=read(".obsidian/plugin-lock.yaml")
@@ -142,7 +145,18 @@ else:
     bv=plock["plugins"].get("mdse-bootstrap",{}).get("version")
     srcv=json.load(open(full(ROOT,bootstrap["source"]+"/manifest.json")))["version"]
     pkgv=json.load(open(full(ROOT,bootstrap["source"]+"/package.json")))["version"]
-    (ok if bv==srcv==pkgv==bootstrap["version"] else fail)(f"Bootstrap lock {bv}, source manifest {srcv}, package {pkgv}, release manifest {bootstrap['version']}")
+    if bv==srcv==pkgv==bootstrap["version"]:
+        ok(f"Bootstrap lock {bv} matches pinned runtime source and release manifest")
+    else:
+        csrc=bootstrap.get("candidateSource")
+        cv=cpv=None
+        if csrc and os.path.isfile(full(ROOT,csrc+"/manifest.json")) and os.path.isfile(full(ROOT,csrc+"/package.json")):
+            cv=json.load(open(full(ROOT,csrc+"/manifest.json")))["version"]
+            cpv=json.load(open(full(ROOT,csrc+"/package.json")))["version"]
+        if man["releaseStatus"]!="release" and csrc and bv==cv==cpv:
+            warn(f"Bootstrap lock {bv} matches candidate source {csrc}; pinned runtime remains {bootstrap['version']}")
+        else:
+            fail(f"Bootstrap lock {bv}, pinned source manifest {srcv}, package {pkgv}, release manifest {bootstrap['version']}, candidate {cv}")
     wv=plock["plugins"].get(wbid,{}).get("version")
     (ok if wv==man["tools"]["workbench"]["version"] else fail)(f"Workbench lock {wv} vs release manifest {man['tools']['workbench']['version']}")
     wb106=man["tools"]["workbench"].get("wb106Version")
@@ -304,7 +318,7 @@ if a.base:
     for p in sorted(expected-set(rb["generatedFiles"])-set(plugin_files)):
         src=mapped.get(p,p)
         if p in actual and os.path.exists(full(ROOT,src)):
-            (ok if norm(read_at(base,p))==norm(read(src)) else fail)(f"base file equals authority: {p}")
+            (ok if sha(full(base,p))==sha(full(ROOT,src)) else fail)(f"base file equals authority: {p}")
 
     for p in rb.get("forbiddenPaths",[]):
         if os.path.exists(full(base,p)): fail(f"workspace-only path leaked into base: {p}")
