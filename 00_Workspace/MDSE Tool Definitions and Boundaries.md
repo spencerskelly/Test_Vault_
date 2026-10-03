@@ -1,6 +1,6 @@
 # MDSE Tool Definitions and Boundaries
 
-**Status: current through W-338, 2026-10-03.** This page is the comparison map for the MDSE toolchain. It does not replace each tool's detailed definition; it says where authority lives, what each tool owns, and what it must not own.
+**Status: current through W-341, 2026-10-03.** This page is the comparison map for the MDSE toolchain. It does not replace each tool's detailed definition; it says where authority lives, what each tool owns, and what it must not own.
 
 ## Authority rule
 
@@ -15,7 +15,7 @@ For now, every MDSE tool except the standalone Workbench implementation is manag
 
 | Tool / capability | Primary purpose | Authority / source | Owns | Does not own |
 |---|---|---|---|---|
-| **MDSE Workbench** | Everyday engineering interface: Create, Explore, Details, Inherited, Review and safe model edits | `spencerskelly/MDSE_Workbench` (source/tests/build + `docs/Definition/`) | UI behavior, disposable index, ModelRef-based navigation, schema-valid edit transactions, generated views, Review disposition | MDSE semantics, importer mapping, release packaging, Git commits |
+| **MDSE Workbench** | Everyday engineering interface: Create, Explore, Details, Inherited, Review and safe model edits | `spencerskelly/MDSE_Workbench` (source/tests/build + `docs/Definition/`) | UI behavior, disposable index, ModelRef-based navigation, schema-valid edit transactions, generated/curated view presentation, Review disposition | MDSE semantics, importer mapping, authoritative model meaning from Canvas geometry, release packaging, Git commits |
 | **MDSE Bootstrap** | Make a released vault ready for a person and verify the controlled runtime | `Bootstrap/Definition/` and versioned source under `Bootstrap/Tools/` | safe activation repair, startup/release verification, author registration and per-person initialization (W-330) | model semantics, engineering edits, Workbench behavior, importer behavior |
 | **EA → MDSE Importer** | Deterministically translate the governed EA source into a fresh MDSE base and produce reconciliation evidence | `Importer/Tools/`, `Importer/Definition/Translator Definition.md`, mapping schemas and reconciliation docs | source translation, deterministic naming/identity allocation, Local Model writing, import evidence | everyday model editing, Review disposition, runtime plugin management |
 | **Base / release builder** | Produce the fully configured engineering vault delivered to users | `Base Vault/Definition/mdse-release.yaml`, versioned build tools under `Base Vault/Tools/`, runtime payload under `Base Vault/Runtime/`, and release tests under `Base Vault/Testing/` | runtime payload, governed plugin configuration, pins/hashes, release consistency | engineering model semantics beyond copying governed schemas/config |
@@ -42,6 +42,8 @@ All tools that touch model content must agree on these contracts:
 - Local occurrences are local records, not fake notes.
 - Reusable definitions remain first-class notes.
 - Workbench reads schemas rather than inventing private model rules.
+- Canvas geometry is presentation only; Internal/curated views never create model semantics from placement or drawn geometry (W-340).
+- The engineer-facing Workbench guide is release-managed and cross-repository synchronized (W-341).
 - Cross-vault resolution is intentionally deferred, but the ModelRef boundary must not block it later.
 
 ## Comparison protocol
