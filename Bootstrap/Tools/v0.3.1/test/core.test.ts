@@ -41,7 +41,7 @@ const LOCK = parseLock({
   requiredCorePlugins: ["bases", "canvas"],
   disabledCorePlugins: ["templates"],
   plugins: {
-    dataview: { version: "0.5.68", sha256: { "main.js": "AA", "manifest.json": "bb" } },
+    dataview: { version: "0.5.68", settings: "governed", sha256: { "main.js": "AA", "manifest.json": "bb", "data.json": "ee" } },
     "mdse-bootstrap": { version: "0.3.0", sha256: { "main.js": "cc", "manifest.json": "dd" } },
   },
 });
@@ -50,7 +50,7 @@ function state(over: Partial<ReleaseState> = {}): ReleaseState {
   return {
     lock: LOCK,
     installed: {
-      dataview: { version: "0.5.68", sha256: { "main.js": "aa", "manifest.json": "bb" } },
+      dataview: { version: "0.5.68", sha256: { "main.js": "aa", "manifest.json": "bb", "data.json": "ee" } },
       "mdse-bootstrap": { version: "0.3.0", sha256: { "main.js": "cc", "manifest.json": "dd" } },
     },
     enabled: new Set(["dataview", "mdse-bootstrap"]),
@@ -72,7 +72,7 @@ test("a vault that matches the lock has no problems", () => {
 test("drift is reported: changed file, wrong version, disabled, missing, extra plugin, old Obsidian, core plugins", () => {
   const f = evaluate(state({
     installed: {
-      dataview: { version: "0.5.70", sha256: { "main.js": "ff", "manifest.json": "bb" } },
+      dataview: { version: "0.5.70", sha256: { "main.js": "ff", "manifest.json": "bb", "data.json": "00" } },
       "mdse-bootstrap": { version: null, sha256: { "main.js": null, "manifest.json": null } },
     },
     enabled: new Set(["dataview", "calendar"]),
@@ -113,4 +113,15 @@ test("W-330 activation repair plans only enable locked/required and disable expl
     enableCore: ["bases"],
     disableCore: ["templates"],
   });
+});
+
+
+test("governed settings hash drift is reported", () => {
+  const f = evaluate(state({
+    installed: {
+      dataview: { version: "0.5.68", sha256: { "main.js": "aa", "manifest.json": "bb", "data.json": "ff" } },
+      "mdse-bootstrap": { version: "0.3.0", sha256: { "main.js": "cc", "manifest.json": "dd" } },
+    },
+  }));
+  assert.match(f.find((x) => x.subject === "dataview")?.message ?? "", /data\.json differs from the release/);
 });

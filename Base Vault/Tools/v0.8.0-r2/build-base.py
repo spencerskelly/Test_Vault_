@@ -5,9 +5,8 @@ Usage:
   python3 "Base Vault/Tools/v0.8.0/build-base.py" OUTPUT_DIRECTORY
 
 The output directory must not already contain files. The positive include list comes only
-from 99_System/03_Schemas/mdse-release.yaml. Workspace-only methodology files are never
-copied. During pre-release, a not-yet-built conditional file (currently importer v0.8.0)
-is reported and skipped; release status 'release' makes it blocking.
+from Base Vault/Definition/mdse-release.yaml. Workspace-only methodology files are never
+copied. The runtime payload is intentionally operational only. Importer executables remain external and run against the generated base; they are not copied into engineer vaults.
 """
 import argparse, os, shutil, sys
 
@@ -83,7 +82,7 @@ rp=man["runtimePlugins"]
 with open(full(ROOT,rp["lock"]),encoding="utf-8") as f:
     plock=yaml.safe_load(f)
 if plock.get("schema")!=2:
-    sys.exit("plugin-lock.yaml is not schema 2; run update-plugin-lock.py")
+    sys.exit("plugin-lock.yaml is not schema 2; run Base Vault/Tools/v0.8.0-r2/update-plugin-lock.py")
 for pid in plock["plugins"]:
     src=full(ROOT,rp["payload"]+"/"+pid)
     if not os.path.isdir(src):

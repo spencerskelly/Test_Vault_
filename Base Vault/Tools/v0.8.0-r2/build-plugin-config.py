@@ -2,8 +2,8 @@
 """Generate the governed plugin configuration of the MDSE runtime base (W-322).
 
 Usage:
-  python3 "Base Vault/Tools/v0.8.0/build-plugin-config.py"          # write generated files
-  python3 "Base Vault/Tools/v0.8.0/build-plugin-config.py" --check  # exit 1 if any generated file is stale
+  python3 "Base Vault/Tools/v0.8.0-r2/build-plugin-config.py"          # write generated files
+  python3 "Base Vault/Tools/v0.8.0-r2/build-plugin-config.py" --check  # exit 1 if any generated file is stale
 
 Inputs (authority): 99_System/03_Schemas/relationships.yaml, element-types.yaml.
 Outputs (generated, never edit by hand):

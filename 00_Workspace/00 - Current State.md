@@ -20,7 +20,7 @@
 3. [[MDSE v0.8 Cross-Repository Reconciliation - 2026-10-02]]: the implementation contract (identity, reruns, naming, Local Model 0.2, evidence set, gates, build order).
 4. [[MDSE Modeling Ruleset 1.23]]: what the model means and how imports are governed.
 5. [[Translator Definition]]: what the stage 1 importer must do.
-6. [[Workspace Decision Log]]: every decision (W-01 to W-330); newest last. Where a log entry marks an earlier one superseded, the later one governs.
+6. [[Workspace Decision Log]]: every decision (W-01 to W-332); newest last. Where a log entry marks an earlier one superseded, the later one governs.
 7. [[MDSE Tool Definitions and Boundaries]]: authoritative ownership/boundary map for Workbench, Bootstrap, importer, base/release tooling and deferred cross-vault infrastructure.
 8. [[Handoff Prompt - MDSE v0.8 Implementation]]: copy-ready prompts for a new AI chat (general, and Workbench).
 9. [[Post-Import Tasks]]: the work done in the vault after an import, Tasks 1 to 9.
@@ -49,7 +49,7 @@
 |---|---|---|
 | Importer v0.8.6 | **implementation candidate built; whole-model semantic write succeeded (v0.8.3 run)** | Run the decode-only attachment check on the real QEAX with `attachment_benchmark.json` (376 documents, 390 files, zero residual; W-323), then a full fresh-base run. W-324: no length-driven shortening, links by file name, `Review - Long Paths.csv` feeds Post-Import Task 9. Do not mark release-conformant until acceptance gates and WB-106 pass. |
 | Importers v0.1 to v0.7, v0.8.0 to v0.8.5 | archived (W-326) | `99_System/archive/09_Tools retired importers/` with a README of their roles. None may generate a model. |
-| Clean 0.8.0 base vault | **not issued** | Generate deterministically with `build-base.py`; validate with `check-release.py --base`. It is a lean runtime artifact and carries `mdse_release: "0.8.0"` in `.vault.yaml`. |
+| Clean 0.8.0 base vault | **not issued** | Generate deterministically with `Base Vault/Tools/v0.8.0-r2/build-base.py`; validate with `Base Vault/Testing/check-release.py --base`. Importer stays external (W-332). It is a lean runtime artifact and carries `mdse_release: "0.8.0"` in `.vault.yaml`. |
 | MDSE Workbench 0.1.16 | built; typecheck, 52 tests and build pass (2026-10-03). Reads Local Model 0.1/0.2, `ModelRef`, findings report (**Check Local Model**); writes links Obsidian-style (W-324, W-325, WB-111, WB-112) | WB-106 remainder: occurrence-aware Structure, Interfaces, Where Used and Requirements views, Local Model popup (WB-105), Review integration |
 | MDSE Bootstrap 0.3.0 | pinned runtime release (W-322); 6 tests previously passed; in every pre-release base | W-330 option B is implemented as **0.3.1 candidate** in `Bootstrap/Tools/v0.3.1`; run automated build/tests and `Bootstrap/Testing/Base First-Open Test Sheet.md` before promoting it into the Base Vault runtime payload |
 | Runtime plugins (11) | vendored, pinned, hashed, configured (W-322) | `Base Vault/Runtime/Plugins/`; lock `.obsidian/plugin-lock.yaml`; see `Base Vault/Definition/Enabled Plugin Stack.md` |

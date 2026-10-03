@@ -9,4 +9,4 @@ Development area for the controlled MDSE engineering-vault release.
 - **Testing/** — release consistency checks and test artifacts.
 - **Initialization/** — scripts delivered or mapped into a clean generated vault for one-time vault initialization.
 
-The Base Vault tooling assembles the product delivered to an engineer. Tool-development material itself is not copied into the released engineering vault unless the release manifest explicitly maps it there.
+The Base Vault tooling assembles the product delivered to an engineer. Tool-development material itself is not copied into the released engineering vault unless the release manifest explicitly maps it there. The Importer is external to the operational vault: it targets a fresh generated base during model creation but is not shipped in the resulting engineer vault.
