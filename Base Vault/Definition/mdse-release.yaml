@@ -122,6 +122,7 @@ documents:
   - {path: "00_Workspace/00 - Current State.md", status: current}
   - {path: "00_Workspace/MDSE Plan - Path to a Golden Model.md", status: current}
   - {path: "00_Workspace/MDSE v0.8 Cross-Repository Reconciliation - 2026-10-02.md", status: current}
+  - {path: "00_Workspace/MDSE Tool Definitions and Boundaries.md", status: current}
   - {path: "99_System/10_Docs/MDSE Modeling Ruleset 1.23.md", status: current}
   - {path: "Importer/Definition/Translator Definition.md", status: current}
   - {path: "00_Workspace/Workspace Decision Log.md", status: current}
@@ -133,13 +134,13 @@ documents:
   - {path: "Bootstrap/Testing/Base First-Open Test Sheet.md", status: current}
   - {path: "Base Vault/Definition/Enabled Plugin Stack.md", status: current}
   - {path: "00_Workspace/Review Changes Log.md", status: reference}
-  - {path: "00_Workspace/History/Retired Documents/Handoff - Continue Here.md", status: retired, supersededBy: "99_System/10_Docs/00 - Current State.md"}
-  - {path: "00_Workspace/History/Retired Documents/MDSE v0.8 Design Check - 2026-10-01.md", status: retired, supersededBy: "99_System/10_Docs/MDSE v0.8 Cross-Repository Reconciliation - 2026-10-02.md"}
-  - {path: "00_Workspace/History/Retired Documents/EA Native Importer Comprehensive Handoff - 2026-10-01.md", status: retired, supersededBy: "99_System/10_Docs/MDSE v0.8 Cross-Repository Reconciliation - 2026-10-02.md"}
+  - {path: "00_Workspace/History/Retired Documents/Handoff - Continue Here.md", status: retired, supersededBy: "00_Workspace/00 - Current State.md"}
+  - {path: "00_Workspace/History/Retired Documents/MDSE v0.8 Design Check - 2026-10-01.md", status: retired, supersededBy: "00_Workspace/MDSE v0.8 Cross-Repository Reconciliation - 2026-10-02.md"}
+  - {path: "00_Workspace/History/Retired Documents/EA Native Importer Comprehensive Handoff - 2026-10-01.md", status: retired, supersededBy: "00_Workspace/MDSE v0.8 Cross-Repository Reconciliation - 2026-10-02.md"}
   - {path: "00_Workspace/History/Retired Documents/MDSE Modeling Ruleset 1.22.md", status: retired, supersededBy: "99_System/10_Docs/MDSE Modeling Ruleset 1.23.md"}
-  - {path: "00_Workspace/History/Retired Documents/Git and New Vault Setup.md", status: retired, supersededBy: "99_System/10_Docs/00 - Current State.md"}
-  - {path: "00_Workspace/History/Retired Documents/MDSE v0.8 Toolchain Review - 2026-10-02.md", status: retired, supersededBy: "99_System/10_Docs/MDSE Plan - Path to a Golden Model.md"}
-  - {path: "00_Workspace/History/Retired Documents/MDSE Platform Roadmap and Critical Points - 2026-10-02.md", status: retired, supersededBy: "99_System/10_Docs/MDSE Plan - Path to a Golden Model.md"}
-  - {path: "Importer/History/Importer Revisions/README_retired importers.md", status: retired, supersededBy: "99_System/10_Docs/00 - Current State.md"}
-  - {path: "Importer/History/EA Native Translator/README_EA Native Translator.md", status: retired, supersededBy: "99_System/10_Docs/Translator Definition.md"}
-  - {path: "Importer/History/Retired Import Evidence/README_11_Import retired.md", status: retired, supersededBy: "99_System/10_Docs/MDSE v0.8 Cross-Repository Reconciliation - 2026-10-02.md"}
+  - {path: "00_Workspace/History/Retired Documents/Git and New Vault Setup.md", status: retired, supersededBy: "00_Workspace/00 - Current State.md"}
+  - {path: "00_Workspace/History/Retired Documents/MDSE v0.8 Toolchain Review - 2026-10-02.md", status: retired, supersededBy: "00_Workspace/MDSE Plan - Path to a Golden Model.md"}
+  - {path: "00_Workspace/History/Retired Documents/MDSE Platform Roadmap and Critical Points - 2026-10-02.md", status: retired, supersededBy: "00_Workspace/MDSE Plan - Path to a Golden Model.md"}
+  - {path: "Importer/History/Importer Revisions/README_retired importers.md", status: retired, supersededBy: "00_Workspace/00 - Current State.md"}
+  - {path: "Importer/History/EA Native Translator/README_EA Native Translator.md", status: retired, supersededBy: "Importer/Definition/Translator Definition.md"}
+  - {path: "Importer/History/Retired Import Evidence/README_11_Import retired.md", status: retired, supersededBy: "00_Workspace/MDSE v0.8 Cross-Repository Reconciliation - 2026-10-02.md"}

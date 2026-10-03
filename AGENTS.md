@@ -1,6 +1,6 @@
 # AI / Agent Rules
 
-If `99_System/10_Docs/00 - Current State.md` exists, read it first; it governs the methodology workspace. A lean generated engineering vault intentionally omits that registry, so there start from `99_System/02_AI/AI_INSTRUCTIONS.md`, Ruleset 1.23 and the runtime schemas.
+If `00_Workspace/00 - Current State.md` exists, read it first; it governs the methodology workspace. A lean generated engineering vault intentionally omits that registry, so there start from `99_System/02_AI/AI_INSTRUCTIONS.md`, Ruleset 1.23 and the runtime schemas.
 
 Read and follow `99_System/02_AI/AI_INSTRUCTIONS.md` before creating or editing any note.
 
