@@ -21,8 +21,7 @@ plugins:
       main.js: f672cf8432164e386551e8fd51d8f8d015e6003ae95debbbdebbd29ee4ad0c7d
       manifest.json: e7f52d68a02fe511d5f4a137138df322057d4a4babe8730dbec4218382edc5d8
       styles.css: 445abe199f3dbf00724dc3cffa13aed58fc087adc9396e79de18ebe6b274b008
-  templater-obsidian
-      data.json: f1f07fef40bb321376a4392fb87f86f85d42d3fed7ffe3ae701eddf8eb999154:
+  templater-obsidian:
     version: "2.25.0"
     source: "github.com/SilentVoid13/Templater release"
     settings: governed
@@ -30,8 +29,8 @@ plugins:
       main.js: 6a29790e8ad3bb3de5bcc7381588f20093b2dbecc1ff27d8a5d7ed3fcebbdf4e
       manifest.json: 75985188fac8b518eebb791370a24dae1a2476cce3912de4709778dbde0171e4
       styles.css: eb94063be602679f397e3e35fcb7f6a4b027da82e17c213bb44a267c6b45d8de
-  fileclass
-      data.json: 1bfc926d4532b641d440be621b87455fdeebd58db8cee2986f48ba55adb1d654:
+      data.json: f1f07fef40bb321376a4392fb87f86f85d42d3fed7ffe3ae701eddf8eb999154
+  fileclass:
     version: "0.2.15"
     source: "github.com/mdelobelle/fileclass release"
     settings: governed
@@ -39,8 +38,7 @@ plugins:
       main.js: 2ef2199710b4b9a2b9e2307ba6218b591557667e4fa11b09906844f0bcc78d64
       manifest.json: d40f1802e1fa1fa1b2245cc52f56b8030a947747a733cf67eae03d4a452b312b
       styles.css: da16243f2e928592e05e5b31db5620f9bcd00ffc45a92453d30c53953e5c5ccb
-  breadcrumbs
-      data.json: f9ff4cd407a5f3ad7c53ddf4614af6bf5fc0f3f15a9873934ff513b49fc2a035:
+  breadcrumbs:
     version: "4.21.11"
     source: "github.com/michaelpporter/breadcrumbs release"
     settings: governed
@@ -48,8 +46,8 @@ plugins:
       main.js: 7c51717ee9ef0846d39bceba2b518f344027e3cbef0722cf303cbd8ac5ec21d7
       manifest.json: 5561437e5e25a954bc2db53ca7404d54887960338b2ca5f1cd24fd594338528b
       styles.css: 674de457b453895a59e342466c378f5272d265900bf9e8b6d50d892cc37d5c60
-  obsidian-git
-      data.json: 1bbb149152720ab80c8a1e492b2f8379aa92c5b6876ebd58301c6f1d8c3d3045:
+      data.json: f9ff4cd407a5f3ad7c53ddf4614af6bf5fc0f3f15a9873934ff513b49fc2a035
+  obsidian-git:
     version: "2.40.0"
     source: "github.com/Vinzent03/obsidian-git release"
     settings: governed
@@ -57,6 +55,7 @@ plugins:
       main.js: 6f198f140be39254c410c21998c1bd86f9a077ad415604356382e5dc5836e1a1
       manifest.json: c9f0d49c2094c4751b97e395015b49761651944c371cba67bbf6a46170f2cb91
       styles.css: f5ab93f4d5b4dd1bd1e577864c5c79087f7adfd448ac346e0489e5847ce6922d
+      data.json: 1bbb149152720ab80c8a1e492b2f8379aa92c5b6876ebd58301c6f1d8c3d3045
   dataview:
     version: "0.5.68"
     source: "github.com/blacksmithgu/obsidian-dataview release"
