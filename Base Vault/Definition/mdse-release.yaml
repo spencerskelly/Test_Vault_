@@ -37,6 +37,7 @@ tools:
   workbench:
     repo: "spencerskelly/MDSE_Workbench"
     version: "0.1.16"                               # pinned in plugin-lock.yaml for pre-release bases
+    candidateVersion: "0.1.17"                      # W-342: standalone development candidate; not yet vendored/promoted
     nextGate: "WB-106"
     wb106Version: null                              # set to the first WB-106-capable release; required for releaseStatus: release
     runtimePluginId: "mdse-workbench"
