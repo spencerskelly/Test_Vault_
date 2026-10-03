@@ -154,7 +154,7 @@ if candidate:
     else:
         itxt=read(candidate)
         required_importer_tokens=[
-            'version: "0.8.3"',
+            'version: "0.8.4"',
             'const REL_SCHEMA_VERSION="1.35"',
             'const ELEMENT_SCHEMA_VERSION="1.17"',
             'const LOCAL_MODEL_SCHEMA_VERSION="0.2"',
@@ -171,6 +171,10 @@ if candidate:
             'folderLimit=MAX_GENERATED_PATH-MIN_READABLE_FILE_CHARS-4',
             'function rebuildMapped()',
             'label="folder_"+ordinal',
+            'async function unzipFirstFile',
+            'async function unwrapEaDocumentPayload',
+            'sourceRaw=blobBytes',
+            'v"+BUILD.version+" candidate PASS',
             '<!-- MDSE:LOCAL-MODEL START schema=0.2 -->',
             'Local Model Source Map.csv',
             'Attachment Reconciliation.csv',
