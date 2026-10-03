@@ -1,6 +1,6 @@
 # MDSE Plan: Path to a Golden Model
 
-**Status: current plan (W-330), 2026-10-03.** This is the working plan from today's tools to a **golden** model: the vault the team uses as the single authoritative engineering model after EA is retired. Rules live in the authority files named in [[00 - Current State]]; this plan says what to do, in what order, and how to know a step is done. Items marked **proposal** are not decisions until logged as `W-n` or `WB-n`. Update this file in the same commit as any decision that changes a step.
+**Status: current plan (W-338), 2026-10-03.** This is the working plan from today's tools to a **golden** model: the vault the team uses as the single authoritative engineering model after EA is retired. Rules live in the authority files named in [[00 - Current State]]; this plan says what to do, in what order, and how to know a step is done. Items marked **proposal** are not decisions until logged as `W-n` or `WB-n`. Update this file in the same commit as any decision that changes a step.
 
 ## 1. What "golden" means (proposal, confirm as D1)
 
@@ -33,6 +33,10 @@ Add one row per real run. "Decision" is accept-for-review, restart (fix rules, r
 | 2026-10-02 | v0.8.3 | whole model | 30,298 notes, 2,030 parts, 2,484 endpoints, 460 connections, 53 flows; preflight and plan PASS. All 376 attachments failed: EA stores linked documents as ZIP. | Restart. Decoder fixed in v0.8.4, hardened in v0.8.5 (W-323). |
 | 2026-10-02 | v0.8.5 | decode-only | 376 decoded, 367 OK, 9 `PATH_ERROR` (attachment paths 221 to 262 characters over the old 212 limit); benchmark file not loaded. | Restart. W-324 removed length-driven rules (v0.8.6); decode-only now refuses to run without the benchmark. |
 | next | v0.8.6 | decode-only, then whole model | expected: benchmark PASS 376/376 documents, 390/390 files | |
+
+### Current stopping point — 2026-10-03
+
+Base/Bootstrap work is paused at a stable candidate boundary (W-337). Do not create another integration vault solely for Bootstrap testing. Resume with Workbench WB-106 first, then importer v0.8.6 alignment. Once both are ready, build one fresh integration vault for Bootstrap first-open persistence, importer execution, Workbench validation, and the remaining golden-model gates.
 
 ## 3. Gates
 
