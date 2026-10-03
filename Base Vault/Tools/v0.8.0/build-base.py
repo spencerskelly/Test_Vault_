@@ -2,7 +2,7 @@
 """Build the lean MDSE runtime base from the W-321 release manifest.
 
 Usage:
-  python3 99_System/09_Tools/build-base.py OUTPUT_DIRECTORY
+  python3 "Base Vault/Tools/v0.8.0/build-base.py" OUTPUT_DIRECTORY
 
 The output directory must not already contain files. The positive include list comes only
 from 99_System/03_Schemas/mdse-release.yaml. Workspace-only methodology files are never
@@ -16,16 +16,19 @@ try:
 except ImportError:
     sys.exit("PyYAML is required: pip install pyyaml")
 
-ROOT=os.path.abspath(os.path.join(os.path.dirname(__file__),"..",".."))
-MANIFEST=os.path.join(ROOT,"99_System","03_Schemas","mdse-release.yaml")
+ROOT=os.path.abspath(os.path.join(os.path.dirname(__file__),"..","..",".."))
+MANIFEST=os.path.join(ROOT,"Base Vault","Definition","mdse-release.yaml")
 
 def full(root,p):
     return os.path.join(root,*p.split("/"))
 
 def copy_file(src_root,dst_root,p):
-    src=full(src_root,p); dst=full(dst_root,p)
+    copy_file_as(src_root,dst_root,p,p)
+
+def copy_file_as(src_root,dst_root,source,target):
+    src=full(src_root,source); dst=full(dst_root,target)
     if not os.path.isfile(src):
-        raise FileNotFoundError(p)
+        raise FileNotFoundError(source)
     os.makedirs(os.path.dirname(dst),exist_ok=True)
     shutil.copy2(src,dst)
 
@@ -61,6 +64,8 @@ else:
 copied=0
 for p in rb["includeFiles"]:
     copy_file(ROOT,out,p); copied+=1
+for m in rb.get("mappedFiles",[]):
+    copy_file_as(ROOT,out,m["source"],m["target"]); copied+=1
 for p in rb["includeTrees"]:
     before=sum(len(ns) for _,_,ns in os.walk(full(ROOT,p)))
     copy_tree(ROOT,out,p); copied+=before
@@ -168,4 +173,4 @@ if man["releaseStatus"]=="release" and man["tools"]["workbench"]["requiredForRel
 
 print(f"Built MDSE {man['mdseRelease']} lean runtime base at {out}")
 print(f"Copied {copied} governed files (including {len(plock['plugins'])} runtime plugins) plus generated README.md, .gitignore and .vault.yaml")
-print("Validate with: python3 99_System/09_Tools/check-release.py --base <output>")
+print('Validate with: python3 "Base Vault/Testing/check-release.py" --base <output>')

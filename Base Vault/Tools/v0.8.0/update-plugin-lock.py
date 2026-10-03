@@ -2,24 +2,24 @@
 """Write or verify `.obsidian/plugin-lock.yaml` (schema 2) from the vendored runtime plugins (W-322).
 
 Usage:
-  python3 99_System/09_Tools/update-plugin-lock.py          # rewrite lock + community-plugins.json
-  python3 99_System/09_Tools/update-plugin-lock.py --check  # exit 1 if either is stale
+  python3 "Base Vault/Tools/v0.8.0/update-plugin-lock.py"          # rewrite lock + community-plugins.json
+  python3 "Base Vault/Tools/v0.8.0/update-plugin-lock.py" --check  # exit 1 if either is stale
 
 The plugin set, order, sources and settings policy are declared in PLUGINS below; versions and SHA-256
-hashes are read from 99_System/09_Tools/runtime-plugins/<id>/. Changing a plugin version is a release
+hashes are read from Base Vault/Runtime/Plugins/<id>/. Changing a plugin version is a release
 decision: replace the vendored files, update PLUGINS if the source changes, run this script, log a W- entry.
 """
 import argparse, hashlib, json, os, sys
 
-ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", ".."))
-PAYLOAD = os.path.join(ROOT, "99_System", "09_Tools", "runtime-plugins")
+ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "..", ".."))
+PAYLOAD = os.path.join(ROOT, "Base Vault", "Runtime", "Plugins")
 LOCK = os.path.join(ROOT, ".obsidian", "plugin-lock.yaml")
 ENABLED = os.path.join(ROOT, ".obsidian", "community-plugins.json")
 FILES = ("main.js", "manifest.json", "styles.css")
 
 # id: (source, settings) — settings "governed" means a generated data.json ships with the release.
 PLUGINS = {
-    "mdse-bootstrap":     ("Test_Vault_ MDSE Bootstrap/plugin (built)", "default"),
+    "mdse-bootstrap":     ("Test_Vault_ Bootstrap/Tools/v0.3.0 (built)", "default"),
     "mdse-workbench":     ("spencerskelly/MDSE_Workbench (built)", "default"),
     "templater-obsidian": ("github.com/SilentVoid13/Templater release", "governed"),
     "fileclass":          ("github.com/mdelobelle/fileclass release", "governed"),
