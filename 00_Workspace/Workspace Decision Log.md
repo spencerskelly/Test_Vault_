@@ -866,3 +866,8 @@ The approved theory, examples and implementation impact are recorded in `MDSE v0
 
 
 **W-336 · 2026-10-03 · Base initialization scripts are release-validated for host-shell syntax.** The macOS/Linux `Initialize-Vault.sh` must parse successfully under `sh -n` as part of `check-release.py` before a Base Vault is considered valid. Embedded helper code must avoid shell-sensitive quote patterns even inside here-documents. This gate was added after the first 0.3.1 candidate Base exposed a quoting defect before changing `.vault.yaml`; initialization remains fail-safe and refuses partial identity creation.
+
+
+**W-337 · 2026-10-03 · Pause creation of the next integration vault until Workbench and importer are aligned.** Base/Bootstrap candidate work has reached a stable source/build-validation boundary: Bootstrap 0.3.1 builds and passes 9 tests, the candidate Base builds, and release validation reports 0 failures with only expected pre-release warnings. Do not spend time creating another disposable/integration repository solely for Bootstrap first-open testing. Finish Workbench WB-106 first, then align importer v0.8.6; use one fresh integrated candidate vault to test Bootstrap first-open persistence, importer execution and Workbench behavior together. Bootstrap 0.3.0 remains the official pin until that integrated test passes.
+
+**W-338 · 2026-10-03 · OS metadata is never governed Base Vault content.** Base build tooling must ignore platform metadata such as `.DS_Store` and `Thumbs.db` when copying governed trees. These files are local filesystem artifacts, not MDSE definitions/evidence, and their presence must not affect deterministic release contents.
