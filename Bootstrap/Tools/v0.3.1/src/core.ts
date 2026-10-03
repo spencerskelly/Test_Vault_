@@ -45,9 +45,26 @@ export interface ActivationPlan {
 }
 
 /** W-330: repair activation only. Never add/remove plugin files and never rewrite governed settings. */
-export function activationPlan(lock: PluginLock, enabled: Set<string>, coreEnabled: Record<string, boolean>): ActivationPlan {
+export function installedMatchesLock(plugin: LockedPlugin, installed: InstalledPlugin | undefined): boolean {
+  if (!installed || installed.version !== plugin.version) return false;
+  for (const [file, want] of Object.entries(plugin.sha256)) {
+    const got = installed.sha256[file];
+    if (!got || got.toLowerCase() !== want.toLowerCase()) return false;
+  }
+  return true;
+}
+
+export function activationPlan(
+  lock: PluginLock,
+  enabled: Set<string>,
+  coreEnabled: Record<string, boolean>,
+  installed: Record<string, InstalledPlugin>,
+): ActivationPlan {
   return {
-    enableCommunity: Object.keys(lock.plugins).filter((id) => !enabled.has(id)).sort(),
+    enableCommunity: Object.entries(lock.plugins)
+      .filter(([id, plugin]) => !enabled.has(id) && installedMatchesLock(plugin, installed[id]))
+      .map(([id]) => id)
+      .sort(),
     enableCore: lock.requiredCorePlugins.filter((id) => !coreEnabled[id]).sort(),
     disableCore: lock.disabledCorePlugins.filter((id) => !!coreEnabled[id]).sort(),
   };
@@ -170,7 +187,7 @@ export function evaluate(s: ReleaseState): Finding[] {
   }
   for (const id of s.lock.disabledCorePlugins) {
     const on = !!s.coreEnabled[id];
-    add(on ? "warn" : "ok", "core", id, on ? "core plugin should be off (use Templater for templates)" : "off");
+    add(on ? "error" : "ok", "core", id, on ? "core plugin must be off (use Templater for templates)" : "off");
   }
 
   add(s.isGitRepo ? "ok" : "warn", "git", "Git", s.isGitRepo ? "vault is a Git repository" : "vault is not a Git repository; changes cannot be shared");

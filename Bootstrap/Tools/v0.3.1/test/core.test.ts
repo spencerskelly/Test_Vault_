@@ -90,7 +90,7 @@ test("drift is reported: changed file, wrong version, disabled, missing, extra p
   assert.match(msg("kanban"), /warn:installed but not part/);
   assert.match(msg("Obsidian"), /^error:1\.11\.0 is older/);
   assert.match(msg("bases"), /^error/);
-  assert.match(msg("templates"), /^warn/);
+  assert.match(msg("templates"), /^error/);
   assert.match(msg("MDSE release"), /^error/);
   assert.match(msg("Vault identity"), /^warn/);
   assert.match(msg("Git"), /^warn/);
@@ -107,6 +107,7 @@ test("W-330 activation repair plans only enable locked/required and disable expl
     LOCK,
     new Set(["mdse-bootstrap", "calendar"]),
     { bases: false, canvas: true, templates: true },
+    state().installed,
   );
   assert.deepEqual(p, {
     enableCommunity: ["dataview"],
@@ -124,4 +125,12 @@ test("governed settings hash drift is reported", () => {
     },
   }));
   assert.match(f.find((x) => x.subject === "dataview")?.message ?? "", /data\.json differs from the release/);
+});
+
+
+test("activation repair refuses a changed plugin", () => {
+  const installed = state().installed;
+  installed.dataview = { version: "0.5.68", sha256: { "main.js": "ff", "manifest.json": "bb", "data.json": "ee" } };
+  const p = activationPlan(LOCK, new Set(["mdse-bootstrap"]), { bases: true, canvas: true, templates: false }, installed);
+  assert.deepEqual(p.enableCommunity, [], "a disabled plugin with file drift is reported, not loaded");
 });

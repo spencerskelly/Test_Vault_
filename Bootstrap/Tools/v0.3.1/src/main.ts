@@ -59,6 +59,24 @@ export default class MdseBootstrap extends Plugin {
     return (this.app as unknown as { internalPlugins: InternalPluginsApi }).internalPlugins;
   }
 
+  private async scanInstalled(lock: ReturnType<typeof parseLock>): Promise<Record<string, InstalledPlugin>> {
+    const a = this.app.vault.adapter;
+    const cfg = this.app.vault.configDir;
+    const installed: Record<string, InstalledPlugin> = {};
+    for (const [id, p] of Object.entries(lock.plugins)) {
+      const dir = normalizePath(`${cfg}/plugins/${id}`);
+      let version: string | null = null;
+      try { version = String(JSON.parse(await a.read(`${dir}/manifest.json`)).version); } catch { version = null; }
+      const sha256: Record<string, string | null> = {};
+      for (const file of Object.keys(p.sha256)) {
+        try { sha256[file] = hex(await crypto.subtle.digest("SHA-256", await a.readBinary(`${dir}/${file}`))); }
+        catch { sha256[file] = null; }
+      }
+      installed[id] = { version, sha256 };
+    }
+    return installed;
+  }
+
   private async repairActivation(): Promise<void> {
     try {
       const a = this.app.vault.adapter;
@@ -67,7 +85,8 @@ export default class MdseBootstrap extends Plugin {
       const internal = this.internalPlugins();
       const coreEnabled: Record<string, boolean> = {};
       for (const id of [...lock.requiredCorePlugins, ...lock.disabledCorePlugins]) coreEnabled[id] = !!internal.getPluginById(id)?.enabled;
-      const plan = activationPlan(lock, new Set(this.plugins().enabledPlugins), coreEnabled);
+      const installed = await this.scanInstalled(lock);
+      const plan = activationPlan(lock, new Set(this.plugins().enabledPlugins), coreEnabled, installed);
 
       for (const id of plan.enableCommunity) {
         if (typeof this.plugins().enablePlugin === "function") await this.plugins().enablePlugin!(id);
@@ -89,18 +108,7 @@ export default class MdseBootstrap extends Plugin {
     let findings: Finding[];
     try {
       const lock = parseLock(parseYaml(await a.read(normalizePath(`${cfg}/plugin-lock.yaml`))));
-      const installed: Record<string, InstalledPlugin> = {};
-      for (const [id, p] of Object.entries(lock.plugins)) {
-        const dir = normalizePath(`${cfg}/plugins/${id}`);
-        let version: string | null = null;
-        try { version = String(JSON.parse(await a.read(`${dir}/manifest.json`)).version); } catch { version = null; }
-        const sha256: Record<string, string | null> = {};
-        for (const file of Object.keys(p.sha256)) {
-          try { sha256[file] = hex(await crypto.subtle.digest("SHA-256", await a.readBinary(`${dir}/${file}`))); }
-          catch { sha256[file] = null; }
-        }
-        installed[id] = { version, sha256 };
-      }
+      const installed = await this.scanInstalled(lock);
       let vaultText = "";
       try { vaultText = await a.read(".vault.yaml"); } catch { /* reported below */ }
       const rel = /^mdse_release:\s*["']?([^"'#\r\n]+)/m.exec(vaultText);
