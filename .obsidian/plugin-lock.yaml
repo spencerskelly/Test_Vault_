@@ -14,12 +14,12 @@ plugins:
       manifest.json: 2e78f9bccd44a1fcca17b6ce2bb071a69d423eb1e93b50a08bc4d4085bea2114
       styles.css: dd7ba34452810f9d39ea03395fae66469decb386de83e6ab66d7a345e42ca645
   mdse-workbench:
-    version: "0.1.15"
+    version: "0.1.16"
     source: "spencerskelly/MDSE_Workbench (built)"
     settings: default
     sha256:
-      main.js: ad8369360e6ad4e10e9fb69ce7566bd288048fddf1241321ad98aa30c8d7c918
-      manifest.json: 50da977f2c2184aa773b5a94228d19bba6cfd9dca0081215f3bbc0de29bad027
+      main.js: f672cf8432164e386551e8fd51d8f8d015e6003ae95debbbdebbd29ee4ad0c7d
+      manifest.json: e7f52d68a02fe511d5f4a137138df322057d4a4babe8730dbec4218382edc5d8
       styles.css: 445abe199f3dbf00724dc3cffa13aed58fc087adc9396e79de18ebe6b274b008
   templater-obsidian:
     version: "2.25.0"

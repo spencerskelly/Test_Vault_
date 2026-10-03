@@ -48,11 +48,11 @@
 | Importer v0.7 | evidence only, never accepted | Do not use to generate a model to keep |
 | Importers v0.1 to v0.5.1 | history | See `99_System/09_Tools/README_09_Tools.md` |
 | Clean 0.8.0 base vault | **not issued** | Generate deterministically with `build-base.py`; validate with `check-release.py --base`. It is a lean runtime artifact and carries `mdse_release: "0.8.0"` in `.vault.yaml`. |
-| MDSE Workbench 0.1.15 | built; typecheck, 31 tests and build pass (2026-10-02) | WB-106: Local Model reader, ModelRef, block fragments, occurrence-aware views |
+| MDSE Workbench 0.1.16 | built; typecheck, 52 tests and build pass (2026-10-03). Reads Local Model 0.1/0.2, `ModelRef`, findings report (**Check Local Model**); writes links Obsidian-style (W-324, W-325, WB-111, WB-112) | WB-106 remainder: occurrence-aware Structure, Interfaces, Where Used and Requirements views, Local Model popup (WB-105), Review integration |
 | MDSE Bootstrap 0.3.0 | built (W-322); 6 tests pass; in every base | Run the [[Base First-Open Test Sheet]] in Obsidian. Source and docs: `MDSE Bootstrap/` |
 | Runtime plugins (11) | vendored, pinned, hashed, configured (W-322) | `99_System/09_Tools/runtime-plugins/`; lock `.obsidian/plugin-lock.yaml`; see `99_System/01_Admin/Enabled Plugin Stack.md` |
 
-Workbench 0.1.15 is pinned and enabled in pre-release bases. The **final issued** base must pin the WB-106-capable release (`wb106Version` in `mdse-release.yaml`); `check-release.py` fails a release build until then.
+Workbench 0.1.16 is pinned and enabled in pre-release bases (WB-106 is not complete; `wb106Version` stays unset until the occurrence-aware views are done). The **final issued** base must pin the WB-106-capable release (`wb106Version` in `mdse-release.yaml`); `check-release.py` fails a release build until then.
 
 ## Runtime-base alignment
 

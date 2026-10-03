@@ -28,7 +28,7 @@ Current target:
 ### MDSE_Workbench
 This is the live plugin implementation. It remains independently versioned from MDSE releases.
 
-The current 0.1.15 source is a safety/alignment build: repeated relationships are not shown as quantity and ordinary body editing is blocked on governed Local Model notes. It is not the keepability build. WB-106 is the next implementation gate.
+The current 0.1.16 source reads Local Model 0.1/0.2 with `ModelRef` identity and reports findings, writes links Obsidian-style, shows no repeated relationship as quantity and blocks ordinary body editing on governed Local Model notes. It is not the keepability build: the occurrence-aware views of WB-106 remain.
 
 ### Old base-vault repository
 `Test_Vault_-base-vault-2026-09-30-rel133-v051` is reference only. It must not be issued as the v0.8 base.

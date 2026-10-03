@@ -103,6 +103,8 @@ Exact APIs can change; the separation is what matters.
 
 Each milestone has an exit criterion. A milestone is not done until its exit criterion is shown on the real translated vault, not only on a small sample.
 
+**Update 2026-10-03 (plugin 0.1.16).** WB-106 part 1 is built: Local Model 0.1/0.2 reader, `ModelRef`, the finding list and a findings report command (WB-111), and Obsidian-style link writing (WB-112). Still to build before the gate: occurrence-aware Structure, Interfaces, Where Used and Requirements views, the Local Model popup (WB-105) and Review integration.
+
 **WB-106 v0.8 keepability prerequisite before R1.** Workbench 0.1.15 is still frontmatter/note/path-only. It now refuses ordinary body editing when a governed Local Model marker exists, but before the first potentially keepable v0.8 import is accepted it must load `local-model.yaml`, read both schema 0.1 and 0.2, index durable note/local ModelRefs, preserve `#^local-id` fragments, expose the Local Model surface, add local model-health findings, and make Structure, Interfaces, Where Used and Requirements occurrence-aware. Repeated relationship entries are duplicate evidence, not quantity. Structured Local Model authoring is deliberately later than this read/navigation gate.
 
 ### M0 — Spike and feasibility (Phase 0)

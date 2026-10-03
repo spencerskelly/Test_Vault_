@@ -83,3 +83,7 @@ One row per reason, not one per note. If the same change was made on many notes,
 - Links now go to the file name, or the shortest unique path where the name is not unique. v0.8.0 to v0.8.5 wrote full vault paths.
 - Added `Review - Long Paths.csv` (paths over 212 characters) and Post-Import Task 9.
 - The decode-only attachment check refuses to run without the benchmark file.
+
+## 2026-10-03 — Release chain alignment (W-325)
+
+- Vendored Workbench 0.1.16 and regenerated `plugin-lock.yaml`. Bootstrap 0.3.0 unchanged (rebuild identical to payload). Base rebuilt with importer v0.8.6.

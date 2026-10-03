@@ -37,7 +37,7 @@ tools:
     obsoleteReference: "spencerskelly/Test_Vault_-base-vault-2026-09-30-rel133-v051"
   workbench:
     repo: "spencerskelly/MDSE_Workbench"
-    version: "0.1.15"                               # pinned in plugin-lock.yaml for pre-release bases
+    version: "0.1.16"                               # pinned in plugin-lock.yaml for pre-release bases
     nextGate: "WB-106"
     wb106Version: null                              # set to the first WB-106-capable release; required for releaseStatus: release
     runtimePluginId: "mdse-workbench"

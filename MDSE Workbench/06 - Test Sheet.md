@@ -1,4 +1,4 @@
-# Workbench Test Sheet (plugin 0.1.15)
+# Workbench Test Sheet (plugin 0.1.16)
 
 > **Occurrence-model safety note (W-298 / WB-105):** 0.1.15 still does not index Local Model records. It now refuses ordinary body editing when a governed Local Model START marker is present; WB-106 is still required for parsing/indexing and occurrence-aware views. This sheet remains a regression test for the pre-occurrence plugin; the next pilot sheet must use the synchronized importer/base output and the occurrence-aware Workbench build. W-319 defines 0.2 as canonical new output while Workbench must read 0.1 and 0.2. Parser tests must include missing, duplicate, nested and mismatched marker cases.
 
@@ -7,7 +7,7 @@ Run in `20260930`. About 50 minutes. The steps are ordered so the biggest unknow
 Counts below come from a run outside Obsidian on the same notes. Obsidian may differ by a note or two (it resolves duplicate note names its own way); a difference of more than a few is a finding.
 
 ## 0. Setup (2 min)
-- [ ] Pull `20260930`. Settings → Community plugins: MDSE Workbench shows **0.1.15**. Turn it off and on.
+- [ ] Pull `20260930`. Settings → Community plugins: MDSE Workbench shows **0.1.16**. Turn it off and on.
 - [ ] Open any Markdown note (commands in this sheet only appear while a note is the active tab, not while a canvas is).
 - [ ] Wait until Workbench has finished indexing (a diagnostics run in step 1 says so).
 
@@ -81,3 +81,14 @@ Use `Antenna - WiFi`. This changes the note; run `git restore` on it afterwards.
 
 ## What to send back
 For each failed step: the step number, a screenshot, and any notice text or console error. Everything that passes needs nothing.
+
+## 0.1.16 additions: links and Local Model (WB-111, WB-112)
+
+Run after the first v0.8.6 import, in the imported vault. About 15 minutes.
+
+- [ ] Open a note whose file name is shared with another note (for example a `~2` duplicate or a requirement clause like `1.0 Purpose`). Use **Relate current note to another note** to link it to a note whose name is not unique. In the note's properties the new entry is the shortest unique path, not the bare name, and the link opens the note you picked.
+- [ ] Relate two notes, then Undo. The property returns to exactly what it was.
+- [ ] Open a note that already links to a target as `[[Folder/Name]]` and relate it to the same target again: Workbench reports that the link already exists and adds nothing.
+- [ ] Run **MDSE Workbench: Check Local Model (write findings report)**. Time it (the Notice shows seconds). `Workbench Views/Local Model Findings.md` opens. Record the counts: notes with a region, records, errors, warnings, and the table of finding codes.
+- [ ] For each finding code in the table, open two examples through their links. Each should land on the record the message names. Write down any code that looks like a reader mistake rather than a model fault; those are Workbench bugs.
+- [ ] Open a note that has a Local Model region and try to edit its text from the note popup: editing is refused.

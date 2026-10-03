@@ -91,7 +91,7 @@ This folder therefore contains a README and local Base only. The navigation rule
 - **Implementation details** (WB-072 to WB-078) are decided during the build, not one at a time up front (WB-089).
 - **Whenever the UI needs a model fact,** read it from the governed schema/configuration rather than embedding a copy in the plugin.
 - **A good next step** either resolves an open decision or implements and tests one user journey or milestone. A poor next step adds model complexity that does not improve the engineer's interface.
-- **Now:** standalone Workbench 0.1.15 is in `spencerskelly/MDSE_Workbench`. It contains the immediate W-310/W-319 safety corrections; `WB106_IMPLEMENTATION_CONTRACT.md` is the next coding handoff. Its README lists the M0 questions, the commands that answer them and the first measurements on a synthetic 60,000-note vault. First results are in the Decision Log (2026-09-30): performance passes; the Canvas selection menu works; gate R0 is decided: go (2026-10-01). Open items: the release pipeline, Canvas hook rechecks per Obsidian version, and the R1 pilot setup.
+- **Now:** standalone Workbench 0.1.16 is in `spencerskelly/MDSE_Workbench`. It contains the W-310/W-319 safety corrections, the Local Model reader and findings report (WB-111) and Obsidian-style link writing (WB-112); `WB106_IMPLEMENTATION_CONTRACT.md` is the next coding handoff. Its README lists the M0 questions, the commands that answer them and the first measurements on a synthetic 60,000-note vault. First results are in the Decision Log (2026-09-30): performance passes; the Canvas selection menu works; gate R0 is decided: go (2026-10-01). Open items: the release pipeline, Canvas hook rechecks per Obsidian version, and the R1 pilot setup.
 
 ## Status
 

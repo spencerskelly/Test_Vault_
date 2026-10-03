@@ -23,7 +23,7 @@ __export(main_exports, {
   default: () => MdseWorkbench
 });
 module.exports = __toCommonJS(main_exports);
-var import_obsidian7 = require("obsidian");
+var import_obsidian8 = require("obsidian");
 
 // src/core/rules.ts
 var inEndpoint = (e, cls) => e === "any" || e.includes(cls);
@@ -734,6 +734,7 @@ var Indexer = class {
     let unresolved = 0;
     const broken = [];
     const repeat = /* @__PURE__ */ new Map();
+    const localRefs = [];
     for (const fl of cache.frontmatterLinks ?? []) {
       const field = fl.key.split(".")[0];
       if (!this.schema.byField.has(field) && !this.schema.byInverse.has(field)) continue;
@@ -747,9 +748,26 @@ var Indexer = class {
       if (!list) fields.set(field, list = []);
       if (!list.includes(dest.path)) list.push(dest.path);
       else repeat.set(`${field}|${dest.path}`, (repeat.get(`${field}|${dest.path}`) ?? 1) + 1);
+      const hash = fl.link.indexOf("#^");
+      if (hash >= 0) localRefs.push({ field, path: dest.path, localId: fl.link.slice(hash + 2).split("|")[0].trim() });
     }
     const str = (v) => v === void 0 || v === null || v === "" ? void 0 : String(v);
-    return { path: file.path, name: file.basename, type: str(fm.type), id: str(fm.id), uid: str(fm.uid), fields, unresolved, broken, repeat: repeat.size ? repeat : void 0 };
+    const abstract = fm.abstract === true ? true : fm.abstract === false ? false : void 0;
+    const abstractInvalid = fm.abstract !== void 0 && fm.abstract !== null && fm.abstract !== "" && abstract === void 0;
+    return {
+      path: file.path,
+      name: file.basename,
+      type: str(fm.type),
+      id: str(fm.id),
+      uid: str(fm.uid),
+      fields,
+      unresolved,
+      broken,
+      repeat: repeat.size ? repeat : void 0,
+      abstract,
+      abstractInvalid: abstractInvalid || void 0,
+      localRefs: localRefs.length ? localRefs : void 0
+    };
   }
   /** Builds the index; a second call while building returns the same promise. */
   build() {
@@ -1780,16 +1798,18 @@ function sortLinks(list) {
     (a, b) => (linkTarget(a) ?? String(a)).localeCompare(linkTarget(b) ?? String(b), void 0, { sensitivity: "base" })
   );
 }
-function addLink(fm, field, target) {
+function addLink(fm, field, linkText, same) {
   const list = asList(fm[field]);
-  if (list.some((v) => linkTarget(v)?.toLowerCase() === target.toLowerCase())) return false;
-  list.push(`[[${target}]]`);
+  const already = same ?? ((v) => linkTarget(v)?.toLowerCase() === linkText.toLowerCase());
+  if (list.some(already)) return false;
+  list.push(`[[${linkText}]]`);
   fm[field] = sortLinks(list);
   return true;
 }
-function removeLink(fm, field, target) {
+function removeLink(fm, field, linkText, same) {
   const list = asList(fm[field]);
-  const kept = list.filter((v) => linkTarget(v)?.toLowerCase() !== target.toLowerCase());
+  const match = same ?? ((v) => linkTarget(v)?.toLowerCase() === linkText.toLowerCase());
+  const kept = list.filter((v) => !match(v));
   if (kept.length === list.length) return false;
   fm[field] = kept;
   return true;
@@ -1816,6 +1836,22 @@ function orderProperties(fm, order) {
 }
 
 // src/obsidian/writer.ts
+function linkTextFor(app, target, sourcePath) {
+  try {
+    const md = app.fileManager.generateMarkdownLink(target, sourcePath);
+    const m = /^\[\[([^\]|#]+)/.exec(md);
+    if (m) return m[1].trim();
+  } catch {
+  }
+  return app.metadataCache.fileToLinktext(target, sourcePath, true);
+}
+function pointsAt(app, target, sourcePath) {
+  return (value) => {
+    const text = linkTarget(value);
+    if (!text) return false;
+    return app.metadataCache.getFirstLinkpathDest((0, import_obsidian6.getLinkpath)(text), sourcePath)?.path === target.path;
+  };
+}
 var RelationshipWriter = class {
   constructor(app, getSchema, getIndex) {
     this.app = app;
@@ -1852,7 +1888,7 @@ var RelationshipWriter = class {
       const before = await this.app.vault.read(file);
       let changed = false;
       await this.app.fileManager.processFrontMatter(file, (fm) => {
-        changed = addLink(fm, field, linkTo.basename);
+        changed = addLink(fm, field, linkTextFor(this.app, linkTo, file.path), pointsAt(this.app, linkTo, file.path));
         if (changed) orderProperties(fm, order);
       });
       if (changed) tx.files.push({ path: file.path, before, after: await this.app.vault.read(file) });
@@ -1872,7 +1908,7 @@ var RelationshipWriter = class {
       const before = await this.app.vault.read(file);
       let changed = false;
       await this.app.fileManager.processFrontMatter(file, (fm) => {
-        changed = removeLink(fm, field, linkTo.basename);
+        changed = removeLink(fm, field, linkTextFor(this.app, linkTo, file.path), pointsAt(this.app, linkTo, file.path));
       });
       if (changed) tx.files.push({ path: file.path, before, after: await this.app.vault.read(file) });
     };
@@ -1964,6 +2000,533 @@ var RelationshipWriter = class {
   }
 };
 
+// src/obsidian/localmodel.ts
+var import_obsidian7 = require("obsidian");
+
+// src/core/localmodel.ts
+var READABLE_VERSIONS = ["0.1", "0.2"];
+var PREFIX = { part: "part-", endpoint: "ep-", connection: "conn-", flow: "flow-" };
+var SECTION = { "part occurrences": "part", "local interfaces": "endpoint", connections: "connection" };
+var FLOW_ROLES = ["transmit", "receive", "exchange", "unspecified"];
+var USAGES = ["standard", "variant", "option"];
+var TOKEN_30 = /^\d{17}[a-z-]{13}$/;
+var START = /^<!--\s*MDSE:LOCAL-MODEL START(?:\s+schema=(\S+?))?\s*-->\s*$/;
+var END = /^<!--\s*MDSE:LOCAL-MODEL END\s*-->\s*$/;
+var localRef = (ownerUid, localKind, localId) => ({ kind: "local", ownerUid, localKind, localId });
+function parseLinks(value) {
+  const out = [];
+  for (const m of value.matchAll(/\[\[([^\]]*)\]\]/g)) {
+    const inner = m[1];
+    const bar = inner.indexOf("|");
+    const left = bar < 0 ? inner : inner.slice(0, bar);
+    const alias = bar < 0 ? void 0 : inner.slice(bar + 1).trim();
+    const hash = left.indexOf("#");
+    const target = (hash < 0 ? left : left.slice(0, hash)).trim();
+    const frag = hash < 0 ? "" : left.slice(hash + 1).trim();
+    out.push({ text: m[0], target, blockId: frag.startsWith("^") ? frag.slice(1) : "", alias });
+  }
+  return out;
+}
+var kindOfId = (id) => {
+  for (const k of Object.keys(PREFIX)) if (id.startsWith(PREFIX[k])) return k;
+  return null;
+};
+function blank(kind, identifier, line, version) {
+  return {
+    kind,
+    localId: "",
+    identifier,
+    line,
+    fields: /* @__PURE__ */ new Map(),
+    definition: null,
+    usage: "standard",
+    usageExplicit: false,
+    part: null,
+    parent: null,
+    exposes: [],
+    equals: [],
+    endpointA: null,
+    endpointB: null,
+    roleA: null,
+    roleB: null,
+    multiplicity: null,
+    endpointKind: null,
+    connectionId: null,
+    sourceSchemaVersion: version
+  };
+}
+function finish(r) {
+  const f = r.fields;
+  const links = (k) => parseLinks(f.get(k) ?? "");
+  r.definition = links("definition")[0] ?? null;
+  if (r.kind === "part" || r.kind === "endpoint") {
+    if (r.sourceSchemaVersion === "0.1") {
+      r.usage = "standard";
+      r.usageExplicit = false;
+    } else if (f.has("usage")) {
+      r.usage = (f.get("usage") ?? "").trim();
+      r.usageExplicit = true;
+    }
+  } else if (f.has("usage")) {
+    r.usage = (f.get("usage") ?? "").trim();
+    r.usageExplicit = true;
+  }
+  r.part = links("part")[0] ?? null;
+  r.parent = links("parent")[0] ?? null;
+  r.exposes = links("exposes");
+  r.equals = links("equals");
+  if (r.kind === "flow") {
+    r.roleA = (f.get("endpointA") ?? "").trim() || null;
+    r.roleB = (f.get("endpointB") ?? "").trim() || null;
+  } else {
+    r.endpointA = links("endpointA")[0] ?? null;
+    r.endpointB = links("endpointB")[0] ?? null;
+  }
+  r.multiplicity = (f.get("multiplicity") ?? "").trim() || null;
+  r.endpointKind = (f.get("kind") ?? "").trim() || null;
+}
+var ALLOWED_FIELDS = {
+  part: ["definition", "usage", "identifier", "multiplicity"],
+  endpoint: ["definition", "usage", "identifier", "part", "parent", "exposes", "equals", "multiplicity", "kind"],
+  connection: ["endpointA", "endpointB", "definition", "identifier"],
+  flow: ["definition", "identifier", "endpointA", "endpointB"]
+};
+function parseLocalModel(text) {
+  const lines = text.split(/\r?\n/);
+  const starts = [];
+  const ends = [];
+  lines.forEach((l, i) => {
+    const s = START.exec(l.trim());
+    if (s) starts.push({ i, version: s[1] ?? null });
+    else if (END.test(l.trim())) ends.push(i);
+  });
+  if (!starts.length && !ends.length) return null;
+  const region = {
+    schemaVersion: starts[0]?.version ?? null,
+    startLine: starts[0] ? starts[0].i + 1 : null,
+    endLine: ends[0] !== void 0 ? ends[0] + 1 : null,
+    records: [],
+    findings: [],
+    structured: true
+  };
+  const bad = (code, message, line) => {
+    region.findings.push({ code, severity: "error", message, line });
+    region.structured = false;
+  };
+  if (starts.length > 1) bad("marker.duplicate", `Local Model START appears ${starts.length} times; one governed region per note.`, starts[1].i + 1);
+  if (!starts.length) bad("marker.missing-start", "Local Model END without a START marker.", ends[0] + 1);
+  else if (!ends.length) bad("marker.missing-end", "Local Model START without an END marker.", starts[0].i + 1);
+  else if (ends[0] < starts[0].i) bad("marker.order", "Local Model END comes before START.", ends[0] + 1);
+  if (starts.length >= 2 && ends.length && starts[1].i < ends[0]) bad("marker.nested", "A Local Model START appears inside an open region.", starts[1].i + 1);
+  if (ends.length > starts.length && starts.length) bad("marker.mismatch", `Local Model has ${starts.length} START and ${ends.length} END markers.`, ends[ends.length - 1] + 1);
+  if (starts.length) {
+    const v = starts[0].version;
+    if (!v) bad("schema.missing-version", "Local Model START has no schema= version.", starts[0].i + 1);
+    else if (!READABLE_VERSIONS.includes(v)) bad("schema.unsupported", `Local Model schema ${v} is not supported; the text stays readable and structured Local Model use is off.`, starts[0].i + 1);
+  }
+  if (!region.structured) return region;
+  const version = starts[0].version;
+  const from = starts[0].i + 1;
+  const to = ends[0];
+  let section = null;
+  let current = null;
+  let lastConnection = null;
+  const done = (r) => {
+    if (r) {
+      finish(r);
+      region.records.push(r);
+    }
+  };
+  for (let i = from; i < to; i++) {
+    const raw = lines[i];
+    const h = /^(#{2,6})\s+(.*?)\s*#*\s*$/.exec(raw);
+    if (h) {
+      const level = h[1].length;
+      const title = h[2].trim();
+      if (level === 2) continue;
+      done(current);
+      current = null;
+      if (level === 3) {
+        section = SECTION[title.toLowerCase()] ?? null;
+        if (!section) region.findings.push({ code: "record.unknown-section", severity: "warning", message: `Unknown Local Model section "${title}".`, line: i + 1 });
+        continue;
+      }
+      if (level === 4) {
+        if (!section) {
+          region.findings.push({ code: "record.unknown-section", severity: "warning", message: `Record "${title}" is outside a known section.`, line: i + 1 });
+          continue;
+        }
+        current = blank(section, title, i + 1, version);
+        if (section === "connection") lastConnection = current;
+        continue;
+      }
+      if (level === 5) {
+        current = blank("flow", title, i + 1, version);
+        if (lastConnection) current.connectionId = lastConnection.localId || null;
+        else region.findings.push({ code: "record.orphan-flow", severity: "error", message: `Flow "${title}" is not under a connection.`, line: i + 1 });
+        continue;
+      }
+      continue;
+    }
+    if (!current) continue;
+    const id = /^\^([A-Za-z0-9][A-Za-z0-9-]*)\s*$/.exec(raw.trim());
+    if (id) {
+      current.localId = id[1];
+      if (current.kind === "connection") lastConnection = current;
+      continue;
+    }
+    const fieldLine = /^\s*[-*]\s+([A-Za-z][A-Za-z0-9]*)\s*:\s*(.*)$/.exec(raw);
+    if (fieldLine) {
+      let value = fieldLine[2];
+      const trailing = /\s\^([A-Za-z0-9][A-Za-z0-9-]*)\s*$/.exec(value);
+      if (trailing) {
+        current.localId = trailing[1];
+        value = value.slice(0, trailing.index).trim();
+        if (current.kind === "connection") lastConnection = current;
+      }
+      current.fields.set(fieldLine[1], value);
+    }
+  }
+  done(current);
+  for (const r of region.records) if (r.kind === "flow" && !r.connectionId) r.connectionId = null;
+  region.findings.push(...validateRegion(region));
+  return region;
+}
+var refTargetsKind = [
+  ["part", "endpoint", "part"],
+  ["parent", "endpoint", "endpoint"]
+];
+function validateRegion(region) {
+  const out = [];
+  const add = (code, message, r, severity = "error") => out.push({ code, severity, message, localId: r?.localId || void 0, line: r?.line });
+  const version = region.schemaVersion ?? "0.2";
+  const byId = /* @__PURE__ */ new Map();
+  for (const r of region.records) {
+    if (r.localId) {
+      const l = byId.get(r.localId) ?? [];
+      l.push(r);
+      byId.set(r.localId, l);
+    }
+  }
+  for (const r of region.records) {
+    const label = `${r.kind} "${r.identifier}"`;
+    if (!r.localId) {
+      add("record.no-block-id", `${label} has no block ID.`, r);
+    } else {
+      const k = kindOfId(r.localId);
+      if (!k) add("record.block-id-malformed", `${label}: block ID ${r.localId} does not start with a record prefix (part-, ep-, conn-, flow-).`, r);
+      else if (k !== r.kind) add("record.block-id-malformed", `${label}: block ID ${r.localId} is for a ${k}.`, r);
+      else if (version === "0.2" && !TOKEN_30.test(r.localId.slice(PREFIX[k].length))) add("record.block-id-malformed", `${label}: block ID ${r.localId} does not end in a 30-character identity token.`, r);
+    }
+    for (const key2 of r.fields.keys()) {
+      if (key2 === "usage" && version === "0.1") add("record.unknown-field", `${label}: usage is not part of schema 0.1.`, r, "warning");
+      else if (!ALLOWED_FIELDS[r.kind].includes(key2) && key2 !== "usage") add("record.unknown-field", `${label}: unknown field ${key2}.`, r, "warning");
+    }
+    if (r.fields.has("usage")) {
+      if (r.kind === "connection" || r.kind === "flow") add("record.usage-invalid", `${label}: usage is not valid on a ${r.kind}.`, r);
+      else if (version === "0.2" && !USAGES.includes(r.usage)) add("record.usage-invalid", `${label}: usage "${r.usage}" is not standard, variant or option.`, r);
+    }
+    if ((r.kind === "part" || r.kind === "endpoint" || r.kind === "flow") && !r.definition) add("record.missing-definition", `${label} has no definition link.`, r);
+    if (r.definition && r.definition.blockId) add("definition.incompatible", `${label}: the definition must link to a note, not a block.`, r);
+  }
+  for (const [id, list] of byId) if (list.length > 1) add("record.duplicate-id", `Block ID ${id} is used by ${list.length} records.`, list[1]);
+  const sameNote = (l) => l && !l.target && l.blockId ? byId.get(l.blockId)?.[0] : void 0;
+  const needLocal = (r, l, field, kind) => {
+    if (!l) return;
+    if (l.target) return;
+    if (!l.blockId) {
+      add("ref.local-missing", `${r.kind} "${r.identifier}": ${field} is not a block link.`, r);
+      return;
+    }
+    const t = sameNote(l);
+    if (!t) add("ref.local-missing", `${r.kind} "${r.identifier}": ${field} points at ^${l.blockId}, which is not in this note.`, r);
+    else if (t.kind !== kind) add("ref.local-kind", `${r.kind} "${r.identifier}": ${field} points at a ${t.kind}, expected a ${kind}.`, r);
+  };
+  for (const r of region.records) {
+    if (r.kind === "endpoint") {
+      for (const [field, , want] of refTargetsKind) needLocal(r, r[field], field, want);
+      if (r.part && r.parent) add("ref.part-and-parent", `endpoint "${r.identifier}" has both part and parent; they are mutually exclusive.`, r);
+      for (const l of r.exposes) needLocal(r, l, "exposes", "endpoint");
+      for (const l of r.equals) needLocal(r, l, "equals", "endpoint");
+    }
+    if (r.kind === "connection") {
+      if (!r.endpointA || !r.endpointB) add("ref.endpoint-count", `connection "${r.identifier}" needs exactly two endpoints (endpointA and endpointB).`, r);
+      needLocal(r, r.endpointA, "endpointA", "endpoint");
+      needLocal(r, r.endpointB, "endpointB", "endpoint");
+    }
+    if (r.kind === "flow") {
+      for (const [f, v] of [["endpointA", r.roleA], ["endpointB", r.roleB]]) {
+        if (!v || !FLOW_ROLES.includes(v)) add("ref.flow-role-invalid", `flow "${r.identifier}": ${f} role "${v ?? ""}" is not one of ${FLOW_ROLES.join(", ")}.`, r, "error");
+      }
+      if (!r.connectionId && region.records.some((x) => x.kind === "connection" && !x.localId)) add("record.orphan-flow", `flow "${r.identifier}" sits under a connection that has no block ID.`, r);
+    }
+  }
+  for (const r of region.records) {
+    if (r.kind !== "endpoint" || !r.parent) continue;
+    const seen = /* @__PURE__ */ new Set([r.localId]);
+    let cur = sameNote(r.parent);
+    while (cur && cur.kind === "endpoint") {
+      if (seen.has(cur.localId)) {
+        add("ref.parent-cycle", `endpoint "${r.identifier}" is its own ancestor through parent links.`, r);
+        break;
+      }
+      seen.add(cur.localId);
+      cur = sameNote(cur.parent);
+    }
+  }
+  return out;
+}
+var LocalModelIndex = class {
+  constructor() {
+    this.regions = /* @__PURE__ */ new Map();
+    this.ids = /* @__PURE__ */ new Map();
+  }
+  set(path, region) {
+    this.remove(path);
+    if (!region) return;
+    this.regions.set(path, region);
+    for (const r of region.records) {
+      if (!r.localId) continue;
+      const l = this.ids.get(r.localId) ?? [];
+      l.push({ path, record: r });
+      this.ids.set(r.localId, l);
+    }
+  }
+  remove(path) {
+    const old = this.regions.get(path);
+    if (!old) return;
+    this.regions.delete(path);
+    for (const r of old.records) {
+      const l = this.ids.get(r.localId);
+      if (!l) continue;
+      const kept = l.filter((x) => x.path !== path || x.record !== r);
+      if (kept.length) this.ids.set(r.localId, kept);
+      else this.ids.delete(r.localId);
+    }
+  }
+  find(localId) {
+    return this.ids.get(localId) ?? [];
+  }
+  recordsOf(path, kind) {
+    const r = this.regions.get(path);
+    if (!r || !r.structured) return [];
+    return kind ? r.records.filter((x) => x.kind === kind) : r.records.slice();
+  }
+  /**
+   * Where Used for occurrences (WB-106): every local record whose definition resolves to `definitionPath`.
+   * `resolve` turns link text into a vault path the way Obsidian would from the owning note.
+   */
+  occurrencesOf(definitionPath, resolve) {
+    const out = [];
+    for (const [path, region] of this.regions) {
+      if (!region.structured) continue;
+      for (const record of region.records) {
+        if (record.definition && record.definition.target && resolve(record.definition.target, path) === definitionPath) out.push({ path, record });
+      }
+    }
+    return out;
+  }
+  /** ModelRef of a record in a note whose uid is `ownerUid`. */
+  refOf(ownerUid, record) {
+    return record.localId ? localRef(ownerUid, record.kind, record.localId) : null;
+  }
+};
+function specializationCandidates(index, root) {
+  const seen = /* @__PURE__ */ new Set([root]);
+  const order = [root];
+  const onStack = /* @__PURE__ */ new Set([root]);
+  let cycle = false;
+  const stack = [
+    { node: root, edges: index.in(root).filter((e) => e.field === "subtypeOf"), i: 0 }
+  ];
+  while (stack.length) {
+    const top = stack[stack.length - 1];
+    if (top.i >= top.edges.length) {
+      onStack.delete(top.node);
+      stack.pop();
+      continue;
+    }
+    const child = top.edges[top.i++].from;
+    if (onStack.has(child)) {
+      cycle = true;
+      continue;
+    }
+    if (seen.has(child)) continue;
+    seen.add(child);
+    order.push(child);
+    onStack.add(child);
+    stack.push({ node: child, edges: index.in(child).filter((e) => e.field === "subtypeOf"), i: 0 });
+  }
+  const byKey = /* @__PURE__ */ new Map();
+  for (const p of order) {
+    const n = index.notes.get(p);
+    if (!n || n.abstract === true) continue;
+    const key2 = n.uid || p;
+    if (!byKey.has(key2)) byKey.set(key2, p);
+  }
+  return { candidates: [...byKey.values()], cycle };
+}
+var COMPATIBLE = { part: "Object", endpoint: "Port", flow: "Item Flow", connection: null };
+function validateLocalModels(input) {
+  const { index, local, resolve } = input;
+  const out = [];
+  const add = (path, code, message, r, severity = "error") => out.push({ code, severity, message, path, localId: r?.localId || void 0, line: r?.line });
+  for (const [path, region] of local.regions) for (const f of region.findings) out.push({ ...f, path });
+  const owners = /* @__PURE__ */ new Map();
+  const claim = (token, who) => {
+    const l = owners.get(token) ?? [];
+    l.push(who);
+    owners.set(token, l);
+  };
+  for (const n of index.notes.values()) if (n.uid && TOKEN_30.test(n.uid)) claim(n.uid, `note ${n.path}`);
+  for (const [path, region] of local.regions) {
+    if (region.schemaVersion !== "0.2") continue;
+    for (const r of region.records) {
+      const k = kindOfId(r.localId);
+      if (!k) continue;
+      const token = r.localId.slice(PREFIX[k].length);
+      if (TOKEN_30.test(token)) claim(token, `${r.kind} ^${r.localId} in ${path}`);
+    }
+  }
+  for (const [token, who] of owners) {
+    if (who.length < 2) continue;
+    for (const w of who) {
+      const m = /in (.+)$/.exec(w);
+      const path = m ? m[1] : w.replace(/^note /, "");
+      add(path, "identity.collision", `Identity token ${token} is used more than once: ${who.join("; ")}.`);
+    }
+  }
+  const rootsChecked = /* @__PURE__ */ new Set();
+  for (const [path, region] of local.regions) {
+    if (!region.structured) continue;
+    for (const r of region.records) {
+      const label = `${r.kind} "${r.identifier}"`;
+      const links = [
+        ["part", r.part, "part"],
+        ["parent", r.parent, "endpoint"],
+        ["endpointA", r.endpointA, "endpoint"],
+        ["endpointB", r.endpointB, "endpoint"],
+        ...r.exposes.map((l) => ["exposes", l, "endpoint"]),
+        ...r.equals.map((l) => ["equals", l, "endpoint"])
+      ];
+      for (const [field, l, want2] of links) {
+        if (!l || !l.target) continue;
+        const tp = resolve(l.target, path);
+        const rec = tp ? local.recordsOf(tp).find((x) => x.localId === l.blockId) : void 0;
+        if (!tp) add(path, "ref.cross-note-missing", `${label}: ${field} points at note "${l.target}", which does not exist.`, r);
+        else if (!rec) add(path, "ref.cross-note-missing", `${label}: ${field} points at ^${l.blockId} in ${tp}, which has no such record.`, r);
+        else if (rec.kind !== want2) add(path, "ref.local-kind", `${label}: ${field} points at a ${rec.kind}, expected a ${want2}.`, r);
+      }
+      if (!r.definition || r.definition.blockId) continue;
+      const dp = r.definition.target ? resolve(r.definition.target, path) : path;
+      const def = dp ? index.notes.get(dp) : void 0;
+      if (!dp || !def) {
+        add(path, "definition.unresolved", `${label}: definition "${r.definition.target}" does not resolve to a note.`, r);
+        continue;
+      }
+      const want = COMPATIBLE[r.kind];
+      if (want && def.type !== want) add(path, "definition.incompatible", `${label}: definition ${def.name} is ${def.type ? `a ${def.type}` : "not a model note"}, expected a ${want}.`, r);
+      if ((r.kind === "part" || r.kind === "endpoint") && USAGES.includes(r.usage)) {
+        if (r.usage === "standard" && def.abstract === true) add(path, "definition.abstract-standard", `${label}: a standard occurrence points at abstract definition ${def.name}.`, r);
+        if (r.usage === "variant" || r.usage === "option") {
+          const c = specializationCandidates(index, dp);
+          if (c.cycle && !rootsChecked.has(dp)) {
+            rootsChecked.add(dp);
+            add(dp, "specialization.cycle", `The subtypeOf links under ${def.name} form a cycle.`, r);
+          }
+          if (!c.candidates.length) add(path, "variation.no-candidate", `${label}: ${r.usage} on ${def.name} has no concrete candidate in its specialization family.`, r);
+        }
+      }
+    }
+  }
+  for (const n of index.notes.values()) {
+    for (const ref of n.localRefs ?? []) {
+      const rec = local.recordsOf(ref.path).find((x) => x.localId === ref.localId);
+      if (!rec) add(n.path, "frontmatter.local-target-missing", `${ref.field} points at ^${ref.localId} in ${ref.path}, which has no such record.`);
+    }
+    if (n.abstractInvalid) add(n.path, "abstract.invalid", "abstract must be true or false.");
+  }
+  return out;
+}
+function renderFindingsReport(findings, stats, opts = {}) {
+  const per = opts.perCode ?? 25;
+  const by = /* @__PURE__ */ new Map();
+  for (const f of findings) {
+    const l = by.get(f.code) ?? [];
+    l.push(f);
+    by.set(f.code, l);
+  }
+  const errors = findings.filter((f) => f.severity === "error").length;
+  const lines = [
+    "# Local Model findings",
+    "",
+    `Generated by MDSE Workbench${opts.generated ? ` on ${opts.generated}` : ""}. This file is generated and git-ignored; do not edit it.`,
+    "",
+    `- Notes with a Local Model region: ${stats.notesWithRegion}`,
+    `- Records: ${stats.records} (${Object.entries(stats.byKind).map(([k, v]) => `${k} ${v}`).join(", ") || "none"})`,
+    `- Findings: ${findings.length} (${errors} errors, ${findings.length - errors} warnings)`,
+    ""
+  ];
+  if (!findings.length) lines.push("No findings.", "");
+  else {
+    lines.push("| Code | Severity | Count |", "|---|---|---|");
+    for (const [code, list] of [...by].sort((a, b) => b[1].length - a[1].length || a[0].localeCompare(b[0]))) lines.push(`| \`${code}\` | ${list[0].severity} | ${list.length} |`);
+    lines.push("");
+    for (const [code, list] of [...by].sort((a, b) => a[0].localeCompare(b[0]))) {
+      lines.push(`## ${code}`, "");
+      for (const f of list.slice(0, per)) {
+        const where = f.path ? `[[${f.path.replace(/\.md$/i, "")}${f.localId ? `#^${f.localId}` : ""}|${f.path.split("/").pop()?.replace(/\.md$/i, "")}]]` : "";
+        lines.push(`- ${where} ${f.message}${f.line ? ` (line ${f.line})` : ""}`);
+      }
+      if (list.length > per) lines.push(`- \u2026 ${list.length - per} more`);
+      lines.push("");
+    }
+  }
+  return lines.join("\n");
+}
+
+// src/obsidian/localmodel.ts
+var BLOCK_PREFIX = /^(part|ep|conn|flow)-/;
+function mayHaveRegion(app, file) {
+  const cache = app.metadataCache.getFileCache(file);
+  if (!cache) return false;
+  if (cache.headings?.some((h) => h.level === 2 && h.heading.trim().toLowerCase() === "local model")) return true;
+  return Object.keys(cache.blocks ?? {}).some((id) => BLOCK_PREFIX.test(id));
+}
+async function scanLocalModel(app, index) {
+  const t0 = performance.now();
+  const local = new LocalModelIndex();
+  let n = 0;
+  for (const file of app.vault.getMarkdownFiles()) {
+    if (!mayHaveRegion(app, file)) continue;
+    local.set(file.path, parseLocalModel(await app.vault.cachedRead(file)));
+    if (++n % 100 === 0) await new Promise((r) => window.setTimeout(r, 0));
+  }
+  const resolve = (target, from) => app.metadataCache.getFirstLinkpathDest((0, import_obsidian7.getLinkpath)(target), from)?.path;
+  const findings = validateLocalModels({ index, local, resolve });
+  const byKind = {};
+  let records = 0;
+  for (const region of local.regions.values()) {
+    for (const r of region.records) {
+      records++;
+      byKind[r.kind] = (byKind[r.kind] ?? 0) + 1;
+    }
+  }
+  return { local, findings, notesWithRegion: local.regions.size, records, byKind, ms: Math.round(performance.now() - t0) };
+}
+async function writeFindingsReport(app, viewsFolder, scan) {
+  const folder = (0, import_obsidian7.normalizePath)(viewsFolder);
+  if (!await app.vault.adapter.exists(folder)) await app.vault.createFolder(folder);
+  const path = `${folder}/Local Model Findings.md`;
+  const text = renderFindingsReport(scan.findings, { notesWithRegion: scan.notesWithRegion, records: scan.records, byKind: scan.byKind }, { generated: (/* @__PURE__ */ new Date()).toISOString().slice(0, 10) });
+  const existing = app.vault.getAbstractFileByPath(path);
+  if (existing instanceof import_obsidian7.TFile) {
+    await app.vault.modify(existing, text);
+    return existing;
+  }
+  return app.vault.create(path, text);
+}
+
 // src/main.ts
 var QUIET_START_MS = 8e3;
 var DEFAULTS = {
@@ -1973,7 +2536,7 @@ var DEFAULTS = {
   canvasProbe: true,
   showDetails: true
 };
-var MdseWorkbench = class extends import_obsidian7.Plugin {
+var MdseWorkbench = class extends import_obsidian8.Plugin {
   constructor() {
     super(...arguments);
     this.settings = { ...DEFAULTS };
@@ -2070,6 +2633,7 @@ var MdseWorkbench = class extends import_obsidian7.Plugin {
       })
     );
     this.addCommand({ id: "open-review", name: "Open Review", callback: () => void this.openReview() });
+    this.addCommand({ id: "local-model-findings", name: "Check Local Model (write findings report)", callback: () => void this.checkLocalModel() });
     this.addRibbonIcon("list-checks", "Workbench Review", () => void this.openReview());
     this.registerEvent(this.app.metadataCache.on("changed", () => this.lastChange = Date.now()));
     this.register(() => this.unloaded = true);
@@ -2091,7 +2655,7 @@ var MdseWorkbench = class extends import_obsidian7.Plugin {
     return true;
   }
   async loadSchema() {
-    const read = async (p) => (0, import_obsidian7.parseYaml)(await this.app.vault.adapter.read((0, import_obsidian7.normalizePath)(p)));
+    const read = async (p) => (0, import_obsidian8.parseYaml)(await this.app.vault.adapter.read((0, import_obsidian8.normalizePath)(p)));
     return parseSchema(await read(this.settings.relationshipsPath), await read(this.settings.elementTypesPath));
   }
   /** Load schema, build the index, then follow vault changes (WB-033, WB-086). */
@@ -2099,14 +2663,14 @@ var MdseWorkbench = class extends import_obsidian7.Plugin {
     try {
       this.schema = await this.loadSchema();
     } catch (e) {
-      new import_obsidian7.Notice(`MDSE Workbench: could not read the schema files. ${e.message} Check the paths in settings.`);
+      new import_obsidian8.Notice(`MDSE Workbench: could not read the schema files. ${e.message} Check the paths in settings.`);
       return;
     }
     const schema = this.schema;
     if (!this.indexer) {
       this.indexer = new Indexer(this.app, schema);
       this.writer = new RelationshipWriter(this.app, () => this.schema, () => this.indexer.index);
-      const schemaPaths = () => [(0, import_obsidian7.normalizePath)(this.settings.relationshipsPath), (0, import_obsidian7.normalizePath)(this.settings.elementTypesPath)];
+      const schemaPaths = () => [(0, import_obsidian8.normalizePath)(this.settings.relationshipsPath), (0, import_obsidian8.normalizePath)(this.settings.elementTypesPath)];
       this.registerEvent(
         this.app.metadataCache.on("changed", (file) => {
           if (!schemaPaths().includes(file.path)) this.indexer?.changed(file.path);
@@ -2132,12 +2696,28 @@ var MdseWorkbench = class extends import_obsidian7.Plugin {
     }
     const stats = await this.indexer.build();
     if (rebuild || schema.warnings.length) {
-      new import_obsidian7.Notice(`MDSE Workbench: indexed ${stats.elements} model notes in ${(stats.ms / 1e3).toFixed(1)} s${schema.warnings.length ? `; ${schema.warnings.length} schema warning(s), see diagnostics` : ""}.`);
+      new import_obsidian8.Notice(`MDSE Workbench: indexed ${stats.elements} model notes in ${(stats.ms / 1e3).toFixed(1)} s${schema.warnings.length ? `; ${schema.warnings.length} schema warning(s), see diagnostics` : ""}.`);
     }
   }
   /** Quiet version of ready(): no notice. Used by Review, which waits and retries. */
   isReady() {
     return !!(this.schema && this.indexer && this.writer && !this.indexer.building && this.indexer.stats);
+  }
+  /** WB-111: read every Local Model region, run the WB-106 checks, write the report and open it. */
+  async checkLocalModel() {
+    if (!this.ready()) return;
+    const notice = new import_obsidian8.Notice("MDSE Workbench: reading Local Model regions\u2026", 0);
+    try {
+      const scan = await scanLocalModel(this.app, this.indexer.index);
+      const file = await writeFindingsReport(this.app, this.settings.viewsFolder, scan);
+      const errors = scan.findings.filter((f) => f.severity === "error").length;
+      new import_obsidian8.Notice(`Local Model: ${scan.notesWithRegion} notes, ${scan.records} records, ${errors} errors, ${scan.findings.length - errors} warnings (${(scan.ms / 1e3).toFixed(1)} s).`, 1e4);
+      await this.app.workspace.getLeaf(false).openFile(file);
+    } catch (e) {
+      new import_obsidian8.Notice(`Local Model check failed: ${e.message}`, 15e3);
+    } finally {
+      notice.hide();
+    }
   }
   async openReview() {
     const existing = this.app.workspace.getLeavesOfType(REVIEW_VIEW)[0];
@@ -2147,7 +2727,7 @@ var MdseWorkbench = class extends import_obsidian7.Plugin {
   }
   ready() {
     if (!this.schema || !this.indexer || this.indexer.building || !this.indexer.stats) {
-      new import_obsidian7.Notice("MDSE Workbench is still indexing. Try again in a moment.");
+      new import_obsidian8.Notice("MDSE Workbench is still indexing. Try again in a moment.");
       return false;
     }
     return true;
@@ -2182,7 +2762,7 @@ var MdseWorkbench = class extends import_obsidian7.Plugin {
   /** Lists the views that can start from this note's type and opens the one chosen. */
   pickView(path) {
     if (!this.isReady()) {
-      new import_obsidian7.Notice("MDSE Workbench is still indexing. Try again in a moment.");
+      new import_obsidian8.Notice("MDSE Workbench is still indexing. Try again in a moment.");
       return;
     }
     const rec = this.indexer.index.notes.get(path);
@@ -2197,28 +2777,28 @@ var MdseWorkbench = class extends import_obsidian7.Plugin {
     if (profile.startTypes) {
       const type = index.notes.get(starts[0])?.type ?? "";
       if (!profile.startTypes.includes(type)) {
-        new import_obsidian7.Notice(`The ${profile.name} view starts from ${profile.startTypes.join(" or ")}. This note is ${type ? `a ${type}` : "not a model note"}.`);
+        new import_obsidian8.Notice(`The ${profile.name} view starts from ${profile.startTypes.join(" or ")}. This note is ${type ? `a ${type}` : "not a model note"}.`);
         return;
       }
     }
     const view = traverse(index, starts, profile);
     if (view.depthOf.size <= 1 && view.omitted.size === 0) {
-      new import_obsidian7.Notice(`Nothing to show: this note has no links the ${profile.name} view follows (${[...new Set(profile.steps.map((s) => s.field))].join(", ")}).`);
+      new import_obsidian8.Notice(`Nothing to show: this note has no links the ${profile.name} view follows (${[...new Set(profile.steps.map((s) => s.field))].join(", ")}).`);
       return;
     }
     const canvas = toCanvas(index, view, profile);
     const name = (index.notes.get(starts[0])?.name ?? "view").replace(/[\\/:*?"<>|#^[\]]/g, "_");
-    const folder = (0, import_obsidian7.normalizePath)(this.settings.viewsFolder);
+    const folder = (0, import_obsidian8.normalizePath)(this.settings.viewsFolder);
     if (!this.app.vault.getAbstractFileByPath(folder)) await this.app.vault.createFolder(folder);
-    const path = (0, import_obsidian7.normalizePath)(`${folder}/${name} - ${view.profile}.canvas`);
+    const path = (0, import_obsidian8.normalizePath)(`${folder}/${name} - ${view.profile}.canvas`);
     const json = JSON.stringify(canvas, null, "	");
     const existing = this.app.vault.getAbstractFileByPath(path);
-    const file = existing instanceof import_obsidian7.TFile ? (await this.app.vault.modify(existing, json), existing) : await this.app.vault.create(path, json);
+    const file = existing instanceof import_obsidian8.TFile ? (await this.app.vault.modify(existing, json), existing) : await this.app.vault.create(path, json);
     this.views[path] = { starts: view.starts, profile: view.profile, signature: signature(view), at: Date.now() };
     await this.saveAll();
     const ms = Math.round(performance.now() - t0);
     await this.app.workspace.getLeaf(true).openFile(file);
-    new import_obsidian7.Notice(`${view.profile}: ${view.depthOf.size} notes${view.undefinedCount ? ` (${view.undefinedCount} undefined)` : ""} in ${ms} ms${view.capReached ? `, stopped at the ${profile.nodeCap}-note limit` : ""}.`);
+    new import_obsidian8.Notice(`${view.profile}: ${view.depthOf.size} notes${view.undefinedCount ? ` (${view.undefinedCount} undefined)` : ""} in ${ms} ms${view.capReached ? `, stopped at the ${profile.nodeCap}-note limit` : ""}.`);
   }
   /**
    * Clicking a card on a generated view opens its details (WB-099). It only watches clicks and never stops
@@ -2247,7 +2827,7 @@ var MdseWorkbench = class extends import_obsidian7.Plugin {
   }
   isWorkbenchCanvas(file) {
     if (!file) return false;
-    return !!this.views[file.path] || file.path.startsWith((0, import_obsidian7.normalizePath)(this.settings.viewsFolder) + "/");
+    return !!this.views[file.path] || file.path.startsWith((0, import_obsidian8.normalizePath)(this.settings.viewsFolder) + "/");
   }
   async onCanvasClick(target) {
     const cardEl = target?.closest?.(".canvas-node");
@@ -2260,7 +2840,7 @@ var MdseWorkbench = class extends import_obsidian7.Plugin {
       const nodes = view.canvas?.nodes;
       const list = nodes instanceof Map ? [...nodes.values()] : Array.isArray(nodes) ? nodes : [];
       const node = list.find((n) => n?.nodeEl === cardEl);
-      if (node?.file instanceof import_obsidian7.TFile) file = node.file;
+      if (node?.file instanceof import_obsidian8.TFile) file = node.file;
       else if (node) missing = undefinedName2(node.text);
     } catch {
     }
@@ -2272,7 +2852,7 @@ var MdseWorkbench = class extends import_obsidian7.Plugin {
           const n = nodeAt(json.nodes ?? [], pos.x, pos.y);
           if (n?.file) {
             const f = this.app.vault.getAbstractFileByPath(n.file);
-            if (f instanceof import_obsidian7.TFile) file = f;
+            if (f instanceof import_obsidian8.TFile) file = f;
           } else if (n) missing = undefinedName2(n.text);
         } catch {
         }
@@ -2286,12 +2866,12 @@ var MdseWorkbench = class extends import_obsidian7.Plugin {
     const f = this.app.workspace.getActiveFile();
     const meta = f ? this.views[f.path] : void 0;
     if (!f || !meta) {
-      new import_obsidian7.Notice("Open a view generated by Workbench first.");
+      new import_obsidian8.Notice("Open a view generated by Workbench first.");
       return;
     }
     const profile = PROFILES[meta.profile] ?? STRUCTURE_PROFILE;
     const now = signature(traverse(this.indexer.index, meta.starts, profile));
-    if (now === meta.signature) new import_obsidian7.Notice("This view is current.");
+    if (now === meta.signature) new import_obsidian8.Notice("This view is current.");
     else
       new ConfirmModal(this.app, "The model changed since this view was generated.", "Refresh view", () => void this.explore(meta.starts, profile)).open();
   }
@@ -2303,7 +2883,7 @@ var MdseWorkbench = class extends import_obsidian7.Plugin {
     if (!this.ready()) return;
     const first = this.indexer.index.notes.get(firstPath);
     if (!this.indexer.index.isElement(first)) {
-      new import_obsidian7.Notice("This note has no known type, so Workbench cannot relate it.");
+      new import_obsidian8.Notice("This note has no known type, so Workbench cannot relate it.");
       return;
     }
     new ElementPicker(
@@ -2319,7 +2899,7 @@ var MdseWorkbench = class extends import_obsidian7.Plugin {
     const a = index.notes.get(firstPath);
     const b = index.notes.get(secondPath);
     if (!index.isElement(a) || !index.isElement(b)) {
-      new import_obsidian7.Notice("Both notes need a known type to be related.");
+      new import_obsidian8.Notice("Both notes need a known type to be related.");
       return;
     }
     const options = optionsBetween(this.schema, a.type, b.type);
@@ -2327,18 +2907,18 @@ var MdseWorkbench = class extends import_obsidian7.Plugin {
       const [owner, target] = o.ownerIsFirst ? [a, b] : [b, a];
       try {
         const tx = await this.writer.add(o.def, owner.path, target.path);
-        new import_obsidian7.Notice(tx.files.length ? `Added: ${owner.name} ${o.def.field} ${target.name}.` : "That link already exists.", 8e3);
+        new import_obsidian8.Notice(tx.files.length ? `Added: ${owner.name} ${o.def.field} ${target.name}.` : "That link already exists.", 8e3);
       } catch (e) {
-        new import_obsidian7.Notice(`Not added: ${e.message}`, 15e3);
+        new import_obsidian8.Notice(`Not added: ${e.message}`, 15e3);
       }
     }).open();
   }
   async undo() {
     if (!this.writer) return;
-    new import_obsidian7.Notice(await this.writer.undo(), 15e3);
+    new import_obsidian8.Notice(await this.writer.undo(), 15e3);
   }
 };
-var WorkbenchSettings = class extends import_obsidian7.PluginSettingTab {
+var WorkbenchSettings = class extends import_obsidian8.PluginSettingTab {
   constructor(app, plugin) {
     super(app, plugin);
     this.plugin = plugin;
@@ -2346,7 +2926,7 @@ var WorkbenchSettings = class extends import_obsidian7.PluginSettingTab {
   display() {
     const { containerEl } = this;
     containerEl.empty();
-    const text = (name, desc, key2) => new import_obsidian7.Setting(containerEl).setName(name).setDesc(desc).addText(
+    const text = (name, desc, key2) => new import_obsidian8.Setting(containerEl).setName(name).setDesc(desc).addText(
       (t) => t.setValue(this.plugin.settings[key2]).onChange(async (v) => {
         this.plugin.settings[key2] = v.trim();
         await this.plugin.saveAll();
@@ -2355,14 +2935,14 @@ var WorkbenchSettings = class extends import_obsidian7.PluginSettingTab {
     text("Relationship schema", "Path to relationships.yaml in this vault.", "relationshipsPath");
     text("Element types", "Path to element-types.yaml in this vault.", "elementTypesPath");
     text("Generated views folder", "Generated canvases are written here. Add this folder to .gitignore.", "viewsFolder");
-    new import_obsidian7.Setting(containerEl).setName("Note details on click").setDesc("Clicking a note on a generated view (a canvas in the views folder) opens its properties and text in a popup. Uses Canvas internals that Obsidian does not document.").addToggle(
+    new import_obsidian8.Setting(containerEl).setName("Note details on click").setDesc("Clicking a note on a generated view (a canvas in the views folder) opens its properties and text in a popup. Uses Canvas internals that Obsidian does not document.").addToggle(
       (t) => t.setValue(this.plugin.settings.showDetails).onChange(async (v) => {
         this.plugin.settings.showDetails = v;
         if (!v) this.plugin.detail?.close();
         await this.plugin.saveAll();
       })
     );
-    new import_obsidian7.Setting(containerEl).setName("Canvas probe").setDesc("Adds 'Relate selected notes' to the canvas right-click menu, to test whether Canvas editing is possible (Phase 0). Reload Obsidian after changing.").addToggle(
+    new import_obsidian8.Setting(containerEl).setName("Canvas probe").setDesc("Adds 'Relate selected notes' to the canvas right-click menu, to test whether Canvas editing is possible (Phase 0). Reload Obsidian after changing.").addToggle(
       (t) => t.setValue(this.plugin.settings.canvasProbe).onChange(async (v) => {
         this.plugin.settings.canvasProbe = v;
         await this.plugin.saveAll();
