@@ -20,7 +20,7 @@
 3. [[MDSE v0.8 Cross-Repository Reconciliation - 2026-10-02]]: the implementation contract (identity, reruns, naming, Local Model 0.2, evidence set, gates, build order).
 4. [[MDSE Modeling Ruleset 1.23]]: what the model means and how imports are governed.
 5. [[Translator Definition]]: what the stage 1 importer must do.
-6. [[Workspace Decision Log]]: every decision (W-01 to W-328); newest last. Where a log entry marks an earlier one superseded, the later one governs.
+6. [[Workspace Decision Log]]: every decision (W-01 to W-330); newest last. Where a log entry marks an earlier one superseded, the later one governs.
 7. [[MDSE Tool Definitions and Boundaries]]: authoritative ownership/boundary map for Workbench, Bootstrap, importer, base/release tooling and deferred cross-vault infrastructure.
 8. [[Handoff Prompt - MDSE v0.8 Implementation]]: copy-ready prompts for a new AI chat (general, and Workbench).
 9. [[Post-Import Tasks]]: the work done in the vault after an import, Tasks 1 to 9.
@@ -51,8 +51,8 @@
 | Importers v0.1 to v0.7, v0.8.0 to v0.8.5 | archived (W-326) | `99_System/archive/09_Tools retired importers/` with a README of their roles. None may generate a model. |
 | Clean 0.8.0 base vault | **not issued** | Generate deterministically with `build-base.py`; validate with `check-release.py --base`. It is a lean runtime artifact and carries `mdse_release: "0.8.0"` in `.vault.yaml`. |
 | MDSE Workbench 0.1.16 | built; typecheck, 52 tests and build pass (2026-10-03). Reads Local Model 0.1/0.2, `ModelRef`, findings report (**Check Local Model**); writes links Obsidian-style (W-324, W-325, WB-111, WB-112) | WB-106 remainder: occurrence-aware Structure, Interfaces, Where Used and Requirements views, Local Model popup (WB-105), Review integration |
-| MDSE Bootstrap 0.3.0 | built (W-322); 6 tests pass; in every base | Run the [[Base First-Open Test Sheet]] in Obsidian. Source and docs: `MDSE Bootstrap/` |
-| Runtime plugins (11) | vendored, pinned, hashed, configured (W-322) | `99_System/09_Tools/runtime-plugins/`; lock `.obsidian/plugin-lock.yaml`; see `99_System/01_Admin/Enabled Plugin Stack.md` |
+| MDSE Bootstrap 0.3.0 | pinned runtime release (W-322); 6 tests previously passed; in every pre-release base | W-330 option B is implemented as **0.3.1 candidate** in `Bootstrap/Tools/v0.3.1`; run automated build/tests and `Bootstrap/Testing/Base First-Open Test Sheet.md` before promoting it into the Base Vault runtime payload |
+| Runtime plugins (11) | vendored, pinned, hashed, configured (W-322) | `Base Vault/Runtime/Plugins/`; lock `.obsidian/plugin-lock.yaml`; see `Base Vault/Definition/Enabled Plugin Stack.md` |
 
 Workbench 0.1.16 is pinned and enabled in pre-release bases (WB-106 is not complete; `wb106Version` stays unset until the occurrence-aware views are done). The **final issued** base must pin the WB-106-capable release (`wb106Version` in `mdse-release.yaml`); `check-release.py` fails a release build until then.
 
@@ -60,11 +60,11 @@ Workbench 0.1.16 is pinned and enabled in pre-release bases (WB-106 is not compl
 
 W-321 removes the old manually curated base-content list. `mdse-release.yaml` now contains the one positive include list used by `build-base.py`. The generated engineering vault intentionally omits this Current State registry, the release manifest, Translator Definition, Decision Log, EA evidence, archives and Workbench design notes. Runtime consumers instead share the actual schemas: relationships 1.35, element-types 1.17 and Local Model 0.2. Initialization preserves the base's `mdse_release`.
 
-**Controlled plugin release (W-322).** The base opens fully functional once Restricted mode is turned off: all 11 runtime plugins ship inside it, pinned and hashed in `.obsidian/plugin-lock.yaml` (schema 2), with governed settings for Templater, Fileclass, Breadcrumbs and Obsidian Git generated from the schemas. Obsidian 1.13.0 or later is required. MDSE Bootstrap checks every start against the lock and registers each person's author code. To change a plugin version, follow `MDSE Bootstrap/README_MDSE Bootstrap.md`.
+**Controlled plugin release (W-322).** The base opens fully functional once Restricted mode is turned off: all 11 runtime plugins ship inside it, pinned and hashed in `.obsidian/plugin-lock.yaml` (schema 2), with governed settings for Templater, Fileclass, Breadcrumbs and Obsidian Git generated from the schemas. Obsidian 1.13.0 or later is required. MDSE Bootstrap checks every start against the lock and registers each person's author code. To change a plugin version, follow `Bootstrap/Definition/README.md`.
 
 ## File status registry
 
-**Current:** the files in "Read in this order", [[MDSE Tool Definitions and Boundaries]], `Definitions/`, `99_System/03_Schemas/`, `99_System/05_Templates/`, `MDSE Bootstrap/`, `MDSE Workbench/` (Workbench product direction).
+**Current:** the files in "Read in this order", [[MDSE Tool Definitions and Boundaries]], `Importer/Definition/`, `Bootstrap/Definition/`, `Base Vault/Definition/`, `Definitions/`, `99_System/03_Schemas/`, `99_System/05_Templates/`, `MDSE Bootstrap/`, `MDSE Workbench/` (Workbench product direction).
 
 **Generated (never edit by hand; change the schemas or payload and regenerate):** `99_System/06_Fileclasses/`, `.obsidian/plugin-lock.yaml`, `.obsidian/community-plugins.json`, `99_System/09_Tools/runtime-plugins/*/data.json`.
 

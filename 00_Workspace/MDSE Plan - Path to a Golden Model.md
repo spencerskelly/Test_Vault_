@@ -1,6 +1,6 @@
 # MDSE Plan: Path to a Golden Model
 
-**Status: current plan (W-328), 2026-10-03.** This is the working plan from today's tools to a **golden** model: the vault the team uses as the single authoritative engineering model after EA is retired. Rules live in the authority files named in [[00 - Current State]]; this plan says what to do, in what order, and how to know a step is done. Items marked **proposal** are not decisions until logged as `W-n` or `WB-n`. Update this file in the same commit as any decision that changes a step.
+**Status: current plan (W-330), 2026-10-03.** This is the working plan from today's tools to a **golden** model: the vault the team uses as the single authoritative engineering model after EA is retired. Rules live in the authority files named in [[00 - Current State]]; this plan says what to do, in what order, and how to know a step is done. Items marked **proposal** are not decisions until logged as `W-n` or `WB-n`. Update this file in the same commit as any decision that changes a step.
 
 ## 1. What "golden" means (proposal, confirm as D1)
 
