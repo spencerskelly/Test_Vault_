@@ -14,6 +14,7 @@ interface PluginsApi {
   enabledPlugins: Set<string>;
   plugins: Record<string, unknown>;
   enablePlugin?(id: string): Promise<void> | void;
+  enablePluginAndSave?(id: string): Promise<void> | void;
 }
 
 interface InternalPluginsApi {
@@ -89,7 +90,9 @@ export default class MdseBootstrap extends Plugin {
       const plan = activationPlan(lock, new Set(this.plugins().enabledPlugins), coreEnabled, installed);
 
       for (const id of plan.enableCommunity) {
-        if (typeof this.plugins().enablePlugin === "function") await this.plugins().enablePlugin!(id);
+        const plugins = this.plugins();
+        if (typeof plugins.enablePluginAndSave === "function") await plugins.enablePluginAndSave(id);
+        else if (typeof plugins.enablePlugin === "function") await plugins.enablePlugin(id);
       }
       for (const id of plan.enableCore) {
         if (typeof internal.enablePlugin === "function") await internal.enablePlugin(id);
