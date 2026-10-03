@@ -55,6 +55,9 @@ for p in rb["includeFiles"]:
     (ok if os.path.isfile(full(ROOT,p)) else fail)(f"runtime include file exists: {p}")
 for m in rb.get("mappedFiles",[]):
     (ok if os.path.isfile(full(ROOT,m["source"])) else fail)(f"runtime mapped source exists: {m['source']} -> {m['target']}")
+    if m["source"].endswith(".sh") and os.path.isfile(full(ROOT,m["source"])):
+        r=subprocess.run(["sh","-n",full(ROOT,m["source"])],capture_output=True,text=True)
+        (ok if r.returncode==0 else fail)(f"shell initialization script parses: {m['source']}" + ("" if r.returncode==0 else ": "+r.stderr.strip()))
 for p in rb["includeTrees"]:
     (ok if os.path.isdir(full(ROOT,p)) else fail)(f"runtime include tree exists: {p}")
 for p in rb.get("forbiddenPaths",[]):
