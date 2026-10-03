@@ -12,7 +12,7 @@ Use these as code/history references only:
 
 Do not use v0.7 to generate a model intended to keep.
 
-Candidate file: `EA_to_MDSE_Native_Importer/v0.8.3/EA_to_MDSE_Native_Importer_v0.8.3.html`. It follows:
+Candidate file: `EA_to_MDSE_Native_Importer/v0.8.4/EA_to_MDSE_Native_Importer_v0.8.4.html`. It follows:
 1. `../10_Docs/MDSE v0.8 Cross-Repository Reconciliation - 2026-10-02.md`
 2. `../10_Docs/Translator Definition.md`
 3. Workspace Decision Log through W-319
@@ -44,7 +44,7 @@ See `MDSE v0.8 Toolchain Review - 2026-10-02.md` for the code-gap audit.
 | `EA_to_MDSE_Native_Importer_v0.3.html`, `v0.4.html`, `v0.5.html`, `v0.5.1.html` | history | Intermediate builds. Superseded by v0.5.2. |
 | `EA_to_MDSE_Native_Importer_v0.5.2.html` | accepted safety lineage (fallback) | Base-vault identity checks, stale-state invalidation, `hasState/stateOf`, schema 1.35. Starting point for v0.8.0. |
 | `EA_to_MDSE_Native_Importer_v0.7.html` | merge candidate, never accepted | Occurrence/QEAX code evidence. Not release-conformant (14 gaps listed in the Toolchain Review). Do not generate a model to keep. |
-| `EA_to_MDSE_Native_Importer/v0.8.3/EA_to_MDSE_Native_Importer_v0.8.3.html` | hardened implementation candidate; acceptance pending | Release/schema/plugin gates, Local Model 0.2, W-318 naming/path preflight with marker preservation, authoritative Source Map provenance, governed linked-document extraction, Source EA evidence, evidence package and stage-2 review views implemented. Real QEAX acceptance and the WB-106 keepability gate remain. |
+| `EA_to_MDSE_Native_Importer/v0.8.4/EA_to_MDSE_Native_Importer_v0.8.4.html` | hardened implementation candidate; acceptance pending | Release/schema/plugin gates, Local Model 0.2, W-318 naming/path preflight with marker preservation, authoritative Source Map provenance, governed linked-document extraction, Source EA evidence, evidence package and stage-2 review views implemented. Real QEAX acceptance and the WB-106 keepability gate remain. |
 | `Initialize-Vault.sh`, `Initialize-Vault.ps1` | current helpers | Initialize `.vault.yaml` once in a new disposable or real vault. |
 
 The machine-checkable version of this table is `99_System/03_Schemas/mdse-release.yaml`; run `python3 99_System/09_Tools/check-release.py` after any change to tools, schemas or docs. Registry of current files: [[00 - Current State]].
@@ -90,3 +90,8 @@ The next real EA8647 run passed preflight and whole-model planning but found a 2
 ### v0.8.3 mechanical path compaction
 
 After normalized/redundant folder handling, an overlong folder hierarchy no longer aborts solely because it leaves too little filename space. The importer preserves the engineering hierarchy first, then deterministically replaces the longest contributing non-root navigation folder with a sibling-stable `folder_N` label as needed. The replacement applies to the entire subtree, the 212-character path limit stays unchanged, and original source folder/final output path remain in review evidence.
+
+
+### v0.8.4 attachment decoding
+
+The first complete semantic whole-model write exposed that all 376 approved t_document attachments were being treated as raw content even though EA stores linked-document BinContent in ZIP payloads. v0.8.4 unwraps the EA ZIP payload before applying the existing image/RTF extraction rules and reports the active BUILD.version in its completion log. The governed target is 376 linked documents producing 390 attachment files, subject to explicit reconciliation of any residual failures.
