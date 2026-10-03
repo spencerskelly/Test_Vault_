@@ -1,6 +1,6 @@
 {
   "name": "mdse-bootstrap",
-  "version": "0.3.0",
+  "version": "0.3.1",
   "description": "MDSE controlled-release check and author registration for MDSE vaults (W-322).",
   "main": "main.js",
   "private": true,
