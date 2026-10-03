@@ -70,3 +70,13 @@ uid: 20260928101530123claudeai-----   (Claude created it on its own)
 ## Identity namespace
 
 The 30-character token used by a note `uid` and by a Local Model block ID belongs to one global identity namespace. Never allocate a token already used by any note or Local Model record. The local kind prefix is representation metadata, not a separate uniqueness namespace.
+
+
+## Views and Canvas
+
+- Workbench-generated and curated Canvas files are presentation artifacts, not model-semantic authority.
+- Never infer a new MDSE relationship merely because two Canvas nodes are near each other or connected by a manually drawn Canvas edge.
+- Moving or resizing a Canvas node changes presentation only.
+- For an Internal Structure view, the containing Canvas group represents the selected Object/note context; its local parts, endpoints, connections and flows remain authoritative in that note's governed Local Model records.
+- Semantic creation/removal of an occurrence, endpoint, connection, flow or relationship must edit the governed note/Local Model through an approved model-edit path. Do not encode that semantic change only in Canvas geometry.
+- When refreshing a curated Internal view, preserve surviving stable-node positions where practical; do not silently discard engineer-curated layout (W-340).
