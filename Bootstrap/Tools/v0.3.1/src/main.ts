@@ -9,7 +9,7 @@ const PERSON_TEMPLATE = "99_System/05_Templates/Person.md";
 const AUTHORS = "99_System/03_Schemas/authors.yaml";
 const START_DELAY_MS = 750;
 const FULL_CHECK_FALLBACK_MS = 12000;
-const POST_METADATA_QUIET_MS = 1500;
+const POST_METADATA_QUIET_MS = 8000;
 
 interface PluginsApi {
   manifests: Record<string, { version: string; dir?: string }>;
@@ -68,8 +68,9 @@ export default class MdseBootstrap extends Plugin {
       await this.repairActivation();
       if (!(await this.readCode())) this.openRegistration(false);
     } finally {
-      this.status?.setText("MDSE: verifying…");
+      this.status?.setText("MDSE: checks queued…");
       await this.whenMetadataSettled();
+      this.status?.setText("MDSE: verifying…");
       await this.runCheck(true);
     }
   }
