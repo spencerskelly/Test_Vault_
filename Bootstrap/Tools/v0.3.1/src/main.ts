@@ -10,6 +10,8 @@ const AUTHORS = "99_System/03_Schemas/authors.yaml";
 const START_DELAY_MS = 750;
 const FULL_CHECK_FALLBACK_MS = 12000;
 const POST_METADATA_QUIET_MS = 15000;
+const FULL_CHECK_ACTIVITY_QUIET_MS = 5000;
+const FULL_CHECK_MAX_DEFER_MS = 60000;
 
 interface PluginsApi {
   manifests: Record<string, { version: string; dir?: string }>;
@@ -34,6 +36,7 @@ export default class MdseBootstrap extends Plugin {
   private status: HTMLElement | null = null;
   private last: Finding[] = [];
   private metadataResolved = false;
+  private lastActivity = Date.now();
 
   async onload(): Promise<void> {
     this.status = this.addStatusBarItem();
@@ -47,8 +50,12 @@ export default class MdseBootstrap extends Plugin {
     } });
     this.addCommand({ id: "register-author", name: "Register author code", callback: () => this.openRegistration(true) });
 
+    this.registerEvent(this.app.metadataCache.on("changed", () => {
+      this.lastActivity = Date.now();
+    }));
     this.registerEvent(this.app.metadataCache.on("resolved", () => {
       this.metadataResolved = true;
+      this.lastActivity = Date.now();
     }));
 
     this.app.workspace.onLayoutReady(() => {
@@ -81,10 +88,17 @@ export default class MdseBootstrap extends Plugin {
       await new Promise((resolve) => window.setTimeout(resolve, 250));
     }
     // When Obsidian provides the resolved signal, deliberately give Workbench/core model startup
-    // its own lane before hashing the controlled plugin payload. If the signal never arrives,
-    // the bounded fallback wait above is already the conservative delay.
+    // its own lane before hashing the controlled plugin payload. Then prefer a quiet user/activity
+    // window, but cap the deferral so integrity verification cannot be postponed indefinitely.
     if (this.metadataResolved) {
       await new Promise((resolve) => window.setTimeout(resolve, POST_METADATA_QUIET_MS));
+      const deferStarted = Date.now();
+      while (
+        Date.now() - this.lastActivity < FULL_CHECK_ACTIVITY_QUIET_MS &&
+        Date.now() - deferStarted < FULL_CHECK_MAX_DEFER_MS
+      ) {
+        await new Promise((resolve) => window.setTimeout(resolve, 500));
+      }
     }
   }
 
