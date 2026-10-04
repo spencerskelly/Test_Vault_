@@ -7,7 +7,9 @@ const CODE_FILE = ".obsidian/author-code.txt";        // same literal as Snippet
 const PEOPLE = "99_System/04_People";
 const PERSON_TEMPLATE = "99_System/05_Templates/Person.md";
 const AUTHORS = "99_System/03_Schemas/authors.yaml";
-const START_DELAY_MS = 4000;
+const START_DELAY_MS = 750;
+const FULL_CHECK_FALLBACK_MS = 12000;
+const POST_METADATA_QUIET_MS = 1500;
 
 interface PluginsApi {
   manifests: Record<string, { version: string; dir?: string }>;
@@ -31,6 +33,7 @@ interface PreparedReleaseScan {
 export default class MdseBootstrap extends Plugin {
   private status: HTMLElement | null = null;
   private last: Finding[] = [];
+  private metadataResolved = false;
 
   async onload(): Promise<void> {
     this.status = this.addStatusBarItem();
@@ -44,17 +47,39 @@ export default class MdseBootstrap extends Plugin {
     } });
     this.addCommand({ id: "register-author", name: "Register author code", callback: () => this.openRegistration(true) });
 
+    this.registerEvent(this.app.metadataCache.on("resolved", () => {
+      this.metadataResolved = true;
+    }));
+
     this.app.workspace.onLayoutReady(() => {
-      window.setTimeout(async () => {
-        // First-use author setup is interactive and should not sit behind a potentially expensive
-        // whole-plugin integrity scan. Start the release check, then surface registration while
-        // it runs. Registration itself still uses the controlled Templater path and the release
-        // check/repair continues independently.
-        const check = this.repairAndCheck(true);
-        if (!(await this.readCode())) this.openRegistration(false);
-        await check;
-      }, START_DELAY_MS);
+      window.setTimeout(() => void this.startup(), START_DELAY_MS);
     });
+  }
+
+  /**
+   * Staged startup (W-347): repair only activation state first, hashing community plugins only
+   * when a disabled locked plugin actually needs proof before enablement. Author registration
+   * then becomes available without waiting behind the normal full integrity scan. The complete
+   * release hash check waits for Obsidian's metadata pass (or a bounded fallback) so it does not
+   * compete with the heaviest part of vault startup.
+   */
+  private async startup(): Promise<void> {
+    try {
+      await this.repairActivation();
+      if (!(await this.readCode())) this.openRegistration(false);
+    } finally {
+      this.status?.setText("MDSE: verifying…");
+      await this.whenMetadataSettled();
+      await this.runCheck(true);
+    }
+  }
+
+  private async whenMetadataSettled(): Promise<void> {
+    const started = Date.now();
+    while (!this.metadataResolved && Date.now() - started < FULL_CHECK_FALLBACK_MS) {
+      await new Promise((resolve) => window.setTimeout(resolve, 250));
+    }
+    await new Promise((resolve) => window.setTimeout(resolve, POST_METADATA_QUIET_MS));
   }
 
   private plugins(): PluginsApi {
@@ -87,11 +112,13 @@ export default class MdseBootstrap extends Plugin {
     }
   }
 
-  private async scanInstalled(lock: ReturnType<typeof parseLock>): Promise<Record<string, InstalledPlugin>> {
+  private async scanInstalled(lock: ReturnType<typeof parseLock>, ids?: readonly string[]): Promise<Record<string, InstalledPlugin>> {
     const a = this.app.vault.adapter;
     const cfg = this.app.vault.configDir;
     const installed: Record<string, InstalledPlugin> = {};
+    const selected = ids ? new Set(ids) : null;
     for (const [id, p] of Object.entries(lock.plugins)) {
+      if (selected && !selected.has(id)) continue;
       const dir = normalizePath(`${cfg}/plugins/${id}`);
       let version: string | null = null;
       try { version = String(JSON.parse(await a.read(`${dir}/manifest.json`)).version); } catch { version = null; }
@@ -113,8 +140,10 @@ export default class MdseBootstrap extends Plugin {
       const internal = this.internalPlugins();
       const coreEnabled: Record<string, boolean> = {};
       for (const id of [...lock.requiredCorePlugins, ...lock.disabledCorePlugins]) coreEnabled[id] = !!internal.getPluginById(id)?.enabled;
-      const installed = prepared?.installed ?? await this.scanInstalled(lock);
-      const plan = activationPlan(lock, new Set(this.plugins().enabledPlugins), coreEnabled, installed);
+      const enabled = new Set(this.plugins().enabledPlugins);
+      const disabledLocked = Object.keys(lock.plugins).filter((id) => !enabled.has(id));
+      const installed = prepared?.installed ?? await this.scanInstalled(lock, disabledLocked);
+      const plan = activationPlan(lock, enabled, coreEnabled, installed);
 
       for (const id of plan.enableCommunity) {
         const plugins = this.plugins();
