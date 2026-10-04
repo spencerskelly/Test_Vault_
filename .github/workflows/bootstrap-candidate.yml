@@ -34,3 +34,5 @@ jobs:
           cp main.js /tmp/bootstrap-main.js
           npm run build
           cmp -s main.js /tmp/bootstrap-main.js
+
+# Temporary PR CI probe; do not merge this line.
