@@ -354,7 +354,35 @@ Implemented and verified on `spencerskelly/MDSE_Workbench` main.
 - Step 47 commits are `f44af72a`, `965f4e2e`, and `ca609f18`; CI produced built-artifact commit `6ffbdb00`.
 - Intentionally deferred: failure-injection proof that one derived subsystem can fail without ordinary Obsidian editing or unrelated Workbench capabilities failing remains Step 48.
 
-**Current resume point:** Step 48. Do not begin it until Spencer explicitly answers `y` after the Step 47 completion report. A new chat should read this roadmap, verify the repository still matches this state, and then execute Step 48 only.
+### Step 48 completion evidence — 2026-10-04
+
+Implemented and verified on `spencerskelly/MDSE_Workbench` main.
+
+- Added an explicit pure edit-availability policy: ordinary Workbench model editing depends only on authoritative core readiness and schema compatibility.
+- Derived subsystem state is intentionally excluded from the edit gate. Occurrence, semantic-cache and assurance failures therefore cannot disable ordinary Workbench model editing while core/schema remain valid.
+- The existing UI edit gate now delegates to this pure policy, making the isolation contract directly testable.
+- Added failure-injection coverage for three derived subsystems:
+  - injected occurrence failure;
+  - injected semantic-cache failure;
+  - injected assurance failure.
+- Each injected failure proves all of the following:
+  - only the targeted capability enters `failed`;
+  - core remains `ready`;
+  - unrelated derived capability states remain usable/ready;
+  - schema remains ready;
+  - the edit gate remains open.
+- Added fail-closed tests proving editing is blocked only when authoritative prerequisites fail:
+  - core is not ready;
+  - schema is unavailable;
+  - schema relationship version is too old for safe editing.
+- This preserves the intended failure-isolation boundary: derived accelerators/diagnostics may degrade independently without taking down ordinary Obsidian editing or unrelated Workbench capabilities.
+- The first Step 48 CI attempt (`37225750204`) passed all 210 tests and all three 60k benchmark gates but failed the TypeScript build because `editingBlocked` was still used by an existing diagnostic path after its import was removed during edit-gate refactoring.
+- Restored that existing schema diagnostic import without changing the Step 48 isolation design.
+- Final GitHub Actions run `37225802020` passed `npm test`, the 60k semantic-cache scale smoke, paired cold/warm startup benchmark, 60k relationship re-resolution benchmark, `npm run build`, artifact hashing/sync, and built-artifact commit.
+- Step 48 commits are `e0c9447b`, `5cf6a3f2`, `1605ac61`, and corrective build commit `ec7d6173`; CI produced built-artifact commit `6bf7338b`.
+- Intentionally deferred: measuring end-to-end cold startup in a disposable integration vault with real Obsidian metadata resolution/source parsing remains Step 49.
+
+**Current resume point:** Step 49. Do not begin it until Spencer explicitly answers `y` after the Step 48 completion report. A new chat should read this roadmap, verify the repository still matches this state, and then execute Step 49 only.
 
 ## Reconstructed remaining steps
 
