@@ -1022,7 +1022,53 @@ Step 59 conclusion:
 - Repeated cold/warm restarts do not produce cumulative memory growth, stale semantic state, reverse-index drift, renderer/listener accumulation, stranded background work or material scheduling/startup degradation.
 - The accepted performance/stability candidate is ready for Step 60 release-candidate freeze and handoff documentation.
 
-**Current resume point:** Step 60. Do not begin it until Spencer explicitly answers `y` after the Step 59 completion report. A new chat should read this roadmap, verify the repository still matches this state, and then execute Step 60 only.
+**Current resume point:** the numbered performance/stability roadmap is complete at Step 60. Do not invent a Step 61; return to the separate MDSE v0.8 integration/release plan for subsequent work.
+
+### Step 60 completion evidence — 2026-10-04
+
+Frozen the accepted Workbench performance/stability candidate and recorded the exact handoff evidence.
+
+Accepted candidate:
+- repository: `spencerskelly/MDSE_Workbench`;
+- branch: `main`;
+- frozen source commit: **`476fbcad08ecd03f8c2c49cd3126393beb6ab412`**;
+- Workbench manifest version: **0.1.17**;
+- no runtime source change was introduced by Step 60.
+
+Exact checked-in plugin artifact hashes:
+- `main.js`: **`bc553fef67b5aa2cc7623b2811c05e7af8952296dd3b3ba55e663e3de5fc64aa`**;
+- `manifest.json`: **`a898ec3acce99650f18ded11235a236881ce8a8de86bfc857c70c5c4508d0e5d`**;
+- `styles.css`: **`445abe199f3dbf00724dc3cffa13aed58fc087adc9396e79de18ebe6b274b008`**;
+- hash authority: `MDSE_Workbench/artifact-sha256.txt` at the frozen commit.
+
+Integrated acceptance evidence retained for the frozen candidate:
+- Step 55 exact-candidate integrated startup acceptance completed before later acceptance work.
+- Step 56 occurrence-view staging acceptance: workflow `Integrated occurrence-view acceptance`, run **37232510452**.
+- Step 57 live-edit/background-work acceptance: workflow `Integrated live-edit acceptance`, run **37234448220**.
+- Step 58 recovery acceptance: workflow `Integrated recovery acceptance`, run **37235759018**.
+- Step 59 repeated restart acceptance: workflow `Repeated restart acceptance`, run **37239424333**.
+- Normal `Build Workbench artifact` workflow for the frozen commit passed as run **37239424369**.
+
+Frozen runtime conclusions:
+- immediate/startup work is staged rather than monopolizing Obsidian startup;
+- core semantic readiness is separated from deferred occurrence hydration;
+- occurrence-aware views wait only for the capability they require;
+- live edits converge while background occurrence work is active;
+- corrupted semantic cache fails closed to authoritative cold reconstruction;
+- plugin reload and full process restart recover without stale or stranded derived state;
+- three cold plus three warm restart cycles showed no cumulative semantic drift, scheduler buildup, reverse-index growth, renderer/listener accumulation, JS-heap growth trend or material core-readiness degradation.
+
+Governance/handoff updates:
+- `00_Workspace/00 - Current State.md` now identifies the frozen standalone Workbench stability candidate and points to this roadmap for acceptance evidence.
+- `00_Workspace/Handoff Prompt - MDSE v0.8 Implementation.md` now tells later chats not to reopen Steps 18–60 unless the frozen candidate changes or new evidence invalidates acceptance.
+- Performance/stability work is complete at this boundary. Promotion into the controlled Base Vault remains a separate release/integration action and is not implied by this freeze.
+
+Step 60 conclusion:
+- The performance/stability sequence **Steps 18–60 is complete**.
+- The accepted standalone candidate is frozen at `476fbcad08ecd03f8c2c49cd3126393beb6ab412`.
+- Any later runtime change creates a new candidate and requires rerunning the acceptance scope affected by that change.
+
+**Current resume point:** the numbered performance/stability roadmap is complete. Do not invent Step 61. Continue with the separate MDSE v0.8 integration/release plan when Spencer explicitly chooses to proceed.
 
 ## Reconstructed remaining steps
 
@@ -1031,7 +1077,6 @@ Step 59 conclusion:
 48. Add failure-injection tests proving one derived subsystem can fail without making ordinary Obsidian editing or unrelated Workbench capabilities unusable.
 
 
-60. Freeze the accepted performance/stability candidate, record hashes and runtime evidence, and update the handoff/current-state documentation.
 
 ## Mapping to Startup Stability Plan
 
