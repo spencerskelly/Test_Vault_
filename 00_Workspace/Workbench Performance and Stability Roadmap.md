@@ -222,7 +222,34 @@ Implemented and verified on `spencerskelly/MDSE_Workbench` main.
 - Step 42 commits are `cae60778` and `786ff30e`. No new built-artifact commit was required because this step changed only pure core/test sources and did not alter the bundled plugin output.
 - Intentionally deferred: proving that restore failure always transitions to a cooperative cold build with no partially restored state visible remains Step 43.
 
-**Current resume point:** Step 43. Do not begin it until Spencer explicitly answers `y` after the Step 42 completion report. A new chat should read this roadmap, verify the repository still matches this state, and then execute Step 43 only.
+### Step 43 completion evidence — 2026-10-04
+
+Implemented and verified on `spencerskelly/MDSE_Workbench` main.
+
+- Warm restore failure/recovery now follows an explicit ordered path: freeze provisional live work → drain already-active source tasks → discard provisional semantic state → re-enable live tracking → run the authoritative cooperative cold build.
+- Added `Indexer.discardProvisionalSemanticState()` to remove every provisional warm surface before recovery:
+  - semantic `ModelIndex`;
+  - reverse relationship dependency index;
+  - relationship re-resolution history;
+  - Local Model derived state and hydration bookkeeping;
+  - fingerprints;
+  - dirty/live/path-change sets;
+  - cache-dirty bookkeeping;
+  - readiness statistics.
+- Recovery also clears provisional rebuild/live/relationship timers, stops new live work while discard is in progress, waits for active live-apply/relationship-resolution tasks to settle, and invalidates pending Local Model publications through hydration/local revision guards.
+- Added pure `recoverWithColdBuild()` ordering used by runtime startup. It awaits provisional-state discard before allowing the cold build callback to start.
+- Cold recovery re-enables live tracking only immediately before the cold build, so edits during the authoritative rebuild continue to enter the normal cold-build reconciliation path rather than mutating discarded warm state.
+- The cold build remains the existing cooperative `Indexer.build()`/`doBuild()` path with UI-yielding `CooperativeBudget` checkpoints.
+- Step 41's explicit publication gate remains closed throughout restore failure, discard, and cold rebuild; partially restored state therefore cannot become core-ready.
+- Focused tests prove:
+  - discard completes before the cold build starts;
+  - the cold build never starts if discard itself fails;
+  - a cold-build failure occurs only after provisional state has already been discarded.
+- GitHub Actions run `37224209387` passed `npm test`, the 60k semantic-cache scale smoke, paired cold/warm startup benchmark, 60k relationship re-resolution benchmark, `npm run build`, artifact hashing/sync, and built-artifact commit.
+- Step 43 commits are `41edf8c4`, `60d4ca0f`, `307482a7`, `c28472f5`, `28d0ae80`, `3e10cd53`, and `327253ec`; CI produced built-artifact commit `17287a58`.
+- Intentionally deferred: requested occurrence hydration preemption/duplicate-read/stale-publication proof remains Step 44.
+
+**Current resume point:** Step 44. Do not begin it until Spencer explicitly answers `y` after the Step 43 completion report. A new chat should read this roadmap, verify the repository still matches this state, and then execute Step 44 only.
 
 ## Reconstructed remaining steps
 
