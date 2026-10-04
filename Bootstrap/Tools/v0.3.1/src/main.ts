@@ -23,6 +23,11 @@ interface InternalPluginsApi {
   disablePlugin?(id: string): Promise<void> | void;
 }
 
+interface PreparedReleaseScan {
+  lock: ReturnType<typeof parseLock>;
+  installed: Record<string, InstalledPlugin>;
+}
+
 export default class MdseBootstrap extends Plugin {
   private status: HTMLElement | null = null;
   private last: Finding[] = [];
@@ -31,22 +36,17 @@ export default class MdseBootstrap extends Plugin {
     this.status = this.addStatusBarItem();
     this.status.setText("MDSE: checking…");
     this.status.addClass("mod-clickable");
-    this.registerDomEvent(this.status, "click", () => new CheckModal(this.app, this.last, async () => {
-      await this.repairActivation();
-      return this.runCheck(true);
-    }).open());
+    this.registerDomEvent(this.status, "click", () => new CheckModal(this.app, this.last, () => this.repairAndCheck(true)).open());
 
     this.addCommand({ id: "show-release-check", name: "Show release check", callback: async () => {
-      await this.repairActivation();
-      await this.runCheck(false);
-      new CheckModal(this.app, this.last, async () => { await this.repairActivation(); return this.runCheck(true); }).open();
+      await this.repairAndCheck(false);
+      new CheckModal(this.app, this.last, () => this.repairAndCheck(true)).open();
     } });
     this.addCommand({ id: "register-author", name: "Register author code", callback: () => this.openRegistration(true) });
 
     this.app.workspace.onLayoutReady(() => {
       window.setTimeout(async () => {
-        await this.repairActivation();
-        await this.runCheck(true);
+        await this.repairAndCheck(true);
         if (!(await this.readCode())) this.openRegistration(false);
       }, START_DELAY_MS);
     });
@@ -58,6 +58,28 @@ export default class MdseBootstrap extends Plugin {
 
   private internalPlugins(): InternalPluginsApi {
     return (this.app as unknown as { internalPlugins: InternalPluginsApi }).internalPlugins;
+  }
+
+  private async prepareReleaseScan(): Promise<PreparedReleaseScan> {
+    const a = this.app.vault.adapter;
+    const cfg = this.app.vault.configDir;
+    const lock = parseLock(parseYaml(await a.read(normalizePath(`${cfg}/plugin-lock.yaml`))));
+    return { lock, installed: await this.scanInstalled(lock) };
+  }
+
+  /**
+   * One integrity scan feeds both safe activation repair and the immediately following release
+   * evaluation. Hashing the same plugin payload twice on startup adds no assurance.
+   */
+  private async repairAndCheck(notify: boolean): Promise<Finding[]> {
+    try {
+      const prepared = await this.prepareReleaseScan();
+      await this.repairActivation(prepared);
+      return this.runCheck(notify, prepared);
+    } catch {
+      // Let runCheck produce the normal readable lock/release finding.
+      return this.runCheck(notify);
+    }
   }
 
   private async scanInstalled(lock: ReturnType<typeof parseLock>): Promise<Record<string, InstalledPlugin>> {
@@ -78,15 +100,15 @@ export default class MdseBootstrap extends Plugin {
     return installed;
   }
 
-  private async repairActivation(): Promise<void> {
+  private async repairActivation(prepared?: PreparedReleaseScan): Promise<void> {
     try {
       const a = this.app.vault.adapter;
       const cfg = this.app.vault.configDir;
-      const lock = parseLock(parseYaml(await a.read(normalizePath(`${cfg}/plugin-lock.yaml`))));
+      const lock = prepared?.lock ?? parseLock(parseYaml(await a.read(normalizePath(`${cfg}/plugin-lock.yaml`))));
       const internal = this.internalPlugins();
       const coreEnabled: Record<string, boolean> = {};
       for (const id of [...lock.requiredCorePlugins, ...lock.disabledCorePlugins]) coreEnabled[id] = !!internal.getPluginById(id)?.enabled;
-      const installed = await this.scanInstalled(lock);
+      const installed = prepared?.installed ?? await this.scanInstalled(lock);
       const plan = activationPlan(lock, new Set(this.plugins().enabledPlugins), coreEnabled, installed);
 
       for (const id of plan.enableCommunity) {
@@ -105,13 +127,13 @@ export default class MdseBootstrap extends Plugin {
     }
   }
 
-  async runCheck(notify: boolean): Promise<Finding[]> {
+  async runCheck(notify: boolean, prepared?: PreparedReleaseScan): Promise<Finding[]> {
     const a = this.app.vault.adapter;
     const cfg = this.app.vault.configDir;
     let findings: Finding[];
     try {
-      const lock = parseLock(parseYaml(await a.read(normalizePath(`${cfg}/plugin-lock.yaml`))));
-      const installed = await this.scanInstalled(lock);
+      const lock = prepared?.lock ?? parseLock(parseYaml(await a.read(normalizePath(`${cfg}/plugin-lock.yaml`))));
+      const installed = prepared?.installed ?? await this.scanInstalled(lock);
       let vaultText = "";
       try { vaultText = await a.read(".vault.yaml"); } catch { /* reported below */ }
       const rel = /^mdse_release:\s*["']?([^"'#\r\n]+)/m.exec(vaultText);
