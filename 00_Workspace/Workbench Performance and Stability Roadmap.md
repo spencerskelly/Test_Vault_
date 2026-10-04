@@ -19,6 +19,21 @@ The runtime should therefore:
 - reduce overlapping plugin/runtime work only after equivalent capability is proven;
 - accept a release only from the exact CI-built candidate tested in a disposable integration vault.
 
+## Execution contract for future chats
+
+Use this section as the continuation protocol; do not reconstruct the plan from conversation memory.
+
+1. **Authority and repositories.** This roadmap and `00_Workspace/Startup Stability Plan.md` in `spencerskelly/Test_Vault_` main define the numbered stability sequence. Runtime implementation belongs in `spencerskelly/MDSE_Workbench` main. Test_Vault_ records governance/status; it is not a duplicate runtime source tree.
+2. **Resume point.** Find the first numbered step below that is not listed under **Verified completed steps** and has no later completion evidence in this file. That is the only active step.
+3. **Read before changing code.** Read the active step, the immediately preceding completed steps it depends on, and the current Workbench implementation/tests for the affected seam. Treat newer source/tests on Workbench main as evidence that a reconstructed step may already be satisfied.
+4. **Keep scope exact.** Implement or prove only the active numbered step. Do not silently pull later-step behavior forward. A prerequisite defect may be fixed only when it blocks the active step; document that exception.
+5. **Prefer instrumentation before policy.** Measurement steps collect evidence without setting thresholds or changing runtime policy unless the numbered step explicitly says to do so. Thresholds, fallback behavior, diagnostics UI, and acceptance decisions belong to their own numbered steps.
+6. **Proof required.** A step is complete only when the implementation or evidence exists in the authoritative repository, focused tests cover the new behavior, the full Workbench test suite/build are clean when code changed, and this roadmap records what changed and where the proof lives.
+7. **Record enough for handoff.** Completion evidence must state the semantic intent, files changed, test/build result, and any intentionally deferred follow-on. A later chat should be able to continue without relying on hidden reasoning or prior chat text.
+8. **One-step gate.** After completing and documenting one numbered step, stop. Report the result and wait for Spencer's explicit `y` before starting the next numbered step.
+9. **No retroactive renumbering.** If a reconstructed step is already satisfied, mark that step complete with evidence; do not delete it or renumber later steps.
+10. **Release boundary.** Performance/stability work on standalone Workbench main does not by itself change the Base Vault pin or constitute an MDSE release. Release promotion remains a separate controlled integration action.
+
 ## Verified completed steps
 
 18. Collapse relationship evidence into one canonical internal representation.
