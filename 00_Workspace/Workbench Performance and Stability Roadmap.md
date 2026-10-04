@@ -792,15 +792,92 @@ Step 56 conclusion:
   - full occurrence settlement only for Interfaces and Where Used, whose semantics require vault-wide occurrence completeness.
 - No view published occurrence-derived output before the required capability was ready.
 
-**Current resume point:** Step 57. Do not begin it until Spencer explicitly answers `y` after the Step 56 completion report. A new chat should read this roadmap, verify the repository still matches this state, and then execute Step 57 only.
+### Step 57 completion evidence — 2026-10-04
+
+Ran integrated real-Obsidian live-edit acceptance while genuine Workbench background occurrence work was active.
+
+Acceptance design:
+- Used the exact accepted Workbench candidate from Step 55; artifact hashes were reverified before launch.
+- Disposable Obsidian 1.13.7 vault contained:
+  - 12,000 generated MDSE notes;
+  - 500 Local Model background-owner fixtures;
+  - a live-edit anchor Object with an initially unresolved `hasPart: [[Live Target]]`;
+  - a reusable Function target.
+- Background occurrence hydration was deliberately slowed for the 500 background fixtures so every foreground file operation could be proven to begin while background work was active.
+- Before each operation the probe required:
+  - `localHydrationActive > 0`;
+  - 500 background candidates still pending.
+- The acceptance sequence then performed real Obsidian vault operations:
+  1. add;
+  2. edit;
+  3. rename;
+  4. move;
+  5. delete.
+- Every potentially blocking vault/source/occurrence barrier had a bounded timeout and progress breadcrumb, so a deadlock would fail by named stage instead of hanging the workflow.
+
+Per-operation proof:
+- **Add**
+  - background active: 500;
+  - background pending: 500;
+  - new `Acceptance/Live Target.md` indexed;
+  - previously unresolved `Live Anchor hasPart Live Target` relationship resolved;
+  - target Local Model region hydrated with 1 record.
+- **Edit**
+  - background active: 500;
+  - background pending: 500;
+  - added `performs: [[Live Function]]` relationship resolved in the live semantic graph;
+  - edited Local Model region remained valid with 1 record.
+- **Rename**
+  - background active: 500;
+  - background pending: 500;
+  - old path removed from the model;
+  - new renamed path indexed;
+  - renamed note's `performs` relationship converged correctly;
+  - Local Model ownership migrated to the renamed path with 1 record and no stale old-path region.
+- **Move**
+  - background active: 500;
+  - background pending: 500;
+  - old pre-move path removed;
+  - folder-qualified moved path indexed;
+  - moved note's `performs` relationship remained correct;
+  - Local Model ownership migrated to the moved path with 1 record.
+- **Delete**
+  - background active: 500;
+  - background pending: 500;
+  - deleted path removed from the model;
+  - relationship to the deleted path disappeared;
+  - Local Model region removed completely (0 records).
+
+Final convergence proof:
+- source reconciliation pending: **false**;
+- live update pending: **0**;
+- occurrence hydration pending: **0**;
+- Local Model read errors: **0**.
+- Interrupted/requeued occurrence work completed successfully after the edit sequence.
+
+Harness note:
+- An earlier meaningful attempt showed `fileManager.renameFile()` itself exceeded a 10 s bound in the 12.5k-note vault because that API includes broader Obsidian link-maintenance behavior.
+- Step 57 was narrowed to the actual Workbench requirement by using the real low-level `app.vault.rename()` event for rename/move, while separately asserting Workbench path, relationship and Local Model convergence.
+- No Workbench runtime code change was required to pass Step 57; the changes were integration-harness-only.
+
+Authoritative evidence:
+- Workflow: `Integrated live-edit acceptance`.
+- Successful run: **`37234448220`** (run 7).
+- Evidence artifact: `live-edit-evidence`, artifact ID **`11314204465`**.
+- Final Step 57 probe commit: `8fa81f09`.
+- Normal Build Workbench workflow for the final Step 57 commit also passed: **`37234448217`** (run 406).
+
+Step 57 conclusion:
+- Add, edit, rename, move and delete all converge correctly while background occurrence work is active.
+- Foreground source edits successfully preempt/cancel and requeue background occurrence work without leaving stale semantic state, stale paths, stale Local Model regions or stranded background queues.
+
+**Current resume point:** Step 58. Do not begin it until Spencer explicitly answers `y` after the Step 57 completion report. A new chat should read this roadmap, verify the repository still matches this state, and then execute Step 58 only.
 
 ## Reconstructed remaining steps
 
 43. Ensure cache restore failure always falls back to a cooperative cold build without leaving partially restored semantic state visible.
 
 48. Add failure-injection tests proving one derived subsystem can fail without making ordinary Obsidian editing or unrelated Workbench capabilities unusable.
-
-57. Run integrated live-edit acceptance covering add, edit, rename, move and delete while background work is active.
 
 58. Run integrated recovery acceptance covering bad cache, interrupted background work, plugin reload and Obsidian restart.
 
