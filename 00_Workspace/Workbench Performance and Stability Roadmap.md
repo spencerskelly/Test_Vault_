@@ -270,13 +270,35 @@ Implemented and verified on `spencerskelly/MDSE_Workbench` main.
 - Step 44 commits are `4fe00529`, `91fc1900`, `c7f34bf4`, and `d992e82d`; CI produced built-artifact commit `ab8a4502`.
 - Intentionally deferred: unified foreground-activity pausing of cache persistence, assurance, and background occurrence work remains Step 45.
 
-**Current resume point:** Step 45. Do not begin it until Spencer explicitly answers `y` after the Step 44 completion report. A new chat should read this roadmap, verify the repository still matches this state, and then execute Step 45 only.
+### Step 45 completion evidence — 2026-10-04
+
+Implemented and verified on `spencerskelly/MDSE_Workbench` main.
+
+- Foreground activity is now one shared runtime signal for all optional/background Workbench subsystems: background occurrence hydration, semantic-cache persistence, and automatic/stale-retry assurance.
+- All three paths use the same `lastChange` foreground-activity timestamp through `canRunBackgroundWork()`, plus the same explicit runtime-work priority ordering from `canStartRuntimeWork()`.
+- `backgroundWorkAllowed()` now accepts `assurance` in addition to background hydration and cache writes.
+- Added a shared `waitForBackgroundWork()` loop so automatic assurance can wait on the same policy rather than using a separate assurance-specific quiet heuristic.
+- Assurance behavior is intentionally split by intent:
+  - automatic assurance waits for shared background permission before scanning;
+  - a deliberately forced/manual assurance request may start immediately as foreground work;
+  - if that forced scan races a foreground edit and becomes stale, its retry must yield to the shared background policy before rescanning.
+- Cache persistence already used the shared foreground gate when its timer fired. Step 45 adds a second shared-policy recheck after Local Model settling and immediately before the expensive serialize/write boundary, so an edit that resumes during the wait defers persistence instead of continuing from an invalidated quiet period.
+- Background occurrence hydration continues to consult the same shared gate both before starting and, through the Indexer's background-idle callback, between cooperative owner boundaries.
+- Runtime work priority remains explicit: indexing > requested hydration > background hydration > assurance > cache write. Therefore lower-priority optional work cannot begin while higher-priority work is active.
+- Focused assurance tests prove:
+  - automatic assurance does not scan until shared background permission is granted;
+  - forced assurance can run immediately;
+  - a stale forced scan's retry yields to shared background permission before rescanning.
+- Existing background-policy tests continue to prove the common foreground quiet window and runtime-work priority ordering.
+- GitHub Actions run `37224995767` passed `npm test`, the 60k semantic-cache scale smoke, paired cold/warm startup benchmark, 60k relationship re-resolution benchmark, `npm run build`, artifact hashing/sync, and built-artifact commit.
+- Step 45 commits are `f136f0a0`, `aa284891`, `992bf04c`, and `c26fbdb5`; CI produced built-artifact commit `9274b8c0`.
+- Intentionally deferred: starvation bounds ensuring deferred occurrence hydration, cache persistence, and assurance eventually resume under sustained intermittent foreground activity remain Step 46.
+
+**Current resume point:** Step 46. Do not begin it until Spencer explicitly answers `y` after the Step 45 completion report. A new chat should read this roadmap, verify the repository still matches this state, and then execute Step 46 only.
 
 ## Reconstructed remaining steps
 
 43. Ensure cache restore failure always falls back to a cooperative cold build without leaving partially restored semantic state visible.
-
-45. Verify resumed foreground edits pause cache persistence, assurance and background occurrence work through one shared activity policy.
 
 46. Add starvation bounds so deferred occurrence hydration, cache persistence and assurance eventually resume after sustained but intermittent foreground activity.
 
