@@ -64,6 +64,8 @@ Implemented on `spencerskelly/MDSE_Workbench` main.
 - Commits carrying the implementation/test are `e6ad7e6`, `e1116c6`, and `374f772` (followed by the normal CI-built artifact commit).
 - Intentionally deferred: no candidate threshold/fallback policy was added (Step 34), and no user-facing diagnostics surface was added (Step 38).
 
+**Current resume point:** Step 34. Do not begin it until Spencer explicitly answers `y` after the Step 33 completion report. A new chat should read this roadmap, verify the repository still matches this state, and then execute Step 34 only.
+
 ## Reconstructed remaining steps
 
 34. Define a candidate-count threshold above which targeted relationship re-resolution falls back to the cooperative whole-graph path.
