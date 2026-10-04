@@ -37,9 +37,12 @@ Each plugin is reviewed against the same questions:
 | `nodian` | Existing typed-note/model navigation capability from the earlier MDSE architecture | **Under overlap review** | Measure remaining unique value now that Workbench owns the semantic index |
 | `breadcrumbs` | Existing relationship navigation/bidirectional browsing | **Under overlap review** | Measure remaining unique value against Workbench Where Used/details/navigation |
 | `fileclass` | Existing typed-property/class editing support | **Under overlap review** | Measure remaining unique value against the structured Workbench editor |
-| `dataview` | Query/report capability in existing notes | **Under overlap review** | Inventory real queries; prefer native Bases/Workbench only when functional parity exists |
 | `quickadd` | Convenience creation/actions | **Under overlap review** | Candidate to retire only after Workbench creation flows cover actual use |
 | `table-exporter` | Convenience export | **Optional/convenience candidate** | Determine whether it belongs in the controlled default or a user-optional layer |
+
+## Retired from controlled runtime
+
+- **Dataview 0.5.68 — retired by W-370.** Dependency inventory found no Dataview queries in the current controlled vault, so no engineering workflow depended on it. Native Bases provide folder/property tables and Workbench provides schema-aware Explore/Details/Review/navigation for the modeled workflows in use. The Step 53 one-plugin-at-a-time integration benchmark measured Dataview at **+34.246 s** to Workbench core/occurrence readiness versus the bracketed Workbench-only baseline while preserving identical model counts. Because both the replacement/dependency gate and startup-benefit gate were satisfied, Dataview was removed from the controlled lock, enabled list and runtime payload. Reintroducing it would require a new demonstrated requirement and dependency-budget review.
 
 ## Runtime tiers
 
