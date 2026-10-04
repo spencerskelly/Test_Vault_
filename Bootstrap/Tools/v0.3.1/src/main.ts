@@ -46,8 +46,13 @@ export default class MdseBootstrap extends Plugin {
 
     this.app.workspace.onLayoutReady(() => {
       window.setTimeout(async () => {
-        await this.repairAndCheck(true);
+        // First-use author setup is interactive and should not sit behind a potentially expensive
+        // whole-plugin integrity scan. Start the release check, then surface registration while
+        // it runs. Registration itself still uses the controlled Templater path and the release
+        // check/repair continues independently.
+        const check = this.repairAndCheck(true);
         if (!(await this.readCode())) this.openRegistration(false);
+        await check;
       }, START_DELAY_MS);
     });
   }
