@@ -594,15 +594,56 @@ Step 53 conclusion:
 - Nodian, Breadcrumbs and Advanced Canvas did not show a meaningful startup penalty in this run.
 - **No plugin is removed or demoted by Step 53.** Step 54 must separately prove that Workbench actually replaces the overlapping capability and that removing/demoting the plugin produces a startup benefit before changing the baseline.
 
-**Current resume point:** Step 54. Do not begin it until Spencer explicitly answers `y` after the Step 53 completion report. A new chat should read this roadmap, verify the repository still matches this state, and then execute Step 54 only.
+### Step 54 completion evidence — 2026-10-04
+
+Verified the one-plugin removal/demotion gate against the current controlled MDSE runtime.
+
+Decision:
+- **Dataview 0.5.68 is retired from the controlled MDSE runtime.**
+- No additional plugin is removed or demoted in Step 54.
+
+Why Dataview satisfies both required gates:
+
+1. **Replacement/dependency gate passed**
+   - Current controlled vault search found no Dataview query blocks (```dataview`).
+   - W-370 records that no current engineering workflow depends on Dataview-specific query execution.
+   - Native Obsidian Bases cover the tabular/property views currently present.
+   - Workbench provides the schema-aware semantic index plus Explore, Details, Review and relationship/navigation workflows used by MDSE.
+   - Therefore removing Dataview does not remove a required current engineering capability.
+
+2. **Startup-benefit gate passed**
+   - Step 53 isolated Dataview 0.5.68 against the bracketed Workbench-only 12,000-note baseline.
+   - Dataview preserved the same **12,000 files / 12,000 elements / 21,491 links** and all required Workbench commands.
+   - It nevertheless delayed Workbench core/occurrence readiness by **34.246 s**.
+   - This is a clear, material startup penalty rather than measurement noise.
+
+Controlled-stack verification:
+- `.obsidian/community-plugins.json` no longer contains `dataview`.
+- `.obsidian/plugin-lock.yaml` contains no Dataview entry.
+- `Base Vault/Runtime/Plugins/` contains no Dataview payload.
+- `Base Vault/Definition/Enabled Plugin Stack.md` records Dataview retirement under W-370.
+- `00_Workspace/Runtime Plugin Dependency Audit.md` records Dataview under retired controlled runtime.
+- The governed one-plugin change is W-370 in `00_Workspace/Workspace Decision Log.md`.
+
+Plugins intentionally retained:
+- **Fileclass 0.2.15** remains transitional. Step 53 measured a smaller +1.160 s cost, but the current Base Vault still uses generated Fileclass definitions in `99_System/06_Fileclasses/` for typed-property input/validation. Workbench replacement of that complete editing workflow is not yet proven.
+- **Breadcrumbs 4.21.11** remains under overlap review; no meaningful startup penalty was measured, and its unique navigation value has not been proven unnecessary.
+- **Nodian 1.4.14** remains under overlap review; no meaningful startup penalty was measured.
+- **Advanced Canvas 7.0.0** remains a presentation dependency; it showed only +225 ms in the Step 53 run and still provides unique Canvas UX.
+- No multi-plugin cleanup was performed; the architecture rule remains one dependency change at a time.
+
+Step 54 conclusion:
+- Dataview is the only overlapping plugin for which both replacement and startup-benefit gates are currently proven.
+- The controlled runtime already reflects that retirement.
+- No runtime code change was needed in this step, so no new Workbench CI run was required.
+
+**Current resume point:** Step 55. Do not begin it until Spencer explicitly answers `y` after the Step 54 completion report. A new chat should read this roadmap, verify the repository still matches this state, and then execute Step 55 only.
 
 ## Reconstructed remaining steps
 
 43. Ensure cache restore failure always falls back to a cooperative cold build without leaving partially restored semantic state visible.
 
 48. Add failure-injection tests proving one derived subsystem can fail without making ordinary Obsidian editing or unrelated Workbench capabilities unusable.
-
-54. Remove or demote an overlapping plugin only when Workbench replacement capability and startup benefit are both proven.
 
 55. Install the exact CI-built candidate in the disposable integration vault and run the integrated startup-responsiveness acceptance test.
 
