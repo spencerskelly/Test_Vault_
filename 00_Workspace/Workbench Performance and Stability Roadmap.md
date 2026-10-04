@@ -141,11 +141,27 @@ Implemented on `spencerskelly/MDSE_Workbench` main.
 - Implementation commits are `82f4ea1a` and `398c54af`; CI produced built-artifact commit `25259feb`.
 - Intentionally deferred: reverse dependency index memory bounding and size reporting remain Step 39.
 
-**Current resume point:** Step 39. Do not begin it until Spencer explicitly answers `y` after the Step 38 completion report. A new chat should read this roadmap, verify the repository still matches this state, and then execute Step 39 only.
+### Step 39 completion evidence — 2026-10-04
+
+Implemented on `spencerskelly/MDSE_Workbench` main.
+
+- The reverse relationship dependency accelerator now exposes an exact structural size summary: source count, resolved target-key count, authored-key count, resolved association count, authored-key association count, and total stored set memberships.
+- The memory bound is deliberately structural rather than a lossy hard cap:
+  - `set()` removes a source's previous entries before replacement, so the index cannot accumulate edit-history residue;
+  - each current resolved source-target association is stored exactly twice, once source→target and once target→source;
+  - each normalized authored-key association is stored exactly twice, once source→key and once key→source;
+  - one authored link yields at most two normalized candidate keys (qualified path and basename).
+- Therefore total stored memberships are exactly `2 × (resolved associations + authored-key associations)`, and growth remains proportional to current model relationship evidence rather than runtime history.
+- No eviction or arbitrary entry cap was introduced because dropping dependency evidence would weaken targeted invalidation correctness.
+- Workbench diagnostics now reports reverse relationship index sources, combined key count, stored memberships, and the split between resolved and authored-key associations.
+- Focused tests prove replacement removes stale memory rather than accumulating it, and one authored link contributes at most two normalized dependency keys.
+- GitHub Actions run `37222550717` passed `npm test`, the 60k semantic-cache scale smoke, paired cold/warm startup benchmark, 60k relationship re-resolution benchmark, `npm run build`, artifact hashing/sync, and built-artifact commit.
+- Implementation/test commits are `fac11490`, `db426f4d`, `58fd69e9`, and `4319f14f`; CI produced built-artifact commit `e089b8cb`.
+- Intentionally deferred: schema-change invalidation of every relationship-derived cache/index surface remains Step 40.
+
+**Current resume point:** Step 40. Do not begin it until Spencer explicitly answers `y` after the Step 39 completion report. A new chat should read this roadmap, verify the repository still matches this state, and then execute Step 40 only.
 
 ## Reconstructed remaining steps
-
-39. Bound the memory cost of reverse relationship dependency indexes and report their size in explicit diagnostics.
 
 40. Verify that a schema change invalidates every derived index/cache surface that depends on relationship definitions.
 
