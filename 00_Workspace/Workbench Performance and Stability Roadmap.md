@@ -871,15 +871,86 @@ Step 57 conclusion:
 - Add, edit, rename, move and delete all converge correctly while background occurrence work is active.
 - Foreground source edits successfully preempt/cancel and requeue background occurrence work without leaving stale semantic state, stale paths, stale Local Model regions or stranded background queues.
 
-**Current resume point:** Step 58. Do not begin it until Spencer explicitly answers `y` after the Step 57 completion report. A new chat should read this roadmap, verify the repository still matches this state, and then execute Step 58 only.
+### Step 58 completion evidence — 2026-10-04
+
+Ran integrated real-Obsidian recovery acceptance covering bad cache, interrupted background work, plugin reload and full Obsidian restart.
+
+Acceptance design:
+- Used the exact accepted Workbench candidate; artifact hashes were reverified before launch.
+- Disposable recovery vault contained:
+  - 12,000 generated MDSE notes;
+  - 300 Local Model background-owner fixtures;
+  - one reusable background target Object;
+  - warm-cache preview explicitly enabled for the recovery test.
+- Recovery phases were isolated across separate Obsidian/XDG profiles and explicit process shutdowns so one renderer/process could not satisfy a later phase accidentally.
+
+1. **Seed a valid semantic cache**
+   - A normal real-Obsidian launch was allowed to reach core readiness and commit a valid Workbench semantic-cache generation.
+
+2. **Inject bad cache**
+   - Both cache manifests were deliberately corrupted before the next launch:
+     - `manifest-a.json`;
+     - `manifest-b.json`.
+   - Warm preview remained enabled, forcing the startup restore path to attempt the damaged cache rather than bypass it.
+
+3. **Bad-cache fallback acceptance**
+   - Workbench rejected the cache:
+     - restore record: `not used: No semantic cache manifest is available.`
+   - Startup recovered through the authoritative cooperative cold path.
+   - Resulting startup mode: **`full`**.
+   - No partially restored semantic state was accepted as core-ready.
+
+4. **Interrupted background work + plugin reload**
+   - The 300 Local Model fixtures were slowed so genuine occurrence hydration was active.
+   - At plugin reload:
+     - active background occurrence owners: **300**.
+   - Workbench was disabled/unloaded through persisted Obsidian plugin controls, then enabled again in the same renderer.
+   - After reload:
+     - plugin enabled: **yes**;
+     - mode: **`full`**;
+     - files: **12,301**;
+     - elements: **12,301**;
+     - source reconciliation pending: **false**;
+     - occurrence hydration pending: **0**;
+     - Local Model read errors: **0**.
+   - Background work interrupted by unload did not leave stale or stranded derived state after reload.
+
+5. **Full Obsidian restart**
+   - The recovery renderer/process was explicitly terminated.
+   - A fresh Obsidian process/profile reopened the same vault.
+   - Post-recovery restart reached authoritative Workbench core-ready state:
+     - launch → core ready: **43,257 ms**;
+     - files: **12,301**;
+     - elements: **12,301**;
+     - links: **21,491**;
+     - mode: **`full`**.
+   - Source coverage after restart matched the recovery vault rather than reverting to any pre-recovery snapshot.
+
+Authoritative evidence:
+- Workflow: `Integrated recovery acceptance`.
+- Successful run: **`37235759018`** (run 4), conclusion `success`.
+- Evidence artifact: `recovery-evidence`, artifact ID **`11315602310`**.
+- Step 58 implementation/harness commits:
+  - `1fded7a0` — integrated recovery probe;
+  - `f1e743ad` — recovery workflow;
+  - `c1344437` — isolated Obsidian profiles across launches;
+  - `e9d16e58` — explicit process shutdown between recovery phases;
+  - `4c9eaa91` — persisted Obsidian plugin-control reload path.
+- Normal Build Workbench workflow for the final Step 58 commit passed: **`37235759063`** (run 411).
+
+Step 58 conclusion:
+- Bad semantic cache fails closed and falls back to an authoritative full build.
+- Plugin unload/reload safely interrupts active background occurrence work and returns to a fully settled source/occurrence state.
+- A subsequent full Obsidian restart recovers the same current vault model without stale semantic state or stranded background work.
+- No new runtime defect was required to be fixed in the accepted candidate; Step 58 changes were recovery-integration harness/control refinements.
+
+**Current resume point:** Step 59. Do not begin it until Spencer explicitly answers `y` after the Step 58 completion report. A new chat should read this roadmap, verify the repository still matches this state, and then execute Step 59 only.
 
 ## Reconstructed remaining steps
 
 43. Ensure cache restore failure always falls back to a cooperative cold build without leaving partially restored semantic state visible.
 
 48. Add failure-injection tests proving one derived subsystem can fail without making ordinary Obsidian editing or unrelated Workbench capabilities unusable.
-
-58. Run integrated recovery acceptance covering bad cache, interrupted background work, plugin reload and Obsidian restart.
 
 59. Run repeated cold/warm restart cycles and confirm no cumulative memory, stale-state or scheduling degradation.
 
