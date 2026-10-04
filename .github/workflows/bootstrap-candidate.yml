@@ -63,7 +63,7 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add -f Bootstrap/Tools/v0.3.1/artifact/main.js Bootstrap/Tools/v0.3.1/artifact/manifest.json Bootstrap/Tools/v0.3.1/artifact/styles.css Bootstrap/Tools/v0.3.1/artifact/artifact-sha256.txt
+          git add -f artifact/main.js artifact/manifest.json artifact/styles.css artifact/artifact-sha256.txt
           if git diff --cached --quiet; then
             echo "Bootstrap candidate artifact already current."
             exit 0
