@@ -51,10 +51,20 @@ Use this section as the continuation protocol; do not reconstruct the plan from 
 30. Prevent semantic-cache clearing from racing an active cache writer.
 31. Maintain reverse-path dependency indexes for targeted relationship re-resolution.
 32. Use dependency candidates so path-set changes do not require whole-graph relationship re-resolution.
+33. Measure targeted relationship re-resolution fan-out so we can see how many source notes each path-set change actually invalidates.
+
+### Step 33 completion evidence — 2026-10-04
+
+Implemented on `spencerskelly/MDSE_Workbench` main.
+
+- `src/core/relationship-dependencies.ts` now reports conservative candidate fan-out per changed path without changing reconciliation semantics.
+- `src/obsidian/indexer.ts` records a bounded 20-sample in-memory history for each coalesced live path-set reconciliation: changed paths, per-path candidate fan-out, unique candidate count, count of source notes whose resolved evidence actually changed, and elapsed re-resolution time.
+- `test/relationship-dependencies.test.ts` proves fan-out measurement remains consistent with the canonical candidate union and deduplicates repeated changed paths.
+- GitHub Actions run `37219842542` passed `npm test`, the 60k semantic-cache scale smoke, the paired cold/warm startup benchmark, `npm run build`, artifact hashing/sync, and built-artifact commit.
+- Commits carrying the implementation/test are `e6ad7e6`, `e1116c6`, and `374f772` (followed by the normal CI-built artifact commit).
+- Intentionally deferred: no candidate threshold/fallback policy was added (Step 34), and no user-facing diagnostics surface was added (Step 38).
 
 ## Reconstructed remaining steps
-
-33. Measure targeted relationship re-resolution fan-out so we can see how many source notes each path-set change actually invalidates.
 
 34. Define a candidate-count threshold above which targeted relationship re-resolution falls back to the cooperative whole-graph path.
 
