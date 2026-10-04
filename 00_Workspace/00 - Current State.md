@@ -1,6 +1,6 @@
 # Current State
 
-**Last verified: 2026-10-03. Read this first, human or AI.** It says what is current, what is historical, where each rule lives and what is not built yet. If any other file disagrees with this page, this page and the files it names as current win. The machine-readable release authority is `Base Vault/Definition/mdse-release.yaml`.
+**Last verified: 2026-10-04. Read this first, human or AI.** It says what is current, what is historical, where each rule lives and what is not built yet. If any other file disagrees with this page, this page and the files it names as current win. The machine-readable release authority is `Base Vault/Definition/mdse-release.yaml`.
 
 ## Target and status
 
@@ -20,7 +20,7 @@
 3. [[MDSE v0.8 Cross-Repository Reconciliation - 2026-10-02]]: the implementation contract (identity, reruns, naming, Local Model 0.2, evidence set, gates, build order).
 4. [[MDSE Modeling Ruleset 1.23]]: what the model means and how imports are governed.
 5. [[Translator Definition]]: what the stage 1 importer must do.
-6. [[Workspace Decision Log]]: every decision (W-01 to W-342); newest last. Where a log entry marks an earlier one superseded, the later one governs.
+6. [[Workspace Decision Log]]: every decision (W-01 to W-370); newest last. Where a log entry marks an earlier one superseded, the later one governs.
 7. [[MDSE Tool Definitions and Boundaries]]: authoritative ownership/boundary map for Workbench, Bootstrap, importer, base/release tooling and deferred cross-vault infrastructure.
 8. [[Handoff Prompt - MDSE v0.8 Implementation]]: copy-ready prompts for a new AI chat (general, and Workbench).
 9. [[Post-Import Tasks]]: the work done in the vault after an import, Tasks 1 to 9.
