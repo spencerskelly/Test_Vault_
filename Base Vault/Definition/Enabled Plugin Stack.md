@@ -14,7 +14,6 @@ Obsidian **1.13.0 or later** is required (`obsidianMinVersion` in the lock; set 
 | Fileclass | 0.2.15 | Typed property input and validation; one schema per class in `99_System/06_Fileclasses`, bound by the note's `type` | governed |
 | Breadcrumbs | 4.21.11 | Relationship navigation: every relationship field is an edge field; parent/child, peers, sequence and trace groups | governed |
 | Obsidian Git | 2.40.0 | Pull on start, commit and sync | governed |
-| Dataview | 0.5.68 | Queries Bases cannot do. No Dataview queries exist in the vault yet | defaults |
 | Advanced Canvas | 7.0.0 | Canvas visualization | defaults |
 | Nodian | 1.4.14 | Pinned but not relied on (W-275 trial); removal decided after the trial | defaults |
 | QuickAdd | 2.23.0 | Optional launcher | defaults |
@@ -30,9 +29,11 @@ W-354 adds an explicit dependency budget so startup cost and compatibility surfa
 |---|---|---|
 | Essential | MDSE Bootstrap, MDSE Workbench, Templater, Advanced Canvas, Obsidian Git | Retain while they own unique release/runtime capabilities. |
 | Transitional | Fileclass, Breadcrumbs | Retain until Workbench replacement is complete and accepted. |
-| Review for retirement | Dataview, Nodian, QuickAdd, Table Exporter | Keep in the current pre-release Base until dependency/startup comparison proves they are unnecessary; do not add new MDSE dependencies on them. |
+| Review for retirement | Nodian, QuickAdd, Table Exporter | Keep in the current pre-release Base until dependency/startup comparison proves they are unnecessary; do not add new MDSE dependencies on them. |
 
 A plugin leaves the controlled stack only after templates, generated configuration, documentation and representative engineering workflows are checked. The target is the smallest dependable runtime surface, not minimal plugin count for its own sake.
+
+**Dataview retirement (W-370).** Dataview 0.5.68 is no longer part of the controlled runtime. The current vault contains no Dataview queries, native Bases plus Workbench cover the workflows actually in use, and the Step 53 isolated overlap benchmark measured a +34.246 s core/occurrence-ready penalty on the 12,000-note integration vault. It is removed from the plugin lock, enabled list and runtime payload rather than kept installed-but-disabled.
 
 ## User instructions
 
