@@ -424,15 +424,71 @@ Implemented and verified on `spencerskelly/MDSE_Workbench` main.
 - Interpretation: on this controlled 12k-note Linux integration run, most elapsed cold-start time precedes Workbench core indexing itself; the measured Workbench core parsing/indexing slice was 70 ms, while launch-to-metadata-resolution was 8.737 s and launch-to-core-ready was 10.013 s.
 - Intentionally deferred: measuring warm startup against the exact same vault/repository state and comparing time-to-readable, time-to-core-ready and time-to-occurrence-ready remains Step 50.
 
-**Current resume point:** Step 50. Do not begin it until Spencer explicitly answers `y` after the Step 49 completion report. A new chat should read this roadmap, verify the repository still matches this state, and then execute Step 50 only.
+### Step 50 completion evidence — 2026-10-04
+
+Implemented and verified on `spencerskelly/MDSE_Workbench` main.
+
+- Extended the real-Obsidian disposable-vault harness so cold and warm startup are measured sequentially against the exact same generated model state.
+- Added independent launch milestones for:
+  - Obsidian renderer/vault readable;
+  - Obsidian metadata resolved;
+  - complete per-file metadata-cache coverage;
+  - Workbench core ready;
+  - Workbench occurrence ready;
+  - semantic cache committed.
+- The controller records the first point at which the correct disposable vault renderer is available as the user-visible/readable milestone.
+- The cold instance remains alive until occurrence data is ready and a complete semantic cache generation has been committed; only then is the warm launch started.
+- Warm preview is enabled only for the measured second launch. The Markdown/YAML model files are not regenerated or edited between launches.
+- A deterministic hash of all Markdown/YAML model sources is taken before the cold launch and checked after the warm launch; final validation proved the source model was identical.
+- Step 50 uncovered and corrected an important cold-start completeness defect: Obsidian's global `metadataCache.resolved` event could occur before every Markdown file had an available per-file metadata cache entry. Because Workbench derives frontmatter/type/link semantics from those entries, the earlier Step 49 core-ready sample could be semantically incomplete even though all file fingerprints had been visited.
+- Workbench startup now waits, after the global resolved/quiet gate, until every current Markdown file has a non-null Obsidian metadata-cache entry before the authoritative cold build/restore proceeds. Obsidian remains readable during this wait; only Workbench core readiness is withheld.
+- This correction supersedes the earlier Step 49 cold timing as the authoritative cold baseline. Step 49 still proved the real-Obsidian harness and file-parsing path, but its 1,587-element sample was incomplete relative to the fully resolved 12,000-element graph discovered in Step 50.
+- Final real-Obsidian comparison run: `37228561757` (run 11), conclusion `success`.
+- Environment:
+  - Obsidian 1.13.7 under Xvfb on the GitHub Actions Linux runner;
+  - 12,000 generated Markdown notes;
+  - identical repository/model source state for cold and warm measurements;
+  - warm run used semantic-cache mode `restored`.
+- Final cold measurement:
+  - launch → readable: **5,536 ms**;
+  - launch → metadata resolved: **10,129 ms**;
+  - launch → complete metadata coverage: **10,152 ms**;
+  - launch → core ready: **11,353 ms**;
+  - launch → occurrence ready: **11,353 ms**;
+  - launch → cache committed: **19,749 ms**;
+  - Workbench core work: **171 ms**;
+  - files: **12,000**;
+  - elements: **12,000**;
+  - authored/resolved graph links: **21,491**;
+  - mode: **full**.
+- Final warm measurement against the same model state:
+  - launch → readable: **2,281 ms**;
+  - launch → metadata resolved: **8,522 ms**;
+  - launch → complete metadata coverage: **8,609 ms**;
+  - launch → core ready: **9,866 ms**;
+  - launch → occurrence ready: **9,866 ms**;
+  - Workbench core work: **0 ms** reported for restored state;
+  - files: **12,000**;
+  - elements: **12,000**;
+  - links: **21,491**;
+  - mode: **restored**.
+- Warm-minus-cold deltas:
+  - readable: **-3,255 ms** (warm renderer became readable earlier);
+  - core ready: **-1,487 ms**;
+  - occurrence ready: **-1,487 ms**.
+- The semantic counts match exactly between cold and warm, and the Markdown/YAML source hash was identical.
+- Interpretation is deliberately deferred to Step 51: Step 50 establishes the measured fact that warm restore was about 1.49 s faster to core/occurrence readiness in this controlled 12k-note run, while the larger 3.26 s readable difference is an Obsidian/process-launch variation and cannot be attributed solely to Workbench cache restore.
+- Integration evidence artifact `obsidian-cold-start-evidence` was uploaded as artifact ID `11313037402` and contains cold result, warm result, comparison JSON, and controller/Obsidian logs.
+- Step 50 implementation commits are `904f8a61`, `141ebf93`, `312977d9`, `5b031d6d`, and correctness-barrier commit `13476498`; normal Build Workbench workflow run `37228561784` passed, producing built-artifact commit `31c1093a`.
+- Intentionally deferred: deciding whether this measured benefit is sufficient to keep/promote warm-cache preview remains Step 51.
+
+**Current resume point:** Step 51. Do not begin it until Spencer explicitly answers `y` after the Step 50 completion report. A new chat should read this roadmap, verify the repository still matches this state, and then execute Step 51 only.
 
 ## Reconstructed remaining steps
 
 43. Ensure cache restore failure always falls back to a cooperative cold build without leaving partially restored semantic state visible.
 
 48. Add failure-injection tests proving one derived subsystem can fail without making ordinary Obsidian editing or unrelated Workbench capabilities unusable.
-
-50. Measure end-to-end warm startup against the exact same vault/repository state and compare time-to-readable, time-to-core-ready and time-to-occurrence-ready.
 
 51. Keep warm-cache preview disabled by default unless integrated measurements prove a real user-visible startup benefit without weaker correctness.
 
