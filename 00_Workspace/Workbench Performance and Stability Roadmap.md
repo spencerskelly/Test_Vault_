@@ -482,17 +482,36 @@ Implemented and verified on `spencerskelly/MDSE_Workbench` main.
 - Step 50 implementation commits are `904f8a61`, `141ebf93`, `312977d9`, `5b031d6d`, and correctness-barrier commit `13476498`; normal Build Workbench workflow run `37228561784` passed, producing built-artifact commit `31c1093a`.
 - Intentionally deferred: deciding whether this measured benefit is sufficient to keep/promote warm-cache preview remains Step 51.
 
-**Current resume point:** Step 51. Do not begin it until Spencer explicitly answers `y` after the Step 50 completion report. A new chat should read this roadmap, verify the repository still matches this state, and then execute Step 51 only.
+### Step 51 completion evidence — 2026-10-04
+
+Decision: **keep warm-cache preview disabled by default.**
+
+Evidence reviewed:
+- Step 50 proved warm restore can be correct against the same 12,000-note model state:
+  - identical Markdown/YAML source hash;
+  - identical 12,000 files / 12,000 elements / 21,491 links;
+  - warm mode was `restored`;
+  - Steps 40–48 already proved schema/cache invalidation, source reconciliation, fail-closed restore, recovery, publication gating, background-work isolation and subsystem failure isolation.
+- The measured warm improvement was real but limited:
+  - core ready improved from **11.353 s** to **9.866 s**: **1.487 s faster**;
+  - occurrence ready improved by the same **1.487 s**;
+  - this is about a **13.1%** reduction in launch-to-Workbench-readiness for the controlled 12k-note run.
+- The apparent **3.255 s** improvement in Obsidian/vault readable time is not accepted as a Workbench warm-cache benefit because that milestone precedes Workbench restore and is subject to normal process/runner launch variation.
+- Warm restore does not eliminate the dominant startup prerequisite: Workbench still waits for Obsidian metadata resolution and complete per-file metadata coverage before publishing authoritative core state.
+- Only one controlled real-Obsidian cold/warm pair has been accepted so far. That is enough to prove feasibility and correctness, but not enough evidence to change the controlled default for every vault/user machine.
+- No regression requires removal of the preview. The opt-in setting remains available for further controlled measurements and later acceptance work.
+- Production default remains exactly as implemented: `warmCachePreview: false`.
+- No runtime/code change was required for Step 51, so no new Build Workbench CI run was necessary; the current implementation evidence remains Step 50's successful build run `37228561784` and built artifact commit `31c1093a`.
+- Step 52 is conditional on warm startup **earning promotion**. Because Step 51 does not promote warm restore to the normal startup path, Step 52 is **not activated** and no retrospective acceptance threshold is being invented after seeing one favorable measurement.
+- A future decision to reconsider promotion should first gather broader/repeated evidence; if that later earns promotion, Step 52's threshold/fallback-definition work becomes applicable before changing the normal startup path.
+
+**Current resume point:** Step 53. Do not begin it until Spencer explicitly answers `y` after the Step 51 completion report. Step 52 is currently not applicable because warm startup was not promoted. A new chat should read this roadmap, verify the repository still matches this state, and then execute Step 53 only.
 
 ## Reconstructed remaining steps
 
 43. Ensure cache restore failure always falls back to a cooperative cold build without leaving partially restored semantic state visible.
 
 48. Add failure-injection tests proving one derived subsystem can fail without making ordinary Obsidian editing or unrelated Workbench capabilities unusable.
-
-51. Keep warm-cache preview disabled by default unless integrated measurements prove a real user-visible startup benefit without weaker correctness.
-
-52. If warm startup earns promotion, define the exact acceptance threshold and fallback conditions required before making it the normal startup path.
 
 53. Measure third-party plugin overlap one plugin at a time against startup responsiveness and MDSE capability.
 
