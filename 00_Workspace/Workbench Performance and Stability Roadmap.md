@@ -79,11 +79,23 @@ Implemented on `spencerskelly/MDSE_Workbench` main.
 - The 5,000 threshold is intentionally a conservative safety policy, not a claimed performance optimum. Representative add/delete/rename benchmark tuning remains Step 37.
 - Intentionally deferred: detailed link-form correctness proof remains Step 35, dependency-evidence fail-closed behavior remains Step 36, and user-facing reconciliation diagnostics remain Step 38.
 
-**Current resume point:** Step 35. Do not begin it until Spencer explicitly answers `y` after the Step 34 completion report. A new chat should read this roadmap, verify the repository still matches this state, and then execute Step 35 only.
+### Step 35 completion evidence — 2026-10-04
+
+Implemented on `spencerskelly/MDSE_Workbench` main.
+
+- Reviewed the existing authored-link resolution and targeted dependency-candidate seam before changing behavior.
+- Found one real correctness weakness: the derived dependency index normalized slashes and `.md`, but remained case-sensitive and depended on upstream callers to have already removed wikilink aliases/fragments.
+- `src/core/relationship-dependencies.ts` now normalizes candidate keys conservatively by stripping alias/fragment syntax, normalizing Windows separators and leading slashes, removing `.md`, and comparing case-insensitively.
+- This normalization affects only derived invalidation candidates; authoritative relationship resolution remains delegated to Obsidian metadata resolution.
+- `test/relationship-dependencies.test.ts` now proves candidate coverage for ambiguous basenames, folder-qualified links, aliases, heading/block fragments, case variation, Windows separators, leading slashes, and `.md` normalization.
+- Ambiguous basename handling deliberately over-includes candidates rather than risk missing a source note; the targeted pass remains semantically correct because authoritative re-resolution still decides the actual destination.
+- GitHub Actions run `37221736297` passed `npm test`, the 60k semantic-cache scale smoke, the paired cold/warm startup benchmark, `npm run build`, artifact hashing/sync, and built-artifact commit.
+- Implementation/test commits are `44697378` and `6e9a3aa0`; CI produced built-artifact commit `9a8c9d52`.
+- Intentionally deferred: fail-closed validation of incomplete/inconsistent derived dependency evidence remains Step 36.
+
+**Current resume point:** Step 36. Do not begin it until Spencer explicitly answers `y` after the Step 35 completion report. A new chat should read this roadmap, verify the repository still matches this state, and then execute Step 36 only.
 
 ## Reconstructed remaining steps
-
-35. Prove targeted re-resolution remains correct for ambiguous basenames, folder-qualified links, aliases, fragments and case/path normalization.
 
 36. Add a fail-closed invariant that prevents targeted re-resolution when its derived dependency evidence is incomplete or inconsistent.
 
