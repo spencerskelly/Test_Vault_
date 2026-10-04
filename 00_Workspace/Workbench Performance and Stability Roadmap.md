@@ -179,11 +179,32 @@ Implemented and verified on `spencerskelly/MDSE_Workbench` main.
 - Implementation/test commits are `b2dc7467` and `b5aa19be`; CI produced built-artifact commit `f61a29a3`.
 - Intentionally deferred: proof that warm restore cannot publish core-ready before compatibility and source reconciliation complete remains Step 41.
 
-**Current resume point:** Step 41. Do not begin it until Spencer explicitly answers `y` after the Step 40 completion report. A new chat should read this roadmap, verify the repository still matches this state, and then execute Step 41 only.
+### Step 41 completion evidence — 2026-10-04
+
+Implemented and verified on `spencerskelly/MDSE_Workbench` main.
+
+- Added an explicit core-ready publication gate; restored or built `stats` are now treated as provisional internal state rather than a readiness signal.
+- Warm startup cannot report ready merely because `installRestoredCore()` has installed compatible cached state.
+- Before publishing core-ready, startup now awaits `indexer.whenSourceSettled()`, which covers:
+  - active whole-index build/rebuild work;
+  - queued rebuilds;
+  - coalesced live source updates;
+  - active live apply work;
+  - pending/active relationship re-resolution.
+- After the source-settled barrier, startup verifies publishable index statistics still exist, then opens the explicit publication gate.
+- `isReady()` now requires the publication gate, loaded schema, writer availability, statistics, no active build, and no pending source reconciliation.
+- Added pure `canPublishCoreReady()` readiness policy plus tests proving:
+  - every prerequisite is required;
+  - restored statistics alone never make warm startup ready while reconciliation/publication is incomplete.
+- Cache compatibility remains checked before `installRestoredCore()`; therefore the final ready state is now ordered as: compatibility validation → provisional restore → required reconciliation/recheck → source-settled barrier → explicit publication.
+- This also closes the cold/recovery case where a build could return while another rebuild had already been queued by startup churn; ready publication now waits for that queued source work to settle.
+- GitHub Actions run `37223756621` passed `npm test`, the 60k semantic-cache scale smoke, paired cold/warm startup benchmark, 60k relationship re-resolution benchmark, `npm run build`, artifact hashing/sync, and built-artifact commit.
+- Implementation/test commits are `acf7919d`, `4358064f`, `684cf69a`, and `f95bcdb5`; CI produced built-artifact commit `71abc470`.
+- Intentionally deferred: explicit corrupt/missing/partial/incompatible semantic-cache generation recovery tests remain Step 42.
+
+**Current resume point:** Step 42. Do not begin it until Spencer explicitly answers `y` after the Step 41 completion report. A new chat should read this roadmap, verify the repository still matches this state, and then execute Step 42 only.
 
 ## Reconstructed remaining steps
-
-41. Verify that warm restore cannot publish core-ready state until cache compatibility and source reconciliation have both completed successfully.
 
 42. Add explicit recovery tests for corrupt, missing, partially written and incompatible semantic-cache generations during startup.
 
