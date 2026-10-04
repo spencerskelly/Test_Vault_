@@ -34,5 +34,14 @@ jobs:
           cp main.js /tmp/bootstrap-main.js
           npm run build
           cmp -s main.js /tmp/bootstrap-main.js
+      - name: Upload candidate artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: mdse-bootstrap-0.3.1
+          path: |
+            Bootstrap/Tools/v0.3.1/main.js
+            Bootstrap/Tools/v0.3.1/manifest.json
+            Bootstrap/Tools/v0.3.1/styles.css
+          if-no-files-found: error
 
 # Temporary PR CI probe; do not merge this line.
