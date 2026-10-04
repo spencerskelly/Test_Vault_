@@ -249,13 +249,32 @@ Implemented and verified on `spencerskelly/MDSE_Workbench` main.
 - Step 43 commits are `41edf8c4`, `60d4ca0f`, `307482a7`, `c28472f5`, `28d0ae80`, `3e10cd53`, and `327253ec`; CI produced built-artifact commit `17287a58`.
 - Intentionally deferred: requested occurrence hydration preemption/duplicate-read/stale-publication proof remains Step 44.
 
-**Current resume point:** Step 44. Do not begin it until Spencer explicitly answers `y` after the Step 43 completion report. A new chat should read this roadmap, verify the repository still matches this state, and then execute Step 44 only.
+### Step 44 completion evidence — 2026-10-04
+
+Implemented and verified on `spencerskelly/MDSE_Workbench` main.
+
+- Requested/foreground occurrence hydration and background occurrence hydration now share one keyed in-flight owner body-read registry rather than issuing independent `cachedRead()` calls for the same owner.
+- The shared flight is keyed by owner path and returns the body text plus read timing; background and requested consumers reuse the same physical read while retaining their own publication/revision semantics.
+- Background occurrence hydration now explicitly pauses at its next cooperative owner boundary whenever requested occurrence work is active. Existing background-idle and live-update gates remain in force.
+- Requested owner hydration takes semantic ownership by advancing the owner's local revision before awaiting the shared body read.
+- If a requested hydration overtakes an older background read for the same owner, the background publication fails the owner-revision guard while the requested publication succeeds.
+- Source/hydration epoch changes still invalidate both requested and background stale publication after source semantics change.
+- Added pure `shouldPauseBackgroundOccurrence()` and `canPublishOccurrence()` guards so priority/publication behavior is testable without Obsidian runtime coupling.
+- Focused tests prove:
+  - active requested occurrence work pauses background hydration;
+  - background and requested hydration for one owner share exactly one in-flight body read;
+  - a newer requested owner revision prevents an older background result from publishing;
+  - a source epoch change prevents stale publication from either lane.
+- Existing `SingleFlightByKey` still guarantees concurrent callers for one owner share one promise; Step 44 extends its use to both background and requested occurrence body reads.
+- GitHub Actions run `37224403052` passed `npm test`, the 60k semantic-cache scale smoke, paired cold/warm startup benchmark, 60k relationship re-resolution benchmark, `npm run build`, artifact hashing/sync, and built-artifact commit.
+- Step 44 commits are `4fe00529`, `91fc1900`, `c7f34bf4`, and `d992e82d`; CI produced built-artifact commit `ab8a4502`.
+- Intentionally deferred: unified foreground-activity pausing of cache persistence, assurance, and background occurrence work remains Step 45.
+
+**Current resume point:** Step 45. Do not begin it until Spencer explicitly answers `y` after the Step 44 completion report. A new chat should read this roadmap, verify the repository still matches this state, and then execute Step 45 only.
 
 ## Reconstructed remaining steps
 
 43. Ensure cache restore failure always falls back to a cooperative cold build without leaving partially restored semantic state visible.
-
-44. Verify requested occurrence hydration preempts background occurrence hydration without duplicate body reads or stale publication.
 
 45. Verify resumed foreground edits pause cache persistence, assurance and background occurrence work through one shared activity policy.
 
