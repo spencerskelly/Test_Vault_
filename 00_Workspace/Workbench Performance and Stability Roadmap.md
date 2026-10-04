@@ -325,13 +325,40 @@ Implemented and verified on `spencerskelly/MDSE_Workbench` main.
 - Step 46 commits are `6f86db87`, `eda9ea97`, and `48bc05de`; CI produced built-artifact commit `1edf2f67`.
 - Intentionally deferred: independently exposing core, occurrence, cache, schema, and assurance readiness/failure in runtime health remains Step 47.
 
-**Current resume point:** Step 47. Do not begin it until Spencer explicitly answers `y` after the Step 46 completion report. A new chat should read this roadmap, verify the repository still matches this state, and then execute Step 47 only.
+### Step 47 completion evidence — 2026-10-04
+
+Implemented and verified on `spencerskelly/MDSE_Workbench` main.
+
+- Runtime health now exposes five independent capability states: `core`, `occurrence`, `cache`, `schema`, and `assurance`.
+- Each capability reports an explicit `ready`, `pending`, or `failed` state plus a scoped detail string.
+- Schema load failure is no longer folded into `coreError`; it has its own `lastSchemaError` and appears as `schema=failed` while core remains `pending · blocked by schema`.
+- Core health independently reports startup/indexing/live-reconciliation availability and core-specific startup failure.
+- Occurrence health independently reports settled, queued, hydrating, Local Model read failures, or background occurrence failure.
+- Cache health independently reports current, pending/coalesced/not-current, or cache write failure.
+- Schema health independently reports not loaded, compatible, compatible-with-warnings, or schema load failure.
+- Assurance health independently reports not run/stale/computing, current findings/no findings, or assurance validator failure.
+- The runtime-health modal now renders one row per capability using these explicit states; it remains observation-only and does not trigger indexing, cache I/O, hydration, or assurance.
+- Top-level Workbench status is derived from capability states but does not erase them:
+  - any failed subsystem produces attention;
+  - core-not-ready remains starting/syncing;
+  - occurrence/live work can produce syncing while core remains usable;
+  - engineering findings remain a review state rather than runtime failure.
+- Focused tests prove:
+  - schema failure is distinct from core failure;
+  - occurrence failure is distinct from core availability;
+  - cache pending/failure is independently visible;
+  - assurance pending/ready/failure are independent states;
+  - schema warnings remain readiness-compatible;
+  - deferred occurrence data does not imply core unavailability.
+- GitHub Actions run `37225620835` passed `npm test`, the 60k semantic-cache scale smoke, paired cold/warm startup benchmark, 60k relationship re-resolution benchmark, `npm run build`, artifact hashing/sync, and built-artifact commit.
+- Step 47 commits are `f44af72a`, `965f4e2e`, and `ca609f18`; CI produced built-artifact commit `6ffbdb00`.
+- Intentionally deferred: failure-injection proof that one derived subsystem can fail without ordinary Obsidian editing or unrelated Workbench capabilities failing remains Step 48.
+
+**Current resume point:** Step 48. Do not begin it until Spencer explicitly answers `y` after the Step 47 completion report. A new chat should read this roadmap, verify the repository still matches this state, and then execute Step 48 only.
 
 ## Reconstructed remaining steps
 
 43. Ensure cache restore failure always falls back to a cooperative cold build without leaving partially restored semantic state visible.
-
-47. Expose core, occurrence, cache, schema and assurance readiness/failure independently in runtime health.
 
 48. Add failure-injection tests proving one derived subsystem can fail without making ordinary Obsidian editing or unrelated Workbench capabilities unusable.
 
