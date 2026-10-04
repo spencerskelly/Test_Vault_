@@ -294,13 +294,42 @@ Implemented and verified on `spencerskelly/MDSE_Workbench` main.
 - Step 45 commits are `f136f0a0`, `aa284891`, `992bf04c`, and `c26fbdb5`; CI produced built-artifact commit `9274b8c0`.
 - Intentionally deferred: starvation bounds ensuring deferred occurrence hydration, cache persistence, and assurance eventually resume under sustained intermittent foreground activity remain Step 46.
 
-**Current resume point:** Step 46. Do not begin it until Spencer explicitly answers `y` after the Step 45 completion report. A new chat should read this roadmap, verify the repository still matches this state, and then execute Step 46 only.
+### Step 46 completion evidence — 2026-10-04
+
+Implemented and verified on `spencerskelly/MDSE_Workbench` main.
+
+- Added a shared bounded starvation rule for optional/background Workbench lanes: background occurrence hydration, semantic-cache persistence, and automatic/stale-retry assurance.
+- New `BACKGROUND_MAX_DEFERRAL_MS` is 30,000 ms.
+- Each background lane tracks when it first became pending. Re-scheduling caused by intermittent edits does not reset that age.
+- Before the starvation bound expires, the normal foreground quiet window remains authoritative:
+  - background hydration / assurance use the shared 3 s quiet window;
+  - cache persistence retains its longer 8 s quiet requirement.
+- Once a lane has been pending for 30 s, only the quiet-time requirement may be bypassed. The following remain hard blockers and are never overridden by starvation relief:
+  - plugin unload;
+  - core not ready;
+  - active indexing;
+  - queued rebuild;
+  - pending live semantic updates;
+  - higher-priority active runtime work.
+- Runtime work priority remains unchanged: indexing > requested hydration > background hydration > assurance > cache write.
+- Pending age is cleared when the corresponding work has actually completed/no longer remains pending, so a prior starvation event does not permanently weaken future quiet-window behavior.
+- Background occurrence hydration keeps its pending age across repeated scheduling attempts until occurrence work is settled.
+- Cache persistence keeps its pending age across edit-triggered reschedules until the matching semantic revision is committed.
+- Automatic assurance begins its pending-age window when it requests background permission; forced/manual assurance remains foreground-capable, while any stale retry uses the bounded background policy.
+- Focused tests prove:
+  - intermittent edits below the quiet threshold continue to defer work before the 30 s bound;
+  - the quiet-window rule is relieved once the bound is reached;
+  - starvation relief never overrides unload, not-ready, indexing, rebuild, or live-update blockers;
+  - without a pending-age bound, the original quiet-window semantics remain unchanged.
+- GitHub Actions run `37225163961` passed `npm test`, the 60k semantic-cache scale smoke, paired cold/warm startup benchmark, 60k relationship re-resolution benchmark, `npm run build`, artifact hashing/sync, and built-artifact commit.
+- Step 46 commits are `6f86db87`, `eda9ea97`, and `48bc05de`; CI produced built-artifact commit `1edf2f67`.
+- Intentionally deferred: independently exposing core, occurrence, cache, schema, and assurance readiness/failure in runtime health remains Step 47.
+
+**Current resume point:** Step 47. Do not begin it until Spencer explicitly answers `y` after the Step 46 completion report. A new chat should read this roadmap, verify the repository still matches this state, and then execute Step 47 only.
 
 ## Reconstructed remaining steps
 
 43. Ensure cache restore failure always falls back to a cooperative cold build without leaving partially restored semantic state visible.
-
-46. Add starvation bounds so deferred occurrence hydration, cache persistence and assurance eventually resume after sustained but intermittent foreground activity.
 
 47. Expose core, occurrence, cache, schema and assurance readiness/failure independently in runtime health.
 
