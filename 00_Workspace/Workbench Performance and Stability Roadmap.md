@@ -52,6 +52,7 @@ Use this section as the continuation protocol; do not reconstruct the plan from 
 31. Maintain reverse-path dependency indexes for targeted relationship re-resolution.
 32. Use dependency candidates so path-set changes do not require whole-graph relationship re-resolution.
 33. Measure targeted relationship re-resolution fan-out so we can see how many source notes each path-set change actually invalidates.
+34. Define a candidate-count threshold above which targeted relationship re-resolution falls back to the cooperative whole-graph path.
 
 ### Step 33 completion evidence — 2026-10-04
 
@@ -64,11 +65,23 @@ Implemented on `spencerskelly/MDSE_Workbench` main.
 - Commits carrying the implementation/test are `e6ad7e6`, `e1116c6`, and `374f772` (followed by the normal CI-built artifact commit).
 - Intentionally deferred: no candidate threshold/fallback policy was added (Step 34), and no user-facing diagnostics surface was added (Step 38).
 
-**Current resume point:** Step 34. Do not begin it until Spencer explicitly answers `y` after the Step 33 completion report. A new chat should read this roadmap, verify the repository still matches this state, and then execute Step 34 only.
+### Step 34 completion evidence — 2026-10-04
+
+Implemented on `spencerskelly/MDSE_Workbench` main.
+
+- `src/core/relationship-dependencies.ts` defines `TARGETED_RELATIONSHIP_RERESOLUTION_MAX_CANDIDATES = 5_000` plus the pure policy helper `shouldUseFullRelationshipReresolution()`.
+- Candidate sets of 5,000 or fewer continue through targeted relationship re-resolution; candidate sets above 5,000 fall back to the existing cooperative whole-graph resolver.
+- `src/obsidian/indexer.ts` applies the same policy to both live path-set reconciliation and controlled warm-start add/delete reconciliation, so the threshold does not create two different runtime semantics.
+- `test/relationship-dependencies.test.ts` proves the exact threshold boundary: below and at 5,000 remain targeted; 5,001 requires the full path.
+- GitHub Actions run `37221600586` passed `npm test`, the 60k semantic-cache scale smoke, the paired cold/warm startup benchmark, `npm run build`, artifact hashing/sync, and built-artifact commit.
+- Implementation/test commits are `bc433577`, `4bf7d779`, `458e9f38`, and corrected test-import commit `839acda5`; CI produced built-artifact commit `1addb70c`.
+- One intermediate CI run exposed a malformed test import introduced while editing; it was corrected before acceptance and the final full gate is green.
+- The 5,000 threshold is intentionally a conservative safety policy, not a claimed performance optimum. Representative add/delete/rename benchmark tuning remains Step 37.
+- Intentionally deferred: detailed link-form correctness proof remains Step 35, dependency-evidence fail-closed behavior remains Step 36, and user-facing reconciliation diagnostics remain Step 38.
+
+**Current resume point:** Step 35. Do not begin it until Spencer explicitly answers `y` after the Step 34 completion report. A new chat should read this roadmap, verify the repository still matches this state, and then execute Step 35 only.
 
 ## Reconstructed remaining steps
-
-34. Define a candidate-count threshold above which targeted relationship re-resolution falls back to the cooperative whole-graph path.
 
 35. Prove targeted re-resolution remains correct for ambiguous basenames, folder-qualified links, aliases, fragments and case/path normalization.
 
