@@ -978,3 +978,6 @@ The approved theory, examples and implementation impact are recorded in `MDSE v0
 
 
 **W-368 · 2026-10-03 · Workbench candidate CI includes a representative 60,000-note semantic-cache scale smoke before artifact build.** Unit correctness and TypeScript/bundle success are not sufficient evidence for the target engineering-model size. The candidate workflow now runs the storage-neutral cache benchmark with 60,000 synthetic model notes and a small changed-file set before building the installable artifact. The smoke test is not yet a strict timing gate because hosted-runner timing is noisy; it is a completion/memory/algorithmic regression gate. Real startup timing remains an integration-vault/hardware acceptance concern measured separately through Workbench runtime history.
+
+
+**W-369 · 2026-10-03 · Workbench view capability dependencies are declared on the view profile, not inferred from the view name.** Profiles that consume Local Model occurrence semantics now explicitly declare `needsLocalOccurrences: true`; the runtime stages/waits based on that declaration. This removes brittle name-based coupling and lets future Physical/Functional or other views opt into occurrence hydration only if their actual semantics require it. Capability loading remains a property of what the view needs, not a special-case list maintained elsewhere.
