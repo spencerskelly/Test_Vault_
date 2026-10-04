@@ -637,15 +637,76 @@ Step 54 conclusion:
 - The controlled runtime already reflects that retirement.
 - No runtime code change was needed in this step, so no new Workbench CI run was required.
 
-**Current resume point:** Step 55. Do not begin it until Spencer explicitly answers `y` after the Step 54 completion report. A new chat should read this roadmap, verify the repository still matches this state, and then execute Step 55 only.
+### Step 55 completion evidence — 2026-10-04
+
+Installed and accepted the exact CI-built Workbench candidate in a real disposable Obsidian integration vault.
+
+Candidate identity:
+- Workbench manifest version: **0.1.17**.
+- The integration job did **not** run `npm run build` before installation.
+- It installed the checked-in CI-built bundle directly:
+  - `main.js`;
+  - `manifest.json`;
+  - `styles.css`.
+- Before installation, `sha256sum -c artifact-sha256.txt` passed.
+- Accepted candidate hashes:
+  - `main.js`: `bc553fef67b5aa2cc7623b2811c05e7af8952296dd3b3ba55e663e3de5fc64aa`;
+  - `manifest.json`: `a898ec3acce99650f18ded11235a236881ce8a8de86bfc857c70c5c4508d0e5d`;
+  - `styles.css`: `445abe199f3dbf00724dc3cffa13aed58fc087adc9396e79de18ebe6b274b008`.
+- The latest normal Build Workbench workflow for the Step 55 harness commit also passed: run `37232100200` (run 395), confirming the repository/build gate remained green.
+
+Acceptance environment:
+- Obsidian 1.13.7 under Xvfb on GitHub Actions.
+- 12,000 generated Markdown notes.
+- Warm-cache preview disabled; authoritative cold `full` build.
+- Same real metadata-resolution/per-file-coverage barriers proven in Steps 49–50.
+- Step 53/54 already handled third-party plugin overlap separately; Step 55 intentionally validates the exact Workbench candidate itself before the deeper integrated capability tests in Steps 56–59.
+
+Acceptance criteria:
+- exact artifact hashes must match CI-recorded hashes;
+- Obsidian/vault must become readable before Workbench core-ready;
+- complete per-file metadata coverage must precede Workbench core publication;
+- all 12,000 Markdown files and generated model elements must be present;
+- occurrence readiness must complete no earlier than core readiness;
+- required Workbench commands must be registered;
+- launch-to-core-ready must remain below the existing **60 s** full-size acceptance target.
+
+Final acceptance result:
+- GitHub Actions workflow: `Exact candidate startup acceptance`.
+- Successful run: **`37232100208`** (run 1), conclusion `success`.
+- Evidence artifact: `exact-candidate-startup-evidence`, artifact ID **`11313868263`**.
+- Harness commit: `338eb289`.
+- **Accepted: yes.**
+
+Measured startup:
+- launch → readable: **4,453 ms**;
+- launch → complete metadata coverage: **31,218 ms**;
+- launch → Workbench core ready: **32,416 ms**;
+- launch → occurrence ready: **32,416 ms**;
+- Workbench core indexing work: **175 ms**;
+- files: **12,000**;
+- elements: **12,000**;
+- links: **21,491**;
+- mode: **full**;
+- required Workbench commands: **ready**.
+
+Interpretation:
+- The runner showed substantially slower Obsidian metadata completion than the Step 50 run, but the vault became readable at 4.453 s and remained usable while metadata continued loading.
+- Workbench correctly withheld authoritative core publication until complete metadata coverage and then became ready ~1.2 s later.
+- Core readiness at 32.416 s remained comfortably inside the existing 60 s acceptance bound.
+- The Workbench-owned core work remained only 175 ms; most elapsed time was Obsidian metadata startup, reinforcing the staged-start architecture rather than motivating earlier Workbench work.
+
+Step 55 conclusion:
+- The exact CI-built Workbench candidate passes integrated startup-responsiveness acceptance.
+- This step does not yet accept occurrence-view behavior, live editing, recovery or repeated restart behavior; those remain Steps 56–59.
+
+**Current resume point:** Step 56. Do not begin it until Spencer explicitly answers `y` after the Step 55 completion report. A new chat should read this roadmap, verify the repository still matches this state, and then execute Step 56 only.
 
 ## Reconstructed remaining steps
 
 43. Ensure cache restore failure always falls back to a cooperative cold build without leaving partially restored semantic state visible.
 
 48. Add failure-injection tests proving one derived subsystem can fail without making ordinary Obsidian editing or unrelated Workbench capabilities unusable.
-
-55. Install the exact CI-built candidate in the disposable integration vault and run the integrated startup-responsiveness acceptance test.
 
 56. Run integrated occurrence-view acceptance: Structure, Interfaces, Where Used, Requirements and other occurrence-aware views must wait only for the capability they actually need.
 
