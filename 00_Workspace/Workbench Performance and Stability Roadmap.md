@@ -505,15 +505,102 @@ Evidence reviewed:
 - Step 52 is conditional on warm startup **earning promotion**. Because Step 51 does not promote warm restore to the normal startup path, Step 52 is **not activated** and no retrospective acceptance threshold is being invented after seeing one favorable measurement.
 - A future decision to reconsider promotion should first gather broader/repeated evidence; if that later earns promotion, Step 52's threshold/fallback-definition work becomes applicable before changing the normal startup path.
 
-**Current resume point:** Step 53. Do not begin it until Spencer explicitly answers `y` after the Step 51 completion report. Step 52 is currently not applicable because warm startup was not promoted. A new chat should read this roadmap, verify the repository still matches this state, and then execute Step 53 only.
+### Step 53 completion evidence — 2026-10-04
+
+Measured third-party plugin overlap one plugin at a time on the real-Obsidian disposable integration harness.
+
+Scope:
+- Only plugins with material architectural overlap were included:
+  - Nodian 1.4.14;
+  - Breadcrumbs 4.21.11;
+  - Dataview 0.5.68;
+  - Fileclass 0.2.15;
+  - Advanced Canvas 7.0.0.
+- Utility/workflow plugins such as Git, Templater, QuickAdd and Table Exporter were intentionally excluded because they do not materially duplicate Workbench semantic indexing, relationship handling, schema validation or model visualization.
+- Test environment remained the Step 49/50 real-Obsidian setup:
+  - Obsidian 1.13.7 under Xvfb;
+  - 12,000 generated Markdown notes;
+  - warm-cache preview disabled;
+  - authoritative full Workbench rebuild;
+  - complete per-file metadata coverage required before core-ready.
+
+Measurement method:
+- A sacrificial warmup absorbed first-run runner/filesystem effects.
+- The startup reference was the mean of a warmed Workbench-only baseline at the beginning and another Workbench-only baseline at the end.
+- Each candidate plugin was then enabled **alone with Workbench** in its own disposable copy.
+- Each case had to prove:
+  - candidate plugin enabled;
+  - Workbench enabled and core-ready;
+  - required Workbench commands registered;
+  - mode remained `full`;
+  - all 12,000 Markdown files were represented;
+  - files/elements/links matched the Workbench-only model;
+  - governed Markdown/YAML source hash did not change.
+
+Bracketed Workbench-only reference:
+- readable: **5,175 ms**;
+- core ready: **9,913 ms**;
+- occurrence ready: **9,913 ms**.
+- Baseline-start core ready: 10,014 ms.
+- Baseline-end core ready: 9,812 ms.
+
+Candidate results versus the bracketed baseline:
+- **Nodian 1.4.14**
+  - readable: 5,083 ms;
+  - core/occurrence ready: 9,092 ms;
+  - delta: **-821 ms**;
+  - interpretation: no measurable startup penalty; negative delta is treated as run variation, not evidence that Nodian accelerates Workbench.
+- **Breadcrumbs 4.21.11**
+  - readable: 5,021 ms;
+  - core/occurrence ready: 9,846 ms;
+  - delta: **-67 ms**;
+  - interpretation: effectively neutral within measurement noise.
+- **Dataview 0.5.68**
+  - readable: 4,901 ms;
+  - core/occurrence ready: 44,159 ms;
+  - delta: **+34,246 ms**;
+  - interpretation: clear and material startup-contention outlier in this 12k-note test.
+- **Fileclass 0.2.15**
+  - readable: 5,199 ms;
+  - core/occurrence ready: 11,073 ms;
+  - delta: **+1,160 ms**;
+  - interpretation: measurable but modest startup cost.
+- **Advanced Canvas 7.0.0**
+  - readable: 5,045 ms;
+  - core/occurrence ready: 10,138 ms;
+  - delta: **+225 ms**;
+  - interpretation: small enough to treat as near-neutral in this single integration run.
+
+MDSE capability preservation:
+- Every candidate case retained:
+  - **12,000 files**;
+  - **12,000 elements**;
+  - **21,491 links**;
+  - all required Workbench commands;
+  - Workbench core readiness.
+- No candidate modified the governed Markdown/YAML model during default startup.
+
+Authoritative integration evidence:
+- GitHub Actions workflow: `Obsidian plugin overlap integration`.
+- Successful run: `37230191195` (run 5).
+- Evidence artifact: `plugin-overlap-evidence`, artifact ID `11314055099`.
+- Primary comparison commit: `9d9a008a`.
+- Supporting Step 53 harness commits: `92f4a546`, `2b40639f`, `2390dc2d`, `caf19372`, `9d45ea1b`, `b8de791e`, `356f0aba`, and `b4c04591`.
+- Later Step 53 harness-only commits `80166a16` and `ea305824` do not alter Workbench runtime semantics; normal Build Workbench workflows for them passed.
+
+Step 53 conclusion:
+- Dataview is the only plugin showing a clearly material startup-responsiveness penalty in this controlled overlap test.
+- Fileclass shows a smaller measurable penalty.
+- Nodian, Breadcrumbs and Advanced Canvas did not show a meaningful startup penalty in this run.
+- **No plugin is removed or demoted by Step 53.** Step 54 must separately prove that Workbench actually replaces the overlapping capability and that removing/demoting the plugin produces a startup benefit before changing the baseline.
+
+**Current resume point:** Step 54. Do not begin it until Spencer explicitly answers `y` after the Step 53 completion report. A new chat should read this roadmap, verify the repository still matches this state, and then execute Step 54 only.
 
 ## Reconstructed remaining steps
 
 43. Ensure cache restore failure always falls back to a cooperative cold build without leaving partially restored semantic state visible.
 
 48. Add failure-injection tests proving one derived subsystem can fail without making ordinary Obsidian editing or unrelated Workbench capabilities unusable.
-
-53. Measure third-party plugin overlap one plugin at a time against startup responsiveness and MDSE capability.
 
 54. Remove or demote an overlapping plugin only when Workbench replacement capability and startup benefit are both proven.
 
