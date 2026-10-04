@@ -944,7 +944,85 @@ Step 58 conclusion:
 - A subsequent full Obsidian restart recovers the same current vault model without stale semantic state or stranded background work.
 - No new runtime defect was required to be fixed in the accepted candidate; Step 58 changes were recovery-integration harness/control refinements.
 
-**Current resume point:** Step 59. Do not begin it until Spencer explicitly answers `y` after the Step 58 completion report. A new chat should read this roadmap, verify the repository still matches this state, and then execute Step 59 only.
+### Step 59 completion evidence — 2026-10-04
+
+Ran repeated real-Obsidian cold/warm restart-cycle acceptance against the accepted Workbench candidate and added explicit regression gates for cumulative degradation.
+
+Acceptance design:
+- Obsidian 1.13.7 under Xvfb.
+- 12,000 generated semantic notes plus 300 Local Model background-owner fixtures and one reusable target, for **12,301** total modeled files/elements.
+- Warm-cache preview enabled.
+- Three cold launches alternated with three warm launches.
+- Cold launches deleted semantic cache before startup and were required to use authoritative `full` mode.
+- Warm launches restored the same known-good seeded semantic cache and were required to prove a real compatible restore.
+- Each launch waited for source reconciliation and occurrence work to settle before measurement.
+- The probe forced GC where available, then captured semantic counts, scheduler queues, reverse dependency size, renderer node/document/listener counts, JS heap usage, and launch-to-core-ready time.
+
+Final explicit acceptance gates:
+- semantic file/element/link counts must remain identical across all six launches;
+- source reconciliation must be complete;
+- live-update, occurrence-pending, occurrence-queued and occurrence-active counts must all be zero;
+- Local Model read errors must remain zero;
+- reverse relationship dependency-index size must remain identical across cycles;
+- renderer `Nodes`, `Documents`, and `JSEventListeners` must remain identical across cycles;
+- first-to-last same-mode JS heap growth must remain ≤10%;
+- first-to-last same-mode core-readiness degradation must remain ≤20%.
+
+Final accepted run:
+- Workflow: `Repeated restart acceptance`.
+- Successful run: **`37239424333`** (run 12).
+- Evidence artifact: `restart-cycle-evidence`, artifact ID **`11315944954`**.
+- Acceptance-hardening commit: **`476fbcad`** (`Enforce restart degradation acceptance limits`).
+- Normal Build Workbench workflow also passed for the same commit: **`37239424369`** (run 425).
+
+Semantic/scheduler results across every cycle:
+- files: **12,301**;
+- elements: **12,301**;
+- links: **21,491**;
+- source reconciliation pending: **false**;
+- live updates pending: **0**;
+- occurrence pending/queued/active: **0 / 0 / 0**;
+- Local Model read errors: **0**;
+- relationship re-resolution history after settled restart: **0**;
+- reverse dependency index remained exactly:
+  - sources: **12,000**;
+  - resolved target keys: **12,000**;
+  - authored keys: **12,000**;
+  - resolved associations: **42,266**;
+  - authored associations: **42,266**;
+  - stored memberships: **169,064**;
+- renderer metrics remained exactly:
+  - Nodes: **39,871**;
+  - Documents: **2**;
+  - JS event listeners: **1,332**.
+
+Cold-cycle trend:
+- JS heap used: **77,284,260 → 77,348,128 → 77,299,176 bytes**;
+- first-to-last heap ratio: **1.00019** (~+0.02%);
+- core ready: **42,903 → 42,124 → 43,529 ms**;
+- first-to-last core-ready ratio: **1.01459** (~+1.46%);
+- all three launches used `full` mode.
+
+Warm-cycle trend:
+- JS heap used: **78,792,288 → 78,888,180 → 77,977,276 bytes**;
+- first-to-last heap ratio: **0.98966** (~-1.03%);
+- core ready: **42,297 → 43,255 → 43,563 ms**;
+- first-to-last core-ready ratio: **1.02993** (~+2.99%);
+- all three launches used `restored` mode with `restored; cache matched current file fingerprints`.
+
+Interpretation:
+- There is no cumulative semantic-state drift across repeated restarts.
+- There is no accumulation of pending or active scheduler work.
+- Reverse dependency-index and renderer structural counts remain stable.
+- JS heap shows no cumulative growth trend in either cold or warm sequences.
+- Core-readiness timing shows normal run-to-run variance but no cumulative degradation approaching the acceptance limit.
+- Warm restore remains semantically equivalent to cold reconstruction across repeated cycles.
+
+Step 59 conclusion:
+- Repeated cold/warm restarts do not produce cumulative memory growth, stale semantic state, reverse-index drift, renderer/listener accumulation, stranded background work or material scheduling/startup degradation.
+- The accepted performance/stability candidate is ready for Step 60 release-candidate freeze and handoff documentation.
+
+**Current resume point:** Step 60. Do not begin it until Spencer explicitly answers `y` after the Step 59 completion report. A new chat should read this roadmap, verify the repository still matches this state, and then execute Step 60 only.
 
 ## Reconstructed remaining steps
 
@@ -952,7 +1030,6 @@ Step 58 conclusion:
 
 48. Add failure-injection tests proving one derived subsystem can fail without making ordinary Obsidian editing or unrelated Workbench capabilities unusable.
 
-59. Run repeated cold/warm restart cycles and confirm no cumulative memory, stale-state or scheduling degradation.
 
 60. Freeze the accepted performance/stability candidate, record hashes and runtime evidence, and update the handoff/current-state documentation.
 
