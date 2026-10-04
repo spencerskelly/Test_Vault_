@@ -15,6 +15,7 @@ on:
 
 jobs:
   test-build:
+    if: github.actor != 'github-actions[bot]'
     runs-on: ubuntu-latest
     defaults:
       run:
@@ -43,3 +44,22 @@ jobs:
             Bootstrap/Tools/v0.3.1/manifest.json
             Bootstrap/Tools/v0.3.1/styles.css
           if-no-files-found: error
+      - name: Sync checked-in candidate artifact
+        if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+        run: |
+          mkdir -p artifact
+          cp main.js artifact/main.js
+          cp manifest.json artifact/manifest.json
+          cp styles.css artifact/styles.css
+      - name: Commit candidate artifact
+        if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -f Bootstrap/Tools/v0.3.1/artifact/main.js Bootstrap/Tools/v0.3.1/artifact/manifest.json Bootstrap/Tools/v0.3.1/artifact/styles.css
+          if git diff --cached --quiet; then
+            echo "Bootstrap candidate artifact already current."
+            exit 0
+          fi
+          git commit -m "Build Bootstrap 0.3.1 candidate artifact"
+          git push
