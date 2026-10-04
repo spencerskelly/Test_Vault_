@@ -134,3 +134,24 @@ test("activation repair refuses a changed plugin", () => {
   const p = activationPlan(LOCK, new Set(["mdse-bootstrap"]), { bases: true, canvas: true, templates: false }, installed);
   assert.deepEqual(p.enableCommunity, [], "a disabled plugin with file drift is reported, not loaded");
 });
+
+
+test("staged startup may hash only disabled locked plugins before activation repair", () => {
+  const allEnabled = activationPlan(
+    LOCK,
+    new Set(["dataview", "mdse-bootstrap"]),
+    { bases: true, canvas: true, templates: false },
+    {},
+  );
+  assert.deepEqual(allEnabled.enableCommunity, [], "already-enabled plugins do not need startup hash evidence for activation");
+
+  const onlyDisabledInstalled = activationPlan(
+    LOCK,
+    new Set(["mdse-bootstrap"]),
+    { bases: true, canvas: true, templates: false },
+    {
+      dataview: { version: "0.5.68", sha256: { "main.js": "aa", "manifest.json": "bb", "data.json": "ee" } },
+    },
+  );
+  assert.deepEqual(onlyDisabledInstalled.enableCommunity, ["dataview"]);
+});
