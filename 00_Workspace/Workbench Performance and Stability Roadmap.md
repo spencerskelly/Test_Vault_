@@ -93,11 +93,24 @@ Implemented on `spencerskelly/MDSE_Workbench` main.
 - Implementation/test commits are `44697378` and `6e9a3aa0`; CI produced built-artifact commit `9a8c9d52`.
 - Intentionally deferred: fail-closed validation of incomplete/inconsistent derived dependency evidence remains Step 36.
 
-**Current resume point:** Step 36. Do not begin it until Spencer explicitly answers `y` after the Step 35 completion report. A new chat should read this roadmap, verify the repository still matches this state, and then execute Step 36 only.
+### Step 36 completion evidence — 2026-10-04
+
+Implemented on `spencerskelly/MDSE_Workbench` main.
+
+- `ReversePathDependencyIndex.consistency()` now validates both internal reverse-map symmetry and completeness against expected authoritative source evidence.
+- The completeness check compares each source note's resolved target paths and authored linkpaths against the derived dependency index, so a wholly missing source cannot appear "self-consistent" merely because no derived entries exist for it.
+- `Indexer.relationshipDependencyConsistency()` requires every indexed note to retain authored relationship evidence and compares the derived accelerator against current `NoteRecord` evidence before path-set targeting is trusted.
+- Live path-set reconciliation now fails closed: if dependency evidence is incomplete or inconsistent, targeted re-resolution is skipped and the cooperative rebuild path is scheduled.
+- Warm incremental add/delete reconciliation now throws a scoped "full rebuild required" error on incomplete/inconsistent dependency evidence; the existing startup recovery path catches that condition and performs the proven cold build from authoritative Markdown.
+- Focused tests prove complete evidence passes, missing expected source evidence fails, and deliberately corrupted reverse evidence is detected.
+- GitHub Actions run `37221875787` passed `npm test`, the 60k semantic-cache scale smoke, the paired cold/warm startup benchmark, `npm run build`, artifact hashing/sync, and built-artifact commit.
+- Implementation/test commits are `2b4a7170`, `3e315960`, `42dce2a5`, and `99b85855`; CI produced built-artifact commit `9ece4567`.
+- Intermediate CI runs occurred while the invariant was still being assembled; only the final test-bearing run above is acceptance evidence.
+- Intentionally deferred: representative scale/performance tuning of add/delete/rename reconciliation remains Step 37.
+
+**Current resume point:** Step 37. Do not begin it until Spencer explicitly answers `y` after the Step 36 completion report. A new chat should read this roadmap, verify the repository still matches this state, and then execute Step 37 only.
 
 ## Reconstructed remaining steps
-
-36. Add a fail-closed invariant that prevents targeted re-resolution when its derived dependency evidence is incomplete or inconsistent.
 
 37. Benchmark add, delete and rename warm reconciliation with targeted relationship re-resolution at representative vault scale.
 
