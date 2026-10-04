@@ -382,15 +382,55 @@ Implemented and verified on `spencerskelly/MDSE_Workbench` main.
 - Step 48 commits are `e0c9447b`, `5cf6a3f2`, `1605ac61`, and corrective build commit `ec7d6173`; CI produced built-artifact commit `6bf7338b`.
 - Intentionally deferred: measuring end-to-end cold startup in a disposable integration vault with real Obsidian metadata resolution/source parsing remains Step 49.
 
-**Current resume point:** Step 49. Do not begin it until Spencer explicitly answers `y` after the Step 48 completion report. A new chat should read this roadmap, verify the repository still matches this state, and then execute Step 49 only.
+### Step 49 completion evidence — 2026-10-04
+
+Implemented and verified on `spencerskelly/MDSE_Workbench` main.
+
+- Added/used a disposable real-Obsidian integration harness rather than relying on the synthetic core benchmark.
+- Integration environment:
+  - Obsidian desktop 1.13.7 on the GitHub Actions Linux runner under Xvfb;
+  - 12,000 generated Markdown notes (~19 MB) plus the real MDSE schema files;
+  - current Workbench build installed into a disposable vault;
+  - semantic cache removed before the measured launch;
+  - Workbench startup instrumented only when the disposable integration sentinel is present.
+- The measured cold run records:
+  - process launch timestamp;
+  - Workbench plugin-load timestamp;
+  - real Obsidian metadata-resolution timestamp from `metadataCache.resolved`;
+  - Workbench core-ready timestamp;
+  - parsed Markdown file count, model-element count, authored-link count, index mode and Workbench core work time.
+- The validator fails closed unless:
+  - the run label matches the cold-integration scenario;
+  - index mode is `full`;
+  - a real metadata-resolution timestamp exists;
+  - core-ready occurs after metadata resolution;
+  - at least the requested generated Markdown count was parsed.
+- A harness race discovered in earlier integration attempts was corrected: the cold-run controller could see the renderer before community-plugin activation had fully settled and treated that transient state as terminal. The controller now retries until both Restricted Mode state and `mdse-workbench` activation are confirmed.
+- Final real-Obsidian integration run: `37228021691` (run 7), conclusion `success`.
+- Final measured evidence:
+  - requested/generated notes: **12,000**;
+  - Markdown files parsed: **12,000**;
+  - model elements: **1,587**;
+  - authored links: **2,655**;
+  - index mode: **full**;
+  - launch → Workbench plugin load: **7,315 ms**;
+  - launch → Obsidian metadata resolved: **8,737 ms**;
+  - launch → Workbench core ready: **10,013 ms**;
+  - plugin load → core ready: **2,698 ms**;
+  - Workbench core indexing/parsing work: **70 ms**.
+- Metadata-resolution evidence source was the Workbench listener on the real Obsidian `metadataCache.resolved` event, not a synthetic timer.
+- The integration artifact `obsidian-cold-start-evidence` was uploaded as artifact ID `11313275718` and contains the validated result JSON plus Obsidian/controller logs.
+- The Step 49 harness-trigger/fix commits are `63ee7877` and `88edc4f5`. The normal Build Workbench artifact workflow for `88edc4f5` also passed as run `37228021709` (run 378).
+- Interpretation: on this controlled 12k-note Linux integration run, most elapsed cold-start time precedes Workbench core indexing itself; the measured Workbench core parsing/indexing slice was 70 ms, while launch-to-metadata-resolution was 8.737 s and launch-to-core-ready was 10.013 s.
+- Intentionally deferred: measuring warm startup against the exact same vault/repository state and comparing time-to-readable, time-to-core-ready and time-to-occurrence-ready remains Step 50.
+
+**Current resume point:** Step 50. Do not begin it until Spencer explicitly answers `y` after the Step 49 completion report. A new chat should read this roadmap, verify the repository still matches this state, and then execute Step 50 only.
 
 ## Reconstructed remaining steps
 
 43. Ensure cache restore failure always falls back to a cooperative cold build without leaving partially restored semantic state visible.
 
 48. Add failure-injection tests proving one derived subsystem can fail without making ordinary Obsidian editing or unrelated Workbench capabilities unusable.
-
-49. Measure end-to-end cold startup in the disposable integration vault, including real Obsidian metadata resolution and source parsing rather than only the pure core benchmark.
 
 50. Measure end-to-end warm startup against the exact same vault/repository state and compare time-to-readable, time-to-core-ready and time-to-occurrence-ready.
 
