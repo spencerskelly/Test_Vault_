@@ -125,11 +125,25 @@ Implemented and measured on `spencerskelly/MDSE_Workbench` main.
 - Step 37 commits are `0c814dc0`, `1e61193c`, `71ec5fe2`, and threshold-tuning commit `ccb639db`; CI produced built-artifact commit `07bb07f9`.
 - This remains a synthetic semantic-graph benchmark rather than end-to-end Obsidian integration timing; integrated startup and live-edit measurements remain Steps 49–50 and 55–59.
 
-**Current resume point:** Step 38. Do not begin it until Spencer explicitly answers `y` after the Step 37 completion report. A new chat should read this roadmap, verify the repository still matches this state, and then execute Step 38 only.
+### Step 38 completion evidence — 2026-10-04
+
+Implemented on `spencerskelly/MDSE_Workbench` main.
+
+- The existing bounded relationship re-resolution history now records the execution mode for each sample as `targeted` or `full` in addition to changed paths, per-path fan-out, unique candidate count, changed-source count, and elapsed time.
+- Warm incremental add/delete reconciliation now records into the same history as live path-set reconciliation, so diagnostics reflect the last actual relationship reconciliation regardless of whether it came from startup reconciliation or an open-vault edit.
+- The Workbench diagnostics report now exposes:
+  - relationship reconciliation mode (`targeted` or `full`);
+  - candidate count;
+  - elapsed relationship re-resolution time;
+  - count of source notes whose resolved relationship evidence actually changed.
+- No parallel telemetry model was added; Step 38 reuses the Step 33 bounded in-memory evidence surface.
+- GitHub Actions run `37222232640` passed `npm test`, the 60k semantic-cache scale smoke, paired cold/warm startup benchmark, 60k relationship re-resolution benchmark, `npm run build`, artifact hashing/sync, and built-artifact commit.
+- Implementation commits are `82f4ea1a` and `398c54af`; CI produced built-artifact commit `25259feb`.
+- Intentionally deferred: reverse dependency index memory bounding and size reporting remain Step 39.
+
+**Current resume point:** Step 39. Do not begin it until Spencer explicitly answers `y` after the Step 38 completion report. A new chat should read this roadmap, verify the repository still matches this state, and then execute Step 39 only.
 
 ## Reconstructed remaining steps
-
-38. Expose targeted-versus-full relationship reconciliation mode, candidate count and elapsed time in diagnostics.
 
 39. Bound the memory cost of reverse relationship dependency indexes and report their size in explicit diagnostics.
 
