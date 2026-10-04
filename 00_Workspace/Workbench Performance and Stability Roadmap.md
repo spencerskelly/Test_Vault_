@@ -159,11 +159,29 @@ Implemented on `spencerskelly/MDSE_Workbench` main.
 - Implementation/test commits are `fac11490`, `db426f4d`, `58fd69e9`, and `4319f14f`; CI produced built-artifact commit `e089b8cb`.
 - Intentionally deferred: schema-change invalidation of every relationship-derived cache/index surface remains Step 40.
 
-**Current resume point:** Step 40. Do not begin it until Spencer explicitly answers `y` after the Step 39 completion report. A new chat should read this roadmap, verify the repository still matches this state, and then execute Step 40 only.
+### Step 40 completion evidence — 2026-10-04
+
+Implemented and verified on `spencerskelly/MDSE_Workbench` main.
+
+- Traced relationship-schema dependencies across the live semantic graph, reverse relationship dependency accelerator, reconciliation history/readiness state, assurance/review consumers, and persisted semantic cache.
+- `Indexer.setSchema()` now invalidates relationship-derived runtime state immediately instead of merely swapping the schema object:
+  - replaces the existing `ModelIndex` with a fresh index bound to the new schema;
+  - clears the reverse relationship dependency index;
+  - clears relationship re-resolution history;
+  - clears readiness stats so stale graph state cannot remain publishable during the schema-transition window;
+  - clears cache-dirty path bookkeeping and bumps the semantic revision.
+- The existing required full rebuild then repopulates the graph and reverse dependency index from authoritative Markdown under the new schema.
+- The semantic-cache compatibility contract already included `relationshipsVersion`, `elementTypesVersion`, and a deterministic `schemaSignature` over parsed schema semantics. Step 40 adds explicit proof that relationship-rule changes invalidate every restore surface even when the human-readable schema version strings are deliberately left unchanged.
+- Added tests proving relationship semantic changes reject core, Local Model, and full semantic cache restore before stale derived state can be installed.
+- Added coverage proving the schema signature changes when relationship edge-interpretation fields change, including forward field, inverse field, relationship kind, from/to endpoints, same-class rule, provisional flag, and temporary flag.
+- Because `setSchema()` bumps the semantic revision, revision-keyed assurance results become stale and must recompute against the rebuilt graph; Review/writer obtain the current schema/index through live accessors rather than retaining old relationship definitions.
+- GitHub Actions run `37223259232` passed `npm test`, the 60k semantic-cache scale smoke, paired cold/warm startup benchmark, 60k relationship re-resolution benchmark, `npm run build`, artifact hashing/sync, and built-artifact commit.
+- Implementation/test commits are `b2dc7467` and `b5aa19be`; CI produced built-artifact commit `f61a29a3`.
+- Intentionally deferred: proof that warm restore cannot publish core-ready before compatibility and source reconciliation complete remains Step 41.
+
+**Current resume point:** Step 41. Do not begin it until Spencer explicitly answers `y` after the Step 40 completion report. A new chat should read this roadmap, verify the repository still matches this state, and then execute Step 41 only.
 
 ## Reconstructed remaining steps
-
-40. Verify that a schema change invalidates every derived index/cache surface that depends on relationship definitions.
 
 41. Verify that warm restore cannot publish core-ready state until cache compatibility and source reconciliation have both completed successfully.
 
