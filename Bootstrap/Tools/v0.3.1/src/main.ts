@@ -9,7 +9,7 @@ const PERSON_TEMPLATE = "99_System/05_Templates/Person.md";
 const AUTHORS = "99_System/03_Schemas/authors.yaml";
 const START_DELAY_MS = 750;
 const FULL_CHECK_FALLBACK_MS = 12000;
-const POST_METADATA_QUIET_MS = 8000;
+const POST_METADATA_QUIET_MS = 15000;
 
 interface PluginsApi {
   manifests: Record<string, { version: string; dir?: string }>;
@@ -80,7 +80,12 @@ export default class MdseBootstrap extends Plugin {
     while (!this.metadataResolved && Date.now() - started < FULL_CHECK_FALLBACK_MS) {
       await new Promise((resolve) => window.setTimeout(resolve, 250));
     }
-    await new Promise((resolve) => window.setTimeout(resolve, POST_METADATA_QUIET_MS));
+    // When Obsidian provides the resolved signal, deliberately give Workbench/core model startup
+    // its own lane before hashing the controlled plugin payload. If the signal never arrives,
+    // the bounded fallback wait above is already the conservative delay.
+    if (this.metadataResolved) {
+      await new Promise((resolve) => window.setTimeout(resolve, POST_METADATA_QUIET_MS));
+    }
   }
 
   private plugins(): PluginsApi {
