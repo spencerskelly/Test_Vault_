@@ -1,0 +1,36 @@
+name: Bootstrap candidate
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "Bootstrap/Tools/v0.3.1/**"
+      - ".github/workflows/bootstrap-candidate.yml"
+  pull_request:
+    branches: [main]
+    paths:
+      - "Bootstrap/Tools/v0.3.1/**"
+      - ".github/workflows/bootstrap-candidate.yml"
+  workflow_dispatch:
+
+jobs:
+  test-build:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: Bootstrap/Tools/v0.3.1
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+          cache-dependency-path: Bootstrap/Tools/v0.3.1/package-lock.json
+      - run: npm ci
+      - run: npm test
+      - run: npm run build
+      - name: Verify build is reproducible
+        run: |
+          cp main.js /tmp/bootstrap-main.js
+          npm run build
+          cmp -s main.js /tmp/bootstrap-main.js
