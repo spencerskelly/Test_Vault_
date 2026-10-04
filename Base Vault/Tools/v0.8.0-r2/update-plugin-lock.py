@@ -25,7 +25,6 @@ PLUGINS = {
     "fileclass":          ("github.com/mdelobelle/fileclass release", "governed"),
     "breadcrumbs":        ("github.com/michaelpporter/breadcrumbs release", "governed"),
     "obsidian-git":       ("github.com/Vinzent03/obsidian-git release", "governed"),
-    "dataview":           ("github.com/blacksmithgu/obsidian-dataview release", "default"),
     "advanced-canvas":    ("github.com/Developer-Mike/obsidian-advanced-canvas release", "default"),
     "nodian":             ("github.com/akisantin/Nodian release", "default"),
     "quickadd":           ("github.com/chhoumann/quickadd release", "default"),
