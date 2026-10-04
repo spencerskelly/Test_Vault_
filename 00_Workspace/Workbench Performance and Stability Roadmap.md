@@ -202,11 +202,29 @@ Implemented and verified on `spencerskelly/MDSE_Workbench` main.
 - Implementation/test commits are `acf7919d`, `4358064f`, `684cf69a`, and `f95bcdb5`; CI produced built-artifact commit `71abc470`.
 - Intentionally deferred: explicit corrupt/missing/partial/incompatible semantic-cache generation recovery tests remain Step 42.
 
-**Current resume point:** Step 42. Do not begin it until Spencer explicitly answers `y` after the Step 41 completion report. A new chat should read this roadmap, verify the repository still matches this state, and then execute Step 42 only.
+### Step 42 completion evidence — 2026-10-04
+
+Implemented and verified on `spencerskelly/MDSE_Workbench` main.
+
+- Added a small storage-neutral `probeCoreCacheStartup()` test seam that exercises the exact startup boundary of: read a core generation → enforce cache/schema compatibility → either produce restored state or a scoped restore-unavailable reason.
+- The probe deliberately does **not** choose the cold-build fallback; that runtime fallback/publication behavior remains Step 43.
+- Added explicit startup recovery tests for:
+  - no semantic-cache manifest present;
+  - corrupt newest committed generation with an older complete generation available;
+  - partially written/torn newest generation with an older complete generation available;
+  - every committed generation unreadable;
+  - a complete but schema-incompatible generation.
+- Corrupt/partial newest generations fall back deterministically to the older committed A/B slot before compatibility restoration is attempted.
+- Missing/all-unreadable cache conditions report restore unavailable without producing any restored semantic state.
+- A structurally complete but schema-incompatible generation is rejected by the semantic compatibility contract rather than being restored.
+- Existing storage tests continue to prove manifest-last publication, generation-token matching, bounded read concurrency, and semantic atomicity across every observable write boundary.
+- GitHub Actions run `37223981257` passed `npm test`, the 60k semantic-cache scale smoke, paired cold/warm startup benchmark, 60k relationship re-resolution benchmark, `npm run build`, artifact hashing/sync, and artifact handling.
+- Step 42 commits are `cae60778` and `786ff30e`. No new built-artifact commit was required because this step changed only pure core/test sources and did not alter the bundled plugin output.
+- Intentionally deferred: proving that restore failure always transitions to a cooperative cold build with no partially restored state visible remains Step 43.
+
+**Current resume point:** Step 43. Do not begin it until Spencer explicitly answers `y` after the Step 42 completion report. A new chat should read this roadmap, verify the repository still matches this state, and then execute Step 43 only.
 
 ## Reconstructed remaining steps
-
-42. Add explicit recovery tests for corrupt, missing, partially written and incompatible semantic-cache generations during startup.
 
 43. Ensure cache restore failure always falls back to a cooperative cold build without leaving partially restored semantic state visible.
 
