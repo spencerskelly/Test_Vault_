@@ -108,11 +108,26 @@ Implemented on `spencerskelly/MDSE_Workbench` main.
 - Intermediate CI runs occurred while the invariant was still being assembled; only the final test-bearing run above is acceptance evidence.
 - Intentionally deferred: representative scale/performance tuning of add/delete/rename reconciliation remains Step 37.
 
-**Current resume point:** Step 37. Do not begin it until Spencer explicitly answers `y` after the Step 36 completion report. A new chat should read this roadmap, verify the repository still matches this state, and then execute Step 37 only.
+### Step 37 completion evidence — 2026-10-04
+
+Implemented and measured on `spencerskelly/MDSE_Workbench` main.
+
+- Added `bench/relationship-reresolution-bench.ts` plus `npm run bench:relationships` to measure the warm path-set reconciliation seam after semantic state already exists.
+- The benchmark uses a representative 60,000-note semantic graph and executes add, delete, and rename scenarios at candidate fan-outs of 10, 100, 1,000, 5,000, 10,000, and 20,000.
+- Each scenario compares targeted candidate lookup + authored-link re-resolution against the exact same whole-graph resolver and fails if targeted and full results disagree semantically.
+- The benchmark is now part of the CI build workflow as `60k relationship re-resolution benchmark`.
+- Final CI run `37222063977` measured:
+  - 5,000 candidates: targeted remained 4.82x to 15.31x faster than whole-graph.
+  - 10,000 candidates: targeted remained 3.40x to 4.11x faster across add/delete/rename.
+  - 20,000 candidates: margin narrowed materially to 1.41x to 2.24x in the final run.
+- Based on the measured margin, `TARGETED_RELATIONSHIP_RERESOLUTION_MAX_CANDIDATES` was raised from the conservative 5,000 established in Step 34 to 10,000. This keeps the targeted path where the representative benchmark still shows a consistent >3x advantage while falling back before the lower-margin/noisier 20k region.
+- Final CI run `37222063977` passed `npm test`, the 60k semantic-cache scale smoke, paired cold/warm startup benchmark, 60k relationship re-resolution benchmark, `npm run build`, artifact hashing/sync, and artifact commit.
+- Step 37 commits are `0c814dc0`, `1e61193c`, `71ec5fe2`, and threshold-tuning commit `ccb639db`; CI produced built-artifact commit `07bb07f9`.
+- This remains a synthetic semantic-graph benchmark rather than end-to-end Obsidian integration timing; integrated startup and live-edit measurements remain Steps 49–50 and 55–59.
+
+**Current resume point:** Step 38. Do not begin it until Spencer explicitly answers `y` after the Step 37 completion report. A new chat should read this roadmap, verify the repository still matches this state, and then execute Step 38 only.
 
 ## Reconstructed remaining steps
-
-37. Benchmark add, delete and rename warm reconciliation with targeted relationship re-resolution at representative vault scale.
 
 38. Expose targeted-versus-full relationship reconciliation mode, candidate count and elapsed time in diagnostics.
 
