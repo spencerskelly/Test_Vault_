@@ -37,8 +37,12 @@ export default class MdseBootstrap extends Plugin {
   private last: Finding[] = [];
   private metadataResolved = false;
   private lastActivity = Date.now();
+  private startupTimer: number | null = null;
+  private unloaded = false;
+  private checkTask: Promise<Finding[]> | null = null;
 
   async onload(): Promise<void> {
+    this.unloaded = false;
     this.status = this.addStatusBarItem();
     this.status.setText("MDSE: checking…");
     this.status.addClass("mod-clickable");
@@ -59,7 +63,16 @@ export default class MdseBootstrap extends Plugin {
     }));
 
     this.app.workspace.onLayoutReady(() => {
-      window.setTimeout(() => void this.startup(), START_DELAY_MS);
+      if (this.unloaded) return;
+      this.startupTimer = window.setTimeout(() => {
+        this.startupTimer = null;
+        if (!this.unloaded) void this.startup();
+      }, START_DELAY_MS);
+    });
+    this.register(() => {
+      this.unloaded = true;
+      if (this.startupTimer !== null) window.clearTimeout(this.startupTimer);
+      this.startupTimer = null;
     });
   }
 
@@ -73,10 +86,13 @@ export default class MdseBootstrap extends Plugin {
   private async startup(): Promise<void> {
     try {
       await this.repairActivation();
-      if (!(await this.readCode())) this.openRegistration(false);
+      if (this.unloaded) return;
+      if (!(await this.readCode()) && !this.unloaded) this.openRegistration(false);
     } finally {
+      if (this.unloaded) return;
       this.status?.setText("MDSE: checks queued…");
       await this.whenMetadataSettled();
+      if (this.unloaded) return;
       this.status?.setText("MDSE: verifying…");
       await this.runCheck(true);
     }
@@ -84,16 +100,19 @@ export default class MdseBootstrap extends Plugin {
 
   private async whenMetadataSettled(): Promise<void> {
     const started = Date.now();
-    while (!this.metadataResolved && Date.now() - started < FULL_CHECK_FALLBACK_MS) {
+    while (!this.unloaded && !this.metadataResolved && Date.now() - started < FULL_CHECK_FALLBACK_MS) {
       await new Promise((resolve) => window.setTimeout(resolve, 250));
     }
     // When Obsidian provides the resolved signal, deliberately give Workbench/core model startup
     // its own lane before hashing the controlled plugin payload. Then prefer a quiet user/activity
     // window, but cap the deferral so integrity verification cannot be postponed indefinitely.
+    if (this.unloaded) return;
     if (this.metadataResolved) {
       await new Promise((resolve) => window.setTimeout(resolve, POST_METADATA_QUIET_MS));
+      if (this.unloaded) return;
       const deferStarted = Date.now();
       while (
+        !this.unloaded &&
         Date.now() - this.lastActivity < FULL_CHECK_ACTIVITY_QUIET_MS &&
         Date.now() - deferStarted < FULL_CHECK_MAX_DEFER_MS
       ) {
@@ -182,6 +201,17 @@ export default class MdseBootstrap extends Plugin {
   }
 
   async runCheck(notify: boolean, prepared?: PreparedReleaseScan): Promise<Finding[]> {
+    if (this.unloaded) return this.last;
+    if (this.checkTask) return this.checkTask;
+    let task: Promise<Finding[]>;
+    task = this.performCheck(notify, prepared).finally(() => {
+      if (this.checkTask === task) this.checkTask = null;
+    });
+    this.checkTask = task;
+    return task;
+  }
+
+  private async performCheck(notify: boolean, prepared?: PreparedReleaseScan): Promise<Finding[]> {
     const a = this.app.vault.adapter;
     const cfg = this.app.vault.configDir;
     let findings: Finding[];
