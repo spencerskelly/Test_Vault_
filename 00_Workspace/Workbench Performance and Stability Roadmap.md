@@ -700,15 +700,105 @@ Step 55 conclusion:
 - The exact CI-built Workbench candidate passes integrated startup-responsiveness acceptance.
 - This step does not yet accept occurrence-view behavior, live editing, recovery or repeated restart behavior; those remain Steps 56–59.
 
-**Current resume point:** Step 56. Do not begin it until Spencer explicitly answers `y` after the Step 55 completion report. A new chat should read this roadmap, verify the repository still matches this state, and then execute Step 56 only.
+### Step 56 completion evidence — 2026-10-04
+
+Ran integrated real-Obsidian capability-staging acceptance for occurrence-aware versus core-only Workbench views.
+
+Acceptance design:
+- Used the exact accepted Workbench bundle from Step 55; artifact hashes were reverified before launch.
+- Disposable Obsidian 1.13.7 vault contained:
+  - the standard 12,000 generated MDSE notes;
+  - six explicit acceptance fixture notes;
+  - one governed Local Model on `Acceptance/Fixture Object.md` with:
+    - a part occurrence `part-20261004210000002acceptfixture`;
+    - an endpoint occurrence `ep-20261004210000003acceptfixture`;
+  - a Requirement with block-targeted `appliesTo` to that local part occurrence.
+- The real Workbench view commands were executed through Obsidian:
+  - core-only controls: Functional and Design;
+  - occurrence-aware: Internal, Structure, Interfaces, Where Used, Requirements.
+- During each probe, the relevant Indexer occurrence-hydration gates were deliberately held closed.
+- Acceptance required:
+  - core-only views to complete while occurrence capability remained blocked;
+  - occurrence-aware views not to publish a canvas before their required occurrence gate was released;
+  - owner-targeted profiles to use `hydrateLocalOwners()`;
+  - vault-wide occurrence profiles to use `whenLocalSettled()`;
+  - the final canvas to contain the expected local occurrence marker.
+
+Existing declaration contract also remained green:
+- Internal: occurrence-aware;
+- Structure: occurrence-aware;
+- Interfaces: occurrence-aware;
+- Where Used: occurrence-aware;
+- Requirements: occurrence-aware;
+- Functional, Design, Verification, Scenario, Behavior, Failure/Risk and Evidence: core-only.
+
+Final integrated results:
+- **Functional**
+  - class: core-only;
+  - completed while occurrence hydration was blocked: yes;
+  - occurrence-hydration calls: none.
+- **Design**
+  - class: core-only;
+  - completed while occurrence hydration was blocked: yes;
+  - occurrence-hydration calls: none.
+- **Internal**
+  - class: occurrence-aware;
+  - gate: targeted owner hydration;
+  - owners requested: `Acceptance/Fixture Object.md`;
+  - published before occurrence release: no;
+  - local occurrence marker present after release: yes.
+- **Structure**
+  - class: occurrence-aware;
+  - gate: targeted owner hydration;
+  - owners requested: `Acceptance/Fixture Child.md`, `Acceptance/Fixture Object.md`;
+  - published before occurrence release: no;
+  - local part occurrence marker present after release: yes.
+- **Interfaces**
+  - class: occurrence-aware;
+  - gate: vault-wide occurrence settlement;
+  - published before occurrence release: no;
+  - local endpoint occurrence marker present after release: yes.
+- **Where Used**
+  - class: occurrence-aware;
+  - gate: vault-wide occurrence settlement;
+  - published before occurrence release: no;
+  - local part occurrence marker present after release: yes.
+- **Requirements**
+  - class: occurrence-aware;
+  - gate: targeted owner hydration;
+  - owners requested: `Acceptance/Fixture Object.md`;
+  - published before occurrence release: no;
+  - block-targeted local `appliesTo` occurrence marker present after release: yes.
+
+Semantic/runtime result:
+- mode: `full`;
+- files: **12,006**;
+- elements: **12,006**;
+- occurrence work fully settled after the acceptance sequence.
+
+Authoritative evidence:
+- Workflow: `Integrated occurrence-view acceptance`.
+- Successful run: **`37232510452`** (run 1).
+- Evidence artifact: `view-capability-evidence`, artifact ID **`11314622355`**.
+- Probe commit: `93935d39`.
+- Workflow commit: `72871c1b`.
+- Normal Build Workbench workflow for the final Step 56 commit also passed: **`37232510529`** (run 397).
+
+Step 56 conclusion:
+- Workbench view capability staging is behaving as intended in real Obsidian.
+- Core-only views do not wait for occurrence hydration.
+- Occurrence-aware views wait for only the capability they declare:
+  - targeted owner hydration where the needed owners are knowable from the core graph;
+  - full occurrence settlement only for Interfaces and Where Used, whose semantics require vault-wide occurrence completeness.
+- No view published occurrence-derived output before the required capability was ready.
+
+**Current resume point:** Step 57. Do not begin it until Spencer explicitly answers `y` after the Step 56 completion report. A new chat should read this roadmap, verify the repository still matches this state, and then execute Step 57 only.
 
 ## Reconstructed remaining steps
 
 43. Ensure cache restore failure always falls back to a cooperative cold build without leaving partially restored semantic state visible.
 
 48. Add failure-injection tests proving one derived subsystem can fail without making ordinary Obsidian editing or unrelated Workbench capabilities unusable.
-
-56. Run integrated occurrence-view acceptance: Structure, Interfaces, Where Used, Requirements and other occurrence-aware views must wait only for the capability they actually need.
 
 57. Run integrated live-edit acceptance covering add, edit, rename, move and delete while background work is active.
 
