@@ -2944,11 +2944,20 @@ function buildLocalOccurrenceModel(ctx,entityCtx){
       continue;
     }
     const pk=start.ownerKey+"|"+pairForRefs(start,end),candidates=connectionsByPair.get(pk)||[];
-    let conn=candidates.length===1?candidates[0]:null;
-    if(!conn)conn=makeConnection(c,start,end,"InformationFlow");
-    else{
-      conn.sourceIds.push(n2(c.Connector_ID));
+    let conn=null;
+    if(candidates.length===1){
+      conn=candidates[0];
+      if(!conn.sourceIds.includes(n2(c.Connector_ID)))conn.sourceIds.push(n2(c.Connector_ID));
       if(trim2(c.ea_guid)&&!conn.sourceGuids.includes(trim2(c.ea_guid)))conn.sourceGuids.push(trim2(c.ea_guid));
+    }else if(candidates.length===0){
+      // With no explicit Connector, the InformationFlow itself is sufficient evidence
+      // to preserve one contextual connection between its two Interface occurrences.
+      conn=makeConnection(c,start,end,"InformationFlow");
+    }else{
+      // Multiple existing Connections between the same local endpoints are ambiguous.
+      // Do not invent another connection or guess which existing path carries the flow.
+      warnings.push("InformationFlow "+trim2(c.ea_guid)+" matches "+candidates.length+" existing Local Model Connections between the same Interface occurrences; conveyed flow remains review evidence.");
+      continue;
     }
     if(!conn)continue;
     const conveyedItems=(conveyed.byConnector.get(normGuid(c.ea_guid))||[]).slice().sort((a,b)=>normGuid(a.ea_guid).localeCompare(normGuid(b.ea_guid))||n2(a.Object_ID)-n2(b.Object_ID));
