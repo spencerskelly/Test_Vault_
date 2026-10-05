@@ -130,13 +130,6 @@ fields:
     options:
       baseFile: "99_System/06_Fileclasses/MDSE Link Targets.base"
       viewName: "Condition"
-  - name: hasClassifier
-    id: L5xjtb
-    type: MultiFile
-    path: ""
-    options:
-      baseFile: "99_System/06_Fileclasses/MDSE Link Targets.base"
-      viewName: "Item Flow | Object"
   - name: conflictsWith
     id: hTrIET
     type: MultiFile

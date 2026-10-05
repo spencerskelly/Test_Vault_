@@ -233,19 +233,6 @@ views:
       - property: file.name
         direction: ASC
   - type: table
-    name: "Item Flow | Object"
-    filters:
-      or:
-        - 'note.type == "Object"'
-        - 'note.type == "Item Flow"'
-    order:
-      - file.name
-      - type
-      - id
-    sort:
-      - property: file.name
-        direction: ASC
-  - type: table
     name: "Object"
     filters:
       or:
