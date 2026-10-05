@@ -51,6 +51,8 @@ jobs:
         run: node "Importer/Testing/v0.8.15/fresh_base_compatibility_static_test.js"
       - name: Check v0.8.16 output structure
         run: node "Importer/Testing/v0.8.16/output_structure_static_test.js"
+      - name: Check v0.8.17 filesystem resilience
+        run: node "Importer/Testing/v0.8.17/filesystem_resilience_static_test.js"
       - name: Compile IMP-009 output validator
         run: python -m py_compile "Importer/Testing/v0.8.14/imp009_output_acceptance.py" "Importer/Testing/v0.8.14/imp009_output_acceptance_selftest.py"
       - name: Exercise IMP-009 output validator
