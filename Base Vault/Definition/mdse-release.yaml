@@ -17,18 +17,19 @@ schemas:
 ruleset: "99_System/10_Docs/MDSE Modeling Ruleset 1.23.md"
 
 limits:
-  maxGeneratedPathLength: 400            # W-324: hard stop only; nothing is shortened for length
-  fsComponentMaxBytes: 255               # W-324: the only forced cut (filesystem limit per name)
-  longPathReviewThreshold: 212           # W-324: review report only (Post-Import Task 9)
-  maxModelFilesPerFolder: 75
+  fsComponentMaxBytes: 255               # W-382: physical filesystem component limit only
+  generatedPathLengthLimit: null         # W-382: no importer-defined total path-length limit
+  modelFilesPerFolderLimit: null         # W-382: no importer-defined folder file-count limit
+  importedFileNameScope: global          # W-382: case-insensitive, existing base/system note basenames reserved first
+  nestedElementFolders: true             # W-382: Parent.md beside Parent/Child.md
   duplicateMarker: "~2"
   alterationMarker: "~a"
 
 tools:
   importer:
     release: null
-    candidate: "Importer/Tools/v0.8.15/EA_to_MDSE_Native_Importer_v0.8.15.html"
-    candidateVersion: "0.8.15"
+    candidate: "Importer/Tools/v0.8.16/EA_to_MDSE_Native_Importer_v0.8.16.html"
+    candidateVersion: "0.8.16"
     attachmentBenchmark: "Importer/Testing/v0.8.6/attachment_benchmark.json"
     history: "Importer/History/Importer Revisions"   # v0.1 to v0.7 and v0.8.0 to v0.8.5 (W-326); none may generate a model
   cleanBase:
