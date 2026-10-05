@@ -4,8 +4,8 @@
 # Rules are added type by type as Spencer approves them. Types not listed are not decided.
 # Connector Name line, every type (W-158): "- Connector name: <name> (to [[other end]])" in the Source: EA section,
 # on both end notes for Connector and InformationFlow, on the owner-side note for the other types (W-55, W-56).
-schemaVersion: '1.0'
-date: '2026-09-29'
+schemaVersion: '1.1'
+date: '2026-10-05'
 connectorTypes:
 - eaConnectorType: Generalization
   connectors: 3974
@@ -48,44 +48,16 @@ connectorTypes:
   task: 'Post-Import Task 7, item 5'
 - eaConnectorType: Connector
   connectors: 823
-  decision: W-153
+  decision: W-384
   status: settled
-  matrixRule: 'Rule 41 (no stereotype, 574), Rule 40 (BindingConnector, 249), Rule 71 (1 exception)'
-  direction: 'Unspecified on all 823; both fields are symmetric and written on both end notes'
+  direction: 'Source drawing direction is preserved as source evidence; Local Model connection endpoints are occurrence references.'
   rules:
   - stereotype: none
-    connectors: 574
-    field: interfaces
-    note: 'symmetric; new field (W-153)'
+    result: 'When both ends resolve to Local Model Interface occurrences in one context, emit one Local Model Connection with endpointA and endpointB. Do not emit note-level interfaces relationships.'
   - stereotype: BindingConnector
-    connectors: 249
-    field: equals
-    amendedBy: W-311
-    note: 'temporary mechanical evidence. Where assembly context can be reconstructed, preserve the BindingConnector as contextual local endpoint equals using local-model.yaml and native block links; do not automatically convert it to exposes from containment alone. Review resolves confirmed boundary exposure to exposes/exposedBy or another appropriate local connection/interface meaning. If contextual reconstruction is unsafe, preserve the unresolved source/review evidence rather than inventing exposure.'
-  exception: 'the plain connector with both ends missing from the export writes nothing and is recorded in the ledger (Rule 71, W-57)'
-  duplicates:
-    decision: W-154
-    rule: 'connectors that end on the same pair of notes after the Port merge (either direction) are one link per field; every distinct non-empty Name is kept as its own line, identical names once, unnamed add nothing; every connector GUID stays in the ledger'
-    counts: '22 groups hold 70 connectors (16 plain, 6 binding), so 822 resolved connectors become 774 links; 2 groups have different names; 2 groups repeat the same drawing'
-  blockLevelEnds:
-    decision: W-155
-    rule: 'a connector with an end that is not a Port is written as drawn and gets the line "- REVIEW port needed: Connector <name or unnamed> to [[other end]]: connector {GUID}" (W-55, W-157) in the Source: EA section of both end notes; the evidence is in Review - Block-Level Flow Connectors.csv (W-156, W-157)'
-    counts: '109 connectors (94 with no Port end, 15 with one); 108 resolve, 1 has both ends missing; 101 distinct flag entries'
-  partEnds:
-    decision: W-155
-    rule: 'a Part end resolves to the block note that types the Part (PDATA1, a Class): 182 ends; the 3 Parts with no block resolve to the Object note with subtype part (W-138); no self-loops'
-  context:
-    decision: W-155
-    amendedBy: W-311
-    rule: 'plain note-level connector summaries do not invent assembly semantics. For BindingConnector, assembly/Part/endpoint context is now preserved through Local Model endpoint occurrences and temporary local equals where reconstructable; diagram placement is not required to recover this semantic context.'
-  review:
-    decision: W-156
-    rule: 'every REVIEW line must be resolvable from the vault alone; the note line carries a fixed phrase, a short reason and the GUID; the evidence (ends as drawn with owner and assembly, resolved notes, candidate Ports, derived direction) is in a review table in 99_System/11_Import, regenerated each run'
-    equalsDerived: '245 of 249 get structurally derived outer/inner candidates as review evidence (185 one level, 60 multi-level, not spot-checked); 4 have none. Candidate direction is not automatic exposure semantics (W-311).'
-  linkCount: '822 resolved connectors become 766 links after Parts resolve to blocks (W-154 counted 774 before that)'
-  name:
-    decision: W-158
-    rule: '"- Connector name: <name> (to [[other end]])" on both end notes, one line per distinct name; unnamed write nothing (174 named, 165 distinct names)'
+    result: 'Resolve as Connection.exposes -> boundary Interface only when the owning context, one boundary Interface, one internal Interface and exactly one internal Connection are deterministic. Otherwise retain temporary local equals/review evidence.'
+  exception: 'A connector whose source endpoints cannot be resolved remains source/review evidence; Stage 1 does not manufacture Ports or topology to make it fit.'
+  note: 'W-384 supersedes the current-writing Port-note interfaces/equals representation. Local Model 0.3 historical endpoint-owned exposure remains readable only under its original schema version.'
 - eaConnectorType: Aggregation
   connectors: 2288
   decision: W-159
@@ -116,27 +88,19 @@ connectorTypes:
   fields: 'SourceCard is the quantity line on the assembly (W-43, W-54; 52); SourceRole archived (W-56); Name uses the W-158 line on the whole (4); DestIsAggregate chooses the rule and stays in the export'
 - eaConnectorType: Realisation
   connectors: 950
-  decision: W-160
+  decision: W-384
   status: settled
-  matrixRule: 'Rules 18, 19, 48, 55 (r12 matrix)'
-  direction: 'all Source -> Destination; none named; no self-loops'
-  principle: 'a Function or a Design satisfies a requirement; an Object is what a requirement applies to (W-160)'
   rules:
-  - pair: Object to Requirement, or Requirement to Object (W-167)
-    connectors: 918
+  - pair: Object to Requirement, or Requirement to Object
     field: appliesTo
-    writtenOn: 'the requirement, pointing at the Object; applies generated on the Object; 917 unique links; no flag'
-  - pair: Function to Use Case
-    connectors: 0
+    writtenOn: 'the Requirement, pointing at the governed target'
+  - pair: Behavior to Use Case
     field: realizedBy
-    writtenOn: 'the Use Case; realizes generated on the Function'
+    writtenOn: 'the Use Case; realizes generated on the Behavior'
   - pair: any other
-    connectors: 32
     field: realizedBy
-    writtenOn: 'the target; realizes generated on the source'
-    reviewLine: 'REVIEW modelCheck: realization <source type> to <target type>'
-    note: '32 links on 29 notes (W-167 moved the 8 Requirement to Object connectors to appliesTo)'
-  packageEnds: '7 connectors from 6 packages with no note (W-147) write no field; the requirement gets REVIEW modelCheck: realization from folder <vault folder path>'
+    review: true
+  note: 'Relationship name is retained; endpoint validity is governed by relationships.yaml 1.36.'
 - eaConnectorType: NoteLink
   connectors: 349
   decision: W-161
@@ -158,235 +122,78 @@ connectorTypes:
   - 'the canvas text card for the 225 folded notes drawn on diagrams (W-73)'
 - eaConnectorType: Dependency
   connectors: 6762
+  decision: W-384
   status: settled
-  note: 'decided one stereotype at a time: satisfy 2444, deriveReqt 1416, refine 1114, trace 770, none 667, verify 333, RecoveryRequirement 14, ASILDecompose 4'
   stereotypes:
   - stereotype: satisfy
-    connectors: 2444
-    decision: W-163
-    matrixRule: 'Rules 15, 16, 17, 54, 71'
     rules:
-    - pair: Function or Design to Requirement
-      connectors: 2328
-      field: satisfies
-      writtenOn: 'the Function or Design; satisfiedBy generated on the requirement'
-    - pair: any other
-      connectors: 112
-      field: satisfies
-      writtenOn: 'the source, in the drawn direction'
-      reviewLine: 'REVIEW modelCheck: satisfy <source type> to <target type>'
-      note: '112 links on 89 target notes; State to Requirement 92'
-    exception: '4 connectors with an end missing from the export write nothing (Rule 71)'
+    - {pair: 'Behavior or Condition to Requirement', field: satisfies}
+    - {pair: 'any other', field: satisfies, review: true}
   - stereotype: deriveReqt
-    connectors: 1416
-    decision: W-164
-    matrixRule: 'Rules 23, 57'
     rules:
-    - pair: Requirement to Requirement
-      connectors: 1410
-      field: derivedFrom
-      writtenOn: 'the source (derived requirement); derivedBy generated on the target; 1,408 links'
-    - pair: any other
-      connectors: 6
-      field: derivedFrom
-      writtenOn: 'the source, in the drawn direction'
-      reviewLine: 'REVIEW modelCheck: deriveReqt <source type> to <target type>'
+    - {pair: 'Requirement to Requirement', field: derivedFrom}
+    - {pair: 'any other', field: derivedFrom, review: true}
   - stereotype: refine
-    connectors: 1114
-    decision: W-165
-    matrixRule: 'Rules 20, 21, 22, 56, 65; Rule 20 replaced'
     rules:
-    - pair: Requirement to Requirement
-      connectors: 541
-      field: refines
-      writtenOn: 'the source; refinedBy generated on the target; 539 links'
-    - pair: Use Case to Requirement
-      connectors: 412
-      field: drives
-      writtenOn: 'the Use Case; drivenBy generated on the requirement; 412 links'
-    - pair: Info or Artifact to Requirement
-      connectors: 144
-      field: describes
-      writtenOn: 'the Info or Artifact; describedBy generated on the requirement; 144 links'
-    - pair: any other
-      connectors: 17
-      field: refines
-      writtenOn: 'the source, in the drawn direction'
-      reviewLine: 'REVIEW modelCheck: refine <source type> to <target type>'
-      note: '17 links on 16 notes'
+    - {pair: 'Requirement to Requirement', field: refines}
+    - {pair: 'Use Case to Requirement', field: drives}
+    - {pair: 'Info or Artifact to Requirement', field: describes}
+    - {pair: 'any other', field: refines, review: true}
   - stereotype: trace
-    connectors: 770
-    decision: W-166
-    amendedBy: W-167
-    status: settled
-    matrixRule: 'Rules 24, 25, 26, 50'
-    direction: '1 connector is marked Destination -> Source; the tool follows Direction (W-51)'
     rules:
-    - pair: Info or Artifact to any
-      connectors: 224
-      field: describes
-      writtenOn: 'the Info or Artifact; describedBy generated'
-    - pair: Object to Info
-      connectors: 35
-      field: describes
-      writtenOn: 'turned around: the Info note, pointing at the Object; no flag'
-    - pair: Issue to any
-      connectors: 49
-      field: affects
-      writtenOn: 'the Issue; affectedBy generated'
-    - pair: Object to Requirement, or Requirement to Object
-      connectors: 23
-      field: appliesTo
-      writtenOn: 'the requirement, pointing at the Object; applies generated; no flag'
-    - pair: Requirement to Requirement
-      connectors: 336
-      field: references
-      writtenOn: 'the source (the requirement that mentions the other); referencedBy generated; no flag (W-167)'
-    - pair: any other
-      connectors: 103
-      field: tracesTo
-      writtenOn: 'the source, in the drawn direction'
-      reviewLine: 'REVIEW modelCheck: trace <source type> to <target type>'
-      note: '102 links on 82 notes'
+    - {pair: 'Info or Artifact to any', field: describes}
+    - {pair: 'Object to Info', field: describes}
+    - {pair: 'Issue to any', field: affects}
+    - {pair: 'Object and Requirement, either direction', field: appliesTo}
+    - {pair: 'Requirement to Requirement', field: references}
+    - {pair: 'any other', field: tracesTo, review: true}
   - stereotype: verify
-    connectors: 333
-    decision: W-168
-    matrixRule: 'Rules 63, 64'
     rules:
-    - pair: Verification to Requirement
-      connectors: 325
-      field: verifies
-      writtenOn: 'the Verification; verifiedBy generated'
-    - pair: any other
-      connectors: 8
-      field: verifies
-      writtenOn: 'the source, in the drawn direction'
-      reviewLine: 'REVIEW modelCheck: verify <source type> to <target type>'
-      note: '8 links on 7 notes'
+    - {pair: 'Verification to Requirement', field: verifies}
+    - {pair: 'any other', field: verifies, review: true}
   - stereotype: RecoveryRequirement
-    connectors: 14
-    decision: W-168
-    matrixRule: 'Rule 68'
     rules:
-    - pair: Design or Function to Requirement
-      connectors: 14
-      field: satisfies
-      writtenOn: 'the source; satisfiedBy generated'
-      reviewLine: 'REVIEW modelCheck: RecoveryRequirement <source type> to <target type>'
-      note: 'kept flagged so the recovery meaning is not lost; lines on 13 notes'
+    - {pair: 'Behavior or Condition to Requirement', field: satisfies, review: true}
   - stereotype: ASILDecompose
-    connectors: 4
-    decision: W-168
-    matrixRule: 'Rule 69'
     rules:
-    - pair: Requirement to Requirement
-      connectors: 4
-      field: derivedFrom
-      writtenOn: 'the source; derivedBy generated'
-      reviewLine: 'REVIEW modelCheck: ASILDecompose Requirement to Requirement'
-      note: 'direction not shown by the data; 4 notes'
+    - {pair: 'Requirement to Requirement', field: derivedFrom, review: true}
   - stereotype: none
-    connectors: 667
-    decision: W-169
-    matrixRule: 'Rules 27, 58'
     rules:
-    - pair: Function to Function, or Function to Design
-      connectors: 317
-      field: dependsOn
-      writtenOn: 'the source; dependencyOf generated; no flag'
-    - pair: Artifact to Requirement
-      connectors: 173
-      field: describes
-      writtenOn: 'the Artifact (W-165, W-166)'
-    - pair: Requirement to Requirement
-      connectors: 38
-      field: references
-      writtenOn: 'the source (W-167)'
-    - pair: Requirement and Object, either direction
-      connectors: 13
-      field: appliesTo
-      writtenOn: 'the requirement (W-167)'
-    - pair: Issue to any
-      connectors: 7
-      field: affects
-      writtenOn: 'the Issue (W-166)'
-    - pair: Object to Info
-      connectors: 1
-      field: describes
-      writtenOn: 'turned around: the Info note (W-166)'
-    - pair: any other
-      connectors: 118
-      field: dependsOn
-      writtenOn: 'the source, in the drawn direction'
-      reviewLine: 'REVIEW modelCheck: dependency <source type> to <target type>'
-      note: '115 links on 95 notes'
+    - {pair: 'Behavior to Behavior or Condition', field: dependsOn}
+    - {pair: 'Artifact to Requirement', field: describes}
+    - {pair: 'Requirement to Requirement', field: references}
+    - {pair: 'Requirement and Object, either direction', field: appliesTo}
+    - {pair: 'Issue to any', field: affects}
+    - {pair: 'Object to Info', field: describes}
+    - {pair: 'any other', field: dependsOn, review: true}
+  note: 'W-384 retargets the existing semantic fields from Function/Design/State classes to Behavior/Condition; no relationship name is introduced solely for the taxonomy migration.'
 - eaConnectorType: Abstraction
   connectors: 2811
-  decision: W-170
+  decision: W-384
   status: settled
-  matrixRule: 'Rules 10 to 14, 53, 66, 67, 72 to 79; package-context Rules 72 and 73 not used'
-  direction: '1 connector is marked Destination -> Source; the tool follows Direction (W-51)'
-  exception: '2 connectors with an end missing from the export write nothing (Rule 71)'
   stereotypes:
   - stereotype: allocate
-    connectors: 2795
     rules:
-    - pair: Function to Object
-      connectors: 1362
-      field: performs
-      writtenOn: 'turned around: the Object, pointing at the Function; performedBy generated; 1,348 links'
-    - pair: Design to Object
-      connectors: 968
-      field: hasDesign
-      writtenOn: 'the Object, pointing at the Design; designOf generated; 956 links'
-    - pair: Issue to any
-      connectors: 213
-      field: affects
-      writtenOn: 'the Issue (W-166)'
-    - pair: Info or Artifact to any
-      connectors: 44
-      field: describes
-      writtenOn: 'the Info or Artifact (W-166)'
-    - pair: Requirement and Object, either direction
-      connectors: 25
-      field: appliesTo
-      writtenOn: 'the requirement (W-167)'
-    - pair: any other
-      connectors: 181
-      field: tracesTo
-      writtenOn: 'the source, in the drawn direction'
-      reviewLine: 'REVIEW modelCheck: allocate <source type> to <target type>'
-      note: '180 links on 123 notes'
+    - {pair: 'Behavior to Object', field: performs, writtenOn: Object}
+    - {pair: 'Condition/design to Object', field: hasDesign, writtenOn: Object}
+    - {pair: 'Issue to any', field: affects}
+    - {pair: 'Info or Artifact to any', field: describes}
+    - {pair: 'Requirement and Object, either direction', field: appliesTo}
+    - {pair: 'any other', field: tracesTo, review: true}
   - stereotype: Refine
-    connectors: 3
     rules:
-    - pair: Use Case to Requirement
-      field: drives
-      writtenOn: 'the Use Case (W-165)'
+    - {pair: 'Use Case to Requirement', field: drives}
   - stereotype: Derive
-    connectors: 8
     rules:
-    - pair: Requirement to Requirement
-      connectors: 7
-      field: derivedFrom
-      writtenOn: 'the source (W-164)'
-    - pair: Requirement to Issue
-      connectors: 1
-      field: derivedFrom
-      reviewLine: 'REVIEW modelCheck: Derive Requirement to Issue'
+    - {pair: 'Requirement to Requirement', field: derivedFrom}
+    - {pair: 'any other', field: derivedFrom, review: true}
   - stereotype: trace
-    connectors: 5
     rules:
-    - pair: Requirement to Requirement
-      connectors: 3
-      field: references
-    - pair: Object to Requirement
-      connectors: 1
-      field: appliesTo
-    - pair: Object to Artifact
-      connectors: 1
-      field: describes
-      writtenOn: 'turned around: the Artifact (W-166 applied to an Artifact)'
+    - {pair: 'Requirement to Requirement', field: references}
+    - {pair: 'Object to Requirement', field: appliesTo}
+    - {pair: 'Object to Artifact', field: describes}
+    - {pair: 'any other', field: tracesTo, review: true}
+  note: 'Object performs Behavior; Object/Document hasDesign Condition/design. Endpoint validity remains governed by relationships.yaml 1.36.'
 - eaConnectorType: UseCase
   connectors: 1258
   decision: W-171
@@ -420,53 +227,25 @@ connectorTypes:
       reviewLine: 'REVIEW hasChild: the two notes have different types'
 - eaConnectorType: Association
   connectors: 603
-  decision: W-172
+  decision: W-384
   status: settled
-  matrixRule: 'Rules 5, 6, 7, 8, 34, 52'
-  direction: 'Unspecified on all 603'
   rules:
-  - pair: Use Case with an Object, Actor, Function or Port
-    connectors: 494
+  - pair: Use Case with an Object, Actor or Behavior
     field: participants
-    writtenOn: 'the Use Case only; one-way, no inverse (W-172); 494 links on 330 Use Cases'
-  - pair: Issue with any
-    connectors: 3
-    field: affects
-    writtenOn: 'the Issue (W-166)'
-  - pair: Info or Artifact with an Object
-    connectors: 4
-    field: describes
-    writtenOn: 'the Info or Artifact (W-166)'
-  - pair: any other
-    connectors: 102
-    field: tracesTo
-    writtenOn: 'the drawn start, pointing at the drawn end'
-    reviewLine: 'REVIEW modelCheck: association <start type> to <end type>'
-    note: '102 links on 65 notes'
+    writtenOn: 'the Use Case only; one-way'
+  - {pair: 'Issue with any', field: affects}
+  - {pair: 'Info or Artifact with an Object', field: describes}
+  - {pair: 'any other', field: tracesTo, review: true}
+  note: 'Local Interface occurrences are contextual Local Model records and are not represented as note-level Use Case participants under the first-class relationship schema.'
 - eaConnectorType: Usage
   connectors: 239
-  decision: W-173
+  decision: W-384
   status: settled
-  matrixRule: 'Rules 28, 29, 49, 59, 70'
   rules:
-  - pair: Use Case to Function or Design
-    connectors: 214
-    field: realizedBy
-    writtenOn: 'the Use Case; realizes generated on the Function or Design; 213 links'
-  - pair: Requirement to Requirement
-    connectors: 15
-    field: dependsOn
-    writtenOn: 'the source; dependencyOf generated; no flag'
-  - pair: Issue to State
-    connectors: 2
-    field: affects
-    writtenOn: 'the Issue (W-166)'
-  - pair: any other
-    connectors: 8
-    field: dependsOn
-    writtenOn: 'the source, in the drawn direction'
-    reviewLine: 'REVIEW modelCheck: usage <source type> to <target type>'
-    note: '8 links on 6 notes, including the 4 Responsibility connectors'
+  - {pair: 'Use Case to Behavior or Condition', field: realizedBy}
+  - {pair: 'Requirement to Requirement', field: dependsOn}
+  - {pair: 'Issue to Condition', field: affects}
+  - {pair: 'any other', field: dependsOn, review: true}
 - eaConnectorType: ControlFlow
   connectors: 407
   decision: W-174
@@ -499,21 +278,14 @@ connectorTypes:
   rule: 'no relationship field; the diagram companion note (W-73) lists the messages under **Messages:** in SeqNo order, "<SeqNo>. [[sender]] → [[receiver]]: <message name>"; Notes (4) as an indented line under the message; DiagramID places the message (W-61)'
 - eaConnectorType: InformationFlow
   connectors: 123
-  decision: W-177
+  decision: W-384
   status: settled
-  matrixRule: 'Rule 42, replaced'
   rules:
-  - pair: any
-    connectors: 123
-    field: interfaces
-    writtenOn: 'both end Ports (W-153, W-154)'
-  - pair: conveys an item (t_xref conveyed, W-83)
-    connectors: 79
-    field: 'transmits on the source Port, receives on the target Port'
-    writtenOn: 'pointing at the conveyed Item Flow note; one-way; where a Port would get both transmits and receives for one item it gets exchanges once instead (W-178): transmits 51, receives 60, exchanges 18'
-  blockLevel: '9 connectors keep REVIEW port needed with the GUID and the review table (W-55, W-157)'
-  name: 'W-158 line on both ends (10)'
-# Relationship rows in t_xref (W-83) mapped in W-194 as body lines on both ends, no relationship field:
-# entry 3 and doActivity 2 (State to Activity), represents 1 (ActivityPartition to Class), target 6 (Action to ActionPin).
-# See ea-field-dispositions.yaml for the line formats. conveyed is used by InformationFlow
-# (W-177); trigger and effect are written as StateFlow lines (W-175).
+  - pair: Local Interface to Local Interface
+    result: 'Use or create the specific Local Model Connection carrying the flow; do not write note-level interfaces.'
+  - pair: conveys an item
+    result: 'Create a Local Model Flow under the carrying Connection with definition pointing to the reusable Item Flow and endpoint roles transmit/receive/exchange/unspecified.'
+  - pair: unresolved or non-local endpoint pattern
+    field: tracesTo
+    review: true
+  note: 'W-384 removes the Port-note interfaces/transmits/receives/exchanges summary. Exact occurrence-level connection/flow topology is authoritative.'
