@@ -9,7 +9,7 @@ What the stage 1 translator must do, in one place. It is kept current: any decis
 
 [[Importer Operating Contract]] defines the Stage-1 operational pipeline, trust boundaries, run-state terminology and release-hardening invariants without duplicating the detailed mappings here. [[Importer Issue Register]] tracks observed implementation/authority gaps against that pipeline. Neither document overrides a mapping/schema decision; any disagreement among current authorities is a fault to resolve explicitly.
 
-Current through W-378. (W-325 and W-326 change no stage 1 rule; they align the release chain and the documents.) Release target 0.8.0; the registry of current files is [[00 - Current State]].
+Current through W-380. (W-325 and W-326 change no stage 1 rule; they align the release chain and the documents.) Release target 0.8.0; the registry of current files is [[00 - Current State]].
 
 ## 1. Purpose and scope
 
@@ -21,6 +21,7 @@ Current through W-378. (W-325 and W-326 change no stage 1 rule; they align the r
 - Path to a testable vault (W-249): a script builds a base vault once from the workspace; the tool fills a copy of it and does not create the vault, the plugin settings or Bootstrap; the tool reads the person notes, `authors.yaml` and the templates from that base vault, not from the workspace. Each test run is a disposable copy, checked by section 10, opened in Obsidian and discarded. The tool takes a package filter (W-252): it opens the `.qeax` read-only, numbers every note from the whole model (W-14) and writes only the selected packages, so a slice keeps its final ids and its numbers have gaps. A full run is the same tool with no filter. Links that leave the slice are written as in a full run (W-253). A fold follows the note that receives it: an element that folds into a note outside the slice is not written in that run (W-254). Packages are selected by a list of package paths given at run time; each path includes every package below it, a path may name any package, and the tool rejects a path that matches no package or more than one (W-255). A path is written `Name > Name > Name`, with `>` as the separator and optional spaces around it; each name is matched against the EA package name after trimming leading and trailing spaces, with case kept; no escaping is needed (W-266). A path starts at one of the ten packages under `IPC !` (my reading of W-117, not confirmed). The first test slice is `02 Product Context` (W-267). Not decided: what the ledger holds for a slice beyond the outcome `outside slice` (W-254).
 - The result must be usable by people and AI together. Every review line must be resolvable from the vault alone (W-156). The vault is not released until stage 2 is complete (W-55).
 - Stage 1 output is a vault, a ledger, a run manifest and review tables (section 3).
+- **Resolvable contextual-endpoint review evidence (W-380).** A definitionless contextual endpoint review row retains the EA source Object_ID used by `localendpoint:<Object_ID>` planning keys, and semantic connector review persists the planner detail explaining why a W-377 connector was withheld. Review evidence must be joinable back to the exact source endpoint without inferring from display names.
 
 ## 2. Input
 
