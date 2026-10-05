@@ -29,23 +29,18 @@ views:
       - property: file.name
         direction: ASC
   - type: table
-    name: "Actor | Artifact | Design | Diagram | Document | Failure Mode | Function | Functional Flow | Info | Issue | Item Flow | Object | Plan | Port | Procedure | Requirement | Result | Setup | State Machine | Step | Use Case | Verification | modelCheck"
+    name: "Actor | Artifact | Behavior | Diagram | Document | Failure Mode | Functional Flow | Info | Issue | Item Flow | Plan | Procedure | Requirement | Result | Setup | Use Case | Verification | modelCheck"
     filters:
       or:
-        - 'note.type == "Object"'
-        - 'note.type == "Port"'
         - 'note.type == "Item Flow"'
-        - 'note.type == "Function"'
+        - 'note.type == "Behavior"'
         - 'note.type == "Functional Flow"'
-        - 'note.type == "State Machine"'
         - 'note.type == "Requirement"'
-        - 'note.type == "Design"'
         - 'note.type == "Use Case"'
         - 'note.type == "Actor"'
         - 'note.type == "Failure Mode"'
         - 'note.type == "Issue"'
         - 'note.type == "Info"'
-        - 'note.type == "Step"'
         - 'note.type == "Verification"'
         - 'note.type == "Procedure"'
         - 'note.type == "Setup"'
@@ -63,45 +58,12 @@ views:
       - property: file.name
         direction: ASC
   - type: table
-    name: "Actor | Artifact | Design | Diagram | Document | Failure Mode | Function | Functional Flow | Info | Issue | Item Flow | Plan | Port | Procedure | Requirement | Result | Setup | Step | Use Case | Verification | modelCheck"
-    filters:
-      or:
-        - 'note.type == "Port"'
-        - 'note.type == "Item Flow"'
-        - 'note.type == "Function"'
-        - 'note.type == "Functional Flow"'
-        - 'note.type == "Requirement"'
-        - 'note.type == "Design"'
-        - 'note.type == "Use Case"'
-        - 'note.type == "Actor"'
-        - 'note.type == "Failure Mode"'
-        - 'note.type == "Issue"'
-        - 'note.type == "Info"'
-        - 'note.type == "Step"'
-        - 'note.type == "Verification"'
-        - 'note.type == "Procedure"'
-        - 'note.type == "Setup"'
-        - 'note.type == "Plan"'
-        - 'note.type == "Result"'
-        - 'note.type == "Document"'
-        - 'note.type == "Artifact"'
-        - 'note.type == "modelCheck"'
-        - 'note.type == "Diagram"'
-    order:
-      - file.name
-      - type
-      - id
-    sort:
-      - property: file.name
-        direction: ASC
-  - type: table
-    name: "Actor | Document | Function | Object | Port"
+    name: "Actor | Behavior | Document | Object"
     filters:
       or:
         - 'note.type == "Object"'
         - 'note.type == "Actor"'
-        - 'note.type == "Function"'
-        - 'note.type == "Port"'
+        - 'note.type == "Behavior"'
         - 'note.type == "Document"'
     order:
       - file.name
@@ -123,10 +85,10 @@ views:
       - property: file.name
         direction: ASC
   - type: table
-    name: "Design"
+    name: "Behavior"
     filters:
       or:
-        - 'note.type == "Design"'
+        - 'note.type == "Behavior"'
     order:
       - file.name
       - type
@@ -135,11 +97,11 @@ views:
       - property: file.name
         direction: ASC
   - type: table
-    name: "Design | Function"
+    name: "Behavior | Condition"
     filters:
       or:
-        - 'note.type == "Function"'
-        - 'note.type == "Design"'
+        - 'note.type == "Behavior"'
+        - 'note.type == "Condition"'
     order:
       - file.name
       - type
@@ -148,13 +110,24 @@ views:
       - property: file.name
         direction: ASC
   - type: table
-    name: "Design | Function | Item Flow | State"
+    name: "Behavior | Condition | Item Flow"
     filters:
       or:
-        - 'note.type == "Function"'
-        - 'note.type == "Design"'
-        - 'note.type == "State"'
+        - 'note.type == "Behavior"'
+        - 'note.type == "Condition"'
         - 'note.type == "Item Flow"'
+    order:
+      - file.name
+      - type
+      - id
+    sort:
+      - property: file.name
+        direction: ASC
+  - type: table
+    name: "Condition"
+    filters:
+      or:
+        - 'note.type == "Condition"'
     order:
       - file.name
       - type
@@ -212,18 +185,6 @@ views:
       - property: file.name
         direction: ASC
   - type: table
-    name: "Function"
-    filters:
-      or:
-        - 'note.type == "Function"'
-    order:
-      - file.name
-      - type
-      - id
-    sort:
-      - property: file.name
-        direction: ASC
-  - type: table
     name: "Functional Flow"
     filters:
       or:
@@ -272,6 +233,18 @@ views:
       - property: file.name
         direction: ASC
   - type: table
+    name: "modelCheck"
+    filters:
+      or:
+        - 'note.type == "modelCheck"'
+    order:
+      - file.name
+      - type
+      - id
+    sort:
+      - property: file.name
+        direction: ASC
+  - type: table
     name: "Object"
     filters:
       or:
@@ -288,18 +261,6 @@ views:
     filters:
       or:
         - 'note.type == "Plan"'
-    order:
-      - file.name
-      - type
-      - id
-    sort:
-      - property: file.name
-        direction: ASC
-  - type: table
-    name: "Port"
-    filters:
-      or:
-        - 'note.type == "Port"'
     order:
       - file.name
       - type
@@ -356,55 +317,6 @@ views:
       - property: file.name
         direction: ASC
   - type: table
-    name: "State"
-    filters:
-      or:
-        - 'note.type == "State"'
-    order:
-      - file.name
-      - type
-      - id
-    sort:
-      - property: file.name
-        direction: ASC
-  - type: table
-    name: "State Machine"
-    filters:
-      or:
-        - 'note.type == "State Machine"'
-    order:
-      - file.name
-      - type
-      - id
-    sort:
-      - property: file.name
-        direction: ASC
-  - type: table
-    name: "State | State Machine"
-    filters:
-      or:
-        - 'note.type == "State"'
-        - 'note.type == "State Machine"'
-    order:
-      - file.name
-      - type
-      - id
-    sort:
-      - property: file.name
-        direction: ASC
-  - type: table
-    name: "Step"
-    filters:
-      or:
-        - 'note.type == "Step"'
-    order:
-      - file.name
-      - type
-      - id
-    sort:
-      - property: file.name
-        direction: ASC
-  - type: table
     name: "Use Case"
     filters:
       or:
@@ -421,18 +333,6 @@ views:
     filters:
       or:
         - 'note.type == "Verification"'
-    order:
-      - file.name
-      - type
-      - id
-    sort:
-      - property: file.name
-        direction: ASC
-  - type: table
-    name: "modelCheck"
-    filters:
-      or:
-        - 'note.type == "modelCheck"'
     order:
       - file.name
       - type
