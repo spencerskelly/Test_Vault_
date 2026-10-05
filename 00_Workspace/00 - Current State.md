@@ -20,7 +20,7 @@
 3. [[MDSE Impact-Focused Remaining Work - 2026-10-05]]: execution filter that breaks the remaining high-impact work into small steps and explicitly defers low-value expansion. It is planning/reference guidance and does not replace W/WB authority.
 4. [[MDSE v0.8 Cross-Repository Reconciliation - 2026-10-02]]: the implementation contract (identity, reruns, naming, Local Model 0.2, evidence set, gates, build order).
 5. [[MDSE Modeling Ruleset 1.23]]: what the model means and how imports are governed.
-6. [[Translator Definition]]: what the stage 1 importer must do.
+6. [[Translator Definition]] and [[Importer Operating Contract]]: what the stage 1 importer must do and how a run progresses; [[Importer Issue Register]] is the active systemic correction backlog.
 7. [[Workspace Decision Log]]: every decision (W-01 to W-370); newest last. Where a log entry marks an earlier one superseded, the later one governs.
 8. [[MDSE Tool Definitions and Boundaries]]: authoritative ownership/boundary map for Workbench, Bootstrap, importer, base/release tooling and deferred cross-vault infrastructure.
 9. [[Handoff Prompt - MDSE v0.8 Implementation]]: copy-ready prompts for a new AI chat (general, and Workbench).
@@ -37,6 +37,8 @@
 | How EA elements, connectors, tags and fields map | `ea-element-mapping.yaml`, `ea-connector-mapping.yaml`, `ea-tag-dispositions.yaml`, `ea-field-dispositions.yaml`, `ea-package-rules.yaml` |
 | Identity (`uid`, local tokens), reruns, source ownership | Reconciliation, "Settled identity rules" and "Source ownership and reruns"; Ruleset 1.23 section 16 |
 | File and folder naming, path limit | Reconciliation, "Naming and path rules"; Ruleset 1.23 sections 15 and 16 |
+| Importer pipeline, trust boundaries and run states | [[Importer Operating Contract]]; detailed semantic behavior remains in [[Translator Definition]] and the schemas |
+| Active importer systemic corrections | [[Importer Issue Register]] |
 | Run completion and evidence | Translator Definition, checks 1 to 9; Reconciliation, "Evidence package" |
 | Tool ownership and boundaries | [[MDSE Tool Definitions and Boundaries]] |
 | Workbench product direction | `spencerskelly/MDSE_Workbench/docs/Definition/` (`WB-` decisions and implementation contract) |
@@ -49,7 +51,7 @@
 
 | Tool | Status | Next step |
 |---|---|---|
-| Importer v0.8.6 | **implementation candidate built; whole-model semantic write succeeded (v0.8.3 run)** | **Current active work window:** apply the known systemic corrections identified from the last imported model before spending another full integration run. Record rule changes in the governing importer authority, test each change at the smallest useful level, then return to decode-only/full fresh-base acceptance when the known list is exhausted enough to make the next run informative. Do not mark release-conformant until acceptance gates and WB-106 pass. |
+| Importer v0.8.6 | **implementation candidate built; whole-model semantic write succeeded (v0.8.3 run)** | **Current active work window:** work the ranked systemic corrections in [[Importer Issue Register]], beginning with false-confidence/failure-state risks before semantic expansion. Record behavior changes in the governing importer authority, test each change at the smallest useful level, then return to decode-only/full fresh-base acceptance when the known list is exhausted enough to make the next run informative. Do not mark release-conformant until acceptance gates and WB-106 pass. |
 | Importers v0.1 to v0.7, v0.8.0 to v0.8.5 | archived (W-326) | `Importer/History/Importer Revisions/` with retained revision history. None may generate a model. |
 | Clean 0.8.0 base vault | **candidate build path validated; not issued** | A 0.3.1-candidate base built successfully and `check-release.py --base` completed with **0 fail / 4 expected pre-release warnings** on 2026-10-03. Initializer defects were fixed in source and syntax-gated (W-336). Do not create the next integration vault until Workbench/Importer alignment is ready (W-337). |
 | MDSE Workbench | **0.1.16 remains the pre-release Base pin.** The Step-60 standalone stability baseline remains frozen at `476fbcad08ecd03f8c2c49cd3126393beb6ab412`, but active 0.1.17 development has moved beyond that baseline through **WB-126**; the latest built artifact on 2026-10-05 is commit `e88d1b40a29d79b988cfb1b40e73717e8c6492a8`. The numbered Workbench stability roadmap remains closed. WB-125/WB-126 added fresh-source identity protection to relationship mutation paths; **WB-127 closes the remaining ordinary property/body writer symmetry and is the current Workbench pause boundary.** Workbench structured-editor expansion is intentionally paused while known importer corrections from the last imported model are worked. | Finish the bounded identity-safety boundary, then complete the minimum structured editor and rerun only the acceptance scope affected by post-freeze changes. Do not expand standalone hardening indefinitely; the next major value gate is one real importer/Base/Bootstrap/Workbench integration run. |
