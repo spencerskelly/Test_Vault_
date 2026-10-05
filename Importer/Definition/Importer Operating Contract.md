@@ -1,7 +1,7 @@
 # Importer Operating Contract
 
 **Status:** Current baseline and release-hardening contract  
-**Applies to:** EA → MDSE native importer, current candidate v0.8.12  
+**Applies to:** EA → MDSE native importer, current candidate v0.8.13  
 **Release target:** MDSE 0.8.0  
 **Detailed semantic authority:** `Translator Definition.md` and the machine-readable schemas in `99_System/03_Schemas/`
 
@@ -55,7 +55,7 @@ The phases below subdivide Stage 1 operationally. They do not redefine Stage 2.
 11. **Evidence is part of the result.** A generated model without its reconciliation/evidence package is incomplete.
 12. **Acceptance requires repeatability.** A release-eligible importer must eventually pass deterministic rerun and headless validation gates.
 
-Items not yet fully enforced by v0.8.6 are tracked in [[Importer Issue Register]].
+Items not yet fully implemented or acceptance-proven by v0.8.13 are tracked in [[Importer Issue Register]].
 
 ## 5. Stage-1 pipeline
 
@@ -63,9 +63,7 @@ Items not yet fully enforced by v0.8.6 are tracked in [[Importer Issue Register]
 
 **Purpose:** determine whether an import is allowed to begin.
 
-Current checks include the destination MDSE release, relationship schema, element schema, Local Model schema, controlled plugin stack and rejection of an already-populated model root.
-
-A whole-model run must ultimately require an initialized vault identity as well.
+Current checks include the destination MDSE release, relationship schema, element schema, Local Model schema, controlled plugin stack, initialized `vault_uid`, rejection of an already-populated model root and rejection of prior import transaction state.
 
 **Questions affecting usability/stability**
 - Can a user accidentally import into the methodology workspace or an existing generated model?
@@ -81,7 +79,7 @@ A whole-model run must ultimately require an initialized vault identity as well.
 
 The current importer reads `.qea/.qeax` directly as SQLite using a streaming page reader. It discovers SQLite tables and columns from the file and decodes rows without SQL, indexes or writes.
 
-The source should be a closed/checkpointed EA snapshot. WAL-mode detection currently warns; release hardening must decide whether this is blocking.
+The source must be a closed/checkpointed EA snapshot. WAL-mode detection is a blocking preflight failure, and the exact selected QEAX is fingerprinted with streaming SHA-256 before an otherwise viable source can pass preflight.
 
 **Questions affecting usability/stability**
 - Is this the exact file the user intended?
@@ -174,7 +172,7 @@ A review finding must not automatically make an otherwise illegal relationship a
 
 **Purpose:** preserve contextual assembly/configuration structure that must not be flattened into reusable note-level relationships.
 
-Current Local Model 0.2 records include parts, endpoints, connections and flows. BindingConnector context may become temporary local `equals` evidence when deterministically reconstructable.
+Current Local Model 0.3 records include parts, endpoints, connections and flows. BindingConnector context may become temporary local `equals` evidence when deterministically reconstructable. Local Model 0.2 semantics remain frozen for existing content.
 
 The importer must distinguish:
 - reusable definition;
@@ -182,7 +180,7 @@ The importer must distinguish:
 - contextual topology;
 - uncertain source evidence.
 
-It must not manufacture reusable definitions solely because the current Local Model schema requires a definition unless that policy is explicitly accepted.
+For contextual EA Ports, the importer must reuse a reusable Port definition only when deterministic evidence supports it. Otherwise it preserves a definitionless Local Model 0.3 endpoint; it must not manufacture a reusable Port note merely to satisfy storage.
 
 **Questions affecting usability/stability**
 - Does an EA Part resolve to a valid reusable Object definition?
@@ -237,11 +235,11 @@ Required checks include:
 
 **Purpose:** materialize the validated plan without allowing a partial write to masquerade as success.
 
-The current importer writes many files sequentially. Release hardening must provide an explicit run-state marker, for example:
+The current importer writes a persistent transaction state before model output:
 
-`IMPORT_IN_PROGRESS` → write notes/assets/evidence → post-write validation → `IMPORT_COMPLETE`
+`IMPORT_IN_PROGRESS` → write notes/assets/evidence → write Run Manifest → `IMPORT_COMPLETE`
 
-A failed run must remain unmistakably incomplete. A PASS manifest must not be authoritative until all required filesystem writes and post-write checks succeed.
+Caught write failures attempt `IMPORT_FAILED`; if even that update cannot be written, the earlier `IMPORT_IN_PROGRESS` remains authoritative. A Run Manifest is not authoritative without matching `IMPORT_COMPLETE`, and a destination containing prior transaction state is not reusable as a clean base.
 
 Rollback is not required for disposable candidate bases if incomplete state is obvious and the run is discarded.
 
@@ -257,15 +255,15 @@ Rollback is not required for disposable candidate bases if incomplete state is o
 
 **Purpose:** distinguish a mechanically complete import from a model eligible for engineering use.
 
-Recommended run states are:
+The importer reports independent run dimensions rather than one generic PASS:
 
-1. **SOURCE PASS** — approved QEAX snapshot was read completely.
-2. **PLAN PASS** — deterministic terminal plan and pre-write structural checks passed.
-3. **WRITE PASS** — all planned files/evidence were written and post-write validation passed.
-4. **SEMANTIC REVIEW REQUIRED** — model is mechanically complete but contains unresolved engineering-semantic review groups.
-5. **ACCEPTANCE PASS** — release gates, review policy, Workbench checks, determinism and headless validation are satisfied.
+1. **SOURCE_PASS / SOURCE_WARN** — source preflight state.
+2. **PLAN_PASS** — deterministic terminal plan and pre-write structural checks passed.
+3. **WRITE_IN_PROGRESS / WRITE_PASS / WRITE_FAIL** — filesystem transaction state.
+4. **SEMANTIC_CLEAR / SEMANTIC_REVIEW_REQUIRED** — semantic review state.
+5. **ACCEPTANCE_PENDING** until external release gates are satisfied; final acceptance is a separate release decision.
 
-The current single `PASS (implementation candidate)` language is insufficient because it can conceal large semantic review populations.
+Mechanical completion must never be presented as semantic or release acceptance.
 
 **Questions affecting usability/stability**
 - Can a user tell whether PASS means “nothing was lost” or “engineering model is accepted”?
@@ -327,7 +325,7 @@ Observed:
 
 The 1,012 Local Model warning rows collapse to 244 unique folded EA Parts, showing why grouped review evidence is needed.
 
-v0.8.6 has not yet replaced this observation baseline with a whole-model real-QEAX run.
+v0.8.13 has not yet replaced this observation baseline with a whole-model real-QEAX run.
 
 ## 9. Change discipline
 
