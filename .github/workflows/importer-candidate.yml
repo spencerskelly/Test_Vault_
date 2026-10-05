@@ -71,5 +71,6 @@ jobs:
         with:
           name: MDSE_IMP009_BASE_v0.8.14
           path: ${{ runner.temp }}/MDSE_IMP009_BASE_v0.8.14
+          include-hidden-files: true
           if-no-files-found: error
           retention-days: 7
