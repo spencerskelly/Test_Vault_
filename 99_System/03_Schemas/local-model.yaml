@@ -1,17 +1,18 @@
-schemaVersion: "0.3"
+schemaVersion: "0.4"
 purpose: "Machine-readable contract for governed Local Model Markdown records. This is a tooling/format schema, not a new first-class MDSE element schema."
 
 compatibility:
-  readableVersions: ["0.1", "0.2", "0.3"]
-  writableVersion: "0.3"
+  readableVersions: ["0.1", "0.2", "0.3", "0.4"]
+  writableVersion: "0.4"
   version01Normalization: "A 0.1 part or endpoint is standard usage in memory. Reading 0.1 never mutates the file."
-  version02Compatibility: "Schema 0.2 remains readable with its original rule that every endpoint requires a reusable Port definition. Reading or editing 0.2 never silently reinterprets it as 0.3."
+  version02Compatibility: "Schema 0.2 remains readable with its original rule that every endpoint requires a reusable Port definition. Reading or editing 0.2 never silently reinterprets it as 0.3 or 0.4."
+  version03Compatibility: "Schema 0.3 remains readable with Part Occurrences / Local Interfaces headings and optional endpoint definitions. Reading 0.3 never rewrites headings or changes endpoint semantics unless explicitly upgraded to 0.4."
   unknownVersion: "Markdown remains readable, but structured Local Model interaction is disabled."
 
 region:
   heading: "Local Model"
   headingLevel: 2
-  startMarker: "<!-- MDSE:LOCAL-MODEL START schema=0.3 -->"
+  startMarker: "<!-- MDSE:LOCAL-MODEL START schema=0.4 -->"
   endMarker: "<!-- MDSE:LOCAL-MODEL END -->"
   maxPerNote: 1
   markerErrorsBlockStructuredEditing: true
@@ -60,8 +61,8 @@ usage:
     option: "Occurrence may be absent; when present it resolves to the concrete root or one concrete candidate in the specialization family."
 
 sections:
-  part: "Part Occurrences"
-  endpoint: "Local Interfaces"
+  part: "Parts"
+  endpoint: "Interfaces"
   connection: "Connections"
 
 records:
@@ -87,7 +88,7 @@ records:
     required: []
     optional: [definition, usage, identifier, part, parent, exposes, equals, multiplicity, kind]
     fields:
-      definition: {value: "noteLink", targetSemanticKind: "Port"}
+      definition: {value: "noteLink", targetSemanticKind: "Object", targetSubtype: "interface"}
       usage: {value: "enum", allowed: [standard, variant, option]}
       identifier: {value: "text"}
       part: {value: "localBlockLink", targetLocalKind: "part"}
@@ -99,8 +100,8 @@ records:
     rules:
       - "part and parent are mutually exclusive."
       - "absence of both part and parent means an endpoint on the owning assembly boundary."
-      - "definition, when present, points to the reusable Port/interface definition."
-      - "definition may be omitted when the endpoint is contextual and no reusable Port definition is deterministically supported."
+      - "definition, when present, points to the reusable Object / interface definition."
+      - "definition may be omitted when the endpoint is contextual and no reusable interface definition is deterministically supported."
       - "usage requires definition; a definitionless endpoint has no variation semantics."
       - "when definition is present, omitted usage means standard; canonical writing omits usage: standard."
       - "a standard occurrence with a definition cannot point at abstract: true."
