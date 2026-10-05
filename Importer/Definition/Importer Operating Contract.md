@@ -1,7 +1,7 @@
 # Importer Operating Contract
 
 **Status:** Current baseline and release-hardening contract  
-**Applies to:** EA → MDSE native importer, current candidate v0.8.6  
+**Applies to:** EA → MDSE native importer, current candidate v0.8.7  
 **Release target:** MDSE 0.8.0  
 **Detailed semantic authority:** `Translator Definition.md` and the machine-readable schemas in `99_System/03_Schemas/`
 
