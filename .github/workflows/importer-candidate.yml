@@ -5,8 +5,7 @@ on:
     branches: [main]
     paths:
       - "Importer/**"
-      - "Base Vault/Definition/mdse-release.yaml"
-      - "Base Vault/Testing/check-release.py"
+      - "Base Vault/**"
       - "99_System/03_Schemas/**"
       - ".obsidian/plugin-lock.yaml"
       - ".obsidian/community-plugins.json"
@@ -16,8 +15,7 @@ on:
     branches: [main]
     paths:
       - "Importer/**"
-      - "Base Vault/Definition/mdse-release.yaml"
-      - "Base Vault/Testing/check-release.py"
+      - "Base Vault/**"
       - "99_System/03_Schemas/**"
       - ".obsidian/plugin-lock.yaml"
       - ".obsidian/community-plugins.json"
