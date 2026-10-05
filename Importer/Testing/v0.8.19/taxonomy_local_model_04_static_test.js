@@ -24,7 +24,10 @@ need('p.outcome="note";p.mdseType="Condition";p.subtype=conditionSubtype(raw,pkg
   "State -> Condition");
 need('p.outcome="note";p.mdseType="Condition";p.subtype="state machine";p.rule="W-384";',
   "StateMachine -> Condition/state machine");
-need('if(stereotypeIncludes(raw,"mode"))return "mode";',"Mode -> Condition/mode");
+need('} else if(t==="Mode"){\n      p.outcome="note";p.mdseType="Condition";p.subtype="mode";p.rule="W-384";',
+  "Mode -> Condition/mode as its own source type");
+forbid('if(stereotypeIncludes(raw,"mode"))return "mode";',
+  "EA State stereotype must not silently become Mode");
 
 need('if(INTERFACE_CLASS_STEREOTYPES.has(st)){p.subtype="interface";p.rule="W-384";}',
   "Interface Class -> Object/interface");
@@ -46,6 +49,9 @@ forbid('lines.push("### Local Interfaces","");',"0.3 Interface heading not writt
 need('if(conn.exposesRefs&&conn.exposesRefs.length)lines.push("- exposes: "+conn.exposesRefs.map(x=>localRefLink(localModel,x,e)).join(", "));',
   "Connection owns exposes");
 need('resolved as Connection exposes -> boundary Interface',"binding exposure resolution");
+need('definition is not Object / interface',"Interface occurrence definition validator");
+need('exposes target is not an assembly-boundary Interface',"Connection exposes boundary validator");
+need('conn.sourceIds.includes(n2(bc.Connector_ID))',"BindingConnector provenance carried into exposed Connection");
 need('could not be deterministically resolved to one internal Connection exposure; temporary equals/review evidence retained.',
   "ambiguous binding remains review evidence");
 
