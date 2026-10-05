@@ -243,7 +243,7 @@ Prefer core Obsidian mechanisms and standard Markdown/YAML whenever they preserv
 3. Every `[[link]]` the tool writes resolves to a note or an attachment in the run. In a slice run, a link to a note outside the slice is accepted when its target is in the model; the run manifest lists those links (W-253).
 4. Every YAML and JSON file in the vault parses; every relationship field written is in `relationships.yaml`; every governed Local Model record validates against `local-model.yaml`. Paired inverses and symmetric mirrors must match before writing. From W-376 onward, reviewed connector mappings are evidence-only and any remaining endpoint-rule violation is recorded then suppressed (including its inverse/symmetric mirror) before Markdown is rendered; canonical YAML must therefore contain only currently legal endpoint combinations.
 5. The source counts the tool read from the whole `.qeax` match the counts in this file exactly: the table rows listed in section 2, the elements by EA object type (section 5), the connectors by EA connector type (section 6) and the diagrams by EA diagram type (section 2). Any difference fails the check and the run is discarded; the manifest lists the differences, a person updates the counts in this file from it, and the run is repeated. This applies to every run, full or slice (W-257, W-268).
-6. Before any model write, validate the complete planned repository-relative paths after approved shortening and fail on any generated path over 400 characters or any path component over 255 bytes. Nothing is cut for length (W-297, W-318, W-324). Paths over 212 characters are listed in `Review - Long Paths.csv` for Post-Import Task 9.
+6. Before any model write, validate that every planned output path is deterministic, collision-free and writable. W-382 imposes no importer-defined total repository-relative path-length cap and no per-folder file-count cap. Only physical filesystem component constraints remain; a component the selected filesystem cannot create must be deterministically adjusted or the write must fail.
 7. Reconcile every planned entity to one terminal state: written, intentionally transformed/suppressed, or failed. There must be zero unexplained remainder. A partial writer is `INCOMPLETE / FAIL`; file creation alone is not completion. The filesystem transaction must follow W-371: `IMPORT_IN_PROGRESS` precedes the first model write, the Run Manifest is written only after the other required evidence, and `IMPORT_COMPLETE` is the final authoritative write. Any `IMPORT_FAILED`, lingering `IMPORT_IN_PROGRESS`, or missing transaction state makes the candidate vault invalid. Keep the Run Manifest concise and put detailed path/collision/transformation/model-check evidence in separate audit outputs (W-297, W-371).
 8. Import/bootstrap housekeeping initializes or validates `.vault.yaml`, removes tracked OS junk such as `.DS_Store`, enforces the reserved infrastructure namespace and records its actions (W-297).
 9. For synchronized releases, the importer's release version must exactly equal the clean base vault's `.vault.yaml` `mdse_release`; mismatch blocks planning/writing. Relationship and element schema versions are checked separately and are not required to equal the release version (W-299).
@@ -312,7 +312,7 @@ Refresh only declared EA-owned translated fields and source-provenanced relation
 
 ### Local Model
 
-Write only schema 0.2. Standard part/endpoint usage is represented by omission of `usage`. Do not infer variant/option from specialization descendants. Do not infer `abstract` from EA without an approved deterministic source rule.
+Write new governed Local Model regions as schema 0.3. Existing schema 0.2 semantics remain frozen/compatible. Definitionless contextual endpoints may omit reusable `definition` under W-377/W-378; standard part/endpoint usage is represented by omission of `usage`. Do not infer variant/option from specialization descendants. Do not infer `abstract` from EA without an approved deterministic source rule.
 
 BindingConnector with reconstructable context becomes temporary local `equals` evidence. If context/endpoints cannot be reconstructed deterministically, preserve it in review evidence only.
 
@@ -322,7 +322,7 @@ The duplicate filename rule based on MDSE `id` is superseded.
 
 Use `~2`, `~3` for duplicates; `~a`, `~b`, ... for forced name alterations; and combined forms such as `~a~2`. Apply the same convention to folders.
 
-Normalize/shorten redundant folders by meaning first. The hard stop is 400 characters; a planned path above 400 blocks writing and is never cut (W-324).
+Normalize/shorten redundant folders by meaning only when that improves navigation. W-382 removes the importer-defined total path-length cap and mechanical folder-capacity subdivisions. Nested emitted elements use parent-element folders, and generated/imported filenames must remain globally unique case-insensitively across the vault namespace.
 
 ### Attachments and diagrams
 
