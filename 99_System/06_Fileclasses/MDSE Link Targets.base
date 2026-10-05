@@ -233,10 +233,11 @@ views:
       - property: file.name
         direction: ASC
   - type: table
-    name: "modelCheck"
+    name: "Item Flow | Object"
     filters:
       or:
-        - 'note.type == "modelCheck"'
+        - 'note.type == "Object"'
+        - 'note.type == "Item Flow"'
     order:
       - file.name
       - type
@@ -333,6 +334,18 @@ views:
     filters:
       or:
         - 'note.type == "Verification"'
+    order:
+      - file.name
+      - type
+      - id
+    sort:
+      - property: file.name
+        direction: ASC
+  - type: table
+    name: "modelCheck"
+    filters:
+      or:
+        - 'note.type == "modelCheck"'
     order:
       - file.name
       - type

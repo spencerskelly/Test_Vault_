@@ -47,7 +47,7 @@ plugins:
       main.js: 7c51717ee9ef0846d39bceba2b518f344027e3cbef0722cf303cbd8ac5ec21d7
       manifest.json: 5561437e5e25a954bc2db53ca7404d54887960338b2ca5f1cd24fd594338528b
       styles.css: 674de457b453895a59e342466c378f5272d265900bf9e8b6d50d892cc37d5c60
-      data.json: f9ff4cd407a5f3ad7c53ddf4614af6bf5fc0f3f15a9873934ff513b49fc2a035
+      data.json: b8f0289306fd8b2d681de56dbc739f02629d8e38f48b622512768bfefed20f3d
   obsidian-git:
     version: "2.40.0"
     source: "github.com/Vinzent03/obsidian-git release"

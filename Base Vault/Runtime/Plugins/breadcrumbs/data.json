@@ -146,6 +146,12 @@
       "label": "affectedBy"
     },
     {
+      "label": "hasClassifier"
+    },
+    {
+      "label": "classifierOf"
+    },
+    {
       "label": "conflictsWith"
     },
     {
@@ -223,6 +229,7 @@
         "realizedBy",
         "optionOf",
         "affects",
+        "hasClassifier",
         "participants",
         "initialState",
         "finalState"
@@ -248,7 +255,8 @@
         "verifiedBy",
         "realizes",
         "hasOption",
-        "affectedBy"
+        "affectedBy",
+        "classifierOf"
       ]
     }
   ],
@@ -780,6 +788,28 @@
           }
         ],
         "close_field": "affects",
+        "close_reversed": true
+      },
+      {
+        "name": "",
+        "rounds": 1,
+        "chain": [
+          {
+            "field": "hasClassifier"
+          }
+        ],
+        "close_field": "classifierOf",
+        "close_reversed": true
+      },
+      {
+        "name": "",
+        "rounds": 1,
+        "chain": [
+          {
+            "field": "classifierOf"
+          }
+        ],
+        "close_field": "hasClassifier",
         "close_reversed": true
       },
       {
