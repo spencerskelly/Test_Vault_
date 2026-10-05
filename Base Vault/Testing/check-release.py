@@ -211,7 +211,7 @@ if candidate:
             'function attachmentVerdict(result,bench)',
             'async function unwrapEaDocumentPayload',
             'sourceRaw=blobBytes',
-            'v"+BUILD.version+" candidate PASS',
+            'result:"WRITE_PASS"',
             '"<!-- MDSE:LOCAL-MODEL START schema="+LOCAL_BODY_SCHEMA+" -->"',
             'Local Model Source Map.csv',
             'Attachment Reconciliation.csv',
