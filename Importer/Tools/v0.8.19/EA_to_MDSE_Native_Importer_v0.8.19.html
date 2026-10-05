@@ -4668,6 +4668,9 @@ async function generateSlice(){
 
     const localModel=buildLocalOccurrenceModel(lastPlannerContext,entityCtx);
     const localErrors=validateLocalModel(localModel,entityCtx);
+    if(localModel.stats.unresolvedConveyedXrefs){
+      localErrors.push(localModel.stats.unresolvedConveyedXrefs+" conveyed-flow source reference(s) could not be resolved; flow reconciliation is incomplete.");
+    }
     if(localErrors.length)throw new Error("Local Model "+LOCAL_BODY_SCHEMA+" validation failed before writing: "+localErrors.slice(0,12).join("; "));
 
     const sourceIds=new Set();
