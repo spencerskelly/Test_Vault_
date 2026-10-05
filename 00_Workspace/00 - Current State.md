@@ -1,6 +1,6 @@
 # Current State
 
-**Last verified: 2026-10-04. Read this first, human or AI.** It says what is current, what is historical, where each rule lives and what is not built yet. If any other file disagrees with this page, this page and the files it names as current win. The machine-readable release authority is `Base Vault/Definition/mdse-release.yaml`.
+**Last verified: 2026-10-05. Read this first, human or AI.** It says what is current, what is historical, where each rule lives and what is not built yet. If any other file disagrees with this page, this page and the files it names as current win. The machine-readable release authority is `Base Vault/Definition/mdse-release.yaml`.
 
 ## Target and status
 
@@ -16,15 +16,16 @@
 ## Read in this order
 
 1. This page.
-2. [[MDSE Plan - Path to a Golden Model]]: the plan from here to a golden model (gates, run procedure, post-import order, improvements per component, decisions needed).
-3. [[MDSE v0.8 Cross-Repository Reconciliation - 2026-10-02]]: the implementation contract (identity, reruns, naming, Local Model 0.2, evidence set, gates, build order).
-4. [[MDSE Modeling Ruleset 1.23]]: what the model means and how imports are governed.
-5. [[Translator Definition]]: what the stage 1 importer must do.
-6. [[Workspace Decision Log]]: every decision (W-01 to W-370); newest last. Where a log entry marks an earlier one superseded, the later one governs.
-7. [[MDSE Tool Definitions and Boundaries]]: authoritative ownership/boundary map for Workbench, Bootstrap, importer, base/release tooling and deferred cross-vault infrastructure.
-8. [[Handoff Prompt - MDSE v0.8 Implementation]]: copy-ready prompts for a new AI chat (general, and Workbench).
-9. [[Post-Import Tasks]]: the work done in the vault after an import, Tasks 1 to 9.
-10. For AI tools creating or editing notes: `99_System/02_AI/AI_INSTRUCTIONS.md`.
+2. [[MDSE Plan - Path to a Golden Model]]: the authoritative plan from here to a golden model (gates, run procedure, post-import order, improvements per component, decisions needed).
+3. [[MDSE Impact-Focused Remaining Work - 2026-10-05]]: execution filter that breaks the remaining high-impact work into small steps and explicitly defers low-value expansion. It is planning/reference guidance and does not replace W/WB authority.
+4. [[MDSE v0.8 Cross-Repository Reconciliation - 2026-10-02]]: the implementation contract (identity, reruns, naming, Local Model 0.2, evidence set, gates, build order).
+5. [[MDSE Modeling Ruleset 1.23]]: what the model means and how imports are governed.
+6. [[Translator Definition]]: what the stage 1 importer must do.
+7. [[Workspace Decision Log]]: every decision (W-01 to W-370); newest last. Where a log entry marks an earlier one superseded, the later one governs.
+8. [[MDSE Tool Definitions and Boundaries]]: authoritative ownership/boundary map for Workbench, Bootstrap, importer, base/release tooling and deferred cross-vault infrastructure.
+9. [[Handoff Prompt - MDSE v0.8 Implementation]]: copy-ready prompts for a new AI chat (general, and Workbench).
+10. [[Post-Import Tasks]]: the work done in the vault after an import, Tasks 1 to 9.
+11. For AI tools creating or editing notes: `99_System/02_AI/AI_INSTRUCTIONS.md`.
 
 ## Where each rule lives
 
@@ -51,11 +52,11 @@
 | Importer v0.8.6 | **implementation candidate built; whole-model semantic write succeeded (v0.8.3 run)** | Run the decode-only attachment check on the real QEAX with `attachment_benchmark.json` (376 documents, 390 files, zero residual; W-323), then a full fresh-base run. W-324: no length-driven shortening, links by file name, `Review - Long Paths.csv` feeds Post-Import Task 9. Do not mark release-conformant until acceptance gates and WB-106 pass. |
 | Importers v0.1 to v0.7, v0.8.0 to v0.8.5 | archived (W-326) | `Importer/History/Importer Revisions/` with retained revision history. None may generate a model. |
 | Clean 0.8.0 base vault | **candidate build path validated; not issued** | A 0.3.1-candidate base built successfully and `check-release.py --base` completed with **0 fail / 4 expected pre-release warnings** on 2026-10-03. Initializer defects were fixed in source and syntax-gated (W-336). Do not create the next integration vault until Workbench/Importer alignment is ready (W-337). |
-| MDSE Workbench | **0.1.16 remains the pre-release Base pin; standalone 0.1.17 performance/stability candidate is frozen at `476fbcad08ecd03f8c2c49cd3126393beb6ab412`.** The numbered Workbench stability roadmap Steps 18–60 is complete. Exact standalone artifact SHA-256 values are recorded in `00_Workspace/Workbench Performance and Stability Roadmap.md`: `main.js` `bc553fef…64aa`, `manifest.json` `a898ec3a…0e5d`, `styles.css` `445abe19…008`. Integrated acceptance covers staged startup/readiness, occurrence views, live edits under background work, bad-cache recovery, plugin reload/full restart, and repeated cold/warm restart cycles without cumulative state or scheduling degradation. | Treat this exact commit as the accepted standalone stability candidate. Do not reopen the numbered stability sequence unless the candidate changes or new evidence invalidates acceptance. Base promotion remains separate: vendor the selected Workbench artifact, regenerate the plugin lock/release manifest, and run the controlled MDSE v0.8 integration/release gates before claiming a pinned release. |
+| MDSE Workbench | **0.1.16 remains the pre-release Base pin.** The Step-60 standalone stability baseline remains frozen at `476fbcad08ecd03f8c2c49cd3126393beb6ab412`, but active 0.1.17 development has moved beyond that baseline through **WB-126**; the latest built artifact on 2026-10-05 is commit `e88d1b40a29d79b988cfb1b40e73717e8c6492a8`. The numbered Workbench stability roadmap remains closed. WB-125/WB-126 add fresh-source identity protection to relationship mutation paths; the remaining bounded safety work is ordinary property/body writer symmetry before returning to the structured-editor gate. | Finish the bounded identity-safety boundary, then complete the minimum structured editor and rerun only the acceptance scope affected by post-freeze changes. Do not expand standalone hardening indefinitely; the next major value gate is one real importer/Base/Bootstrap/Workbench integration run. |
 | MDSE Bootstrap 0.3.0 | pinned Base runtime; **0.3.1 staged-start candidate is built, reproducibility-tested and installed only in `261002083`.** W-347 defers normal full release hashing until Obsidian metadata settles while preserving exact pre-enable verification for disabled locked plugins and immediate author registration. CI now publishes/commits a checksummed candidate artifact; integration lock uses the exact 0.3.1 artifact hashes. | Validate first-open/startup behavior in the same `261002083` smoke gate. Do not promote 0.3.1 to the controlled Base until that user-side startup gate passes. |
 | Runtime plugins (10) | vendored, pinned, hashed, configured (W-322) | `Base Vault/Runtime/Plugins/`; lock `.obsidian/plugin-lock.yaml`; see `Base Vault/Definition/Enabled Plugin Stack.md` |
 
-Workbench 0.1.16 is still pinned and enabled in pre-release bases. The standalone 0.1.17 candidate completed the former read/navigation WB-106 scope, but W-339 intentionally expands WB-106 to include structured editing, so `wb106Version` remains unset until that editor gate is complete. The **final issued** base must pin the WB-106-capable release (`wb106Version` in `mdse-release.yaml`); `check-release.py` fails a release build until then.
+Workbench 0.1.16 is still pinned and enabled in pre-release bases. The Step-60 0.1.17 stability baseline remains the accepted standalone reference, while post-freeze 0.1.17 development has continued through WB-126. W-339 intentionally expands WB-106 to include structured editing, so `wb106Version` remains unset until that editor gate is complete and the changed candidate passes its affected acceptance scope. The **final issued** base must pin the WB-106-capable release (`wb106Version` in `mdse-release.yaml`); `check-release.py` fails a release build until then.
 
 ## Runtime-base alignment
 
@@ -69,7 +70,7 @@ W-321 removes the old manually curated base-content list. `mdse-release.yaml` no
 
 **Generated (never edit by hand; change the schemas or payload and regenerate):** `99_System/06_Fileclasses/`, `.obsidian/plugin-lock.yaml`, `.obsidian/community-plugins.json`, governed runtime plugin `data.json` files under `Base Vault/Runtime/Plugins/`.
 
-**Reference (valid support, not rule authority):** [[Review Changes Log]]; `99_System/CSV_EA/` (EA evidence used to define the rules); `99_System/11_Import/` snapshots named by [[Post-Import Tasks]].
+**Reference (valid support, not rule authority):** [[MDSE Impact-Focused Remaining Work - 2026-10-05]]; [[Review Changes Log]]; `99_System/CSV_EA/` (EA evidence used to define the rules); `99_System/11_Import/` snapshots named by [[Post-Import Tasks]].
 
 **Archived (`99_System/archive/`, no authority, see its README):** old translator workspace `10_EA Native Translator/`; four retired empty CSVs `11_Import retired/`; `08_Scripts retired/`; retired importers v0.1 to v0.7 and v0.8.0 to v0.8.5 `09_Tools retired importers/`; `01_Admin Archived Plugins/`; `03_Schemas retired/vault-registry.yaml`; and these documents in `10_Docs retired/` (W-326):
 
