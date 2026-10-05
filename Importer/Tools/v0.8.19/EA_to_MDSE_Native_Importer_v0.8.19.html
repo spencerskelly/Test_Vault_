@@ -1500,7 +1500,6 @@ function behaviorSubtype(raw,pkg){
   return "activity";
 }
 function conditionSubtype(raw,pkg){
-  if(stereotypeIncludes(raw,"mode"))return "mode";
   return isProductDesign(raw,pkg)?"design":"state";
 }
 
@@ -1658,6 +1657,8 @@ function classifyElements(objects,connectors,pkg,portResolution){
       p.outcome="note";p.mdseType="Behavior";p.subtype="action";p.rule="W-384";
     } else if(t==="Step"){
       p.outcome="note";p.mdseType="Behavior";p.subtype="step";p.rule="W-384";
+    } else if(t==="Mode"){
+      p.outcome="note";p.mdseType="Condition";p.subtype="mode";p.rule="W-384";
     } else if(SMALL_MODEL_CHECK.has(t)){
       p.outcome="note";p.mdseType="modelCheck";p.subtype=t;p.rule="W-146";
     }
@@ -1720,10 +1721,11 @@ function buildPlacementPairs(objects,connectors,elementCtx,portResolution){
 
 /* Ownership field by owner and child class (W-149, W-291, W-292): Object to Object is hasPart, Object to State or
    State Machine and State Machine to State are hasState (never hasChild), everything else is the generic hasChild. */
-function ownerField(ownerType,childType,childSubtype){
+function ownerField(ownerType,childType,ownerSubtype,childSubtype){
   if(ownerType==="Object"&&childType==="Object")return "hasPart";
   if(childType==="Condition"&&childSubtype==="design"&&(ownerType==="Object"||ownerType==="Document"))return "hasDesign";
-  if(childType==="Condition"&&(ownerType==="Object"||ownerType==="Condition"))return "hasState";
+  if(childType==="Condition"&&ownerType==="Object")return "hasState";
+  if(ownerType==="Condition"&&ownerSubtype==="state machine"&&childType==="Condition"&&childSubtype==="state")return "hasState";
   return "hasChild";
 }
 
@@ -1740,7 +1742,7 @@ function classifyConnector(c,elementCtx,portResolution,placementCtx,conveyed){
   if(type==="Nesting"){
     const rawStart=elementCtx.byId.get(n2(c.Start_Object_ID)),rawEnd=elementCtx.byId.get(n2(c.End_Object_ID));
     if(rawStart&&rawEnd&&n2(rawStart.ParentID)===n2(rawEnd.Object_ID)){base.outcome="repeat placement";base.rule="W-151";return base;}
-    base.field=ownerField(t.type,s.type,s.plan&&s.plan.subtype);base.rule="W-151/W-152";base.review=true;return base;
+    base.field=ownerField(t.type,s.type,t.plan&&t.plan.subtype,s.plan&&s.plan.subtype);base.rule="W-151/W-152";base.review=true;return base;
   }
   if(type==="Connector"){
     if(st==="BindingConnector"){
@@ -1758,7 +1760,7 @@ function classifyConnector(c,elementCtx,portResolution,placementCtx,conveyed){
     if(placementCtx.placement.has(pairKey(whole.key,part.key))){base.outcome="repeat existing link";base.rule="W-159/W-277";return base;}
     if(aggregation===1)base.field="includes";
     else if(aggregation===2&&whole.type==="Object"&&part.type==="Object")base.field="hasPart";
-    else base.field=ownerField(whole.type,part.type,part.plan&&part.plan.subtype)==="hasState"?"hasState":"hasChild";
+    else base.field=ownerField(whole.type,part.type,whole.plan&&whole.plan.subtype,part.plan&&part.plan.subtype)==="hasState"?"hasState":"hasChild";
     base.rule=aggregation===1?"W-159/W-277":"W-159";
     base.review=base.field==="hasChild"&&whole.type!==part.type;
     return base;
@@ -2710,7 +2712,7 @@ function buildRelationshipGraph(ctx,entityCtx,limitations){
     const child=resolveEndpoint(raw.Object_ID,ctx.elementCtx,ctx.portResolution),owner=resolveEndpoint(raw.ParentID,ctx.elementCtx,ctx.portResolution);
     if(!entities.has(child.key)||!entities.has(owner.key)||child.key===owner.key)continue;
     if(ctx.placementCtx.subtypePairs.has(pairKey(child.key,owner.key)))continue;
-    addForwardRel(graph,owner.key,ownerField(owner.type,child.type,child.plan&&child.plan.subtype),child.key,false);
+    addForwardRel(graph,owner.key,ownerField(owner.type,child.type,owner.plan&&owner.plan.subtype,child.plan&&child.plan.subtype),child.key,false);
   }
 
   // Parts: relationship graph is semantic summary only. Local Part occurrences,
@@ -2948,7 +2950,7 @@ function buildLocalOccurrenceModel(ctx,entityCtx){
     const rec={
       sourceIds:[n2(c.Connector_ID)],sourceGuids:[trim2(c.ea_guid)].filter(Boolean),
       localId,anchor:localAnchor([localId]),ownerKey,endpointA:a,endpointB:b,
-      definitionKey:optionalConnectorDefinition(c),identifier:trim2(c.Name),origin,flows:[]
+      definitionKey:optionalConnectorDefinition(c),identifier:trim2(c.Name),origin,flows:[],exposesRefs:[]
     };
     push(connectionsByOwner,ownerKey,rec);
     const pk=ownerKey+"|"+pairForRefs(a,b);if(!connectionsByPair.has(pk))connectionsByPair.set(pk,[]);connectionsByPair.get(pk).push(rec);
@@ -3023,6 +3025,8 @@ function buildLocalOccurrenceModel(ctx,entityCtx){
         if(candidates.length===1){
           const conn=candidates[0];if(!conn.exposesRefs)conn.exposesRefs=[];
           if(!conn.exposesRefs.some(x=>x.refKey===outer.refKey))conn.exposesRefs.push(outer);
+          if(!conn.sourceIds.includes(n2(bc.Connector_ID)))conn.sourceIds.push(n2(bc.Connector_ID));
+          if(trim2(bc.ea_guid)&&!conn.sourceGuids.includes(trim2(bc.ea_guid)))conn.sourceGuids.push(trim2(bc.ea_guid));
           warnings.push("BindingConnector "+trim2(bc.ea_guid)+" resolved as Connection exposes -> boundary Interface under "+inner.ownerKey+".");
           continue;
         }
@@ -3130,7 +3134,10 @@ function validateLocalModel(localModel,entityCtx){
   }
   for(const [owner,list] of localModel.endpointsByOwner.entries()){
     for(const r of list){
-      if(r.definitionKey&&defType(r.definitionKey)!=="Port")errors.push("endpoint "+r.localId+" definition is not a Port");
+      if(r.definitionKey){
+        const def=entities.get(r.definitionKey);
+        if(!def||def.mdseType!=="Object"||def.subtype!=="interface")errors.push("endpoint "+r.localId+" definition is not Object / interface");
+      }
       if(r.parentPath&&r.parentPath.length){
         const parent=r.parentPath[r.parentPath.length-1],k=localByOwner.get(owner)&&localByOwner.get(owner).get(parent);
         if(k!=="part"&&k!=="ep")errors.push("endpoint "+r.localId+" parent/part does not resolve: "+parent);
@@ -3146,6 +3153,11 @@ function validateLocalModel(localModel,entityCtx){
       for(const ref of [r.endpointA,r.endpointB]){
         const k=localByOwner.get(owner)&&localByOwner.get(owner).get(ref&&ref.anchor);
         if(!ref||ref.kind!=="endpoint"||k!=="ep")errors.push("connection "+r.localId+" endpoint does not resolve to local endpoint");
+      }
+      for(const x of r.exposesRefs||[]){
+        const k=localByOwner.get(owner)&&localByOwner.get(owner).get(x&&x.anchor);
+        const ep=(localModel.endpointsByOwner.get(owner)||[]).find(y=>y.anchor===(x&&x.anchor));
+        if(k!=="ep"||!ep||((ep.parentPath||[]).length!==0))errors.push("connection "+r.localId+" exposes target is not an assembly-boundary Interface");
       }
       for(const fl of r.flows){
         if(defType(fl.definitionKey)!=="Item Flow")errors.push("flow "+fl.localId+" definition is not an Item Flow");
