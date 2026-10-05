@@ -46,7 +46,7 @@ jobs:
       - name: Check release authority alignment
         run: python "Base Vault/Testing/check-release.py"
       - name: Check current importer regression contract
-        run: node "Importer/Testing/v0.8.14/local_endpoint_evidence_static_test.js"
+        run: node "Importer/Testing/v0.8.14/local_endpoint_evidence_static_test.js"\n      - name: Check v0.8.15 fresh-base compatibility\n        run: node "Importer/Testing/v0.8.15/fresh_base_compatibility_static_test.js"
       - name: Compile IMP-009 output validator
         run: python -m py_compile "Importer/Testing/v0.8.14/imp009_output_acceptance.py" "Importer/Testing/v0.8.14/imp009_output_acceptance_selftest.py"
       - name: Exercise IMP-009 output validator
