@@ -163,6 +163,9 @@ Priority: **P1** needed for G2/G3; **P2** needed for G4/G5; **P3** after golden.
 | W13 | P2 | **Validation scheduling RTA-4.** Immediate dependency-scoped checks after edits; expensive global assurance jobs explicit/idle; Review exposes freshness. | Opening the vault never blocks on exhaustive validation. |
 | W14 | P2 | **Runtime/view consolidation RTA-6/RTA-7.** Physical, Internal, Functional and other views query one semantic model service; remove duplicate parsing paths; run corruption/interrupt/slow-machine/OS gates and review third-party plugin dependencies. | One shared semantic interpretation drives views and recovery/performance gates pass. |
 
+**Workbench continuation status — 2026-10-05.** The numbered stability roadmap remains closed at Step 60. Expanded WB-106 editor work is active under W4/W5. The latest completed safety slice is WB-125: relationship add/remove now fail closed if the current Markdown source UID does not match the indexed UID before mutation. CI run `37339741587` passed the full test/build/performance gate. The next symmetry check is the remaining legacy writer paths (remove-missing, ordinary property/body edits) before treating identity safety as complete across the old note-edit surface.
+
+
 ### Bootstrap
 
 | # | P | Item | Done when |
