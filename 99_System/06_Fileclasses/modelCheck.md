@@ -22,20 +22,19 @@ fields:
     options:
       sourceType: "ValuesList"
       valuesList:
-        "1": "Action"
-        "2": "StateNode"
-        "3": "Change"
-        "4": "Boundary"
-        "5": "Decision"
-        "6": "ActivityPartition"
-        "7": "Trigger"
-        "8": "Synchronization"
-        "9": "Sequence"
-        "10": "ActionPin"
-        "11": "ProxyConnector"
-        "12": "Event"
-        "13": "ActivityParameter"
-        "14": "Package"
+        "1": "StateNode"
+        "2": "Change"
+        "3": "Boundary"
+        "4": "Decision"
+        "5": "ActivityPartition"
+        "6": "Trigger"
+        "7": "Synchronization"
+        "8": "Sequence"
+        "9": "ActionPin"
+        "10": "ProxyConnector"
+        "11": "Event"
+        "12": "ActivityParameter"
+        "13": "Package"
   - name: status
     id: owbND7
     type: Select
