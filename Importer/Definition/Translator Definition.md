@@ -9,7 +9,7 @@ What the stage 1 translator must do, in one place. It is kept current: any decis
 
 [[Importer Operating Contract]] defines the Stage-1 operational pipeline, trust boundaries, run-state terminology and release-hardening invariants without duplicating the detailed mappings here. [[Importer Issue Register]] tracks observed implementation/authority gaps against that pipeline. Neither document overrides a mapping/schema decision; any disagreement among current authorities is a fault to resolve explicitly.
 
-Current through W-382. (W-325 and W-326 change no stage 1 rule; they align the release chain and the documents.) Release target 0.8.0; the registry of current files is [[00 - Current State]].
+Current through W-384. (W-325 and W-326 change no stage 1 rule; they align the release chain and the documents.) Release target 0.8.0; the registry of current files is [[00 - Current State]].
 
 ## 1. Purpose and scope
 
@@ -52,7 +52,7 @@ All in `99_System/11_Import`, regenerated on every run, read-only evidence (W-35
 
 ## 4. Notes
 
-- **Classes:** 24, in `element-types.yaml` (schemaVersion 1.17): Object OBJ, Port PORT, Item Flow IFLOW, Function FUNC, Functional Flow FFLOW, State STATE, State Machine SM, Requirement REQ, Design DES, Use Case UC, Actor ACT, Failure Mode FM, Issue ISS, Info INFO, Step STEP, Verification VER, Procedure PROC, Setup SETUP, Plan PLAN, Result RES, Document DOC, Artifact ART, modelCheck MC, Diagram DIA. Context and Transition do not exist (W-237). Only Port, Item Flow, Requirement, Object, Use Case, Issue, Verification, Procedure, Diagram and modelCheck have subtypes; Function, Design, Info, Document and Artifact have none (W-237, W-238). Port subtypes are `proxy` and `full`.
+- **Classes:** 20, in `element-types.yaml` (schemaVersion 1.18): Object OBJ, Item Flow IFLOW, Behavior BEH, Functional Flow FFLOW, Condition COND, Requirement REQ, Use Case UC, Actor ACT, Failure Mode FM, Issue ISS, Info INFO, Verification VER, Procedure PROC, Setup SETUP, Plan PLAN, Result RES, Document DOC, Artifact ART, modelCheck MC, Diagram DIA. `Object` includes subtype `interface` for reusable interface definitions. `Behavior` subtypes are `function`, `activity`, `action`, and `step`. `Condition` subtypes are `state`, `state machine`, `mode`, and `design`. Port, Function, State, State Machine, Design and Step are no longer first-class note classes under W-384; EA Ports are Local Model Interface occurrences.
 - **Notes in `99_System`** carry no `type` or `subtype` and are not model elements (W-243). The translator makes none of them.
 - **Properties, in order:** `type`, `subtype`, `id`, `uid`, `status`, `eaType`, `tags`, governed sparse optional properties (currently `abstract` when true), then relationship fields in the order of `relationships.yaml` (W-97, W-126, W-319). `eaType` is the EA stereotype, else the EA object type (W-31); it is temporary. EA's own status, version, phase, complexity, effort and dates other than creation are dropped (W-39).
 - **uid:** 17-digit local-time stamp plus a 13-character author code (W-13). Translated notes use the EA creation time and author (W-09). The code is last name plus first name, accents removed, cut to 13 and padded with hyphens (W-10, W-24). For the EA8647 v0.8 first import, an EA author that is blank or unusable uses `skellyspencer`; the generic historical `sparxeaauthor` fallback in `authors.yaml` does not apply to this import (W-316).
@@ -86,16 +86,16 @@ Every EA element has exactly one rule (W-148); the input is `eaType`. The rules 
 |---|---|---|
 | Requirement 13,988 | Requirement. Subtype from the EA package path: standard, engineering (the Engineering Requirements folder), design, functional, stakeholder. Every requirement is its own note; folding is stage 2 | W-115, W-116, W-81 |
 | InformationItem 2,825 | Requirement/standard (2,383, in the Regulatory Requirements folder) or Info (442, blank subtype) | W-115, W-145 |
-| Port 4,387 | Reusable Port/interface definitions remain Port notes. For an instance/context Port, Stage 1 first tries the W-114 deterministic reusable-definition evidence (`PDATA3`, then one exact same-named Port on the reusable block). If that resolves, the local endpoint links to the existing reusable Port. If it does not resolve, W-377 preserves the contextual Port only as a Local Model 0.3 endpoint with no `definition`; the importer does **not** manufacture a first-class Port note merely to satisfy the local format. Port subtype remains only `proxy`, `full` or blank; EA interface-Class stereotypes stay in `eaType`, not arbitrary Port subtype values. Historical W-114.3/W-276 added-Port synthesis is superseded for current writing by W-377. | W-114, W-120, W-128, W-294, W-377 |
-| Class 2,737 | Port (423 interface Classes, blank subtype, stereotype in `eaType`) or Object (2,314, blank subtype). A Physical Context stays an Object with its parts | W-120, W-139, W-237, W-239 |
+| Port 4,387 | **Local Model Interface occurrence only; never a first-class Port note.** A Port directly owned by a reusable Class becomes a boundary Interface occurrence in that Object's Local Model; a contextual/part-owned Port becomes an Interface occurrence in the containing context. When deterministic EA classifier/redefinition evidence resolves a reusable Interface Class, `definition` points to that `Object / interface` note; otherwise the Interface remains definitionless. Stage 1 does not synthesize a reusable definition merely because an endpoint exists. | W-384 |
+| Class 2,737 | Object. The 423 recognized Interface Classes become `Object / interface`; other Classes remain Object under their existing Object mapping. A Physical Context stays an Object with its parts. | W-139, W-384 |
 | Part 3,137 | Item Flow (760 FlowProperty pins); typed reusable Parts still resolve/fold to their reusable Object definition for note reduction, but each contextual typed Part also preserves a stable local part occurrence owned by the containing context when identity/configuration matters; untyped Parts may remain Object subtype `part`. Repeated identical `hasPart` targets do not encode quantity | W-132, W-136, W-137, W-138, W-149, W-293, W-294 |
-| Object 545 | Object, blank subtype; `Classifier` is a temporary `hasClassifier` link | W-135, W-180 |
+| Object 545 | Object. EA classifier evidence remains available in source provenance/review evidence where needed; W-384 removes the Port-era temporary `hasClassifier` relationship from the current relationship schema. | W-135, W-384 |
 | Signal 623 | Item Flow, blank subtype | W-131 |
-| Activity 1,668 | Function (blank subtype, 1,141) or Verification, subtype `test` (527, stereotype `testCase`) | W-141, W-238 |
+| Activity 1,668 | Verification / `test` for stereotype `testCase`; otherwise Behavior. If the Activity stereotype includes `function`, it is `Behavior / function` regardless of package location. An Activity under `04 Product Function` is also `Behavior / function`; remaining Activities are `Behavior / activity`. | W-141, W-384 |
 | UseCase 1,667 | Use Case; subtype from the folder (what, when, where, who), else blank | W-140 |
-| State 1,112 | Design (954, under `05 Product Design`) or State (158); blank subtypes | W-142, W-237 |
+| State 1,112 | Condition. A State under `05 Product Design` becomes `Condition / design`; a State identified as a mode becomes `Condition / mode`; remaining States become `Condition / state`. | W-142, W-384 |
 | Artifact 459 | Artifact, blank subtype | W-143, W-237 |
-| Issue 264, Actor 44, StateMachine 2 | Issue, Actor, State Machine; blank subtypes | W-144 |
+| Issue 264, Actor 44, StateMachine 2 | Issue, Actor, and `Condition / state machine`, respectively. | W-144, W-384 |
 | Note 431, Text 61, Constraint 1 | Info, blank subtype, except a Note linked to one unique element folds into that element's body. The accepted v0.2 plan folds 247 unique Note elements through 250 NoteLink connector rows; 184 Notes remain Info | W-145, W-161, W-274 |
 | 13 small types, 632 (Action 323, StateNode 73, Change 65, Boundary 44, Decision 34, ActivityPartition 28, Trigger 27, Synchronization 14, Sequence 11, ActionPin 6, ProxyConnector 5, Event 1, ActivityParameter 1) | modelCheck, subtype = the EA type, `MC-#####` | W-146, W-181 |
 | Package 1,386 | A folder; a modelCheck note, subtype `Package`, only for the 34 with a Notes description | W-147 |
@@ -110,20 +110,20 @@ Every connector has exactly one rule (W-178); 9 have an end missing from the exp
 |---|---|---|
 | Nesting 836 | Nothing where it repeats placement (584); the other 252 `hasChild` (`hasPart` for Object to Object, `hasState` for Object to State or State Machine and State Machine to State, W-292) with `REVIEW nesting direction: connector {GUID}` | W-151, W-152, W-292 |
 | Generalization 3,974 | `subtypeOf`; mixed types flagged | W-152 |
-| Connector 823 | `interfaces`; BindingConnector a temporary `equals`; one link per pair; block-level ends `REVIEW port needed` | W-153 to W-158 |
+| Connector 823 | A connector between Local Model Interface occurrences becomes a Local Model Connection rather than a note-level `interfaces` relationship. A BindingConnector is resolved mechanically to `Connection.exposes -> boundary Interface` only when one internal connection and one boundary Interface are deterministic in the same context; ambiguous cases retain temporary local `equals`/review evidence rather than inventing exposure. | W-384 |
 | Aggregation 2,288 | Composite: Object pairs `hasPart`, Object to State or State Machine and State Machine to State `hasState` (W-292), all else `hasChild`; shared: `includes`; an existing link wins | W-159, W-277 |
-| Realisation 950 | A requirement `appliesTo` an Object; Function realizes Use Case; else `realizedBy` flagged | W-160, W-167 |
+| Realisation 950 | A requirement `appliesTo` an Object; Behavior realizes Use Case where the existing direction/rule applies; else `realizedBy` is review evidence until endpoint semantics are valid. | W-160, W-167, W-384 |
 | NoteLink 349 | A note on one element folds into its body under `**EA notes:**`; a note on several stays Info with `describes` | W-161, W-162 |
 | Dependency 6,762 | By stereotype: `satisfy` (`satisfies`), `deriveReqt` (`derivedFrom`), `refine` (`refines`, `drives`, `describes`), `trace` (`describes`, `affects`, `appliesTo`, `references`), `verify` (`verifies`); none: `dependsOn`; off-pattern flagged | W-163 to W-169 |
-| Abstraction 2,811 | `allocate`: an Object `performs` a Function and has a Design (`hasDesign`); else earlier rules or `tracesTo` flagged | W-170 |
+| Abstraction 2,811 | `allocate`: Object-to-Behavior uses `performs`; Object/Document-to-`Condition / design` uses `hasDesign`; other accepted mappings retain their existing relationship names, with off-pattern cases held for review. | W-170, W-384 |
 | UseCase 1,258 | `extend` is `optionOf`; `include` is `hasChild` | W-171 |
 | Association 603 | One-way `participants` on the Use Case; else earlier rules or `tracesTo` flagged | W-172 |
-| Usage 239 | A Function or Design realizes a Use Case; requirements `dependsOn` requirements | W-173 |
+| Usage 239 | Behavior or Condition realizes a Use Case where the governed endpoint rule permits it; requirements `dependsOn` requirements. | W-173, W-384 |
 | ControlFlow 407, StateFlow 200 | `precedes`; Guard, Trigger and Effect as lines on the step before | W-174, W-175 |
 | Sequence 199 | An ordered message list on the diagram companion note, no field | W-176 |
-| InformationFlow 123 | Preserve the note-level `interfaces` / `transmits` / `receives` / `exchanges` summary where applicable **and** preserve each conveyed Item Flow as a local flow allocated to the specific local endpoint-to-endpoint connection. Local flow roles are `transmit`, `receive`, `exchange` or `unspecified`; exact connection allocation is authoritative for occurrence-level meaning | W-177, W-178, W-294 |
+| InformationFlow 123 | Preserve occurrence-level topology only: the participating Interfaces belong to a Local Model Connection, and each conveyed Item Flow is a local Flow under that specific Connection with roles `transmit`, `receive`, `exchange` or `unspecified`. W-384 removes the former note-level Port `interfaces` / `transmits` / `receives` / `exchanges` summary. | W-177, W-294, W-384 |
 
-An off-pattern pair keeps the EA meaning and gets `REVIEW modelCheck: <stereotype> <source type> to <target type>` (W-160 onward). Connector names use `- Connector name: <name> (to [[other end]])` (W-158). Where a placement child is `subtypeOf` its owner, no placement link is written (W-178). A Function or a Design satisfies a requirement; a requirement applies to an Object (W-160).
+An off-pattern pair keeps the EA meaning and gets `REVIEW modelCheck: <stereotype> <source type> to <target type>` (W-160 onward). Connector names use `- Connector name: <name> (to [[other end]])` (W-158). Where a placement child is `subtypeOf` its owner, no placement link is written (W-178). A Behavior or Condition may satisfy a requirement when permitted by `relationships.yaml`; a requirement applies to its governed target (W-384).
 
 
 ### 6.1 Local occurrence, connection and flow preservation (W-293, W-294)
@@ -131,11 +131,11 @@ An off-pattern pair keeps the EA meaning and gets `REVIEW modelCheck: <stereotyp
 Stage 1 must preserve the distinction between a reusable definition and a contextual use without forcing every contextual use into a standalone note.
 
 - **Local part occurrence:** when a reusable Object/assembly is used inside another Object/system and the contextual use matters, the containing context owns a stable local part occurrence. It uses `definition` to reference the reusable Object. Invariant structure remains on the reusable definition; product/system-specific integration belongs to the containing context.
-- **Local endpoint occurrence:** a contextual Port/connector/surface/proxy occurrence has a stable local ID separate from its visible identifier. Under W-377/Local Model 0.3, `definition` links to a reusable Port only when deterministic source evidence resolves one; otherwise `definition` is omitted and the contextual endpoint still preserves source identifier, kind, multiplicity/quantity evidence, provenance and local topology. A definitionless endpoint cannot carry `usage`. Reusable interface definitions may contain nested addressable members such as pins/contacts; local endpoints inherit that structure only when a reusable definition exists.
-- **Local connection:** the binding between two endpoint occurrences has its own stable local ID and is owned by the lowest meaningful common Object/system/configuration context that brings those occurrences together. It may optionally use `definition` for a reusable interface/connection concept.
+- **Local Interface occurrence:** every EA Port that survives Stage 1 is represented as an Interface occurrence with a stable local ID separate from its visible identifier. `definition` may point to a reusable `Object / interface` only when deterministic source evidence resolves one; otherwise it is omitted. An Interface directly owned by the containing reusable Class/Object is a boundary Interface; part-owned or nested Interfaces retain their contextual ownership. A definitionless Interface cannot carry `usage`.
+- **Local Connection:** the binding between two Interface occurrences has its own stable local ID and is owned by the lowest meaningful common Object/system/configuration context that brings those occurrences together. It may optionally use `definition` for a reusable connection concept. In Local Model 0.4, `exposes` belongs to the Connection and points to the boundary Interface through which that internal/context-owned Connection is made externally available.
 - **Local flow:** each conveyed information/energy/material occurrence is allocated to one specific local connection, not merely to a Port. One connection may carry multiple flows. Local flow identity is connection-scoped and the participating endpoint roles are `transmit`, `receive`, `exchange` or `unspecified`.
 - **Requirements:** existing `appliesTo` semantics may target an addressable local occurrence when that occurrence is genuinely the requirement scope. No new relationship is introduced solely because the target is contained.
-- **Storage direction:** first-class note semantics remain in frontmatter. Exact occurrence/connection/flow allocation is represented as structured, addressable, human-readable Markdown body records owned by the containing note. These records form a governed **Local Model** region distinct from ordinary narrative text (W-298). Canonical current writing uses `<!-- MDSE:LOCAL-MODEL START schema=0.3 -->` through `<!-- MDSE:LOCAL-MODEL END -->`; Workbench readers retain 0.1 and 0.2 compatibility. Schema 0.2 keeps its original requirement that every endpoint have a reusable Port definition; W-377's definitionless endpoint rule exists only in 0.3. The comments are parser/editor boundaries only. Missing, duplicate, nested or mismatched boundaries are model-health errors. Canonical record fields, native block-ID/address syntax, identity-token rules and usage semantics are governed by `local-model.yaml` 0.3, W-315/W-319 and W-377. Promotion of a local occurrence to a note remains an explicit modeling decision and is not inferred by the importer.
+- **Storage direction:** first-class note semantics remain in frontmatter. Exact occurrence/connection/flow allocation is represented as structured, addressable, human-readable Markdown body records owned by the containing note. These records form a governed **Local Model** region distinct from ordinary narrative text (W-298). Canonical current writing uses `<!-- MDSE:LOCAL-MODEL START schema=0.4 -->` through `<!-- MDSE:LOCAL-MODEL END -->`. Schemas 0.1, 0.2 and 0.3 retain their historical meanings; readers must select syntax/semantics by the region version and never silently reinterpret an older region as 0.4. The comments are parser/editor boundaries only. Missing, duplicate, nested or mismatched boundaries are model-health errors. Canonical record fields, native block-ID/address syntax, identity-token rules and usage semantics are governed by `local-model.yaml` 0.4 and W-384. Promotion of a local occurrence to a note remains an explicit modeling decision and is not inferred by the importer.
 
 Conceptual durable addresses use the same Workbench/Local Model seam for every local kind:
 - local record = owner note UID + local ID.
@@ -150,67 +150,58 @@ A named source occurrence alone does not require a standalone Markdown note if t
 
 v0.8.0 uses engineering-readable headings plus named-field Markdown records inside the W-302 managed region. Each materialized record ends with a native Obsidian block ID equal to its stable W-303 local ID. All persisted references between local records use native Obsidian block links under W-312; bare local-ID strings are not the canonical persisted reference form.
 
-The machine-readable authority for this body format is `99_System/03_Schemas/local-model.yaml`. Schema 0.3 is the current writer contract (W-377); readers must accept 0.1, 0.2 and 0.3, and must preserve 0.2 semantics rather than silently upgrading them.
+The machine-readable authority for this body format is `99_System/03_Schemas/local-model.yaml`. Schema 0.4 is the current writer contract (W-384); readers must accept 0.1, 0.2, 0.3 and 0.4, preserving each older version's semantics rather than silently upgrading it.
 
 - **Part occurrence:** readable heading, `definition` to reusable Object/assembly, optional `identifier` and `multiplicity`, followed by `^part-*`. W-310 permits multiplicity only for contextually interchangeable copies.
-- **Endpoint occurrence:** readable heading; optional `definition` to a reusable Port/interface when deterministic reusable-definition evidence exists; optional `part` link to a local part occurrence or `parent` link to a local endpoint occurrence; optional `exposes` or temporary `equals`; optional identifier/multiplicity/kind; followed by `^ep-*`. `part` and `parent` are mutually exclusive. An endpoint with neither is on the owning assembly boundary. Under 0.3 a definitionless endpoint is valid contextual topology but cannot carry `usage`. W-305 still applies: inherited nested members remain implicit until local addressability is required.
-- **Connection:** readable heading with `endpointA` and `endpointB` native block links, followed by `^conn-*`. Under W-311 the owning note is the assembly/context that forms the connection.
+- **Interface occurrence:** readable heading; optional `definition` to a reusable `Object / interface`; optional `part` link to a local part occurrence or `parent` link to a local Interface occurrence; optional temporary `equals`, identifier/multiplicity/kind; followed by `^ep-*`. `part` and `parent` are mutually exclusive. An Interface with neither is on the owning assembly boundary. A definitionless Interface is valid contextual topology but cannot carry `usage`.
+- **Connection:** readable heading with `endpointA` and `endpointB` native block links, optional `exposes` pointing to one or more same-context boundary Interface occurrences, followed by `^conn-*`. The owning note is the assembly/context that forms the connection.
 - **Flow:** readable nested heading under its carrying connection, `definition` to reusable Item Flow, endpoint role fields (`transmit`, `receive`, `exchange`, `unspecified`), followed by `^flow-*`. The authoritative flow occurrence exists once on the connection.
 
 Example:
 
 ```markdown
-### Part Occurrences
+### Parts
 
 #### Power Board
 - definition: [[Power Board]]
-
 ^part-power-board
 
 #### Logic Board
 - definition: [[Logic Board]]
-
 ^part-logic-board
 
-### Local Interfaces
+### Interfaces
 
 #### Power Board J2
 - part: [[#^part-power-board|Power Board]]
 - definition: [[CAN Interface]]
-
 ^ep-power-j2
 
 #### Logic Board J4
 - part: [[#^part-logic-board|Logic Board]]
 - definition: [[CAN Interface]]
-
 ^ep-logic-j4
 
 #### CAN
 - definition: [[CAN Interface]]
-- exposes: [[#^ep-logic-j4|Logic Board J4]]
-
 ^ep-can
 
 ### Connections
 
-#### Power Board J2 to Logic Board J4
+#### Internal CAN
 - endpointA: [[#^ep-power-j2|Power Board J2]]
 - endpointB: [[#^ep-logic-j4|Logic Board J4]]
-
+- exposes: [[#^ep-can|CAN]]
 ^conn-internal-can
 
 ##### CAN_H
 - definition: [[CAN_H]]
 - endpointA: transmit
 - endpointB: receive
-
 ^flow-can-h
 ```
 
-W-311 distinguishes a physical/local connection from boundary exposure. The parent assembly connects to a child assembly's boundary endpoint; it does not reach through the child to an internal endpoint. A boundary endpoint can `exposes` an inner endpoint.
-
-EA BindingConnector remains mechanical Stage-1 evidence. When its assembly context can be reconstructed, materialize the participating contextual endpoints and preserve a temporary local `equals` relationship for review. Structural inner/outer evidence may be written to review output, but the importer does not automatically change `equals` to `exposes`. Review confirms `exposes`, a peer connection/interface interpretation, or another approved meaning.
+W-384 distinguishes a Connection from the boundary Interface that exposes it. A parent assembly connects to a child assembly's boundary Interface; it does not reach through the child to an internal endpoint. When deterministic BindingConnector/context evidence identifies exactly one internal Connection and boundary Interface, Stage 1 writes `Connection.exposes -> boundary Interface`. When that mapping is ambiguous, the importer retains temporary local `equals`/review evidence and does not invent exposure.
 
 EA-only provenance does not appear in Local Model engineering records. The importer writes `99_System/11_Import/Local Model Source Map.csv`, keyed by owner note UID + local ID. Minimum columns remain `owner_uid,local_id,local_kind,ea_guid,ea_source_kind,ea_owner_guid`; additional source-only columns may be added when needed.
 
@@ -223,7 +214,7 @@ Prefer core Obsidian mechanisms and standard Markdown/YAML whenever they preserv
 
 - **Dispositions:** every EA field, tag, small table and `t_xref` kind has one (section 2). Values kept are the tag lines, the comment texts and the structure lines defined in `Definitions/EA Source Section.md` (W-93, W-101, W-102, W-104 to W-106, W-209).
 - **Packages:** the vault tree starts at the ten packages under `IPC !`; `Model` and `IPC !` are not folders (W-117, `ea-package-rules.yaml`). Package names follow the file-name rules. A package without a Notes description is only a folder.
-- **Relationship fields in templates:** `Port` `subtypeOf`, `interfaces`; `Item Flow` `subtypeOf`; `Use Case` `participants`; `Function` and `Design` `subtypeOf`, `satisfies`; `Verification` `verifies`; `Info` and `Artifact` `describes`; `Issue` and `Failure Mode` `affects`; `State Machine` `hasState`; all other classes none (W-222 to W-241). The translator writes fields from the connector rules, not from the templates.
+- **Relationship fields in templates:** current first-class relationships are governed by `relationships.yaml` 1.36, not legacy Port/Function/State templates. Behavior and Condition use the retained semantic relationship names where their endpoint rules permit them; Interface occurrence topology, including Connection-owned `exposes`, is represented in Local Model 0.4 rather than frontmatter. The translator writes fields from the governed connector rules, not from legacy templates.
 
 ## 8. Diagrams and attachments
 
