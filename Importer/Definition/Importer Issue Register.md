@@ -2,7 +2,7 @@
 
 **Status:** Active correction backlog  
 **Baseline date:** 2026-10-05  
-**Current candidate:** `EA_to_MDSE_Native_Importer_v0.8.6.html`  
+**Current candidate:** `EA_to_MDSE_Native_Importer_v0.8.7.html`  
 **Operating model:** [[Importer Operating Contract]]
 
 This register turns observed importer/model problems into bounded engineering work. It is intentionally focused on issues that affect model integrity, traceability, deterministic behavior, release confidence or everyday usability.
@@ -25,7 +25,7 @@ Status values:
 
 | ID | Pri | Phase | Status | Issue | Why it matters | Current evidence | Exit condition |
 |---|---|---|---|---|---|---|---|
-| IMP-001 | P0 | 9 | implementation required | Partial filesystem writes can leave a vault that looks legitimate | v0.8.6 writes tens of thousands of notes sequentially, then attachments/evidence. A mid-write failure can leave a populated partial vault. | `generateSlice()` has no persistent in-progress/completion transaction marker or rollback. | An incomplete run is unmistakably marked and cannot contain an authoritative PASS state; successful completion is finalized only after all required writes/post-write checks. |
+| IMP-001 | P0 | 9 | test required | Partial filesystem writes can leave a vault that looks legitimate | v0.8.7 implements W-371 persistent transaction state; browser fault-injection acceptance is still pending. | `IMPORT_IN_PROGRESS` is written before model output, caught failures attempt `IMPORT_FAILED`, the Run Manifest is late, and `IMPORT_COMPLETE` is the final authoritative write. Static ordering/syntax checks pass. | Fault-injection during note and evidence writes proves the state remains failed/in-progress, never authoritative PASS, and the dirty destination is refused on rerun. |
 | IMP-002 | P0 | 5/10 | decision required | Off-rule/provisional relationships are written into canonical YAML | Downstream tools and AI treat the fields as real engineering semantics even when importer review says the endpoints are invalid/uncertain. | v0.8.3: 587 endpoint findings + 384 provisional `tracesTo`; examples include Function `subtypeOf` Design and Requirement `satisfies` Function. | Define and implement a canonical-vs-review relationship policy; unresolved mappings stay traceable without becoming accepted relationship fields. |
 | IMP-003 | P0 | 10 | implementation required | One PASS label conflates mechanical completeness with semantic acceptance | Exact reconciliation can pass while thousands of semantic findings remain. | v0.8.3 Run Manifest says `PASS (implementation candidate)` while semantic review contains 2,232 rows. | Run/result states distinguish source, plan, write, semantic-review and acceptance status. |
 | IMP-004 | P0 | 1 | decision required | SQLite WAL mode is only a warning | A `.qeax` main file can omit uncheckpointed changes stored in WAL. | v0.8.6 detects WAL mode but planning can proceed when preflight is WARN. | For governed whole imports, policy is explicit; recommended exit is WAL/checkpoint condition blocks the run. |
