@@ -2535,7 +2535,7 @@ function filenameMarkerParts(name){
   return {stem:(m&&m[1])||name,alteration:(m&&m[2])||"",duplicate:(m&&m[3])||""};
 }
 function utf8Len(str){return new TextEncoder().encode(String(str)).length;}
-// The only forced cut (W-324): a file or folder name component cannot exceed the filesystem limit. Cut at a word boundary where one exists in the last 40%, keep the markers.
+// W-382 keeps only the physical filesystem component limit. Cut an overlong file component at a word boundary where possible and retain deterministic markers.
 function fitStemToBytes(stem,budget){
   if(utf8Len(stem)<=budget)return stem;
   let out="";
@@ -4529,30 +4529,7 @@ function sourceCountManifestLines(report){
   lines.push("- Diagram-type counts: "+(exact(EXPECTED_DIAGRAM_TYPES,report.diagramTypes)?"MATCH":"DIFF"));
   return lines;
 }
-// W-324: links go to the file name (Obsidian "shortest path"); only when a name is not unique in the vault is the shortest unique trailing path used. Paths are never written into a link unless they are needed to disambiguate.
-function assignLinkTargets(entities,existingStems){
-  const count=new Map();
-  const add=stem=>{
-    const segs=String(stem).toLowerCase().split("/");
-    for(let k=1;k<=segs.length;k++){const key=segs.slice(segs.length-k).join("/");count.set(key,(count.get(key)||0)+1);}
-  };
-  for(const e of entities.values())if(e.outputPath)add(e.outputPath.replace(/\.md$/i,""));
-  for(const st of existingStems||[])add(st);
-  const stats={total:0,byName:0,qualified:0};
-  for(const e of entities.values()){
-    if(!e.outputPath)continue;
-    const stem=e.outputPath.replace(/\.md$/i,""),segs=stem.split("/");
-    let target=stem;
-    for(let k=1;k<=segs.length;k++){
-      const cand=segs.slice(segs.length-k).join("/");
-      if(count.get(cand.toLowerCase())===1){target=cand;break;}
-    }
-    e.pathTarget=stem;e.linkTarget=target;
-    stats.total++;if(target.indexOf("/")<0)stats.byName++;else stats.qualified++;
-  }
-  linkTargetStats=stats;
-  return stats;
-}
+// W-382: imported note filenames are globally unique, so imported-note links use filename-only targets.
 let linkTargetStats=null;
 async function scanExistingNoteStems(root){
   const stems=[];
