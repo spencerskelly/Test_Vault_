@@ -1,7 +1,7 @@
 # Importer Operating Contract
 
 **Status:** Current baseline and release-hardening contract  
-**Applies to:** EA → MDSE native importer, current candidate v0.8.16  
+**Applies to:** EA → MDSE native importer, current candidate v0.8.17  
 **Release target:** MDSE 0.8.0  
 **Detailed semantic authority:** `Translator Definition.md` and the machine-readable schemas in `99_System/03_Schemas/`
 
@@ -55,7 +55,7 @@ The phases below subdivide Stage 1 operationally. They do not redefine Stage 2.
 11. **Evidence is part of the result.** A generated model without its reconciliation/evidence package is incomplete.
 12. **Acceptance requires repeatability.** A release-eligible importer must eventually pass deterministic rerun and headless validation gates.
 
-Items not yet fully implemented or acceptance-proven by v0.8.16 are tracked in [[Importer Issue Register]].
+Items not yet fully implemented or acceptance-proven by v0.8.17 are tracked in [[Importer Issue Register]].
 
 ## 5. Stage-1 pipeline
 
