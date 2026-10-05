@@ -12,7 +12,7 @@ sourceModelId: EA8647
 schemas:
   relationships: "1.35"
   elementTypes: "1.17"
-  localModel: "0.2"
+  localModel: "0.3"
 
 ruleset: "99_System/10_Docs/MDSE Modeling Ruleset 1.23.md"
 
@@ -27,7 +27,8 @@ limits:
 tools:
   importer:
     release: null
-    candidate: "Importer/Tools/v0.8.6/EA_to_MDSE_Native_Importer_v0.8.6.html"
+    candidate: "Importer/Tools/v0.8.13/EA_to_MDSE_Native_Importer_v0.8.13.html"
+    candidateVersion: "0.8.13"
     attachmentBenchmark: "Importer/Testing/v0.8.6/attachment_benchmark.json"
     history: "Importer/History/Importer Revisions"   # v0.1 to v0.7 and v0.8.0 to v0.8.5 (W-326); none may generate a model
   cleanBase:
