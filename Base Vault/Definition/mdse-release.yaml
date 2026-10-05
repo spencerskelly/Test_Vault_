@@ -27,8 +27,8 @@ limits:
 tools:
   importer:
     release: null
-    candidate: "Importer/Tools/v0.8.14/EA_to_MDSE_Native_Importer_v0.8.14.html"
-    candidateVersion: "0.8.14"
+    candidate: "Importer/Tools/v0.8.15/EA_to_MDSE_Native_Importer_v0.8.15.html"
+    candidateVersion: "0.8.15"
     attachmentBenchmark: "Importer/Testing/v0.8.6/attachment_benchmark.json"
     history: "Importer/History/Importer Revisions"   # v0.1 to v0.7 and v0.8.0 to v0.8.5 (W-326); none may generate a model
   cleanBase:
