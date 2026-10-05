@@ -34,6 +34,12 @@ Use this section as the continuation protocol; do not reconstruct the plan from 
 9. **No retroactive renumbering.** If a reconstructed step is already satisfied, mark that step complete with evidence; do not delete it or renumber later steps.
 10. **Release boundary.** Performance/stability work on standalone Workbench main does not by itself change the Base Vault pin or constitute an MDSE release. Release promotion remains a separate controlled integration action.
 
+## High-priority semantic compatibility To-Do
+
+These items are release-blocking compatibility work and do **not** renumber or interrupt the performance/stability sequence below.
+
+- **WB-128 · HIGH · Local Model 0.4 + W-384/W-385 compatibility.** Update Workbench to read Local Model 0.4 while preserving frozen 0.1/0.2/0.3 semantics; write 0.4 using `Parts`, `Interfaces`, and `Connections`; treat reusable interface definitions as `Object / interface` instead of Port notes; update type filters/editors/views for `Behavior` subtypes (`function`, `activity`, `action`, `step`) and `Condition` subtypes (`state`, `state machine`, `mode`, `design`); remove creation/validation assumptions that require first-class Port/Function/State/Design/Step notes; and support connection-level `exposes` links to boundary Interface occurrences so Internal/Interfaces views show how an internal connection is exposed at the owning context boundary. Required proof: parser compatibility fixtures for 0.1–0.4, structured editor round-trip, view rendering, schema-driven relationship filtering, and regression tests proving legacy 0.3 headings are read without silent rewrite.
+
 ## Verified completed steps
 
 18. Collapse relationship evidence into one canonical internal representation.
