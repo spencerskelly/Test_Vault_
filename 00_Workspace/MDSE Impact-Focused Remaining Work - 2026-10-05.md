@@ -65,6 +65,23 @@ Add regression cases for stale UID, missing UID, renamed/replaced file, stale lo
 **A6 — Declare the identity-safety boundary complete.**  
 Record the covered writer paths and stop adding defensive identity work unless a real test exposes a new unsafe mutation route. This is the deliberate exit from open-ended hardening.
 
+### Phase B0 — Known importer corrections from the last imported model
+
+**B0.1 — Capture the current importer issue list.**  
+Treat findings from the last imported model as the working correction backlog. Classify each item as mapping/semantics, Local Model generation, naming/path planning, attachment/reconciliation, evidence/reporting, or source-data/manual review.
+
+**B0.2 — Prioritize systemic importer fixes.**  
+Fix issues that change generated engineering meaning, traceability, identity, Local Model structure, relationships, or large groups of paths before doing more Workbench editor expansion. Do not patch the prior generated vault to simulate the fix.
+
+**B0.3 — Update importer authority with each accepted change.**  
+Record the applicable W decision/rule, update Translator Definition or mapping authority where required, implement it in the importer, and add focused regression evidence.
+
+**B0.4 — Run importer-only acceptance before returning to Workbench.**  
+Use static/unit/planning/decode checks appropriate to each change. A full fresh integration vault is not required for every importer edit; save the expensive whole-model run until the known correction list is exhausted enough to make it informative.
+
+**B0.5 — Declare importer ready for the next disposable integration run.**  
+When all known systemic issues from the prior imported model are either corrected, explicitly deferred to source/manual review, or require whole-model evidence, return to the minimum Workbench editor/integration path below.
+
 ### Phase B — Deliver the minimum engineering editor
 
 **B1 — Edit a normal note property through Workbench.**  
@@ -186,6 +203,6 @@ Tag the accepted model, archive the source QEAX/checksum, enable repository prot
 
 The shortest path to material value is:
 
-**A1–A6 → B1–B9 → C1–C4 → D1–D8 → E1–E6 → F1–F5**
+**A1–A6 → B0.1–B0.5 → B1–B9 → C1–C4 → D1–D8 → E1–E6 → F1–F5**
 
 The first major milestone is **D8**: a fresh, real imported vault in which an engineer can safely inspect and modify the model through Workbench and restart without losing correctness. The second is **E6**: a keepable, evidence-backed model. The third is **F5**: a protected golden model ready for normal engineering use.
