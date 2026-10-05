@@ -23,6 +23,10 @@ on:
       - ".github/workflows/importer-candidate.yml"
   workflow_dispatch:
 
+concurrency:
+  group: importer-candidate-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
 permissions:
   contents: read
 
