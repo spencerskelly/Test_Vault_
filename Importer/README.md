@@ -7,6 +7,10 @@ Long-lived development area for the EA → MDSE importer.
 - **Definition/Translator Definition.md** — detailed Stage-1 translation rules and links to the machine-readable mapping authorities.
 - **Definition/Importer Issue Register.md** — ranked systemic correction backlog grounded in the current implementation and real imported-model evidence.
 
+## Current candidate
+- **v0.8.7** — implements W-371 / IMP-001 persistent transaction state. Browser fault-injection acceptance is still pending.
+- v0.8.6 remains the immediate predecessor/reference.
+
 ## Folder intent
 - **Definition/** — current importer contract, translation behavior and correction backlog.
 - **Tools/** — executable importer revisions. Each revision has its own version folder; the candidate version is named by the release manifest.
