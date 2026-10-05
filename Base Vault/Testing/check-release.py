@@ -44,8 +44,15 @@ ap.add_argument("--base")
 a=ap.parse_args()
 
 man=yaml.safe_load(read("Base Vault/Definition/mdse-release.yaml"))
-if man.get("limits",{}).get("maxModelFilesPerFolder") != 75:
-    fail("release manifest maxModelFilesPerFolder must be 75")
+limits=man.get("limits",{})
+if limits.get("generatedPathLengthLimit", "missing") is not None:
+    fail("release manifest generatedPathLengthLimit must be null (W-382)")
+if limits.get("modelFilesPerFolderLimit", "missing") is not None:
+    fail("release manifest modelFilesPerFolderLimit must be null (W-382)")
+if limits.get("importedFileNameScope") != "global":
+    fail("release manifest importedFileNameScope must be global (W-382)")
+if limits.get("nestedElementFolders") is not True:
+    fail("release manifest nestedElementFolders must be true (W-382)")
 
 # Manifest/build-contract self-consistency.
 builder=man["tools"]["cleanBase"]["builder"]
@@ -189,17 +196,16 @@ if candidate:
             f'const LOCAL_BODY_SCHEMA="{man["schemas"]["localModel"]}"',
             'const MDSE_RELEASE="0.8.0"',
             'const SOURCE_MODEL_ID="EA8647"',
-            f'const MAX_GENERATED_PATH={man["limits"]["maxGeneratedPathLength"]};',
             f'const FS_COMPONENT_MAX_BYTES={man["limits"]["fsComponentMaxBytes"]};',
-            f'const LONG_PATH_REVIEW_THRESHOLD={man["limits"]["longPathReviewThreshold"]};',
-            'function assignLinkTargets(entities,existingStems)',
             'async function scanExistingNoteStems(root)',
-            'function longPathReviewCsv(entities,sliceKeys,attachmentFiles)',
             'function fitFileNameToFilesystem(name,maxBytes)',
-            'Review - Long Paths.csv',
-            'const MAX_MODEL_FILES_PER_FOLDER=75',
-            'function applyMechanicalFolderCapacity(items)',
-            'folder_1',
+            'function elementParentChain(e,entities)',
+            'function pathPlanForEntity(e,folderMap,entities)',
+            'e.linkTarget=e.fileName',
+            'buildEntityContext(lastPlannerContext,reservedIdentityTokens,existingStems)',
+            'Importer-defined total path limit: none',
+            'Generated-file-count limit per folder: none',
+            'Imported note filenames globally unique:',
             'definitionEntity.mdseType!=="Object"',
             'if(!(await fileExists(root,".vault.yaml")))return false;',
             'const folderRepeatsFile=',
@@ -224,6 +230,16 @@ if candidate:
         ]
         missing=[x for x in required_importer_tokens if x not in itxt]
         (ok if not missing else fail)(f"importer candidate static contract tokens present{'' if not missing else ': '+', '.join(missing)}")
+        forbidden_importer_tokens=[
+            'const MAX_GENERATED_PATH=',
+            'const LONG_PATH_REVIEW_THRESHOLD=',
+            'const MAX_MODEL_FILES_PER_FOLDER=',
+            'function applyMechanicalFolderCapacity(items)',
+            'Review - Long Paths.csv',
+            'folder_1',
+        ]
+        present_forbidden=[x for x in forbidden_importer_tokens if x in itxt]
+        (ok if not present_forbidden else fail)(f"W-382 removed artificial path/folder limits{'' if not present_forbidden else ': '+', '.join(present_forbidden)}")
         shared_plan=itxt.count('planOutputPaths(entities,sliceKeys,entityCtx,')
         shared_att=itxt.count('attachmentReconciliation(lastPlannerContext,entityCtx,sliceKeys,')
         (ok if shared_plan>=3 and shared_att>=2 else fail)(f"decode-only check shares path planning and attachment reconciliation with the whole-model write (planOutputPaths x{shared_plan}, attachmentReconciliation calls x{shared_att})")
