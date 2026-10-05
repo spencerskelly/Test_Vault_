@@ -8,8 +8,10 @@ Long-lived development area for the EA → MDSE importer.
 - **Definition/Importer Issue Register.md** — ranked systemic correction backlog grounded in the current implementation and real imported-model evidence.
 
 ## Current candidate
-- **v0.8.7** — implements W-371 / IMP-001 persistent transaction state. Browser fault-injection acceptance is still pending.
-- v0.8.6 remains the immediate predecessor/reference.
+- **v0.8.12** — current hardening candidate.
+- v0.8.7–v0.8.11 are incremental hardening references for transaction state, run-status separation, WAL blocking, initialized destination enforcement, and source fingerprinting.
+- v0.8.12 additionally implements the W-376 canonical-vs-review relationship boundary.
+- Real browser/QEAX acceptance is still pending for these changes.
 
 ## Folder intent
 - **Definition/** — current importer contract, translation behavior and correction backlog.
