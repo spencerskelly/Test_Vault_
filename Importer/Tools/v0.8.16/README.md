@@ -11,7 +11,7 @@ v0.8.16 builds on v0.8.15 and implements W-382. It changes output placement and 
 - A nested emitted element is written under a folder named for its emitted parent element: `Parent.md` beside `Parent/Child.md`, recursively for deeper nesting.
 - Imported note filenames are globally unique case-insensitively across the vault namespace.
 - Existing base/system note basenames are reserved before imported names are assigned.
-- Existing human-readable naming, filesystem alteration markers and deterministic duplicate markers remain the collision mechanism.
+- Collision resolution follows the governed naming order: explicit type-specific discriminator where defined (for example Requirement `_r`), then the shortest useful emitted-parent/source-package context, then deterministic `~2`, `~3`, ... only as the fallback.
 - Imported-note links use filename-only targets because imported filenames are globally unique.
 - `Review - Long Paths.csv` is no longer generated.
 
