@@ -1,7 +1,7 @@
 # Importer Operating Contract
 
 **Status:** Current baseline and release-hardening contract  
-**Applies to:** EA → MDSE native importer, current candidate v0.8.17  
+**Applies to:** EA → MDSE native importer, current candidate v0.8.18  
 **Release target:** MDSE 0.8.0  
 **Detailed semantic authority:** `Translator Definition.md` and the machine-readable schemas in `99_System/03_Schemas/`
 
@@ -55,7 +55,7 @@ The phases below subdivide Stage 1 operationally. They do not redefine Stage 2.
 11. **Evidence is part of the result.** A generated model without its reconciliation/evidence package is incomplete.
 12. **Acceptance requires repeatability.** A release-eligible importer must eventually pass deterministic rerun and headless validation gates.
 
-Items not yet fully implemented or acceptance-proven by v0.8.17 are tracked in [[Importer Issue Register]].
+Items not yet fully implemented or acceptance-proven by v0.8.18 are tracked in [[Importer Issue Register]].
 
 ## 5. Stage-1 pipeline
 
@@ -132,7 +132,7 @@ Planning must not depend on filesystem side effects.
 
 This phase allocates note IDs/UIDs and Local Model tokens, plans filenames/folders, handles duplicate/altered names, checks case-insensitive collisions, computes link targets and validates filesystem constraints.
 
-W-382 requires globally unique imported note filenames across the vault namespace, case-insensitive, with existing base/system note basenames reserved first. Emitted parent-child element nesting is reflected in navigation as `Parent.md` beside `Parent/Child.md`, recursively. The importer has no policy-level total path-length cap and no generated-file-count cap per folder; only physical filesystem component constraints remain.
+W-382 requires globally unique imported note filenames across the vault namespace, case-insensitive, with existing base/system note basenames reserved first. W-383 preserves the source package path and places a parent that has emitted children inside its own folder with those children (`Parent/Parent.md`, `Parent/Child.md`), recursively. URL/file-path/machine-noise source names must use a safe Alias or a readable context-derived external-reference filename while preserving the source Name in provenance. The importer has no policy-level total path-length cap and no generated-file-count cap per folder; only physical filesystem component constraints remain.
 
 Identity and locator are separate:
 - ID/UID/local token = engineering identity;
