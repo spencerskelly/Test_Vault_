@@ -9,7 +9,7 @@ Obsidian **1.13.0 or later** is required (`obsidianMinVersion` in the lock; set 
 | Plugin | Version | Role | Settings |
 |---|---|---|---|
 | MDSE Bootstrap | 0.3.0 | Release check against the lock; author registration on first open | defaults |
-| MDSE Workbench | 0.1.16 | Create / Explore / Review interface. Pre-release pin; standalone WB-106 editor/Internal work is newer and is not runtime truth until promoted | defaults (per-machine state is git-ignored) |
+| MDSE Workbench | 0.1.17 candidate | Create / Explore / Review interface. W-379 integration pin uses the exact CI-tested Local Model 0.3 candidate; final WB-106 release promotion is still pending | defaults (per-machine state is git-ignored) |
 | Templater | 2.25.0 | Note creation from `99_System/05_Templates`; runs the `uid` and `id` snippets | governed: templates folder |
 | Fileclass | 0.2.15 | Typed property input and validation; one schema per class in `99_System/06_Fileclasses`, bound by the note's `type` | governed |
 | Breadcrumbs | 4.21.11 | Relationship navigation: every relationship field is an edge field; parent/child, peers, sequence and trace groups | governed |
