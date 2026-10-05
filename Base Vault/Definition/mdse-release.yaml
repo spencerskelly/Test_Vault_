@@ -138,6 +138,12 @@ documents:
   - {path: "Base Vault/Definition/Enabled Plugin Stack.md", status: current}
   - {path: "Base Vault/Definition/MDSE Workbench User Guide.md", status: current}
   - {path: "00_Workspace/Review Changes Log.md", status: reference}
+  - {path: "Importer/Definition/Importer Operating Contract.md", status: current}
+  - {path: "Importer/Definition/Importer Issue Register.md", status: current}
+  - {path: "00_Workspace/MDSE Impact-Focused Remaining Work - 2026-10-05.md", status: reference}
+  - {path: "00_Workspace/Runtime Plugin Dependency Audit.md", status: reference}
+  - {path: "00_Workspace/Startup Stability Plan.md", status: reference}
+  - {path: "00_Workspace/Workbench Performance and Stability Roadmap.md", status: reference}
   - {path: "00_Workspace/History/Retired Documents/Handoff - Continue Here.md", status: retired, supersededBy: "00_Workspace/00 - Current State.md"}
   - {path: "00_Workspace/History/Retired Documents/MDSE v0.8 Design Check - 2026-10-01.md", status: retired, supersededBy: "00_Workspace/MDSE v0.8 Cross-Repository Reconciliation - 2026-10-02.md"}
   - {path: "00_Workspace/History/Retired Documents/EA Native Importer Comprehensive Handoff - 2026-10-01.md", status: retired, supersededBy: "00_Workspace/MDSE v0.8 Cross-Repository Reconciliation - 2026-10-02.md"}
