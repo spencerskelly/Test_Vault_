@@ -299,10 +299,11 @@ def main() -> int:
                 if local_id in target_ids:
                     sec, rec = find_record(lines, idx)
                     target_hits[local_id].append((p, sec, rec))
-            for ref in EP_REF.findall(line):
-                all_endpoint_refs.append((p, ref))
-                if in_local and section == "Connections" and line.startswith(("- endpointA:", "- endpointB:")):
-                    connection_refs.add(ref)
+            if in_local:
+                for ref in EP_REF.findall(line):
+                    all_endpoint_refs.append((p, ref))
+                    if section == "Connections" and line.startswith(("- endpointA:", "- endpointB:")):
+                        connection_refs.add(ref)
 
     broken = [(p, ref) for p, ref in all_endpoint_refs if ref not in all_endpoint_blocks]
     if broken:
