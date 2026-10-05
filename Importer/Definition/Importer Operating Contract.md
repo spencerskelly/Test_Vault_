@@ -1,7 +1,7 @@
 # Importer Operating Contract
 
 **Status:** Current baseline and release-hardening contract  
-**Applies to:** EA → MDSE native importer, current candidate v0.8.14  
+**Applies to:** EA → MDSE native importer, current candidate v0.8.15  
 **Release target:** MDSE 0.8.0  
 **Detailed semantic authority:** `Translator Definition.md` and the machine-readable schemas in `99_System/03_Schemas/`
 
@@ -55,7 +55,7 @@ The phases below subdivide Stage 1 operationally. They do not redefine Stage 2.
 11. **Evidence is part of the result.** A generated model without its reconciliation/evidence package is incomplete.
 12. **Acceptance requires repeatability.** A release-eligible importer must eventually pass deterministic rerun and headless validation gates.
 
-Items not yet fully implemented or acceptance-proven by v0.8.14 are tracked in [[Importer Issue Register]].
+Items not yet fully implemented or acceptance-proven by v0.8.15 are tracked in [[Importer Issue Register]].
 
 ## 5. Stage-1 pipeline
 
@@ -63,7 +63,7 @@ Items not yet fully implemented or acceptance-proven by v0.8.14 are tracked in [
 
 **Purpose:** determine whether an import is allowed to begin.
 
-Current checks include the destination MDSE release, relationship schema, element schema, Local Model schema, controlled plugin stack, initialized `vault_uid`, rejection of an already-populated model root and rejection of prior import transaction state.
+Current checks include the destination MDSE release, relationship schema, element schema, Local Model schema, controlled plugin stack, rejection of an already-populated model root and rejection of prior import transaction state. A freshly generated base may enter selection with `vault_uid: UNINITIALIZED`; it is not write-eligible until an explicit governed initialization step creates a unique vault identity and the strict initialized-base validation passes again.
 
 **Questions affecting usability/stability**
 - Can a user accidentally import into the methodology workspace or an existing generated model?
@@ -325,7 +325,7 @@ Observed:
 
 The 1,012 Local Model warning rows collapse to 244 unique folded EA Parts, showing why grouped review evidence is needed.
 
-v0.8.14 has not yet replaced this observation baseline with a whole-model real-QEAX run.
+v0.8.15 has not yet replaced this observation baseline with a whole-model real-QEAX run.
 
 ## 9. Change discipline
 
