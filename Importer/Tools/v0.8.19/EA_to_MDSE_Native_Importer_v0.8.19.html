@@ -3001,15 +3001,19 @@ function buildLocalOccurrenceModel(ctx,entityCtx){
           warnings.push("BindingConnector "+trim2(bc.ea_guid)+" resolved as Connection exposes -> boundary Interface under "+inner.ownerKey+".");
           continue;
         }
-      }
-      const ae=endpointBySource.get(n2(a.sourceId)),be=endpointBySource.get(n2(b.sourceId));
-      if(ae&&be){
-        if(!ae.equalsRefs)ae.equalsRefs=[];if(!be.equalsRefs)be.equalsRefs=[];
-        if(!ae.equalsRefs.some(x=>x.refKey===b.refKey))ae.equalsRefs.push(b);
-        if(!be.equalsRefs.some(x=>x.refKey===a.refKey))be.equalsRefs.push(a);
+        // equals is temporary review evidence only for a genuine boundary-to-internal
+        // binding where the exposed internal Connection cannot be chosen deterministically.
+        const ae=endpointBySource.get(n2(a.sourceId)),be=endpointBySource.get(n2(b.sourceId));
+        if(ae&&be){
+          if(!ae.equalsRefs)ae.equalsRefs=[];if(!be.equalsRefs)be.equalsRefs=[];
+          if(!ae.equalsRefs.some(x=>x.refKey===b.refKey))ae.equalsRefs.push(b);
+          if(!be.equalsRefs.some(x=>x.refKey===a.refKey))be.equalsRefs.push(a);
+        }
+        warnings.push("BindingConnector "+trim2(bc.ea_guid)+" has boundary/internal Interface evidence but "+candidates.length+" candidate internal Connections; temporary equals/review evidence retained.");
+        continue;
       }
     }
-    warnings.push("BindingConnector "+trim2(bc.ea_guid)+" could not be deterministically resolved to one internal Connection exposure; temporary equals/review evidence retained.");
+    warnings.push("BindingConnector "+trim2(bc.ea_guid)+" is not a deterministic boundary-to-internal exposure; no exposes or equals relationship invented.");
   }
 
   for(const p of ctx.connectorPlans||[]){
