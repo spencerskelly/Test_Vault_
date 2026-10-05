@@ -9,7 +9,7 @@ What the stage 1 translator must do, in one place. It is kept current: any decis
 
 [[Importer Operating Contract]] defines the Stage-1 operational pipeline, trust boundaries, run-state terminology and release-hardening invariants without duplicating the detailed mappings here. [[Importer Issue Register]] tracks observed implementation/authority gaps against that pipeline. Neither document overrides a mapping/schema decision; any disagreement among current authorities is a fault to resolve explicitly.
 
-Current through W-380. (W-325 and W-326 change no stage 1 rule; they align the release chain and the documents.) Release target 0.8.0; the registry of current files is [[00 - Current State]].
+Current through W-381. (W-325 and W-326 change no stage 1 rule; they align the release chain and the documents.) Release target 0.8.0; the registry of current files is [[00 - Current State]].
 
 ## 1. Purpose and scope
 
@@ -22,6 +22,7 @@ Current through W-380. (W-325 and W-326 change no stage 1 rule; they align the r
 - The result must be usable by people and AI together. Every review line must be resolvable from the vault alone (W-156). The vault is not released until stage 2 is complete (W-55).
 - Stage 1 output is a vault, a ledger, a run manifest and review tables (section 3).
 - **Resolvable contextual-endpoint review evidence (W-380).** A definitionless contextual endpoint review row retains the EA source Object_ID used by `localendpoint:<Object_ID>` planning keys, and semantic connector review persists the planner detail explaining why a W-377 connector was withheld. Review evidence must be joinable back to the exact source endpoint without inferring from display names.
+- **Fresh-base initialization boundary (W-381).** `vault_uid: UNINITIALIZED` is valid only as a pre-import fresh-base state. The importer may validate/select it, but no model content may be written until explicit initialization allocates a unique governed vault UID and strict base validation passes again.
 
 ## 2. Input
 
