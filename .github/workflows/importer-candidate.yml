@@ -51,3 +51,25 @@ jobs:
         run: python -m py_compile "Importer/Testing/v0.8.14/imp009_output_acceptance.py" "Importer/Testing/v0.8.14/imp009_output_acceptance_selftest.py"
       - name: Exercise IMP-009 output validator
         run: python "Importer/Testing/v0.8.14/imp009_output_acceptance_selftest.py"
+
+  package-integration-base:
+    needs: static-contract
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install base-build dependency
+        run: python -m pip install pyyaml
+      - name: Build fresh IMP-009 integration base
+        run: python "Base Vault/Tools/v0.8.0-r2/build-base.py" "$RUNNER_TEMP/MDSE_IMP009_BASE_v0.8.14"
+      - name: Validate generated base
+        run: python "Base Vault/Testing/check-release.py" --base "$RUNNER_TEMP/MDSE_IMP009_BASE_v0.8.14"
+      - name: Upload fresh base
+        uses: actions/upload-artifact@v4
+        with:
+          name: MDSE_IMP009_BASE_v0.8.14
+          path: ${{ runner.temp }}/MDSE_IMP009_BASE_v0.8.14
+          if-no-files-found: error
+          retention-days: 7
