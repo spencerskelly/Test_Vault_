@@ -6,13 +6,13 @@
 manifestVersion: 2
 mdseRelease: "0.8.0"
 releaseStatus: pre-release
-date: "2026-10-03"
+date: "2026-10-05"
 sourceModelId: EA8647
 
 schemas:
-  relationships: "1.35"
-  elementTypes: "1.17"
-  localModel: "0.3"
+  relationships: "1.36"
+  elementTypes: "1.18"
+  localModel: "0.4"
 
 ruleset: "99_System/10_Docs/MDSE Modeling Ruleset 1.23.md"
 
@@ -28,8 +28,8 @@ limits:
 tools:
   importer:
     release: null
-    candidate: "Importer/Tools/v0.8.18/EA_to_MDSE_Native_Importer_v0.8.18.html"
-    candidateVersion: "0.8.18"
+    candidate: "Importer/Tools/v0.8.19/EA_to_MDSE_Native_Importer_v0.8.19.html"
+    candidateVersion: "0.8.19"
     attachmentBenchmark: "Importer/Testing/v0.8.6/attachment_benchmark.json"
     history: "Importer/History/Importer Revisions"   # v0.1 to v0.7 and v0.8.0 to v0.8.5 (W-326); none may generate a model
   cleanBase:
@@ -40,7 +40,7 @@ tools:
     repo: "spencerskelly/MDSE_Workbench"
     version: "0.1.16"                               # prior pinned-release baseline; final WB-106 release not yet promoted
     candidateVersion: "0.1.17"                      # W-379: exact CI-tested candidate may be vendored/pinned only while pre-release
-    nextGate: "WB-106"
+    nextGate: "WB-128 / Local Model 0.4 compatibility"
     wb106Version: null                              # set to the first WB-106-capable release; required for releaseStatus: release
     runtimePluginId: "mdse-workbench"
     requiredForRelease: true
