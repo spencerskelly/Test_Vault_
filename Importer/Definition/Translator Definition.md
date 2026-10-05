@@ -9,7 +9,7 @@ What the stage 1 translator must do, in one place. It is kept current: any decis
 
 [[Importer Operating Contract]] defines the Stage-1 operational pipeline, trust boundaries, run-state terminology and release-hardening invariants without duplicating the detailed mappings here. [[Importer Issue Register]] tracks observed implementation/authority gaps against that pipeline. Neither document overrides a mapping/schema decision; any disagreement among current authorities is a fault to resolve explicitly.
 
-Current through W-376. (W-325 and W-326 change no stage 1 rule; they align the release chain and the documents.) Release target 0.8.0; the registry of current files is [[00 - Current State]].
+Current through W-378. (W-325 and W-326 change no stage 1 rule; they align the release chain and the documents.) Release target 0.8.0; the registry of current files is [[00 - Current State]].
 
 ## 1. Purpose and scope
 
