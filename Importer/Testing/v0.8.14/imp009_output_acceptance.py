@@ -365,12 +365,22 @@ def main() -> int:
     for msg in fails:
         print("FAIL", msg)
 
+    sample_pool = sorted(connection_definitionless) or sorted(target_ids)
+    if sample_pool:
+        sample_id = sample_pool[0]
+        sample_row = review_ids.get(sample_id, {})
+        sample_hits = target_hits.get(sample_id, [])
+        if sample_hits:
+            sample_path = sample_hits[0][0].relative_to(root)
+            print(f"MANUAL SAMPLE: {sample_path}#^{sample_id} | EA name: {sample_row.get('ea_name') or '<unnamed>'}")
+            print("MANUAL TEST: in Workbench, inspect this endpoint in Local Model/Internal/Interfaces, change its contextual identifier in this disposable vault, verify no Local Model error, restart Obsidian, and confirm the edited identifier persists.")
+
     if fails:
         print(f"RESULT: FAIL ({len(fails)} failures, {len(warns)} warnings)")
         return 2
 
     print(f"RESULT: HEADLESS PASS ({len(passes)} checks, {len(warns)} warnings)")
-    print("PENDING: open this same vault with the pinned Workbench 0.1.17 candidate and prove schema-0.3 read/navigation/edit/reload on at least one definitionless endpoint.")
+    print("PENDING: complete the printed Workbench read/navigation/edit/reload test on this same vault with the pinned Workbench 0.1.17 candidate.")
     return 0
 
 
