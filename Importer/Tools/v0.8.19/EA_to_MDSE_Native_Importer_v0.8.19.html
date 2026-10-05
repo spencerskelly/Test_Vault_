@@ -2312,29 +2312,12 @@ function buildEntityContext(ctx,reservedIdentityTokens,existingStems){
     e.parentEntityKey=endpointKeyForOwner(e.raw);
     if(e.parentEntityKey&&ctx.placementCtx&&ctx.placementCtx.subtypePairs&&ctx.placementCtx.subtypePairs.has(pairKey(e.key,e.parentEntityKey)))e.parentEntityKey="";
   }
-  const portOwner=new Map();
-  for(const e of entities.values()){
-    if(e.synthetic){portOwner.set(e.key,e.ownerKey||"");continue;}
-    if(trim2(e.raw.Object_Type)==="Port")portOwner.set(e.key,endpointKeyForOwner(e.raw));
-  }
-
-  // Local Port/pin names before composing whole-model human names.
-  const localPortName=new Map(), localPinName=new Map();
-  const portsByOwner=new Map(), pinsByOwner=new Map();
+  // Local pin names before composing whole-model human names.
+  // EA Ports are contextual Local Model Interfaces and never enter the note entity set.
+  const localPinName=new Map(), pinsByOwner=new Map();
   for(const e of ordered){
-    if(e.synthetic||trim2(e.raw.Object_Type)==="Port")mapPush(portsByOwner,portOwner.get(e.key)||"__no_owner__",e);
     if(trim2(e.raw.Object_Type)==="Part"&&trim2(e.raw.Stereotype)==="FlowProperty"){
       const owner=endpointKeyForOwner(e.raw);mapPush(pinsByOwner,owner||"__no_owner__",e);
-    }
-  }
-  function localPortNames(groups,target){
-    for(const list of groups.values()){
-      list.sort(compareEntity);let blank=0;
-      for(const e of list){
-        const n=trim2(e.raw.Name);
-        if(!n){blank++;target.set(e.key,"port "+blank);}
-        else target.set(e.key,n);
-      }
     }
   }
   function localNames(groups,label,target){
@@ -2350,7 +2333,6 @@ function buildEntityContext(ctx,reservedIdentityTokens,existingStems){
       }
     }
   }
-  localPortNames(portsByOwner,localPortName);
   localNames(pinsByOwner,"pin",localPinName);
 
   const naturalCache=new Map();
@@ -2359,11 +2341,10 @@ function buildEntityContext(ctx,reservedIdentityTokens,existingStems){
     stack=stack||new Set();if(stack.has(e.key))return trim2(e.raw.Name)||e.id;
     stack.add(e.key);
     let name="";
-    if(e.synthetic||trim2(e.raw.Object_Type)==="Port"){
-      const ownerKey=portOwner.get(e.key)||"";
-      const owner=entities.get(ownerKey);
-      const ownerName=owner?naturalName(owner,stack):(trim2(ctx.byId.get(n2(e.raw.ParentID))&&ctx.byId.get(n2(e.raw.ParentID)).Name)||"owner");
-      name="i"+ownerName+" - "+(localPortName.get(e.key)||trim2(e.raw.Name)||"port");
+    if(e.synthetic){
+      const owner=entities.get(e.ownerKey||"");
+      const ownerName=owner?naturalName(owner,stack):"owner";
+      name="i"+ownerName+" - "+(trim2(e.raw&&e.raw.Name)||"interface");
     }else if(trim2(e.raw.Object_Type)==="Part"&&trim2(e.raw.Stereotype)==="FlowProperty"){
       const ownerKey=endpointKeyForOwner(e.raw), owner=entities.get(ownerKey);
       const ownerName=owner?naturalName(owner,stack):(trim2(ctx.byId.get(n2(e.raw.ParentID))&&ctx.byId.get(n2(e.raw.ParentID)).Name)||"port");
@@ -2376,23 +2357,6 @@ function buildEntityContext(ctx,reservedIdentityTokens,existingStems){
     stack.delete(e.key);naturalCache.set(e.key,name);return name;
   }
   for(const e of entities.values())e.naturalName=naturalName(e);
-
-  function connectedObjectKeysForPort(e){
-    const ownerKey=portOwner.get(e.key)||"",found=new Set();
-    for(const p of ctx.connectorPlans){
-      if(p.field!=="interfaces"&&p.field!=="equals"&&p.field!=="exposes")continue;
-      let otherKey="";
-      if(p.sourceKey===e.key)otherKey=p.targetKey;
-      else if(p.targetKey===e.key)otherKey=p.sourceKey;
-      else continue;
-      const other=entities.get(otherKey);if(!other)continue;
-      let objKey="";
-      if(other.mdseType==="Object")objKey=other.key;
-      else if(other.mdseType==="Port")objKey=portOwner.get(other.key)||"";
-      if(objKey&&objKey!==ownerKey&&entities.has(objKey))found.add(objKey);
-    }
-    return Array.from(found);
-  }
 
   // W-318: human-readable filenames with explicit alteration and duplicate markers.
   const alteredGroups=new Map();
@@ -2502,7 +2466,7 @@ function buildEntityContext(ctx,reservedIdentityTokens,existingStems){
     }
   }
 
-  return {entities,portOwner,namingStats,nameReviews,usedIdentityTokens:used,identityBaseCounts:baseCount};
+  return {entities,namingStats,nameReviews,usedIdentityTokens:used,identityBaseCounts:baseCount};
 }
 
 // Build normalized folder paths once for the whole model. The folder is navigation;
