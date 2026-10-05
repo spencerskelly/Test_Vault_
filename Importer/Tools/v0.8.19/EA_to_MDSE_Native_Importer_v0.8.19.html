@@ -2871,13 +2871,9 @@ function buildLocalOccurrenceModel(ctx,entityCtx){
     id=n2(id);
     const ep=endpointBySource.get(id);if(ep)return {kind:"endpoint",ownerKey:ep.ownerKey,address:ep.path.join("/"),anchor:ep.anchor,refKey:"local:"+ep.ownerKey+":"+ep.path.join("/"),sourceId:id};
     const part=partBySource.get(id);if(part)return {kind:"part",ownerKey:part.ownerKey,address:part.path.join("/"),anchor:part.anchor,refKey:"local:"+part.ownerKey+":"+part.path.join("/"),sourceId:id};
-    const raw=ctx.byId.get(id),r=resolveEndpoint(id,ctx.elementCtx,ctx.portResolution);
+    const r=resolveEndpoint(id,ctx.elementCtx,ctx.portResolution);
     if(!r||!entities.has(r.key))return null;
-    let ownerKey=r.key;
-    if(raw&&trim2(raw.Object_Type)==="Port"){
-      const po=entityCtx.portOwner.get(r.key);if(po&&entities.has(po))ownerKey=po;
-    }
-    return {kind:"note",ownerKey,address:entityWiki(entities,r.key),anchor:"",refKey:"note:"+r.key,entityKey:r.key,sourceId:id};
+    return {kind:"note",ownerKey:r.key,address:entityWiki(entities,r.key),anchor:"",refKey:"note:"+r.key,entityKey:r.key,sourceId:id};
   }
   function refDisplay(ref,ownerEntity){
     if(!ref)return "`unresolved`";
