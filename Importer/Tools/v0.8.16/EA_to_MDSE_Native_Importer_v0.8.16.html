@@ -2439,27 +2439,74 @@ function buildEntityContext(ctx,reservedIdentityTokens,existingStems){
     });
   }
 
-  // W-382: note filenames are globally unique across the vault, case-insensitive.
-  // Existing base/system notes reserve their basenames; imported notes never rename them.
+  // W-382/W-297: filenames are globally unique, but meaningful source/context
+  // must be tried before blind numeric suffixes. Existing base/system notes keep their names.
   const usedFileNames=new Set();
   for(const stem of existingStems||[]){
     const base=String(stem).split("/").pop();
     if(base)usedFileNames.add(base.toLowerCase());
   }
+  function collisionContexts(e){
+    const out=[],seen=new Set();
+    const add=v=>{
+      const x=sanitizeName(trim2(v));
+      const k=x.toLowerCase();
+      if(!x||x==="unnamed"||k===e.fileCandidate.toLowerCase()||seen.has(k))return;
+      seen.add(k);out.push(x);
+    };
+    // Nearest emitted parent is the strongest engineering context.
+    let pk=e.parentEntityKey||"",guard=new Set();
+    while(pk&&entities.has(pk)&&!guard.has(pk)){
+      guard.add(pk);
+      const p=entities.get(pk);
+      add(p.naturalName||trim2(p.raw.Name));
+      pk=p.parentEntityKey||"";
+    }
+    // Then use the nearest source/package context, shortest useful discriminator first.
+    const segs=(e.vaultPath||"").split(" > ").filter(Boolean).map(sanitizeName);
+    for(let i=segs.length-1;i>=0;i--)add(segs[i]);
+    // If one label is not enough, progressively combine nearby package context.
+    for(let width=2;width<=Math.min(4,segs.length);width++){
+      add(segs.slice(segs.length-width).join(" - "));
+    }
+    return out;
+  }
+  function fitCandidate(name){
+    return utf8Len(name+".md")<=FS_COMPONENT_MAX_BYTES
+      ? name
+      : fitFileNameToFilesystem(name,FS_COMPONENT_MAX_BYTES-3);
+  }
   for(const e of Array.from(entities.values()).sort(compareEntity)){
     const originalCandidate=e.fileCandidate;
-    let candidate=originalCandidate,ordinal=1;
-    if(utf8Len(candidate+".md")>FS_COMPONENT_MAX_BYTES){
-      candidate=fitFileNameToFilesystem(candidate,FS_COMPONENT_MAX_BYTES-3);
-      e.nameRule+=(e.nameRule?"+":"")+"filesystem";
+    let candidate=fitCandidate(originalCandidate),rule="";
+    if(candidate!==originalCandidate)rule="filesystem";
+
+    if(usedFileNames.has(candidate.toLowerCase())&&e.mdseType==="Requirement"){
+      const requirementCandidate=fitCandidate(originalCandidate+"_r");
+      if(!usedFileNames.has(requirementCandidate.toLowerCase())){
+        candidate=requirementCandidate;rule="requirement-context";
+      }
     }
-    while(usedFileNames.has(candidate.toLowerCase())){
-      ordinal++;
-      candidate=duplicateMarkedFileName(originalCandidate,ordinal,FS_COMPONENT_MAX_BYTES-3);
+
+    if(usedFileNames.has(candidate.toLowerCase())){
+      for(const context of collisionContexts(e)){
+        const contextual=fitCandidate(context+" - "+originalCandidate);
+        if(!usedFileNames.has(contextual.toLowerCase())){
+          candidate=contextual;rule="context";break;
+        }
+      }
     }
+
+    if(usedFileNames.has(candidate.toLowerCase())){
+      let ordinal=2;
+      do{candidate=duplicateMarkedFileName(originalCandidate,ordinal++,FS_COMPONENT_MAX_BYTES-3);}
+      while(usedFileNames.has(candidate.toLowerCase()));
+      rule="duplicate";
+    }
+
     e.fileName=candidate;
     usedFileNames.add(candidate.toLowerCase());
-    if(candidate!==originalCandidate)e.nameRule+=(e.nameRule?"+":"")+"duplicate";
+    if(rule)e.nameRule+=(e.nameRule?"+":"")+rule;
   }
 
   const namingStats={},nameReviews=[];
