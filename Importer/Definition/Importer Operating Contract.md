@@ -1,7 +1,7 @@
 # Importer Operating Contract
 
 **Status:** Current baseline and release-hardening contract  
-**Applies to:** EA → MDSE native importer, current candidate v0.8.13  
+**Applies to:** EA → MDSE native importer, current candidate v0.8.14  
 **Release target:** MDSE 0.8.0  
 **Detailed semantic authority:** `Translator Definition.md` and the machine-readable schemas in `99_System/03_Schemas/`
 
@@ -55,7 +55,7 @@ The phases below subdivide Stage 1 operationally. They do not redefine Stage 2.
 11. **Evidence is part of the result.** A generated model without its reconciliation/evidence package is incomplete.
 12. **Acceptance requires repeatability.** A release-eligible importer must eventually pass deterministic rerun and headless validation gates.
 
-Items not yet fully implemented or acceptance-proven by v0.8.13 are tracked in [[Importer Issue Register]].
+Items not yet fully implemented or acceptance-proven by v0.8.14 are tracked in [[Importer Issue Register]].
 
 ## 5. Stage-1 pipeline
 
@@ -294,7 +294,7 @@ Evidence has two audiences and should be designed accordingly.
 
 ### Machine audit evidence
 
-Exhaustive and lossless. Includes the Ledger, source counts, Source Map, attachment/diagram reconciliation and detailed transformation/review rows.
+Exhaustive and lossless. Includes the Ledger, source counts, Source Map, attachment/diagram reconciliation and detailed transformation/review rows. Contextual-endpoint review evidence must retain machine-resolvable source identity: W-380 requires the EA Port Object_ID and persists the connector planner detail so a withheld W-377 relationship can be joined back to the exact source endpoint.
 
 ### Human review evidence
 
@@ -325,7 +325,7 @@ Observed:
 
 The 1,012 Local Model warning rows collapse to 244 unique folded EA Parts, showing why grouped review evidence is needed.
 
-v0.8.13 has not yet replaced this observation baseline with a whole-model real-QEAX run.
+v0.8.14 has not yet replaced this observation baseline with a whole-model real-QEAX run.
 
 ## 9. Change discipline
 
