@@ -9,9 +9,9 @@
 | MDSE release target | **0.8.0** (pre-release: controlled base packaging and importer candidate built; acceptance gates remain) |
 | Relationships schema | 1.35 (`99_System/03_Schemas/relationships.yaml`) |
 | Element-types schema | 1.17 (`99_System/03_Schemas/element-types.yaml`) |
-| Local Model | 0.2 writer; readers accept 0.1 and 0.2 (`99_System/03_Schemas/local-model.yaml`) |
+| Local Model | **0.3 writer**; Workbench preserves 0.2 compatibility (`99_System/03_Schemas/local-model.yaml`) |
 | Source model lineage | EA8647 |
-| Generated path rule | hard stop 400 characters, nothing shortened for length (W-324); duplicate marker `~2`; alteration marker `~a` |
+| Generated path/name rule | **no importer-defined total path or folder file-count limit**; physical component limit only; nested parent-element folders; imported filenames globally unique case-insensitively (W-382) |
 
 ## Read in this order
 
@@ -21,7 +21,7 @@
 4. [[MDSE v0.8 Cross-Repository Reconciliation - 2026-10-02]]: the implementation baseline for identity, reruns, naming, evidence, gates and build order. Its Local Model 0.2 endpoint requirement is superseded for current writing by W-377/W-378 and `local-model.yaml` 0.3.
 5. [[MDSE Modeling Ruleset 1.23]]: what the model means and how imports are governed.
 6. [[Translator Definition]] and [[Importer Operating Contract]]: what the stage 1 importer must do and how a run progresses; [[Importer Issue Register]] is the active systemic correction backlog.
-7. [[Workspace Decision Log]]: every decision (W-01 to W-381); newest last. Where a log entry marks an earlier one superseded, the later one governs.
+7. [[Workspace Decision Log]]: every decision (W-01 to W-382); newest last. Where a log entry marks an earlier one superseded, the later one governs.
 8. [[MDSE Tool Definitions and Boundaries]]: authoritative ownership/boundary map for Workbench, Bootstrap, importer, base/release tooling and deferred cross-vault infrastructure.
 9. [[Handoff Prompt - MDSE v0.8 Implementation]]: copy-ready prompts for a new AI chat (general, and Workbench).
 10. [[Post-Import Tasks]]: the work done in the vault after an import, Tasks 1 to 9.
@@ -51,10 +51,10 @@
 
 | Tool | Status | Next step |
 |---|---|---|
-| Importer v0.8.15 | **active hardening candidate.** v0.8.7–v0.8.12 implement W-371 through W-376; W-377/W-378 implement Local Model 0.3 definitionless contextual endpoints without synthetic reusable Port notes; W-380 makes their withheld connector evidence machine-resolvable to the exact EA Port Object_ID; W-381 allows a valid `UNINITIALIZED` generated base to be selected and explicitly initialized in-tool before any model write. Static/source/syntax checks pass. Last whole-model real-QEAX semantic write remains v0.8.3. | IMP-009 is test-required. Follow `Importer/Testing/v0.8.15/IMP-009 Real-QEAX Acceptance Runbook.md`: fresh whole-model real-QEAX import, checked-in headless validator, then Workbench 0.1.17 schema-0.3 read/navigation/edit/reload on the printed definitionless-endpoint sample. |
+| Importer v0.8.16 | **active hardening candidate.** v0.8.7–v0.8.12 implement W-371 through W-376; W-377/W-378 implement Local Model 0.3 definitionless contextual endpoints without synthetic reusable Port notes; W-380 makes their withheld connector evidence machine-resolvable to the exact EA Port Object_ID; W-381 addresses fresh-base registration/initialization compatibility; W-382 changes only output placement/naming: no artificial total-path or folder-count cap, nested parent-element folders, and globally unique imported filenames. Static/source/syntax checks pass. Last whole-model real-QEAX semantic write remains v0.8.3. | IMP-009 is test-required. Follow `Importer/Testing/v0.8.14/IMP-009 Real-QEAX Acceptance Runbook.md`: fresh whole-model real-QEAX import, checked-in headless validator, then Workbench 0.1.17 schema-0.3 read/navigation/edit/reload on the printed definitionless-endpoint sample. |
 | Importers v0.1 to v0.7, v0.8.0 to v0.8.6 | archived/reference once v0.8.7 is accepted as the active candidate (W-326 lineage) | `Importer/History/Importer Revisions/` with retained revision history. None may generate a model. |
 | Clean 0.8.0 base vault | **candidate build path validated; not issued** | A 0.3.1-candidate base built successfully and `check-release.py --base` completed with **0 fail / 4 expected pre-release warnings** on 2026-10-03. Initializer defects were fixed in source and syntax-gated (W-336). Do not create the next integration vault until Workbench/Importer alignment is ready (W-337). |
-| MDSE Workbench | **0.1.17 is the W-379 pre-release integration pin; 0.1.16 remains the prior pinned-release baseline.** The exact `workbench/local-model-0.3` artifact at `fd058511e7b701c7f4ca2ae714ff30e9bc10275b` passed CI run 838, including tests, scale/startup benchmarks and build. It adds Local Model 0.3 compatibility while preserving 0.2 semantics. Final WB-106 release promotion is still pending. | Use this exact 0.1.17 candidate for the v0.8.15 integration/real-QEAX gate. Do not call it an issued release; after importer acceptance, resume only the minimum WB-106 acceptance work needed for the final pin. |
+| MDSE Workbench | **0.1.17 is the W-379 pre-release integration pin; 0.1.16 remains the prior pinned-release baseline.** The exact `workbench/local-model-0.3` artifact at `fd058511e7b701c7f4ca2ae714ff30e9bc10275b` passed CI run 838, including tests, scale/startup benchmarks and build. It adds Local Model 0.3 compatibility while preserving 0.2 semantics. Final WB-106 release promotion is still pending. | Use this exact 0.1.17 candidate for the v0.8.16 integration/real-QEAX gate. Do not call it an issued release; after importer acceptance, resume only the minimum WB-106 acceptance work needed for the final pin. |
 | MDSE Bootstrap 0.3.0 | pinned Base runtime; **0.3.1 staged-start candidate is built, reproducibility-tested and installed only in `261002083`.** W-347 defers normal full release hashing until Obsidian metadata settles while preserving exact pre-enable verification for disabled locked plugins and immediate author registration. CI now publishes/commits a checksummed candidate artifact; integration lock uses the exact 0.3.1 artifact hashes. | Validate first-open/startup behavior in the same `261002083` smoke gate. Do not promote 0.3.1 to the controlled Base until that user-side startup gate passes. |
 | Runtime plugins (10) | vendored, pinned, hashed, configured (W-322) | `Base Vault/Runtime/Plugins/`; lock `.obsidian/plugin-lock.yaml`; see `Base Vault/Definition/Enabled Plugin Stack.md` |
 
