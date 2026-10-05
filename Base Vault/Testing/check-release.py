@@ -173,11 +173,13 @@ if candidate:
         fail(f"importer candidate missing: {candidate}")
     else:
         itxt=read(candidate)
+        importer_version=man["tools"]["importer"].get("candidateVersion")
         required_importer_tokens=[
-            'version: "0.8.6"',
-            'const REL_SCHEMA_VERSION="1.35"',
-            'const ELEMENT_SCHEMA_VERSION="1.17"',
-            'const LOCAL_MODEL_SCHEMA_VERSION="0.2"',
+            f'version: "{importer_version}"',
+            f'const REL_SCHEMA_VERSION="{man["schemas"]["relationships"]}"',
+            f'const ELEMENT_SCHEMA_VERSION="{man["schemas"]["elementTypes"]}"',
+            f'const LOCAL_MODEL_SCHEMA_VERSION="{man["schemas"]["localModel"]}"',
+            f'const LOCAL_BODY_SCHEMA="{man["schemas"]["localModel"]}"',
             'const MDSE_RELEASE="0.8.0"',
             'const SOURCE_MODEL_ID="EA8647"',
             f'const MAX_GENERATED_PATH={man["limits"]["maxGeneratedPathLength"]};',
@@ -203,7 +205,7 @@ if candidate:
             'async function unwrapEaDocumentPayload',
             'sourceRaw=blobBytes',
             'v"+BUILD.version+" candidate PASS',
-            '<!-- MDSE:LOCAL-MODEL START schema=0.2 -->',
+            '"<!-- MDSE:LOCAL-MODEL START schema="+LOCAL_BODY_SCHEMA+" -->"',
             'Local Model Source Map.csv',
             'Attachment Reconciliation.csv',
             'Diagram Reconciliation.csv',
@@ -237,7 +239,7 @@ if candidate:
         if 'schema=0.1' in itxt or 'return ("loc-"' in itxt:
             fail("importer candidate contains superseded Local Model marker/anchor behavior")
         if 'source_model_id","source_key","owner_uid","local_id","local_kind","ea_guid","ea_source_kind","ea_owner_guid' not in itxt:
-            fail("importer candidate Source Map header does not match Local Model 0.2 contract")
+            fail(f"importer candidate Source Map header does not match Local Model {man['schemas']['localModel']} contract")
         if 'sourceKey||(g?SOURCE_MODEL_ID+"|"+g:""),ou,localId,kind,g,sourceKind||"",ownerGuid||""' in itxt:
             fail("importer candidate still contains superseded blank/misused ea_owner_guid Source Map writer")
         if 'base+"~a.md"' in itxt:
@@ -250,7 +252,11 @@ hist=man["tools"]["importer"].get("history")
 (ok if hist and os.path.isdir(full(ROOT,hist)) else fail)(f"retired importers archived at {hist} (W-326)")
 cand_dir=os.path.dirname(man["tools"]["importer"]["candidate"])
 others=[d for d in os.listdir(full(ROOT,"Importer/Tools")) if "Importer/Tools/"+d!=cand_dir]
-(ok if not others else fail)(f"only the candidate importer revision is in Importer/Tools (others: {others})")
+if others:
+    (fail if man["releaseStatus"]=="release" else warn)(
+        f"non-current importer revisions remain in Importer/Tools during {man['releaseStatus']} hardening: {others}; archive them before release")
+else:
+    ok("only the current importer revision is in Importer/Tools")
 
 if a.workbench:
     wb=os.path.abspath(a.workbench)
