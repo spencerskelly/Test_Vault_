@@ -2233,8 +2233,9 @@ function machineNoiseName(v){
   if(/^\$?inet\b/i.test(s))return true;
   if(/\bhttps?:\s*[/\\-]*[/\\-]*/i.test(s)||/\bwww\./i.test(s))return true;
   if(/\b[a-z0-9.-]+\.(?:com|net|org|io|co|gov|edu)(?:[/\\?&#]|$)/i.test(s))return true;
-  if(/^(?:[a-z]:[\\/]|\\\\|\/Users\/|\/home\/)/i.test(s))return true;
-  return s.length>120&&(/[?&][^\s=]{1,40}=/.test(s)||/%[0-9a-f]{2}/i.test(s));
+  if(/^(?:[a-z]:[\\/]|\\\\|\/(?:Users|home|var|tmp|opt|etc)\/)/i.test(s))return true;
+  if(/[?&][^\s=?&#]{1,40}=/.test(s))return true;
+  return s.length>120&&/%[0-9a-f]{2}/i.test(s);
 }
 function safeHumanAlias(v){
   const s=trim2(v);
