@@ -1470,9 +1470,10 @@ function containsPath(names, seq){
 
 function requirementSubtype(raw,pkg){
   const names=pkg.vaultNames(raw.Package_ID), st=trim2(raw.Stereotype);
-  if(containsPath(names,["03 Product Requirement","Engineering Requirements"]))return "engineering";
+  // Explicit EA semantics take precedence over package/folder context.
   if(st==="functionalRequirement")return "functional";
   if(st==="designConstraint")return "design";
+  if(containsPath(names,["03 Product Requirement","Engineering Requirements"]))return "engineering";
   if(containsPath(names,["03 Product Requirement","Regulatory Requirements"]))return "standard";
   if(containsPath(names,["03 Product Requirement","Design Guides"])||names.includes("05 Product Design"))return "design";
   if(names.includes("04 Product Function"))return "functional";
