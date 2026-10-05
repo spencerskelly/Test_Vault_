@@ -48,4 +48,6 @@ jobs:
       - name: Check current importer regression contract
         run: node "Importer/Testing/v0.8.14/local_endpoint_evidence_static_test.js"
       - name: Compile IMP-009 output validator
-        run: python -m py_compile "Importer/Testing/v0.8.14/imp009_output_acceptance.py"
+        run: python -m py_compile "Importer/Testing/v0.8.14/imp009_output_acceptance.py" "Importer/Testing/v0.8.14/imp009_output_acceptance_selftest.py"
+      - name: Exercise IMP-009 output validator
+        run: python "Importer/Testing/v0.8.14/imp009_output_acceptance_selftest.py"
