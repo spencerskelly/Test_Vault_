@@ -161,7 +161,14 @@ else:
         else:
             fail(f"Bootstrap lock {bv}, pinned source manifest {srcv}, package {pkgv}, release manifest {bootstrap['version']}, candidate {cv}")
     wv=plock["plugins"].get(wbid,{}).get("version")
-    (ok if wv==man["tools"]["workbench"]["version"] else fail)(f"Workbench lock {wv} vs release manifest {man['tools']['workbench']['version']}")
+    pinned_wb=man["tools"]["workbench"]["version"]
+    candidate_wb=man["tools"]["workbench"].get("candidateVersion")
+    if wv==pinned_wb:
+        ok(f"Workbench lock {wv} matches pinned release manifest")
+    elif man["releaseStatus"]!="release" and candidate_wb and wv==candidate_wb:
+        warn(f"Workbench lock {wv} uses declared pre-release candidate; pinned release remains {pinned_wb}")
+    else:
+        fail(f"Workbench lock {wv} vs pinned {pinned_wb}, candidate {candidate_wb}")
     wb106=man["tools"]["workbench"].get("wb106Version")
     if not wb106 or wv!=wb106:
         (fail if man["releaseStatus"]=="release" and man["tools"]["workbench"]["requiredForRelease"] else warn)(
