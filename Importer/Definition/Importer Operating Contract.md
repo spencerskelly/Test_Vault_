@@ -1,7 +1,7 @@
 # Importer Operating Contract
 
 **Status:** Current baseline and release-hardening contract  
-**Applies to:** EA → MDSE native importer, current candidate v0.8.15  
+**Applies to:** EA → MDSE native importer, current candidate v0.8.16  
 **Release target:** MDSE 0.8.0  
 **Detailed semantic authority:** `Translator Definition.md` and the machine-readable schemas in `99_System/03_Schemas/`
 
@@ -55,7 +55,7 @@ The phases below subdivide Stage 1 operationally. They do not redefine Stage 2.
 11. **Evidence is part of the result.** A generated model without its reconciliation/evidence package is incomplete.
 12. **Acceptance requires repeatability.** A release-eligible importer must eventually pass deterministic rerun and headless validation gates.
 
-Items not yet fully implemented or acceptance-proven by v0.8.15 are tracked in [[Importer Issue Register]].
+Items not yet fully implemented or acceptance-proven by v0.8.16 are tracked in [[Importer Issue Register]].
 
 ## 5. Stage-1 pipeline
 
@@ -132,6 +132,8 @@ Planning must not depend on filesystem side effects.
 
 This phase allocates note IDs/UIDs and Local Model tokens, plans filenames/folders, handles duplicate/altered names, checks case-insensitive collisions, computes link targets and validates filesystem constraints.
 
+W-382 requires globally unique imported note filenames across the vault namespace, case-insensitive, with existing base/system note basenames reserved first. Emitted parent-child element nesting is reflected in navigation as `Parent.md` beside `Parent/Child.md`, recursively. The importer has no policy-level total path-length cap and no generated-file-count cap per folder; only physical filesystem component constraints remain.
+
 Identity and locator are separate:
 - ID/UID/local token = engineering identity;
 - filename/path = human/filesystem locator.
@@ -142,10 +144,10 @@ Path/name changes must not silently alter semantic identity.
 - Will a repeated import allocate the same identities?
 - Are duplicate names understandable to engineers?
 - Are paths usable on both macOS and Windows?
-- Are mechanical folders degrading navigation?
+- Does source element nesting produce understandable parent-element folders without mechanical capacity buckets?
 - Is a path rule governed consistently across Ruleset, Translator Definition and code?
 
-**Gate:** all identities are unique; every path is collision-free and legal; all forced alterations are reviewable.
+**Gate:** all identities are unique; imported filenames are globally unique case-insensitively; every path is collision-free and filesystem-legal; all forced alterations are reviewable.
 
 ### Phase 5 — Canonical semantic relationship construction
 
