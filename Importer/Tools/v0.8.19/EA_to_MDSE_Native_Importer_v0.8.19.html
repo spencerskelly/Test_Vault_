@@ -2775,7 +2775,7 @@ function conveyedObjectMap(ctx){
 function buildLocalOccurrenceModel(ctx,entityCtx){
   const entities=entityCtx.entities;
   const partsByOwner=new Map(), endpointsByOwner=new Map(), connectionsByOwner=new Map(), requirementLinksByOwner=new Map();
-  const partBySource=new Map(), endpointBySource=new Map(), warnings=[];
+  const partBySource=new Map(), endpointBySource=new Map(), warnings=[], unallocatedConveyedFlows=[];
   const conveyed=conveyedObjectMap(ctx);
   const connectorById=new Map((ctx.connectors||[]).map(c=>[n2(c.Connector_ID),c]));
   const objectByNormGuid=new Map();
@@ -2940,9 +2940,21 @@ function buildLocalOccurrenceModel(ctx,entityCtx){
 
   for(const c of orderedConnectors){
     if(trim2(c.Connector_Type)!=="InformationFlow")continue;
-    const start=refForRaw(c.Start_Object_ID),end=refForRaw(c.End_Object_ID);if(!start||!end)continue;
+    const conveyedItems=(conveyed.byConnector.get(normGuid(c.ea_guid))||[]).slice().sort((a,b)=>normGuid(a.ea_guid).localeCompare(normGuid(b.ea_guid))||n2(a.Object_ID)-n2(b.Object_ID));
+    const markUnallocated=reason=>{
+      for(const item of conveyedItems)unallocatedConveyedFlows.push({
+        connectorId:n2(c.Connector_ID),connectorGuid:trim2(c.ea_guid),
+        itemId:n2(item.Object_ID),itemGuid:trim2(item.ea_guid),reason
+      });
+    };
+    const start=refForRaw(c.Start_Object_ID),end=refForRaw(c.End_Object_ID);
+    if(!start||!end){
+      markUnallocated("InformationFlow endpoint could not be resolved");
+      continue;
+    }
     if(!start.ownerKey||start.ownerKey!==end.ownerKey){
       warnings.push("InformationFlow "+trim2(c.ea_guid)+" has no common local owner.");
+      markUnallocated("InformationFlow endpoints do not share one Local Model owner");
       continue;
     }
     const pk=start.ownerKey+"|"+pairForRefs(start,end),candidates=connectionsByPair.get(pk)||[];
@@ -2959,15 +2971,23 @@ function buildLocalOccurrenceModel(ctx,entityCtx){
       // Multiple existing Connections between the same local endpoints are ambiguous.
       // Do not invent another connection or guess which existing path carries the flow.
       warnings.push("InformationFlow "+trim2(c.ea_guid)+" matches "+candidates.length+" existing Local Model Connections between the same Interface occurrences; conveyed flow remains review evidence.");
+      markUnallocated("InformationFlow matches multiple candidate Local Model Connections");
       continue;
     }
-    if(!conn)continue;
-    const conveyedItems=(conveyed.byConnector.get(normGuid(c.ea_guid))||[]).slice().sort((a,b)=>normGuid(a.ea_guid).localeCompare(normGuid(b.ea_guid))||n2(a.Object_ID)-n2(b.Object_ID));
+    if(!conn){
+      markUnallocated("InformationFlow could not create or resolve a Local Model Connection");
+      continue;
+    }
     for(const item of conveyedItems){
       const rr=resolveEndpoint(item.Object_ID,ctx.elementCtx,ctx.portResolution);
       const defKey=rr&&entities.has(rr.key)?rr.key:"";
       if(!defKey){
         warnings.push("InformationFlow "+trim2(c.ea_guid)+" conveyed item "+trim2(item.ea_guid)+" has no reusable Item Flow definition; no invalid Local Model flow record written.");
+        unallocatedConveyedFlows.push({
+          connectorId:n2(c.Connector_ID),connectorGuid:trim2(c.ea_guid),
+          itemId:n2(item.Object_ID),itemGuid:trim2(item.ea_guid),
+          reason:"Conveyed item has no reusable Item Flow definition"
+        });
         continue;
       }
       const localId=stableLocalId("flow",c,item.Object_ID);
@@ -3071,6 +3091,7 @@ function buildLocalOccurrenceModel(ctx,entityCtx){
       flows:flowCount,
       localRequirementLinks:Array.from(requirementLinksByOwner.values()).reduce((n,a)=>n+a.length,0),
       unresolvedConveyedXrefs:conveyed.unresolved.length,
+      unallocatedConveyedFlows:unallocatedConveyedFlows.length,
       warnings:warnings.length
     }
   };
@@ -4675,6 +4696,9 @@ async function generateSlice(){
     const localErrors=validateLocalModel(localModel,entityCtx);
     if(localModel.stats.unresolvedConveyedXrefs){
       localErrors.push(localModel.stats.unresolvedConveyedXrefs+" conveyed-flow source reference(s) could not be resolved; flow reconciliation is incomplete.");
+    }
+    if(localModel.stats.unallocatedConveyedFlows){
+      localErrors.push(localModel.stats.unallocatedConveyedFlows+" resolved conveyed-flow item(s) could not be allocated to a valid Local Model Connection; flow reconciliation is incomplete.");
     }
     if(localErrors.length)throw new Error("Local Model "+LOCAL_BODY_SCHEMA+" validation failed before writing: "+localErrors.slice(0,12).join("; "));
 
