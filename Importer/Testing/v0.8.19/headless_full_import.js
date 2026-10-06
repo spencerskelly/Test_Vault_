@@ -16,6 +16,7 @@ const importerPath = path.resolve(process.argv[2]);
 const sourcePath = path.resolve(process.argv[3]);
 const outputPath = path.resolve(process.argv[4]);
 const secondOutputPath = process.argv[5] ? path.resolve(process.argv[5]) : null;
+const failureOutputPath = process.argv[6] ? path.resolve(process.argv[6]) : null;
 const benchmarkPath = path.join(path.dirname(__filename), "attachment_benchmark.json");
 const benchmarkObject = fs.existsSync(benchmarkPath) ? JSON.parse(fs.readFileSync(benchmarkPath, "utf8")) : null;
 
@@ -279,6 +280,37 @@ globalThis.__mdseHeadlessRegenerate = async function(outputHandle){
   const slice=lastSliceReport?JSON.parse(JSON.stringify(lastSliceReport)):null;
   return {phase:slice?"complete":"write",slice,uiLog:el("log").textContent,sliceStatus:el("sliceStatus").textContent};
 };
+globalThis.__mdseHeadlessStatusFailure = async function(outputHandle){
+  if(!lastReport||!lastPlan||!lastSliceReport)throw new Error("IMP-003 status failure check requires a completed real import first.");
+  const meta={
+    source:{name:lastReport.source.name,size:lastReport.source.size,sha256:lastReport.source.sha256},
+    scope:"WHOLE MODEL",
+    startedAt:new Date().toISOString(),
+    planned:{
+      notes:lastSliceReport.notes,
+      attachmentFiles:lastSliceReport.attachmentCounts&&lastSliceReport.attachmentCounts.filesWritten||0,
+      evidenceFiles:0
+    },
+    runStatus:{
+      source:lastSliceReport.sourceStatus,
+      plan:lastSliceReport.planStatus,
+      semantic:lastSliceReport.semanticStatus,
+      acceptance:lastSliceReport.acceptanceStatus
+    }
+  };
+  await assertFreshImportDestination(outputHandle);
+  let errorMessage="";
+  try{
+    await runImportTransaction(outputHandle,meta,async()=>{
+      await writeTextPath(outputHandle,"IMP003-Mechanical-Write.md","partial mechanical write\n");
+      throw new Error("IMP-003 injected write failure after real QEAX plan");
+    });
+  }catch(err){
+    errorMessage=String(err&&err.message||err);
+  }
+  const state=JSON.parse(await readTextPath(outputHandle,IMPORT_STATE_PATH));
+  return {errorMessage,state};
+};
 `;
 
 vm.createContext(context);
@@ -480,5 +512,53 @@ function validateImp002(result,root){
     console.log(JSON.stringify(second,null,2));
     console.log("HEADLESS_SECOND_RESULT_END");
     if(second.phase!=="complete"||!second.slice||second.slice.result!=="WRITE_PASS")process.exitCode=1;
+  }
+
+  const successState=JSON.parse(fs.readFileSync(path.join(outputPath,"99_System/11_Import/Import State.json"),"utf8"));
+  const successExpected={
+    status:"IMPORT_COMPLETE",
+    source:"SOURCE_PASS",
+    plan:"PLAN_PASS",
+    write:"WRITE_PASS",
+    semantic:"SEMANTIC_REVIEW_REQUIRED",
+    acceptance:"ACCEPTANCE_PENDING"
+  };
+  const successActual={
+    status:successState.status,
+    source:successState.runStatus&&successState.runStatus.source,
+    plan:successState.runStatus&&successState.runStatus.plan,
+    write:successState.runStatus&&successState.runStatus.write,
+    semantic:successState.runStatus&&successState.runStatus.semantic,
+    acceptance:successState.runStatus&&successState.runStatus.acceptance
+  };
+  if(JSON.stringify(successActual)!==JSON.stringify(successExpected)){
+    throw new Error("IMP-003 successful real import conflated status dimensions: "+JSON.stringify(successActual));
+  }
+
+  if(failureOutputPath){
+    const failed=await context.__mdseHeadlessStatusFailure(new DirectoryHandle(failureOutputPath));
+    const failedExpected={
+      status:"IMPORT_FAILED",
+      source:"SOURCE_PASS",
+      plan:"PLAN_PASS",
+      write:"WRITE_FAIL",
+      semantic:"SEMANTIC_REVIEW_REQUIRED",
+      acceptance:"ACCEPTANCE_PENDING"
+    };
+    const failedActual={
+      status:failed.state.status,
+      source:failed.state.runStatus&&failed.state.runStatus.source,
+      plan:failed.state.runStatus&&failed.state.runStatus.plan,
+      write:failed.state.runStatus&&failed.state.runStatus.write,
+      semantic:failed.state.runStatus&&failed.state.runStatus.semantic,
+      acceptance:failed.state.runStatus&&failed.state.runStatus.acceptance
+    };
+    if(JSON.stringify(failedActual)!==JSON.stringify(failedExpected)){
+      throw new Error("IMP-003 failed real-plan transaction conflated status dimensions: "+JSON.stringify(failedActual));
+    }
+    if(!/IMP-003 injected write failure/.test(failed.errorMessage)){
+      throw new Error("IMP-003 failure injection did not propagate the expected failure reason");
+    }
+    console.log("IMP003_STATUS_AUDIT "+JSON.stringify({success:successActual,failed:failedActual}));
   }
 })().catch(err=>{console.error(err&&err.stack?err.stack:err);process.exitCode=1;});
