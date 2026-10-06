@@ -1076,6 +1076,20 @@ Step 60 conclusion:
 
 **Current resume point:** the numbered performance/stability roadmap is complete. Do not invent Step 61. Continue with the separate MDSE v0.8 integration/release plan when Spencer explicitly chooses to proceed.
 
+## Integration follow-up — acceptance harness packaging (high priority, outside Steps 18–60)
+
+This is **not Step 61** and does not reopen the completed runtime performance/stability roadmap.
+
+During IMP-009 integration on 2026-10-06, real-QEAX bridge run `37487843505` proved the importer-side IMP-009 validator and Workbench read-only real-vault scan, then failed before semantic model evaluation because Workbench 0.1.18's `scripts/real-vault-acceptance.ts` uses top-level `await` while the package is executed in a CommonJS context. The direct `npm run accept:real-vault` path therefore fails during TSX/esbuild transformation rather than because of a vault/runtime defect.
+
+High-priority Workbench follow-up:
+- make `accept:real-vault` directly runnable from the repository's declared package/module configuration (preferred: wrap executable code in an async `main()` like the existing edit harness, or otherwise make the script explicitly ESM);
+- add CI that executes the packaged command itself so module-format drift cannot silently break acceptance tooling;
+- keep this change isolated from `main.js` runtime behavior unless runtime changes are actually necessary;
+- rerun the affected real-vault acceptance command after the harness fix.
+
+Until that follow-up is landed in Workbench, the importer bridge uses the **same accepted Workbench 0.1.18 source** from artifact commit `b0c4e2c6bdfb96d36f51d8152b17be22592ef174`, bundles the acceptance harness as ESM, and runs that bundle. This preserves the semantic gate without treating a test-runner packaging defect as an importer failure.
+
 ## Reconstructed remaining steps
 
 43. Ensure cache restore failure always falls back to a cooperative cold build without leaving partially restored semantic state visible.
