@@ -3365,7 +3365,7 @@ function buildLocalOccurrenceModel(ctx,entityCtx){
     schemaVersion:LOCAL_BODY_SCHEMA,partsByOwner,endpointsByOwner,connectionsByOwner,requirementLinksByOwner,
     partBySource,endpointBySource,partTerminatedFlowReviews,refDisplay,warnings,
     stats:{
-      parts:Array.from(partBySource.values()).length,
+      parts:Array.from(partsByOwner.values()).reduce((n,a)=>n+a.length,0),
       endpoints:Array.from(endpointBySource.values()).length,
       connections:Array.from(connectionsByOwner.values()).reduce((n,a)=>n+a.length,0),
       flows:flowCount,

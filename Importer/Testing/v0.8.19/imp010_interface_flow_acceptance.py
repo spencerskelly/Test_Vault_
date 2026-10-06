@@ -99,13 +99,17 @@ def main():
     ledger=read_csv(vault/"99_System/11_Import/Ledger.csv")
     ledger_by_guid={ng(r.get("ea_guid")):r for r in ledger if ng(r.get("ea_guid"))}
     localmap=read_csv(vault/"99_System/11_Import/Local Model Source Map.csv")
-    local_part_guids={ng(r.get("ea_guid")) for r in localmap if (r.get("local_kind") or "")=="part"}
+    local_parts=[r for r in localmap if (r.get("local_kind") or "")=="part"]
+    local_part_guids={ng(r.get("ea_guid")) for r in local_parts}
+    req(len(local_parts)==2055,f"Local Model Part rows {len(local_parts)} != 2055 structural Object occurrences")
     semantic=read_csv(vault/"99_System/11_Import/Review - Semantic and Connectors.csv")
 
     wanted=set()
     for fp in class_owned:
         owner=byid[int(fp["ParentID"])]
-        for raw in (fp,owner):
+        typed=byg.get(ng(fp["PDATA1"]))
+        for raw in (fp,owner,typed):
+            if raw is None: continue
             row=ledger_by_guid.get(ng(raw["ea_guid"]))
             if row and (row.get("uid") or "").strip():wanted.add((row.get("uid") or "").strip())
     for p,_,classifier,_,typed in copies:

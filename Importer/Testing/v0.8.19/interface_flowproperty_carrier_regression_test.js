@@ -16,6 +16,8 @@ need('addForwardRel(graph,owner.key,"hasChild",child.key,false);', "current gene
 need('definitionEntity.mdseType==="Item Flow"&&p.rule==="W-397"', "no structural Local Model Part for exact flow copy");
 need('partBySource.set(id,null);', "handled/rejected Part caching");
 need('const partBySource=new Map(), endpointBySource=new Map(), warnings=[], warningKeys=new Set()', "warning dedupe key set");
+need('parts:Array.from(partsByOwner.values()).reduce((n,a)=>n+a.length,0)', "Local Model Part stats count emitted records only");
+forbid('parts:Array.from(partBySource.values()).length', "handled null cache entries must not inflate Local Model Part stats");
 need('"Detection","direction"', "direction retained");
 need('name==="direction"?"Direction":name', "human-facing direction label");
 need('"- FlowProperty type: "', "FlowProperty type source evidence");
