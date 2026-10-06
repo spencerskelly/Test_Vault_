@@ -100,14 +100,19 @@ jobs:
             "$RUNNER_TEMP/MDSE_v0819_full_import" \
             "$RUNNER_TEMP/MDSE_v0819_full_import_2"
 
-      - name: Checkout WB-128 read-only scanner
+      - name: Gate 1 - current IMP-009 output acceptance
+        run: |
+          BASE="$RUNNER_TEMP/MDSE_v0819_full_import"
+          python3 Importer/Testing/v0.8.19/imp009_output_acceptance.py "$BASE" | tee "$RUNNER_TEMP/imp009-headless-acceptance.txt"
+
+      - name: Checkout Workbench 0.1.18 acceptance source
         uses: actions/checkout@v4
         with:
           repository: spencerskelly/MDSE_Workbench
           ref: f51ed792f641077f3c68a426170d3b281f5590ca
           path: _wb128
 
-      - name: Install WB-128 scanner dependencies
+      - name: Install Workbench acceptance dependencies
         run: npm ci --prefix _wb128
 
       - name: Gate 2 - read-only Workbench real-vault scan
@@ -117,6 +122,14 @@ jobs:
           BASE="$RUNNER_TEMP/MDSE_v0819_full_import"
           timeout 10m npm --prefix _wb128 run accept:real-vault:scan -- \
             "$BASE" "$RUNNER_TEMP/wb128-readonly-scan.json"
+
+      - name: Gate 3 - Workbench semantic real-vault acceptance
+        env:
+          NODE_OPTIONS: --max-old-space-size=1024
+        run: |
+          BASE="$RUNNER_TEMP/MDSE_v0819_full_import"
+          timeout 10m npm --prefix _wb128 run accept:real-vault -- \
+            "$BASE" "$RUNNER_TEMP/wb128-real-vault-acceptance.json"
 
       - name: Inspect full-import output
         if: always()
@@ -138,7 +151,9 @@ jobs:
           name: v0819-full-import-evidence
           path: |
             ${{ runner.temp }}/v0819-headless.log
+            ${{ runner.temp }}/imp009-headless-acceptance.txt
             ${{ runner.temp }}/wb128-readonly-scan.json
+            ${{ runner.temp }}/wb128-real-vault-acceptance.json
             ${{ runner.temp }}/MDSE_v0819_full_import/99_System/11_Import
           retention-days: 7
           if-no-files-found: warn
