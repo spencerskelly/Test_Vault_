@@ -47,7 +47,7 @@ def make_fixture(root: Path) -> None:
     }
     write(root, "99_System/11_Import/Import State.json", json.dumps(state, indent=2) + "\n")
     write(root, "99_System/11_Import/Run Manifest.md",
-          "# Run Manifest\n\n- Importer: EA_to_MDSE_Native_Importer 0.8.19\n- Local Model schema: 0.4\n- Definitionless contextual endpoints (W-377): 1\n")
+          "# Run Manifest\n\n- Importer: EA_to_MDSE_Native_Importer 0.8.19\n- Local Model schema: 0.5\n- Definitionless contextual endpoints (W-377): 1\n")
     write(root, "99_System/11_Import/Review - Definitionless Local Endpoints.csv",
           "ea_guid,source_object_id,ea_type,ea_name,category,owner_note,local_id,assembly,block_note,block_ports,reason\n"
           f'"{GUID_EP}",42,Port,P1,named Local Model Interface; no deterministic reusable Object/interface match,Assembly,{EP1},Assembly,Reusable Block,,EA Port preserved only as a definitionless Local Model Interface occurrence\n')
@@ -69,7 +69,7 @@ def make_fixture(root: Path) -> None:
         "---\n\n"
         "# Assembly\n\n"
         "## Local Model\n"
-        "<!-- MDSE:LOCAL-MODEL START schema=0.4 -->\n\n"
+        "<!-- MDSE:LOCAL-MODEL START schema=0.5 -->\n\n"
         "### Interfaces\n\n"
         "#### P1\n"
         "- kind: proxy\n"

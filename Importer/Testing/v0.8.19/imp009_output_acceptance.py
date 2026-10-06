@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""IMP-009 whole-model output acceptance check for importer v0.8.19 / Local Model 0.4.
+"""IMP-009 whole-model output acceptance check for importer v0.8.19 / Local Model 0.5.
 
 Usage:
   python3 imp009_output_acceptance.py /path/to/generated/vault
@@ -16,7 +16,7 @@ import re
 from pathlib import Path
 
 IMPORTER_VERSION = "0.8.19"
-LOCAL_SCHEMA = "0.4"
+LOCAL_SCHEMA = "0.5"
 INTERFACE_SECTION = "Interfaces"
 IMPORT_DIR = Path("99_System/11_Import")
 STATE = IMPORT_DIR / "Import State.json"
@@ -249,12 +249,12 @@ def main() -> int:
         if sample_hits:
             sample_path=sample_hits[0][0].relative_to(root)
             print(f"MANUAL SAMPLE: {sample_path}#^{sample_id} | EA name: {sample_row.get('ea_name') or '<unnamed>'}")
-            print("MANUAL TEST: in Workbench 0.1.18, inspect this Interface in Local Model/Internal/Interfaces, change only its contextual identifier in this disposable vault, verify no Local Model error, restart Obsidian, and confirm the edited identifier persists without creating a reusable Interface note.")
+            print("MANUAL TEST: in the controlled Workbench Local Model 0.5 candidate, inspect this Interface in Local Model/Internal/Interfaces, change only its contextual identifier in this disposable vault, verify no Local Model error, restart Obsidian, and confirm the edited identifier persists without creating a reusable Interface note.")
 
     if fails:
         print(f"RESULT: FAIL ({len(fails)} failures, {len(warns)} warnings)"); return 2
     print(f"RESULT: HEADLESS PASS ({len(passes)} checks, {len(warns)} warnings)")
-    print("PENDING: run the controlled Workbench 0.1.18 real-vault acceptance and complete the UI edit/reload check on the same disposable vault before closing IMP-009.")
+    print("PENDING: run the controlled Workbench Local Model 0.5 real-vault acceptance on this output before release alignment.")
     return 0
 
 if __name__ == "__main__":

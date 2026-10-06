@@ -127,13 +127,18 @@ jobs:
           python3 Importer/Testing/v0.8.19/imp010_interface_flow_acceptance.py "$QEAX" "$BASE" | tee "$RUNNER_TEMP/imp010-interface-flow-acceptance.txt"
           test -s "$RUNNER_TEMP/imp010-interface-flow-acceptance.txt"
 
-      - name: Gate 1d - IMP-011A BindingConnector review acceptance
+      - name: Gate 1e - IMP-011B Local Model 0.5 BindingConnector acceptance
         run: |
           set -o pipefail
           QEAX="$(find _qeax_bridge -maxdepth 1 -type f -name '*.qeax' ! -name '._*' -size +1M | head -1)"
           BASE="$RUNNER_TEMP/MDSE_v0819_full_import"
-          python3 Importer/Testing/v0.8.19/imp011_binding_review_acceptance.py "$QEAX" "$BASE" | tee "$RUNNER_TEMP/imp011-binding-review-acceptance.txt"
-          test -s "$RUNNER_TEMP/imp011-binding-review-acceptance.txt"
+          python3 Importer/Testing/v0.8.19/imp011_canonical_equals_acceptance.py "$QEAX" "$BASE" | tee "$RUNNER_TEMP/imp011-canonical-equals-acceptance.txt"
+          test -s "$RUNNER_TEMP/imp011-canonical-equals-acceptance.txt"
+
+      - name: Declare Local Model 0.5 Workbench integration boundary
+        run: |
+          echo "Importer/schema acceptance may pass through Gate 1e."
+          echo "Workbench 0.1.18 is intentionally expected to reject Local Model 0.5 until the W-398 runtime follow-up is implemented."
 
       - name: Checkout Workbench 0.1.18 acceptance source
         uses: actions/checkout@v4
@@ -201,7 +206,7 @@ jobs:
             ${{ runner.temp }}/imp009-headless-acceptance.txt
             ${{ runner.temp }}/imp010-hierarchy-acceptance.txt
             ${{ runner.temp }}/imp010-interface-flow-acceptance.txt
-            ${{ runner.temp }}/imp011-binding-review-acceptance.txt
+            ${{ runner.temp }}/imp011-canonical-equals-acceptance.txt
             ${{ runner.temp }}/wb128-readonly-scan.json
             ${{ runner.temp }}/wb128-real-vault-acceptance.json
             ${{ runner.temp }}/wb128-real-vault-edit-acceptance.json

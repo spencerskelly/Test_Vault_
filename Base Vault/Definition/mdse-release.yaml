@@ -12,7 +12,7 @@ sourceModelId: EA8647
 schemas:
   relationships: "1.36"
   elementTypes: "1.18"
-  localModel: "0.4"
+  localModel: "0.5"
 
 ruleset: "99_System/10_Docs/MDSE Modeling Ruleset 1.23.md"
 

@@ -10,7 +10,7 @@ const importer = path.resolve(here, "../../Tools/v0.8.19/EA_to_MDSE_Native_Impor
 const src = fs.readFileSync(importer, "utf8");
 
 const focused = [
-  "taxonomy_local_model_04_static_test.js",
+  "taxonomy_local_model_05_static_test.js",
   "behavior_classification_regression_test.js",
   "condition_classification_regression_test.js",
   "semantic_placement_precedence_regression_test.js",
@@ -24,7 +24,7 @@ const focused = [
   "interface_flowproperty_carrier_regression_test.js",
   "contextual_connections_regression_test.js",
   "exposes_regression_test.js",
-  "bindingconnector_review_disposition_regression_test.js",
+  "bindingconnector_canonical_equals_regression_test.js",
   "conveyed_flow_allocation_regression_test.js",
   "common_context_connection_ownership_regression_test.js",
   "part_terminated_flow_review_regression_test.js",

@@ -180,7 +180,7 @@ summary{cursor:pointer;font-weight:650}
 
   <div class="card">
     <h2>MDSE 0.8.0 import renderer</h2>
-    <p class="small muted">Writes one package slice or the complete planned model into a fresh generated MDSE 0.8.0 base. The base release and all three runtime schemas are validated before writing. Local parts, endpoints, connections and flows use governed Local Model 0.3 records. A valid fresh base may be selected while its vault identity is still uninitialized, but model generation remains blocked until the explicit initialization step completes. Diagram artifacts are intentionally deferred; linked-document rows are reconciled and any extraction failure is logged explicitly.</p>
+    <p class="small muted">Writes one package slice or the complete planned model into a fresh generated MDSE 0.8.0 base. The base release and all three runtime schemas are validated before writing. Local parts, Interfaces, connections and flows use governed Local Model 0.5 records. A valid fresh base may be selected while its vault identity is still uninitialized, but model generation remains blocked until the explicit initialization step completes. Diagram artifacts are intentionally deferred; linked-document rows are reconciled and any extraction failure is logged explicitly.</p>
     <div class="row">
       <label class="small"><strong>Package path</strong></label>
       <input id="slicePath" type="text" value="02 Product Context" style="min-width:360px;padding:7px 9px;border:1px solid #b8c0cc;border-radius:7px">
@@ -207,7 +207,7 @@ summary{cursor:pointer;font-weight:650}
       <span id="decodeStatus" class="badge">Build a PASS plan first</span>
     </div>
     <p class="small muted">Decode-only needs only the QEAX and a PASS plan (no output folder). It runs the same identity, path-planning and attachment code as the whole-model write, writes nothing, downloads <code>Attachment Reconciliation - Decode Only.csv</code>, and reports PASS only against the loaded <code>attachment_benchmark.json</code>.</p>
-    <p class="small muted">Use a fresh generated MDSE 0.8.0 base. Do not select <code>Test_Vault_</code> or an existing imported model. Build a PASS plan first, then select the output. The importer requires relationships 1.35, element-types 1.17, Local Model 0.3, and the pinned MDSE Bootstrap + Workbench runtime stack. A newly extracted base with <code>vault_uid: UNINITIALIZED</code> is valid input to the initialization step but cannot receive model content until initialization succeeds. The importer imposes no total generated-path-length limit and no generated-file-count limit per folder. Only the physical filesystem component limit is enforced. Nested first-class elements are placed under folders named for their parent elements, and imported note filenames are unique across the entire vault (case-insensitive), including names already present in the base.</p>
+    <p class="small muted">Use a fresh generated MDSE 0.8.0 base. Do not select <code>Test_Vault_</code> or an existing imported model. Build a PASS plan first, then select the output. The importer requires relationships 1.36, element-types 1.18 and Local Model 0.5. Workbench 0.1.19 compatibility is the pending runtime gate before this candidate can be release-aligned. A newly extracted base with <code>vault_uid: UNINITIALIZED</code> is valid input to the initialization step but cannot receive model content until initialization succeeds. The importer imposes no total generated-path-length limit and no generated-file-count limit per folder. Only the physical filesystem component limit is enforced. Nested first-class elements are placed under folders named for their parent elements, and imported note filenames are unique across the entire vault (case-insensitive), including names already present in the base.</p>
   </div>
 
   <div class="grid3">
@@ -932,7 +932,7 @@ const BUILD = {
   name: "EA_to_MDSE_Native_Importer",
   version: "0.8.19",
   date: "2026-10-05",
-  purpose: "QEAX preflight + deterministic Stage-1 MDSE 0.8.0 clean import with Local Model 0.4, Behavior/Condition taxonomy and occurrence-only Interfaces",
+  purpose: "QEAX preflight + deterministic Stage-1 MDSE 0.8.0 clean import with Local Model 0.5, canonical BindingConnector equality, Behavior/Condition taxonomy and occurrence-only Interfaces",
   writesVault: true
 };
 
@@ -1959,7 +1959,7 @@ function classifyConnector(c,elementCtx,portResolution,placementCtx,conveyed){
   if(type==="Connector"){
     if(st==="BindingConnector"){
       base.outcome="local exposure evidence";base.field="";base.rule="W-384";base.review=false;
-      base.detail="BindingConnector is resolved inside Local Model 0.4 as Connection exposes -> boundary Interface when deterministic; ambiguous cases remain temporary local equals/review evidence.";
+      base.detail="BindingConnector is resolved inside Local Model 0.5 as Connection exposes -> boundary Interface when deterministic; otherwise same-owner Interface occurrences retain canonical symmetric equals and cross-owner cases remain review-only.";
       return base;
     }
     if(s.type==="Local Interface"&&t.type==="Local Interface"){
@@ -2268,7 +2268,7 @@ async function buildTranslationPlan(){
 
 const REL_SCHEMA_VERSION="1.36";
 const ELEMENT_SCHEMA_VERSION="1.18";
-const LOCAL_MODEL_SCHEMA_VERSION="0.4";
+const LOCAL_MODEL_SCHEMA_VERSION="0.5";
 const MDSE_RELEASE="0.8.0";
 // Source-model identity and expected counts are loaded from SOURCE_PROFILE above.
 // W-382: no importer-defined total path-length or per-folder file-count limit.
@@ -2923,10 +2923,10 @@ function buildRelationshipGraph(ctx,entityCtx,limitations){
 
 /* =====================================================================
    MDSE 0.8.0 Local Model implementation.
-   Local records use schema 0.4 native block IDs. The 30-character token
+   Local records use schema 0.5 native block IDs. The 30-character token
    is globally unique with note UIDs; semantic address is owner UID + local ID.
    ===================================================================== */
-const LOCAL_BODY_SCHEMA="0.4";
+const LOCAL_BODY_SCHEMA="0.5";
 
 function normGuid(v){return trim2(v).replace(/[{}-]/g,"").toLowerCase();}
 function guidToken(v,fallback){
@@ -3280,15 +3280,19 @@ function buildLocalOccurrenceModel(ctx,entityCtx){
     }
   }
 
-  // Resolve BindingConnector as Connection.exposes -> boundary Interface only when
-  // one boundary endpoint, one internal endpoint and exactly one internal connection match.
+  // W-398 / Local Model 0.5:
+  // 1) prefer the stronger Connection.exposes topology only when one boundary Interface,
+  //    one internal Interface and exactly one matching internal Connection are deterministic;
+  // 2) otherwise preserve an explicit same-owner BindingConnector as one canonical symmetric
+  //    equals edge; never synthesize a Connection or persist transitive equality closure;
+  // 3) cross-owner/unresolved bindings remain review-only.
   for(const bc of pendingBindings){
     const a=refForRaw(bc.Start_Object_ID),b=refForRaw(bc.End_Object_ID);
-    let outer=null,inner=null;
     if(a&&b&&a.kind==="endpoint"&&b.kind==="endpoint"&&a.ownerKey&&a.ownerKey===b.ownerKey){
       const ar=endpointBySource.get(n2(a.sourceId)),br=endpointBySource.get(n2(b.sourceId));
       const aBoundary=!!(ar&&(!ar.parentPath||ar.parentPath.length===0));
       const bBoundary=!!(br&&(!br.parentPath||br.parentPath.length===0));
+      let outer=null,inner=null;
       if(aBoundary&&!bBoundary){outer=a;inner=b;}
       else if(bBoundary&&!aBoundary){outer=b;inner=a;}
       if(outer&&inner){
@@ -3300,22 +3304,18 @@ function buildLocalOccurrenceModel(ctx,entityCtx){
           if(!conn.exposesRefs.some(x=>x.refKey===outer.refKey))conn.exposesRefs.push(outer);
           if(!conn.sourceIds.includes(n2(bc.Connector_ID)))conn.sourceIds.push(n2(bc.Connector_ID));
           if(trim2(bc.ea_guid)&&!conn.sourceGuids.includes(trim2(bc.ea_guid)))conn.sourceGuids.push(trim2(bc.ea_guid));
-          warnings.push("BindingConnector "+trim2(bc.ea_guid)+" resolved as Connection exposes -> boundary Interface under "+inner.ownerKey+".");
           continue;
         }
-        // equals is temporary review evidence only for a genuine boundary-to-internal
-        // binding where the exposed internal Connection cannot be chosen deterministically.
-        const ae=endpointBySource.get(n2(a.sourceId)),be=endpointBySource.get(n2(b.sourceId));
-        if(ae&&be){
-          if(!ae.equalsRefs)ae.equalsRefs=[];if(!be.equalsRefs)be.equalsRefs=[];
-          if(!ae.equalsRefs.some(x=>x.refKey===b.refKey))ae.equalsRefs.push(b);
-          if(!be.equalsRefs.some(x=>x.refKey===a.refKey))be.equalsRefs.push(a);
-        }
-        warnings.push("BindingConnector "+trim2(bc.ea_guid)+" has boundary/internal Interface evidence but "+candidates.length+" candidate internal Connections; temporary equals/review evidence retained.");
+      }
+      const ae=endpointBySource.get(n2(a.sourceId)),be=endpointBySource.get(n2(b.sourceId));
+      if(ae&&be){
+        if(!ae.equalsRefs)ae.equalsRefs=[];if(!be.equalsRefs)be.equalsRefs=[];
+        if(!ae.equalsRefs.some(x=>x.refKey===b.refKey))ae.equalsRefs.push(b);
+        if(!be.equalsRefs.some(x=>x.refKey===a.refKey))be.equalsRefs.push(a);
         continue;
       }
     }
-    warnings.push("BindingConnector "+trim2(bc.ea_guid)+" is not a deterministic boundary-to-internal exposure; no exposes or equals relationship invented.");
+    warnings.push("BindingConnector "+trim2(bc.ea_guid)+" cannot be represented as same-owner Local Model 0.5 equals or deterministic Connection.exposes; review-only evidence retained.");
   }
 
   for(const p of ctx.connectorPlans||[]){
@@ -3424,6 +3424,10 @@ function validateLocalModel(localModel,entityCtx){
       for(const x of r.equalsRefs||[]){
         const k=localByOwner.get(owner)&&localByOwner.get(owner).get(x.anchor);
         if(k!=="ep")errors.push("endpoint "+r.localId+" equals target is not a local endpoint: "+x.anchor);
+        const peer=(localModel.endpointsByOwner.get(owner)||[]).find(y=>y.anchor===x.anchor);
+        const selfKey="local:"+owner+":"+r.path.join("/");
+        if(!peer||!(peer.equalsRefs||[]).some(y=>y.refKey===selfKey))
+          errors.push("endpoint "+r.localId+" equals relation is not symmetric with "+x.anchor);
       }
     }
   }
@@ -4618,23 +4622,24 @@ function bindingReviewDisposition(con,localModel){
     );
   }
   if(equalsWritten){
-    result.category=result.candidateConnections.length===0?
-      "temporary local equals - no internal Connection":
-      "temporary local equals - ambiguous internal Connection";
-    result.actualRelation="Interface.equals (temporary)";
-    result.rootCause=result.candidateConnections.length===0?
-      "boundary/internal BindingConnector has zero candidate internal Connections":
-      "boundary/internal BindingConnector has "+result.candidateConnections.length+" candidate internal Connections";
+    const sp=s.path.slice(0,-1),ep=e.path.slice(0,-1);
+    const nested=(prefixPath(sp,ep)&&sp.length<ep.length)||(prefixPath(ep,sp)&&ep.length<sp.length);
+    const aBoundary=(!s.parentPath||s.parentPath.length===0),bBoundary=(!e.parentPath||e.parentPath.length===0);
+    const boundaryInternal=(aBoundary&&!bBoundary)||(bBoundary&&!aBoundary);
+    result.category=boundaryInternal?
+      "canonical local equals - boundary/internal no internal Connection":
+      (nested?"canonical local equals - same-owner nested internal binding":"canonical local equals - same-owner sibling/non-hierarchical binding");
+    result.actualRelation="Interface.equals";
+    result.rootCause=boundaryInternal?
+      "explicit same-owner BindingConnector retained as canonical equality because no unique internal Connection was exposed":
+      (nested?"explicit same-owner BindingConnector retained as canonical equality across nested Interface occurrences":
+              "explicit same-owner BindingConnector retained as canonical equality between same-context Interface occurrences");
     return result;
   }
 
   if(sameOwner){
-    const sp=s.path.slice(0,-1),ep=e.path.slice(0,-1);
-    const nested=(prefixPath(sp,ep)&&sp.length<ep.length)||(prefixPath(ep,sp)&&ep.length<sp.length);
-    result.category=nested?"same-owner nested internal binding":"same-owner sibling/non-hierarchical binding";
-    result.rootCause=nested?
-      "both Interfaces are internal; containment exists but neither is an assembly-boundary Interface":
-      "both Interfaces share a Local Model owner but no boundary/internal containment direction is deterministic";
+    result.category="same-owner binding missing canonical equals";
+    result.rootCause="Local Model 0.5 requires an explicit same-owner non-exposure BindingConnector to persist as symmetric equals";
     return result;
   }
   result.category="cross-owner binding";

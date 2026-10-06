@@ -89,6 +89,8 @@ jobs:
         run: python -m py_compile "Importer/Testing/v0.8.19/imp010_interface_flow_acceptance.py"
       - name: Compile IMP-011A BindingConnector review validator
         run: python -m py_compile "Importer/Testing/v0.8.19/imp011_binding_review_acceptance.py"
+      - name: Compile IMP-011B Local Model 0.5 BindingConnector validator
+        run: python -m py_compile "Importer/Testing/v0.8.19/imp011_canonical_equals_acceptance.py"
 
   package-integration-base:
     needs: static-contract
