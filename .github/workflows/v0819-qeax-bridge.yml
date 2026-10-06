@@ -33,14 +33,15 @@ jobs:
 
       - name: Source database counts
         run: |
-          QEAX="$(find _qeax_bridge -maxdepth 1 -type f -name '*.qeax' | head -1)"
+          QEAX="$(find _qeax_bridge -maxdepth 1 -type f -name '*.qeax' ! -name '._*' -size +1M | head -1)"
           test -n "$QEAX"
+          file "$QEAX"
           sqlite3 "$QEAX" "SELECT 't_object', count(*) FROM t_object UNION ALL SELECT 't_connector', count(*) FROM t_connector UNION ALL SELECT 't_package', count(*) FROM t_package UNION ALL SELECT 't_diagramobjects', count(*) FROM t_diagramobjects;"
 
       - name: Upload QEAX bridge artifact
         uses: actions/upload-artifact@v4
         with:
           name: v0819-qeax-source
-          path: _qeax_bridge/*.qeax
+          path: _qeax_bridge/EA_2026_09_06_endgame.qeax
           retention-days: 1
           if-no-files-found: error
