@@ -62,13 +62,15 @@ The aggregate release gate now includes the conveyed-flow allocation regression.
 
 ## Remaining Step 12 acceptance work
 
-Step 12 cannot pass until the remaining 7 source records have an approved deterministic treatment. Acceptable resolution must do one of the following without silent loss:
+The remaining 7 source records now have an approved deterministic treatment: preserve them only in governed import-review evidence, with no synthesized Interface or Connection. The conveyed-flow reconciliation is now fully accounted for at the source-semantic layer:
 
-- resolve the source endpoints to existing contextual Interfaces with deterministic evidence,
-- define an approved Local Model representation for a flow terminating on a Part occurrence, or
-- preserve the affected source flows as explicit governed review/model-check evidence while preventing them from being represented as completed Connection flows.
+- 72 conveyed records remain valid Local Model Connection flows.
+- 7 Part-terminated conveyed records are retained in `Review - Part-Terminated Conveyed Flows.csv` as explicit semantic review evidence.
+- 0 conveyed records are silently dropped.
 
-Do not freeze v0.8.19 while these 17 records remain semantically unallocated.
+Local Model 0.4 is unchanged: review-only Part-terminated records are not written into the governed Local Model body region.
+
+Step 12 still requires deterministic generated-output verification before v0.8.19 can be frozen.
 
 ## Common-context ownership correction
 
