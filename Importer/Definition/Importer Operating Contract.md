@@ -173,7 +173,7 @@ A review finding must not automatically make an otherwise illegal relationship a
 
 **Purpose:** preserve contextual assembly/configuration structure that must not be flattened into reusable note-level relationships.
 
-Current Local Model 0.3 records include parts, endpoints, connections and flows. BindingConnector context may become temporary local `equals` evidence when deterministically reconstructable. Local Model 0.2 semantics remain frozen for existing content.
+Current Local Model 0.5 records include parts, Interfaces, Connections and flows. For a BindingConnector, deterministic `Connection.exposes` topology takes precedence. Otherwise, two resolved same-owner Interface occurrences persist one canonical symmetric `equals` edge pair; cross-owner or unresolved cases remain review-only. Earlier Local Model schema semantics remain frozen for existing content.
 
 The importer must distinguish:
 - reusable definition;
