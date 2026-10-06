@@ -1,6 +1,6 @@
 # v0.8.19 Full Import Execution Status
 
-Status: **PASS — full real-source import and deterministic rerun completed**
+Execution status: **PASS — full real-source import and deterministic rerun completed; semantic acceptance remains pending review**
 
 ## Acceptance source
 
@@ -153,9 +153,35 @@ W-388 / IMP-002 adds an independent real-output audit for review-only and off-ru
 
 The bridge is also fail-closed now: `set -o pipefail` prevents a failed Node importer from being hidden by `tee`, and both output bases must contain a parseable `Import State.json` with `IMPORT_COMPLETE` plus a Run Manifest before the workflow can continue.
 
+## Status-separation acceptance
+
+W-389 / IMP-003 proves that mechanical write completion is not semantic/model acceptance.
+
+- Fast importer CI: **PASS**, run `37416807483`
+- Generated headless VM source compile gate: **PASS**
+- Real-QEAX bridge: **PASS**, run `37416802624`
+- Successful real import:
+  - transaction: `IMPORT_COMPLETE`
+  - source: `SOURCE_PASS`
+  - plan: `PLAN_PASS`
+  - write: `WRITE_PASS`
+  - semantic: `SEMANTIC_REVIEW_REQUIRED`
+  - acceptance: `ACCEPTANCE_PENDING`
+- Injected failed transaction reusing that same real planner state:
+  - transaction: `IMPORT_FAILED`
+  - source: `SOURCE_PASS`
+  - plan: `PLAN_PASS`
+  - write: `WRITE_FAIL`
+  - semantic: `SEMANTIC_REVIEW_REQUIRED`
+  - acceptance: `ACCEPTANCE_PENDING`
+- Deterministic second full import: **PASS**
+- Workbench read-only real-vault scan: **PASS**
+
+The importer UI, Run Manifest, Import State and acceptance evidence therefore qualify PASS by dimension. `IMPORT_COMPLETE` means the import transaction completed mechanically; it does **not** mean semantic/model acceptance.
+
 ## Step 12 conclusion
 
-Step 12 is **PASS**.
+Step 12 execution is **PASS**; semantic acceptance remains `ACCEPTANCE_PENDING` with `SEMANTIC_REVIEW_REQUIRED`.
 
 The real source model:
 - passes preflight and planning,
