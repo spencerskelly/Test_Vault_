@@ -159,6 +159,11 @@ context.alert=()=>{};
 context.confirm=()=>true;
 
 const html=fs.readFileSync(importerPath,"utf8");
+const profileOpen='<script id="mdse-source-profile" type="application/json">\n';
+const profileStart=html.indexOf(profileOpen);
+const profileEnd=profileStart<0?-1:html.indexOf("\n</script>",profileStart+profileOpen.length);
+if(profileStart<0||profileEnd<0)throw new Error("Importer embedded source profile missing");
+getEl("mdse-source-profile").textContent=html.slice(profileStart+profileOpen.length,profileEnd);
 const s1=html.indexOf("<script>"),s2=html.lastIndexOf("</script>");
 if(s1<0||s2<s1)throw new Error("Importer embedded script missing");
 const source=html.slice(s1+8,s2)+`
