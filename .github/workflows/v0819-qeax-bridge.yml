@@ -10,6 +10,8 @@ on:
       - "Importer/Testing/v0.8.19/**"
       - "Importer/Tools/v0.8.19/**"
       - "Importer/Definition/Source Profiles/**"
+      - "99_System/03_Schemas/local-model.yaml"
+      - "Base Vault/Definition/mdse-release.yaml"
   workflow_dispatch:
 
 concurrency:
@@ -137,51 +139,10 @@ jobs:
 
       - name: Declare Local Model 0.5 Workbench integration boundary
         run: |
-          echo "Importer/schema acceptance may pass through Gate 1e."
-          echo "Workbench 0.1.18 is intentionally expected to reject Local Model 0.5 until the W-398 runtime follow-up is implemented."
-
-      - name: Checkout Workbench 0.1.18 acceptance source
-        uses: actions/checkout@v4
-        with:
-          repository: spencerskelly/MDSE_Workbench
-          ref: b0c4e2c6bdfb96d36f51d8152b17be22592ef174
-          path: _wb128
-
-      - name: Install Workbench acceptance dependencies
-        run: npm ci --prefix _wb128
-
-      - name: Build Workbench acceptance harnesses as ESM
-        run: |
-          ./_wb128/node_modules/.bin/esbuild _wb128/scripts/real-vault-acceptance.ts \
-            --bundle --platform=node --format=esm --external:yaml \
-            --outfile="_wb128/wb128-real-vault-acceptance.mjs"
-          ./_wb128/node_modules/.bin/esbuild _wb128/scripts/real-vault-edit-check.ts \
-            --bundle --platform=node --format=esm --external:yaml \
-            --outfile="_wb128/wb128-real-vault-edit-check.mjs"
-
-      - name: Gate 2 - read-only Workbench real-vault scan
-        env:
-          NODE_OPTIONS: --max-old-space-size=1024
-        run: |
-          BASE="$RUNNER_TEMP/MDSE_v0819_full_import"
-          timeout 10m npm --prefix _wb128 run accept:real-vault:scan -- \
-            "$BASE" "$RUNNER_TEMP/wb128-readonly-scan.json"
-
-      - name: Gate 3 - Workbench semantic real-vault acceptance
-        env:
-          NODE_OPTIONS: --max-old-space-size=1024
-        run: |
-          BASE="$RUNNER_TEMP/MDSE_v0819_full_import"
-          timeout 10m node "_wb128/wb128-real-vault-acceptance.mjs" \
-            "$BASE" "$RUNNER_TEMP/wb128-real-vault-acceptance.json"
-
-      - name: Gate 4 - Workbench disposable structured edit acceptance
-        env:
-          NODE_OPTIONS: --max-old-space-size=1024
-        run: |
-          BASE="$RUNNER_TEMP/MDSE_v0819_full_import"
-          timeout 10m node "_wb128/wb128-real-vault-edit-check.mjs" \
-            "$BASE" "$RUNNER_TEMP/wb128-real-vault-edit-acceptance.json"
+          grep -q 'schemaVersion: "0.5"' 99_System/03_Schemas/local-model.yaml
+          grep -q 'localModel: "0.5"' "Base Vault/Definition/mdse-release.yaml"
+          echo "Importer/schema acceptance ends at Gate 1e for Local Model 0.5."
+          echo "Workbench 0.1.18 remains intentionally unaccepted for 0.5; WB-128 Gate 5 must stay blocking until the W-398 Workbench candidate is implemented."
 
       - name: Inspect full-import output
         if: always()
@@ -207,9 +168,6 @@ jobs:
             ${{ runner.temp }}/imp010-hierarchy-acceptance.txt
             ${{ runner.temp }}/imp010-interface-flow-acceptance.txt
             ${{ runner.temp }}/imp011-canonical-equals-acceptance.txt
-            ${{ runner.temp }}/wb128-readonly-scan.json
-            ${{ runner.temp }}/wb128-real-vault-acceptance.json
-            ${{ runner.temp }}/wb128-real-vault-edit-acceptance.json
             ${{ runner.temp }}/MDSE_v0819_full_import/99_System/11_Import
           retention-days: 7
           if-no-files-found: warn
