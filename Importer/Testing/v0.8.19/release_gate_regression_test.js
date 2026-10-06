@@ -19,7 +19,10 @@ const focused = [
   "port_contextual_only_regression_test.js",
   "local_model_parts_interfaces_regression_test.js",
   "contextual_connections_regression_test.js",
-  "exposes_regression_test.js",\n  "conveyed_flow_allocation_regression_test.js",\n  "common_context_connection_ownership_regression_test.js",\n  "part_terminated_flow_review_regression_test.js",
+  "exposes_regression_test.js",
+  "conveyed_flow_allocation_regression_test.js",
+  "common_context_connection_ownership_regression_test.js",
+  "part_terminated_flow_review_regression_test.js",
   "definitionless_interface_accounting_regression_test.js"
 ];
 
