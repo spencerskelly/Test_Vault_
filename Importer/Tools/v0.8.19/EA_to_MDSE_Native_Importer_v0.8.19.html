@@ -4078,10 +4078,13 @@ function sourceOwnerChain(ctx,id){
 function candidatePortEntities(ctx,entityCtx,id){
   const e=resolvedEntityForRaw(ctx,entityCtx,id);if(!e)return [];
   const out=[];
-  for(const [portKey,ownerKey] of entityCtx.portOwner.entries()){
-    if(ownerKey===e.key&&entityCtx.entities.has(portKey))out.push(entityCtx.entities.get(portKey));
+  for(const raw of ctx.objects||[]){
+    if(trim2(raw.Object_Type)!=="Port")continue;
+    const owner=resolveEndpoint(raw.ParentID,ctx.elementCtx,ctx.portResolution);
+    if(!owner||owner.key!==e.key)continue;
+    out.push({raw,fileName:rawElementLabel(raw)});
   }
-  return out.sort(compareEntity);
+  return out.sort((a,b)=>sourceOrder(a.raw,b.raw)||a.fileName.localeCompare(b.fileName));
 }
 async function connectorDiagramMap(ctx){
   const out=new Map(),reader=await SQLiteReader.open(selectedFile);
