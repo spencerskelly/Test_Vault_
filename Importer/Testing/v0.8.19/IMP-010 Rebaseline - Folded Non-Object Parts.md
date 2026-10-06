@@ -224,3 +224,63 @@ Only **16 unique Port-owned flow-property carrier Parts** remain a semantic deci
 These must be resolved as Interface semantics, not by widening Local Model Part.
 
 Separately, the importer currently emits duplicate folded-Part warning rows because a rejected non-Object structural Part can be visited in both Local Model passes without a rejected-result cache entry. Once the 16-case semantic rule is settled, IMP-010 cleanup must emit no more than one actionable finding per source Part while retaining exhaustive machine traceability.
+
+
+## IMP-010C implementation — W-397
+
+The remaining 16 source rows do not carry independent occurrence semantics. Each is an unnamed Port-owned EA `Part` with no Note, Multiplicity, tag, connector or diagram evidence. Its `Classifier` is a reusable `FlowProperty` Part, its parent Port points to the Interface Class that owns that FlowProperty, and its `PDATA1` exactly matches the FlowProperty definition's `PDATA1`.
+
+W-397 therefore treats them as contextual copies of the reusable FlowProperty definition rather than local structural Parts.
+
+Recognition is intentionally strict. A carrier folds to the FlowProperty Item Flow only when all of these are true:
+
+1. the source row is a non-FlowProperty EA `Part`;
+2. its owner is an EA Port;
+3. `Classifier` / `Classifier_guid` resolves to an EA Part stereotyped `FlowProperty`;
+4. that FlowProperty is owned by an interface Class;
+5. the owner Port points to that same interface Class;
+6. carrier `PDATA1` equals FlowProperty-definition `PDATA1`;
+7. the typed target resolves to a Signal or Class.
+
+Any future row that differs fails that exact-copy recognition and remains visible for review rather than being silently collapsed.
+
+### Reusable definition layer
+
+The current model has 760 FlowProperty Item Flow definitions. **752** are owned by reusable interface Classes. Those definitions now use the current generic ownership vocabulary:
+
+`Object/interface hasChild Item Flow` / `Item Flow childOf Object/interface`
+
+This restores the useful ownership intent of historical W-133 without restoring first-class Port notes or the retired `hasFlow/flowOf` vocabulary.
+
+The 1 package-owned and 7 ownerless FlowProperties are not assigned artificial interface owners.
+
+### Direction and typed Signal/Class
+
+Local Model flow occurrences remain connection-owned under W-294. A FlowProperty definition is not itself a connection-carried local flow occurrence.
+
+The reusable Item Flow note retains:
+
+- EA FlowProperty `direction` as `- Direction: ...` in `Source: EA`;
+- its exact `PDATA1` type as `- FlowProperty type: [[...]]` when resolvable.
+
+These are source evidence, not new canonical relationships. The current schema has no governed `typedBy` relation, so W-397 does not invent one.
+
+### Warning behavior
+
+Behavior/Condition carriers already accepted by W-396 and exact FlowProperty copies accepted by W-397 are handled semantic carriers, not Local Model warnings. They are cached as non-structural results so a second Local Model pass cannot emit duplicate warnings.
+
+Unsupported future folded Parts that resolve to a non-Object definition still produce a review warning, but warning keys are source-Part scoped so one source Part cannot create duplicate actionable findings.
+
+### Acceptance
+
+`imp010_interface_flow_acceptance.py` is wired as real-QEAX Gate 1c and must prove:
+
+- exactly 16 exact contextual copies;
+- grouping 14 `3.3V` / `ps3V3Analog`, 2 `can` / `psCan`;
+- no occurrence-specific data on those 16;
+- each copy folds in Ledger to its FlowProperty Item Flow UID;
+- zero Local Model Part records for those source GUIDs;
+- all 752 interface-owned FlowProperty definitions have `hasChild` / `childOf`;
+- direction and typed-target source evidence are retained;
+- zero exact-copy Local Model warning rows;
+- no folded-Part source GUID has duplicate review rows.
