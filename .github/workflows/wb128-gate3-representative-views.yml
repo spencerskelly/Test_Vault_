@@ -27,8 +27,8 @@ jobs:
         uses: actions/download-artifact@v4
         with:
           name: wb128-v0819-real-vault
-          path: \${{ runner.temp }}/gate3
-          github-token: \${{ github.token }}
+          path: ${{ runner.temp }}/gate3
+          github-token: ${{ github.token }}
           repository: spencerskelly/Test_Vault_
           run-id: 37404532307
 
@@ -67,7 +67,7 @@ jobs:
         with:
           name: wb128-gate3-representative-views
           path: |
-            \${{ runner.temp }}/wb128-gate3-views.json
-            \${{ runner.temp }}/wb128-gate3-views.log
+            ${{ runner.temp }}/wb128-gate3-views.json
+            ${{ runner.temp }}/wb128-gate3-views.log
           retention-days: 7
           if-no-files-found: warn
