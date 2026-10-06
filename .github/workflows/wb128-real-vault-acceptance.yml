@@ -60,7 +60,8 @@ jobs:
           node Importer/Testing/v0.8.19/headless_full_import.js \
             Importer/Tools/v0.8.19/EA_to_MDSE_Native_Importer_v0.8.19.html \
             "$QEAX" "$BASE" "$BASE2" | tee "$RUNNER_TEMP/v0819-headless.log"
-          grep -q "DETERMINISM PASS" "$RUNNER_TEMP/v0819-headless.log"
+          python3 Importer/Testing/v0.8.19/compare_full_import_outputs.py "$BASE" "$BASE2" \
+            | tee "$RUNNER_TEMP/v0819-determinism.log"
 
       - name: Check out WB-128 candidate
         run: |
@@ -86,6 +87,7 @@ jobs:
           name: wb128-v0819-real-vault
           path: |
             ${{ runner.temp }}/v0819-headless.log
+            ${{ runner.temp }}/v0819-determinism.log
             ${{ runner.temp }}/wb128-real-vault.log
             ${{ runner.temp }}/MDSE_v0819_full_import
           include-hidden-files: true
