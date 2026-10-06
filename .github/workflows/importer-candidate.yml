@@ -55,6 +55,9 @@ jobs:
         run: node "Importer/Testing/v0.8.17/filesystem_resilience_static_test.js"
       - name: Check v0.8.18 naming and placement
         run: node "Importer/Testing/v0.8.18/naming_placement_static_test.js"
+      - name: Verify v0.8.19 governed source profile sync
+        run: python3 "Importer/Tools/v0.8.19/sync_source_profile.py" --check
+
       - name: Check v0.8.19 headless acceptance harness syntax
         run: node --check "Importer/Testing/v0.8.19/headless_full_import.js"
 
