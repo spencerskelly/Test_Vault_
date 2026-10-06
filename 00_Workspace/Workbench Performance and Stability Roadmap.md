@@ -1102,6 +1102,21 @@ Defense-in-depth Workbench follow-up, **high priority but not a new numbered sta
 
 This does not invalidate the accepted 0.1.18 runtime for canonical importer output, but it closes a useful robustness gap for noncanonical/legacy notes.
 
+### 2026-10-06 high-priority follow-up — Local Model 0.5 canonical BindingConnector equals
+
+W-398 resolves IMP-011's same-context BindingConnector semantics. Workbench 0.1.18 already parses, edits, caches and renders the local `equals` field, but it treats and labels it as temporary review evidence. The importer will version the semantic promotion as Local Model 0.5 rather than silently altering 0.4.
+
+High-priority Workbench follow-up:
+- add Local Model 0.5 to the readable/writeable schema set;
+- preserve 0.1–0.4 historical semantics when reading older vaults;
+- in 0.5, display `equals` as canonical BindingConnector equality/binding, not “Equals (temporary)”;
+- keep the field symmetric and same-note/context for governed editing;
+- do not infer `Connection.exposes`, create a Connection, or compute/store transitive equality closure from `equals`;
+- update structured-edit, cache, Internal/Interfaces view and deletion-impact tests for the 0.5 meaning;
+- acceptance must use the same real-QEAX output that proves 23 exposure + 209 canonical equals + 17 review-only cross-owner cases.
+
+This is a runtime-contract change and should produce the next controlled Workbench candidate rather than modifying the accepted 0.1.18 artifact in place.
+
 ## Reconstructed remaining steps
 
 43. Ensure cache restore failure always falls back to a cooperative cold build without leaving partially restored semantic state visible.
