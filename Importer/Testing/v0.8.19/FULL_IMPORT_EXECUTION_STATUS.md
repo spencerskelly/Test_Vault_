@@ -263,6 +263,30 @@ W-393 / IMP-007 externalizes EA8647 source-shape policy from importer executable
 
 Intentional source-model evolution now changes/version-controls profile data and regenerates the embedded copy; it does not require editing importer source-count logic.
 
+## Complete table-disposition acceptance
+
+W-394 / IMP-008 proves that every SQLite table discovered in the accepted source is governed before planning.
+
+- Real-QEAX bridge: **PASS**, run `37425094714`
+- Accepted source tables discovered: **100**
+- Source-profile disposition inventory: **100 / 100**
+  - `imported` exact-count tables: **12**
+  - `ignored_nonempty_approved`: **34**
+  - `ignored_must_be_empty`: **54**
+- `t_operationparams`: governed as imported with expected count **0**
+- Governed source-profile sync: **PASS**
+- `table_disposition_regression_test.js`: **PASS**
+- Aggregate v0.8.19 release gate: **PASS**
+- Real-source preflight: **PASS — 0 fail, 0 warn**
+- Full import: **WRITE_PASS / IMPORT_COMPLETE**
+- Independent deterministic second import: **PASS**
+- Workbench read-only real-vault scan: **PASS**
+- Current importer CI after the W-394 documentation update: **PASS**, run `37425291335`
+
+The gate is intentionally fail-closed. An undispositioned discovered table, a governed table that disappears, an imported-table count change, or rows appearing in an `ignored_must_be_empty` table prevents planning. Approved non-empty ignored tables remain an explicit source-profile decision rather than an accidental omission.
+
+This closes **IMP-008**.
+
 ## Step 12 conclusion
 
 Step 12 execution is **PASS**; semantic acceptance remains `ACCEPTANCE_PENDING` with `SEMANTIC_REVIEW_REQUIRED`.
@@ -278,4 +302,4 @@ The real source model:
 
 `SEMANTIC_REVIEW_REQUIRED` remains intentional review state and should not be confused with an importer execution/reconciliation failure.
 
-v0.8.19 has completed Workbench compatibility acceptance, all P0 importer release-conformity blockers IMP-001 through IMP-006 are closed, and P1 IMP-007 is closed. Release conformity continues with the P1 register; next is IMP-008 (executable disposition for every discovered/non-empty QEAX table).
+v0.8.19 has completed Workbench compatibility acceptance, all P0 importer release-conformity blockers IMP-001 through IMP-006 are closed, and P1 source-governance blockers IMP-007 and IMP-008 are closed. Release conformity continues with the remaining P1 semantic/model gates; next is IMP-009 (prove definitionless contextual Interfaces and their topology end-to-end on the current real-source output).
