@@ -2958,7 +2958,7 @@ function buildLocalOccurrenceModel(ctx,entityCtx){
     const endpointRef=start&&start.kind==="endpoint"?start:(end&&end.kind==="endpoint"?end:null);
     if(!partRef||!endpointRef)return false;
     const ownerKey=commonConnectionOwner(partRef,endpointRef);
-    if(!ownerKey||!conveyedItems.length)return false;
+    if(!conveyedItems.length)return false;
     const prepared=[];
     for(const item of conveyedItems){
       const rr=resolveEndpoint(item.Object_ID,ctx.elementCtx,ctx.portResolution);
