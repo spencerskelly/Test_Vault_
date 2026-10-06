@@ -20,6 +20,7 @@ const focused = [
   "canonical_markdown_line_endings_regression_test.js",
   "port_contextual_only_regression_test.js",
   "local_model_parts_interfaces_regression_test.js",
+  "folded_part_relationship_regression_test.js",
   "contextual_connections_regression_test.js",
   "exposes_regression_test.js",
   "conveyed_flow_allocation_regression_test.js",

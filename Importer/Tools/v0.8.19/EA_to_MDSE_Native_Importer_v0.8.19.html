@@ -2883,7 +2883,7 @@ function buildRelationshipGraph(ctx,entityCtx,limitations){
     if(trim2(raw.Object_Type)!=="Part"||trim2(raw.Stereotype)==="FlowProperty"||!n2(raw.ParentID))continue;
     const child=resolveEndpoint(raw.Object_ID,ctx.elementCtx,ctx.portResolution),owner=resolveEndpoint(raw.ParentID,ctx.elementCtx,ctx.portResolution);
     if(!entities.has(child.key)||!entities.has(owner.key)||child.key===owner.key)continue;
-    addForwardRel(graph,owner.key,ownerField(owner.type,child.type,child.plan&&child.plan.subtype),child.key,false);
+    addForwardRel(graph,owner.key,ownerField(owner.type,child.type,owner.plan&&owner.plan.subtype,child.plan&&child.plan.subtype),child.key,false);
   }
 
   // W-384: EA Ports are Local Model Interface occurrences only. No note-level Port ownership,
