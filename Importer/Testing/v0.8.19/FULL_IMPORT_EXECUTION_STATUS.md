@@ -179,6 +179,26 @@ W-389 / IMP-003 proves that mechanical write completion is not semantic/model ac
 
 The importer UI, Run Manifest, Import State and acceptance evidence therefore qualify PASS by dimension. `IMPORT_COMPLETE` means the import transaction completed mechanically; it does **not** mean semantic/model acceptance.
 
+## WAL-mode source-integrity acceptance
+
+W-390 / IMP-004 proves that an EA SQLite snapshot requiring WAL content is rejected before planning/import.
+
+- Real-QEAX bridge: **PASS**, run `37417967397`
+- Clean EA8647 source:
+  - WAL mode: **false**
+  - preflight: **PASS**
+  - whole-model plan: **PASS**
+- Same source through a virtual header-only WAL mutation:
+  - WAL mode: **true**
+  - preflight: **FAIL**
+  - hard-fail codes: **SQLITE_WAL_MODE only**
+  - plan created: **false**
+  - source SHA-256: **null** because hard preflight failure stops the path before fingerprinting/planning
+- Fast importer CI on the same head: **PASS**, run `37417971551`
+- Base package check on the same head: **PASS**, run `37417971522`
+
+The WAL fixture does not copy or alter the source database on disk; only SQLite header bytes 18/19 are changed as the headless browser-compatible file wrapper serves reads.
+
 ## Step 12 conclusion
 
 Step 12 execution is **PASS**; semantic acceptance remains `ACCEPTANCE_PENDING` with `SEMANTIC_REVIEW_REQUIRED`.
