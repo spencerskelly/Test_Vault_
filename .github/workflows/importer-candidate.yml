@@ -58,6 +58,11 @@ jobs:
       - name: Check v0.8.19 headless acceptance harness syntax
         run: node --check "Importer/Testing/v0.8.19/headless_full_import.js"
 
+      - name: Compile generated v0.8.19 headless VM source
+        env:
+          MDSE_HEADLESS_COMPILE_ONLY: "1"
+        run: node "Importer/Testing/v0.8.19/headless_full_import.js" "Importer/Tools/v0.8.19/EA_to_MDSE_Native_Importer_v0.8.19.html" /dev/null "$RUNNER_TEMP/unused"
+
       - name: Check v0.8.19 aggregate release gate
         run: node "Importer/Testing/v0.8.19/release_gate_regression_test.js"
       - name: Compile IMP-009 output validator
