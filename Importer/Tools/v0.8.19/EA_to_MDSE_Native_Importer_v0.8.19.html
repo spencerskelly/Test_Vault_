@@ -1775,9 +1775,25 @@ function buildNoteLinkFacts(connectors,byId){
   return byNote;
 }
 
+function exactInterfaceFlowCopyTarget(raw,byId,byGuidNorm){
+  if(!raw||trim2(raw.Object_Type)!=="Part"||trim2(raw.Stereotype)==="FlowProperty")return null;
+  const parent=byId.get(n2(raw.ParentID));
+  if(!parent||trim2(parent.Object_Type)!=="Port")return null;
+  const classifier=byId.get(n2(raw.Classifier))||byGuidNorm.get(normGuid(raw.Classifier_guid));
+  if(!classifier||trim2(classifier.Object_Type)!=="Part"||trim2(classifier.Stereotype)!=="FlowProperty")return null;
+  const interfaceDef=byId.get(n2(classifier.ParentID));
+  if(!interfaceDef||trim2(interfaceDef.Object_Type)!=="Class"||!INTERFACE_CLASS_STEREOTYPES.has(trim2(interfaceDef.Stereotype)))return null;
+  if(!trim2(raw.PDATA1)||normGuid(raw.PDATA1)!==normGuid(classifier.PDATA1))return null;
+  if(normGuid(parent.PDATA1)!==normGuid(interfaceDef.ea_guid))return null;
+  const typed=byGuidNorm.get(normGuid(raw.PDATA1));
+  if(!typed||!(trim2(typed.Object_Type)==="Signal"||trim2(typed.Object_Type)==="Class"))return null;
+  return classifier;
+}
+
 function classifyElements(objects,connectors,pkg,portResolution){
   const byId=new Map(objects.map(o=>[n2(o.Object_ID),o]));
   const byGuid=new Map(objects.filter(o=>trim2(o.ea_guid)).map(o=>[trim2(o.ea_guid),o]));
+  const byGuidNorm=new Map(objects.filter(o=>trim2(o.ea_guid)).map(o=>[normGuid(o.ea_guid),o]));
   const noteLinks=buildNoteLinkFacts(connectors,byId);
   const plans=new Map();
 
@@ -1796,8 +1812,11 @@ function classifyElements(objects,connectors,pkg,portResolution){
       if(st==="FlowProperty"){
         p.outcome="note";p.mdseType="Item Flow";p.rule="W-132/W-177";
       }else{
-        const target=byGuid.get(trim2(raw.PDATA1));
-        if(target&&trim2(target.Object_Type)==="Class"){
+        const flowCopy=exactInterfaceFlowCopyTarget(raw,byId,byGuidNorm);
+        const target=byGuid.get(trim2(raw.PDATA1))||byGuidNorm.get(normGuid(raw.PDATA1));
+        if(flowCopy){
+          p.outcome="folded";p.rule="W-397";p.targetKey=planKey("object",flowCopy.Object_ID);
+        }else if(target&&trim2(target.Object_Type)==="Class"){
           p.outcome="folded";p.mdseType="Object";p.rule="W-136";p.targetKey=planKey("object",target.Object_ID);
         }else if(target&&["Activity","State","Signal"].includes(trim2(target.Object_Type))){
           p.outcome="folded";p.rule="W-137/W-149";p.targetKey=planKey("object",target.Object_ID);
@@ -2374,7 +2393,7 @@ const TAG_SOURCE_ORDER=[
   "Applicability Comment","Webasto MBDV Profile::Applicability Comment","verifyMethod",
   "Positions","Style","CMF","Material","Weight (g)","Quantity","Piece Cost",
   "PowerMax","Current Max","CurrentOutMax","VoltageInMin","VoltageInMax","VoltageOutMin",
-  "VoltageOutMax","Cable Compatibility","SignalType","Severity","Occurence","Detection"
+  "VoltageOutMax","Cable Compatibility","SignalType","Severity","Occurence","Detection","direction"
 ];
 const TAG_SOURCE_SET=new Set(TAG_SOURCE_ORDER);
 const AUTHOR_DISPLAY={
@@ -2886,6 +2905,16 @@ function buildRelationshipGraph(ctx,entityCtx,limitations){
     addForwardRel(graph,owner.key,ownerField(owner.type,child.type,owner.plan&&owner.plan.subtype,child.plan&&child.plan.subtype),child.key,false);
   }
 
+  // W-397: reusable Interface definitions own their FlowProperty Item Flow definitions.
+  // The old Port-note hasFlow vocabulary is not revived; current generic ownership is hasChild/childOf.
+  for(const raw of ctx.objects){
+    if(trim2(raw.Object_Type)!=="Part"||trim2(raw.Stereotype)!=="FlowProperty"||!n2(raw.ParentID))continue;
+    const child=resolveEndpoint(raw.Object_ID,ctx.elementCtx,ctx.portResolution),owner=resolveEndpoint(raw.ParentID,ctx.elementCtx,ctx.portResolution);
+    if(!entities.has(child.key)||!entities.has(owner.key)||child.key===owner.key)continue;
+    if(owner.type==="Object"&&owner.plan&&owner.plan.subtype==="interface"&&child.type==="Item Flow")
+      addForwardRel(graph,owner.key,"hasChild",child.key,false);
+  }
+
   // W-384: EA Ports are Local Model Interface occurrences only. No note-level Port ownership,
   // classifier, interfaces, flow or exposure relationships are emitted here.
   applyConnectorRelations(graph,ctx,entityCtx,limitations);
@@ -2970,7 +2999,7 @@ function conveyedObjectMap(ctx){
 function buildLocalOccurrenceModel(ctx,entityCtx){
   const entities=entityCtx.entities;
   const partsByOwner=new Map(), endpointsByOwner=new Map(), connectionsByOwner=new Map(), requirementLinksByOwner=new Map();
-  const partBySource=new Map(), endpointBySource=new Map(), warnings=[], unallocatedConveyedFlows=[], partTerminatedFlowReviews=[];
+  const partBySource=new Map(), endpointBySource=new Map(), warnings=[], warningKeys=new Set(), unallocatedConveyedFlows=[], partTerminatedFlowReviews=[];
   const conveyed=conveyedObjectMap(ctx);
   const connectorById=new Map((ctx.connectors||[]).map(c=>[n2(c.Connector_ID),c]));
   const objectByNormGuid=new Map();
@@ -2990,7 +3019,17 @@ function buildLocalOccurrenceModel(ctx,entityCtx){
     if(!raw||trim2(raw.Object_Type)!=="Part"||trim2(raw.Stereotype)==="FlowProperty"||!p||p.outcome!=="folded")return null;
     const definitionEntity=p.targetKey?entities.get(p.targetKey):null;
     if(!definitionEntity||definitionEntity.mdseType!=="Object"){
-      warnings.push("Folded EA Part "+trim2(raw.ea_guid)+" resolves to "+(definitionEntity?definitionEntity.mdseType:"no first-class definition")+"; it remains note-level/source evidence and is not emitted as a Local Model part occurrence.");
+      // W-396/W-397: semantic carrier Parts are intentionally not structural Local Model Parts.
+      if(definitionEntity&&(["Behavior","Condition"].includes(definitionEntity.mdseType)||(definitionEntity.mdseType==="Item Flow"&&p.rule==="W-397"))){
+        partBySource.set(id,null);
+        return null;
+      }
+      const wk="folded-part:"+id;
+      if(!warningKeys.has(wk)){
+        warningKeys.add(wk);
+        warnings.push("Folded EA Part "+trim2(raw.ea_guid)+" resolves to "+(definitionEntity?definitionEntity.mdseType:"no first-class definition")+"; it remains note-level/source evidence and is not emitted as a Local Model part occurrence.");
+      }
+      partBySource.set(id,null);
       return null;
     }
     const parent=ctx.byId.get(n2(raw.ParentID));
@@ -3790,6 +3829,15 @@ async function buildSourceEvidence(ctx,entityCtx,endpointFindings){
     }
   }
 
+  // W-397: FlowProperty Item Flow definitions retain their EA typing without inventing
+  // a new canonical relationship. Direction is retained through the governed source-tag path.
+  for(const raw of ctx.objects||[]){
+    if(trim2(raw.Object_Type)!=="Part"||trim2(raw.Stereotype)!=="FlowProperty"||!trim2(raw.PDATA1))continue;
+    const flow=rawIdEntity(ctx,entityCtx,raw.Object_ID);if(!flow)continue;
+    const typed=rawGuidEntity(ctx,entityCtx,raw.PDATA1);
+    addEvidence(out,flow.key,"structure","- FlowProperty type: "+(typed?entityLink(typed):trim2(raw.PDATA1)));
+  }
+
   // W-194 xref evidence on both ends, independently of frontmatter relationships.
   const xKinds=new Set(["entry","doactivity","represents","target"]);
   for(const x of ctx.xrefs||[]){
@@ -3987,8 +4035,10 @@ function renderEntityMarkdown(e,graph,entityCtx,tagMap,foldedNotes,externalSet,s
     const vals=tags.filter(x=>x.name===name);
     for(const t of vals){
       if(name==="Webasto MBDV Profile::Priority"&&/[\r\n]/.test(t.value))continue;
-      const label=(name==="PN"||name==="PartNumber")?"Part Number":name;
-      lines.push("- "+label+": "+t.value.replace(/\r?\n/g," "));
+      const label=(name==="PN"||name==="PartNumber")?"Part Number":(name==="direction"?"Direction":name);
+      const value=t.value.replace(/\r?\n/g," ");
+      if(name==="direction"&&vals.slice(0,vals.indexOf(t)).some(x=>trim2(x.value)===trim2(t.value)))continue;
+      lines.push("- "+label+": "+value);
     }
   }
   const ev=sourceEvidence&&sourceEvidence.get(e.key);

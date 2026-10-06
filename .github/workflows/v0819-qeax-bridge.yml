@@ -119,6 +119,14 @@ jobs:
           python3 Importer/Testing/v0.8.19/imp010_hierarchy_acceptance.py "$QEAX" "$BASE" | tee "$RUNNER_TEMP/imp010-hierarchy-acceptance.txt"
           test -s "$RUNNER_TEMP/imp010-hierarchy-acceptance.txt"
 
+      - name: Gate 1c - IMP-010C Interface FlowProperty acceptance
+        run: |
+          set -o pipefail
+          QEAX="$(find _qeax_bridge -maxdepth 1 -type f -name '*.qeax' ! -name '._*' -size +1M | head -1)"
+          BASE="$RUNNER_TEMP/MDSE_v0819_full_import"
+          python3 Importer/Testing/v0.8.19/imp010_interface_flow_acceptance.py "$QEAX" "$BASE" | tee "$RUNNER_TEMP/imp010-interface-flow-acceptance.txt"
+          test -s "$RUNNER_TEMP/imp010-interface-flow-acceptance.txt"
+
       - name: Checkout Workbench 0.1.18 acceptance source
         uses: actions/checkout@v4
         with:
@@ -184,6 +192,7 @@ jobs:
             ${{ runner.temp }}/v0819-headless.log
             ${{ runner.temp }}/imp009-headless-acceptance.txt
             ${{ runner.temp }}/imp010-hierarchy-acceptance.txt
+            ${{ runner.temp }}/imp010-interface-flow-acceptance.txt
             ${{ runner.temp }}/wb128-readonly-scan.json
             ${{ runner.temp }}/wb128-real-vault-acceptance.json
             ${{ runner.temp }}/wb128-real-vault-edit-acceptance.json
