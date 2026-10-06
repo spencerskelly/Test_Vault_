@@ -287,6 +287,44 @@ The gate is intentionally fail-closed. An undispositioned discovered table, a go
 
 This closes **IMP-008**.
 
+## Definitionless Interface / Workbench acceptance
+
+IMP-009 is closed on the post-W-395 real-source bridge.
+
+- Real-QEAX bridge: **PASS**, run `37492673084`
+- Full import: **WRITE_PASS / IMPORT_COMPLETE**
+- Deterministic second import: **PASS**, 28,273 files vs 28,273, no changed files
+- IMP-009 headless Gate 1: **PASS — 25 checks, 0 warnings**
+- Definitionless contextual Interfaces: **1,051**
+- Definitionless Interfaces referenced by persisted local links: **306**
+- Definitionless Interfaces participating in Connections: **256**
+- Definitionless connector-review rows traceable to exact source Object_IDs: **8 / 8**
+- First-class `type: Port` notes: **0**
+- Workbench 0.1.18 read-only Gate 2: **PASS**
+- Workbench 0.1.18 semantic Gate 3: **PASS**
+  - Markdown files scanned: **27,813**
+  - Local Model no-op regions checked: **1,050**
+  - no-op formatting drift: **0**
+  - Local block-reference failures: **0**
+  - duplicate local IDs: **0**
+  - parser errors: **0**
+  - blocking compatibility findings: **0**
+  - `Connection.exposes` references: **23**
+  - representative Structure, Interfaces/Internal, conveyed-flow and Where Used samples: **PASS**
+- Workbench 0.1.18 disposable structured-edit Gate 4: **PASS**
+  - reviewed create Interface: PASS
+  - create/reconnect Connection: PASS
+  - patch Interface: PASS
+  - delete Connection/Interface: PASS
+  - Undo/Redo: PASS
+  - original imported source note unchanged by hash: **PASS**
+  - final disposable fixture Local Model errors: **0**
+- Exact-artifact Obsidian startup acceptance remains green: Workbench run `37409833814`
+
+The immediately preceding real bridge exposed four byte-only no-op drifts caused by mixed line endings in three EA narrative notes. W-395 corrects the importer output boundary by canonicalizing final generated Markdown to LF; the focused `canonical_markdown_line_endings_regression_test.js` is now part of the aggregate v0.8.19 release gate. The post-W-395 bridge above proves `noOpDrift: 0` on the real model.
+
+This closes **IMP-009**. The remaining `SEMANTIC_REVIEW_REQUIRED / ACCEPTANCE_PENDING` state belongs to later P1 semantic/model issues, beginning with IMP-010; it is not a definitionless-Interface acceptance failure.
+
 ## Step 12 conclusion
 
 Step 12 execution is **PASS**; semantic acceptance remains `ACCEPTANCE_PENDING` with `SEMANTIC_REVIEW_REQUIRED`.
@@ -302,4 +340,4 @@ The real source model:
 
 `SEMANTIC_REVIEW_REQUIRED` remains intentional review state and should not be confused with an importer execution/reconciliation failure.
 
-v0.8.19 has completed Workbench compatibility acceptance, all P0 importer release-conformity blockers IMP-001 through IMP-006 are closed, and P1 source-governance blockers IMP-007 and IMP-008 are closed. Release conformity continues with the remaining P1 semantic/model gates; next is IMP-009 (prove definitionless contextual Interfaces and their topology end-to-end on the current real-source output).
+v0.8.19 has completed Workbench compatibility acceptance, all P0 importer release-conformity blockers IMP-001 through IMP-006 are closed, and P1 IMP-007 through IMP-009 are closed. Release conformity continues with the remaining P1 semantic/model gates; next is IMP-010 (classify and resolve folded Parts whose deterministic reusable target is not an Object without inventing structure).
