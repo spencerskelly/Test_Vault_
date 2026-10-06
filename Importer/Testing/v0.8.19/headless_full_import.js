@@ -406,11 +406,11 @@ function validateImp002(result,root){
   for(const x of audit.endpointFindings){
     if(!x.ownerPath||!x.targetPath)throw new Error("IMP-002: suppressed finding lacks emitted owner/target path");
     const ownerText=fs.readFileSync(path.join(root,x.ownerPath),"utf8");
-    const targetLink="[["".slice(0,2)+(x.targetLink||"")+"]]"; // produces [[target]] without template interpolation
+    const targetLink="[["+(x.targetLink||"")+"]]";
     if(relationValues(ownerText,x.field).includes(targetLink))yamlSuppressedHits++;
     if(x.inverseField){
       const targetText=fs.readFileSync(path.join(root,x.targetPath),"utf8");
-      const ownerLink="[["".slice(0,2)+(x.ownerLink||"")+"]]";
+      const ownerLink="[["+(x.ownerLink||"")+"]]";
       if(relationValues(targetText,x.inverseField).includes(ownerLink))yamlSuppressedHits++;
     }
   }
