@@ -29,15 +29,16 @@ jobs:
       - uses: actions/checkout@v4
 
       - name: Download accepted QEAX source artifact
-        env:
-          GH_TOKEN: \${{ github.token }}
+        uses: actions/download-artifact@v4
+        with:
+          name: v0819-qeax-source
+          path: _qeax_bridge
+          github-token: ${{ github.token }}
+          repository: spencerskelly/Test_Vault_
+          run-id: 37399169045
+
+      - name: Verify downloaded QEAX
         run: |
-          rm -rf _qeax_bridge
-          mkdir -p _qeax_bridge
-          gh run download 37399169045 \
-            --repo spencerskelly/Test_Vault_ \
-            --name v0819-qeax-source \
-            --dir _qeax_bridge
           test -n "$(find _qeax_bridge -type f -name '*.qeax' -size +1M -print -quit)"
 
       - name: Rebuild exact v0.8.19 disposable vault
@@ -84,9 +85,9 @@ jobs:
         with:
           name: wb128-v0819-real-vault
           path: |
-            \${{ runner.temp }}/v0819-headless.log
-            \${{ runner.temp }}/wb128-real-vault.log
-            \${{ runner.temp }}/MDSE_v0819_full_import
+            ${{ runner.temp }}/v0819-headless.log
+            ${{ runner.temp }}/wb128-real-vault.log
+            ${{ runner.temp }}/MDSE_v0819_full_import
           include-hidden-files: true
           retention-days: 7
           compression-level: 6
