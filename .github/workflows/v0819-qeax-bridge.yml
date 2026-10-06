@@ -70,6 +70,24 @@ jobs:
             "$RUNNER_TEMP/MDSE_v0819_full_import" \
             "$RUNNER_TEMP/MDSE_v0819_full_import_2"
 
+      - name: Checkout WB-128 read-only scanner
+        uses: actions/checkout@v4
+        with:
+          repository: spencerskelly/MDSE_Workbench
+          ref: 3682e359645a32093ac66c4bd42ccb37ca1fbdc1
+          path: _wb128
+
+      - name: Install WB-128 scanner dependencies
+        run: npm ci --prefix _wb128
+
+      - name: Gate 2 - read-only Workbench real-vault scan
+        env:
+          NODE_OPTIONS: --max-old-space-size=1024
+        run: |
+          BASE="$RUNNER_TEMP/MDSE_v0819_full_import"
+          timeout 10m npm --prefix _wb128 run accept:real-vault:scan -- \
+            "$BASE" "$RUNNER_TEMP/wb128-readonly-scan.json"
+
       - name: Inspect full-import output
         if: always()
         run: |
@@ -90,6 +108,7 @@ jobs:
           name: v0819-full-import-evidence
           path: |
             ${{ runner.temp }}/v0819-headless.log
+            ${{ runner.temp }}/wb128-readonly-scan.json
             ${{ runner.temp }}/MDSE_v0819_full_import/99_System/11_Import
           retention-days: 7
           if-no-files-found: warn
