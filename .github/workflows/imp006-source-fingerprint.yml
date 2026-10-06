@@ -47,14 +47,17 @@ jobs:
           repository: spencerskelly/Test_Vault_
           run-id: 37416802624
 
-      - name: Extract exact accepted QEAX
+      - name: Locate exact accepted QEAX
         run: |
           set -euo pipefail
-          ZIP="$(find "$RUNNER_TEMP/imp006/source-artifact" -type f -name '*.zip' | head -1)"
-          test -n "$ZIP"
-          mkdir -p "$RUNNER_TEMP/imp006/source"
-          unzip -q "$ZIP" -d "$RUNNER_TEMP/imp006/source"
-          QEAX="$(find "$RUNNER_TEMP/imp006/source" -type f -name '*.qeax' ! -name '._*' -size +1M | head -1)"
+          QEAX="$(find "$RUNNER_TEMP/imp006/source-artifact" -type f -name '*.qeax' ! -name '._*' -size +1M | head -1)"
+          if [ -z "$QEAX" ]; then
+            ZIP="$(find "$RUNNER_TEMP/imp006/source-artifact" -type f -name '*.zip' | head -1)"
+            test -n "$ZIP"
+            mkdir -p "$RUNNER_TEMP/imp006/source"
+            unzip -q "$ZIP" -d "$RUNNER_TEMP/imp006/source"
+            QEAX="$(find "$RUNNER_TEMP/imp006/source" -type f -name '*.qeax' ! -name '._*' -size +1M | head -1)"
+          fi
           test -n "$QEAX"
           echo "QEAX=$QEAX" >> "$GITHUB_ENV"
 
