@@ -102,7 +102,7 @@ const context={
   LOCAL_MODEL_SCHEMA_VERSION:constValue("LOCAL_MODEL_SCHEMA_VERSION"),
   outputDirHandle:null,
   lastPlan:{result:"PASS"},
-  window:{showDirectoryPicker:async()=>rootHandle},
+  __rootHandle:rootHandle,
   el,
   log:(x)=>logs.push(String(x)),
 };
@@ -114,7 +114,7 @@ const names=[
   "requireBaseVault","utcVaultStamp","initializeSelectedBase","chooseOutputFolder"
 ];
 vm.runInContext(
-  "var outputDirHandle=null; var lastPlan={result:'PASS'};\n"+
+  "var outputDirHandle=null; var lastPlan={result:'PASS'}; globalThis.window={showDirectoryPicker:async function(){return globalThis.__rootHandle;}};\n"+
   names.map(extractFunction).join("\n")+
   "\nthis.__api={requireBaseVault,initializeSelectedBase,chooseOutputFolder,getOutput:()=>outputDirHandle};",
   context,
