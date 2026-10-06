@@ -42,6 +42,7 @@ expect(d.category,"resolved Connection.exposes","exposure category");
 expect(d.actualRelation,"Connection.exposes","exposure relation");
 expect(d.connection.localId,"conn-1","exposure connection");
 expect(d.exposes.localId,outer.localId,"exposure endpoint");
+expect(d.candidateConnections.length,1,"exposure candidate count");
 
 const deep=ep(4,"owner",["P1","P2","J1"],["P1","P2"]);
 lm=local([inner,deep],[["owner",[]]]);
