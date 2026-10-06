@@ -57,12 +57,22 @@ jobs:
 
       - name: Run actual v0.8.19 full importer
         run: |
+          set -o pipefail
           QEAX="$(find _qeax_bridge -maxdepth 1 -type f -name '*.qeax' ! -name '._*' -size +1M | head -1)"
           BASE="$RUNNER_TEMP/MDSE_v0819_full_import"
           BASE2="$RUNNER_TEMP/MDSE_v0819_full_import_2"
           node Importer/Testing/v0.8.19/headless_full_import.js \
             Importer/Tools/v0.8.19/EA_to_MDSE_Native_Importer_v0.8.19.html \
             "$QEAX" "$BASE" "$BASE2" | tee "$RUNNER_TEMP/v0819-headless.log"
+          test -f "$BASE/99_System/11_Import/Run Manifest.md"
+          test -f "$BASE2/99_System/11_Import/Run Manifest.md"
+          python3 - <<'PY'
+          import json, os
+          for key in ("MDSE_v0819_full_import","MDSE_v0819_full_import_2"):
+              p=os.path.join(os.environ["RUNNER_TEMP"],key,"99_System","11_Import","Import State.json")
+              with open(p,encoding="utf-8") as f: state=json.load(f)
+              assert state["status"]=="IMPORT_COMPLETE", (p,state.get("status"))
+          PY
 
       - name: Compare deterministic outputs
         run: |
