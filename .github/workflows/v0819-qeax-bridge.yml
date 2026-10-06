@@ -20,6 +20,11 @@ jobs:
       - name: Run v0.8.19 release gate
         run: node Importer/Testing/v0.8.19/release_gate_regression_test.js
 
+      - name: Compile generated headless VM source
+        env:
+          MDSE_HEADLESS_COMPILE_ONLY: "1"
+        run: node Importer/Testing/v0.8.19/headless_full_import.js Importer/Tools/v0.8.19/EA_to_MDSE_Native_Importer_v0.8.19.html /dev/null "$RUNNER_TEMP/unused"
+
       - name: Verify source archive
         run: |
           test -f EA_2026_09_06_endgame.qeax.zip
