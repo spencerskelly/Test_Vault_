@@ -18,6 +18,9 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      - name: Verify governed source profile sync
+        run: python3 Importer/Tools/v0.8.19/sync_source_profile.py --check
+
       - name: Run v0.8.19 release gate
         run: node Importer/Testing/v0.8.19/release_gate_regression_test.js
 
