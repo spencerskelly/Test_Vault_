@@ -194,4 +194,4 @@ The real source model:
 
 `SEMANTIC_REVIEW_REQUIRED` remains intentional review state and should not be confused with an importer execution/reconciliation failure.
 
-v0.8.19 is now ready to proceed to the Workbench compatibility backlog step before release freeze.
+v0.8.19 has completed Workbench compatibility acceptance. Importer release conformity continues with the remaining release-blocking issue register; next is P0 IMP-004 (WAL-mode preflight rejection).
