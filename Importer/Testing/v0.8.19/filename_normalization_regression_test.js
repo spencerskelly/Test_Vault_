@@ -13,24 +13,9 @@ const src = fs.readFileSync(importer, "utf8");
 function extractFunction(name) {
   const start = src.indexOf("function " + name + "(");
   if (start < 0) throw new Error("Missing function: " + name);
-  const brace = src.indexOf("{", start);
-  let depth = 0, quote = null, escape = false;
-  for (let i = brace; i < src.length; i++) {
-    const ch = src[i];
-    if (quote) {
-      if (escape) escape = false;
-      else if (ch === "\\") escape = true;
-      else if (ch === quote) quote = null;
-      continue;
-    }
-    if (ch === "'" || ch === '"' || ch === "`") { quote = ch; continue; }
-    if (ch === "{") depth++;
-    else if (ch === "}") {
-      depth--;
-      if (depth === 0) return src.slice(start, i + 1);
-    }
-  }
-  throw new Error("Unterminated function: " + name);
+  const next = src.indexOf("\nfunction ", start + 10);
+  if (next < 0) throw new Error("Missing function boundary after: " + name);
+  return src.slice(start, next).trim();
 }
 
 const code = [
