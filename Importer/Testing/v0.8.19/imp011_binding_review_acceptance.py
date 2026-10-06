@@ -44,6 +44,7 @@ def main():
       req(rel=="Connection.exposes",f"{r.get('ea_guid')} exposure relation mismatch")
       req(bool(r.get("connection_local","").strip()),f"{r.get('ea_guid')} exposure missing connection_local")
       req(bool(r.get("exposes_local","").strip()),f"{r.get('ea_guid')} exposure missing exposes_local")
+      req(r.get("candidate_connection_count","")=="1",f"{r.get('ea_guid')} exposure expected one candidate Connection")
     elif cat=="temporary local equals - no internal Connection":
       req(rel=="Interface.equals (temporary)",f"{r.get('ea_guid')} equals relation mismatch")
       req(r.get("candidate_connection_count","")=="0",f"{r.get('ea_guid')} expected zero candidate Connections")
