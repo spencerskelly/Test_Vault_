@@ -26,6 +26,7 @@ const focused = [
   "part_terminated_flow_review_regression_test.js",
   "definitionless_interface_accounting_regression_test.js",
   "canonical_relationship_boundary_regression_test.js",
+  "source_fingerprint_regression_test.js",
   "transaction_failure_regression_test.js"
 ];
 
