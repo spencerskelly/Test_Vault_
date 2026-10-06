@@ -32,8 +32,8 @@ const outerKey="local:"+outer.ownerKey+":"+outer.path.join("/");
 const innerKey="local:"+inner.ownerKey+":"+inner.path.join("/");
 outer.equalsRefs=[{refKey:innerKey}];inner.equalsRefs=[{refKey:outerKey}];
 let d=api.bindingReviewDisposition(c0,lm);
-expect(d.category,"temporary local equals - no internal Connection","zero-candidate equals category");
-expect(d.actualRelation,"Interface.equals (temporary)","zero-candidate equals relation");
+expect(d.category,"canonical local equals - boundary/internal no internal Connection","zero-candidate equals category");
+expect(d.actualRelation,"Interface.equals","zero-candidate equals relation");
 expect(d.candidateConnections.length,0,"zero-candidate count");
 
 outer.equalsRefs=[];inner.equalsRefs=[];
@@ -52,13 +52,13 @@ expect(d.candidateConnections.length,1,"exposure candidate count");
 const deep=ep(4,"owner",["P1","P2","J1"],["P1","P2"]);
 lm=local([inner,deep],[["owner",[]]]);
 d=api.bindingReviewDisposition(con(101,2,4),lm);
-expect(d.category,"same-owner nested internal binding","nested category");
-expect(d.actualRelation,"","nested writes no relation");
+expect(d.category,"canonical local equals - same-owner nested internal binding","nested category");
+expect(d.actualRelation,"Interface.equals","nested canonical equals relation");
 
 const sib=ep(5,"owner",["P2","J1"],["P2"]);
 lm=local([inner,sib],[["owner",[]]]);
 d=api.bindingReviewDisposition(con(102,2,5),lm);
-expect(d.category,"same-owner sibling/non-hierarchical binding","sibling category");
+expect(d.category,"canonical local equals - same-owner sibling/non-hierarchical binding","sibling category");
 
 const other=ep(6,"other",["J1"],[]);
 lm=local([outer,other],[["owner",[]],["other",[]]]);
