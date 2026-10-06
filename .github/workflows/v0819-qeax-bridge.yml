@@ -42,22 +42,33 @@ jobs:
         run: |
           python3 -m pip install pyyaml
           BASE="$RUNNER_TEMP/MDSE_v0819_full_import"
+          BASE2="$RUNNER_TEMP/MDSE_v0819_full_import_2"
           python3 "Base Vault/Tools/v0.8.0-r2/build-base.py" "$BASE"
+          python3 "Base Vault/Tools/v0.8.0-r2/build-base.py" "$BASE2"
           python3 "Base Vault/Testing/check-release.py" --base "$BASE" || echo "Pre-release repository checker has known non-runtime blockers; continuing to importer runtime-base validation."
-          cat > "$BASE/.vault.yaml" <<'EOF'
+          for B in "$BASE" "$BASE2"; do
+            cat > "$B/.vault.yaml" <<'EOF'
           vault_uid: 20261006000000000skellyspencer
           name: MDSE_v0819_full_import
           default_branch: main
           mdse_release: "0.8.0"
           EOF
+          done
 
       - name: Run actual v0.8.19 full importer
         run: |
           QEAX="$(find _qeax_bridge -maxdepth 1 -type f -name '*.qeax' ! -name '._*' -size +1M | head -1)"
           BASE="$RUNNER_TEMP/MDSE_v0819_full_import"
+          BASE2="$RUNNER_TEMP/MDSE_v0819_full_import_2"
           node Importer/Testing/v0.8.19/headless_full_import.js \
             Importer/Tools/v0.8.19/EA_to_MDSE_Native_Importer_v0.8.19.html \
-            "$QEAX" "$BASE" | tee "$RUNNER_TEMP/v0819-headless.log"
+            "$QEAX" "$BASE" "$BASE2" | tee "$RUNNER_TEMP/v0819-headless.log"
+
+      - name: Compare deterministic outputs
+        run: |
+          python3 Importer/Testing/v0.8.19/compare_full_import_outputs.py \
+            "$RUNNER_TEMP/MDSE_v0819_full_import" \
+            "$RUNNER_TEMP/MDSE_v0819_full_import_2"
 
       - name: Inspect full-import output
         if: always()
