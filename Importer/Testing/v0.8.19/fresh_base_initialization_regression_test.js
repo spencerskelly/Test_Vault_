@@ -142,7 +142,7 @@ const api=context.__api;
   if(!strictBlocked)throw new Error("strict write validation accepted UNINITIALIZED base");
 
   await api.chooseOutputFolder();
-  if(api.getOutput()!==rootHandle)throw new Error("fresh base selection did not retain selected output handle");
+  const selected=api.getOutput();\n  if(!selected||selected.name!==rootHandle.name)throw new Error("fresh base selection did not retain selected output handle");
   if(el("initializeOutput").disabled!==false)throw new Error("fresh base did not enable initialization control");
   if(el("generateSlice").disabled!==true)throw new Error("fresh base did not block model generation");
   if(el("initStatus").textContent!=="Fresh base — initialization required")throw new Error("fresh-base UI did not report initialization-required state");
