@@ -29,7 +29,7 @@ jobs:
         uses: actions/checkout@v4
         with:
           repository: spencerskelly/MDSE_Workbench
-          ref: 3d06ce884e52f7ada89dc1c45cce5ce11ef60ca9
+          ref: 59fc6219b1d0586900aa7d38685e7087a9d47fec
           path: _workbench
           sparse-checkout: |
             package.json
