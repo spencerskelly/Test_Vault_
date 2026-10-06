@@ -2929,7 +2929,8 @@ function stableLocalId(prefix,raw,fallback){
 function localAnchor(parts){
   return parts&&parts.length?parts[parts.length-1]:"";
 }
-function canonicalMarkdownLf(v){return str(v).replace(/\r\n?/g,"\n");}\nfunction mdInline(v){return trim2(v).replace(/\r?\n/g," ").replace(/\s+/g," ").trim();}
+function canonicalMarkdownLf(v){return str(v).replace(/\r\n?/g,"\n");}
+function mdInline(v){return trim2(v).replace(/\r?\n/g," ").replace(/\s+/g," ").trim();}
 function entityWiki(entities,key){
   const e=entities.get(key);return e?"[["+(e.linkTarget||e.fileName)+"]]":"";
 }
