@@ -25,6 +25,7 @@ const focused = [
   "contextual_connections_regression_test.js",
   "exposes_regression_test.js",
   "bindingconnector_canonical_equals_regression_test.js",
+  "bindingconnector_review_disposition_regression_test.js",
   "conveyed_flow_allocation_regression_test.js",
   "common_context_connection_ownership_regression_test.js",
   "part_terminated_flow_review_regression_test.js",
