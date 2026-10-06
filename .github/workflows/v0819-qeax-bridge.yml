@@ -12,6 +12,10 @@ on:
       - "Importer/Definition/Source Profiles/**"
   workflow_dispatch:
 
+concurrency:
+  group: v0819-qeax-bridge-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
   bridge:
     runs-on: ubuntu-latest
@@ -109,7 +113,7 @@ jobs:
         uses: actions/checkout@v4
         with:
           repository: spencerskelly/MDSE_Workbench
-          ref: f51ed792f641077f3c68a426170d3b281f5590ca
+          ref: b0c4e2c6bdfb96d36f51d8152b17be22592ef174
           path: _wb128
 
       - name: Install Workbench acceptance dependencies
@@ -130,6 +134,14 @@ jobs:
           BASE="$RUNNER_TEMP/MDSE_v0819_full_import"
           timeout 10m npm --prefix _wb128 run accept:real-vault -- \
             "$BASE" "$RUNNER_TEMP/wb128-real-vault-acceptance.json"
+
+      - name: Gate 4 - Workbench disposable structured edit acceptance
+        env:
+          NODE_OPTIONS: --max-old-space-size=1024
+        run: |
+          BASE="$RUNNER_TEMP/MDSE_v0819_full_import"
+          timeout 10m npm --prefix _wb128 run accept:real-vault:edits -- \
+            "$BASE" "$RUNNER_TEMP/wb128-real-vault-edit-acceptance.json"
 
       - name: Inspect full-import output
         if: always()
@@ -154,6 +166,7 @@ jobs:
             ${{ runner.temp }}/imp009-headless-acceptance.txt
             ${{ runner.temp }}/wb128-readonly-scan.json
             ${{ runner.temp }}/wb128-real-vault-acceptance.json
+            ${{ runner.temp }}/wb128-real-vault-edit-acceptance.json
             ${{ runner.temp }}/MDSE_v0819_full_import/99_System/11_Import
           retention-days: 7
           if-no-files-found: warn
