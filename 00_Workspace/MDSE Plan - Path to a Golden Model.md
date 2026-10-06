@@ -165,6 +165,13 @@ Priority: **P1** needed for G2/G3; **P2** needed for G4/G5; **P3** after golden.
 
 **Workbench continuation status — 2026-10-05.** The numbered stability roadmap remains closed at Step 60. Expanded WB-106 editor work is active under W4/W5. WB-128 Local Model 0.4 compatibility is implemented as Workbench 0.1.18 candidate on PR #5. CI run `37401786417` passes the full test, 60k semantic-cache, warm-start, relationship re-resolution, build, and artifact-hash gate. Local Model 0.1–0.3 remain readable but read-only for structured mutation; 0.4 writes `Parts`, `Interfaces`, and `Connections`, with `Connection.exposes` owning boundary exposure. The next gate is real-vault acceptance against the deterministic v0.8.19 import before WB-128 is merged, pinned, or promoted. WB-125 legacy-writer identity-symmetry work remains subsequent editor-safety backlog unless real-vault validation exposes a higher-priority regression.
 
+**WB-128 real-vault acceptance — bounded 5-gate plan (2026-10-05).** Keep this validation off the interactive workstation and avoid whole-vault materialization in chat. The deterministic v0.8.19 run (Actions run `37399169045`) creates the 27,709-note candidate only in runner temporary storage; the retained `v0819-full-import-evidence` artifact contains import evidence, not the full generated vault. Acceptance therefore proceeds in the same GitHub Actions environment:
+1. **Provenance/persistence check — COMPLETE.** Confirm importer 0.8.19, MDSE 0.8.0, relationships 1.36, element-types 1.18, Local Model 0.4, `IMPORT_COMPLETE`, and the deterministic source hash/counts without indexing the vault.
+2. **Read-only Workbench real-vault scan.** Generate one fresh v0.8.19 candidate in CI and run only Workbench parser/index/Local Model validation plus bounded aggregate counts; no Canvas generation and no mutations.
+3. **Representative view checks.** Select a small deterministic fixture set from the real vault covering Parts, boundary/internal Interfaces, Connections, `Connection.exposes`, conveyed flows and definitionless Interfaces; render/check only those views.
+4. **Representative edit checks on copies.** Copy only the selected owner notes into a disposable test area and exercise 0.4 create/patch/delete/reconnect operations with Review/Apply/Cancel and semantic undo/redo. Never mutate the generated acceptance candidate.
+5. **Acceptance decision.** Record timings/findings, compare them with importer evidence, and only then merge/pin Workbench 0.1.18 if no blocking incompatibility remains.
+
 
 ### Bootstrap
 
