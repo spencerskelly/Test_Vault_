@@ -81,6 +81,10 @@ jobs:
         run: python -m py_compile "Importer/Testing/v0.8.19/imp009_output_acceptance.py" "Importer/Testing/v0.8.19/imp009_output_acceptance_selftest.py"
       - name: Exercise IMP-009 output validator
         run: python "Importer/Testing/v0.8.19/imp009_output_acceptance_selftest.py"
+      - name: Compile IMP-010A/B hierarchy validator
+        run: python -m py_compile "Importer/Testing/v0.8.19/imp010_hierarchy_acceptance.py" "Importer/Testing/v0.8.19/imp010_hierarchy_acceptance_selftest.py"
+      - name: Exercise IMP-010A/B hierarchy validator
+        run: python "Importer/Testing/v0.8.19/imp010_hierarchy_acceptance_selftest.py"
 
   package-integration-base:
     needs: static-contract

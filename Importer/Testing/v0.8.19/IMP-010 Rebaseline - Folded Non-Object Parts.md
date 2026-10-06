@@ -83,7 +83,7 @@ The one Object-owned case is:
 - target source type: State / System State
 - source Part GUID: `{F82059BA-4249-4db8-A19B-426004EB5E9C}`
 
-The 60 State→State rows behave like state/design hierarchy references. The one Object→Condition row is structurally different and is a candidate for ordinary state ownership rather than generic hierarchy.
+The 60 State→State rows behave like state/design hierarchy references. The one Object→Condition row is structurally different. Its target `WiFi 802.11 Interface` is under `05 Product Design`, so the current W-149/W-291/W-292 ownership rule resolves it as `hasDesign` / `designOf`, not `hasState` / `stateOf`.
 
 ### C — Interface flow-property instances: 16
 
@@ -128,7 +128,7 @@ Current v0.8.19 has two relevant mechanisms:
 2. The note-level relationship graph is type-aware:
    - Behavior → Behavior resolves through generic hierarchy ownership (`hasChild` / `childOf`);
    - Condition → Condition likewise resolves as hierarchy except governed special cases;
-   - Object → Condition resolves as `hasState` / `stateOf`.
+   - Object → Condition resolves as `hasDesign` / `designOf` when the Condition subtype is `design`; otherwise it resolves as `hasState` / `stateOf`. The single current IMP-010 case is a design.
 
 Therefore the current Local Model rejection is not evidence that all 219 need a broader Part schema. For groups A/B, a Local Model Part would likely be the wrong representation.
 
@@ -143,7 +143,7 @@ Do **not** create Local Model Parts. Verify on real output that each determinist
 Split further:
 
 - 60 State→Condition references: verify the intended Condition hierarchy relationship.
-- 1 Object→Condition reference: verify `hasState` / `stateOf`.
+- 1 Object→Condition/design reference: verify `hasDesign` / `designOf`.
 
 Do **not** make either case a physical Local Model Part merely because EA stored the carrier row as `Object_Type=Part`.
 
@@ -164,9 +164,27 @@ Add a focused IMP-010 classifier/validator that proves, on the current real sour
 1. exactly 219 unique affected source Parts;
 2. exact subgroup counts 142 / 61 / 16;
 3. the 142 Behavior and 60 State-owned Condition references resolve to their intended canonical note-level hierarchy links;
-4. the single Object-owned Condition resolves through state ownership;
+4. the single Object-owned design Condition resolves through `hasDesign` / `designOf`;
 5. the 16 Port-owned Signal copies are traceable through their Port definition and FlowProperty classifier;
 6. no non-Object target is emitted as a Local Model Part;
 7. one source Part produces at most one actionable review finding.
 
 Only after that evidence should the governing rule be updated and implementation behavior changed.
+
+
+## Current acceptance gate
+
+`imp010_hierarchy_acceptance.py` is the focused real-source acceptance for groups A/B. It is intentionally stricter than checking aggregate relationship counts:
+
+- reads the accepted QEAX directly;
+- requires exactly 203 Activity/State-targeted Part carrier rows (142 Activity, 61 State);
+- requires the State-target owner split 60 State / 1 Class;
+- verifies each folded Part ledger row resolves to the exact target note UID;
+- proves none of the 203 source GUIDs is emitted as a Local Model physical Part;
+- finds the actual owner and target Markdown notes by UID;
+- requires the forward and inverse canonical YAML relationships on every source case;
+- expects 202 source rows to resolve through `hasChild` / `childOf`, with one duplicate owner-target pair producing 201 unique links;
+- expects the single Object→design case to resolve through `hasDesign` / `designOf`;
+- fails if a required link or inverse is missing.
+
+The synthetic self-test reproduces all 203 cases including the one duplicate pair and proves the validator fails closed when one required `hasChild` link is removed. The real-QEAX bridge now runs this gate against the complete generated vault before Workbench acceptance.
