@@ -106,14 +106,18 @@ jobs:
 
       - name: Gate 1 - current IMP-009 output acceptance
         run: |
+          set -o pipefail
           BASE="$RUNNER_TEMP/MDSE_v0819_full_import"
           python3 Importer/Testing/v0.8.19/imp009_output_acceptance.py "$BASE" | tee "$RUNNER_TEMP/imp009-headless-acceptance.txt"
+          test -s "$RUNNER_TEMP/imp009-headless-acceptance.txt"
 
       - name: Gate 1b - IMP-010A/B hierarchy acceptance
         run: |
+          set -o pipefail
           QEAX="$(find _qeax_bridge -maxdepth 1 -type f -name '*.qeax' ! -name '._*' -size +1M | head -1)"
           BASE="$RUNNER_TEMP/MDSE_v0819_full_import"
           python3 Importer/Testing/v0.8.19/imp010_hierarchy_acceptance.py "$QEAX" "$BASE" | tee "$RUNNER_TEMP/imp010-hierarchy-acceptance.txt"
+          test -s "$RUNNER_TEMP/imp010-hierarchy-acceptance.txt"
 
       - name: Checkout Workbench 0.1.18 acceptance source
         uses: actions/checkout@v4

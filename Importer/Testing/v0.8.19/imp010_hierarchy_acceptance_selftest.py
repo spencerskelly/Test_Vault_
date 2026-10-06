@@ -50,6 +50,16 @@ def main() -> int:
                     w.writerow([eg,"element",typ,name,"note","W",uid,"X",""])
         with (imp/"Local Model Source Map.csv").open("w",newline="",encoding="utf-8") as f:
             csv.writer(f).writerow(["source_model_id","source_key","owner_uid","local_id","local_kind","ea_guid","ea_source_kind","ea_owner_guid"])
+
+        # Base templates legitimately repeat an unexpanded Templater uid expression.
+        # The real acceptance must ignore those source-template placeholders rather
+        # than misdiagnose them as duplicate generated model identities.
+        templates = vault/"99_System/05_Templates"
+        templates.mkdir(parents=True, exist_ok=True)
+        placeholder = '---\nuid: <% tp.file.include("[[Snippet - uid]]") %>\n---\n'
+        (templates/"Plan.md").write_text(placeholder, encoding="utf-8")
+        (templates/"Document.md").write_text(placeholder, encoding="utf-8")
+
         rels={}
         for _,o,t,fw,inv in carriers:
             rels.setdefault(o,{}).setdefault(fw,set()).add(t)

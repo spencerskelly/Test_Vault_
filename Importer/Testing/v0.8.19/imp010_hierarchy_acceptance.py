@@ -103,7 +103,13 @@ def read_source_map_part_guids(vault: Path) -> set[str]:
                     out.add(g)
     return out
 
-def index_notes(vault: Path) -> dict[str, tuple[Path, dict[str, list[str]]]]:
+def index_notes(vault: Path, wanted_uids: set[str]) -> dict[str, tuple[Path, dict[str, list[str]]]]:
+    """Index only generated notes required by this acceptance.
+
+    Base templates intentionally contain repeated Templater expressions in their
+    uid fields. Those are source templates, not instantiated model identities,
+    and must not participate in generated-note uniqueness checks.
+    """
     out = {}
     for p in vault.rglob("*.md"):
         if ".git" in p.parts or ".obsidian" in p.parts:
@@ -115,10 +121,11 @@ def index_notes(vault: Path) -> dict[str, tuple[Path, dict[str, list[str]]]]:
         if not fm:
             continue
         uid, rels = parse_frontmatter(fm)
-        if uid:
-            if uid in out:
-                raise RuntimeError(f"duplicate note uid {uid}: {out[uid][0]} and {p}")
-            out[uid] = (p, rels)
+        if uid not in wanted_uids:
+            continue
+        if uid in out:
+            raise RuntimeError(f"duplicate generated note uid {uid}: {out[uid][0]} and {p}")
+        out[uid] = (p, rels)
     return out
 
 def package_paths(con: sqlite3.Connection) -> dict[int, list[str]]:
@@ -184,7 +191,13 @@ def main() -> int:
 
     ledger = read_ledger(vault)
     local_part_guids = read_source_map_part_guids(vault)
-    notes = index_notes(vault)
+    wanted_uids = set()
+    for _, owner, target in cases:
+        for raw in (owner, target):
+            row = ledger.get(norm_guid(raw["ea_guid"]))
+            if row and (row.get("uid") or "").strip():
+                wanted_uids.add((row.get("uid") or "").strip())
+    notes = index_notes(vault, wanted_uids)
 
     expected_rows = Counter()
     expected_pairs = set()
