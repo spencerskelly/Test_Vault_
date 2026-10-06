@@ -53,6 +53,29 @@ class DiskFile {
   async arrayBuffer(){return this.slice(0,this.size).arrayBuffer();}
   async text(){return fsp.readFile(this.filePath,"utf8");}
 }
+class WalHeaderDiskFile extends DiskFile {
+  constructor(filePath){
+    super(filePath);
+    this.name=path.basename(filePath).replace(/\.(qea|qeax)$/i,"")+"_wal.qeax";
+  }
+  slice(start=0,end=this.size){
+    start=Math.max(0,Number(start)||0);
+    end=Math.min(this.size,end==null?this.size:Number(end));
+    const base=super.slice(start,end);
+    return {
+      async arrayBuffer(){
+        const ab=await base.arrayBuffer();
+        const bytes=new Uint8Array(ab);
+        for(const absolute of [18,19]){
+          if(absolute>=start&&absolute<end)bytes[absolute-start]=2;
+        }
+        return bytes.buffer.slice(bytes.byteOffset,bytes.byteOffset+bytes.byteLength);
+      },
+      async text(){return Buffer.from(await this.arrayBuffer()).toString("utf8");}
+    };
+  }
+}
+
 class WritableHandle {
   constructor(filePath){this.filePath=filePath;this.closed=false;}
   async write(data){
@@ -279,6 +302,20 @@ globalThis.__mdseHeadlessRegenerate = async function(outputHandle){
   await generateSlice();
   const slice=lastSliceReport?JSON.parse(JSON.stringify(lastSliceReport)):null;
   return {phase:slice?"complete":"write",slice,uiLog:el("log").textContent,sliceStatus:el("sliceStatus").textContent};
+};
+globalThis.__mdseHeadlessPreflightOnly = async function(sourceFile){
+  selectedFile=sourceFile;
+  lastReport=null;
+  lastPlan=null;
+  await analyze();
+  const preflight=lastReport?JSON.parse(JSON.stringify(lastReport)):null;
+  await buildTranslationPlan();
+  return {
+    preflight,
+    planCreated:!!lastPlan,
+    planDisabled:!!el("plan").disabled,
+    plannerIssues:el("plannerIssues").textContent||""
+  };
 };
 globalThis.__mdseHeadlessStatusFailure = async function(outputHandle){
   if(!lastReport||!lastPlan||!lastSliceReport)throw new Error("IMP-003 status failure check requires a completed real import first.");
@@ -566,4 +603,36 @@ function validateImp002(result,root){
     }
     console.log("IMP003_STATUS_AUDIT "+JSON.stringify({success:successActual,failed:failedActual}));
   }
+
+  if(!result.preflight||result.preflight.result!=="PASS"||!result.plan||result.plan.result!=="PASS"){
+    throw new Error("IMP-004 requires the clean real QEAX to pass preflight and planning first");
+  }
+  if(result.preflight.sqlite&&result.preflight.sqlite.walMode){
+    throw new Error("IMP-004 clean real QEAX unexpectedly reports WAL mode");
+  }
+  const wal=await context.__mdseHeadlessPreflightOnly(new WalHeaderDiskFile(sourcePath));
+  const walIssues=(wal.preflight&&wal.preflight.issues)||[];
+  const walFailCodes=walIssues.filter(x=>x.severity==="fail").map(x=>x.code).sort();
+  if(!wal.preflight||wal.preflight.result!=="FAIL"){
+    throw new Error("IMP-004 WAL-header fixture did not fail source preflight");
+  }
+  if(!wal.preflight.sqlite||wal.preflight.sqlite.walMode!==true){
+    throw new Error("IMP-004 WAL-header fixture was not detected as WAL mode");
+  }
+  if(!walFailCodes.includes("SQLITE_WAL_MODE")){
+    throw new Error("IMP-004 WAL-header fixture did not emit blocking SQLITE_WAL_MODE");
+  }
+  if(walFailCodes.some(code=>code!=="SQLITE_WAL_MODE")){
+    throw new Error("IMP-004 WAL fixture introduced unrelated preflight failures: "+walFailCodes.join(","));
+  }
+  if(wal.planCreated){
+    throw new Error("IMP-004 planner was created despite blocking WAL preflight failure");
+  }
+  if(wal.preflight.source&&wal.preflight.source.sha256!==null){
+    throw new Error("IMP-004 blocked WAL source was hashed after hard preflight failure");
+  }
+  console.log("IMP004_WAL_AUDIT "+JSON.stringify({
+    clean:{preflight:result.preflight.result,plan:result.plan.result,walMode:!!(result.preflight.sqlite&&result.preflight.sqlite.walMode)},
+    wal:{preflight:wal.preflight.result,walMode:wal.preflight.sqlite.walMode,failCodes:walFailCodes,planCreated:wal.planCreated,sourceSha256:wal.preflight.source.sha256}
+  }));
 })().catch(err=>{console.error(err&&err.stack?err.stack:err);process.exitCode=1;});
