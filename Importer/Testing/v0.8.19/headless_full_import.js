@@ -284,6 +284,157 @@ globalThis.__mdseHeadlessRegenerate = async function(outputHandle){
 vm.createContext(context);
 vm.runInContext(source,context,{filename:importerPath,timeout:120000});
 
+function parseCsv(text){
+  const rows=[];let row=[],field="",quoted=false;
+  for(let i=0;i<text.length;i++){
+    const ch=text[i];
+    if(quoted){
+      if(ch==='"'&&text[i+1]==='"'){field+='"';i++;continue;}
+      if(ch==='"'){quoted=false;continue;}
+      field+=ch;continue;
+    }
+    if(ch==='"'){quoted=true;continue;}
+    if(ch===","){row.push(field);field="";continue;}
+    if(ch==="\n"){
+      row.push(field);field="";
+      if(row.length>1||row[0]!=="")rows.push(row);
+      row=[];continue;
+    }
+    if(ch==="\r")continue;
+    field+=ch;
+  }
+  if(field||row.length){row.push(field);rows.push(row);}
+  if(!rows.length)return [];
+  const header=rows[0];
+  return rows.slice(1).map(vals=>Object.fromEntries(header.map((h,i)=>[h,vals[i]||""])));
+}
+function evidenceKey(r){
+  return JSON.stringify([
+    r.source_guid||"",r.category||"",r.relationship||"",r.from_type||"",
+    r.from_name||"",r.to_type||"",r.to_name||"",r.detail||""
+  ]);
+}
+function multiset(values){
+  const m=new Map();
+  for(const v of values)m.set(v,(m.get(v)||0)+1);
+  return m;
+}
+function sameMultiset(a,b){
+  const ma=multiset(a),mb=multiset(b);
+  if(ma.size!==mb.size)return false;
+  for(const [k,n] of ma)if(mb.get(k)!==n)return false;
+  return true;
+}
+function frontmatter(text){
+  if(!text.startsWith("---\n")&&!text.startsWith("---\r\n"))return "";
+  const normalized=text.replace(/\r\n/g,"\n");
+  const end=normalized.indexOf("\n---\n",4);
+  return end<0?"":normalized.slice(4,end);
+}
+function relationValues(text,field){
+  const fm=frontmatter(text), lines=fm.split("\n"),out=[];
+  for(let i=0;i<lines.length;i++){
+    if(lines[i]!==field+":")continue;
+    for(let j=i+1;j<lines.length&&/^  - /.test(lines[j]);j++){
+      const raw=lines[j].slice(4);
+      try{out.push(JSON.parse(raw));}catch(_){out.push(raw);}
+    }
+  }
+  return out;
+}
+function allMarkdownFiles(root){
+  const out=[],stack=[root];
+  while(stack.length){
+    const dir=stack.pop();
+    for(const ent of fs.readdirSync(dir,{withFileTypes:true})){
+      if(ent.name===".git")continue;
+      const p=path.join(dir,ent.name);
+      if(ent.isDirectory())stack.push(p);
+      else if(ent.isFile()&&ent.name.toLowerCase().endsWith(".md"))out.push(p);
+    }
+  }
+  return out;
+}
+function manifestNumber(text,label){
+  const m=new RegExp("^- "+label.replace(/[.*+?^$\{\}()|[\]\\]/g,"\\vm.createContext(context);
+vm.runInContext(source,context,{filename:importerPath,timeout:120000});
+
+(async()=>{")+":\\s*(\\d+)\\s*$","m").exec(text);
+  return m?Number(m[1]):null;
+}
+function validateImp002(result,root){
+  const audit=result&&result.imp002Audit;
+  if(!audit)throw new Error("IMP-002 audit missing from completed import");
+
+  if(audit.reviewedWriterCalls.length){
+    throw new Error("IMP-002: "+audit.reviewedWriterCalls.length+" reviewed connector plan(s) invoked the canonical relationship writer");
+  }
+  if(audit.reviewedMissingRaw.length){
+    throw new Error("IMP-002: "+audit.reviewedMissingRaw.length+" reviewed connector GUID(s) do not resolve to raw t_connector rows");
+  }
+  if(audit.remainingSuppressedEdges.length){
+    throw new Error("IMP-002: "+audit.remainingSuppressedEdges.length+" off-rule/provisional graph edge(s) remain after suppression");
+  }
+  if(audit.provisionalGraphEdges.length){
+    throw new Error("IMP-002: "+audit.provisionalGraphEdges.length+" provisional tracesTo/tracesFrom graph edge(s) remain");
+  }
+
+  const evidencePath=path.join(root,"99_System/11_Import/Review - Semantic and Connectors.csv");
+  const manifestPath=path.join(root,"99_System/11_Import/Run Manifest.md");
+  const rows=parseCsv(fs.readFileSync(evidencePath,"utf8"));
+  const manifest=fs.readFileSync(manifestPath,"utf8");
+  const reviewRows=rows.filter(r=>(r.detail||"").startsWith("review-only source connector; not written to canonical YAML;"));
+  const suppressedRows=rows.filter(r=>(r.detail||"")==="off-rule graph relationship suppressed from canonical YAML");
+
+  if(!sameMultiset(reviewRows.map(evidenceKey),audit.reviewEvidenceExpected.map(evidenceKey))){
+    throw new Error("IMP-002: review-only connector evidence does not exactly match the real planner review set");
+  }
+  if(!sameMultiset(suppressedRows.map(evidenceKey),audit.endpointEvidenceExpected.map(evidenceKey))){
+    throw new Error("IMP-002: suppressed endpoint evidence does not exactly match the real endpoint finding set");
+  }
+
+  const manifestReviewed=manifestNumber(manifest,"Review-only connector mappings withheld from canonical YAML");
+  const manifestSuppressed=manifestNumber(manifest,"Off-rule graph relationships suppressed before write");
+  if(manifestReviewed!==audit.reviewedPlanCount||reviewRows.length!==audit.reviewedPlanCount){
+    throw new Error("IMP-002: manifest/review evidence reviewed-connector counts disagree");
+  }
+  if(manifestSuppressed!==audit.endpointFindingCount||suppressedRows.length!==audit.endpointFindingCount){
+    throw new Error("IMP-002: manifest/review evidence suppressed-edge counts disagree");
+  }
+
+  let yamlSuppressedHits=0;
+  for(const x of audit.endpointFindings){
+    if(!x.ownerPath||!x.targetPath)throw new Error("IMP-002: suppressed finding lacks emitted owner/target path");
+    const ownerText=fs.readFileSync(path.join(root,x.ownerPath),"utf8");
+    const targetLink="[["".slice(0,2)+(x.targetLink||"")+"]]"; // produces [[target]] without template interpolation
+    if(relationValues(ownerText,x.field).includes(targetLink))yamlSuppressedHits++;
+    if(x.inverseField){
+      const targetText=fs.readFileSync(path.join(root,x.targetPath),"utf8");
+      const ownerLink="[["".slice(0,2)+(x.ownerLink||"")+"]]";
+      if(relationValues(targetText,x.inverseField).includes(ownerLink))yamlSuppressedHits++;
+    }
+  }
+  if(yamlSuppressedHits)throw new Error("IMP-002: "+yamlSuppressedHits+" suppressed relationship value(s) are still present in written YAML");
+
+  let provisionalYamlValues=0;
+  for(const p of allMarkdownFiles(root)){
+    const text=fs.readFileSync(p,"utf8");
+    provisionalYamlValues+=relationValues(text,"tracesTo").length;
+    provisionalYamlValues+=relationValues(text,"tracesFrom").length;
+  }
+  if(provisionalYamlValues)throw new Error("IMP-002: "+provisionalYamlValues+" provisional tracesTo/tracesFrom value(s) exist in written YAML");
+
+  return {
+    reviewedConnectorPlans:audit.reviewedPlanCount,
+    reviewedConnectorEvidence:reviewRows.length,
+    reviewedWriterCalls:0,
+    suppressedEndpointFindings:audit.endpointFindingCount,
+    suppressedEndpointEvidence:suppressedRows.length,
+    suppressedYamlValues:0,
+    provisionalYamlValues:0
+  };
+}
+
 (async()=>{
   const result=await context.__mdseHeadlessRun(new DiskFile(sourcePath),new DirectoryHandle(outputPath));
   const summary={
@@ -321,6 +472,8 @@ vm.runInContext(source,context,{filename:importerPath,timeout:120000});
     process.exitCode=1;
     return;
   }
+  const imp002=validateImp002(result,outputPath);
+  console.log("IMP002_AUDIT "+JSON.stringify(imp002));
   if(secondOutputPath){
     const second=await context.__mdseHeadlessRegenerate(new DirectoryHandle(secondOutputPath));
     console.log("HEADLESS_SECOND_RESULT_BEGIN");
