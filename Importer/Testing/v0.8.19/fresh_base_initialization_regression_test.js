@@ -108,7 +108,7 @@ const context={
 };
 vm.createContext(context);
 const names=[
-  "trim2","dirFor","transientFsStateError","fsRetryPause","fsWrappedError",
+  "str","trim2","dirFor","transientFsStateError","fsRetryPause","fsWrappedError",
   "fileExists","writeTextPath","readTextPath","schemaVersionFromText",
   "vaultReleaseFromText","vaultUidFromText","pluginIdsFromLock",
   "requireBaseVault","utcVaultStamp","initializeSelectedBase","chooseOutputFolder"
