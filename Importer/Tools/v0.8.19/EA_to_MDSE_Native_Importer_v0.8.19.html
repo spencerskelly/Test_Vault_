@@ -2954,8 +2954,12 @@ function buildLocalOccurrenceModel(ctx,entityCtx){
   }
 
   function preservePartTerminatedFlowReview(c,start,end,conveyedItems){
-    const partRef=start&&start.kind==="part"?start:(end&&end.kind==="part"?end:null);
-    const endpointRef=start&&start.kind==="endpoint"?start:(end&&end.kind==="endpoint"?end:null);
+    const startRaw=ctx.byId.get(n2(c.Start_Object_ID)),endRaw=ctx.byId.get(n2(c.End_Object_ID));
+    const startIsPart=!!(startRaw&&trim2(startRaw.Object_Type)==="Part"&&trim2(startRaw.Stereotype)!=="FlowProperty");
+    const endIsPart=!!(endRaw&&trim2(endRaw.Object_Type)==="Part"&&trim2(endRaw.Stereotype)!=="FlowProperty");
+    const partRef=startIsPart&&!endIsPart?start:(endIsPart&&!startIsPart?end:null);
+    const endpointRef=startIsPart&&!endIsPart&&end&&end.kind==="endpoint"?end:
+      (endIsPart&&!startIsPart&&start&&start.kind==="endpoint"?start:null);
     if(!partRef||!endpointRef)return false;
     const ownerKey=commonConnectionOwner(partRef,endpointRef);
     if(!conveyedItems.length)return false;
@@ -2970,7 +2974,7 @@ function buildLocalOccurrenceModel(ctx,entityCtx){
         itemId:n2(item.Object_ID),itemGuid:trim2(item.ea_guid),
         itemName:trim2(item.Name)||"flow",definitionKey:rr.key,
         direction:trim2(c.Direction),
-        reason:"EA InformationFlow terminates directly on a Part; retained as governed import review evidence without synthesizing an Interface or Connection."
+        reason:"EA InformationFlow terminates directly on a Part element; retained as governed import review evidence without synthesizing an Interface or Connection."
       });
     }
     partTerminatedFlowReviews.push(...prepared);
@@ -4207,7 +4211,7 @@ function blockLevelFlowReviewCsv(ctx,entityCtx,connectorDiagrams){
 function partTerminatedFlowReviewCsv(ctx,entityCtx,localModel,connectorDiagrams){
   const rows=[[
     "connector_id","connector_guid","category","owner_note",
-    "part_owner","part_local","interface_owner","interface_local",
+    "part_owner","part_representation","part_reference","interface_owner","interface_local",
     "item_guid","item_name","item_definition","direction","reason","diagrams"
   ]];
   for(const r of localModel.partTerminatedFlowReviews||[]){
@@ -4219,6 +4223,7 @@ function partTerminatedFlowReviewCsv(ctx,entityCtx,localModel,connectorDiagrams)
       r.connectorId,r.connectorGuid,"Part-terminated conveyed flow",
       owner?(owner.pathTarget||owner.linkTarget||owner.fileName):"",
       partOwner?(partOwner.pathTarget||partOwner.linkTarget||partOwner.fileName):"",
+      r.partRef?r.partRef.kind:"",
       r.partRef?r.partRef.address:"",
       epOwner?(epOwner.pathTarget||epOwner.linkTarget||epOwner.fileName):"",
       r.endpointRef?r.endpointRef.address:"",
