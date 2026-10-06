@@ -200,7 +200,7 @@ if candidate:
             'async function scanExistingNoteStems(root)',
             'function fitFileNameToFilesystem(name,maxBytes)',
             'function elementParentChain(e,entities)',
-            'function pathPlanForEntity(e,folderMap,entities)',
+            'function pathPlanForEntity(e,folderMap,entities,hasChildrenKeys)',
             'e.linkTarget=e.fileName',
             'buildEntityContext(lastPlannerContext,reservedIdentityTokens,existingStems)',
             'Importer-defined total path limit: none',
