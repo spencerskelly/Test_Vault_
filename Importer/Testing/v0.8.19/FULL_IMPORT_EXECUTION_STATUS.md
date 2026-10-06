@@ -134,6 +134,25 @@ W-387 / IMP-001 adds the negative-path release evidence that the original succes
 
 This closes IMP-001 without weakening the clean-import rule.
 
+## Canonical relationship boundary acceptance
+
+W-388 / IMP-002 adds an independent real-output audit for review-only and off-rule relationships.
+
+- Real-QEAX bridge: **PASS**, run `37415340902`
+- Reviewed connector plans: **1,010**
+- Exact review-evidence rows: **1,010**
+- Reviewed connector plans that invoked the canonical relationship writer: **0**
+- Endpoint/provisional findings collected before suppression: **237**
+- Exact suppression-evidence rows: **237**
+- Suppressed forward/inverse values found in written YAML: **0**
+- Provisional `tracesTo` / `tracesFrom` values found in written YAML: **0**
+- Deterministic second import: **PASS**
+- Workbench read-only real-vault scan: **PASS**
+- Fast current-version regression: `canonical_relationship_boundary_regression_test.js`
+- Aggregate importer CI with that regression: **PASS**, run `37415891266`
+
+The bridge is also fail-closed now: `set -o pipefail` prevents a failed Node importer from being hidden by `tee`, and both output bases must contain a parseable `Import State.json` with `IMPORT_COMPLETE` plus a Run Manifest before the workflow can continue.
+
 ## Step 12 conclusion
 
 Step 12 is **PASS**.
