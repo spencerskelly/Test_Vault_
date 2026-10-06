@@ -52,8 +52,10 @@ need('resolved as Connection exposes -> boundary Interface',"binding exposure re
 need('definition is not Object / interface',"Interface occurrence definition validator");
 need('exposes target is not an assembly-boundary Interface',"Connection exposes boundary validator");
 need('conn.sourceIds.includes(n2(bc.Connector_ID))',"BindingConnector provenance carried into exposed Connection");
-need('could not be deterministically resolved to one internal Connection exposure; temporary equals/review evidence retained.',
-  "ambiguous binding remains review evidence");
+need('has boundary/internal Interface evidence but "+candidates.length+" candidate internal Connections; temporary equals/review evidence retained.',
+  "ambiguous boundary binding remains review evidence");
+need('is not a deterministic boundary-to-internal exposure; no exposes or equals relationship invented.',
+  "non-exposure binding does not invent relationship");
 
 need('W-384: EA Ports are Local Model Interface occurrences only. No note-level Port ownership,',
   "note-level Port graph removed");
