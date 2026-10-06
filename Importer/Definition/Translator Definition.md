@@ -111,7 +111,7 @@ Every connector has exactly one rule (W-178); 9 have an end missing from the exp
 |---|---|---|
 | Nesting 836 | Nothing where it repeats placement (584); the other 252 `hasChild` (`hasPart` for Object to Object, `hasState` for Object to State or State Machine and State Machine to State, W-292) with `REVIEW nesting direction: connector {GUID}` | W-151, W-152, W-292 |
 | Generalization 3,974 | `subtypeOf`; mixed types flagged | W-152 |
-| Connector 823 | A connector between Local Model Interface occurrences becomes a Local Model Connection rather than a note-level `interfaces` relationship. A BindingConnector is resolved mechanically to `Connection.exposes -> boundary Interface` only when one internal connection and one boundary Interface are deterministic in the same context; ambiguous cases retain temporary local `equals`/review evidence rather than inventing exposure. | W-384 |
+| Connector 823 | A connector between Local Model Interface occurrences becomes a Local Model Connection rather than a note-level `interfaces` relationship. A BindingConnector is resolved mechanically to `Connection.exposes -> boundary Interface` only when one internal connection and one boundary Interface are deterministic in the same context. Otherwise, resolved same-owner BindingConnector endpoints persist canonical symmetric `Interface.equals`; cross-owner or unresolved cases remain review-only. No Connection is invented. | W-384 |
 | Aggregation 2,288 | Composite: Object pairs `hasPart`, Object to State or State Machine and State Machine to State `hasState` (W-292), all else `hasChild`; shared: `includes`; an existing link wins | W-159, W-277 |
 | Realisation 950 | A requirement `appliesTo` an Object; Behavior realizes Use Case where the existing direction/rule applies; else `realizedBy` is review evidence until endpoint semantics are valid. | W-160, W-167, W-384 |
 | NoteLink 349 | A note on one element folds into its body under `**EA notes:**`; a note on several stays Info with `describes` | W-161, W-162 |
@@ -155,7 +155,7 @@ v0.8.0 uses engineering-readable headings plus named-field Markdown records insi
 The machine-readable authority for this body format is `99_System/03_Schemas/local-model.yaml`. Schema 0.4 is the current writer contract (W-384); readers must accept 0.1, 0.2, 0.3 and 0.4, preserving each older version's semantics rather than silently upgrading it.
 
 - **Part occurrence:** readable heading, `definition` to reusable Object/assembly, optional `identifier` and `multiplicity`, followed by `^part-*`. W-310 permits multiplicity only for contextually interchangeable copies.
-- **Interface occurrence:** readable heading; optional `definition` to a reusable `Object / interface`; optional `part` link to a local part occurrence or `parent` link to a local Interface occurrence; optional temporary `equals`, identifier/multiplicity/kind; followed by `^ep-*`. `part` and `parent` are mutually exclusive. An Interface with neither is on the owning assembly boundary. A definitionless Interface is valid contextual topology but cannot carry `usage`.
+- **Interface occurrence:** readable heading; optional `definition` to a reusable `Object / interface`; optional `part` link to a local part occurrence or `parent` link to a local Interface occurrence; optional canonical symmetric `equals`, identifier/multiplicity/kind; followed by `^ep-*`. `part` and `parent` are mutually exclusive. An Interface with neither is on the owning assembly boundary. A definitionless Interface is valid contextual topology but cannot carry `usage`.
 - **Connection:** readable heading with `endpointA` and `endpointB` native block links, optional `exposes` pointing to one or more same-context boundary Interface occurrences, followed by `^conn-*`. The owning note is the assembly/context that forms the connection.
 - **Flow:** readable nested heading under its carrying connection, `definition` to reusable Item Flow, endpoint role fields (`transmit`, `receive`, `exchange`, `unspecified`), followed by `^flow-*`. The authoritative flow occurrence exists once on the connection.
 
@@ -203,7 +203,7 @@ Example:
 ^flow-can-h
 ```
 
-W-384 distinguishes a Connection from the boundary Interface that exposes it. A parent assembly connects to a child assembly's boundary Interface; it does not reach through the child to an internal endpoint. When deterministic BindingConnector/context evidence identifies exactly one internal Connection and boundary Interface, Stage 1 writes `Connection.exposes -> boundary Interface`. When that mapping is ambiguous, the importer retains temporary local `equals`/review evidence and does not invent exposure.
+W-384 distinguishes a Connection from the boundary Interface that exposes it. A parent assembly connects to a child assembly's boundary Interface; it does not reach through the child to an internal endpoint. When deterministic BindingConnector/context evidence identifies exactly one internal Connection and boundary Interface, Stage 1 writes `Connection.exposes -> boundary Interface`. Otherwise, if both BindingConnector endpoints resolve to Interface occurrences under the same Local Model owner, Stage 1 writes canonical symmetric `Interface.equals`. Cross-owner or unresolved bindings remain review-only. The importer never invents a Connection to satisfy a BindingConnector.
 
 EA-only provenance does not appear in Local Model engineering records. The importer writes `99_System/11_Import/Local Model Source Map.csv`, keyed by owner note UID + local ID. Minimum columns remain `owner_uid,local_id,local_kind,ea_guid,ea_source_kind,ea_owner_guid`; additional source-only columns may be added when needed.
 
@@ -216,7 +216,7 @@ Prefer core Obsidian mechanisms and standard Markdown/YAML whenever they preserv
 
 - **Dispositions:** every EA field, tag, small table and `t_xref` kind has one (section 2). Values kept are the tag lines, the comment texts and the structure lines defined in `Definitions/EA Source Section.md` (W-93, W-101, W-102, W-104 to W-106, W-209).
 - **Packages:** the vault tree starts at the ten packages under `IPC !`; `Model` and `IPC !` are not folders (W-117, `ea-package-rules.yaml`). Package names follow the file-name rules. A package without a Notes description is only a folder.
-- **Relationship fields in templates:** current first-class relationships are governed by `relationships.yaml` 1.36, not legacy Port/Function/State templates. Behavior and Condition use the retained semantic relationship names where their endpoint rules permit them; Interface occurrence topology, including Connection-owned `exposes`, is represented in Local Model 0.4 rather than frontmatter. The translator writes fields from the governed connector rules, not from legacy templates.
+- **Relationship fields in templates:** current first-class relationships are governed by `relationships.yaml` 1.36, not legacy Port/Function/State templates. Behavior and Condition use the retained semantic relationship names where their endpoint rules permit them; Interface occurrence topology, including Connection-owned `exposes` and canonical symmetric `equals`, is represented in Local Model 0.5 rather than frontmatter. The translator writes fields from the governed connector rules, not from legacy templates.
 
 ## 8. Diagrams and attachments
 
@@ -307,7 +307,7 @@ Refresh only declared EA-owned translated fields and source-provenanced relation
 
 Write new governed Local Model regions as schema 0.3. Existing schema 0.2 semantics remain frozen/compatible. Definitionless contextual endpoints may omit reusable `definition` under W-377/W-378; standard part/endpoint usage is represented by omission of `usage`. Do not infer variant/option from specialization descendants. Do not infer `abstract` from EA without an approved deterministic source rule.
 
-BindingConnector with reconstructable context becomes temporary local `equals` evidence. If context/endpoints cannot be reconstructed deterministically, preserve it in review evidence only.
+BindingConnector precedence is: deterministic same-context `Connection.exposes` when a unique internal Connection and boundary Interface are proven; otherwise canonical symmetric `Interface.equals` for two resolved same-owner Interface occurrences; otherwise review-only evidence. Do not synthesize a Connection from BindingConnector evidence alone.
 
 ### Naming/path
 
