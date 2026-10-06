@@ -119,6 +119,21 @@ Real-scale execution exposed an O(N²) output-path planning loop that repeatedly
 
 v0.8.19 now precomputes the set of parent entities once and performs constant-time child membership checks. The behavior is protected by `path_planning_scalability_regression_test.js`.
 
+## Transaction failure acceptance
+
+W-387 / IMP-001 adds the negative-path release evidence that the original successful whole-model run did not cover.
+
+- Aggregate importer CI: **PASS**, run `37414098512`
+- Production-path fault-injection test: **PASS**
+- Injected body/evidence failure: final state `IMPORT_FAILED`, write state `WRITE_FAIL`
+- Injected failure while persisting `IMPORT_FAILED`: prior `IMPORT_IN_PROGRESS / WRITE_IN_PROGRESS` remains authoritative
+- Dirty destination containing any Import State file: rerun refused
+- `Import State.json`: corrected to strict JSON; the earlier serializer appended a literal `\\n`
+- Real-QEAX regression after the transaction refactor: bridge run `37414094667` **PASS**
+- Same bridge also passed deterministic comparison and the Workbench read-only real-vault scan
+
+This closes IMP-001 without weakening the clean-import rule.
+
 ## Step 12 conclusion
 
 Step 12 is **PASS**.
