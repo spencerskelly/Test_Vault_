@@ -1090,6 +1090,18 @@ High-priority Workbench follow-up:
 
 Until that follow-up is landed in Workbench, the importer bridge uses the **same accepted Workbench 0.1.18 source** from artifact commit `b0c4e2c6bdfb96d36f51d8152b17be22592ef174`, bundles the acceptance harness as ESM, and runs that bundle. This preserves the semantic gate without treating a test-runner packaging defect as an importer failure.
 
+### 2026-10-06 follow-up — preserve unrelated bytes during Local Model edits
+
+IMP-009 bridge run `37490701170` exposed a second integration-level hardening opportunity after the acceptance harness itself was made runnable. Workbench 0.1.18 passed Local Model parsing/topology checks but reported four no-op formatting drifts. All four were traced to three importer-generated notes whose EA narrative contained CRLF while generated structure used LF. The importer side is corrected by W-395 so generated Markdown is canonical LF.
+
+Defense-in-depth Workbench follow-up, **high priority but not a new numbered stability step**:
+- structured Local Model patching should preserve text outside the replaced governed record byte-for-byte, even if a legacy/user-authored note has mixed line endings;
+- `editableLocalRegion()` currently selects one EOL for the entire reconstructed file from `text.includes("\\r\\n")`, which can normalize unrelated text;
+- prefer a minimal splice or record-local EOL strategy that changes only the intended Local Model record;
+- add a focused mixed-EOL no-op and real edit regression before the next Workbench release that changes writer behavior.
+
+This does not invalidate the accepted 0.1.18 runtime for canonical importer output, but it closes a useful robustness gap for noncanonical/legacy notes.
+
 ## Reconstructed remaining steps
 
 43. Ensure cache restore failure always falls back to a cooperative cold build without leaving partially restored semantic state visible.
