@@ -188,3 +188,39 @@ Only after that evidence should the governing rule be updated and implementation
 - fails if a required link or inverse is missing.
 
 The synthetic self-test reproduces all 203 cases including the one duplicate pair and proves the validator fails closed when one required `hasChild` link is removed. The real-QEAX bridge now runs this gate against the complete generated vault before Workbench acceptance.
+
+
+## Real-QEAX hierarchy acceptance — PASS
+
+Bridge `37498212847` is the governing proof for IMP-010A/B after the folded-Part ownership fix.
+
+Gate 1b ran fail-closed against the complete generated vault and reported:
+
+- source Parts checked: **203**
+- target counts: **142 Activity / 61 State**
+- State-target owner counts: **60 State / 1 Class**
+- expected relationship rows: **202 `hasChild` / 1 `hasDesign`**
+- unique relationship pairs: **201 `hasChild` / 1 `hasDesign`**
+- generated owner/target note pairs checked: **203**
+- Local Model Part occurrences for these source GUIDs: **0**
+- result: **PASS**
+
+Representative hierarchy evidence:
+
+- `Product Durability` → `Lifecycle Abuse Durability` through `hasChild` / `childOf`
+- `Circuit - Comms_Universal BMID` → `WiFi 802.11 Interface` through `hasDesign` / `designOf`
+
+The first fail-closed real run exposed the single Object→design ownership defect. The folded-Part graph builder passed `childSubtype` into the `ownerSubtype` argument and omitted the real child subtype, preventing `ownerField()` from choosing `hasDesign`. Commit `3d8657f2510f0a71387a005f58621ed18cbc2d03` corrects that call and adds `folded_part_relationship_regression_test.js` to the aggregate release gate.
+
+**Conclusion:** the 142 Behavior and 61 Condition carrier rows are not Local Model structural-Part defects. Their source semantics are preserved through governed note-level ownership. IMP-010A/B are complete.
+
+## Remaining IMP-010 scope
+
+Only **16 unique Port-owned flow-property carrier Parts** remain a semantic decision:
+
+- 2 contextual copies of `iCan` / FlowProperty `can` / Physical Signal `psCan`;
+- 14 contextual copies of `i3V3Analog` / FlowProperty `3.3V` / Physical Signal `ps3V3Analog`.
+
+These must be resolved as Interface semantics, not by widening Local Model Part.
+
+Separately, the importer currently emits duplicate folded-Part warning rows because a rejected non-Object structural Part can be visited in both Local Model passes without a rejected-result cache entry. Once the 16-case semantic rule is settled, IMP-010 cleanup must emit no more than one actionable finding per source Part while retaining exhaustive machine traceability.

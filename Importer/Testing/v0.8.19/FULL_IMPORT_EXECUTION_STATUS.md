@@ -325,6 +325,27 @@ The immediately preceding real bridge exposed four byte-only no-op drifts caused
 
 This closes **IMP-009**. The remaining `SEMANTIC_REVIEW_REQUIRED / ACCEPTANCE_PENDING` state belongs to later P1 semantic/model issues, beginning with IMP-010; it is not a definitionless-Interface acceptance failure.
 
+## IMP-010 hierarchy acceptance
+
+The Behavior/Condition portion of IMP-010 is accepted on the current real source.
+
+- Bridge: **PASS**, run `37498212847`
+- Full import + deterministic comparison: **PASS**
+- IMP-010 Gate 1b: **PASS**
+- Source Part carriers checked: **203**
+- Activity targets: **142**
+- State targets: **61**
+- State-target owners: **60 State / 1 Class**
+- Source relationship rows expected: **202 `hasChild` / 1 `hasDesign`**
+- Unique canonical links: **201 `hasChild` / 1 `hasDesign`**
+- Generated owner/target forward+inverse pairs checked: **203 / 203**
+- Local Model physical Part occurrences for these source GUIDs: **0**
+- Workbench Gates 2–4 on the same post-fix vault: **PASS**
+
+The single Object→design case initially failed and exposed an importer argument-order defect in the folded-Part relationship builder. Commit `3d8657f2510f0a71387a005f58621ed18cbc2d03` fixes it and adds a focused fast regression. W-396 therefore retires the 203 Behavior/Condition carriers from IMP-010's Local Model defect population.
+
+IMP-010 remains open for **16 Port-owned FlowProperty/Physical-Signal carrier Parts** plus duplicate-warning cleanup.
+
 ## Step 12 conclusion
 
 Step 12 execution is **PASS**; semantic acceptance remains `ACCEPTANCE_PENDING` with `SEMANTIC_REVIEW_REQUIRED`.
