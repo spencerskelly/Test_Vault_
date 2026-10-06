@@ -302,7 +302,7 @@ globalThis.__mdseHeadlessStatusFailure = async function(outputHandle){
   let errorMessage="";
   try{
     await runImportTransaction(outputHandle,meta,async()=>{
-      await writeTextPath(outputHandle,"IMP003-Mechanical-Write.md","partial mechanical write\n");
+      await writeTextPath(outputHandle,"IMP003-Mechanical-Write.md","partial mechanical write\\n");
       throw new Error("IMP-003 injected write failure after real QEAX plan");
     });
   }catch(err){
@@ -313,6 +313,11 @@ globalThis.__mdseHeadlessStatusFailure = async function(outputHandle){
 };
 `;
 
+if(process.env.MDSE_HEADLESS_COMPILE_ONLY==="1"){
+  new vm.Script(source,{filename:importerPath});
+  console.log("HEADLESS_VM_COMPILE PASS");
+  process.exit(0);
+}
 vm.createContext(context);
 vm.runInContext(source,context,{filename:importerPath,timeout:120000});
 
