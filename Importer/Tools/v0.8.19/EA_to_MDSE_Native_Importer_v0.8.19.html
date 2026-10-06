@@ -2774,7 +2774,7 @@ function conveyedObjectMap(ctx){
 
 function buildLocalOccurrenceModel(ctx,entityCtx){
   const entities=entityCtx.entities;
-  const partsByOwner=new Map(), endpointsByOwner=new Map(), connectionsByOwner=new Map(), requirementLinksByOwner=new Map();
+  const partsByOwner=new Map(), endpointsByOwner=new Map(), connectionsByOwner=new Map(), flowReviewsByOwner=new Map(), requirementLinksByOwner=new Map();
   const partBySource=new Map(), endpointBySource=new Map(), warnings=[], unallocatedConveyedFlows=[];
   const conveyed=conveyedObjectMap(ctx);
   const connectorById=new Map((ctx.connectors||[]).map(c=>[n2(c.Connector_ID),c]));
@@ -2953,6 +2953,34 @@ function buildLocalOccurrenceModel(ctx,entityCtx){
     return "unspecified";
   }
 
+  function preservePartTerminatedFlowReview(c,start,end,conveyedItems){
+    const partRef=start&&start.kind==="part"?start:(end&&end.kind==="part"?end:null);
+    const endpointRef=start&&start.kind==="endpoint"?start:(end&&end.kind==="endpoint"?end:null);
+    if(!partRef||!endpointRef)return false;
+    const ownerKey=commonConnectionOwner(partRef,endpointRef);
+    if(!ownerKey)return false;
+    let preserved=0;
+    for(const item of conveyedItems){
+      const rr=resolveEndpoint(item.Object_ID,ctx.elementCtx,ctx.portResolution);
+      const defKey=rr&&entities.has(rr.key)?rr.key:"";
+      if(!defKey)continue;
+      const localId=stableLocalId("flow",c,item.Object_ID);
+      push(flowReviewsByOwner,ownerKey,{
+        localId,anchor:localAnchor([localId]),ownerKey,
+        partRef,endpointRef,definitionKey:defKey,
+        identifier:trim2(item.Name)||"flow",
+        sourceGuid:trim2(c.ea_guid),sourceItemGuid:trim2(item.ea_guid),
+        reason:"EA InformationFlow terminates directly on a Part; preserved as review evidence without synthesizing an Interface or Connection."
+      });
+      preserved++;
+    }
+    if(preserved===conveyedItems.length&&preserved){
+      warnings.push("InformationFlow "+trim2(c.ea_guid)+" terminates directly on a Part; "+preserved+" conveyed item(s) preserved as governed Local Model flow review evidence.");
+      return true;
+    }
+    return false;
+  }
+
   for(const c of orderedConnectors){
     if(trim2(c.Connector_Type)!=="InformationFlow")continue;
     const conveyedItems=(conveyed.byConnector.get(normGuid(c.ea_guid))||[]).slice().sort((a,b)=>normGuid(a.ea_guid).localeCompare(normGuid(b.ea_guid))||n2(a.Object_ID)-n2(b.Object_ID));
@@ -2967,6 +2995,7 @@ function buildLocalOccurrenceModel(ctx,entityCtx){
       markUnallocated("InformationFlow endpoint could not be resolved");
       continue;
     }
+    if(preservePartTerminatedFlowReview(c,start,end,conveyedItems))continue;
     const connectionOwner=commonConnectionOwner(start,end);
     if(!connectionOwner){
       warnings.push("InformationFlow "+trim2(c.ea_guid)+" has no emitted common Local Model owner.");
@@ -3070,7 +3099,7 @@ function buildLocalOccurrenceModel(ctx,entityCtx){
     });
   }
 
-  for(const map of [partsByOwner,endpointsByOwner,connectionsByOwner,requirementLinksByOwner]){
+  for(const map of [partsByOwner,endpointsByOwner,connectionsByOwner,flowReviewsByOwner,requirementLinksByOwner]){
     for(const list of map.values())list.sort((a,b)=>(a.path?a.path.join("/"):a.localId||a.targetAddress).localeCompare(b.path?b.path.join("/"):b.localId||b.targetAddress));
   }
   function checkScopedIds(map,label,idFn){
@@ -3098,13 +3127,14 @@ function buildLocalOccurrenceModel(ctx,entityCtx){
 
   let flowCount=0;for(const list of connectionsByOwner.values())for(const c of list)flowCount+=c.flows.length;
   return {
-    schemaVersion:LOCAL_BODY_SCHEMA,partsByOwner,endpointsByOwner,connectionsByOwner,requirementLinksByOwner,
+    schemaVersion:LOCAL_BODY_SCHEMA,partsByOwner,endpointsByOwner,connectionsByOwner,flowReviewsByOwner,requirementLinksByOwner,
     partBySource,endpointBySource,refDisplay,warnings,
     stats:{
       parts:Array.from(partBySource.values()).length,
       endpoints:Array.from(endpointBySource.values()).length,
       connections:Array.from(connectionsByOwner.values()).reduce((n,a)=>n+a.length,0),
       flows:flowCount,
+      flowReviews:Array.from(flowReviewsByOwner.values()).reduce((n,a)=>n+a.length,0),
       localRequirementLinks:Array.from(requirementLinksByOwner.values()).reduce((n,a)=>n+a.length,0),
       unresolvedConveyedXrefs:conveyed.unresolved.length,
       unallocatedConveyedFlows:unallocatedConveyedFlows.length,
@@ -3136,6 +3166,7 @@ function validateLocalModel(localModel,entityCtx){
       for(const fl of r.flows)reg(owner,fl.localId,"flow");
     }
   }
+  for(const [owner,list] of localModel.flowReviewsByOwner.entries())for(const r of list)reg(owner,r.localId,"flow");
   function defType(key){const e=entities.get(key);return e?e.mdseType:"";}
   for(const [owner,list] of localModel.partsByOwner.entries()){
     for(const r of list){
@@ -3181,6 +3212,16 @@ function validateLocalModel(localModel,entityCtx){
       }
     }
   }
+  for(const [owner,list] of localModel.flowReviewsByOwner.entries()){
+    for(const r of list){
+      if(defType(r.definitionKey)!=="Item Flow")errors.push("flow review "+r.localId+" definition is not an Item Flow");
+      const partOwner=r.partRef&&r.partRef.ownerKey,epOwner=r.endpointRef&&r.endpointRef.ownerKey;
+      const pk=partOwner&&localByOwner.get(partOwner)&&localByOwner.get(partOwner).get(r.partRef.anchor);
+      const ek=epOwner&&localByOwner.get(epOwner)&&localByOwner.get(epOwner).get(r.endpointRef.anchor);
+      if(pk!=="part")errors.push("flow review "+r.localId+" Part endpoint does not resolve to a local Part");
+      if(ek!=="ep")errors.push("flow review "+r.localId+" Interface endpoint does not resolve to a local Interface");
+    }
+  }
   for(const [req,list] of localModel.requirementLinksByOwner.entries()){
     if(defType(req)!=="Requirement")errors.push("local applicability owner is not a Requirement: "+req);
     for(const r of list){
@@ -3200,7 +3241,8 @@ function renderLocalOccurrenceSections(e,localModel,entityCtx,externalSet,sliceK
   const parts=localModel.partsByOwner.get(e.key)||[];
   const endpoints=localModel.endpointsByOwner.get(e.key)||[];
   const connections=localModel.connectionsByOwner.get(e.key)||[];
-  if(!parts.length&&!endpoints.length&&!connections.length)return lines;
+  const flowReviews=localModel.flowReviewsByOwner.get(e.key)||[];
+  if(!parts.length&&!endpoints.length&&!connections.length&&!flowReviews.length)return lines;
 
   lines.push("## Local Model","<!-- MDSE:LOCAL-MODEL START schema="+LOCAL_BODY_SCHEMA+" -->","");
 
@@ -3259,6 +3301,20 @@ function renderLocalOccurrenceSections(e,localModel,entityCtx,externalSet,sliceK
         lines.push("- endpointB: "+complementRole(fl.roleA));
         lines.push("^"+fl.localId,"");
       }
+    }
+  }
+
+  if(flowReviews.length){
+    lines.push("### Flow Reviews","");
+    for(const r of flowReviews){
+      lines.push("#### "+(mdInline(r.identifier)||"Flow review"));
+      lines.push("- status: review");
+      lines.push("- definition: "+entityWiki(entities,r.definitionKey));
+      lines.push("- part: "+localRefLink(localModel,r.partRef,e));
+      lines.push("- interface: "+localRefLink(localModel,r.endpointRef,e));
+      lines.push("- reason: "+mdInline(r.reason));
+      if(!sliceKeys.has(r.definitionKey))externalSet.add(e.fileName+" | local flow review definition | "+entities.get(r.definitionKey).fileName);
+      lines.push("^"+r.localId,"");
     }
   }
 
@@ -4788,6 +4844,7 @@ async function generateSlice(){
       "- Definitionless contextual endpoints (W-377): "+definitionlessEndpointCount,
       "- Local connections: "+localModel.stats.connections,
       "- Local flows: "+localModel.stats.flows,
+      "- Local flow reviews: "+localModel.stats.flowReviews,
       "- Relationship review findings: "+relationshipReviewCount,
       "- Review-only connector mappings withheld from canonical YAML: "+reviewedConnectorPlans.length,
       "- Off-rule graph relationships suppressed before write: "+endpointFindings.length,
