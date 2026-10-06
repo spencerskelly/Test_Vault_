@@ -226,7 +226,7 @@ summary{cursor:pointer;font-weight:650}
   "schema": "mdse-ea-source-profile/1",
   "profileId": "EA8647-2026-09-06-v1",
   "sourceModelId": "EA8647",
-  "description": "Accepted EA8647 source-shape contract for the MDSE 0.8 first import. Updating this profile changes source snapshot policy without changing importer engine logic.",
+  "description": "Accepted EA8647 source-shape contract for the MDSE 0.8 first import. Updating this profile changes source snapshot policy without changing importer engine logic. Every discovered QEAX table has an explicit execution disposition.",
   "expected": {
     "tables": {
       "t_object": 35969,
@@ -239,7 +239,8 @@ summary{cursor:pointer;font-weight:650}
       "t_xref": 42052,
       "t_document": 397,
       "t_operation": 23,
-      "t_attribute": 5
+      "t_attribute": 5,
+      "t_operationparams": 0
     },
     "elementTypes": {
       "Requirement": 13988,
@@ -301,6 +302,108 @@ summary{cursor:pointer;font-weight:650}
       "Sequence": 24,
       "Package": 10
     }
+  },
+  "tableDispositions": {
+    "sqlite_sequence": "ignored_nonempty_approved",
+    "t_attribute": "imported",
+    "t_attributeconstraints": "ignored_must_be_empty",
+    "t_attributetag": "ignored_must_be_empty",
+    "t_authors": "ignored_must_be_empty",
+    "t_cardinality": "ignored_nonempty_approved",
+    "t_category": "ignored_must_be_empty",
+    "t_clients": "ignored_must_be_empty",
+    "t_complexitytypes": "ignored_nonempty_approved",
+    "t_connector": "imported",
+    "t_connectorconstraint": "ignored_must_be_empty",
+    "t_connectortag": "ignored_nonempty_approved",
+    "t_connectortypes": "ignored_nonempty_approved",
+    "t_constants": "ignored_nonempty_approved",
+    "t_constrainttypes": "ignored_nonempty_approved",
+    "t_datatypes": "ignored_nonempty_approved",
+    "t_diagram": "imported",
+    "t_diagramlinks": "imported",
+    "t_diagramobjects": "imported",
+    "t_diagramtypes": "ignored_nonempty_approved",
+    "t_document": "imported",
+    "t_ecf": "ignored_nonempty_approved",
+    "t_efforttypes": "ignored_nonempty_approved",
+    "t_files": "ignored_must_be_empty",
+    "t_genopt": "ignored_nonempty_approved",
+    "t_glossary": "ignored_must_be_empty",
+    "t_html": "ignored_must_be_empty",
+    "t_image": "ignored_nonempty_approved",
+    "t_implement": "ignored_nonempty_approved",
+    "t_issues": "ignored_must_be_empty",
+    "t_lists": "ignored_nonempty_approved",
+    "t_mainttypes": "ignored_must_be_empty",
+    "t_method": "ignored_must_be_empty",
+    "t_metrictypes": "ignored_nonempty_approved",
+    "t_object": "imported",
+    "t_objectconstraint": "ignored_must_be_empty",
+    "t_objecteffort": "ignored_must_be_empty",
+    "t_objectfiles": "ignored_must_be_empty",
+    "t_objectmetrics": "ignored_must_be_empty",
+    "t_objectproblems": "ignored_must_be_empty",
+    "t_objectproperties": "imported",
+    "t_objectrequires": "ignored_nonempty_approved",
+    "t_objectresource": "ignored_must_be_empty",
+    "t_objectrisks": "ignored_must_be_empty",
+    "t_objectscenarios": "ignored_nonempty_approved",
+    "t_objecttests": "ignored_must_be_empty",
+    "t_objecttrx": "ignored_must_be_empty",
+    "t_objecttypes": "ignored_nonempty_approved",
+    "t_ocf": "ignored_nonempty_approved",
+    "t_operation": "imported",
+    "t_operationparams": "imported",
+    "t_operationposts": "ignored_must_be_empty",
+    "t_operationpres": "ignored_must_be_empty",
+    "t_operationtag": "ignored_must_be_empty",
+    "t_package": "imported",
+    "t_palette": "ignored_must_be_empty",
+    "t_paletteitem": "ignored_must_be_empty",
+    "t_phase": "ignored_must_be_empty",
+    "t_primitives": "ignored_must_be_empty",
+    "t_problemtypes": "ignored_nonempty_approved",
+    "t_projectroles": "ignored_nonempty_approved",
+    "t_propertytypes": "ignored_must_be_empty",
+    "t_requiretypes": "ignored_nonempty_approved",
+    "t_resources": "ignored_must_be_empty",
+    "t_risktypes": "ignored_must_be_empty",
+    "t_roleconstraint": "ignored_must_be_empty",
+    "t_rtf": "ignored_must_be_empty",
+    "t_rtfreport": "ignored_must_be_empty",
+    "t_rules": "ignored_must_be_empty",
+    "t_scenariotypes": "ignored_nonempty_approved",
+    "t_script": "ignored_nonempty_approved",
+    "t_secgroup": "ignored_must_be_empty",
+    "t_secgrouppermission": "ignored_must_be_empty",
+    "t_seclocks": "ignored_must_be_empty",
+    "t_secpermission": "ignored_must_be_empty",
+    "t_secpolicies": "ignored_must_be_empty",
+    "t_secuser": "ignored_must_be_empty",
+    "t_secusergroup": "ignored_must_be_empty",
+    "t_secuserpermission": "ignored_must_be_empty",
+    "t_snapshot": "ignored_nonempty_approved",
+    "t_statustypes": "ignored_nonempty_approved",
+    "t_stereotypes": "ignored_nonempty_approved",
+    "t_taggedvalue": "ignored_must_be_empty",
+    "t_tasks": "ignored_must_be_empty",
+    "t_tcf": "ignored_nonempty_approved",
+    "t_template": "ignored_nonempty_approved",
+    "t_testclass": "ignored_must_be_empty",
+    "t_testplans": "ignored_must_be_empty",
+    "t_testtypes": "ignored_nonempty_approved",
+    "t_trxtypes": "ignored_must_be_empty",
+    "t_umlpattern": "ignored_must_be_empty",
+    "t_version": "ignored_must_be_empty",
+    "t_xref": "imported",
+    "t_xrefsystem": "ignored_nonempty_approved",
+    "t_xrefuser": "ignored_must_be_empty",
+    "usys_schema": "ignored_must_be_empty",
+    "usys_system": "ignored_nonempty_approved",
+    "usysOldTables": "ignored_must_be_empty",
+    "usysQueries": "ignored_must_be_empty",
+    "usysTables": "ignored_nonempty_approved"
   }
 }
 </script>
@@ -843,6 +946,20 @@ function sourceProfileCounts(name,value){
   if(!Object.keys(out).length)throw new Error("Source profile "+name+" must not be empty.");
   return Object.freeze(out);
 }
+function sourceProfileTableDispositions(raw){
+  if(!raw||typeof raw!=="object"||Array.isArray(raw))throw new Error("Source profile tableDispositions must be an object.");
+  const allowed=new Set(["imported","ignored_nonempty_approved","ignored_must_be_empty"]);
+  const out={},seenLower=new Set();
+  for(const [key,value] of Object.entries(raw)){
+    if(!key||typeof value!=="string"||!allowed.has(value))throw new Error("Source profile tableDispositions has invalid disposition for "+key+".");
+    const lower=key.toLowerCase();
+    if(seenLower.has(lower))throw new Error("Source profile tableDispositions has a case-insensitive duplicate for "+key+".");
+    seenLower.add(lower);
+    out[key]=value;
+  }
+  if(!Object.keys(out).length)throw new Error("Source profile tableDispositions must not be empty.");
+  return Object.freeze(out);
+}
 function loadSourceProfile(){
   const node=document.getElementById("mdse-source-profile");
   if(!node)throw new Error("Embedded MDSE source profile is missing.");
@@ -859,15 +976,23 @@ function loadSourceProfile(){
     connectorTypes:sourceProfileCounts("expected.connectorTypes",raw.expected.connectorTypes),
     diagramTypes:sourceProfileCounts("expected.diagramTypes",raw.expected.diagramTypes)
   });
+  const tableDispositions=sourceProfileTableDispositions(raw.tableDispositions);
   for(const required of ["t_object","t_connector","t_package","t_diagram"]){
     if(!Object.prototype.hasOwnProperty.call(expected.tables,required))throw new Error("Source profile is missing required table count "+required+".");
+  }
+  for(const name of Object.keys(expected.tables)){
+    if(tableDispositions[name]!=="imported")throw new Error("Count-gated table "+name+" must have imported disposition.");
+  }
+  for(const [name,disposition] of Object.entries(tableDispositions)){
+    if(disposition==="imported"&&!Object.prototype.hasOwnProperty.call(expected.tables,name))throw new Error("Imported table "+name+" is missing an expected row count.");
   }
   return Object.freeze({
     schema:raw.schema,
     profileId:raw.profileId.trim(),
     sourceModelId:raw.sourceModelId.trim(),
     description:typeof raw.description==="string"?raw.description:"",
-    expected
+    expected,
+    tableDispositions
   });
 }
 const SOURCE_PROFILE=loadSourceProfile();
@@ -876,6 +1001,7 @@ const EXPECTED_TABLES=SOURCE_PROFILE.expected.tables;
 const EXPECTED_ELEMENT_TYPES=SOURCE_PROFILE.expected.elementTypes;
 const EXPECTED_CONNECTOR_TYPES=SOURCE_PROFILE.expected.connectorTypes;
 const EXPECTED_DIAGRAM_TYPES=SOURCE_PROFILE.expected.diagramTypes;
+const TABLE_DISPOSITIONS=SOURCE_PROFILE.tableDispositions;
 
 const LENGTH_PROPERTIES = [
   "User Story",
@@ -1101,6 +1227,30 @@ function compareExact(expected, actual, category, issues) {
     }
   });
 }
+function applyTableDispositionPolicy(reader,tableDiagnostics,issues){
+  const byLower=new Map(Object.keys(TABLE_DISPOSITIONS).map(function(name){return [name.toLowerCase(),name];}));
+  for(const table of reader.tables.values()){
+    if(!byLower.has(String(table.name||"").toLowerCase())){
+      issues.push({severity:"fail",code:"TABLE_DISPOSITION_MISSING",message:"Discovered QEAX table "+table.name+" has no governed source-profile disposition."});
+    }
+  }
+  for(const [name,disposition] of Object.entries(TABLE_DISPOSITIONS)){
+    const d=tableDiagnostics[name];
+    if(!d||!d.present){
+      issues.push({severity:"fail",code:"TABLE_DISPOSITION_TABLE_MISSING",message:"Governed QEAX table "+name+" is missing from the selected source."});
+      continue;
+    }
+    if(d.error){
+      issues.push({severity:"fail",code:"TABLE_READ_ERROR",message:name+": "+d.error});
+      continue;
+    }
+    if(disposition==="imported"){
+      if(d.rows!==EXPECTED_TABLES[name])issues.push({severity:"fail",code:"TABLE_COUNT_DIFF",message:name+" expected "+EXPECTED_TABLES[name]+" rows but QEAX has "+d.rows+"."});
+    }else if(disposition==="ignored_must_be_empty"&&d.rows!==0){
+      issues.push({severity:"fail",code:"TABLE_DISPOSITION_NONEMPTY",message:name+" is intentionally ignored only while empty, but QEAX now has "+d.rows+" row(s). Update/approve the source profile disposition before import."});
+    }
+  }
+}
 
 async function analyze() {
   if (busy) return;
@@ -1132,27 +1282,18 @@ async function analyze() {
       return {name:t.name,rootpage:t.rootpage,rowidAlias:t.rowidAlias,columns:(t.columns || []).filter(Boolean),sql:t.sql};
     });
 
-    setStatus("","Counting tables");
-    const diagList = await reader.diagnose(Object.keys(EXPECTED_TABLES), function(name,rows){ log("Counted " + name + ": " + fmt(rows)); });
+    setStatus("","Counting governed tables");
+    const dispositionNames=Object.keys(TABLE_DISPOSITIONS);
+    const diagList = await reader.diagnose(dispositionNames, function(name,rows){ log("Counted " + name + ": " + fmt(rows)); });
     const tableDiagnostics = {};
-    diagList.forEach(function(d){ tableDiagnostics[d.name || d.name === "" ? d.name : ""] = d; });
-    // Key by requested lower-case table name as well, even if missing.
-    Object.keys(EXPECTED_TABLES).forEach(function(name){
+    dispositionNames.forEach(function(name){
       const d = diagList.find(function(x){ return String(x.name || "").toLowerCase() === name.toLowerCase(); });
       tableDiagnostics[name] = d || {name:name,present:false,rows:0};
     });
     renderTableCounts(tableDiagnostics);
 
     const issues = [];
-    Object.keys(EXPECTED_TABLES).forEach(function(name){
-      const d = tableDiagnostics[name];
-      if (!d || !d.present) {
-        issues.push({severity:"fail",code:"TABLE_MISSING",message:name + " is required by the Stage-1 definition but is not present."});
-      } else {
-        if (d.error) issues.push({severity:"fail",code:"TABLE_READ_ERROR",message:name + ": " + d.error});
-        if (d.rows !== EXPECTED_TABLES[name]) issues.push({severity:"fail",code:"TABLE_COUNT_DIFF",message:name + " expected " + EXPECTED_TABLES[name] + " rows but QEAX has " + d.rows + "."});
-      }
-    });
+    applyTableDispositionPolicy(reader,tableDiagnostics,issues);
 
     if (!reader.has("t_object") || !reader.has("t_connector") || !reader.has("t_diagram")) {
       throw new Error("Cannot continue type-count scans because t_object, t_connector or t_diagram is missing.");
@@ -1237,6 +1378,7 @@ async function analyze() {
         discoveredTableCount:stats.tables
       },
       expectedBaseline:"Source profile "+SOURCE_PROFILE.profileId,
+      tableDispositions:TABLE_DISPOSITIONS,
       tableDiagnostics:tableDiagnostics,
       elementTypes:objectScan.counts,
       connectorTypes:connectorScan.counts,
