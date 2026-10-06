@@ -16,7 +16,7 @@ const code=[extract("prefixPath"),extract("bindingReviewDisposition"),"return {b
 const api=new Function("n2",code)(n2);
 
 function ep(sourceId,ownerKey,path,parentPath){
-  return {kind:"endpoint",sourceId,ownerKey,path,parentPath,localId:"ep-"+sourceId,refKey:"ep:"+sourceId,equalsRefs:[]};
+  return {kind:"endpoint",sourceId,ownerKey,path,parentPath,localId:"ep-"+sourceId,anchor:"^ep-"+sourceId,equalsRefs:[]};
 }
 function local(endpoints,connections){
   return {endpointBySource:new Map(endpoints.map(x=>[x.sourceId,x])),connectionsByOwner:new Map(connections||[])};
@@ -28,20 +28,25 @@ const outer=ep(1,"owner",["J1"],[]);
 const inner=ep(2,"owner",["P1","J1"],["P1"]);
 const c0=con(100,1,2);
 let lm=local([outer,inner],[["owner",[]]]);
-outer.equalsRefs=[inner];inner.equalsRefs=[outer];
+const outerKey="local:"+outer.ownerKey+":"+outer.path.join("/");
+const innerKey="local:"+inner.ownerKey+":"+inner.path.join("/");
+outer.equalsRefs=[{refKey:innerKey}];inner.equalsRefs=[{refKey:outerKey}];
 let d=api.bindingReviewDisposition(c0,lm);
 expect(d.category,"temporary local equals - no internal Connection","zero-candidate equals category");
 expect(d.actualRelation,"Interface.equals (temporary)","zero-candidate equals relation");
 expect(d.candidateConnections.length,0,"zero-candidate count");
 
 outer.equalsRefs=[];inner.equalsRefs=[];
-const realConn={localId:"conn-1",ownerKey:"owner",sourceIds:[200,100],endpointA:inner,endpointB:ep(3,"owner",["P1","J2"],["P1"]),exposesRefs:[outer]};
+const realConn={localId:"conn-1",ownerKey:"owner",sourceIds:[200,100],
+  endpointA:{kind:"endpoint",refKey:innerKey},
+  endpointB:{kind:"endpoint",refKey:"local:owner:P1/J2"},
+  exposesRefs:[{kind:"endpoint",refKey:outerKey}]};
 lm=local([outer,inner],[["owner",[realConn]]]);
 d=api.bindingReviewDisposition(c0,lm);
 expect(d.category,"resolved Connection.exposes","exposure category");
 expect(d.actualRelation,"Connection.exposes","exposure relation");
 expect(d.connection.localId,"conn-1","exposure connection");
-expect(d.exposes.localId,outer.localId,"exposure endpoint");
+expect(d.exposes.localId,outer.localId,"exposure endpoint occurrence");
 expect(d.candidateConnections.length,1,"exposure candidate count");
 
 const deep=ep(4,"owner",["P1","P2","J1"],["P1","P2"]);

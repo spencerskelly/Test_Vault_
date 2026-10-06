@@ -4552,9 +4552,13 @@ function prefixPath(a,b){
   for(let i=0;i<a.length;i++)if(a[i]!==b[i])return false;
   return true;
 }
+function localOccurrenceRefKey(ep){
+  return ep&&ep.ownerKey&&Array.isArray(ep.path)?"local:"+ep.ownerKey+":"+ep.path.join("/"):"";
+}
 function bindingReviewDisposition(con,localModel){
   const s=localModel.endpointBySource.get(n2(con.Start_Object_ID))||null;
   const e=localModel.endpointBySource.get(n2(con.End_Object_ID))||null;
+  const sKey=localOccurrenceRefKey(s),eKey=localOccurrenceRefKey(e);
   const sameOwner=!!(s&&e&&s.ownerKey&&s.ownerKey===e.ownerKey);
   const result={
     s,e,sameOwner,category:"unresolved contextual endpoint(s)",actualRelation:"",rootCause:"",
@@ -4580,8 +4584,8 @@ function bindingReviewDisposition(con,localModel){
   for(const list of localModel.connectionsByOwner.values()){
     for(const conn of list){
       if(!(conn.sourceIds||[]).includes(cid))continue;
-      const exposed=(conn.exposesRefs||[]).find(x=>x&&((s&&x.refKey===s.refKey)||(e&&x.refKey===e.refKey)))||null;
-      if(exposed){result.connection=conn;result.exposes=exposed;break;}
+      const exposed=(conn.exposesRefs||[]).find(x=>x&&(x.refKey===sKey||x.refKey===eKey))||null;
+      if(exposed){result.connection=conn;result.exposes=exposed.refKey===sKey?s:e;break;}
     }
     if(result.connection)break;
   }
@@ -4593,20 +4597,24 @@ function bindingReviewDisposition(con,localModel){
     result.rootCause="unique internal Connection matched BindingConnector boundary Interface";
     if(!result.outer)result.outer=result.exposes;
     if(!result.inner){
-      if(result.connection.endpointA&&result.connection.endpointA.refKey!==result.exposes.refKey)result.inner=result.connection.endpointA;
-      else if(result.connection.endpointB&&result.connection.endpointB.refKey!==result.exposes.refKey)result.inner=result.connection.endpointB;
+      const exposedKey=localOccurrenceRefKey(result.exposes);
+      if(result.connection.endpointA&&result.connection.endpointA.refKey!==exposedKey&&result.connection.endpointA.kind==="endpoint")
+        result.inner=result.connection.endpointA.refKey===sKey?s:e;
+      else if(result.connection.endpointB&&result.connection.endpointB.refKey!==exposedKey&&result.connection.endpointB.kind==="endpoint")
+        result.inner=result.connection.endpointB.refKey===sKey?s:e;
     }
     return result;
   }
 
   const equalsWritten=!!(
-    (s.equalsRefs||[]).some(x=>x&&x.refKey===e.refKey)||
-    (e.equalsRefs||[]).some(x=>x&&x.refKey===s.refKey)
+    (s.equalsRefs||[]).some(x=>x&&x.refKey===eKey)||
+    (e.equalsRefs||[]).some(x=>x&&x.refKey===sKey)
   );
   if(result.inner&&result.inner.ownerKey){
+    const innerKey=localOccurrenceRefKey(result.inner);
     result.candidateConnections=(localModel.connectionsByOwner.get(result.inner.ownerKey)||[]).filter(conn=>
-      (conn.endpointA&&conn.endpointA.refKey===result.inner.refKey)||
-      (conn.endpointB&&conn.endpointB.refKey===result.inner.refKey)
+      (conn.endpointA&&conn.endpointA.refKey===innerKey)||
+      (conn.endpointB&&conn.endpointB.refKey===innerKey)
     );
   }
   if(equalsWritten){
