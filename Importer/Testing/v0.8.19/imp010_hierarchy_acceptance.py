@@ -30,7 +30,9 @@ def scalar(v: str) -> str:
     try:
         return str(json.loads(v))
     except Exception:
-        return v.strip(""'")
+        if len(v) >= 2 and v[0] == v[-1] and v[0] in ('"', "\'"):
+            return v[1:-1]
+        return v
 
 def frontmatter(text: str) -> list[str]:
     lines = text.splitlines()
