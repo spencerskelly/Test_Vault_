@@ -219,6 +219,25 @@ W-391 / IMP-005 validates the importer against a real generated 0.8.0 Base.
 
 This closes the false-incompatibility path for distributed fresh Bases without pre-assigning a shared vault identity.
 
+## Source fingerprint acceptance
+
+W-392 / IMP-006 proves strong source identity using the current v0.8.19 production streaming SHA-256 implementation and immutable artifacts from the accepted real-QEAX run.
+
+- Dedicated artifact-reuse acceptance: **PASS**, run `37420398404`
+- Exact source size: **186,036,224 bytes**
+- Production clean SHA-256: `16c055ec1a5af57b0f4f9059d6292c5ddd3ed052124c7ef54d9af288971ae02c`
+- Preflight SHA-256: exact match
+- `Import State.json` SHA-256: exact match
+- `Run Manifest.md` SHA-256: exact match
+- Virtual changed-byte offset: **93,018,112**
+- Changed-byte SHA-256: `00ae9590b2a970830545d80a281f8e238274c9f8c1310b9a7f0000b8d764635c`
+- Changed digest differs from accepted source: **PASS**
+- Fast current-version empty / `abc` / split-update vectors: **PASS**
+- Normal importer CI on same head: **PASS**, run `37420404557`
+- Package check on same head: **PASS**, run `37420404553`
+
+The source artifact was not modified or re-imported. The changed-byte case is a virtual read wrapper used only for fingerprint sensitivity.
+
 ## Step 12 conclusion
 
 Step 12 execution is **PASS**; semantic acceptance remains `ACCEPTANCE_PENDING` with `SEMANTIC_REVIEW_REQUIRED`.
@@ -234,4 +253,4 @@ The real source model:
 
 `SEMANTIC_REVIEW_REQUIRED` remains intentional review state and should not be confused with an importer execution/reconciliation failure.
 
-v0.8.19 has completed Workbench compatibility acceptance. Importer release conformity continues with the remaining release-blocking issue register; next is P0 IMP-006 (source SHA-256 evidence).
+v0.8.19 has completed Workbench compatibility acceptance and all P0 importer release-conformity blockers IMP-001 through IMP-006 are closed. Release conformity continues with the P1 register; next is IMP-007 (externalize the EA8647 source-count contract).
