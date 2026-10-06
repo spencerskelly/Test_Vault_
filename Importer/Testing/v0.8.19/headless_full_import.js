@@ -138,6 +138,120 @@ const html=fs.readFileSync(importerPath,"utf8");
 const s1=html.indexOf("<script>"),s2=html.lastIndexOf("</script>");
 if(s1<0||s2<s1)throw new Error("Importer embedded script missing");
 const source=html.slice(s1+8,s2)+`
+globalThis.__imp002Capture={endpointFindings:[],entityCtx:null,finalGraph:[]};
+const __imp002OriginalSuppress=suppressEndpointFindings;
+suppressEndpointFindings=function(graph,findings){
+  globalThis.__imp002Capture.endpointFindings=(findings||[]).map(x=>Object.assign({},x));
+  const out=__imp002OriginalSuppress(graph,findings);
+  globalThis.__imp002Capture.finalGraph=Array.from(graph.entries()).map(([owner,fm])=>[
+    owner,Array.from(fm.entries()).map(([field,targets])=>[field,Array.from(targets)])
+  ]);
+  return out;
+};
+const __imp002OriginalRender=renderEntityMarkdown;
+renderEntityMarkdown=function(e,graph,entityCtx,...rest){
+  globalThis.__imp002Capture.entityCtx=entityCtx;
+  return __imp002OriginalRender(e,graph,entityCtx,...rest);
+};
+globalThis.__mdseImp002Audit=function(){
+  const cap=globalThis.__imp002Capture||{};
+  if(!lastPlannerContext||!cap.entityCtx)throw new Error("IMP-002 audit requires a completed real plan and entity context.");
+  const reviewed=(lastPlannerContext.connectorPlans||[]).filter(p=>p.review&&p.field);
+  const rawGuidSet=new Set((lastPlannerContext.connectors||[]).map(x=>normGuid(x.ea_guid||x.ConnectorGUID||x.Connector_GUID||"")).filter(Boolean));
+  const reviewEvidenceExpected=reviewed.map(p=>{
+    const from=cap.entityCtx.entities.get(p.sourceKey),to=cap.entityCtx.entities.get(p.targetKey);
+    return {
+      source_guid:p.eaGuid||"",
+      category:p.field==="tracesTo"?"provisional":"connector review",
+      relationship:p.field||"",
+      from_type:p.sourceType||"",
+      from_name:from?(from.fileName||from.naturalName||from.key):(p.sourceKey||""),
+      to_type:p.targetType||"",
+      to_name:to?(to.fileName||to.naturalName||to.key):(p.targetKey||""),
+      detail:"review-only source connector; not written to canonical YAML; "+(p.rule||"")+(p.detail?"; "+p.detail:"")
+    };
+  });
+  const reviewedMissingRaw=reviewed.filter(p=>!rawGuidSet.has(normGuid(p.eaGuid||""))).map(p=>p.eaGuid||p.sourceId||"");
+
+  let currentPlan=null;
+  const writerCalls=[];
+  const plans=Array.from(lastPlannerContext.connectorPlans||[]);
+  const replayCtx=Object.create(lastPlannerContext);
+  replayCtx.connectorPlans={
+    [Symbol.iterator]:function(){
+      let i=0;
+      return {next:function(){
+        if(i>=plans.length){currentPlan=null;return {done:true};}
+        currentPlan=plans[i++];
+        return {value:currentPlan,done:false};
+      }};
+    }
+  };
+  const originalAddForwardRel=addForwardRel;
+  addForwardRel=function(graph,ownerKey,field,targetKey,allowDuplicate){
+    writerCalls.push({
+      source_guid:currentPlan&&currentPlan.eaGuid||"",
+      review:!!(currentPlan&&currentPlan.review),
+      planned_field:currentPlan&&currentPlan.field||"",
+      written_field:field,
+      ownerKey,targetKey
+    });
+    return originalAddForwardRel(graph,ownerKey,field,targetKey,allowDuplicate);
+  };
+  try{
+    applyConnectorRelations(new Map(),replayCtx,cap.entityCtx,new Set());
+  }finally{
+    addForwardRel=originalAddForwardRel;
+  }
+
+  const graph=new Map((cap.finalGraph||[]).map(([owner,fields])=>[
+    owner,new Map(fields.map(([field,targets])=>[field,Array.from(targets)]))
+  ]));
+  const hasEdge=(owner,field,target)=>!!(graph.get(owner)&&graph.get(owner).get(field)&&graph.get(owner).get(field).includes(target));
+  const endpointFindings=(cap.endpointFindings||[]).map(x=>{
+    const owner=cap.entityCtx.entities.get(x.ownerKey),target=cap.entityCtx.entities.get(x.targetKey);
+    const inverse=REL_PAIRS[x.field]||(REL_SYMMETRIC.has(x.field)?x.field:"");
+    return Object.assign({},x,{
+      inverseField:inverse,
+      ownerPath:owner&&owner.outputPath||"",
+      ownerLink:owner&&(owner.linkTarget||owner.fileName)||"",
+      targetPath:target&&target.outputPath||"",
+      targetLink:target&&(target.linkTarget||target.fileName)||""
+    });
+  });
+  const remainingSuppressedEdges=[];
+  for(const x of endpointFindings){
+    if(hasEdge(x.ownerKey,x.field,x.targetKey))remainingSuppressedEdges.push(x.ownerKey+"|"+x.field+"|"+x.targetKey);
+    if(x.inverseField&&hasEdge(x.targetKey,x.inverseField,x.ownerKey))remainingSuppressedEdges.push(x.targetKey+"|"+x.inverseField+"|"+x.ownerKey);
+  }
+  const provisionalGraphEdges=[];
+  for(const [owner,fm] of graph.entries()){
+    for(const field of ["tracesTo","tracesFrom"]){
+      for(const target of (fm.get(field)||[]))provisionalGraphEdges.push(owner+"|"+field+"|"+target);
+    }
+  }
+  const endpointEvidenceExpected=endpointFindings.map(x=>({
+    source_guid:"",
+    category:x.reason,
+    relationship:x.field,
+    from_type:x.fromType,
+    from_name:x.ownerName,
+    to_type:x.toType,
+    to_name:x.targetName,
+    detail:"off-rule graph relationship suppressed from canonical YAML"
+  }));
+  return {
+    reviewedPlanCount:reviewed.length,
+    reviewedWriterCalls:writerCalls.filter(x=>x.review),
+    reviewedMissingRaw,
+    reviewEvidenceExpected,
+    endpointFindingCount:endpointFindings.length,
+    endpointFindings,
+    endpointEvidenceExpected,
+    remainingSuppressedEdges,
+    provisionalGraphEdges
+  };
+};
 globalThis.__mdseHeadlessRun = async function(sourceFile, outputHandle){
   attachmentBenchmark=globalThis.__attachmentBenchmarkObject||null;
   selectedFile=sourceFile;
@@ -153,7 +267,8 @@ globalThis.__mdseHeadlessRun = async function(sourceFile, outputHandle){
   el("slicePath").value="";
   await generateSlice();
   const slice=lastSliceReport?JSON.parse(JSON.stringify(lastSliceReport)):null;
-  return {phase:slice?"complete":"write",preflight,plan,slice,uiLog:el("log").textContent,sliceStatus:el("sliceStatus").textContent};
+  const imp002Audit=slice?globalThis.__mdseImp002Audit():null;
+  return {phase:slice?"complete":"write",preflight,plan,slice,imp002Audit,uiLog:el("log").textContent,sliceStatus:el("sliceStatus").textContent};
 };
 globalThis.__mdseHeadlessRegenerate = async function(outputHandle){
   lastSliceReport=null;
@@ -188,6 +303,14 @@ vm.runInContext(source,context,{filename:importerPath,timeout:120000});
       issues:result.plan.issues
     },
     slice:result.slice,
+    imp002Audit:result.imp002Audit&&{
+      reviewedPlanCount:result.imp002Audit.reviewedPlanCount,
+      reviewedWriterCallCount:result.imp002Audit.reviewedWriterCalls.length,
+      reviewedMissingRawCount:result.imp002Audit.reviewedMissingRaw.length,
+      endpointFindingCount:result.imp002Audit.endpointFindingCount,
+      remainingSuppressedEdgeCount:result.imp002Audit.remainingSuppressedEdges.length,
+      provisionalGraphEdgeCount:result.imp002Audit.provisionalGraphEdges.length
+    },
     sliceStatus:result.sliceStatus,
     uiLog:result.uiLog
   };
