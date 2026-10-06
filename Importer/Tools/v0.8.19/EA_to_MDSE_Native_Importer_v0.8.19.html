@@ -1985,6 +1985,8 @@ async function buildTranslationPlan(){
 
     const portCounts={"local-endpoint-only":0};
     for(const q of portResolution.info.values())portCounts[q.outcome]=(portCounts[q.outcome]||0)+1;
+    const resolvedLocalEndpointCount=Array.from(portResolution.info.values()).filter(q=>q&&q.outcome==="local-endpoint-only"&&q.resolvedKey).length;
+    const definitionlessLocalEndpointCount=Array.from(portResolution.info.values()).filter(q=>q&&q.outcome==="local-endpoint-only"&&!q.resolvedKey).length;
     const definitionlessGroupCount=portResolution.addGroups.size;
     const multiDefinitionlessGroups=Array.from(portResolution.addGroups.values()).filter(g=>g.length>1);
 
@@ -2014,7 +2016,7 @@ async function buildTranslationPlan(){
       importer:BUILD,relationshipSchema:REL_SCHEMA_VERSION,generatedAt:new Date().toISOString(),source:lastReport.source,result,durationMs,
       notes:{elementEntities:emittedElementEntityKeys.size,packageNotes:packageNoteCount,diagramNotes:diagramNoteCount},
       counts:{elements:objects.length,connectors:connectors.length,packages:packages.length,diagrams:diagrams.length,xrefs:xrefs.length},
-      portPlan:{sourcePorts:portResolution.info.size,outcomes:portCounts,definitionlessLocalEndpoints:portCounts["local-endpoint-only"]||0,definitionlessGroups:definitionlessGroupCount,multiSourceDefinitionlessGroups:multiDefinitionlessGroups.length,rule:"W-384 all EA Ports are Local Model Interface occurrences; no Port notes"},
+      portPlan:{sourcePorts:portResolution.info.size,outcomes:portCounts,resolvedLocalEndpoints:resolvedLocalEndpointCount,definitionlessLocalEndpoints:definitionlessLocalEndpointCount,definitionlessGroups:definitionlessGroupCount,multiSourceDefinitionlessGroups:multiDefinitionlessGroups.length,rule:"W-384 all EA Ports are Local Model Interface occurrences; no Port notes"},
       issues,elements:elementPlans,connectors:connectorPlans,packages:packagePlans,diagrams:diagramPlans
     };
     lastPlannerContext={reader,packages,objects,connectors,diagrams,xrefs,pkg,byId,byGuid,portResolution,elementCtx,placementCtx,elementPlans,connectorPlans,packagePlans,diagramPlans};
@@ -4144,7 +4146,7 @@ function definitionlessEndpointsReviewCsv(ctx,entityCtx,localModel){
   for(const raw of ctx.objects||[]){
     if(trim2(raw.Object_Type)!=="Port")continue;
     const q=ctx.portResolution.info.get(n2(raw.Object_ID));
-    if(!q||q.outcome!=="local-endpoint-only")continue;
+    if(!q||q.outcome!=="local-endpoint-only"||q.resolvedKey)continue;
     const owner=ctx.byId.get(n2(raw.ParentID))||null,assembly=owner?ctx.byId.get(n2(owner.ParentID))||null:null;
     const block=ctx.byId.get(n2(q.blockObjectId))||null;
     const blockPorts=block?(directPortsByOwner.get(n2(block.Object_ID))||[]):[],
@@ -4713,7 +4715,7 @@ async function generateSlice(){
     const planStatus="PLAN_PASS";
     const reviewedConnectorPlans=(lastPlannerContext.connectorPlans||[]).filter(p=>p.review&&p.field);
     const relationshipReviewCount=endpointFindings.length+reviewedConnectorPlans.length;
-    const definitionlessEndpointCount=Array.from(lastPlannerContext.portResolution.info.values()).filter(q=>q&&q.outcome==="local-endpoint-only").length;
+    const definitionlessEndpointCount=Array.from(lastPlannerContext.portResolution.info.values()).filter(q=>q&&q.outcome==="local-endpoint-only"&&!q.resolvedKey).length;
     const semanticStatus=(relationshipReviewCount||localModel.stats.warnings||definitionlessEndpointCount)?"SEMANTIC_REVIEW_REQUIRED":"SEMANTIC_CLEAR";
     const acceptanceStatus="ACCEPTANCE_PENDING";
 
