@@ -2929,7 +2929,7 @@ function stableLocalId(prefix,raw,fallback){
 function localAnchor(parts){
   return parts&&parts.length?parts[parts.length-1]:"";
 }
-function mdInline(v){return trim2(v).replace(/\r?\n/g," ").replace(/\s+/g," ").trim();}
+function canonicalMarkdownLf(v){return str(v).replace(/\r\n?/g,"\n");}\nfunction mdInline(v){return trim2(v).replace(/\r?\n/g," ").replace(/\s+/g," ").trim();}
 function entityWiki(entities,key){
   const e=entities.get(key);return e?"[["+(e.linkTarget||e.fileName)+"]]":"";
 }
@@ -3994,7 +3994,7 @@ function renderEntityMarkdown(e,graph,entityCtx,tagMap,foldedNotes,externalSet,s
   if(ev){
     lines.push(...ev.structure,...ev.connectors,...ev.discussions,...ev.reviews);
   }
-  return lines.join("\n").replace(/\n+$/,"")+"\n";
+  return canonicalMarkdownLf(lines.join("\n")).replace(/\n+$/,"")+"\n";
 }
 
 function selectedPackageIds(ctx,selected){
