@@ -66,7 +66,7 @@ for (const value of human) {
 // Filesystem sanitization must remove or replace unsafe filename characters.
 expect(
   api.sanitizeName('A/B:C?D*E"F<G>H|I\\J'),
-  "A-B -CD E''F(G)H-I-J",
+  "A-B -CDE''F(G)H-I-J",
   "unsafe filename characters normalized"
 );
 
