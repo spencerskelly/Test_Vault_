@@ -9,6 +9,7 @@ on:
       - "EA_2026_09_06_endgame.qeax.zip"
       - "Importer/Testing/v0.8.19/**"
       - "Importer/Tools/v0.8.19/**"
+      - "Importer/Definition/Source Profiles/**"
   workflow_dispatch:
 
 jobs:
