@@ -4552,30 +4552,108 @@ function prefixPath(a,b){
   for(let i=0;i<a.length;i++)if(a[i]!==b[i])return false;
   return true;
 }
+function bindingReviewDisposition(con,localModel){
+  const s=localModel.endpointBySource.get(n2(con.Start_Object_ID))||null;
+  const e=localModel.endpointBySource.get(n2(con.End_Object_ID))||null;
+  const sameOwner=!!(s&&e&&s.ownerKey&&s.ownerKey===e.ownerKey);
+  const result={
+    s,e,sameOwner,category:"unresolved contextual endpoint(s)",actualRelation:"",rootCause:"",
+    ownerKey:sameOwner?s.ownerKey:"",outer:null,inner:null,containment:"",candidateConnections:[],
+    connection:null,exposes:null
+  };
+  if(!s||!e){
+    result.rootCause="one or both BindingConnector endpoints do not resolve to Local Model Interface occurrences";
+    return result;
+  }
+  if(sameOwner){
+    const sp=s.path.slice(0,-1),ep=e.path.slice(0,-1);
+    if(prefixPath(sp,ep)&&sp.length<ep.length){result.outer=s;result.inner=e;result.containment=sp.join("/")+" -> "+ep.join("/");}
+    else if(prefixPath(ep,sp)&&ep.length<sp.length){result.outer=e;result.inner=s;result.containment=ep.join("/")+" -> "+sp.join("/");}
+    else{
+      const sb=(!s.parentPath||s.parentPath.length===0),eb=(!e.parentPath||e.parentPath.length===0);
+      if(sb&&!eb){result.outer=s;result.inner=e;}
+      else if(eb&&!sb){result.outer=e;result.inner=s;}
+    }
+  }
+
+  const cid=n2(con.Connector_ID);
+  for(const list of localModel.connectionsByOwner.values()){
+    for(const conn of list){
+      if(!(conn.sourceIds||[]).includes(cid))continue;
+      const exposed=(conn.exposesRefs||[]).find(x=>x&&((s&&x.refKey===s.refKey)||(e&&x.refKey===e.refKey)))||null;
+      if(exposed){result.connection=conn;result.exposes=exposed;break;}
+    }
+    if(result.connection)break;
+  }
+  if(result.connection){
+    result.category="resolved Connection.exposes";
+    result.actualRelation="Connection.exposes";
+    result.ownerKey=result.connection.ownerKey||result.ownerKey;
+    result.rootCause="unique internal Connection matched BindingConnector boundary Interface";
+    if(!result.outer)result.outer=result.exposes;
+    if(!result.inner){
+      if(result.connection.endpointA&&result.connection.endpointA.refKey!==result.exposes.refKey)result.inner=result.connection.endpointA;
+      else if(result.connection.endpointB&&result.connection.endpointB.refKey!==result.exposes.refKey)result.inner=result.connection.endpointB;
+    }
+    return result;
+  }
+
+  const equalsWritten=!!(
+    (s.equalsRefs||[]).some(x=>x&&x.refKey===e.refKey)||
+    (e.equalsRefs||[]).some(x=>x&&x.refKey===s.refKey)
+  );
+  if(result.inner&&result.inner.ownerKey){
+    result.candidateConnections=(localModel.connectionsByOwner.get(result.inner.ownerKey)||[]).filter(conn=>
+      (conn.endpointA&&conn.endpointA.refKey===result.inner.refKey)||
+      (conn.endpointB&&conn.endpointB.refKey===result.inner.refKey)
+    );
+  }
+  if(equalsWritten){
+    result.category=result.candidateConnections.length===0?
+      "temporary local equals - no internal Connection":
+      "temporary local equals - ambiguous internal Connection";
+    result.actualRelation="Interface.equals (temporary)";
+    result.rootCause=result.candidateConnections.length===0?
+      "boundary/internal BindingConnector has zero candidate internal Connections":
+      "boundary/internal BindingConnector has "+result.candidateConnections.length+" candidate internal Connections";
+    return result;
+  }
+
+  if(sameOwner){
+    const sp=s.path.slice(0,-1),ep=e.path.slice(0,-1);
+    const nested=(prefixPath(sp,ep)&&sp.length<ep.length)||(prefixPath(ep,sp)&&ep.length<sp.length);
+    result.category=nested?"same-owner nested internal binding":"same-owner sibling/non-hierarchical binding";
+    result.rootCause=nested?
+      "both Interfaces are internal; containment exists but neither is an assembly-boundary Interface":
+      "both Interfaces share a Local Model owner but no boundary/internal containment direction is deterministic";
+    return result;
+  }
+  result.category="cross-owner binding";
+  result.rootCause="Interfaces belong to different Local Model owner notes; no shared local binding context is proven";
+  return result;
+}
+
 function equalsDirectionReviewCsv(ctx,entityCtx,localModel,connectorDiagrams){
   const rows=[[
-    "ea_guid","ea_type","ea_name","category","start_element","end_element",
-    "owner_note","start_local","end_local","candidate_outer","candidate_inner",
-    "containment_path","connector_values","diagrams"
+    "ea_guid","ea_type","ea_name","category","actual_relation","root_cause",
+    "start_element","end_element","owner_note","start_local","end_local",
+    "connection_local","exposes_local","candidate_connection_count",
+    "candidate_outer","candidate_inner","containment_path","connector_values","diagrams"
   ]];
   for(const con of ctx.connectors||[]){
     if(trim2(con.Connector_Type)!=="Connector"||trim2(con.Stereotype)!=="BindingConnector")continue;
     const sRaw=ctx.byId.get(n2(con.Start_Object_ID)),eRaw=ctx.byId.get(n2(con.End_Object_ID));
-    const s=localModel.endpointBySource.get(n2(con.Start_Object_ID))||null;
-    const e=localModel.endpointBySource.get(n2(con.End_Object_ID))||null;
-    const sameOwner=!!(s&&e&&s.ownerKey&&s.ownerKey===e.ownerKey),owner=sameOwner?entityCtx.entities.get(s.ownerKey):null;
-    let outer="",inner="",containment="";
-    if(sameOwner){
-      const sp=s.path.slice(0,-1),ep=e.path.slice(0,-1);
-      if(prefixPath(sp,ep)&&sp.length<ep.length){outer=s.localId;inner=e.localId;containment=sp.join("/")+" -> "+ep.join("/");}
-      else if(prefixPath(ep,sp)&&ep.length<sp.length){outer=e.localId;inner=s.localId;containment=ep.join("/")+" -> "+sp.join("/");}
-    }
+    const d=bindingReviewDisposition(con,localModel);
+    const owner=d.ownerKey?entityCtx.entities.get(d.ownerKey):null;
     const values=[trim2(con.Name),trim2(con.Notes)].filter(Boolean).join(" | ");
     rows.push([
       trim2(con.ea_guid),trim2(con.Connector_Type),trim2(con.Name),
-      sameOwner?"temporary local equals":"unresolved contextual owner/endpoints",
+      d.category,d.actualRelation,d.rootCause,
       rawElementLabel(sRaw),rawElementLabel(eRaw),owner?(owner.pathTarget||owner.linkTarget||owner.fileName):"",
-      s?s.localId:"",e?e.localId:"",outer,inner,containment,values,
+      d.s?d.s.localId:"",d.e?d.e.localId:"",
+      d.connection?d.connection.localId:"",d.exposes?d.exposes.localId:"",
+      String(d.candidateConnections.length),
+      d.outer?d.outer.localId:"",d.inner?d.inner.localId:"",d.containment,values,
       (connectorDiagrams.get(n2(con.Connector_ID))||[]).join("; ")
     ]);
   }
