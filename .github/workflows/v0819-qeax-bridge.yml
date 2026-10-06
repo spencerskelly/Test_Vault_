@@ -74,7 +74,7 @@ jobs:
         uses: actions/checkout@v4
         with:
           repository: spencerskelly/MDSE_Workbench
-          ref: 3682e359645a32093ac66c4bd42ccb37ca1fbdc1
+          ref: 96aa5eb6453e41761b62e45de36a779fccf80983
           path: _wb128
 
       - name: Install WB-128 scanner dependencies
