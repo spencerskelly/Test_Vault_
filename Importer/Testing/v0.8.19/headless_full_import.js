@@ -356,11 +356,11 @@ function allMarkdownFiles(root){
   return out;
 }
 function manifestNumber(text,label){
-  const m=new RegExp("^- "+label.replace(/[.*+?^$\{\}()|[\]\\]/g,"\\vm.createContext(context);
-vm.runInContext(source,context,{filename:importerPath,timeout:120000});
-
-(async()=>{")+":\\s*(\\d+)\\s*$","m").exec(text);
-  return m?Number(m[1]):null;
+  const prefix="- "+label+":";
+  const line=String(text||"").replace(/\r\n/g,"\n").split("\n").find(x=>x.startsWith(prefix));
+  if(!line)return null;
+  const n=Number(line.slice(prefix.length).trim());
+  return Number.isFinite(n)?n:null;
 }
 function validateImp002(result,root){
   const audit=result&&result.imp002Audit;
