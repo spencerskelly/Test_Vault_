@@ -221,6 +221,89 @@ summary{cursor:pointer;font-weight:650}
     <div id="log">Ready.</div>
   </div>
 </div>
+<script id="mdse-source-profile" type="application/json">
+{
+  "schema": "mdse-ea-source-profile/1",
+  "profileId": "EA8647-2026-09-06-v1",
+  "sourceModelId": "EA8647",
+  "description": "Accepted EA8647 source-shape contract for the MDSE 0.8 first import. Updating this profile changes source snapshot policy without changing importer engine logic.",
+  "expected": {
+    "tables": {
+      "t_object": 35969,
+      "t_connector": 21822,
+      "t_package": 1387,
+      "t_diagram": 2924,
+      "t_diagramobjects": 42966,
+      "t_diagramlinks": 37955,
+      "t_objectproperties": 249892,
+      "t_xref": 42052,
+      "t_document": 397,
+      "t_operation": 23,
+      "t_attribute": 5
+    },
+    "elementTypes": {
+      "Requirement": 13988,
+      "InformationItem": 2825,
+      "Port": 4387,
+      "Class": 2737,
+      "Part": 3137,
+      "Object": 545,
+      "Signal": 623,
+      "Activity": 1668,
+      "UseCase": 1667,
+      "State": 1112,
+      "Artifact": 459,
+      "Issue": 264,
+      "Actor": 44,
+      "StateMachine": 2,
+      "Note": 431,
+      "Text": 61,
+      "Constraint": 1,
+      "Action": 323,
+      "StateNode": 73,
+      "Change": 65,
+      "Boundary": 44,
+      "Decision": 34,
+      "ActivityPartition": 28,
+      "Trigger": 27,
+      "Synchronization": 14,
+      "Sequence": 11,
+      "ActionPin": 6,
+      "ProxyConnector": 5,
+      "Event": 1,
+      "ActivityParameter": 1,
+      "Package": 1386
+    },
+    "connectorTypes": {
+      "Nesting": 836,
+      "Generalization": 3974,
+      "Connector": 823,
+      "Aggregation": 2288,
+      "Realisation": 950,
+      "NoteLink": 349,
+      "Dependency": 6762,
+      "Abstraction": 2811,
+      "UseCase": 1258,
+      "Association": 603,
+      "Usage": 239,
+      "ControlFlow": 407,
+      "StateFlow": 200,
+      "Sequence": 199,
+      "InformationFlow": 123
+    },
+    "diagramTypes": {
+      "Custom": 1230,
+      "Logical": 1038,
+      "Use Case": 267,
+      "CompositeStructure": 151,
+      "Statechart": 109,
+      "Activity": 95,
+      "Sequence": 24,
+      "Package": 10
+    }
+  }
+}
+</script>
 <script>
 
 /* ===================================================================
@@ -750,82 +833,49 @@ const BUILD = {
   writesVault: true
 };
 
-const EXPECTED_TABLES = {
-  t_object: 35969,
-  t_connector: 21822,
-  t_package: 1387,
-  t_diagram: 2924,
-  t_diagramobjects: 42966,
-  t_diagramlinks: 37955,
-  t_objectproperties: 249892,
-  t_xref: 42052,
-  t_document: 397,
-  t_operation: 23,
-  t_attribute: 5
-};
-
-const EXPECTED_ELEMENT_TYPES = {
-  Requirement:13988,
-  InformationItem:2825,
-  Port:4387,
-  Class:2737,
-  Part:3137,
-  Object:545,
-  Signal:623,
-  Activity:1668,
-  UseCase:1667,
-  State:1112,
-  Artifact:459,
-  Issue:264,
-  Actor:44,
-  StateMachine:2,
-  Note:431,
-  Text:61,
-  Constraint:1,
-  Action:323,
-  StateNode:73,
-  Change:65,
-  Boundary:44,
-  Decision:34,
-  ActivityPartition:28,
-  Trigger:27,
-  Synchronization:14,
-  Sequence:11,
-  ActionPin:6,
-  ProxyConnector:5,
-  Event:1,
-  ActivityParameter:1,
-  Package:1386
-};
-
-const EXPECTED_CONNECTOR_TYPES = {
-  Nesting:836,
-  Generalization:3974,
-  Connector:823,
-  Aggregation:2288,
-  Realisation:950,
-  NoteLink:349,
-  Dependency:6762,
-  Abstraction:2811,
-  UseCase:1258,
-  Association:603,
-  Usage:239,
-  ControlFlow:407,
-  StateFlow:200,
-  Sequence:199,
-  InformationFlow:123
-};
-
-const EXPECTED_DIAGRAM_TYPES = {
-  Custom:1230,
-  Logical:1038,
-  "Use Case":267,
-  CompositeStructure:151,
-  Statechart:109,
-  Activity:95,
-  Sequence:24,
-  Package:10
-};
+function sourceProfileCounts(name,value){
+  if(!value||typeof value!=="object"||Array.isArray(value))throw new Error("Source profile "+name+" must be an object.");
+  const out={};
+  for(const [key,count] of Object.entries(value)){
+    if(!key||!Number.isSafeInteger(count)||count<0)throw new Error("Source profile "+name+" has invalid count for "+key+".");
+    out[key]=count;
+  }
+  if(!Object.keys(out).length)throw new Error("Source profile "+name+" must not be empty.");
+  return Object.freeze(out);
+}
+function loadSourceProfile(){
+  const node=document.getElementById("mdse-source-profile");
+  if(!node)throw new Error("Embedded MDSE source profile is missing.");
+  let raw;
+  try{raw=JSON.parse(node.textContent||"");}
+  catch(err){throw new Error("Embedded MDSE source profile is not valid JSON: "+(err&&err.message?err.message:String(err)));}
+  if(!raw||raw.schema!=="mdse-ea-source-profile/1")throw new Error("Unsupported MDSE source profile schema.");
+  if(typeof raw.profileId!=="string"||!raw.profileId.trim())throw new Error("Source profile profileId is required.");
+  if(typeof raw.sourceModelId!=="string"||!raw.sourceModelId.trim())throw new Error("Source profile sourceModelId is required.");
+  if(!raw.expected||typeof raw.expected!=="object")throw new Error("Source profile expected counts are required.");
+  const expected=Object.freeze({
+    tables:sourceProfileCounts("expected.tables",raw.expected.tables),
+    elementTypes:sourceProfileCounts("expected.elementTypes",raw.expected.elementTypes),
+    connectorTypes:sourceProfileCounts("expected.connectorTypes",raw.expected.connectorTypes),
+    diagramTypes:sourceProfileCounts("expected.diagramTypes",raw.expected.diagramTypes)
+  });
+  for(const required of ["t_object","t_connector","t_package","t_diagram"]){
+    if(!Object.prototype.hasOwnProperty.call(expected.tables,required))throw new Error("Source profile is missing required table count "+required+".");
+  }
+  return Object.freeze({
+    schema:raw.schema,
+    profileId:raw.profileId.trim(),
+    sourceModelId:raw.sourceModelId.trim(),
+    description:typeof raw.description==="string"?raw.description:"",
+    expected
+  });
+}
+const SOURCE_PROFILE=loadSourceProfile();
+const SOURCE_MODEL_ID=SOURCE_PROFILE.sourceModelId;
+const EXPECTED_TABLES=SOURCE_PROFILE.expected.tables;
+const EXPECTED_ELEMENT_TYPES=SOURCE_PROFILE.expected.elementTypes;
+const EXPECTED_CONNECTOR_TYPES=SOURCE_PROFILE.expected.connectorTypes;
+const EXPECTED_DIAGRAM_TYPES=SOURCE_PROFILE.expected.diagramTypes;
 
 const LENGTH_PROPERTIES = [
   "User Story",
@@ -1186,7 +1236,7 @@ async function analyze() {
         encoding:reader.encoding,
         discoveredTableCount:stats.tables
       },
-      expectedBaseline:"Translator Definition / W-268 exact-count baseline verified directly against the actual QEAX under W-273",
+      expectedBaseline:"Source profile "+SOURCE_PROFILE.profileId,
       tableDiagnostics:tableDiagnostics,
       elementTypes:objectScan.counts,
       connectorTypes:connectorScan.counts,
@@ -2059,7 +2109,7 @@ const REL_SCHEMA_VERSION="1.36";
 const ELEMENT_SCHEMA_VERSION="1.18";
 const LOCAL_MODEL_SCHEMA_VERSION="0.4";
 const MDSE_RELEASE="0.8.0";
-const SOURCE_MODEL_ID="EA8647";
+// Source-model identity and expected counts are loaded from SOURCE_PROFILE above.
 // W-382: no importer-defined total path-length or per-folder file-count limit.
 const FS_COMPONENT_MAX_BYTES=255;
 const IMPORT_STATE_PATH="99_System/11_Import/Import State.json";
@@ -4849,6 +4899,7 @@ async function generateSlice(){
       "- MDSE release: "+MDSE_RELEASE,
       "- Generated: "+new Date().toISOString(),
       "- Source model: "+SOURCE_MODEL_ID,
+      "- Source profile: "+SOURCE_PROFILE.profileId+" ("+SOURCE_PROFILE.schema+")",
       "- Source: "+lastReport.source.name+" ("+lastReport.source.size+" bytes)",
       "- Source SHA-256: "+lastReport.source.sha256,
       "- Scope: "+(wholeModel?"WHOLE MODEL":selected),
