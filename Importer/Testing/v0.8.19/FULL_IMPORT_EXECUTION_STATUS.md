@@ -199,6 +199,26 @@ W-390 / IMP-004 proves that an EA SQLite snapshot requiring WAL content is rejec
 
 The WAL fixture does not copy or alter the source database on disk; only SQLite header bytes 18/19 are changed as the headless browser-compatible file wrapper serves reads.
 
+## Fresh-base initialization acceptance
+
+W-391 / IMP-005 validates the importer against a real generated 0.8.0 Base.
+
+- Importer CI: **PASS**, run `37419754379`
+- Base built by `Base Vault/Tools/v0.8.0-r2/build-base.py`
+- Governed files copied by Base builder: **158**, plus generated README, .gitignore and .vault.yaml
+- Fresh Base selection validator (`allowUninitialized=true`): **PASS**
+- Strict pre-initialization write validation: **BLOCKED**
+- Generated UID: `20261006054124829testuser-----`
+- UID length: **30**
+- Strict post-initialization validation: **PASS**
+- `mdse_release`: **0.8.0**, preserved
+- Non-`.vault.yaml` Base files compared before/after: **160**, all unchanged
+- Relationships / element-types / Local Model schemas: **preserved**
+- Plugin lock and enabled-plugin identity: **preserved**
+- Existing v0.8.15 static UI gate remains **PASS** and protects the visible rule that generation stays blocked until initialization succeeds
+
+This closes the false-incompatibility path for distributed fresh Bases without pre-assigning a shared vault identity.
+
 ## Step 12 conclusion
 
 Step 12 execution is **PASS**; semantic acceptance remains `ACCEPTANCE_PENDING` with `SEMANTIC_REVIEW_REQUIRED`.
@@ -214,4 +234,4 @@ The real source model:
 
 `SEMANTIC_REVIEW_REQUIRED` remains intentional review state and should not be confused with an importer execution/reconciliation failure.
 
-v0.8.19 has completed Workbench compatibility acceptance. Importer release conformity continues with the remaining release-blocking issue register; next is P0 IMP-004 (WAL-mode preflight rejection).
+v0.8.19 has completed Workbench compatibility acceptance. Importer release conformity continues with the remaining release-blocking issue register; next is P0 IMP-006 (source SHA-256 evidence).
