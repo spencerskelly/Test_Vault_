@@ -34,6 +34,24 @@ def load_profile(profile_path):
     for required in ("t_object", "t_connector", "t_package", "t_diagram"):
         if required not in expected["tables"]:
             raise SystemExit(f"missing required table count: {required}")
+    dispositions = data.get("tableDispositions")
+    if not isinstance(dispositions, dict) or not dispositions:
+        raise SystemExit("tableDispositions must be a non-empty object")
+    allowed = {"imported", "ignored_nonempty_approved", "ignored_must_be_empty"}
+    seen_lower = set()
+    for name, disposition in dispositions.items():
+        if not isinstance(name, str) or not name or disposition not in allowed:
+            raise SystemExit(f"invalid table disposition: {name!r}={disposition!r}")
+        lowered = name.lower()
+        if lowered in seen_lower:
+            raise SystemExit(f"case-insensitive duplicate table disposition: {name}")
+        seen_lower.add(lowered)
+    for name in expected["tables"]:
+        if dispositions.get(name) != "imported":
+            raise SystemExit(f"count-gated table must be imported: {name}")
+    for name, disposition in dispositions.items():
+        if disposition == "imported" and name not in expected["tables"]:
+            raise SystemExit(f"imported table missing expected row count: {name}")
     return data
 
 def embedded_range(text):
@@ -84,6 +102,7 @@ def main():
             "const EXPECTED_ELEMENT_TYPES=SOURCE_PROFILE.expected.elementTypes;",
             "const EXPECTED_CONNECTOR_TYPES=SOURCE_PROFILE.expected.connectorTypes;",
             "const EXPECTED_DIAGRAM_TYPES=SOURCE_PROFILE.expected.diagramTypes;",
+            "const TABLE_DISPOSITIONS=SOURCE_PROFILE.tableDispositions;",
         ):
             if token not in text:
                 raise SystemExit(f"generic source-profile loader token missing: {token}")
