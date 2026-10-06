@@ -38,6 +38,57 @@ jobs:
           file "$QEAX"
           sqlite3 "$QEAX" "SELECT 't_object', count(*) FROM t_object UNION ALL SELECT 't_connector', count(*) FROM t_connector UNION ALL SELECT 't_package', count(*) FROM t_package UNION ALL SELECT 't_diagramobjects', count(*) FROM t_diagramobjects;"
 
+      - name: Build disposable MDSE base
+        run: |
+          python3 -m pip install pyyaml
+          BASE="$RUNNER_TEMP/MDSE_v0819_full_import"
+          python3 "Base Vault/Tools/v0.8.0-r2/build-base.py" "$BASE"
+          python3 "Base Vault/Testing/check-release.py" --base "$BASE"
+          python3 - <<'PY'
+          from pathlib import Path
+          import os
+          p=Path(os.environ["RUNNER_TEMP"])/"MDSE_v0819_full_import"/".vault.yaml"
+          p.write_text(
+              'vault_uid: 20261006000000000skellyspencer\\n'
+              'name: MDSE_v0819_full_import\\n'
+              'default_branch: main\\n'
+              'mdse_release: "0.8.0"\\n',
+              encoding='utf-8'
+          )
+          PY
+
+      - name: Run actual v0.8.19 full importer
+        run: |
+          QEAX="$(find _qeax_bridge -maxdepth 1 -type f -name '*.qeax' ! -name '._*' -size +1M | head -1)"
+          BASE="$RUNNER_TEMP/MDSE_v0819_full_import"
+          node Importer/Testing/v0.8.19/headless_full_import.js \\
+            Importer/Tools/v0.8.19/EA_to_MDSE_Native_Importer_v0.8.19.html \\
+            "$QEAX" "$BASE" | tee "$RUNNER_TEMP/v0819-headless.log"
+
+      - name: Inspect full-import output
+        if: always()
+        run: |
+          BASE="$RUNNER_TEMP/MDSE_v0819_full_import"
+          echo "Generated markdown files:"
+          find "$BASE" -type f -name '*.md' | wc -l
+          echo "Import state:"
+          cat "$BASE/99_System/11_Import/Import State.json" 2>/dev/null || true
+          echo "Run manifest:"
+          cat "$BASE/99_System/11_Import/Run Manifest.md" 2>/dev/null || true
+          echo "Headless log tail:"
+          tail -200 "$RUNNER_TEMP/v0819-headless.log" 2>/dev/null || true
+
+      - name: Upload full-import evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: v0819-full-import-evidence
+          path: |
+            ${{ runner.temp }}/v0819-headless.log
+            ${{ runner.temp }}/MDSE_v0819_full_import/99_System/11_Import
+          retention-days: 7
+          if-no-files-found: warn
+
       - name: Upload QEAX bridge artifact
         uses: actions/upload-artifact@v4
         with:
