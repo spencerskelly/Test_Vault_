@@ -2,7 +2,7 @@
 
 **Status:** Active correction backlog  
 **Baseline date:** 2026-10-05  
-**Current candidate:** `EA_to_MDSE_Native_Importer_v0.8.17.html`  
+**Current candidate:** `EA_to_MDSE_Native_Importer_v0.8.19.html`  
 **Operating model:** [[Importer Operating Contract]]
 
 This register turns observed importer/model problems into bounded engineering work. It is intentionally focused on issues that affect model integrity, traceability, deterministic behavior, release confidence or everyday usability.
@@ -25,7 +25,7 @@ Status values:
 
 | ID | Pri | Phase | Status | Issue | Why it matters | Current evidence | Exit condition |
 |---|---|---|---|---|---|---|---|
-| IMP-001 | P0 | 9 | test required | Partial filesystem writes can leave a vault that looks legitimate | v0.8.7 implements W-371 persistent transaction state; browser fault-injection acceptance is still pending. | `IMPORT_IN_PROGRESS` is written before model output, caught failures attempt `IMPORT_FAILED`, the Run Manifest is late, and `IMPORT_COMPLETE` is the final authoritative write. Static ordering/syntax checks pass. | Fault-injection during note and evidence writes proves the state remains failed/in-progress, never authoritative PASS, and the dirty destination is refused on rerun. |
+| IMP-001 | P0 | 9 | closed | Partial filesystem writes can leave a vault that looks legitimate | v0.8.19 centralizes transaction state in `runImportTransaction`; no partial write can become authoritative. | Production-path fault injection in `transaction_failure_regression_test.js` passes inside the aggregate release gate (run `37414098512`): an injected body write failure persists `IMPORT_FAILED / WRITE_FAIL`; an injected failure while persisting `IMPORT_FAILED` leaves the prior `IMPORT_IN_PROGRESS / WRITE_IN_PROGRESS` marker authoritative; both dirty states are rejected by `assertFreshImportDestination`. Acceptance also exposed and fixed a strict-JSON defect in `Import State.json`. The changed production path then passed full real-QEAX import, deterministic comparison and Workbench scan in bridge run `37414094667`. | **Closed.** Failure/in-progress states cannot masquerade as PASS and a destination with any import-state file is refused for rerun. |
 | IMP-002 | P0 | 5/10 | test required | Off-rule/provisional relationships are written into canonical YAML | v0.8.12 implements W-376: reviewed connector mappings are evidence-only and remaining endpoint-invalid/provisional graph edges are suppressed before rendering. | Static syntax/order checks pass; evidence retains reviewed connector GUID/type/endpoints and explicit suppression reason. | Real-QEAX run confirms the canonical graph contains no off-rule/provisional relationships and review evidence remains complete/resolvable. |
 | IMP-003 | P0 | 10 | test required | One PASS label conflates mechanical completeness with semantic acceptance | v0.8.8 implements W-372 separate source, plan, write, semantic and acceptance states. | Generic Run Manifest PASS was removed; UI shows WRITE PASS separately and warns when semantic review is required. | Real-QEAX/browser run demonstrates statuses remain distinct through complete and failed writes. |
 | IMP-004 | P0 | 1 | test required | SQLite WAL mode is only a warning | v0.8.9 implements W-373 and makes WAL mode a blocking preflight failure. | Static checks confirm `SQLITE_WAL_MODE` is severity `fail` and the old warning form is absent. | Browser test with WAL-mode fixture is blocked before planning; clean checkpointed QEAX proceeds. |
