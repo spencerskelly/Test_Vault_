@@ -25,6 +25,7 @@ const focused = [
   "common_context_connection_ownership_regression_test.js",
   "part_terminated_flow_review_regression_test.js",
   "definitionless_interface_accounting_regression_test.js",
+  "canonical_relationship_boundary_regression_test.js",
   "transaction_failure_regression_test.js"
 ];
 
