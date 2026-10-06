@@ -12,7 +12,7 @@ function extract(name){
   return src.slice(start,next).trim();
 }
 function n2(v){const n=Number(v);return Number.isFinite(n)?Math.trunc(n):0;}
-const code=[extract("prefixPath"),extract("bindingReviewDisposition"),"return {bindingReviewDisposition};"].join("\n");
+const code=[extract("prefixPath"),extract("localOccurrenceRefKey"),extract("bindingReviewDisposition"),"return {bindingReviewDisposition};"].join("\n");
 const api=new Function("n2",code)(n2);
 
 function ep(sourceId,ownerKey,path,parentPath){
