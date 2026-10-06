@@ -1,14 +1,14 @@
 # Handoff Prompt — MDSE v0.8 Implementation
 
-**Current through the Workbench stability freeze, 2026-10-04.** Use this file to start the next chat. The numbered Workbench performance/stability sequence is complete through Step 60; do not reconstruct or extend it.
+**Current through W-386 / Workbench 0.1.18 release alignment, 2026-10-05.** Use this file to start the next chat. The numbered Workbench performance/stability sequence remains complete through Step 60; do not reconstruct or extend it.
 
 ## Copy-ready continuation prompt
 
-> Continue the MDSE v0.8 golden-model/toolchain work. Authorities: `spencerskelly/Test_Vault_` (main) for shared MDSE semantics, importer, Bootstrap, Base/release tooling and golden-model governance; `spencerskelly/MDSE_Workbench` (main) for Workbench implementation and its product-definition docs. Read first: `Test_Vault_/00_Workspace/00 - Current State.md`; `Test_Vault_/00_Workspace/MDSE Plan - Path to a Golden Model.md`; `Test_Vault_/00_Workspace/MDSE Tool Definitions and Boundaries.md`; `Test_Vault_/00_Workspace/Workspace Decision Log.md` through W-342; `Test_Vault_/99_System/10_Docs/MDSE Modeling Ruleset 1.23.md`; `Test_Vault_/Importer/Definition/Translator Definition.md`; and the current Workbench docs under `MDSE_Workbench/docs/Definition/`. Do not create a new integration vault yet. W-337 deliberately pauses that until Workbench WB-106 and importer v0.8.6 are aligned enough for a meaningful integrated test. Start with Workbench WB-106 as expanded by W-339/WB-114: the 0.1.17 standalone candidate already completed the original occurrence-aware Structure, Interfaces, Where Used, Requirements, read-only Local Model popup and Review gate. Continue the structured editor architecture now on standalone `main`: one semantic transaction/history service, Local Model 0.2 structured editing, distinct context-vs-definition edit surfaces, schema-driven impact review, and guarded structural transactions. Preserve the settled occurrence model: reusable definitions are notes; contextual uses are Local Model records; no fake notes; occurrence clicks open occurrence details; inheritance comes from subtypeOf/instanceOf/occurrence→definition, never partOf. Once WB-106 is releasable, align importer v0.8.6, then build one fresh integration vault for Bootstrap first-open persistence + importer + Workbench validation.
+> Continue the MDSE v0.8 golden-model/toolchain work. Authorities: `spencerskelly/Test_Vault_` for shared MDSE semantics/importer/Base/Bootstrap governance and `spencerskelly/MDSE_Workbench` for Workbench implementation. Current matched semantics are relationships 1.36, element-types 1.18 and Local Model 0.4. Importer v0.8.19 has a deterministic real-QEAX whole-model candidate with `IMPORT_COMPLETE` and completed WB-128 acceptance. Workbench 0.1.18 is merged, exact-artifact startup accepted and is the W-386 WB-106 Base pin. Do not add more standalone Workbench hardening without new regression evidence. Continue the remaining G2 path: importer release conformity, clean 0.8.0 base issuance, then Bootstrap first-open/OS acceptance before any keep/freeze decision.
 
-## Frozen Workbench stability candidate
+## Released Workbench baseline
 
-The standalone Workbench performance/stability candidate is frozen at **`spencerskelly/MDSE_Workbench` commit `476fbcad08ecd03f8c2c49cd3126393beb6ab412`** (manifest 0.1.17).
+Workbench 0.1.18 is the W-386 controlled WB-106 baseline. WB-128 merged at `e2364cabd97118c9e9cc359ad5404620309092cc`; the controlled runtime artifact is `b0c4e2c6bdfb96d36f51d8152b17be22592ef174` and exact-artifact startup acceptance is run `37408519667`.
 
 Exact SHA-256:
 - `main.js`: `bc553fef67b5aa2cc7623b2811c05e7af8952296dd3b3ba55e663e3de5fc64aa`
@@ -17,7 +17,7 @@ Exact SHA-256:
 
 Acceptance authority is `00_Workspace/Workbench Performance and Stability Roadmap.md`. Steps 55–59 retain the integrated runtime evidence; Step 60 freezes the candidate and handoff. Do not reopen Steps 18–60 unless the Workbench candidate changes or new evidence invalidates acceptance. A later code change is a new candidate and must rerun the acceptance scope affected by that change.
 
-This freeze does **not** promote Workbench into the controlled Base Vault. Base vendoring, plugin-lock regeneration, release-manifest updates and MDSE v0.8 integrated release checks remain separate controlled work.
+W-386 promotes Workbench 0.1.18 into the controlled pre-release Base payload/lock and sets `wb106Version`. This does **not** make the overall MDSE 0.8 release complete; importer release conformity, clean-base issuance and Bootstrap first-open/OS gates remain.
 
 ## Current release target
 
@@ -26,7 +26,7 @@ This freeze does **not** promote Workbench into the controlled Base Vault. Base 
 - element-types: **1.17**
 - Local Model: **0.2**
 - importer: **v0.8.6 candidate**
-- Workbench base pin: **0.1.16**; standalone candidateVersion **0.1.17** is the active development line (W-342); it completed the old read/navigation gate and the expanded WB-106 editor/Internal work is in progress
+- Workbench Base pin / WB-106 release: **0.1.18** (W-386); Local Model 0.1–0.3 remain readable/read-only for structured mutation and 0.4 is the governed structured-write target
 - Bootstrap official runtime: **0.3.0**
 - Bootstrap candidate: **0.3.1**
 - Base tooling: **v0.8.0-r2**
@@ -65,9 +65,7 @@ Still required in the integrated candidate vault:
 
 ## Workbench continuation
 
-Base runtime 0.1.16 remains unchanged. Standalone 0.1.17 at `476fbcad08ecd03f8c2c49cd3126393beb6ab412` is the frozen performance/stability candidate. The stability roadmap is closed at Step 60; do not invent a Step 61. Any further Workbench feature work or release integration must treat a code change after this commit as a new candidate and preserve/rerun the applicable stability acceptance gates. Use Workbench's current docs/tests as implementation authority and keep `src/core` free of Obsidian imports.
-
-Do not claim a new Workbench release is pinned in Test_Vault_ until its built artifacts are vendored, the plugin lock is regenerated, the release manifest is updated, and release checks pass.
+Workbench 0.1.18 is the released W-386 Base pin. The stability roadmap remains closed at Step 60; do not invent a Step 61. WB-128's bounded real-vault Gates 1–4 and the exact-artifact startup gate are the acceptance baseline for Local Model 0.4. Any later Workbench code change is a new candidate and must rerun the acceptance scope affected by that change. Use Workbench's current docs/tests as implementation authority and keep `src/core` free of Obsidian imports.
 
 ## Important governance
 
