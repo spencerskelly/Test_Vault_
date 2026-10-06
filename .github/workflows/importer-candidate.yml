@@ -63,6 +63,12 @@ jobs:
           MDSE_HEADLESS_COMPILE_ONLY: "1"
         run: node "Importer/Testing/v0.8.19/headless_full_import.js" "Importer/Tools/v0.8.19/EA_to_MDSE_Native_Importer_v0.8.19.html" /dev/null "$RUNNER_TEMP/unused"
 
+      - name: Build fresh Base for IMP-005
+        run: python3 "Base Vault/Tools/v0.8.0-r2/build-base.py" "$RUNNER_TEMP/imp005-fresh-base"
+
+      - name: Check IMP-005 fresh-base initialization
+        run: node "Importer/Testing/v0.8.19/fresh_base_initialization_regression_test.js" "$RUNNER_TEMP/imp005-fresh-base"
+
       - name: Check v0.8.19 aggregate release gate
         run: node "Importer/Testing/v0.8.19/release_gate_regression_test.js"
       - name: Compile IMP-009 output validator
