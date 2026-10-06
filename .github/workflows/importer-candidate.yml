@@ -69,7 +69,7 @@ jobs:
       - name: Build fresh Base for IMP-005
         run: python3 "Base Vault/Tools/v0.8.0-r2/build-base.py" "$RUNNER_TEMP/imp005-fresh-base"
 
-      - name: Check IMP-005 fresh-base initialization
+      - name: Check IMP-005 fresh-base initialization runtime
         run: node "Importer/Testing/v0.8.19/fresh_base_initialization_regression_test.js" "$RUNNER_TEMP/imp005-fresh-base"
 
       - name: Check v0.8.19 aggregate release gate
