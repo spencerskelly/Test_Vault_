@@ -86,7 +86,7 @@ class FakeFileHandle {
   }
   async createWritable() {
     const root = this.root, node = this.node, path = this.path;
-    let pending = node.content ?? "";
+    let pending = ""; // createWritable() defaults to keepExistingData: false
     return {
       async write(data) {
         if (root.failPredicate && root.failPredicate(path, data)) {
