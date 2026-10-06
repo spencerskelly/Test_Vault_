@@ -157,9 +157,8 @@ const api=context.__api;
   if(uid==="UNINITIALIZED")throw new Error("initializer did not replace UNINITIALIZED identity");
   if(!/^name:\s*IMP-005 Acceptance\s*$/m.test(vault))throw new Error("initializer did not write requested vault name");
   if(!/^default_branch:\s*main\s*$/m.test(vault))throw new Error("initializer changed governed default branch");
-  if(!new RegExp('^mdse_release:\\s*["\\']?'+context.MDSE_RELEASE.replace(/[.*+?^$()|[\]\\]/g,"\\$&")+'["\\']?\\s*$','m').test(vault)){
-    throw new Error("initializer did not preserve mdse_release");
-  }
+  const release=/^mdse_release:\\s*["']?([^"'#\\r\\n]+)["']?\\s*$/m.exec(vault)?.[1]?.trim()||"";
+  if(release!==context.MDSE_RELEASE)throw new Error("initializer did not preserve mdse_release");
 
   const strict=await api.requireBaseVault(rootHandle,false);
   if(!strict||!strict.initialized||strict.vaultUid!==uid)throw new Error("initialized base failed strict post-initialization validation");
