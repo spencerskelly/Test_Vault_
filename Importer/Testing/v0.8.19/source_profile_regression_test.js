@@ -26,6 +26,17 @@ for(const section of ["tables","elementTypes","connectorTypes","diagramTypes"]){
 for(const name of ["t_object","t_connector","t_package","t_diagram"]){
   if(!Object.prototype.hasOwnProperty.call(profile.expected.tables,name))throw new Error("required table absent: "+name);
 }
+if(!profile.tableDispositions||typeof profile.tableDispositions!=="object"||Array.isArray(profile.tableDispositions))throw new Error("tableDispositions missing");
+const allowedDispositions=new Set(["imported","ignored_nonempty_approved","ignored_must_be_empty"]);
+for(const [name,disposition] of Object.entries(profile.tableDispositions)){
+  if(!allowedDispositions.has(disposition))throw new Error("invalid table disposition "+name);
+}
+for(const name of Object.keys(profile.expected.tables)){
+  if(profile.tableDispositions[name]!=="imported")throw new Error("count-gated table not imported: "+name);
+}
+for(const [name,disposition] of Object.entries(profile.tableDispositions)){
+  if(disposition==="imported"&&!Object.prototype.hasOwnProperty.call(profile.expected.tables,name))throw new Error("imported table lacks count: "+name);
+}
 
 const open='<script id="mdse-source-profile" type="application/json">\n';
 const start=html.indexOf(open);
@@ -52,6 +63,7 @@ for(const token of [
   "const EXPECTED_ELEMENT_TYPES=SOURCE_PROFILE.expected.elementTypes;",
   "const EXPECTED_CONNECTOR_TYPES=SOURCE_PROFILE.expected.connectorTypes;",
   "const EXPECTED_DIAGRAM_TYPES=SOURCE_PROFILE.expected.diagramTypes;",
+  "const TABLE_DISPOSITIONS=SOURCE_PROFILE.tableDispositions;",
   '"- Source profile: "+SOURCE_PROFILE.profileId+" ("+SOURCE_PROFILE.schema+")"'
 ]){
   if(!html.includes(token))throw new Error("source profile runtime token missing: "+token);
@@ -80,7 +92,7 @@ function extractFunction(name){
   }
   throw new Error("unterminated runtime function: "+name);
 }
-const runtimeSource=extractFunction("sourceProfileCounts")+"\n"+extractFunction("loadSourceProfile")+"\nthis.__load=loadSourceProfile;";
+const runtimeSource=extractFunction("sourceProfileCounts")+"\n"+extractFunction("sourceProfileTableDispositions")+"\n"+extractFunction("loadSourceProfile")+"\nthis.__load=loadSourceProfile;";
 function runtimeLoad(value){
   const ctx={
     document:{getElementById:(id)=>id==="mdse-source-profile"?{textContent:JSON.stringify(value)}:null},
@@ -105,5 +117,9 @@ expectReject(v=>{v.schema="wrong";},"unsupported schema");
 expectReject(v=>{v.expected.tables.t_object="35969";},"non-integer count");
 expectReject(v=>{delete v.expected.tables.t_diagram;},"missing required table");
 expectReject(v=>{v.expected.connectorTypes={};},"empty expected section");
+expectReject(v=>{delete v.tableDispositions;},"missing table dispositions");
+expectReject(v=>{v.tableDispositions.t_object="ignored_nonempty_approved";},"count-gated table not imported");
+expectReject(v=>{v.tableDispositions.__new_table="imported";},"imported table without count");
+expectReject(v=>{v.tableDispositions.t_object="bogus";},"invalid table disposition");
 
 console.log("IMP-007 source profile regression: PASS");
