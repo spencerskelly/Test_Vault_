@@ -43,10 +43,12 @@ jobs:
           python3 -m pip install pyyaml
           BASE="$RUNNER_TEMP/MDSE_v0819_full_import"
           BASE2="$RUNNER_TEMP/MDSE_v0819_full_import_2"
+          BASE_FAIL="$RUNNER_TEMP/MDSE_v0819_failed_import"
           python3 "Base Vault/Tools/v0.8.0-r2/build-base.py" "$BASE"
           python3 "Base Vault/Tools/v0.8.0-r2/build-base.py" "$BASE2"
+          python3 "Base Vault/Tools/v0.8.0-r2/build-base.py" "$BASE_FAIL"
           python3 "Base Vault/Testing/check-release.py" --base "$BASE" || echo "Pre-release repository checker has known non-runtime blockers; continuing to importer runtime-base validation."
-          for B in "$BASE" "$BASE2"; do
+          for B in "$BASE" "$BASE2" "$BASE_FAIL"; do
             cat > "$B/.vault.yaml" <<'EOF'
           vault_uid: 20261006000000000skellyspencer
           name: MDSE_v0819_full_import
@@ -61,17 +63,26 @@ jobs:
           QEAX="$(find _qeax_bridge -maxdepth 1 -type f -name '*.qeax' ! -name '._*' -size +1M | head -1)"
           BASE="$RUNNER_TEMP/MDSE_v0819_full_import"
           BASE2="$RUNNER_TEMP/MDSE_v0819_full_import_2"
+          BASE_FAIL="$RUNNER_TEMP/MDSE_v0819_failed_import"
           node Importer/Testing/v0.8.19/headless_full_import.js \
             Importer/Tools/v0.8.19/EA_to_MDSE_Native_Importer_v0.8.19.html \
-            "$QEAX" "$BASE" "$BASE2" | tee "$RUNNER_TEMP/v0819-headless.log"
+            "$QEAX" "$BASE" "$BASE2" "$BASE_FAIL" | tee "$RUNNER_TEMP/v0819-headless.log"
           test -f "$BASE/99_System/11_Import/Run Manifest.md"
           test -f "$BASE2/99_System/11_Import/Run Manifest.md"
           python3 - <<'PY'
           import json, os
-          for key in ("MDSE_v0819_full_import","MDSE_v0819_full_import_2"):
+          expected = {
+              "MDSE_v0819_full_import": ("IMPORT_COMPLETE","WRITE_PASS"),
+              "MDSE_v0819_full_import_2": ("IMPORT_COMPLETE","WRITE_PASS"),
+              "MDSE_v0819_failed_import": ("IMPORT_FAILED","WRITE_FAIL"),
+          }
+          for key,(status,write) in expected.items():
               p=os.path.join(os.environ["RUNNER_TEMP"],key,"99_System","11_Import","Import State.json")
               with open(p,encoding="utf-8") as f: state=json.load(f)
-              assert state["status"]=="IMPORT_COMPLETE", (p,state.get("status"))
+              assert state["status"]==status, (p,state.get("status"))
+              assert state["runStatus"]["write"]==write, (p,state["runStatus"])
+              assert state["runStatus"]["semantic"]=="SEMANTIC_REVIEW_REQUIRED", (p,state["runStatus"])
+              assert state["runStatus"]["acceptance"]=="ACCEPTANCE_PENDING", (p,state["runStatus"])
           PY
 
       - name: Compare deterministic outputs
