@@ -16,6 +16,8 @@ const importerPath = path.resolve(process.argv[2]);
 const sourcePath = path.resolve(process.argv[3]);
 const outputPath = path.resolve(process.argv[4]);
 const secondOutputPath = process.argv[5] ? path.resolve(process.argv[5]) : null;
+const benchmarkPath = path.join(path.dirname(__filename), "attachment_benchmark.json");
+const benchmarkObject = fs.existsSync(benchmarkPath) ? JSON.parse(fs.readFileSync(benchmarkPath, "utf8")) : null;
 
 class DiskSlice {
   constructor(filePath, start, end) { this.filePath=filePath; this.start=start; this.end=end; }
@@ -125,6 +127,7 @@ const context={
   MutationObserver:MutationObserverStub, URL:globalThis.URL,
   setTimeout, clearTimeout, queueMicrotask,
 };
+context.__attachmentBenchmarkObject=benchmarkObject;
 context.window=context;
 context.globalThis=context;
 context.navigator={userAgent:"node-headless-mdse"};
@@ -136,6 +139,7 @@ const s1=html.indexOf("<script>"),s2=html.lastIndexOf("</script>");
 if(s1<0||s2<s1)throw new Error("Importer embedded script missing");
 const source=html.slice(s1+8,s2)+`
 globalThis.__mdseHeadlessRun = async function(sourceFile, outputHandle){
+  attachmentBenchmark=globalThis.__attachmentBenchmarkObject||null;
   selectedFile=sourceFile;
   lastReport=null;lastPlan=null;lastPlannerContext=null;lastSliceReport=null;outputDirHandle=null;
   await analyze();
