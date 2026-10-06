@@ -14,12 +14,12 @@ plugins:
       manifest.json: 15586ffbfabee6a99d6b51777558ad2a36184eefa4b9ff782eb325350b61833a
       styles.css: dd7ba34452810f9d39ea03395fae66469decb386de83e6ab66d7a345e42ca645
   mdse-workbench:
-    version: "0.1.17"
-    source: "spencerskelly/MDSE_Workbench workbench/local-model-0.3 @ fd058511e7b701c7f4ca2ae714ff30e9bc10275b (CI run 838)"
+    version: "0.1.18"
+    source: "spencerskelly/MDSE_Workbench 0.1.18 artifact b0c4e2c6bdfb96d36f51d8152b17be22592ef174 (verified build 37408465530; startup 37408519667)"
     settings: default
     sha256:
-      main.js: 0958ee5bba4f68ad846e31b0b5a2da32a8dbe1aeedec97d729250e8c63d0fc54
-      manifest.json: a898ec3acce99650f18ded11235a236881ce8a8de86bfc857c70c5c4508d0e5d
+      main.js: 1690d32a0c05e496366199b8ead7247eab42314a940ada8de3a0a1f109fcb0a7
+      manifest.json: 6e2a74891743df424d80fe5cb551460ce4971852bf152909a2a5cecbbb218bd9
       styles.css: 445abe199f3dbf00724dc3cffa13aed58fc087adc9396e79de18ebe6b274b008
   templater-obsidian:
     version: "2.25.0"
