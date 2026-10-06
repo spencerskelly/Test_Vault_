@@ -1,77 +1,137 @@
 # v0.8.19 Full Import Execution Status
 
-Status: BLOCKED — real-source semantic reconciliation failure
+Status: **PASS — full real-source import and deterministic rerun completed**
 
-## Source verification
+## Acceptance source
 
-The exact project source is now available and was inspected directly as SQLite:
+The exact approved source was exercised by the GitHub-hosted v0.8.19 QEAX bridge:
 
-- File: `EA_2026_09_06_endgame.qeax`
+- Source: `EA_2026_09_06_endgame.qeax`
 - Size: `186036224` bytes
 - SHA-256: `16c055ec1a5af57b0f4f9059d6292c5ddd3ed052124c7ef54d9af288971ae02c`
+- Bridge run: `37399169045`
+- Bridge result: **SUCCESS**
+- Import transaction state: **IMPORT_COMPLETE**
+- Preflight: **PASS — 0 fail, 0 warn**
+- Whole-model plan: **PASS**
+- First full write: **WRITE_PASS**
+- Second full write: **WRITE_PASS**
+- Deterministic comparison: **DETERMINISM PASS**
+
+## Source reconciliation
+
+The actual QEAX matched the approved baseline:
+
 - `t_object`: 35,969
 - `t_connector`: 21,822
 - `t_package`: 1,387
-- `t_diagramobjects`: 42,966
 - `t_diagram`: 2,924
+- `t_diagramobjects`: 42,966
+- `t_diagramlinks`: 37,955
+- `t_objectproperties`: 249,892
 - `t_xref`: 42,052
 - `t_document`: 397
+- `t_operation`: 23
+- `t_attribute`: 5
 
-The source therefore matches the approved baseline counts.
+No source element or connector planner-row loss was detected.
 
-## Real-source checks passed
+## Actual generated model
 
-- 84 Activities with a function stereotype exist outside the Product Function folder; v0.8.19 must retain them as Behavior/function.
-- State split from the source is 954 Product Design States and 158 other States.
-- 42 `functionalRequirement` and 83 `designConstraint` Requirements occur inside Engineering Requirements; explicit semantics must override folder context.
-- No raw ParentID cycles were found.
-- 53 machine-generated/URL-like element names were found and are covered by the v0.8.19 filename normalization rule.
-- All 79 `t_xref.Behavior = conveyed` source records resolve to a real source object and a real InformationFlow connector.
+The whole-model import produced:
 
-## Blocking finding
+- Imported engineering notes: **27,709**
+- Total Markdown files including base/evidence: **27,813**
+- Relationship values: **71,938**
+- Local Parts: **2,055**
+- Local Interfaces/endpoints: **4,387**
+- Local Connections: **552**
+- Local conveyed flows: **72**
+- Part-terminated conveyed-flow review records: **7**
+- Definitionless contextual Interfaces: **1,051**
+- Imported note filenames globally unique: **27,709**
+- Path-qualified imported-note links: **0**
+- Links outside whole-model scope: **0**
 
-Raw xref resolution is not sufficient to prove flow preservation.
+## Conveyed-flow reconciliation
 
-Of the 79 resolved conveyed-flow records, the initial real-source review found 62 directly allocatable and 17 blocked.
+All conveyed source evidence is accounted for:
 
-Further endpoint tracing split the 17 blockers into two categories:
+- Source conveyed records: **79**
+- Valid Local Model Connection flows: **72**
+- Governed Part-terminated review records: **7**
+- Unresolved conveyed xrefs: **0**
+- Resolved but unallocated conveyed items: **0**
+- Silent conveyed-flow loss: **0**
 
-- **10 Port↔Port records** were valid Interface-to-Interface topology whose Interfaces live under different child Objects. EA provides a deterministic lowest common owner: `DVS 330 E 240 Context`. The importer was too strict because it required identical immediate owners. v0.8.19 now owns these Connections at the lowest emitted common context.
-- **7 Part↔Port records** remain semantically unallocated. Their Part endpoint has no explicit Interface/Port occurrence that can be selected without inventing structure.
+The seven Part-terminated cases remain in
+`99_System/11_Import/Review - Part-Terminated Conveyed Flows.csv`.
+They do not synthesize an Interface or Connection and do not extend Local Model schema 0.4.
 
-The remaining 7 records are concentrated in the legacy DVS concept path:
+## Attachment reconciliation
 
-`Model > IPC ! > 09 Product in Progress > Concepts > DVS Concepts > DVS 330 E 240`
+Attachment decode and write completed cleanly:
 
-The remaining records are InformationFlows whose one endpoint is directly attached to a contextual Part. Under Local Model 0.4, a Connection must bind contextual Interface occurrences. Automatically turning those Part endpoints into Interfaces would invent structure that is not explicitly present in EA.
+- Source document rows: 397
+- Approved linked-document rows: 376
+- Documents written: 376
+- Attachment files written: 390
+- Failed attachment imports: **0**
+- Decode residual: **0**
+- Attachment benchmark: **PASS**
 
-The reviewed source records are Connector IDs `34347`, `34352`, `34353`, `34354`, `34357`, `34360`, and `34361`. They carry `ps480VACL1`, `ps480VACL2`, `ps480VACL3`, `psNeutral`, and `psPE` conveyed items.
+## Explicit semantic review inventory
 
-This is therefore a real semantic reconciliation blocker, not a file-access or parser problem.
+The import correctly finishes as `SEMANTIC_REVIEW_REQUIRED`; this is not unexplained source loss.
 
-## Importer correction made during Step 12
+Relationship review:
 
-v0.8.19 now distinguishes:
+- Relationship review findings: 1,247
+- Review-only connector mappings withheld from canonical YAML: 1,010
+- Off-rule graph relationships suppressed before write: 237
 
-1. unresolved conveyed xref source evidence, and
-2. resolved conveyed source evidence that cannot be allocated to a valid Local Model Connection.
+Local Model warnings: **1,100**, fully categorized as:
 
-Either condition blocks the write before generated vault content is accepted.
+- 438 folded-Part definition/representation reviews
+- 269 nested-Part occurrences where Local Model 0.4 has no Part parent field
+- 110 Connectors whose endpoints are not both contextual Interfaces
+- 27 Connectors with no emitted common Local Model owner
+- 7 Part-terminated InformationFlow review records
+- 249 BindingConnector reviews:
+  - 23 deterministically resolved as `Connection.exposes`
+  - 191 ambiguous boundary/internal candidates retained for review
+  - 35 not deterministic exposure candidates; no `exposes` or `equals` invented
 
-The aggregate release gate now includes the conveyed-flow allocation regression.
+These findings remain explicit review evidence rather than being silently converted into canonical model structure.
 
-## Remaining Step 12 acceptance work
+## Determinism
 
-The remaining 7 source records now have an approved deterministic treatment: preserve them only in governed import-review evidence, with no synthesized Interface or Connection. The conveyed-flow reconciliation is now fully accounted for at the source-semantic layer:
+The importer was executed twice from the same source into two independently generated disposable bases.
 
-- 72 conveyed records remain valid Local Model Connection flows.
-- 7 Part-terminated conveyed records are retained in `Review - Part-Terminated Conveyed Flows.csv` as explicit semantic review evidence.
-- 0 conveyed records are silently dropped.
+- Output files compared: **28,273 vs 28,273**
+- Comparison result: **DETERMINISM PASS**
 
-Local Model 0.4 is unchanged: review-only Part-terminated records are not written into the governed Local Model body region.
+The second run reproduced the same semantic output and generated-file set.
 
-Step 12 still requires deterministic generated-output verification before v0.8.19 can be frozen.
+## Performance correction discovered during acceptance
 
-## Common-context ownership correction
+Real-scale execution exposed an O(N²) output-path planning loop that repeatedly scanned every emitted entity to determine whether each note had children. At approximately 27,700 imported notes this represented roughly 750 million unnecessary comparisons.
 
-The importer now determines Connection ownership by walking the emitted owner hierarchy and selecting the lowest common context rather than requiring both Interfaces to have the same immediate owner. This resolves the 10 cross-component Port↔Port cases without changing their Interface identity or inventing topology.
+v0.8.19 now precomputes the set of parent entities once and performs constant-time child membership checks. The behavior is protected by `path_planning_scalability_regression_test.js`.
+
+## Step 12 conclusion
+
+Step 12 is **PASS**.
+
+The real source model:
+- passes preflight and planning,
+- writes successfully,
+- reaches `IMPORT_COMPLETE`,
+- preserves all conveyed-flow evidence,
+- writes attachments without failures,
+- produces globally unique imported note filenames,
+- and reproduces deterministic output on a second independent full import.
+
+`SEMANTIC_REVIEW_REQUIRED` remains intentional review state and should not be confused with an importer execution/reconciliation failure.
+
+v0.8.19 is now ready to proceed to the Workbench compatibility backlog step before release freeze.
