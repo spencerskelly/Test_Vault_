@@ -15,6 +15,7 @@ if (process.argv.length < 5) {
 const importerPath = path.resolve(process.argv[2]);
 const sourcePath = path.resolve(process.argv[3]);
 const outputPath = path.resolve(process.argv[4]);
+const secondOutputPath = process.argv[5] ? path.resolve(process.argv[5]) : null;
 
 class DiskSlice {
   constructor(filePath, start, end) { this.filePath=filePath; this.start=start; this.end=end; }
@@ -150,6 +151,15 @@ globalThis.__mdseHeadlessRun = async function(sourceFile, outputHandle){
   const slice=lastSliceReport?JSON.parse(JSON.stringify(lastSliceReport)):null;
   return {phase:slice?"complete":"write",preflight,plan,slice,uiLog:el("log").textContent,sliceStatus:el("sliceStatus").textContent};
 };
+globalThis.__mdseHeadlessRegenerate = async function(outputHandle){
+  lastSliceReport=null;
+  outputDirHandle=outputHandle;
+  el("wholeModel").checked=true;
+  el("slicePath").value="";
+  await generateSlice();
+  const slice=lastSliceReport?JSON.parse(JSON.stringify(lastSliceReport)):null;
+  return {phase:slice?"complete":"write",slice,uiLog:el("log").textContent,sliceStatus:el("sliceStatus").textContent};
+};
 `;
 
 vm.createContext(context);
@@ -180,5 +190,15 @@ vm.runInContext(source,context,{filename:importerPath,timeout:120000});
   console.log("HEADLESS_RESULT_BEGIN");
   console.log(JSON.stringify(summary,null,2));
   console.log("HEADLESS_RESULT_END");
-  if(result.phase!=="complete"||!result.slice||result.slice.result!=="WRITE_PASS")process.exitCode=1;
+  if(result.phase!=="complete"||!result.slice||result.slice.result!=="WRITE_PASS"){
+    process.exitCode=1;
+    return;
+  }
+  if(secondOutputPath){
+    const second=await context.__mdseHeadlessRegenerate(new DirectoryHandle(secondOutputPath));
+    console.log("HEADLESS_SECOND_RESULT_BEGIN");
+    console.log(JSON.stringify(second,null,2));
+    console.log("HEADLESS_SECOND_RESULT_END");
+    if(second.phase!=="complete"||!second.slice||second.slice.result!=="WRITE_PASS")process.exitCode=1;
+  }
 })().catch(err=>{console.error(err&&err.stack?err.stack:err);process.exitCode=1;});
