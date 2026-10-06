@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""IMP-011A real-source acceptance for truthful BindingConnector review disposition."""
+"""IMP-011 real-source acceptance for current Local Model 0.5 BindingConnector review disposition."""
 from __future__ import annotations
 import argparse,csv,sqlite3
 from collections import Counter
@@ -7,12 +7,12 @@ from pathlib import Path
 
 EXPECTED_CATEGORIES={
   "resolved Connection.exposes":23,
-  "temporary local equals - no internal Connection":191,
-  "same-owner nested internal binding":17,
-  "same-owner sibling/non-hierarchical binding":1,
+  "canonical local equals - boundary/internal no internal Connection":191,
+  "canonical local equals - same-owner nested internal binding":17,
+  "canonical local equals - same-owner sibling/non-hierarchical binding":1,
   "cross-owner binding":17,
 }
-EXPECTED_RELATIONS={"Connection.exposes":23,"Interface.equals (temporary)":191,"":35}
+EXPECTED_RELATIONS={"Connection.exposes":23,"Interface.equals":209,"":17}
 
 def norm(v): return str(v or "").strip().lower().replace("{","").replace("}","")
 
@@ -45,14 +45,16 @@ def main():
       req(bool(r.get("connection_local","").strip()),f"{r.get('ea_guid')} exposure missing connection_local")
       req(bool(r.get("exposes_local","").strip()),f"{r.get('ea_guid')} exposure missing exposes_local")
       req(r.get("candidate_connection_count","")=="1",f"{r.get('ea_guid')} exposure expected one candidate Connection")
-    elif cat=="temporary local equals - no internal Connection":
-      req(rel=="Interface.equals (temporary)",f"{r.get('ea_guid')} equals relation mismatch")
-      req(r.get("candidate_connection_count","")=="0",f"{r.get('ea_guid')} expected zero candidate Connections")
-      req(bool(r.get("owner_note","").strip()),f"{r.get('ea_guid')} equals missing owner_note")
-      req(bool(r.get("start_local","").strip()) and bool(r.get("end_local","").strip()),f"{r.get('ea_guid')} equals missing endpoint IDs")
+    elif cat.startswith("canonical local equals - "):
+      req(rel=="Interface.equals",f"{r.get('ea_guid')} canonical equals relation mismatch")
+      req(bool(r.get("owner_note","").strip()),f"{r.get('ea_guid')} canonical equals missing owner_note")
+      req(bool(r.get("start_local","").strip()) and bool(r.get("end_local","").strip()),f"{r.get('ea_guid')} canonical equals missing endpoint IDs")
+      if cat=="canonical local equals - boundary/internal no internal Connection":
+        req(r.get("candidate_connection_count","")=="0",f"{r.get('ea_guid')} boundary/internal equals expected zero candidate Connections")
     else:
-      req(rel=="",f"{r.get('ea_guid')} unresolved category unexpectedly writes {rel!r}")
-  print("IMP-011A BindingConnector review acceptance")
+      req(cat=="cross-owner binding",f"{r.get('ea_guid')} unexpected unresolved category {cat!r}")
+      req(rel=="",f"{r.get('ea_guid')} cross-owner category unexpectedly writes {rel!r}")
+  print("IMP-011 Local Model 0.5 BindingConnector review acceptance")
   print(f"source BindingConnectors: {len(src)}")
   print(f"review rows / unique GUIDs: {len(rows)} / {len(set(guids))}")
   print(f"category counts: {dict(cats)}")
