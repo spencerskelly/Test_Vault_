@@ -38,10 +38,10 @@ tools:
     obsoleteReference: "spencerskelly/Test_Vault_-base-vault-2026-09-30-rel133-v051"
   workbench:
     repo: "spencerskelly/MDSE_Workbench"
-    version: "0.1.16"                               # prior pinned-release baseline; final WB-106 release not yet promoted
-    candidateVersion: "0.1.17"                      # W-379: exact CI-tested candidate may be vendored/pinned only while pre-release
-    nextGate: "WB-128 / Local Model 0.4 compatibility"
-    wb106Version: null                              # set to the first WB-106-capable release; required for releaseStatus: release
+    version: "0.1.18"                               # W-386: first WB-106-capable controlled Workbench release
+    candidateVersion: null
+    nextGate: "Golden-model integration / Bootstrap first-open"
+    wb106Version: "0.1.18"                          # required Workbench release for the issued 0.8.0 base
     runtimePluginId: "mdse-workbench"
     requiredForRelease: true
     fixturesFrom: "99_System/03_Schemas"
