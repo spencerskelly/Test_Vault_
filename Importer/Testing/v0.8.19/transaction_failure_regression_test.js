@@ -145,6 +145,14 @@ async function readState(root) {
   return JSON.parse(await api.readTextPath(root, context.IMPORT_STATE_PATH));
 }
 
+function assertStatusSeparation(state, expectedWrite, label) {
+  if (state.runStatus.source !== "SOURCE_PASS") throw new Error(label + ": source status changed");
+  if (state.runStatus.plan !== "PLAN_PASS") throw new Error(label + ": plan status changed");
+  if (state.runStatus.write !== expectedWrite) throw new Error(label + ": unexpected write status " + state.runStatus.write);
+  if (state.runStatus.semantic !== "SEMANTIC_REVIEW_REQUIRED") throw new Error(label + ": semantic review status was conflated with write state");
+  if (state.runStatus.acceptance !== "ACCEPTANCE_PENDING") throw new Error(label + ": acceptance status was conflated with write state");
+}
+
 const meta = {
   source: { name: "fixture.qeax", size: 123, sha256: "a".repeat(64) },
   scope: "WHOLE MODEL",
@@ -167,9 +175,8 @@ const meta = {
       await api.writeTextPath(root, "Model/One.md", "one");
     });
     const state = await readState(root);
-    if (state.status !== "IMPORT_COMPLETE" || state.runStatus.write !== "WRITE_PASS") {
-      throw new Error("success path did not finalize IMPORT_COMPLETE/WRITE_PASS");
-    }
+    if (state.status !== "IMPORT_COMPLETE") throw new Error("success path did not finalize IMPORT_COMPLETE");
+    assertStatusSeparation(state, "WRITE_PASS", "success path");
   }
 
   // Inject a model-write failure after IN_PROGRESS. Production helper must persist FAILED.
@@ -185,7 +192,7 @@ const meta = {
     if (!thrown) throw new Error("injected transaction failure did not propagate");
     const state = await readState(root);
     if (state.status !== "IMPORT_FAILED") throw new Error("failed transaction did not persist IMPORT_FAILED");
-    if (state.runStatus.write !== "WRITE_FAIL") throw new Error("failed transaction did not persist WRITE_FAIL");
+    assertStatusSeparation(state, "WRITE_FAIL", "failed path");
     if (!state.failure || !/injected note\/evidence write failure/.test(state.failure.message || "")) {
       throw new Error("failed transaction did not preserve failure reason");
     }
@@ -213,9 +220,7 @@ const meta = {
     if (state.status !== "IMPORT_IN_PROGRESS") {
       throw new Error("failed failure-state write did not leave IMPORT_IN_PROGRESS authoritative");
     }
-    if (state.runStatus.write !== "WRITE_IN_PROGRESS") {
-      throw new Error("failed failure-state write did not preserve WRITE_IN_PROGRESS");
-    }
+    assertStatusSeparation(state, "WRITE_IN_PROGRESS", "in-progress fallback");
     let rerunBlocked = false;
     try { await api.assertFreshImportDestination(root); } catch (e) { rerunBlocked = /already contains an import transaction state/.test(e.message); }
     if (!rerunBlocked) throw new Error("dirty in-progress destination was not refused on rerun");
