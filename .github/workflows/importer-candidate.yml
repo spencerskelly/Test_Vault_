@@ -55,8 +55,8 @@ jobs:
         run: node "Importer/Testing/v0.8.17/filesystem_resilience_static_test.js"
       - name: Check v0.8.18 naming and placement
         run: node "Importer/Testing/v0.8.18/naming_placement_static_test.js"
-      - name: Check v0.8.19 taxonomy and Local Model 0.4
-        run: node "Importer/Testing/v0.8.19/taxonomy_local_model_04_static_test.js"
+      - name: Check v0.8.19 aggregate release gate
+        run: node "Importer/Testing/v0.8.19/release_gate_regression_test.js"
       - name: Compile IMP-009 output validator
         run: python -m py_compile "Importer/Testing/v0.8.14/imp009_output_acceptance.py" "Importer/Testing/v0.8.14/imp009_output_acceptance_selftest.py"
       - name: Exercise IMP-009 output validator
