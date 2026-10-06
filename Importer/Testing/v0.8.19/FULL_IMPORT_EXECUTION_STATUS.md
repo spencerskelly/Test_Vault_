@@ -238,6 +238,31 @@ W-392 / IMP-006 proves strong source identity using the current v0.8.19 producti
 
 The source artifact was not modified or re-imported. The changed-byte case is a virtual read wrapper used only for fingerprint sensitivity.
 
+## Source-profile acceptance
+
+W-393 / IMP-007 externalizes EA8647 source-shape policy from importer executable logic.
+
+- Governed profile: `Importer/Definition/Source Profiles/EA8647-2026-09-06-v1.json`
+- Profile schema: `mdse-ea-source-profile/1`
+- Release manifest declares the profile and sync tool
+- Distributed importer remains one self-contained HTML artifact; it embeds a canonical profile copy for offline use
+- Engine derives `SOURCE_MODEL_ID`, expected table counts, object-type counts, connector-type counts and diagram-type counts from the validated profile
+- Legacy compiled `EXPECTED_* = {...}` count objects: **absent**
+- Legacy hard-coded `SOURCE_MODEL_ID="EA8647"`: **absent**
+- Fast runtime regression rejects unsupported schema, non-integer counts, a missing required table and an empty expected section
+- Embedded/external profile equality check: **PASS**
+- Real-QEAX bridge: **PASS**, run `37422210977`
+- Source-profile sync gate: **PASS**
+- Aggregate v0.8.19 release gate: **PASS**
+- Full whole-model import: **PASS**
+- Deterministic second import: **PASS**
+- Workbench read-only real-vault scan: **PASS**
+- Run Manifest identifies `EA8647-2026-09-06-v1 (mdse-ea-source-profile/1)`
+- Normal importer CI: **PASS**, run `37422215257`
+- Package/base CI: **PASS**, run `37422215224`
+
+Intentional source-model evolution now changes/version-controls profile data and regenerates the embedded copy; it does not require editing importer source-count logic.
+
 ## Step 12 conclusion
 
 Step 12 execution is **PASS**; semantic acceptance remains `ACCEPTANCE_PENDING` with `SEMANTIC_REVIEW_REQUIRED`.
@@ -253,4 +278,4 @@ The real source model:
 
 `SEMANTIC_REVIEW_REQUIRED` remains intentional review state and should not be confused with an importer execution/reconciliation failure.
 
-v0.8.19 has completed Workbench compatibility acceptance and all P0 importer release-conformity blockers IMP-001 through IMP-006 are closed. Release conformity continues with the P1 register; next is IMP-007 (externalize the EA8647 source-count contract).
+v0.8.19 has completed Workbench compatibility acceptance, all P0 importer release-conformity blockers IMP-001 through IMP-006 are closed, and P1 IMP-007 is closed. Release conformity continues with the P1 register; next is IMP-008 (executable disposition for every discovered/non-empty QEAX table).
