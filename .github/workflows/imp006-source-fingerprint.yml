@@ -1,0 +1,77 @@
+name: IMP-006 source fingerprint acceptance
+
+on:
+  push:
+    branches:
+      - importer/baseline-contract-2026-10-05
+    paths:
+      - ".github/workflows/imp006-source-fingerprint.yml"
+      - "Importer/Testing/v0.8.19/source_fingerprint_real_acceptance.js"
+      - "Importer/Testing/v0.8.19/source_fingerprint_regression_test.js"
+      - "Importer/Testing/v0.8.19/release_gate_regression_test.js"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  actions: read
+
+concurrency:
+  group: imp006-source-fingerprint
+  cancel-in-progress: true
+
+jobs:
+  fingerprint:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Run current fast fingerprint regression
+        run: node Importer/Testing/v0.8.19/source_fingerprint_regression_test.js
+
+      - name: Download accepted QEAX source artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: v0819-qeax-source
+          path: ${{ runner.temp }}/imp006/source-artifact
+          github-token: ${{ github.token }}
+          repository: spencerskelly/Test_Vault_
+          run-id: 37416802624
+
+      - name: Download accepted import evidence artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: v0819-full-import-evidence
+          path: ${{ runner.temp }}/imp006/evidence
+          github-token: ${{ github.token }}
+          repository: spencerskelly/Test_Vault_
+          run-id: 37416802624
+
+      - name: Extract exact accepted QEAX
+        run: |
+          set -euo pipefail
+          ZIP="$(find "$RUNNER_TEMP/imp006/source-artifact" -type f -name '*.zip' | head -1)"
+          test -n "$ZIP"
+          mkdir -p "$RUNNER_TEMP/imp006/source"
+          unzip -q "$ZIP" -d "$RUNNER_TEMP/imp006/source"
+          QEAX="$(find "$RUNNER_TEMP/imp006/source" -type f -name '*.qeax' ! -name '._*' -size +1M | head -1)"
+          test -n "$QEAX"
+          echo "QEAX=$QEAX" >> "$GITHUB_ENV"
+
+      - name: IMP-006 real-source fingerprint audit
+        env:
+          NODE_OPTIONS: --max-old-space-size=512
+        run: |
+          set -o pipefail
+          LOG="$(find "$RUNNER_TEMP/imp006/evidence" -type f -name 'v0819-headless.log' | head -1)"
+          test -n "$LOG"
+          timeout 8m node Importer/Testing/v0.8.19/source_fingerprint_real_acceptance.js             Importer/Tools/v0.8.19/EA_to_MDSE_Native_Importer_v0.8.19.html             "$QEAX"             "$RUNNER_TEMP/imp006/evidence"             "$LOG" | tee "$RUNNER_TEMP/imp006-source-fingerprint.log"
+
+      - name: Upload IMP-006 evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: imp006-source-fingerprint
+          path: ${{ runner.temp }}/imp006-source-fingerprint.log
+          retention-days: 7
+          if-no-files-found: warn
