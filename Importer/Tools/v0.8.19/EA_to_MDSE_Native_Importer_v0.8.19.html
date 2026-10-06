@@ -4588,6 +4588,7 @@ function bindingReviewDisposition(con,localModel){
   if(result.connection){
     result.category="resolved Connection.exposes";
     result.actualRelation="Connection.exposes";
+    result.candidateConnections=[result.connection];
     result.ownerKey=result.connection.ownerKey||result.ownerKey;
     result.rootCause="unique internal Connection matched BindingConnector boundary Interface";
     if(!result.outer)result.outer=result.exposes;
