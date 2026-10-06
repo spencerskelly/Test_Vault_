@@ -9,6 +9,12 @@ on:
       - "Importer/Tools/v0.8.19/**"
       - "Importer/Testing/v0.8.19/**"
       - "Base Vault/**"
+  pull_request:
+    paths:
+      - ".github/workflows/wb128-real-vault-acceptance.yml"
+      - "Importer/Tools/v0.8.19/**"
+      - "Importer/Testing/v0.8.19/**"
+      - "Base Vault/**"
   workflow_dispatch:
 
 permissions:
