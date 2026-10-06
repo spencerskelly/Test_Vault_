@@ -119,6 +119,15 @@ jobs:
       - name: Install Workbench acceptance dependencies
         run: npm ci --prefix _wb128
 
+      - name: Build Workbench acceptance harnesses as ESM
+        run: |
+          ./_wb128/node_modules/.bin/esbuild _wb128/scripts/real-vault-acceptance.ts \
+            --bundle --platform=node --format=esm \
+            --outfile="$RUNNER_TEMP/wb128-real-vault-acceptance.mjs"
+          ./_wb128/node_modules/.bin/esbuild _wb128/scripts/real-vault-edit-check.ts \
+            --bundle --platform=node --format=esm \
+            --outfile="$RUNNER_TEMP/wb128-real-vault-edit-check.mjs"
+
       - name: Gate 2 - read-only Workbench real-vault scan
         env:
           NODE_OPTIONS: --max-old-space-size=1024
@@ -132,7 +141,7 @@ jobs:
           NODE_OPTIONS: --max-old-space-size=1024
         run: |
           BASE="$RUNNER_TEMP/MDSE_v0819_full_import"
-          timeout 10m npm --prefix _wb128 run accept:real-vault -- \
+          timeout 10m node "$RUNNER_TEMP/wb128-real-vault-acceptance.mjs" \
             "$BASE" "$RUNNER_TEMP/wb128-real-vault-acceptance.json"
 
       - name: Gate 4 - Workbench disposable structured edit acceptance
@@ -140,7 +149,7 @@ jobs:
           NODE_OPTIONS: --max-old-space-size=1024
         run: |
           BASE="$RUNNER_TEMP/MDSE_v0819_full_import"
-          timeout 10m npm --prefix _wb128 run accept:real-vault:edits -- \
+          timeout 10m node "$RUNNER_TEMP/wb128-real-vault-edit-check.mjs" \
             "$BASE" "$RUNNER_TEMP/wb128-real-vault-edit-acceptance.json"
 
       - name: Inspect full-import output
