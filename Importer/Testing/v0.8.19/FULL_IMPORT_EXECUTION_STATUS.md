@@ -346,6 +346,29 @@ The single Object→design case initially failed and exposed an importer argumen
 
 IMP-010 remains open for **16 Port-owned FlowProperty/Physical-Signal carrier Parts** plus duplicate-warning cleanup.
 
+## IMP-010C Interface FlowProperty acceptance
+
+The final IMP-010 carrier population is accepted on the current real source.
+
+- Bridge: **PASS**, run `37502083911`
+- Head: `2492b64f3e6caf9acf7745c8936b6a43040e964f`
+- Full import + deterministic comparison: **PASS**
+- Full-import Local Model Parts: **2,055** actual emitted records
+- IMP-010 Gate 1c: **PASS**
+- Exact contextual copies checked: **16**
+  - 14 × FlowProperty `3.3V` typed by `ps3V3Analog`
+  - 2 × FlowProperty `can` typed by `psCan`
+- Reusable FlowProperty definitions: **760**
+- Interface-owned FlowProperty definitions checked: **752**
+- Local Model Part occurrences for exact-copy source GUIDs: **0**
+- Exact-copy Local Model warning rows: **0**
+- Duplicate folded-Part review GUIDs: **0**
+- Workbench Gates 2–4 on the same generated vault: **PASS**
+
+The first Gate 1c run correctly exposed two acceptance-accounting defects rather than a semantic-model defect: its validator had not loaded all typed-target notes, and the manifest counted handled `null` cache entries as Local Model Parts. Commit `2492b64f3e6caf9acf7745c8936b6a43040e964f` fixes both without changing W-397 semantics. The rerun restores the true **2,055** Local Model Part count and passes Gate 1c.
+
+This closes **IMP-010**. The next P1 semantic/model issue is **IMP-011 BindingConnector contextual topology**.
+
 ## Step 12 conclusion
 
 Step 12 execution is **PASS**; semantic acceptance remains `ACCEPTANCE_PENDING` with `SEMANTIC_REVIEW_REQUIRED`.
@@ -361,4 +384,4 @@ The real source model:
 
 `SEMANTIC_REVIEW_REQUIRED` remains intentional review state and should not be confused with an importer execution/reconciliation failure.
 
-v0.8.19 has completed Workbench compatibility acceptance, all P0 importer release-conformity blockers IMP-001 through IMP-006 are closed, and P1 IMP-007 through IMP-009 are closed. Release conformity continues with the remaining P1 semantic/model gates; next is IMP-010 (classify and resolve folded Parts whose deterministic reusable target is not an Object without inventing structure).
+v0.8.19 has completed Workbench compatibility acceptance, all P0 importer release-conformity blockers IMP-001 through IMP-006 are closed, and P1 IMP-007 through IMP-010 are closed. Release conformity continues with the remaining P1 semantic/model gates; next is IMP-011 (classify BindingConnector root causes, recover deterministic contextual topology, and retain genuinely ambiguous cases as evidence only).

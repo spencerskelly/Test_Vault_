@@ -284,3 +284,24 @@ Unsupported future folded Parts that resolve to a non-Object definition still pr
 - direction and typed-target source evidence are retained;
 - zero exact-copy Local Model warning rows;
 - no folded-Part source GUID has duplicate review rows.
+
+
+## Real-QEAX acceptance — closed
+
+IMP-010 is closed by bridge run `37502083911` on head `2492b64f3e6caf9acf7745c8936b6a43040e964f`.
+
+Acceptance results:
+
+- both full imports: **WRITE PASS**
+- deterministic output comparison: **PASS**
+- Local Model Parts: **2,055** actual emitted records
+- Gate 1b Behavior/Condition hierarchy acceptance: **PASS**
+- Gate 1c Interface FlowProperty acceptance: **PASS**
+- exact contextual copies: **16**
+- interface-owned FlowProperty definitions checked: **752**
+- copy GUIDs emitted as Local Model Parts: **0**
+- exact-copy Local Model warnings: **0**
+- duplicate folded-Part review GUIDs: **0**
+- Workbench read-only, semantic and structured-edit Gates 2–4: **PASS**
+
+The first Gate 1c attempt failed only because the acceptance validator had not loaded typed-target notes for every FlowProperty definition. That same run also revealed an accounting defect: handled semantic carriers cached as `null` were included in the displayed Local Model Part statistic. Neither defect changed the emitted Local Model. The accounting fix now counts `partsByOwner` records, restoring the authoritative 2,055-part result, and Gate 1c verifies that count directly from the Local Model Source Map.
