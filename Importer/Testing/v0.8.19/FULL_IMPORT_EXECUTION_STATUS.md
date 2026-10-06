@@ -369,6 +369,38 @@ The first Gate 1c run correctly exposed two acceptance-accounting defects rather
 
 This closes **IMP-010**. The next P1 semantic/model issue is **IMP-011 BindingConnector contextual topology**.
 
+## IMP-011 BindingConnector rebaseline
+
+The current real-source BindingConnector population is materially different from the old v0.8.3 register baseline.
+
+- Source BindingConnectors: **249**
+- Current deterministic `Connection.exposes`: **23**
+- Same-owner boundary/internal with **0 candidate internal Connections**: **191**
+  - current representation: temporary local `equals`
+  - inner Interface has no other connector: **179**
+  - inner Interface continues only through another BindingConnector: **12**
+- Not boundary/internal under current Local Model ownership: **35**
+  - same-owner nested internal → deeper internal: **17**
+  - same-owner sibling/internal: **1**
+  - cross-owner: **17**
+    - Staples Button composite structure: **10**
+    - DVS 330 E Buck Context: **7**
+
+BindingConnector graph structure is shallow: **234 connected components**, with **219 single-edge** and **15 two-edge** components; no larger component exists. Every two-edge component has **zero non-Binding connectors**, so following BindingConnector chains cannot discover a hidden Connection to expose.
+
+Definition evidence for the 191 zero-candidate boundary/internal cases is also strong but does not create a Connection:
+
+- same non-empty reusable Interface definition on both ends: **180**
+- reusable definition present on only one end: **10**
+- neither end has reusable definition evidence: **1**
+- conflicting non-empty reusable Interface definitions: **0**
+
+This makes the immediate safety boundary clear: the importer must not synthesize Connections merely to clear review findings.
+
+A separate review-usability defect remains. `Review - Equals Direction.csv` currently classifies by whether both endpoints have the same Local Model owner, so it reports **232** rows as `temporary local equals` and **17** as unresolved. That is not the actual written disposition. The real Local Model result is **23 exposes + 191 temporary equals + 35 with no relationship written**.
+
+The next IMP-011 step is therefore evidence correction: make the review table state the actual BindingConnector disposition/root cause before deciding whether same-owner non-exposure bindings should remain temporary `equals` or become a governed canonical local binding relation.
+
 ## Step 12 conclusion
 
 Step 12 execution is **PASS**; semantic acceptance remains `ACCEPTANCE_PENDING` with `SEMANTIC_REVIEW_REQUIRED`.
