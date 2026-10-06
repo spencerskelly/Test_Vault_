@@ -2558,7 +2558,7 @@ function elementParentChain(e,entities){
   }
   return chain;
 }
-function pathPlanForEntity(e,folderMap,entities){
+function pathPlanForEntity(e,folderMap,entities,hasChildrenKeys){
   const parents=elementParentChain(e,entities);
   const placementRoot=parents.length?parents[0]:e;
   let folder=folderMap.get(placementRoot.vaultPath||e.vaultPath||"")||"";
@@ -2572,9 +2572,11 @@ function pathPlanForEntity(e,folderMap,entities){
 
   // When an emitted element has emitted children, its own note lives inside the
   // folder that represents that parent: Parent/Parent.md beside Parent/Child.md.
-  let hasChildren=false;
-  for(const x of entities.values()){
-    if(x.parentEntityKey===e.key){hasChildren=true;break;}
+  let hasChildren=hasChildrenKeys?hasChildrenKeys.has(e.key):false;
+  if(!hasChildrenKeys){
+    for(const x of entities.values()){
+      if(x.parentEntityKey===e.key){hasChildren=true;break;}
+    }
   }
   if(hasChildren){outSegs.push(e.fileName);changed=true;}
 
@@ -4688,12 +4690,14 @@ async function scanExistingNoteStems(root){
 }
 function planOutputPaths(entities,sliceKeys,entityCtx,existingStems){
   const folderMap=buildFolderPathMap(entities),pathReviews=[],allPaths=new Map(),pathSet=new Set(),fileSet=new Set();
+  const hasChildrenKeys=new Set();
+  for(const x of entities.values())if(x.parentEntityKey)hasChildrenKeys.add(x.parentEntityKey);
   for(const stem of existingStems||[]){
     const base=String(stem).split("/").pop();
     if(base)fileSet.add(base.toLowerCase());
   }
   for(const e of Array.from(entities.values()).sort(compareEntity)){
-    const pp=pathPlanForEntity(e,folderMap,entities);
+    const pp=pathPlanForEntity(e,folderMap,entities,hasChildrenKeys);
     for(const seg of pp.path.split("/")){
       if(utf8Len(seg)>FS_COMPONENT_MAX_BYTES)throw new Error("Path component exceeds "+FS_COMPONENT_MAX_BYTES+" bytes and cannot exist on the selected filesystem: "+pp.path);
     }
