@@ -38,6 +38,8 @@ Add one row per real run. "Decision" is accept-for-review, restart (fix rules, r
 
 Workbench WB-128/WB-106 release alignment is complete at 0.1.18. The deterministic v0.8.19 real-QEAX candidate has passed Workbench compatibility acceptance, but MDSE 0.8 is not yet G2: importer release conformity, clean-base issuance and Bootstrap first-open/OS acceptance remain. Do not add more standalone Workbench hardening unless new evidence exposes a regression; move to those remaining G2 gates.
 
+**Importer release-conformity progress:** W-387 closes P0 IMP-001. Automated production-path failure injection proves failed/in-progress transactions cannot masquerade as a valid import or be reused, strict `Import State.json` serialization is fixed, and bridge run `37414094667` reconfirms the real whole-model/determinism/Workbench path. Continue the remaining release-blocking importer register in priority order; next is IMP-002. `tools.importer.release` remains unset until that bounded register is resolved or explicitly accepted.
+
 ## 3. Gates
 
 | Gate | Passed when | Owner |
