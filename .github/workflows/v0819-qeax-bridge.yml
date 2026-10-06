@@ -44,25 +44,19 @@ jobs:
           BASE="$RUNNER_TEMP/MDSE_v0819_full_import"
           python3 "Base Vault/Tools/v0.8.0-r2/build-base.py" "$BASE"
           python3 "Base Vault/Testing/check-release.py" --base "$BASE" || echo "Pre-release repository checker has known non-runtime blockers; continuing to importer runtime-base validation."
-          python3 - <<'PY'
-          from pathlib import Path
-          import os
-          p=Path(os.environ["RUNNER_TEMP"])/"MDSE_v0819_full_import"/".vault.yaml"
-          p.write_text(
-              'vault_uid: 20261006000000000skellyspencer\\n'
-              'name: MDSE_v0819_full_import\\n'
-              'default_branch: main\\n'
-              'mdse_release: "0.8.0"\\n',
-              encoding='utf-8'
-          )
-          PY
+          cat > "$BASE/.vault.yaml" <<'EOF'
+          vault_uid: 20261006000000000skellyspencer
+          name: MDSE_v0819_full_import
+          default_branch: main
+          mdse_release: "0.8.0"
+          EOF
 
       - name: Run actual v0.8.19 full importer
         run: |
           QEAX="$(find _qeax_bridge -maxdepth 1 -type f -name '*.qeax' ! -name '._*' -size +1M | head -1)"
           BASE="$RUNNER_TEMP/MDSE_v0819_full_import"
-          node Importer/Testing/v0.8.19/headless_full_import.js \\
-            Importer/Tools/v0.8.19/EA_to_MDSE_Native_Importer_v0.8.19.html \\
+          node Importer/Testing/v0.8.19/headless_full_import.js \
+            Importer/Tools/v0.8.19/EA_to_MDSE_Native_Importer_v0.8.19.html \
             "$QEAX" "$BASE" | tee "$RUNNER_TEMP/v0819-headless.log"
 
       - name: Inspect full-import output
