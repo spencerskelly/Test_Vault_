@@ -1,0 +1,87 @@
+name: WB-128 real-vault acceptance
+
+on:
+  push:
+    branches:
+      - importer/baseline-contract-2026-10-05
+    paths:
+      - ".github/workflows/wb128-real-vault-acceptance.yml"
+      - "Importer/Tools/v0.8.19/**"
+      - "Importer/Testing/v0.8.19/**"
+      - "Base Vault/**"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  actions: read
+
+jobs:
+  accept:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Download accepted QEAX source artifact
+        env:
+          GH_TOKEN: \${{ github.token }}
+        run: |
+          rm -rf _qeax_bridge
+          mkdir -p _qeax_bridge
+          gh run download 37399169045 \
+            --repo spencerskelly/Test_Vault_ \
+            --name v0819-qeax-source \
+            --dir _qeax_bridge
+          test -n "$(find _qeax_bridge -type f -name '*.qeax' -size +1M -print -quit)"
+
+      - name: Rebuild exact v0.8.19 disposable vault
+        run: |
+          python3 -m pip install pyyaml
+          BASE="$RUNNER_TEMP/MDSE_v0819_full_import"
+          BASE2="$RUNNER_TEMP/MDSE_v0819_full_import_2"
+          python3 "Base Vault/Tools/v0.8.0-r2/build-base.py" "$BASE"
+          python3 "Base Vault/Tools/v0.8.0-r2/build-base.py" "$BASE2"
+          for B in "$BASE" "$BASE2"; do
+            cat > "$B/.vault.yaml" <<'EOF'
+          vault_uid: 20261006000000000skellyspencer
+          name: MDSE_v0819_full_import
+          default_branch: main
+          mdse_release: "0.8.0"
+          EOF
+          done
+          QEAX="$(find _qeax_bridge -type f -name '*.qeax' -size +1M -print -quit)"
+          node Importer/Testing/v0.8.19/headless_full_import.js \
+            Importer/Tools/v0.8.19/EA_to_MDSE_Native_Importer_v0.8.19.html \
+            "$QEAX" "$BASE" "$BASE2" | tee "$RUNNER_TEMP/v0819-headless.log"
+          grep -q "DETERMINISM PASS" "$RUNNER_TEMP/v0819-headless.log"
+
+      - name: Check out WB-128 candidate
+        run: |
+          git clone --depth 1 --branch workbench/local-model-0.4 \
+            https://github.com/spencerskelly/MDSE_Workbench.git "$RUNNER_TEMP/MDSE_Workbench"
+
+      - name: Run Workbench on real v0.8.19 output
+        run: |
+          BASE="$RUNNER_TEMP/MDSE_v0819_full_import"
+          WB="$RUNNER_TEMP/MDSE_Workbench"
+          cd "$WB"
+          npm ci
+          npm test
+          npm run build
+          npm run accept:real-vault -- \
+            "$BASE" \
+            "$BASE/99_System/11_Import/Workbench WB-128 Acceptance.json" \
+            | tee "$RUNNER_TEMP/wb128-real-vault.log"
+
+      - name: Upload real-vault acceptance evidence
+        uses: actions/upload-artifact@v4
+        with:
+          name: wb128-v0819-real-vault
+          path: |
+            \${{ runner.temp }}/v0819-headless.log
+            \${{ runner.temp }}/wb128-real-vault.log
+            \${{ runner.temp }}/MDSE_v0819_full_import
+          include-hidden-files: true
+          retention-days: 7
+          compression-level: 6
+          if-no-files-found: error
