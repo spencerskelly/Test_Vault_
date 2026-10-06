@@ -15,6 +15,7 @@ const focused = [
   "condition_classification_regression_test.js",
   "semantic_placement_precedence_regression_test.js",
   "nested_element_placement_regression_test.js",
+  "path_planning_scalability_regression_test.js",
   "filename_normalization_regression_test.js",
   "port_contextual_only_regression_test.js",
   "local_model_parts_interfaces_regression_test.js",
