@@ -93,15 +93,14 @@ The source must be a closed/checkpointed EA snapshot. WAL-mode detection is a bl
 
 **Purpose:** account for what exists in the EA database before translating it.
 
-Current whole-model baseline data includes the governed EA tables, object types, connector types and diagram types documented by `Translator Definition.md`. Field/tag/table dispositions live in the mapping YAML files.
+Current whole-model baseline data includes the governed EA tables, object types, connector types and diagram types documented by `Translator Definition.md`. Field/tag semantic dispositions live in the mapping YAML files. Executable SQLite table dispositions live in the active `mdse-ea-source-profile/1` source profile (W-394).
 
-Every discovered source table or record class must be either:
-- consumed by a current rule;
-- preserved as evidence/review;
-- explicitly and intentionally dropped; or
-- rejected because its disposition is unknown.
+Every discovered source table must be one of:
+- `imported` — consumed by Stage 1 and exact-row-count gated;
+- `ignored_nonempty_approved` — explicitly known to contain data but intentionally outside Stage-1 consumption; or
+- `ignored_must_be_empty` — intentionally ignored only while its row count remains zero.
 
-A previously empty table becoming non-empty must not pass unnoticed merely because the table name was already known.
+An undispositioned discovered table, a missing governed table, or a previously empty `ignored_must_be_empty` table becoming non-empty is a blocking preflight failure. This converts future EA feature/storage changes into an explicit profile review instead of silent data loss.
 
 **Questions affecting usability/stability**
 - Are there source tables/features the importer discovers but does not disposition?
