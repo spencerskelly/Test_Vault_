@@ -3946,7 +3946,7 @@ function importStateText(status,meta,failure){
     failure:failure?{message:String(failure.message||failure)}:null,
     authority:"Importer Operating Contract / W-371 / W-372"
   };
-  return JSON.stringify(state,null,2)+"\\n";
+  return JSON.stringify(state,null,2)+"\n";
 }
 async function writeImportState(root,status,meta,failure){
   await writeTextPath(root,IMPORT_STATE_PATH,importStateText(status,meta,failure));
