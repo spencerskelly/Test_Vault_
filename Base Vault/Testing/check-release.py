@@ -236,6 +236,18 @@ if candidate:
         ]
         missing=[x for x in required_importer_tokens if x not in itxt]
         (ok if not missing else fail)(f"importer candidate static contract tokens present{'' if not missing else ': '+', '.join(missing)}")
+        sp=man["tools"]["importer"].get("sourceProfile")
+        sync=man["tools"]["importer"].get("sourceProfileSync")
+        if not sp or not os.path.isfile(full(ROOT,sp)):
+            fail(f"importer source profile missing: {sp}")
+        else:
+            try:
+                prof=json.load(open(full(ROOT,sp),encoding="utf-8"))
+                good=prof.get("schema")=="mdse-ea-source-profile/1" and prof.get("sourceModelId")==man.get("sourceModelId")
+                (ok if good else fail)(f"importer source profile matches release source model: {prof.get('profileId')}")
+            except Exception as ex:
+                fail(f"importer source profile unreadable: {ex}")
+        (ok if sync and os.path.isfile(full(ROOT,sync)) else fail)(f"importer source profile sync tool present: {sync}")
         forbidden_importer_tokens=[
             'const MAX_GENERATED_PATH=',
             'const LONG_PATH_REVIEW_THRESHOLD=',
@@ -243,9 +255,14 @@ if candidate:
             'function applyMechanicalFolderCapacity(items)',
             'Review - Long Paths.csv',
             'folder_1',
+            'const EXPECTED_TABLES = {',
+            'const EXPECTED_ELEMENT_TYPES = {',
+            'const EXPECTED_CONNECTOR_TYPES = {',
+            'const EXPECTED_DIAGRAM_TYPES = {',
+            'const SOURCE_MODEL_ID="EA8647"',
         ]
         present_forbidden=[x for x in forbidden_importer_tokens if x in itxt]
-        (ok if not present_forbidden else fail)(f"W-382 removed artificial path/folder limits{'' if not present_forbidden else ': '+', '.join(present_forbidden)}")
+        (ok if not present_forbidden else fail)(f"importer removed forbidden hard-coded/runtime legacy rules{'' if not present_forbidden else ': '+', '.join(present_forbidden)}")
         shared_plan=itxt.count('planOutputPaths(entities,sliceKeys,entityCtx,')
         shared_att=itxt.count('attachmentReconciliation(lastPlannerContext,entityCtx,sliceKeys,')
         (ok if shared_plan>=3 and shared_att>=2 else fail)(f"decode-only check shares path planning and attachment reconciliation with the whole-model write (planOutputPaths x{shared_plan}, attachmentReconciliation calls x{shared_att})")
