@@ -78,7 +78,7 @@ The script prints a `MANUAL SAMPLE`, preferring a definitionless Interface used 
 
 ## 4. Run controlled Workbench 0.1.18 real-vault gates
 
-The automated bridge checks out the same Workbench 0.1.18 acceptance source used by WB-128 and runs both real-vault gates on the imported vault:
+The automated bridge checks out the **accepted Workbench 0.1.18 artifact source commit** `b0c4e2c6bdfb96d36f51d8152b17be22592ef174` and runs three Workbench gates against the imported vault. This replaces the earlier stale `f51ed...` pin, which predated WB-128's disposable structured-edit gate by 14 commits.
 
 ```sh
 npm --prefix _wb128 run accept:real-vault:scan -- \
@@ -86,6 +86,9 @@ npm --prefix _wb128 run accept:real-vault:scan -- \
 
 npm --prefix _wb128 run accept:real-vault -- \
   "/path/to/MDSE_IMP009_ACCEPTANCE" "/tmp/wb128-real-vault-acceptance.json"
+
+npm --prefix _wb128 run accept:real-vault:edits -- \
+  "/path/to/MDSE_IMP009_ACCEPTANCE" "/tmp/wb128-real-vault-edit-acceptance.json"
 ```
 
 Required results:
@@ -98,32 +101,34 @@ Required results:
 - a real occurrence Structure sample renders;
 - a real `Connection.exposes` sample renders;
 - a real conveyed-flow sample renders;
-- Workbench no-op structured-edit planning produces no formatting drift.
+- Workbench no-op structured-edit planning produces no formatting drift;
+- the WB-128 disposable edit gate copies a real imported Local Model 0.4 note, creates a definitionless Interface, requires Review before Apply, creates/reconnects a Connection, edits the Interface, and proves Apply / Undo / Redo / Delete round trips remain structurally parseable;
+- the disposable edit gate proves the original imported note is byte-for-byte unchanged.
 
-These tests exercise Workbench core behavior against the real generated vault without modifying engineering content.
+The structured-edit gate intentionally modifies only a temporary copy of a real imported note, so acceptance cannot contaminate the candidate vault.
 
-## 5. Final Workbench UI edit/reload check
+## 5. Obsidian startup/UI coverage
 
-Open the **same disposable vault** in Obsidian with controlled Workbench 0.1.18.
+A separate exact-artifact Workbench startup gate runs the CI-built plugin inside Obsidian and proves the controlled plugin becomes readable/core/occurrence-ready with commands available. The current accepted evidence is Workbench run `37409833814` on 12,000 notes, with startup acceptance PASS.
 
-1. Wait for Workbench readiness and rebuild the index if necessary.
-2. Run **Check Local Model**; the `MANUAL SAMPLE` must not report a missing-definition error merely because it is definitionless.
-3. Open the sample in Local Model / Internal / Interfaces and confirm its Connection topology is visible.
-4. Change only that Interface occurrence's contextual `identifier` (for example append ` IMP009-TEST`). Do not add a reusable definition.
-5. Confirm the edit succeeds without creating a Local Model error.
-6. Restart Obsidian.
-7. Confirm the changed identifier reloads and no synthetic reusable Interface/Port note appears.
+For IMP-009, the combination is stronger and more repeatable than requiring a one-off manual edit:
 
-This edit is test data. Never promote the disposable acceptance vault as engineering authority.
+1. the importer validator proves the **actual 1,051 definitionless Interfaces** exist, remain definitionless, are traceable to exact EA source IDs, and participate in real persisted topology;
+2. the Workbench real-vault gates prove that exact imported model parses and renders occurrence topology;
+3. the Workbench disposable structured-edit gate proves the accepted writer can create/edit/reload a definitionless Interface using a copied real note without manufacturing a reusable definition;
+4. the exact-artifact Obsidian startup gate proves the controlled plugin starts and exposes its commands in Obsidian.
+
+A manual UI spot-check of the validator's `MANUAL SAMPLE` is still useful before promoting a golden vault, but it is **not an IMP-009 closure blocker** unless automated evidence shows a UI-specific regression.
 
 ## 6. Closure rule
 
-IMP-009 may move from `test required` to `closed` only when:
+IMP-009 may move from `test required` to `closed` when:
 
 - the current v0.8.19 real-QEAX import passes;
 - `imp009_output_acceptance.py` returns `HEADLESS PASS` on that output;
-- both Workbench 0.1.18 automated real-vault gates pass on the same output;
-- the UI edit/reload check passes on the printed definitionless sample;
+- Workbench 0.1.18 read-only and semantic real-vault gates pass on the same output;
+- Workbench 0.1.18 disposable structured-edit acceptance passes using a copied real imported note;
+- controlled exact-artifact Obsidian startup acceptance remains green;
 - no synthetic reusable Port/Interface note or legacy Added-Port behavior is observed;
 - connector/review evidence remains traceable to the exact contextual source Ports.
 
