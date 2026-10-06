@@ -1,0 +1,46 @@
+name: v0.8.19 QEAX bridge
+
+on:
+  push:
+    branches:
+      - importer/baseline-contract-2026-10-05
+    paths:
+      - ".github/workflows/v0819-qeax-bridge.yml"
+      - "EA_2026_09_06_endgame.qeax.zip"
+      - "Importer/Testing/v0.8.19/**"
+      - "Importer/Tools/v0.8.19/**"
+  workflow_dispatch:
+
+jobs:
+  bridge:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Run v0.8.19 release gate
+        run: node Importer/Testing/v0.8.19/release_gate_regression_test.js
+
+      - name: Verify source archive
+        run: |
+          test -f EA_2026_09_06_endgame.qeax.zip
+          unzip -l EA_2026_09_06_endgame.qeax.zip
+
+      - name: Extract QEAX
+        run: |
+          mkdir -p _qeax_bridge
+          unzip -j EA_2026_09_06_endgame.qeax.zip -d _qeax_bridge
+          find _qeax_bridge -maxdepth 1 -type f -print -exec ls -lh {} \;
+
+      - name: Source database counts
+        run: |
+          QEAX="$(find _qeax_bridge -maxdepth 1 -type f -name '*.qeax' | head -1)"
+          test -n "$QEAX"
+          sqlite3 "$QEAX" "SELECT 't_object', count(*) FROM t_object UNION ALL SELECT 't_connector', count(*) FROM t_connector UNION ALL SELECT 't_package', count(*) FROM t_package UNION ALL SELECT 't_diagramobjects', count(*) FROM t_diagramobjects;"
+
+      - name: Upload QEAX bridge artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: v0819-qeax-source
+          path: _qeax_bridge/*.qeax
+          retention-days: 1
+          if-no-files-found: error
