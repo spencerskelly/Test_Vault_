@@ -3951,6 +3951,27 @@ function importStateText(status,meta,failure){
 async function writeImportState(root,status,meta,failure){
   await writeTextPath(root,IMPORT_STATE_PATH,importStateText(status,meta,failure));
 }
+async function assertFreshImportDestination(root){
+  if(await fileExists(root,IMPORT_STATE_PATH)){
+    throw new Error("Selected output already contains an import transaction state. Use a fresh generated base rather than reusing a completed or incomplete import.");
+  }
+}
+async function runImportTransaction(root,meta,writeBody){
+  await writeImportState(root,"IMPORT_IN_PROGRESS",meta,null);
+  try{
+    await writeBody();
+    await writeImportState(root,"IMPORT_COMPLETE",meta,null);
+  }catch(err){
+    try{
+      await writeImportState(root,"IMPORT_FAILED",meta,err);
+    }catch(stateErr){
+      // The last successfully committed state remains IMPORT_IN_PROGRESS.
+      // Preserve both errors so the UI/log can explain why FAILED could not be persisted.
+      err.importStateWriteError=stateErr;
+    }
+    throw err;
+  }
+}
 async function scanExistingIdentityTokens(root){
   const used=new Set();
   async function walk(dir){
@@ -4723,10 +4744,10 @@ async function generateSlice(){
   if(sliceBusy||!lastPlannerContext||!lastPlan||lastPlan.result!=="PASS"||!outputDirHandle)return;
   sliceBusy=true;el("generateSlice").disabled=true;el("sliceStatus").className="badge";el("sliceStatus").textContent="Validating output";
   const started=performance.now();
-  let transactionStarted=false,transactionMeta=null;
+  let transactionMeta=null;
   try{
     if(!(await requireBaseVault(outputDirHandle)))throw new Error("Selected output folder is not a generated MDSE "+MDSE_RELEASE+" base.");
-    if(await fileExists(outputDirHandle,IMPORT_STATE_PATH))throw new Error("Selected output already contains an import transaction state. Use a fresh generated base rather than reusing a completed or incomplete import.");
+    await assertFreshImportDestination(outputDirHandle);
     const wholeModel=!!el("wholeModel").checked;
     const selected=wholeModel?"":trim2(el("slicePath").value);
     if(!wholeModel&&!selected)throw new Error("Package path is blank.");
@@ -4900,25 +4921,21 @@ async function generateSlice(){
       runStatus:{source:sourceStatus,plan:planStatus,semantic:semanticStatus,acceptance:acceptanceStatus}
     };
     el("sliceStatus").textContent="Starting import transaction";
-    await writeImportState(outputDirHandle,"IMPORT_IN_PROGRESS",transactionMeta,null);
-    transactionStarted=true;
+    await runImportTransaction(outputDirHandle,transactionMeta,async()=>{
+      el("sliceStatus").textContent="Writing "+fmt(files.length)+" notes";
+      let n=0;
+      for(const f of files){
+        await writeTextPath(outputDirHandle,f.path,f.text);
+        n++;if(n%50===0){el("sliceStatus").textContent="Writing notes "+fmt(n)+"/"+fmt(files.length);await tick();}
+      }
+      for(const a of attachments.files)await writeBinaryPath(outputDirHandle,a.path,a.bytes);
 
-    el("sliceStatus").textContent="Writing "+fmt(files.length)+" notes";
-    let n=0;
-    for(const f of files){
-      await writeTextPath(outputDirHandle,f.path,f.text);
-      n++;if(n%50===0){el("sliceStatus").textContent="Writing notes "+fmt(n)+"/"+fmt(files.length);await tick();}
-    }
-    for(const a of attachments.files)await writeBinaryPath(outputDirHandle,a.path,a.bytes);
-
-    // The Run Manifest is intentionally written after all other required evidence.
-    // It is still non-authoritative until Import State.json is finalized COMPLETE.
-    for(const [p,t] of Object.entries(evidence))if(p!==RUN_MANIFEST_PATH)await writeTextPath(outputDirHandle,p,t);
-    await writeTextPath(outputDirHandle,RUN_MANIFEST_PATH,manifest);
-
-    el("sliceStatus").textContent="Finalizing import transaction";
-    await writeImportState(outputDirHandle,"IMPORT_COMPLETE",transactionMeta,null);
-    transactionStarted=false;
+      // The Run Manifest is intentionally written after all other required evidence.
+      // It is still non-authoritative until runImportTransaction finalizes Import State.json COMPLETE.
+      for(const [p,t] of Object.entries(evidence))if(p!==RUN_MANIFEST_PATH)await writeTextPath(outputDirHandle,p,t);
+      await writeTextPath(outputDirHandle,RUN_MANIFEST_PATH,manifest);
+      el("sliceStatus").textContent="Finalizing import transaction";
+    });
 
     const durationMs=Math.round(performance.now()-started);
     lastSliceReport={
@@ -4943,15 +4960,11 @@ async function generateSlice(){
     log(attachmentVerdict(attachments,attachmentBenchmark).line);
   }catch(err){
     console.error(err);
-    if(transactionStarted&&outputDirHandle){
-      try{
-        await writeImportState(outputDirHandle,"IMPORT_FAILED",transactionMeta,err);
-        transactionStarted=false;
-      }catch(stateErr){
-        // Safe failure mode: the previously written IMPORT_IN_PROGRESS marker remains.
-        // Never turn a failed filesystem state into an apparent PASS.
-        log("IMPORT STATE ERROR: could not write IMPORT_FAILED; existing IMPORT_IN_PROGRESS marker remains authoritative. "+(stateErr&&stateErr.message?stateErr.message:String(stateErr)));
-      }
+    if(err&&err.importStateWriteError){
+      const stateErr=err.importStateWriteError;
+      // Safe failure mode: the previously written IMPORT_IN_PROGRESS marker remains.
+      // Never turn a failed filesystem state into an apparent PASS.
+      log("IMPORT STATE ERROR: could not write IMPORT_FAILED; existing IMPORT_IN_PROGRESS marker remains authoritative. "+(stateErr&&stateErr.message?stateErr.message:String(stateErr)));
     }
     el("sliceResult").textContent="FAIL";el("sliceResult").className="stat bad";
     el("sliceResultDetail").textContent=err.message||String(err);
