@@ -2885,6 +2885,20 @@ function buildLocalOccurrenceModel(ctx,entityCtx){
     return o?"[["+(o.linkTarget||o.fileName)+"#^"+ref.anchor+"|"+o.fileName+" / "+ref.address+"]]":"`"+ref.address+"`";
   }
   function pairForRefs(a,b){return [a.refKey,b.refKey].sort().join("<->");}
+  function ownerChain(key){
+    const out=[],seen=new Set();
+    while(key&&entities.has(key)&&!seen.has(key)){
+      seen.add(key);out.push(key);
+      key=entities.get(key).parentEntityKey||"";
+    }
+    return out;
+  }
+  function commonConnectionOwner(a,b){
+    if(!a||!b||!a.ownerKey||!b.ownerKey)return "";
+    if(a.ownerKey===b.ownerKey)return a.ownerKey;
+    const bset=new Set(ownerChain(b.ownerKey));
+    return ownerChain(a.ownerKey).find(k=>bset.has(k))||"";
+  }
   function optionalConnectorDefinition(c){
     for(const v of [c.PDATA1,c.PDATA2,c.PDATA3]){
       const raw=objectByNormGuid.get(normGuid(v));if(!raw)continue;
@@ -2906,11 +2920,12 @@ function buildLocalOccurrenceModel(ctx,entityCtx){
       warnings.push("Connection "+trim2(c.ea_guid)+" does not resolve to two contextual endpoint occurrences; no Local Model connection written.");
       return null;
     }
-    if(!a.ownerKey||a.ownerKey!==b.ownerKey){
-      warnings.push("Connection "+trim2(c.ea_guid)+" spans unresolved/common contexts: "+(a&&a.refKey)+" <> "+(b&&b.refKey));
+    const ownerKey=commonConnectionOwner(a,b);
+    if(!ownerKey){
+      warnings.push("Connection "+trim2(c.ea_guid)+" has no emitted common owner for contextual endpoints: "+(a&&a.refKey)+" <> "+(b&&b.refKey));
       return null;
     }
-    const ownerKey=a.ownerKey,localId=stableLocalId("conn",c,n2(c.Connector_ID));
+    const localId=stableLocalId("conn",c,n2(c.Connector_ID));
     const rec={
       sourceIds:[n2(c.Connector_ID)],sourceGuids:[trim2(c.ea_guid)].filter(Boolean),
       localId,anchor:localAnchor([localId]),ownerKey,endpointA:a,endpointB:b,
@@ -2952,12 +2967,13 @@ function buildLocalOccurrenceModel(ctx,entityCtx){
       markUnallocated("InformationFlow endpoint could not be resolved");
       continue;
     }
-    if(!start.ownerKey||start.ownerKey!==end.ownerKey){
-      warnings.push("InformationFlow "+trim2(c.ea_guid)+" has no common local owner.");
-      markUnallocated("InformationFlow endpoints do not share one Local Model owner");
+    const connectionOwner=commonConnectionOwner(start,end);
+    if(!connectionOwner){
+      warnings.push("InformationFlow "+trim2(c.ea_guid)+" has no emitted common Local Model owner.");
+      markUnallocated("InformationFlow endpoints have no emitted common Local Model owner");
       continue;
     }
-    const pk=start.ownerKey+"|"+pairForRefs(start,end),candidates=connectionsByPair.get(pk)||[];
+    const pk=connectionOwner+"|"+pairForRefs(start,end),candidates=connectionsByPair.get(pk)||[];
     let conn=null;
     if(candidates.length===1){
       conn=candidates[0];
@@ -3149,7 +3165,8 @@ function validateLocalModel(localModel,entityCtx){
   for(const [owner,list] of localModel.connectionsByOwner.entries()){
     for(const r of list){
       for(const ref of [r.endpointA,r.endpointB]){
-        const k=localByOwner.get(owner)&&localByOwner.get(owner).get(ref&&ref.anchor);
+        const endpointOwner=ref&&ref.ownerKey;
+        const k=endpointOwner&&localByOwner.get(endpointOwner)&&localByOwner.get(endpointOwner).get(ref&&ref.anchor);
         if(!ref||ref.kind!=="endpoint"||k!=="ep")errors.push("connection "+r.localId+" endpoint does not resolve to local endpoint");
       }
       for(const x of r.exposesRefs||[]){
