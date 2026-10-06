@@ -4,13 +4,17 @@ import json
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[3]
-PROFILE = ROOT / "Importer/Definition/Source Profiles/EA8647-2026-09-06-v1.json"
-IMPORTER = ROOT / "Importer/Tools/v0.8.19/EA_to_MDSE_Native_Importer_v0.8.19.html"
+DEFAULT_PROFILE = ROOT / "Importer/Definition/Source Profiles/EA8647-2026-09-06-v1.json"
+DEFAULT_IMPORTER = ROOT / "Importer/Tools/v0.8.19/EA_to_MDSE_Native_Importer_v0.8.19.html"
 OPEN = '<script id="mdse-source-profile" type="application/json">\n'
 CLOSE = '\n</script>'
 
-def load_profile():
-    data = json.loads(PROFILE.read_text(encoding="utf-8"))
+def resolve_path(value):
+    p = Path(value)
+    return p if p.is_absolute() else ROOT / p
+
+def load_profile(profile_path):
+    data = json.loads(profile_path.read_text(encoding="utf-8"))
     if data.get("schema") != "mdse-ea-source-profile/1":
         raise SystemExit("unsupported source profile schema")
     if not isinstance(data.get("profileId"), str) or not data["profileId"].strip():
@@ -47,13 +51,17 @@ def canonical(data):
 
 def main():
     ap = argparse.ArgumentParser()
+    ap.add_argument("--profile", default=str(DEFAULT_PROFILE))
+    ap.add_argument("--importer", default=str(DEFAULT_IMPORTER))
     mode = ap.add_mutually_exclusive_group(required=True)
     mode.add_argument("--check", action="store_true")
     mode.add_argument("--write", action="store_true")
     args = ap.parse_args()
 
-    data = load_profile()
-    text = IMPORTER.read_text(encoding="utf-8")
+    profile_path = resolve_path(args.profile)
+    importer_path = resolve_path(args.importer)
+    data = load_profile(profile_path)
+    text = importer_path.read_text(encoding="utf-8")
     start, end = embedded_range(text)
     wanted = canonical(data)
 
@@ -82,8 +90,12 @@ def main():
         print(f"source profile sync: PASS ({data['profileId']})")
         return
 
-    IMPORTER.write_text(text[:start] + wanted + text[end:], encoding="utf-8")
-    print(f"embedded source profile updated from {PROFILE.relative_to(ROOT)}")
+    importer_path.write_text(text[:start] + wanted + text[end:], encoding="utf-8")
+    try:
+        shown = profile_path.relative_to(ROOT)
+    except ValueError:
+        shown = profile_path
+    print(f"embedded source profile updated from {shown}")
 
 if __name__ == "__main__":
     main()
