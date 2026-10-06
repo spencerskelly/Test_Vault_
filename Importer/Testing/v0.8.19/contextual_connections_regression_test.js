@@ -10,13 +10,13 @@ function need(text,label){ if(!src.includes(text)) throw new Error(label+": miss
 function forbid(text,label){ if(src.includes(text)) throw new Error(label+": forbidden "+text); }
 
 need('if(a.kind!=="endpoint"||b.kind!=="endpoint"){', "connection requires two contextual Interfaces");
-need('if(!a.ownerKey||a.ownerKey!==b.ownerKey){', "connection endpoints require common owner");
-need('const ownerKey=a.ownerKey,localId=stableLocalId("conn",c,n2(c.Connector_ID));', "stable contextual Connection ID");
+need('const ownerKey=commonConnectionOwner(a,b);', "connection endpoints resolve through lowest common owner");
+need('const localId=stableLocalId("conn",c,n2(c.Connector_ID));', "stable contextual Connection ID");
 need('const pk=ownerKey+"|"+pairForRefs(a,b);', "connection indexed by owner and endpoint pair");
 need('if(candidates.length===1){', "reuse one deterministic existing Connection");
 need('else if(candidates.length===0){', "synthesize Connection only when none exists");
 need('matches "+candidates.length+" existing Local Model Connections', "ambiguous multi-connection warning");
-forbid('let conn=candidates.length===1?candidates[0]:null;\n    if(!conn)conn=makeConnection(c,start,end,"InformationFlow");', "old ambiguous synthesis behavior");
+forbid('if(!a.ownerKey||a.ownerKey!==b.ownerKey){', "old immediate-owner Connection restriction");
 
 need('const conveyedItems=(conveyed.byConnector.get(normGuid(c.ea_guid))||[]).slice().sort(', "deterministic conveyed item ordering");
 need('definitionKey:defKey,roleA:roleForA(c,conn,start,end)', "conveyed flow definition and endpoint role");
