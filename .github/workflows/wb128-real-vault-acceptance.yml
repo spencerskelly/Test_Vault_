@@ -1,20 +1,6 @@
 name: WB-128 real-vault acceptance
 
 on:
-  push:
-    branches:
-      - importer/baseline-contract-2026-10-05
-    paths:
-      - ".github/workflows/wb128-real-vault-acceptance.yml"
-      - "Importer/Tools/v0.8.19/**"
-      - "Importer/Testing/v0.8.19/**"
-      - "Base Vault/**"
-  pull_request:
-    paths:
-      - ".github/workflows/wb128-real-vault-acceptance.yml"
-      - "Importer/Tools/v0.8.19/**"
-      - "Importer/Testing/v0.8.19/**"
-      - "Base Vault/**"
   workflow_dispatch:
 
 permissions:
@@ -70,6 +56,7 @@ jobs:
 
       - name: Run Workbench on real v0.8.19 output
         run: |
+          set -o pipefail
           BASE="$RUNNER_TEMP/MDSE_v0819_full_import"
           WB="$RUNNER_TEMP/MDSE_Workbench"
           cd "$WB"
