@@ -1,55 +1,67 @@
 # v0.8.19 Full Import Execution Status
 
-Status: BLOCKED — source artifact unavailable to this execution environment
+Status: BLOCKED — real-source semantic reconciliation failure
 
-## Purpose
+## Source verification
 
-Step 12 of the v0.8.19 release plan requires a fresh disposable whole-model import using the current importer, followed by reconciliation of source counts, generated paths, semantic types, Local Model records, connector/flow preservation, and deterministic rerun behavior.
+The exact project source is now available and was inspected directly as SQLite:
 
-## Required source
+- File: `EA_2026_09_06_endgame.qeax`
+- Size: `186036224` bytes
+- SHA-256: `16c055ec1a5af57b0f4f9059d6292c5ddd3ed052124c7ef54d9af288971ae02c`
+- `t_object`: 35,969
+- `t_connector`: 21,822
+- `t_package`: 1,387
+- `t_diagramobjects`: 42,966
+- `t_diagram`: 2,924
+- `t_xref`: 42,052
+- `t_document`: 397
 
-- Source file: `EA_2026_09_06_endgame.qeax`
-- Historical recorded size: `186036224` bytes
-- Historical source counts:
-  - `t_object`: 35,969
-  - `t_connector`: 21,822
-  - `t_package`: 1,387
-  - `t_diagramobjects`: 42,966
+The source therefore matches the approved baseline counts.
 
-The current connected Project/Library and the known importer repositories do not expose the QEAX file bytes, so the v0.8.19 importer cannot be run against the source from this session.
+## Real-source checks passed
 
-## Historical evidence inspected
+- 84 Activities with a function stereotype exist outside the Product Function folder; v0.8.19 must retain them as Behavior/function.
+- State split from the source is 954 Product Design States and 158 other States.
+- 42 `functionalRequirement` and 83 `designConstraint` Requirements occur inside Engineering Requirements; explicit semantics must override folder context.
+- No raw ParentID cycles were found.
+- 53 machine-generated/URL-like element names were found and are covered by the v0.8.19 filename normalization rule.
+- All 79 `t_xref.Behavior = conveyed` source records resolve to a real source object and a real InformationFlow connector.
 
-The existing `spencerskelly/EA_Model_Import` run manifest from 2026-09-25 records a full import of the same named source using an older importer build. It reports:
+## Blocking finding
 
-- source object reconciliation: PASS
-- source connector reconciliation: PASS
-- validation: PASS_WITH_REVIEW
-- promotion blocked: true
-- 82 unresolved pending connectors
-- 11,247 emitted notes
-- 35,969 source objects
-- 21,822 source connectors
+Raw xref resolution is not sufficient to prove flow preservation.
 
-This is useful baseline evidence only. It is **not** acceptance evidence for v0.8.19 because the importer semantics and Local Model representation have changed.
+Of the 79 resolved conveyed-flow records:
 
-## Step 12 acceptance gates
+- 62 can be allocated to the current Local Model Interface/Connection structure.
+- 17 resolve to valid source Item Flow evidence but cannot currently be allocated to a valid Local Model Connection.
 
-A fresh v0.8.19 full import is accepted only when all of the following are verified from the same source snapshot:
+The 17 records are concentrated in the legacy DVS concept path:
 
-1. Planner/release-gate regressions pass.
-2. Source table counts match the approved baseline.
-3. Zero unmapped source elements.
-4. Zero unmapped source connectors.
-5. Element and connector planner row counts equal source row counts.
-6. Zero unresolved conveyed-flow source references.
-7. Local Model validation passes before writing.
-8. No first-class Port notes or legacy Port relationships are emitted.
-9. Parts, Interfaces, Connections, flows, and `exposes` resolve to valid local/native references.
-10. Generated paths obey v0.8.19 nesting and filename rules.
-11. A second import of the same source produces deterministic semantic output/identity allocation.
-12. Any remaining semantic review findings are explicit and source-traceable rather than silent loss.
+`Model > IPC ! > 09 Product in Progress > Concepts > DVS Concepts > DVS 330 E 240`
 
-## Next action
+They include InformationFlows whose endpoints are directly attached to contextual Parts or span owner contexts. Under Local Model 0.4, a Connection must bind contextual Interface occurrences. Automatically turning those Part endpoints into Interfaces would invent structure that is not explicitly present in EA.
 
-Do not freeze v0.8.19 or begin release acceptance from historical output. Re-run Step 12 as soon as the exact QEAX source is available to the execution environment.
+This is therefore a real semantic reconciliation blocker, not a file-access or parser problem.
+
+## Importer correction made during Step 12
+
+v0.8.19 now distinguishes:
+
+1. unresolved conveyed xref source evidence, and
+2. resolved conveyed source evidence that cannot be allocated to a valid Local Model Connection.
+
+Either condition blocks the write before generated vault content is accepted.
+
+The aggregate release gate now includes the conveyed-flow allocation regression.
+
+## Remaining Step 12 acceptance work
+
+Step 12 cannot pass until the 17 source records have an approved deterministic treatment. Acceptable resolution must do one of the following without silent loss:
+
+- resolve the source endpoints to existing contextual Interfaces with deterministic evidence,
+- define an approved Local Model representation for a flow terminating on a Part occurrence, or
+- preserve the affected source flows as explicit governed review/model-check evidence while preventing them from being represented as completed Connection flows.
+
+Do not freeze v0.8.19 while these 17 records remain semantically unallocated.
