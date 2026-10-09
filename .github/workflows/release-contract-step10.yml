@@ -1,0 +1,87 @@
+name: MDSE Step 10 release registry verification
+
+on:
+  push:
+    branches: [integration/release-contract-step10-2026-10-09]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  release-contract:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install exact checker prerequisite
+        run: python3 -m pip install pyyaml
+      - name: Check governed manifest, reference docs, immutable pins
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          from pathlib import Path
+          import yaml
+          p=Path('Base Vault/Definition/mdse-release.yaml')
+          d=yaml.safe_load(p.read_text())
+          assert d['releaseStatus']=='pre-release'
+          assert d['schemas']==dict(relationships='1.36',elementTypes='1.18',localModel='0.5')
+          assert d['tools']['importer']['release'] is None
+          assert d['tools']['bootstrap']['version']=='0.3.0'
+          assert d['tools']['bootstrap']['candidateSource']=='Bootstrap/Tools/v0.3.1'
+          assert d['tools']['workbench']['version']=='0.1.18'
+          lock=yaml.safe_load(Path('.obsidian/plugin-lock.yaml').read_text())
+          assert lock['plugins']['mdse-bootstrap']['version']=='0.3.1'
+          assert lock['plugins']['mdse-workbench']['version']=='0.1.18'
+          docs={x['path']:x['status'] for x in d['documents']}
+          prefix='00_Workspace/GitHub Consolidation '
+          expected=['Recovery Inventory 2026-10-09.md','Step 02 Branch Reconciliation 2026-10-09.md','Step 03 Workbench Migration Manifest 2026-10-09.md','Step 04 Workbench Rehearsal 2026-10-09.md']
+          for name in expected:
+              path=prefix+name
+              assert docs[path]=='reference', path
+              assert Path(path).is_file(), path
+          print('PASS: four recovery docs registered as references; controlled release and lock untouched')
+          PY
+      - name: Confirm generated runtime plugin lock unchanged from payload
+        run: python3 "Base Vault/Tools/v0.8.0-r2/update-plugin-lock.py" --check
+      - name: Build fresh disposable base from staged release contract
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 "Base Vault/Tools/v0.8.0-r2/build-base.py" "$RUNNER_TEMP/base"
+          test -f "$RUNNER_TEMP/base/99_System/03_Schemas/local-model.yaml"
+      - name: Run established full release checker; preserve diagnostic warnings
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 "Base Vault/Testing/check-release.py" --base "$RUNNER_TEMP/base" --workbench "55_Workbench" > "$RUNNER_TEMP/release-check.log" 2>&1 || {
+            grep -E '^FAIL |^WARN |[0-9]+ fail,' "$RUNNER_TEMP/release-check.log" || true
+            tail -n 20 "$RUNNER_TEMP/release-check.log"
+            exit 1
+          }
+          grep -E '^WARN |[0-9]+ fail,' "$RUNNER_TEMP/release-check.log" || true
+          if grep -q '^FAIL ' "$RUNNER_TEMP/release-check.log"; then
+            exit 1
+          fi
+          {
+            echo '## Controlled release preflight'
+            echo '- Original release checker: **zero FAILs**'
+            echo '- Known pre-release warnings remain visible (not suppressed)'
+            echo '- Original release status: **pre-release**; candidate only'
+            echo '- No plugin lock, release pin, or user vault changed'
+          } >> "$GITHUB_STEP_SUMMARY"
+      - name: Publish checker log as diagnostic evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: step10-release-check-log
+          path: ${{ runner.temp }}/release-check.log
+          if-no-files-found: warn
+          retention-days: 14
