@@ -124,7 +124,15 @@ runtimeBase:
     - "Bootstrap/Tools"
 
 # Status vocabulary: current | reference | proposal | historical | superseded | retired
+# The four October 9 recovery records carried into this integration tree are
+# reference-only evidence. They do not override active schemas, current-state
+# authority, or the release gate; newer recovery records live on the separate
+# recovery branch until intentionally brought into this tree and registered.
 documents:
+  - {path: "00_Workspace/GitHub Consolidation Recovery Inventory 2026-10-09.md", status: reference}
+  - {path: "00_Workspace/GitHub Consolidation Step 02 Branch Reconciliation 2026-10-09.md", status: reference}
+  - {path: "00_Workspace/GitHub Consolidation Step 03 Workbench Migration Manifest 2026-10-09.md", status: reference}
+  - {path: "00_Workspace/GitHub Consolidation Step 04 Workbench Rehearsal 2026-10-09.md", status: reference}
   - {path: "00_Workspace/00 - Current State.md", status: current}
   - {path: "00_Workspace/MDSE Plan - Path to a Golden Model.md", status: current}
   - {path: "00_Workspace/MDSE v0.8 Cross-Repository Reconciliation - 2026-10-02.md", status: current}
