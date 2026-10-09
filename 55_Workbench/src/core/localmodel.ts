@@ -2,21 +2,21 @@
  * Local Model reader (WB-106, WB-111). Pure TypeScript, no Obsidian imports.
  *
  * The model stays Markdown in the vault: this reads the governed `## Local Model` region of a note
- * (schema 0.1 through 0.4), gives every record a stable `ModelRef`, and reports findings. It never writes.
+ * (schema 0.1 through 0.5), gives every record a stable `ModelRef`, and reports findings. It never writes.
  * Paths and headings are navigation and display; identity is the note `uid` plus the local block ID.
  */
 import type { ModelIndex } from "./model";
 
 export type LocalKind = "part" | "endpoint" | "connection" | "flow";
 
-export const READABLE_VERSIONS = ["0.1", "0.2", "0.3", "0.4"] as const;
-export const WRITABLE_VERSION = "0.4";
+export const READABLE_VERSIONS = ["0.1", "0.2", "0.3", "0.4", "0.5"] as const;
+export const WRITABLE_VERSION = "0.5";
 
 const PREFIX: Record<LocalKind, string> = { part: "part-", endpoint: "ep-", connection: "conn-", flow: "flow-" };
 const SECTION_LEGACY: Record<string, LocalKind> = { "part occurrences": "part", "local interfaces": "endpoint", connections: "connection" };
 const SECTION_04: Record<string, LocalKind> = { parts: "part", interfaces: "endpoint", connections: "connection" };
 const sectionFor = (version: string, title: string): LocalKind | null =>
-  ((version === "0.4" ? SECTION_04 : SECTION_LEGACY)[title.toLowerCase()] ?? null);
+  (((version === "0.4" || version === "0.5") ? SECTION_04 : SECTION_LEGACY)[title.toLowerCase()] ?? null);
 const FLOW_ROLES = ["transmit", "receive", "exchange", "unspecified"];
 const USAGES = ["standard", "variant", "option"];
 /** A 30-character global identity token: 17 digits then 13 letters or hyphens (schema 0.2). */
@@ -165,7 +165,7 @@ const ALLOWED_FIELDS_04: Record<LocalKind, string[]> = {
   flow: ["definition", "identifier", "endpointA", "endpointB"],
 };
 const allowedFields = (version: string, kind: LocalKind): readonly string[] =>
-  (version === "0.4" ? ALLOWED_FIELDS_04 : ALLOWED_FIELDS_LEGACY)[kind];
+  ((version === "0.4" || version === "0.5") ? ALLOWED_FIELDS_04 : ALLOWED_FIELDS_LEGACY)[kind];
 
 /** Stable FNV-1a fingerprint of the text that can affect Local Model parsing/validation. */
 export function localModelSourceFingerprint(text: string): string | null {
@@ -342,7 +342,7 @@ export function validateRegion(region: LocalRegion): LocalFinding[] {
     ) {
       add("record.missing-definition", `${label} has no definition link.`, r);
     }
-    if (r.kind === "endpoint" && version === "0.4" && r.exposes.length) {
+    if (r.kind === "endpoint" && (version === "0.4" || version === "0.5") && r.exposes.length) {
       add("exposure.owner-invalid", `${label}: exposes belongs to a Connection in schema 0.4.`, r);
     }
     if (r.definition && r.definition.blockId) add("definition.incompatible", `${label}: the definition must link to a note, not a block.`, r);
@@ -363,16 +363,54 @@ export function validateRegion(region: LocalRegion): LocalFinding[] {
   };
   for (const r of region.records) {
     if (r.kind === "endpoint") {
+      const label = `endpoint "${r.identifier}"`;
       for (const [field, , want] of refTargetsKind) needLocal(r, r[field], field, want);
       if (r.part && r.parent) add("ref.part-and-parent", `endpoint "${r.identifier}" has both part and parent; they are mutually exclusive.`, r);
       for (const l of r.exposes) needLocal(r, l, "exposes", "endpoint");
       for (const l of r.equals) needLocal(r, l, "equals", "endpoint");
+      // In 0.5 only, explicit source BindingConnector equals is a symmetric,
+      // same-owner edge. Earlier versions retain their original review semantics.
+      if (version === "0.5") {
+        const rawEquals = r.fields.get("equals");
+        if (rawEquals !== undefined && (
+          !r.equals.length ||
+          // The importer writes multiple explicit links as "[[...]], [[...]]";
+          // the editor also accepts space-separated links. Nothing else is valid.
+          !/^\[\[[^\]]+\]\](?:\s*(?:,\s*|\s+)\[\[[^\]]+\]\])*$/u.test(rawEquals.trim()) ||
+          r.equals.some((link) => !link.blockId)
+        )) {
+          add("equals.malformed", `${label}: equals must contain only Interface block links with valid ^IDs.`, r);
+        }
+        const seenEquals = new Set<string>();
+        for (const l of r.equals) {
+          if (!l.target && l.blockId && l.blockId === r.localId) {
+            add("equals.self", `${label}: an Interface cannot equal itself.`, r);
+          }
+          if (l.blockId) {
+            const key = l.target + "#" + l.blockId;
+            if (seenEquals.has(key)) {
+              add("equals.duplicate", `${label}: duplicate equals link to ^${l.blockId}.`, r);
+            }
+            seenEquals.add(key);
+          }
+          if (l.target) {
+            add("equals.cross-context", `${label}: equals must target an Interface in the same Local Model owner.`, r);
+            continue;
+          }
+          if (!l.blockId) continue; // missing/malformed links are checked by needLocal
+          const target = sameNote(l);
+          if (!target || target.kind !== "endpoint" || !r.localId) continue;
+          if (!target.equals.some((back) => !back.target && back.blockId === r.localId)) {
+            add("equals.asymmetric", `${label}: equals with Interface "${target.identifier}" must be reciprocal.`, r);
+          }
+        }
+      }
     }
     if (r.kind === "connection") {
       if (!r.endpointA || !r.endpointB) add("ref.endpoint-count", `connection "${r.identifier}" needs exactly two endpoints (endpointA and endpointB).`, r);
       needLocal(r, r.endpointA, "endpointA", "endpoint");
       needLocal(r, r.endpointB, "endpointB", "endpoint");
-      if (version === "0.4") {
+      if (version === "0.4" || version === "0.5") {
         for (const l of r.exposes) {
           if (l.target) {
             add("exposure.cross-context", `connection "${r.identifier}": exposes must target a boundary Interface in this Local Model context.`, r);
@@ -539,7 +577,7 @@ function compatibleDefinition(record: LocalRecord, def: { type?: string; subtype
     const expected = COMPATIBLE[record.kind];
     return expected && def.type !== expected ? expected : null;
   }
-  if (record.sourceSchemaVersion === "0.4") {
+  if (record.sourceSchemaVersion === "0.4" || record.sourceSchemaVersion === "0.5") {
     return def.type === "Object" && def.subtype === "interface" ? null : "Object / interface";
   }
   return def.type === "Port" ? null : "Port";
