@@ -1,6 +1,16 @@
 # Current State
 
-**Last verified: 2026-10-06. Read this first, human or AI.** It says what is current, what is historical, where each rule lives and what is not built yet. If any other file disagrees with this page, this page and the files it names as current win. The machine-readable release authority is `Base Vault/Definition/mdse-release.yaml`.
+**Controlled release state: pre-release.** The single machine-readable authority remains `Base Vault/Definition/mdse-release.yaml`. The detailed tool status below records the **October 6 baseline** and has not been independently reverified as the October 9 release state. For the in-progress consolidated staging branch, use the checkpoint immediately below and the corresponding source/test commits; candidate tests are not release approval.
+
+## October 9 integration checkpoint (staging only)
+
+- Workbench source is now staged in `55_Workbench/` within `Test_Vault_` with its Git history retained; the original standalone repository and feature branches remain preserved, not retired.
+- Importer v0.8.19 and WB-129 Local Model 0.5 were combined **on isolated staging** with full ancestry. The candidate's `local-model.yaml` schema is **0.5**; Workbench 0.5 reads 0.1–0.5 and writes **0.5**. The October 6 references to writer 0.4 below are superseded for this **candidate**, but still document that earlier verified baseline.
+- [Step 8 full real-QEAX acceptance](https://github.com/spencerskelly/Test_Vault_/actions/runs/37974532073) passed a deterministic whole-model import and headless Workbench read/edit candidate check. [Step 9 persisted staging](https://github.com/spencerskelly/Test_Vault_/commit/dcfe3e45bd45f0a3619c18ae5841a357f526347b) passed component tests. **Neither represents a final issued release or manual Obsidian first-open acceptance.**
+- Bootstrap manifest `0.3.0` versus generated plugin lock `0.3.1` is an explicitly known **pre-release candidate warning**. Leave the pin untouched until approved startup/lock provenance checks pass; do not edit the generated lock by hand.
+- Workbench BOM A-14, numbered folder migration, release document registration and local-only work protection are separate unfinished gates.
+
+## October 6 baseline snapshot (historical for candidate-version statements)
 
 ## Target and status
 
