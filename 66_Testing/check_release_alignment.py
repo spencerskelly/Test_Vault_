@@ -196,6 +196,10 @@ def main() -> int:
         report["dependencyReferences"][term] = {
             "trackedFiles": len(matches), "examples": matches[:10]
         }
+    for term in terms:
+        info = report["dependencyReferences"][term]
+        print("DEPENDENCY", repr(term), info["trackedFiles"], "tracked files",
+              "| examples:", ", ".join(info["examples"][:3]))
     if any(report["dependencyReferences"][k]["trackedFiles"] for k in terms):
         finding("warning", "OLD_PATH_REFERENCES",
                 "Legacy references remain in tracked files; see dependencyReferences; " +
