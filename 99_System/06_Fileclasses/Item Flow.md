@@ -42,13 +42,6 @@ fields:
     options:
       baseFile: "99_System/06_Fileclasses/MDSE Link Targets.base"
       viewName: "Item Flow"
-  - name: hasPort
-    id: NLRbQP
-    type: MultiFile
-    path: ""
-    options:
-      baseFile: "99_System/06_Fileclasses/MDSE Link Targets.base"
-      viewName: "Port"
   - name: hasChild
     id: sWzp62
     type: MultiFile

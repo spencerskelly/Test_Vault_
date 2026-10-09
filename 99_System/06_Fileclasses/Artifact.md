@@ -32,13 +32,6 @@ fields:
     options:
       baseFile: "99_System/06_Fileclasses/MDSE Link Targets.base"
       viewName: "Artifact"
-  - name: hasPort
-    id: 8uO8uF
-    type: MultiFile
-    path: ""
-    options:
-      baseFile: "99_System/06_Fileclasses/MDSE Link Targets.base"
-      viewName: "Port"
   - name: hasChild
     id: my99UO
     type: MultiFile

@@ -14,24 +14,6 @@
       "label": "partOf"
     },
     {
-      "label": "hasPort"
-    },
-    {
-      "label": "portOf"
-    },
-    {
-      "label": "hasFlow"
-    },
-    {
-      "label": "flowOf"
-    },
-    {
-      "label": "exposes"
-    },
-    {
-      "label": "exposedBy"
-    },
-    {
       "label": "hasChild"
     },
     {
@@ -164,31 +146,10 @@
       "label": "affectedBy"
     },
     {
-      "label": "hasClassifier"
-    },
-    {
-      "label": "classifierOf"
-    },
-    {
       "label": "conflictsWith"
     },
     {
-      "label": "interfaces"
-    },
-    {
-      "label": "equals"
-    },
-    {
       "label": "participants"
-    },
-    {
-      "label": "transmits"
-    },
-    {
-      "label": "receives"
-    },
-    {
-      "label": "exchanges"
     },
     {
       "label": "initialState"
@@ -202,30 +163,24 @@
       "label": "ups",
       "fields": [
         "partOf",
-        "portOf",
         "childOf",
         "stateOf",
-        "includedIn",
-        "flowOf"
+        "includedIn"
       ]
     },
     {
       "label": "downs",
       "fields": [
         "hasPart",
-        "hasPort",
         "hasChild",
         "hasState",
-        "includes",
-        "hasFlow"
+        "includes"
       ]
     },
     {
       "label": "sames",
       "fields": [
-        "conflictsWith",
-        "interfaces",
-        "equals"
+        "conflictsWith"
       ]
     },
     {
@@ -250,7 +205,6 @@
     {
       "label": "outgoing",
       "fields": [
-        "exposes",
         "copyOf",
         "dependsOn",
         "derivedFrom",
@@ -269,11 +223,7 @@
         "realizedBy",
         "optionOf",
         "affects",
-        "hasClassifier",
         "participants",
-        "transmits",
-        "receives",
-        "exchanges",
         "initialState",
         "finalState"
       ]
@@ -281,7 +231,6 @@
     {
       "label": "incoming",
       "fields": [
-        "exposedBy",
         "hasCopy",
         "dependencyOf",
         "derivedBy",
@@ -299,8 +248,7 @@
         "verifiedBy",
         "realizes",
         "hasOption",
-        "affectedBy",
-        "classifierOf"
+        "affectedBy"
       ]
     }
   ],
@@ -348,72 +296,6 @@
           }
         ],
         "close_field": "hasPart",
-        "close_reversed": true
-      },
-      {
-        "name": "",
-        "rounds": 1,
-        "chain": [
-          {
-            "field": "hasPort"
-          }
-        ],
-        "close_field": "portOf",
-        "close_reversed": true
-      },
-      {
-        "name": "",
-        "rounds": 1,
-        "chain": [
-          {
-            "field": "portOf"
-          }
-        ],
-        "close_field": "hasPort",
-        "close_reversed": true
-      },
-      {
-        "name": "",
-        "rounds": 1,
-        "chain": [
-          {
-            "field": "hasFlow"
-          }
-        ],
-        "close_field": "flowOf",
-        "close_reversed": true
-      },
-      {
-        "name": "",
-        "rounds": 1,
-        "chain": [
-          {
-            "field": "flowOf"
-          }
-        ],
-        "close_field": "hasFlow",
-        "close_reversed": true
-      },
-      {
-        "name": "",
-        "rounds": 1,
-        "chain": [
-          {
-            "field": "exposes"
-          }
-        ],
-        "close_field": "exposedBy",
-        "close_reversed": true
-      },
-      {
-        "name": "",
-        "rounds": 1,
-        "chain": [
-          {
-            "field": "exposedBy"
-          }
-        ],
-        "close_field": "exposes",
         "close_reversed": true
       },
       {
@@ -905,54 +787,10 @@
         "rounds": 1,
         "chain": [
           {
-            "field": "hasClassifier"
-          }
-        ],
-        "close_field": "classifierOf",
-        "close_reversed": true
-      },
-      {
-        "name": "",
-        "rounds": 1,
-        "chain": [
-          {
-            "field": "classifierOf"
-          }
-        ],
-        "close_field": "hasClassifier",
-        "close_reversed": true
-      },
-      {
-        "name": "",
-        "rounds": 1,
-        "chain": [
-          {
             "field": "conflictsWith"
           }
         ],
         "close_field": "conflictsWith",
-        "close_reversed": true
-      },
-      {
-        "name": "",
-        "rounds": 1,
-        "chain": [
-          {
-            "field": "interfaces"
-          }
-        ],
-        "close_field": "interfaces",
-        "close_reversed": true
-      },
-      {
-        "name": "",
-        "rounds": 1,
-        "chain": [
-          {
-            "field": "equals"
-          }
-        ],
-        "close_field": "equals",
         "close_reversed": true
       }
     ]

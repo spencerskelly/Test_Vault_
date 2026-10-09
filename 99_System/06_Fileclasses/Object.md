@@ -28,6 +28,7 @@ fields:
         "4": "software"
         "5": "firmware"
         "6": "part"
+        "7": "interface"
   - name: status
     id: fNIHRc
     type: Select
@@ -52,27 +53,20 @@ fields:
     options:
       baseFile: "99_System/06_Fileclasses/MDSE Link Targets.base"
       viewName: "Object"
-  - name: hasPort
-    id: 6SvNP3
-    type: MultiFile
-    path: ""
-    options:
-      baseFile: "99_System/06_Fileclasses/MDSE Link Targets.base"
-      viewName: "Port"
   - name: hasChild
     id: Bf2vOK
     type: MultiFile
     path: ""
     options:
       baseFile: "99_System/06_Fileclasses/MDSE Link Targets.base"
-      viewName: "Actor | Artifact | Design | Diagram | Document | Failure Mode | Function | Functional Flow | Info | Issue | Item Flow | Plan | Port | Procedure | Requirement | Result | Setup | Step | Use Case | Verification | modelCheck"
+      viewName: "Actor | Artifact | Behavior | Diagram | Document | Failure Mode | Functional Flow | Info | Issue | Item Flow | Plan | Procedure | Requirement | Result | Setup | Use Case | Verification | modelCheck"
   - name: hasState
     id: 9TtGIC
     type: MultiFile
     path: ""
     options:
       baseFile: "99_System/06_Fileclasses/MDSE Link Targets.base"
-      viewName: "State | State Machine"
+      viewName: "Condition"
   - name: includes
     id: 6MGdbk
     type: MultiFile
@@ -128,14 +122,14 @@ fields:
     path: ""
     options:
       baseFile: "99_System/06_Fileclasses/MDSE Link Targets.base"
-      viewName: "Function"
+      viewName: "Behavior"
   - name: hasDesign
     id: mbvJ3V
     type: MultiFile
     path: ""
     options:
       baseFile: "99_System/06_Fileclasses/MDSE Link Targets.base"
-      viewName: "Design"
+      viewName: "Condition"
   - name: conflictsWith
     id: hTrIET
     type: MultiFile

@@ -34,6 +34,12 @@ Use this section as the continuation protocol; do not reconstruct the plan from 
 9. **No retroactive renumbering.** If a reconstructed step is already satisfied, mark that step complete with evidence; do not delete it or renumber later steps.
 10. **Release boundary.** Performance/stability work on standalone Workbench main does not by itself change the Base Vault pin or constitute an MDSE release. Release promotion remains a separate controlled integration action.
 
+## High-priority semantic compatibility To-Do
+
+These items are release-blocking compatibility work and do **not** renumber or interrupt the performance/stability sequence below.
+
+- **WB-128 · HIGH · Local Model 0.4 + W-384/W-385 compatibility.** Update Workbench to read Local Model 0.4 while preserving frozen 0.1/0.2/0.3 semantics; write 0.4 using `Parts`, `Interfaces`, and `Connections`; treat reusable interface definitions as `Object / interface` instead of Port notes; update type filters/editors/views for `Behavior` subtypes (`function`, `activity`, `action`, `step`) and `Condition` subtypes (`state`, `state machine`, `mode`, `design`); remove creation/validation assumptions that require first-class Port/Function/State/Design/Step notes; and support connection-level `exposes` links to boundary Interface occurrences so Internal/Interfaces views show how an internal connection is exposed at the owning context boundary. Required proof: parser compatibility fixtures for 0.1–0.4, structured editor round-trip, view rendering, schema-driven relationship filtering, and regression tests proving legacy 0.3 headings are read without silent rewrite.
+
 ## Verified completed steps
 
 18. Collapse relationship evidence into one canonical internal representation.
@@ -1069,6 +1075,47 @@ Step 60 conclusion:
 - Any later runtime change creates a new candidate and requires rerunning the acceptance scope affected by that change.
 
 **Current resume point:** the numbered performance/stability roadmap is complete. Do not invent Step 61. Continue with the separate MDSE v0.8 integration/release plan when Spencer explicitly chooses to proceed.
+
+## Integration follow-up — acceptance harness packaging (high priority, outside Steps 18–60)
+
+This is **not Step 61** and does not reopen the completed runtime performance/stability roadmap.
+
+During IMP-009 integration on 2026-10-06, real-QEAX bridge run `37487843505` proved the importer-side IMP-009 validator and Workbench read-only real-vault scan, then failed before semantic model evaluation because Workbench 0.1.18's `scripts/real-vault-acceptance.ts` uses top-level `await` while the package is executed in a CommonJS context. The direct `npm run accept:real-vault` path therefore fails during TSX/esbuild transformation rather than because of a vault/runtime defect.
+
+High-priority Workbench follow-up:
+- make `accept:real-vault` directly runnable from the repository's declared package/module configuration (preferred: wrap executable code in an async `main()` like the existing edit harness, or otherwise make the script explicitly ESM);
+- add CI that executes the packaged command itself so module-format drift cannot silently break acceptance tooling;
+- keep this change isolated from `main.js` runtime behavior unless runtime changes are actually necessary;
+- rerun the affected real-vault acceptance command after the harness fix.
+
+Until that follow-up is landed in Workbench, the importer bridge uses the **same accepted Workbench 0.1.18 source** from artifact commit `b0c4e2c6bdfb96d36f51d8152b17be22592ef174`, bundles the acceptance harness as ESM, and runs that bundle. This preserves the semantic gate without treating a test-runner packaging defect as an importer failure.
+
+### 2026-10-06 follow-up — preserve unrelated bytes during Local Model edits
+
+IMP-009 bridge run `37490701170` exposed a second integration-level hardening opportunity after the acceptance harness itself was made runnable. Workbench 0.1.18 passed Local Model parsing/topology checks but reported four no-op formatting drifts. All four were traced to three importer-generated notes whose EA narrative contained CRLF while generated structure used LF. The importer side is corrected by W-395 so generated Markdown is canonical LF.
+
+Defense-in-depth Workbench follow-up, **high priority but not a new numbered stability step**:
+- structured Local Model patching should preserve text outside the replaced governed record byte-for-byte, even if a legacy/user-authored note has mixed line endings;
+- `editableLocalRegion()` currently selects one EOL for the entire reconstructed file from `text.includes("\\r\\n")`, which can normalize unrelated text;
+- prefer a minimal splice or record-local EOL strategy that changes only the intended Local Model record;
+- add a focused mixed-EOL no-op and real edit regression before the next Workbench release that changes writer behavior.
+
+This does not invalidate the accepted 0.1.18 runtime for canonical importer output, but it closes a useful robustness gap for noncanonical/legacy notes.
+
+### 2026-10-06 high-priority follow-up — Local Model 0.5 canonical BindingConnector equals
+
+W-398 resolves IMP-011's same-context BindingConnector semantics. Workbench 0.1.18 already parses, edits, caches and renders the local `equals` field, but it treats and labels it as temporary review evidence. The importer will version the semantic promotion as Local Model 0.5 rather than silently altering 0.4.
+
+High-priority Workbench follow-up:
+- add Local Model 0.5 to the readable/writeable schema set;
+- preserve 0.1–0.4 historical semantics when reading older vaults;
+- in 0.5, display `equals` as canonical BindingConnector equality/binding, not “Equals (temporary)”;
+- keep the field symmetric and same-note/context for governed editing;
+- do not infer `Connection.exposes`, create a Connection, or compute/store transitive equality closure from `equals`;
+- update structured-edit, cache, Internal/Interfaces view and deletion-impact tests for the 0.5 meaning;
+- acceptance must use the same real-QEAX output that proves 23 exposure + 209 canonical equals + 17 review-only cross-owner cases.
+
+This is a runtime-contract change and should produce the next controlled Workbench candidate rather than modifying the accepted 0.1.18 artifact in place.
 
 ## Reconstructed remaining steps
 

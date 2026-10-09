@@ -32,13 +32,6 @@ fields:
     options:
       baseFile: "99_System/06_Fileclasses/MDSE Link Targets.base"
       viewName: "Info"
-  - name: hasPort
-    id: OWZ2Z4
-    type: MultiFile
-    path: ""
-    options:
-      baseFile: "99_System/06_Fileclasses/MDSE Link Targets.base"
-      viewName: "Port"
   - name: hasChild
     id: lvanx1
     type: MultiFile
