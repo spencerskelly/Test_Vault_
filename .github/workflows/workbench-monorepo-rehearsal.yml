@@ -1,0 +1,94 @@
+name: Rehearse Workbench subtree migration
+
+# Disposable CI proof only. This workflow never pushes, opens PRs, or changes main.
+on:
+  push:
+    branches:
+      - integration/workbench-monorepo-rehearsal-2026-10-09
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  history-and-build-rehearsal:
+    runs-on: ubuntu-latest
+    timeout-minutes: 35
+    env:
+      SOURCE_SHA: 59fc6219b1d0586900aa7d38685e7087a9d47fec
+      RECOVERY_BASE_SHA: bfefb8ee0c03dd613a8695662fbcc25112bc90c2
+    steps:
+      - name: Checkout isolated staging branch with history
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+
+      - name: Import Workbench in runner only; prove both histories and exact tree
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "$GITHUB_REF_NAME" = "integration/workbench-monorepo-rehearsal-2026-10-09"
+          git merge-base --is-ancestor "$RECOVERY_BASE_SHA" HEAD
+          test -z "$(git status --porcelain=v1 -uall)"
+          test ! -e 55_Workbench
+          git config user.name "MDSE migration rehearsal"
+          git config user.email "mdse-rehearsal@users.noreply.github.com"
+          git remote add workbench https://github.com/spencerskelly/MDSE_Workbench.git
+          git fetch --no-tags workbench refs/heads/main:refs/remotes/workbench/main
+          found="$(git rev-parse refs/remotes/workbench/main)"
+          if [ "$found" != "$SOURCE_SHA" ]; then
+            echo "::error::Workbench main has moved ($found); refresh pinned source and reassess"
+            exit 1
+          fi
+          before="$(git rev-parse HEAD)"
+          git subtree add --prefix=55_Workbench workbench/main -m "REHEARSAL ONLY: import pinned Workbench ancestry under 55_Workbench"
+          after="$(git rev-parse HEAD)"
+          read -r p1 p2 < <(git show -s --format='%P' "$after")
+          test "$p1" = "$before"
+          test "$p2" = "$SOURCE_SHA"
+          git merge-base --is-ancestor "$SOURCE_SHA" HEAD
+          expected_tree="$(git rev-parse "$SOURCE_SHA^{tree}")"
+          actual_tree="$(git rev-parse HEAD:55_Workbench)"
+          test "$actual_tree" = "$expected_tree"
+          for path in package.json package-lock.json esbuild.config.mjs tsconfig.json src/main.ts test/localmodel.test.ts manifest.json .github/workflows/build-artifact.yml; do
+            test -f "55_Workbench/$path"
+          done
+          before_files="$(git ls-tree -r --name-only "$SOURCE_SHA" | wc -l | tr -d ' ')"
+          after_files="$(git ls-tree -r --name-only HEAD:55_Workbench | wc -l | tr -d ' ')"
+          test "$before_files" = "$after_files"
+          {
+            echo "## Workbench subtree rehearsal (ephemeral runner only)"
+            echo "- Source: spencerskelly/MDSE_Workbench main at $SOURCE_SHA"
+            echo "- Staging input: $before"
+            echo "- Ephemeral subtree merge: $after"
+            echo "- Both commit parents checked: $p1 / $p2"
+            echo "- Exact subtree Git tree object: $actual_tree"
+            echo "- Tracked files matched: $before_files"
+            echo "- **No commit pushed to GitHub; no main or user vault changed.**"
+          } >> "$GITHUB_STEP_SUMMARY"
+
+      - name: Set up Node from imported package lock
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+          cache-dependency-path: 55_Workbench/package-lock.json
+
+      - name: Smoke test imported Workbench build
+        shell: bash
+        working-directory: 55_Workbench
+        run: |
+          set -euo pipefail
+          npm ci
+          npm run typecheck
+          npm test
+          npm run build
+          echo "- Imported Workbench npm ci, typecheck, test, and build: PASS" >> "$GITHUB_STEP_SUMMARY"
+
+      - name: Confirm build did not alter imported source/fixtures
+        shell: bash
+        run: |
+          set -euo pipefail
+          git diff --exit-code -- 55_Workbench/src 55_Workbench/test 55_Workbench/package.json 55_Workbench/package-lock.json
+          echo "- Workbench source/fixture/package changes during build: NONE" >> "$GITHUB_STEP_SUMMARY"
