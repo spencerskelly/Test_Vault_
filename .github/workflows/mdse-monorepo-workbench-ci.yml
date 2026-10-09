@@ -1,0 +1,105 @@
+name: MDSE monorepo Workbench CI
+
+# First unified root-level CI. This checks Workbench and affected shared contracts
+# without promoting any MDSE release or writing build artifacts to Git.
+on:
+  push:
+    branches:
+      - integration/workbench-subtree-2026-10-09
+    paths:
+      - "55_Workbench/**"
+      - "99_System/03_Schemas/**"
+      - "Base Vault/Definition/**"
+      - "Importer/**"
+      - "Bootstrap/**"
+      - ".github/workflows/mdse-monorepo-workbench-ci.yml"
+  pull_request:
+    branches:
+      - main
+      - recovery/repository-consolidation-2026-10-09
+    paths:
+      - "55_Workbench/**"
+      - "99_System/03_Schemas/**"
+      - "Base Vault/Definition/**"
+      - "Importer/**"
+      - "Bootstrap/**"
+      - ".github/workflows/mdse-monorepo-workbench-ci.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: mdse-monorepo-workbench-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  workbench:
+    name: Typecheck, tests, build, artifact
+    runs-on: ubuntu-latest
+    timeout-minutes: 35
+    defaults:
+      run:
+        working-directory: 55_Workbench
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+
+      - name: Check Workbench subtree and recorded source ancestry
+        shell: bash
+        run: |
+          set -euo pipefail
+          test -f package.json
+          test -f manifest.json
+          git merge-base --is-ancestor 59fc6219b1d0586900aa7d38685e7087a9d47fec HEAD
+          node -e 'const p=require("./package.json"),m=require("./manifest.json"); if(p.version!==m.version || m.id!=="mdse-workbench") {console.error("Workbench metadata drift", p.version,m.version,m.id);process.exit(1)}; console.log("Workbench source manifest:",p.version);'
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+          cache-dependency-path: 55_Workbench/package-lock.json
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: TypeScript typecheck
+        run: npm run typecheck
+
+      - name: Full Workbench test suite
+        run: npm test
+
+      - name: Build plugin
+        run: npm run build
+
+      - name: Check for accidental source or fixture modifications
+        run: git diff --exit-code -- src test package.json package-lock.json
+
+      - name: Save immutable build artifact and hashes (not a Git push)
+        shell: bash
+        run: |
+          set -euo pipefail
+          sha256sum main.js manifest.json styles.css > "$RUNNER_TEMP/workbench-sha256.txt"
+          cp "$RUNNER_TEMP/workbench-sha256.txt" artifact-ci-sha256.txt
+          {
+            echo "## Workbench integration CI"
+            echo "- Commit: $GITHUB_SHA"
+            echo "- Component: 55_Workbench"
+            echo "- Typecheck, tests, plugin build: PASS"
+            echo "- Artifacts published to Actions, not committed to Git"
+            echo "- **No claim of importer/Base/Bootstrap combined-release acceptance**"
+          } >> "$GITHUB_STEP_SUMMARY"
+
+      - name: Upload reviewed build inputs
+        uses: actions/upload-artifact@v4
+        with:
+          name: mdse-workbench-${{ github.sha }}
+          path: |
+            55_Workbench/main.js
+            55_Workbench/manifest.json
+            55_Workbench/styles.css
+            55_Workbench/artifact-ci-sha256.txt
+          if-no-files-found: error
+          retention-days: 14
