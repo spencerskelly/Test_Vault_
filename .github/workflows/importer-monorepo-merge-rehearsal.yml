@@ -1,0 +1,182 @@
+name: Rehearse importer-to-monorepo merge
+
+# Non-writing integration rehearsal: NO merge commits/pushes/branch changes.
+on:
+  push:
+    branches:
+      - integration/importer-reconciliation-2026-10-09
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  importer-merge-rehearsal:
+    runs-on: ubuntu-latest
+    timeout-minutes: 35
+    env:
+      EXPECTED_INTEGRATION_BASE: 75eff6007af46e19f36f76b38df44658ac381ba5
+      EXPECTED_IMPORTER_SHA: 0494354ec40378e119b17c61fdf6e828844035e4
+    steps:
+      - name: Checkout frozen monorepo integration baseline
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+
+      - name: Non-committing merge and conflict report
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "$GITHUB_REF_NAME" = "integration/importer-reconciliation-2026-10-09"
+          test -z "$(git status --porcelain=v1 -uall)"
+          git merge-base --is-ancestor "$EXPECTED_INTEGRATION_BASE" HEAD
+          git remote -v
+          git fetch --no-tags origin 'refs/heads/importer/baseline-contract-2026-10-05'
+          found="$(git rev-parse FETCH_HEAD)"
+          if [ "$found" != "$EXPECTED_IMPORTER_SHA" ]; then
+            echo "::error::Importer candidate moved to $found; refusing unreviewed source."
+            exit 1
+          fi
+          git config user.name "MDSE importer merge rehearsal"
+          git config user.email "mdse-rehearsal@users.noreply.github.com"
+          echo "Monorepo base: $(git rev-parse HEAD)"
+          echo "Importer source: $found"
+          if ! git merge --no-ff --no-commit "$EXPECTED_IMPORTER_SHA"; then
+            echo "::error::Importer merge has conflicts; no push attempted."
+            echo "Unmerged files:"
+            git diff --name-only --diff-filter=U
+            git status --short
+            exit 1
+          fi
+          echo "Merge without commit: clean"
+          test -d 55_Workbench
+          test -d 66_Testing
+          test -f Importer/Tools/v0.8.19/EA_to_MDSE_Native_Importer_v0.8.19.html
+          test -f Base\ Vault/Definition/mdse-release.yaml
+          echo "Proposed merge change paths:"
+          git diff --cached --name-status > "$RUNNER_TEMP/merge-files.txt"
+          head -n 45 "$RUNNER_TEMP/merge-files.txt"
+          {
+            echo "## Pinned importer + Workbench merge rehearsal"
+            echo "- Importer: $EXPECTED_IMPORTER_SHA"
+            echo "- Original monorepo main-history baseline: $EXPECTED_INTEGRATION_BASE"
+            echo "- Merge simulated using git merge --no-commit --no-ff, not pushed."
+            echo "- Git conflict result: NONE"
+          } >> "$GITHUB_STEP_SUMMARY"
+
+      - name: Prepare Python and Node dependencies
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - name: Install release-check parser
+        run: python3 -m pip install pyyaml
+
+      - name: Verify merged contracts and component identity
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          import json,yaml
+          from pathlib import Path
+          root=Path(".")
+          release=yaml.safe_load((root/"Base Vault/Definition/mdse-release.yaml").read_text())
+          schema=release["schemas"]
+          actual={k:yaml.safe_load((root/f"99_System/03_Schemas/{name}").read_text())["schemaVersion"]
+            for k,name in [("relationships","relationships.yaml"),("elementTypes","element-types.yaml"),("localModel","local-model.yaml")]}
+          print("Candidate schema pins:",schema)
+          print("Merged schema files:",actual)
+          assert all(str(schema[k])==str(actual[k]) for k in actual)
+          assert str(schema["localModel"])=="0.5"
+          assert str(schema["relationships"])=="1.36"
+          assert str(schema["elementTypes"])=="1.18"
+          importer=release["tools"]["importer"]
+          wb=release["tools"]["workbench"]
+          version=json.loads((root/"55_Workbench/package.json").read_text())["version"]
+          assert importer.get("candidateVersion")=="0.8.19"
+          assert str(wb["version"])==version=="0.1.18"
+          lock=yaml.safe_load((root/".obsidian/plugin-lock.yaml").read_text())
+          locked=str(lock["plugins"]["mdse-workbench"]["version"])
+          print("Workbench package, release pin, generated plugin lock:", version,wb["version"],locked)
+          assert locked==version
+          print("Bootstrap manifest pin / generated lock:",
+               release["tools"]["bootstrap"]["version"],lock["plugins"]["mdse-bootstrap"]["version"])
+          print("Release status:",release["releaseStatus"])
+          assert release["releaseStatus"]!="release"
+          PY
+
+      - name: Check importer source profile, headless code and regression gate
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 Importer/Tools/v0.8.19/sync_source_profile.py --check
+          node --check Importer/Testing/v0.8.19/headless_full_import.js
+          node Importer/Testing/v0.8.19/release_gate_regression_test.js
+          python3 Importer/Testing/v0.8.19/imp009_output_acceptance_selftest.py
+
+      - name: Build candidate Base Vault from merged tree
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 "Base Vault/Tools/v0.8.0-r2/build-base.py" "$RUNNER_TEMP/mdse-merge-base"
+          test -f "$RUNNER_TEMP/mdse-merge-base/.vault.yaml"
+          test -f "$RUNNER_TEMP/mdse-merge-base/99_System/03_Schemas/local-model.yaml"
+
+      - name: Run legacy full release checker as diagnostic
+        id: release
+        shell: bash
+        run: |
+          set -uo pipefail
+          set +e
+          python3 "Base Vault/Testing/check-release.py" --base "$RUNNER_TEMP/mdse-merge-base" > "$RUNNER_TEMP/release-check.log" 2>&1
+          code=$?
+          set -e
+          echo "Release checker exit status: $code"
+          echo "Release-check failures and warnings:"
+          grep -E '^(FAIL |WARN |[0-9]+ fail,)' "$RUNNER_TEMP/release-check.log" || true
+          echo "Release-check final summary:"
+          tail -n 4 "$RUNNER_TEMP/release-check.log"
+          {
+            echo "- Existing release checker status: $code (full release validation, distinct from merge test)"
+            echo "- This candidate is still **pre-release** and requires full real-model/Bootstrap/Workbench acceptance."
+          } >> "$GITHUB_STEP_SUMMARY"
+          exit 0
+
+      - name: Block incompatible Workbench Local Model source/schema pair
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 66_Testing/check_importer_workbench_localmodel.py
+
+      - name: Workbench source tests on the merged model authority
+        shell: bash
+        working-directory: 55_Workbench
+        run: |
+          set -euo pipefail
+          npm ci
+          npm run typecheck
+          npm test
+          npm run build
+          echo "- Imported Workbench standalone tests/build: PASS" >> "$GITHUB_STEP_SUMMARY"
+
+      - name: Audit merged tree without any Git writes
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 66_Testing/check_release_alignment.py --output "$RUNNER_TEMP/importer-merged-alignment.json"
+          test -n "$(git rev-parse FETCH_HEAD)"
+          echo "- Finished on ephemeral runner. No merge commit and no Git push." >> "$GITHUB_STEP_SUMMARY"
+
+      - name: Publish diagnostic logs only
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: importer-merge-diagnostics-${{ github.sha }}
+          path: |
+            ${{ runner.temp }}/release-check.log
+            ${{ runner.temp }}/importer-merged-alignment.json
+          if-no-files-found: warn
+          retention-days: 14
