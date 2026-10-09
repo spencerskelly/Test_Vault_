@@ -129,8 +129,10 @@ jobs:
         shell: bash
         run: |
           set -uo pipefail
+          set +e
           python3 "Base Vault/Testing/check-release.py" --base "$RUNNER_TEMP/mdse-merge-base" > "$RUNNER_TEMP/release-check.log" 2>&1
           code=$?
+          set -e
           echo "Release checker exit status: $code"
           tail -n 28 "$RUNNER_TEMP/release-check.log"
           {
