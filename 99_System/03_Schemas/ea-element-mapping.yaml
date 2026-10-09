@@ -6,7 +6,7 @@
 #   archive  kept only in the import archive, not in the vault
 #   drop     not carried over
 # oldToolRules is evidence only: what the earlier semantic translator (v2.6.0) did with this type, from its embedded rules. It is a starting point for discussion, not a decision.
-schemaVersion: '1.0'
+schemaVersion: '1.1'
 elementTypes:
 - eaObjectType: Requirement
   elements: 13988
@@ -47,29 +47,18 @@ elementTypes:
     (none): 4071
     ProxyPort: 303
     FullPort: 13
-  disposition: note
-  mdseType: Port
-  decision: W-113
-  subtypeRule: 'from the EA stereotype: ProxyPort gives proxy, FullPort gives full, no stereotype gives a blank subtype (W-128)'
-  decisions: [W-113, W-114, W-120, W-121, W-122, W-123, W-125, W-127, W-128, W-129, W-130, W-134, W-276]
-  note: 'MDSE now has a Port class (W-113). Part- and Object-owned Ports merge into the block''s Port by the W-114 rule. PDATA1 (typing Class) is written as subtypeOf between Port notes (W-120). Differences on a merged instance Port are kept as lines on the block Port note (W-121; format not decided). The Port note''s subtype comes from the EA stereotype: proxy for ProxyPort, full for FullPort, blank for plain (W-128). For a W-114.3 group that emits one added Port from several source Ports, the earliest CreatedDate source, tied by EA GUID, supplies canonical uid/id identity and the primary EA GUID; other sources remain ledger/evidence rows (W-276). PDATA2 is subtypeOf (W-122), the owner link is hasPort (W-123), Classifier is the temporary hasClassifier (W-125).'
-  oldToolRules:
-  - rule: F-01
-    verdict: fold
-    target: owning block .ports
-  - rule: F-01c
-    verdict: fold
-    target: owning block .ports
-  - rule: F-01n
-    verdict: fold
-  - rule: F-01d
-    verdict: fold
-    target: owning block .ports
-  - rule: F-01du
-    verdict: fold
-    target: owning block .ports
-  - rule: F-01i
-    verdict: suppress
+  disposition: local
+  mdseType: null
+  decision: W-384
+  localKind: endpoint
+  localLabel: Interface
+  rules:
+  - 'Every EA Port is preserved as a Local Model 0.4 Interface occurrence; no first-class Port note is emitted.'
+  - 'A Port directly owned by a reusable Class becomes a boundary Interface occurrence in that Class/Object Local Model.'
+  - 'A contextual/Part-owned Port becomes an Interface occurrence in the containing Local Model context.'
+  - 'definition points to Object/interface only when deterministic Classifier/PDATA redefinition evidence resolves a recognized Interface Class; otherwise definition is omitted.'
+  - 'ProxyPort/FullPort may be retained as local kind/source evidence but are not first-class MDSE subtypes.'
+  note: 'W-384 supersedes the Port-note, hasPort/portOf, Port-subtype and synthetic-added-Port mappings for current writing. Historical Port rules remain evidence in the decision log/history, not current output semantics.'
 - eaObjectType: Part
   elements: 3137
   stereotypes:
@@ -144,69 +133,11 @@ elementTypes:
     Software Unit: 3
   disposition: note
   mdseType: Object
-  decision: W-139
-  subtype: null
-  partialDecision: 'The 423 Class elements with an interface stereotype (Electrical & Material Interface 205, Data Interface 112, Mechanical Interface 69, Generic Physical Interface 30, Environmental Interface 7) become Port notes with a blank subtype, the stereotype staying in eaType (W-120, W-237). All other Class elements (2,314) become Object notes with a blank subtype, the stereotype staying in eaType (W-139). oldToolRules X-03 (emit as Interface) and the other old rules are evidence of the old tool only.'
-  oldToolRules:
-  - rule: X-01
-    verdict: decompose
-  - rule: X-01N
-    verdict: emit
-    as: Object
-  - rule: X-01O
-    verdict: suppress
-  - rule: X-02
-    verdict: emit
-    as: Context
-    note: 'the Context class was removed (W-237); a Physical Context is an Object (W-239)'
-  - rule: X-03
-    verdict: emit
-    as: Interface
-  - rule: X-04
-    verdict: emit
-    as: Object
-  - rule: X-05
-    verdict: suppress
-  - rule: X-10
-    verdict: emit
-    as: Object
-  - rule: X-11
-    verdict: emit
-    as: Object
-  - rule: X-12
-    verdict: emit
-    as: Object
-  - rule: X-13
-    verdict: emit
-    as: Object
-  - rule: X-14
-    verdict: emit
-    as: Object
-  - rule: X-15
-    verdict: emit
-    as: Object
-  - rule: AC-04
-    verdict: suppress
-  - rule: X-20
-    verdict: emit
-    as: Object
-  - rule: X-21
-    verdict: emit
-    as: Actor
-  - rule: X-22
-    verdict: emit
-    as: Object
-  - rule: X-23
-    verdict: emit
-    as: Object
-  - rule: UC-01
-    verdict: emit
-    as: Use Case
-  - rule: X-30
-    verdict: emit
-    as: Object
-  - rule: X-31
-    verdict: suppress
+  decision: W-384
+  subtypeRule:
+    interface: [Electrical & Material Interface, Data Interface, Mechanical Interface, Generic Physical Interface, Environmental Interface]
+    default: null
+  note: 'The 423 recognized Interface Classes become Object/interface reusable definitions. All other Classes remain Object under their existing Object semantics. The EA stereotype remains in eaType.'
 - eaObjectType: Activity
   elements: 1668
   stereotypes:
@@ -217,29 +148,13 @@ elementTypes:
     Software Function: 108
     Module Function: 13
   disposition: note
-  mdseType: Function
-  decision: W-141
-  note: 'Function has no subtypes (W-238); the EA stereotype stays in eaType, so a Function from a System, Hardware, Software or Module Function keeps its EA name there.'
+  decision: W-384
   mapping:
-  - {eaType: System Function, mdseType: Function, subtype: null}
-  - {eaType: Hardware Function, mdseType: Function, subtype: null}
-  - {eaType: Software Function, mdseType: Function, subtype: null}
-  - {eaType: Module Function, mdseType: Function, subtype: null}
-  - {eaType: Activity, mdseType: Function, subtype: null}
-  - {eaType: testCase, mdseType: Verification, subtype: test}
-  oldToolRules:
-  - rule: E-03P
-    verdict: emit
-    as: Procedure
-  - rule: E-03S
-    verdict: emit
-    as: Step
-  - rule: E-04
-    verdict: emit
-    as: 'by test: Verification, Plan, Procedure, Step, decide'
-  - rule: E-05
-    verdict: emit
-    as: Function
+  - {rule: 'stereotype is testCase', mdseType: Verification, subtype: test}
+  - {rule: 'stereotype includes function, regardless of package location', mdseType: Behavior, subtype: function}
+  - {rule: 'under 04 Product Function', mdseType: Behavior, subtype: function}
+  - {rule: 'all remaining Activities', mdseType: Behavior, subtype: activity}
+  note: 'The stereotype testCase retains the existing Verification/test mapping. Function semantics use Behavior/function; package location cannot demote an Activity whose stereotype includes function.'
 - eaObjectType: UseCase
   elements: 1667
   stereotypes:
@@ -279,31 +194,13 @@ elementTypes:
     (none): 341
     Fault State: 2
   disposition: note
-  mdseType: State
-  decision: W-142
+  mdseType: Condition
+  decision: W-384
   mapping:
-  - {rule: 'element sits in the package IPC ! / 05 Product Design or below it', mdseType: Design, subtype: null, elements: 954}
-  - {rule: 'element sits in any other package', mdseType: State, subtype: null, elements: 158}
-  note: 'Subtype blank in both (reading to confirm, W-142). eaType keeps System State, Fault State or the object type.'
-  oldToolRules:
-  - rule: S-01
-    verdict: emit
-    as: Failure Mode
-  - rule: S-02
-    verdict: emit
-    as: State
-  - rule: S-02SM
-    verdict: emit
-    as: State Machine
-  - rule: S-02D
-    verdict: emit
-    as: Design
-  - rule: S-02C
-    verdict: emit
-    as: State
-  - rule: S-03
-    verdict: emit
-    as: Design
+  - {rule: 'stereotype identifies a mode', mdseType: Condition, subtype: mode}
+  - {rule: 'element sits in 05 Product Design or below it', mdseType: Condition, subtype: design, elements: 954}
+  - {rule: 'all remaining States', mdseType: Condition, subtype: state}
+  note: 'EA stereotype remains in eaType; Condition subtype carries the current MDSE state/design/mode meaning.'
 - eaObjectType: Signal
   elements: 623
   stereotypes:
@@ -386,17 +283,10 @@ elementTypes:
   stereotypes:
     (none): 323
   disposition: note
-  mdseType: modelCheck
-  decision: W-146
-  subtype: Action
-  note: 'type modelCheck, subtype = eaType, so the note shows what it was and that it has to be updated (W-146).'
-  oldToolRules:
-  - rule: E-03A
-    verdict: emit
-    as: Step
-  - rule: B-01
-    verdict: fold
-    target: owning behavior
+  mdseType: Behavior
+  subtype: action
+  decision: W-384
+  note: 'Action is no longer a modelCheck holding type; it is Behavior/action.'
 - eaObjectType: Issue
   elements: 264
   stereotypes:
@@ -583,13 +473,10 @@ elementTypes:
   stereotypes:
     (none): 2
   disposition: note
-  mdseType: State Machine
-  decision: W-144
-  subtype: null
-  note: 'Both StateMachine elements become State Machine notes (W-144).'
-  oldToolRules:
-  - rule: E-06
-    verdict: emit
+  mdseType: Condition
+  subtype: state machine
+  decision: W-384
+  note: 'StateMachine is Condition/state machine.'
 - eaObjectType: Constraint
   elements: 1
   stereotypes:

@@ -6,28 +6,32 @@
 manifestVersion: 2
 mdseRelease: "0.8.0"
 releaseStatus: pre-release
-date: "2026-10-03"
+date: "2026-10-05"
 sourceModelId: EA8647
 
 schemas:
-  relationships: "1.35"
-  elementTypes: "1.17"
-  localModel: "0.2"
+  relationships: "1.36"
+  elementTypes: "1.18"
+  localModel: "0.5"
 
 ruleset: "99_System/10_Docs/MDSE Modeling Ruleset 1.23.md"
 
 limits:
-  maxGeneratedPathLength: 400            # W-324: hard stop only; nothing is shortened for length
-  fsComponentMaxBytes: 255               # W-324: the only forced cut (filesystem limit per name)
-  longPathReviewThreshold: 212           # W-324: review report only (Post-Import Task 9)
-  maxModelFilesPerFolder: 75
+  fsComponentMaxBytes: 255               # W-382: physical filesystem component limit only
+  generatedPathLengthLimit: null         # W-382: no importer-defined total path-length limit
+  modelFilesPerFolderLimit: null         # W-382: no importer-defined folder file-count limit
+  importedFileNameScope: global          # W-382: case-insensitive, existing base/system note basenames reserved first
+  nestedElementFolders: true             # W-382: Parent.md beside Parent/Child.md
   duplicateMarker: "~2"
   alterationMarker: "~a"
 
 tools:
   importer:
     release: null
-    candidate: "Importer/Tools/v0.8.6/EA_to_MDSE_Native_Importer_v0.8.6.html"
+    candidate: "Importer/Tools/v0.8.19/EA_to_MDSE_Native_Importer_v0.8.19.html"
+    candidateVersion: "0.8.19"
+    sourceProfile: "Importer/Definition/Source Profiles/EA8647-2026-09-06-v1.json"
+    sourceProfileSync: "Importer/Tools/v0.8.19/sync_source_profile.py"
     attachmentBenchmark: "Importer/Testing/v0.8.6/attachment_benchmark.json"
     history: "Importer/History/Importer Revisions"   # v0.1 to v0.7 and v0.8.0 to v0.8.5 (W-326); none may generate a model
   cleanBase:
@@ -36,10 +40,10 @@ tools:
     obsoleteReference: "spencerskelly/Test_Vault_-base-vault-2026-09-30-rel133-v051"
   workbench:
     repo: "spencerskelly/MDSE_Workbench"
-    version: "0.1.16"                               # pinned in plugin-lock.yaml for pre-release bases
-    candidateVersion: "0.1.17"                      # W-342: standalone development candidate; not yet vendored/promoted
-    nextGate: "WB-106"
-    wb106Version: null                              # set to the first WB-106-capable release; required for releaseStatus: release
+    version: "0.1.18"                               # W-386: first WB-106-capable controlled Workbench release
+    candidateVersion: null
+    nextGate: "Golden-model integration / Bootstrap first-open"
+    wb106Version: "0.1.18"                          # required Workbench release for the issued 0.8.0 base
     runtimePluginId: "mdse-workbench"
     requiredForRelease: true
     fixturesFrom: "99_System/03_Schemas"
@@ -137,6 +141,12 @@ documents:
   - {path: "Base Vault/Definition/Enabled Plugin Stack.md", status: current}
   - {path: "Base Vault/Definition/MDSE Workbench User Guide.md", status: current}
   - {path: "00_Workspace/Review Changes Log.md", status: reference}
+  - {path: "Importer/Definition/Importer Operating Contract.md", status: current}
+  - {path: "Importer/Definition/Importer Issue Register.md", status: current}
+  - {path: "00_Workspace/MDSE Impact-Focused Remaining Work - 2026-10-05.md", status: reference}
+  - {path: "00_Workspace/Runtime Plugin Dependency Audit.md", status: reference}
+  - {path: "00_Workspace/Startup Stability Plan.md", status: reference}
+  - {path: "00_Workspace/Workbench Performance and Stability Roadmap.md", status: reference}
   - {path: "00_Workspace/History/Retired Documents/Handoff - Continue Here.md", status: retired, supersededBy: "00_Workspace/00 - Current State.md"}
   - {path: "00_Workspace/History/Retired Documents/MDSE v0.8 Design Check - 2026-10-01.md", status: retired, supersededBy: "00_Workspace/MDSE v0.8 Cross-Repository Reconciliation - 2026-10-02.md"}
   - {path: "00_Workspace/History/Retired Documents/EA Native Importer Comprehensive Handoff - 2026-10-01.md", status: retired, supersededBy: "00_Workspace/MDSE v0.8 Cross-Repository Reconciliation - 2026-10-02.md"}

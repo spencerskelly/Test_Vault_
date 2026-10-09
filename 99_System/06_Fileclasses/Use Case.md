@@ -44,13 +44,6 @@ fields:
     options:
       baseFile: "99_System/06_Fileclasses/MDSE Link Targets.base"
       viewName: "Use Case"
-  - name: hasPort
-    id: FnMPgp
-    type: MultiFile
-    path: ""
-    options:
-      baseFile: "99_System/06_Fileclasses/MDSE Link Targets.base"
-      viewName: "Port"
   - name: hasChild
     id: KeUnoR
     type: MultiFile
@@ -113,7 +106,7 @@ fields:
     path: ""
     options:
       baseFile: "99_System/06_Fileclasses/MDSE Link Targets.base"
-      viewName: "Design | Function"
+      viewName: "Behavior | Condition"
   - name: optionOf
     id: oJJLgG
     type: MultiFile
@@ -141,7 +134,7 @@ fields:
     path: ""
     options:
       baseFile: "99_System/06_Fileclasses/MDSE Link Targets.base"
-      viewName: "Actor | Document | Function | Object | Port"
+      viewName: "Actor | Behavior | Document | Object"
 ---
 # Use Case
 

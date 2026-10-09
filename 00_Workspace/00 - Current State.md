@@ -1,27 +1,27 @@
 # Current State
 
-**Last verified: 2026-10-05. Read this first, human or AI.** It says what is current, what is historical, where each rule lives and what is not built yet. If any other file disagrees with this page, this page and the files it names as current win. The machine-readable release authority is `Base Vault/Definition/mdse-release.yaml`.
+**Last verified: 2026-10-06. Read this first, human or AI.** It says what is current, what is historical, where each rule lives and what is not built yet. If any other file disagrees with this page, this page and the files it names as current win. The machine-readable release authority is `Base Vault/Definition/mdse-release.yaml`.
 
 ## Target and status
 
 | Item | Value |
 |---|---|
 | MDSE release target | **0.8.0** (pre-release: controlled base packaging and importer candidate built; acceptance gates remain) |
-| Relationships schema | 1.35 (`99_System/03_Schemas/relationships.yaml`) |
-| Element-types schema | 1.17 (`99_System/03_Schemas/element-types.yaml`) |
-| Local Model | 0.2 writer; readers accept 0.1 and 0.2 (`99_System/03_Schemas/local-model.yaml`) |
+| Relationships schema | 1.36 (`99_System/03_Schemas/relationships.yaml`) |
+| Element-types schema | 1.18 (`99_System/03_Schemas/element-types.yaml`) |
+| Local Model | **0.4 writer**; 0.3 remains frozen/readable; Workbench WB-128 compatibility is required (`99_System/03_Schemas/local-model.yaml`) |
 | Source model lineage | EA8647 |
-| Generated path rule | hard stop 400 characters, nothing shortened for length (W-324); duplicate marker `~2`; alteration marker `~a` |
+| Generated path/name rule | **no importer-defined total path or folder file-count limit**; physical component limit only; nested parent-element folders; imported filenames globally unique case-insensitively (W-382) |
 
 ## Read in this order
 
 1. This page.
 2. [[MDSE Plan - Path to a Golden Model]]: the authoritative plan from here to a golden model (gates, run procedure, post-import order, improvements per component, decisions needed).
 3. [[MDSE Impact-Focused Remaining Work - 2026-10-05]]: execution filter that breaks the remaining high-impact work into small steps and explicitly defers low-value expansion. It is planning/reference guidance and does not replace W/WB authority.
-4. [[MDSE v0.8 Cross-Repository Reconciliation - 2026-10-02]]: the implementation contract (identity, reruns, naming, Local Model 0.2, evidence set, gates, build order).
+4. [[MDSE v0.8 Cross-Repository Reconciliation - 2026-10-02]]: the implementation baseline for identity, reruns, naming, evidence, gates and build order. Its Local Model 0.2 endpoint requirement is superseded for current writing by W-377/W-378 and `local-model.yaml` 0.4.
 5. [[MDSE Modeling Ruleset 1.23]]: what the model means and how imports are governed.
-6. [[Translator Definition]]: what the stage 1 importer must do.
-7. [[Workspace Decision Log]]: every decision (W-01 to W-370); newest last. Where a log entry marks an earlier one superseded, the later one governs.
+6. [[Translator Definition]] and [[Importer Operating Contract]]: what the stage 1 importer must do and how a run progresses; [[Importer Issue Register]] is the active systemic correction backlog.
+7. [[Workspace Decision Log]]: every decision through W-395; newest last. Where a log entry marks an earlier one superseded, the later one governs.
 8. [[MDSE Tool Definitions and Boundaries]]: authoritative ownership/boundary map for Workbench, Bootstrap, importer, base/release tooling and deferred cross-vault infrastructure.
 9. [[Handoff Prompt - MDSE v0.8 Implementation]]: copy-ready prompts for a new AI chat (general, and Workbench).
 10. [[Post-Import Tasks]]: the work done in the vault after an import, Tasks 1 to 9.
@@ -31,12 +31,14 @@
 
 | Question | Authority |
 |---|---|
-| What a relationship may connect | `relationships.yaml` 1.35 |
-| Note properties and their order | `element-types.yaml` 1.17, `Definitions/Properties` |
-| Local part, endpoint, connection and flow records in a note body | `local-model.yaml` 0.2, Ruleset 1.23 section 15.7 |
+| What a relationship may connect | `relationships.yaml` 1.36 |
+| Note properties and their order | `element-types.yaml` 1.18, `Definitions/Properties` |
+| Local part, endpoint, connection and flow records in a note body | `local-model.yaml` 0.4, Ruleset 1.23 section 15.7 |
 | How EA elements, connectors, tags and fields map | `ea-element-mapping.yaml`, `ea-connector-mapping.yaml`, `ea-tag-dispositions.yaml`, `ea-field-dispositions.yaml`, `ea-package-rules.yaml` |
 | Identity (`uid`, local tokens), reruns, source ownership | Reconciliation, "Settled identity rules" and "Source ownership and reruns"; Ruleset 1.23 section 16 |
 | File and folder naming, path limit | Reconciliation, "Naming and path rules"; Ruleset 1.23 sections 15 and 16 |
+| Importer pipeline, trust boundaries and run states | [[Importer Operating Contract]]; detailed semantic behavior remains in [[Translator Definition]] and the schemas |
+| Active importer systemic corrections | [[Importer Issue Register]] |
 | Run completion and evidence | Translator Definition, checks 1 to 9; Reconciliation, "Evidence package" |
 | Tool ownership and boundaries | [[MDSE Tool Definitions and Boundaries]] |
 | Workbench product direction | `spencerskelly/MDSE_Workbench/docs/Definition/` (`WB-` decisions and implementation contract) |
@@ -49,18 +51,18 @@
 
 | Tool | Status | Next step |
 |---|---|---|
-| Importer v0.8.6 | **implementation candidate built; whole-model semantic write succeeded (v0.8.3 run)** | **Current active work window:** apply the known systemic corrections identified from the last imported model before spending another full integration run. Record rule changes in the governing importer authority, test each change at the smallest useful level, then return to decode-only/full fresh-base acceptance when the known list is exhausted enough to make the next run informative. Do not mark release-conformant until acceptance gates and WB-106 pass. |
-| Importers v0.1 to v0.7, v0.8.0 to v0.8.5 | archived (W-326) | `Importer/History/Importer Revisions/` with retained revision history. None may generate a model. |
+| Importer v0.8.19 | **accepted hardening candidate; not yet release-conformant.** W-387 through W-397 close IMP-001 through IMP-010. **IMP-011A evidence is accepted** on bridge `37507855737`: 249/249 BindingConnectors reconcile as 23 `Connection.exposes`, 191 temporary same-context `equals`, 17 same-owner nested bindings, 1 same-owner sibling binding, and 17 cross-owner review-only cases; determinism and Workbench Gates 2–4 pass on the same output. **W-398 semantic decision:** BindingConnector is binding/equality, not delegation. Preserve the 23 stronger `Connection.exposes`; canonicalize all 209 same-owner non-exposure bindings as symmetric `equals`; retain the 17 cross-owner cases as review evidence. Because 0.4 defines `equals` as temporary, this semantic promotion is versioned as Local Model **0.5** rather than silently changing 0.4. | Next: implement the Local Model 0.5 importer/schema slice for canonical `equals` with regression coverage. Do not change the 23 exposure cases, do not write transitive closure, and do not create cross-owner local links or synthetic Connections. Workbench must then gain 0.5 read/write/display support before IMP-011 can close. |
+| Importers v0.1 to v0.7, v0.8.0 to v0.8.6 | archived/reference once v0.8.7 is accepted as the active candidate (W-326 lineage) | `Importer/History/Importer Revisions/` with retained revision history. None may generate a model. |
 | Clean 0.8.0 base vault | **candidate build path validated; not issued** | A 0.3.1-candidate base built successfully and `check-release.py --base` completed with **0 fail / 4 expected pre-release warnings** on 2026-10-03. Initializer defects were fixed in source and syntax-gated (W-336). Do not create the next integration vault until Workbench/Importer alignment is ready (W-337). |
-| MDSE Workbench | **0.1.16 remains the pre-release Base pin.** The Step-60 standalone stability baseline remains frozen at `476fbcad08ecd03f8c2c49cd3126393beb6ab412`, but active 0.1.17 development has moved beyond that baseline through **WB-126**; the latest built artifact on 2026-10-05 is commit `e88d1b40a29d79b988cfb1b40e73717e8c6492a8`. The numbered Workbench stability roadmap remains closed. WB-125/WB-126 added fresh-source identity protection to relationship mutation paths; **WB-127 closes the remaining ordinary property/body writer symmetry and is the current Workbench pause boundary.** Workbench structured-editor expansion is intentionally paused while known importer corrections from the last imported model are worked. | Finish the bounded identity-safety boundary, then complete the minimum structured editor and rerun only the acceptance scope affected by post-freeze changes. Do not expand standalone hardening indefinitely; the next major value gate is one real importer/Base/Bootstrap/Workbench integration run. |
+| MDSE Workbench | **0.1.18 is the first WB-106-capable controlled pre-release Base pin (W-386).** WB-128 Local Model 0.4 compatibility passed the bounded real-vault scan, representative views and disposable structural edit/undo-redo gates. PR #5 is merged; the exact controlled artifact is `b0c4e2c6bdfb96d36f51d8152b17be22592ef174`. Exact-artifact Obsidian startup acceptance also passed on 12,000 notes (1.414 s readable; 30.010 s core/occurrence ready). | Use 0.1.18 for v0.8.19 integration. Do not reopen standalone Workbench hardening unless new acceptance evidence shows a regression. |
 | MDSE Bootstrap 0.3.0 | pinned Base runtime; **0.3.1 staged-start candidate is built, reproducibility-tested and installed only in `261002083`.** W-347 defers normal full release hashing until Obsidian metadata settles while preserving exact pre-enable verification for disabled locked plugins and immediate author registration. CI now publishes/commits a checksummed candidate artifact; integration lock uses the exact 0.3.1 artifact hashes. | Validate first-open/startup behavior in the same `261002083` smoke gate. Do not promote 0.3.1 to the controlled Base until that user-side startup gate passes. |
 | Runtime plugins (10) | vendored, pinned, hashed, configured (W-322) | `Base Vault/Runtime/Plugins/`; lock `.obsidian/plugin-lock.yaml`; see `Base Vault/Definition/Enabled Plugin Stack.md` |
 
-Workbench 0.1.16 is still pinned and enabled in pre-release bases. The Step-60 0.1.17 stability baseline remains the accepted standalone reference, while post-freeze 0.1.17 development has continued through WB-126. W-339 intentionally expands WB-106 to include structured editing, so `wb106Version` remains unset until that editor gate is complete and the changed candidate passes its affected acceptance scope. The **final issued** base must pin the WB-106-capable release (`wb106Version` in `mdse-release.yaml`); `check-release.py` fails a release build until then.
+Under W-386, the pre-release integration base pins Workbench 0.1.18 as the first WB-106-capable controlled release and `wb106Version` is set to 0.1.18. Local Model 0.1–0.3 remain readable/read-only for structured mutation; Local Model 0.4 is the governed write target. The **overall MDSE release remains pre-release** because importer release conformity, clean-base issuance and Bootstrap first-open/OS acceptance are still outstanding.
 
 ## Runtime-base alignment
 
-W-321 removes the old manually curated base-content list. `mdse-release.yaml` now contains the one positive include list used by `build-base.py`. The generated engineering vault intentionally omits this Current State registry, the release manifest, Translator Definition, Decision Log, EA evidence, archives and Workbench design notes. Runtime consumers instead share the actual schemas: relationships 1.35, element-types 1.17 and Local Model 0.2. Initialization preserves the base's `mdse_release`.
+W-321 removes the old manually curated base-content list. `mdse-release.yaml` now contains the one positive include list used by `build-base.py`. The generated engineering vault intentionally omits this Current State registry, the release manifest, Translator Definition, Decision Log, EA evidence, archives and Workbench design notes. Runtime consumers instead share the actual schemas: relationships 1.36, element-types 1.18 and Local Model 0.4. Historical Local Model 0.1–0.3 content retains its frozen semantics and is read-only for structured Workbench mutation; the next integration base is paired with the controlled Workbench 0.1.18 Local Model 0.4 runtime. Initialization preserves the base's `mdse_release`.
 
 **Controlled plugin release (W-322).** The base opens fully functional once Restricted mode is turned off: all 10 runtime plugins ship inside it, pinned and hashed in `.obsidian/plugin-lock.yaml` (schema 2), with governed settings for Templater, Fileclass, Breadcrumbs and Obsidian Git generated from the schemas. Obsidian 1.13.0 or later is required. MDSE Bootstrap checks every start against the lock and registers each person's author code. To change a plugin version, follow `Bootstrap/Definition/README.md`.
 
