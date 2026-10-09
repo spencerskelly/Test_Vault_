@@ -55,7 +55,8 @@ jobs:
           test -f Importer/Tools/v0.8.19/EA_to_MDSE_Native_Importer_v0.8.19.html
           test -f Base\ Vault/Definition/mdse-release.yaml
           echo "Proposed merge change paths:"
-          git diff --cached --name-status | head -n 45
+          git diff --cached --name-status > "$RUNNER_TEMP/merge-files.txt"
+          head -n 45 "$RUNNER_TEMP/merge-files.txt"
           {
             echo "## Pinned importer + Workbench merge rehearsal"
             echo "- Importer: $EXPECTED_IMPORTER_SHA"
