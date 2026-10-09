@@ -145,6 +145,12 @@ jobs:
           } >> "$GITHUB_STEP_SUMMARY"
           exit 0
 
+      - name: Block incompatible Workbench Local Model source/schema pair
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 66_Testing/check_importer_workbench_localmodel.py
+
       - name: Workbench source tests on the merged model authority
         shell: bash
         working-directory: 55_Workbench
