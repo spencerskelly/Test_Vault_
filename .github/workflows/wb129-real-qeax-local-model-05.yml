@@ -1,0 +1,132 @@
+name: WB-129 pinned real-QEAX Local Model 0.5 candidate acceptance
+
+on:
+  push:
+    branches:
+      - importer/baseline-contract-2026-10-05
+    paths:
+      - ".github/workflows/wb129-real-qeax-local-model-05.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  candidate-paired-05:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 45
+    steps:
+      - name: Checkout exact importer candidate
+        uses: actions/checkout@v4
+        with:
+          repository: spencerskelly/Test_Vault_
+          ref: b43c4d314ac4a924a569c4cfa87c28ea1fca1887
+          persist-credentials: false
+      - name: Checkout exact Workbench 0.5 recovery candidate
+        uses: actions/checkout@v4
+        with:
+          repository: spencerskelly/MDSE_Workbench
+          ref: 6b1bbba0228e00daacbd0130993c9baf62ec26c6
+          path: _wb05
+          persist-credentials: false
+      - name: Confirm immutable inputs
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "$(git rev-parse HEAD)" = "b43c4d314ac4a924a569c4cfa87c28ea1fca1887"
+          test "$(git -C _wb05 rev-parse HEAD)" = "6b1bbba0228e00daacbd0130993c9baf62ec26c6"
+          test -f EA_2026_09_06_endgame.qeax.zip
+          test -f _wb05/scripts/real-vault-05-acceptance.ts
+          grep -q 'localModel: "0.5"' "Base Vault/Definition/mdse-release.yaml"
+          grep -q 'schemaVersion: "0.5"' "99_System/03_Schemas/local-model.yaml"
+          grep -q 'accept:real-vault:05' "_wb05/package.json"
+      - name: Verify source profile and importer release gate
+        run: |
+          set -euo pipefail
+          python3 Importer/Tools/v0.8.19/sync_source_profile.py --check
+          node Importer/Testing/v0.8.19/release_gate_regression_test.js
+      - name: Extract and checksum the accepted QEAX source
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p "$RUNNER_TEMP/qeax"
+          unzip -j EA_2026_09_06_endgame.qeax.zip -d "$RUNNER_TEMP/qeax" >/dev/null
+          QEAX="$(find "$RUNNER_TEMP/qeax" -maxdepth 1 -name '*.qeax' -type f -size +1M -print -quit)"
+          test -n "$QEAX"
+          SOURCE_HASH="$(sha256sum "$QEAX" | cut -d' ' -f1)"
+          test "$SOURCE_HASH" = "16c055ec1a5af57b0f4f9059d6292c5ddd3ed052124c7ef54d9af288971ae02c"
+          echo "Source archive matched the governed QEAX SHA-256."
+          sqlite3 "$QEAX" "SELECT count(*) FROM t_object;" | grep -qx "35969"
+          sqlite3 "$QEAX" "SELECT count(*) FROM t_connector;" | grep -qx "21822"
+      - name: Generate fresh disposable vaults from exact importer
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 -m pip install pyyaml
+          BASE="$RUNNER_TEMP/mdse05"
+          BASE2="$RUNNER_TEMP/mdse05-repeat"
+          BASE_FAIL="$RUNNER_TEMP/mdse05-injected-failure"
+          for TARGET in "$BASE" "$BASE2" "$BASE_FAIL"; do
+            python3 "Base Vault/Tools/v0.8.0-r2/build-base.py" "$TARGET"
+            cat > "$TARGET/.vault.yaml" <<'EOF'
+          vault_uid: 20261006000000000skellyspencer
+          name: MDSE_05_CANDIDATE
+          default_branch: main
+          mdse_release: "0.8.0"
+          EOF
+          done
+      - name: Execute full real-QEAX import and deterministic repeat
+        shell: bash
+        run: |
+          set -euo pipefail
+          QEAX="$(find "$RUNNER_TEMP/qeax" -maxdepth 1 -name '*.qeax' -type f -size +1M -print -quit)"
+          node Importer/Testing/v0.8.19/headless_full_import.js \
+            Importer/Tools/v0.8.19/EA_to_MDSE_Native_Importer_v0.8.19.html \
+            "$QEAX" "$RUNNER_TEMP/mdse05" "$RUNNER_TEMP/mdse05-repeat" \
+            "$RUNNER_TEMP/mdse05-injected-failure" > "$RUNNER_TEMP/importer-run.log"
+          python3 Importer/Testing/v0.8.19/compare_full_import_outputs.py \
+            "$RUNNER_TEMP/mdse05" "$RUNNER_TEMP/mdse05-repeat"
+      - name: Verify importer schema 0.5 and BindingConnector evidence
+        shell: bash
+        run: |
+          set -euo pipefail
+          QEAX="$(find "$RUNNER_TEMP/qeax" -maxdepth 1 -name '*.qeax' -type f -size +1M -print -quit)"
+          BASE="$RUNNER_TEMP/mdse05"
+          python3 Importer/Testing/v0.8.19/imp009_output_acceptance.py "$BASE"
+          python3 Importer/Testing/v0.8.19/imp010_hierarchy_acceptance.py "$QEAX" "$BASE"
+          python3 Importer/Testing/v0.8.19/imp010_interface_flow_acceptance.py "$QEAX" "$BASE"
+          python3 Importer/Testing/v0.8.19/imp011_canonical_equals_acceptance.py "$QEAX" "$BASE"
+      - name: Install, test and build exact Workbench recovery candidate
+        shell: bash
+        run: |
+          set -euo pipefail
+          npm --prefix _wb05 ci
+          npm --prefix _wb05 test
+          npm --prefix _wb05 run build
+      - name: Run separate Workbench 0.5 real-vault candidate acceptance
+        shell: bash
+        run: |
+          set -euo pipefail
+          npm --prefix _wb05 run accept:real-vault:05 -- \
+            "$RUNNER_TEMP/mdse05" "$RUNNER_TEMP/wb129-05-acceptance.json"
+          test -s "$RUNNER_TEMP/wb129-05-acceptance.json"
+          python3 - "$RUNNER_TEMP/wb129-05-acceptance.json" <<'PY'
+          import json,sys
+          with open(sys.argv[1],encoding='utf-8') as f: data=json.load(f)
+          assert data['status']=='PASS', data['failures'][:10]
+          assert data['acceptance']=='candidate-only'
+          assert data['localModelVersion']=='0.5'
+          assert data['sourceVaultUnmodified'] is True
+          PY
+      - name: Publish non-sensitive acceptance summary only
+        if: always()
+        shell: bash
+        run: |
+          echo "Candidate integration gate (not release promotion)."
+          echo "Importer pinned: b43c4d314ac4a924a569c4cfa87c28ea1fca1887"
+          echo "Workbench pinned: 6b1bbba0228e00daacbd0130993c9baf62ec26c6"
+          if test -f "$RUNNER_TEMP/wb129-05-acceptance.json"; then
+            cat "$RUNNER_TEMP/wb129-05-acceptance.json"
+          else
+            echo "Workbench 0.5 gate not reached; review preceding job step."
+          fi
