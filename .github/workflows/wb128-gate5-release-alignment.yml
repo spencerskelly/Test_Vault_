@@ -1,0 +1,49 @@
+name: WB-128 Gate 5 release alignment
+
+on:
+  push:
+    branches:
+      - importer/baseline-contract-2026-10-05
+    paths:
+      - ".github/workflows/wb128-gate5-release-alignment.yml"
+      - "Base Vault/Definition/mdse-release.yaml"
+      - "Base Vault/Runtime/Plugins/mdse-workbench/**"
+      - "Base Vault/Definition/MDSE Workbench User Guide.md"
+      - ".obsidian/plugin-lock.yaml"
+      - ".obsidian/community-plugins.json"
+      - "Base Vault/Testing/check-release.py"
+      - "99_System/03_Schemas/**"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  workbench-release-alignment:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Checkout accepted Workbench 0.1.18 authority
+        uses: actions/checkout@v4
+        with:
+          repository: spencerskelly/MDSE_Workbench
+          ref: 59fc6219b1d0586900aa7d38685e7087a9d47fec
+          path: _workbench
+          sparse-checkout: |
+            package.json
+            manifest.json
+            test/fixtures
+            docs/User Guide
+          sparse-checkout-cone-mode: false
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install release-check dependency
+        run: python -m pip install pyyaml
+
+      - name: Gate 5 - release authority plus Workbench alignment
+        run: python "Base Vault/Testing/check-release.py" --workbench _workbench

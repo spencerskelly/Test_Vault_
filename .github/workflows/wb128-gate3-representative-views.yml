@@ -1,0 +1,73 @@
+name: WB-128 Gate 3 representative views
+
+on:
+  push:
+    branches:
+      - importer/baseline-contract-2026-10-05
+    paths:
+      - ".github/workflows/wb128-gate3-representative-views.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  actions: read
+
+concurrency:
+  group: wb128-gate3-representative-views
+  cancel-in-progress: true
+
+jobs:
+  representative-views:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Download deterministic v0.8.19 vault artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: wb128-v0819-real-vault
+          path: ${{ runner.temp }}/gate3
+          github-token: ${{ github.token }}
+          repository: spencerskelly/Test_Vault_
+          run-id: 37404532307
+
+      - name: Verify candidate artifact only
+        run: |
+          BASE="$RUNNER_TEMP/gate3/MDSE_v0819_full_import"
+          test -f "$BASE/99_System/11_Import/Run Manifest.md"
+          test -f "$BASE/99_System/11_Import/Import State.json"
+          COUNT="$(find "$BASE" -type f -name '*.md' | wc -l | tr -d ' ')"
+          test "$COUNT" = "27813"
+          echo "Candidate Markdown files: $COUNT"
+
+      - name: Checkout pinned WB-128 candidate
+        uses: actions/checkout@v4
+        with:
+          repository: spencerskelly/MDSE_Workbench
+          ref: b23a4bc94709e0473675e6e6d526f94f1f0cd146
+          path: _wb128
+
+      - name: Install Workbench dependencies
+        run: npm ci --prefix _wb128
+
+      - name: Gate 3 - representative real-vault views
+        env:
+          NODE_OPTIONS: --max-old-space-size=1024
+        run: |
+          set -o pipefail
+          BASE="$RUNNER_TEMP/gate3/MDSE_v0819_full_import"
+          timeout 10m npm --prefix _wb128 run accept:real-vault:views -- \
+            "$BASE" "$RUNNER_TEMP/wb128-gate3-views.json" \
+            | tee "$RUNNER_TEMP/wb128-gate3-views.log"
+
+      - name: Upload Gate 3 evidence only
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: wb128-gate3-representative-views
+          path: |
+            ${{ runner.temp }}/wb128-gate3-views.json
+            ${{ runner.temp }}/wb128-gate3-views.log
+          retention-days: 7
+          if-no-files-found: warn

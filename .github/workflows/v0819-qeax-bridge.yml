@@ -1,0 +1,181 @@
+name: v0.8.19 QEAX bridge
+
+on:
+  push:
+    branches:
+      - importer/baseline-contract-2026-10-05
+    paths:
+      - ".github/workflows/v0819-qeax-bridge.yml"
+      - "EA_2026_09_06_endgame.qeax.zip"
+      - "Importer/Testing/v0.8.19/**"
+      - "Importer/Tools/v0.8.19/**"
+      - "Importer/Definition/Source Profiles/**"
+      - "99_System/03_Schemas/local-model.yaml"
+      - "Base Vault/Definition/mdse-release.yaml"
+  workflow_dispatch:
+
+concurrency:
+  group: v0819-qeax-bridge-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  bridge:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Verify governed source profile sync
+        run: python3 Importer/Tools/v0.8.19/sync_source_profile.py --check
+
+      - name: Run v0.8.19 release gate
+        run: node Importer/Testing/v0.8.19/release_gate_regression_test.js
+
+      - name: Compile generated headless VM source
+        env:
+          MDSE_HEADLESS_COMPILE_ONLY: "1"
+        run: node Importer/Testing/v0.8.19/headless_full_import.js Importer/Tools/v0.8.19/EA_to_MDSE_Native_Importer_v0.8.19.html /dev/null "$RUNNER_TEMP/unused"
+
+      - name: Verify source archive
+        run: |
+          test -f EA_2026_09_06_endgame.qeax.zip
+          unzip -l EA_2026_09_06_endgame.qeax.zip
+
+      - name: Extract QEAX
+        run: |
+          mkdir -p _qeax_bridge
+          unzip -j EA_2026_09_06_endgame.qeax.zip -d _qeax_bridge
+          find _qeax_bridge -maxdepth 1 -type f -print -exec ls -lh {} \;
+
+      - name: Source database counts
+        run: |
+          QEAX="$(find _qeax_bridge -maxdepth 1 -type f -name '*.qeax' ! -name '._*' -size +1M | head -1)"
+          test -n "$QEAX"
+          file "$QEAX"
+          sqlite3 "$QEAX" "SELECT 't_object', count(*) FROM t_object UNION ALL SELECT 't_connector', count(*) FROM t_connector UNION ALL SELECT 't_package', count(*) FROM t_package UNION ALL SELECT 't_diagramobjects', count(*) FROM t_diagramobjects;"
+
+      - name: Build disposable MDSE base
+        run: |
+          python3 -m pip install pyyaml
+          BASE="$RUNNER_TEMP/MDSE_v0819_full_import"
+          BASE2="$RUNNER_TEMP/MDSE_v0819_full_import_2"
+          BASE_FAIL="$RUNNER_TEMP/MDSE_v0819_failed_import"
+          python3 "Base Vault/Tools/v0.8.0-r2/build-base.py" "$BASE"
+          python3 "Base Vault/Tools/v0.8.0-r2/build-base.py" "$BASE2"
+          python3 "Base Vault/Tools/v0.8.0-r2/build-base.py" "$BASE_FAIL"
+          python3 "Base Vault/Testing/check-release.py" --base "$BASE" || echo "Pre-release repository checker has known non-runtime blockers; continuing to importer runtime-base validation."
+          for B in "$BASE" "$BASE2" "$BASE_FAIL"; do
+            cat > "$B/.vault.yaml" <<'EOF'
+          vault_uid: 20261006000000000skellyspencer
+          name: MDSE_v0819_full_import
+          default_branch: main
+          mdse_release: "0.8.0"
+          EOF
+          done
+
+      - name: Run actual v0.8.19 full importer
+        run: |
+          set -o pipefail
+          QEAX="$(find _qeax_bridge -maxdepth 1 -type f -name '*.qeax' ! -name '._*' -size +1M | head -1)"
+          BASE="$RUNNER_TEMP/MDSE_v0819_full_import"
+          BASE2="$RUNNER_TEMP/MDSE_v0819_full_import_2"
+          BASE_FAIL="$RUNNER_TEMP/MDSE_v0819_failed_import"
+          node Importer/Testing/v0.8.19/headless_full_import.js \
+            Importer/Tools/v0.8.19/EA_to_MDSE_Native_Importer_v0.8.19.html \
+            "$QEAX" "$BASE" "$BASE2" "$BASE_FAIL" | tee "$RUNNER_TEMP/v0819-headless.log"
+          test -f "$BASE/99_System/11_Import/Run Manifest.md"
+          test -f "$BASE2/99_System/11_Import/Run Manifest.md"
+          python3 - <<'PY'
+          import json, os
+          expected = {
+              "MDSE_v0819_full_import": ("IMPORT_COMPLETE","WRITE_PASS"),
+              "MDSE_v0819_full_import_2": ("IMPORT_COMPLETE","WRITE_PASS"),
+              "MDSE_v0819_failed_import": ("IMPORT_FAILED","WRITE_FAIL"),
+          }
+          for key,(status,write) in expected.items():
+              p=os.path.join(os.environ["RUNNER_TEMP"],key,"99_System","11_Import","Import State.json")
+              with open(p,encoding="utf-8") as f: state=json.load(f)
+              assert state["status"]==status, (p,state.get("status"))
+              assert state["runStatus"]["write"]==write, (p,state["runStatus"])
+              assert state["runStatus"]["semantic"]=="SEMANTIC_REVIEW_REQUIRED", (p,state["runStatus"])
+              assert state["runStatus"]["acceptance"]=="ACCEPTANCE_PENDING", (p,state["runStatus"])
+          PY
+
+      - name: Compare deterministic outputs
+        run: |
+          python3 Importer/Testing/v0.8.19/compare_full_import_outputs.py \
+            "$RUNNER_TEMP/MDSE_v0819_full_import" \
+            "$RUNNER_TEMP/MDSE_v0819_full_import_2"
+
+      - name: Gate 1 - current IMP-009 output acceptance
+        run: |
+          set -o pipefail
+          BASE="$RUNNER_TEMP/MDSE_v0819_full_import"
+          python3 Importer/Testing/v0.8.19/imp009_output_acceptance.py "$BASE" | tee "$RUNNER_TEMP/imp009-headless-acceptance.txt"
+          test -s "$RUNNER_TEMP/imp009-headless-acceptance.txt"
+
+      - name: Gate 1b - IMP-010A/B hierarchy acceptance
+        run: |
+          set -o pipefail
+          QEAX="$(find _qeax_bridge -maxdepth 1 -type f -name '*.qeax' ! -name '._*' -size +1M | head -1)"
+          BASE="$RUNNER_TEMP/MDSE_v0819_full_import"
+          python3 Importer/Testing/v0.8.19/imp010_hierarchy_acceptance.py "$QEAX" "$BASE" | tee "$RUNNER_TEMP/imp010-hierarchy-acceptance.txt"
+          test -s "$RUNNER_TEMP/imp010-hierarchy-acceptance.txt"
+
+      - name: Gate 1c - IMP-010C Interface FlowProperty acceptance
+        run: |
+          set -o pipefail
+          QEAX="$(find _qeax_bridge -maxdepth 1 -type f -name '*.qeax' ! -name '._*' -size +1M | head -1)"
+          BASE="$RUNNER_TEMP/MDSE_v0819_full_import"
+          python3 Importer/Testing/v0.8.19/imp010_interface_flow_acceptance.py "$QEAX" "$BASE" | tee "$RUNNER_TEMP/imp010-interface-flow-acceptance.txt"
+          test -s "$RUNNER_TEMP/imp010-interface-flow-acceptance.txt"
+
+      - name: Gate 1e - IMP-011B Local Model 0.5 BindingConnector acceptance
+        run: |
+          set -o pipefail
+          QEAX="$(find _qeax_bridge -maxdepth 1 -type f -name '*.qeax' ! -name '._*' -size +1M | head -1)"
+          BASE="$RUNNER_TEMP/MDSE_v0819_full_import"
+          python3 Importer/Testing/v0.8.19/imp011_canonical_equals_acceptance.py "$QEAX" "$BASE" | tee "$RUNNER_TEMP/imp011-canonical-equals-acceptance.txt"
+          test -s "$RUNNER_TEMP/imp011-canonical-equals-acceptance.txt"
+
+      - name: Declare Local Model 0.5 Workbench integration boundary
+        run: |
+          grep -q 'schemaVersion: "0.5"' 99_System/03_Schemas/local-model.yaml
+          grep -q 'localModel: "0.5"' "Base Vault/Definition/mdse-release.yaml"
+          echo "Importer/schema acceptance ends at Gate 1e for Local Model 0.5."
+          echo "Workbench 0.1.18 remains intentionally unaccepted for 0.5; WB-128 Gate 5 must stay blocking until the W-398 Workbench candidate is implemented."
+
+      - name: Inspect full-import output
+        if: always()
+        run: |
+          BASE="$RUNNER_TEMP/MDSE_v0819_full_import"
+          echo "Generated markdown files:"
+          find "$BASE" -type f -name '*.md' | wc -l
+          echo "Import state:"
+          cat "$BASE/99_System/11_Import/Import State.json" 2>/dev/null || true
+          echo "Run manifest:"
+          cat "$BASE/99_System/11_Import/Run Manifest.md" 2>/dev/null || true
+          echo "Headless log tail:"
+          tail -200 "$RUNNER_TEMP/v0819-headless.log" 2>/dev/null || true
+
+      - name: Upload full-import evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: v0819-full-import-evidence
+          path: |
+            ${{ runner.temp }}/v0819-headless.log
+            ${{ runner.temp }}/imp009-headless-acceptance.txt
+            ${{ runner.temp }}/imp010-hierarchy-acceptance.txt
+            ${{ runner.temp }}/imp010-interface-flow-acceptance.txt
+            ${{ runner.temp }}/imp011-canonical-equals-acceptance.txt
+            ${{ runner.temp }}/MDSE_v0819_full_import/99_System/11_Import
+          retention-days: 7
+          if-no-files-found: warn
+
+      - name: Upload QEAX bridge artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: v0819-qeax-source
+          path: _qeax_bridge/EA_2026_09_06_endgame.qeax
+          retention-days: 1
+          if-no-files-found: error
