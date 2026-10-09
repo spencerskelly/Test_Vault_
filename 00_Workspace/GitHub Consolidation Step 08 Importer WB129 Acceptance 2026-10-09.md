@@ -1,7 +1,7 @@
 # GitHub Consolidation — Step 8 Importer and Workbench 0.5 Integrated Acceptance
 
 **Recorded:** 2026-10-09
-**Status:** Compatibility/regression gate **PASS**; real-QEAX acceptance run awaiting final result at time of this initial record.
+**Status:** **PASS — paired source/regression, deterministic full-QEAX import, topology/BindingConnector and Workbench Local Model 0.5 headless real-vault candidate acceptance.** Full controlled release and manual Obsidian UI acceptance remain pending.
 **Promotion status:** Candidate only, no persistent importer merge, no changes to main.
 **Predecessor:** [[GitHub Consolidation Step 07 WB129 Local Model 05 Staging 2026-10-09]]
 
@@ -27,7 +27,17 @@ The run also passed importer v0.8.19 governed source-profile check, release-gate
 - builds three initialized disposable base vaults;
 - attempts the full deterministic import + injected-failure scenario, output hash equality, IMP-009/010/011 topology and BindingConnector acceptance and WB-129 `accept:real-vault:05` read/edit/reload acceptance with source-vault mutation prohibited.
 
-**Do not assume the real-QEAX run succeeded until its final job conclusion and steps are verified.** No model/QEAX output is uploaded into the repo. No release manifest, generated lock, BOM feature, importer source or main branch has been changed.
+**Final verified real-QEAX result: PASS.** GitHub Actions [run 37974532073](https://github.com/spencerskelly/Test_Vault_/actions/runs/37974532073) is `completed` / `success` (job `113969334862`); every job step, including `Full import and WB-129 read/edit acceptance`, completed successfully. Source QEAX checksum was validated before executing the import, including **35,969 objects** and **21,822 connectors**.
+
+**Deterministic replay:** two fresh import inventories each contained **28,273 nonvolatile files**; `onlyA=0`, `onlyB=0`, `changed=0`, `DETERMINISM PASS`.
+
+**Importer semantic / topology checks:** IMP-009 headless result **25 checks / 0 warnings**, transaction status `IMPORT_COMPLETE`, write `WRITE_PASS`, pending (not falsely approved) semantic acceptance, **1,051 definitionless Interfaces**, all **1,545 Local Model endpoint block references** resolving. IMP-010 hierarchy/interface-flow and IMP-011 BindingConnector acceptance passed: **249** source/review bindings, **209** `Interface.equals` pairs (418 directed links), **23** `Connection.exposes` relationships, and **803** Local Model regions.
+
+**Workbench Local Model 0.5 candidate:** log result `status=PASS`, `acceptance=candidate-only`, `localModelVersion=0.5`, `sourceVaultUnmodified=true`, `failures=[]`; **27,813 Markdown files**, **803** Local Model regions; counts match expected: **2,055 parts**, **4,387 endpoints**, **552 connections**, **72 flows**. **0 parsed errors**, **4 no-op samples**, **0 no-op drifts**. It did not write to the source vault.
+
+**Remaining manual/UI acceptance:** the importer reported an explicit manual Obsidian scenario on a definitionless Interface: inspect and edit only its contextual identifier in the controlled Workbench UI, restart Obsidian, confirm persistence and no reusable Interface note. The headless gate does not perform this graphical Obsidian interaction. The log also reports **3 moderate npm audit vulnerabilities**, requiring separate dependency triage; this was not a failing gate.
+
+No generated QEAX/model output was uploaded to the Git repository. No release manifest, generated plugin lock, BOM feature, persistent importer source merge or `main` branch was changed.
 
 ## Remaining release gates
 
@@ -37,4 +47,4 @@ The run also passed importer v0.8.19 governed source-profile check, release-gate
 - Migrate approved numbered folder paths with dependency-aware CI/runtime updates.
 - Verify Obsidian first-open and end-user interactions plus workstation-local uncommitted/unpushed changes.
 
-**Next:** update this record with actual real-QEAX job outcome before moving to persistent importer merge.
+**Step 8 verdict:** Headless full real-QEAX pairing PASSED. **Next bounded unit (Step 9):** preserve and non-squash stage the importer v0.8.19 history atop Workbench 0.5 on a dedicated proposal branch, while retaining all original PRs; rerun the source gate after persistence. Do not promote the release until document registration, Bootstrap lock alignment, manual Obsidian check, BOM reconciliation, local-work audit and numbered path migration are resolved.
