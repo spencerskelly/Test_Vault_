@@ -1,0 +1,35 @@
+name: Integrated real-QEAX candidate acceptance
+
+on:
+  push:
+    branches: [integration/importer-wb129-acceptance-2026-10-09]
+    paths:
+      - ".github/workflows/real-qeax-integration.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  real-qeax:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 55
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+          cache-dependency-path: 55_Workbench/package-lock.json
+      - name: Install YAML parser
+        run: python3 -m pip install pyyaml
+      - name: Prepare exact source heads and governed QEAX
+        run: bash 66_Testing/real_qeax_prepare.sh
+      - name: Full import and WB-129 read/edit acceptance
+        run: bash 66_Testing/real_qeax_execute.sh
