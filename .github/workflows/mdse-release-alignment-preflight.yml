@@ -1,0 +1,74 @@
+name: MDSE monorepo release alignment preflight
+
+# A non-mutating diagnostic gate. Unreleased candidate drift is reported and
+# saved; it does not silently update versions, schemas, or generated plugin lock.
+on:
+  push:
+    branches:
+      - integration/workbench-subtree-2026-10-09
+    paths:
+      - "66_Testing/**"
+      - "00_Workspace/**"
+      - "55_Workbench/package.json"
+      - "55_Workbench/manifest.json"
+      - "99_System/03_Schemas/**"
+      - "Base Vault/Definition/mdse-release.yaml"
+      - ".obsidian/plugin-lock.yaml"
+      - ".github/workflows/mdse-release-alignment-preflight.yml"
+  pull_request:
+    branches:
+      - main
+      - recovery/repository-consolidation-2026-10-09
+    paths:
+      - "66_Testing/**"
+      - "00_Workspace/**"
+      - "55_Workbench/package.json"
+      - "55_Workbench/manifest.json"
+      - "99_System/03_Schemas/**"
+      - "Base Vault/Definition/mdse-release.yaml"
+      - ".obsidian/plugin-lock.yaml"
+      - ".github/workflows/mdse-release-alignment-preflight.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  contract-audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+      - name: Run alignment and migration-path audit (no version promotion)
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 66_Testing/check_release_alignment.py --output "$RUNNER_TEMP/release-alignment.json"
+          python3 - "$RUNNER_TEMP/release-alignment.json" <<'PY'
+          import json,sys,os
+          doc=json.load(open(sys.argv[1],encoding="utf-8"))
+          assert doc["check"]=="mdse-monorepo-release-preflight"
+          assert doc["mode"]=="audit"
+          assert len(doc["roots"])==11
+          assert doc["versions"]["workbench"]["importedPackage"] == doc["versions"]["workbench"]["importedManifest"]
+          with open(os.environ["GITHUB_STEP_SUMMARY"],"a",encoding="utf-8") as f:
+              f.write("## MDSE pre-release alignment (diagnostic only)\n\n")
+              f.write("| Item | Observed |\n| --- | --- |\n")
+              wb=doc["versions"]["workbench"]
+              f.write(f'| Release status | {doc["versions"]["releaseStatus"]} |\n')
+              f.write(f'| Workbench release pin / imported | {wb["releasePin"]} / {wb["importedPackage"]} |\n')
+              f.write(f'| Bootstrap release pin / lock | {doc["versions"]["bootstrap"]["releasePin"]} / {doc["versions"]["bootstrap"]["pluginLock"]} |\n')
+              f.write(f'| Pending findings | {len(doc["findings"])} |\n')
+              f.write(f'| Unregistered workspace docs | {len(doc["unregisteredWorkspaceDocs"])} |\n')
+              f.write("\nThis is **not** an accepted integrated MDSE release.\n")
+          PY
+      - name: Upload version and path-dependency report
+        uses: actions/upload-artifact@v4
+        with:
+          name: mdse-release-path-audit-${{ github.sha }}
+          path: ${{ runner.temp }}/release-alignment.json
+          retention-days: 14
+          if-no-files-found: error
