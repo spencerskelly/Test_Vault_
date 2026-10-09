@@ -6,6 +6,11 @@ on:
       - importer/baseline-contract-2026-10-05
     paths:
       - ".github/workflows/wb129-real-qeax-local-model-05.yml"
+  pull_request:
+    branches:
+      - main
+    paths:
+      - ".github/workflows/wb129-real-qeax-local-model-05.yml"
   workflow_dispatch:
 
 permissions:
