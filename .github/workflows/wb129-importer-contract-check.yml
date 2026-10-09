@@ -1,0 +1,55 @@
+name: WB129 importer integration preflight
+
+on:
+  push:
+    branches: [integration/importer-wb129-acceptance-2026-10-09]
+
+permissions:
+  contents: read
+
+jobs:
+  integration:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+      - name: Verify fixed heads and merge without committing
+        shell: bash
+        run: |
+          set -euo pipefail
+          git merge-base --is-ancestor 8097f383c41617f879eac8e4ca19fab1d0cb7657 HEAD
+          git config user.name "MDSE acceptance"
+          git config user.email "mdse-rehearsal@users.noreply.github.com"
+          git fetch --no-tags origin refs/heads/importer/baseline-contract-2026-10-05
+          test "$(git rev-parse FETCH_HEAD)" = 0494354ec40378e119b17c61fdf6e828844035e4
+          git merge --no-ff --no-commit FETCH_HEAD
+          test -z "$(git diff --name-only --diff-filter=U)"
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+          cache-dependency-path: 55_Workbench/package-lock.json
+      - run: python3 -m pip install pyyaml
+      - name: Source compatibility and importer regressions
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 66_Testing/check_importer_workbench_localmodel.py
+          python3 Importer/Tools/v0.8.19/sync_source_profile.py --check
+          node Importer/Testing/v0.8.19/release_gate_regression_test.js
+          python3 Importer/Testing/v0.8.19/imp009_output_acceptance_selftest.py
+          python3 "Base Vault/Tools/v0.8.0-r2/build-base.py" "$RUNNER_TEMP/MDSE_BASE"
+          grep -q 'schemaVersion: "0.5"' "$RUNNER_TEMP/MDSE_BASE/99_System/03_Schemas/local-model.yaml"
+      - name: WB129 TypeScript and full regression suite
+        working-directory: 55_Workbench
+        run: |
+          npm ci
+          npm run typecheck
+          npm test
+          npm run build
