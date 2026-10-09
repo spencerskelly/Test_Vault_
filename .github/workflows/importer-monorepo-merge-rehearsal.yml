@@ -135,7 +135,10 @@ jobs:
           code=$?
           set -e
           echo "Release checker exit status: $code"
-          tail -n 28 "$RUNNER_TEMP/release-check.log"
+          echo "Release-check failures and warnings:"
+          grep -E '^(FAIL |WARN |[0-9]+ fail,)' "$RUNNER_TEMP/release-check.log" || true
+          echo "Release-check final summary:"
+          tail -n 4 "$RUNNER_TEMP/release-check.log"
           {
             echo "- Existing release checker status: $code (full release validation, distinct from merge test)"
             echo "- This candidate is still **pre-release** and requires full real-model/Bootstrap/Workbench acceptance."
