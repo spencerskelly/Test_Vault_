@@ -77,6 +77,21 @@ jobs:
             echo '- Original release status: **pre-release**; candidate only'
             echo '- No plugin lock, release pin, or user vault changed'
           } >> "$GITHUB_STEP_SUMMARY"
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+          cache-dependency-path: 55_Workbench/package-lock.json
+      - name: Run Workbench against canonical Local Model 0.5 fixture
+        working-directory: 55_Workbench
+        shell: bash
+        run: |
+          set -euo pipefail
+          npm ci
+          npm run typecheck
+          npm test
+          npm run build
+          git diff --exit-code -- src test package.json package-lock.json
       - name: Publish checker log as diagnostic evidence
         if: always()
         uses: actions/upload-artifact@v4
