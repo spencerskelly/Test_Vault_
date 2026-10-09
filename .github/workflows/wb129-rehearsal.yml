@@ -1,0 +1,45 @@
+name: Rehearse WB-129 subtree feature import
+
+on:
+  push:
+    branches: [integration/workbench-lm05-2026-10-09]
+
+permissions:
+  contents: read
+
+jobs:
+  wb129:
+    runs-on: ubuntu-latest
+    timeout-minutes: 35
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+
+      - name: Preserve original and WB-129 Git ancestry in ephemeral runner
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name "MDSE rehearsal"
+          git config user.email "mdse-rehearsal@users.noreply.github.com"
+          git remote add workbench https://github.com/spencerskelly/MDSE_Workbench.git
+          git fetch --no-tags workbench refs/heads/recovery/wb129-test-alignment-2026-10-08:refs/remotes/workbench/wb129
+          test "$(git rev-parse refs/remotes/workbench/wb129)" = "8097f383c41617f879eac8e4ca19fab1d0cb7657"
+          git subtree pull --prefix=55_Workbench workbench 8097f383c41617f879eac8e4ca19fab1d0cb7657 --no-squash -m "Rehearse WB-129 source integration"
+          git merge-base --is-ancestor 8097f383c41617f879eac8e4ca19fab1d0cb7657 HEAD
+          grep -q 'WRITABLE_VERSION = "0.5"' 55_Workbench/src/core/localmodel.ts
+          grep -q '"0.5"' 55_Workbench/src/core/localmodel.ts
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+          cache-dependency-path: 55_Workbench/package-lock.json
+      - name: Validate WB-129 source
+        working-directory: 55_Workbench
+        run: |
+          npm ci
+          npm run typecheck
+          npm test
+          npm run build
