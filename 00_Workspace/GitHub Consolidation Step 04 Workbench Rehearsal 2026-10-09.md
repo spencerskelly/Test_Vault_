@@ -1,7 +1,7 @@
 # GitHub Consolidation — Step 4: Safe Workbench Import Rehearsal
 
 **Date:** 2026-10-09
-**Status:** GitHub Actions rehearsal launched; validation result must be read from the linked run before any promotion.
+**Status:** **PASS** — GitHub Actions run `37970033542` completed successfully on the pinned source/base revisions. This proves an ephemeral history-preserving import and Workbench standalone build, **not** a persistent monorepo merge or integrated release.
 **Recovery authority:** [Test_Vault_ PR #6](https://github.com/spencerskelly/Test_Vault_/pull/6)
 **Staging PR:** [Test_Vault_ draft PR #7](https://github.com/spencerskelly/Test_Vault_/pull/7)
 **Run:** [Rehearse Workbench subtree migration](https://github.com/spencerskelly/Test_Vault_/actions/runs/37970033542)
@@ -31,7 +31,17 @@ Instead a narrowly-scoped GitHub Actions **rehearsal-only** workflow was added t
 - logs the result to the Actions job summary;
 - has **no GitHub push or PR-write operations**. The imported source is intentionally not committed to the GitHub staging branch by this workflow.
 
-GitHub initiated the job at run `37970033542`. This documentation does not infer success merely because the job started.
+GitHub completed run `37970033542` with conclusion **success**. All history/tree checks, standalone TypeScript tests and build, and no-source-mutation assertions passed.
+
+## Verified CI outcome
+
+- Run: https://github.com/spencerskelly/Test_Vault_/actions/runs/37970033542
+- Run status: **completed**, conclusion: **success**, source branch SHA: `79dac2f69f97c3ac9ae8a1735640666e4047badb`.
+- History/tree proof step: **success**. Checked original Test_Vault_ ancestry, pinned source SHA, both merge parents, source commit ancestry, exact imported subtree Git tree equality, matching tracked file count and critical source paths.
+- Workbench independent `npm ci`, TypeScript typecheck, `npm test`, `npm run build`: **success**; test log reports **443 passing, 0 failing**.
+- Postbuild source/fixture/package diff assertion: **success**.
+- No source import commit was pushed to the staging branch; temporary subtree commit vanished with the runner.
+- The job logs include a Node 20 runtime deprecation warning from GitHub Actions; this did **not** fail the run but should be handled in the eventual CI migration.
 
 ## Interpretation and next promotion gate
 
