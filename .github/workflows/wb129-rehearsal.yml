@@ -1,11 +1,11 @@
-name: Rehearse WB-129 subtree feature import
+name: Stage validated WB-129 subtree feature import
 
 on:
   push:
     branches: [integration/workbench-lm05-2026-10-09]
 
 permissions:
-  contents: read
+  contents: write
 
 jobs:
   wb129:
@@ -15,21 +15,41 @@ jobs:
       - uses: actions/checkout@v4
         with:
           fetch-depth: 0
-          persist-credentials: false
+          persist-credentials: true
 
       - name: Preserve original and WB-129 Git ancestry in ephemeral runner
         shell: bash
         run: |
           set -euo pipefail
-          git config user.name "MDSE rehearsal"
+          test "$GITHUB_REF_NAME" = "integration/workbench-lm05-2026-10-09"
+          test -z "$(git status --porcelain=v1 -uall)"
+          git merge-base --is-ancestor 75eff6007af46e19f36f76b38df44658ac381ba5 HEAD
+          git config user.name "MDSE staging"
           git config user.email "mdse-rehearsal@users.noreply.github.com"
           git remote add workbench https://github.com/spencerskelly/MDSE_Workbench.git
           git fetch --no-tags workbench refs/heads/recovery/wb129-test-alignment-2026-10-08:refs/remotes/workbench/wb129
           test "$(git rev-parse refs/remotes/workbench/wb129)" = "8097f383c41617f879eac8e4ca19fab1d0cb7657"
-          git subtree pull --prefix=55_Workbench workbench 8097f383c41617f879eac8e4ca19fab1d0cb7657 --no-squash -m "Rehearse WB-129 source integration"
+          if git merge-base --is-ancestor 8097f383c41617f879eac8e4ca19fab1d0cb7657 HEAD; then
+            echo "Already staged: running tests without another merge"
+          else
+            git subtree pull --prefix=55_Workbench workbench 8097f383c41617f879eac8e4ca19fab1d0cb7657 --no-squash -m "Stage WB-129 Local Model 0.5 source and complete Git history"
+          fi
           git merge-base --is-ancestor 8097f383c41617f879eac8e4ca19fab1d0cb7657 HEAD
           grep -q 'WRITABLE_VERSION = "0.5"' 55_Workbench/src/core/localmodel.ts
           grep -q '"0.5"' 55_Workbench/src/core/localmodel.ts
+
+      - name: Check against frozen importer schema 0.5
+        shell: bash
+        run: |
+          set -euo pipefail
+          git fetch --no-tags origin refs/heads/importer/baseline-contract-2026-10-05
+          test "$(git rev-parse FETCH_HEAD)" = "0494354ec40378e119b17c61fdf6e828844035e4"
+          git show 0494354ec40378e119b17c61fdf6e828844035e4:99_System/03_Schemas/local-model.yaml > "$RUNNER_TEMP/importer-schema.yaml"
+          grep -q 'schemaVersion: "0.5"' "$RUNNER_TEMP/importer-schema.yaml"
+          grep -q 'writableVersion: "0.5"' "$RUNNER_TEMP/importer-schema.yaml"
+          grep -q 'WRITABLE_VERSION = "0.5"' 55_Workbench/src/core/localmodel.ts
+          grep -q 'READABLE_VERSIONS = \["0.1", "0.2", "0.3", "0.4", "0.5"\]' 55_Workbench/src/core/localmodel.ts
+          grep -q 'schemaVersion: "0.5"' 55_Workbench/test/fixtures/local-model.yaml
 
       - uses: actions/setup-node@v4
         with:
@@ -43,3 +63,18 @@ jobs:
           npm run typecheck
           npm test
           npm run build
+
+      - name: Push verified source history only to integration branch
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "$GITHUB_REF_NAME" = "integration/workbench-lm05-2026-10-09"
+          git merge-base --is-ancestor 8097f383c41617f879eac8e4ca19fab1d0cb7657 HEAD
+          git diff --exit-code -- 55_Workbench/src 55_Workbench/test 55_Workbench/package.json 55_Workbench/package-lock.json
+          remote_sha="$(git ls-remote --heads origin "refs/heads/$GITHUB_REF_NAME" | cut -f1)"
+          if [ "$remote_sha" = "$(git rev-parse HEAD)" ]; then
+            echo "Already staged at remote HEAD: no push"
+          else
+            test "$remote_sha" = "$GITHUB_SHA"
+            git push origin "HEAD:refs/heads/$GITHUB_REF_NAME"
+          fi
