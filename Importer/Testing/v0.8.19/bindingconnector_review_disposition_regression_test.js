@@ -52,13 +52,24 @@ expect(d.candidateConnections.length,1,"exposure candidate count");
 const deep=ep(4,"owner",["P1","P2","J1"],["P1","P2"]);
 lm=local([inner,deep],[["owner",[]]]);
 d=api.bindingReviewDisposition(con(101,2,4),lm);
-expect(d.category,"canonical local equals - same-owner nested internal binding","nested category");
+expect(d.category,"same-owner binding missing canonical equals","nested missing equals category");
+expect(d.actualRelation,"","nested missing equals must not claim canonical relation");
+inner.equalsRefs=[{refKey:"local:"+deep.ownerKey+":"+deep.path.join("/")}];
+deep.equalsRefs=[{refKey:innerKey}];
+d=api.bindingReviewDisposition(con(101,2,4),lm);
+expect(d.category,"canonical local equals - same-owner nested internal binding","nested explicit equals category");
 expect(d.actualRelation,"Interface.equals","nested canonical equals relation");
 
 const sib=ep(5,"owner",["P2","J1"],["P2"]);
 lm=local([inner,sib],[["owner",[]]]);
 d=api.bindingReviewDisposition(con(102,2,5),lm);
-expect(d.category,"canonical local equals - same-owner sibling/non-hierarchical binding","sibling category");
+expect(d.category,"same-owner binding missing canonical equals","sibling missing equals category");
+expect(d.actualRelation,"","sibling missing equals must not claim canonical relation");
+inner.equalsRefs=[{refKey:"local:"+sib.ownerKey+":"+sib.path.join("/")}];
+sib.equalsRefs=[{refKey:innerKey}];
+d=api.bindingReviewDisposition(con(102,2,5),lm);
+expect(d.category,"canonical local equals - same-owner sibling/non-hierarchical binding","sibling explicit equals category");
+expect(d.actualRelation,"Interface.equals","sibling canonical equals relation");
 
 const other=ep(6,"other",["J1"],[]);
 lm=local([outer,other],[["owner",[]],["other",[]]]);
