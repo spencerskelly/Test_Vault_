@@ -1,0 +1,100 @@
+name: Rehearse BOM A-14 against accepted WB-129 and importer candidate
+
+on:
+  push:
+    branches: [integration/bom-a14-reconciliation-2026-10-09]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  merge-diagnosis:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    env:
+      STAGING_SOURCE_SHA: c922067c7aa0cf6ae2dbc1035527f1a7c4ee27ad
+      BOM_SHA: 87cb615876c342a34ce794beee8b5fad80b80520
+      WB129_SHA: 8097f383c41617f879eac8e4ca19fab1d0cb7657
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+      - name: Run non-writing history-preserving subtree merge and capture conflicts
+        id: diagnostic
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "$GITHUB_REF_NAME" = "integration/bom-a14-reconciliation-2026-10-09"
+          test -z "$(git status --porcelain=v1 -uall)"
+          git merge-base --is-ancestor "$STAGING_SOURCE_SHA" HEAD
+          git merge-base --is-ancestor "$WB129_SHA" HEAD
+          git config user.name "MDSE BOM rehearsal"
+          git config user.email "mdse-bom-rehearsal@users.noreply.github.com"
+          git remote add workbench https://github.com/spencerskelly/MDSE_Workbench.git
+          git fetch --no-tags workbench refs/heads/proposal/bom-a14-readonly-quantity-uom:refs/remotes/workbench/bom-a14
+          test "$(git rev-parse refs/remotes/workbench/bom-a14)" = "$BOM_SHA"
+          git merge-base --is-ancestor 7052c07b4c95212522ba4b5d274c95be0860bda3 "$BOM_SHA"
+          mkdir -p "$RUNNER_TEMP/bom-diagnosis"
+          set +e
+          git subtree pull --prefix=55_Workbench workbench "$BOM_SHA" --no-squash -m "EPHEMERAL: rehearse A-14 history on WB-129 candidate" > "$RUNNER_TEMP/bom-diagnosis/subtree.log" 2>&1
+          code=$?
+          set -e
+          printf '%s\n' "$code" > "$RUNNER_TEMP/bom-diagnosis/merge-status.txt"
+          git status --short > "$RUNNER_TEMP/bom-diagnosis/git-status.txt"
+          git diff --name-only --diff-filter=U > "$RUNNER_TEMP/bom-diagnosis/unmerged-files.txt"
+          git diff --cc -- 55_Workbench/src/core/localmodel.ts > "$RUNNER_TEMP/bom-diagnosis/localmodel-conflict.txt" || true
+          tail -n 35 "$RUNNER_TEMP/bom-diagnosis/subtree.log"
+          if [ "$code" -ne 0 ]; then
+            echo "BOM A-14 source merge has conflicts and requires a separate review."
+            cat "$RUNNER_TEMP/bom-diagnosis/unmerged-files.txt"
+            echo "- BOM A-14 merge: CONFLICT; original inputs untouched." >> "$GITHUB_STEP_SUMMARY"
+            echo "merge_clean=false" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+          test -z "$(cat "$RUNNER_TEMP/bom-diagnosis/unmerged-files.txt")"
+          git merge-base --is-ancestor "$BOM_SHA" HEAD
+          git merge-base --is-ancestor "$WB129_SHA" HEAD
+          echo "merge_clean=true" >> "$GITHUB_OUTPUT"
+          echo "- BOM history-preserving merge: CLEAN in temporary runner only." >> "$GITHUB_STEP_SUMMARY"
+      - uses: actions/setup-node@v4
+        if: steps.diagnostic.outputs.merge_clean == 'true'
+        with:
+          node-version: 20
+          cache: npm
+          cache-dependency-path: 55_Workbench/package-lock.json
+      - name: Check schema writing safety and BOM focused regressions if clean
+        if: steps.diagnostic.outputs.merge_clean == 'true'
+        working-directory: 55_Workbench
+        shell: bash
+        run: |
+          set -euo pipefail
+          grep -q 'WRITABLE_VERSION = "0.5"' src/core/localmodel.ts
+          grep -q '"0.6"' src/core/localmodel.ts
+          npm ci
+          npm run typecheck
+          node --import tsx --test test/bom-localmodel-06.test.ts test/bom-variantof.test.ts test/cache.test.ts
+          npm test
+          npm run build
+      - name: Upload conflict/merge diagnostic without model source
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: bom-a14-merge-diagnosis
+          path: ${{ runner.temp }}/bom-diagnosis/
+          if-no-files-found: warn
+          retention-days: 14
+      - name: Gate final result on a clean merge and complete source artifacts
+        if: always()
+        shell: bash
+        run: |
+          set -euo pipefail
+          if [ "${{ steps.diagnostic.outputs.merge_clean }}" != "true" ]; then
+            echo "::error::BOM A-14 cannot be promoted: unresolved merge conflict or incomplete rehearsal"
+            exit 1
+          fi
+          if [ ! -f 55_Workbench/docs/bom/a01-a14/BOM_SOURCE_MANIFEST.json ]; then
+            echo "::error::BOM A-01–A-14 authored artifacts not yet committed; preserve originals before promoting"
+            exit 1
+          fi
