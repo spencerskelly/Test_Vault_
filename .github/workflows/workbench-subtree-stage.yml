@@ -1,0 +1,114 @@
+name: Stage Workbench source with preserved Git history
+
+# One-shot, guarded staging import. Never targets main or deletes source branches.
+on:
+  push:
+    branches:
+      - integration/workbench-subtree-2026-10-09
+
+permissions:
+  contents: write
+
+concurrency:
+  group: workbench-subtree-stage-2026-10-09
+  cancel-in-progress: false
+
+jobs:
+  import-verify-stage:
+    runs-on: ubuntu-latest
+    timeout-minutes: 35
+    env:
+      SOURCE_SHA: 59fc6219b1d0586900aa7d38685e7087a9d47fec
+      ROOT_BASE_SHA: 61633d0ea66c06928d4e457dff8d9550096164eb
+      TARGET_BRANCH: integration/workbench-subtree-2026-10-09
+    steps:
+      - name: Checkout isolated integration branch with complete history
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Verify branch, provenance, and exact imported source
+        id: subtree
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "$GITHUB_REF_NAME" = "$TARGET_BRANCH"
+          git merge-base --is-ancestor "$ROOT_BASE_SHA" HEAD
+          test -z "$(git status --porcelain=v1 -uall)"
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git remote add workbench https://github.com/spencerskelly/MDSE_Workbench.git
+          git fetch --no-tags workbench refs/heads/main:refs/remotes/workbench/main
+          found="$(git rev-parse refs/remotes/workbench/main)"
+          test "$found" = "$SOURCE_SHA" || {
+            echo "::error::Workbench main moved ($found); refusing to migrate an unreviewed revision."
+            exit 1
+          }
+          if test -e 55_Workbench; then
+            echo "Already staged; validating exact imported history and tree."
+            git merge-base --is-ancestor "$SOURCE_SHA" HEAD
+            test "$(git rev-parse HEAD:55_Workbench)" = "$(git rev-parse "$SOURCE_SHA^{tree}")"
+            echo "new_import=false" >> "$GITHUB_OUTPUT"
+          else
+            before="$(git rev-parse HEAD)"
+            git subtree add --prefix=55_Workbench workbench/main -m "Merge Workbench main ancestry under 55_Workbench (integration staging)"
+            read -r parent1 parent2 < <(git show -s --format='%P' HEAD)
+            test "$parent1" = "$before"
+            test "$parent2" = "$SOURCE_SHA"
+            git merge-base --is-ancestor "$SOURCE_SHA" HEAD
+            test "$(git rev-parse HEAD:55_Workbench)" = "$(git rev-parse "$SOURCE_SHA^{tree}")"
+            echo "new_import=true" >> "$GITHUB_OUTPUT"
+          fi
+          for p in package.json package-lock.json esbuild.config.mjs tsconfig.json src/main.ts test/localmodel.test.ts manifest.json .github/workflows/build-artifact.yml; do
+            test -f "55_Workbench/$p"
+          done
+          src_count="$(git ls-tree -r --name-only "$SOURCE_SHA" | wc -l | tr -d ' ')"
+          dst_count="$(git ls-tree -r --name-only HEAD:55_Workbench | wc -l | tr -d ' ')"
+          test "$src_count" = "$dst_count"
+          {
+            echo "## History-preserving Workbench staging"
+            echo "- Pinned Workbench source: $SOURCE_SHA"
+            echo "- Exact imported Git tree object: $(git rev-parse HEAD:55_Workbench)"
+            echo "- Tracked files: $src_count (equal in both repositories)"
+            echo "- Merge/ancestry assertions: PASS"
+            echo "- Source was imported by non-squashed Git subtree, not file copy"
+          } >> "$GITHUB_STEP_SUMMARY"
+
+      - name: Setup Node for Workbench validation
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Run source package checks and full test suite
+        working-directory: 55_Workbench
+        shell: bash
+        run: |
+          set -euo pipefail
+          npm ci
+          npm run typecheck
+          npm test
+          npm run build
+          echo "- npm ci/typecheck/test/build: PASS" >> "$GITHUB_STEP_SUMMARY"
+
+      - name: Refuse unexpected source or fixture modifications
+        shell: bash
+        run: |
+          set -euo pipefail
+          git diff --exit-code -- 55_Workbench/src 55_Workbench/test 55_Workbench/package.json 55_Workbench/package-lock.json
+          echo "- Source/fixture diffs after validation: NONE" >> "$GITHUB_STEP_SUMMARY"
+
+      - name: Push only validated subtree merge onto isolated branch
+        if: steps.subtree.outputs.new_import == 'true'
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "$GITHUB_REF_NAME" = "$TARGET_BRANCH"
+          git merge-base --is-ancestor "$SOURCE_SHA" HEAD
+          # Non-forced fast-forward push: any concurrent branch movement rejects.
+          git push origin "HEAD:refs/heads/$TARGET_BRANCH"
+          echo "- Staged subtree commit: $(git rev-parse HEAD)" >> "$GITHUB_STEP_SUMMARY"
+          echo "- Pushed only to $TARGET_BRANCH; main and MDSE_Workbench unchanged" >> "$GITHUB_STEP_SUMMARY"
+
+      - name: Already staged — do not push again
+        if: steps.subtree.outputs.new_import == 'false'
+        run: echo "Pinned Workbench subtree already staged and validated; no Git push necessary."
