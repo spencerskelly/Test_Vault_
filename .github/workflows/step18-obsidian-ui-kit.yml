@@ -97,7 +97,8 @@ jobs:
           import { readFileSync } from "node:fs";
           import { join } from "node:path";
           import assert from "node:assert/strict";
-          import { parseLocalModel, WRITABLE_VERSION } from "./src/core/localmodel.ts";
+          const moduleExports = await import("./src/core/localmodel.ts");
+          const { parseLocalModel, WRITABLE_VERSION } = moduleExports.default ?? moduleExports;
           const base = join(process.env.RUNNER_TEMP, "step18-obsidian-ui-acceptance-kit", "02_BOM_Candidate_Test_Only", "88_Step18_Disposable_UI_Fixtures");
           const read = (name) => readFileSync(join(base, name), "utf8");
           const a = parseLocalModel(read("Assembly 0.5.md"));
