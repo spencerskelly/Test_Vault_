@@ -1,7 +1,7 @@
 # GitHub Consolidation — Step 17: Post-BOM full frozen QEAX acceptance
 
 **Recorded:** 2026-10-09 PDT
-**Status:** FULL QEAX MODEL ACCEPTANCE **IN PROGRESS**. Source ancestry, source checks, frozen QEAX integrity and disposable Base Vault preparation PASS. Do not infer a final result until completion.
+**Status:** **PASS — actual persisted BOM+WB-129+importer full frozen QEAX determinism, topology and Workbench 0.5 real-vault acceptance completed successfully.** Candidate-only; manual Obsidian/release approval remains pending.
 **Previous:** [[GitHub Consolidation Step 16 BOM Schema Governance Proposals 2026-10-09]]
 **Review:** [draft integration PR #17](https://github.com/spencerskelly/Test_Vault_/pull/17)
 **Authoritative run:** [GitHub Actions 38012181833](https://github.com/spencerskelly/Test_Vault_/actions/runs/38012181833)
@@ -23,4 +23,18 @@ This tests the **persisted, combined BOM 0.6-reader, WB-129 and importer source*
 
 The Step 16 proposal files remain under `99_System/03_Schemas/Proposals/`; active schemas (`local-model.yaml` 0.5 / `relationships.yaml` 1.36 / `element-types.yaml` 1.18) remain unchanged. No default repository branch or original BOM proposal branch is changed.
 
-**To finish record:** fetch the final Actions job conclusion and substantive runtime logs, record deterministic inventory equality, IMP-009/010/011 results, Workbench status/record counts/no-op drift, sourceVaultUnmodified and no BOM writer promotion. If any check fails, document the exact failed gate and do not claim Step 17 pass.
+## Final GitHub Actions verdict — independently checked
+
+[Run 38012181833](https://github.com/spencerskelly/Test_Vault_/actions/runs/38012181833), job `114094414009`, **completed / success**. All steps passed. The full real-QEAX import was carried out against the *actual persisted Step 16 BOM source*, with no new source merges or generated-model commits.
+
+**Source + deterministic output:** Frozen QEAX SHA-256 verified, **35,969 objects**, **21,822 connectors**. Both fresh model imports produced **28,273 nonvolatile files**; comparison: `onlyA=0`, `onlyB=0`, `changed=0`, `DETERMINISM PASS`. The headless importer transaction recorded `IMPORT_COMPLETE` and `WRITE_PASS`; the injected failure-path case was exercised in the shared headless importer script.
+
+**Importer topology and model status:** IMP-009 source/review integrity reported **25 checks, 0 warnings**, 1,051 definitionless contextual Interfaces (no extra Port notes) and **1,545 resolvable local endpoint block references**, accepted with semantic model acceptance explicitly still **PENDING**. IMP-010 hierarchy and Interface FlowProperty accepted; 752 interface-owned FlowProperty definitions, 0 exact-copy warnings. IMP-011 BindingConnector review: **249 source and 249 review rows**, **209 canonical Interface.equals pairs / 418 directed links**, **23 Connection.exposes**, 17 cross-owner review-only bindings; acceptance **PASS**.
+
+**Workbench real-vault read/no-op acceptance:** `status: PASS`, `acceptance: candidate-only`, `localModelVersion: 0.5`, `sourceVaultUnmodified: true`, `failures: []`. Parsed **27,813 Markdown files**, **803 Local Model regions**, **2,055 parts**, **4,387 endpoints**, **552 connections**, **72 flows**, **1,051 definitionless endpoints**, **23 exposures**, **209 equals pairs**; matched Run Manifest. **0 parse errors**, **4 no-op edit samples**, **0 formatting drift**.
+
+**Post-BOM candidate regression and version safety:** Read-only 0.6 quantity/UOM and Object `variantOf` focused suites with cache tests **30/30 PASS**. Active/generated schema and manifest remain `0.5` / `pre-release`; no 0.6 marker or writer was silently promoted. The Step 16 proposal integrity and all 31 frozen BOM source hashes also passed.
+
+**Manual gates not performed by headless CI:** the importer logged a required real Obsidian Interface contextual-identifier edit and application restart test; this is **not** a passed UI test. In addition, experimental 0.6 reader and `variantOf` are not yet governed write schemas, Bootstrap first-open is pending, and the 4 controlled-release warnings must still be resolved. No generated output, source QEAX or original asset archive was uploaded from the ephemeral runner.
+
+**Next bounded Step 18:** stage a reproducible **manual Obsidian acceptance checklist** based on the accepted disposable QEAX vault, with definitionless Interface editing/restart, BOM quantity/variantOf read-only behaviors, and Bootstrap startup/lock provenance. Decide on independent W-governance of proposed schemas; do not modify main or issue a release before these checks.
