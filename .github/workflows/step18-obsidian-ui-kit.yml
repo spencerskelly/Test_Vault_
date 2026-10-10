@@ -88,6 +88,36 @@ jobs:
           print('PASS: isolated controlled+candidate kit, plugin SHA mismatch intentionally exposed, 8 fixtures, ZIP integrity')
           print('KIT_SHA256',sha(z))
           PY
+      - name: Parse generated 0.5 and 0.6 manual fixtures using candidate Workbench
+        working-directory: 55_Workbench
+        shell: bash
+        run: |
+          set -euo pipefail
+          node --import tsx --input-type=module - <<'JS'
+          import { readFileSync } from "node:fs";
+          import { join } from "node:path";
+          import assert from "node:assert/strict";
+          import { parseLocalModel, WRITABLE_VERSION } from "./src/core/localmodel.ts";
+          const base = join(process.env.RUNNER_TEMP, "step18-obsidian-ui-acceptance-kit", "02_BOM_Candidate_Test_Only", "88_Step18_Disposable_UI_Fixtures");
+          const read = (name) => readFileSync(join(base, name), "utf8");
+          const a = parseLocalModel(read("Assembly 0.5.md"));
+          assert.ok(a?.structured);
+          assert.equal(a.schemaVersion, "0.5");
+          assert.deepEqual(a.findings.filter(f=>f.severity==="error"),[]);
+          assert.equal(a.records.filter(r=>r.kind==="part").length,1);
+          assert.equal(a.records.filter(r=>r.kind==="endpoint" && !r.definition && !r.usageExplicit).length,1);
+          const b = parseLocalModel(read("Assembly 0.6 READ ONLY.md"));
+          assert.ok(b?.structured);
+          assert.equal(b.schemaVersion, "0.6");
+          assert.deepEqual(b.findings.filter(f=>f.severity==="error"),[]);
+          assert.equal(b.records.length,1);
+          assert.equal(b.records[0].quantity,"0.3500000001");
+          assert.equal(b.records[0].unitOfMeasure,"m");
+          assert.equal(b.records[0].multiplicity,"2");
+          assert.equal(WRITABLE_VERSION,"0.5");
+          assert.match(read("Product A.md"), /^variantOf: "\\[\\[Family\\]\\]"$/m);
+          console.log("PASS: actual candidate reader validates 0.5 definitionless Interface and 0.6 Part quantity fixture; writer 0.5");
+          JS
       - name: Publish executable manual acceptance kit
         uses: actions/upload-artifact@v4
         with:
