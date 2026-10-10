@@ -58,6 +58,7 @@ interface CachedNoteRecord {
   repeat?: Array<[string, number]>;
   abstract?: boolean;
   abstractInvalid?: boolean;
+  variantOfFormatError?: string;
   localRefs?: Array<{ field: string; path: string; localId: string }>;
 }
 
@@ -218,6 +219,7 @@ function serializeNote(n: NoteRecord): CachedNoteRecord {
     ...(n.repeat ? { repeat: [...n.repeat.entries()] } : {}),
     ...(n.abstract !== undefined ? { abstract: n.abstract } : {}),
     ...(n.abstractInvalid !== undefined ? { abstractInvalid: n.abstractInvalid } : {}),
+    ...(n.variantOfFormatError !== undefined ? { variantOfFormatError: n.variantOfFormatError } : {}),
     ...(n.localRefs ? { localRefs: n.localRefs.map((x) => ({ ...x })) } : {}),
   };
 }
@@ -250,6 +252,7 @@ function deserializeNote(raw: unknown): NoteRecord {
   }
   const abstract = optionalBoolean(raw, "abstract", raw.path);
   const abstractInvalid = optionalBoolean(raw, "abstractInvalid", raw.path);
+  const variantOfFormatError = optionalString(raw, "variantOfFormatError");
   return {
     path: raw.path,
     name: raw.name,
@@ -264,6 +267,7 @@ function deserializeNote(raw: unknown): NoteRecord {
     ...(repeat ? { repeat } : {}),
     ...(abstract !== undefined ? { abstract } : {}),
     ...(abstractInvalid !== undefined ? { abstractInvalid } : {}),
+    ...(variantOfFormatError !== undefined ? { variantOfFormatError } : {}),
     ...(localRefs ? { localRefs } : {}),
   };
 }
@@ -369,6 +373,8 @@ function deserializeLocalRecord(raw: unknown): LocalRecord {
     roleA: strictNullableString(raw.roleA, "roleA"),
     roleB: strictNullableString(raw.roleB, "roleB"),
     multiplicity: strictNullableString(raw.multiplicity, "multiplicity"),
+    quantity: strictNullableString(raw.quantity ?? null, "quantity"),
+    unitOfMeasure: strictNullableString(raw.unitOfMeasure ?? null, "unitOfMeasure"),
     endpointKind: strictNullableString(raw.endpointKind, "endpointKind"),
     connectionId: strictNullableString(raw.connectionId, "connectionId"),
     sourceSchemaVersion: raw.sourceSchemaVersion,

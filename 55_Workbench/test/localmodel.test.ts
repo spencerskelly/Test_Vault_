@@ -95,7 +95,7 @@ test("marker errors: missing end, missing start, duplicate, nested, wrong order,
 });
 
 test("unsupported future schema: readable as Markdown, structured use off, no records guessed", () => {
-  const r = parseLocalModel(canonical().replace("schema=0.2", "schema=0.6"))!;
+  const r = parseLocalModel(canonical().replace("schema=0.2", "schema=0.7"))!;
   assert.ok(r.findings.some((f) => f.code === "schema.unsupported"));
   assert.equal(r.structured, false);
   assert.deepEqual(r.records, []);
