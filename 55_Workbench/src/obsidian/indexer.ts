@@ -1,3 +1,4 @@
+import { variantOfMetadataFinding } from "../core/variantof-format";
 /**
  * Feeds the pure ModelIndex from Obsidian's own metadata cache (works on desktop and mobile,
  * WB-087). Builds in chunks so Obsidian stays responsive (WB-081).
@@ -683,6 +684,7 @@ export class Indexer {
       repeat: resolved.repeat,
       abstract,
       abstractInvalid: abstractInvalid || undefined,
+      variantOfFormatError: variantOfMetadataFinding(fm),
       localRefs: resolved.localRefs,
     };
   }
