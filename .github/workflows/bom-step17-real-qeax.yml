@@ -1,0 +1,122 @@
+name: Step 17 BOM full-QEAX importer and Workbench 0.5 acceptance
+
+on:
+  push:
+    branches: [integration/bom-real-qeax-step17-2026-10-09]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: bom-step17-real-qeax
+  cancel-in-progress: false
+
+jobs:
+  frozen-model:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 60
+    env:
+      BOM_SOURCE_SHA: 50e78c6924a1615d865e763ffdb39d1d2f338bad
+      BOM_MERGE_SHA: 5d34b3898d7c0a56719435c75b2993b876fca3d6
+      STEP16_SHA: bc1ade17f7e153d748ecd13a6d3b1d8655efd3a7
+      WB129_SHA: 8097f383c41617f879eac8e4ca19fab1d0cb7657
+      IMPORTER_SHA: 0494354ec40378e119b17c61fdf6e828844035e4
+      QEAX_SHA: 16c055ec1a5af57b0f4f9059d6292c5ddd3ed052124c7ef54d9af288971ae02c
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+          cache-dependency-path: 55_Workbench/package-lock.json
+      - name: Install schema verifier prerequisite
+        run: python3 -m pip install pyyaml
+      - name: Verify original source histories on exact combined candidate
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "$GITHUB_REF_NAME" = "integration/bom-real-qeax-step17-2026-10-09"
+          test -z "$(git status --porcelain=v1 -uall)"
+          for SOURCE in "$STEP16_SHA" "$BOM_MERGE_SHA" "$BOM_SOURCE_SHA" "$WB129_SHA" "$IMPORTER_SHA"; do
+            git merge-base --is-ancestor "$SOURCE" HEAD
+          done
+          test "$(git show -s --format=%P "$BOM_MERGE_SHA")" = "24abdb7b570675989cdf8b2d0e23ebd6afafc9c6 $BOM_SOURCE_SHA"
+          python3 66_Testing/check_bom_step16_proposals.py
+          python3 66_Testing/check_importer_workbench_localmodel.py
+          python3 Importer/Tools/v0.8.19/sync_source_profile.py --check
+          node Importer/Testing/v0.8.19/release_gate_regression_test.js
+          echo "Combined original BOM / WB-129 / importer commit ancestry verified"
+      - name: Verify original EA archive and prepare three fresh controlled candidates
+        shell: bash
+        run: |
+          set -euo pipefail
+          ROOT="$RUNNER_TEMP/mdse-real-qeax"
+          mkdir -p "$ROOT/qeax"
+          test -f EA_2026_09_06_endgame.qeax.zip
+          unzip -j EA_2026_09_06_endgame.qeax.zip -d "$ROOT/qeax" >/dev/null
+          QEAX="$(find "$ROOT/qeax" -maxdepth 1 -name '*.qeax' -type f -size +1M -print -quit)"
+          test -n "$QEAX"
+          test "$(sha256sum "$QEAX" | cut -d' ' -f1)" = "$QEAX_SHA"
+          test "$(sqlite3 "$QEAX" 'SELECT count(*) FROM t_object;')" = 35969
+          test "$(sqlite3 "$QEAX" 'SELECT count(*) FROM t_connector;')" = 21822
+          for target in "$ROOT/vault" "$ROOT/replay" "$ROOT/failure"; do
+            python3 "Base Vault/Tools/v0.8.0-r2/build-base.py" "$target"
+            printf 'vault_uid: 20261006000000000skellyspencer\nname: MDSE_05_CANDIDATE\ndefault_branch: main\nmdse_release: "0.8.0"\n' > "$target/.vault.yaml"
+          done
+          echo "Frozen QEAX 35,969 objects / 21,822 connectors verified"
+      - name: Deterministic full importer and WB-129 real-vault acceptance with BOM reader
+        shell: bash
+        run: |
+          set -euo pipefail
+          # This is the exact Step 8 full source-model acceptance script, on the
+          # persisted BOM/0.6-reader source without an ephemeral importer merge.
+          bash 66_Testing/real_qeax_execute.sh
+      - name: Re-run focused BOM read-only 0.6 and variantOf regressions
+        working-directory: 55_Workbench
+        shell: bash
+        run: |
+          set -euo pipefail
+          node --import tsx --test test/bom-localmodel-06.test.ts test/bom-variantof.test.ts test/cache.test.ts
+          git diff --exit-code -- src test package.json package-lock.json
+      - name: Assert importer / writer / release have not promoted schema 0.6
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          from pathlib import Path
+          import yaml
+          root=Path("99_System/03_Schemas")
+          lm=yaml.safe_load((root/"local-model.yaml").read_text())
+          manifest=yaml.safe_load(Path("Base Vault/Definition/mdse-release.yaml").read_text())
+          assert lm["schemaVersion"]=="0.5"
+          assert lm["compatibility"]["writableVersion"]=="0.5"
+          assert manifest["releaseStatus"]=="pre-release"
+          assert manifest["schemas"]["localModel"]=="0.5"
+          model=Path(__import__("os").environ["RUNNER_TEMP"])/"mdse-real-qeax"/"vault"
+          generated=(model/"99_System/03_Schemas/local-model.yaml").read_text()
+          assert 'schemaVersion: "0.5"' in generated
+          assert 'writableVersion: "0.5"' in generated
+          print("PASS: active release and imported model stay Local Model 0.5, candidate only")
+          PY
+      - name: Summarize candidate-only real-source validation
+        if: success()
+        shell: bash
+        run: |
+          {
+            echo "## Step 17 — Post-BOM frozen full-QEAX integration acceptance: PASS"
+            echo "- Workbench BOM proposal and WB-129 source histories retained"
+            echo "- 31/31 BOM source originals match frozen SHA inventory"
+            echo "- 35,969 EA objects / 21,822 connectors; QEAX SHA verified"
+            echo "- Deterministic full import, semantic topology and WB-129 real-vault read/no-op acceptance: PASS"
+            echo "- Read-only schema 0.6 BOM and variantOf focused tests: PASS"
+            echo "- Actual generated model and controlled writer: 0.5; release remains pre-release"
+            echo "- Source vault not modified; no model data or raw QEAX uploaded"
+            echo "- Manual Obsidian UI and schema 0.6/variantOf governance remain outstanding"
+          } >> "$GITHUB_STEP_SUMMARY"
