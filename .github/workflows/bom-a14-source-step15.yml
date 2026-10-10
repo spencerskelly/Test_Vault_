@@ -1,0 +1,130 @@
+name: Stage preserved BOM A-14 implementation with all original artifacts
+
+on:
+  push:
+    branches: [integration/bom-a14-source-step15-2026-10-09]
+
+permissions:
+  contents: write
+
+concurrency:
+  group: mdse-bom-a14-step15
+  cancel-in-progress: false
+
+jobs:
+  bom-candidate:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 45
+    env:
+      INTEGRATED_BASE: c922067c7aa0cf6ae2dbc1035527f1a7c4ee27ad
+      WB129_SHA: 8097f383c41617f879eac8e4ca19fab1d0cb7657
+      BOM_SHA: 50e78c6924a1615d865e763ffdb39d1d2f338bad
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Pin source and retain two-parent non-squashed Workbench history
+        id: merge
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "$GITHUB_REF_NAME" = "integration/bom-a14-source-step15-2026-10-09"
+          test -z "$(git status --porcelain=v1 -uall)"
+          git merge-base --is-ancestor "$INTEGRATED_BASE" HEAD
+          git merge-base --is-ancestor "$WB129_SHA" HEAD
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git remote add workbench https://github.com/spencerskelly/MDSE_Workbench.git
+          git fetch --no-tags workbench refs/heads/recovery/bom-a01-a14-artifacts-2026-10-09:refs/remotes/workbench/bom-recovery
+          test "$(git rev-parse refs/remotes/workbench/bom-recovery)" = "$BOM_SHA"
+          if git merge-base --is-ancestor "$BOM_SHA" HEAD; then
+            echo "already=true" >> "$GITHUB_OUTPUT"
+          else
+            before="$(git rev-parse HEAD)"
+            git subtree pull --prefix=55_Workbench workbench "$BOM_SHA" --no-squash -m "Stage BOM A-14 implementation and 31 verified originals (candidate only)"
+            test "$(git show -s --format=%P HEAD)" = "$before $BOM_SHA"
+            echo "already=false" >> "$GITHUB_OUTPUT"
+          fi
+          git merge-base --is-ancestor "$BOM_SHA" HEAD
+          git merge-base --is-ancestor "$WB129_SHA" HEAD
+          git diff --check HEAD^ HEAD
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+          cache-dependency-path: 55_Workbench/package-lock.json
+      - run: python3 -m pip install pyyaml
+      - name: Verify 31 committed exact originals and version boundaries
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          import hashlib,re
+          from pathlib import Path
+          import yaml
+          root=Path("55_Workbench/docs/bom/a01-a14")
+          inventory=Path("55_Workbench/docs/bom/A01-A14_ARTIFACT_SHA256.md").read_text()
+          expected=dict((n,h) for h,n in re.findall(r"(?m)^([0-9a-f]{64})\s{2}(\S+)\s*$",inventory))
+          assert len(expected)==31
+          for name,sha in expected.items():
+              p=root/name
+              assert p.is_file(), f"MISSING original: {name}"
+              assert hashlib.sha256(p.read_bytes()).hexdigest()==sha, name
+          print("PASS: all 31 historical BOM originals match frozen SHA-256")
+          release=yaml.safe_load(Path("Base Vault/Definition/mdse-release.yaml").read_text())
+          schema=yaml.safe_load(Path("99_System/03_Schemas/local-model.yaml").read_text())
+          assert release["releaseStatus"]=="pre-release"
+          assert str(release["schemas"]["localModel"])=="0.5"
+          assert str(schema["schemaVersion"])=="0.5"
+          source=Path("55_Workbench/src/core/localmodel.ts").read_text()
+          assert re.search(r'WRITABLE_VERSION\s*=\s*"0.5"',source)
+          readable=re.search(r'READABLE_VERSIONS\s*=\s*\[([^\]]+)\]',source)
+          assert readable and '"0.6"' in readable.group(1)
+          test=Path("55_Workbench/test/localmodel.test.ts").read_text()
+          assert test.count('canonical().replace("schema=0.2", "schema=0.7")')==1
+          assert 'canonical().replace("schema=0.2", "schema=0.6")' not in test
+          assert (Path("55_Workbench/test/bom-localmodel-06.test.ts")).is_file()
+          assert (Path("55_Workbench/test/bom-variantof.test.ts")).is_file()
+          print("PASS: reader 0.6 is candidate-only; writer and release remain 0.5")
+          PY
+          python3 66_Testing/check_importer_workbench_localmodel.py
+          python3 Importer/Tools/v0.8.19/sync_source_profile.py --check
+          node Importer/Testing/v0.8.19/release_gate_regression_test.js
+      - name: Build governed Base and run original release checker
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 "Base Vault/Tools/v0.8.0-r2/build-base.py" "$RUNNER_TEMP/base"
+          python3 "Base Vault/Testing/check-release.py" --base "$RUNNER_TEMP/base" --workbench "55_Workbench" > "$RUNNER_TEMP/release-check.log" 2>&1 || {
+            grep -E '^FAIL |^WARN ' "$RUNNER_TEMP/release-check.log" || true
+            tail -n 15 "$RUNNER_TEMP/release-check.log"
+            exit 1
+          }
+          grep -E '^WARN |[0-9]+ fail,' "$RUNNER_TEMP/release-check.log" || true
+      - name: Workbench full regressions and BOM focused tests
+        working-directory: 55_Workbench
+        shell: bash
+        run: |
+          set -euo pipefail
+          npm ci
+          npm run typecheck
+          node --import tsx --test test/bom-localmodel-06.test.ts test/bom-variantof.test.ts test/cache.test.ts
+          npm test
+          npm run build
+          git diff --exit-code -- src test package.json package-lock.json
+      - name: Persist ONLY validated BOM candidate onto separate branch
+        if: steps.merge.outputs.already == 'false'
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "$GITHUB_REF_NAME" = "integration/bom-a14-source-step15-2026-10-09"
+          test "$(git ls-remote --heads origin "refs/heads/$GITHUB_REF_NAME" | cut -f1)" = "$GITHUB_SHA"
+          git merge-base --is-ancestor "$BOM_SHA" HEAD
+          git push origin "HEAD:refs/heads/$GITHUB_REF_NAME"
+      - name: Candidate-only evidence
+        if: success()
+        run: |
+          echo "BOM A-14 staged with original history; 31/31 SHA artifacts, full tests and release-check preflight passed. This is NOT schema 0.6 approval, a main merge or a release." >> "$GITHUB_STEP_SUMMARY"
