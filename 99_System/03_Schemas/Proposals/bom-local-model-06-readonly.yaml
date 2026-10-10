@@ -1,0 +1,54 @@
+# PROPOSAL ONLY — never load as the active Local Model schema.
+# Active authority remains ../local-model.yaml (0.5); this records a candidate
+# reader extension, not an authorized 0.6 writer or record generator.
+status: proposal-only
+proposalId: BOM-A14-LM06-READ
+authority:
+  activePath: "99_System/03_Schemas/local-model.yaml"
+  activeSchemaVersion: "0.5"
+  activeGitBlob: "361dee8269f9fbdfd16bcee33a1b808015f7ba5a"
+  releaseManifestPath: "Base Vault/Definition/mdse-release.yaml"
+candidate:
+  markerVersion: "0.6"
+  readerVersion: "0.6"
+  writableVersion: "0.5"
+  lowerReadableVersions: ["0.1", "0.2", "0.3", "0.4", "0.5"]
+  readerOnly: true
+  preserveOriginalMarker: true
+  noImplicitUpgradeOrDowngrade: true
+  changedRecordKind: part
+  partFieldsAdded: [quantity, unitOfMeasure]
+  noOtherRecordKindExtended: true
+partAmount:
+  parentOwned: true
+  childReverseBOMFieldsPersisted: false
+  multiplicityMeaning: interchangeableIndividualInstances
+  quantityMeaning: consumedAmountPerInterchangeableOccurrence
+  quantityAndUnitMustBothBePresentOrBothAbsent: true
+  positiveExactDecimal:
+    plainAsciiPattern: "^(?:0|[1-9][0-9]*)(?:\\.[0-9]+)?$"
+    greaterThanZero: true
+    binaryFloatRoundtripPermitted: false
+    scientificNotationPermitted: false
+  provisionalUnitSymbols: [ea, in, m, kg]
+  unitRegistryApproved: false
+  aliasesAndImplicitConversionsAllowed: false
+  canonicalCountPolicy: multiplicityOnlyWhenDiscreteInterchangeableInstances
+  countedEaDoubleCountPolicy: rejectWithoutSeparateFactorEvidence
+  ifBothFactorsSupported: exactDecimalProductMultiplicityTimesQuantity
+  sourceLedgerRequiredForUnmappedValues: true
+blocked:
+  - "Do not write quantity or unitOfMeasure under schema=0.5"
+  - "Do not promote 0.6 writer merely because Workbench can parse 0.6"
+  - "Do not assume in/m conversions or unapproved UOM aliases"
+  - "Do not synthesize child partOf or reverse where-used fields"
+approvalPrerequisites:
+  - governing W-decision and version allocation
+  - controlled UOM registry, dimensions and exact conversion policy
+  - versioned positiveExactDecimal schema descriptor and validation consumers
+  - exact arithmetic and source-ledger provenance acceptance
+  - importer and editor writer migration tests
+  - existing 0.1-0.5 compatibility and full QEAX regression
+sourceArtifacts:
+  - "55_Workbench/docs/bom/a01-a14/BOM_LOCAL_MODEL_UNITS_CONTRACT_A-04.md"
+  - "55_Workbench/docs/bom/a01-a14/BOM_LOCAL_MODEL_SCHEMA_PROPOSAL_A-05.md"
