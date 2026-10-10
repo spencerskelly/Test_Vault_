@@ -68,9 +68,9 @@ assert len(token) == 13
 def uid(i):
     return f"202610091827{i:05d}" + token
 def object_note(name, number, fields=""):
-    return "---\ntype: Object\nsubtype: electrical\nid: OBJ-99" + str(number) + "\nuid: " + uid(number) + "\nstatus: Draft\ntags: []\n" + fields + "---\n\n# " + name + "\n\n## Definition\n\nStep 18 disposable test fixture only; not an engineering model.\n"
+    return "---\ntype: Object\nsubtype: electrical\nid: OBJ-" + str(99000 + number) + "\nuid: " + uid(number) + "\nstatus: Draft\ntags: []\n" + fields + "---\n\n# " + name + "\n\n## Definition\n\nStep 18 disposable test fixture only; not an engineering model.\n"
 def requirement_note(name, number):
-    return "---\ntype: Requirement\nsubtype: functional\nid: REQ-99" + str(number) + "\nuid: " + uid(number) + "\nstatus: Draft\ntags: []\n---\n\n# " + name + "\n\n## Definition\n\nStep 18 invalid-target fixture.\n"
+    return "---\ntype: Requirement\nsubtype: functional\nid: REQ-" + str(99000 + number) + "\nuid: " + uid(number) + "\nstatus: Draft\ntags: []\n---\n\n# " + name + "\n\n## Definition\n\nStep 18 invalid-target fixture.\n"
 fixture = candidate_vault / "88_Step18_Disposable_UI_Fixtures"
 add(fixture / "Family.md", object_note("Family", 1))
 add(fixture / "Product A.md", object_note("Product A", 2, 'variantOf: "[[Family]]"\n'))
