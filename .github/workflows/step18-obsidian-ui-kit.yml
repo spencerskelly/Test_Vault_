@@ -116,7 +116,7 @@ jobs:
           assert.equal(b.records[0].unitOfMeasure,"m");
           assert.equal(b.records[0].multiplicity,"2");
           assert.equal(WRITABLE_VERSION,"0.5");
-          assert.match(read("Product A.md"), /^variantOf: "\\[\\[Family\\]\\]"$/m);
+          assert.ok(read("Product A.md").split("\n").includes('variantOf: "[[Family]]"'));
           console.log("PASS: actual candidate reader validates 0.5 definitionless Interface and 0.6 Part quantity fixture; writer 0.5");
           JS
       - name: Publish executable manual acceptance kit
