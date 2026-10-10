@@ -47,7 +47,9 @@ jobs:
           fi
           git merge-base --is-ancestor "$BOM_SHA" HEAD
           git merge-base --is-ancestor "$WB129_SHA" HEAD
-          git diff --check HEAD^ HEAD
+          # Recovered source docs must stay byte-for-byte original, including Markdown
+          # hard-break whitespace; check only executable code and test changes.
+          git diff --check HEAD^ HEAD -- 55_Workbench/src 55_Workbench/test
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
