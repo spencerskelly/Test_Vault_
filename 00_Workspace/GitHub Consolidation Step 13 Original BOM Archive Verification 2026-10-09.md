@@ -1,5 +1,7 @@
 # GitHub Consolidation — Step 13: Original BOM Archive Verified
 
+**Historical checkpoint:** This Step 13 record describes the state *before* the user uploaded the final four originals to GitHub. The [Step 14 completion record](GitHub%20Consolidation%20Step%2014%20BOM%20Original%20Git%20Integrity%20Complete%202026-10-09.md) supersedes its 27/31 Git-persistence status: **31/31 original files are now in GitHub and both the initial and hardened SHA-256 audits passed.**
+
 **Recorded:** 2026-10-09
 **Status:** **Original source archive verified 31/31 against frozen SHA-256 inventory, all ZIP CRC checks PASS. GitHub source files remain 27/31 until the final four are uploaded.**
 **Predecessor:** [[GitHub Consolidation Step 12 BOM Artifacts Recovery 2026-10-09]]
