@@ -1,0 +1,77 @@
+name: Consolidation Step 16 - W341 W342 provenance verification
+
+on:
+  push:
+    branches: [consolidation/step16-w341-w342-release-provenance-2026-10-10]
+    paths:
+      - '.github/workflows/consolidation-step16-release-provenance.yml'
+      - '66_Testing/consolidation/test_step16_release_provenance.py'
+      - '00_Workspace/Consolidation Step 16*'
+
+permissions:
+  contents: read
+
+jobs:
+  release-provenance-candidate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - name: Sparse checkout without public QEAX ZIP bytes
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+          filter: blob:none
+          persist-credentials: false
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            /*
+            !/EA_2026_09_06_endgame.qeax.zip
+
+      - name: Validate exclusion of the source-model archive
+        shell: bash
+        run: |
+          set -euo pipefail
+          test ! -e EA_2026_09_06_endgame.qeax.zip
+          test -f 'Base Vault/Testing/check-release.py'
+          test -f '55_Workbench/docs/User Guide/MDSE Workbench User Guide.md'
+          test -f 'Base Vault/Definition/MDSE Workbench User Guide.md'
+
+      - name: Install read-only YAML validation dependency
+        run: python3 -m pip install --disable-pip-version-check 'PyYAML==6.0.2'
+
+      - name: Verify W341 guide and W342 pinned/candidate policy
+        run: python3 -m unittest discover -s 66_Testing/consolidation -p 'test_step16_release_provenance.py' -v
+
+      - name: Run native MDSE release checker with integrated Workbench source
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 'Base Vault/Testing/check-release.py' --workbench 55_Workbench > "$RUNNER_TEMP/step16-native-check.txt" 2>&1 || {
+            echo 'Native release checker failed. Selected diagnostic messages:'
+            grep -E '^(FAIL|WARN|[0-9]+ fail, [0-9]+ warn)' "$RUNNER_TEMP/step16-native-check.txt" | tail -n 25 || true
+            exit 1
+          }
+          grep -F 'Workbench user guide equals Base Vault release copy' "$RUNNER_TEMP/step16-native-check.txt" >/dev/null
+          grep -F 'Workbench package/manifest 0.1.18 match pinned release manifest' "$RUNNER_TEMP/step16-native-check.txt" >/dev/null
+          grep -F 'Workbench lock 0.1.18 matches pinned release manifest' "$RUNNER_TEMP/step16-native-check.txt" >/dev/null
+          counts=$(grep -E '^[0-9]+ fail, [0-9]+ warn$' "$RUNNER_TEMP/step16-native-check.txt" | tail -n 1)
+          test -n "$counts"
+          echo "STEP16_NATIVE_RELEASE_CHECK=$counts"
+          echo "STEP16_W341_W342=PINNED_SOURCE_AND_GUIDE_CONSISTENT"
+          echo "STEP16_RELEASE_STATUS=PRE_RELEASE"
+
+      - name: Preserve Step15 governance and all pending approval holds
+        run: python3 -m unittest discover -s 66_Testing/consolidation -p 'test_step15_governance.py' -v
+
+      - name: Record non-promoting summary
+        shell: bash
+        run: |
+          {
+            echo '## Step 16 W341/W342 release provenance'
+            echo '- Workbench source user guide and Base Vault guide must be byte-identical'
+            echo '- Workbench package/manifest, release manifest and lock must match 0.1.18'
+            echo '- Native pre-release checker must report zero FAIL; warnings may remain'
+            echo '- Historical W-341/W-342 decisions and original lock remain untouched'
+            echo '- Public QEAX ZIP is not checked out and no full artifacts are uploaded'
+            echo '- This is NOT a release, governance approval, Obsidian GUI acceptance or archival authorization'
+          } >> "$GITHUB_STEP_SUMMARY"
