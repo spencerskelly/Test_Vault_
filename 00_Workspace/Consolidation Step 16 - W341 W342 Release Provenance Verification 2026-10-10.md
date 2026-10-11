@@ -50,3 +50,11 @@ The generated plugin-lock source string still cites the original standalone Work
 - No protected public-main merge or standalone read-only archive until those independent gates are explicitly satisfied.
 
 **Next bounded step:** verify a disposable generated Base Vault has exactly the mapped Workbench guide and pinned plugin payload, then prepare a real Obsidian GUI acceptance protocol without declaring it completed.
+
+## Native release check uncovered an independent registry gate (first CI)
+
+The first actual GitHub Actions run of `python3 'Base Vault/Testing/check-release.py' --workbench 55_Workbench` on this staging branch returned **32 FAIL and 4 WARN**, even though its guide parity and current version tests succeeded. The 32 diagnostic failures were emitted by the native checker’s `current tool/workspace document registered:` validation, which scans every Markdown file directly under `00_Workspace/` and `Importer/Definition/` and requires a release-manifest `documents:` registry entry. The warning categories were Bootstrap candidate-versus-pin, unreleased importer, unissued clean Base Vault, and retained historical importer revisions.
+
+**This is not an issued release.** The Step 16 follow-up introduces `step16_native_gate.py`: it invokes the unmodified native release checker, confirms W-341/W-342 positive results, allows the overall checker to remain **blocked only by the explicitly identified document-registration FAIL category**, and rejects any other native FAIL or unexpected exit. It prints aggregate counts rather than dumping source or model content. Thus a green *focused provenance* verification must not be called a green *overall release gate*.
+
+Document-registry reconciliation is separate from the five still-open Workbench guidance reviews; no auto-registration or change to W approval, runtime lock, original documents, public `main`, or the QEAX artifact is authorized. A later bounded step must inventory the native checker’s unregistered Markdown paths and assign governed statuses with owner review, avoiding silently labeling every checkpoint as `current`.
