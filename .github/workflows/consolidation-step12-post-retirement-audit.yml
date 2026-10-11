@@ -1,0 +1,78 @@
+name: Consolidation Step 12 - post-retirement authority reference audit
+
+on:
+  push:
+    branches:
+      - consolidation/step12-post-retirement-references-2026-10-10
+    paths:
+      - '.github/workflows/consolidation-step12-post-retirement-audit.yml'
+      - '66_Testing/**'
+      - '00_Workspace/Consolidation Step 12*'
+
+permissions:
+  contents: read
+
+jobs:
+  reference-audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - name: Read-only sparse source checkout excluding binary source-model archive
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+          filter: blob:none
+          persist-credentials: false
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            /*
+            !/EA_2026_09_06_endgame.qeax.zip
+
+      - name: Verify archive excluded from worktree
+        shell: bash
+        run: |
+          set -euo pipefail
+          test ! -e EA_2026_09_06_endgame.qeax.zip
+          git ls-files --error-unmatch EA_2026_09_06_endgame.qeax.zip >/dev/null
+          test -f 66_Testing/check_release_alignment.py
+          test -f 66_Testing/consolidation/workbench_reference_policy.py
+
+      - name: Provenance policy negative regression tests
+        run: python3 -m unittest discover -s 66_Testing/consolidation -p 'test_workbench_reference_policy.py' -v
+
+      - name: Retired historical workflow archive regression tests
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Verify eight historical workflow definitions remain archived
+        run: node --test 66_Testing/consolidation/test_step11_retirement.cjs
+
+      - name: Audit post-retirement tracked references with existing read-only preflight
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 66_Testing/check_release_alignment.py --output "$RUNNER_TEMP/step12-preflight.json"
+          python3 - "$RUNNER_TEMP/step12-preflight.json" <<'PY'
+          import json,os,sys
+          data=json.load(open(sys.argv[1],encoding="utf-8"))
+          refs=data["workbenchRepositoryReferences"]
+          assert refs["schema"]=="mdse-workbench-references/1"
+          c=refs["counts"]
+          for k in ["blocking","needs_review","verified_provenance","historical"]:
+              assert c[k]==len(refs["categories"][k]), (k,c)
+          assert c["blocking"]==0, ("Retired workflows or new live references remain",c)
+          assert c["verified_provenance"]==3, c
+          assert c["needs_review"]>0, ("Unexpectedly cleared unresolved-document review gate",c)
+          assert refs["strictReady"] is False
+          assert data["versions"]["releaseStatus"]=="pre-release"
+          print("STEP12_AUDIT_COUNTS "+json.dumps(c,sort_keys=True))
+          for category in ["blocking","needs_review"]:
+              for p in refs["categories"][category]:
+                  print("STEP12_REVIEW_PATH "+json.dumps({"classification":category,"path":p},sort_keys=True))
+          with open(os.environ["GITHUB_STEP_SUMMARY"],"a",encoding="utf-8") as f:
+              f.write("## Step 12 - post-retirement authority check\n\n")
+              for k in ["blocking","needs_review","verified_provenance","historical"]:
+                  f.write("- "+k+": **"+str(c[k])+"** tracked files\n")
+              f.write("\n**NOT approved for cutover or archival.** Unclassified docs, QEAX security, local clones and GUI gates remain.\n")
+          PY
