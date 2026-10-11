@@ -1,0 +1,75 @@
+name: WB-128 Gate 4 disposable edits
+
+on:
+  push:
+    branches:
+      - importer/baseline-contract-2026-10-05
+    paths:
+      - ".github/workflows/wb128-gate4-disposable-edits.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  actions: read
+
+concurrency:
+  group: wb128-gate4-disposable-edits
+  cancel-in-progress: true
+
+jobs:
+  disposable-edits:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    steps:
+      - name: Download deterministic v0.8.19 vault artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: wb128-v0819-real-vault
+          path: ${{ runner.temp }}/gate4
+          github-token: ${{ github.token }}
+          repository: spencerskelly/Test_Vault_
+          run-id: 37404532307
+
+      - name: Verify retained candidate
+        run: |
+          BASE="$RUNNER_TEMP/gate4/MDSE_v0819_full_import"
+          test -f "$BASE/00 Product Abstract/02 Module/04 IPC Accessory & Option/PCOM 1.0/PCBA - PCOM Adapter/PCBA - PCE Adapter.md"
+          test -f "$BASE/99_System/11_Import/Run Manifest.md"
+
+      - name: Checkout pinned WB-128 edit harness only
+        uses: actions/checkout@v4
+        with:
+          repository: spencerskelly/MDSE_Workbench
+          ref: 623a4d64d3d42c474397cba342472f49c778fcd1
+          path: _wb128
+          sparse-checkout: |
+            package.json
+            package-lock.json
+            tsconfig.json
+            src
+            scripts
+          sparse-checkout-cone-mode: false
+
+      - name: Install Workbench harness dependencies
+        run: npm ci --prefix _wb128
+
+      - name: Gate 4 - disposable structured edit transactions
+        env:
+          NODE_OPTIONS: --max-old-space-size=512
+        run: |
+          set -o pipefail
+          BASE="$RUNNER_TEMP/gate4/MDSE_v0819_full_import"
+          timeout 2m npm --prefix _wb128 run accept:real-vault:edits -- \
+            "$BASE" "$RUNNER_TEMP/wb128-gate4-edits.json" \
+            | tee "$RUNNER_TEMP/wb128-gate4-edits.log"
+
+      - name: Upload Gate 4 evidence only
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: wb128-gate4-disposable-edits
+          path: |
+            ${{ runner.temp }}/wb128-gate4-edits.json
+            ${{ runner.temp }}/wb128-gate4-edits.log
+          retention-days: 7
+          if-no-files-found: warn
