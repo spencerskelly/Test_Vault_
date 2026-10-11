@@ -59,6 +59,11 @@ jobs:
             assert.equal(report.counts[kind], report.categories[kind].length);
           const c = report.counts;
           console.log('AUDIT_COUNTS blocking='+c.blocking+' needs_review='+c.needs_review+' historical='+c.historical+' detector='+c.detector);
+          // Names only, never file contents; these filenames are already tracked in the public repository.
+          for (const kind of ['blocking', 'needs_review']) {
+            for (const p of report.categories[kind])
+              console.log('REVIEW_PATH_JSON '+JSON.stringify({kind,path:p}));
+          }
           fs.appendFileSync(process.env.GITHUB_STEP_SUMMARY, [
             '## Consolidation Step 08 — read-only tracked tree scan','',
             '- Commit: '+process.env.GITHUB_SHA,
