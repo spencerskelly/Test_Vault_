@@ -1,0 +1,82 @@
+name: Consolidation Step 19 - disposable generated Base Vault verification
+
+on:
+  push:
+    branches: [consolidation/step19-disposable-base-acceptance-2026-10-11]
+    paths:
+      - '.github/workflows/consolidation-step19-generated-base.yml'
+      - '66_Testing/consolidation/step19_*'
+      - '66_Testing/consolidation/test_step19_*'
+      - '66_Testing/consolidation/STEP19_*'
+
+permissions:
+  contents: read
+
+jobs:
+  disposable-base:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - name: Sparse checkout excluding public QEAX archive
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+          filter: blob:none
+          persist-credentials: false
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            /*
+            !/EA_2026_09_06_endgame.qeax.zip
+
+      - name: Verify no source-model ZIP in runner worktree
+        shell: bash
+        run: |
+          set -euo pipefail
+          test ! -e EA_2026_09_06_endgame.qeax.zip
+          test -f 'Base Vault/Tools/v0.8.0-r2/build-base.py'
+          test -f 66_Testing/consolidation/step19_generated_base.py
+
+      - name: Install YAML parser for controlled release tools
+        run: python3 -m pip install --disable-pip-version-check 'PyYAML==6.0.2'
+
+      - name: Check Step18 registry classification baseline still controlled
+        run: python3 -m unittest discover -s 66_Testing/consolidation -p 'test_step18_registry.py' -v
+
+      - name: Build a disposable uninitialized base, check native release and independent file hashes
+        shell: bash
+        run: |
+          set -euo pipefail
+          scratch="$(mktemp -d "$RUNNER_TEMP/step19-base-XXXXXX")"
+          base="$scratch/base"
+          python3 'Base Vault/Tools/v0.8.0-r2/build-base.py' "$base"
+          echo 'STEP19_DISPOSABLE_BASE_BUILT=true'
+          if ! python3 'Base Vault/Testing/check-release.py' --workbench 55_Workbench --base "$base" > "$scratch/native-check.txt" 2>&1; then
+            echo 'STEP19_NATIVE_CHECK=FAIL'
+            grep -E '^FAIL |^[0-9]+ fail, [0-9]+ warn$' "$scratch/native-check.txt" | tail -n 35 || true
+            exit 1
+          fi
+          grep -F 'base contains every required runtime file' "$scratch/native-check.txt" >/dev/null
+          grep -F 'base contains no ungoverned extra files' "$scratch/native-check.txt" >/dev/null
+          grep -F 'Workbench user guide equals Base Vault release copy' "$scratch/native-check.txt" >/dev/null
+          native_result="$(grep -E '^[0-9]+ fail, [0-9]+ warn$' "$scratch/native-check.txt" | tail -n 1)"
+          test -n "$native_result"
+          echo "STEP19_NATIVE_CHECK=$native_result"
+          python3 66_Testing/consolidation/step19_generated_base.py --base "$base"
+          STEP19_BASE_DIR="$base" python3 -m unittest discover -s 66_Testing/consolidation -p 'test_step19_generated_base.py' -v
+          # Tamper tests restore only their own disposable files; verify again.
+          python3 66_Testing/consolidation/step19_generated_base.py --base "$base"
+          echo 'STEP19_GUI_ACCEPTANCE=NOT_EXECUTED'
+          echo 'STEP19_RELEASE_APPROVAL=NOT_GRANTED'
+
+      - name: Record read-only verification scope
+        shell: bash
+        run: |
+          {
+            echo '## Step 19 — disposable generated Base Vault'
+            echo '- Native release checker and separate guide/payload SHA-256 checks run on an actual generated base'
+            echo '- Tamper tests check guide and Workbench plugin mismatch detection on disposable output only'
+            echo '- Runtime plugin lock, historical source artifacts and governance decisions untouched'
+            echo '- Public QEAX ZIP omitted from runner worktree; generated vault not uploaded'
+            echo '- Human Obsidian GUI acceptance NOT executed; MDSE 0.8.0 remains pre-release'
+            echo '- Public-main promotion and standalone archive remain blocked'
+          } >> "$GITHUB_STEP_SUMMARY"
