@@ -1,0 +1,76 @@
+name: Consolidation Step 20 - synthetic MDSE GUI fixture preparation
+
+on:
+  push:
+    branches: [consolidation/step20-synthetic-gui-model-2026-10-11]
+    paths:
+      - '.github/workflows/consolidation-step20-synthetic-model.yml'
+      - '66_Testing/consolidation/step20_*'
+      - '66_Testing/consolidation/test_step20_*'
+      - '66_Testing/consolidation/STEP20_*'
+
+permissions:
+  contents: read
+
+jobs:
+  synthetic-model-candidate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - name: Sparse checkout without source-model QEAX
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+          filter: blob:none
+          persist-credentials: false
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            /*
+            !/EA_2026_09_06_endgame.qeax.zip
+
+      - name: Confirm public source-model archive absent
+        run: |
+          test ! -e EA_2026_09_06_endgame.qeax.zip
+          test -f '66_Testing/consolidation/STEP20_GUI_ACCEPTANCE.md'
+
+      - name: Install controlled YAML tool dependency
+        run: python3 -m pip install --disable-pip-version-check 'PyYAML==6.0.2'
+
+      - name: Build controlled clean Base, then seed disposable synthetic fixture
+        shell: bash
+        run: |
+          set -euo pipefail
+          scratch="$(mktemp -d "$RUNNER_TEMP/step20-gui-XXXXXX")"
+          base="$scratch/clean"
+          synthetic="$scratch/synthetic"
+          python3 'Base Vault/Tools/v0.8.0-r2/build-base.py' "$base"
+          python3 'Base Vault/Testing/check-release.py' --workbench 55_Workbench --base "$base" > "$scratch/native.txt" 2>&1 || {
+            grep '^FAIL ' "$scratch/native.txt" | tail -n 20 || true
+            exit 1
+          }
+          summary="$(grep -E '^[0-9]+ fail, [0-9]+ warn$' "$scratch/native.txt" | tail -n 1)"
+          test -n "$summary"
+          echo "STEP20_NATIVE_BASE_CHECK=$summary"
+          STEP19_BASE_DIR="$base" python3 -m unittest discover -s 66_Testing/consolidation -p 'test_step19_generated_base.py' -v
+          python3 66_Testing/consolidation/step20_synthetic_vault.py --base "$base" --out "$synthetic"
+          python3 66_Testing/consolidation/step20_validate_fixture.py --vault "$synthetic"
+          STEP20_SYNTHETIC_VAULT="$synthetic" python3 -m unittest discover -s 66_Testing/consolidation -p 'test_step20_synthetic.py' -v
+          python3 66_Testing/consolidation/step20_validate_fixture.py --vault "$synthetic"
+          test -e "$synthetic/88_Step20_Synthetic_GUI_Model/STEP20_GUI_ACCEPTANCE.md"
+          test ! -e "$synthetic/.git"
+          test ! -e "$synthetic/EA_2026_09_06_endgame.qeax.zip"
+          echo 'STEP20_HUMAN_GUI=NOT_RUN'
+          echo 'STEP20_RELEASE=PRE_RELEASE_NOT_APPROVED'
+
+      - name: Record verification scope; do not upload any vault or plugin binary
+        shell: bash
+        run: |
+          {
+            echo '## Step 20 — synthetic MDSE GUI test preparation'
+            echo '- Built a disposable pre-release Base Vault from controlled source'
+            echo '- Generated 12 synthetic first-class model notes and Local Model 0.5 occurrences'
+            echo '- Checked links, part/interface/connection/flow ownership, and rejected malformed test mutations'
+            echo '- Plugin lock and governed schemas remained unchanged; QEAX absent'
+            echo '- Human Obsidian Mac/Windows GUI acceptance: NOT RUN'
+            echo '- No public-main merge, production release, or standalone Workbench archive'
+          } >> "$GITHUB_STEP_SUMMARY"
