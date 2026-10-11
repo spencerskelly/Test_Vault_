@@ -1,0 +1,84 @@
+name: Consolidation Step 15 - governance package fail-closed review
+
+on:
+  push:
+    branches: [consolidation/step15-governance-review-kit-2026-10-10]
+    paths:
+      - '.github/workflows/consolidation-step15-governance.yml'
+      - '00_Workspace/Consolidation Step 15*'
+      - '66_Testing/consolidation/**'
+
+permissions:
+  contents: read
+
+jobs:
+  governance-candidate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - name: Read-only sparse checkout without public source-model archive bytes
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+          filter: blob:none
+          persist-credentials: false
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            /*
+            !/EA_2026_09_06_endgame.qeax.zip
+
+      - name: Verify no model-archive worktree materialization
+        shell: bash
+        run: |
+          set -euo pipefail
+          test ! -e EA_2026_09_06_endgame.qeax.zip
+          test -f 66_Testing/consolidation/test_step15_governance.py
+          test -f "00_Workspace/Consolidation Step 15 - Governance Gate Register 2026-10-10.json"
+
+      - name: Run 26 governance and approval stop-gate tests
+        run: python3 -m unittest discover -s 66_Testing/consolidation -p 'test_step15_governance.py' -v
+
+      - name: Preserve Step 14 Workbench history and redline notices
+        run: python3 -m unittest discover -s 66_Testing/consolidation -p 'test_step14_docs.py' -v
+
+      - name: Preserve Step 13 document registry pending-approval state
+        run: python3 -m unittest discover -s 66_Testing/consolidation -p 'test_step13_registry.py' -v
+
+      - name: Preserve frozen source provenance and active dependency classification
+        run: python3 -m unittest discover -s 66_Testing/consolidation -p 'test_workbench_reference_policy.py' -v
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Preserve eight exact retired Workbench checkout workflows
+        run: node --test 66_Testing/consolidation/test_step11_retirement.cjs
+
+      - name: Actual tracked-tree report must remain NOT ready to merge/archive
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 66_Testing/check_release_alignment.py --output "$RUNNER_TEMP/step15-alignment.json"
+          python3 - "$RUNNER_TEMP/step15-alignment.json" <<'PY'
+          import json,os,sys
+          data=json.load(open(sys.argv[1],encoding="utf-8"))
+          refs=data["workbenchRepositoryReferences"]
+          counts=refs["counts"]
+          assert counts["blocking"] == 0, counts
+          assert counts["needs_review"] == 5, counts
+          assert counts["verified_provenance"] == 3, counts
+          assert refs["strictReady"] is False
+          assert data["versions"]["releaseStatus"] == "pre-release"
+          gates=json.load(open("00_Workspace/Consolidation Step 15 - Governance Gate Register 2026-10-10.json",encoding="utf-8"))
+          assert gates["state"] == "REVIEW_ONLY_NOT_APPROVED"
+          assert len(gates["gates"]) == 12 and all(g["status"] == "NOT_APPROVED" for g in gates["gates"])
+          assert not any(gates["readiness"].values())
+          print("STEP15_REFERENCE_COUNTS "+json.dumps(counts,sort_keys=True))
+          print("STEP15_GATE_COUNT=12; APPROVALS=0; MAIN_PROMOTION=BLOCKED; ARCHIVE=BLOCKED")
+          with open(os.environ["GITHUB_STEP_SUMMARY"],"a",encoding="utf-8") as f:
+              f.write("## Step 15 — unapproved W decision and redline package\n\n")
+              f.write("- Proposed W decision ID: **UNASSIGNED**\n")
+              f.write("- Approval register: **12/12 NOT APPROVED**\n")
+              f.write("- Five existing document-review blockers remain; historical evidence preserved\n")
+              f.write("- No QEAX archive inspected or uploaded, no public-main merge/archival\n")
+          PY
