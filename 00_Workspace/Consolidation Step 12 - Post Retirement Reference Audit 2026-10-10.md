@@ -43,3 +43,10 @@ Recommended controlled follow-up:
 - `spencerskelly/MDSE_Workbench` is **not archived** and neither repository's `main` branch was changed by this stage.
 
 **Next bounded step:** draft the new authoritative continuation/handoff note and revised document registry as an isolated source-of-truth proposal. Do not approve W governance or change public `main` absent explicit owner approval.
+
+## Final Step 12 post-policy verification
+
+- [Final GitHub Actions run 38109713030](https://github.com/spencerskelly/Test_Vault_/actions/runs/38109713030): **SUCCESS**, 23/23 Python negative/provenance tests and 22/22 exact historical-workflow retirement tests.
+- Actual tracked-tree counts **after** the narrowly approved historical classification: **0 blocking, 5 needs_review, 3 verified_provenance, 52 historical**. (The 50 historical count earlier in this document is the initial, pre-policy snapshot.)
+- The five needs-review paths exactly match the five open current/mixed-purpose documents in the disposition ledger. `strictReady=false` remains intentional.
+- This result verifies only the tested Step 12 commit `452805ce3edc0ec8d97908f8bba88051cf09798f`; the checkpoint-only documentation commit below does not change the audited code or reference policies.

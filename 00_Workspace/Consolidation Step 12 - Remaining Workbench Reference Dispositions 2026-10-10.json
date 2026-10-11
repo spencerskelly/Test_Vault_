@@ -77,5 +77,22 @@
     "full_integrated_release_acceptance",
     "real_obsidian_gui_acceptance",
     "explicit_archive_authorization"
-  ]
+  ],
+  "finalCi": {
+    "runId": 38109713030,
+    "url": "https://github.com/spencerskelly/Test_Vault_/actions/runs/38109713030",
+    "testedCommit": "452805ce3edc0ec8d97908f8bba88051cf09798f",
+    "conclusion": "success",
+    "pythonTestsPassed": 23,
+    "nodeTestsPassed": 22,
+    "counts": {
+      "blocking": 0,
+      "needs_review": 5,
+      "verified_provenance": 3,
+      "historical": 52
+    },
+    "strictReady": false,
+    "qeaxWorktreeExcluded": true,
+    "note": "Five current/mixed guidance records remain unresolved. No public-main merge or standalone archival approval."
+  }
 }
