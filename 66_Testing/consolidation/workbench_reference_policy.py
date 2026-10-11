@@ -26,6 +26,12 @@ CURRENT_DOCS = {
     "55_Workbench/docs/Definition/04 - Architecture and Model Boundary.md",
     "Base Vault/Definition/mdse-release.yaml",
 }
+# The Step 07 proposal is source evidence, not current guidance. Its exemption
+# is valid only for its unchanged, reviewed blob.
+HISTORICAL_PROPOSAL_BLOBS = {
+    "66_Testing/consolidation/STEP07_CONTROLLED_CUTOVER_PREVIEW.md":
+        "c510203a480c7e1ce908be3dd677e4dec1bc2d7a",
+}
 HISTORICAL_FILES = {
     "00_Workspace/Workspace Decision Log.md",
     "00_Workspace/GitHub Consolidation Recovery Inventory 2026-10-09.md",
@@ -62,6 +68,13 @@ def classify(root: Path, relative_path: str) -> str:
             return "blocking"
         return ("verified_provenance" if git_blob_sha(data) == PROVENANCE_BLOBS[p]
                 else "blocking")
+    if p in HISTORICAL_PROPOSAL_BLOBS:
+        try:
+            actual = git_blob_sha((root / p).read_bytes())
+        except OSError:
+            return "needs_review"
+        return ("historical" if actual == HISTORICAL_PROPOSAL_BLOBS[p]
+                else "needs_review")
     if p.startswith(".github/workflows/"):
         # GitHub Actions can be invoked: historical pinned checkout != inert file.
         return "blocking"

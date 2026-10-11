@@ -69,6 +69,23 @@ class RepositoryReferenceTests(unittest.TestCase):
             with self.subTest(p=p):
                 self.assertEqual(classify(ROOT, p), "historical")
 
+    def test_review_only_step07_proposal_is_exact_historical_blob(self):
+        p = "66_Testing/consolidation/STEP07_CONTROLLED_CUTOVER_PREVIEW.md"
+        self.assertEqual(git_blob_sha((ROOT / p).read_bytes()),
+                         "c510203a480c7e1ce908be3dd677e4dec1bc2d7a")
+        self.assertEqual(classify(ROOT, p), "historical")
+
+    def test_amended_step07_proposal_loses_history_exemption(self):
+        with tempfile.TemporaryDirectory() as d:
+            p = "66_Testing/consolidation/STEP07_CONTROLLED_CUTOVER_PREVIEW.md"
+            f = Path(d) / p
+            f.parent.mkdir(parents=True)
+            f.write_bytes((ROOT / p).read_bytes() + b"\\n# modified\\n")
+            self.assertEqual(classify(Path(d), p), "needs_review")
+            self.assertEqual(classify(ROOT,
+                             "66_Testing/consolidation/Unreviewed Preview.md"),
+                             "needs_review")
+
     def test_current_unknown_doc_needs_review(self):
         self.assertEqual(classify(ROOT, "55_Workbench/docs/Definition/03 - Build Outline and Roadmap.md"), "needs_review")
 
