@@ -1,5 +1,13 @@
 # Build Outline and Roadmap
 
+<!-- MDSE_STEP14_PROPOSAL_BANNER_START -->
+> **Step 14 Workbench product-roadmap review notice — PROPOSAL, NOT APPROVED (2026-10-10).** This document contains approved 2026-09-30 V1 product direction and dated WB-106/WB-128 implementation milestones. Preserve its original capability and test requirements; its 2026-10-02 instruction to implement in the standalone Workbench repository is **not a new instruction for the consolidated staging candidate**.
+>
+> **Proposed implementation location:** `spencerskelly/Test_Vault_/55_Workbench/` and `55_Workbench/docs/Definition/`, subject to the proposed Step 13 continuation contract and a new W decision. The staging manifest pins relationships **1.36**, element types **1.18**, Local Model **0.5**, Workbench **0.1.18**; historical 0.1.15/0.1.16/0.1.17 and Local Model 0.2/0.4 material below remain attributed to the dates when recorded.
+>
+> **Not authorized:** reinterpret model semantics, enable a Local Model 0.6 writer, treat the earlier WB-128 evidence as new GUI acceptance, promote pre-release runtime, or archive the original standalone Git repository. Product-owner review is still required.
+<!-- MDSE_STEP14_PROPOSAL_BANNER_END -->
+
 ## Goal
 
 Deliver the smallest Workbench release that makes the MDSE vault substantially easier for an engineer to use every day, and prove the interface and semantic-editing pattern before investing in advanced automation.

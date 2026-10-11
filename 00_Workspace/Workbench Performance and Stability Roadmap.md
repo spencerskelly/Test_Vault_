@@ -1,5 +1,13 @@
 # Workbench Performance and Stability Roadmap
 
+<!-- MDSE_STEP14_PROPOSAL_BANNER_START -->
+> **Step 14 consolidation review notice — PROPOSAL, NOT APPROVED (2026-10-10).** This reconstructed roadmap preserves the dated Step 18–60 performance/stability evidence. Its 2026-10-04 **Execution contract for future chats** and directions to edit the standalone Workbench repository are historical instructions for that earlier effort; **do not use those instructions for new consolidation work**.
+>
+> **Proposed current development route:** review Workbench work under `spencerskelly/Test_Vault_/55_Workbench/` using the Step 13 *proposed* [[MDSE v0.8 Unified Development Continuation Contract - PROPOSAL 2026-10-10]], not the original standalone-main workflow. The actual release manifest remains **0.8.0 pre-release**, relationships **1.36**, element types **1.18**, Local Model **0.5**, Workbench **0.1.18**. These are staging pins, not proof of issued release or manual Obsidian acceptance.
+>
+> **Review gate:** a superseding W authority decision, document approvals, QEAX owner/security classification, contributor clone checks and full GUI/release acceptance are still pending. The original numbered evidence below is retained byte-for-byte after this notice.
+<!-- MDSE_STEP14_PROPOSAL_BANNER_END -->
+
 **Status:** reconstructed working roadmap  
 **Date reconstructed:** 2026-10-04  
 **Authority:** replacement for the retired temporary performance/stability checklist. Steps 18–32 below are verified from implementation history; Steps 33 onward are reconstructed from the governing Startup Stability Plan and current Workbench architecture and are not claimed to be the lost checklist verbatim.

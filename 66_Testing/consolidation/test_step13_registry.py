@@ -7,6 +7,8 @@ import re
 import unittest
 from pathlib import Path
 
+from step14_doc_review import original_historical_bytes
+
 ROOT = Path(__file__).resolve().parents[2]
 CONTRACT = "00_Workspace/MDSE v0.8 Unified Development Continuation Contract - PROPOSAL 2026-10-10.md"
 PLAN = "00_Workspace/Consolidation Step 13 - Document Registry Transition Plan 2026-10-10.md"
@@ -100,10 +102,12 @@ class Step13CandidateTests(unittest.TestCase):
         path = "00_Workspace/Workbench Performance and Stability Roadmap.md"
         self.assertIn(f'  - {{path: "{path}", status: reference}}', self.manifest)
 
-    def test_all_five_source_document_blobs_unchanged(self):
+    def test_all_five_original_document_bodies_preserved(self):
         for p, sha in OLD.items():
             with self.subTest(path=p):
-                self.assertEqual(git_blob_sha((ROOT / p).read_bytes()), sha)
+                raw = (ROOT / p).read_bytes()
+                original = original_historical_bytes(p, raw)
+                self.assertEqual(git_blob_sha(original), sha)
 
     def test_legacy_W_log_unchanged(self):
         self.assertEqual(git_blob_sha((ROOT / "00_Workspace/Workspace Decision Log.md").read_bytes()), ORIGINAL_W_LOG_SHA)

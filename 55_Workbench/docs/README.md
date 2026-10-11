@@ -1,5 +1,13 @@
 # MDSE Workbench
 
+<!-- MDSE_STEP14_PROPOSAL_BANNER_START -->
+> **Step 14 living Workbench guide review — PROPOSAL, NOT APPROVED (2026-10-10).** The following original content includes 2026-09-30 to 2026-10-03 snapshots of Workbench 0.1.15/0.1.16 and Local Model writer 0.2. Those statements and the older *Current v0.8 contract* section must **not be used as current staging version instructions**.
+>
+> **Proposed consolidated staging direction:** Workbench implementation and product documentation reside under `spencerskelly/Test_Vault_/55_Workbench/`; shared model semantics stay under `99_System/`. The controlled *staging* release manifest (0.8.0 **pre-release**) pins relationships **1.36**, element types **1.18**, Local Model **0.5**, Workbench **0.1.18**, and Bootstrap runtime **0.3.0** (0.3.1 candidate). Confirm any actual editor capabilities in current source/tests; a schema pin alone does not prove the live UI or acceptance.
+>
+> **Owner action required:** review and rewrite the living version/status sections after the proposed Step 13 continuation contract is formally ratified. The older source and milestone text below is preserved byte-for-byte for traceability. Generated plugin lock, historical W/WB decisions, QEAX, and standalone repository archive remain governed separately.
+<!-- MDSE_STEP14_PROPOSAL_BANNER_END -->
+
 ## Purpose
 
 This folder is the living product-definition workspace for the **MDSE Workbench**: a practical Obsidian interface that helps engineers create, explore, review, and graphically work with the existing MDSE model without requiring them to become modeling specialists.

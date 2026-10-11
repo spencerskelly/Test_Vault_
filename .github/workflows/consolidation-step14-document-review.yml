@@ -1,0 +1,80 @@
+name: Consolidation Step 14 - Workbench documentation review integrity
+
+on:
+  push:
+    branches: [consolidation/step14-workbench-document-review-2026-10-10]
+    paths:
+      - '.github/workflows/consolidation-step14-document-review.yml'
+      - '00_Workspace/Workbench Performance and Stability Roadmap.md'
+      - '55_Workbench/docs/Definition/03 - Build Outline and Roadmap.md'
+      - '55_Workbench/docs/README.md'
+      - '00_Workspace/Consolidation Step 14*'
+      - '66_Testing/consolidation/**'
+
+permissions:
+  contents: read
+
+jobs:
+  document-review-integrity:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - name: Sparse checkout without large public QEAX model archive
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+          filter: blob:none
+          persist-credentials: false
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            /*
+            !/EA_2026_09_06_endgame.qeax.zip
+
+      - name: Assert source-model archive not in working tree
+        shell: bash
+        run: |
+          set -euo pipefail
+          test ! -e EA_2026_09_06_endgame.qeax.zip
+          test -f 66_Testing/consolidation/step14_doc_review.py
+          test -f "55_Workbench/docs/README.md"
+
+      - name: Preserve reviewed Workbench original bytes and reject approval-marker tampering
+        run: python3 -m unittest discover -s 66_Testing/consolidation -p 'test_step14_docs.py' -v
+
+      - name: Preserve Step 13 proposal-only registry and rollback contract
+        run: python3 -m unittest discover -s 66_Testing/consolidation -p 'test_step13_registry.py' -v
+
+      - name: Recheck frozen provenance, Workbench source references and blockers
+        run: python3 -m unittest discover -s 66_Testing/consolidation -p 'test_workbench_reference_policy.py' -v
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Verify eight retired GitHub workflows remain archived exactly
+        run: node --test 66_Testing/consolidation/test_step11_retirement.cjs
+
+      - name: Read-only release/document reference preflight
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 66_Testing/check_release_alignment.py --output "$RUNNER_TEMP/step14-alignment.json"
+          python3 - "$RUNNER_TEMP/step14-alignment.json" <<'PY'
+          import json, os, sys
+          result=json.load(open(sys.argv[1],encoding="utf-8"))
+          refs=result["workbenchRepositoryReferences"]
+          c=refs["counts"]
+          assert c["blocking"] == 0, c
+          assert c["needs_review"] == 5, c
+          assert c["verified_provenance"] == 3, c
+          assert refs["strictReady"] is False
+          assert result["versions"]["releaseStatus"] == "pre-release"
+          print("STEP14_REFERENCE_COUNTS "+json.dumps(c,sort_keys=True))
+          print("STEP14_GOVERNANCE_STATUS=PROPOSAL_NOT_APPROVED")
+          with open(os.environ["GITHUB_STEP_SUMMARY"],"a",encoding="utf-8") as f:
+              f.write("## Step 14 — workbench document historical preservation\n\n")
+              f.write("- Three dated review-only notices; three original document bodies SHA-verified\n")
+              f.write("- Five current/mixed-document review gates remain open\n")
+              f.write("- No public QEAX archive inspection or artifact upload\n")
+              f.write("- No W decision, release or standalone archive approved\n")
+          PY
