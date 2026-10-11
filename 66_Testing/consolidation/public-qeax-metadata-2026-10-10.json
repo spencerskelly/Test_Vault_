@@ -1,0 +1,44 @@
+{
+  "schema": "mdse-consolidation-public-artifact-gate/1",
+  "recorded": "2026-10-10",
+  "repository": "spencerskelly/Test_Vault_",
+  "repository_visibility": "public",
+  "branch_inspected": "consolidation/step04-authority-ci-audit-2026-10-10",
+  "branch_commit": "212602377fb71a634a36bde57e5aa886e8d5b4c1",
+  "default_branch": "main",
+  "default_branch_commit": "19f565859e4b9fb7ae63004f1b6f0a7de1b9144e",
+  "archive": {
+    "name": "EA_2026_09_06_endgame.qeax.zip",
+    "bytes": 73184128,
+    "git_blob_sha": "513b2d2d4696b1502fe482424f7c05985442e2b9",
+    "present_in_public_staging_branch": true,
+    "present_at_main_head": false,
+    "path_history_commit": "2f7c93ffed265349d599fc89efbc85fc7a46dd5e",
+    "path_history_commit_utc": "2026-10-06T00:03:16Z",
+    "bytes_downloaded_or_opened": false,
+    "content_confidentiality": "unassessed",
+    "owner_publication_approval": "pending",
+    "public_history_exposure_review": "required",
+    "remediation_if_sensitive": "owner/security decision required; branch or file deletion alone not sufficient"
+  },
+  "local_clone_audit": {
+    "mac_shell_script": "66_Testing/consolidation/audit_local_git.sh",
+    "windows_powershell_script": "66_Testing/consolidation/audit_local_git.ps1",
+    "scripts_read_only": true,
+    "remote_fetch": false,
+    "uploads_anything": false,
+    "completed_workstations": 0,
+    "outstanding": "All active contributor clones and worktrees must be checked by their owners.",
+    "shell_syntax": "PASS",
+    "shell_disposable_smoke": "PASS",
+    "powerShell_execution": "NOT_RUN_NO_POWERSHELL_RUNTIME"
+  },
+  "release_gates": {
+    "qeax_classification": "OPEN",
+    "local_clone_unpushed_audit": "OPEN",
+    "repo_cutover": "OPEN",
+    "integrated_full_ci": "OPEN",
+    "real_obsidian_gui_acceptance": "OPEN",
+    "standalone_archive": "BLOCKED"
+  }
+}
