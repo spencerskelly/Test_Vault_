@@ -133,6 +133,8 @@ documents:
   - {path: "00_Workspace/GitHub Consolidation Step 02 Branch Reconciliation 2026-10-09.md", status: reference}
   - {path: "00_Workspace/GitHub Consolidation Step 03 Workbench Migration Manifest 2026-10-09.md", status: reference}
   - {path: "00_Workspace/GitHub Consolidation Step 04 Workbench Rehearsal 2026-10-09.md", status: reference}
+  - {path: "00_Workspace/MDSE v0.8 Unified Development Continuation Contract - PROPOSAL 2026-10-10.md", status: proposal}
+  - {path: "00_Workspace/Consolidation Step 13 - Document Registry Transition Plan 2026-10-10.md", status: reference}
   - {path: "00_Workspace/00 - Current State.md", status: current}
   - {path: "00_Workspace/MDSE Plan - Path to a Golden Model.md", status: current}
   - {path: "00_Workspace/MDSE v0.8 Cross-Repository Reconciliation - 2026-10-02.md", status: current}

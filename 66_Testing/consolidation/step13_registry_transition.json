@@ -1,0 +1,104 @@
+{
+  "schema": "mdse-consolidation-document-transition/1",
+  "recorded": "2026-10-10",
+  "sourceRepo": "spencerskelly/Test_Vault_",
+  "parent": "af77492c895dc31d2b28b74d8ded15947d617298",
+  "baselineManifestBlob": "04f1fc2f4a087ccd2d1a49376c221979ee3469e3",
+  "source": "00_Workspace/Consolidation Step 12 - Remaining Workbench Reference Dispositions 2026-10-10.json",
+  "status": "PROPOSED_NOT_APPROVED",
+  "currentStep13Registrations": [
+    {
+      "path": "00_Workspace/MDSE v0.8 Unified Development Continuation Contract - PROPOSAL 2026-10-10.md",
+      "status": "proposal"
+    },
+    {
+      "path": "00_Workspace/Consolidation Step 13 - Document Registry Transition Plan 2026-10-10.md",
+      "status": "reference"
+    }
+  ],
+  "plannedGovernanceChanges": [
+    {
+      "operation": "promote_to_current",
+      "path": "00_Workspace/MDSE v0.8 Unified Development Continuation Contract - PROPOSAL 2026-10-10.md",
+      "from": "proposal",
+      "to": "current",
+      "gate": "approved_new_W_decision"
+    },
+    {
+      "operation": "supersede_old_current",
+      "path": "00_Workspace/Handoff Prompt - MDSE v0.8 Implementation.md",
+      "from": "current",
+      "to": "superseded",
+      "supersededBy": "00_Workspace/MDSE v0.8 Unified Development Continuation Contract - PROPOSAL 2026-10-10.md",
+      "verifiedBaselineBlob": "d344fd38147efd03841acab547cac7bb579c2a1e",
+      "gate": "approved_new_W_decision"
+    },
+    {
+      "operation": "supersede_old_current",
+      "path": "00_Workspace/MDSE v0.8 Cross-Repository Reconciliation - 2026-10-02.md",
+      "from": "current",
+      "to": "superseded",
+      "supersededBy": "00_Workspace/MDSE v0.8 Unified Development Continuation Contract - PROPOSAL 2026-10-10.md",
+      "verifiedBaselineBlob": "e133dcb2672eb6b8066b79d857d7e4e58d1a187f",
+      "gate": "approved_new_W_decision"
+    }
+  ],
+  "unresolvedDocuments": [
+    {
+      "path": "00_Workspace/Handoff Prompt - MDSE v0.8 Implementation.md",
+      "blob": "d344fd38147efd03841acab547cac7bb579c2a1e",
+      "current": "current",
+      "proposed": "superseded",
+      "successor": "00_Workspace/MDSE v0.8 Unified Development Continuation Contract - PROPOSAL 2026-10-10.md",
+      "why": "Old copy-ready prompt sends implementation to standalone and contains pre-0.5 release/version guidance"
+    },
+    {
+      "path": "00_Workspace/MDSE v0.8 Cross-Repository Reconciliation - 2026-10-02.md",
+      "blob": "e133dcb2672eb6b8066b79d857d7e4e58d1a187f",
+      "current": "current",
+      "proposed": "superseded",
+      "successor": "00_Workspace/MDSE v0.8 Unified Development Continuation Contract - PROPOSAL 2026-10-10.md",
+      "why": "Date-specific Oct 2 cross-repo contract is still registered current; preserve source semantics/history while replacing current execution authority"
+    },
+    {
+      "path": "00_Workspace/Workbench Performance and Stability Roadmap.md",
+      "blob": "4f41a03020efe011260dbb884a4c279106814142",
+      "current": "reference",
+      "proposed": "reference",
+      "successor": null,
+      "why": "Preserve verified milestone sequence; separately supersede the old execution protocol, not its historical results"
+    },
+    {
+      "path": "55_Workbench/docs/Definition/03 - Build Outline and Roadmap.md",
+      "blob": "0ff206b531c7659b4b46757554a7f1d6d4b1b53f",
+      "current": "unregistered",
+      "proposed": "reference_after_review",
+      "successor": null,
+      "why": "Approved historical product direction mixed with obsolete standalone implementation instruction; owner to review dated addendum"
+    },
+    {
+      "path": "55_Workbench/docs/README.md",
+      "blob": "2dc82f816e4626982016ed9453c3c5fad8da3f32",
+      "current": "unregistered",
+      "proposed": "current_after_rewrite_and_review",
+      "successor": null,
+      "why": "Living Workbench definition contains older Local Model and runtime claims; updated copy needs owner acceptance"
+    }
+  ],
+  "approvals": {
+    "supersedingWDecision": null,
+    "publicQEAXDataOwnerReview": null,
+    "localCloneSignoffs": 0,
+    "fullIntegrationReleaseApproval": false,
+    "realObsidianGUIAcceptance": false,
+    "standaloneArchiveApproval": false
+  },
+  "testRules": [
+    "Exactly two review-only manifest document entries are inserted; delete both lines to obtain the baseline manifest byte-for-byte",
+    "Two old current documents remain registered current until formal W decision approval",
+    "No original five source blobs or Workspace Decision Log were modified",
+    "No release status, importer candidate, Workbench lock, schema versions, runtime payload or QEAX archive is changed",
+    "An approved future supersession applies in memory against anchored registry rows; only two old current rows and one proposal row may change"
+  ],
+  "next": "Review the proposed replacement, approve a W authority decision only after mandatory security/local-work checks, then implement exact registry supersession and document addenda in a separately reviewed PR."
+}
