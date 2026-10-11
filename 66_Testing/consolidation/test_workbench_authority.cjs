@@ -24,6 +24,7 @@ const cases=[
  ["66_Testing/check_release_alignment.py","detector"],
  ["66_Testing/consolidation/audit_workbench_authority.cjs","detector"],
  ["66_Testing/consolidation/test_workbench_authority.cjs","detector"],
+ ["66_Testing/consolidation/STEP08_REFERENCE_DISPOSITIONS.json","historical"],
  ["00_Workspace/Unexpected New SOP.md","needs_review"],
  ["55_Workbench/docs/Definition/Current Ownership.md","needs_review"],
  ["99_System/10_Docs/Current Modeling.md","needs_review"],

@@ -18,6 +18,7 @@ const AUDIT_SELF = new Set([
   "66_Testing/consolidation/audit_workbench_authority.cjs",
   "66_Testing/consolidation/test_workbench_authority.cjs",
 ]);
+const HISTORICAL_EVIDENCE_FILES = new Set(["66_Testing/consolidation/STEP08_REFERENCE_DISPOSITIONS.json"]);
 const HISTORICAL_PREFIXES = [
   "00_Workspace/History/", "Importer/History/", "55_Workbench/docs/Reference/ARCHIVE_",
   "55_Workbench/docs/bom/a01-a14/", "55_Workbench/docs/bom/History/",
@@ -28,6 +29,7 @@ function classify(relativePath) {
   // Exact current docs and root CI take precedence over history exemptions.
   if (CURRENT_DOCS.has(p) || p.startsWith(".github/workflows/")) return "blocking";
   if (AUDIT_SELF.has(p)) return "detector";
+  if (HISTORICAL_EVIDENCE_FILES.has(p)) return "historical";
   if (HISTORICAL_PREFIXES.some(prefix => p.startsWith(prefix))) return "historical";
   if (/\.(?:cjs|mjs|js|jsx|ts|tsx|py|sh|ps1|ya?ml|json|toml|ini)$/i.test(p)) return "blocking";
   return "needs_review";
