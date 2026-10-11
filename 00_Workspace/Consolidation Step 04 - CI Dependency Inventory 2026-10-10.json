@@ -1,0 +1,102 @@
+{
+  "schema": "mdse-consolidation-authority-audit/1",
+  "date": "2026-10-10",
+  "repository": "spencerskelly/Test_Vault_",
+  "audited_commit": "987e6a6b3a58a973ede5919364863d86d19108e4",
+  "scope": "remote staging snapshot; git tracked paths/selected sources; not local clones or Obsidian",
+  "root_workflows": {
+    "count": 22,
+    "files": [
+      "bom-a14-source-step15.yml",
+      "bom-step16-governance.yml",
+      "bom-step17-real-qeax.yml",
+      "bootstrap-candidate.yml",
+      "imp006-source-fingerprint.yml",
+      "importer-candidate.yml",
+      "importer-history-persist.yml",
+      "mdse-monorepo-workbench-ci.yml",
+      "mdse-release-alignment-preflight.yml",
+      "package-imp009-base.yml",
+      "real-qeax-integration.yml",
+      "release-contract-step10.yml",
+      "step18-obsidian-ui-kit.yml",
+      "v0819-qeax-bridge.yml",
+      "wb128-gate3-representative-views.yml",
+      "wb128-gate4-disposable-edits.yml",
+      "wb128-gate5-release-alignment.yml",
+      "wb128-real-vault-acceptance.yml",
+      "wb129-importer-contract-check.yml",
+      "wb129-real-qeax-local-model-05.yml",
+      "wb129-rehearsal.yml",
+      "workbench-subtree-stage.yml"
+    ],
+    "referencing_legacy_workbench": {
+      "count": 8,
+      "files": [
+        "bom-a14-source-step15.yml",
+        "wb128-gate3-representative-views.yml",
+        "wb128-gate4-disposable-edits.yml",
+        "wb128-gate5-release-alignment.yml",
+        "wb128-real-vault-acceptance.yml",
+        "wb129-real-qeax-local-model-05.yml",
+        "wb129-rehearsal.yml",
+        "workbench-subtree-stage.yml"
+      ]
+    },
+    "active_consolidated_ci": [
+      "mdse-monorepo-workbench-ci.yml",
+      "mdse-release-alignment-preflight.yml"
+    ]
+  },
+  "authority_files": {
+    "Base Vault/Definition/mdse-release.yaml": {
+      "sha": "ce556ade56b5bd9650ccc659f1b41bf2ca411c10",
+      "kind": "authority"
+    },
+    "README.md": {
+      "sha": "ccd627dc18000895a424d577d3615d16535c9f95",
+      "kind": "developer_guide"
+    },
+    "00_Workspace/00 - Current State.md": {
+      "sha": "4e661e075b500950d2aebbf9394fbb087d70242e",
+      "kind": "current_state"
+    },
+    "00_Workspace/MDSE Tool Definitions and Boundaries.md": {
+      "kind": "ownership_definition"
+    },
+    "66_Testing/check_release_alignment.py": {
+      "sha": "3eaeae1fa5b6eb198b717b49cf78b79b556a3dce",
+      "kind": "diagnostic"
+    },
+    ".github/workflows/mdse-monorepo-workbench-ci.yml": {
+      "sha": "afddc15493d96fb35c39eb89e68ad992b64d9c3f",
+      "kind": "future_ci"
+    },
+    ".github/workflows/mdse-release-alignment-preflight.yml": {
+      "sha": "1198601ad6849fdd0ed35e1a08a55f78349d8211",
+      "kind": "future_ci"
+    },
+    "Base Vault/Testing/check-release.py": {
+      "sha": "aae6d70357fbeea2c56aac7c3307604750dfdefe",
+      "kind": "release_checker"
+    }
+  },
+  "release_fields_still_standalone": [
+    "tools.workbench.repo",
+    "repos.workbench"
+  ],
+  "future_source_home": "spencerskelly/Test_Vault_/55_Workbench",
+  "current_source_home": "spencerskelly/MDSE_Workbench",
+  "current_writer_schema": "0.5",
+  "candidate_readable": "0.6",
+  "released": false,
+  "stop_conditions": [
+    "qeax_security_review",
+    "local_clone_unpushed_audit",
+    "workflow_trigger_transition",
+    "manifest_and_docs_authority_update",
+    "workspace_registry_migration",
+    "a15_source_integration_and_ci",
+    "obsidian_gui_first_open_acceptance"
+  ]
+}
