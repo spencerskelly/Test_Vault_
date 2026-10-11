@@ -13,6 +13,7 @@ import re
 import subprocess
 import sys
 from pathlib import Path
+from consolidation.workbench_reference_policy import LEGACY_REPO, analyze
 
 ROOT = Path(__file__).resolve().parent.parent
 PLAN = ROOT / "66_Testing" / "migration-path-plan.json"
@@ -189,13 +190,25 @@ def main() -> int:
     # Includes history/doc references for later disposition. This is a lower
     # bound: dynamic path construction, binaries, and Obsidian links require
     # additional tool-specific checks before any directory move.
-    terms = ["Definitions/", "Importer/", "Base Vault/", "Bootstrap/", "Cross-Vault/",
-             "spencerskelly/MDSE_Workbench"]
+    terms = ["Definitions/", "Importer/", "Base Vault/", "Bootstrap/", "Cross-Vault/"]
     for term in terms:
         matches = grep_files(term)
         report["dependencyReferences"][term] = {
             "trackedFiles": len(matches), "examples": matches[:10]
         }
+    # Standalone Workbench references are an independent fail-closed authority
+    # check. Frozen release provenance is recognized ONLY at exact audited
+    # blob SHAs; legacy workflows can still be run and remain blocking.
+    workbench_refs = analyze(ROOT, grep_files(LEGACY_REPO))
+    report["workbenchRepositoryReferences"] = workbench_refs
+    counts = workbench_refs["counts"]
+    print("WORKBENCH_AUTHORITY_REFERENCES", counts)
+    if not workbench_refs["strictReady"]:
+        finding("warning", "WORKBENCH_REPO_CUTOVER_PENDING",
+                str(counts["blocking"]) + " active references; " +
+                str(counts["needs_review"]) + " unclassified; " +
+                str(counts["verified_provenance"]) + " verified frozen provenance; " +
+                str(counts["historical"]) + " historical")
     for term in terms:
         info = report["dependencyReferences"][term]
         print("DEPENDENCY", repr(term), info["trackedFiles"], "tracked files",
