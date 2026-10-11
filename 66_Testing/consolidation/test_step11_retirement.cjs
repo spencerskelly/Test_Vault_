@@ -12,9 +12,11 @@ const originals=[
 ["wb128-gate4-disposable-edits.yml","5afbcd3322f228889fd0ce57e66e14eb3c725598"],
 ["wb128-gate5-release-alignment.yml","abf0174b2af10d4f9974a584bfa12530f1721b47"],
 ["wb128-real-vault-acceptance.yml","44b4c93f413ccf0478b8cfb162692fc0f40b0004"],
+["wb129-real-qeax-local-model-05.yml","7c14dc88cb3cd53fc317897cd260c3ed9113c2f7"],
 ["wb129-rehearsal.yml","7721087d6fc31cafd2390cdaa5ba8ae1fc97b09a"],
 ["workbench-subtree-stage.yml","3e51e09147179ffed9a24c3f19b38d8705fb6fe1"]
 ];
+test("archive inventory has exactly eight workflow entries",()=>assert.equal(originals.length,8));
 function git(...args){const p=spawnSync("git",["-C",root,...args],{encoding:"utf8"});assert.equal(p.status,0,"git "+args.join(" ")+": "+p.stderr);return p.stdout.trim();}
 function blob(data){const prefix=Buffer.from("blob "+data.length+"\0");return crypto.createHash("sha1").update(prefix).update(data).digest("hex");}
 for(const [name,sha]of originals) {
