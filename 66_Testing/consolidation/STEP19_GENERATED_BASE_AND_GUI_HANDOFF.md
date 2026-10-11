@@ -59,3 +59,28 @@ This procedure is an approval **handoff**, not automatic acceptance. Do not clai
 - Only after these requirements and protected PR review may main be promoted. Standalone repository read-only archival requires an independent explicit authorization.
 
 **Next bounded step:** record verified generated-base build counts and tool output; prepare human GUI acceptance bundle using only synthetic model data, leaving all G19 UI results pending until an actual operator completes them.
+
+## Verified Step 19 CI result (GitHub-hosted disposable runner)
+
+**GitHub Actions:** [run 38183598705](https://github.com/spencerskelly/Test_Vault_/actions/runs/38183598705), completed successfully on source commit `fa0c9d693f663d020fcc24d4d47f01925c1547e4`.
+
+| Actual automated check | Observed result |
+| --- | --- |
+| Controlled r2 base builder | SUCCESS; uninitialized MDSE 0.8.0 lean runtime base produced |
+| Original native release checker with `--base` and `--workbench` | **0 fail, 4 warn** (pre-release) |
+| Generated W-341 Workbench user guide | **Byte-identical** to development and controlled Base Vault guides |
+| Generated guide SHA-256 | `01120e6ba09fba38ab6cee943cb95f7a2f40eac1904be90b2af252c52e55598f` |
+| Generated `.obsidian/plugin-lock.yaml` | Byte-identical to controlled source |
+| Runtime plugins | **10/10 packaged** |
+| Locked plugin payload files | **34/34 SHA-256 source/generated matches** |
+| Step 18 registry regression | **23/23 passed** |
+| Step 19 independent build/tamper regression | **15/15 passed** |
+| Development source (00_Workspace/Importer) | Excluded from generated base |
+| QEAX archive | Excluded from runner worktree and generated base |
+| Generated vault identity | `vault_uid: UNINITIALIZED` |
+| Mac/Windows Obsidian first-open, edit and restart | **NOT RUN** |
+| Source-data security, public-main promotion and standalone archive | **NOT APPROVED** |
+
+The tamper tests changed **only temporary generated** guide and Workbench `main.js` bytes, verified detection, restored the originals, then verified the generated base again. The tested source lock and runtime payload were not rewritten.
+
+This evidence applies to the tested source commit; it does not certify an issued MDSE 0.8.0 release. Human GUI cases G19-01 through G19-12 above remain unexecuted and require separate operator evidence.
