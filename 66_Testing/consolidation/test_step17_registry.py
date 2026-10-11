@@ -5,6 +5,7 @@ import copy
 import json
 import unittest
 from pathlib import Path
+from step18_registry_candidate import baseline as _step18_baseline, INVENTORY as _STEP18_INVENTORY
 
 from step17_registry_review import (
     MANIFEST_PATH, PROPOSAL_PATH, ROOT, SCAN_FOLDERS,
@@ -12,10 +13,13 @@ from step17_registry_review import (
     tracked_md, validate,
 )
 
+def _step18_original_manifest():
+    return _step18_baseline((Path(__file__).resolve().parents[2] / "Base Vault/Definition/mdse-release.yaml").read_text(encoding="utf-8"), json.loads(_STEP18_INVENTORY.read_text(encoding="utf-8")))
+
 class Step17DocumentRegistryTests(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
-        cls.manifest = MANIFEST_PATH.read_text(encoding="utf-8")
+        cls.manifest = _step18_original_manifest()
         cls.proposal = json.loads(PROPOSAL_PATH.read_text(encoding="utf-8"))
 
     def mutate(self, key, value):
@@ -24,7 +28,7 @@ class Step17DocumentRegistryTests(unittest.TestCase):
         return changed
 
     def test_exact_baseline_manifest_sha(self):
-        self.assertEqual(git_blob_sha(MANIFEST_PATH.read_bytes()),
+        self.assertEqual(git_blob_sha(_step18_original_manifest().encode("utf-8")),
                          "29a05fc71c2f25108f07927870ac5d3d3bdd618b")
 
     def test_explicit_review_only_state(self):

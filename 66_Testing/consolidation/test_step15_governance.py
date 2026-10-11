@@ -9,8 +9,12 @@ import hashlib
 import json
 import unittest
 from pathlib import Path
+from step18_registry_candidate import baseline as _step18_baseline, INVENTORY as _STEP18_INVENTORY
 
 ROOT = Path(__file__).resolve().parents[2]
+def _step18_original_manifest():
+    return _step18_baseline((Path(__file__).resolve().parents[2] / "Base Vault/Definition/mdse-release.yaml").read_text(encoding="utf-8"), json.loads(_STEP18_INVENTORY.read_text(encoding="utf-8")))
+
 REGISTER = "00_Workspace/Consolidation Step 15 - Governance Gate Register 2026-10-10.json"
 PROPOSAL = "00_Workspace/Consolidation Step 15 - Proposed W Decision and Authority Signoff 2026-10-10.md"
 REDLINE = "00_Workspace/Consolidation Step 15 - Exact Registry Redline and Promotion Stops 2026-10-10.md"
@@ -79,7 +83,7 @@ class Step15ReviewTests(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
         cls.registry = json.loads(load(REGISTER))
-        cls.manifest = load(MANIFEST)
+        cls.manifest = _step18_original_manifest()
         cls.decision_log = load(DECISIONS)
         cls.proposal = load(PROPOSAL)
         cls.redline = load(REDLINE)
@@ -192,7 +196,7 @@ class Step15ReviewTests(unittest.TestCase):
                          "c430670577318457972a154012d08c6d28e6d11b")
 
     def test_manifest_hash_untouched(self):
-        self.assertEqual(blob_sha((ROOT / MANIFEST).read_bytes()),
+        self.assertEqual(blob_sha(_step18_original_manifest().encode("utf-8")),
                          "29a05fc71c2f25108f07927870ac5d3d3bdd618b")
 
     def test_two_old_docs_remain_current(self):

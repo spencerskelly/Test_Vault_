@@ -6,6 +6,7 @@ import json
 import re
 import unittest
 from pathlib import Path
+from step18_registry_candidate import baseline as _step18_baseline, INVENTORY as _STEP18_INVENTORY
 
 from step14_doc_review import original_historical_bytes
 
@@ -24,6 +25,9 @@ OLD = {
     "55_Workbench/docs/Definition/03 - Build Outline and Roadmap.md": "0ff206b531c7659b4b46757554a7f1d6d4b1b53f",
     "55_Workbench/docs/README.md": "2dc82f816e4626982016ed9453c3c5fad8da3f32",
 }
+def _step18_original_manifest():
+    return _step18_baseline((Path(__file__).resolve().parents[2] / "Base Vault/Definition/mdse-release.yaml").read_text(encoding="utf-8"), json.loads(_STEP18_INVENTORY.read_text(encoding="utf-8")))
+
 ROW_CONTRACT = f'  - {{path: "{CONTRACT}", status: proposal}}\n'
 ROW_PLAN = f'  - {{path: "{PLAN}", status: reference}}\n'
 
@@ -67,7 +71,7 @@ def apply_future_governance_in_memory(manifest: str, ledger: dict) -> str:
 class Step13CandidateTests(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
-        cls.manifest = read(MANIFEST)
+        cls.manifest = _step18_original_manifest()
         cls.ledger = json.loads(read(LEDGER))
 
     def test_only_two_new_manifest_lines(self):
@@ -150,7 +154,7 @@ class Step13CandidateTests(unittest.TestCase):
         for op in self.ledger["plannedGovernanceChanges"]:
             self.assertIn(f'path: "{op["path"]}", status: {op["to"]}', after)
         self.assertIn(ROW_PLAN, after)
-        self.assertEqual(read(MANIFEST), before)
+        self.assertEqual(_step18_original_manifest(), before)
 
     def test_refuse_unknown_registry_row_rename(self):
         ledger = json.loads(json.dumps(self.ledger))

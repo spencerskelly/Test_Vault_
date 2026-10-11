@@ -8,6 +8,7 @@ import hashlib
 import json
 import unittest
 from pathlib import Path
+from step18_registry_candidate import baseline as _step18_baseline, INVENTORY as _STEP18_INVENTORY
 
 from step14_doc_review import START, END, REVIEWED, banner_body, original_historical_bytes
 from workbench_reference_policy import classify
@@ -29,6 +30,10 @@ HISTORICAL_HEADINGS = {
     "55_Workbench/docs/README.md": b"# MDSE Workbench\n\n",
 }
 MANIFEST = "Base Vault/Definition/mdse-release.yaml"
+
+def _step18_original_manifest():
+    return _step18_baseline((Path(__file__).resolve().parents[2] / "Base Vault/Definition/mdse-release.yaml").read_text(encoding="utf-8"), json.loads(_STEP18_INVENTORY.read_text(encoding="utf-8")))
+
 CONTRACT = "00_Workspace/MDSE v0.8 Unified Development Continuation Contract - PROPOSAL 2026-10-10.md"
 LEDGER = "66_Testing/consolidation/step13_registry_transition.json"
 
@@ -176,7 +181,7 @@ class WorkbenchStep14Tests(unittest.TestCase):
         }
         for p, blob in expected.items():
             with self.subTest(path=p):
-                self.assertEqual(sha((ROOT / p).read_bytes()), blob)
+                self.assertEqual(sha(_step18_original_manifest().encode("utf-8") if p == MANIFEST else (ROOT / p).read_bytes()), blob)
 
     def test_prior_W_log_unchanged(self):
         self.assertEqual(

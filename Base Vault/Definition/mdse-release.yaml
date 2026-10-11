@@ -129,6 +129,38 @@ runtimeBase:
 # authority, or the release gate; newer recovery records live on the separate
 # recovery branch until intentionally brought into this tree and registered.
 documents:
+  - {path: "00_Workspace/Consolidation Step 01 - Workbench Remote Coverage 2026-10-10.md", status: reference}
+  - {path: "00_Workspace/Consolidation Step 02 - Recovered Handoffs and Historical Branch Triage 2026-10-10.md", status: reference}
+  - {path: "00_Workspace/Consolidation Step 03 - Workbench Historical Branch Dispositions 2026-10-10.md", status: reference}
+  - {path: "00_Workspace/Consolidation Step 04 - Repository Authority and CI Transition Audit 2026-10-10.md", status: reference}
+  - {path: "00_Workspace/Consolidation Step 05 - Public QEAX Metadata and Local Clone Audit 2026-10-10.md", status: reference}
+  - {path: "00_Workspace/Consolidation Step 06 - Local Audit Hardening and Signoff 2026-10-10.md", status: reference}
+  - {path: "00_Workspace/Consolidation Step 07 - Workbench Authority Cutover Preflight 2026-10-10.md", status: reference}
+  - {path: "00_Workspace/Consolidation Step 08 - Actual Workbench Reference Audit 2026-10-10.md", status: reference}
+  - {path: "00_Workspace/Consolidation Step 09 - Controlled Cutover and Rollback 2026-10-10.md", status: reference}
+  - {path: "00_Workspace/Consolidation Step 09 - Proposed W Authority Decision 2026-10-10.md", status: proposal}
+  - {path: "00_Workspace/Consolidation Step 10 - Workbench Provenance Aware Preflight 2026-10-10.md", status: reference}
+  - {path: "00_Workspace/Consolidation Step 11 - Legacy Workbench Workflow Retirement 2026-10-10.md", status: reference}
+  - {path: "00_Workspace/Consolidation Step 12 - Post Retirement Reference Audit 2026-10-10.md", status: reference}
+  - {path: "00_Workspace/Consolidation Step 14 - Workbench Historical Documentation Review 2026-10-10.md", status: reference}
+  - {path: "00_Workspace/Consolidation Step 15 - Exact Registry Redline and Promotion Stops 2026-10-10.md", status: proposal}
+  - {path: "00_Workspace/Consolidation Step 15 - Proposed W Decision and Authority Signoff 2026-10-10.md", status: proposal}
+  - {path: "00_Workspace/Consolidation Step 16 - W341 W342 Release Provenance Verification 2026-10-10.md", status: reference}
+  - {path: "00_Workspace/GitHub Consolidation Step 04B Persisted Workbench Import 2026-10-09.md", status: reference}
+  - {path: "00_Workspace/GitHub Consolidation Step 05 Release Contract and Path Audit 2026-10-09.md", status: reference}
+  - {path: "00_Workspace/GitHub Consolidation Step 06 Importer Workbench Compatibility 2026-10-09.md", status: reference}
+  - {path: "00_Workspace/GitHub Consolidation Step 07 WB129 Local Model 05 Staging 2026-10-09.md", status: reference}
+  - {path: "00_Workspace/GitHub Consolidation Step 08 Importer WB129 Acceptance 2026-10-09.md", status: reference}
+  - {path: "00_Workspace/GitHub Consolidation Step 09 Persisted Importer WB129 2026-10-09.md", status: reference}
+  - {path: "00_Workspace/GitHub Consolidation Step 10 Release Registry and Fixture 2026-10-09.md", status: reference}
+  - {path: "00_Workspace/GitHub Consolidation Step 11 BOM Reconciliation 2026-10-09.md", status: reference}
+  - {path: "00_Workspace/GitHub Consolidation Step 12 BOM Artifacts Recovery 2026-10-09.md", status: reference}
+  - {path: "00_Workspace/GitHub Consolidation Step 13 Original BOM Archive Verification 2026-10-09.md", status: reference}
+  - {path: "00_Workspace/GitHub Consolidation Step 14 BOM Original Git Integrity Complete 2026-10-09.md", status: reference}
+  - {path: "00_Workspace/GitHub Consolidation Step 15 BOM Staged Source Integration 2026-10-09.md", status: reference}
+  - {path: "00_Workspace/GitHub Consolidation Step 16 BOM Schema Governance Proposals 2026-10-09.md", status: reference}
+  - {path: "00_Workspace/GitHub Consolidation Step 17 Post-BOM Real QEAX 2026-10-09.md", status: reference}
+  - {path: "00_Workspace/GitHub Consolidation Step 18 Obsidian UI Acceptance Handoff 2026-10-09.md", status: reference}
   - {path: "00_Workspace/GitHub Consolidation Recovery Inventory 2026-10-09.md", status: reference}
   - {path: "00_Workspace/GitHub Consolidation Step 02 Branch Reconciliation 2026-10-09.md", status: reference}
   - {path: "00_Workspace/GitHub Consolidation Step 03 Workbench Migration Manifest 2026-10-09.md", status: reference}
