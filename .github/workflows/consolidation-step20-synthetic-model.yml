@@ -62,6 +62,45 @@ jobs:
           echo 'STEP20_HUMAN_GUI=NOT_RUN'
           echo 'STEP20_RELEASE=PRE_RELEASE_NOT_APPROVED'
 
+      - name: Package only approved synthetic notes and GUI checklist
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          import pathlib,zipfile
+          import json
+          root=pathlib.Path("/tmp")
+          # The tested build used a unique runner-temp folder under the platform runner temp.
+          import os
+          scratch=list(pathlib.Path(os.environ["RUNNER_TEMP"]).glob("step20-gui-*/synthetic/88_Step20_Synthetic_GUI_Model"))
+          assert len(scratch)==1, "Expected one verified synthetic fixture from current run"
+          folder=scratch[0]
+          files=sorted(p for p in folder.iterdir() if p.is_file())
+          assert len(files)==15, [x.name for x in files]
+          model=[p for p in files if p.name.startswith("Step20 - ") and p.suffix==".md"]
+          assert len(model)==12
+          expected={"README_TEST_ONLY.md","STEP20_GUI_ACCEPTANCE.md","FIXTURE_PROVENANCE.json"}
+          assert {p.name for p in files if p not in model}==expected
+          assert all(p.suffix in (".md",".json") and not p.is_symlink() for p in files)
+          meta=json.loads((folder/"FIXTURE_PROVENANCE.json").read_text())
+          assert meta["status"]=="GUI_NOT_EXECUTED" and not meta["hasQEAX"] and not meta["hasRealBOM"]
+          output=pathlib.Path("step20-synthetic-notes-only.zip")
+          with zipfile.ZipFile(output,"w",compression=zipfile.ZIP_DEFLATED) as z:
+              for p in files:
+                  z.write(p,arcname="88_Step20_Synthetic_GUI_Model/"+p.name)
+          with zipfile.ZipFile(output) as z:
+              assert z.testzip() is None and len(z.namelist())==15
+          print("STEP20_SYNTHETIC_NOTES_ONLY_ZIP=15_FILES;MODEL_NOTES=12;NO_PLUGINS=true;NO_QEAX=true")
+          PY
+
+      - name: Publish synthetic notes only (no generated vault or plugin binaries)
+        uses: actions/upload-artifact@v4
+        with:
+          name: step20-synthetic-notes-only
+          path: step20-synthetic-notes-only.zip
+          if-no-files-found: error
+          retention-days: 7
+
       - name: Record verification scope; do not upload any vault or plugin binary
         shell: bash
         run: |
