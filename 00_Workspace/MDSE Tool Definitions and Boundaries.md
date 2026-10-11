@@ -4,9 +4,9 @@
 
 ## Authority rule
 
-For now, every MDSE tool except the standalone Workbench implementation is managed in **spencerskelly/Test_Vault_**.
+In the reviewed consolidation candidate, every MDSE tool implementation is managed in **spencerskelly/Test_Vault_**, including Workbench under `55_Workbench/`. This authority change is provisional until the consolidation review is approved.
 
-- **Workbench:** `spencerskelly/MDSE_Workbench` is authoritative for Workbench source, tests, build/release artifacts and product/interface definition under `docs/`. Cross-tool semantic constraints remain governed by Test_Vault_.
+- **Workbench:** `55_Workbench/` within `spencerskelly/Test_Vault_` is the proposed authoritative development location for Workbench source, tests, build inputs and product/interface definition. The standalone repository remains read-only-history *candidate*, not yet archived. Controlled release artifacts, manifests and hashes continue to be governed by the Base Vault release process; cross-tool semantic constraints remain governed by Test_Vault_.
 - **All other tools:** authoritative definition, source and release configuration remain in Test_Vault_ unless a later W-decision deliberately moves one out.
 - **Model semantics:** schemas, Ruleset and W-decisions in Test_Vault_ govern every tool. A tool may not silently broaden or redefine model semantics.
 - **Historical/archived material:** evidence only. It never overrides a current source.
@@ -15,7 +15,7 @@ For now, every MDSE tool except the standalone Workbench implementation is manag
 
 | Tool / capability | Primary purpose | Authority / source | Owns | Does not own |
 |---|---|---|---|---|
-| **MDSE Workbench** | Everyday engineering interface: Create, Explore, Details, Inherited, Review and safe model edits | `spencerskelly/MDSE_Workbench` (source/tests/build + `docs/Definition/`) | UI behavior, disposable index, ModelRef-based navigation, schema-valid edit transactions, generated/curated view presentation, Review disposition | MDSE semantics, importer mapping, authoritative model meaning from Canvas geometry, release packaging, Git commits |
+| **MDSE Workbench** | Everyday engineering interface: Create, Explore, Details, Inherited, Review and safe model edits | `55_Workbench/` in `spencerskelly/Test_Vault_` (source/tests/build inputs + `docs/Definition/`) | UI behavior, disposable index, ModelRef-based navigation, schema-valid edit transactions, generated/curated view presentation, Review disposition | MDSE semantics, importer mapping, authoritative model meaning from Canvas geometry, release packaging, Git commits |
 | **MDSE Bootstrap** | Make a released vault ready for a person and verify the controlled runtime | `Bootstrap/Definition/` and versioned source under `Bootstrap/Tools/` | safe activation repair, startup/release verification, author registration and per-person initialization (W-330) | model semantics, engineering edits, Workbench behavior, importer behavior |
 | **EA → MDSE Importer** | Deterministically translate the governed EA source into a fresh MDSE base and produce reconciliation evidence | `Importer/Tools/`, `Importer/Definition/Translator Definition.md`, mapping schemas and reconciliation docs | source translation, deterministic naming/identity allocation, Local Model writing, import evidence | everyday model editing, Review disposition, runtime plugin management |
 | **Base / release builder** | Produce the fully configured engineering vault delivered to users | `Base Vault/Definition/mdse-release.yaml`, versioned build tools under `Base Vault/Tools/`, runtime payload under `Base Vault/Runtime/`, and release tests under `Base Vault/Testing/` | runtime payload, governed plugin configuration, pins/hashes, release consistency | engineering model semantics beyond copying governed schemas/config |

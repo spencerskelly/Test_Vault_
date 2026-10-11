@@ -39,7 +39,7 @@ tools:
     builder: "Base Vault/Tools/v0.8.0-r2/build-base.py"
     obsoleteReference: "spencerskelly/Test_Vault_-base-vault-2026-09-30-rel133-v051"
   workbench:
-    repo: "spencerskelly/MDSE_Workbench"
+    repo: "spencerskelly/Test_Vault_"
     version: "0.1.18"                               # W-386: first WB-106-capable controlled Workbench release
     candidateVersion: null
     nextGate: "Golden-model integration / Bootstrap first-open"
@@ -66,7 +66,7 @@ runtimePlugins:
 
 repos:
   authority: "spencerskelly/Test_Vault_"
-  workbench: "spencerskelly/MDSE_Workbench"
+  workbench: "spencerskelly/Test_Vault_"
   referenceOnly:
     - "spencerskelly/20260930"
     - "spencerskelly/261001"

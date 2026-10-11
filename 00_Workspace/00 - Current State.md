@@ -51,8 +51,8 @@
 | Active importer systemic corrections | [[Importer Issue Register]] |
 | Run completion and evidence | Translator Definition, checks 1 to 9; Reconciliation, "Evidence package" |
 | Tool ownership and boundaries | [[MDSE Tool Definitions and Boundaries]] |
-| Workbench product direction | `spencerskelly/MDSE_Workbench/docs/Definition/` (`WB-` decisions and implementation contract) |
-| Workbench implementation/code | repo `spencerskelly/MDSE_Workbench`; `WB106_IMPLEMENTATION_CONTRACT.md` is the current implementation boundary |
+| Workbench product direction | `55_Workbench/docs/Definition/` (`WB-` decisions and implementation contract); consolidated authority candidate pending approval |
+| Workbench implementation/code | `55_Workbench/` in this repository; `WB106_IMPLEMENTATION_CONTRACT.md` is the implementation boundary; remote archival pending |
 | Runtime plugins, versions, settings | `.obsidian/plugin-lock.yaml` (generated), `Base Vault/Definition/Enabled Plugin Stack.md`, generators in `Base Vault/Tools/v0.8.0-r2/` |
 | Workbench user guide | `Base Vault/Definition/MDSE Workbench User Guide.md` (release-managed copy of the standalone Workbench guide; mapped into generated vaults by W-341) |
 | Bootstrap behavior and source | `Bootstrap/Definition/`, `Bootstrap/Tools/`, and `Bootstrap/Testing/` |
@@ -78,7 +78,7 @@ W-321 removes the old manually curated base-content list. `mdse-release.yaml` no
 
 ## File status registry
 
-**Current:** the files in "Read in this order", [[MDSE Tool Definitions and Boundaries]], `Importer/Definition/`, `Bootstrap/Definition/`, `Base Vault/Definition/`, `Definitions/`, `99_System/03_Schemas/`, `99_System/05_Templates/`, `Bootstrap/`, `Base Vault/`, and the standalone `spencerskelly/MDSE_Workbench` repository for Workbench product/implementation authority.
+**Current:** the files in "Read in this order", [[MDSE Tool Definitions and Boundaries]], `Importer/Definition/`, `Bootstrap/Definition/`, `Base Vault/Definition/`, `Definitions/`, `99_System/03_Schemas/`, `99_System/05_Templates/`, `Bootstrap/`, `Base Vault/`, and `55_Workbench/` for the proposed consolidated Workbench product/implementation authority, pending controlled promotion.
 
 **Generated (never edit by hand; change the schemas or payload and regenerate):** `99_System/06_Fileclasses/`, `.obsidian/plugin-lock.yaml`, `.obsidian/community-plugins.json`, governed runtime plugin `data.json` files under `Base Vault/Runtime/Plugins/`.
 

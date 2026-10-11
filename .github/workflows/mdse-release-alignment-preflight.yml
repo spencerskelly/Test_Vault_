@@ -5,7 +5,8 @@ name: MDSE monorepo release alignment preflight
 on:
   push:
     branches:
-      - integration/workbench-subtree-2026-10-09
+      - main
+      - consolidation/step09-authority-ci-rehearsal-2026-10-10
     paths:
       - "66_Testing/**"
       - "00_Workspace/**"
@@ -18,7 +19,7 @@ on:
   pull_request:
     branches:
       - main
-      - recovery/repository-consolidation-2026-10-09
+      - consolidation/step08-real-tree-audit-2026-10-10
     paths:
       - "66_Testing/**"
       - "00_Workspace/**"

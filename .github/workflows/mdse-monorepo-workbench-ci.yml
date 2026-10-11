@@ -5,9 +5,13 @@ name: MDSE monorepo Workbench CI
 on:
   push:
     branches:
-      - integration/workbench-subtree-2026-10-09
+      - main
+      - consolidation/step09-authority-ci-rehearsal-2026-10-10
     paths:
       - "55_Workbench/**"
+      - "00_Workspace/**"
+      - "66_Testing/consolidation/**"
+      - "README.md"
       - "99_System/03_Schemas/**"
       - "Base Vault/Definition/**"
       - "Importer/**"
@@ -16,9 +20,12 @@ on:
   pull_request:
     branches:
       - main
-      - recovery/repository-consolidation-2026-10-09
+      - consolidation/step08-real-tree-audit-2026-10-10
     paths:
       - "55_Workbench/**"
+      - "00_Workspace/**"
+      - "66_Testing/consolidation/**"
+      - "README.md"
       - "99_System/03_Schemas/**"
       - "Base Vault/Definition/**"
       - "Importer/**"
@@ -61,6 +68,10 @@ jobs:
           node-version: 20
           cache: npm
           cache-dependency-path: 55_Workbench/package-lock.json
+
+      - name: Verify consolidation cutover invariants (candidate only)
+        working-directory: .
+        run: node --test 66_Testing/consolidation/test_step09_cutover.cjs
 
       - name: Install dependencies
         run: npm ci

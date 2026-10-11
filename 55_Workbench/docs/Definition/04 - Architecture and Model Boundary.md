@@ -22,7 +22,7 @@ Authoritative sources remain the current vault model governance, including:
 
 ### Workbench product/interface
 
-This folder registers the Workbench product/interface decisions alongside the other MDSE tool definitions. The standalone `spencerskelly/MDSE_Workbench` repository is the authoritative Workbench implementation source. Cross-tool ownership and boundaries are summarized in [[MDSE Tool Definitions and Boundaries]].
+This folder registers the Workbench product/interface decisions alongside the other MDSE tool definitions. The integrated `55_Workbench/` directory in `spencerskelly/Test_Vault_` is the proposed authoritative Workbench implementation source under controlled consolidation review. The former standalone repository is retained as historical provenance pending approved archival. Cross-tool ownership and boundaries are summarized in [[MDSE Tool Definitions and Boundaries]].
 
 This folder defines how Workbench should expose and operate on those semantics.
 
