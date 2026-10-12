@@ -52,3 +52,12 @@ In the standalone GitHub repository: **Settings → General → Danger Zone → 
 - QEAX source/public-history security disposition and human Obsidian GUI acceptance remain open independent of old-repo archival.
 
 **End state sought:** only `Test_Vault_` accepts new changes; Workbench is a source subdirectory, the old standalone repo is a frozen historical archive, and new decisions are handled as reviewed changes in the single active repo.
+
+## Completed shutdown preparation — verified 2026-10-11
+
+- **Old repository root README now redirects all new development to Test_Vault_.** Original text was retained after a prominent transition notice. New old-main commit: `721814d8204fc2f0e69e7e2523f70dc0fe3603dd`; README blob: `390cc113332d2ebe456473036c9c7ca5046006e8`.
+- **Old Workbench open draft PRs #6, #7 and #15 were closed WITHOUT MERGE** with comments linking to [Test_Vault_ issue #40](https://github.com/spencerskelly/Test_Vault_/issues/40). This preserves the exact branches and original discussion while ensuring no active review work remains there.
+- The 19 old branch tips and previous `main` hash in `step22_legacy_workbench_inventory.json` are a **pre-redirect historical snapshot**. The new README notice advances old `main` by exactly one documentation-only commit; do not falsely report the old baseline SHA as its current tip.
+- [Test_Vault_ issue #40](https://github.com/spencerskelly/Test_Vault_/issues/40) now tracks the only remaining repository shutdown action and the deferred local-work signoffs.
+- The connected GitHub actions **cannot set repository archived=true**. At this checkpoint GitHub reports the old repository remains **unarchived**. The owner must use its archive setting; do not report completed archival until verified.
+- This is a **development-location cutover**, not a public `Test_Vault_/main` promotion, an approved new W decision, or actual Obsidian GUI acceptance.
