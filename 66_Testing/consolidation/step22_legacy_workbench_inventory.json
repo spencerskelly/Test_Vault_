@@ -1,0 +1,189 @@
+{
+  "schema": "mdse-single-repository-cutover-inventory/1",
+  "prepared": "2026-10-11",
+  "status": "DEVELOPMENT_SWITCH_PROPOSED_ARCHIVE_NOT_YET_PERFORMED",
+  "oldRepository": "spencerskelly/MDSE_Workbench",
+  "oldRepositoryMain": "59fc6219b1d0586900aa7d38685e7087a9d47fec",
+  "oldRepositoryArchived": false,
+  "currentGitHubRemoteBranchCount": 19,
+  "currentGitHubRemoteOpenPRCount": 3,
+  "branches": [
+    {
+      "branch": "ci-probe-runtime-architecture",
+      "sourceSHA": "969b1c8e6d16302b502758f67df5aae58ac09d7e",
+      "disposition": "historical_branch_preserved"
+    },
+    {
+      "branch": "main",
+      "sourceSHA": "59fc6219b1d0586900aa7d38685e7087a9d47fec",
+      "disposition": "legacy_baseline_covered_by_staged_subtree"
+    },
+    {
+      "branch": "proposal/bom-a14-baseline-check",
+      "sourceSHA": "2667965cdff6e2db8cf3129fdd0b50d4f9fd8d04",
+      "disposition": "proposal_preserved_do_not_automerge"
+    },
+    {
+      "branch": "proposal/bom-a14-readonly-quantity-uom",
+      "sourceSHA": "87cb615876c342a34ce794beee8b5fad80b80520",
+      "disposition": "proposal_preserved_do_not_automerge"
+    },
+    {
+      "branch": "recovery/bom-a01-a14-artifacts-2026-10-09",
+      "sourceSHA": "50e78c6924a1615d865e763ffdb39d1d2f338bad",
+      "disposition": "historical_recovery_preserved"
+    },
+    {
+      "branch": "recovery/wb129-ci-equals-2026-10-08",
+      "sourceSHA": "52b0b98f1d8416b8fb02881b79aad828cc7d2f33",
+      "disposition": "historical_recovery_preserved"
+    },
+    {
+      "branch": "recovery/wb129-ci-interface-2026-10-08",
+      "sourceSHA": "fc72a11e26d53f11d3f81de8ffcc1c7ce5fda921",
+      "disposition": "historical_recovery_preserved"
+    },
+    {
+      "branch": "recovery/wb129-ci-pr-probe-2026-10-08",
+      "sourceSHA": "94cf3a7fb2a787bbe9168bf84895dbe2e056f233",
+      "disposition": "historical_recovery_preserved"
+    },
+    {
+      "branch": "recovery/wb129-ci-real-vault-delimiter-2026-10-08",
+      "sourceSHA": "8097f383c41617f879eac8e4ca19fab1d0cb7657",
+      "disposition": "historical_recovery_preserved"
+    },
+    {
+      "branch": "recovery/wb129-ci-reciprocal-2026-10-08",
+      "sourceSHA": "47adc363e6bedcb5a199c7f69c4f2c3d32c20986",
+      "disposition": "historical_recovery_preserved"
+    },
+    {
+      "branch": "recovery/wb129-ci-reject-2026-10-08",
+      "sourceSHA": "78833e1e3a3089d7085dce070bb5b332bbdcbd4e",
+      "disposition": "historical_recovery_preserved"
+    },
+    {
+      "branch": "recovery/wb129-ci-source-equals-2026-10-08",
+      "sourceSHA": "391ca50a3caf7b64d58b4ad49be71e81cd360b7c",
+      "disposition": "historical_recovery_preserved"
+    },
+    {
+      "branch": "recovery/wb129-test-alignment-2026-10-08",
+      "sourceSHA": "8097f383c41617f879eac8e4ca19fab1d0cb7657",
+      "disposition": "historical_recovery_preserved"
+    },
+    {
+      "branch": "rta2-ci-probe",
+      "sourceSHA": "30c6f144748e865aec351d93c935599c93881933",
+      "disposition": "historical_branch_preserved"
+    },
+    {
+      "branch": "wb106-occurrence-views",
+      "sourceSHA": "3a565a7abc8b60d7b3ee7e1a2152556b58e0ec59",
+      "disposition": "historical_branch_preserved"
+    },
+    {
+      "branch": "wb106-runtime-build",
+      "sourceSHA": "e428116f45a114098cd9c1ff46e94af4bf367377",
+      "disposition": "historical_branch_preserved"
+    },
+    {
+      "branch": "workbench/local-model-0.3",
+      "sourceSHA": "c05ede6df4f6e120d9e51a99c1b66a8af386a9ef",
+      "disposition": "historical_branch_preserved"
+    },
+    {
+      "branch": "workbench/local-model-0.4",
+      "sourceSHA": "4987652c63e92f7ac16a2db33eda6feb3b5c6e49",
+      "disposition": "historical_branch_preserved"
+    },
+    {
+      "branch": "workbench/local-model-0.5",
+      "sourceSHA": "7052c07b4c95212522ba4b5d274c95be0860bda3",
+      "disposition": "unapproved_local_model_05_candidate_preserved"
+    }
+  ],
+  "openDraftPRs": [
+    {
+      "number": 15,
+      "title": "WIP: restore verified BOM A-01–A-14 original handoff documents",
+      "head": "recovery/bom-a01-a14-artifacts-2026-10-09",
+      "headSHA": "50e78c6924a1615d865e763ffdb39d1d2f338bad",
+      "base": "proposal/bom-a14-readonly-quantity-uom",
+      "url": "https://github.com/spencerskelly/MDSE_Workbench/pull/15",
+      "status": "OPEN_DRAFT",
+      "disposition": "PRESERVE_AS_HISTORICAL_PROPOSAL; explicit new Test_Vault approval required before semantics/code changes"
+    },
+    {
+      "number": 7,
+      "title": "WIP WB-129 test-only Local Model 0.5 alignment (recovery Step 5C)",
+      "head": "recovery/wb129-test-alignment-2026-10-08",
+      "headSHA": "8097f383c41617f879eac8e4ca19fab1d0cb7657",
+      "base": "workbench/local-model-0.5",
+      "url": "https://github.com/spencerskelly/MDSE_Workbench/pull/7",
+      "status": "OPEN_DRAFT",
+      "disposition": "PRESERVE_AS_HISTORICAL_PROPOSAL; explicit new Test_Vault approval required before semantics/code changes"
+    },
+    {
+      "number": 6,
+      "title": "WB-129 draft: Local Model 0.5 canonical equals compatibility",
+      "head": "workbench/local-model-0.5",
+      "headSHA": "7052c07b4c95212522ba4b5d274c95be0860bda3",
+      "base": "main",
+      "url": "https://github.com/spencerskelly/MDSE_Workbench/pull/6",
+      "status": "OPEN_DRAFT",
+      "disposition": "PRESERVE_AS_HISTORICAL_PROPOSAL; explicit new Test_Vault approval required before semantics/code changes"
+    }
+  ],
+  "existingGitHubOpenIssuesExcludingPRs": 0,
+  "proposedAuthority": {
+    "repository": "spencerskelly/Test_Vault_",
+    "branch": "consolidation/step21-gui-evidence-sessions-2026-10-11",
+    "commit": "952aaecfc16891f2155b78f174340fd70e764683",
+    "workbenchRoot": "55_Workbench/",
+    "releaseStatus": "0.8.0 pre-release",
+    "mainPromotionApproved": false
+  },
+  "pathInventory": {
+    "sourceOldMainBlobCount": 60193,
+    "stagedWorkbenchBlobCount": 60249,
+    "identicalPathAndBlobCount": 60175,
+    "changedPathCount": 18,
+    "missingOldMainPathCount": 0,
+    "stagedAdditionalFilePaths": 56,
+    "sourceTruncated": false,
+    "stagedTruncated": false
+  },
+  "historicalWorkflow": {
+    "oldRepoPath": ".github/workflows/bom-a14-baseline-check.yml",
+    "newRepoPath": "55_Workbench/docs/Reference/ARCHIVE_BOM_A14_BASELINE_CHECK.yml",
+    "exactGitBlob": "3c58fa778d60b7e3d425f67972c136da726b7740",
+    "verifiedIdentical": true
+  },
+  "unmergedBranchCoverage": {
+    "workbench/local-model-0.5": "Old candidate source available; governed Local Model 0.5 is pinned but code changes must be reviewed",
+    "recovery/wb129-test-alignment-2026-10-08": "Remote candidate contains no branch-only missing paths compared with staged Workbench subtree; historical tests need no automatic overwrite",
+    "proposal/bom-a14-readonly-quantity-uom": "VariantOf and read-only BOM source/test paths already represented in staged subtree; unapproved 0.6 writer and schema changes remain off",
+    "recovery/bom-a01-a14-artifacts-2026-10-09": "All remote tip paths represented in staged subtree; original source files still preserved with source Git history and SHA",
+    "proposal/bom-a14-baseline-check": "Only old-tip-only workflow path has an exact SHA-preserved copy under staged Workbench docs/Reference"
+  },
+  "blockerStates": {
+    "workbenchStandaloneArchival": "NOT_EXECUTED",
+    "localUnpushedWorkSignoffs": "UNKNOWN_NOT_REMOTE_VERIFIABLE",
+    "newTestVaultMainPromotion": "UNAPPROVED_STACKED_DRAFTS",
+    "documentAndWGovernance": "UNAPPROVED",
+    "actualMacWindowsObsidianGui": "NOT_RUN",
+    "publicQEAXOwnerSecurityDisposition": "PENDING",
+    "existingWorkbenchSourceRedirect": "TO_BE_WRITTEN_SEPARATELY"
+  },
+  "nonDestructiveCutoverRules": [
+    "New Workbench feature branches must be created in Test_Vault_ from the consolidated candidate rather than MDSE_Workbench",
+    "Do not merge dated experimental BOM/Local Model 0.6 branches into governed release semantics by default",
+    "Preserve the old 19 remote branches, three open draft PR discussions and GitHub history as read-only evidence; do not delete the original repo",
+    "Archive the old repository only after a human confirms no important local-only commits/stashes/worktrees require an upstream push, or explicitly accepts restoration via unarchive",
+    "GitHub archiving is reversible; the connected GitHub tools available in this session do not expose the repository archive-settings mutation",
+    "Before promoting Test_Vault_ public main, handle the public QEAX source-model data-owner/security decision independently",
+    "Do not assert that completed synthetic CI constitutes actual Obsidian GUI acceptance"
+  ]
+}
