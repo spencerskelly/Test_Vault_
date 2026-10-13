@@ -134,7 +134,7 @@ jobs:
             echo "::error::Two builds from identical checked-out inputs produced different bundles"
             exit 1
           fi
-      - name: Compare historical Node 20 toolchain reproducibility
+      - name: Record historical build-toolchain uncertainty
         working-directory: 55_Workbench
         run: |
           set -euo pipefail
