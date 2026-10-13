@@ -127,5 +127,42 @@ class LegacyTriageTests(unittest.TestCase):
         self.assertEqual(triage_legacy_note(raw)["status"], "REVIEW_ONLY")
 
 
+    def test_realistic_multiline_yaml_is_review_only(self):
+        raw = note("Design", "satisfies:\n  - '[[REQ-01]]'\n  - '[[REQ-02]]'\n")
+        result = triage_legacy_note(raw)
+        self.assertEqual(result["status"], "REVIEW_ONLY")
+        self.assertEqual(result["reason"], "unsupported YAML shape")
+
+    def test_realistic_legacy_port_links_retained_as_review(self):
+        raw = note("Port", "interfaces: '[[Assembly/Port-A|Port A]]'\n"
+                   "exposes: '[[InnerPort#Interface]]'\n")
+        result = triage_legacy_note(raw)
+        self.assertEqual(result["status"], "REVIEW_ONLY")
+        self.assertEqual(result["legacy_fields"], ["exposes", "interfaces"])
+        self.assertEqual(result["source_sha256"], hashlib.sha256(raw).hexdigest())
+
+    def test_unknown_property_never_deleted_or_converted(self):
+        raw = note("Function", "customSupplierId: A:B-12\n")
+        result = triage_legacy_note(raw)
+        self.assertEqual(result["status"], "PROPOSED_ONLY")
+        self.assertEqual(result["source_sha256"], hashlib.sha256(raw).hexdigest())
+
+    def test_unsupported_yaml_alias_or_list_fails_closed(self):
+        for raw in (
+            note("State", "tags: &labels [legacy]\nnotes: *labels\n"),
+            note("State", "hasState:\n  - '[[Substate]]'\n"),
+        ):
+            with self.subTest(sample=raw):
+                result = triage_legacy_note(raw)
+                self.assertIn(result["status"], ("REVIEW_ONLY", "PROPOSED_ONLY"))
+                self.assertEqual(result["source_sha256"], hashlib.sha256(raw).hexdigest())
+        self.assertEqual(triage_legacy_note(
+            note("State", "hasState:\n  - '[[Substate]]'\n"))["status"], "REVIEW_ONLY")
+
+    def test_invalid_utf8_fails_closed(self):
+        self.assertEqual(triage_legacy_note(b"---\ntype: Design\n---\n\xff")["reason"],
+                         "non-UTF8 source")
+
+
 if __name__ == "__main__":
     unittest.main()
