@@ -73,7 +73,7 @@ jobs:
         run: |
           {
             echo '## P04 Workbench CI (source/build only)'
-            echo "- Tested commit: `$(git rev-parse HEAD)`"
+            printf '%s\n' "- Tested commit: $(git rev-parse HEAD)"
             echo '- No plugin synchronization, commit/push, or release promotion performed.'
             echo '- This is not Obsidian GUI or real-QEAX acceptance.'
           } >> "$GITHUB_STEP_SUMMARY"
