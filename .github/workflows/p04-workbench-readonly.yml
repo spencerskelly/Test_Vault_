@@ -63,6 +63,24 @@ jobs:
           for k in ('commit','total_workbench_paths','source_checkout_candidates','historic_vault_paths_excluded','other_review_paths'):
               print(f'{k}: {d[k]}')
           PY
+      - name: Export safe source-allowlist candidate only
+        working-directory: .
+        run: |
+          python3 - "$RUNNER_TEMP/p04-tree.json" "$RUNNER_TEMP/p04-allowlist.txt" <<'PY'
+          import json, sys
+          source = json.load(open(sys.argv[1], encoding="utf-8"))
+          with open(sys.argv[2], "w", encoding="utf-8") as handle:
+              for path in source["source_checkout_paths"]:
+                  assert not path.startswith("vault/")
+                  handle.write("55_Workbench/" + path + "\\n")
+          PY
+      - name: Upload source-only candidate manifest
+        uses: actions/upload-artifact@v4
+        with:
+          name: p04-workbench-source-only-candidates
+          path: ${{ runner.temp }}/p04-allowlist.txt
+          retention-days: 30
+          if-no-files-found: error
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
