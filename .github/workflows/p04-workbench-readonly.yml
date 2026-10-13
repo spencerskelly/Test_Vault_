@@ -43,6 +43,7 @@ jobs:
             /55_Workbench/package-lock.json
             /55_Workbench/tsconfig.json
             /55_Workbench/esbuild.config.mjs
+            /55_Workbench/artifact-sha256.txt
             /55_Workbench/manifest.json
             /55_Workbench/styles.css
             /55_Workbench/test/fixtures/
@@ -78,6 +79,10 @@ jobs:
         run: |
           test -f main.js
           sha256sum main.js manifest.json styles.css
+      - name: Require reproduced artifacts to match governed Workbench baseline
+        run: |
+          test -f artifact-sha256.txt
+          sha256sum --check artifact-sha256.txt
       - name: Document read-only verification
         if: always()
         working-directory: .
