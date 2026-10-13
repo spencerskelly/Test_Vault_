@@ -58,6 +58,10 @@ jobs:
       - name: Trace controlled Workbench artifact path history
         working-directory: .
         run: |
+          echo '== original Workbench subtree ancestry =='
+          git log -n 16 --format='%H %cI %s' 59fc6219b1d0586900aa7d38685e7087a9d47fec -- main.js || true
+          echo '== original Workbench artifact manifest ancestry =='
+          git log -n 12 --format='%H %cI %s' 59fc6219b1d0586900aa7d38685e7087a9d47fec -- artifact-sha256.txt || true
           echo '== tracked main.js history =='
           git log -n 12 --format='%H %cI %s' -- 55_Workbench/main.js
           echo '== artifact hash manifest history =='
