@@ -37,7 +37,7 @@ jobs:
       - name: Sparse checkout without historic vault or QEAX archive
         uses: actions/checkout@v4
         with:
-          fetch-depth: 1
+          fetch-depth: 0
           filter: blob:none
           persist-credentials: false
           sparse-checkout-cone-mode: false
@@ -55,6 +55,15 @@ jobs:
             /55_Workbench/manifest.json
             /55_Workbench/styles.css
             /55_Workbench/test/fixtures/
+      - name: Trace controlled Workbench artifact path history
+        working-directory: .
+        run: |
+          echo '== tracked main.js history =='
+          git log -n 12 --format='%H %cI %s' -- 55_Workbench/main.js
+          echo '== artifact hash manifest history =='
+          git log -n 12 --format='%H %cI %s' -- 55_Workbench/artifact-sha256.txt
+          echo '== package lock history =='
+          git log -n 8 --format='%H %cI %s' -- 55_Workbench/package-lock.json
       - name: Verify sensitive and historical sources are absent
         run: |
           test ! -e ../EA_2026_09_06_endgame.qeax.zip
