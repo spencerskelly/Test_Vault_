@@ -1,18 +1,6 @@
 name: P04 Workbench read-only build and tests
 
 on:
-  push:
-    branches: [integration/p03-legacy-compat-tests-20261013]
-    paths:
-      - '.github/workflows/p04-workbench-readonly.yml'
-      - '66_Testing/consolidation/p04_full_workbench_tree.py'
-      - '55_Workbench/src/**'
-      - '55_Workbench/test/**'
-      - '55_Workbench/bench/**'
-      - '55_Workbench/package.json'
-      - '55_Workbench/package-lock.json'
-      - '55_Workbench/tsconfig.json'
-      - '55_Workbench/esbuild.config.mjs'
   workflow_dispatch:
 
 permissions:
