@@ -19,7 +19,7 @@ AMBIGUOUS_LINKS = {
     "equals", "exposes", "interfaces", "hasClassifier", "hasFlow",
     "hasPort", "transmits", "receives", "exchanges",
 }
-FIELD = re.compile(r"^([A-Za-z][A-Za-z0-9_-]*):\\s*(.*?)\\s*$")
+FIELD = re.compile(r"^([A-Za-z][A-Za-z0-9_-]*):\s*(.*?)\s*$")
 
 
 def triage_legacy_note(raw: bytes) -> dict:
@@ -47,7 +47,7 @@ def triage_legacy_note(raw: bytes) -> dict:
         if not m:
             return {"status": "REVIEW_ONLY", "reason": "unsupported YAML shape",
                     "source_sha256": before}
-        pairs.append((m.group(1), m.group(2).strip("\\\"'")))
+        pairs.append((m.group(1), m.group(2).strip("\\"'")))
     keys = [k for k, _ in pairs]
     if len(keys) != len(set(keys)):
         return {"status": "REVIEW_ONLY", "reason": "duplicate frontmatter key",
@@ -71,9 +71,9 @@ def triage_legacy_note(raw: bytes) -> dict:
 
 
 def note(note_type, more=""):
-    return ("---\\ntype: " + note_type +
-            "\\nuid: 20260930133525659skellyspencer\\nid: LEG-0001\\n" +
-            more + "---\\n# Legacy title\\n\\nOriginal narrative preserved.\\n").encode()
+    return ("---\ntype: " + note_type +
+            "\nuid: 20260930133525659skellyspencer\nid: LEG-0001\n" +
+            more + "---\n# Legacy title\n\nOriginal narrative preserved.\n").encode()
 
 
 class LegacyTriageTests(unittest.TestCase):
@@ -88,42 +88,42 @@ class LegacyTriageTests(unittest.TestCase):
         self.assertEqual(triage_legacy_note(note("Port"))["status"], "REVIEW_ONLY")
 
     def test_exposes_is_not_reinterpreted(self):
-        r = triage_legacy_note(note("Port", "exposes: '[[inner Port]]'\\n"))
+        r = triage_legacy_note(note("Port", "exposes: '[[inner Port]]'\n"))
         self.assertIn("exposes", r["legacy_fields"])
         self.assertEqual(r["status"], "REVIEW_ONLY")
 
     def test_equals_is_not_reinterpreted(self):
-        r = triage_legacy_note(note("Port", "equals: '[[other Port]]'\\n"))
+        r = triage_legacy_note(note("Port", "equals: '[[other Port]]'\n"))
         self.assertIn("equals", r["legacy_fields"])
         self.assertEqual(r["status"], "REVIEW_ONLY")
 
     def test_flow_direction_not_inferred(self):
         for key in ("transmits", "receives", "exchanges", "hasFlow"):
             with self.subTest(key=key):
-                r = triage_legacy_note(note("Port", key + ": '[[flow]]'\\n"))
+                r = triage_legacy_note(note("Port", key + ": '[[flow]]'\n"))
                 self.assertIn(key, r["legacy_fields"])
 
     def test_relationships_block_automatic_type_conversion(self):
-        r = triage_legacy_note(note("Step", "interfaces: []\\n"))
+        r = triage_legacy_note(note("Step", "interfaces: []\n"))
         self.assertEqual(r["status"], "REVIEW_ONLY")
 
     def test_duplicate_fields_fail_closed(self):
-        self.assertEqual(triage_legacy_note(note("Design", "uid: duplicate\\n"))["reason"],
+        self.assertEqual(triage_legacy_note(note("Design", "uid: duplicate\n"))["reason"],
                          "duplicate frontmatter key")
 
     def test_malformed_frontmatter_fails_closed(self):
-        self.assertEqual(triage_legacy_note(b"---\\ntype: Port\\n")["status"],
+        self.assertEqual(triage_legacy_note(b"---\ntype: Port\n")["status"],
                          "REVIEW_ONLY")
 
     def test_byte_preservation_and_determinism(self):
-        raw = note("State", "unrecognized_field: keep-me\\n")
+        raw = note("State", "unrecognized_field: keep-me\n")
         digest = hashlib.sha256(raw).hexdigest()
         self.assertEqual(triage_legacy_note(raw), triage_legacy_note(raw))
         self.assertEqual(hashlib.sha256(raw).hexdigest(), digest)
         self.assertEqual(triage_legacy_note(raw)["source_sha256"], digest)
 
     def test_unsupported_yaml_shape_fails_closed(self):
-        raw = note("Function", "nested:\\n  value: uncertain\\n")
+        raw = note("Function", "nested:\n  value: uncertain\n")
         self.assertEqual(triage_legacy_note(raw)["status"], "REVIEW_ONLY")
 
 
