@@ -105,6 +105,22 @@ jobs:
         run: |
           test -f main.js
           sha256sum main.js manifest.json styles.css
+      - name: Check two consecutive clean build outputs
+        run: |
+          set -euo pipefail
+          first="$(sha256sum main.js | cut -d' ' -f1)"
+          rm main.js
+          npm run build
+          second="$(sha256sum main.js | cut -d' ' -f1)"
+          echo "first_fresh_build_sha256=$first"
+          echo "second_fresh_build_sha256=$second"
+          echo "node_version=$(node --version)"
+          echo "npm_version=$(npm --version)"
+          npm ls esbuild typescript --depth=0
+          if [ "$first" != "$second" ]; then
+            echo "::error::Two builds from identical checked-out inputs produced different bundles"
+            exit 1
+          fi
       - name: Diagnose bundle provenance without changing controlled artifacts
         working-directory: .
         run: |
