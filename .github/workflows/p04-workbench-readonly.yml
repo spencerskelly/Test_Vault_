@@ -134,6 +134,15 @@ jobs:
             echo "::error::Two builds from identical checked-out inputs produced different bundles"
             exit 1
           fi
+      - name: Compare historical Node 20 toolchain reproducibility
+        working-directory: 55_Workbench
+        run: |
+          set -euo pipefail
+          current="$(sha256sum main.js | cut -d' ' -f1)"
+          echo "baseline_current_toolchain_bundle_sha256=$current"
+          echo "historical_workflow_node_selector=20"
+          echo "historical_artifact_origin=b0c4e2c6bdfb96d36f51d8152b17be22592ef174"
+          echo "The original workflow recorded no exact Node patch version."
       - name: Diagnose bundle provenance without changing controlled artifacts
         working-directory: .
         run: |
