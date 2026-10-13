@@ -5,6 +5,7 @@ No repository modifications and no model contents read.
 """
 import json
 import subprocess
+from pathlib import Path
 from collections import Counter
 
 ROOT = "55_Workbench/"
@@ -22,6 +23,7 @@ def run():
     excluded = [p for p in relative if p.startswith("vault/")]
     workspace_only = [p for p in relative if p not in tracked_inputs
                       and not p.startswith("vault/")]
+    missing = [p for p in tracked_inputs if not (Path(ROOT) / p).is_file()]
     counts = Counter(p.split("/")[0] for p in relative)
     # Audit the exact tracked source tree, including files unchanged from main.
     # Checkout can be sparse, but the commit tree metadata remains authoritative.
@@ -30,6 +32,8 @@ def run():
             ["git", "rev-parse", "HEAD"], text=True).strip(),
         "total_workbench_paths": len(paths),
         "source_checkout_candidates": len(tracked_inputs),
+        "source_checkout_present": len(tracked_inputs) - len(missing),
+        "missing_source_checkout_paths": missing,
         "historic_vault_paths_excluded": len(excluded),
         "other_review_paths": len(workspace_only),
         "top_level_counts": dict(sorted(counts.items())),
@@ -44,6 +48,8 @@ def run():
         raise SystemExit("Missing Workbench test tree")
     if "package-lock.json" not in tracked_inputs:
         raise SystemExit("Missing lockfile")
+    if missing:
+        raise SystemExit(f"Sparse checkout omitted {len(missing)} source/test/build inputs")
 
 if __name__ == "__main__":
     run()
