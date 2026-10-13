@@ -1,0 +1,96 @@
+name: P04 Workbench read-only build and tests
+
+on:
+  push:
+    branches: [integration/p03-legacy-compat-tests-20261013]
+    paths:
+      - '.github/workflows/p04-workbench-readonly.yml'
+      - '66_Testing/consolidation/p04_full_workbench_tree.py'
+      - '55_Workbench/src/**'
+      - '55_Workbench/test/**'
+      - '55_Workbench/bench/**'
+      - '55_Workbench/package.json'
+      - '55_Workbench/package-lock.json'
+      - '55_Workbench/tsconfig.json'
+      - '55_Workbench/esbuild.config.mjs'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  workbench-build-test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    defaults:
+      run:
+        working-directory: 55_Workbench
+    steps:
+      - name: Sparse checkout without historic vault or QEAX archive
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+          filter: blob:none
+          persist-credentials: false
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            /66_Testing/consolidation/p04_full_workbench_tree.py
+            /55_Workbench/src/
+            /55_Workbench/test/
+            /55_Workbench/bench/
+            /55_Workbench/scripts/
+            /55_Workbench/package.json
+            /55_Workbench/package-lock.json
+            /55_Workbench/tsconfig.json
+            /55_Workbench/esbuild.config.mjs
+            /55_Workbench/artifact-sha256.txt
+            /55_Workbench/manifest.json
+            /55_Workbench/styles.css
+            /55_Workbench/test/fixtures/
+      - name: Verify sensitive and historical sources are absent
+        run: |
+          test ! -e ../EA_2026_09_06_endgame.qeax.zip
+          test ! -d vault
+          test -f src/main.ts
+          test -f package-lock.json
+      - name: Inventory full committed Workbench tree (pathnames only)
+        working-directory: .
+        run: |
+          python3 66_Testing/consolidation/p04_full_workbench_tree.py > "$RUNNER_TEMP/p04-tree.json"
+          python3 - "$RUNNER_TEMP/p04-tree.json" <<'PY'
+          import json,sys
+          d=json.load(open(sys.argv[1]))
+          for k in ('commit','total_workbench_paths','source_checkout_candidates','historic_vault_paths_excluded','other_review_paths'):
+              print(f'{k}: {d[k]}')
+          PY
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: npm
+          cache-dependency-path: 55_Workbench/package-lock.json
+      - name: Install locked dependencies
+        run: npm ci
+      - name: Run Workbench tests
+        run: npm test
+      - name: Typecheck and build
+        run: npm run build
+      - name: Verify produced artifact identities without publishing
+        run: |
+          test -f main.js
+          sha256sum main.js manifest.json styles.css
+      - name: Require reproduced artifacts to match governed Workbench baseline
+        run: |
+          test -f artifact-sha256.txt
+          sha256sum --check artifact-sha256.txt
+      - name: Document read-only verification
+        if: always()
+        working-directory: .
+        shell: bash
+        run: |
+          {
+            echo '## P04 Workbench CI (source/build only)'
+            printf '%s\n' "- Tested commit: $(git rev-parse HEAD)"
+            echo '- No plugin synchronization, commit/push, or release promotion performed.'
+            echo '- This is not Obsidian GUI or real-QEAX acceptance.'
+          } >> "$GITHUB_STEP_SUMMARY"
