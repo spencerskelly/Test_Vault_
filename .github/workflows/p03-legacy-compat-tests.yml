@@ -6,6 +6,11 @@ on:
     paths:
       - '.github/workflows/p03-legacy-compat-tests.yml'
       - '66_Testing/consolidation/test_p03_legacy_compat.py'
+  pull_request:
+    branches: [main]
+    paths:
+      - '.github/workflows/p03-legacy-compat-tests.yml'
+      - '66_Testing/consolidation/test_p03_legacy_compat.py'
   workflow_dispatch:
 
 permissions:
