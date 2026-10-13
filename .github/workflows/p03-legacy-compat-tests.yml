@@ -2,7 +2,7 @@ name: P03 legacy compatibility synthetic tests
 
 on:
   push:
-    branches: [integration/p03-legacy-compat-tests-20261013]
+    branches: [integration/lean-test-infrastructure-20261013]
     paths:
       - '.github/workflows/p03-legacy-compat-tests.yml'
       - '66_Testing/consolidation/test_p03_legacy_compat.py'
