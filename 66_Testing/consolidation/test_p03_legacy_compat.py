@@ -47,7 +47,14 @@ def triage_legacy_note(raw: bytes) -> dict:
         if not m:
             return {"status": "REVIEW_ONLY", "reason": "unsupported YAML shape",
                     "source_sha256": before}
-        pairs.append((m.group(1), m.group(2).strip(chr(34) + chr(39))))
+        key, value = m.group(1), m.group(2).strip()
+        # Conservative guard: this is not a YAML parser. Do not attempt
+        # semantic interpretation of collections, aliases, tags or block scalars.
+        if (not value or value.startswith(("-", "[", "{", "&", "*", "!", "|", ">"))
+                or re.search(r"(?<![A-Za-z0-9])(?:&|\\*|!!)[A-Za-z_]", value)):
+            return {"status": "REVIEW_ONLY", "reason": "unsupported YAML shape",
+                    "source_sha256": before}
+        pairs.append((key, value.strip(chr(34) + chr(39))))
     keys = [k for k, _ in pairs]
     if len(keys) != len(set(keys)):
         return {"status": "REVIEW_ONLY", "reason": "duplicate frontmatter key",
@@ -154,7 +161,7 @@ class LegacyTriageTests(unittest.TestCase):
         ):
             with self.subTest(sample=raw):
                 result = triage_legacy_note(raw)
-                self.assertIn(result["status"], ("REVIEW_ONLY", "PROPOSED_ONLY"))
+                self.assertEqual(result["status"], "REVIEW_ONLY")
                 self.assertEqual(result["source_sha256"], hashlib.sha256(raw).hexdigest())
         self.assertEqual(triage_legacy_note(
             note("State", "hasState:\n  - '[[Substate]]'\n"))["status"], "REVIEW_ONLY")
@@ -162,6 +169,22 @@ class LegacyTriageTests(unittest.TestCase):
     def test_invalid_utf8_fails_closed(self):
         self.assertEqual(triage_legacy_note(b"---\ntype: Design\n---\n\xff")["reason"],
                          "non-UTF8 source")
+
+
+    def test_yaml_alias_never_proposed(self):
+        for extra in ("tags: &labels [legacy]\\nnotes: *labels\\n",
+                      "related: *source\\n", "related: !unsafe value\\n",
+                      "related: {key: value}\\n", "related: |\\n  text\\n"):
+            with self.subTest(extra=extra):
+                self.assertEqual(triage_legacy_note(note("State", extra))["status"],
+                                 "REVIEW_ONLY")
+
+    def test_empty_and_inline_collections_review_only(self):
+        for extra in ("satisfies: []\\n", "satisfies: [REQ-1]\\n",
+                      "satisfies:\\n  - REQ-1\\n"):
+            with self.subTest(extra=extra):
+                self.assertEqual(triage_legacy_note(note("Function", extra))["status"],
+                                 "REVIEW_ONLY")
 
 
 if __name__ == "__main__":
