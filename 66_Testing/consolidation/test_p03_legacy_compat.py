@@ -47,7 +47,7 @@ def triage_legacy_note(raw: bytes) -> dict:
         if not m:
             return {"status": "REVIEW_ONLY", "reason": "unsupported YAML shape",
                     "source_sha256": before}
-        pairs.append((m.group(1), m.group(2).strip("\\"'")))
+        pairs.append((m.group(1), m.group(2).strip(chr(34) + chr(39))))
     keys = [k for k, _ in pairs]
     if len(keys) != len(set(keys)):
         return {"status": "REVIEW_ONLY", "reason": "duplicate frontmatter key",
