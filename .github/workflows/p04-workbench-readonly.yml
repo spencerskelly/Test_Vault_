@@ -13,6 +13,14 @@ on:
       - '55_Workbench/package-lock.json'
       - '55_Workbench/tsconfig.json'
       - '55_Workbench/esbuild.config.mjs'
+  pull_request:
+    branches: [consolidation/step22-single-repo-cutover-2026-10-11]
+    paths:
+      - '.github/workflows/p04-workbench-readonly.yml'
+      - '66_Testing/consolidation/p04_full_workbench_tree.py'
+      - '55_Workbench/src/**'
+      - '55_Workbench/test/**'
+      - '55_Workbench/bench/**'
   workflow_dispatch:
 
 permissions:
