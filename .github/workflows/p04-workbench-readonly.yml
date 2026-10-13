@@ -5,6 +5,7 @@ on:
     branches: [integration/p03-legacy-compat-tests-20261013]
     paths:
       - '.github/workflows/p04-workbench-readonly.yml'
+      - '66_Testing/consolidation/p04_full_workbench_tree.py'
       - '55_Workbench/src/**'
       - '55_Workbench/test/**'
       - '55_Workbench/bench/**'
@@ -33,6 +34,7 @@ jobs:
           persist-credentials: false
           sparse-checkout-cone-mode: false
           sparse-checkout: |
+            /66_Testing/consolidation/p04_full_workbench_tree.py
             /55_Workbench/src/
             /55_Workbench/test/
             /55_Workbench/bench/
@@ -50,6 +52,16 @@ jobs:
           test ! -d vault
           test -f src/main.ts
           test -f package-lock.json
+      - name: Inventory full committed Workbench tree (pathnames only)
+        working-directory: .
+        run: |
+          python3 66_Testing/consolidation/p04_full_workbench_tree.py > "$RUNNER_TEMP/p04-tree.json"
+          python3 - "$RUNNER_TEMP/p04-tree.json" <<'PY'
+          import json,sys
+          d=json.load(open(sys.argv[1]))
+          for k in ('commit','total_workbench_paths','source_checkout_candidates','historic_vault_paths_excluded','other_review_paths'):
+              print(f'{k}: {d[k]}')
+          PY
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
