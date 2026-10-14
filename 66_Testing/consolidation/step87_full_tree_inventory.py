@@ -6,10 +6,10 @@ import subprocess
 from pathlib import Path
 
 REFS = {
-    "main": "main",
-    "step22": "consolidation/step22-single-repo-cutover-2026-10-11",
-    "pr42": "integration/lean-test-infrastructure-20261013",
-    "pr43": "integration/p03-legacy-compat-tests-20261013",
+    "main": "refs/remotes/origin/main",
+    "step22": "refs/remotes/origin/consolidation/step22-single-repo-cutover-2026-10-11",
+    "pr42": "refs/remotes/origin/integration/lean-test-infrastructure-20261013",
+    "pr43": "refs/remotes/origin/integration/p03-legacy-compat-tests-20261013",
 }
 
 def git(*args):
@@ -70,8 +70,6 @@ def main():
                 "- Output is an artifact attached to this CI run; refs must be rechecked before any merge."]
     (folder / "step87-summary.md").write_text("\n".join(summary) + "\n")
     print("\n".join(summary))
-    with open("/dev/stdout", "a") as f:
-        pass
-
+    
 if __name__ == "__main__":
     main()
