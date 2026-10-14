@@ -43,8 +43,7 @@ def main():
                     vaults.append({"path": key, "review": str(current / REVIEW),
                                    "source_map": str(current / MAP)})
                     seen.add(key)
-            if depth >= args.max_depth:
-                continue
+            # Inspect files in the boundary directory; max-depth limits descent.
             for name in sorted(files):
                 path = current / name
                 if path.is_symlink() or path.suffix.lower() not in (".qeax", ".qea"):
