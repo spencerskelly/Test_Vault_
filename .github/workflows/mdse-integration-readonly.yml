@@ -159,15 +159,15 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 30
     steps:
-      - name: Checkout source contracts without archived QEAX
+      - name: Checkout importer contracts and base builder only
         uses: actions/checkout@v4
         with:
           persist-credentials: false
           filter: blob:none
-          sparse-checkout-cone-mode: false
           sparse-checkout: |
-            /*
-            !/EA_2026_09_06_endgame.qeax.zip
+            Importer/Testing
+            Importer/Tools
+            Base Vault/Tools
       - uses: actions/setup-node@v4
         with:
           node-version: '20'
