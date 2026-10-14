@@ -5,6 +5,10 @@ on:
     branches: [integration/p03-legacy-compat-tests-20261013]
     paths:
       - '.github/workflows/step58-historical-reproduction.yml'
+  pull_request:
+    branches: [consolidation/step22-single-repo-cutover-2026-10-11]
+    paths:
+      - '.github/workflows/step58-historical-reproduction.yml'
   workflow_dispatch:
 
 permissions:
