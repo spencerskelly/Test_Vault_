@@ -88,7 +88,7 @@ jobs:
           python3 - <<'PY'
           import json, pathlib, re, hashlib, subprocess
           source = pathlib.Path('src/core/localmodel.ts').read_text()
-          assert re.search(r'WRITABLE_VERSION\\s*=\\s*"0\\.5"', source), 'writer must stay at 0.5'
+          assert re.search(r'WRITABLE_VERSION\s*=\s*"0\.5"', source), 'writer must stay at 0.5'
           assert '"0.6"' in source and '"0.5"' in source, 'expected read versions missing'
           package = json.loads(pathlib.Path('package.json').read_text())
           manifest = json.loads(pathlib.Path('manifest.json').read_text())
@@ -99,12 +99,12 @@ jobs:
           assert hashlib.sha256(governed).hexdigest() == expected, 'governed artifact tampered'
           candidate = pathlib.Path('main.js').read_bytes()
           with open(__import__('os').environ['GITHUB_STEP_SUMMARY'], 'a') as out:
-              out.write('## Workbench 0.5 source candidate (not released)\\n')
-              out.write('Commit: ' + subprocess.check_output(['git','rev-parse','HEAD']).decode().strip() + '\\n')
-              out.write('Plugin version: ' + package['version'] + '; writer: 0.5; reader includes 0.6\\n')
-              out.write('Candidate SHA-256: ' + hashlib.sha256(candidate).hexdigest() + '\\n')
-              out.write('Controlled SHA-256: ' + expected + '\\n')
-              out.write('No governed binary replacement or artifact publication.\\n')
+              out.write('## Workbench 0.5 source candidate (not released)\n')
+              out.write('Commit: ' + subprocess.check_output(['git','rev-parse','HEAD']).decode().strip() + '\n')
+              out.write('Plugin version: ' + package['version'] + '; writer: 0.5; reader includes 0.6\n')
+              out.write('Candidate SHA-256: ' + hashlib.sha256(candidate).hexdigest() + '\n')
+              out.write('Controlled SHA-256: ' + expected + '\n')
+              out.write('No governed binary replacement or artifact publication.\n')
           PY
       - name: Report build identity
         run: |
