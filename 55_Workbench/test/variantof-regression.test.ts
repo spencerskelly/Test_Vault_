@@ -34,3 +34,18 @@ test("variantOf review diagnoses cycles and invalid Object endpoints without rew
   assert.ok(findings.some(f => f.code === "variant.endpoint-invalid" && f.path === "C.md"));
   assert.deepEqual(index.notes.get("A.md")?.fields.get("variantOf"), before);
 });
+
+test("variantOf identifies repeated authored links and unresolved targets", () => {
+  const index = new ModelIndex(fixtureSchema());
+  const duplicate = record("Duplicate.md", "Object", ["Target.md"]);
+  duplicate.repeat = new Map([["variantOf|Target.md", 2]]);
+  const unresolved = record("Unresolved.md", "Object");
+  unresolved.broken = [{ field: "variantOf", link: "[[Missing Type]]" }];
+  index.upsert(duplicate);
+  index.upsert(unresolved);
+  index.upsert(record("Target.md", "Object"));
+  const findings = validateVariantOf(index);
+  assert.ok(findings.some(f => f.code === "variant.duplicate" && f.path === "Duplicate.md"));
+  assert.ok(findings.some(f => f.code === "variant.unresolved" && f.path === "Unresolved.md"));
+  assert.ok(!findings.some(f => f.code === "variant.cycle"));
+});
