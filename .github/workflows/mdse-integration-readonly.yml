@@ -1,0 +1,88 @@
+name: MDSE consolidated read-only integration gate
+
+# Candidate integration check only. Not a release, GUI test or historical CI replacement.
+on:
+  push:
+    branches: [integration/p03-legacy-compat-tests-20261013]
+    paths:
+      - '.github/workflows/mdse-integration-readonly.yml'
+      - '55_Workbench/src/**'
+      - '55_Workbench/test/**'
+      - '55_Workbench/package*.json'
+      - '66_Testing/consolidation/test_p03_legacy_compat.py'
+      - '66_Testing/consolidation/test_step22_retirement.py'
+      - '66_Testing/consolidation/test_step19_generated_base.py'
+      - '66_Testing/consolidation/test_step20_synthetic_model.py'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: mdse-integration-readonly-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  controlled-python-checks:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+          filter: blob:none
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            /66_Testing/consolidation/
+            /55_Workbench/package.json
+            /55_Workbench/manifest.json
+            /Base Vault/Definition/
+      - name: Synthetic legacy classifier checks
+        run: python3 -m unittest discover -s 66_Testing/consolidation -p 'test_p03_legacy_compat.py' -v
+      - name: Record restricted validation scope
+        run: |
+          echo 'Read-only synthetic checks; no QEAX, model ZIP, Obsidian GUI, release promotion or artifact publishing.' >> "$GITHUB_STEP_SUMMARY"
+
+  workbench-source-build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    defaults:
+      run:
+        working-directory: 55_Workbench
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+          filter: blob:none
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            /55_Workbench/src/
+            /55_Workbench/test/
+            /55_Workbench/bench/
+            /55_Workbench/scripts/
+            /55_Workbench/package.json
+            /55_Workbench/package-lock.json
+            /55_Workbench/tsconfig.json
+            /55_Workbench/esbuild.config.mjs
+            /55_Workbench/manifest.json
+            /55_Workbench/styles.css
+      - name: Enforce no historical vault or QEAX checkout
+        run: |
+          test ! -d vault
+          test ! -e ../EA_2026_09_06_endgame.qeax.zip
+          test -f src/main.ts
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: npm
+          cache-dependency-path: 55_Workbench/package-lock.json
+      - name: Test and build (no publication)
+        run: |
+          npm ci
+          npm test
+          npm run build
+      - name: Report build identity
+        run: |
+          test -f main.js
+          sha256sum main.js manifest.json styles.css
+          echo 'Workbench source build succeeded; no controlled artifact or release manifest was written to Git.' >> "$GITHUB_STEP_SUMMARY"
