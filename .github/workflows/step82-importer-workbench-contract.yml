@@ -35,6 +35,36 @@ jobs:
         run: python3 -m pip install PyYAML==6.0.2
       - name: Block incompatible importer and Workbench Local Model source
         run: python3 66_Testing/check_importer_workbench_localmodel.py
+      - name: Prove incompatible schema fails closed in disposable copy
+        shell: bash
+        run: |
+          set -euo pipefail
+          test_dir="$(mktemp -d)"
+          trap 'rm -rf "$test_dir"' EXIT
+          mkdir -p "$test_dir/66_Testing" "$test_dir/55_Workbench/src/core" "$test_dir/99_System/03_Schemas" "$test_dir/Base Vault/Definition"
+          cp 66_Testing/check_importer_workbench_localmodel.py "$test_dir/66_Testing/"
+          cp 55_Workbench/src/core/localmodel.ts "$test_dir/55_Workbench/src/core/"
+          cp 99_System/03_Schemas/local-model.yaml "$test_dir/99_System/03_Schemas/"
+          cp "Base Vault/Definition/mdse-release.yaml" "$test_dir/Base Vault/Definition/"
+          python3 - "$test_dir/99_System/03_Schemas/local-model.yaml" <<'PY'
+          import pathlib, sys, yaml
+          path = pathlib.Path(sys.argv[1])
+          schema = yaml.safe_load(path.read_text())
+          schema["schemaVersion"] = "0.7"
+          schema["compatibility"]["writableVersion"] = "0.7"
+          path.write_text(yaml.safe_dump(schema))
+          PY
+          set +e
+          python3 "$test_dir/66_Testing/check_importer_workbench_localmodel.py" > "$test_dir/failure.log" 2>&1
+          status=$?
+          set -e
+          cat "$test_dir/failure.log"
+          if [ "$status" -eq 0 ]; then
+            echo "::error::Incompatible schema incorrectly passed"
+            exit 1
+          fi
+          grep -q "BLOCKED:" "$test_dir/failure.log"
+          echo "Negative compatibility test: PASS (schema 0.7 rejected)"
       - name: Record source-only validation boundary
         if: always()
         run: |
