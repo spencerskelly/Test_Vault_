@@ -43,6 +43,34 @@ jobs:
         run: |
           echo 'Read-only synthetic checks; no QEAX, model ZIP, Obsidian GUI, release promotion or artifact publishing.' >> "$GITHUB_STEP_SUMMARY"
 
+
+  importer-and-governance-smoke:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - name: Sparse checkout of synthetic validators and consolidation evidence
+        uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+          filter: blob:none
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            /Importer/Testing/v0.8.19/
+            /66_Testing/consolidation/
+            /Base Vault/Definition/
+            /55_Workbench/manifest.json
+            /55_Workbench/docs/
+            /00_Workspace/
+      - name: Exclude source-model archive
+        run: test ! -e EA_2026_09_06_endgame.qeax.zip
+      - name: Synthetic importer output validator regression
+        run: python3 Importer/Testing/v0.8.19/imp009_output_acceptance_selftest.py
+      - name: Historical Workbench inventory and archival holds
+        run: python3 -m unittest discover -s 66_Testing/consolidation -p 'test_step22_retirement.py' -v
+      - name: Record deliberately limited evidence
+        run: |
+          echo 'Synthetic importer and Step22 governance smoke only; no model archive, real QEAX, generated Base Vault, release, or Obsidian GUI tested.' >> "$GITHUB_STEP_SUMMARY"
+
   workbench-source-build:
     runs-on: ubuntu-latest
     timeout-minutes: 30
