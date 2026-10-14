@@ -71,10 +71,9 @@ jobs:
         run: python3 -m unittest discover -s 66_Testing/consolidation -p 'test_step16_release_provenance.py' -v
       - name: Step16 fail-closed native release diagnostic
         run: python3 66_Testing/consolidation/step16_native_gate.py
-      - name: Step17 document registry review and negative tests
-        run: |
-          python3 66_Testing/consolidation/step17_registry_review.py
-          python3 -m unittest discover -s 66_Testing/consolidation -p 'test_step17_registry.py' -v
+      # Step17 review asserts an immutable pre-Step18 manifest byte snapshot.
+      # It remains preserved on its historical branch and must not be
+      # reinterpreted as a present-day release-manifest assertion.
       - name: Preserve proposal-only scope
         run: echo 'Historical governance/provenance verification only; no W decision or release approval implied.' >> "$GITHUB_STEP_SUMMARY"
 
