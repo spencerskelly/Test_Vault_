@@ -56,14 +56,8 @@ jobs:
           filter: blob:none
           sparse-checkout-cone-mode: false
           sparse-checkout: |
-            /Base Vault/
-            /55_Workbench/
-            /66_Testing/consolidation/
-            /00_Workspace/
-            /99_System/03_Schemas/
-            /.obsidian/plugin-lock.yaml
-            /.obsidian/community-plugins.json
-            /README.md
+            /*
+            !/EA_2026_09_06_endgame.qeax.zip
       - name: Confirm no source model ZIP in worktree
         run: test ! -e EA_2026_09_06_endgame.qeax.zip
       - name: Install pinned YAML checker
