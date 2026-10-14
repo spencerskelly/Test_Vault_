@@ -60,6 +60,16 @@ def main():
     summary += [f"| {key} | {count} |" for key, count in sorted(categories.items())]
     summary += ["", "| Ref | Commit | Tracked paths |", "|---|---|---:|"]
     summary += [f"| {key} | \`{val['commit']}\` | {val['paths']} |" for key, val in out["refs"].items()]
+    # Integrity assertions: every union path is classified once; no path is silently dropped.
+    assert len(rows) == len(all_paths)
+    assert sum(categories.values()) == len(all_paths)
+    for key, tree in trees.items():
+        assert sum(row["refs"][key] is not None for row in rows) == len(tree)
+    summary += ["", "## Divergent paths (first 100, full details in JSON)", ""]
+    divergent = [r for r in rows if r["category"] == "divergent-existing"]
+    summary += [f"- \`{r['path']}\`" for r in divergent[:100]]
+    if len(divergent) > 100:
+        summary.append(f"- … plus {len(divergent) - 100} more; see JSON report")
     summary += ["", "## Divergent path count by directory", ""]
     roots = collections.Counter(r["path"].split("/", 1)[0] for r in rows if r["category"] == "divergent-existing")
     summary += [f"- {key}: {count}" for key, count in roots.most_common()]
