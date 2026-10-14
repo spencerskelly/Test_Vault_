@@ -222,7 +222,11 @@ jobs:
           set -euo pipefail
           tempbase="$(mktemp -d "$RUNNER_TEMP/mdse-base-XXXXXX")"
           python3 'Base Vault/Tools/v0.8.0-r2/build-base.py' "$tempbase/base"
-          python3 'Base Vault/Testing/check-release.py' --workbench 55_Workbench --base "$tempbase/base"
+          python3 'Base Vault/Testing/check-release.py' --workbench 55_Workbench --base "$tempbase/base" > "$tempbase/native-check.txt"
+          grep -F 'base contains every required runtime file' "$tempbase/native-check.txt"
+          grep -F 'base contains no ungoverned extra files' "$tempbase/native-check.txt"
+          grep -F 'Workbench user guide equals Base Vault release copy' "$tempbase/native-check.txt"
+          grep -E '^[0-9]+ fail, [0-9]+ warn$' "$tempbase/native-check.txt"
           python3 66_Testing/consolidation/step19_generated_base.py --base "$tempbase/base"
           STEP19_BASE_DIR="$tempbase/base" python3 -m unittest discover -s 66_Testing/consolidation -p 'test_step19_generated_base.py' -v
           python3 66_Testing/consolidation/step19_generated_base.py --base "$tempbase/base"
