@@ -1,0 +1,91 @@
+name: Step58 isolated historical Workbench reproduction
+
+on:
+  push:
+    branches: [integration/p03-legacy-compat-tests-20261013]
+    paths:
+      - '.github/workflows/step58-historical-reproduction.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  historical-source-build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - name: Checkout original Workbench commit, source-only
+        uses: actions/checkout@v4
+        with:
+          ref: b0c4e2c6bdfb96d36f51d8152b17be22592ef174
+          path: historical
+          persist-credentials: false
+          fetch-depth: 1
+          filter: blob:none
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            /src/
+            /test/
+            /scripts/
+            /bench/
+            /package.json
+            /package-lock.json
+            /tsconfig.json
+            /esbuild.config.mjs
+            /artifact-sha256.txt
+            /main.js
+            /manifest.json
+            /styles.css
+      - name: Enforce historical checkout isolation
+        working-directory: historical
+        run: |
+          test ! -e EA_2026_09_06_endgame.qeax.zip
+          test ! -d vault
+          test -f src/main.ts
+          test -f package-lock.json
+          test -f main.js
+          test -f artifact-sha256.txt
+          test "$(git rev-parse HEAD)" = "b0c4e2c6bdfb96d36f51d8152b17be22592ef174"
+      - name: Setup Node 20
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: npm
+          cache-dependency-path: historical/package-lock.json
+      - name: Capture original tracked artifact and runtime
+        working-directory: historical
+        run: |
+          echo "original_commit=$(git rev-parse HEAD)"
+          echo "node_version=$(node --version)"
+          echo "npm_version=$(npm --version)"
+          echo "tracked_original_bundle=$(sha256sum main.js)"
+          echo "historical_lock_sha256=$(sha256sum package-lock.json)"
+          sha256sum --check artifact-sha256.txt
+      - name: Install original locked dependencies and build from original source
+        working-directory: historical
+        run: |
+          npm ci
+          npm ls esbuild typescript --depth=0
+          npm run build
+      - name: Compare historical fresh build with governed original (diagnostic)
+        working-directory: historical
+        shell: bash
+        run: |
+          set -euo pipefail
+          expected="$(awk '$2=="main.js" {print $1}' artifact-sha256.txt)"
+          actual="$(sha256sum main.js | cut -d' ' -f1)"
+          {
+            echo '## Step58 historical source reproduction — diagnostic only'
+            echo "- Historical commit: $(git rev-parse HEAD)"
+            echo "- Node: $(node --version); npm: $(npm --version)"
+            echo "- Governed main.js SHA-256: $expected"
+            echo "- Fresh historical source main.js SHA-256: $actual"
+            if [ "$expected" = "$actual" ]; then
+              echo '- Historical binary reproduced: YES (does not authorize release)'
+            else
+              echo '- Historical binary reproduced: NO; release hold remains'
+              echo '::warning::Historical source build does not match governed artifact; release equivalence remains blocked'
+            fi
+            echo '- No QEAX, historical vault, release artifact or plugin publishing performed.'
+          } | tee -a "$GITHUB_STEP_SUMMARY"
