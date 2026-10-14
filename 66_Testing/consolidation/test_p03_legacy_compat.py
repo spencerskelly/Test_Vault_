@@ -51,7 +51,7 @@ def triage_legacy_note(raw: bytes) -> dict:
         # Conservative guard: this is not a YAML parser. Do not attempt
         # semantic interpretation of collections, aliases, tags or block scalars.
         if (not value or value.startswith(("-", "[", "{", "&", "*", "!", "|", ">"))
-                or re.search(r"(?<![A-Za-z0-9])(?:&|\\*|!!)[A-Za-z_]", value)):
+                or re.search(r"(?<![A-Za-z0-9])(?:&|\*|!!)[A-Za-z_]", value)):
             return {"status": "REVIEW_ONLY", "reason": "unsupported YAML shape",
                     "source_sha256": before}
         pairs.append((key, value.strip(chr(34) + chr(39))))
