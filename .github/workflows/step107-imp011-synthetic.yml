@@ -1,0 +1,36 @@
+name: Step107 IMP-011 synthetic acceptance
+on:
+  push:
+    branches: [integration/p03-legacy-compat-tests-20261013]
+    paths:
+      - '66_Testing/consolidation/imp011_topology_acceptance.py'
+      - '66_Testing/consolidation/localmodel_topology_index_v2.py'
+      - '66_Testing/consolidation/test_imp011_topology_synthetic.py'
+      - '66_Testing/consolidation/test_imp011_baseline_propagation.py'
+      - '.github/workflows/step107-imp011-synthetic.yml'
+  pull_request:
+    branches: [consolidation/step22-single-repo-cutover-2026-10-11]
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  imp011-synthetic:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            /66_Testing/consolidation/imp011_topology_acceptance.py
+            /66_Testing/consolidation/localmodel_topology_index_v2.py
+            /66_Testing/consolidation/test_imp011_topology_synthetic.py
+            /66_Testing/consolidation/test_imp011_baseline_propagation.py
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Run six topology scenarios
+        run: python3 -m unittest discover -s 66_Testing/consolidation -p 'test_imp011_topology_synthetic.py' -v
+      - name: Prove original validator failure propagation
+        run: python3 -m unittest discover -s 66_Testing/consolidation -p 'test_imp011_baseline_propagation.py' -v
