@@ -1,0 +1,41 @@
+name: Step82 importer Workbench source compatibility
+
+on:
+  pull_request:
+    branches: [consolidation/step22-single-repo-cutover-2026-10-11]
+    paths:
+      - '.github/workflows/step82-importer-workbench-contract.yml'
+      - '66_Testing/check_importer_workbench_localmodel.py'
+      - '55_Workbench/src/core/localmodel.ts'
+      - '99_System/03_Schemas/local-model.yaml'
+      - 'Base Vault/Definition/mdse-release.yaml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  importer-workbench-contract:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            /66_Testing/check_importer_workbench_localmodel.py
+            /55_Workbench/src/core/localmodel.ts
+            /99_System/03_Schemas/local-model.yaml
+            /Base Vault/Definition/mdse-release.yaml
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install YAML parser
+        run: python3 -m pip install PyYAML==6.0.2
+      - name: Block incompatible importer and Workbench Local Model source
+        run: python3 66_Testing/check_importer_workbench_localmodel.py
+      - name: Record source-only validation boundary
+        if: always()
+        run: |
+          echo 'Importer to Workbench parser/writer compatibility gate. No model archive, QEAX conversion, release approval or plugin publication.' >> "$GITHUB_STEP_SUMMARY"
