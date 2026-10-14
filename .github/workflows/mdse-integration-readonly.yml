@@ -48,6 +48,51 @@ jobs:
 
 
 
+
+  synthetic-gui-evidence-preflight:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - name: Checkout fixture tools without original QEAX archive
+        uses: actions/checkout@v4
+        with:
+          filter: blob:none
+          persist-credentials: false
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            /*
+            !/EA_2026_09_06_endgame.qeax.zip
+      - name: Install controlled YAML dependency
+        run: python3 -m pip install --disable-pip-version-check PyYAML==6.0.2
+      - name: Verify Step21 missing-evidence rejection regression
+        run: python3 -m unittest discover -s 66_Testing/consolidation -p 'test_step21_evidence.py' -v
+      - name: Build and validate disposable Step20 synthetic model
+        shell: bash
+        run: |
+          set -euo pipefail
+          scratch="$(mktemp -d "$RUNNER_TEMP/step20-XXXXXX")"
+          base="$scratch/base"
+          synthetic="$scratch/synthetic"
+          python3 'Base Vault/Tools/v0.8.0-r2/build-base.py' "$base"
+          python3 'Base Vault/Testing/check-release.py' --workbench 55_Workbench --base "$base"
+          python3 66_Testing/consolidation/step20_synthetic_vault.py --base "$base" --out "$synthetic"
+          python3 66_Testing/consolidation/step20_validate_fixture.py --vault "$synthetic"
+          STEP20_SYNTHETIC_VAULT="$synthetic" python3 -m unittest discover -s 66_Testing/consolidation -p 'test_step20_synthetic.py' -v
+          python3 66_Testing/consolidation/step20_validate_fixture.py --vault "$synthetic"
+      - name: Prepare and verify private target-platform templates on Linux
+        shell: bash
+        run: |
+          set -euo pipefail
+          commit="$(git rev-parse HEAD)"
+          python3 66_Testing/consolidation/step21_prepare_session.py --platform macos --workspace "$RUNNER_TEMP/step21-target-macos" --expected-commit "$commit"
+          python3 66_Testing/consolidation/step21_prepare_session.py --platform windows --workspace "$RUNNER_TEMP/step21-target-windows" --expected-commit "$commit"
+          python3 66_Testing/consolidation/step21_evidence.py --check "$RUNNER_TEMP/step21-target-macos/PRIVATE_GUI_RESULTS.json" "$RUNNER_TEMP/step21-target-windows/PRIVATE_GUI_RESULTS.json"
+          python3 66_Testing/consolidation/step20_validate_fixture.py --vault "$RUNNER_TEMP/step21-target-macos/02_Synthetic_GUI_Vault"
+          python3 66_Testing/consolidation/step20_validate_fixture.py --vault "$RUNNER_TEMP/step21-target-windows/02_Synthetic_GUI_Vault"
+          echo 'STEP21_MAC_GUI_EXECUTED=false; STEP21_WINDOWS_GUI_EXECUTED=false'
+      - name: Report privacy and acceptance limits
+        run: echo 'Synthetic fixtures and empty evidence templates validated on Linux only; no private result upload, actual Obsidian GUI acceptance, QEAX or release promotion.' >> "$GITHUB_STEP_SUMMARY"
+
   governance-provenance-regressions:
     runs-on: ubuntu-latest
     timeout-minutes: 25
