@@ -47,6 +47,37 @@ jobs:
 
 
 
+
+  governance-provenance-regressions:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - name: Read-only source checkout without archived QEAX
+        uses: actions/checkout@v4
+        with:
+          filter: blob:none
+          persist-credentials: false
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            /*
+            !/EA_2026_09_06_endgame.qeax.zip
+      - name: Install pinned YAML dependency
+        run: python3 -m pip install --disable-pip-version-check PyYAML==6.0.2
+      - name: Step14 document byte and approval-marker regressions
+        run: python3 -m unittest discover -s 66_Testing/consolidation -p 'test_step14_docs.py' -v
+      - name: Step15 governance stop-gate regressions
+        run: python3 -m unittest discover -s 66_Testing/consolidation -p 'test_step15_governance.py' -v
+      - name: Step16 release provenance regressions
+        run: python3 -m unittest discover -s 66_Testing/consolidation -p 'test_step16_release_provenance.py' -v
+      - name: Step16 fail-closed native release diagnostic
+        run: python3 66_Testing/consolidation/step16_native_gate.py
+      - name: Step17 document registry review and negative tests
+        run: |
+          python3 66_Testing/consolidation/step17_registry_review.py
+          python3 -m unittest discover -s 66_Testing/consolidation -p 'test_step17_registry.py' -v
+      - name: Preserve proposal-only scope
+        run: echo 'Historical governance/provenance verification only; no W decision or release approval implied.' >> "$GITHUB_STEP_SUMMARY"
+
   historical-authority-regressions:
     runs-on: ubuntu-latest
     timeout-minutes: 25
