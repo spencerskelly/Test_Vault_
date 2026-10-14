@@ -5,6 +5,7 @@ This tool finds candidates; it never assumes that the source QEAX and vault matc
 """
 import argparse
 import json
+import os
 from pathlib import Path
 
 REVIEW = Path("99_System/11_Import/Review - Equals Direction.csv")
@@ -26,25 +27,35 @@ def main():
             failures.append(f"Not a directory: {root}")
             continue
         base = root.resolve()
-        for current in [base, *base.rglob("*")]:
-            if current.is_symlink() or not current.exists():
-                continue
-            try:
-                rel = current.relative_to(base)
-            except ValueError:
-                continue
-            if len(rel.parts) > args.max_depth:
-                continue
-            if current.is_file() and current.suffix.lower() in (".qeax", ".qea"):
+        # os.walk prunes subtrees before traversal, unlike rglob plus a depth filter.
+        for directory, dirs, files in os.walk(base, topdown=True, followlinks=False):
+            current = Path(directory)
+            depth = len(current.relative_to(base).parts)
+            dirs[:] = sorted(
+                name for name in dirs
+                if depth < args.max_depth
+                and not (current / name).is_symlink()
+                and name not in {".git", "node_modules", ".trash"}
+            )
+            if (current / REVIEW).is_file() and (current / MAP).is_file():
                 key = str(current)
                 if key not in seen:
-                    source.append({"path": key, "bytes": current.stat().st_size})
+                    vaults.append({"path": key, "review": str(current / REVIEW),
+                                   "source_map": str(current / MAP)})
                     seen.add(key)
-            if current.is_dir() and (current / REVIEW).is_file() and (current / MAP).is_file():
-                key = str(current)
+            if depth >= args.max_depth:
+                continue
+            for name in sorted(files):
+                path = current / name
+                if path.is_symlink() or path.suffix.lower() not in (".qeax", ".qea"):
+                    continue
+                key = str(path)
                 if key not in seen:
-                    vaults.append({"path": key, "review": str(current / REVIEW), "source_map": str(current / MAP)})
-                    seen.add(key)
+                    try:
+                        source.append({"path": key, "bytes": path.stat().st_size})
+                        seen.add(key)
+                    except OSError as exc:
+                        failures.append(f"Cannot inspect {path}: {exc}")
     report = {"sources": source, "candidate_vaults": vaults, "errors": failures,
               "pairing_verified": False,
               "note": "Candidate discovery only. Match provenance and run step120 acceptance on a verified pair."}
