@@ -10,6 +10,8 @@ on:
       - '55_Workbench/test/**'
       - '55_Workbench/package*.json'
       - '66_Testing/consolidation/test_p03_legacy_compat.py'
+      - '66_Testing/consolidation/test_step121_operator_fail_closed.py'
+      - '66_Testing/consolidation/step120_real_qeax_operator_gate.py'
       - '66_Testing/consolidation/test_step22_retirement.py'
       - '66_Testing/consolidation/test_step19_generated_base.py'
       - '66_Testing/consolidation/test_step20_synthetic_model.py'
@@ -41,6 +43,8 @@ jobs:
             /Base Vault/Definition/
       - name: Synthetic legacy classifier checks
         run: python3 -m unittest discover -s 66_Testing/consolidation -p 'test_p03_legacy_compat.py' -v
+      - name: Step121 QEAX operator fail-closed regressions
+        run: python3 -m unittest discover -s 66_Testing/consolidation -p 'test_step121_operator_fail_closed.py' -v
       - name: Record restricted validation scope
         run: |
           echo 'Read-only synthetic checks; no QEAX, model ZIP, Obsidian GUI, release promotion or artifact publishing.' >> "$GITHUB_STEP_SUMMARY"
