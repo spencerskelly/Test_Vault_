@@ -28,7 +28,7 @@ test("schema 0.6 reads quantity and unitOfMeasure without enabling 0.6 writes", 
   assert.equal(record.quantity, "3.5");
   assert.equal(record.unitOfMeasure, "m");
   assert.equal(record.multiplicity, "2");
-  assert.ok(!parsed.findings.some(f => f.code === "field.unknown"));
+  assert.ok(!parsed.findings.some(f => f.code === "record.unknown-field"));
 });
 
 test("quantity and unitOfMeasure are not silently accepted under schema 0.5", () => {
@@ -37,5 +37,5 @@ test("quantity and unitOfMeasure are not silently accepted under schema 0.5", ()
     "- unitOfMeasure: kg",
   ]));
   assert.ok(parsed);
-  assert.ok(parsed.findings.length > 0, "earlier writable schema must report unsupported fields");
+  assert.ok(parsed.findings.some(f => f.code === "record.unknown-field"), "earlier writable schema must report unsupported fields");
 });
