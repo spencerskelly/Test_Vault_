@@ -45,6 +45,55 @@ jobs:
 
 
 
+
+  importer-static-contract:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - name: Checkout source contracts without archived QEAX
+        uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+          filter: blob:none
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            /*
+            !/EA_2026_09_06_endgame.qeax.zip
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install YAML validator dependency
+        run: python3 -m pip install --disable-pip-version-check PyYAML==6.0.2
+      - name: Importer v0.8.14 through v0.8.18 regression contract
+        run: |
+          node Importer/Testing/v0.8.14/local_endpoint_evidence_static_test.js
+          node Importer/Testing/v0.8.15/fresh_base_compatibility_static_test.js
+          node Importer/Testing/v0.8.16/output_structure_static_test.js
+          node Importer/Testing/v0.8.17/filesystem_resilience_static_test.js
+          node Importer/Testing/v0.8.18/naming_placement_static_test.js
+      - name: Source profile and v0.8.19 headless compile-only
+        run: |
+          python3 Importer/Tools/v0.8.19/sync_source_profile.py --check
+          node --check Importer/Testing/v0.8.19/headless_full_import.js
+          MDSE_HEADLESS_COMPILE_ONLY=1 node Importer/Testing/v0.8.19/headless_full_import.js Importer/Tools/v0.8.19/EA_to_MDSE_Native_Importer_v0.8.19.html /dev/null "$RUNNER_TEMP/unused"
+          node --check Importer/Testing/v0.8.19/fresh_base_initialization_regression_test.js
+          node Importer/Testing/v0.8.19/release_gate_regression_test.js
+      - name: IMP-005 fresh-base initialization regression
+        run: |
+          python3 'Base Vault/Tools/v0.8.0-r2/build-base.py' "$RUNNER_TEMP/imp005-fresh-base"
+          node Importer/Testing/v0.8.19/fresh_base_initialization_regression_test.js "$RUNNER_TEMP/imp005-fresh-base"
+      - name: IMP-009 through IMP-011 validators
+        run: |
+          python3 -m py_compile Importer/Testing/v0.8.19/imp009_output_acceptance.py Importer/Testing/v0.8.19/imp009_output_acceptance_selftest.py
+          python3 Importer/Testing/v0.8.19/imp009_output_acceptance_selftest.py
+          python3 -m py_compile Importer/Testing/v0.8.19/imp010_hierarchy_acceptance.py Importer/Testing/v0.8.19/imp010_hierarchy_acceptance_selftest.py Importer/Testing/v0.8.19/imp010_interface_flow_acceptance.py Importer/Testing/v0.8.19/imp011_binding_review_acceptance.py Importer/Testing/v0.8.19/imp011_canonical_equals_acceptance.py
+          python3 Importer/Testing/v0.8.19/imp010_hierarchy_acceptance_selftest.py
+      - name: Report limited scope
+        run: echo 'Static importer validation only. No real QEAX or Obsidian GUI; no release or packaged artifact upload.' >> "$GITHUB_STEP_SUMMARY"
+
   base-and-document-governance:
     runs-on: ubuntu-latest
     timeout-minutes: 30
