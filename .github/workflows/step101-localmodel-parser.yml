@@ -1,0 +1,27 @@
+name: Local Model 0.5 parser v2 regression
+on:
+  push:
+    branches: [integration/p03-legacy-compat-tests-20261013]
+    paths:
+      - '66_Testing/consolidation/localmodel_topology_index_v2.py'
+      - '66_Testing/consolidation/test_localmodel_topology_index_v2.py'
+      - '.github/workflows/step101-localmodel-parser.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  parser-regression:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            /66_Testing/consolidation/localmodel_topology_index_v2.py
+            /66_Testing/consolidation/test_localmodel_topology_index_v2.py
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python3 -m unittest discover -s 66_Testing/consolidation -p 'test_localmodel_topology_index_v2.py' -v
