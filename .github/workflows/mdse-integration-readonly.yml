@@ -13,6 +13,8 @@ on:
       - '66_Testing/consolidation/test_step22_retirement.py'
       - '66_Testing/consolidation/test_step19_generated_base.py'
       - '66_Testing/consolidation/test_step20_synthetic_model.py'
+  pull_request:
+    branches: [consolidation/step22-single-repo-cutover-2026-10-11]
   workflow_dispatch:
 
 permissions:
