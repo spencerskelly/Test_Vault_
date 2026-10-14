@@ -169,7 +169,15 @@ jobs:
             Importer/Tools
             Importer/Definition
             Base Vault
+            .obsidian
+            Definitions
+            99_System/02_AI
             99_System/03_Schemas
+            99_System/04_People
+            99_System/05_Templates
+            99_System/06_Fileclasses
+            99_System/08_Scripts
+            99_System/10_Docs
       - uses: actions/setup-node@v4
         with:
           node-version: '20'
