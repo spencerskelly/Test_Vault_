@@ -44,6 +44,45 @@ jobs:
           echo 'Read-only synthetic checks; no QEAX, model ZIP, Obsidian GUI, release promotion or artifact publishing.' >> "$GITHUB_STEP_SUMMARY"
 
 
+
+  base-and-document-governance:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - name: Sparse checkout of controlled base tools and governance tests
+        uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+          filter: blob:none
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            /Base Vault/
+            /55_Workbench/
+            /66_Testing/consolidation/
+            /00_Workspace/
+            /99_System/03_Schemas/
+            /.obsidian/plugin-lock.yaml
+            /.obsidian/community-plugins.json
+            /README.md
+      - name: Confirm no source model ZIP in worktree
+        run: test ! -e EA_2026_09_06_endgame.qeax.zip
+      - name: Install pinned YAML checker
+        run: python3 -m pip install --disable-pip-version-check PyYAML==6.0.2
+      - name: Review governance regressions
+        run: python3 -m unittest discover -s 66_Testing/consolidation -p 'test_step18_registry.py' -v
+      - name: Disposable generated Base Vault integrity
+        shell: bash
+        run: |
+          set -euo pipefail
+          tempbase="$(mktemp -d "$RUNNER_TEMP/mdse-base-XXXXXX")"
+          python3 'Base Vault/Tools/v0.8.0-r2/build-base.py' "$tempbase/base"
+          python3 'Base Vault/Testing/check-release.py' --workbench 55_Workbench --base "$tempbase/base"
+          python3 66_Testing/consolidation/step19_generated_base.py --base "$tempbase/base"
+          STEP19_BASE_DIR="$tempbase/base" python3 -m unittest discover -s 66_Testing/consolidation -p 'test_step19_generated_base.py' -v
+          python3 66_Testing/consolidation/step19_generated_base.py --base "$tempbase/base"
+      - name: Report scope
+        run: echo 'Disposable Base and registry review only. No source-model archive, Obsidian GUI, promotion, or artifact upload.' >> "$GITHUB_STEP_SUMMARY"
+
   importer-and-governance-smoke:
     runs-on: ubuntu-latest
     timeout-minutes: 20
