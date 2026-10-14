@@ -61,6 +61,7 @@ jobs:
             /55_Workbench/manifest.json
             /55_Workbench/docs/
             /00_Workspace/
+            /.obsidian/plugin-lock.yaml
       - name: Exclude source-model archive
         run: test ! -e EA_2026_09_06_endgame.qeax.zip
       - name: Synthetic importer output validator regression
