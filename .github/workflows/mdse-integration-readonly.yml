@@ -46,6 +46,34 @@ jobs:
 
 
 
+
+  historical-authority-regressions:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - name: Checkout historical evidence without original QEAX bytes
+        uses: actions/checkout@v4
+        with:
+          filter: blob:none
+          persist-credentials: false
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            /*
+            !/EA_2026_09_06_endgame.qeax.zip
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Retired workflow archive SHA regression
+        run: node --test 66_Testing/consolidation/test_step11_retirement.cjs
+      - name: Workbench authority detector regression
+        run: node --test 66_Testing/consolidation/test_workbench_authority.cjs
+      - name: Reference policy negative regression
+        run: python3 -m unittest discover -s 66_Testing/consolidation -p 'test_workbench_reference_policy.py' -v
+      - name: Historical registry proposal regression
+        run: python3 -m unittest discover -s 66_Testing/consolidation -p 'test_step13_registry.py' -v
+      - name: Preserve historical scope
+        run: echo 'Historical test behavior only; branch-specific historical preflight count assertions are not reinterpreted as current release approval.' >> "$GITHUB_STEP_SUMMARY"
+
   importer-static-contract:
     runs-on: ubuntu-latest
     timeout-minutes: 30
