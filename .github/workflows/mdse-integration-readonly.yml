@@ -167,6 +167,7 @@ jobs:
           sparse-checkout: |
             Importer/Testing
             Importer/Tools
+            Importer/Definition
             Base Vault/Tools
       - uses: actions/setup-node@v4
         with:
