@@ -3,7 +3,7 @@ name: MDSE consolidated read-only integration gate
 # Candidate integration check only. Not a release, GUI test or historical CI replacement.
 on:
   push:
-    branches: [integration/p03-legacy-compat-tests-20261013]
+    branches: [integration/p03-legacy-compat-tests-20261013, integration/final-preservation-stage-20261014, develop]
     paths:
       - '.github/workflows/mdse-integration-readonly.yml'
       - '55_Workbench/src/**'
@@ -16,7 +16,7 @@ on:
       - '66_Testing/consolidation/test_step19_generated_base.py'
       - '66_Testing/consolidation/test_step20_synthetic_model.py'
   pull_request:
-    branches: [consolidation/step22-single-repo-cutover-2026-10-11]
+    branches: [consolidation/step22-single-repo-cutover-2026-10-11, develop, main]
   workflow_dispatch:
 
 permissions:
