@@ -1,0 +1,78 @@
+name: Consolidation Step 13 - document registry proposal validation
+
+on:
+  push:
+    branches: [consolidation/step13-document-authority-reconciliation-2026-10-10]
+    paths:
+      - '.github/workflows/consolidation-step13-registry-review.yml'
+      - '00_Workspace/MDSE v0.8 Unified Development Continuation Contract - PROPOSAL 2026-10-10.md'
+      - '00_Workspace/Consolidation Step 13 - Document Registry Transition Plan 2026-10-10.md'
+      - '66_Testing/consolidation/**'
+      - 'Base Vault/Definition/mdse-release.yaml'
+
+permissions:
+  contents: read
+
+jobs:
+  registry-candidate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - name: Sparse checkout candidate without QEAX archive bytes
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+          filter: blob:none
+          persist-credentials: false
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            /*
+            !/EA_2026_09_06_endgame.qeax.zip
+
+      - name: Verify source-model ZIP excluded from working tree
+        shell: bash
+        run: |
+          set -euo pipefail
+          test ! -e EA_2026_09_06_endgame.qeax.zip
+          test -f 66_Testing/consolidation/test_step13_registry.py
+          test -f "00_Workspace/MDSE v0.8 Unified Development Continuation Contract - PROPOSAL 2026-10-10.md"
+
+      - name: Test exact document registry diff, governance gates and rollback
+        run: python3 -m unittest discover -s 66_Testing/consolidation -p 'test_step13_registry.py' -v
+
+      - name: Recheck Workbench reference provenance policy
+        run: python3 -m unittest discover -s 66_Testing/consolidation -p 'test_workbench_reference_policy.py' -v
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Verify all eight historical workflows remain safely archived
+        run: node --test 66_Testing/consolidation/test_step11_retirement.cjs
+
+      - name: Verify unchanged candidate release preflight and five open document reviews
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 66_Testing/check_release_alignment.py --output "$RUNNER_TEMP/step13-release-audit.json"
+          python3 - "$RUNNER_TEMP/step13-release-audit.json" <<'PY'
+          import json,os,sys
+          data=json.load(open(sys.argv[1],encoding="utf-8"))
+          refs=data["workbenchRepositoryReferences"]
+          c=refs["counts"]
+          assert c["blocking"] == 0, c
+          assert c["needs_review"] == 5, c
+          assert c["verified_provenance"] == 3, c
+          assert refs["strictReady"] is False
+          assert data["versions"]["releaseStatus"] == "pre-release"
+          assert data["versions"]["schemas"]["localModel"]["releasePin"] == "0.5"
+          assert data["versions"]["workbench"]["releasePin"] == "0.1.18"
+          print("STEP13_REVIEW_COUNTS "+json.dumps(c,sort_keys=True))
+          print("STEP13_REGISTRY_STATUS=PROPOSAL_NOT_APPROVED")
+          with open(os.environ["GITHUB_STEP_SUMMARY"],"a",encoding="utf-8") as f:
+              f.write("## Step 13 — governed document-registry candidate\n\n")
+              f.write("- Only two new manifest document rows, both review-only\n")
+              f.write("- Old handoff, reconciliation and W decisions unchanged\n")
+              f.write("- Five Workbench documentation review gates remain open\n")
+              f.write("- No QEAX ZIP inspection, runtime promotion or standalone archive\n")
+          PY

@@ -1,0 +1,25 @@
+name: Step121 QEAX operator fail-closed tests
+on:
+  push:
+    branches: [integration/p03-legacy-compat-tests-20261013]
+    paths:
+      - '66_Testing/consolidation/step120_real_qeax_operator_gate.py'
+      - '66_Testing/consolidation/test_step121_operator_fail_closed.py'
+      - '.github/workflows/step121-qeax-operator-negative.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  negative-operator-fixtures:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+          sparse-checkout: |
+            66_Testing/consolidation
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python3 -m unittest discover -s 66_Testing/consolidation -p 'test_step121_operator_fail_closed.py' -v

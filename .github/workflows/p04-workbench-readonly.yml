@@ -1,0 +1,220 @@
+name: P04 Workbench read-only build and tests
+
+on:
+  push:
+    branches: [integration/p03-legacy-compat-tests-20261013]
+    paths:
+      - '.github/workflows/p04-workbench-readonly.yml'
+      - '66_Testing/consolidation/p04_full_workbench_tree.py'
+      - '55_Workbench/src/**'
+      - '55_Workbench/test/**'
+      - '55_Workbench/bench/**'
+      - '55_Workbench/package.json'
+      - '55_Workbench/package-lock.json'
+      - '55_Workbench/tsconfig.json'
+      - '55_Workbench/esbuild.config.mjs'
+  pull_request:
+    branches: [consolidation/step22-single-repo-cutover-2026-10-11]
+    paths:
+      - '.github/workflows/p04-workbench-readonly.yml'
+      - '66_Testing/consolidation/p04_full_workbench_tree.py'
+      - '55_Workbench/src/**'
+      - '55_Workbench/test/**'
+      - '55_Workbench/bench/**'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  workbench-build-test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    defaults:
+      run:
+        working-directory: 55_Workbench
+    steps:
+      - name: Sparse checkout without historic vault or QEAX archive
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          filter: blob:none
+          persist-credentials: false
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            /66_Testing/consolidation/p04_full_workbench_tree.py
+            /55_Workbench/src/
+            /55_Workbench/test/
+            /55_Workbench/bench/
+            /55_Workbench/scripts/
+            /55_Workbench/package.json
+            /55_Workbench/package-lock.json
+            /55_Workbench/tsconfig.json
+            /55_Workbench/esbuild.config.mjs
+            /55_Workbench/artifact-sha256.txt
+            /55_Workbench/manifest.json
+            /55_Workbench/styles.css
+            /55_Workbench/test/fixtures/
+      - name: Trace controlled Workbench artifact path history
+        working-directory: .
+        run: |
+          echo '== original Workbench subtree ancestry =='
+          git log -n 16 --format='%H %cI %s' 59fc6219b1d0586900aa7d38685e7087a9d47fec -- main.js || true
+          echo '== original Workbench artifact manifest ancestry =='
+          git log -n 12 --format='%H %cI %s' 59fc6219b1d0586900aa7d38685e7087a9d47fec -- artifact-sha256.txt || true
+          echo '== tracked main.js history =='
+          git log -n 12 --format='%H %cI %s' -- 55_Workbench/main.js
+          echo '== artifact hash manifest history =='
+          git log -n 12 --format='%H %cI %s' -- 55_Workbench/artifact-sha256.txt
+          echo '== package lock history =='
+          git log -n 8 --format='%H %cI %s' -- 55_Workbench/package-lock.json
+      - name: Verify sensitive and historical sources are absent
+        run: |
+          test ! -e ../EA_2026_09_06_endgame.qeax.zip
+          test ! -d vault
+          test -f src/main.ts
+          test -f package-lock.json
+      - name: Inventory full committed Workbench tree (pathnames only)
+        working-directory: .
+        run: |
+          python3 66_Testing/consolidation/p04_full_workbench_tree.py > "$RUNNER_TEMP/p04-tree.json"
+          python3 - "$RUNNER_TEMP/p04-tree.json" <<'PY'
+          import json,sys
+          d=json.load(open(sys.argv[1]))
+          for k in ('commit','total_workbench_paths','source_checkout_candidates','historic_vault_paths_excluded','other_review_paths'):
+              print(f'{k}: {d[k]}')
+          PY
+      - name: Export safe source-allowlist candidate only
+        working-directory: .
+        run: |
+          python3 - "$RUNNER_TEMP/p04-tree.json" "$RUNNER_TEMP/p04-allowlist.txt" <<'PY'
+          import json, sys
+          source = json.load(open(sys.argv[1], encoding="utf-8"))
+          with open(sys.argv[2], "w", encoding="utf-8") as handle:
+              for path in source["source_checkout_paths"]:
+                  assert not path.startswith("vault/")
+                  handle.write("55_Workbench/" + path + "\n")
+          PY
+      - name: Upload source-only candidate manifest
+        uses: actions/upload-artifact@v4
+        with:
+          name: p04-workbench-source-only-candidates
+          path: ${{ runner.temp }}/p04-allowlist.txt
+          retention-days: 30
+          if-no-files-found: error
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: npm
+          cache-dependency-path: 55_Workbench/package-lock.json
+      - name: Install locked dependencies
+        run: npm ci
+      - name: Run Workbench tests
+        run: npm test
+      - name: Typecheck and build
+        run: npm run build
+      - name: Verify produced artifact identities without publishing
+        run: |
+          test -f main.js
+          sha256sum main.js manifest.json styles.css
+      - name: Check two consecutive clean build outputs
+        run: |
+          set -euo pipefail
+          first="$(sha256sum main.js | cut -d' ' -f1)"
+          rm main.js
+          npm run build
+          second="$(sha256sum main.js | cut -d' ' -f1)"
+          echo "first_fresh_build_sha256=$first"
+          echo "second_fresh_build_sha256=$second"
+          echo "node_version=$(node --version)"
+          echo "npm_version=$(npm --version)"
+          npm ls esbuild typescript --depth=0
+          if [ "$first" != "$second" ]; then
+            echo "::error::Two builds from identical checked-out inputs produced different bundles"
+            exit 1
+          fi
+      - name: Record historical build-toolchain uncertainty
+        working-directory: 55_Workbench
+        run: |
+          set -euo pipefail
+          current="$(sha256sum main.js | cut -d' ' -f1)"
+          echo "baseline_current_toolchain_bundle_sha256=$current"
+          echo "historical_workflow_node_selector=20"
+          echo "historical_artifact_origin=b0c4e2c6bdfb96d36f51d8152b17be22592ef174"
+          echo "The original workflow recorded no exact Node patch version."
+      - name: Diagnose bundle provenance without changing controlled artifacts
+        working-directory: .
+        run: |
+          python3 - <<'PY'
+          import hashlib, pathlib, subprocess
+          built = pathlib.Path("55_Workbench/main.js").read_bytes()
+          try:
+              controlled = subprocess.check_output(["git", "show", "HEAD:55_Workbench/main.js"])
+          except subprocess.CalledProcessError:
+              print("tracked_workbench_bundle=unavailable")
+          else:
+              def sha(data): return hashlib.sha256(data).hexdigest()
+              print("tracked_workbench_bundle_sha256=" + sha(controlled))
+              print("fresh_workbench_bundle_sha256=" + sha(built))
+              print("tracked_workbench_bundle_size=" + str(len(controlled)))
+              print("fresh_workbench_bundle_size=" + str(len(built)))
+              if controlled != built:
+                  first = next((i for i, (a,b) in enumerate(zip(controlled,built)) if a!=b), min(len(controlled),len(built)))
+                  print("first_mismatch_offset=" + str(first))
+                  print("size_delta=" + str(len(built)-len(controlled)))
+                  print("Artifact remains UNAPPROVED; no binary contents or model data uploaded.")
+              else:
+                  print("tracked_and_fresh_bundle_match=true")
+          PY
+      - name: Validate tracked governed artifact without replacing candidate build
+        working-directory: .
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          import hashlib, subprocess
+          base = "55_Workbench/"
+          lines = subprocess.check_output(["git", "show", "HEAD:" + base + "artifact-sha256.txt"], text=True).splitlines()
+          for line in lines:
+              expected, relative = line.split(None, 1)
+              relative = relative.strip()
+              if relative not in {"main.js", "manifest.json", "styles.css"}:
+                  raise SystemExit("Unexpected controlled artifact path: " + relative)
+              tracked = subprocess.check_output(["git", "show", "HEAD:" + base + relative])
+              actual = hashlib.sha256(tracked).hexdigest()
+              if actual != expected:
+                  raise SystemExit("Governed tracked artifact integrity FAILED: " + relative)
+              print("Governed tracked artifact integrity OK: " + relative)
+          with open(__import__("os").environ["GITHUB_STEP_SUMMARY"], "a") as out:
+              out.write("Governed tracked artifact integrity: PASS (checked using Git objects, not build output).\\n")
+          PY
+      - name: Report candidate-versus-governed release equivalence separately
+        shell: bash
+        run: |
+          set -euo pipefail
+          expected="$(awk '$2=="main.js" {print $1}' artifact-sha256.txt)"
+          candidate="$(sha256sum main.js | cut -d' ' -f1)"
+          test -n "$expected"
+          {
+            echo "### Workbench candidate identity"
+            echo "- Fresh candidate SHA-256: $candidate"
+            echo "- Governed historical SHA-256: $expected"
+            if [ "$candidate" = "$expected" ]; then
+              echo "- Binary equivalence: MATCH (release still requires approval)"
+            else
+              echo "- Binary equivalence: DIFFERENT — candidate requires independent release qualification"
+              echo "::notice::Intentional candidate source changes produce a new bundle; governed artifact remains intact"
+            fi
+          } | tee -a "$GITHUB_STEP_SUMMARY"
+      - name: Document read-only verification
+        if: always()
+        working-directory: .
+        shell: bash
+        run: |
+          {
+            echo '## P04 Workbench CI (source/build only)'
+            printf '%s\n' "- Tested commit: $(git rev-parse HEAD)"
+            echo '- No plugin synchronization, commit/push, or release promotion performed.'
+            echo '- This is not Obsidian GUI or real-QEAX acceptance.'
+          } >> "$GITHUB_STEP_SUMMARY"

@@ -1,0 +1,45 @@
+name: Consolidation Step 11 - verify historical workflow retirement
+
+on:
+  push:
+    branches: [consolidation/step11-retire-legacy-workflows-2026-10-10]
+    paths:
+      - '.github/workflows/**'
+      - '66_Testing/consolidation/test_step11_retirement.cjs'
+      - '55_Workbench/docs/Reference/ARCHIVE_CI_RETIRE_2026-10-10/**'
+
+permissions:
+  contents: read
+
+jobs:
+  exact-workflow-archive:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Sparse checkout of workflow definitions and small text reference files
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+          persist-credentials: false
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            .github/workflows/
+            55_Workbench/docs/Reference/ARCHIVE_CI_RETIRE_2026-10-10/
+            66_Testing/consolidation/test_step11_retirement.cjs
+            Base Vault/Definition/mdse-release.yaml
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Verify eight exact original Git blobs and eight disabled workflow paths
+        run: node --test 66_Testing/consolidation/test_step11_retirement.cjs
+      - name: Record security-preserving verification
+        shell: bash
+        run: |
+          {
+            echo '## Step 11 — historical workflow retirement check'
+            echo '- Eight original workflow YAML Git blob SHA values must match archive sources'
+            echo '- Eight corresponding runnable root-workflow paths must be absent'
+            echo '- Active root CI definitions and pre-release pins must remain'
+            echo '- Archive/test contents are small text files only; QEAX is not inspected or published as an artifact'
+            echo '- Candidate PR is review-only: standalone repo remains unarchived and public-main promotion is blocked'
+          } >> "$GITHUB_STEP_SUMMARY"

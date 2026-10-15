@@ -9,7 +9,7 @@ Obsidian **1.13.0 or later** is required (`obsidianMinVersion` in the lock; set 
 | Plugin | Version | Role | Settings |
 |---|---|---|---|
 | MDSE Bootstrap | 0.3.0 | Release check against the lock; author registration on first open | defaults |
-| MDSE Workbench | 0.1.16 | Create / Explore / Review interface. Pre-release pin; standalone WB-106 editor/Internal work is newer and is not runtime truth until promoted | defaults (per-machine state is git-ignored) |
+| MDSE Workbench | **0.1.18** | Controlled WB-106 Create / Explore / Review / structured Local Model 0.4 interface; real-vault compatibility and exact-artifact startup accepted under W-386 | defaults (per-machine state is git-ignored) |
 | Templater | 2.25.0 | Note creation from `99_System/05_Templates`; runs the `uid` and `id` snippets | governed: templates folder |
 | Fileclass | 0.2.15 | Typed property input and validation; one schema per class in `99_System/06_Fileclasses`, bound by the note's `type` | governed |
 | Breadcrumbs | 4.21.11 | Relationship navigation: every relationship field is an edge field; parent/child, peers, sequence and trace groups | governed |
@@ -37,7 +37,7 @@ A plugin leaves the controlled stack only after templates, generated configurati
 
 ## User instructions
 
-The generated engineering vault includes `99_System/01_Admin/MDSE Workbench User Guide.md`. It explains normal Create / Explore / Details / Review use and clearly marks candidate WB-106 editor/Internal features that are not available in the pinned runtime yet.
+The generated engineering vault includes `99_System/01_Admin/MDSE Workbench User Guide.md`. It explains the pinned 0.1.18 Create / Explore / Details / Review / structured Local Model workflow and separately marks only preview capabilities that remain outside release acceptance.
 
 ## Core plugins
 

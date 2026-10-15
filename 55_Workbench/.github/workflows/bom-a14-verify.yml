@@ -1,0 +1,23 @@
+name: BOM A-14 proposal verification
+on:
+  push:
+    branches:
+      - proposal/bom-a14-readonly-quantity-uom
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: npm
+      - run: npm ci
+      - run: npm run typecheck
+      - name: BOM 0.6 focused tests
+        run: node --import tsx --test test/bom-localmodel-06.test.ts test/bom-variantof.test.ts test/cache.test.ts
+      - name: Full historical suite (baseline drift tracked)
+        run: npm test

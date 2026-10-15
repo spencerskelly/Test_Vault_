@@ -44,13 +44,6 @@ fields:
     options:
       baseFile: "99_System/06_Fileclasses/MDSE Link Targets.base"
       viewName: "Requirement"
-  - name: hasPort
-    id: Y59Uy2
-    type: MultiFile
-    path: ""
-    options:
-      baseFile: "99_System/06_Fileclasses/MDSE Link Targets.base"
-      viewName: "Port"
   - name: hasChild
     id: XDYAxf
     type: MultiFile

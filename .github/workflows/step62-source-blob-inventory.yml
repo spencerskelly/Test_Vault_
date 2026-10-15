@@ -1,0 +1,71 @@
+name: Step62 full Workbench source blob inventory
+
+on:
+  pull_request:
+    branches: [consolidation/step22-single-repo-cutover-2026-10-11]
+    paths: ['.github/workflows/step62-source-blob-inventory.yml']
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  compare-blob-trees:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Checkout candidate Git metadata without historical model data
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          filter: blob:none
+          persist-credentials: false
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            /55_Workbench/package.json
+      - name: Compare every tracked source path and Git blob SHA
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          import subprocess, json, os
+          orig='b0c4e2c6bdfb96d36f51d8152b17be22592ef174'
+          def tree(ref, prefix):
+              raw=subprocess.check_output(['git','ls-tree','-r','-z',ref,'--',prefix])
+              mapping={}
+              for item in raw.split(b'\0'):
+                  if not item: continue
+                  metadata, path=item.split(b'\t',1)
+                  mode,kind,sha=metadata.decode().split(' ')
+                  name=path.decode('utf-8','surrogateescape')
+                  if kind=='blob' and name.startswith(prefix):
+                      mapping[name[len(prefix):]]=sha
+              return mapping
+          old=tree(orig,'src/')
+          current=tree('HEAD','55_Workbench/src/')
+          keys=set(old)|set(current)
+          groups={
+              'identical':sorted(k for k in keys if k in old and k in current and old[k]==current[k]),
+              'modified':sorted(k for k in keys if k in old and k in current and old[k]!=current[k]),
+              'added':sorted(k for k in keys if k not in old),
+              'deleted':sorted(k for k in keys if k not in current)
+          }
+          if not old or not current: raise SystemExit('One source tree is empty: fail closed')
+          report={k:len(v) for k,v in groups.items()}
+          print('Original source paths:',len(old),'Current source paths:',len(current))
+          print('Full tree classification:',json.dumps(report,sort_keys=True))
+          with open(os.environ['GITHUB_STEP_SUMMARY'],'a') as out:
+              out.write('## Step62 complete source blob-ID comparison\n')
+              out.write(f'Original commit: {orig}; candidate: {subprocess.check_output(["git","rev-parse","HEAD"],text=True).strip()}\n\n')
+              out.write(f'Original source paths: {len(old)}; current paths: {len(current)}\n\n')
+              out.write('| Classification | Count |\n|---|---:|\n')
+              for k,vals in groups.items():out.write(f'| {k} | {len(vals)} |\n')
+              for k in ('added','modified','deleted'):
+                  out.write(f'\n### {k.capitalize()} ({len(groups[k])})\n')
+                  for name in groups[k]:
+                      out.write(f'- `{name}` — original `{old.get(name,"absent")}`; current `{current.get(name,"absent")}`\n')
+              out.write('\nRead-only Git object comparison; no archive/model data checkout, source publication or release promotion.\n')
+          for k in ('modified','added','deleted'):
+              print(k.upper(),len(groups[k]))
+              for name in groups[k]:print(name,old.get(name,'-'),current.get(name,'-'))
+          PY

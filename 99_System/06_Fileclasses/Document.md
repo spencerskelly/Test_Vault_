@@ -32,13 +32,6 @@ fields:
     options:
       baseFile: "99_System/06_Fileclasses/MDSE Link Targets.base"
       viewName: "Document"
-  - name: hasPort
-    id: wLUFGd
-    type: MultiFile
-    path: ""
-    options:
-      baseFile: "99_System/06_Fileclasses/MDSE Link Targets.base"
-      viewName: "Port"
   - name: hasChild
     id: KFkhVq
     type: MultiFile
@@ -108,7 +101,7 @@ fields:
     path: ""
     options:
       baseFile: "99_System/06_Fileclasses/MDSE Link Targets.base"
-      viewName: "Design"
+      viewName: "Condition"
   - name: conflictsWith
     id: L0zUeB
     type: MultiFile

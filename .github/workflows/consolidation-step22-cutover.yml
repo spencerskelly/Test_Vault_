@@ -1,0 +1,60 @@
+name: Consolidation Step 22 - single Workbench repository cutover evidence
+
+on:
+  push:
+    branches: [consolidation/step22-single-repo-cutover-2026-10-11]
+    paths:
+      - '.github/workflows/consolidation-step22-cutover.yml'
+      - '66_Testing/consolidation/step22_legacy_workbench_inventory.json'
+      - '66_Testing/consolidation/STEP22_SINGLE_REPO_CUTOVER.md'
+      - '66_Testing/consolidation/test_step22_retirement.py'
+
+permissions:
+  contents: read
+
+jobs:
+  legacy-repository-coverage:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - name: Sparse checkout without public QEAX archive
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+          filter: blob:none
+          persist-credentials: false
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            /*
+            !/EA_2026_09_06_endgame.qeax.zip
+      - name: Confirm original source-model archive never materialized
+        run: test ! -e EA_2026_09_06_endgame.qeax.zip
+      - name: Verify remote ref inventory and frozen historical artifact source
+        run: python3 -m unittest discover -s 66_Testing/consolidation -p 'test_step22_retirement.py' -v
+      - name: Confirm no archive or release approval is fabricated
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          import json
+          record=json.load(open("66_Testing/consolidation/step22_legacy_workbench_inventory.json"))
+          assert len(record["branches"])==19
+          assert {x["number"] for x in record["openDraftPRs"]}=={6,7,15}
+          assert record["pathInventory"]["missingOldMainPathCount"]==0
+          assert record["blockerStates"]["workbenchStandaloneArchival"]=="NOT_EXECUTED"
+          assert not record["proposedAuthority"]["mainPromotionApproved"]
+          print("STEP22_LEGACY_MAIN=COMPLETE_PATH_COVERAGE_IN_STAGING")
+          print("STEP22_UNMERGED_PROPOSALS=3; EXPLICIT_APPROVAL_REQUIRED")
+          print("STEP22_STANDALONE_ARCHIVED=FALSE_OR_NOT_VERIFIED")
+          print("STEP22_NEW_WORK_LOCATION=Test_Vault_/55_Workbench")
+          PY
+      - name: Preserve scope limitations
+        shell: bash
+        run: |
+          {
+            echo '## Step22 — one active source checkout proposal'
+            echo '- Old Workbench main has zero paths absent from staged 55_Workbench'
+            echo '- All 19 remote branch tips, 3 open draft PRs retained by SHA'
+            echo '- GitHub archival requires separate repository setting; this workflow cannot archive'
+            echo '- Workstation-local unpushed work is not remotely verifiable'
+            echo '- Neither repository main branch is merged by this workflow'
+          } >> "$GITHUB_STEP_SUMMARY"

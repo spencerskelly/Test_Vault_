@@ -1,0 +1,35 @@
+name: Step117 IMP-011 v2 eight-test gate
+on:
+  push:
+    branches: [integration/p03-legacy-compat-tests-20261013]
+    paths:
+      - '66_Testing/consolidation/test_imp011_topology_v2_step115.py'
+      - '66_Testing/consolidation/test_imp011_nested_owner_step116.py'
+      - '66_Testing/consolidation/imp011_topology_acceptance_v2.py'
+      - '66_Testing/consolidation/imp011_importer_owner_path_v1.py'
+      - '66_Testing/consolidation/localmodel_topology_index_v3.py'
+      - '.github/workflows/step117-imp011-eight-tests.yml'
+  pull_request:
+    branches: [consolidation/step22-single-repo-cutover-2026-10-11]
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  eight-v2-tests:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+          sparse-checkout: |
+            66_Testing/consolidation
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Five isolated v2 integration fixtures
+        run: python3 -m unittest discover -s 66_Testing/consolidation -p 'test_imp011_topology_v2_step115.py' -v
+      - name: Three nested and duplicate basename fixtures
+        run: python3 -m unittest discover -s 66_Testing/consolidation -p 'test_imp011_nested_owner_step116.py' -v
+      - name: Report restricted evidence
+        run: echo 'Synthetic v2 topology and owner-path tests only; no QEAX, GUI, release or artifact promotion.' >> "$GITHUB_STEP_SUMMARY"

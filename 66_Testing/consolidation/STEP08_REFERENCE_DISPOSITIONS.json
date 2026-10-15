@@ -1,0 +1,189 @@
+{
+  "schema": "mdse-consolidation-step08-path-dispositions/1",
+  "generated": "2026-10-10",
+  "repository": "spencerskelly/Test_Vault_",
+  "checked_commit": "3fc47d9f2ae64e567268925c5d3a495a5bb9fd50",
+  "checked_branch": "consolidation/step08-real-tree-audit-2026-10-10",
+  "actual_tree_ci": {
+    "run_id": 38107795084,
+    "url": "https://github.com/spencerskelly/Test_Vault_/actions/runs/38107795084",
+    "status": "success",
+    "tests_passed": 33,
+    "tests_failed": 0,
+    "strict_expected_failure": true,
+    "counts": {
+      "blocking": 15,
+      "needs_review": 13,
+      "historical": 36,
+      "detector": 1
+    }
+  },
+  "first_ci_run": {
+    "run_id": 38107734743,
+    "checked_commit": "dae77be62662a9c7cbd70712d0c23e527bd317ca",
+    "status": "success"
+  },
+  "exact_source_git_blobs": {
+    "Base Vault/Definition/mdse-release.yaml": "ce556ade56b5bd9650ccc659f1b41bf2ca411c10",
+    "README.md": "ccd627dc18000895a424d577d3615d16535c9f95",
+    "00_Workspace/00 - Current State.md": "4e661e075b500950d2aebbf9394fbb087d70242e",
+    "00_Workspace/MDSE Tool Definitions and Boundaries.md": "6664dd427952fcfac995fee99d2cdd18164719b7",
+    ".github/workflows/mdse-monorepo-workbench-ci.yml": "afddc15493d96fb35c39eb89e68ad992b64d9c3f",
+    ".github/workflows/mdse-release-alignment-preflight.yml": "1198601ad6849fdd0ed35e1a08a55f78349d8211",
+    ".obsidian/plugin-lock.yaml": "c430670577318457972a154012d08c6d28e6d11b",
+    "Base Vault/Tools/v0.8.0-r2/update-plugin-lock.py": "74f18af673263d87d123d31056251ddbab265d4b",
+    "66_Testing/check_release_alignment.py": "3eaeae1fa5b6eb198b717b49cf78b79b556a3dce"
+  },
+  "blocked": [
+    {
+      "path": ".github/workflows/bom-a14-source-step15.yml",
+      "disposition": "legacy_ci_review",
+      "reason": "Old BOM A-14 subtree pull: retain historical frozen workflow, remove from active current CI after review"
+    },
+    {
+      "path": ".github/workflows/wb128-gate3-representative-views.yml",
+      "disposition": "legacy_ci_review",
+      "reason": "Old pinned standalone Workbench checkout, historical acceptance"
+    },
+    {
+      "path": ".github/workflows/wb128-gate4-disposable-edits.yml",
+      "disposition": "legacy_ci_review",
+      "reason": "Old pinned standalone Workbench checkout, historical acceptance"
+    },
+    {
+      "path": ".github/workflows/wb128-gate5-release-alignment.yml",
+      "disposition": "legacy_ci_review",
+      "reason": "Old exact 0.1.18 Workbench release pin, historical acceptance"
+    },
+    {
+      "path": ".github/workflows/wb128-real-vault-acceptance.yml",
+      "disposition": "legacy_ci_review",
+      "reason": "Historical Local Model 0.4 acceptance; not replaceable as equivalent new test"
+    },
+    {
+      "path": ".github/workflows/wb129-real-qeax-local-model-05.yml",
+      "disposition": "legacy_ci_review",
+      "reason": "Pinned importer/Workbench pair; QEAX access and data classification must be addressed"
+    },
+    {
+      "path": ".github/workflows/wb129-rehearsal.yml",
+      "disposition": "legacy_ci_review",
+      "reason": "Old branch-specific Workbench migration/rehearsal"
+    },
+    {
+      "path": ".github/workflows/workbench-subtree-stage.yml",
+      "disposition": "legacy_ci_review",
+      "reason": "Old Workbench source migration and write-capable staging workflow"
+    },
+    {
+      "path": ".obsidian/plugin-lock.yaml",
+      "disposition": "release_provenance_hold",
+      "reason": "Pinned original 0.1.18 source artifact; generated lock must not be manually altered"
+    },
+    {
+      "path": "00_Workspace/00 - Current State.md",
+      "disposition": "migrate_current_authority",
+      "reason": "Current model ownership sections identify standalone despite staging integration"
+    },
+    {
+      "path": "00_Workspace/MDSE Tool Definitions and Boundaries.md",
+      "disposition": "migrate_current_authority",
+      "reason": "Current ownership decision map declares standalone authoritative"
+    },
+    {
+      "path": "Base Vault/Definition/mdse-release.yaml",
+      "disposition": "migrate_current_authority",
+      "reason": "tools.workbench.repo and repos.workbench currently name standalone"
+    },
+    {
+      "path": "Base Vault/Tools/v0.8.0-r2/update-plugin-lock.py",
+      "disposition": "release_provenance_hold",
+      "reason": "Current lock generator source label is pinned artifact provenance, not live code checkout"
+    },
+    {
+      "path": "Base Vault/Tools/v0.8.0/update-plugin-lock.py",
+      "disposition": "historical_generator",
+      "reason": "Older generator source label; preserve as historical after checking no active caller"
+    },
+    {
+      "path": "README.md",
+      "disposition": "migrate_current_authority",
+      "reason": "Root onboarding directs developers to standalone source"
+    }
+  ],
+  "needs_review": [
+    {
+      "path": "00_Workspace/GitHub Consolidation Recovery Inventory 2026-10-09.md",
+      "disposition": "historical_evidence",
+      "reason": "Recovery history; keep original statements"
+    },
+    {
+      "path": "00_Workspace/Handoff Prompt - MDSE v0.8 Implementation.md",
+      "disposition": "update_or_supersede_handoff",
+      "reason": "Current handoff still directs Workbench changes to standalone; replace via registered successor"
+    },
+    {
+      "path": "00_Workspace/MDSE v0.8 Cross-Repository Reconciliation - 2026-10-02.md",
+      "disposition": "governance_review",
+      "reason": "Prior cross-repo baseline; inspect release document registration before downgrading to reference"
+    },
+    {
+      "path": "00_Workspace/README.md",
+      "disposition": "migrate_current_authority",
+      "reason": "Current workspace orientation points to standalone"
+    },
+    {
+      "path": "00_Workspace/Workbench Performance and Stability Roadmap.md",
+      "disposition": "historical_progress",
+      "reason": "Historical implementation milestones; preserve dates and prior commit provenance"
+    },
+    {
+      "path": "00_Workspace/Workspace Decision Log.md",
+      "disposition": "governance_addendum",
+      "reason": "Original W-325/W-328/W-329/W-341/W-342 decisions must remain; append new superseding W decision"
+    },
+    {
+      "path": "55_Workbench/docs/Definition/03 - Build Outline and Roadmap.md",
+      "disposition": "historical_progress",
+      "reason": "Old WB-106 source coding handoff; preserve context"
+    },
+    {
+      "path": "55_Workbench/docs/Definition/04 - Architecture and Model Boundary.md",
+      "disposition": "migrate_current_authority",
+      "reason": "Current Workbench boundary doc explicitly declares standalone implementation source"
+    },
+    {
+      "path": "55_Workbench/docs/INDEX.md",
+      "disposition": "migrate_current_authority",
+      "reason": "Current Workbench navigation declares standalone authority"
+    },
+    {
+      "path": "55_Workbench/docs/README.md",
+      "disposition": "update_or_supersede_handoff",
+      "reason": "Outdated current-ish Workbench introduction; preserve historical version claims"
+    },
+    {
+      "path": "55_Workbench/docs/bom/A01-A14_ORIGINAL_HANDOFF_ARCHIVE_VERIFICATION_2026-10-09.md",
+      "disposition": "historical_evidence",
+      "reason": "Exact original BOM recovery verification; immutable provenance"
+    },
+    {
+      "path": "55_Workbench/docs/bom/A01-A14_RECOVERY_STATUS_2026-10-09.md",
+      "disposition": "historical_evidence",
+      "reason": "Old pull request and audit links are historic facts"
+    },
+    {
+      "path": "66_Testing/consolidation/STEP07_CONTROLLED_CUTOVER_PREVIEW.md",
+      "disposition": "historical_proposal",
+      "reason": "Prior review-only proposal; not live dependency"
+    }
+  ],
+  "notes": [
+    "Results are exact for one tracked tree; no local clones or untracked files were audited.",
+    "The scanner is deliberately path-based, so a provenance string in a generated lock is a conservative blocker; do not remove it as though it were an active clone URL.",
+    "The eight root historical workflows are CI configurations and may permit manual invocation; review and disable/retire triggers before archive.",
+    "No QEAX file was uploaded as an audit artifact; CI checkout inherently accessed a Git working-tree copy, but the audit did not inspect QEAX contents.",
+    "Before editing current-state documentation, approve successor W-decision and maintain document registry/history.",
+    "QEAX owner-security classification, local workstation signoffs, actual Obsidian GUI acceptance and production main merge remain blocked."
+  ]
+}

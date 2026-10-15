@@ -1,0 +1,84 @@
+name: Consolidation Step 08 - actual tree authority preflight
+
+# This isolated job scans tracked staging files. It does not upload the QEAX archive.
+on:
+  push:
+    branches: [consolidation/step08-real-tree-audit-2026-10-10]
+    paths:
+      - '.github/workflows/consolidation-step08-authority-preflight.yml'
+      - '66_Testing/consolidation/**'
+      - '00_Workspace/Consolidation Step 08*'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  authority-audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - name: Checkout integration candidate
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+          persist-credentials: false
+
+      - name: Confirm candidate paths (do not open or publish the QEAX)
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "$GITHUB_REF_NAME" = 'consolidation/step08-real-tree-audit-2026-10-10'
+          test -f 66_Testing/consolidation/audit_workbench_authority.cjs
+          test -f 55_Workbench/package.json
+          test -f 'Base Vault/Definition/mdse-release.yaml'
+          test "$(git ls-files --error-unmatch EA_2026_09_06_endgame.qeax.zip)" = EA_2026_09_06_endgame.qeax.zip
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Candidate regression suite
+        run: node --test 66_Testing/consolidation/test_workbench_authority.cjs
+
+      - name: Full tracked staging tree scan, expected fail-closed strict gate
+        shell: bash
+        run: |
+          set -euo pipefail
+          node 66_Testing/consolidation/audit_workbench_authority.cjs --root . --output "$RUNNER_TEMP/authority-report.json"
+          node - "$RUNNER_TEMP/authority-report.json" <<'JS'
+          const fs = require('node:fs');
+          const assert = require('node:assert/strict');
+          const report = JSON.parse(fs.readFileSync(process.argv[2], 'utf8'));
+          assert.equal(report.schema, 'mdse-workbench-authority-reference-audit/1');
+          assert.equal(report.strictReady, false, 'Current unapproved cutover must fail closed');
+          assert.ok(report.categories.blocking.includes('Base Vault/Definition/mdse-release.yaml'));
+          assert.ok(report.categories.blocking.includes('README.md'));
+          assert.ok(report.counts.historical > 0);
+          for (const kind of ['blocking', 'needs_review', 'historical', 'detector'])
+            assert.equal(report.counts[kind], report.categories[kind].length);
+          const c = report.counts;
+          console.log('AUDIT_COUNTS blocking='+c.blocking+' needs_review='+c.needs_review+' historical='+c.historical+' detector='+c.detector);
+          // Names only, never file contents; these filenames are already tracked in the public repository.
+          for (const kind of ['blocking', 'needs_review']) {
+            for (const p of report.categories[kind])
+              console.log('REVIEW_PATH_JSON '+JSON.stringify({kind,path:p}));
+          }
+          fs.appendFileSync(process.env.GITHUB_STEP_SUMMARY, [
+            '## Consolidation Step 08 — read-only tracked tree scan','',
+            '- Commit: '+process.env.GITHUB_SHA,
+            '- Blocking paths: **'+c.blocking+'**',
+            '- Paths needing review: **'+c.needs_review+'**',
+            '- Historical citations: '+c.historical,
+            '- Detector self-references: '+c.detector,
+            '- Strict cutover gate: **NOT READY** (expected on baseline)',
+            '- No model content or audit report uploaded.',''
+          ].join('\n'));
+          JS
+          set +e
+          node 66_Testing/consolidation/audit_workbench_authority.cjs --root . --strict --output "$RUNNER_TEMP/authority-strict.json"
+          code=$?
+          set -e
+          test "$code" -eq 2
+          cmp "$RUNNER_TEMP/authority-report.json" "$RUNNER_TEMP/authority-strict.json"
+          echo 'EXPECTED_FAIL_CLOSED=true; full staging tree checked; no audit files uploaded'

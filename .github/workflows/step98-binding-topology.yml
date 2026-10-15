@@ -1,0 +1,35 @@
+name: MDSE BindingConnector synthetic topology gate
+on:
+  push:
+    branches: [integration/p03-legacy-compat-tests-20261013]
+    paths:
+      - '66_Testing/consolidation/binding_topology_gate.py'
+      - '66_Testing/consolidation/test_binding_topology_gate.py'
+      - '.github/workflows/step98-binding-topology.yml'
+  pull_request:
+    branches: [consolidation/step22-single-repo-cutover-2026-10-11]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  binding-topology-negative-tests:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+          filter: blob:none
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            /66_Testing/consolidation/binding_topology_gate.py
+            /66_Testing/consolidation/test_binding_topology_gate.py
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Execute synthetic fail-closed topology tests
+        run: python3 -m unittest discover -s 66_Testing/consolidation -p 'test_binding_topology_gate.py' -v
+      - name: State test boundary
+        run: echo 'Synthetic topology only; no real QEAX, GUI, runtime promotion or release approval.' >> "$GITHUB_STEP_SUMMARY"

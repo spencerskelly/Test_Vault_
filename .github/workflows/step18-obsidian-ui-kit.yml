@@ -1,0 +1,149 @@
+name: Step 18 isolated Obsidian acceptance kit (manual UI NOT executed)
+
+on:
+  push:
+    branches: [integration/obsidian-ui-acceptance-step18-2026-10-09]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  ui-kit-build:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 35
+    env:
+      SOURCE_HEAD: 12d36de03cdeb10fe88cc6cc8c15823abd90e3f5
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+          cache-dependency-path: 55_Workbench/package-lock.json
+      - name: Install governing manifest reader
+        run: python3 -m pip install pyyaml
+      - name: Confirm unchanged Step 17 acceptance and release boundaries
+        shell: bash
+        run: |
+          set -euo pipefail
+          git merge-base --is-ancestor "$SOURCE_HEAD" HEAD
+          python3 66_Testing/check_bom_step16_proposals.py
+          python3 66_Testing/check_importer_workbench_localmodel.py
+          python3 "Base Vault/Tools/v0.8.0-r2/update-plugin-lock.py" --check
+          python3 "Base Vault/Tools/v0.8.0-r2/build-base.py" "$RUNNER_TEMP/step18-base"
+          python3 "Base Vault/Testing/check-release.py" --base "$RUNNER_TEMP/step18-base" --workbench "55_Workbench" > "$RUNNER_TEMP/step18-release.log" 2>&1 || {
+            grep -E '^FAIL |^WARN |fail,' "$RUNNER_TEMP/step18-release.log" || true
+            exit 1
+          }
+          grep -E '^WARN |fail,' "$RUNNER_TEMP/step18-release.log" || true
+      - name: Build candidate Workbench plugin, retain original controlled binary
+        working-directory: 55_Workbench
+        shell: bash
+        run: |
+          set -euo pipefail
+          npm ci
+          npm run typecheck
+          npm test
+          npm run build
+      - name: Build two separately labelled disposable Obsidian vaults
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 66_Testing/build_step18_ui_kit.py \
+            --base "$RUNNER_TEMP/step18-base" \
+            --workbench "55_Workbench" \
+            --out "$RUNNER_TEMP/step18-obsidian-ui-acceptance-kit" \
+            --source-sha "$SOURCE_HEAD"
+          python3 - <<'PY'
+          from pathlib import Path
+          import hashlib,json,zipfile
+          import yaml
+          root=Path(__import__('os').environ['RUNNER_TEMP'])
+          kit=root/'step18-obsidian-ui-acceptance-kit'
+          src=json.loads((kit/'ACCEPTANCE_BUILD_PROVENANCE.json').read_text())
+          assert src['status']=='MANUAL_GUI_NOT_EXECUTED'
+          assert src['plugin_lock_unchanged'] is True
+          controlled=kit/'01_Controlled_Base'
+          candidate=kit/'02_BOM_Candidate_Test_Only'
+          lock=(controlled/'.obsidian/plugin-lock.yaml').read_bytes()
+          assert lock==(candidate/'.obsidian/plugin-lock.yaml').read_bytes()
+          locked=yaml.safe_load(lock)['plugins']['mdse-workbench']['sha256']['main.js']
+          sha=lambda p:hashlib.sha256(p.read_bytes()).hexdigest()
+          assert sha(controlled/'.obsidian/plugins/mdse-workbench/main.js')==locked
+          assert sha(candidate/'.obsidian/plugins/mdse-workbench/main.js')!=locked
+          assert (controlled/'99_System/03_Schemas/relationships.yaml').read_text().startswith("schemaVersion: '1.36'")
+          assert 'TEST-ONLY EXPERIMENTAL' in (candidate/'99_System/03_Schemas/relationships.yaml').read_text()
+          assert len(list((candidate/'88_Step18_Disposable_UI_Fixtures').glob('*.md'))) == 8
+          assert (controlled/'.vault.yaml').read_text().count('UNINITIALIZED')==1
+          assert (candidate/'.vault.yaml').read_text().count('UNINITIALIZED')==1
+          z=root/'step18-obsidian-ui-acceptance-kit.zip'
+          with zipfile.ZipFile(z) as obj:assert obj.testzip() is None
+          print('PASS: isolated controlled+candidate kit, plugin SHA mismatch intentionally exposed, 8 fixtures, ZIP integrity')
+          print('KIT_SHA256',sha(z))
+          PY
+      - name: Parse generated 0.5 and 0.6 manual fixtures using candidate Workbench
+        working-directory: 55_Workbench
+        shell: bash
+        run: |
+          set -euo pipefail
+          node --import tsx --input-type=module - <<'JS'
+          import { readFileSync } from "node:fs";
+          import { join } from "node:path";
+          import assert from "node:assert/strict";
+          const moduleExports = await import("./src/core/localmodel.ts");
+          const { parseLocalModel, WRITABLE_VERSION } = moduleExports.default ?? moduleExports;
+          const base = join(process.env.RUNNER_TEMP, "step18-obsidian-ui-acceptance-kit", "02_BOM_Candidate_Test_Only", "88_Step18_Disposable_UI_Fixtures");
+          const read = (name) => readFileSync(join(base, name), "utf8");
+          const a = parseLocalModel(read("Assembly 0.5.md"));
+          assert.ok(a?.structured);
+          assert.equal(a.schemaVersion, "0.5");
+          assert.deepEqual(a.findings.filter(f=>f.severity==="error"),[]);
+          assert.equal(a.records.filter(r=>r.kind==="part").length,1);
+          assert.equal(a.records.filter(r=>r.kind==="endpoint" && !r.definition && !r.usageExplicit).length,1);
+          const b = parseLocalModel(read("Assembly 0.6 READ ONLY.md"));
+          assert.ok(b?.structured);
+          assert.equal(b.schemaVersion, "0.6");
+          assert.deepEqual(b.findings.filter(f=>f.severity==="error"),[]);
+          assert.equal(b.records.length,1);
+          assert.equal(b.records[0].quantity,"0.3500000001");
+          assert.equal(b.records[0].unitOfMeasure,"m");
+          assert.equal(b.records[0].multiplicity,"2");
+          assert.equal(WRITABLE_VERSION,"0.5");
+          assert.ok(read("Product A.md").split("\n").includes('variantOf: "[[Family]]"'));
+          console.log("PASS: actual candidate reader validates 0.5 definitionless Interface and 0.6 Part quantity fixture; writer 0.5");
+          JS
+      - name: Publish executable manual acceptance kit
+        uses: actions/upload-artifact@v4
+        with:
+          name: step18-obsidian-ui-acceptance-kit
+          path: ${{ runner.temp }}/step18-obsidian-ui-acceptance-kit.zip
+          if-no-files-found: error
+          retention-days: 30
+      - name: Publish clean pre-release checker log
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: step18-controlled-preflight-log
+          path: ${{ runner.temp }}/step18-release.log
+          if-no-files-found: warn
+          retention-days: 30
+      - name: Record manual GUI acceptance explicitly incomplete
+        if: success()
+        shell: bash
+        run: |
+          {
+            echo "## Step 18: Manual Obsidian acceptance package CREATED; GUI NOT EXECUTED"
+            echo "- Two separate disposable vaults: controlled Bootstrap first-open and experimental BOM Workbench"
+            echo "- Controlled plugin SHA/lock unchanged; candidate plugin SHA deliberately differs"
+            echo "- Experimental oneWay variantOf relationship schema included ONLY in disposable candidate"
+            echo "- Correct real-QEAX Interface edit/restart acceptance still requires local Obsidian"
+            echo "- No generated QEAX model, release promotion, or main-branch changes"
+            echo "- Follow 66_Testing/Step18_Obsidian_UI_Acceptance.md and record witnessed results"
+          } >> "$GITHUB_STEP_SUMMARY"

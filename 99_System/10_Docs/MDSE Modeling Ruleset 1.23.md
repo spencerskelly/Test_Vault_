@@ -69,9 +69,11 @@ Verification defines reusable intent; Procedure orders activities; Setup defines
 
 Folder structure is for human navigation; it does not create semantic relationships.
 
-Do not split a folder based on element count alone while it remains within the governed capacity. A model-content folder may contain at most **75 generated model files**. Prefer a meaningful semantic or navigational subdivision based on actual engineering or source structure. If no clear subdivision is available, deterministic mechanical subfolders such as `folder_1`, `folder_2`, etc. are allowed so import can continue; each generated subfolder must remain at or below the 75-file limit.
+There is no generated-file-count limit per folder and the importer must not create mechanical `folder_N` subdivisions merely because a folder contains many notes. Split only when the source/model has a meaningful semantic or navigational subdivision.
 
-Aim for approximately 5–6 meaningful folder levels below the vault root for normal MDSE content. Deeper structure is allowed when it preserves useful formal/source structure, including regulatory hierarchies, document hierarchy, or real architecture.
+When a first-class imported element is nested under another emitted first-class element, represent that navigation hierarchy with a folder named for the parent element: the parent note remains beside its folder (for example `Parent.md` and `Parent/Child.md`). Apply recursively for deeper nesting. This placement rule does not create or change model semantics.
+
+Aim for approximately 5–6 meaningful folder levels below the vault root for normal MDSE content. Deeper structure is allowed when it preserves useful formal/source structure, including regulatory hierarchies, document hierarchy, real architecture, or source element nesting.
 
 An intermediate folder may be collapsed automatically only when it has exactly one meaningful child branch and has no independent note, content, or navigation value.
 
@@ -206,13 +208,11 @@ Preflight order:
 8. recalculate full repository-relative paths;
 9. flag unresolved excessive paths.
 
-After approved shortening, any path still over the final hard repository-relative limit is a blocking preflight error. The importer must not begin writing until every path has a deterministic human-readable destination.
+**Amended by W-382.** The importer has no repository-relative total path-length limit and does not shorten or block a path because of total character count. Approved shortening remains semantic/readability cleanup only. The physical filesystem component limit still applies: a single file or folder component that the selected filesystem cannot create must be shortened or blocked deterministically. Total-path failures reported directly by the operating system/browser remain write failures, not importer policy limits.
 
-**Amended by W-324.** No name or folder is shortened to fit a length. The approved shortening above is by meaning only. The hard repository-relative stop is **400 characters**; a planned path over 400 blocks the run and is never cut. The only forced cut is the filesystem component limit: a file name over 255 bytes cannot exist and is cut at a word boundary with `~a`; a folder name over 255 bytes blocks the run. Paths longer than 212 characters are listed for review in `Review - Long Paths.csv` and shortened after the import (Post-Import Tasks, Task 9).
+### 15.4a Link targets and global filenames (W-382)
 
-### 15.4a Link targets (W-324)
-
-A link written by the importer or by hand goes to the file name: `[[File name]]`. Only when that name is not unique in the vault (case-insensitive) is the shortest trailing path that is unique used, as Obsidian's shortest-path format writes it (`newLinkFormat: shortest`). A full path is never written unless it is the shortest unique one. Identity stays `uid`/`id` in the note, never in a link.
+Generated/imported note filenames must be unique across the vault namespace, case-insensitive. Existing base/system note basenames are reserved before importer names are assigned. Apply the established human-readable naming rules first; if a collision remains, use the deterministic alteration/duplicate markers already defined by the importer. Imported-note links therefore use the filename target directly, `[[File name]]`, rather than relying on path qualification to distinguish imported notes. Identity stays `uid`/`id` in the note, never in a link.
 
 ### 15.5 Root-package placement and housekeeping
 

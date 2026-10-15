@@ -1,0 +1,83 @@
+name: Consolidation Step 18 - staged registry application and native release gate
+
+on:
+  push:
+    branches: [consolidation/step18-registry-application-rehearsal-2026-10-10]
+    paths:
+      - '.github/workflows/consolidation-step18-registry-application.yml'
+      - '66_Testing/consolidation/**'
+      - 'Base Vault/Definition/mdse-release.yaml'
+
+permissions:
+  contents: read
+
+jobs:
+  isolated-registry-rehearsal:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - name: Sparse checkout with source-model archive omitted
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+          filter: blob:none
+          persist-credentials: false
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            /*
+            !/EA_2026_09_06_endgame.qeax.zip
+      - name: No model archive in checked-out files
+        run: |
+          test ! -e EA_2026_09_06_endgame.qeax.zip
+          test -f 66_Testing/consolidation/step18_registry_candidate.py
+          test -f 'Base Vault/Definition/mdse-release.yaml'
+      - name: Install YAML validator for original native checker
+        run: python3 -m pip install --disable-pip-version-check 'PyYAML==6.0.2'
+      - name: Verify candidate source SHA, 32 entries and byte-for-byte revert
+        run: python3 66_Testing/consolidation/step18_registry_candidate.py
+      - name: Step18 targeted negative and source-drift tests
+        run: python3 -m unittest discover -s 66_Testing/consolidation -p 'test_step18_registry.py' -v
+      - name: Earlier Step17 exact registry proof on restored baseline
+        run: python3 -m unittest discover -s 66_Testing/consolidation -p 'test_step17_registry.py' -v
+      - name: Step13 pending-document status / rollback tests
+        run: python3 -m unittest discover -s 66_Testing/consolidation -p 'test_step13_registry.py' -v
+      - name: Step14 unchanged historical body and Workbench guide tests
+        run: python3 -m unittest discover -s 66_Testing/consolidation -p 'test_step14_docs.py' -v
+      - name: Step15 governance stop checks
+        run: python3 -m unittest discover -s 66_Testing/consolidation -p 'test_step15_governance.py' -v
+      - name: Step16 Workbench release version and W341 guide parity checks
+        run: python3 -m unittest discover -s 66_Testing/consolidation -p 'test_step16_release_provenance.py' -v
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Verify old executable workflows remain retired
+        run: node --test 66_Testing/consolidation/test_step11_retirement.cjs
+      - name: Entire native release checker must return zero FAIL
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 'Base Vault/Testing/check-release.py' --workbench 55_Workbench > "$RUNNER_TEMP/step18-native-release.txt" 2>&1 || {
+            echo 'Native release errors (paths/counts only):'
+            grep '^FAIL ' "$RUNNER_TEMP/step18-native-release.txt" | tail -n 35 || true
+            exit 1
+          }
+          test "$(grep -c '^FAIL ' "$RUNNER_TEMP/step18-native-release.txt" || true)" -eq 0
+          grep -F 'Workbench user guide equals Base Vault release copy' "$RUNNER_TEMP/step18-native-release.txt" >/dev/null
+          grep -F 'Workbench package/manifest 0.1.18 match pinned release manifest' "$RUNNER_TEMP/step18-native-release.txt" >/dev/null
+          grep -F 'Workbench lock 0.1.18 matches pinned release manifest' "$RUNNER_TEMP/step18-native-release.txt" >/dev/null
+          counts=$(grep -E '^[0-9]+ fail, [0-9]+ warn$' "$RUNNER_TEMP/step18-native-release.txt" | tail -n 1)
+          test -n "$counts"
+          echo "STEP18_NATIVE_RESULT=$counts"
+          echo 'STEP18_NATIVE_REGISTRATION_BLOCKERS=0'
+          echo 'STEP18_REGISTRY_ROWS=29_REFERENCE_3_PROPOSAL_PENDING_APPROVAL'
+          echo 'STEP18_RELEASE_STATUS=PRE_RELEASE_NOT_ISSUED'
+      - name: Record proposal-only verification limitations
+        shell: bash
+        run: |
+          {
+            echo '## Step 18 — registry application candidate only'
+            echo '- All 32 proposals staged only on a separate branch; byte-identical rollback enforced'
+            echo '- Full native release checker zero FAIL required, remaining WARN permitted'
+            echo '- No governance decision approved, no actual release or Obsidian GUI accepted'
+            echo '- Public QEAX owner review, contributor clone signoffs and separate archival permission remain open'
+          } >> "$GITHUB_STEP_SUMMARY"

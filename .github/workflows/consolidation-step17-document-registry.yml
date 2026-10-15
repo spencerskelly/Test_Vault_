@@ -1,0 +1,74 @@
+name: Consolidation Step 17 - review-only document registry reconciliation
+
+on:
+  push:
+    branches: [consolidation/step17-document-registry-proposal-2026-10-10]
+    paths:
+      - '.github/workflows/consolidation-step17-document-registry.yml'
+      - '66_Testing/consolidation/step17_*'
+      - '66_Testing/consolidation/STEP17_*'
+
+permissions:
+  contents: read
+
+jobs:
+  registry-reconciliation:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - name: Sparse checkout excluding public QEAX archive bytes
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+          filter: blob:none
+          persist-credentials: false
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            /*
+            !/EA_2026_09_06_endgame.qeax.zip
+      - name: Confirm QEAX excluded from runner working tree
+        shell: bash
+        run: |
+          set -euo pipefail
+          test ! -e EA_2026_09_06_endgame.qeax.zip
+          test -f 66_Testing/consolidation/step17_registry_proposal.json
+          test -f 'Base Vault/Definition/mdse-release.yaml'
+      - name: Install YAML dependency required by original release checker
+        run: python3 -m pip install --disable-pip-version-check 'PyYAML==6.0.2'
+      - name: Validate proposed registry paths and simulated in-memory closure
+        run: python3 66_Testing/consolidation/step17_registry_review.py
+      - name: Fail-closed 30-test registration and provenance suite
+        run: python3 -m unittest discover -s 66_Testing/consolidation -p 'test_step17_registry.py' -v
+      - name: Confirm exactly 32 proposed rows and zero current rows
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 66_Testing/consolidation/step17_registry_review.py --render > "$RUNNER_TEMP/step17-proposed-rows.txt"
+          test "$(wc -l < "$RUNNER_TEMP/step17-proposed-rows.txt")" -eq 32
+          test "$(grep -c 'status: proposal}' "$RUNNER_TEMP/step17-proposed-rows.txt")" -eq 3
+          test "$(grep -c 'status: reference}' "$RUNNER_TEMP/step17-proposed-rows.txt")" -eq 29
+          if grep -Eq 'status: (current|historical|superseded|retired)' "$RUNNER_TEMP/step17-proposed-rows.txt"; then
+            exit 1
+          fi
+          echo "STEP17_PROPOSED_ROWS=32; REFERENCE=29; PROPOSAL=3; APPLIED=FALSE"
+      - name: Native release gate remains blocked by exactly 32 unregistered documents
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 66_Testing/consolidation/step16_native_gate.py > "$RUNNER_TEMP/step17-native-result.txt"
+          grep -Fx 'STEP16_NATIVE_RELEASE_GATE=BLOCKED_UNREGISTERED_DOCUMENTS' "$RUNNER_TEMP/step17-native-result.txt"
+          grep -Fx 'STEP16_DOCUMENT_REGISTRY_FAILURES=32' "$RUNNER_TEMP/step17-native-result.txt"
+          grep -Fx 'STEP16_W341_W342=FOCUSED_CHECKS_PASS' "$RUNNER_TEMP/step17-native-result.txt"
+      - name: Confirm Step15 governance gates remain closed
+        run: python3 -m unittest discover -s 66_Testing/consolidation -p 'test_step15_governance.py' -v
+      - name: Record limitations and no-release status
+        shell: bash
+        run: |
+          {
+            echo '## Step 17 - document registry proposal only'
+            echo '- 32 exact-matched unregistered checkpoint/evidence files reviewed'
+            echo '- 29 reference + 3 unapproved proposal statuses staged as in-memory preview'
+            echo '- Live release manifest is unchanged and native release checker remains BLOCKED'
+            echo '- No QEAX bytes checked out, no model contents/artifacts published'
+            echo '- No approval to merge public main, issue release, or archive standalone Workbench'
+          } >> "$GITHUB_STEP_SUMMARY"

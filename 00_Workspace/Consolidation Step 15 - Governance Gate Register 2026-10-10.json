@@ -1,0 +1,148 @@
+{
+  "schema": "mdse-consolidation-governance-gates/1",
+  "created": "2026-10-10",
+  "state": "REVIEW_ONLY_NOT_APPROVED",
+  "decisionId": null,
+  "decisionApproval": null,
+  "approvalEvidence": null,
+  "roleAssignmentsPersonalDataExcluded": true,
+  "parentCommit": "49503104bc875d8a19d99b7248a000ddd9f00db5",
+  "mainBaseline": {
+    "testVault": "19f565859e4b9fb7ae63004f1b6f0a7de1b9144e",
+    "standaloneWorkbench": "59fc6219b1d0586900aa7d38685e7087a9d47fec"
+  },
+  "proposalPath": "00_Workspace/Consolidation Step 15 - Proposed W Decision and Authority Signoff 2026-10-10.md",
+  "redlinePath": "00_Workspace/Consolidation Step 15 - Exact Registry Redline and Promotion Stops 2026-10-10.md",
+  "registryBaselineSHA": "29a05fc71c2f25108f07927870ac5d3d3bdd618b",
+  "workspaceDecisionLogSHA": "49ab9bc513b27ce7e1c2beed6e039aad5c0bebbb",
+  "pinnedPluginLockSHA": "c430670577318457972a154012d08c6d28e6d11b",
+  "proposedDocumentSuccessor": "00_Workspace/MDSE v0.8 Unified Development Continuation Contract - PROPOSAL 2026-10-10.md",
+  "affectedOriginalDecisions": [
+    "W-328",
+    "W-329"
+  ],
+  "releaseControlsPreserved": [
+    "W-341",
+    "W-342"
+  ],
+  "gates": [
+    {
+      "id": "W_DECISION_OWNER_APPROVAL",
+      "ownerRole": "governance",
+      "required": true,
+      "status": "NOT_APPROVED",
+      "evidenceRef": null,
+      "approvedAt": null
+    },
+    {
+      "id": "WORKBENCH_PRODUCT_SOURCE_APPROVAL",
+      "ownerRole": "workbench_owner",
+      "required": true,
+      "status": "NOT_APPROVED",
+      "evidenceRef": null,
+      "approvedAt": null
+    },
+    {
+      "id": "DOCUMENT_REGISTRY_APPROVAL",
+      "ownerRole": "document_control",
+      "required": true,
+      "status": "NOT_APPROVED",
+      "evidenceRef": null,
+      "approvedAt": null
+    },
+    {
+      "id": "W341_USER_GUIDE_PARITY",
+      "ownerRole": "release_engineering",
+      "required": true,
+      "status": "NOT_APPROVED",
+      "evidenceRef": null,
+      "approvedAt": null
+    },
+    {
+      "id": "W342_RUNTIME_CANDIDATE_SEPARATION",
+      "ownerRole": "release_engineering",
+      "required": true,
+      "status": "NOT_APPROVED",
+      "evidenceRef": null,
+      "approvedAt": null
+    },
+    {
+      "id": "QEAX_DATA_OWNER_SECURITY_DISPOSITION",
+      "ownerRole": "data_owner_and_security",
+      "required": true,
+      "status": "NOT_APPROVED",
+      "evidenceRef": null,
+      "approvedAt": null
+    },
+    {
+      "id": "ALL_LOCAL_CLONE_WORKTREE_STASH_SIGNOFFS",
+      "ownerRole": "repository_contributors",
+      "required": true,
+      "status": "NOT_APPROVED",
+      "evidenceRef": null,
+      "approvedAt": null
+    },
+    {
+      "id": "BOM_A15_LOCAL_WORK_INVENTORY",
+      "ownerRole": "repository_contributors",
+      "required": true,
+      "status": "NOT_APPROVED",
+      "evidenceRef": null,
+      "approvedAt": null
+    },
+    {
+      "id": "INTEGRATED_RELEASE_ARTIFACT_CHECKS",
+      "ownerRole": "release_engineering",
+      "required": true,
+      "status": "NOT_APPROVED",
+      "evidenceRef": null,
+      "approvedAt": null
+    },
+    {
+      "id": "REAL_OBSIDIAN_MAC_WINDOWS_GUI",
+      "ownerRole": "user_acceptance",
+      "required": true,
+      "status": "NOT_APPROVED",
+      "evidenceRef": null,
+      "approvedAt": null
+    },
+    {
+      "id": "REVIEWED_STACK_PROMOTION_APPROVAL",
+      "ownerRole": "repo_maintainers",
+      "required": true,
+      "status": "NOT_APPROVED",
+      "evidenceRef": null,
+      "approvedAt": null
+    },
+    {
+      "id": "SEPARATE_STANDALONE_ARCHIVE_AUTHORIZATION",
+      "ownerRole": "repository_owner",
+      "required": true,
+      "status": "NOT_APPROVED",
+      "evidenceRef": null,
+      "approvedAt": null
+    }
+  ],
+  "workflow": {
+    "decisionTextPrepared": true,
+    "decisionApproved": false,
+    "redlinePrepared": true,
+    "redlineApplied": false,
+    "mainPromotionApproved": false,
+    "mainPromotionExecuted": false,
+    "standaloneArchiveAuthorized": false,
+    "standaloneArchived": false
+  },
+  "readiness": {
+    "governanceDecisionReady": false,
+    "publicMainPromotionReady": false,
+    "standaloneArchiveReady": false
+  },
+  "notices": [
+    "Do not record actual approvals in public JSON until the owner authorizes publishing evidence; private controls may retain sensitive classification data.",
+    "An unassigned W decision identifier is not a governance approval.",
+    "Approval of a governance decision alone never authorizes public main promotion, security disclosure, or standalone archival.",
+    "The old standalone repo and both main heads remain unmodified by this review package.",
+    "Historical GitHub source and prior CI runs must remain traceable; a generated plugin-lock historical source label cannot be replaced merely to pass a scanner."
+  ]
+}

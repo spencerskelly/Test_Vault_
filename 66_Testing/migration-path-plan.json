@@ -1,0 +1,86 @@
+{
+  "schemaVersion": 1,
+  "status": "proposal-read-only",
+  "recorded": "2026-10-09",
+  "objective": "Map Test_Vault_ into the user-approved numbered structure without changing model semantics or approved release pins.",
+  "roots": [
+    {
+      "source": "00_Workspace",
+      "target": "00_Workspace",
+      "policy": "retain"
+    },
+    {
+      "source": "Definitions",
+      "target": "11_Definitions",
+      "policy": "move-after-reference-audit"
+    },
+    {
+      "source": "Importer",
+      "target": "22_Importer",
+      "policy": "move-after-PR5-reconciliation"
+    },
+    {
+      "source": "Base Vault",
+      "target": "33_Base Vault",
+      "policy": "move-after-builder-and-manifest-path-patches"
+    },
+    {
+      "source": "Bootstrap",
+      "target": "44_Bootstrap",
+      "policy": "move-after-source-and-plugin-lock-alignment"
+    },
+    {
+      "source": "55_Workbench",
+      "target": "55_Workbench",
+      "policy": "staged-history-preserved"
+    },
+    {
+      "source": null,
+      "target": "66_Testing",
+      "policy": "new-shared-integration-tests"
+    },
+    {
+      "source": null,
+      "target": "88_Resources",
+      "policy": "new-external-resources-only"
+    },
+    {
+      "source": "99_System",
+      "target": "99_System",
+      "policy": "retain-authority"
+    },
+    {
+      "source": ".github/workflows",
+      "target": ".github/workflows",
+      "policy": "retain-root-only-workflows"
+    },
+    {
+      "source": ".obsidian",
+      "target": ".obsidian",
+      "policy": "retain-development-vault"
+    }
+  ],
+  "unresolved": [
+    {
+      "source": "Cross-Vault",
+      "decision": "Examine current/deferred source versus historical research; do not move automatically into 88_Resources."
+    }
+  ],
+  "releaseAuthority": {
+    "authoritativeManifest": "Base Vault/Definition/mdse-release.yaml",
+    "postMoveManifest": "33_Base Vault/Definition/mdse-release.yaml",
+    "schemaRoot": "99_System/03_Schemas",
+    "runtimePluginLock": ".obsidian/plugin-lock.yaml",
+    "workbenchSource": "55_Workbench",
+    "acceptance": "66_Testing",
+    "rule": "A candidate source version is not the pinned release. Change pinned versions and generated locks through reviewed build/promotion; never edit generated plugin lock by hand."
+  },
+  "promotionGates": [
+    "All local uncommitted/unpushed work accounted for; remote branches and source SHA retained",
+    "All old paths referenced by source, CI, manifests, scripts, and Obsidian links remapped and audited",
+    "Workbench, Importer, Bootstrap, schema and Base Vault accept same approved manifest versions",
+    "Workbench standalone and representative imported-model integration tests pass",
+    "Release plugin lock is regenerated, pinned artifacts hashed and verified, not manually edited",
+    "Successful new import plus Obsidian startup/WorkBench read-edit-reload acceptance"
+  ]
+}

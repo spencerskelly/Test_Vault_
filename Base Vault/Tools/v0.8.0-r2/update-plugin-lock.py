@@ -20,7 +20,7 @@ FILES = ("main.js", "manifest.json", "styles.css")
 # id: (source, settings) — settings "governed" means a generated data.json ships with the release.
 PLUGINS = {
     "mdse-bootstrap":     ("Test_Vault_ Bootstrap controlled build", "default"),
-    "mdse-workbench":     ("spencerskelly/MDSE_Workbench (built)", "default"),
+    "mdse-workbench":     ("spencerskelly/MDSE_Workbench 0.1.18 artifact b0c4e2c6bdfb96d36f51d8152b17be22592ef174 (verified build 37408465530; startup 37408519667)", "default"),
     "templater-obsidian": ("github.com/SilentVoid13/Templater release", "governed"),
     "fileclass":          ("github.com/mdelobelle/fileclass release", "governed"),
     "breadcrumbs":        ("github.com/michaelpporter/breadcrumbs release", "governed"),

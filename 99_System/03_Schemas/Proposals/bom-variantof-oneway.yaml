@@ -1,0 +1,53 @@
+# PROPOSAL ONLY — no change to active ../relationships.yaml v1.36.
+status: proposal-only
+proposalId: BOM-A14-VARIANTOF
+authority:
+  activePath: "99_System/03_Schemas/relationships.yaml"
+  activeSchemaVersion: "1.36"
+  activeGitBlob: "413fd5d32d12331413fda30653c7a3a38ac2d2ab"
+  elementTypesPath: "99_System/03_Schemas/element-types.yaml"
+  elementTypesVersion: "1.18"
+relationship:
+  field: variantOf
+  category: oneWay
+  from: [Object]
+  to: [Object]
+  optional: true
+  maxForwardTargets: 1
+  rawYamlShape: singleNoteWikilinkScalar
+  storedInverse: false
+  reverseMembership: derivedReadOnlyQuery
+  allowTransitivelyNestedFamilies: true
+  directAndTransitiveMembersDistinguished: true
+  resolverUsesNoteIdentity: true
+  noCycles: true
+  noSelfLink: true
+  noDanglingLinks: true
+  noDuplicateLinks: true
+  noImplicitSubtypeOf: true
+  noImplicitPartOf: true
+  noImplicitReplacementOrSubstitutability: true
+  noInverseRepairOnTarget: true
+evidence:
+  manualOrApprovedAuthoritativeGrouping: acceptable
+  supportedSourceDerived: requiresTwoIndependentConsistentSignalsAndReviewLedger
+  uncertainOrAmbiguousSource: findingOnlyDoNotEmitYaml
+  reviewerOverridePrecedesInferredCandidate: true
+  candidateLedgerSeparateFromEngineeringYaml: true
+prerequisite:
+  proposedObjectSubtypeOmission:
+    status: needs-independent-approval
+    activeElementTypesVersion: "1.18"
+    candidateVersionNotAllocated: true
+    omissionAllowedForNonNumberedFamilyObjectOnlyAfterApproval: true
+    doNotUseEmptyOrNullSubtype: true
+  governance:
+    - W-decision and relationship schema version allocation
+    - Ruleset and AI authoring update
+    - Object note serializer, Fileclass and template validation
+    - importer reader/writer and Workbench resolver acceptance
+    - graph cycle and cardinality tests on committed source
+sourceArtifacts:
+  - "55_Workbench/docs/bom/a01-a14/BOM_VARIANTOF_CONTRACT_A-07.md"
+  - "55_Workbench/docs/bom/a01-a14/BOM_VARIANTOF_SCHEMA_PROPOSAL_A-08.md"
+  - "55_Workbench/docs/bom/a01-a14/BOM_OBJECT_SUBTYPE_A-09.md"

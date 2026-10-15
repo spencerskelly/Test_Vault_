@@ -44,8 +44,15 @@ ap.add_argument("--base")
 a=ap.parse_args()
 
 man=yaml.safe_load(read("Base Vault/Definition/mdse-release.yaml"))
-if man.get("limits",{}).get("maxModelFilesPerFolder") != 75:
-    fail("release manifest maxModelFilesPerFolder must be 75")
+limits=man.get("limits",{})
+if limits.get("generatedPathLengthLimit", "missing") is not None:
+    fail("release manifest generatedPathLengthLimit must be null (W-382)")
+if limits.get("modelFilesPerFolderLimit", "missing") is not None:
+    fail("release manifest modelFilesPerFolderLimit must be null (W-382)")
+if limits.get("importedFileNameScope") != "global":
+    fail("release manifest importedFileNameScope must be global (W-382)")
+if limits.get("nestedElementFolders") is not True:
+    fail("release manifest nestedElementFolders must be true (W-382)")
 
 # Manifest/build-contract self-consistency.
 builder=man["tools"]["cleanBase"]["builder"]
@@ -161,7 +168,14 @@ else:
         else:
             fail(f"Bootstrap lock {bv}, pinned source manifest {srcv}, package {pkgv}, release manifest {bootstrap['version']}, candidate {cv}")
     wv=plock["plugins"].get(wbid,{}).get("version")
-    (ok if wv==man["tools"]["workbench"]["version"] else fail)(f"Workbench lock {wv} vs release manifest {man['tools']['workbench']['version']}")
+    pinned_wb=man["tools"]["workbench"]["version"]
+    candidate_wb=man["tools"]["workbench"].get("candidateVersion")
+    if wv==pinned_wb:
+        ok(f"Workbench lock {wv} matches pinned release manifest")
+    elif man["releaseStatus"]!="release" and candidate_wb and wv==candidate_wb:
+        warn(f"Workbench lock {wv} uses declared pre-release candidate; pinned release remains {pinned_wb}")
+    else:
+        fail(f"Workbench lock {wv} vs pinned {pinned_wb}, candidate {candidate_wb}")
     wb106=man["tools"]["workbench"].get("wb106Version")
     if not wb106 or wv!=wb106:
         (fail if man["releaseStatus"]=="release" and man["tools"]["workbench"]["requiredForRelease"] else warn)(
@@ -173,27 +187,34 @@ if candidate:
         fail(f"importer candidate missing: {candidate}")
     else:
         itxt=read(candidate)
+        importer_version=man["tools"]["importer"].get("candidateVersion")
         required_importer_tokens=[
-            'version: "0.8.6"',
-            'const REL_SCHEMA_VERSION="1.35"',
-            'const ELEMENT_SCHEMA_VERSION="1.17"',
-            'const LOCAL_MODEL_SCHEMA_VERSION="0.2"',
+            f'version: "{importer_version}"',
+            f'const REL_SCHEMA_VERSION="{man["schemas"]["relationships"]}"',
+            f'const ELEMENT_SCHEMA_VERSION="{man["schemas"]["elementTypes"]}"',
+            f'const LOCAL_MODEL_SCHEMA_VERSION="{man["schemas"]["localModel"]}"',
+            f'const LOCAL_BODY_SCHEMA="{man["schemas"]["localModel"]}"',
             'const MDSE_RELEASE="0.8.0"',
-            'const SOURCE_MODEL_ID="EA8647"',
-            f'const MAX_GENERATED_PATH={man["limits"]["maxGeneratedPathLength"]};',
+            'const SOURCE_PROFILE=loadSourceProfile();',
+            'const SOURCE_MODEL_ID=SOURCE_PROFILE.sourceModelId;',
+            'const EXPECTED_TABLES=SOURCE_PROFILE.expected.tables;',
+            'const EXPECTED_ELEMENT_TYPES=SOURCE_PROFILE.expected.elementTypes;',
+            'const EXPECTED_CONNECTOR_TYPES=SOURCE_PROFILE.expected.connectorTypes;',
+            'const EXPECTED_DIAGRAM_TYPES=SOURCE_PROFILE.expected.diagramTypes;',
             f'const FS_COMPONENT_MAX_BYTES={man["limits"]["fsComponentMaxBytes"]};',
-            f'const LONG_PATH_REVIEW_THRESHOLD={man["limits"]["longPathReviewThreshold"]};',
-            'function assignLinkTargets(entities,existingStems)',
             'async function scanExistingNoteStems(root)',
-            'function longPathReviewCsv(entities,sliceKeys,attachmentFiles)',
             'function fitFileNameToFilesystem(name,maxBytes)',
-            'Review - Long Paths.csv',
-            'const MAX_MODEL_FILES_PER_FOLDER=75',
-            'function applyMechanicalFolderCapacity(items)',
-            'folder_1',
+            'function elementParentChain(e,entities)',
+            'function pathPlanForEntity(e,folderMap,entities,hasChildrenKeys)',
+            'e.linkTarget=e.fileName',
+            'buildEntityContext(lastPlannerContext,reservedIdentityTokens,existingStems)',
+            'Importer-defined total path limit: none',
+            'Generated-file-count limit per folder: none',
+            'Imported note filenames globally unique:',
             'definitionEntity.mdseType!=="Object"',
             'if(!(await fileExists(root,".vault.yaml")))return false;',
-            'const folderRepeatsFile=',
+            'W-383: never remove the final source package',
+            'if(hasChildren){outSegs.push(e.fileName);changed=true;}',
             'async function unzipEaPayload',
             'class PayloadError',
             'function crc32(bytes)',
@@ -202,8 +223,8 @@ if candidate:
             'function attachmentVerdict(result,bench)',
             'async function unwrapEaDocumentPayload',
             'sourceRaw=blobBytes',
-            'v"+BUILD.version+" candidate PASS',
-            '<!-- MDSE:LOCAL-MODEL START schema=0.2 -->',
+            'result:"WRITE_PASS"',
+            '"<!-- MDSE:LOCAL-MODEL START schema="+LOCAL_BODY_SCHEMA+" -->"',
             'Local Model Source Map.csv',
             'Attachment Reconciliation.csv',
             'Diagram Reconciliation.csv',
@@ -215,6 +236,33 @@ if candidate:
         ]
         missing=[x for x in required_importer_tokens if x not in itxt]
         (ok if not missing else fail)(f"importer candidate static contract tokens present{'' if not missing else ': '+', '.join(missing)}")
+        sp=man["tools"]["importer"].get("sourceProfile")
+        sync=man["tools"]["importer"].get("sourceProfileSync")
+        if not sp or not os.path.isfile(full(ROOT,sp)):
+            fail(f"importer source profile missing: {sp}")
+        else:
+            try:
+                prof=json.load(open(full(ROOT,sp),encoding="utf-8"))
+                good=prof.get("schema")=="mdse-ea-source-profile/1" and prof.get("sourceModelId")==man.get("sourceModelId")
+                (ok if good else fail)(f"importer source profile matches release source model: {prof.get('profileId')}")
+            except Exception as ex:
+                fail(f"importer source profile unreadable: {ex}")
+        (ok if sync and os.path.isfile(full(ROOT,sync)) else fail)(f"importer source profile sync tool present: {sync}")
+        forbidden_importer_tokens=[
+            'const MAX_GENERATED_PATH=',
+            'const LONG_PATH_REVIEW_THRESHOLD=',
+            'const MAX_MODEL_FILES_PER_FOLDER=',
+            'function applyMechanicalFolderCapacity(items)',
+            'Review - Long Paths.csv',
+            'folder_1',
+            'const EXPECTED_TABLES = {',
+            'const EXPECTED_ELEMENT_TYPES = {',
+            'const EXPECTED_CONNECTOR_TYPES = {',
+            'const EXPECTED_DIAGRAM_TYPES = {',
+            'const SOURCE_MODEL_ID="EA8647"',
+        ]
+        present_forbidden=[x for x in forbidden_importer_tokens if x in itxt]
+        (ok if not present_forbidden else fail)(f"importer removed forbidden hard-coded/runtime legacy rules{'' if not present_forbidden else ': '+', '.join(present_forbidden)}")
         shared_plan=itxt.count('planOutputPaths(entities,sliceKeys,entityCtx,')
         shared_att=itxt.count('attachmentReconciliation(lastPlannerContext,entityCtx,sliceKeys,')
         (ok if shared_plan>=3 and shared_att>=2 else fail)(f"decode-only check shares path planning and attachment reconciliation with the whole-model write (planOutputPaths x{shared_plan}, attachmentReconciliation calls x{shared_att})")
@@ -237,7 +285,7 @@ if candidate:
         if 'schema=0.1' in itxt or 'return ("loc-"' in itxt:
             fail("importer candidate contains superseded Local Model marker/anchor behavior")
         if 'source_model_id","source_key","owner_uid","local_id","local_kind","ea_guid","ea_source_kind","ea_owner_guid' not in itxt:
-            fail("importer candidate Source Map header does not match Local Model 0.2 contract")
+            fail(f"importer candidate Source Map header does not match Local Model {man['schemas']['localModel']} contract")
         if 'sourceKey||(g?SOURCE_MODEL_ID+"|"+g:""),ou,localId,kind,g,sourceKind||"",ownerGuid||""' in itxt:
             fail("importer candidate still contains superseded blank/misused ea_owner_guid Source Map writer")
         if 'base+"~a.md"' in itxt:
@@ -250,7 +298,11 @@ hist=man["tools"]["importer"].get("history")
 (ok if hist and os.path.isdir(full(ROOT,hist)) else fail)(f"retired importers archived at {hist} (W-326)")
 cand_dir=os.path.dirname(man["tools"]["importer"]["candidate"])
 others=[d for d in os.listdir(full(ROOT,"Importer/Tools")) if "Importer/Tools/"+d!=cand_dir]
-(ok if not others else fail)(f"only the candidate importer revision is in Importer/Tools (others: {others})")
+if others:
+    (fail if man["releaseStatus"]=="release" else warn)(
+        f"non-current importer revisions remain in Importer/Tools during {man['releaseStatus']} hardening: {others}; archive them before release")
+else:
+    ok("only the current importer revision is in Importer/Tools")
 
 if a.workbench:
     wb=os.path.abspath(a.workbench)

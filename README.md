@@ -13,7 +13,7 @@ Development workspace for the MDSE toolchain and the initial golden-model effort
 
 ## Tool-development areas
 
-- **Workbench** — standalone repository `spencerskelly/MDSE_Workbench`; long-lived implementation + product-definition space.
+- **Workbench** — `55_Workbench/` (source, tests, implementation contracts and product-definition documentation) within this repository. The former standalone Workbench Git history is retained for historical traceability, and archival requires separate approval.
 - **Importer/** — importer definition, versioned tools, testing evidence and history.
 - **Bootstrap/** — Bootstrap definition, versioned source and first-open testing.
 - **Base Vault/** — release definition, build tools, runtime payload, release tests and initialization.

@@ -1,0 +1,49 @@
+name: Consolidation Step 16 - W341 W342 provenance verification
+
+on:
+  push:
+    branches: [consolidation/step16-w341-w342-release-provenance-2026-10-10]
+    paths:
+      - '.github/workflows/consolidation-step16-release-provenance.yml'
+      - '66_Testing/consolidation/step16_native_gate.py'
+      - '66_Testing/consolidation/test_step16_release_provenance.py'
+      - '00_Workspace/Consolidation Step 16*'
+
+permissions:
+  contents: read
+
+jobs:
+  release-provenance-candidate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - name: Sparse checkout without QEAX archive content
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+          filter: blob:none
+          persist-credentials: false
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            /*
+            !/EA_2026_09_06_endgame.qeax.zip
+      - name: Exclude source-model archive from worktree
+        run: test ! -e EA_2026_09_06_endgame.qeax.zip
+      - name: Install YAML parser for native release checker
+        run: python3 -m pip install --disable-pip-version-check 'PyYAML==6.0.2'
+      - name: Focused W341 W342 positive/negative regression tests
+        run: python3 -m unittest discover -s 66_Testing/consolidation -p 'test_step16_release_provenance.py' -v
+      - name: Native check-release gate, record document registration blockers
+        run: python3 66_Testing/consolidation/step16_native_gate.py
+      - name: Preserve Step15 governance holds
+        run: python3 -m unittest discover -s 66_Testing/consolidation -p 'test_step15_governance.py' -v
+      - name: Record verification scope without content uploads
+        shell: bash
+        run: |
+          {
+            echo '## Step 16 - W341/W342 provenance only'
+            echo '- Both guide copies must be byte-exact; pinned Workbench versions must agree'
+            echo '- Native release gate remains BLOCKED if unregistered workspace documentation exists'
+            echo '- Native failures outside that documented category fail this CI job'
+            echo '- No archive content inspected, release promoted, or main branch changed'
+          } >> "$GITHUB_STEP_SUMMARY"

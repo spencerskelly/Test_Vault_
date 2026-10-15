@@ -1,0 +1,98 @@
+{
+  "schema": "mdse-consolidation-step12-reference-dispositions/1",
+  "recorded": "2026-10-10",
+  "repository": "spencerskelly/Test_Vault_",
+  "reviewBranch": "consolidation/step12-post-retirement-references-2026-10-10",
+  "startCommit": "8a4690df044825d0ae7fa7ec377dc7eca8e2e94a",
+  "initialCi": {
+    "runId": 38109592394,
+    "runUrl": "https://github.com/spencerskelly/Test_Vault_/actions/runs/38109592394",
+    "conclusion": "success",
+    "pythonTests": 21,
+    "nodeTests": 22,
+    "counts": {
+      "blocking": 0,
+      "needs_review": 6,
+      "verified_provenance": 3,
+      "historical": 50
+    },
+    "qeaxWorktreeExcluded": true,
+    "note": "Audit is strict-not-ready because six referenced documents were not yet disposed."
+  },
+  "intendedPolicyChange": "One exact historical proposal is closed by whole-blob identity; five live or mixed-purpose documents remain review-required.",
+  "dispositions": [
+    {
+      "path": "00_Workspace/Handoff Prompt - MDSE v0.8 Implementation.md",
+      "blob": "d344fd38147efd03841acab547cac7bb579c2a1e",
+      "registryStatus": "current",
+      "state": "open_current_handoff",
+      "evidence": "Opening continuation prompt sends Workbench implementation to standalone; the document also contains superseded Local Model 0.2/0.4 version instructions.",
+      "requiredAction": "Prepare a new dated authoritative handoff under approval with current manifest pins 1.36/1.18/0.5 and proposed 55_Workbench path; supersede old handoff through document registry rather than rewriting historical version evidence."
+    },
+    {
+      "path": "00_Workspace/MDSE v0.8 Cross-Repository Reconciliation - 2026-10-02.md",
+      "blob": "e133dcb2672eb6b8066b79d857d7e4e58d1a187f",
+      "registryStatus": "current",
+      "state": "open_prior_current_contract",
+      "evidence": "Explicitly claims to be an authoritative continuation contract; still says Workbench implementation is standalone and Local Model 0.2.",
+      "requiredAction": "Approve a successor reconciliation contract and change registry status to reference/superseded through a reviewed manifest diff, with incoming links and supersession relations checked. Retain original Oct 2 content and audit provenance."
+    },
+    {
+      "path": "00_Workspace/Workbench Performance and Stability Roadmap.md",
+      "blob": "4f41a03020efe011260dbb884a4c279106814142",
+      "registryStatus": "reference",
+      "state": "open_mixed_roadmap",
+      "evidence": "Recorded implementation milestone history includes ~20 original standalone references, but section 'Execution contract for future chats' explicitly directs work to standalone main.",
+      "requiredAction": "Preserve numbered verified historical milestone text. Provide an explicit current execution supersession/header through governance rather than blanket demoting the roadmap as harmless history."
+    },
+    {
+      "path": "55_Workbench/docs/Definition/03 - Build Outline and Roadmap.md",
+      "blob": "0ff206b531c7659b4b46757554a7f1d6d4b1b53f",
+      "registryStatus": "not_in_workspace_document_registry",
+      "state": "open_mixed_product_roadmap",
+      "evidence": "Contains approved product direction and older next-implementation instruction to use standalone WB106 implementation contract.",
+      "requiredAction": "Retain approved capability decisions, add an explicitly dated supersession for implementation-location instructions, and verify product owners accept the new source path."
+    },
+    {
+      "path": "55_Workbench/docs/README.md",
+      "blob": "2dc82f816e4626982016ed9453c3c5fad8da3f32",
+      "registryStatus": "not_in_workspace_document_registry",
+      "state": "open_living_workbench_guidance",
+      "evidence": "Calls itself the living Workbench product-definition workspace and its 'Current v0.8 contract' still says Local Model 0.2 writer / Workbench 0.1.15–0.1.16.",
+      "requiredAction": "Update the living current-state summary for approved Workbench 0.1.18 / Local Model 0.5 authority; preserve early project snapshot in dated historical subsections after owner review."
+    },
+    {
+      "path": "66_Testing/consolidation/STEP07_CONTROLLED_CUTOVER_PREVIEW.md",
+      "blob": "c510203a480c7e1ce908be3dd677e4dec1bc2d7a",
+      "registryStatus": "review_only_proposal",
+      "state": "closed_exact_historical",
+      "evidence": "File self-identifies as a proposed Step 07 cutover, not an applied change or approved release; later Step 09 candidate and Step 11 retirement supersede its instructions.",
+      "requiredAction": "Classify ONLY this exact historical path as historical while the entire original Git blob SHA matches; any content change or similarly named new proposal remains review-required."
+    }
+  ],
+  "hardStops": [
+    "qeax_owner_security_classification",
+    "contributor_local_clone_signoff",
+    "superseding_W_governance_decision",
+    "full_integrated_release_acceptance",
+    "real_obsidian_gui_acceptance",
+    "explicit_archive_authorization"
+  ],
+  "finalCi": {
+    "runId": 38109713030,
+    "url": "https://github.com/spencerskelly/Test_Vault_/actions/runs/38109713030",
+    "testedCommit": "452805ce3edc0ec8d97908f8bba88051cf09798f",
+    "conclusion": "success",
+    "pythonTestsPassed": 23,
+    "nodeTestsPassed": 22,
+    "counts": {
+      "blocking": 0,
+      "needs_review": 5,
+      "verified_provenance": 3,
+      "historical": 52
+    },
+    "strictReady": false,
+    "qeaxWorktreeExcluded": true,
+    "note": "Five current/mixed guidance records remain unresolved. No public-main merge or standalone archival approval."
+  }
+}

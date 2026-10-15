@@ -161,17 +161,15 @@ These are structural candidates, not automatic semantic decisions. Some BindingC
 
 **Done when.** No temporary `equals` remains in the accepted/released model unless an explicitly approved unresolved-review policy says otherwise, and every source BindingConnector is reconciled to a reviewed outcome.
 
-## Task 9: Shorten paths
+## Task 9: Platform path compatibility review
 
-**What it is.** The import no longer shortens any name or folder for length (W-324). Its hard stop is 400 characters, so some paths are long. Long paths matter when the vault is shared: a path over about 260 characters, counting the folder the vault sits in, does not work on Windows without special settings, and Git on Windows refuses to check such a file out. This task shortens them by rule, before the vault goes to the team on Windows. Working on a Mac only, nothing here blocks you until then.
+**What it is.** W-382 removes importer-defined total path-length limits and the importer no longer produces a long-path review file or blocks a run because a complete repository-relative path is long. This task is a deployment/platform review, not an MDSE naming rule and not a required shortening pass.
 
-**How to find them.** `99_System/11_Import/Review - Long Paths.csv` lists every note and attachment path over 212 characters, longest first, with `uid`, `id`, EA GUID, length, path and link target. 212 was the earlier limit and stays as the review line; the Run Manifest gives the counts. Attachments are listed separately because their file name adds ` asset <n>.<ext>` to the note name.
+**How to review it.**
+1. Test the accepted vault on the actual supported Windows/macOS/Git environment before organization-wide rollout.
+2. If a platform cannot create, clone, open or sync a path, treat that as a platform compatibility finding and identify the smallest meaningful navigation/naming rule that resolves the affected group.
+3. Do not reintroduce arbitrary global character limits or mechanical `folder_N` buckets. Prefer meaningful source/model structure and the W-382 parent-element folder hierarchy.
+4. Put any broadly useful remediation rule back into the importer and rerun a fresh disposable import; do not hand-patch the generated golden candidate.
 
-**How to resolve them.**
-1. Look at where the characters are. In the EA8647 extract about 450 of the 517 raw paths over 212 sit under one subtree, `Connector ASM - Industrial`, and most are 8 to 11 folders deep. Fix by rule, not note by note.
-2. Candidate rules, easiest first. Extend the folder rules in the Reconciliation (leading words repeated from the parent, folders with one child and no note). Cut over-long names at a word boundary and keep the full name in the note's `Name:` line. Flatten the deepest chains (ports, signals and states under connector variants), since containment is already carried by the relationship fields and the Local Model. Flattening makes some names clash, which then take `~2`.
-3. Decide each rule in a group, log it in the Decision Log, and put it into the importer so the next fresh import produces the short names (W-36, W-37). Do not rename note by note by hand.
-4. Rename and move inside Obsidian, which keeps "Automatically update internal links" on, or by a script that reads the `uid` and path from `Review - Long Paths.csv` and the Ledger. Most links use only the file name and do not change. A link that carries a path (written only where a name is not unique) changes when a folder in that path is renamed, so a script must rewrite those. The Run Manifest says how many there are.
-5. Record each rule in `Review Changes Log.md`.
+**Done when.** The candidate vault can be cloned, opened, edited and synchronized on the supported team platforms without path-related failures. If no platform failure occurs, this task requires no changes.
 
-**Done when.** No path in the vault is longer than the team's agreed limit, which this task sets once it is known where the vault sits on the team's Windows machines. `Review - Long Paths.csv` from a fresh import under the new rules has no rows over that limit, and every link still resolves.
