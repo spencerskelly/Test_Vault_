@@ -7,3 +7,6 @@ Thumbs.db
 .obsidian/author-code.txt
 MDSE Bootstrap/plugin/node_modules/
 MDSE Bootstrap/plugin/main.js
+
+# Real EA model-derived evidence must remain outside this repository
+/Importer/Testing/EA Source Evidence/
