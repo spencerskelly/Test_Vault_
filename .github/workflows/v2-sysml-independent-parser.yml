@@ -37,6 +37,12 @@ jobs:
           python3 "$GITHUB_WORKSPACE/25_Testing/Fixtures/Golden Charger v2/semantic_regression.py" \
             --source "$RUNNER_TEMP/golden-charger.sysml" \
             --validator "./validate-sysml {model}"
+      - name: Validate typed ports ownership and multiplicity probes
+        run: |
+          cd "$RUNNER_TEMP/sysml-parser/sysmlv2-validator"
+          python3 "$GITHUB_WORKSPACE/25_Testing/Fixtures/Golden Charger v2/structural_checks.py" \
+            --source "$RUNNER_TEMP/golden-charger.sysml" \
+            --validator "./validate-sysml {model}"
       - name: Upload provenance evidence
         if: always()
         uses: actions/upload-artifact@v4
