@@ -34,12 +34,20 @@ def main() -> int:
     ap.add_argument("--validator", help="CLI template with exactly one {model} placeholder, e.g. 'validate-sysml {model}'")
     ap.add_argument("--validator-version", help="Exact external validator version or commit; required for --validator")
     ap.add_argument("--expect-sha256", help="Optional reproducibility assertion")
+    ap.add_argument("--output", type=Path, help="Optional output file for deterministic assembled SysML; must be outside fixture export inputs")
     args = ap.parse_args()
     try:
         data = assemble(args.root.resolve())
         digest = hashlib.sha256(data).hexdigest()
         if args.expect_sha256 and digest != args.expect_sha256:
             raise ValueError("assembled SysML SHA-256 mismatch")
+        if args.output:
+            destination = args.output.resolve()
+            inputs = {(args.root.resolve() / "export" / n).resolve() for n in FILES}
+            if destination in inputs:
+                raise ValueError("--output cannot overwrite an input snapshot")
+            destination.parent.mkdir(parents=True, exist_ok=True)
+            destination.write_bytes(data)
         result = {"schema": "mdse-v2-external-parser-gate/1", "modelSha256": digest,
                   "modelBytes": len(data), "sources": list(FILES),
                   "parser": "not-run", "conformance": "not-verified"}
