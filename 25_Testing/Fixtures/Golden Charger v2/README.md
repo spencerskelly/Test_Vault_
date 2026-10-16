@@ -67,6 +67,10 @@ python3 "25_Testing/Fixtures/Golden Charger v2/external_parser_gate.py" \
 
 Without `--validator`, this is **assembly/hash only**; it explicitly reports `conformance: not-verified`. With a validator, it reports only the syntax validation command's exit status; semantic model linking still requires a validator with that capability. Prerequisites for the DeciSym wrapper are Java 21+ and Maven, plus its separately downloaded OMG pilot dependency. There is no parser binary or Maven installed in the execution environment used for this pass, so **independent conformance remains blocked**. Consult the [DeciSym CLI README](https://github.com/DeciSym/sysmlv2-validator) and pin its implementation/version before approving this gate.
 
+## CI artifact for external parser validation
+
+The v2-only GitHub Actions workflow now assembles `golden-charger.sysml` from the three committed fixture exports and uploads it as artifact **`v2-golden-charger-sysml`** (30-day retention). The artifact is a frozen parser input, **not a validated SysML result**. The assembly script also accepts `--output PATH` for local reproducible extraction; `--expect-sha256` checks an expected hash. These workflow changes require a new successful run to verify upload behavior.
+
 ## Portable regression checks
 
 Run seven standard-library tests from the repository root:
