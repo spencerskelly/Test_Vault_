@@ -107,6 +107,10 @@ The manual-only [V2 SysML independent parser workflow](https://github.com/spence
 - Remaining CI warnings: `actions/setup-java@v4` deprecated and `actions/upload-artifact@v4` Node.js 20 compatibility warning; update action versions after confirming supported replacements.
 - V1 files were not modified.
 
+## External negative-test gate
+
+The [semantic_regression.py](semantic_regression.py) script uses a pinned parser to test three versions of the **same assembled model**: (1) unchanged baseline accepted, (2) syntactically valid unresolved qualified `PowerLibrary::MissingPowerModule` rejected, (3) malformed part declaration rejected. These probes are now in the **manual-only** independent parser workflow, not the baseline extraction workflow. If the external CLI exits zero for semantic name-resolution diagnostics, the job will fail, correctly demonstrating that the current validator is insufficient to enforce semantic validity; in that case, choose a stronger resolution validator rather than weakening the check. No negative probe execution has yet been observed. This does not validate generalization, ports, binding, full model ownership or engineering equivalence.
+
 ## Verification sequence
 
 1. Check three Markdown notes have exactly one authoritative fenced `sysml` block each.
