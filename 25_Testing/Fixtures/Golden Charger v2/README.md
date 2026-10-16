@@ -91,6 +91,12 @@ These cover snapshot equality, source ownership metadata, intended usage text, m
 - One runner annotation remains for `actions/upload-artifact@v4` targeting deprecated Node.js 20. Assess and update separately after verifying availability of a supported replacement.
 - Current numbered paths are `25_Testing/Fixtures/Golden Charger v2` for tests and `26_Definitions` for contracts.
 
+## Experimental independent parser execution
+
+The manual-only [V2 SysML independent parser workflow](https://github.com/spencerskelly/Test_Vault_/actions/workflows/v2-sysml-independent-parser.yml) provisions Java 21 and Maven, checks out DeciSym validator commit `63abbd9fbc7851dc437d01b2dc07836b919770b8` and **overrides upstream defaults** (`2026-07 / 0.61.0`) to the selected Pilot Implementation `2026-04 / 0.59.0`. It assembles the model, calls `./validate-sysml`, and uploads parser provenance and binary SHA-256 evidence.
+
+**Experimental, not validated:** The environment here has Java 21 but no Maven and no access to GitHub downloads, so actual provisioning and the independent parser are not yet executed. A Maven setup or parser failure on first execution is an expected integration finding, not a standards pass. Do not merge this workflow's result conceptually with the already passing fixture extraction gate. Check [provision_parser.sh](provision_parser.sh) and pin binary checksums after the first successful provisioning.
+
 ## Verification sequence
 
 1. Check three Markdown notes have exactly one authoritative fenced `sysml` block each.
