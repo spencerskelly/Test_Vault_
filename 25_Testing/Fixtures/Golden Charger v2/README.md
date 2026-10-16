@@ -53,6 +53,20 @@ Candidate implementations (not yet installed or tested here):
 
 Current gate: committed snapshots were compared to Markdown source; the Python scripts and independent SysML parser have **not yet been executed against a repository checkout**. Do not mark golden conformance passed.
 
+## Whole-model parser gate (next candidate)
+
+[external_parser_gate.py](external_parser_gate.py) assembles the three exported SysML files **as one model** in a temporary directory. This avoids invoking a single-file CLI with three separate arguments.
+
+```bash
+python3 "25_Testing/Fixtures/Golden Charger v2/external_parser_gate.py"
+# Once a compatible independently installed parser is pinned:
+python3 "25_Testing/Fixtures/Golden Charger v2/external_parser_gate.py" \
+  --validator "validate-sysml {model}" \
+  --validator-version "PINNED_RELEASE_OR_COMMIT"
+```
+
+Without `--validator`, this is **assembly/hash only**; it explicitly reports `conformance: not-verified`. With a validator, it reports only the syntax validation command's exit status; semantic model linking still requires a validator with that capability. Prerequisites for the DeciSym wrapper are Java 21+ and Maven, plus its separately downloaded OMG pilot dependency. There is no parser binary or Maven installed in the execution environment used for this pass, so **independent conformance remains blocked**. Consult the [DeciSym CLI README](https://github.com/DeciSym/sysmlv2-validator) and pin its implementation/version before approving this gate.
+
 ## Verification sequence
 
 1. Check three Markdown notes have exactly one authoritative fenced `sysml` block each.
