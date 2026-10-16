@@ -9,7 +9,7 @@ sourceRepository: spencerskelly/Test_Vault_
 ## V2 workspace navigation
 
 - [Definition README](Definition/README.md) — authoritative v2 decisions, OMG mapping, BOM contract and gated delivery plan.
-- [Tools README](Tools/README.md) — planned translator, parser, BOM and Workbench source modules.
+- [Tools README](29_SysMLv2_Translator_Workbench/Tools/README.md) — planned translator, parser, BOM and Workbench source modules.
 - [Testing README](Testing/README.md) — acceptance fixtures and external conformance gates.
 - [BOM Integration](Definition/BOM%20Integration.md) — BOM-ALT-001 and configuration/revision interpretation.
 
