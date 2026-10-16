@@ -1,0 +1,40 @@
+name: V2 SysML fixture regression
+
+on:
+  push:
+    paths:
+      - ".github/workflows/v2-sysml-fixture.yml"
+      - "25_Testing/Fixtures/Golden Charger v2/**"
+  pull_request:
+    paths:
+      - ".github/workflows/v2-sysml-fixture.yml"
+      - "25_Testing/Fixtures/Golden Charger v2/**"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  fixture:
+    name: Golden Charger extraction and deterministic checks
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+      - name: Configure Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Check Markdown extraction snapshots
+        run: python3 "25_Testing/Fixtures/Golden Charger v2/extract_sysml.py" --check
+      - name: Run structural smoke checks
+        run: python3 "25_Testing/Fixtures/Golden Charger v2/validate_fixture.py"
+      - name: Run Python regression tests
+        run: python3 "25_Testing/Fixtures/Golden Charger v2/test_fixture_pipeline.py"
+      - name: Assemble and fingerprint SysML source
+        run: python3 "25_Testing/Fixtures/Golden Charger v2/external_parser_gate.py"
+      - name: Record validation limits
+        run: |
+          echo "Fixture extraction and deterministic checks only."
+          echo "Independent OMG SysML parser and cross-package semantic validation NOT performed."
