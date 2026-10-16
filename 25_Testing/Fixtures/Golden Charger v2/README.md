@@ -32,6 +32,27 @@ Use `--write` to regenerate only the three committed `export/*.sysml` snapshots 
 
 On 2026-10-15, a source-versus-snapshot comparison through the connected GitHub repository confirmed all three text blocks match the three export snapshots. Executing this Python script or an independent standards parser against a repository checkout has **not** yet been verified.
 
+## Fixture structure checks and external parser gate
+
+Run from repository root:
+
+```bash
+python3 "25_Testing/Fixtures/Golden Charger v2/extract_sysml.py" --check
+python3 "25_Testing/Fixtures/Golden Charger v2/validate_fixture.py"
+```
+
+The second command is a **fixture-specific smoke check**, not a complete SysML parser. It checks the expected definitions, typed qualified usages, three controller/module/contactor part lines, and ensures manufacturing alternates are not emitted as required components.
+
+For independent syntax **and cross-file symbol resolution**, install a separately version-pinned standards-aware SysML parser. The validation script accepts `--external-command "COMMAND {files}" --external-version "PINNED_VERSION"`, substituting the three exported source files as argv tokens. Supply a command that actually parses these files **as one model**, not three unrelated standalone inputs. External passing exit status alone only proves what the chosen command validates; record its actual capabilities.
+
+Candidate implementations (not yet installed or tested here):
+- Official pilot releases: https://github.com/Systems-Modeling/SysML-v2-Pilot-Implementation/releases
+- CLI wrapper: https://github.com/DeciSym/sysmlv2-validator
+
+**Compatibility review required:** recent pilot releases include SysML 2.1 beta features, while the current v2 plan targets OMG SysML 2.0. Pin the appropriate grammar and runtime version before claiming independent SysML 2.0 conformance.
+
+Current gate: committed snapshots were compared to Markdown source; the Python scripts and independent SysML parser have **not yet been executed against a repository checkout**. Do not mark golden conformance passed.
+
 ## Verification sequence
 
 1. Check three Markdown notes have exactly one authoritative fenced `sysml` block each.
