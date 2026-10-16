@@ -5,6 +5,7 @@
 This is the v2 authoritative design workspace for mapping, structure, relationships, SysML textual ownership, and BOM integration. It complements the existing `README_SysMLv2_Translator_Workbench.md` rather than overriding its history.
 
 ## Start here
+1. [SysML source ownership and note storage](SysML%20Source%20Ownership%20and%20Note%20Storage.md) — proposed authoritative text ownership, cross-note views and safe Workbench edits.
 1. [Structural translation matrix](Structural%20Translation%20Matrix%20-%20First%20Pass.md) — first-pass EA/SysML v1 to SysML v2 mapping, deviations, required evidence and Workbench meaning.
 2. [Structural mapping contract](Structural%20Mapping%20Contract.md) — next Gate A working definition of definitions, usages, ownership, ports, connectors and BOM structure.
 3. [Architecture decisions](Architecture Decisions.md) — adopted v2 direction versus open decisions.
