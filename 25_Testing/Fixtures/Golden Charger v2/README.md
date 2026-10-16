@@ -97,6 +97,16 @@ The manual-only [V2 SysML independent parser workflow](https://github.com/spence
 
 **Experimental, not validated:** The environment here has Java 21 but no Maven and no access to GitHub downloads, so actual provisioning and the independent parser are not yet executed. A Maven setup or parser failure on first execution is an expected integration finding, not a standards pass. Do not merge this workflow's result conceptually with the already passing fixture extraction gate. Check [provision_parser.sh](provision_parser.sh) and pin binary checksums after the first successful provisioning.
 
+## Independent parser CI result — verified
+
+- [Run 38860179478](https://github.com/spencerskelly/Test_Vault_/actions/runs/38860179478): **success**.
+- Pinned validator source provisioned; Pilot kernel dependency `0.59.0` observed in build logs.
+- `Validate Golden Charger with independent parser`: **success**, per GitHub job steps.
+- Evidence artifact `v2-independent-parser-evidence`, ID `12028348413`: uploaded.
+- **Scope:** successful invocation/exit of independent validator on extracted combined model. This alone is not proof of full cross-package semantic resolution, semantic equivalence to EA, or round-trip editing.
+- Remaining CI warnings: `actions/setup-java@v4` deprecated and `actions/upload-artifact@v4` Node.js 20 compatibility warning; update action versions after confirming supported replacements.
+- V1 files were not modified.
+
 ## Verification sequence
 
 1. Check three Markdown notes have exactly one authoritative fenced `sysml` block each.
