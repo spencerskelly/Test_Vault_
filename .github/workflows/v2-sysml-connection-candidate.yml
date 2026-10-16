@@ -22,6 +22,12 @@ jobs:
         run: |
           cd "$RUNNER_TEMP/sysml-parser/sysmlv2-validator"
           ./validate-sysml "$GITHUB_WORKSPACE/25_Testing/Fixtures/Charger Connections v2/connection_candidate.sysml"
+      - name: Test connection endpoint negative controls
+        run: |
+          cd "$RUNNER_TEMP/sysml-parser/sysmlv2-validator"
+          python3 "$GITHUB_WORKSPACE/25_Testing/Fixtures/Charger Connections v2/check_connection_semantics.py" \
+            --source "$GITHUB_WORKSPACE/25_Testing/Fixtures/Charger Connections v2/connection_candidate.sysml" \
+            --validator "./validate-sysml {model}"
       - name: Upload parser provenance
         if: always()
         uses: actions/upload-artifact@v4
