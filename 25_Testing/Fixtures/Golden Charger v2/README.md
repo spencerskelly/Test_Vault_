@@ -111,6 +111,15 @@ The manual-only [V2 SysML independent parser workflow](https://github.com/spence
 
 The [semantic_regression.py](semantic_regression.py) script uses a pinned parser to test three versions of the **same assembled model**: (1) unchanged baseline accepted, (2) syntactically valid unresolved qualified `PowerLibrary::MissingPowerModule` rejected, (3) malformed part declaration rejected. These probes are now in the **manual-only** independent parser workflow, not the baseline extraction workflow. If the external CLI exits zero for semantic name-resolution diagnostics, the job will fail, correctly demonstrating that the current validator is insufficient to enforce semantic validity; in that case, choose a stronger resolution validator rather than weakening the check. No negative probe execution has yet been observed. This does not validate generalization, ports, binding, full model ownership or engineering equivalence.
 
+## Independent negative-probe result — verified
+
+- [Run 38862948036](https://github.com/spencerskelly/Test_Vault_/actions/runs/38862948036): **success**; the independent parser baseline, invalid syntax and unresolved qualified-type probes all passed.
+- The external validator returned exit code **1** for `PowerLibrary::MissingPowerModule`; the malformed part declaration was also rejected.
+- CI explicitly logged: `PASS: positive baseline accepted; unresolved type and malformed syntax rejected`.
+- Evidence artifact: `v2-independent-parser-evidence` (ID `12029572337`).
+- This is a **focused negative-control result**, not proof of all model ownership, connection, interface, multiplicity, or behavioral semantics.
+- Continue checking numbered repository paths (`25_Testing/`, `26_Definitions/`); no v1 changes made.
+
 ## Verification sequence
 
 1. Check three Markdown notes have exactly one authoritative fenced `sysml` block each.
