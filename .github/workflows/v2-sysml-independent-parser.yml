@@ -31,6 +31,12 @@ jobs:
         run: |
           cd "$RUNNER_TEMP/sysml-parser/sysmlv2-validator"
           ./validate-sysml "$RUNNER_TEMP/golden-charger.sysml"
+      - name: Probe negative syntax and unresolved type rejection
+        run: |
+          cd "$RUNNER_TEMP/sysml-parser/sysmlv2-validator"
+          python3 "$GITHUB_WORKSPACE/25_Testing/Fixtures/Golden Charger v2/semantic_regression.py" \
+            --source "$RUNNER_TEMP/golden-charger.sysml" \
+            --validator "./validate-sysml {model}"
       - name: Upload provenance evidence
         if: always()
         uses: actions/upload-artifact@v4
