@@ -1,0 +1,44 @@
+name: V2 SysML independent parser (experimental)
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    name: Pinned 2026-04 parser and Golden Charger
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+      - name: Verify Maven and Java
+        run: |
+          java -version
+          mvn -version
+      - name: Check fixture extraction
+        run: python3 "25_Testing/Fixtures/Golden Charger v2/extract_sysml.py" --check
+      - name: Assemble parser input
+        run: python3 "25_Testing/Fixtures/Golden Charger v2/external_parser_gate.py" --output "$RUNNER_TEMP/golden-charger.sysml"
+      - name: Provision version-pinned validator
+        run: bash "25_Testing/Fixtures/Golden Charger v2/provision_parser.sh" "$RUNNER_TEMP/sysml-parser"
+      - name: Validate Golden Charger with independent parser
+        run: |
+          cd "$RUNNER_TEMP/sysml-parser/sysmlv2-validator"
+          ./validate-sysml "$RUNNER_TEMP/golden-charger.sysml"
+      - name: Upload provenance evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: v2-independent-parser-evidence
+          path: |
+            ${{ runner.temp }}/sysml-parser/parser-provenance.txt
+            ${{ runner.temp }}/sysml-parser/parser-sha256.txt
+            ${{ runner.temp }}/golden-charger.sysml
+          if-no-files-found: warn
+          retention-days: 30
