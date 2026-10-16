@@ -6,6 +6,15 @@ sourceRepository: spencerskelly/Test_Vault_
 ---
 # SysML v2 Translator and Workbench
 
+## V2 workspace navigation
+
+- [Definition README](Definition/README.md) — authoritative v2 decisions, OMG mapping, BOM contract and gated delivery plan.
+- [Tools README](Tools/README.md) — planned translator, parser, BOM and Workbench source modules.
+- [Testing README](Testing/README.md) — acceptance fixtures and external conformance gates.
+- [BOM Integration](Definition/BOM%20Integration.md) — BOM-ALT-001 and configuration/revision interpretation.
+
+**Scope:** SysML v2 is authoritative for formal structure and relationships; the established main-element-to-note mapping remains. Keep shared source interpretation separate from version-specific translation. This README retains the earlier 24-step baseline as historical planning context; see [V2 Delivery Plan](Definition/V2%20Delivery%20Plan.md) for the active integrated sequence.
+
 ## Purpose
 Create a browser-based HTML/JavaScript CSV-to-SysML v2 translator and interactive model workbench while preserving the existing MDSE pathway. EA source semantics and import normalization MUST be common, versioned, and reusable. Translation rules MUST be separate and independently versioned.
 
