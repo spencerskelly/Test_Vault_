@@ -120,6 +120,11 @@ The [semantic_regression.py](semantic_regression.py) script uses a pinned parser
 - This is a **focused negative-control result**, not proof of all model ownership, connection, interface, multiplicity, or behavioral semantics.
 - Continue checking numbered repository paths (`25_Testing/`, `26_Definitions/`); no v1 changes made.
 
+
+## Structural checks added (pending execution)
+
+The manual independent-parser workflow includes `structural_checks.py` under this fixture folder. Five probes test the accepted baseline, a valid change to four power modules, an undefined CAN port type, an undefined controller type, and malformed multiplicity syntax. This extends the previously verified invalid-reference tests; these five new probes have **not** yet been verified in a completed workflow run. Connection, interface and binding semantics remain future work.
+
 ## Verification sequence
 
 1. Check three Markdown notes have exactly one authoritative fenced `sysml` block each.
