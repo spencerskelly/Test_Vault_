@@ -2,6 +2,10 @@
 
 **Status:** Test plan scaffold.
 
+## Reference fixtures
+
+- [Golden Charger v2 — Structural Fixture 001](Fixtures/Golden%20Charger%20v2/README.md) — Markdown-owned SysML declarations, three source notes, exported textual snapshots and BOM alternate evidence. **Parser verification pending.**
+
 ## Acceptance progression
 1. Synthetic SysML structure with reusable part definitions and contextual usages.
 2. Ports, interfaces, connections, binding, flow and inverse navigation.
