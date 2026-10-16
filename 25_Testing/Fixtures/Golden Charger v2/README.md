@@ -83,6 +83,14 @@ These cover snapshot equality, source ownership metadata, intended usage text, m
 
 **Standards pin proposal:** select the [official 2026-04 SysML v2 release](https://github.com/Systems-Modeling/SysML-v2-Release/releases/tag/2026-04) for the first SysML **2.0** grammar gate. Later 2026 Pilot Implementation updates contain 2.1 Beta revisions, so validator implementation and language grammar must be pinned separately. The third-party CLI `validate-sysml` reads one file, and its unpinned setup downloads the Pilot Implementation; do not call that script a pinned SysML 2.0 validator until its actual dependency is verified. [CLI README](https://github.com/DeciSym/sysmlv2-validator).
 
+## Verified CI acceptance (2026-10-15 local / 2026-10-16 UTC)
+
+- [Run 38859223435](https://github.com/spencerskelly/Test_Vault_/actions/runs/38859223435): **success**, including extraction, structural smoke, Python regression tests, deterministic SysML assembly and artifact upload.
+- GitHub artifact `v2-golden-charger-sysml` (artifact ID `12028246944`): present, not expired, 320 bytes compressed artifact metadata.
+- This closes **fixture extraction + artifact publication**, not independent OMG SysML parsing, symbol resolution or semantic interchange.
+- One runner annotation remains for `actions/upload-artifact@v4` targeting deprecated Node.js 20. Assess and update separately after verifying availability of a supported replacement.
+- Current numbered paths are `25_Testing/Fixtures/Golden Charger v2` for tests and `26_Definitions` for contracts.
+
 ## Verification sequence
 
 1. Check three Markdown notes have exactly one authoritative fenced `sysml` block each.
