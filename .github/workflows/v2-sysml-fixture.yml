@@ -32,6 +32,8 @@ jobs:
         run: python3 "25_Testing/Fixtures/Golden Charger v2/validate_fixture.py"
       - name: Run Python regression tests
         run: python3 "25_Testing/Fixtures/Golden Charger v2/test_fixture_pipeline.py"
+      - name: Check pinned parser provenance contract
+        run: python3 "25_Testing/Fixtures/Golden Charger v2/check_parser_pin.py"
       - name: Assemble and fingerprint SysML source
         run: python3 "25_Testing/Fixtures/Golden Charger v2/external_parser_gate.py" --output "$RUNNER_TEMP/golden-charger.sysml"
       - name: Publish SysML parser input
