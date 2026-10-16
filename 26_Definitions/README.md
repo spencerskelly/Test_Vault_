@@ -5,10 +5,11 @@
 This is the v2 authoritative design workspace for mapping, structure, relationships, SysML textual ownership, and BOM integration. It complements the existing `README_SysMLv2_Translator_Workbench.md` rather than overriding its history.
 
 ## Start here
-1. [Architecture decisions](Architecture Decisions.md) — adopted v2 direction versus open decisions.
-2. [BOM integration](BOM Integration.md) — manufacturing structure, alternates, configuration and traceability.
-3. [Mapping and conformance](Mapping and Conformance.md) — OMG-first mapping reviews and exceptions.
-4. [V2 delivery plan](V2 Delivery Plan.md) — gated roadmap and acceptance criteria.
+1. [Structural mapping contract](Structural%20Mapping%20Contract.md) — next Gate A working definition of definitions, usages, ownership, ports, connectors and BOM structure.
+2. [Architecture decisions](Architecture Decisions.md) — adopted v2 direction versus open decisions.
+3. [BOM integration](BOM Integration.md) — manufacturing structure, alternates, configuration and traceability.
+4. [Mapping and conformance](Mapping and Conformance.md) — OMG-first mapping reviews and exceptions.
+5. [V2 delivery plan](V2 Delivery Plan.md) — gated roadmap and acceptance criteria.
 
 ## Rules
 - **Only v2 files govern v2 outputs**; do not modify v1 mappings as a side effect.
