@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>MDSE v2 Workbench — Preview</title>
+<style>
+:root{font-family:system-ui,-apple-system,Segoe UI,sans-serif;color:#dce8f4;background:#0b1421}
+*{box-sizing:border-box}body{margin:0}header{padding:14px 20px;background:#142238;border-bottom:1px solid #34465c;display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}h1{font-size:19px;margin:0}small,.muted{color:#9aacbc}button,input{font:inherit}button{background:#294765;color:white;border:1px solid #58718d;border-radius:7px;padding:8px 11px;cursor:pointer}button:hover{background:#376086}button:focus-visible,.item:focus-visible{outline:2px solid #89beff}.layout{display:grid;grid-template-columns:minmax(220px,25%) minmax(280px,35%) minmax(350px,40%);min-height:calc(100vh - 72px)}section{padding:16px;border-right:1px solid #304157;min-width:0}h2{font-size:14px;text-transform:uppercase;letter-spacing:.07em;color:#a5c8e7;margin:0 0 12px}.item{display:block;width:100%;text-align:left;background:transparent;border:0;border-radius:6px;margin:2px 0;padding:8px;color:#dfebf8}.item:hover{background:#192f48}.item.active{background:#235078} .indent{padding-left:22px}.tag{font-size:11px;border:1px solid #526984;border-radius:5px;padding:2px 5px;color:#b3cae2;margin-left:5px}dl{display:grid;grid-template-columns:95px minmax(0,1fr);gap:10px}dt{color:#94adc6}dd{margin:0;overflow-wrap:anywhere}a{color:#8fc3ff}pre{white-space:pre-wrap;overflow:auto;background:#080f19;color:#d5f2da;padding:15px;border:1px solid #304157;border-radius:9px;font-size:12px;line-height:1.5;max-height:68vh}ul{padding-left:18px}li{margin:8px 0}.toolbar{display:flex;gap:7px;flex-wrap:wrap;margin-bottom:12px}.notice{border-left:3px solid #dbb46b;background:#2a261f;padding:10px;margin:10px 0;font-size:13px}#status{font-size:12px;color:#b8c9d9}@media(max-width:850px){.layout{display:block}section{border-right:0;border-bottom:1px solid #304157}pre{max-height:420px}}</style>
+</head><body><header><div><h1>MDSE v2 Workbench <span class="tag">MVP 0.1</span></h1><small>SysML v2 first · local preview · no write-back</small></div><div class="toolbar"><button id="reset">Load Golden Charger</button><button id="open">Open .sysml files</button><input id="files" type="file" accept=".sysml,.txt" multiple hidden><button id="download">Export combined source</button></div></header>
+<div class="layout"><section><h2>Model explorer</h2><div id="status"></div><div id="tree" role="tree" aria-label="Model elements"></div></section><section><h2>Element inspector</h2><div id="details"></div><h2 style="margin-top:22px">Relationships</h2><ul id="relations"></ul></section><section><h2>SysML v2 source</h2><div class="toolbar"><button id="copy">Copy source</button></div><pre id="source" tabindex="0"></pre><div class="notice">Read-only inspection. This preview recognizes a limited subset of SysML textual notation; it is <strong>not</strong> the standards parser. Use the separate pinned validator before accepting imported models.</div></section></div>
+<script>
+"use strict";
+const fixture=[
+{name:"01_Controller.sysml",text:"package ControllerLibrary {\n    port def CanPort;\n    part def Controller {\n        port can : CanPort;\n    }\n}\n"},
+{name:"02_PowerModule.sysml",text:"package PowerLibrary {\n    part def PowerModule {\n        port can : ControllerLibrary::CanPort;\n    }\n}\n"},
+{name:"03_Charger.sysml",text:"package ChargerProduct {\n    part def Contactor;\n    part def Charger {\n        part controller : ControllerLibrary::Controller;\n        part modules : PowerLibrary::PowerModule[3];\n        part contactors : Contactor[2];\n    }\n}\n"}
+];
+let files=[],nodes=[],selected=null;
+const el=id=>document.getElementById(id);
+function parse(sources){
+ const records=[];let seq=0;
+ for(const file of sources){
+  let stack=[],lines=file.text.split(/\r?\n/);
+  for(let lineNum=0;lineNum<lines.length;lineNum++){
+   const line=lines[lineNum].trim();
+   if(!line||line.startsWith("//"))continue;
+   const pkg=line.match(/^package\s+([\w]+)\s*\{/);
+   const def=line.match(/^(part|port|interface|connection)\s+def\s+([\w]+)\s*(\{|;)/);
+   const usage=line.match(/^(part|port)\s+([\w]+)\s*:\s*([\w:]+)(?:\[(\d+)\])?\s*;/);
+   const conn=line.match(/^connect\s+([\w.]+)\s+to\s+([\w.]+)\s*;/);
+   let node=null,opens=false;
+   if(pkg){node={kind:"package",name:pkg[1]};opens=true}
+   else if(def){node={kind:def[1]+" definition",name:def[2]};opens=def[3]==="{"}
+   else if(usage)node={kind:usage[1]+" usage",name:usage[2],type:usage[3],multiplicity:usage[4]||"1"};
+   else if(conn)node={kind:"connection",name:conn[1]+" → "+conn[2],from:conn[1],to:conn[2]};
+   if(node){
+    node.id="n"+seq++;node.file=file.name;node.line=lineNum+1;node.parent=stack.length?stack[stack.length-1].id:null;node.source=file.text;node.path=(stack.map(x=>x.name).concat(node.name)).join("::");records.push(node);if(opens)stack.push(node);
+   } else if(line.startsWith("}"))stack.pop();
+  }
+ }
+ return records;
+}
+function btn(node){const b=document.createElement("button");b.className="item"+(selected===node.id?" active":"");b.style.paddingLeft=(8+Math.min(depth(node),6)*18)+"px";b.textContent=({package:"▣ ","part definition":"◇ ","port definition":"◈ ","part usage":"↳ ","port usage":"↳ ",connection:"⇄ "}[node.kind]||"• ")+node.name;b.setAttribute("role","treeitem");b.setAttribute("aria-selected",selected===node.id);b.onclick=()=>{selected=node.id;render()};return b}
+function depth(n){let count=0,p=n.parent;while(p){const parent=nodes.find(x=>x.id===p);p=parent?parent.parent:null;count++}return count}
+function render(){
+ const tree=el("tree");tree.replaceChildren();nodes.forEach(n=>tree.append(btn(n)));
+ el("status").textContent=nodes.length+" recognized elements · "+files.length+" source file(s)";
+ const n=nodes.find(x=>x.id===selected)||nodes[0];if(!n){el("details").textContent="No model loaded";el("relations").replaceChildren();el("source").textContent="";return}
+ selected=n.id;const detail=el("details");detail.replaceChildren();const h=document.createElement("h3");h.textContent=n.name;detail.append(h);const dl=document.createElement("dl");for(const [key,value] of Object.entries({Kind:n.kind,"Qualified path":n.path,Type:n.type,Multiplicity:n.multiplicity,"Source file":n.file,Line:n.line})){if(value===undefined)continue;const dt=document.createElement("dt");dt.textContent=key;const dd=document.createElement("dd");dd.textContent=value;dl.append(dt,dd)}detail.append(dl);
+ const rel=el("relations");rel.replaceChildren();
+ let matches=nodes.filter(x=>x.parent===n.id||(n.parent&&x.id===n.parent)||x.type===n.path||(n.kind==="connection"&&x.parent===n.parent));
+ if(n.type)matches.push(...nodes.filter(x=>x.kind.includes("definition")&&(x.path===n.type||x.name===n.type.split("::").pop())));
+ const unique=new Map(matches.filter(x=>x.id!==n.id).map(x=>[x.id,x]));for(const x of unique.values()){const li=document.createElement("li");const b=document.createElement("button");b.textContent=x.kind+" · "+x.name;b.onclick=()=>{selected=x.id;render()};li.append(b);rel.append(li)}
+ if(!rel.childNodes.length){const li=document.createElement("li");li.textContent="No inferred relationship in this preview";rel.append(li)}
+ el("source").textContent=n.source;
+}
+function load(a){files=a.map(f=>({name:f.name,text:f.text}));nodes=parse(files);selected=nodes[0]?.id||null;render()}
+el("reset").onclick=()=>load(fixture);
+el("open").onclick=()=>el("files").click();
+el("files").onchange=async e=>{const selectedFiles=[...e.target.files];const loaded=await Promise.all(selectedFiles.map(async f=>({name:f.name,text:await f.text()})));if(loaded.length)load(loaded);e.target.value=""};
+el("download").onclick=()=>{const blob=new Blob([files.map(f=>"// FILE: "+f.name+"\n"+f.text).join("\n")],{type:"text/plain"});const url=URL.createObjectURL(blob);const a=document.createElement("a");a.href=url;a.download="mdse-v2-combined.sysml";a.click();setTimeout(()=>URL.revokeObjectURL(url),1000)};
+el("copy").onclick=()=>{const n=nodes.find(x=>x.id===selected);if(n)navigator.clipboard?.writeText(n.source)};
+load(fixture);
+</script></body></html>
