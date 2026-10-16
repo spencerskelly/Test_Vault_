@@ -8,12 +8,14 @@ sourceRepository: spencerskelly/Test_Vault_
 
 ## V2 workspace navigation
 
-- [Definition README](Definition/README.md) — authoritative v2 decisions, OMG mapping, BOM contract and gated delivery plan.
-- [Tools README](29_SysMLv2_Translator_Workbench/Tools/README.md) — planned translator, parser, BOM and Workbench source modules.
-- [Testing README](Testing/README.md) — acceptance fixtures and external conformance gates.
-- [BOM Integration](Definition/BOM%20Integration.md) — BOM-ALT-001 and configuration/revision interpretation.
+**Location:** This is the numbered `29_` research/planning area. Active v2 definitions live in `26_Definitions/`, test documentation in `25_Testing/` and Workbench product work in `24_Workbench/`.
 
-**Scope:** SysML v2 is authoritative for formal structure and relationships; the established main-element-to-note mapping remains. Keep shared source interpretation separate from version-specific translation. This README retains the earlier 24-step baseline as historical planning context; see [V2 Delivery Plan](Definition/V2%20Delivery%20Plan.md) for the active integrated sequence.
+- [Definition README](../26_Definitions/README.md) — authoritative v2 decisions, OMG mapping, BOM contract and gated delivery plan.
+- [Tools README](Tools/README.md) — planned translator, parser, BOM and Workbench source modules.
+- [Testing README](../25_Testing/README.md) — acceptance fixtures and external conformance gates.
+- [BOM Integration](../26_Definitions/BOM%20Integration.md) — BOM-ALT-001 and configuration/revision interpretation.
+
+**Scope:** SysML v2 is authoritative for formal structure and relationships; the established main-element-to-note mapping remains. Keep shared source interpretation separate from version-specific translation. This README retains the earlier 24-step baseline as historical planning context; see [V2 Delivery Plan](../26_Definitions/V2%20Delivery%20Plan.md) for the active integrated sequence.
 
 ## Purpose
 Create a browser-based HTML/JavaScript CSV-to-SysML v2 translator and interactive model workbench while preserving the existing MDSE pathway. EA source semantics and import normalization MUST be common, versioned, and reusable. Translation rules MUST be separate and independently versioned.
