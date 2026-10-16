@@ -67,6 +67,18 @@ python3 "25_Testing/Fixtures/Golden Charger v2/external_parser_gate.py" \
 
 Without `--validator`, this is **assembly/hash only**; it explicitly reports `conformance: not-verified`. With a validator, it reports only the syntax validation command's exit status; semantic model linking still requires a validator with that capability. Prerequisites for the DeciSym wrapper are Java 21+ and Maven, plus its separately downloaded OMG pilot dependency. There is no parser binary or Maven installed in the execution environment used for this pass, so **independent conformance remains blocked**. Consult the [DeciSym CLI README](https://github.com/DeciSym/sysmlv2-validator) and pin its implementation/version before approving this gate.
 
+## Portable regression checks
+
+Run seven standard-library tests from the repository root:
+
+```bash
+python3 "25_Testing/Fixtures/Golden Charger v2/test_fixture_pipeline.py"
+```
+
+These cover snapshot equality, source ownership metadata, intended usage text, missing source, altered source, identity mismatch, repeatable assembly hashes and mismatch detection. They run without Maven and do not establish OMG compliance.
+
+**Standards pin proposal:** select the [official 2026-04 SysML v2 release](https://github.com/Systems-Modeling/SysML-v2-Release/releases/tag/2026-04) for the first SysML **2.0** grammar gate. Later 2026 Pilot Implementation updates contain 2.1 Beta revisions, so validator implementation and language grammar must be pinned separately. The third-party CLI `validate-sysml` reads one file, and its unpinned setup downloads the Pilot Implementation; do not call that script a pinned SysML 2.0 validator until its actual dependency is verified. [CLI README](https://github.com/DeciSym/sysmlv2-validator).
+
 ## Verification sequence
 
 1. Check three Markdown notes have exactly one authoritative fenced `sysml` block each.
