@@ -1,37 +1,35 @@
 # Test_Vault_
 
-Development workspace for the MDSE toolchain and the initial golden-model effort. This repository is intentionally **not** the engineering vault delivered to end users; it defines, builds and tests the tools and release that create that vault.
+MDSE toolchain development repository. This is **not** a generated engineering model vault.
 
-## Version navigation
+## Versioned workspaces
 
-- **Version 1 (10–19):** legacy/release-compatible implementation, including `10_Base Vault/` and `11_Importer/`. Maintain independently.
-- **Version 2 (20–29):** new standard SysML v2 development. Start at [`20_SysMLv2_Translator_Workbench/README_SysMLv2_Translator_Workbench.md`](README_SysMLv2_Translator_Workbench.md), then its [`Definition/`](20_SysMLv2_Translator_Workbench/Definition/README.md), [`Tools/`](29_SysMLv2_Translator_Workbench/Tools/README.md), and [`Testing/`](20_SysMLv2_Translator_Workbench/Testing/README.md) indexes.
-- **Shared (outside 10–29):** source evidence definitions, governance, compatible helpers and reference material. Keep v1/v2 transformations and release pins independently versioned. A shared change must be tested against both, and proposed v1 adoption requires approval.
+| Area | V1 | V2 |
+|---|---|---|
+| Base Vault | [10_Base Vault](10_Base%20Vault/README.md) | [20_Base Vault](20_Base%20Vault/README.md) |
+| Importer | [11_Importer](11_Importer/README.md) | [21_Importer](21_Importer/README.md) |
+| Bootstrap | [13_Bootstrap](13_Bootstrap/Definition/README.md) | [23_Bootstrap](23_Bootstrap/README.md) |
+| Workbench | [14_Workbench](14_Workbench/README.md) | [24_Workbench](24_Workbench/README.md) |
+| Testing | [15_Testing](15_Testing/) | [25_Testing](25_Testing/README.md) |
+| Definitions | [16_Definitions](16_Definitions/) | [26_Definitions](26_Definitions/README.md) |
 
-**Navigation note:** Some older links in this README still use paths predating the October 15 folder move. Follow the versioned entrypoints above while cross-reference migration is audited; do not assume a file has disappeared.
+[V2 SysML translator research and historical plan](29_SysMLv2_Translator_Workbench/README_SysMLv2_Translator_Workbench.md).
 
-## Start here
+## Shared and cross-version
 
-1. `00_Workspace/00 - Current State.md` — current authority/status registry.
-2. `00_Workspace/MDSE Plan - Path to a Golden Model.md` — gates and path to the first accepted model.
-3. `00_Workspace/MDSE Tool Definitions and Boundaries.md` — ownership and contracts between tools.
-4. `00_Workspace/Workspace Decision Log.md` — cross-tool/model decisions.
-5. `99_System/10_Docs/MDSE Modeling Ruleset 1.23.md` — shared model semantics.
-6. The owning tool folder/repository for implementation detail.
+- [55_Workspace](55_Workspace/README.md) — workspace governance, decision history, current-state registry (some internal references still require path migration).
+- [Reference](Reference/) — cross-version reference and architecture discussions.
+- [99_System](99_System/) — inherited system schemas, runtime configuration and v1 baseline; **not automatically v2 authority**.
+- [V2 architecture decisions](26_Definitions/Architecture%20Decisions.md), [v2 delivery plan](26_Definitions/V2%20Delivery%20Plan.md), [v2 BOM rules](26_Definitions/BOM%20Integration.md).
 
-## Tool-development areas
+## Safety and development policy
 
-- **Workbench** — `55_Workbench/` (source, tests, implementation contracts and product-definition documentation) within this repository. The former standalone Workbench Git history is retained for historical traceability, and archival requires separate approval.
-- **Importer/** — importer definition, versioned tools, testing evidence and history.
-- **Bootstrap/** — Bootstrap definition, versioned source and first-open testing.
-- **Base Vault/** — release definition, build tools, runtime payload, release tests and initialization.
-- **Cross-Vault/** — deferred future cross-vault capability and retained prior implementation evidence.
-- **00_Workspace/** — cross-tool current state, roadmap, release reconciliation, decisions and handoffs.
-- **99_System/** — shared MDSE semantic/runtime core. Do not use it as a generic dumping ground for tool implementations.
-- **Definitions/** — shared MDSE definition notes used by the model/runtime.
+- V1 and V2 release manifests, mappings, tools and dependencies must remain separately versioned.
+- SysML v2 textual declarations govern formal structure and relationships in v2; v1 retains its established model semantics until specifically approved to change.
+- Shared source extraction/provenance code should be version-neutral; any shared change requires independent v1 and v2 testing.
+- Never place real imported engineering models or production BOM datasets in this tools repository.
+- Use `main` as reviewed working truth, with short-lived branches when code changes need isolation.
 
-## Development convention
+## Move verification status
 
-`main` is the normal working truth. Tool revisions live in explicit version folders (for example `Importer/Tools/v0.8.6`, `Bootstrap/Tools/v0.3.1`). Use branches only when isolation is genuinely useful; do not use long-lived branches as the normal way to present options or retain versions.
-
-Machine-readable release authority: `Base Vault/Definition/mdse-release.yaml`.
+**2026-10-15:** Folder moves have left legacy references inside executable scripts and the v1 release manifest. The new directory tree is navigable, **but executable compatibility is not yet certified**. See [move impact audit](25_Testing/Folder%20Move%20Audit%202026-10-15.md) before running v1 release/build tasks. Do not treat a source file being present as evidence that the build still succeeds.
