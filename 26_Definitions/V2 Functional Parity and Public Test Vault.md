@@ -67,3 +67,11 @@ Create `20_Base Vault/Public Sample Vault/` with Obsidian-ready directory tree, 
 ## Safety / licensing
 
 A public repo is accessible to anyone; a fictional fixture is the default. An automated sensitive-content scan is a useful backstop but not a guarantee. Do not make public any private dependencies, access tokens, proprietary schematics, customer references or user-supplied EA exports. Use local-only paths for real models.
+
+## 2026-10-16 integration prototype — separate public test repository
+
+The user created [spencerskelly/v2_test](https://github.com/spencerskelly/v2_test) for rapid, synthetic-only Obsidian integration trials. The earlier “repo request gate” is superseded **for this explicit user-authorized experimental repository**, not for release approval. Keep `Test_Vault_` as the method/tool definition authority and `v2_test` as disposable test content and compiled prototype runtime.
+
+Initial integration artifacts in `v2_test`: native `mdse-v2-bootstrap` and `mdse-v2-workbench` Obsidian prototype plugins, 11 standard folder groups with README/Base/Canvas companions, more than 30 fictional domain notes, context-owned SysML fenced text, linked canvases, a comprehensive coverage/backlog catalog, and automatic light CI smoke checks. Workbench additionally offers a tightly constrained single-note part-usage edit with preview and stale-content guard. A structured first-open test sheet resides in `99_System/First Open Acceptance.md`.
+
+**Not proved by a repository commit:** successful Obsidian runtime load, parser validation of all distributed snippets, bidirectional Canvas editing, v1 schema parity, full Bootstrap cryptographic release verification, importer/Excel/product-definition exports or transactional multi-file incremental updates. V1 binaries and third-party plugin settings were deliberately not copied unreviewed into the SysML-authority vault. The next practical gate is user first-open acceptance and error feedback; detailed parser/regression checks remain in automated integration milestones.
