@@ -125,6 +125,12 @@ The [semantic_regression.py](semantic_regression.py) script uses a pinned parser
 
 The manual independent-parser workflow includes `structural_checks.py` under this fixture folder. Five probes test the accepted baseline, a valid change to four power modules, an undefined CAN port type, an undefined controller type, and malformed multiplicity syntax. This extends the previously verified invalid-reference tests; these five new probes have **not** yet been verified in a completed workflow run. Connection, interface and binding semantics remain future work.
 
+## Structural parser verification — 2026-10-16
+
+[Run 38930587840](https://github.com/spencerskelly/Test_Vault_/actions/runs/38930587840) completed successfully. External structural probe exit codes: baseline 0, four-module multiplicity 0, missing CAN port type 1, missing controller type 1, malformed multiplicity 1. The CI log reports `PASS: structural reference and multiplicity probes`. Prior syntax and unresolved-type probes passed again. Provenance artifact: `v2-independent-parser-evidence`, ID `12059035810`.
+
+**Validation boundary:** These are focused acceptance/rejection probes, not proof of complete type semantics, owned composition or connector/interface correctness. The next work unit is a new isolated connection/interface fixture, without changing the existing passing Golden Charger snapshots or v1.
+
 ## Verification sequence
 
 1. Check three Markdown notes have exactly one authoritative fenced `sysml` block each.
