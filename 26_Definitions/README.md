@@ -6,12 +6,12 @@ This is the v2 authoritative design workspace for mapping, structure, relationsh
 
 ## Start here
 1. [SysML source ownership and note storage](SysML%20Source%20Ownership%20and%20Note%20Storage.md) — proposed authoritative text ownership, cross-note views and safe Workbench edits.
-1. [Structural translation matrix](Structural%20Translation%20Matrix%20-%20First%20Pass.md) — first-pass EA/SysML v1 to SysML v2 mapping, deviations, required evidence and Workbench meaning.
-2. [Structural mapping contract](Structural%20Mapping%20Contract.md) — next Gate A working definition of definitions, usages, ownership, ports, connectors and BOM structure.
-3. [Architecture decisions](Architecture Decisions.md) — adopted v2 direction versus open decisions.
-4. [BOM integration](BOM Integration.md) — manufacturing structure, alternates, configuration and traceability.
-5. [Mapping and conformance](Mapping and Conformance.md) — OMG-first mapping reviews and exceptions.
-6. [V2 delivery plan](V2 Delivery Plan.md) — gated roadmap and acceptance criteria.
+2. [Structural translation matrix](Structural%20Translation%20Matrix%20-%20First%20Pass.md) — first-pass EA/SysML v1 to SysML v2 mapping, deviations, required evidence and Workbench meaning.
+3. [Structural mapping contract](Structural%20Mapping%20Contract.md) — next Gate A working definition of definitions, usages, ownership, ports, connectors and BOM structure.
+4. [Architecture decisions](Architecture Decisions.md) — adopted v2 direction versus open decisions.
+5. [BOM integration](BOM Integration.md) — manufacturing structure, alternates, configuration and traceability.
+6. [Mapping and conformance](Mapping and Conformance.md) — OMG-first mapping reviews and exceptions.
+7. [V2 delivery plan](V2 Delivery Plan.md) — gated roadmap and acceptance criteria.
 
 ## Rules
 - **Only v2 files govern v2 outputs**; do not modify v1 mappings as a side effect.
