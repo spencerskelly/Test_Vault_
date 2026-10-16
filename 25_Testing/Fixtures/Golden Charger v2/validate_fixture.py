@@ -26,7 +26,6 @@ TYPED_USAGES = {
     "ControllerLibrary::CanPort": 1,
     "ControllerLibrary::Controller": 1,
     "PowerLibrary::PowerModule": 1,
-    "ChargerProduct::Contactor": 1,
 }
 
 def main() -> int:
@@ -52,6 +51,9 @@ def main() -> int:
             issues.append(f"{qualified}: expected {count} qualified usage(s), found {actual}")
     # A coarse fixture-specific check only. Real containment and name resolution require external parser.
     charger = src["03_Charger.sysml"]
+    # Contactor is declared in ChargerProduct and referred to by its local name.
+    if len(re.findall(r"\\bpart\\s+contactors\\s*:\\s*Contactor\\[2\\]\\s*;", charger)) != 1:
+        issues.append("expected one local Contactor usage with multiplicity 2")
     for token in ("part controller : ControllerLibrary::Controller;",
                   "part modules : PowerLibrary::PowerModule[3];",
                   "part contactors : Contactor[2];"):
