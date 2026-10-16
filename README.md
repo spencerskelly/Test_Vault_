@@ -2,6 +2,14 @@
 
 Development workspace for the MDSE toolchain and the initial golden-model effort. This repository is intentionally **not** the engineering vault delivered to end users; it defines, builds and tests the tools and release that create that vault.
 
+## Version navigation
+
+- **Version 1 (10–19):** legacy/release-compatible implementation, including `10_Base Vault/` and `11_Importer/`. Maintain independently.
+- **Version 2 (20–29):** new standard SysML v2 development. Start at [`20_SysMLv2_Translator_Workbench/README_SysMLv2_Translator_Workbench.md`](20_SysMLv2_Translator_Workbench/README_SysMLv2_Translator_Workbench.md), then its [`Definition/`](20_SysMLv2_Translator_Workbench/Definition/README.md), [`Tools/`](20_SysMLv2_Translator_Workbench/Tools/README.md), and [`Testing/`](20_SysMLv2_Translator_Workbench/Testing/README.md) indexes.
+- **Shared (outside 10–29):** source evidence definitions, governance, compatible helpers and reference material. Keep v1/v2 transformations and release pins independently versioned. A shared change must be tested against both, and proposed v1 adoption requires approval.
+
+**Navigation note:** Some older links in this README still use paths predating the October 15 folder move. Follow the versioned entrypoints above while cross-reference migration is audited; do not assume a file has disappeared.
+
 ## Start here
 
 1. `00_Workspace/00 - Current State.md` — current authority/status registry.
