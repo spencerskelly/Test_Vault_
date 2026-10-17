@@ -1,0 +1,28 @@
+name: MDSE registry policy tests
+on:
+  push:
+    paths:
+      - '14_Workbench/registry/**'
+      - '.github/workflows/mdse-relationship-registry.yml'
+  pull_request:
+    paths:
+      - '14_Workbench/registry/**'
+      - '.github/workflows/mdse-relationship-registry.yml'
+  workflow_dispatch:
+jobs:
+  synthetic-tests:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: JavaScript registry tests
+        run: node --test 14_Workbench/registry/runtime/*.test.mjs
+      - name: Python evidence and family tests
+        run: python -m unittest discover -s 14_Workbench/registry/runtime -p 'test_phase6.py' -v
