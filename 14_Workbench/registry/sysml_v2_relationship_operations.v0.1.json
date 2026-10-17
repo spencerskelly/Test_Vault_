@@ -1,0 +1,440 @@
+{
+  "registry_id": "mdse-sysmlv2-relationship-operations",
+  "schema_version": "0.1.0",
+  "target_spec": "OMG SysML v2.0 / KerML",
+  "status": "provisional_not_parser_verified",
+  "policy": "deny_by_default",
+  "identity": {
+    "source": "EA GUID + connector ID",
+    "target": "MDSE stable ID; feature usage distinct from definition",
+    "authority": "source semantics EA; canonical IDs and vault placement MDSE; BOM revisioned usage evidence BOM"
+  },
+  "rules": [
+    {
+      "id": "AGG-OWNED",
+      "ea": [
+        "Aggregation"
+      ],
+      "native": "PartUsage or nested owned feature usage",
+      "gate": "review",
+      "source": [
+        "EA aggregation/composition flags",
+        "direction and parent/child roles",
+        "classifier identity",
+        "multiplicity and containment evidence"
+      ],
+      "eligible": {
+        "from": [
+          "PartDefinition",
+          "PartUsage"
+        ],
+        "to": [
+          "PartDefinition",
+          "PartUsage"
+        ],
+        "requires_owner": true
+      },
+      "ownership": "parent usage/definition owns typed child usage; reusable child definition is not owned by each parent",
+      "workbench": {
+        "structural": "child typed usage under parent; retain shared definition link",
+        "visual": "compartment/contained shape with optional diamond projection; never treat drawn edge as independent core relation",
+        "navigation": "parent usage -> child usage -> reusable definition; inverse where-used"
+      },
+      "validation": [
+        "reject cycles of composite ownership",
+        "cardinality on usage; BOM quantity/UOM distinct",
+        "reject duplicate definition for shared part",
+        "unknown aggregation kind -> deferred_review"
+      ],
+      "provenance": [
+        "connector GUID",
+        "endpoint GUIDs",
+        "flags",
+        "multiplicity",
+        "transformation rule"
+      ]
+    },
+    {
+      "id": "REAL-REQ",
+      "ea": [
+        "Realisation"
+      ],
+      "native": "AllocationUsage (approved Object->Requirement policy, direction normalized)",
+      "gate": "review",
+      "source": [
+        "Object/Requirement endpoint classification",
+        "original intended direction",
+        "source stereotype and tagged semantics"
+      ],
+      "eligible": {
+        "from": [
+          "RequirementDefinition",
+          "RequirementUsage"
+        ],
+        "to": [
+          "PartDefinition",
+          "PartUsage",
+          "ActionDefinition",
+          "ActionUsage"
+        ],
+        "requires_owner": false
+      },
+      "ownership": "native allocation anchored in valid containing namespace; avoid requirement ownership mutation",
+      "workbench": {
+        "structural": "explicit allocation record with source target references",
+        "visual": "directed allocation edge labelled allocation; separate satisfaction style",
+        "navigation": "requirement -> implementation plus inverse"
+      },
+      "validation": [
+        "not SatisfyRequirementUsage without explicit satisfy evidence",
+        "orientation checked",
+        "unsupported endpoint patterns blocked"
+      ],
+      "provenance": [
+        "EA connector GUID",
+        "source direction",
+        "decision justification"
+      ]
+    },
+    {
+      "id": "REAL-OBJECT",
+      "ea": [
+        "Realisation"
+      ],
+      "native": "AllocationUsage only where implementation mapping explicit; otherwise evidence-only",
+      "gate": "review",
+      "source": [
+        "both endpoint roles",
+        "realization meaning evidence"
+      ],
+      "eligible": {
+        "from": [
+          "PartDefinition",
+          "PartUsage",
+          "ActionDefinition",
+          "ActionUsage"
+        ],
+        "to": [
+          "PartDefinition",
+          "PartUsage",
+          "ActionDefinition",
+          "ActionUsage"
+        ],
+        "requires_owner": false
+      },
+      "ownership": "containing namespace hosts relationship",
+      "workbench": {
+        "structural": "allocation record or unresolved evidence",
+        "visual": "allocation edge only after classification",
+        "navigation": "bidirectional backlinks"
+      },
+      "validation": [
+        "avoid containment or specialization inference",
+        "preserve unusual Realisation shapes in exception ledger"
+      ],
+      "provenance": [
+        "GUID",
+        "orientation",
+        "classification"
+      ]
+    },
+    {
+      "id": "ALLOC-PERFORM",
+      "ea": [
+        "Abstraction:allocate"
+      ],
+      "native": "PerformActionUsage",
+      "gate": "conditional",
+      "source": [
+        "action/function endpoint",
+        "object performer endpoint",
+        "direction"
+      ],
+      "eligible": {
+        "from": [
+          "PartDefinition",
+          "PartUsage"
+        ],
+        "to": [
+          "ActionDefinition",
+          "ActionUsage"
+        ],
+        "requires_owner": true
+      },
+      "ownership": "perform usage owned by performing object context",
+      "workbench": {
+        "structural": "object performs action usage typed by action definition",
+        "visual": "perform connector/compartment distinct from allocation",
+        "navigation": "object -> performed action; inverse performer"
+      },
+      "validation": [
+        "no generic allocation substitution for matching approved rule",
+        "function type and owner valid"
+      ],
+      "provenance": [
+        "GUID",
+        "EA roles",
+        "normalization"
+      ]
+    },
+    {
+      "id": "ALLOC-EXHIBIT",
+      "ea": [
+        "Abstraction:allocate"
+      ],
+      "native": "ExhibitStateUsage",
+      "gate": "conditional",
+      "source": [
+        "state endpoint",
+        "object endpoint",
+        "direction"
+      ],
+      "eligible": {
+        "from": [
+          "PartDefinition",
+          "PartUsage"
+        ],
+        "to": [
+          "StateDefinition",
+          "StateUsage"
+        ],
+        "requires_owner": true
+      },
+      "ownership": "state usage owned by exhibiting object context",
+      "workbench": {
+        "structural": "object exhibits state usage",
+        "visual": "state compartment / exhibit connector distinct from perform",
+        "navigation": "object -> state; inverse"
+      },
+      "validation": [
+        "no generic allocation for valid exhibit shape",
+        "state nesting stays contextual"
+      ],
+      "provenance": [
+        "GUID",
+        "roles"
+      ]
+    },
+    {
+      "id": "ALLOC-GENERIC",
+      "ea": [
+        "Abstraction:allocate"
+      ],
+      "native": "AllocationUsage",
+      "gate": "conditional",
+      "source": [
+        "both typed ends",
+        "allocation meaning",
+        "direction"
+      ],
+      "eligible": {
+        "from": [
+          "PartDefinition",
+          "PartUsage",
+          "ActionDefinition",
+          "ActionUsage"
+        ],
+        "to": [
+          "PartDefinition",
+          "PartUsage",
+          "ActionDefinition",
+          "ActionUsage"
+        ],
+        "requires_owner": false
+      },
+      "ownership": "namespace scoped relationship",
+      "workbench": {
+        "structural": "explicit allocation with two feature references",
+        "visual": "directed allocation edge",
+        "navigation": "both directions"
+      },
+      "validation": [
+        "perform/exhibit rules higher precedence",
+        "no inferred satisfaction"
+      ],
+      "provenance": [
+        "GUID",
+        "direction",
+        "rule precedence"
+      ]
+    },
+    {
+      "id": "SATISFY",
+      "ea": [
+        "Dependency:satisfy"
+      ],
+      "native": "SatisfyRequirementUsage",
+      "gate": "conditional",
+      "source": [
+        "explicit satisfy stereotype",
+        "requirement endpoint",
+        "candidate satisfying subject"
+      ],
+      "eligible": {
+        "from": [
+          "PartDefinition",
+          "PartUsage",
+          "ActionDefinition",
+          "ActionUsage"
+        ],
+        "to": [
+          "RequirementDefinition",
+          "RequirementUsage"
+        ],
+        "requires_owner": false
+      },
+      "ownership": "namespace scoped satisfaction statement with requirement + subject",
+      "workbench": {
+        "structural": "distinct satisfaction node/statement",
+        "visual": "satisfy edge, not allocation or verification",
+        "navigation": "requirement <-> satisfying subject"
+      },
+      "validation": [
+        "explicit evidence only",
+        "requirement typed end required",
+        "do not infer verification result"
+      ],
+      "provenance": [
+        "connector GUID",
+        "original direction",
+        "stereotype"
+      ]
+    },
+    {
+      "id": "GENERALIZE",
+      "ea": [
+        "Generalization"
+      ],
+      "native": "Specialization",
+      "gate": "conditional",
+      "source": [
+        "subtype GUID",
+        "supertype GUID",
+        "original orientation"
+      ],
+      "eligible": {
+        "from": [
+          "Definition"
+        ],
+        "to": [
+          "Definition"
+        ],
+        "requires_owner": false
+      },
+      "ownership": "subtype specializes supertype without duplicating target or changing ownership",
+      "workbench": {
+        "structural": "specialization on definition",
+        "visual": "generalization triangle from specialized to general",
+        "navigation": "super/subtype hierarchy"
+      },
+      "validation": [
+        "compatible definition kinds",
+        "no specialization cycles",
+        "not feature redefinition"
+      ],
+      "provenance": [
+        "connector GUID",
+        "EA subtype supertype IDs"
+      ]
+    },
+    {
+      "id": "DEPENDENCY",
+      "ea": [
+        "Dependency"
+      ],
+      "native": "Dependency",
+      "gate": "conditional",
+      "source": [
+        "plain dependency or explicitly compatible stereotype",
+        "source/target role"
+      ],
+      "eligible": {
+        "from": [
+          "Element"
+        ],
+        "to": [
+          "Element"
+        ],
+        "requires_owner": false
+      },
+      "ownership": "containing namespace scoped",
+      "workbench": {
+        "structural": "dependency reference",
+        "visual": "dashed dependency edge distinct from ownership",
+        "navigation": "client -> supplier plus reverse"
+      },
+      "validation": [
+        "exclude trace/refine/satisfy/verify/deriveReqt/recovery stereotypes from generic path",
+        "resolvable endpoints and source direction"
+      ],
+      "provenance": [
+        "connector GUID",
+        "stereotype",
+        "EA direction"
+      ]
+    },
+    {
+      "id": "DEPENDENCY-TRACE-REFINE",
+      "ea": [
+        "Dependency:trace",
+        "Dependency:refine",
+        "Abstraction:trace",
+        "Abstraction:Refine"
+      ],
+      "native": null,
+      "gate": "review",
+      "source": [
+        "explicit intended relationship meaning",
+        "legal native alternative if shown"
+      ],
+      "eligible": {
+        "from": [
+          "Element"
+        ],
+        "to": [
+          "Element"
+        ],
+        "requires_owner": false
+      },
+      "ownership": "no native mutation until justified",
+      "workbench": {
+        "structural": "source evidence + unresolved semantic exception",
+        "visual": "evidence-only dashed annotation, not native edge",
+        "navigation": "click to source diagnostics"
+      },
+      "validation": [
+        "deny fallback to generic Dependency unless user approves exact semantics",
+        "never silently discard"
+      ],
+      "provenance": [
+        "connector GUID",
+        "EA stereotype",
+        "decision history"
+      ]
+    }
+  ],
+  "precedence": [
+    "ALLOC-PERFORM",
+    "ALLOC-EXHIBIT",
+    "ALLOC-GENERIC"
+  ],
+  "engine": {
+    "inputs": [
+      "typed semantic graph",
+      "raw EA connector evidence",
+      "canonical ownership context",
+      "versioned registry"
+    ],
+    "outputs": [
+      "eligible candidate rules with reasons",
+      "deterministic disposition",
+      "validation issues",
+      "proposed native edit preview"
+    ],
+    "default": {
+      "disposition": "deferred_review",
+      "mutation": false
+    },
+    "conflicts": "reject ambiguous competing rules; require operator decision; never guess"
+  }
+}
