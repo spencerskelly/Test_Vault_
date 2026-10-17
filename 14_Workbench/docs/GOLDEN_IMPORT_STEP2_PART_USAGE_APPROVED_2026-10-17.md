@@ -9,3 +9,10 @@ Decision: APPROVED, 2026-10-17.
 - Do not infer a reusable definition from the part name. Unresolved typed feature references remain explicit review items for native conformance.
 - The 6 FlowProperty elements have ParentID=0 and require separate port ownership evidence; do not conflate with ordinary parts.
 - Check native ownership and typing, provenance, and idempotence before import acceptance.
+
+## Additional approval — untyped usage
+
+- Permit an EA Part to import as an **untyped native PartUsage** when no classifier / reusable PartDefinition is identified, subject to official SysML v2 parser validation.
+- Mark the local usage with an explicit `UNRESOLVED_PART_TYPE` diagnostic/review flag and preserve source provenance; do not fabricate a definition or guess typing from its name.
+- Keep the flag visible in the owning element's MDSE note/import diagnostics. No standalone note for the usage.
+- Clear the flag only after an actual type is supplied or confirmed.
