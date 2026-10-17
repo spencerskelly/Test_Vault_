@@ -1,0 +1,11 @@
+# Phase 4 executable policy engine and Workbench menu adapter
+Date: 2026-10-17. Status: locally tested policy prototype, not Workbench-integrated or native SysML v2 parser certified.
+Registry source: `14_Workbench/registry/sysml_v2_relationship_operations.v0.1.json`.
+Runtime: Node.js ESM, zero npm dependencies.
+Run: `node --test 14_Workbench/registry/runtime/eligibility-engine.test.mjs`.
+API: `evaluate(registry, {family,from:{id,kind},to:{id,kind},ownerId,originalDirection,evidence})`; `createWorkbenchMenu(registry,request)`.
+Outcome: deterministic `preview_available`, `review_required`, or `rejected`; individual options carry rule IDs, typed eligibility, errors and structure/visual/navigation summaries. No writes, serialization or provenance-less approval.
+Safety controls: no unknown family fallback; explicit typed endpoints, normalized direction, required owner and evidence; all review rules blocked; no generic Allocation bypass when Perform/Exhibit endpoint pattern matches; wrong definition kind blocks Generalization; per-rule rejection codes. Generic Dependency does not catch trace/refine.
+**Limitations:** Required evidence keys are a deliberately conservative lexical projection of Phase 3 descriptions, not a complete typed evidence schema. Source direction is asserted, not independently verified from EA metadata. No composite ownership cycle checking, hierarchy checks, model-wide identity graph, native grammar/library parser, stable-ID persistence, serializer, three-way merge, commit operation or GUI event binding. The tests use synthetic projected registry rules; production integration MUST load the full committed Phase 3 JSON and add integrated contract tests. The use of gate `conditional` is not a proof that generated SysML v2 is legal.
+Acceptance before live editing: schema-validate registry and evidence; implement true typed canonical model graph, normalized EA orientation and ownership-cycle check; compile native operation and verify using pinned SysML v2.0 parser; run full-registry coverage tests plus golden fixture and reimport tests; stage changes and approve before write.
+Test evidence: nine synthetic tests passed with Node v22.16.0 locally on 2026-10-17; fixture-free methods repository.
