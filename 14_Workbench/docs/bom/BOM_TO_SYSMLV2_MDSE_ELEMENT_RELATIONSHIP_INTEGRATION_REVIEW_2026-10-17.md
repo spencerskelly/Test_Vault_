@@ -62,3 +62,25 @@ The A-series docs explicitly mark proposed changes, and A-14 describes partial v
 
 ## Key still-open decision
 What constitutes affirmative evidence that an EA usage and a BOM row describe **the same usage**, instead of two independently modeled usages? Prefer conservative separate usages until reviewed, because prior policy preserves multiple EA connectors for distinct use of the same part.
+
+## Superseding approval — separate EA and BOM note identities (2026-10-17)
+
+This section **supersedes** the earlier proposed automatic shared-UID identity reconciliation and the 'first decision' at the bottom of this review.
+
+1. **Independent import first.** Every imported EA element note and every imported BOM part note receives its own unique, stable MDSE UID. Do not automatically coalesce notes/UIDs, even when an EA element alias equals a BOM part number.
+2. **Cross-source discovery key.** EA `Alias` may contain the part number recorded in the BOM. Keep the exact EA alias and normalized BOM part number as independent provenance/search fields, never as proof that the two notes represent the same definition.
+3. **SysML v2 first, BOM metadata retained.** Map recognized BOM structure into native SysML v2 definitions/usages and supported attributes where valid; put BOM-only fields that do not fit approved SysML v2 constructs into governed MDSE YAML, preserving values and source provenance. Do not invent native syntax for these fields.
+4. **Post-import crossover review.** After both complete imports, build candidate matching reports (EA alias ↔ BOM part number, plus description, category, product context, relationships and revisions). Review possible overlaps and decide individually which notes, if any, should merge. No automatic note merge, deletion or UID rewriting.
+5. **Merge governance.** A future merge requires an explicit reviewed decision, retention of all source identifiers and relationships, deterministic choice of surviving UID, a durable UID redirect/alias for the retired note identity, inbound link repair or resolution, audit trail, and reversible staged validation. Until approved, both notes persist.
+6. **Distinct usage records.** EA aggregation usages and BOM owned usages remain independent on import, notwithstanding matching definitions or endpoints. A reviewed later merge of definitions does not automatically merge independent usage lines.
+7. **Unresolved links.** When exact native semantics remain uncertain, retain MDSE YAML `flagLink` with an explanatory note section, including local evidence.
+
+### Revised implementation order
+
+A. Define UID allocation, separate EA/BOM namespaces, provenance and BOM metadata YAML schema.
+B. Import EA and BOM independently while preserving source-defined relationships/usages and historical BOM evidence.
+C. Validate each imported note/usage and native SysML v2 syntax; keep raw model data out of the methods repo.
+D. Produce non-destructive post-import candidate overlap report with reason/confidence.
+E. Review possible note merges individually; perform only approved staged migrations with link integrity and identity redirects.
+
+**Acceptance:** A matching EA alias and BOM part number results in **two separate notes with two unique UIDs** until explicitly reviewed and merged. Both remain discoverable as possible crossovers. Original source identifiers remain in provenance and BOM metadata remains in YAML when no native v2 counterpart exists.
