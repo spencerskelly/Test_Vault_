@@ -16,3 +16,18 @@ When an EA relationship cannot be confidently mapped to an approved native SysML
 - Acceptance tests: deterministic identity across reimport; repeated connectors stay distinct; endpoints and directions unchanged; unresolved links survive round-trip; corrected disposition is reversible and traceable; no accidental native serialization.
 
 This policy does not override any already approved direct mappings: use a native construct when endpoint semantics and evidence support it, and reserve flagLink for genuinely unresolved cases.
+
+## Approved clarification — YAML link and explanation in note (2026-10-17)
+
+The `flagLink` is stored as an **MDSE YAML link on the relevant note**, rather than merely an external exception ledger. The note body must contain a human-readable explanation of why that specific link is flagged, the observed source relationship, and what decision or evidence is required to resolve it. The YAML link carries stable target reference and original connector provenance; when multiple EA connectors target the same element, represent each independently and preserve connector identity. Show the YAML link and explanatory note text together in Workbench, with navigation and a clear unresolved indicator. This remains MDSE-only (not native SysML v2 syntax). Later replacement with an approved relationship must retain audit history and remove the active unresolved flag without silently losing provenance.
+
+Illustrative shape only; final YAML schema and note section names require integration tests:
+
+```yaml
+flagLink:
+  - target: "<MDSE-target-UID>"
+    eaConnectorGUID: "<source-connector-GUID>"
+    reason: "ambiguous_semantics"
+```
+
+In the note body, explain the source relationship and why its native interpretation is unresolved. Do not add model-specific source data to the methods repository.
