@@ -1,0 +1,210 @@
+{
+  "schema_version": "0.2.0",
+  "default": "review",
+  "status": "provisional_not_parser_verified",
+  "families": [
+    {
+      "family": "Generalization:",
+      "disposition": "existing_rule",
+      "rule_ids": [
+        "GENERALIZE"
+      ],
+      "native_candidate": null,
+      "reason": "Apply existing typed Phase 3 rule; not automatically accepted"
+    },
+    {
+      "family": "Abstraction:allocate",
+      "disposition": "existing_rule",
+      "rule_ids": [
+        "ALLOC-GENERIC"
+      ],
+      "native_candidate": null,
+      "reason": "Apply existing typed Phase 3 rule; not automatically accepted"
+    },
+    {
+      "family": "Aggregation:",
+      "disposition": "existing_rule",
+      "rule_ids": [
+        "AGG-OWNED"
+      ],
+      "native_candidate": null,
+      "reason": "Apply existing typed Phase 3 rule; not automatically accepted"
+    },
+    {
+      "family": "Dependency:satisfy",
+      "disposition": "existing_rule",
+      "rule_ids": [
+        "SATISFY"
+      ],
+      "native_candidate": null,
+      "reason": "Apply existing typed Phase 3 rule; not automatically accepted"
+    },
+    {
+      "family": "Realisation:",
+      "disposition": "existing_rule",
+      "rule_ids": [
+        "REAL-REQ",
+        "REAL-OBJECT"
+      ],
+      "native_candidate": null,
+      "reason": "Apply existing typed Phase 3 rule; not automatically accepted"
+    },
+    {
+      "family": "Dependency:refine",
+      "disposition": "existing_rule",
+      "rule_ids": [
+        "DEPENDENCY-TRACE-REFINE"
+      ],
+      "native_candidate": null,
+      "reason": "Apply existing typed Phase 3 rule; not automatically accepted"
+    },
+    {
+      "family": "Dependency:",
+      "disposition": "existing_rule",
+      "rule_ids": [
+        "DEPENDENCY"
+      ],
+      "native_candidate": null,
+      "reason": "Apply existing typed Phase 3 rule; not automatically accepted"
+    },
+    {
+      "family": "Dependency:trace",
+      "disposition": "existing_rule",
+      "rule_ids": [
+        "DEPENDENCY-TRACE-REFINE"
+      ],
+      "native_candidate": null,
+      "reason": "Apply existing typed Phase 3 rule; not automatically accepted"
+    },
+    {
+      "family": "Abstraction:trace",
+      "disposition": "existing_rule",
+      "rule_ids": [
+        "DEPENDENCY-TRACE-REFINE"
+      ],
+      "native_candidate": null,
+      "reason": "Apply existing typed Phase 3 rule; not automatically accepted"
+    },
+    {
+      "family": "Abstraction:Refine",
+      "disposition": "existing_rule",
+      "rule_ids": [
+        "DEPENDENCY-TRACE-REFINE"
+      ],
+      "native_candidate": null,
+      "reason": "Apply existing typed Phase 3 rule; not automatically accepted"
+    },
+    {
+      "family": "Association:",
+      "disposition": "review",
+      "rule_ids": [],
+      "native_candidate": "Connection/Interface/Reference",
+      "reason": "Evidence and normative native modeling confirmation required; deny automatic semantic mutation"
+    },
+    {
+      "family": "UseCase:extend",
+      "disposition": "review",
+      "rule_ids": [],
+      "native_candidate": "UseCase extension",
+      "reason": "Evidence and normative native modeling confirmation required; deny automatic semantic mutation"
+    },
+    {
+      "family": "ControlFlow:",
+      "disposition": "review",
+      "rule_ids": [],
+      "native_candidate": "Succession/Transition",
+      "reason": "Evidence and normative native modeling confirmation required; deny automatic semantic mutation"
+    },
+    {
+      "family": "Dependency:deriveReqt",
+      "disposition": "review",
+      "rule_ids": [],
+      "native_candidate": "Requirement derivation",
+      "reason": "Evidence and normative native modeling confirmation required; deny automatic semantic mutation"
+    },
+    {
+      "family": "NoteLink:",
+      "disposition": "evidence_only",
+      "rule_ids": [],
+      "native_candidate": null,
+      "reason": "Evidence and normative native modeling confirmation required; deny automatic semantic mutation"
+    },
+    {
+      "family": "UseCase:include",
+      "disposition": "review",
+      "rule_ids": [],
+      "native_candidate": "UseCase inclusion",
+      "reason": "Evidence and normative native modeling confirmation required; deny automatic semantic mutation"
+    },
+    {
+      "family": "Sequence:",
+      "disposition": "review",
+      "rule_ids": [],
+      "native_candidate": "Message/Succession",
+      "reason": "Evidence and normative native modeling confirmation required; deny automatic semantic mutation"
+    },
+    {
+      "family": "StateFlow:",
+      "disposition": "review",
+      "rule_ids": [],
+      "native_candidate": "TransitionUsage",
+      "reason": "Evidence and normative native modeling confirmation required; deny automatic semantic mutation"
+    },
+    {
+      "family": "Nesting:",
+      "disposition": "review",
+      "rule_ids": [],
+      "native_candidate": "Feature/Namespace membership",
+      "reason": "Evidence and normative native modeling confirmation required; deny automatic semantic mutation"
+    },
+    {
+      "family": "Usage:",
+      "disposition": "review",
+      "rule_ids": [],
+      "native_candidate": "FeatureUsage/Dependency",
+      "reason": "Evidence and normative native modeling confirmation required; deny automatic semantic mutation"
+    },
+    {
+      "family": "Dependency:verify",
+      "disposition": "review",
+      "rule_ids": [],
+      "native_candidate": "VerifyRequirementUsage",
+      "reason": "Evidence and normative native modeling confirmation required; deny automatic semantic mutation"
+    },
+    {
+      "family": "Dependency:RecoveryRequirement",
+      "disposition": "review",
+      "rule_ids": [],
+      "native_candidate": null,
+      "reason": "Evidence and normative native modeling confirmation required; deny automatic semantic mutation"
+    },
+    {
+      "family": "Connector:",
+      "disposition": "evidence_only",
+      "rule_ids": [],
+      "native_candidate": null,
+      "reason": "Evidence and normative native modeling confirmation required; deny automatic semantic mutation"
+    },
+    {
+      "family": "Abstraction:Derive",
+      "disposition": "review",
+      "rule_ids": [],
+      "native_candidate": "Requirement derivation",
+      "reason": "Evidence and normative native modeling confirmation required; deny automatic semantic mutation"
+    },
+    {
+      "family": "Usage:Responsibility",
+      "disposition": "review",
+      "rule_ids": [],
+      "native_candidate": "Owned usage",
+      "reason": "Evidence and normative native modeling confirmation required; deny automatic semantic mutation"
+    },
+    {
+      "family": "Realisation:deriveReqt",
+      "disposition": "review",
+      "rule_ids": [],
+      "native_candidate": null,
+      "reason": "Evidence and normative native modeling confirmation required; deny automatic semantic mutation"
+    }
+  ]
+}
