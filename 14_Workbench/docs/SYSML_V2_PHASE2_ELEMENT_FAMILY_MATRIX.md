@@ -51,6 +51,7 @@ These are rule-family definitions without source records, part identifiers, diag
 | Activity:Module Function | ActionDefinition/Usage | conditional | Action ownership |
 | Class:Business Line | Namespace/organizational metadata | evidence | Not automatically a part |
 | Part:FlowProperty | Item/port feature | review | Legacy flow property |
+| Signal:Physical Signal | ItemDefinition/EventOccurrence | review | Physical signal payload vs event and electrical/flow semantics |
 | Signal:Software Parameter | AttributeDefinition/Usage or ItemDefinition | review | Parameter value or payload |
 | Trigger | Transition trigger | review | Owner, guard and event |
 | Boundary | Diagram annotation | evidence | Not native boundary node |
