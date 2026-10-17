@@ -1,6 +1,6 @@
 # Golden Import Step 2 — Physical Context classification decision
 
-Decision date: 2026-10-17. Status: user-approved conceptual classification; native representation detail pending.
+Decision date: 2026-10-17. Status: APPROVED conceptual classification and native representation; implementation/parser verification pending.
 
 EA source family: `Class:Physical Context`.
 
@@ -11,6 +11,6 @@ EA source family: `Class:Physical Context`.
 - EA packages remain organizational and are not evidence of physical composition. Require explicitly modeled constituent parts/relationships or trusted equivalent evidence.
 - Do not introduce a custom SysML v2 relationship or assume a dedicated native `ContextDefinition` construct.
 
-Pending one focused question: for a multiple-part context, should native SysML v2 serialization be a `PartDefinition` used as a context boundary, owning typed `PartUsage` references to its included parts (rather than a custom concept)? Mark such imports as review until approved.
+Approved: a multiple-part context is serialized as a native SysML v2 `PartDefinition` owning typed `PartUsage` references to its constituent reusable `PartDefinition` elements. The MDSE note has `type: Context`; its original EA classification is preserved in YAML. Do not generate separate notes for the usages.
 
 Acceptance tests: single external part, multiple-part context, package-only grouping (must not become context), missing/ambiguous composition (review).
