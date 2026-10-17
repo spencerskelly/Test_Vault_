@@ -1,0 +1,63 @@
+{
+  "suite": "phase3-eligibility-contract",
+  "status": "illustrative_not_executed",
+  "cases": [
+    {
+      "id": "shared_part",
+      "rule": "AGG-OWNED",
+      "expected": "two usages one reusable definition"
+    },
+    {
+      "id": "refine_not_dependency",
+      "source": {
+        "family": "Dependency:refine"
+      },
+      "expected": "deferred_review"
+    },
+    {
+      "id": "perform_precedence",
+      "source": {
+        "family": "Abstraction:allocate",
+        "from": "ActionDefinition",
+        "to": "PartDefinition"
+      },
+      "expected": "ALLOC-PERFORM"
+    },
+    {
+      "id": "exhibit_precedence",
+      "source": {
+        "family": "Abstraction:allocate",
+        "from": "StateDefinition",
+        "to": "PartDefinition"
+      },
+      "expected": "ALLOC-EXHIBIT"
+    },
+    {
+      "id": "real_req_not_satisfy",
+      "source": {
+        "family": "Realisation",
+        "from": "PartDefinition",
+        "to": "RequirementDefinition"
+      },
+      "expected": "REAL-REQ review; no satisfaction"
+    },
+    {
+      "id": "explicit_satisfy",
+      "source": {
+        "family": "Dependency:satisfy",
+        "from": "PartDefinition",
+        "to": "RequirementDefinition"
+      },
+      "expected": "SATISFY conditional"
+    },
+    {
+      "id": "specialization",
+      "source": {
+        "family": "Generalization",
+        "from": "PartDefinition",
+        "to": "PartDefinition"
+      },
+      "expected": "GENERALIZE conditional; subtype orientation checked"
+    }
+  ]
+}
