@@ -84,3 +84,20 @@ D. Produce non-destructive post-import candidate overlap report with reason/conf
 E. Review possible note merges individually; perform only approved staged migrations with link integrity and identity redirects.
 
 **Acceptance:** A matching EA alias and BOM part number results in **two separate notes with two unique UIDs** until explicitly reviewed and merged. Both remain discoverable as possible crossovers. Original source identifiers remain in provenance and BOM metadata remains in YAML when no native v2 counterpart exists.
+
+## Approved Workbench requirement — Advanced Actions: Merge Notes (2026-10-17)
+
+Add a **Merge Notes** function to Workbench under a clearly labeled **Advanced Actions** menu/section, not the everyday edit controls. This is an approved feature requirement; implementation is pending.
+
+The action supports post-import reconciliation of separate EA and BOM notes; matching EA Alias and BOM part number is merely a candidate signal and must **never trigger an automatic merge**.
+
+Required workflow:
+1. Select two candidate notes, display their distinct UIDs, source provenance, names/aliases and proposed survivor UID.
+2. Preview differences in SysML v2 definitions, usages and relationships; MDSE YAML; note-body descriptions; BOM revisions/effectivity; and attached files. Identify conflicts; don't silently overwrite or union incompatible semantics.
+3. Require an explicit operator-selected survivor and a clear confirmation of the reviewed merge. Preserve a backup/checkpoint and an undo/rollback plan before modification.
+4. Retain EA GUID/Alias, BOM part number, all source identity and provenance, and a durable redirect/alias from the replaced UID; repair or resolve inbound links, usage references, attachments and indexes atomically.
+5. **Do not automatically merge independent PartUsage records or conflate native definitions and MDSE-specific links**; preserve separate usages unless explicitly reviewed as the same occurrence.
+6. Handle collisions, incompatible types, ambiguous references and rejected merges by failing closed with useful diagnostics; preserve both original notes if a merge cannot complete safely.
+7. Produce a reviewable audit trail and validate link integrity, UID uniqueness, provenance, Workbench structural/visual views, Where Used results, and reimport stability.
+
+UI: `Advanced Actions → Merge Notes`; include compare/preview, choose survivor, dry run and explicit confirm. Restrict to authorized editors and do not expose a bulk auto-merge action by default. Track status as **planned**, not implemented or runtime verified.
