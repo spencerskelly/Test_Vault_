@@ -11,7 +11,7 @@ This document reconciles the original `SYSML_V2_PHASE2_ELEMENT_FAMILY_MATRIX.md`
 
 ## Current mapping, grouped by exact EA families
 
-### Native reusable definitions (34 source families)
+### Native reusable definitions (40 source families, including conditional Physical Context)
 - `Requirement`, `Requirement:requirement`, `Requirement:designConstraint`, `Requirement:functionalRequirement`, `Requirement:extendedRequirement`, `Requirement:Functional`, `Requirement:Webasto Requirement`, `Requirement:performanceRequirement` -> RequirementDefinition.
 - `Activity`, `Activity:System Function`, `Activity:Hardware Function`, `Activity:Software Function`, `Activity:Module Function` -> ActionDefinition; owning contextual usage when source evidence supports.
 - `UseCase` -> UseCaseDefinition; actor/case usages local.
@@ -26,6 +26,7 @@ This document reconciles the original `SYSML_V2_PHASE2_ELEMENT_FAMILY_MATRIX.md`
 - `Activity:testCase` -> VerificationCaseDefinition with explicit valid verify relationships.
 - `Constraint` -> ConstraintDefinition.
 - `Event` -> OccurrenceDefinition.
+- `Class:Physical Context` -> if composite context, native PartDefinition with typed contained PartUsages and MDSE type Context; if a single external referenced part, external PartDefinition. Ambiguous source classification flagged.
 
 ### Native local usages / behavior (7 source families)
 - `Action` -> owned ActionUsage, untyped allowed with `UNRESOLVED_ACTION_TYPE`.
@@ -36,7 +37,7 @@ This document reconciles the original `SYSML_V2_PHASE2_ELEMENT_FAMILY_MATRIX.md`
 - `Synchronization` -> local fork/join workflow construct based on actual incoming/outgoing control-flow evidence.
 - `Trigger` -> local transition trigger.
 
-### MDSE note / attachment / view / organizational / no native node (19 source families)
+### MDSE note / attachment / view / organizational / no native node (13 source families)
 - `Package` -> folder only.
 - `InformationItem` -> description-only MDSE note with links; not native ItemDefinition.
 - `Note` -> MDSE note with YAML element links.
@@ -48,10 +49,9 @@ This document reconciles the original `SYSML_V2_PHASE2_ELEMENT_FAMILY_MATRIX.md`
 - `Sequence` -> reference-only interaction/workflow view, preserving order/participants/messages, no inferred executable succession.
 - `ProxyConnector` -> reference to original connection/endpoints; no invented port/part or separate usage note.
 - `Boundary` -> remove from generated model (still disposition-ledgered).
-- `Class:Physical Context` -> if composite context, native PartDefinition with typed contained PartUsages and MDSE type Context; if a single external referenced part, external PartDefinition. Ambiguous source classification flagged. (Categorized here only as conditional branch; it emits a native definition.)
- 
+
 ## Reconciliation outcome / questions not yet decided
-The enumerations above account for all 60 distinct exact source-family names from the original matrix; the display heading group counts are **not** authoritative census counts, because Physical Context has a native conditional branch and ProxyConnector is reference-only. The source SQL census remains the authoritative count.
+The enumerations above account for all 60 distinct exact source-family names from the original matrix; the grouping is **40 native definition families + 7 local usage/behavior families + 13 non-native/reference families = 60**. The source SQL census remains the authoritative source-row count.
 
 **Single potential remaining modeling decision:** what MDSE subtype should label `Class:Physical Context` when it is a single external part versus a multi-part context? Native mapping is already approved; do not block import on subtype label until schema matching is implemented. No other missing semantic-family decision identified.
 
