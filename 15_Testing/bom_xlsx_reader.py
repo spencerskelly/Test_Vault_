@@ -46,11 +46,20 @@ def rows_from_xlsx(path,sheet_name):
             root=ET.fromstring(z.read("xl/sharedStrings.xml"))
             strings=["".join(t.text or "" for t in si.findall(".//m:t",NS)) for si in root.findall("m:si",NS)]
         with z.open(target) as stream:
-            root=ET.parse(stream).getroot()
-            for row in root.findall(".//m:sheetData/m:row",NS):
+            # Stream one worksheet row at a time; do not construct a full sheet tree.
+            # Shared strings remain workbook-scoped and may need a separate
+            # large-workbook strategy if their table is itself enormous.
+            row_tag="{"+NS["m"]+"}row"
+            last_row=0
+            for event,node in ET.iterparse(stream,events=("end",)):
+                if node.tag!=row_tag:continue
+                row_num=int(node.get("r"))
+                if row_num<=last_row:raise ValueError("INVALID_OR_DUPLICATE_EXCEL_ROW")
+                last_row=row_num
                 vals={column_index(c.get("r")):text_cell(c,strings)
-                      for c in row.findall("m:c",NS)}
-                yield int(row.get("r")),vals
+                      for c in node.findall("m:c",NS)}
+                node.clear()
+                yield row_num,vals
 
 def iter_bom(path,sheet,columns,snapshot_id,workbook_id,header_row=1):
     """columns is explicit field name -> Excel header text, no guessed synonyms."""
