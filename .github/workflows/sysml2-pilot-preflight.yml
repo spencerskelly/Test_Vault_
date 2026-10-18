@@ -1,0 +1,26 @@
+name: SysML v2 pilot preflight unit tests
+on:
+  push:
+    paths:
+      - '15_Testing/sysml2_pilot_preflight.py'
+      - '15_Testing/test_sysml2_pilot_preflight.py'
+      - '.github/workflows/sysml2-pilot-preflight.yml'
+  pull_request:
+    paths:
+      - '15_Testing/sysml2_pilot_preflight.py'
+      - '15_Testing/test_sysml2_pilot_preflight.py'
+      - '.github/workflows/sysml2-pilot-preflight.yml'
+  workflow_dispatch:
+jobs:
+  preflight-regression:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Compile probe and tests
+        run: python -m py_compile 15_Testing/sysml2_pilot_preflight.py 15_Testing/test_sysml2_pilot_preflight.py
+      - name: Run nine synthetic preflight tests
+        run: python -m unittest -v 15_Testing/test_sysml2_pilot_preflight.py
+# Intentionally does not run an actual SysML parser or approve native emission.
