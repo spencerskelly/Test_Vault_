@@ -84,3 +84,23 @@ Read the active `10_Base Vault/Tools/v0.8.0-r2/build-base.py` and identified a d
 This is a real source correction but **not execution evidence**. The new builder needs syntax/build tests on checkout; further latent path assumptions may remain. It preserves the old release version, all plugin hashes, and the non-overwrite destination policy. Critically, missing dependencies now produce visible BLOCKER messages instead of leaving an incomplete destination staging vault. Existing CI workflow migration and Bootstrap source build/Obsidian first-open remain open.
 
 **Next gated increment:** run checkout-level Python syntax check, `python3 10_Base Vault/Tools/v0.8.0-r2/build-base.py /tmp/clean-mdse-base`, and `python3 10_Base Vault/Testing/check-release.py --base /tmp/clean-mdse-base`. Capture exact error codes and iterate only on verified blockers. Do not accept an incomplete output as a release artifact.
+
+## Continuation — pre-staging integrity hardening (2026-10-17)
+
+GitHub main's actual `10_Base Vault/Tools/v0.8.0-r2/build-base.py` was re-inspected. Its prior preflight checked only whether locked plugin payload files **existed**, and the builder would copy byte-drifted binaries into a fresh base before any release validator could reject them. This was a material first-run risk.
+
+Committed `07589c0`: calculate SHA-256 for **every locked plugin payload** from `.obsidian/plugin-lock.yaml` before creation of output directory. Explicitly fail on missing or empty hash tables, unsupported locked filename, missing payload, and hash mismatch. Also fail before staging if any `conditionalFiles` is absent for a `release` build; corrected the updater script hint path. This is a safety hardening change only; no lock, plugin binaries, release version or model data were modified.
+
+**Validation boundary:** current tool environment can fetch GitHub file contents but still cannot clone the complete repository into the local shell (GitHub DNS resolution error). The changed Python source was **not** run against the complete release manifest and plugin payloads. Live local build/check-release/Obsidian first-open remain pending. Do not claim `PASS` until running the actual commands from a complete checkout and preserving console evidence.
+
+Next command sequence on full checkout:
+```sh
+python3 -m py_compile "10_Base Vault/Tools/v0.8.0-r2/build-base.py"
+python3 "15_Testing/check_v2_import_kit.py" . --json
+tmp="$(mktemp -d)"
+python3 "10_Base Vault/Tools/v0.8.0-r2/build-base.py" "$tmp/base"
+python3 "10_Base Vault/Testing/check-release.py" --base "$tmp/base"
+```
+Positive and negative tests: alter one byte of a **disposable copy** of a locked plugin and confirm the builder exits before creating its destination; restore, then verify a valid base. Note that the v2 global release checker is *expected to block* until native importer, parser and v2 editor are released; it must not be confused with the v1/base-specific build acceptance check.
+
+**Work pass status:** completed source hardening and documented handoff; full release execution remains blocked by checkout access. User `y` required for next pass.
