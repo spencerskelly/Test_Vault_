@@ -1,0 +1,9 @@
+# STEP-02K — Registry-driven staging integration
+
+Date: 2026-10-18. Status: local tool created and one synthetic end-to-end test passed; **real full-source execution with the exact approved registry not yet completed**. Not a native parser pass, Workbench acceptance, or golden import.
+
+The new staged tool, provided in `STEP_02K_registry_driven_stage.zip` in the conversation, accepts the **actual approved 60 element/26 relationship family registry** as a required CLI input, instead of treating heuristic source families as semantic authority. It checks registry schema, declared no-diagram mode, exact family coverage, reads the QEAX in SQLite read-only mode, retains source identities, produces Obsidian Markdown, and records explicit provisional `flagLink` / `flagNote` exceptions while leaving valid family matches as uncertified native candidates. It refuses an existing output directory and reports connector accounting. It does not emit native SysML syntax.
+
+Synthetic test verified two synthetic elements and one generalization connector, zero dropped source records, Markdown output, explicit native-uncertified status, and collision rejection.
+
+**Limitations and next acceptance:** code in downloadable artifact still must be committed to repository before CI can run. Exact approved registry was fetched from GitHub and inspected, but the local execution runtime cannot access GitHub raw content, so no authoritative real-source counts are claimed from this new script. It must next be run using a checked-out repository registry and the supplied reduced QEAX, then use verified Phase 8 private ledger dispositions in place of conservative fallback inference. Stable MDSE UIDs, canonical note placement, reimport merge policy, Workbench navigation and official native parser verification remain pending. EA diagrams are excluded. Review flags must not block a functional model unless source accounting/integrity is threatened.
