@@ -1,0 +1,9 @@
+# Pass 7 — Official Linux SysML v2 kernel fixture gate
+
+2026-10-17. Added a manual GitHub Actions workflow at `.github/workflows/sysml2-native-fixtures.yml`. Uses Linux, Java 21, isolated Conda environment and the `jupyter-sysml-kernel=0.60.1` package specified by the official SysML v2 Release installer; installs `jupyter_client`, verifies the `sysml` kernel, then attempts valid/invalid synthetic fixtures using `15_Testing/sysml2_jupyter_fixture_gate.py`.
+
+Official source instructions: https://github.com/Systems-Modeling/SysML-v2-Release/blob/master/install/jupyter/install.sh and https://github.com/Systems-Modeling/SysML-v2-Pilot-Implementation/blob/master/org.omg.sysml.jupyter.kernel/README.adoc . The official script includes optional JupyterLab extensions; we deliberately omit the interactive UI installation for headless CI.
+
+The runner records fixture SHA256 and aggregate outcome, does not print kernel diagnostics, and always sets nativeCertified false. The negative fixture intentionally omits a terminator. IMPORTANT: This is an **unexecuted first candidate**. The `jupyter_client`/kernel protocol may require adjustments to correctly detect SysML parse errors (including diagnostic display messages rather than `error` protocol records). CI pass must not be asserted until a real run has completed and its output independently reviewed. Workflow is `workflow_dispatch` only, not automatic, to avoid unexpected third-party package installations and resource usage on every push.
+
+User action: open https://github.com/spencerskelly/Test_Vault_/actions/workflows/sysml2-native-fixtures.yml and select Run workflow on main. Return run URL or job result for review. No changes to Mac required. Keep repository model-free. Do not enable native emission until actual parser acceptance/rejection and semantic reviews succeed.
