@@ -24,6 +24,9 @@ jobs:
           java -version
           jupyter kernelspec list
           python -c "from jupyter_client import KernelManager; assert 'sysml' in __import__('jupyter_client.kernelspec',fromlist=['KernelSpecManager']).KernelSpecManager().find_kernel_specs()"
+      - name: Verify diagnostic classifier regression
+        shell: bash -el {0}
+        run: python -m unittest -v 15_Testing/test_sysml2_jupyter_diagnostics.py
       - name: Validate positive SysML fixture with real kernel
         shell: bash -el {0}
         run: python 15_Testing/sysml2_jupyter_fixture_gate.py --fixture 29_SysMLv2_Translator_Workbench/Fixtures/synthetic_part_definition_usage.sysml --expect ACCEPTED
