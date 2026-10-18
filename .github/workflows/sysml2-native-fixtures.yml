@@ -30,6 +30,16 @@ jobs:
       - name: Validate positive SysML fixture with real kernel
         shell: bash -el {0}
         run: python 15_Testing/sysml2_jupyter_fixture_gate.py --fixture 29_SysMLv2_Translator_Workbench/Fixtures/synthetic_part_definition_usage.sysml --expect ACCEPTED
+      - name: Validate nested part usages
+        shell: bash -el {0}
+        run: python 15_Testing/sysml2_jupyter_fixture_gate.py --fixture 29_SysMLv2_Translator_Workbench/Fixtures/synthetic_nested_part_usages.sysml --expect ACCEPTED
+      - name: Validate port definitions and usages
+        shell: bash -el {0}
+        run: python 15_Testing/sysml2_jupyter_fixture_gate.py --fixture 29_SysMLv2_Translator_Workbench/Fixtures/synthetic_port_as_part.sysml --expect ACCEPTED
+      - name: Validate native connection usage
+        shell: bash -el {0}
+        run: python 15_Testing/sysml2_jupyter_fixture_gate.py --fixture 29_SysMLv2_Translator_Workbench/Fixtures/synthetic_connection_usage.sysml --expect ACCEPTED
+
       - name: Reject invalid SysML fixture with real kernel
         shell: bash -el {0}
         run: python 15_Testing/sysml2_jupyter_fixture_gate.py --fixture 29_SysMLv2_Translator_Workbench/Fixtures/synthetic_invalid_syntax.sysml --expect REJECTED
