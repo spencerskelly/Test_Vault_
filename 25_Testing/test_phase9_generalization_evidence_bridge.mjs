@@ -1,6 +1,6 @@
 import assert from 'node:assert/strict';
 import {test} from 'node:test';
-import {reviewGeneralizationFromEvidence} from '../14_Workbench/registry/runtime/phase9-generalization-evidence-bridge.mjs';
+import {reviewGeneralizationFromEvidence} from '../24_Workbench/registry/runtime/phase9-generalization-evidence-bridge.mjs';
 const graph=()=>({nodes:[{id:'super',kind:'PartDefinition'},{id:'sub',kind:'PartDefinition',ownerId:'super'}]});
 const evidence=()=>({schema:'mdse-phase9-generalization-direction/1',reconciliationVerified:true,sourceFamily:'Generalization',sourceDirection:'Source -> Destination',connectorRef:'synthetic-ref',sourceNodeId:'sub',targetNodeId:'super',snapshotSha256:'a'.repeat(64)});
 const codes=x=>x.diagnostics.map(d=>d.code);
