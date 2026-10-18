@@ -113,3 +113,21 @@ python3 -m unittest discover -s 15_Testing -p test_gate_v2_qeax_reconciliation.p
 These new tests were **committed, but not verified run from the full repository checkout**. The runner currently stops at the source-to-policy preflight boundary: it **does not yet invoke Phase 8 direction-normalized native v2 connector reconciliation**. The reduced private profile must exist and match its exact QEAX bytes; old September profile is never overwritten. Next pass: expose an explicit accepted preflight token or direct in-process integration to the Phase 8 reconciliation runner and test fail-closed behavior on wrong-profile selections before any ledger write.
 
 **Status:** Pass 04 source-profile selection methods delivered; v2 downstream wiring and end-to-end validation pending. No release or plugin promotion.
+
+## Pass 04 continuation — gated Phase 8 integration (2026-10-17)
+
+New `15_Testing/run_gated_phase8.py` (commit `5c6c206`) is an orchestration entrypoint: explicit selected source profile + disposition policy must pass first, before it loads/invokes `14_Workbench/registry/runtime/normalize_qeax_phase8.py`. It rejects output paths inside Test_Vault_, missing inputs and nonempty output folder; after reconciliation it compares the output row count against the selected source profile and exposes `nativeCertified: 0`. A failure of either input gate returns `BLOCKED`, `ledgerWritten: false` and creates **no ledger through this entrypoint**.
+
+Four synthetic tests in `15_Testing/test_run_gated_phase8.py` (commit `a34e86d`) exercise blocked profile, blocked table policy, missing registry, and repository-internal ledger path. These test files are committed but **not executed from a complete checkout**. They mock source reads and are not a substitute for an end-to-end reduced-QEAX test. The original standalone Phase 8 runner is still callable without the new gate: adoption is an operator/CI policy until that older CLI is retired or updated, **not an enforced universal prohibition**.
+
+Operator command:
+```sh
+python3 15_Testing/run_gated_phase8.py \
+  --qeax /private/EA_2026_10_15_endgame_mini.qeax \
+  --source-profile /private/reduced-2026-10-15-profile.local.json \
+  --disposition-policy "11_Importer/Definition/Source Profiles/EA8647-2026-09-06-v1.json" \
+  --registry "14_Workbench/registry/family_disposition_registry.v0.2.json" \
+  --out /private/new_phase8_run
+```
+
+**Remaining risk:** Phase 8 writes ledger incrementally rather than atomically; I/O exceptions after an admitted gate can leave an incomplete local-only output. A forthcoming pass should stage in a temp directory, validate total and evidence schema, and promote atomically. Wrong-profile failure is guarded before any output directory is created. No actual source ledger was committed. This is normalization evidence only, not native v2 acceptance. Next user `y` is required.
