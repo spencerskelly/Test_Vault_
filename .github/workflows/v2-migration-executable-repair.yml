@@ -1,0 +1,41 @@
+name: V2 migration executable repair
+on:
+  push:
+    branches: [chore/v2-folder-separation-20261018]
+    paths:
+      - '26_Definitions/tools/repair_v2_moved_registry_paths.py'
+      - '.github/workflows/v2-migration-executable-repair.yml'
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  repair-and-test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: chore/v2-folder-separation-20261018
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Rewrite old registry paths in active V2 executable files
+        run: python3 26_Definitions/tools/repair_v2_moved_registry_paths.py
+      - name: Commit only verified path repairs
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add 24_Workbench 25_Testing 26_Definitions
+          if ! git diff --cached --quiet; then
+            git commit -m 'fix(v2): reconcile remaining moved executable registry paths'
+            git push origin HEAD:chore/v2-folder-separation-20261018
+          fi
+      - name: Verify pinned v2 source registry
+        run: node 24_Workbench/registry/runtime/v2-translator-preflight.mjs "$PWD"
+      - name: Execute synthetic V2 registry tests
+        run: node --test 24_Workbench/registry/runtime/pinned-v2-eligibility.test.mjs
+      - name: Execute Phase 9 bridge tests
+        run: python3 -m unittest 25_Testing/test_phase9_source_direction_bridge.py
