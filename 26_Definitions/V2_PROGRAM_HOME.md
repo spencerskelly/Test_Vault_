@@ -19,6 +19,7 @@
 - [Help/definitions panel specification](../24_Workbench/docs/SYSML_V2_RELATIONSHIP_REFERENCE_AND_HELP_PANEL.md)
 
 ## Data and implementation register
+- [Approved semantic rules vs active runtime divergence register](v2_approved_runtime_divergences.v0.1.json)
 - [V1→V2 reusable capability ledger (28 entries)](V1_V2_REUSE_LEDGER_INDEX.md)
 - [Detailed technical analysis, known mismatches, and target Obsidian architecture](V1_V2_DEEP_TECHNICAL_RECOVERY_AND_PLATFORM_ARCHITECTURE_2026-10-18.md)
 - [Machine-readable reuse ledger](v1_to_v2_reuse_ledger.v0.1.json)
