@@ -11,6 +11,10 @@
 - [Detailed implementation traceability and gaps](V2_IMPLEMENTATION_TRACEABILITY_AUDIT_2026-10-18.md)
 
 ## Definitions and conversions — approved authority
+- [Repository-wide Markdown note census](MOC_REPOSITORY_NOTE_CENSUS_2026-10-18.md)
+- [35 original SysML v2 decision notes](MOC_Catalogs/sysml_decisions_1.md)
+- [Exact mapping exception audit](V2_APPROVED_EXCEPTION_HANDLING_AUDIT_2026-10-18.md)
+- [Use Case definitions](SysML_v2_Use_Case_Definitions_and_Usages.md) · [Occurrence definitions](SysML_v2_Occurrence_Definitions_and_Usages.md)
 - [Connector and native construct definition index](V2_CONNECTOR_DEFINITIONS_INDEX.md)
 - [October 17 approval: 60 element families](../24_Workbench/docs/GOLDEN_IMPORT_STEP2_60_FAMILY_DECISION_RECONCILIATION_2026-10-17.md)
 - [October 17 approval: 26 relationship families](../24_Workbench/docs/GOLDEN_IMPORT_RELATIONSHIP_26_FAMILY_DECISION_AUDIT_2026-10-17.md)
