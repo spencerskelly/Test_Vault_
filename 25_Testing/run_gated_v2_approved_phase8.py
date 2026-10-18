@@ -123,7 +123,7 @@ def verify_ledger(qeax, ledger, summary, expected):
     return count
 
 
-def execute(qeax, out, *, expected_counts=None, registry=REGISTRY):
+def execute(qeax, out, *, expected_counts=None, registry=REGISTRY, expected_sha256=None):
     """Commit private ledger only after strict source, schema, row and hash checks.
 
     expected_counts is solely for synthetic test fixtures; normal CLI pins
@@ -151,6 +151,9 @@ def execute(qeax, out, *, expected_counts=None, registry=REGISTRY):
     if approved["metadata"]["ea_diagrams_enabled"]:
         raise ValueError("DIAGRAM_SCOPE_FORBIDDEN")
     before = normalizer.input_attestation(qeax, registry)
+    if expected_sha256 is not None and before["source_sha256"] != expected_sha256:
+        return {"status": "BLOCKED", "reason": "SOURCE_SNAPSHOT_HASH_MISMATCH",
+                "ledgerWritten": False}
     stage = pathlib.Path(tempfile.mkdtemp(prefix=".v2-approved-stage-", dir=out.parent))
     try:
         summary = normalizer.reconcile(qeax, registry, stage)
@@ -188,8 +191,10 @@ def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--qeax", type=pathlib.Path, required=True)
     ap.add_argument("--out", type=pathlib.Path, required=True)
+    ap.add_argument("--source-sha256", required=True,
+                    help="Previously selected private QEAX SHA-256 fingerprint")
     args = ap.parse_args()
-    result = execute(args.qeax, args.out)
+    result = execute(args.qeax, args.out, expected_sha256=args.source_sha256)
     print(json.dumps(result, indent=2))
     return 0 if result["status"] == "RECONCILED_EVIDENCE_ONLY" else 1
 
