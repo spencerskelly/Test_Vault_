@@ -12,11 +12,11 @@ def probe(which=shutil.which, run=subprocess.run):
             "javaAvailable":False,"jupyterAvailable":False,
             "sysmlKernelRegistered":False,"readyForManualPilotValidation":False,
             "nativeCertified":False}
-    if not which("java") or not which("jupyter"):
+    result["javaAvailable"]=bool(which("java"))
+    result["jupyterAvailable"]=bool(which("jupyter"))
+    if not (result["javaAvailable"] and result["jupyterAvailable"]):
         result["status"]="MISSING_DEPENDENCY"
         return result
-    result["javaAvailable"]=True
-    result["jupyterAvailable"]=True
     try:
         proc=run(["jupyter","kernelspec","list","--json"],
                  capture_output=True,text=True,timeout=20,check=False)
