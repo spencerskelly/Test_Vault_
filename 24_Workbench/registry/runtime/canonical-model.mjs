@@ -1,10 +1,10 @@
 import { evaluate, createWorkbenchMenu } from './eligibility-engine.mjs';
-export const DEFINITION_KINDS = Object.freeze(['PartDefinition','ActionDefinition','StateDefinition','RequirementDefinition','ItemDefinition','PortDefinition','InterfaceDefinition','ConstraintDefinition','AttributeDefinition','CalculationDefinition','VerificationCaseDefinition']);
+export const DEFINITION_KINDS = Object.freeze(['PartDefinition','ActionDefinition','StateDefinition','RequirementDefinition','ItemDefinition','PortDefinition','InterfaceDefinition','ConstraintDefinition','AttributeDefinition','CalculationDefinition','VerificationCaseDefinition','UseCaseDefinition','OccurrenceDefinition']);
 const defKinds=new Set(DEFINITION_KINDS);
-const usageToDef={PartUsage:'PartDefinition',ActionUsage:'ActionDefinition',StateUsage:'StateDefinition',RequirementUsage:'RequirementDefinition',ItemUsage:'ItemDefinition',PortUsage:'PortDefinition',InterfaceUsage:'InterfaceDefinition',ConstraintUsage:'ConstraintDefinition',AttributeUsage:'AttributeDefinition',CalculationUsage:'CalculationDefinition',VerificationCaseUsage:'VerificationCaseDefinition'};
+const usageToDef={PartUsage:'PartDefinition',ActionUsage:'ActionDefinition',StateUsage:'StateDefinition',RequirementUsage:'RequirementDefinition',ItemUsage:'ItemDefinition',PortUsage:'PortDefinition',InterfaceUsage:'InterfaceDefinition',ConstraintUsage:'ConstraintDefinition',AttributeUsage:'AttributeDefinition',CalculationUsage:'CalculationDefinition',VerificationCaseUsage:'VerificationCaseDefinition',UseCaseUsage:'UseCaseDefinition',IncludeUseCaseUsage:'UseCaseDefinition',OccurrenceUsage:'OccurrenceDefinition',EventOccurrenceUsage:'OccurrenceDefinition'};
 const issue=(code,detail)=>({code,detail});
 export function validateGraph(graph){
- const errors=[],nodes=new Map();
+ const errors=[],reviewFlags=[],nodes=new Map();
  for(const n of graph?.nodes||[]){
   if(!n?.id||!n.kind||nodes.has(n.id)){errors.push(issue('INVALID_ID','Missing/duplicate node ID'));continue;}
   nodes.set(n.id,n);
@@ -16,7 +16,11 @@ export function validateGraph(graph){
    else if(!d)errors.push(issue('MISSING_DEFINITION',n.id));
    else if(d.kind!==usageToDef[n.kind])errors.push(issue('INCOMPATIBLE_DEFINITION',n.id));
   }
-  if(usageToDef[n.kind]&&!n.definitionId)errors.push(issue('UNTYPED_USAGE',n.id));
+  if(usageToDef[n.kind]&&!n.definitionId){
+   const allowed={PartUsage:'UNRESOLVED_PART_TYPE',ActionUsage:'UNRESOLVED_ACTION_TYPE',PortUsage:'UNRESOLVED_PORT_TYPE'};
+   if(allowed[n.kind])reviewFlags.push({...issue(allowed[n.kind],n.id),status:'review_required',sourceRef:n.sourceRef??null});
+   else errors.push(issue('UNTYPED_USAGE',n.id));
+  }
   if(n.ownerId&&!nodes.has(n.ownerId))errors.push(issue('MISSING_OWNER',n.id));
   if(n.kind==='PortUsage'&&n.ownerId&&nodes.has(n.ownerId)&&!['PartDefinition','PartUsage'].includes(nodes.get(n.ownerId).kind))errors.push(issue('INVALID_PORT_OWNER',n.id));
   if(n.multiplicity!==undefined){
@@ -32,7 +36,7 @@ export function validateGraph(graph){
   while(current?.ownerId){if(visited.has(current.id)){errors.push(issue('OWNERSHIP_CYCLE',n.id));break;}visited.add(current.id);current=nodes.get(current.ownerId);}
  }
  errors.push(...validateCanonicalRelationships(graph,nodes));
- return {valid:errors.length===0,diagnostics:errors.sort((a,b)=>a.code.localeCompare(b.code)||a.detail.localeCompare(b.detail)),nodes};
+ return {valid:errors.length===0,diagnostics:errors.sort((a,b)=>a.code.localeCompare(b.code)||a.detail.localeCompare(b.detail)),reviewRequired:reviewFlags.length>0,reviewFlags:reviewFlags.sort((a,b)=>a.code.localeCompare(b.code)||a.detail.localeCompare(b.detail)),nodes};
 }
 export function normalizeEA(input){
  const {family,sourceId,targetId,roles,evidence={},connectorId}=input||{};
@@ -63,7 +67,7 @@ export function evaluateOnGraph(registry,graph,input){
   while(cursor?.ownerId&&!seen.has(cursor.id)){seen.add(cursor.id);if(cursor.ownerId===to.id)return {status:'rejected',mutation:false,options:[],diagnostics:[issue('OWNERSHIP_CYCLE','Proposed edge closes a cycle')]};cursor=validation.nodes.get(cursor.ownerId);}
  }
  const result=evaluate(registry,{family:n.family,from,to,ownerId,originalDirection:n.originalDirection,evidence:n.evidence});
- return {...result,normalization:n.provenance,canonical:{fromId:n.fromId,toId:n.toId},graphVersion:graph.version||null};
+ return {...result,reviewFlags:validation.reviewFlags,reviewRequired:validation.reviewRequired,normalization:n.provenance,canonical:{fromId:n.fromId,toId:n.toId},graphVersion:graph.version||null};
 }
 export function menuOnGraph(registry,graph,input){
  const result=evaluateOnGraph(registry,graph,input);
