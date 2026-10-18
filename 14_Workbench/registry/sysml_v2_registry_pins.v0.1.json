@@ -1,0 +1,9 @@
+{
+  "schema": "mdse-v2-registry-pins/1",
+  "status": "candidate_not_release",
+  "files": {
+    "14_Workbench/registry/family_disposition_registry.v0.2.json": "1aa455a8f2813e33ccd032a649a23af753088d4994011c7dc17c42c668499bd2",
+    "14_Workbench/registry/sysml_v2_semantic_rules.v0.2.json": "7d7d282d34314de1c97c0fbe6d32ca0a6aadd1e19109fbff71e4dcfa05d7beb7",
+    "14_Workbench/registry/sysml_v2_semantic_decisions.v0.1.json": "ff57fe6b69dd9b6c67cfe4ccf9f9389d5c89a3f93089f7fb4494f84624b0a9fa"
+  }
+}
