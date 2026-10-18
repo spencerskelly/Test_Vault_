@@ -71,8 +71,15 @@ def verify_ledger(qeax, ledger, summary, expected):
     statuses = collections.Counter()
     rules = collections.Counter()
     diagnostics = collections.Counter()
+    seen_ids = set()
+    seen_guids = set()
     with sqlite3.connect(pathlib.Path(qeax).resolve().as_uri() + "?mode=ro", uri=True) as db:
         db.row_factory = sqlite3.Row
+        endpoints = {
+            item["Object_ID"]: (value(item["Object_Type"]), value(item["Stereotype"]))
+            for item in db.execute(
+                "SELECT Object_ID,Object_Type,Stereotype FROM t_object")
+        }
         q = "SELECT " + ",".join(SOURCE_COLUMNS) + " FROM t_connector ORDER BY Connector_ID"
         source = db.execute(q)
         with pathlib.Path(ledger).open(newline="", encoding="utf-8") as fh:
@@ -88,6 +95,21 @@ def verify_ledger(qeax, ledger, summary, expected):
                     raise ValueError("INCOMPLETE_LEDGER_ROW")
                 if row["source_pk"] != value(original["Connector_ID"]):
                     raise ValueError("LEDGER_ID_OR_ORDER_MISMATCH")
+                if row["source_pk"] in seen_ids:
+                    raise ValueError("DUPLICATE_SOURCE_CONNECTOR_ID")
+                seen_ids.add(row["source_pk"])
+                if not row["source_guid"] or row["source_guid"] in seen_guids:
+                    raise ValueError("MISSING_OR_DUPLICATE_SOURCE_CONNECTOR_GUID")
+                seen_guids.add(row["source_guid"])
+                for source_label, source_id, type_col, stereotype_col in (
+                    ("from", original["Start_Object_ID"], "raw_source_type", "raw_source_stereotype"),
+                    ("to", original["End_Object_ID"], "raw_target_type", "raw_target_stereotype"),
+                ):
+                    if source_id not in endpoints:
+                        raise ValueError("MISSING_ENDPOINT_ELEMENT_" + source_label)
+                    expected_type, expected_stereotype = endpoints[source_id]
+                    if (row[type_col], row[stereotype_col]) != (expected_type, expected_stereotype):
+                        raise ValueError("RAW_ENDPOINT_KIND_MISMATCH_" + source_label)
                 for source_col, ledger_col in headers.items():
                     if row[ledger_col] != value(original[source_col]):
                         raise ValueError("SOURCE_EVIDENCE_MISMATCH:" + ledger_col)
