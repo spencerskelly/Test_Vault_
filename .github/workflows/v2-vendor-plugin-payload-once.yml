@@ -1,5 +1,9 @@
 name: Vendor legacy plugin payload into V2 (one-time)
 on:
+  push:
+    branches: [feat/v2-integrated-pilot-20261018]
+    paths:
+      - '.github/workflows/v2-vendor-plugin-payload-once.yml'
   workflow_dispatch:
 permissions:
   contents: write
