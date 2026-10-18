@@ -40,6 +40,12 @@ jobs:
         shell: bash -el {0}
         run: python 15_Testing/sysml2_jupyter_fixture_gate.py --fixture 29_SysMLv2_Translator_Workbench/Fixtures/synthetic_connection_usage.sysml --expect ACCEPTED
 
+      - name: Validate nested definition specialization of lexical owner
+        shell: bash -el {0}
+        run: python 15_Testing/sysml2_jupyter_fixture_gate.py --fixture 29_SysMLv2_Translator_Workbench/Fixtures/synthetic_nested_definition_specializes_owner.sysml --expect ACCEPTED
+      - name: Validate contrast between nested usage and definition
+        shell: bash -el {0}
+        run: python 15_Testing/sysml2_jupyter_fixture_gate.py --fixture 29_SysMLv2_Translator_Workbench/Fixtures/synthetic_nested_usage_not_definition.sysml --expect ACCEPTED
       - name: Reject invalid SysML fixture with real kernel
         shell: bash -el {0}
         run: python 15_Testing/sysml2_jupyter_fixture_gate.py --fixture 29_SysMLv2_Translator_Workbench/Fixtures/synthetic_invalid_syntax.sysml --expect REJECTED
