@@ -1,0 +1,23 @@
+name: Phase 8 evidence verification
+on:
+  push:
+    paths:
+      - '14_Workbench/registry/runtime/normalize_qeax_phase8.py'
+      - '15_Testing/phase8_deferred_evidence_compat.py'
+      - '15_Testing/test_phase8_deferred_evidence_compat.py'
+      - '15_Testing/test_phase8_raw_evidence_coverage.py'
+      - '.github/workflows/phase8-evidence-verification.yml'
+  workflow_dispatch:
+jobs:
+  synthetic:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Verify exact checked-out Python syntax
+        run: python -m py_compile 14_Workbench/registry/runtime/normalize_qeax_phase8.py 15_Testing/phase8_deferred_evidence_compat.py
+      - name: Run exact repository regression files
+        working-directory: 15_Testing
+        run: python -m unittest -v test_phase8_deferred_evidence_compat test_phase8_raw_evidence_coverage
