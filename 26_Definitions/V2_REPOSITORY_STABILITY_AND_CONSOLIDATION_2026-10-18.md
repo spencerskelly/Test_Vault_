@@ -45,6 +45,16 @@ updated: 2026-10-18
 - **Fixtures:** tests and synthetic model Markdown are validation evidence, not a production model release.
 - **Unreviewed content:** catalog-only notes not yet tied to authority/owner/test; preserve and mark `indexed_only`, with no automated deletion.
 
+## Read-only consolidation preflight
+
+For any suggested consolidation, run [the inbound-reference and byte-duplicate auditor](tools/audit_note_backlinks.py) on a local clone, for example:
+
+```bash
+python3 26_Definitions/tools/audit_note_backlinks.py "100_Archive/V1/10_Base Vault/Definition/MDSE Workbench User Guide.md"
+```
+
+The output lists exact path references, ambiguous basename/wikilink references, exact-content duplicate paths and unavoidable dynamic/external-link limitations. [Synthetic regression](../25_Testing/test_v2_note_backlink_audit.py) verifies it does not mutate notes. It is a **preflight**, not an auto-delete authorization.
+
 ## Reference-safe cleanup policy
 1. No automatic delete or rename; preserve old paths, UID/id, citations and links.
 2. For any candidate move: enumerate inbound Markdown, wikilink, frontmatter, canvas, Bases, JSON and source-code references. Report ambiguous basename/aliases separately.
