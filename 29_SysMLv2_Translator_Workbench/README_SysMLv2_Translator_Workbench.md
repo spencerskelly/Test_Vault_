@@ -6,6 +6,10 @@ sourceRepository: spencerskelly/Test_Vault_
 ---
 # SysML v2 Translator and Workbench
 
+## Active first-run integration plan
+
+The primary short-pass dependency audit and 16-step first-run checklist is [FIRST_RUN_FAST_TRACK_DEPENDENCY_RULES_DOC_AUDIT_2026-10-17.md](FIRST_RUN_FAST_TRACK_DEPENDENCY_RULES_DOC_AUDIT_2026-10-17.md). It separates runnable v1 baseline pieces from the **not-yet-released** SysML v2 importer, parser, bottom-of-note writer and Workbench editor. The earlier 24-step plan below is historical; do not infer implementation from a planned step.
+
 ## V2 workspace navigation
 
 **Location:** This is the numbered `29_` research/planning area. Active v2 definitions live in `26_Definitions/`, test documentation in `25_Testing/` and Workbench product work in `24_Workbench/`.
