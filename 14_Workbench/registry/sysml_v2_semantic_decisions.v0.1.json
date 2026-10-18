@@ -1,0 +1,174 @@
+{
+  "schema": "mdse-v2-semantic-decision-register/1",
+  "version": "0.1.0",
+  "sourceRegistry": "14_Workbench/registry/family_disposition_registry.v0.2.json",
+  "candidateRegistry": "14_Workbench/registry/sysml_v2_semantic_rules.v0.2.json",
+  "default": "deferred_pending_evidence_and_parser",
+  "records": [
+    {
+      "family": "Abstraction:allocate",
+      "classification": "unspecified_to_candidate",
+      "candidate": "Allocation",
+      "requiredEvidence": "semantic_roles_and_allocation_context",
+      "reviewState": "candidate_needs_validation",
+      "nativeEmissionAuthorized": false,
+      "workbench": {
+        "structural": "show sourced candidate separately from native relationship",
+        "visual": "show distinct styled edge or evidence marker, not a certified connection",
+        "navigation": "preserve EA endpoint and proposed normalized roles",
+        "validation": "block unverified native edits",
+        "roundTrip": "retain source GUID and reason for deferral"
+      }
+    },
+    {
+      "family": "Aggregation:",
+      "classification": "unspecified_to_candidate",
+      "candidate": "OwnedPartUsage",
+      "requiredEvidence": "composition_end_and_multiplicity",
+      "reviewState": "candidate_needs_validation",
+      "nativeEmissionAuthorized": false,
+      "workbench": {
+        "structural": "show sourced candidate separately from native relationship",
+        "visual": "show distinct styled edge or evidence marker, not a certified connection",
+        "navigation": "preserve EA endpoint and proposed normalized roles",
+        "validation": "block unverified native edits",
+        "roundTrip": "retain source GUID and reason for deferral"
+      }
+    },
+    {
+      "family": "Association:",
+      "classification": "semantic_choice",
+      "candidate": "ConnectionOrReference",
+      "requiredEvidence": "connection_vs_interface_vs_reference",
+      "reviewState": "candidate_needs_validation",
+      "nativeEmissionAuthorized": false,
+      "workbench": {
+        "structural": "show sourced candidate separately from native relationship",
+        "visual": "show distinct styled edge or evidence marker, not a certified connection",
+        "navigation": "preserve EA endpoint and proposed normalized roles",
+        "validation": "block unverified native edits",
+        "roundTrip": "retain source GUID and reason for deferral"
+      }
+    },
+    {
+      "family": "Connector:",
+      "classification": "evidence_only_label",
+      "candidate": "None",
+      "requiredEvidence": "retain_only_source_evidence",
+      "reviewState": "evidence_only",
+      "nativeEmissionAuthorized": false,
+      "workbench": {
+        "structural": "show sourced candidate separately from native relationship",
+        "visual": "show distinct styled edge or evidence marker, not a certified connection",
+        "navigation": "preserve EA endpoint and proposed normalized roles",
+        "validation": "block unverified native edits",
+        "roundTrip": "retain source GUID and reason for deferral"
+      }
+    },
+    {
+      "family": "ControlFlow:",
+      "classification": "semantic_choice",
+      "candidate": "Succession",
+      "requiredEvidence": "succession_vs_transition_and_occurrence",
+      "reviewState": "candidate_needs_validation",
+      "nativeEmissionAuthorized": false,
+      "workbench": {
+        "structural": "show sourced candidate separately from native relationship",
+        "visual": "show distinct styled edge or evidence marker, not a certified connection",
+        "navigation": "preserve EA endpoint and proposed normalized roles",
+        "validation": "block unverified native edits",
+        "roundTrip": "retain source GUID and reason for deferral"
+      }
+    },
+    {
+      "family": "Dependency:deriveReqt",
+      "classification": "label_normalization",
+      "candidate": "RequirementDerivation",
+      "requiredEvidence": "requirement_endpoints_and_standard_library",
+      "reviewState": "candidate_needs_validation",
+      "nativeEmissionAuthorized": false,
+      "workbench": {
+        "structural": "show sourced candidate separately from native relationship",
+        "visual": "show distinct styled edge or evidence marker, not a certified connection",
+        "navigation": "preserve EA endpoint and proposed normalized roles",
+        "validation": "block unverified native edits",
+        "roundTrip": "retain source GUID and reason for deferral"
+      }
+    },
+    {
+      "family": "Dependency:satisfy",
+      "classification": "unspecified_to_candidate",
+      "candidate": "SatisfyRequirementUsage",
+      "requiredEvidence": "satisfied_requirement_and_subject",
+      "reviewState": "candidate_needs_validation",
+      "nativeEmissionAuthorized": false,
+      "workbench": {
+        "structural": "show sourced candidate separately from native relationship",
+        "visual": "show distinct styled edge or evidence marker, not a certified connection",
+        "navigation": "preserve EA endpoint and proposed normalized roles",
+        "validation": "block unverified native edits",
+        "roundTrip": "retain source GUID and reason for deferral"
+      }
+    },
+    {
+      "family": "Generalization:",
+      "classification": "unspecified_to_candidate",
+      "candidate": "Specialization",
+      "requiredEvidence": "subtype_supertype_orientation",
+      "reviewState": "candidate_needs_validation",
+      "nativeEmissionAuthorized": false,
+      "workbench": {
+        "structural": "show sourced candidate separately from native relationship",
+        "visual": "show distinct styled edge or evidence marker, not a certified connection",
+        "navigation": "preserve EA endpoint and proposed normalized roles",
+        "validation": "block unverified native edits",
+        "roundTrip": "retain source GUID and reason for deferral"
+      }
+    },
+    {
+      "family": "NoteLink:",
+      "classification": "evidence_only_label",
+      "candidate": "None",
+      "requiredEvidence": "retain_only_source_evidence",
+      "reviewState": "evidence_only",
+      "nativeEmissionAuthorized": false,
+      "workbench": {
+        "structural": "show sourced candidate separately from native relationship",
+        "visual": "show distinct styled edge or evidence marker, not a certified connection",
+        "navigation": "preserve EA endpoint and proposed normalized roles",
+        "validation": "block unverified native edits",
+        "roundTrip": "retain source GUID and reason for deferral"
+      }
+    },
+    {
+      "family": "UseCase:extend",
+      "classification": "label_normalization",
+      "candidate": "UseCaseExtension",
+      "requiredEvidence": "valid_extension_context",
+      "reviewState": "candidate_needs_validation",
+      "nativeEmissionAuthorized": false,
+      "workbench": {
+        "structural": "show sourced candidate separately from native relationship",
+        "visual": "show distinct styled edge or evidence marker, not a certified connection",
+        "navigation": "preserve EA endpoint and proposed normalized roles",
+        "validation": "block unverified native edits",
+        "roundTrip": "retain source GUID and reason for deferral"
+      }
+    },
+    {
+      "family": "UseCase:include",
+      "classification": "label_normalization",
+      "candidate": "UseCaseInclusion",
+      "requiredEvidence": "valid_inclusion_context",
+      "reviewState": "candidate_needs_validation",
+      "nativeEmissionAuthorized": false,
+      "workbench": {
+        "structural": "show sourced candidate separately from native relationship",
+        "visual": "show distinct styled edge or evidence marker, not a certified connection",
+        "navigation": "preserve EA endpoint and proposed normalized roles",
+        "validation": "block unverified native edits",
+        "roundTrip": "retain source GUID and reason for deferral"
+      }
+    }
+  ]
+}
