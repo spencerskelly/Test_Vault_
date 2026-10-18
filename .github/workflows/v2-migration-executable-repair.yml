@@ -20,6 +20,8 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
+      - name: Test bounded V2 QEAX slice relationship review
+        run: python3 -m unittest 25_Testing/test_v2_qeax_slice_review.py
       - name: Test V2 QEAX read-only source preflight
         run: python3 -m unittest 25_Testing/test_v2_qeax_preflight.py
       - name: Test standalone V2 base generation
