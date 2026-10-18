@@ -98,7 +98,7 @@ runtimeBase:
     - "99_System/03_Schemas/relationships.yaml"
     - "99_System/10_Docs/MDSE Modeling Ruleset 1.23.md"
   includeTrees:
-    - "Definitions"
+    - "16_Definitions"
     - "99_System/02_AI"
     - "99_System/04_People"
     - "99_System/05_Templates"
@@ -118,7 +118,7 @@ runtimeBase:
     - "11_Importer/Testing/EA Source Evidence"
     - "11_Importer/History"
     - "55_Workspace/History"
-    - "Cross-Vault/History"
+    - "66_Cross-Vault/History"
     - "10_Base Vault/Runtime"
     - "10_Base Vault/Tools"
     - "13_Bootstrap/Tools"
