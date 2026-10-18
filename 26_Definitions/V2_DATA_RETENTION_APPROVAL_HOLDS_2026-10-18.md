@@ -1,8 +1,8 @@
-# V2 Data Retention — Explicit Approval Holds
+# V2 Data Retention — Historical Review, Superseded
 
 [Master MOC](../MOC_MDSE_V2.md) · [Source controls](../24_Workbench/docs/GOLDEN_IMPORT_SOURCE_AND_VAULT_CONTROLS_PHASE1.md)
 
-**Status:** Review requested; do not implement destructive cleanup or change approved native SysML semantics. Keep proprietary source evidence private.
+**CURRENT STATUS: SUPERSEDED.** The user resolved these holds on October 18 in [STEP-00 approved model-handling clarifications](STEP_00_APPROVED_MODEL_HANDLING_CLARIFICATIONS_2026-10-18.md). The sections below are historical proposals, **not active requests to maintain duplicate source archives**. Aliased content/relationships merge into one canonical note; Boundary elements become one indexed MDSE Boundary note; packages map to folders; original source remains available externally. New generated artifacts preserve meaningful data and explanatory review links.
 
 ## HOLD-01 — EA Copy source records
 [Approved Copy and alias consolidation](../99System/10_EA%20Native%20Translator/sysml-v2-decisions/2026-10-16-ea-copy-alias-consolidation-approved.md) explicitly permits removing redundant notes and discarding source records after clean migration. Native alias semantics are approved and unaffected. Review whether source GUIDs, all original note text/tags, every original connector, redirects, and the complete migration ledger must remain recoverable even after generating one canonical note. **Recommendation: retain in a versioned private evidence archive.**
@@ -10,7 +10,7 @@
 ## HOLD-02 — EA Boundary exclusion
 [60-family approved matrix](../24_Workbench/docs/GOLDEN_IMPORT_STEP2_60_FAMILY_DECISION_RECONCILIATION_2026-10-17.md) specifies Boundary removed from generated model, though source-ledgered. [Source family execution](../24_Workbench/docs/GOLDEN_IMPORT_STEP2_FIRST_EXECUTION_2026-10-17.md) recorded 3 excluded-by-policy elements. Review whether source notes, tags, diagram position and identity require a searchable preserved evidence record. Do not conflate "no native SysML node" with permission to discard original observations.
 
-**Pending user approval:** Preserve Copy and excluded Boundary source evidence indefinitely in a private, versioned, recoverable form? No source data should be placed in this public methods repository.
+**Resolved:** No second archival source copy is required. Current handling is defined in STEP-00. Source records are available from the user's underlying source systems for future updates.
 
 ## Additional preservation gates (existing definitions, implementation unverified)
 
