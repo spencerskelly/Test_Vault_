@@ -1,0 +1,11 @@
+# STEP-02T — Safe three-way reimport and Workbench contract
+
+Date: 2026-10-18. Status: standalone prototype, 6/6 synthetic unit tests passed; not yet wired into production importer or live Workbench.
+
+A local tool accepts immutable previously-generated baseline, user-edited current vault and newly generated incoming vault, publishing to a fresh output directory only. Unchanged user files receive source updates. When source is unchanged, user edits survive. Nonoverlapping Markdown edits merge via `git merge-file`; overlapping edits preserve the current user note and retain the incoming version as a private conflict sidecar. It produces audit JSON and refuses an existing output or overlapping source/output trees. Conflicts are merge-review items, not automatically semantic flagLinks. No native SysML emission and zero EA diagram access.
+
+Synthetic tests cover clean source update, retained user edit, overlapping conflict preservation, nonoverlapping automatic merge, output collision, and source deletion versus user edit. All six passed in the tool package `STEP_02T_safe_reimport_and_workbench.zip` provided in chat. The code itself is presently packaged locally, not committed to the importer.
+
+Proposed Workbench contract: nodes carry UID, note path, source identity, kind and flags; edges carry unique source connector identity, endpoints, family, original roles, direction, cardinality, aggregation, disposition, reason and status; import summary carries expected/represented element and connector totals plus source/registry fingerprints. Workbench structural and visual views must distinguish native candidates from MDSE descriptive edges and unresolved flagLinks. FlagNotes visibly annotate source elements. Neither kind of flag may imply native SysML semantics, and resolving a flag must retain provenance/history and remove duplicate active representations.
+
+Before operational acceptance: connect the tool into the v2 importer; verify source identities and endpoint navigation after each merge; test real Obsidian and Workbench behavior; preserve private source data and immutable baseline; test UID schema and native parser separately. Maintain flag-and-continue for isolated semantic outliers, with zero silent source loss.
