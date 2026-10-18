@@ -42,3 +42,7 @@ STEP-08: [Scoped migration CI](../.github/workflows/v2-migration-executable-repa
 STEP-09: [Archived transaction manager](../100_Archive/V1/14_Workbench/src/core/transaction.ts) and [source reconciliation](../100_Archive/V1/14_Workbench/src/core/source-reconciliation.ts) are reusable design/test sources. Transactional native-text editing follows the read-only release.
 
 STEP-10: [BOM integration review](../24_Workbench/docs/BOM_TO_SYSMLV2_MDSE_ELEMENT_RELATIONSHIP_INTEGRATION_REVIEW_2026-10-17.md) and [XLSX adapter test work](../29_SysMLv2_Translator_Workbench/Passes/PASS06_BOM_XLSX_ADAPTER_2026-10-17.md). Real assembly, formulas, units and configuration acceptance remain open.
+
+STEP-11: [V1 Bootstrap author registration](../100_Archive/V1/13_Bootstrap/Definition/Author%20Registration%20Spec.md) and [governed plugin settings](../100_Archive/V1/10_Base%20Vault/Definition/Enabled%20Plugin%20Stack.md). Retain approved personal settings; updater and rollback later.
+
+STEP-12: [Cross-vault history](../66_Cross-Vault/README.md) and [phased release decisions](V2_RELEASE_ARCHITECTURE_DECISIONS_2026-10-18.md). Design IDs/contracts now; ship functionality after single-vault verification.
