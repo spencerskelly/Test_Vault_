@@ -1,0 +1,9 @@
+# Phase 9 — Phase 8 replay-gated specialization evidence handoff
+
+Added `15_Testing/phase9_local_specialization_evidence_gate.py`. Unlike an untrusted `directionEvidence:true` parameter, it reads the private QEAX and Phase 8 ledger, first requires a full successful replay, then checks requested connector IDs against actual `t_connector` records, explicit EA direction, endpoint kinds and the ledger's normalized orientation. It returns aggregate-only statuses. Six synthetic tests cover approved-form candidates, direction ambiguity, missing source, duplicate request, failed replay and changed orientation.
+
+**Critical qualification:** `qualified` means matching *source evidence candidate*, **not** semantic approval. The gate does not pass an authorization object to the JS graph; `semantic_approved=false`, `native_certified=0`. The full replay still uses the same Phase 8 decision routine that generated the ledger. There is no independent signed attestation of full semantics and no permission to enable the native emitter. Model GUIDs, IDs and local ledger remain private. Caller request IDs are consumed only locally, not logged.
+
+Run locally after pulling main: `python3 -m unittest -v 15_Testing/test_phase9_local_specialization_evidence_gate.py`. The test suite is committed but execution is not yet confirmed. Next step: bind an independently checked locally issued evidence token to a graph edge without exposing source IDs outside the local runtime, and require both semantic classification and parser gate before any native translation.
+
+Workbench: retain lexical nesting and specialization as distinct edges, show local provenance review state, and prohibit an assertion supplied by UI input from granting acceptance. Source and target navigation, visual direction and round-trip checks remain necessary.
