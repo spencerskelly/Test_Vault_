@@ -20,6 +20,10 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
+      - name: Verify all Markdown notes are indexed by MOCs
+        run: python3 -m unittest 25_Testing/test_repository_note_moc_coverage.py
+      - name: Verify approved V2 native-usage and definition decisions
+        run: node --test 24_Workbench/registry/runtime/approved-v2-clarifications.test.mjs
       - name: Validate approved vs runtime divergence register
         run: python3 -m unittest 25_Testing/test_v2_approved_runtime_divergences.py
       - name: Validate V1-to-V2 reuse ledger
