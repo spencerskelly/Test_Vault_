@@ -1,5 +1,5 @@
 """Read-only Phase 8 EA normalization. Local ledger only; no SysML emitter."""
-import sqlite3,csv,json,collections,pathlib,argparse,os,tempfile,shutil
+import sqlite3,csv,json,collections,pathlib,argparse,os,tempfile,shutil,hashlib
 K={'Class':'PartDefinition','Object':'PartUsage','Part':'PartUsage','Activity':'ActionDefinition','Action':'ActionUsage','State':'StateDefinition','Requirement':'RequirementDefinition','UseCase':'UseCaseDefinition','Signal':'ItemDefinition','InformationItem':'ItemDefinition','Port':'PortUsage'}
 def kind(t,s):
  if t in ('Note','Boundary','Text','Decision','Synchronization','StateNode','Issue','Change','Artifact','Trigger') or (t=='Class' and s=='Business Line'):return None
@@ -59,6 +59,21 @@ def reconcile(qeax,registry,output):
  assert summary['total']==con.execute('SELECT COUNT(*) FROM t_connector').fetchone()[0]
  (output/'aggregate_only.json').write_text(json.dumps(summary,indent=2)+'\n')
  return summary
+def sha256_file(path):
+ """Hash complete local input bytes; do not output model rows."""
+ digest=hashlib.sha256()
+ with pathlib.Path(path).open('rb') as inp:
+  for chunk in iter(lambda:inp.read(1024*1024),b''):
+   digest.update(chunk)
+ return digest.hexdigest()
+
+def input_attestation(qeax,registry):
+ """Snapshot provenance is private and never grants semantic eligibility."""
+ return {'schema':'mdse-phase8-input-attestation/1',
+         'source_sha256':sha256_file(qeax),
+         'registry_sha256':sha256_file(registry),
+         'native_certified':0}
+
 def reconcile_atomic(qeax,registry,output):
  """Publish an all-or-nothing local result directory; never overwrite an existing run."""
  destination=pathlib.Path(output).resolve()
@@ -66,7 +81,10 @@ def reconcile_atomic(qeax,registry,output):
  if not destination.parent.is_dir():raise ValueError('OUTPUT_PARENT_MISSING')
  stage=pathlib.Path(tempfile.mkdtemp(prefix='.phase8-incomplete-',dir=destination.parent))
  try:
+  inputs=input_attestation(qeax,registry)
   summary=reconcile(qeax,registry,stage)
+  if inputs!=input_attestation(qeax,registry):raise ValueError('INPUT_CHANGED_DURING_RECONCILIATION')
+  (stage/'input_attestation.local.json').write_text(json.dumps(inputs,indent=2)+'\n')
   if summary['native_certified']!=0:raise ValueError('NATIVE_EMISSION_FORBIDDEN')
   os.rename(stage,destination)
   return summary
