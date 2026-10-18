@@ -14,7 +14,7 @@ class DirectionTests(unittest.TestCase):
   with self.ledger.open("w",newline="") as f:
    w=csv.DictWriter(f,fieldnames=self.row.keys());w.writeheader();w.writerow(self.row)
  def errors(self):return assess(self.db,self.ledger)["error_counts"]
- def test_matching_raw_direction(self):self.assertEqual(self.errors(),{"EXPLICIT_DIRECTION_NOT_PRESENT":0,"MISSING_GENERALIZATIONS":0} if False else {"MISSING_GENERALIZATIONS":0})
+ def test_matching_raw_direction(self):self.assertEqual(self.errors(),{"MISSING_GENERALIZATIONS":0})
  def test_tampered_direction(self):
   self.row["source_direction"]="Unspecified";self.write()
   self.assertIn("SOURCE_EVIDENCE_MISMATCH",self.errors())
