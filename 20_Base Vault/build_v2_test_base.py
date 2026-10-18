@@ -39,7 +39,7 @@ def build(dest):
             "community-plugins.json":[],
         }
         for name,settings in configs.items():
-            payload=json.dumps(settings,indent=2)+"\\n"
+            payload=json.dumps(settings,indent=2)+"\n"
             (obs/name).write_text(payload)
             hashes[".obsidian/"+name]=hashlib.sha256(payload.encode()).hexdigest()
         (dest/".mdse_v2_test_base.json").write_text(json.dumps({"schema":"mdse-v2-test-base/1","status":"uninitialized_test_only","native_import_ready":False,"plugin_ready":False,"files":hashes},indent=2)+"\n")
