@@ -4,6 +4,9 @@ MDSE toolchain development repository. This is **not** a generated engineering m
 
 ## V2 program start here
 
+**[Open the MDSE v2 Master Map of Contents](MOC_MDSE_V2.md)** — authoritative navigation across project decisions, native definitions, importer, Workbench, validation, historical references, and known gaps.
+
+
 - [V2 program home — decisions, definition map, implementations and tests](26_Definitions/V2_PROGRAM_HOME.md)
 - [V2 goals, work breakdown and progress](26_Definitions/V2_PROGRAM_GOALS_AND_COMPLETION_2026-10-18.md)
 - [V2 connector definitions](26_Definitions/V2_CONNECTOR_DEFINITIONS_INDEX.md)
