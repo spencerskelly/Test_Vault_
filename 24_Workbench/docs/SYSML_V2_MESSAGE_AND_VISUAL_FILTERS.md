@@ -1,4 +1,6 @@
 # SysML v2 Message and Visual Visibility Filters
+
+> **Scope update (ADR-V2-05, October 18):** EA diagrams and their layout/sequence/Canvas translation are **deferred** until all tools and golden-import testing are complete. This document retains its approved semantic and future view-design decisions, but the first-release importer must use only non-diagram source elements/connectors. [Scope lock](../../26_Definitions/STEP_02A_EA_DIAGRAM_DEFERRED_2026-10-18.md).
 Date: 2026-10-17
 Status: Message option A approved; view-filter behavior approved as requirements, implementation pending.
 
