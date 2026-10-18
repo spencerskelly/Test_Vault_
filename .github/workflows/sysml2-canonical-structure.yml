@@ -1,0 +1,23 @@
+name: SysML v2 canonical graph structural checks
+on:
+  push:
+    paths:
+      - '14_Workbench/registry/runtime/canonical-model.mjs'
+      - '15_Testing/test_canonical_structural_invariants.mjs'
+      - '.github/workflows/sysml2-canonical-structure.yml'
+  pull_request:
+    paths:
+      - '14_Workbench/registry/runtime/canonical-model.mjs'
+      - '15_Testing/test_canonical_structural_invariants.mjs'
+      - '.github/workflows/sysml2-canonical-structure.yml'
+  workflow_dispatch:
+jobs:
+  canonical-graph:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Validate canonical graph invariants
+        run: node --test 15_Testing/test_canonical_structural_invariants.mjs
