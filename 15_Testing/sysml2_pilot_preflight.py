@@ -3,17 +3,32 @@
 This checks installation only; it does not execute, parse or certify SysML.
 """
 import json
+import re
 import shutil
 import subprocess
 import sys
 
 def probe(which=shutil.which, run=subprocess.run):
     result={"schema":"mdse-sysml2-kernel-preflight/1",
-            "javaAvailable":False,"jupyterAvailable":False,
+            "javaAvailable":False,"javaCommandPresent":False,"javaMajorVersion":None,
+            "jupyterAvailable":False,
             "sysmlKernelRegistered":False,"readyForManualPilotValidation":False,
             "nativeCertified":False}
-    result["javaAvailable"]=bool(which("java"))
+    result["javaCommandPresent"]=bool(which("java"))
     result["jupyterAvailable"]=bool(which("jupyter"))
+    if result["javaCommandPresent"]:
+        try:
+            java=run(["java","-version"],capture_output=True,text=True,timeout=10,check=False)
+            version_text=(java.stderr or "")+"\n"+(java.stdout or "")
+            match=re.search(r'(?i)(?:openjdk|java) version\s+"?(\d+)(?:\.(\d+))?',version_text)
+            if not match:
+                match=re.search(r'(?i)openjdk\s+(\d+)(?:\.(\d+))?',version_text)
+            if java.returncode==0 and match:
+                major=int(match.group(2)) if match.group(1)=="1" and match.group(2) else int(match.group(1))
+                result["javaMajorVersion"]=major
+                result["javaAvailable"]=major>=21
+        except (OSError,subprocess.TimeoutExpired):
+            pass
     if not (result["javaAvailable"] and result["jupyterAvailable"]):
         result["status"]="MISSING_DEPENDENCY"
         return result
