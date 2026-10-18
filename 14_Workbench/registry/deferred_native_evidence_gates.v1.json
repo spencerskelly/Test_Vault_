@@ -1,0 +1,103 @@
+{
+  "schema": "mdse-deferred-native-evidence-gates/1",
+  "nativeEmissionAuthorized": false,
+  "requiredCommon": [
+    "source_kind",
+    "source_snapshot",
+    "ea_element_guid",
+    "ea_connector_guid",
+    "source_type",
+    "source_stereotype",
+    "source_direction",
+    "source_role",
+    "target_role",
+    "candidate_native_construct",
+    "source_semantic_assertion",
+    "workbench_structural",
+    "workbench_visual",
+    "workbench_navigation",
+    "workbench_validation",
+    "roundtrip_provenance",
+    "reviewer_decision",
+    "reviewer_rationale",
+    "parser_fixture_id",
+    "parser_result"
+  ],
+  "categories": {
+    "Software Component": {
+      "nativeCandidates": [
+        "PartDefinition",
+        "PartUsage"
+      ],
+      "required": [
+        "software_component_boundary",
+        "host_usage_evidence",
+        "containment_or_reference",
+        "definition_usage_kind"
+      ],
+      "forbiddenInference": [
+        "BOM_membership",
+        "physical_part_from_software_label"
+      ]
+    },
+    "System Partner": {
+      "nativeCandidates": [
+        "PartDefinition",
+        "PartUsage",
+        "UseCaseActor"
+      ],
+      "required": [
+        "external_boundary_evidence",
+        "actor_or_reference_role",
+        "owned_vs_external"
+      ],
+      "forbiddenInference": [
+        "composite_ownership_from_aggregation_only"
+      ]
+    },
+    "Physical Context": {
+      "nativeCandidates": [
+        "UseCaseDefinition",
+        "OccurrenceUsage",
+        "PartUsage"
+      ],
+      "required": [
+        "context_kind",
+        "subject_evidence",
+        "actor_or_environment_roles"
+      ],
+      "forbiddenInference": [
+        "physical_owner_from_context_name"
+      ]
+    },
+    "Platform": {
+      "nativeCandidates": [
+        "PartDefinition",
+        "PartUsage",
+        "Redefinition",
+        "Specialization"
+      ],
+      "required": [
+        "platform_definition_or_usage",
+        "reference_variant_or_owned",
+        "typing_evidence"
+      ],
+      "forbiddenInference": [
+        "subtype_from_similarity"
+      ]
+    },
+    "Unstereotyped Class": {
+      "nativeCandidates": [],
+      "required": [
+        "explicit_source_concept",
+        "reviewed_target_kind"
+      ],
+      "forbiddenInference": [
+        "default_part_classification"
+      ]
+    }
+  },
+  "acceptedReviewDecision": "approved",
+  "acceptedParserResult": "passed",
+  "status": "evidence_gate_only"
+}
