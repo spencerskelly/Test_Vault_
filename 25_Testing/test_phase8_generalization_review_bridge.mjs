@@ -1,6 +1,6 @@
 import assert from 'node:assert/strict';
 import {test} from 'node:test';
-import {reviewPhase8Generalization as review} from '../14_Workbench/registry/runtime/phase8-generalization-review-bridge.mjs';
+import {reviewPhase8Generalization as review} from '../24_Workbench/registry/runtime/phase8-generalization-review-bridge.mjs';
 const row=()=>({source_pk:'1',source_guid:'synthetic-guid',family:'Generalization',source_direction:'Source -> Destination',raw_from:'10',raw_to:'20',normalized_from:'10',normalized_to:'20',role:'source-subtype-to-destination-supertype',status:'orientation_normalized',diagnostics:'NATIVE_PARSER_AND_EVIDENCE_PENDING'});
 const source=()=>({connectorId:1,guid:'synthetic-guid',family:'Generalization',direction:'Source -> Destination',startId:10,endId:20,fromKind:'PartDefinition',toKind:'PartDefinition',definitionKindsVerified:true,localSnapshotBound:true});
 const codes=r=>r.diagnostics.map(x=>x.code);
