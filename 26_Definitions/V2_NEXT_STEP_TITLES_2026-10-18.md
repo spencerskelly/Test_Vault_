@@ -34,3 +34,7 @@ STEP-04: [Reduced EA family census](../24_Workbench/docs/GOLDEN_IMPORT_STEP2_FIR
 STEP-05: [Official parser smoke-test result](../29_SysMLv2_Translator_Workbench/Passes/PASS07_FIRST_PASSING_NATIVE_PARSER_GATE_2026-10-17.md). Real-source native emitter and note writer remain pending.
 
 STEP-06: [Archived plugin lock baseline](../100_Archive/V1/10_Base%20Vault/Definition/Enabled%20Plugin%20Stack.md). The V2 base builder exists; plugin-ready packaging remains pending.
+
+STEP-07: [Workbench interaction contract](../24_Workbench/docs/SYSML_V2_DRAW_TO_RELATE_AND_VAULT_DEFINITIONS_CONTRACT.md) and [historical Obsidian indexer](../100_Archive/V1/14_Workbench/src/obsidian/indexer.ts). Native read-only Obsidian integration remains pending.
+
+STEP-08: [Scoped migration CI](../.github/workflows/v2-migration-executable-repair.yml) and [source/no-loss gates](../24_Workbench/docs/GOLDEN_IMPORT_SOURCE_AND_VAULT_CONTROLS_PHASE1.md). Synthetic CI passes; golden source→parser→GUI acceptance is not established.
