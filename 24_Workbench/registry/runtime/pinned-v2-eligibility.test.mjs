@@ -22,10 +22,10 @@ test('unknown candidate family rejected before evaluation',()=>{
 test('tampered registry hash is rejected',()=>{
  const temp=mkdtempSync(join(tmpdir(),'v2-pin-test-'));
  try{
-  const files=['14_Workbench/registry/sysml_v2_registry_pins.v0.1.json',
-   '14_Workbench/registry/family_disposition_registry.v0.2.json',
-   '14_Workbench/registry/sysml_v2_semantic_rules.v0.2.json',
-   '14_Workbench/registry/sysml_v2_semantic_decisions.v0.1.json'];
+  const files=['24_Workbench/registry/sysml_v2_registry_pins.v0.1.json',
+   '24_Workbench/registry/family_disposition_registry.v0.2.json',
+   '24_Workbench/registry/sysml_v2_semantic_rules.v0.2.json',
+   '24_Workbench/registry/sysml_v2_semantic_decisions.v0.1.json'];
   for(const f of files){mkdirSync(dirname(join(temp,f)),{recursive:true});writeFileSync(join(temp,f),readFileSync(join(root,f)));}
   writeFileSync(join(temp,files[2]),'{}');
   assert.throws(()=>loadPinnedV2(temp),/REGISTRY_HASH_MISMATCH/);
