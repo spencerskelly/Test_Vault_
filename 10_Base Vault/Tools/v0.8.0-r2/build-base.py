@@ -2,10 +2,10 @@
 """Build the lean MDSE runtime base from the W-321 release manifest.
 
 Usage:
-  python3 "Base Vault/Tools/v0.8.0-r2/build-base.py" OUTPUT_DIRECTORY
+  python3 "10_Base Vault/Tools/v0.8.0-r2/build-base.py" OUTPUT_DIRECTORY
 
 The output directory must not already contain files. The positive include list comes only
-from Base Vault/Definition/mdse-release.yaml. Workspace-only methodology files are never
+from 10_Base Vault/Definition/mdse-release.yaml. Workspace-only methodology files are never
 copied. The runtime payload is intentionally operational only. Importer executables remain external and run against the generated base; they are not copied into engineer vaults.
 """
 import argparse, os, shutil, sys
@@ -16,7 +16,7 @@ except ImportError:
     sys.exit("PyYAML is required: pip install pyyaml")
 
 ROOT=os.path.abspath(os.path.join(os.path.dirname(__file__),"..","..",".."))
-MANIFEST=os.path.join(ROOT,"Base Vault","Definition","mdse-release.yaml")
+MANIFEST=os.path.join(ROOT,"10_Base Vault","Definition","mdse-release.yaml")
 
 def full(root,p):
     return os.path.join(root,*p.split("/"))
@@ -53,6 +53,28 @@ out=os.path.abspath(a.output)
 with open(MANIFEST,encoding="utf-8") as f:
     man=yaml.safe_load(f)
 rb=man["runtimeBase"]
+
+# Fail early: reject missing governed inputs before the first output directory is created.
+rp=man["runtimePlugins"]
+required_files=list(rb["includeFiles"])
+required_files += [m["source"] for m in rb.get("mappedFiles", [])]
+required_files += [rp["lock"], rp["enabledList"]]
+required_trees=list(rb["includeTrees"])
+missing_files=[p for p in required_files if not os.path.isfile(full(ROOT,p))]
+missing_trees=[p for p in required_trees if not os.path.isdir(full(ROOT,p))]
+if missing_files or missing_trees:
+    for p in missing_files: print("BLOCKER missing release input file:",p,file=sys.stderr)
+    for p in missing_trees: print("BLOCKER missing release input tree:",p,file=sys.stderr)
+    sys.exit(2)
+with open(full(ROOT,rp["lock"]),encoding="utf-8") as lf:
+    prelock=yaml.safe_load(lf)
+if not isinstance(prelock,dict) or prelock.get("schema")!=2 or not isinstance(prelock.get("plugins"),dict):
+    sys.exit("BLOCKER invalid plugin lock schema")
+for plugin_id, files in prelock["plugins"].items():
+    for name in files.get("sha256",{}):
+        p=rp["payload"]+"/"+plugin_id+"/"+name
+        if not os.path.isfile(full(ROOT,p)):
+            sys.exit("BLOCKER missing locked plugin payload: "+p)
 
 if os.path.exists(out):
     if not os.path.isdir(out):
