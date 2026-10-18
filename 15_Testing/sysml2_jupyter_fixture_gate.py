@@ -25,22 +25,31 @@ def execute_fixture(path, timeout=90):
         execute_reply=None
         error=False
         idle=False
+        observed_types={}
+        stream_keyword_hits=0
+        shell_reply_type=None
         while not idle:
             msg=client.get_iopub_msg(timeout=timeout)
             if msg.get("parent_header",{}).get("msg_id")!=request:
                 continue
             msg_type=msg.get("msg_type")
+            observed_types[msg_type]=observed_types.get(msg_type,0)+1
             if msg_type=="error":
                 error=True
             if msg_type=="stream":
                 text=msg.get("content",{}).get("text","")
                 if "Error" in text or "error" in text:
+                    stream_keyword_hits+=1
                     error=True
             if msg_type=="status" and msg.get("content",{}).get("execution_state")=="idle":
                 idle=True
         reply=client.get_shell_msg(timeout=timeout)
+        shell_reply_type=reply.get("msg_type")
         if reply.get("parent_header",{}).get("msg_id")==request:
             execute_reply=reply.get("content",{}).get("status")
+        result["diagnosticSummary"]={"iopubMessageCounts":observed_types,
+          "streamKeywordHits":stream_keyword_hits,"iopubError":observed_types.get("error",0)>0,
+          "sawIdle":idle,"shellReplyType":shell_reply_type,"shellReplyStatus":execute_reply}
         result["status"]="ACCEPTED" if idle and not error and execute_reply=="ok" else "REJECTED"
     except Exception as exc:
         result["status"]="RUNNER_ERROR"
