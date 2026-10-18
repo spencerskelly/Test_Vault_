@@ -71,3 +71,25 @@ export function menuOnGraph(registry,graph,input){
  const menu=createWorkbenchMenu(registry,selection);
  return {...menu,normalization:result.normalization};
 }
+
+// Strict, opt-in candidate guard. No native emission authorization.
+export function validateConnectionEvidence(graph,connection){
+ const diagnostics=[];
+ const indexed=new Map((graph?.nodes||[]).map(n=>[n.id,n]));
+ const fail=(code)=>diagnostics.push(issue(code,connection?.id||'unknown'));
+ if(!connection?.id||!connection?.sourceRef?.trim?.())fail('MISSING_CONNECTOR_PROVENANCE');
+ const owner=indexed.get(connection?.ownerId);
+ if(!owner||!['PartDefinition','PartUsage'].includes(owner.kind))fail('INVALID_CONNECTION_OWNER');
+ const endpoints=[indexed.get(connection?.fromId),indexed.get(connection?.toId)];
+ if(endpoints.some(n=>!n))fail('UNRESOLVED_CONNECTION_ENDPOINT');
+ else {
+  for(const n of endpoints){
+   if(!['PartUsage','PortUsage'].includes(n.kind))fail('INVALID_CONNECTION_ENDPOINT_KIND');
+   // Only direct child endpoints are provisionally supported; wider traversal remains deferred.
+   if(n.ownerId!==connection.ownerId)fail('CONNECTION_ENDPOINT_SCOPE_UNVERIFIED');
+  }
+ }
+ if(!['source-to-target','target-to-source','bidirectional','undirected'].includes(connection?.direction))fail('UNVERIFIED_CONNECTION_DIRECTION');
+ if(connection?.directionEvidence!==true)fail('UNATTESTED_DIRECTION');
+ return {valid:diagnostics.length===0,diagnostics,nativeCertified:false};
+}
