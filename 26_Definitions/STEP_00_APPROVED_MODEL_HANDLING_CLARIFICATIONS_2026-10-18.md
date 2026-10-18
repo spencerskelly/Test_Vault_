@@ -2,6 +2,8 @@
 
 Date: 2026-10-18. Status: **APPROVED implementation direction**. Supersedes earlier proposed retention holds in [the review note](V2_DATA_RETENTION_APPROVAL_HOLDS_2026-10-18.md) where inconsistent. No prior native semantic approval is reopened. [Master MOC](../MOC_MDSE_V2.md) · [Titled steps](V2_NEXT_STEP_TITLES_2026-10-18.md).
 
+> **Current EA-diagram scope (ADR-V2-05, October 18):** All EA diagram source tables, diagram-derived sequence/view interpretation, Canvas seeding from EA, and diagram-specific tool/testing work are deferred until the complete toolchain and golden import are accepted. This supersedes diagram-dependent portions of the sequence and workflow guidance below, not native behavior modeling from explicitly modeled non-diagram elements/connectors. See [STEP-02A](STEP_02A_EA_DIAGRAM_DEFERRED_2026-10-18.md).
+
 ## Translation/data handling decisions
 
 1. **Copy/alias consolidation:** Merge all *meaningful* source text, properties, evidence and separate inbound/outbound relationships from copies that genuinely represent one definition into **one canonical Markdown note** and native alias memberships as approved. Removing redundant duplicate notes after verifying merger is not data loss. Do not collapse distinct usages or connectors. The original source stays available for reimport; no duplicate indefinite private source archive is required.
