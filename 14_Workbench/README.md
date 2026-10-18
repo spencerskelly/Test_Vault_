@@ -1,5 +1,8 @@
 # MDSE Workbench
 
+> [!WARNING] V1 runtime baseline versus V2 work in progress
+> This README documents the existing MDSE YAML/Local Model Workbench 0.1.18 runtime and its tests. The newly approved **SysML v2** authoritative model lives in the **bottom `## SysML v2` section of each note**, not an independent writable YAML graph. The recent context-popup source change is not yet an installed, rebuilt and validated release. The v2 first-run dependency audit and release gates are at [FIRST_RUN_FAST_TRACK_DEPENDENCY_RULES_DOC_AUDIT_2026-10-17.md](../29_SysMLv2_Translator_Workbench/FIRST_RUN_FAST_TRACK_DEPENDENCY_RULES_DOC_AUDIT_2026-10-17.md). Do not treat v1 schema assertions below as a complete v2 native mapping.
+
 The everyday engineer interface to the MDSE model vault: create model elements, explore them as generated views, and review model health, without editing YAML by hand.
 
 The vault's Markdown and YAML are the model. Workbench reads the vault's own schema (`relationships.yaml`, `element-types.yaml`) and never embeds model rules. If Workbench is turned off, the vault stays complete and readable.
