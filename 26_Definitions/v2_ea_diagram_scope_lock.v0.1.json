@@ -1,0 +1,39 @@
+{
+  "schema": "mdse-v2-ea-diagram-deferral/1",
+  "decision": "ADR-V2-05",
+  "status": "APPROVED_DISABLE_ALL_EA_DIAGRAM_IMPORT",
+  "source_tables": {
+    "allowed": [
+      "t_object",
+      "t_connector",
+      "t_package"
+    ],
+    "excluded": [
+      "t_diagram",
+      "t_diagramobjects",
+      "t_diagramlinks"
+    ]
+  },
+  "excluded_operations": [
+    "source_diagram_read",
+    "diagram_count_gate",
+    "diagram_layout_translation",
+    "ea_sequence_diagram_interpretation",
+    "canvas_seed_from_ea",
+    "diagram_metadata_export",
+    "diagram_dependent_native_inference",
+    "diagram_specific_golden_acceptance"
+  ],
+  "allowed_independent_operations": [
+    "native_sysml_text_parsing",
+    "native_sysml_workbench_views",
+    "native_behavior_from_explicit_non_diagram_source",
+    "element_connector_source_reconciliation"
+  ],
+  "reopen_only_after": [
+    "all_planned_tools_implemented_and_tested",
+    "golden_import_explicitly_accepted",
+    "separate_user_approval_for_ea_diagrams"
+  ],
+  "authority": "26_Definitions/STEP_02A_EA_DIAGRAM_DEFERRED_2026-10-18.md"
+}
