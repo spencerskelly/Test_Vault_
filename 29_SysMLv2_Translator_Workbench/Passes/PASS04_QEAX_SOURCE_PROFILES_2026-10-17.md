@@ -74,3 +74,23 @@ python3 -m unittest discover -s 15_Testing -p test_reconcile_qeax_dispositions.p
 **Not yet verified:** importing the reduced model with its own source profile, all element-type and connector-type distributions, and imported connector disposition completeness. The old September full profile is preserved unchanged. The table-disposition gate is a separate required gate; it does not supersede strict current-source counts.
 
 **Next gated step:** generate the current source's full type/count evidence locally and introduce a separate reduced profile selection contract without embedding proprietary row-level data or silently replacing the old v1 profile.
+
+## Pass 04 continuation — Reduced snapshot profile and strict selection (2026-10-17)
+
+Created local-only source snapshot profile at `/mnt/data/mdse_local_profiles/reduced-2026-10-15-profile.local.json`; **not committed**. The profile contains the exact counts of 12 mandatory EA tables, 27 element kinds, 14 connector kinds and 8 diagram kinds, plus the reduced QEAX's SHA-256. Verified independently using read-only SQLite (`quick_check = ok`). No connector endpoints, source element GUIDs, text or diagrams are exported.
+
+Current reduced source: t_object 11,447; t_connector 14,688; t_package 1,389; t_diagram 2,208; t_diagramobjects 25,402; t_diagramlinks 23,531; t_objectproperties 43,634; t_xref 17,825; t_document 120; t_operation 21; t_attribute 3; t_operationparams 0. Hash `69222c060a81b3e35a3e25f365f2a1f4c3dd6eaa19d77fbbd5ba9abdf365a822`.
+
+Added explicit profile selection validator `15_Testing/check_qeax_source_profile.py` (commit `611b59c`): it compares all counts in each of the four sections and rejects mismatches, missing/new source kinds, invalid schema and pinned source hash mismatch. There is **no profile autodetection/fallback**. Added synthetic unit tests `15_Testing/test_qeax_source_profile_selection.py` (commit `899e695`) covering matching snapshot, wrong full profile, extra kind, hash drift and missing expected section. The new committed tests have **not been executed from a complete checkout**; a local independently implemented sanity check confirmed reduced-profile category sums and one deliberately modified count produces an expected mismatch.
+
+Example operator usage:
+```sh
+python3 15_Testing/check_qeax_source_profile.py /private/EA_2026_10_15_endgame_mini.qeax --profile /private/reduced-2026-10-15-profile.local.json
+python3 15_Testing/check_qeax_source_profile.py /private/EA_2026_10_15_endgame_mini.qeax --profile "11_Importer/Definition/Source Profiles/EA8647-2026-09-06-v1.json"
+python3 -m unittest discover -s 15_Testing -p test_qeax_source_profile_selection.py -v
+```
+First must PASS and second must BLOCK due to the original September full-model counts. A full checkout execution of these exact commands is required before treating the gate as verified.
+
+**Source profile policy:** September v1 profile unchanged. Reduced snapshot counts and exact hash stay local; repo stores only code, synthetic tests and aggregate findings. This checker controls snapshot acceptance; native SysML v2 serialization and per-connector disposition remain separate release gates.
+
+**Next pass:** Complete selection integration into the v2 importer pipeline, ensure all connector dispositions are represented, and keep local source-specific profile and ledger private. User `y` required.
