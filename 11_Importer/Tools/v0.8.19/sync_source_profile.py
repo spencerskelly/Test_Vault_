@@ -4,8 +4,8 @@ import json
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[3]
-DEFAULT_PROFILE = ROOT / "Importer/Definition/Source Profiles/EA8647-2026-09-06-v1.json"
-DEFAULT_IMPORTER = ROOT / "Importer/Tools/v0.8.19/EA_to_MDSE_Native_Importer_v0.8.19.html"
+DEFAULT_PROFILE = ROOT / "11_Importer/Definition/Source Profiles/EA8647-2026-09-06-v1.json"
+DEFAULT_IMPORTER = ROOT / "11_Importer/Tools/v0.8.19/EA_to_MDSE_Native_Importer_v0.8.19.html"
 OPEN = '<script id="mdse-source-profile" type="application/json">\n'
 CLOSE = '\n</script>'
 
