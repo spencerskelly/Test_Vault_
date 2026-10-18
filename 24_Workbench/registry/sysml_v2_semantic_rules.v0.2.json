@@ -407,7 +407,7 @@
     "trade-study calculations and results"
   ],
   "noSilentDiscard": true,
-  "upstreamRegistry": "14_Workbench/registry/family_disposition_registry.v0.2.json",
+  "upstreamRegistry": "24_Workbench/registry/family_disposition_registry.v0.2.json",
   "coverage": {
     "sourceFamilies": 26,
     "coveredFamilies": 26,
