@@ -54,6 +54,8 @@ jobs:
         run: python3 -m unittest 25_Testing/test_v2_element_candidate_projection.py
       - name: Test bounded V2 QEAX slice relationship review
         run: python3 -m unittest 25_Testing/test_v2_qeax_slice_review.py
+      - name: Enforce EA diagram exclusion across active V2 executables
+        run: python3 -m unittest 25_Testing/test_v2_ea_diagram_scope.py
       - name: Test V2 QEAX read-only source preflight
         run: python3 -m unittest 25_Testing/test_v2_qeax_preflight.py
       - name: Test standalone V2 base generation
