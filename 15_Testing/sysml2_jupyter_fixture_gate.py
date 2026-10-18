@@ -43,10 +43,16 @@ def execute_fixture(path, timeout=90):
                     error=True
             if msg_type=="status" and msg.get("content",{}).get("execution_state")=="idle":
                 idle=True
-        reply=client.get_shell_msg(timeout=timeout)
-        shell_reply_type=reply.get("msg_type")
-        if reply.get("parent_header",{}).get("msg_id")==request:
-            execute_reply=reply.get("content",{}).get("status")
+        # Ignore unmatched shell replies left over from kernel initialization.
+        import time
+        deadline=time.monotonic()+timeout
+        while time.monotonic()<deadline:
+            reply=client.get_shell_msg(timeout=max(0.1,deadline-time.monotonic()))
+            if (reply.get("msg_type")=="execute_reply" and
+                    reply.get("parent_header",{}).get("msg_id")==request):
+                shell_reply_type=reply.get("msg_type")
+                execute_reply=reply.get("content",{}).get("status")
+                break
         result["diagnosticSummary"]={"iopubMessageCounts":observed_types,
           "streamKeywordHits":stream_keyword_hits,"iopubError":observed_types.get("error",0)>0,
           "sawIdle":idle,"shellReplyType":shell_reply_type,"shellReplyStatus":execute_reply}
