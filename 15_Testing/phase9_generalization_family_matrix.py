@@ -9,6 +9,10 @@ DEFINITIONS={
  ("Requirement",""):"RequirementDefinition",
  ("Signal",""):"ItemDefinition",
  ("InformationItem",""):"ItemDefinition",
+ ("Class","Hardware Component"):"PartDefinition",
+ ("Class","Physical Component"):"PartDefinition",
+ ("Class","Module"):"PartDefinition",
+ ("Signal","Logical Signal"):"ItemDefinition",
 }
 def ea_kind(type_,stereotype):
  return DEFINITIONS.get((type_,(stereotype or "").strip()),"UNRESOLVED")
@@ -19,6 +23,8 @@ def assess(source,target,direction,connector_stereotype=""):
  a,b=ea_kind(*source),ea_kind(*target)
  if "UNRESOLVED" in (a,b):return "ENDPOINT_KIND_REVIEW"
  if a!=b:return "CROSS_KIND_REVIEW"
+ if source[1].strip() in ("Hardware Component","Physical Component","Module","Logical Signal") or target[1].strip() in ("Hardware Component","Physical Component","Module","Logical Signal"):
+  return "STEREOTYPE_MAPPING_REVIEW:"+a
  return "SAME_DEFINITION_FAMILY_CANDIDATE:"+a
 
 def audit(qeax):
