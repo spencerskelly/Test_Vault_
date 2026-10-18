@@ -1,6 +1,6 @@
 import assert from 'node:assert/strict';
 import {test} from 'node:test';
-import {validateGraph} from '../14_Workbench/registry/runtime/canonical-model.mjs';
+import {validateGraph} from '../24_Workbench/registry/runtime/canonical-model.mjs';
 // Canonical graph keeps lexical owner and semantic generalization separate.
 // This is a Workbench contract fixture, not a SysML-native emitter.
 const graph=()=>({version:'phase9-synthetic',nodes:[
