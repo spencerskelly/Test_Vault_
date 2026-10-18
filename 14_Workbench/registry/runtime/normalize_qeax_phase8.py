@@ -1,5 +1,5 @@
 """Read-only Phase 8 EA normalization. Local ledger only; no SysML emitter."""
-import sqlite3,csv,json,collections,pathlib,argparse
+import sqlite3,csv,json,collections,pathlib,argparse,os,tempfile,shutil
 K={'Class':'PartDefinition','Object':'PartUsage','Part':'PartUsage','Activity':'ActionDefinition','Action':'ActionUsage','State':'StateDefinition','Requirement':'RequirementDefinition','UseCase':'UseCaseDefinition','Signal':'ItemDefinition','InformationItem':'ItemDefinition','Port':'PortUsage'}
 def kind(t,s):
  if t in ('Note','Boundary','Text','Decision','Synchronization','StateNode','Issue','Change','Artifact','Trigger') or (t=='Class' and s=='Business Line'):return None
@@ -59,5 +59,19 @@ def reconcile(qeax,registry,output):
  assert summary['total']==con.execute('SELECT COUNT(*) FROM t_connector').fetchone()[0]
  (output/'aggregate_only.json').write_text(json.dumps(summary,indent=2)+'\n')
  return summary
+def reconcile_atomic(qeax,registry,output):
+ """Publish an all-or-nothing local result directory; never overwrite an existing run."""
+ destination=pathlib.Path(output).resolve()
+ if destination.exists():raise ValueError('OUTPUT_ALREADY_EXISTS')
+ if not destination.parent.is_dir():raise ValueError('OUTPUT_PARENT_MISSING')
+ stage=pathlib.Path(tempfile.mkdtemp(prefix='.phase8-incomplete-',dir=destination.parent))
+ try:
+  summary=reconcile(qeax,registry,stage)
+  if summary['native_certified']!=0:raise ValueError('NATIVE_EMISSION_FORBIDDEN')
+  os.rename(stage,destination)
+  return summary
+ finally:
+  if stage.exists():shutil.rmtree(stage)
+
 if __name__=='__main__':
- p=argparse.ArgumentParser();p.add_argument('--qeax',required=True);p.add_argument('--registry',required=True);p.add_argument('--out',required=True);v=p.parse_args();print(json.dumps(reconcile(v.qeax,v.registry,v.out),indent=2))
+ p=argparse.ArgumentParser();p.add_argument('--qeax',required=True);p.add_argument('--registry',required=True);p.add_argument('--out',required=True);v=p.parse_args();print(json.dumps(reconcile_atomic(v.qeax,v.registry,v.out),indent=2))
