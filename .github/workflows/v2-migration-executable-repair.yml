@@ -24,7 +24,14 @@ jobs:
         run: python3 26_Definitions/tools/repair_v2_moved_registry_paths.py --check
       - name: Audit active V2 references without rewriting historical documentation
         run: python3 26_Definitions/tools/audit_v2_legacy_references.py --strict > "$RUNNER_TEMP/v2-reference-audit.json"
-      - name: Publish migration reference audit\n        if: always()\n        uses: actions/upload-artifact@v4\n        with:\n          name: v2-active-reference-audit\n          path: ${{ runner.temp }}/v2-reference-audit.json\n          if-no-files-found: warn\n      - name: Verify unchanged governance registry hashes
+      - name: Publish migration reference audit
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: v2-active-reference-audit
+          path: ${{ runner.temp }}/v2-reference-audit.json
+          if-no-files-found: warn
+      - name: Verify unchanged governance registry hashes
         run: python3 25_Testing/verify_sysml_v2_registry_pins.py "$PWD"
       - name: Verify pinned v2 source registry
         run: node 24_Workbench/registry/runtime/v2-translator-preflight.mjs "$PWD"
