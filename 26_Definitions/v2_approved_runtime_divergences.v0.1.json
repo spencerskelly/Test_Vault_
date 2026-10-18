@@ -12,7 +12,13 @@
       "runtime": "24_Workbench/registry/runtime/eligibility-engine.mjs",
       "symptom": "AGG-OWNED only accepts composite; approved typed owned usages may arise from shared or composite when parent-child meaning is verified",
       "required_fixture": "positive shared owned usage; negative unowned grouping; preserve source flag",
-      "status": "open_implementation_alignment"
+      "status": "implementation_updated_tests_pending",
+      "fix_evidence": {
+        "code": "24_Workbench/registry/runtime/eligibility-engine.mjs",
+        "test": "24_Workbench/registry/runtime/approved-v2-clarifications.test.mjs",
+        "native_parser_accepted": false,
+        "full_source_verified": false
+      }
     },
     {
       "id": "DEF-02",
@@ -22,7 +28,13 @@
       "runtime": "24_Workbench/registry/runtime/canonical-model.mjs",
       "symptom": "UNTYPED_USAGE emitted universally for missing definitionId; approved unresolved untyped Part/Action/Port usages require typed review disposition rather than universal semantic rejection",
       "required_fixture": "untyped Part Action Port with unresolved-type evidence plus illegal owner/missing identity negative tests",
-      "status": "open_implementation_alignment"
+      "status": "implementation_updated_tests_pending",
+      "fix_evidence": {
+        "code": "24_Workbench/registry/runtime/canonical-model.mjs",
+        "test": "24_Workbench/registry/runtime/approved-v2-clarifications.test.mjs",
+        "native_parser_accepted": false,
+        "full_source_verified": false
+      }
     },
     {
       "id": "DEF-03",
@@ -32,7 +44,8 @@
       "runtime": "24_Workbench/registry/sysml_v2_semantic_rules.v0.2.json",
       "symptom": "Provisional candidate selectors and wildcard coverage differ from approved mapping (InformationItem descriptive note, not ItemDefinition)",
       "required_fixture": "all 60 exact approved families and 26 relationship family cases including non-native and review dispositions",
-      "status": "open_implementation_alignment"
+      "status": "open_implementation_alignment",
+      "exception_audit": "26_Definitions/V2_APPROVED_EXCEPTION_HANDLING_AUDIT_2026-10-18.md"
     },
     {
       "id": "DEF-04",
@@ -42,7 +55,13 @@
       "runtime": "24_Workbench/registry/runtime/canonical-model.mjs",
       "symptom": "DEFINITION_KINDS exported list omits approved UseCaseDefinition and OccurrenceDefinition; downstream impact not yet measured",
       "required_fixture": "positive UseCase/Occurrence definition support and negative invalid owner/typing",
-      "status": "open_review"
+      "status": "implementation_updated_tests_pending",
+      "fix_evidence": {
+        "code": "24_Workbench/registry/runtime/canonical-model.mjs",
+        "test": "24_Workbench/registry/runtime/approved-v2-clarifications.test.mjs",
+        "native_parser_accepted": false,
+        "full_source_verified": false
+      }
     }
   ]
 }
