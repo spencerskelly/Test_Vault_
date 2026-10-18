@@ -78,6 +78,9 @@ scope: toolchain-development-repository
 - [Family disposition registry](24_Workbench/registry/family_disposition_registry.v0.2.json)
 
 ## 60 — Project background and retained knowledge
+- [V1→V2 28-capability reuse ledger — human navigation](26_Definitions/V1_V2_REUSE_LEDGER_INDEX.md)
+- [V1→V2 deep source-code audit, defects and integrated platform architecture](26_Definitions/V1_V2_DEEP_TECHNICAL_RECOVERY_AND_PLATFORM_ARCHITECTURE_2026-10-18.md)
+- [Machine-readable V1→V2 reuse ledger](26_Definitions/v1_to_v2_reuse_ledger.v0.1.json)
 - [V1 Archive Master Map of Contents — all 1,165 archived paths](100_Archive/MOC_V1_ARCHIVE.md)
 - [V1 capabilities that may add value to V2, with gaps and priorities](26_Definitions/V1_ARCHIVE_VALUE_RECOVERY_GAPS_2026-10-18.md)
 - [Workspace governance and older decisions](55_Workspace/README.md)
