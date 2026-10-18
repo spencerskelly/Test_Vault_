@@ -10,7 +10,10 @@ GROUPS=(("elementTypes","t_object","Object_Type"),
         ("diagramTypes","t_diagram","Diagram_Type"))
 
 def profile(path):
-    raw=path.read_bytes()
+    with path.open("rb") as fp:
+        h=hashlib.sha256()
+        for chunk in iter(lambda:fp.read(1024*1024),b""):
+            h.update(chunk)
     con=sqlite3.connect("file:"+str(path.resolve())+"?mode=ro",uri=True)
     try:
         integrity=con.execute("PRAGMA quick_check").fetchone()[0]
@@ -26,7 +29,7 @@ def profile(path):
             if sum(kinds[key].values())!=tables[t]:
                 raise ValueError("Distribution mismatch: "+t)
         return {"schema":"mdse-ea-local-profile-evidence/1",
-                "fileSha256":hashlib.sha256(raw).hexdigest(),
+                "fileSha256":h.hexdigest(),
                 "sqliteQuickCheck":"ok","expected":{"tables":tables,**kinds}}
     finally: con.close()
 
@@ -36,7 +39,7 @@ def main():
     ap.add_argument("--out",required=True,type=pathlib.Path,
                     help="LOCAL path outside Test_Vault_ checkout")
     args=ap.parse_args()
-    if args.out.resolve().is_relative_to(pathlib.Path(__file__).resolve().parents[2]):
+    if args.out.resolve().is_relative_to(pathlib.Path(__file__).resolve().parents[1]):
         raise SystemExit("Output must be outside Test_Vault_: source-specific evidence is local-only")
     result=profile(args.qeax)
     args.out.parent.mkdir(parents=True,exist_ok=True)
