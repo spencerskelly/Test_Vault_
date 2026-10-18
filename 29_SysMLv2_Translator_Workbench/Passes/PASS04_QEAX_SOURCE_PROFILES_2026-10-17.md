@@ -56,3 +56,21 @@ python3 15_Testing/reconcile_qeax_dispositions.py /private/EA_2026_10_15_endgame
 
 ### Next
 Add isolated synthetic regression tests: a valid fixture, one unexpected table, one forbidden nonempty table, and a missing required table. Then produce a **separate reduced-source v2 candidate profile** with current table/type counts (locally) and explicit selector. Do not mutate v1 September profile or any previous v1 baked importer profile. No proprietary rows or source GUIDs were committed. Pass 04 ongoing until these tests and selection behavior are verified.
+
+## Pass 04 continuation — synthetic table-disposition regression tests
+
+Added `15_Testing/test_reconcile_qeax_dispositions.py` (commit `2f616857b3766d8ca81489be46082943aa2d3e90`), using a disposable four-table SQLite model and no enterprise data. Five tests cover valid dispositions, unknown table, nonempty forbidden table, absent required table and the deliberate separation of snapshot count matching from table-disposition matching. All **five passed locally** with Python unittest against the fetched checker source:
+
+```text
+Ran 5 tests in 0.048s
+OK
+```
+
+Re-run from full Test_Vault_ checkout with:
+```sh
+python3 -m unittest discover -s 15_Testing -p test_reconcile_qeax_dispositions.py -v
+```
+
+**Not yet verified:** importing the reduced model with its own source profile, all element-type and connector-type distributions, and imported connector disposition completeness. The old September full profile is preserved unchanged. The table-disposition gate is a separate required gate; it does not supersede strict current-source counts.
+
+**Next gated step:** generate the current source's full type/count evidence locally and introduce a separate reduced profile selection contract without embedding proprietary row-level data or silently replacing the old v1 profile.
