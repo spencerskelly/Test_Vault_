@@ -73,6 +73,8 @@ source: V2_FOLDER_MIGRATION_MANIFEST_2026-10-18
 - [Author identity change process](V1/16_Definitions/Changing%20Your%20Author%20Code.md)
 
 ## 80 — Reuse candidates and overlooked value
+- [V1→V2 28-capability handoff ledger](../26_Definitions/V1_V2_REUSE_LEDGER_INDEX.md)
+- [Deep implementation audit and v2 engineering architecture](../26_Definitions/V1_V2_DEEP_TECHNICAL_RECOVERY_AND_PLATFORM_ARCHITECTURE_2026-10-18.md)
 [**V1 → v2 recovery opportunity register**](../26_Definitions/V1_ARCHIVE_VALUE_RECOVERY_GAPS_2026-10-18.md) records what is reusable, the target v2 owner, validation needed, and approved/proposed status. High-priority examples: staged import ledger and rollback gates; per-occurrence ModelRef identity and local model indexing; reproducible plugin lock/config ownership; author identity collisions; BOM exact-decimal and alternates; release provenance/reproducible CI.
 
 ## 90 — Maintenance and decision precedence
