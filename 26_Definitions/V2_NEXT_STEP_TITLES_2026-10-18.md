@@ -2,6 +2,8 @@
 
 [Master MOC](../MOC_MDSE_V2.md) · [Scored goals](V2_PROGRAM_GOALS_AND_COMPLETION_2026-10-18.md)
 
+> **STEP-02A — EA Diagram Deferral (approved):** All EA diagram extraction, import, translation, Canvas seeding, source-profile counts and diagram-based golden acceptance are out of scope until after all tools and golden import have been completed and accepted. [Scope policy](STEP_02A_EA_DIAGRAM_DEFERRED_2026-10-18.md). Native SysML-derived Workbench views are unaffected.
+
 These step titles are stable handoff IDs. Completion percentages are current planning estimates, not release certification.
 
 | Step | Scope | Completion |
