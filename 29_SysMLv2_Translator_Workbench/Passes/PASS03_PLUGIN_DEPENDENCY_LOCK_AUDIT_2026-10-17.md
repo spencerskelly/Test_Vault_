@@ -53,3 +53,16 @@ An actionable test-sheet error was corrected: its row 15 instructed altering Dat
 5. **Only after these gates** promote release YAML Bootstrap active version/source to 0.3.1 in the same controlled change as any necessary generated lock/payload updates. Avoid claiming native SysML v2 Workbench acceptance from v1 sheet.
 
 **Status:** Pass 03 investigation progressed; hash lock 6/6 PASS (Bootstrap + legacy Workbench); source build and first-open acceptance **PENDING**. This is a clean handoff; no automatic version promotion.
+
+## Pass 03 continuation — executable source-build gate (2026-10-17)
+
+Verified on current GitHub main that Bootstrap 0.3.1 includes `package.json`, a lockfile, `src/main.ts`, `test/core.test.ts`, `tsconfig.json`, and `esbuild.config.mjs`. Local runner Node v22.16.0/npm 10.9.2 are present, but `git ls-remote` failed DNS resolution for github.com and no complete checkout or node_modules was available. **npm ci, npm test, npm run build were NOT executed.**
+
+Added `15_Testing/check_bootstrap_candidate.py` (commit `a0413fe`) to perform the missing checks **from a complete checkout**: verify source input existence, SHA256 of locked Bootstrap runtime files, execute `npm ci`, `npm test`, `npm run build` in Bootstrap 0.3.1, hash the resulting `main.js`, compare to the locked bundle and report mismatch without changing release files. Run:
+```sh
+python3 -m pip install pyyaml
+python3 15_Testing/check_bootstrap_candidate.py . --output /private/bootstrap-031-build.json
+```
+The checker fails closed on input, hash or test errors. Even if these pass, `BUILD_AND_TEST_PASS` is **not** an Obsidian first-open pass and does not authorize automatic promotion of the Bootstrap release declaration.
+
+**Next:** Run the checker from a checkout with npm dependency access/cache, then verify first-open and update active pin only after runtime sign-off. Pass 02 workflow/base build remains pending. No model data or live vault changes.
