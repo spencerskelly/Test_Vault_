@@ -28,11 +28,12 @@ def run(write=False):
         if NEW not in data or digest(data.replace(NEW,OLD))!=old_hash:
             raise RuntimeError("NON_PATH_REGISTRY_DRIFT: "+rel)
         amended[rel]=actual
-    if write and amended!=pins["files"]:
+    changed=sum(amended[k]!=pins["files"][k] for k in amended)
+    if write and changed:
         pins["files"]=amended
         PIN.write_text(json.dumps(pins,indent=2,ensure_ascii=False)+"\n",encoding="utf-8")
     return {"status":"PASS" if write or amended==pins["files"] else "REPIN_REQUIRED",
-            "registry_count":len(expected),"path_only_repin":sum(amended[k]!=pins["files"][k] for k in amended),
+            "registry_count":len(expected),"path_only_repin":changed,
             "write":write}
 if __name__=="__main__":
     arg=argparse.ArgumentParser()
