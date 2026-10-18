@@ -1,6 +1,6 @@
 """Run exact Phase 8 normalizer on synthetic SQLite and check raw evidence."""
 import csv,importlib.util,json,pathlib,sqlite3,tempfile,unittest
-TARGET=pathlib.Path(__file__).resolve().parents[1]/"14_Workbench/registry/runtime/normalize_qeax_phase8.py"
+TARGET=pathlib.Path(__file__).resolve().parents[1]/"24_Workbench/registry/runtime/normalize_qeax_phase8.py"
 SPEC=importlib.util.spec_from_file_location("normalize_qeax_phase8",TARGET)
 MOD=importlib.util.module_from_spec(SPEC);SPEC.loader.exec_module(MOD)
 
