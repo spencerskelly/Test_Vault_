@@ -1,0 +1,418 @@
+{
+  "schema": "mdse-v2-semantic-rules/0.2",
+  "version": "0.2.0",
+  "authority": "approved_design_decisions_plus_provisional_source_families",
+  "releaseStatus": "candidate_not_parser_verified",
+  "defaultDisposition": "deferred_review",
+  "automaticNativeEmission": false,
+  "sourceRoles": "EA source/target stored independently from oriented SysML candidate",
+  "provenance": [
+    "source_guid",
+    "source_pk",
+    "ea_type",
+    "ea_stereotype",
+    "normalization_rule_id",
+    "evidence_ids"
+  ],
+  "elementRules": [
+    {
+      "eaType": "Class",
+      "stereotype": "block",
+      "target": "PartDefinition",
+      "candidateStatus": "candidate",
+      "emission": "deferred_pending_parser"
+    },
+    {
+      "eaType": "Part",
+      "stereotype": "*",
+      "target": "PartUsage",
+      "candidateStatus": "candidate",
+      "emission": "deferred_pending_parser"
+    },
+    {
+      "eaType": "Object",
+      "stereotype": "*",
+      "target": "PartUsage",
+      "candidateStatus": "candidate",
+      "emission": "deferred_pending_parser"
+    },
+    {
+      "eaType": "Port",
+      "stereotype": "proxy",
+      "target": "PortUsage",
+      "candidateStatus": "needs_port_classifier_evidence",
+      "emission": "deferred_pending_parser"
+    },
+    {
+      "eaType": "Port",
+      "stereotype": "full",
+      "target": "PartUsage",
+      "candidateStatus": "needs_port_classifier_evidence",
+      "emission": "deferred_pending_parser"
+    },
+    {
+      "eaType": "Activity",
+      "stereotype": "function",
+      "target": "ActionDefinition",
+      "candidateStatus": "candidate",
+      "emission": "deferred_pending_parser"
+    },
+    {
+      "eaType": "Activity",
+      "stereotype": "testCase",
+      "target": "VerificationCaseDefinition",
+      "candidateStatus": "candidate",
+      "emission": "deferred_pending_parser"
+    },
+    {
+      "eaType": "Activity",
+      "stereotype": "*",
+      "target": "ActionDefinition",
+      "candidateStatus": "candidate",
+      "emission": "deferred_pending_parser"
+    },
+    {
+      "eaType": "Action",
+      "stereotype": "*",
+      "target": "ActionUsage",
+      "candidateStatus": "candidate",
+      "emission": "deferred_pending_parser"
+    },
+    {
+      "eaType": "State",
+      "stereotype": "*",
+      "target": "StateDefinition",
+      "candidateStatus": "needs_containment_evidence",
+      "emission": "deferred_pending_parser"
+    },
+    {
+      "eaType": "Requirement",
+      "stereotype": "*",
+      "target": "RequirementDefinition",
+      "candidateStatus": "candidate",
+      "emission": "deferred_pending_parser"
+    },
+    {
+      "eaType": "UseCase",
+      "stereotype": "*",
+      "target": "UseCaseDefinition",
+      "candidateStatus": "candidate",
+      "emission": "deferred_pending_parser"
+    },
+    {
+      "eaType": "Signal",
+      "stereotype": "*",
+      "target": "ItemDefinition",
+      "candidateStatus": "candidate",
+      "emission": "deferred_pending_parser"
+    },
+    {
+      "eaType": "InformationItem",
+      "stereotype": "*",
+      "target": "ItemDefinition",
+      "candidateStatus": "candidate",
+      "emission": "deferred_pending_parser"
+    },
+    {
+      "eaType": "Class",
+      "stereotype": "Interface",
+      "target": "InterfaceDefinition",
+      "candidateStatus": "needs_interface_evidence",
+      "emission": "deferred_pending_parser"
+    },
+    {
+      "eaType": "Issue",
+      "stereotype": "*",
+      "target": "MetadataOrProse",
+      "candidateStatus": "extension_review",
+      "emission": "deferred_pending_parser"
+    },
+    {
+      "eaType": "Change",
+      "stereotype": "*",
+      "target": "MetadataOrProse",
+      "candidateStatus": "extension_review",
+      "emission": "deferred_pending_parser"
+    }
+  ],
+  "relationshipRules": [
+    {
+      "family": "Abstraction:allocate",
+      "nativeCandidate": "Allocation",
+      "gate": "needs_semantic_roles",
+      "emission": "deferred_pending_evidence_and_parser",
+      "sourceDisposition": "existing_rule",
+      "sourceRuleIds": [
+        "ALLOC-GENERIC"
+      ],
+      "existingCandidateDifference": true
+    },
+    {
+      "family": "Abstraction:Derive",
+      "nativeCandidate": "Requirement derivation",
+      "gate": "requires_semantic_review",
+      "sourceDisposition": "review",
+      "sourceRuleIds": [],
+      "emission": "deferred_pending_evidence_and_parser"
+    },
+    {
+      "family": "Abstraction:Refine",
+      "nativeCandidate": null,
+      "gate": "requires_semantic_review",
+      "sourceDisposition": "existing_rule",
+      "sourceRuleIds": [
+        "DEPENDENCY-TRACE-REFINE"
+      ],
+      "emission": "deferred_pending_evidence_and_parser"
+    },
+    {
+      "family": "Abstraction:trace",
+      "nativeCandidate": null,
+      "gate": "requires_semantic_review",
+      "sourceDisposition": "existing_rule",
+      "sourceRuleIds": [
+        "DEPENDENCY-TRACE-REFINE"
+      ],
+      "emission": "deferred_pending_evidence_and_parser"
+    },
+    {
+      "family": "Aggregation:",
+      "nativeCandidate": "OwnedPartUsage",
+      "gate": "needs_composite_end_and_multiplicity",
+      "emission": "deferred_pending_evidence_and_parser",
+      "sourceDisposition": "existing_rule",
+      "sourceRuleIds": [
+        "AGG-OWNED"
+      ],
+      "existingCandidateDifference": true
+    },
+    {
+      "family": "Association:",
+      "nativeCandidate": "ConnectionOrReference",
+      "gate": "needs_connection_kind",
+      "emission": "deferred_pending_evidence_and_parser",
+      "sourceDisposition": "review",
+      "sourceRuleIds": [],
+      "existingCandidateDifference": true
+    },
+    {
+      "family": "Connector:",
+      "nativeCandidate": "None",
+      "gate": "evidence_only",
+      "emission": "deferred_pending_evidence_and_parser",
+      "sourceDisposition": "evidence_only",
+      "sourceRuleIds": [],
+      "existingCandidateDifference": true
+    },
+    {
+      "family": "ControlFlow:",
+      "nativeCandidate": "Succession",
+      "gate": "needs_action_occurrences",
+      "emission": "deferred_pending_evidence_and_parser",
+      "sourceDisposition": "review",
+      "sourceRuleIds": [],
+      "existingCandidateDifference": true
+    },
+    {
+      "family": "Dependency:",
+      "nativeCandidate": null,
+      "gate": "requires_semantic_review",
+      "sourceDisposition": "existing_rule",
+      "sourceRuleIds": [
+        "DEPENDENCY"
+      ],
+      "emission": "deferred_pending_evidence_and_parser"
+    },
+    {
+      "family": "Dependency:deriveReqt",
+      "nativeCandidate": "RequirementDerivation",
+      "gate": "needs_two_requirements",
+      "emission": "deferred_pending_evidence_and_parser",
+      "sourceDisposition": "review",
+      "sourceRuleIds": [],
+      "existingCandidateDifference": true
+    },
+    {
+      "family": "Dependency:RecoveryRequirement",
+      "nativeCandidate": null,
+      "gate": "requires_semantic_review",
+      "sourceDisposition": "review",
+      "sourceRuleIds": [],
+      "emission": "deferred_pending_evidence_and_parser"
+    },
+    {
+      "family": "Dependency:refine",
+      "nativeCandidate": null,
+      "gate": "requires_semantic_review",
+      "sourceDisposition": "existing_rule",
+      "sourceRuleIds": [
+        "DEPENDENCY-TRACE-REFINE"
+      ],
+      "emission": "deferred_pending_evidence_and_parser"
+    },
+    {
+      "family": "Dependency:satisfy",
+      "nativeCandidate": "SatisfyRequirementUsage",
+      "gate": "needs_requirement_objective",
+      "emission": "deferred_pending_evidence_and_parser",
+      "sourceDisposition": "existing_rule",
+      "sourceRuleIds": [
+        "SATISFY"
+      ],
+      "existingCandidateDifference": true
+    },
+    {
+      "family": "Dependency:trace",
+      "nativeCandidate": null,
+      "gate": "requires_semantic_review",
+      "sourceDisposition": "existing_rule",
+      "sourceRuleIds": [
+        "DEPENDENCY-TRACE-REFINE"
+      ],
+      "emission": "deferred_pending_evidence_and_parser"
+    },
+    {
+      "family": "Dependency:verify",
+      "nativeCandidate": "VerifyRequirementUsage",
+      "gate": "needs_verification_case_objective",
+      "emission": "deferred_pending_evidence_and_parser",
+      "sourceDisposition": "review",
+      "sourceRuleIds": [],
+      "existingCandidateDifference": false
+    },
+    {
+      "family": "Generalization:",
+      "nativeCandidate": "Specialization",
+      "gate": "needs_typed_endpoints_and_direction",
+      "emission": "deferred_pending_evidence_and_parser",
+      "sourceDisposition": "existing_rule",
+      "sourceRuleIds": [
+        "GENERALIZE"
+      ],
+      "existingCandidateDifference": true
+    },
+    {
+      "family": "Nesting:",
+      "nativeCandidate": "Feature/Namespace membership",
+      "gate": "requires_semantic_review",
+      "sourceDisposition": "review",
+      "sourceRuleIds": [],
+      "emission": "deferred_pending_evidence_and_parser"
+    },
+    {
+      "family": "NoteLink:",
+      "nativeCandidate": "None",
+      "gate": "evidence_only",
+      "emission": "deferred_pending_evidence_and_parser",
+      "sourceDisposition": "evidence_only",
+      "sourceRuleIds": [],
+      "existingCandidateDifference": true
+    },
+    {
+      "family": "Realisation:",
+      "nativeCandidate": null,
+      "gate": "requires_semantic_review",
+      "sourceDisposition": "existing_rule",
+      "sourceRuleIds": [
+        "REAL-REQ",
+        "REAL-OBJECT"
+      ],
+      "emission": "deferred_pending_evidence_and_parser"
+    },
+    {
+      "family": "Realisation:deriveReqt",
+      "nativeCandidate": null,
+      "gate": "requires_semantic_review",
+      "sourceDisposition": "review",
+      "sourceRuleIds": [],
+      "emission": "deferred_pending_evidence_and_parser"
+    },
+    {
+      "family": "Sequence:",
+      "nativeCandidate": "Message/Succession",
+      "gate": "requires_semantic_review",
+      "sourceDisposition": "review",
+      "sourceRuleIds": [],
+      "emission": "deferred_pending_evidence_and_parser"
+    },
+    {
+      "family": "StateFlow:",
+      "nativeCandidate": "TransitionUsage",
+      "gate": "needs_state_context",
+      "emission": "deferred_pending_evidence_and_parser",
+      "sourceDisposition": "review",
+      "sourceRuleIds": [],
+      "existingCandidateDifference": false
+    },
+    {
+      "family": "Usage:",
+      "nativeCandidate": "FeatureUsage/Dependency",
+      "gate": "requires_semantic_review",
+      "sourceDisposition": "review",
+      "sourceRuleIds": [],
+      "emission": "deferred_pending_evidence_and_parser"
+    },
+    {
+      "family": "Usage:Responsibility",
+      "nativeCandidate": "Owned usage",
+      "gate": "requires_semantic_review",
+      "sourceDisposition": "review",
+      "sourceRuleIds": [],
+      "emission": "deferred_pending_evidence_and_parser"
+    },
+    {
+      "family": "UseCase:extend",
+      "nativeCandidate": "UseCaseExtension",
+      "gate": "needs_valid_extension",
+      "emission": "deferred_pending_evidence_and_parser",
+      "sourceDisposition": "review",
+      "sourceRuleIds": [],
+      "existingCandidateDifference": true
+    },
+    {
+      "family": "UseCase:include",
+      "nativeCandidate": "UseCaseInclusion",
+      "gate": "needs_valid_ownership",
+      "emission": "deferred_pending_evidence_and_parser",
+      "sourceDisposition": "review",
+      "sourceRuleIds": [],
+      "existingCandidateDifference": true
+    }
+  ],
+  "workbenchContract": {
+    "views": [
+      "structure",
+      "visual",
+      "behavior",
+      "requirements"
+    ],
+    "mustPreserveDistinctKinds": true,
+    "selection": "note and element identities distinct",
+    "validation": "no native writes on deferred or unparsed syntax",
+    "navigation": [
+      "containment",
+      "connection",
+      "inbound",
+      "outbound",
+      "source provenance"
+    ],
+    "roundTrip": "source evidence and user-authored text retained; no silent rewriting"
+  },
+  "deferredDecisions": [
+    "redefinition mapping",
+    "full-port ownership versus proxy-port contract repair",
+    "binding port semantics",
+    "state/action nested usages",
+    "causal versus temporal behavior",
+    "trade-study calculations and results"
+  ],
+  "noSilentDiscard": true,
+  "upstreamRegistry": "14_Workbench/registry/family_disposition_registry.v0.2.json",
+  "coverage": {
+    "sourceFamilies": 26,
+    "coveredFamilies": 26,
+    "missingFamilies": 0,
+    "addedFamilies": 13,
+    "semanticCandidateDifferences": 11
+  }
+}
