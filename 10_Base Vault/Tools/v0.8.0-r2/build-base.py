@@ -174,4 +174,4 @@ if man["releaseStatus"]=="release" and man["tools"]["workbench"]["requiredForRel
 
 print(f"Built MDSE {man['mdseRelease']} lean runtime base at {out}")
 print(f"Copied {copied} governed files (including {len(plock['plugins'])} runtime plugins) plus generated README.md, .gitignore and .vault.yaml")
-print('Validate with: python3 "Base Vault/Testing/check-release.py" --base <output>')
+print('Validate with: python3 "10_Base Vault/Testing/check-release.py" --base <output>')
