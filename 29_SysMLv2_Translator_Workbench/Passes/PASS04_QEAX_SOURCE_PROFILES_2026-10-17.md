@@ -40,3 +40,19 @@ Observed October element kinds include Requirement 2,638; Class 2,381; Package 1
 4. Preserve all element and connector dispositions in a local-only ledger; publish only aggregates.
 
 Release is not cleared: full base build, CI, native v2 parser, importer and Workbench runtime remain outstanding. Require user y for next pass.
+
+## Pass 04 continuation — full table-disposition verification (2026-10-17)
+
+Executed read-only SQLite on the user's reduced October QEAX (`PRAGMA quick_check = ok`) and compared the complete set of **100** table names and their row counts against the **100** named dispositions in September's accepted full-model EA source profile. The source contains **45 nonempty** and **55 empty** SQLite tables.
+
+**Result:** 100/100 source tables classified, zero unexpected tables, zero source policy table omissions, **zero nonempty tables where the old profile requires ignored_must_be_empty**. This passes table policy compatibility only, not source snapshot count matching: reduced data intentionally differs from the full-model profile.
+
+Committed reusable read-only policy runner `15_Testing/reconcile_qeax_dispositions.py` (commit `7e9fe4c7e073135491d78bfd2764991afcf08255`). It compares every SQLite table to a passed JSON profile, reports unclassified/missing tables and forbidden nonempty counts, does not copy source rows, and returns failure on findings. This runner was **not run from a complete repo checkout**; the local SQLite comparison described above was executed independently against the same reference disposition lists.
+
+Run in a full checkout as:
+```bash
+python3 15_Testing/reconcile_qeax_dispositions.py /private/EA_2026_10_15_endgame_mini.qeax "11_Importer/Definition/Source Profiles/EA8647-2026-09-06-v1.json" --out /private/qeax-disposition-report.json
+```
+
+### Next
+Add isolated synthetic regression tests: a valid fixture, one unexpected table, one forbidden nonempty table, and a missing required table. Then produce a **separate reduced-source v2 candidate profile** with current table/type counts (locally) and explicit selector. Do not mutate v1 September profile or any previous v1 baked importer profile. No proprietary rows or source GUIDs were committed. Pass 04 ongoing until these tests and selection behavior are verified.
