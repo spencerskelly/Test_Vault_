@@ -1,0 +1,14 @@
+import assert from 'node:assert/strict';
+import {test} from 'node:test';
+import {proposeGeneralization} from '../14_Workbench/registry/runtime/phase9-generalization-handoff.mjs';
+const graph={nodes:[{id:'1',kind:'PartDefinition'},{id:'2',kind:'PartDefinition'}]};
+const row=()=>({source_pk:'synthetic-id',source_guid:'synthetic-guid',family:'Generalization',role:'source-subtype-to-destination-supertype',source_direction:'Source -> Destination',raw_from:'1',raw_to:'2',normalized_from:'1',normalized_to:'2'});
+const ev=()=>({schema:'mdse-phase8-reconciled-local-manifest/1',verified:true,native_certified:0,semantic_direction_verified:true});
+const codes=r=>r.diagnostics.map(d=>d.code);
+test('synthetic complete claim produces review-only candidate',()=>{const r=proposeGeneralization(graph,row(),ev());assert.equal(r.status,'candidate');assert.equal(r.nativeCertified,false);assert.equal(r.mutation,false);});
+test('missing semantic review blocks',()=>{const x=ev();delete x.semantic_direction_verified;assert.ok(codes(proposeGeneralization(graph,row(),x)).includes('SOURCE_SEMANTICS_UNVERIFIED'));});
+test('wrong direction blocks',()=>{const x=row();x.source_direction='Unspecified';assert.ok(codes(proposeGeneralization(graph,x,ev())).includes('DIRECTION_UNVERIFIED'));});
+test('reversal blocks',()=>{const x=row();x.normalized_from='2';assert.ok(codes(proposeGeneralization(graph,x,ev())).includes('ORIENTATION_MISMATCH'));});
+test('unverified bundle blocks',()=>assert.ok(codes(proposeGeneralization(graph,row(),{})).includes('BUNDLE_CHECK_REQUIRED')));
+test('wrong role blocks',()=>{const x=row();x.role='unknown';assert.ok(codes(proposeGeneralization(graph,x,ev())).includes('ROLE_UNVERIFIED'));});
+test('unresolved graph endpoint blocks',()=>{const x=row();x.raw_to='3';x.normalized_to='3';assert.ok(codes(proposeGeneralization(graph,x,ev())).includes('RELATIONSHIP_ENDPOINT_MISSING'));});
