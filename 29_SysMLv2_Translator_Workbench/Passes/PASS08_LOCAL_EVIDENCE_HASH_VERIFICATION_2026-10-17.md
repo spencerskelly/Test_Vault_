@@ -1,0 +1,9 @@
+# Pass 8 — Local source bundle hash verification increment
+
+Added `15_Testing/verify_phase8_local_evidence_bundle.py`, six synthetic tamper tests and an isolated GitHub CI workflow. The script runs on a local QEAX file, local Phase 8 ledger, registry, and locally generated Phase 8 input attestation; computes full-file SHA-256 digests, checks source/registry hashes against the attestation, verifies a minimum ledger header and identity uniqueness, and writes a local JSON summary. The output keeps individual source rows out of the report. Native certification is fixed at zero.
+
+IMPORTANT trust limitation: this is a **preliminary integrity checker**, not the promised trusted ledger issuer. The attestation format currently records only source and registry hashes; it does not authenticate or bind the ledger hash to a trusted independently issued manifest. The script computes the ledger digest, but a substituted ledger could pass its structural checks. Neither matching file hashes nor a caller-supplied `verified` boolean proves the underlying EA connector direction or role semantics. DO NOT pass this output to the canonical graph adapter as an authorized trust token, do not treat it as verified source eligibility, and do not enable native emission.
+
+Future gate: extend the local reconciliation issuer with an independently checked expected ledger digest, expected record count from QEAX, registry/version identity, reproducible sorted row coverage, and read-only comparison against each original QEAX connector. Bind the issued verification to the exact snapshot and forbid reusing it against other files. Ensure outputs remain on the local workstation.
+
+Run synthetics: `python3 -m unittest -v 15_Testing/test_verify_phase8_local_evidence_bundle.py`. Synthetic CI has been committed but its actual execution has not yet been independently confirmed. No QEAX, connector records, or private ledger committed.
