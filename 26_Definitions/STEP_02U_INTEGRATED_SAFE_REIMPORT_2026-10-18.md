@@ -1,0 +1,7 @@
+# STEP-02U — Integrated safe reimport validation
+
+Date: 2026-10-18. A conservative wrapper around the STEP-02T three-way reimport merger passed six synthetic unit tests. Synthetic cases cover clean import, retaining user edits, conflicting note changes, missing indexed target, edited private infrastructure manifest and existing output destination.
+
+Read-only validation of the existing STEP-02R controlled stage confirmed an 11,447-element source index with 9,913 unique indexed note paths. The 14,688 connector count came from the prior validated import manifest and was **not independently recounted in this step**. The integrated tool validates the merged result's index paths and protects generated private manifests, creates output in a separate directory, and marks conflict-containing results REVIEW_REQUIRED rather than clean. Neither live Workbench nor Obsidian UI was tested. Native SysML certification remains false and EA diagrams are excluded.
+
+Reusable wrapper, the STEP-02T merger, tests and instructions are supplied in the chat artifact `STEP_02U_integrated_reimport.zip`. This repository document does **not** mean code is integrated into the production import runtime. Remaining work includes an actual changed-real-source three-way merge, independent source connector GUID audit following merge, stable approved UIDs, live Obsidian/Workbench navigation, and official native parser acceptance. Use flagLink/flagNote for localized semantic exceptions without accepting silent data loss.
