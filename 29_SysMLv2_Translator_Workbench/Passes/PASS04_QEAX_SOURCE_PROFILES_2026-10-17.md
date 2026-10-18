@@ -94,3 +94,22 @@ First must PASS and second must BLOCK due to the original September full-model c
 **Source profile policy:** September v1 profile unchanged. Reduced snapshot counts and exact hash stay local; repo stores only code, synthetic tests and aggregate findings. This checker controls snapshot acceptance; native SysML v2 serialization and per-connector disposition remain separate release gates.
 
 **Next pass:** Complete selection integration into the v2 importer pipeline, ensure all connector dispositions are represented, and keep local source-specific profile and ledger private. User `y` required.
+
+## Pass 04 continuation — v2 pre-reconciliation gate (2026-10-17)
+
+Committed `15_Testing/gate_v2_qeax_reconciliation.py` (commit `202ed870`) and five synthetic regression cases in `15_Testing/test_gate_v2_qeax_reconciliation.py` (commit `d10a808`).
+
+The new CLI **requires explicit** `--source-profile` and `--disposition-policy`; it independently executes complete source shape/hash/count comparison and table-disposition policy reconciliation. Both must PASS; either failure BLOCKS. The output provides a connector count and deliberately labels `CONNECTOR_RECONCILIATION_NOT_EXECUTED` to prevent an eligible preflight being mistaken for native v2 translation acceptance. Optional reports are rejected if inside the Test_Vault_ checkout. No source rows/edges emitted.
+
+Example:
+```sh
+python3 15_Testing/gate_v2_qeax_reconciliation.py /private/reduced.qeax \
+ --source-profile /private/reduced.local.json \
+ --disposition-policy '11_Importer/Definition/Source Profiles/EA8647-2026-09-06-v1.json' \
+ --report /private/v2-preflight.json
+python3 -m unittest discover -s 15_Testing -p test_gate_v2_qeax_reconciliation.py -v
+```
+
+These new tests were **committed, but not verified run from the full repository checkout**. The runner currently stops at the source-to-policy preflight boundary: it **does not yet invoke Phase 8 direction-normalized native v2 connector reconciliation**. The reduced private profile must exist and match its exact QEAX bytes; old September profile is never overwritten. Next pass: expose an explicit accepted preflight token or direct in-process integration to the Phase 8 reconciliation runner and test fail-closed behavior on wrong-profile selections before any ledger write.
+
+**Status:** Pass 04 source-profile selection methods delivered; v2 downstream wiring and end-to-end validation pending. No release or plugin promotion.
