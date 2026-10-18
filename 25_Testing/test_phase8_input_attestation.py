@@ -1,6 +1,6 @@
 """Synthetic, private-only Phase 8 input attestations."""
 import hashlib,importlib.util,pathlib,tempfile,unittest
-P=pathlib.Path(__file__).resolve().parents[1]/'14_Workbench/registry/runtime/normalize_qeax_phase8.py'
+P=pathlib.Path(__file__).resolve().parents[1]/'24_Workbench/registry/runtime/normalize_qeax_phase8.py'
 spec=importlib.util.spec_from_file_location('phase8_input_attestation',P)
 mod=importlib.util.module_from_spec(spec);spec.loader.exec_module(mod)
 class InputAttestation(unittest.TestCase):
