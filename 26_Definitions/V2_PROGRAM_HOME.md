@@ -19,6 +19,9 @@
 - [Help/definitions panel specification](../24_Workbench/docs/SYSML_V2_RELATIONSHIP_REFERENCE_AND_HELP_PANEL.md)
 
 ## Data and implementation register
+- [V1→V2 reusable capability ledger (28 entries)](V1_V2_REUSE_LEDGER_INDEX.md)
+- [Detailed technical analysis, known mismatches, and target Obsidian architecture](V1_V2_DEEP_TECHNICAL_RECOVERY_AND_PLATFORM_ARCHITECTURE_2026-10-18.md)
+- [Machine-readable reuse ledger](v1_to_v2_reuse_ledger.v0.1.json)
 - [Machine-readable 60+26 family inventory](v2_mapping_family_recovery.v0.1.json)
 - [Approved family versus provisional selector crosswalk](v2_executable_candidate_crosswalk.v0.1.json)
 - [Workstream traceability register](v2_recovery_traceability.v0.1.json)
