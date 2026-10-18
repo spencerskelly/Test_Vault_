@@ -23,6 +23,9 @@ scope: toolchain-development-repository
 - [Current approved-to-runtime mismatch report](26_Definitions/V2_EXECUTABLE_CANDIDATE_GAP_REVIEW_2026-10-18.md)
 
 ## 10 — Model language, definitions and relationships
+- [Use Case Definitions and Usages — full V2 semantics and acceptance](26_Definitions/SysML_v2_Use_Case_Definitions_and_Usages.md)
+- [Occurrence Definitions and Usages — full V2 semantics and acceptance](26_Definitions/SysML_v2_Occurrence_Definitions_and_Usages.md)
+- [Original October 16–17 native SysML v2 approvals (35 notes)](26_Definitions/MOC_Catalogs/sysml_decisions_1.md)
 - [Definitions area](26_Definitions/README.md)
 - [Native connector/semantic operation definition index](26_Definitions/V2_CONNECTOR_DEFINITIONS_INDEX.md)
 - [Reviewed SysML v2 relationship concepts and Workbench help](24_Workbench/docs/SYSML_V2_RELATIONSHIP_REFERENCE_AND_HELP_PANEL.md)
