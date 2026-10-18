@@ -90,6 +90,7 @@ scope: toolchain-development-repository
 - [V2 research / Phase 5–9 passes](29_SysMLv2_Translator_Workbench/README_SysMLv2_Translator_Workbench.md)
 
 ## 70 — Known missing coverage / avoid duplicated work
+- [Four approved-rule vs runtime divergence findings and verification fixtures](26_Definitions/v2_approved_runtime_divergences.v0.1.json)
 | Gap | Why it matters | Next action |
 |---|---|---|
 | Individual native definitions for Binding, ports/conjugation, requirement operations, attributes/units, analysis and causation | Reviewed in prior discussions but not all individually linked and verified in active catalog | Find existing approval first; add exact link + status, not a duplicate decision |
