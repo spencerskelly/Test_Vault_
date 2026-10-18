@@ -20,6 +20,8 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
+      - name: Validate V1 archive MOC completeness
+        run: python3 -m unittest 25_Testing/test_v1_archive_moc_coverage.py
       - name: Validate master MOC navigation and coverage
         run: python3 -m unittest 25_Testing/test_v2_master_moc.py
       - name: Validate executable candidate crosswalk
