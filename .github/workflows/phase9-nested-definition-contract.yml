@@ -1,0 +1,23 @@
+name: Phase 9 nested definition Workbench contract
+on:
+  push:
+    paths:
+      - '15_Testing/test_phase9_nested_definition_workbench_contract.mjs'
+      - '14_Workbench/registry/runtime/canonical-model.mjs'
+      - '.github/workflows/phase9-nested-definition-contract.yml'
+  pull_request:
+    paths:
+      - '15_Testing/test_phase9_nested_definition_workbench_contract.mjs'
+      - '14_Workbench/registry/runtime/canonical-model.mjs'
+      - '.github/workflows/phase9-nested-definition-contract.yml'
+  workflow_dispatch:
+jobs:
+  canonical-contract:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Verify synthetic canonical nested-definition contract
+        run: node --test 15_Testing/test_phase9_nested_definition_workbench_contract.mjs
