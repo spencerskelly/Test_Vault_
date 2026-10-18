@@ -1,0 +1,15 @@
+import assert from 'node:assert/strict';
+import {test} from 'node:test';
+import {reviewPhase8Generalization as review} from '../14_Workbench/registry/runtime/phase8-generalization-review-bridge.mjs';
+const row=()=>({source_pk:'1',source_guid:'synthetic-guid',family:'Generalization',source_direction:'Source -> Destination',raw_from:'10',raw_to:'20',normalized_from:'10',normalized_to:'20',role:'source-subtype-to-destination-supertype',status:'orientation_normalized',diagnostics:'NATIVE_PARSER_AND_EVIDENCE_PENDING'});
+const source=()=>({connectorId:1,guid:'synthetic-guid',family:'Generalization',direction:'Source -> Destination',startId:10,endId:20,fromKind:'PartDefinition',toKind:'PartDefinition',definitionKindsVerified:true,localSnapshotBound:true});
+const codes=r=>r.diagnostics.map(x=>x.code);
+test('complete synthetic record produces review-only graph candidate',()=>{const r=review(row(),source());assert.equal(r.status,'candidate_for_graph_review');assert.equal(r.nativeCertified,false);assert.equal(r.edge.direction,'subtype-to-supertype');});
+test('unbound snapshot blocks handoff',()=>{const s=source();s.localSnapshotBound=false;assert.ok(codes(review(row(),s)).includes('LOCAL_SNAPSHOT_ATTESTATION_MISSING'));});
+test('reversed source direction blocks handoff',()=>{const s=source();s.direction='Destination -> Source';assert.ok(codes(review(row(),s)).includes('EA_DIRECTION_NOT_EXPLICIT'));});
+test('altered ledger endpoint blocks handoff',()=>{const r=row();r.normalized_from='20';assert.ok(codes(review(r,source())).includes('NORMALIZED_ENDPOINT_MISMATCH'));});
+test('altered source identity blocks handoff',()=>{const r=row();r.source_guid='forged';assert.ok(codes(review(r,source())).includes('CONNECTOR_IDENTITY_MISMATCH'));});
+test('unverified kinds remain review',()=>{const s=source();s.definitionKindsVerified=false;assert.ok(codes(review(row(),s)).includes('DEFINITION_KINDS_UNVERIFIED'));});
+test('non-approved disposition remains review',()=>{const r=row();r.status='deferred_review';assert.ok(codes(review(r,source())).includes('LEDGER_DISPOSITION_REVIEW'));});
+test('unsupported relationship blocked',()=>{const s=source();s.family='Aggregation';assert.ok(codes(review(row(),s)).includes('NOT_GENERALIZATION'));});
+test('no missing source record accepted',()=>assert.equal(review(row(),null).edge,null));
