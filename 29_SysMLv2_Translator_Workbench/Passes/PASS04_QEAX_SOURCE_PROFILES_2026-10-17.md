@@ -1,0 +1,42 @@
+# Pass 04 — Reduced and full QEAX source profiles (initial evidence)
+
+Status: aggregate source inspection completed, local-only profile generator committed; importer integration pending.
+
+## Aggregate source baselines
+
+| Table | September full accepted v1 | October reduced local test |
+|---|---:|---:|
+| t_object | 35,969 | 11,447 |
+| t_connector | 21,822 | 14,688 |
+| t_package | 1,387 | 1,389 |
+| t_diagram | 2,924 | 2,208 |
+| t_diagramobjects | 42,966 | 25,402 |
+| t_diagramlinks | 37,955 | 23,531 |
+| t_objectproperties | 249,892 | 43,634 |
+| t_xref | 42,052 | 17,825 |
+| t_document | 397 | 120 |
+| t_operation | 23 | 21 |
+| t_attribute | 5 | 3 |
+| t_operationparams | 0 | 0 |
+
+Local October QEAX: read-only SQLite PRAGMA quick_check = ok; SHA256 69222c060a81b3e35a3e25f365f2a1f4c3dd6eaa19d77fbbd5ba9abdf365a822. No proprietary row data committed.
+
+## Shape evidence
+
+Observed October element kinds include Requirement 2,638; Class 2,381; Package 1,388; Activity 1,151; UseCase 857. Connector kinds include Generalization 3,735; Dependency 3,058; Abstraction 2,619; Aggregation 2,267; Realisation 884. These are EA source classifications, not accepted SysML v2 relationships.
+
+## Repository updates
+
+- The September full-model v1 profile remains unchanged: 11_Importer/Definition/Source Profiles/EA8647-2026-09-06-v1.json. DO NOT overwrite or globally bypass its counts.
+- Fixed old directory defaults in 11_Importer/Tools/v0.8.19/sync_source_profile.py (commit 6460ba0). This remains a historical v1 sync tool.
+- Added 15_Testing/profile_qeax_local.py (commits 831477d, df4cfe3), a source-specific read-only evidence generator using SQLite quick_check, table and type counts and streaming SHA-256; output must be outside the Test_Vault_ checkout.
+- Generator execution from a complete GitHub checkout has NOT been verified; aggregates above were obtained with separate read-only local SQLite queries.
+
+## Next bounded action
+
+1. Validate all discovered EA tables for the reduced source and compare against September's tableDispositions rules (including ignored_must_be_empty); never silently ignore nonempty unexpected rows.
+2. Record a separate reduced-source profile as LOCAL evidence with explicit release/profile selector, never as a replacement of the full-model accepted v1 contract.
+3. Add synthetic tests for profile mismatch, unexpected nonempty tables and count drifts.
+4. Preserve all element and connector dispositions in a local-only ledger; publish only aggregates.
+
+Release is not cleared: full base build, CI, native v2 parser, importer and Workbench runtime remain outstanding. Require user y for next pass.
