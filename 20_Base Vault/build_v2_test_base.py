@@ -4,6 +4,7 @@ import argparse, json, shutil, pathlib, hashlib, sys
 ROOT=pathlib.Path(__file__).resolve().parents[2]
 REQUIRED={
  "20_Base Vault/README.md":"99_System/README_Base_V2.md",
+ "20_Base Vault/v2_base_release_manifest.json":"99_System/v2_base_release_manifest.json",
  "21_Importer/README.md":"99_System/README_Importer_V2.md",
  "23_Bootstrap/README.md":"99_System/README_Bootstrap_V2.md",
  "26_Definitions/APPROVED_V2_TRANSLATION_BASELINE_AND_TEST_HANDOFF_2026-10-18.md":"99_System/Approved_V2_Translation_Baseline.md",
@@ -28,6 +29,19 @@ def build(dest):
             out.parent.mkdir(parents=True,exist_ok=True)
             out.write_bytes(data)
             hashes[target]=hashlib.sha256(data).hexdigest()
+        # Only built-in Obsidian settings are included. No plugin binary is claimed or enabled.
+        obs=dest/".obsidian"
+        obs.mkdir(exist_ok=True)
+        configs={
+            "app.json":{"showLineNumber":True,"strictLineBreaks":False},
+            "appearance.json":{"baseFontSize":16,"cssTheme":""},
+            "core-plugins.json":["file-explorer","global-search","switcher","graph","backlinks","outgoing-link","tag-pane","properties","page-preview","daily-notes","templates","note-composer","command-palette","slash-command"],
+            "community-plugins.json":[],
+        }
+        for name,settings in configs.items():
+            payload=json.dumps(settings,indent=2)+"\\n"
+            (obs/name).write_text(payload)
+            hashes[".obsidian/"+name]=hashlib.sha256(payload.encode()).hexdigest()
         (dest/".mdse_v2_test_base.json").write_text(json.dumps({"schema":"mdse-v2-test-base/1","status":"uninitialized_test_only","native_import_ready":False,"plugin_ready":False,"files":hashes},indent=2)+"\n")
     except BaseException:
         shutil.rmtree(dest,ignore_errors=True)
