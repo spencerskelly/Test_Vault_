@@ -1,0 +1,162 @@
+{
+  "schema": "mdse-v2-recovery-trace/1",
+  "status": "inventory_not_execution_certification",
+  "release_decisions": "26_Definitions/V2_RELEASE_ARCHITECTURE_DECISIONS_2026-10-18.md",
+  "record_scope": "selected_core_workstreams_not_exhaustive_element_mapping",
+  "records": [
+    {
+      "id": "V2-01",
+      "phase": "first",
+      "authority": "26_Definitions/APPROVED_V2_TRANSLATION_BASELINE_AND_TEST_HANDOFF_2026-10-18.md",
+      "implementation": "25_Testing/run_gated_phase8.py",
+      "test": "25_Testing/verify_phase8_rows_against_qeax.py",
+      "evidence_level": "path_inventory_unverified",
+      "native_certified": false,
+      "ui_accepted": false,
+      "release_accepted": false
+    },
+    {
+      "id": "V2-02",
+      "phase": "first",
+      "authority": "24_Workbench/docs/GOLDEN_IMPORT_RELATIONSHIP_26_FAMILY_DECISION_AUDIT_2026-10-17.md",
+      "implementation": "24_Workbench/registry/sysml_v2_semantic_rules.v0.2.json",
+      "test": "25_Testing/test_sysml_v2_family_coverage.py",
+      "evidence_level": "path_inventory_unverified",
+      "native_certified": false,
+      "ui_accepted": false,
+      "release_accepted": false
+    },
+    {
+      "id": "V2-03",
+      "phase": "first",
+      "authority": "24_Workbench/docs/GOLDEN_IMPORT_AGGREGATION_SHARED_COMPOSITE_USAGE_APPROVED_2026-10-17.md",
+      "implementation": "21_Importer/v2_validate_connector_evidence.py",
+      "test": "25_Testing/test_v2_validate_connector_evidence.py",
+      "evidence_level": "path_inventory_unverified",
+      "native_certified": false,
+      "ui_accepted": false,
+      "release_accepted": false
+    },
+    {
+      "id": "V2-04",
+      "phase": "first",
+      "authority": "24_Workbench/docs/GOLDEN_IMPORT_RELATIONSHIP_26_FAMILY_DECISION_AUDIT_2026-10-17.md",
+      "implementation": "25_Testing/phase9_source_direction_bridge.py",
+      "test": "25_Testing/test_phase9_source_direction_bridge.py",
+      "evidence_level": "path_inventory_unverified",
+      "native_certified": false,
+      "ui_accepted": false,
+      "release_accepted": false
+    },
+    {
+      "id": "V2-05",
+      "phase": "first",
+      "authority": "26_Definitions/V2_RELEASE_ARCHITECTURE_DECISIONS_2026-10-18.md",
+      "implementation": null,
+      "test": null,
+      "evidence_level": "path_inventory_unverified",
+      "native_certified": false,
+      "ui_accepted": false,
+      "release_accepted": false
+    },
+    {
+      "id": "V2-06",
+      "phase": "first",
+      "authority": "26_Definitions/APPROVED_V2_TRANSLATION_BASELINE_AND_TEST_HANDOFF_2026-10-18.md",
+      "implementation": "25_Testing/sysml2_parser_runner.py",
+      "test": null,
+      "evidence_level": "path_inventory_unverified",
+      "native_certified": false,
+      "ui_accepted": false,
+      "release_accepted": false
+    },
+    {
+      "id": "V2-07",
+      "phase": "first",
+      "authority": "26_Definitions/V2_RELEASE_ARCHITECTURE_DECISIONS_2026-10-18.md",
+      "implementation": "20_Base Vault/build_v2_test_base.py",
+      "test": "25_Testing/test_v2_test_base_builder.py",
+      "evidence_level": "path_inventory_unverified",
+      "native_certified": false,
+      "ui_accepted": false,
+      "release_accepted": false
+    },
+    {
+      "id": "V2-08",
+      "phase": "first",
+      "authority": "24_Workbench/V2 Workbench MVP.md",
+      "implementation": "24_Workbench/v2-workbench.html",
+      "test": null,
+      "evidence_level": "path_inventory_unverified",
+      "native_certified": false,
+      "ui_accepted": false,
+      "release_accepted": false
+    },
+    {
+      "id": "V2-09",
+      "phase": "later",
+      "authority": "26_Definitions/V2_RELEASE_ARCHITECTURE_DECISIONS_2026-10-18.md",
+      "implementation": null,
+      "test": null,
+      "evidence_level": "path_inventory_unverified",
+      "native_certified": false,
+      "ui_accepted": false,
+      "release_accepted": false
+    },
+    {
+      "id": "V2-10",
+      "phase": "later",
+      "authority": "24_Workbench/docs/BOM_TO_SYSMLV2_MDSE_ELEMENT_RELATIONSHIP_INTEGRATION_REVIEW_2026-10-17.md",
+      "implementation": null,
+      "test": null,
+      "evidence_level": "path_inventory_unverified",
+      "native_certified": false,
+      "ui_accepted": false,
+      "release_accepted": false
+    },
+    {
+      "id": "V2-11",
+      "phase": "later",
+      "authority": "26_Definitions/V2_RELEASE_ARCHITECTURE_DECISIONS_2026-10-18.md",
+      "implementation": null,
+      "test": null,
+      "evidence_level": "path_inventory_unverified",
+      "native_certified": false,
+      "ui_accepted": false,
+      "release_accepted": false
+    },
+    {
+      "id": "V2-12",
+      "phase": "later",
+      "authority": "66_Cross-Vault/README.md",
+      "implementation": null,
+      "test": null,
+      "evidence_level": "path_inventory_unverified",
+      "native_certified": false,
+      "ui_accepted": false,
+      "release_accepted": false
+    },
+    {
+      "id": "V2-13",
+      "phase": "first",
+      "authority": "24_Workbench/docs/GOLDEN_IMPORT_SOURCE_AND_VAULT_CONTROLS_PHASE1.md",
+      "implementation": ".github/workflows/v2-migration-executable-repair.yml",
+      "test": null,
+      "evidence_level": "path_inventory_unverified",
+      "native_certified": false,
+      "ui_accepted": false,
+      "release_accepted": false
+    },
+    {
+      "id": "V2-14",
+      "phase": "first",
+      "authority": "26_Definitions/V2_FOLDER_MIGRATION_MANIFEST_2026-10-18.json",
+      "implementation": "26_Definitions/tools/check_v2_archive_runtime_boundary.py",
+      "test": null,
+      "evidence_level": "path_inventory_unverified",
+      "native_certified": false,
+      "ui_accepted": false,
+      "release_accepted": false
+    }
+  ]
+}
