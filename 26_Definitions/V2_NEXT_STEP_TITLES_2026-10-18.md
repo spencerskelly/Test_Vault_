@@ -48,3 +48,5 @@ STEP-10: [BOM integration review](../24_Workbench/docs/BOM_TO_SYSMLV2_MDSE_ELEME
 STEP-11: [V1 Bootstrap author registration](../100_Archive/V1/13_Bootstrap/Definition/Author%20Registration%20Spec.md) and [governed plugin settings](../100_Archive/V1/10_Base%20Vault/Definition/Enabled%20Plugin%20Stack.md). Retain approved personal settings; updater and rollback later.
 
 STEP-12: [Cross-vault history](../66_Cross-Vault/README.md) and [phased release decisions](V2_RELEASE_ARCHITECTURE_DECISIONS_2026-10-18.md). Design IDs/contracts now; ship functionality after single-vault verification.
+
+**STEP-02B — Group resolver milestone:** [Approved 60+26 runtime and local QEAX match](STEP_02B_APPROVED_FAMILY_RESOLVER_AND_LOCAL_GROUP_CHECK_2026-10-18.md). Zero unmatched source families; native row acceptance remains pending.
