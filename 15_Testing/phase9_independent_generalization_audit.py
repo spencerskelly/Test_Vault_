@@ -42,7 +42,7 @@ def audit(qeax,ledger):
                 if row["normalized_from"]!=str(c["Start_Object_ID"]) or row["normalized_to"]!=str(c["End_Object_ID"]):
                     counts["ORIENTATION_LEDGER_MISMATCH"]+=1
                 if result!="ORIENTATION_AND_BLOCK_KINDS_CANDIDATE" and row["status"]=="orientation_normalized":
-                    counts["OVERBROAD_NORMALIZATION_REQUIRES_REVIEW"]+=1
+                    counts["PHASE8_BROADER_THAN_STRICT_BLOCK_POLICY"]+=1
         counts["MISSING_GENERALIZATION_ROWS"]=len(set(source)-observed)
         counts["GENERALIZATION_SOURCE_COUNT"]=len(source)
     return {"schema":"mdse-phase9-generalization-independent-audit/1","counts":dict(sorted(counts.items())),"native_certified":0}
