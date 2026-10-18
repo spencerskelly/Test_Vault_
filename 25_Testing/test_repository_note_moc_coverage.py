@@ -1,0 +1,54 @@
+"""Make a missing-indexed-note a CI failure, never an automatic delete.
+
+Full tracked repo scan. Markdown links in the master MOC, complete census, and
+catalogs are the source of truth; notes in the catalog remain 'indexed only'.
+"""
+import pathlib, subprocess, re, urllib.parse, unittest
+
+ROOT=pathlib.Path(__file__).resolve().parents[1]
+CATALOGS=ROOT/"26_Definitions/MOC_Catalogs"
+MOCS=[ROOT/"MOC_MDSE_V2.md",
+      ROOT/"26_Definitions/MOC_REPOSITORY_NOTE_CENSUS_2026-10-18.md",
+      *sorted(CATALOGS.glob("*.md"))]
+LINK=re.compile(r'(?<!!)\[[^\]]+\]\(([^)]+)\)')
+
+def tracked_notes():
+    p=subprocess.run(["git","ls-files","-z","--","*.md"],cwd=ROOT,
+                     stdout=subprocess.PIPE,stderr=subprocess.PIPE,check=True)
+    return {pathlib.Path(x.decode("utf-8")).as_posix()
+            for x in p.stdout.split(b"\0") if x}
+
+def links_in(note):
+    paths=[]
+    for raw in LINK.findall(note.read_text(encoding="utf-8")):
+        ref=urllib.parse.unquote(raw.split("#",1)[0])
+        if not ref or "://" in ref or ref.startswith("mailto:"):continue
+        dest=(note.parent/ref).resolve()
+        if not dest.is_relative_to(ROOT):raise AssertionError("ESCAPED_REPOSITORY: "+raw)
+        if dest.suffix.lower()==".md":
+            paths.append(dest.relative_to(ROOT).as_posix())
+    return paths
+
+class MasterNoteCoverage(unittest.TestCase):
+    def test_every_tracked_markdown_is_linked(self):
+        self.assertEqual(len(list(CATALOGS.glob("*.md"))),13)
+        tracked=tracked_notes()
+        self.assertGreaterEqual(len(tracked),917)
+        indexed=set()
+        for doc in MOCS:
+            self.assertTrue(doc.is_file(),doc.as_posix())
+            indexed.update(links_in(doc))
+        unindexed=sorted(tracked-indexed)
+        self.assertFalse(unindexed,"UNINDEXED_NOTES (update owning MOC): "+repr(unindexed[:50]))
+        missing=sorted(indexed-tracked)
+        self.assertFalse(missing,"BROKEN_INDEX_LINKS: "+repr(missing[:50]))
+    def test_catalog_has_one_entry_per_snapshot_note(self):
+        entries=[]
+        for doc in sorted(CATALOGS.glob("*.md")):
+            entries.extend(links_in(doc))
+        self.assertGreaterEqual(len(entries),917)
+        self.assertEqual(len(entries),len(set(entries)),
+                         "Duplicate note links across generated catalogs")
+        for path in entries:self.assertTrue((ROOT/path).is_file(),path)
+
+if __name__=="__main__":unittest.main()
