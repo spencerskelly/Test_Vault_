@@ -20,7 +20,7 @@ class ReplayTests(unittest.TestCase):
   self.write()
  def write(self):
   with self.ledger.open("w",newline="") as f:
-   w=csv.DictWriter(f,fieldnames=self.headers);w.writeheader();w.writerow(self.row)
+   w=csv.DictWriter(f,fieldnames=self.headers);w.writeheader();w.writerow({k:self.row[k] for k in self.headers})
  def result(self):return replay.check(self.db,self.ledger,self.registry)
  def test_exact_replay(self):self.assertTrue(self.result()["valid"])
  def test_changed_direction(self):
