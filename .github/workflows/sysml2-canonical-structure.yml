@@ -4,6 +4,8 @@ on:
     paths:
       - '14_Workbench/registry/runtime/canonical-model.mjs'
       - '15_Testing/test_canonical_structural_invariants.mjs'
+      - '15_Testing/test_phase8_ledger_connection_gate.mjs'
+      - '14_Workbench/registry/runtime/phase8-ledger-connection-gate.mjs'
       - '.github/workflows/sysml2-canonical-structure.yml'
   pull_request:
     paths:
@@ -20,4 +22,4 @@ jobs:
         with:
           node-version: '22'
       - name: Validate canonical graph invariants
-        run: node --test 15_Testing/test_canonical_structural_invariants.mjs
+        run: node --test 15_Testing/test_canonical_structural_invariants.mjs 15_Testing/test_phase8_ledger_connection_gate.mjs
