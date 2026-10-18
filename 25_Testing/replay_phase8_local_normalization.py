@@ -1,7 +1,7 @@
 """Local-only independent replay of Phase 8 normalize_qeax_phase8.decide against ledger."""
 import collections,csv,importlib.util,json,pathlib,sqlite3,sys
 BASE=pathlib.Path(__file__).resolve().parents[1]
-SOURCE=BASE/"14_Workbench/registry/runtime/normalize_qeax_phase8.py"
+SOURCE=BASE/"24_Workbench/registry/runtime/normalize_qeax_phase8.py"
 spec=importlib.util.spec_from_file_location("phase8_qeax_normalizer",SOURCE)
 mod=importlib.util.module_from_spec(spec);spec.loader.exec_module(mod)
 def check(qeax,ledger,registry):
