@@ -1,4 +1,4 @@
-name: Vendor legacy plugin payload into V2 (one-time)
+name: V2 plugin lock generation
 on:
   push:
     branches: [feat/v2-integrated-pilot-20261018]
@@ -8,7 +8,7 @@ on:
 permissions:
   contents: write
 jobs:
-  vendor:
+  pin:
     if: github.ref == 'refs/heads/feat/v2-integrated-pilot-20261018'
     runs-on: ubuntu-latest
     steps:
@@ -18,26 +18,16 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
-      - name: Copy artifacts and verify hashes
-        run: python3 26_Definitions/tools/migrate_v1_plugin_payload_once.py
-      - name: Confirm no V2 plugin runtime paths point into archive
-        run: |
-          test -f "20_Base Vault/Runtime/Plugins/plugin-lock.v2.json"
-          python3 - <<'PY'
-          import json
-          from pathlib import Path
-          r=Path("20_Base Vault/Runtime/Plugins")
-          j=json.loads((r/"plugin-lock.v2.json").read_text())
-          assert j["status"]=="unverified_v2_runtime"
-          assert len(j["plugins"])==7
-          for pid in j["plugins"]:
-              assert (r/pid/"main.js").is_file()
-              assert "100_Archive" not in str(r/pid)
-          PY
-      - name: Commit only V2 payload files
+      - name: Generate V2-only plugin lock
+        run: python3 "20_Base Vault/build_v2_plugin_lock.py"
+      - name: Validate pinned plugin binaries
+        run: python3 "20_Base Vault/build_v2_plugin_lock.py" --check
+      - name: Validate vendored custom plugin payloads
+        run: python3 -m unittest 25_Testing/test_v2_custom_plugin_payloads.py 25_Testing/test_v2_vendored_plugin_runtime.py
+      - name: Commit lock into implementation branch
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add "20_Base Vault/Runtime/Plugins"
-          git commit -m "build(v2): vendor seven verified-blob plugin payloads into V2 ownership"
+          git add "20_Base Vault/Runtime/Plugins/plugin-lock.v2.json"
+          git diff --cached --quiet || git commit -m "build(v2): pin seven owned plugin packages by SHA256"
           git push origin HEAD:feat/v2-integrated-pilot-20261018
