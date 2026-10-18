@@ -1,0 +1,9 @@
+# Pass 8 — Complete local QEAX connector-row reconciliation
+
+Added `15_Testing/verify_phase8_rows_against_qeax.py` to compare the local Phase 8 CSV ledger against the read-only SQLite `t_connector` table in the same QEAX snapshot. It checks expected source count (optional), all raw connector identities and endpoints, extra/missing/duplicated ledger keys, normalized endpoint presence, and input attestation hashes. It returns an aggregate local manifest with source, registry, ledger and attestation SHA-256 fingerprints, counts, categorized failures and native_certified=0. No proprietary rows are output.
+
+Added six synthetic SQLite tampering tests, included in `.github/workflows/phase8-local-evidence-bundle.yml`. Tests and CI have not been independently observed yet.
+
+**Important outstanding trust limits:** this reconciles identity, raw endpoint values and full row coverage only; it does NOT independently reproduce normalized direction, roles, ownership, kinds, eligibility dispositions or parser semantics. Its `verified` refers to these row-integrity checks only. It does not authenticate a separate trusted issuer; a process with access to both ledger and attestation could replace the artifacts. Do not feed the result into the canonical graph as semantic authorization. Build an atomically produced local-only manifest and validate the fully normalized columns against the trusted normalization function in a later pass. Native emission remains disabled.
+
+Run synthetic checks with `python3 -m unittest -v 15_Testing/test_verify_phase8_rows_against_qeax.py`. On the actual reduced QEAX, execute locally with a separate local script that imports `verify_rows(qeax,ledger,registry,input_attestation,expected_count=14688)`; never commit its inputs or report.
