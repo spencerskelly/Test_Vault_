@@ -34,3 +34,12 @@ Scope: evaluate **specific exceptions** where a broad provisional selector could
 - Negative and positive test cases for all EXC-01–EXC-12 using the approved source family and trusted endpoint direction.
 - Parser testing for emitted use case/occurrence and feature usage; keep standard library causation separate.
 - Connect `reviewFlags` (elements) and `flagLink` (relationships) through one governed review UI and schema without claiming these are SysML relations.
+
+## Additional recovered evidence by exception (no policy reopening)
+
+- **EXC-01 — Owned vs non-owning reference:** [Original referential part usage approval](../99System/10_EA%20Native%20Translator/sysml-v2-decisions/2026-10-16-referential-part-usage-approved.md) distinguishes reuse of one `part def` from `ref part` pointing to an existing occurrence.
+- **EXC-02 — Untyped and reviewable:** [Part usage](../24_Workbench/docs/GOLDEN_IMPORT_STEP2_PART_USAGE_APPROVED_2026-10-17.md), [Action usage](../24_Workbench/docs/GOLDEN_IMPORT_STEP2_ACTION_USAGE_APPROVED_2026-10-17.md), and [Port usage](../24_Workbench/docs/GOLDEN_IMPORT_STEP2_PORT_USAGE_APPROVED_2026-10-17.md) are already individually approved.
+- **EXC-03 — Descriptive InformationItem:** [Standalone approved mapping](../24_Workbench/docs/GOLDEN_IMPORT_STEP2_INFORMATION_ITEM_APPROVED_2026-10-17.md) requires a note with original metadata and source-backed YAML links.
+- **EXC-04 — Physical Context:** [Original context split approval](../24_Workbench/docs/GOLDEN_IMPORT_STEP2_PHYSICAL_CONTEXT_CLASSIFICATION_2026-10-17.md) already identifies composite versus single-external forms and flags missing evidence.
+- **EXC-05 — Object classifier:** [Object mapping](../24_Workbench/docs/GOLDEN_IMPORT_STEP2_OBJECT_APPROVED_2026-10-17.md) and Phase 9 direction checks distinguish specialization from typing.
+- **EXC-06 — Copy aliases:** [Detailed source consolidation decision](../99System/10_EA%20Native%20Translator/sysml-v2-decisions/2026-10-16-ea-copy-alias-consolidation-approved.md) explicitly covers repeat connectors, content conflicts and possible source discard. [Retention hold](V2_DATA_RETENTION_APPROVAL_HOLDS_2026-10-18.md) isolates the destructive clauses.
