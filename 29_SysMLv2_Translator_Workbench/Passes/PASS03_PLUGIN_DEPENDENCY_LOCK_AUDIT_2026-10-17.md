@@ -38,3 +38,18 @@ Expected/actual hashes: Bootstrap main `16339af93abe34dc053ac2a8a60db7c081f7b07d
 **Interpretation:** the currently vendored binaries are internally consistent with the lock. The active release YAML still says Bootstrap 0.3.0, so alignment still fails; Workbench 0.1.18 binaries do not contain the recent uncompiled v2 popup. No third-party plugin data.json hash, Obsidian first-open test, nor npm source/build reproducibility test was performed. **Do not promote release yet.**
 
 **Next user-gated pass:** run Bootstrap v0.3.1 TypeScript/tests/build and controlled first-open candidate smoke test, then address release manifest pin and regenerate lock only if artifact changes. Existing Pass 02 CI/build blockers remain independent.
+
+## Pass 03 continuation — Bootstrap source-build readiness and first-open gate
+
+Inspected `13_Bootstrap/Tools/v0.3.1/package.json`, `tsconfig.json`, `esbuild.config.mjs` and `13_Bootstrap/Testing/Base First-Open Test Sheet.md` in current main. Package version 0.3.1, build chain TypeScript `tsc --noEmit` + esbuild commonjs output `main.js` targeting ES2020 and treating `obsidian` as external; tests use `node --import tsx --test test/*.test.ts`. The package defines the necessary scripts, **but successful execution is not verified** because the complete source checkout/dependency installation is unavailable in this runtime.
+
+An actionable test-sheet error was corrected: its row 15 instructed altering Dataview although Dataview is **not** in the locked ten-plugin list. In a *disposable vault* row 15 now tests drift of locked `mdse-bootstrap/styles.css`, requires backup and exact restoration. A warning at the top makes legacy v1 Port/Fileclass/Breadcrumbs checks distinct from SysML v2 note and menu acceptance. Commit `56978063f1d09934cf6c49b8dbdb2123ebfa8b46`.
+
+### Next executable promotion gate (operator with checkout and Obsidian)
+1. `cd 13_Bootstrap/Tools/v0.3.1 && npm ci && npm test && npm run build` — collect exit codes and output hash. Do not assume generated `main.js` identical to the already locked artifact until compared.
+2. Confirm that `10_Base Vault/Runtime/Plugins/mdse-bootstrap/{main.js,manifest.json,styles.css}` still match lock; prior independent hash verification was 3/3 PASS.
+3. Repair remaining Pass 02 CI and release path blockers, then generate an **empty disposable** controlled base, initialize its vault UID, and initialize its Git repository. Run the base release validator against this exact artifact.
+4. Open in Obsidian at or above locked minimum; complete trust, safe activation, author registration, drift and restore scenarios on both macOS and Windows where practicable; capture actual results.
+5. **Only after these gates** promote release YAML Bootstrap active version/source to 0.3.1 in the same controlled change as any necessary generated lock/payload updates. Avoid claiming native SysML v2 Workbench acceptance from v1 sheet.
+
+**Status:** Pass 03 investigation progressed; hash lock 6/6 PASS (Bootstrap + legacy Workbench); source build and first-open acceptance **PENDING**. This is a clean handoff; no automatic version promotion.
