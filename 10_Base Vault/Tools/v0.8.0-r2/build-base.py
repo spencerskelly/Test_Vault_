@@ -8,7 +8,7 @@ The output directory must not already contain files. The positive include list c
 from 10_Base Vault/Definition/mdse-release.yaml. Workspace-only methodology files are never
 copied. The runtime payload is intentionally operational only. Importer executables remain external and run against the generated base; they are not copied into engineer vaults.
 """
-import argparse, os, shutil, sys
+import argparse, hashlib, os, shutil, sys
 
 try:
     import yaml
@@ -71,10 +71,22 @@ with open(full(ROOT,rp["lock"]),encoding="utf-8") as lf:
 if not isinstance(prelock,dict) or prelock.get("schema")!=2 or not isinstance(prelock.get("plugins"),dict):
     sys.exit("BLOCKER invalid plugin lock schema")
 for plugin_id, files in prelock["plugins"].items():
-    for name in files.get("sha256",{}):
+    checks=files.get("sha256",{})
+    if not isinstance(checks,dict) or not checks:
+        sys.exit("BLOCKER missing plugin hashes: "+plugin_id)
+    for name, expected in checks.items():
+        if name not in ("main.js","manifest.json","styles.css","data.json"):
+            sys.exit("BLOCKER unsupported locked plugin file: "+str(name))
         p=rp["payload"]+"/"+plugin_id+"/"+name
         if not os.path.isfile(full(ROOT,p)):
             sys.exit("BLOCKER missing locked plugin payload: "+p)
+        with open(full(ROOT,p),"rb") as plugin_file:
+            digest=hashlib.sha256(plugin_file.read()).hexdigest()
+        if digest != expected:
+            sys.exit("BLOCKER plugin SHA256 mismatch: "+p)
+for p in rb.get("conditionalFiles",[]):
+    if man["releaseStatus"]=="release" and not os.path.isfile(full(ROOT,p)):
+        sys.exit("BLOCKER missing release conditional file: "+p)
 
 if os.path.exists(out):
     if not os.path.isdir(out):
@@ -106,7 +118,7 @@ rp=man["runtimePlugins"]
 with open(full(ROOT,rp["lock"]),encoding="utf-8") as f:
     plock=yaml.safe_load(f)
 if plock.get("schema")!=2:
-    sys.exit("plugin-lock.yaml is not schema 2; run Base Vault/Tools/v0.8.0-r2/update-plugin-lock.py")
+    sys.exit("plugin-lock.yaml is not schema 2; run 10_Base Vault/Tools/v0.8.0-r2/update-plugin-lock.py")
 for pid in plock["plugins"]:
     src=full(ROOT,rp["payload"]+"/"+pid)
     if not os.path.isdir(src):
