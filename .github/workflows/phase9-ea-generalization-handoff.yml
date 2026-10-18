@@ -1,0 +1,24 @@
+name: EA generalization handoff review tests
+on:
+  push:
+    paths:
+      - '14_Workbench/registry/runtime/ea-generalization-review-handoff.mjs'
+      - '14_Workbench/registry/runtime/canonical-model.mjs'
+      - '15_Testing/test_ea_generalization_review_handoff.mjs'
+      - '.github/workflows/phase9-ea-generalization-handoff.yml'
+  pull_request:
+    paths:
+      - '14_Workbench/registry/runtime/ea-generalization-review-handoff.mjs'
+      - '14_Workbench/registry/runtime/canonical-model.mjs'
+      - '15_Testing/test_ea_generalization_review_handoff.mjs'
+      - '.github/workflows/phase9-ea-generalization-handoff.yml'
+  workflow_dispatch:
+jobs:
+  review-handoff:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: node --test 15_Testing/test_ea_generalization_review_handoff.mjs
