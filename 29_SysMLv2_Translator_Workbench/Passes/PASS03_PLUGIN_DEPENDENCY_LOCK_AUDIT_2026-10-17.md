@@ -66,3 +66,11 @@ python3 15_Testing/check_bootstrap_candidate.py . --output /private/bootstrap-03
 The checker fails closed on input, hash or test errors. Even if these pass, `BUILD_AND_TEST_PASS` is **not** an Obsidian first-open pass and does not authorize automatic promotion of the Bootstrap release declaration.
 
 **Next:** Run the checker from a checkout with npm dependency access/cache, then verify first-open and update active pin only after runtime sign-off. Pass 02 workflow/base build remains pending. No model data or live vault changes.
+
+## Continuation — Base Vault builder dependency/readiness inspection
+
+On 2026-10-17 inspected the current `10_Base Vault/Tools/v0.8.0-r2/build-base.py` and `10_Base Vault/Definition/mdse-release.yaml`. Builder reads governed manifest via relative filesystem location, copies positive-include runtime files/trees, copies only locked plugin files, emits `.vault.yaml` with UNINITIALIZED UID, rejects nonempty target folders, and enforces forbidden-path exclusions. Source import remains external and must operate on fresh vault copies.
+
+A concrete fix was committed: the builder's printed validation command incorrectly referenced old `Base Vault/Testing/check-release.py`; it now names `10_Base Vault/Testing/check-release.py` (commit `8300715`). This is a command correctness fix, not release promotion.
+
+**Outstanding:** end-to-end builder run, full include-file existence audit, parser/native v2 compatibility, and first-open Bootstrap QA require a complete checkout. No generated base ZIP, npm build, or Obsidian acceptance was produced during this pass. Current release YAML remains Bootstrap 0.3.0 while lock/vendor use 0.3.1. Pass 02 CI workflow remains open. Continue in next user-approved bounded pass.
