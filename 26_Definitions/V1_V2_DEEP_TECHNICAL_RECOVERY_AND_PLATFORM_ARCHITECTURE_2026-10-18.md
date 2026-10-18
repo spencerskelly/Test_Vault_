@@ -5,6 +5,10 @@ Status: verified source excerpts + manifest-path recovery; implementation gaps a
 
 [Master MOC](../MOC_MDSE_V2.md) · [V1 archive MOC](../100_Archive/MOC_V1_ARCHIVE.md) · [Machine-readable reuse ledger](v1_to_v2_reuse_ledger.v0.1.json) · [Approved v2 release architecture](V2_RELEASE_ARCHITECTURE_DECISIONS_2026-10-18.md) · [Program goals](V2_PROGRAM_GOALS_AND_COMPLETION_2026-10-18.md)
 
+## Current status correction — later October 18, 2026
+
+This report retains **historical defects** as discovered at its original code snapshot. **DEF-01, DEF-02 and DEF-04 have since received active runtime amendments and passed synthetic GitHub CI**, but none has been accepted by native SysML parser or full source/vault round-trip. DEF-03 remains a versioned approved-rule implementation/reconciliation gap and is described as 12 exact exception cases in [the exception audit](V2_APPROVED_EXCEPTION_HANDLING_AUDIT_2026-10-18.md). For current machine statuses and CI attestation use [the divergence register](v2_approved_runtime_divergences.v0.1.json), not the original historical "Implemented" descriptions below.
+
 ## Executive technical finding
 
 The last month's work is **not primarily missing definitions**. Significant v1 functionality and test methodology exists, and the October 17 v2 source-family policies have been approved. The central risks are (i) distributed authority, (ii) incomplete native text-to-Workbench integration, (iii) v2 provisional runtime logic that differs from newer approved policies, (iv) absent independent acceptance at full scale and (v) rollout/configuration governance. Building another parser, connector classifier or UI shell before closing these seams risks recreating work.
