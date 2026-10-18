@@ -1,6 +1,6 @@
 """Synthetic transactional output guarantees for Phase 8 CLI wrapper."""
 import importlib.util,pathlib,tempfile,unittest
-PATH=pathlib.Path(__file__).resolve().parents[1]/"14_Workbench/registry/runtime/normalize_qeax_phase8.py"
+PATH=pathlib.Path(__file__).resolve().parents[1]/"24_Workbench/registry/runtime/normalize_qeax_phase8.py"
 spec=importlib.util.spec_from_file_location("phase8_normalizer",PATH)
 module=importlib.util.module_from_spec(spec)
 spec.loader.exec_module(module)
