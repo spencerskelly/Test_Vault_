@@ -1,0 +1,7 @@
+# Pass 6 — Typed ownership evidence
+
+Added `15_Testing/audit_ea_typed_ownership.py` in commit `6c7cd4b` and six synthetic tests in commit `56dada7`. The audit separately classifies a typed composite-end ownership candidate, ambiguous/shared aggregation, non-part endpoints, proxy-port/interface ambiguity, unspecified direction, self-reference and missing endpoint. A candidate is **not accepted native SysML v2**. It does not create part usages, alter any source connector or infer missing multiplicity.
+
+This is intentionally narrower than the Phase 8 provisional normalizer. The source type mapping recognizes explicit Class «block» and Object/Part kinds; Port and Interface remain individually reviewable rather than collapsed into PartUsage. A future adapter must reconcile actual proxy/full port stereotypes and underlying classifier definitions against approved rules. The current checker requires explicit Source -> Destination even when the aggregation-end flag identifies ownership, conservatively deferring other cases.
+
+No production connector-specific rows or IDs committed. The exact new synthetic tests have **not been executed from a full repository checkout**, and no fresh real QEAX aggregate counts from this particular checker have been certified. Next pass: run tests and the checker on the reduced QEAX with local-only result, compare against previous 1,408 provisional owner-endpoint findings, review semantically correct roles using the approved registry and native parser. Keep Native Certified = 0 and Pass 6 not yet release accepted.
