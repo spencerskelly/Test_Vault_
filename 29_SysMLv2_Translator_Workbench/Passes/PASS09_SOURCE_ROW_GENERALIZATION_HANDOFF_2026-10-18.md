@@ -1,0 +1,7 @@
+# Phase 9 — Source row comparison in canonical generalization handoff
+
+Extended the existing `phase9-generalization-handoff.mjs` to compare an explicitly supplied local QEAX connector observation against a Phase 8 ledger row before proposing a canonical specialization candidate. It checks connector type, raw direction, connector ID and GUID, and both raw endpoints. A mismatch yields review. Added seven synthetic tests for matching, missing and altered source fields, unverified direction, and incompatible canonical nodes.
+
+**Trust caveat:** This is a structural cross-check between two supplied objects, **not independent authentication**. A caller can fabricate both the ledger and `source_connector` or the `semantic_direction_verified` flag. Only the local read-only SQLite QEAX verifier with snapshot-bound integrity evidence can establish provenance; no `status:candidate` must authorize native emission or Workbench promotion absent that separately trusted process. `nativeCertified=false` and `mutation=false` remain invariant.
+
+Local test: `node --test 15_Testing/test_phase9_generalization_source_handoff.mjs`. Mac and CI test execution not yet observed. No private connector records or GUIDs committed. Workbench structural/visual views must distinguish source qualification state and retain local round-trip evidence. Native emission disabled.
