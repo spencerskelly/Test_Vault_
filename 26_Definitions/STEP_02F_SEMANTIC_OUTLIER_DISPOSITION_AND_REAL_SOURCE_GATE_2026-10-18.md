@@ -11,7 +11,7 @@ A fresh **independent SQLite read-only** classification preview was run on the l
 A post-gate disposition tool and five synthetic fail-closed tests are now tracked in the V2 methods repo:
 
 - [Post-gate private classifier](../25_Testing/v2_step02f_semantic_outlier_disposition.py) — requires the exact Phase 8 **verified** private \`gate.local.json\` and corresponding 24-column ledger, validates identity and row count, writes atomic private full-row classification plus aggregate; rejects staging failures.
-- [Synthetic tests](../25_Testing/test_v2_step02f_semantic_outlier_disposition.py) — exclusive categories, duplicate source GUID rejection, unverified gate rejection, count inconsistency rejection, and grouped Boundary trace retention. **5/5 passed locally** with synthetic records. CI wiring/status still requires verification.
+- [Synthetic tests](../25_Testing/test_v2_step02f_semantic_outlier_disposition.py) — exclusive categories, duplicate source GUID rejection, unverified gate rejection, count inconsistency rejection, and grouped Boundary trace retention. **5/5 passed locally** with synthetic records. [Dedicated CI workflow](../.github/workflows/v2-step02f-semantic-disposition.yml) committed, but its first live Actions result has not yet been confirmed.
 
 **Independent source preview (exclusive partition, NOT a verified output from the committed gated executable):**
 
