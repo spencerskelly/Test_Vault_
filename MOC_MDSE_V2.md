@@ -79,7 +79,7 @@ scope: toolchain-development-repository
 
 ## 60 — Project background and retained knowledge
 - [Workspace governance and older decisions](55_Workspace/README.md)
-- [Earlier development and approvals: historic reference only](100_Archive/V1/README.md)
+- [Earlier development and approvals: historic reference only](26_Definitions/V2_FOLDER_MIGRATION_MANIFEST_2026-10-18.json)
 - [Shared tool/runtime model schemas (check v2 authority before use)](99_System/)
 - [Cross-cutting reference and research](88_Reference/)
 - [V2 research / Phase 5–9 passes](29_SysMLv2_Translator_Workbench/README_SysMLv2_Translator_Workbench.md)
