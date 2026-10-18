@@ -41,10 +41,68 @@ def decide(row,a,b,registered):
  else:diag.append('UNKNOWN_FAMILY')
  if status!='deferred_review':diag.append('NATIVE_PARSER_AND_EVIDENCE_PENDING')
  return dict(family=fam,rule=rule or '',role=role,status=status,normalized_from=start,normalized_to=end,source_kind=ak or '',target_kind=bk or '',diagnostics=sorted(set(diag)))
+
+# Approved V2 policy uses existing Phase 8 ledger writer; no parallel importer.
+# The earlier KIND/decide functions remain solely for historical fixture replay.
+def _approved_module():
+ import importlib.util
+ resolver=pathlib.Path(__file__).resolve().parents[3]/'21_Importer/v2_approved_family_resolver.py'
+ spec=importlib.util.spec_from_file_location('v2_approved_family_resolver',resolver)
+ if spec is None or spec.loader is None:raise ValueError('APPROVED_RESOLVER_MISSING')
+ api=importlib.util.module_from_spec(spec);spec.loader.exec_module(api)
+ return api
+
+def decide_approved(row,a,b,approved,api):
+ """Resolve approved family, recording per-row review evidence. No native orientation claim."""
+ t,s=row['Connector_Type'] or '',row['Stereotype'] or ''
+ source_id,target_id=row['Start_Object_ID'],row['End_Object_ID']
+ rel=api.resolve_connector(t,s,registry=approved)
+ start=api.resolve_element(*(a or ('MISSING_SOURCE','')),registry=approved)
+ end=api.resolve_element(*(b or ('MISSING_TARGET','')),registry=approved)
+ reasons=[]
+ if a is None or b is None:reasons.append('MISSING_EA_ENDPOINT')
+ for label,node in [('SOURCE',start),('TARGET',end)]:
+  if node['status']!='approved_group':reasons.append(label+'_FAMILY_OUTLIER')
+  elif node['disposition'] not in ('native_candidate','conditional_review'):
+   reasons.append(label+'_NON_NATIVE_MODEL_ELEMENT')
+ if row['Direction']!='Source -> Destination':reasons.append('SOURCE_DIRECTION_REVIEW')
+ if rel['status']!='approved_group':
+  reasons.append('CONNECTOR_FAMILY_OUTLIER')
+  status='deferred_review';operation=''
+ elif rel['disposition']=='reference_only':
+  status='evidence_only';operation=''
+  reasons.append('APPROVED_NON_NATIVE_CONNECTOR')
+ else:
+  status='deferred_review';operation=rel['native_operation']
+  reasons.append('ROW_SEMANTIC_ELIGIBILITY_PENDING')
+  if t=='Aggregation':
+   flags=(row['SourceIsAggregate'],row['DestIsAggregate'])
+   if not any(v in (1,2,'1','2') for v in flags):
+    reasons.append('AGGREGATION_OWNERSHIP_EVIDENCE_MISSING')
+   else:reasons.append('AGGREGATION_OWNERSHIP_AND_USAGE_REVIEW')
+  if t in ('Generalization','Realisation') or s in ('include','extend'):
+   reasons.append('TRUSTED_ROLE_ORIENTATION_PENDING')
+ if t=='Sequence':reasons.append('EA_DIAGRAMS_OUT_OF_SCOPE')
+ return dict(family=api.family_key(t,s),rule=operation or '',role='approved-group-review',
+  status=status,normalized_from=source_id,normalized_to=target_id,
+  source_kind=start.get('native_kind') or '',target_kind=end.get('native_kind') or '',
+  diagnostics=sorted(set(reasons)))
+
 def reconcile(qeax,registry,output):
  con=sqlite3.connect('file:'+str(pathlib.Path(qeax).resolve())+'?mode=ro',uri=True);con.row_factory=sqlite3.Row
  objs={r['Object_ID']:(r['Object_Type'],r['Stereotype'] or '') for r in con.execute('SELECT Object_ID,Object_Type,Stereotype FROM t_object')}
- families={x['family'] for x in json.loads(pathlib.Path(registry).read_text())['families']}
+ registry_data=json.loads(pathlib.Path(registry).read_text(encoding='utf-8'))
+ if registry_data.get('schema')=='mdse-v2-approved-family-resolver/0.1':
+  api=_approved_module()
+  approved=api.load_registry(registry)
+  families=set(approved['relationships'])
+  policy_mode='approved_exact_groups'
+ elif 'families' in registry_data:
+  api=None;approved=None
+  families={x['family'] for x in registry_data['families']}
+  policy_mode='historical_candidates'
+ else:
+  raise ValueError('UNSUPPORTED_PHASE8_REGISTRY_SCHEMA')
  output=pathlib.Path(output);output.mkdir(parents=True,exist_ok=True)
  status=collections.Counter();diagnostics=collections.Counter();rules=collections.Counter()
  with (output/'local_only_phase8_ledger.csv').open('w',newline='') as f:
@@ -52,10 +110,18 @@ def reconcile(qeax,registry,output):
   w=csv.DictWriter(f,fieldnames=headers);w.writeheader()
   q='SELECT Connector_ID,ea_guid,Connector_Type,Stereotype,Direction,Start_Object_ID,End_Object_ID,SourceIsAggregate,DestIsAggregate,SourceRole,DestRole,SourceCard,DestCard FROM t_connector ORDER BY Connector_ID'
   for r in con.execute(q):
-   x=decide(r,objs.get(r['Start_Object_ID']),objs.get(r['End_Object_ID']),families)
+   x=(decide_approved(r,objs.get(r['Start_Object_ID']),objs.get(r['End_Object_ID']),approved,api)
+      if approved is not None else decide(r,objs.get(r['Start_Object_ID']),objs.get(r['End_Object_ID']),families))
    w.writerow(dict(source_pk=r['Connector_ID'],source_guid=r['ea_guid'],raw_from=r['Start_Object_ID'],raw_to=r['End_Object_ID'],source_direction=r['Direction'],source_role=r['SourceRole'],target_role=r['DestRole'],source_cardinality=r['SourceCard'],target_cardinality=r['DestCard'],raw_source_type=(objs.get(r['Start_Object_ID']) or ('',''))[0],raw_source_stereotype=(objs.get(r['Start_Object_ID']) or ('',''))[1],raw_target_type=(objs.get(r['End_Object_ID']) or ('',''))[0],raw_target_stereotype=(objs.get(r['End_Object_ID']) or ('',''))[1],source_aggregation_flag=r['SourceIsAggregate'],target_aggregation_flag=r['DestIsAggregate'],**{k:(';'.join(v) if isinstance(v,list) else v) for k,v in x.items()}))
    status[x['status']]+=1;rules[x['rule'] or '(none)']+=1;diagnostics.update(x['diagnostics'])
  summary={'total':sum(status.values()),'status':dict(status),'rule_candidates':dict(rules),'diagnostics':dict(diagnostics),'native_certified':0}
+ if policy_mode=='approved_exact_groups':
+  summary['policy_mode']=policy_mode
+  summary['approved_family_count']=len(families)
+  summary['unmatched_connector_rows']=diagnostics.get('CONNECTOR_FAMILY_OUTLIER',0)
+  summary['unmatched_endpoint_rows']=diagnostics.get('SOURCE_FAMILY_OUTLIER',0)+diagnostics.get('TARGET_FAMILY_OUTLIER',0)
+  summary['native_emission_authorized']=False
+  summary['ea_diagrams_processed']=0
  assert summary['total']==con.execute('SELECT COUNT(*) FROM t_connector').fetchone()[0]
  (output/'aggregate_only.json').write_text(json.dumps(summary,indent=2)+'\n')
  return summary
