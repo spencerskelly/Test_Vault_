@@ -13,7 +13,7 @@ args=parser.parse_args()
 changed=[]
 for path in tracked:
     if path.parts[0] not in active or path.suffix not in code:continue
-    if path.name in {"V2_FOLDER_MIGRATION_MANIFEST_2026-10-18.json","V2_FOLDER_MIGRATION_REFERENCE_AUDIT_2026-10-18.json"}:continue
+    if path.name in {"V2_FOLDER_MIGRATION_MANIFEST_2026-10-18.json","V2_FOLDER_MIGRATION_REFERENCE_AUDIT_2026-10-18.json","repair_v2_moved_registry_paths.py"}:continue
     full=ROOT/path
     if not full.exists(): continue
     try: content=full.read_text()
@@ -35,7 +35,7 @@ for path in tracked:
     if not full.exists():continue
     try: content=full.read_text()
     except UnicodeDecodeError:continue
-    if old in content and path.name not in {"V2_FOLDER_MIGRATION_REFERENCE_AUDIT_2026-10-18.json","V2_FOLDER_MIGRATION_MANIFEST_2026-10-18.json"}:
+    if old in content and path.name not in {"V2_FOLDER_MIGRATION_REFERENCE_AUDIT_2026-10-18.json","V2_FOLDER_MIGRATION_MANIFEST_2026-10-18.json","repair_v2_moved_registry_paths.py"}:
         remaining.append(str(path))
 print(json.dumps({"changed":changed,"remaining_executable_old_registry_references":remaining},indent=2))
 if remaining or (args.check and changed):sys.exit(1)
