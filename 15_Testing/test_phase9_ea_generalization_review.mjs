@@ -1,0 +1,14 @@
+import assert from 'node:assert/strict';
+import {test} from 'node:test';
+import {reviewEAGeneralization} from '../14_Workbench/registry/runtime/phase9-ea-generalization-review.mjs';
+const graph=()=>({nodes:[{id:'base',kind:'PartDefinition'},{id:'sub',kind:'PartDefinition'}]});
+const record=()=>({family:'Generalization',sourceRef:'synthetic-guid',rawFrom:'sub',rawTo:'base',normalizedFrom:'sub',normalizedTo:'base',sourceDirection:'Source -> Destination',role:'source-subtype-to-destination-supertype'});
+const codes=r=>r.diagnostics.map(d=>d.code);
+test('qualified shape stays review-only and cannot mutate',()=>{const r=reviewEAGeneralization(graph(),record());assert.equal(r.status,'review');assert.equal(r.nativeCertified,false);assert.equal(r.trustedSourceVerified,false);assert.equal(r.mutation,false);});
+test('missing direction rejected',()=>{const r=record();delete r.sourceDirection;assert.ok(codes(reviewEAGeneralization(graph(),r)).includes('UNVERIFIED_EA_DIRECTION'));});
+test('reversed direction rejected',()=>{const r=record();r.sourceDirection='Destination -> Source';assert.ok(codes(reviewEAGeneralization(graph(),r)).includes('UNVERIFIED_EA_DIRECTION'));});
+test('role unverified rejected',()=>{const r=record();r.role='unknown';assert.ok(codes(reviewEAGeneralization(graph(),r)).includes('UNVERIFIED_EA_ROLE'));});
+test('normalized endpoint disagreement rejected',()=>{const r=record();r.normalizedFrom='base';assert.ok(codes(reviewEAGeneralization(graph(),r)).includes('NORMALIZATION_ENDPOINT_MISMATCH'));});
+test('usage endpoint rejected by canonical validator',()=>{const g=graph();g.nodes[0].kind='PartUsage';assert.ok(codes(reviewEAGeneralization(g,record())).includes('INVALID_SPECIALIZATION_KINDS'));});
+test('unresolved endpoint rejected by canonical validator',()=>{const r=record();r.rawTo='absent';r.normalizedTo='absent';assert.ok(codes(reviewEAGeneralization(graph(),r)).includes('RELATIONSHIP_ENDPOINT_MISSING'));});
+test('source provenance absent rejected',()=>{const r=record();r.sourceRef='';assert.ok(codes(reviewEAGeneralization(graph(),r)).includes('MISSING_SOURCE_PROVENANCE'));});
