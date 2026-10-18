@@ -1,0 +1,7 @@
+# Pass 7: Java/Jupyter preflight verified on user's Mac
+
+Date: 2026-10-17. User successfully pulled main, ran `python3 -m unittest -v 15_Testing/test_sysml2_pilot_preflight.py`: **9 tests passed, 0 failures, 0 errors**. Their live preflight returned `javaAvailable=false`, `javaCommandPresent=true`, `javaMajorVersion=null`, `jupyterAvailable=false`, `readyForManualPilotValidation=false`, `status=MISSING_DEPENDENCY`, `nativeCertified=false`.
+
+Interpretation: macOS provides a Java launcher but there is no functioning, discoverable Java 21+ runtime; Jupyter is unavailable. This is a host prerequisite result, **not** evidence of native SysML v2 parser acceptance. Git operations on the Mac work. Recommend running official parser in an isolated Linux CI environment instead of changing the older Mac.
+
+Added `.github/workflows/sysml2-pilot-preflight.yml` to run exact checkout syntax checks and all nine synthetic preflight regression tests on GitHub Actions. This workflow is not an actual parser install and does not certify native semantics. A successful GitHub Actions job must still be observed; do not infer status from committing the workflow. Next: secure supported official SysML v2 pilot launch/installation instructions, build positive and negative fixture validation as a separate fail-closed CI job, then inspect outcome. No private model data in repo; native emission remains disabled.
