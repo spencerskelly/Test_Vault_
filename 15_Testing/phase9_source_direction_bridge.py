@@ -31,6 +31,10 @@ def audit(qeax,ledger):
      out["direction_review"]+=1;continue
     if row["normalized_from"]!=raw[1] or row["normalized_to"]!=raw[2]:
      errors["NORMALIZED_ENDPOINT_MISMATCH"]+=1;continue
+    if row["status"]!="orientation_normalized":
+     out["ledger_status_review"]+=1;continue
+    if (original["Stereotype"] or "").strip():
+     out["connector_stereotype_review"]+=1;continue
     if row["family"]!="Generalization" or row["role"]!="source-subtype-to-destination-supertype":
      errors["ROLE_OR_FAMILY_MISMATCH"]+=1;continue
     a=nodes.get(raw[1]);b=nodes.get(raw[2])
