@@ -6,7 +6,7 @@ ROOT=Path(__file__).resolve().parents[2]
 tracked=[Path(x) for x in subprocess.check_output(["git","ls-files","-z"],cwd=ROOT).decode().split("\0") if x]
 active={"20_Base Vault","21_Importer","23_Bootstrap","24_Workbench","25_Testing","26_Definitions","29_SysMLv2_Translator_Workbench"}
 code={".py",".mjs",".js",".ts",".json",".yml",".yaml"}
-old="14_Workbench/registry/"
+old="24_Workbench/registry/"
 parser=argparse.ArgumentParser()
 parser.add_argument("--check",action="store_true",help="verify without writing")
 args=parser.parse_args()
