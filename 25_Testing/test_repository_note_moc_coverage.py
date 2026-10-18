@@ -45,7 +45,12 @@ class MasterNoteCoverage(unittest.TestCase):
     def test_catalog_has_one_entry_per_snapshot_note(self):
         entries=[]
         for doc in sorted(CATALOGS.glob("*.md")):
-            entries.extend(links_in(doc))
+            for line in doc.read_text(encoding="utf-8").splitlines():
+                if line.startswith("- ["):
+                    for raw in LINK.findall(line):
+                        target=urllib.parse.unquote(raw.split("#",1)[0])
+                        resolved=(doc.parent/target).resolve()
+                        entries.append(resolved.relative_to(ROOT).as_posix())
         self.assertGreaterEqual(len(entries),917)
         self.assertEqual(len(entries),len(set(entries)),
                          "Duplicate note links across generated catalogs")
