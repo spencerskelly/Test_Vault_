@@ -18,5 +18,36 @@
     "preserveUserFiles": true,
     "autoInstallPlugins": false
   },
-  "notes": "Empty community plugin list is deliberate. Plugin binaries, versions, hashes and platform acceptance must be verified before deployment."
+  "notes": "Empty community plugin list is deliberate. Plugin binaries, versions, hashes and platform acceptance must be verified before deployment.",
+  "settingsOwnership": {
+    "app.json": "managed_defaults",
+    "appearance.json": "managed_defaults",
+    "core-plugins.json": "managed_defaults",
+    "community-plugins.json": "bootstrap_approval_required",
+    "workspace.json": "user_owned",
+    "hotkeys.json": "user_owned",
+    "plugin_data": "preserve_until_validated_migration"
+  },
+  "candidatePlugins": [
+    {
+      "id": "obsidian-git",
+      "status": "verify_before_install"
+    },
+    {
+      "id": "templater-obsidian",
+      "status": "verify_before_install"
+    },
+    {
+      "id": "dataview",
+      "status": "verify_before_install"
+    },
+    {
+      "id": "mdse-bootstrap",
+      "status": "verify_before_install"
+    },
+    {
+      "id": "mdse-workbench",
+      "status": "verify_before_install"
+    }
+  ]
 }
