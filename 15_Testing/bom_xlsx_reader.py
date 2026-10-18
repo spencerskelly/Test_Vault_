@@ -55,7 +55,9 @@ def rows_from_xlsx(path,sheet_name):
 def iter_bom(path,sheet,columns,snapshot_id,workbook_id,header_row=1):
     """columns is explicit field name -> Excel header text, no guessed synonyms."""
     required={"part_number","parent_part_number","quantity","unit"}
-    if set(columns)!=required:raise ValueError("REQUIRED_BOM_FIELDS_MISSING")
+    optional={"part_revision","parent_revision","variant_of","configuration","effectivity_start","effectivity_end","bom_revision","alternate_group"}
+    if not required.issubset(columns) or set(columns)-required-optional:
+        raise ValueError("INVALID_BOM_FIELD_MAPPING")
     if len(set(columns.values()))!=len(columns):raise ValueError("DUPLICATE_COLUMN_MAPPING")
     header=None
     for row_number,raw in rows_from_xlsx(path,sheet):
@@ -67,6 +69,8 @@ def iter_bom(path,sheet,columns,snapshot_id,workbook_id,header_row=1):
             continue
         if header is None:raise ValueError("HEADER_ROW_NOT_FOUND")
         values={field:raw.get(header[title]) for field,title in columns.items()}
+        # All optional fields remain uninterpreted original source strings.
+        # A variant marker is evidence, NOT automatic subtypeOf/variantOf acceptance.
         if all(v is None or str(v).strip()=="" for v in values.values()):continue
         if not values["part_number"]:raise ValueError("BOM_PART_NUMBER_MISSING_ROW_"+str(row_number))
         quantity=values["quantity"]
