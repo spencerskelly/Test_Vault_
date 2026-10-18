@@ -23,3 +23,18 @@ Current locked community IDs: `mdse-bootstrap` 0.3.1, `mdse-workbench` 0.1.18, `
 
 ## Pass result
 Audited: version/pin alignment and lock membership. Not tested: actual plugin hashes, full base construction, Obsidian first open, latest Workbench bundle, GitHub Actions. **Release NO-GO**. Next continuation requires user `y`.
+
+## Pass 03 continuation — actual vendored binary hash evidence
+
+On 2026-10-17 the six actual vendored files below were fetched from GitHub current main; SHA-256 was recomputed from their UTF-8 bytes and compared with the exact values in `.obsidian/plugin-lock.yaml`. **6/6 MATCH**:
+
+| Plugin | main.js | manifest.json | styles.css |
+|---|---|---|---|
+| mdse-bootstrap 0.3.1 | PASS | PASS | PASS |
+| mdse-workbench 0.1.18 | PASS | PASS | PASS |
+
+Expected/actual hashes: Bootstrap main `16339af93abe34dc053ac2a8a60db7c081f7b07d584aa4b8d942fd9081eb0c62`, manifest `15586ffbfabee6a99d6b51777558ad2a36184eefa4b9ff782eb325350b61833a`, styles `dd7ba34452810f9d39ea03395fae66469decb386de83e6ab66d7a345e42ca645`. Workbench main `1690d32a0c05e496366199b8ead7247eab42314a940ada8de3a0a1f109fcb0a7`, manifest `6e2a74891743df424d80fe5cb551460ce4971852bf152909a2a5cecbbb218bd9`, styles `445abe199f3dbf00724dc3cffa13aed58fc087adc9396e79de18ebe6b274b008`.
+
+**Interpretation:** the currently vendored binaries are internally consistent with the lock. The active release YAML still says Bootstrap 0.3.0, so alignment still fails; Workbench 0.1.18 binaries do not contain the recent uncompiled v2 popup. No third-party plugin data.json hash, Obsidian first-open test, nor npm source/build reproducibility test was performed. **Do not promote release yet.**
+
+**Next user-gated pass:** run Bootstrap v0.3.1 TypeScript/tests/build and controlled first-open candidate smoke test, then address release manifest pin and regenerate lock only if artifact changes. Existing Pass 02 CI/build blockers remain independent.
