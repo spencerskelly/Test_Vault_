@@ -1,0 +1,604 @@
+{
+  "stale_active_references": [
+    {
+      "path": "24_Workbench/docs/GOLDEN_IMPORT_RELATIONSHIP_FIRST_EXECUTION_2026-10-17.md",
+      "line": 20,
+      "text": "Implementation artifacts: `14_Workbench/registry/runtime/approved_relationship_audit.py` and `test_approved_relationship_audit.py`. Run: `python approved_relationship_aud"
+    },
+    {
+      "path": "24_Workbench/docs/GOLDEN_IMPORT_STEP1_BASELINE_RECONCILIATION_2026-10-17.md",
+      "line": 12,
+      "text": "- `14_Workbench/registry/runtime/reconcile_qeax.py`: executable **read-only connector** audit. Reads QEAX, classifies a deliberately limited set of endpoint kinds, writes"
+    },
+    {
+      "path": "24_Workbench/docs/GOLDEN_IMPORT_STEP1_BASELINE_RECONCILIATION_2026-10-17.md",
+      "line": 13,
+      "text": "- `14_Workbench/registry/runtime/test_reconcile_qeax.py`: six synthetic test definitions available. Test source inspected; tests were **not independently executed from th"
+    },
+    {
+      "path": "24_Workbench/docs/GOLDEN_IMPORT_STEP1_BASELINE_RECONCILIATION_2026-10-17.md",
+      "line": 15,
+      "text": "- `14_Workbench/registry/runtime/canonical-model.mjs` described in Phase 5 documentation as a synthetic typed graph validator and eligibility adapter; no end-to-end QEAX-"
+    },
+    {
+      "path": "24_Workbench/docs/SYSML_V2_PHASE3_CENTRAL_RELATIONSHIP_REGISTRY.md",
+      "line": 3,
+      "text": "Registry: `14_Workbench/registry/sysml_v2_relationship_operations.v0.1.json`"
+    },
+    {
+      "path": "24_Workbench/docs/SYSML_V2_PHASE4_ENGINE_IMPLEMENTATION.md",
+      "line": 3,
+      "text": "Registry source: `14_Workbench/registry/sysml_v2_relationship_operations.v0.1.json`."
+    },
+    {
+      "path": "24_Workbench/docs/SYSML_V2_PHASE4_ENGINE_IMPLEMENTATION.md",
+      "line": 5,
+      "text": "Run: `node --test 14_Workbench/registry/runtime/eligibility-engine.test.mjs`."
+    },
+    {
+      "path": "24_Workbench/docs/SYSML_V2_PHASE5_CANONICAL_GRAPH_EVIDENCE.md",
+      "line": 18,
+      "text": "Run tests: `node --test 14_Workbench/registry/runtime/*.test.mjs`. Synthetic tests are no proof of golden-import acceptance."
+    },
+    {
+      "path": "24_Workbench/docs/SYSML_V2_PHASE5_ENDPOINT_COVERAGE_GATE.md",
+      "line": 14,
+      "text": "Phase 5 synthetic test source was committed, but automated execution of the repository version could not be confirmed from this environment because the raw GitHub content"
+    },
+    {
+      "path": "24_Workbench/docs/SYSML_V2_PHASE6_REGISTRY_COVERAGE.md",
+      "line": 15,
+      "text": "Run: `python 14_Workbench/registry/runtime/reconcile_fixture.py --registry 14_Workbench/registry/family_disposition_registry.v0.2.json --shapes /local/private/endpoint_sh"
+    },
+    {
+      "path": "24_Workbench/docs/SYSML_V2_PHASE7_QEAX_SOURCE_LEDGER.md",
+      "line": 4,
+      "text": "Run: `python 14_Workbench/registry/runtime/reconcile_qeax.py --qeax /private/path/EA_2026_10_15_endgame_mini.qeax --out /private/local/output`."
+    },
+    {
+      "path": "24_Workbench/docs/SYSML_V2_PHASE8_CONNECTOR_NORMALIZATION.md",
+      "line": 9,
+      "text": "`python 14_Workbench/registry/runtime/normalize_qeax_phase8.py --qeax /private/model.qeax --registry 14_Workbench/registry/family_disposition_registry.v0.2.json --out /pr"
+    },
+    {
+      "path": "24_Workbench/registry/runtime/pinned-v2-eligibility.mjs",
+      "line": 9,
+      "text": " '14_Workbench/registry/family_disposition_registry.v0.2.json',"
+    },
+    {
+      "path": "24_Workbench/registry/runtime/pinned-v2-eligibility.mjs",
+      "line": 10,
+      "text": " '14_Workbench/registry/sysml_v2_semantic_rules.v0.2.json',"
+    },
+    {
+      "path": "24_Workbench/registry/runtime/pinned-v2-eligibility.mjs",
+      "line": 11,
+      "text": " '14_Workbench/registry/sysml_v2_semantic_decisions.v0.1.json'"
+    },
+    {
+      "path": "24_Workbench/registry/runtime/pinned-v2-eligibility.mjs",
+      "line": 14,
+      "text": " const pins=JSON.parse(readFileSync(resolve(root,'14_Workbench/registry/sysml_v2_registry_pins.v0.1.json')));"
+    },
+    {
+      "path": "24_Workbench/registry/runtime/pinned-v2-eligibility.test.mjs",
+      "line": 25,
+      "text": "  const files=['14_Workbench/registry/sysml_v2_registry_pins.v0.1.json',"
+    },
+    {
+      "path": "24_Workbench/registry/runtime/pinned-v2-eligibility.test.mjs",
+      "line": 26,
+      "text": "   '14_Workbench/registry/family_disposition_registry.v0.2.json',"
+    },
+    {
+      "path": "24_Workbench/registry/runtime/pinned-v2-eligibility.test.mjs",
+      "line": 27,
+      "text": "   '14_Workbench/registry/sysml_v2_semantic_rules.v0.2.json',"
+    },
+    {
+      "path": "24_Workbench/registry/runtime/pinned-v2-eligibility.test.mjs",
+      "line": 28,
+      "text": "   '14_Workbench/registry/sysml_v2_semantic_decisions.v0.1.json'];"
+    },
+    {
+      "path": "24_Workbench/registry/sysml_v2_registry_pins.v0.1.json",
+      "line": 5,
+      "text": "    \"14_Workbench/registry/family_disposition_registry.v0.2.json\": \"1aa455a8f2813e33ccd032a649a23af753088d4994011c7dc17c42c668499bd2\","
+    },
+    {
+      "path": "24_Workbench/registry/sysml_v2_registry_pins.v0.1.json",
+      "line": 6,
+      "text": "    \"14_Workbench/registry/sysml_v2_semantic_rules.v0.2.json\": \"7d7d282d34314de1c97c0fbe6d32ca0a6aadd1e19109fbff71e4dcfa05d7beb7\","
+    },
+    {
+      "path": "24_Workbench/registry/sysml_v2_registry_pins.v0.1.json",
+      "line": 7,
+      "text": "    \"14_Workbench/registry/sysml_v2_semantic_decisions.v0.1.json\": \"ff57fe6b69dd9b6c67cfe4ccf9f9389d5c89a3f93089f7fb4494f84624b0a9fa\""
+    },
+    {
+      "path": "24_Workbench/registry/sysml_v2_semantic_decisions.v0.1.json",
+      "line": 4,
+      "text": "  \"sourceRegistry\": \"14_Workbench/registry/family_disposition_registry.v0.2.json\","
+    },
+    {
+      "path": "24_Workbench/registry/sysml_v2_semantic_decisions.v0.1.json",
+      "line": 5,
+      "text": "  \"candidateRegistry\": \"14_Workbench/registry/sysml_v2_semantic_rules.v0.2.json\","
+    },
+    {
+      "path": "24_Workbench/registry/sysml_v2_semantic_rules.v0.2.json",
+      "line": 410,
+      "text": "  \"upstreamRegistry\": \"14_Workbench/registry/family_disposition_registry.v0.2.json\","
+    },
+    {
+      "path": "25_Testing/replay_phase8_local_normalization.py",
+      "line": 4,
+      "text": "SOURCE=BASE/\"14_Workbench/registry/runtime/normalize_qeax_phase8.py\""
+    },
+    {
+      "path": "25_Testing/run_gated_phase8.py",
+      "line": 18,
+      "text": "PHASE8=ROOT/\"14_Workbench/registry/runtime/normalize_qeax_phase8.py\""
+    },
+    {
+      "path": "25_Testing/test_phase8_atomic_publication.py",
+      "line": 3,
+      "text": "PATH=pathlib.Path(__file__).resolve().parents[1]/\"14_Workbench/registry/runtime/normalize_qeax_phase8.py\""
+    },
+    {
+      "path": "25_Testing/test_phase8_e2e_original_values.py",
+      "line": 3,
+      "text": "TARGET=pathlib.Path(__file__).resolve().parents[1]/\"14_Workbench/registry/runtime/normalize_qeax_phase8.py\""
+    },
+    {
+      "path": "25_Testing/test_phase8_generalization_review.mjs",
+      "line": 3,
+      "text": "import {reviewPhase8Generalization} from '../14_Workbench/registry/runtime/phase8-generalization-review.mjs';"
+    },
+    {
+      "path": "25_Testing/test_phase8_generalization_review_bridge.mjs",
+      "line": 3,
+      "text": "import {reviewPhase8Generalization as review} from '../14_Workbench/registry/runtime/phase8-generalization-review-bridge.mjs';"
+    },
+    {
+      "path": "25_Testing/test_phase8_input_attestation.py",
+      "line": 3,
+      "text": "P=pathlib.Path(__file__).resolve().parents[1]/'14_Workbench/registry/runtime/normalize_qeax_phase8.py'"
+    },
+    {
+      "path": "25_Testing/test_phase8_ledger_connection_gate.mjs",
+      "line": 3,
+      "text": "import {evaluateLedgerConnection} from '../14_Workbench/registry/runtime/phase8-ledger-connection-gate.mjs';"
+    },
+    {
+      "path": "25_Testing/test_phase9_canonical_relationship_validator.mjs",
+      "line": 3,
+      "text": "import {validateGraph} from '../14_Workbench/registry/runtime/canonical-model.mjs';"
+    },
+    {
+      "path": "25_Testing/test_phase9_ea_generalization_review.mjs",
+      "line": 3,
+      "text": "import {reviewEAGeneralization} from '../14_Workbench/registry/runtime/phase9-ea-generalization-review.mjs';"
+    },
+    {
+      "path": "25_Testing/test_phase9_generalization_evidence_bridge.mjs",
+      "line": 3,
+      "text": "import {reviewGeneralizationFromEvidence} from '../14_Workbench/registry/runtime/phase9-generalization-evidence-bridge.mjs';"
+    },
+    {
+      "path": "25_Testing/test_phase9_generalization_handoff.mjs",
+      "line": 3,
+      "text": "import {proposeGeneralization} from '../14_Workbench/registry/runtime/phase9-generalization-handoff.mjs';"
+    },
+    {
+      "path": "25_Testing/test_phase9_generalization_source_handoff.mjs",
+      "line": 3,
+      "text": "import {proposeGeneralization} from '../14_Workbench/registry/runtime/phase9-generalization-handoff.mjs';"
+    },
+    {
+      "path": "25_Testing/test_phase9_nested_definition_workbench_contract.mjs",
+      "line": 3,
+      "text": "import {validateGraph} from '../14_Workbench/registry/runtime/canonical-model.mjs';"
+    },
+    {
+      "path": "25_Testing/test_phase9_source_evidence_bridge_boundary.mjs",
+      "line": 3,
+      "text": "import {reviewGeneralizationFromEvidence} from '../14_Workbench/registry/runtime/phase9-generalization-evidence-bridge.mjs';"
+    },
+    {
+      "path": "25_Testing/test_sysml_v2_family_coverage.py",
+      "line": 11,
+      "text": "        cls.source=load(\"14_Workbench/registry/family_disposition_registry.v0.2.json\")"
+    },
+    {
+      "path": "25_Testing/test_sysml_v2_family_coverage.py",
+      "line": 12,
+      "text": "        cls.target=load(\"14_Workbench/registry/sysml_v2_semantic_rules.v0.2.json\")"
+    },
+    {
+      "path": "25_Testing/test_sysml_v2_semantic_rules.py",
+      "line": 5,
+      "text": "RULES=pathlib.Path(__file__).resolve().parents[1]/\"14_Workbench/registry/sysml_v2_semantic_rules.v0.1.json\""
+    },
+    {
+      "path": "25_Testing/verify_sysml_v2_registry_pins.py",
+      "line": 8,
+      "text": "DEFAULT=\"14_Workbench/registry/sysml_v2_registry_pins.v0.1.json\""
+    },
+    {
+      "path": "26_Definitions/APPROVED_V2_TRANSLATION_BASELINE_AND_TEST_HANDOFF_2026-10-18.md",
+      "line": 26,
+      "text": "- `14_Workbench/registry/`, `15_Testing/`: currently shared implementation locations for V2 registries, parsers, canonical graph, normalization and synthetic regression c"
+    },
+    {
+      "path": "26_Definitions/tools/stage_v2_archive_migration.py",
+      "line": 52,
+      "text": "        if any(x in line for x in (\"14_Workbench/registry/\",\"15_Testing/phase\",\"11_Importer/Definition/SysML\",\"10_Base Vault/Testing/V2_\")):"
+    },
+    {
+      "path": "29_SysMLv2_Translator_Workbench/FIRST_RUN_FAST_TRACK_DEPENDENCY_RULES_DOC_AUDIT_2026-10-17.md",
+      "line": 36,
+      "text": "2. **V2 implementation contracts**: `14_Workbench/docs/SYSML_V2_BUILD_READINESS_STABILITY_UX_GATE_2026-10-17.md` **superseding addenda**, `14_Workbench/docs/GOLDEN_IMPORT"
+    },
+    {
+      "path": "29_SysMLv2_Translator_Workbench/Passes/PASS04_ACCEPTANCE_STATUS_2026-10-17.md",
+      "line": 21,
+      "text": "2. Run `15_Testing/run_gated_phase8.py` with the private exact-hash reduced profile, full profile disposition policy, actual `14_Workbench/registry/family_disposition_reg"
+    },
+    {
+      "path": "29_SysMLv2_Translator_Workbench/Passes/PASS04_QEAX_SOURCE_PROFILES_2026-10-17.md",
+      "line": 119,
+      "text": "New `15_Testing/run_gated_phase8.py` (commit `5c6c206`) is an orchestration entrypoint: explicit selected source profile + disposition policy must pass first, before it l"
+    },
+    {
+      "path": "29_SysMLv2_Translator_Workbench/Passes/PASS04_QEAX_SOURCE_PROFILES_2026-10-17.md",
+      "line": 129,
+      "text": "  --registry \"14_Workbench/registry/family_disposition_registry.v0.2.json\" \\"
+    },
+    {
+      "path": "29_SysMLv2_Translator_Workbench/Passes/PASS05_DIFFERENCE_REVIEW_2026-10-17.md",
+      "line": 3,
+      "text": "Created machine-readable decision register `14_Workbench/registry/sysml_v2_semantic_decisions.v0.1.json` (commit `cf39550`). It classifies all eleven source-versus-v2 can"
+    },
+    {
+      "path": "29_SysMLv2_Translator_Workbench/Passes/PASS05_FAMILY_COVERAGE_2026-10-17.md",
+      "line": 5,
+      "text": "The previous candidate semantic ruleset contained 13 relationship family keys. The existing Phase 8 registry contained 26. New immutable candidate file `14_Workbench/regi"
+    },
+    {
+      "path": "29_SysMLv2_Translator_Workbench/Passes/PASS05_PINNED_ELIGIBILITY_INTEGRATION_2026-10-17.md",
+      "line": 3,
+      "text": "Added `14_Workbench/registry/runtime/pinned-v2-eligibility.mjs` (commit `a67a6b9`). It loads three version-pinned JSON registry files, independently checks their SHA-256 "
+    },
+    {
+      "path": "29_SysMLv2_Translator_Workbench/Passes/PASS05_PINNED_ELIGIBILITY_INTEGRATION_2026-10-17.md",
+      "line": 5,
+      "text": "Added `14_Workbench/registry/runtime/pinned-v2-eligibility.test.mjs` (commit `9c92328`) with three synthetic Node tests: normal pin loading, unknown family denial, and mo"
+    },
+    {
+      "path": "29_SysMLv2_Translator_Workbench/Passes/PASS05_PINNED_PREFLIGHT_ENTRY_2026-10-17.md",
+      "line": 9,
+      "text": "When a complete checkout is available, run `node --test 14_Workbench/registry/runtime/pinned-v2-eligibility.test.mjs`, `node 14_Workbench/registry/runtime/v2-translator-p"
+    },
+    {
+      "path": "29_SysMLv2_Translator_Workbench/Passes/PASS05_REGISTRY_HASH_PINS_2026-10-17.md",
+      "line": 7,
+      "text": "- `14_Workbench/registry/sysml_v2_registry_pins.v0.1.json` (commit `01df97d`), SHA256 for all three current registry files: family dispositions v0.2, candidate v2 semanti"
+    },
+    {
+      "path": "29_SysMLv2_Translator_Workbench/Passes/PASS05_SEMANTIC_RULESET_2026-10-17.md",
+      "line": 3,
+      "text": "Created `14_Workbench/registry/sysml_v2_semantic_rules.v0.1.json` commit `52534c9` with 17 provisional EA element selectors and 13 relationship families. Every mapping is"
+    },
+    {
+      "path": "29_SysMLv2_Translator_Workbench/Passes/PASS06_EXACT_BLOB_ELEVEN_TESTS_2026-10-17.md",
+      "line": 8,
+      "text": "- Adapter `15_Testing/phase8_deferred_evidence_compat.py`: `949ccb79e0467e727cb0e03feb632df8e8b44662`"
+    },
+    {
+      "path": "29_SysMLv2_Translator_Workbench/Passes/PASS06_EXACT_BLOB_TEST_SUBSET_2026-10-17.md",
+      "line": 5,
+      "text": "- `15_Testing/phase8_deferred_evidence_compat.py`: SHA `949ccb79e0467e727cb0e03feb632df8e8b44662`"
+    },
+    {
+      "path": "29_SysMLv2_Translator_Workbench/Passes/PASS06_EXPANDED_STEREOTYPE_AUDIT_2026-10-17.md",
+      "line": 5,
+      "text": "The new versioned source taxonomy `14_Workbench/registry/ea_source_stereotypes.v0.1.json` (commit `82c376b`) includes explicit candidate kinds for Class stereotypes `bloc"
+    },
+    {
+      "path": "29_SysMLv2_Translator_Workbench/Passes/PASS06_INPUT_FINGERPRINT_PINNING_2026-10-17.md",
+      "line": 5,
+      "text": "Changes: input attestation and before/after hash checks in `14_Workbench/registry/runtime/normalize_qeax_phase8.py` (commit `85bd278`); three synthetic attestation tests "
+    },
+    {
+      "path": "29_SysMLv2_Translator_Workbench/Passes/PASS06_NATIVE_EVIDENCE_GATES_2026-10-17.md",
+      "line": 5,
+      "text": "Implemented versioned evidence checklist `14_Workbench/registry/deferred_native_evidence_gates.v1.json`, assessment `15_Testing/deferred_native_evidence_gate.py`, and fiv"
+    },
+    {
+      "path": "29_SysMLv2_Translator_Workbench/Passes/PASS06_ORIGINAL_EVIDENCE_FIELD_MAPPING_2026-10-17.md",
+      "line": 3,
+      "text": "Corrected `15_Testing/phase8_deferred_evidence_compat.py` so `source_type` attestation reads `raw_source_type`, and `source_stereotype` attestation reads `raw_source_ster"
+    },
+    {
+      "path": "29_SysMLv2_Translator_Workbench/Passes/PASS06_PHASE8_ATOMIC_PUBLICATION_2026-10-17.md",
+      "line": 5,
+      "text": "Changes: `14_Workbench/registry/runtime/normalize_qeax_phase8.py` commit `1dfe0fa`; synthetic existing-destination and failure-cleanup tests `15_Testing/test_phase8_atomi"
+    },
+    {
+      "path": "29_SysMLv2_Translator_Workbench/Passes/PASS06_PHASE8_EVIDENCE_COMPATIBILITY_2026-10-17.md",
+      "line": 7,
+      "text": "Inspected actual GitHub `main` files: `14_Workbench/registry/runtime/normalize_qeax_phase8.py` emits CSV columns `source_pk, source_guid, raw_from, raw_to, family, rule, "
+    },
+    {
+      "path": "29_SysMLv2_Translator_Workbench/Passes/PASS06_PHASE8_EVIDENCE_COMPATIBILITY_2026-10-17.md",
+      "line": 9,
+      "text": "Added `15_Testing/phase8_deferred_evidence_compat.py` (`a23260b`): validates required CSV keys, explicitly identifies missing source attestation and requires independent "
+    },
+    {
+      "path": "29_SysMLv2_Translator_Workbench/Passes/PASS06_PHASE8_RAW_SOURCE_RETENTION_2026-10-17.md",
+      "line": 3,
+      "text": "Updated `14_Workbench/registry/runtime/normalize_qeax_phase8.py` on main (42f43ab) to add original connector `Direction`, `SourceRole`, `DestRole`, `SourceCard`, `DestCar"
+    },
+    {
+      "path": "29_SysMLv2_Translator_Workbench/Passes/PASS06_PHASE8_RAW_SOURCE_RETENTION_2026-10-17.md",
+      "line": 5,
+      "text": "Updated `15_Testing/phase8_deferred_evidence_compat.py` (a3fbcf9 and f3649ed): it now reports whether extended source fields exist and no longer reports them as absent wh"
+    },
+    {
+      "path": "29_SysMLv2_Translator_Workbench/Passes/PASS08_CANONICAL_CONNECTION_EVIDENCE_GATE_2026-10-17.md",
+      "line": 3,
+      "text": "Added `validateConnectionEvidence(graph, connection)` to the existing `14_Workbench/registry/runtime/canonical-model.mjs`, reusing the graph node identities. It is a cons"
+    },
+    {
+      "path": "29_SysMLv2_Translator_Workbench/Passes/PASS08_CANONICAL_GRAPH_INVARIANT_INTEGRATION_2026-10-17.md",
+      "line": 3,
+      "text": "This increment updates the existing production graph validator `14_Workbench/registry/runtime/canonical-model.mjs`, rather than relying solely on the earlier standalone P"
+    },
+    {
+      "path": "29_SysMLv2_Translator_Workbench/Passes/PASS08_LOCAL_LEDGER_CANONICAL_ADAPTER_2026-10-17.md",
+      "line": 3,
+      "text": "Created `14_Workbench/registry/runtime/phase8-ledger-connection-gate.mjs` as an opt-in, fail-closed review adapter. It consumes a projected local Phase 8 ledger record pl"
+    },
+    {
+      "path": "29_SysMLv2_Translator_Workbench/Passes/PASS08_MAC_REPLAY_TEST_FIX_AND_PATH_HANDOFF_2026-10-17.md",
+      "line": 15,
+      "text": "Use actual **absolute local file paths** for the QEAX, a matching generated Phase 8 ledger and the central eligibility registry JSON. If no ledger exists, generate a fres"
+    },
+    {
+      "path": "29_SysMLv2_Translator_Workbench/Passes/PASS08_MAC_SIX_REPLAY_TESTS_AND_LEDGER_GENERATION_2026-10-17.md",
+      "line": 7,
+      "text": "The documented registry is `14_Workbench/registry/family_disposition_registry.v0.2.json`; check it out with git and generate private ledger into `$HOME/Documents/MDSE_Loc"
+    },
+    {
+      "path": "29_SysMLv2_Translator_Workbench/Passes/PASS09_COINCIDENT_PARENT_SUPERTYPE_GATE_2026-10-17.md",
+      "line": 15,
+      "text": "python3 15_Testing/phase9_coincident_parent_specialization.py --qeax \"$HOME/Documents/Vaults/Engineering_Data/EA_2026_10_15_endgame_mini.qeax\""
+    },
+    {
+      "path": "29_SysMLv2_Translator_Workbench/Passes/PASS09_DEFINITION_OWNERSHIP_EVIDENCE_2026-10-17.md",
+      "line": 9,
+      "text": "Added `15_Testing/phase9_definition_ownership_evidence.py` with aggregate-only output and six synthetic tests. Native certification remains zero. No source records, eleme"
+    },
+    {
+      "path": "29_SysMLv2_Translator_Workbench/Passes/PASS09_DEFINITION_OWNERSHIP_EVIDENCE_2026-10-17.md",
+      "line": 18,
+      "text": "python3 15_Testing/phase9_definition_ownership_evidence.py --qeax \"$HOME/Documents/Vaults/Engineering_Data/EA_2026_10_15_endgame_mini.qeax\""
+    },
+    {
+      "path": "29_SysMLv2_Translator_Workbench/Passes/PASS09_EA_GENERALIZATION_CANONICAL_REVIEW_HANDOFF_2026-10-18.md",
+      "line": 3,
+      "text": "Added `14_Workbench/registry/runtime/phase9-ea-generalization-review.mjs` and eight synthetic tests. The adapter checks explicit EA source direction, generalization famil"
+    },
+    {
+      "path": "29_SysMLv2_Translator_Workbench/Passes/PASS09_ENDPOINT_KIND_DISTRIBUTION_2026-10-17.md",
+      "line": 26,
+      "text": "Added `15_Testing/phase9_generalization_endpoint_distribution.py` and synthetic tests to reproduce this aggregate-only distribution. Run:"
+    },
+    {
+      "path": "29_SysMLv2_Translator_Workbench/Passes/PASS09_ENDPOINT_KIND_DISTRIBUTION_2026-10-17.md",
+      "line": 31,
+      "text": "python3 15_Testing/phase9_generalization_endpoint_distribution.py --qeax \"$HOME/Documents/Vaults/Engineering_Data/EA_2026_10_15_endgame_mini.qeax\""
+    },
+    {
+      "path": "29_SysMLv2_Translator_Workbench/Passes/PASS09_FOUR_HIGH_VOLUME_STEREOTYPES_REVIEW_ONLY_2026-10-17.md",
+      "line": 14,
+      "text": "python3 15_Testing/phase9_generalization_family_matrix.py --qeax \"$HOME/Documents/Vaults/Engineering_Data/EA_2026_10_15_endgame_mini.qeax\""
+    },
+    {
+      "path": "29_SysMLv2_Translator_Workbench/Passes/PASS09_GENERALIZATION_EVIDENCE_BRIDGE_REVIEW_ONLY_2026-10-18.md",
+      "line": 3,
+      "text": "Added `14_Workbench/registry/runtime/phase9-generalization-evidence-bridge.mjs` and six synthetic tests. The bridge checks candidate evidence schema, caller reconciliatio"
+    },
+    {
+      "path": "29_SysMLv2_Translator_Workbench/Passes/PASS09_GENERALIZATION_FAMILY_MATRIX_2026-10-17.md",
+      "line": 5,
+      "text": "Added `15_Testing/phase9_generalization_family_matrix.py` with independent, conservative classification for Part, Action, State, Requirement, and Item definition families"
+    },
+    {
+      "path": "29_SysMLv2_Translator_Workbench/Passes/PASS09_GENERALIZATION_FAMILY_MATRIX_2026-10-17.md",
+      "line": 14,
+      "text": "python3 15_Testing/phase9_generalization_family_matrix.py --qeax \"$HOME/Documents/Vaults/Engineering_Data/EA_2026_10_15_endgame_mini.qeax\""
+    },
+    {
+      "path": "29_SysMLv2_Translator_Workbench/Passes/PASS09_GENERALIZATION_STRUCTURAL_RISK_GATE_2026-10-17.md",
+      "line": 12,
+      "text": "python3 15_Testing/phase9_generalization_structural_risk_screen.py --qeax \"$HOME/Documents/Vaults/Engineering_Data/EA_2026_10_15_endgame_mini.qeax\""
+    },
+    {
+      "path": "29_SysMLv2_Translator_Workbench/Passes/PASS09_HIGH_VOLUME_SEMANTIC_SEPARATION_2026-10-17.md",
+      "line": 18,
+      "text": "Added `15_Testing/phase9_high_volume_semantic_separation.py` and six synthetic classification tests. Local aggregate source was inspected, but the newly committed tests h"
+    },
+    {
+      "path": "29_SysMLv2_Translator_Workbench/Passes/PASS09_HIGH_VOLUME_SEMANTIC_SEPARATION_2026-10-17.md",
+      "line": 23,
+      "text": "python3 15_Testing/phase9_high_volume_semantic_separation.py --qeax \"$HOME/Documents/Vaults/Engineering_Data/EA_2026_10_15_endgame_mini.qeax\""
+    },
+    {
+      "path": "29_SysMLv2_Translator_Workbench/Passes/PASS09_INDEPENDENT_GENERALIZATION_ORACLE_2026-10-17.md",
+      "line": 3,
+      "text": "Phase 8 operator-verified full 14,688-row replay was successful with zero discrepancies, but that merely reproduced the Phase 8 normalizer. This pass adds a **separate**,"
+    },
+    {
+      "path": "29_SysMLv2_Translator_Workbench/Passes/PASS09_INDEPENDENT_GENERALIZATION_ORACLE_2026-10-17.md",
+      "line": 14,
+      "text": "python3 15_Testing/phase9_independent_generalization_audit.py --qeax \"$HOME/Documents/Vaults/Engineering_Data/EA_2026_10_15_endgame_mini.qeax\" --ledger \"$HOME/Documents/M"
+    },
+    {
+      "path": "29_SysMLv2_Translator_Workbench/Passes/PASS09_LOCAL_DIRECTION_HANDOFF_2026-10-18.md",
+      "line": 3,
+      "text": "Added `15_Testing/phase9_local_direction_handoff.py`, a read-only comparison of Phase 8 ledger connector identity, raw endpoints, normalized orientation, family, disposit"
+    },
+    {
+      "path": "29_SysMLv2_Translator_Workbench/Passes/PASS09_LOCAL_GENERALIZATION_BRIDGE_2026-10-18.md",
+      "line": 3,
+      "text": "Implemented `15_Testing/phase9_local_ea_generalization_bridge.py` as a narrow handoff from the existing Phase 8 QEAX/ledger normalization replay to review-only canonical-"
+    },
+    {
+      "path": "29_SysMLv2_Translator_Workbench/Passes/PASS09_LOCAL_GENERALIZATION_BRIDGE_2026-10-18.md",
+      "line": 14,
+      "text": "python3 15_Testing/phase9_local_ea_generalization_bridge.py \\"
+    },
+    {
+      "path": "29_SysMLv2_Translator_Workbench/Passes/PASS09_LOCAL_GENERALIZATION_BRIDGE_2026-10-18.md",
+      "line": 17,
+      "text": "  --registry 14_Workbench/registry/family_disposition_registry.v0.2.json \\"
+    },
+    {
+      "path": "29_SysMLv2_Translator_Workbench/Passes/PASS09_LOCAL_GENERALIZATION_DIRECTION_HANDOFF_2026-10-18.md",
+      "line": 3,
+      "text": "Added `15_Testing/phase9_local_specialization_direction_handoff.py`, a read-only, aggregate-only comparison of original QEAX generalization connector identity and directi"
+    },
+    {
+      "path": "29_SysMLv2_Translator_Workbench/Passes/PASS09_LOCAL_GENERALIZATION_DIRECTION_HANDOFF_2026-10-18.md",
+      "line": 12,
+      "text": "python3 15_Testing/phase9_local_specialization_direction_handoff.py --qeax \"$HOME/Documents/Vaults/Engineering_Data/EA_2026_10_15_endgame_mini.qeax\" --ledger \"$HOME/Docum"
+    },
+    {
+      "path": "29_SysMLv2_Translator_Workbench/Passes/PASS09_LOCAL_REPLAY_GATED_SPECIALIZATION_HANDOFF_2026-10-18.md",
+      "line": 3,
+      "text": "Added `15_Testing/phase9_local_specialization_evidence_gate.py`. Unlike an untrusted `directionEvidence:true` parameter, it reads the private QEAX and Phase 8 ledger, fir"
+    },
+    {
+      "path": "29_SysMLv2_Translator_Workbench/Passes/PASS09_LOCAL_SOURCE_CANONICAL_HANDOFF_2026-10-18.md",
+      "line": 3,
+      "text": "Added `15_Testing/phase9_local_source_to_canonical_candidate.py` as a pure, local-only fail-closed consistency guard. It cross-checks raw EA connector identity, source/ta"
+    },
+    {
+      "path": "29_SysMLv2_Translator_Workbench/Passes/PASS09_LOCAL_SOURCE_DIRECTION_HANDOFF_2026-10-17.md",
+      "line": 3,
+      "text": "Added `15_Testing/phase9_direction_evidence_gate.py` and five synthetic tests. This reads a single generalization directly from the read-only QEAX and cross-checks its GU"
+    },
+    {
+      "path": "29_SysMLv2_Translator_Workbench/Passes/PASS09_NESTED_DECOMPOSITION_EVIDENCE_2026-10-17.md",
+      "line": 16,
+      "text": "python3 15_Testing/phase9_nested_decomposition_evidence.py --qeax \"$HOME/Documents/Vaults/Engineering_Data/EA_2026_10_15_endgame_mini.qeax\""
+    },
+    {
+      "path": "29_SysMLv2_Translator_Workbench/Passes/PASS09_NESTED_ENDPOINT_EVIDENCE_2026-10-17.md",
+      "line": 14,
+      "text": "python3 15_Testing/phase9_nested_generalization_evidence.py --qeax \"$HOME/Documents/Vaults/Engineering_Data/EA_2026_10_15_endgame_mini.qeax\""
+    },
+    {
+      "path": "29_SysMLv2_Translator_Workbench/Passes/PASS09_NESTED_PARENT_GENERALIZATION_CONTEXT_2026-10-17.md",
+      "line": 9,
+      "text": "Added `15_Testing/phase9_nested_relationship_context.py`, including source-only aggregate metadata, and `15_Testing/test_phase9_nested_relationship_context.py` synthetic "
+    },
+    {
+      "path": "29_SysMLv2_Translator_Workbench/Passes/PASS09_NESTED_PARENT_GENERALIZATION_CONTEXT_2026-10-17.md",
+      "line": 18,
+      "text": "python3 15_Testing/phase9_nested_relationship_context.py --qeax \"$HOME/Documents/Vaults/Engineering_Data/EA_2026_10_15_endgame_mini.qeax\""
+    },
+    {
+      "path": "29_SysMLv2_Translator_Workbench/Passes/PASS09_NESTED_PROFILE_CONSISTENCY_2026-10-17.md",
+      "line": 7,
+      "text": "Added `15_Testing/phase9_nested_profile_consistency.py` and four synthetic tests. Run locally:"
+    },
+    {
+      "path": "29_SysMLv2_Translator_Workbench/Passes/PASS09_NESTED_PROFILE_CONSISTENCY_2026-10-17.md",
+      "line": 12,
+      "text": "python3 15_Testing/phase9_nested_profile_consistency.py --qeax \"$HOME/Documents/Vaults/Engineering_Data/EA_2026_10_15_endgame_mini.qeax\""
+    },
+    {
+      "path": "29_SysMLv2_Translator_Workbench/Passes/PASS09_PHASE8_GENERALIZATION_REVIEW_HANDOFF_2026-10-18.md",
+      "line": 3,
+      "text": "Implemented `14_Workbench/registry/runtime/phase8-generalization-review-bridge.mjs` as a **read-only candidate handoff**, not a trusted issuer, canonical mutation or nati"
+    },
+    {
+      "path": "29_SysMLv2_Translator_Workbench/Passes/PASS09_PHASE8_SOURCE_GENERALIZATION_HANDOFF_2026-10-18.md",
+      "line": 3,
+      "text": "Added `15_Testing/phase9_source_generalization_handoff.py`. Before producing source-derived generalization review categories it reruns the existing Phase 8 full local led"
+    },
+    {
+      "path": "29_SysMLv2_Translator_Workbench/Passes/PASS09_PHASE8_SOURCE_GENERALIZATION_HANDOFF_2026-10-18.md",
+      "line": 16,
+      "text": "python3 15_Testing/phase9_source_generalization_handoff.py --qeax \"$HOME/Documents/Vaults/Engineering_Data/EA_2026_10_15_endgame_mini.qeax\" --ledger \"$HOME/Documents/MDSE"
+    },
+    {
+      "path": "29_SysMLv2_Translator_Workbench/Passes/PASS09_PHASE8_TO_CANONICAL_GENERALIZATION_HANDOFF_2026-10-18.md",
+      "line": 3,
+      "text": "Implemented `14_Workbench/registry/runtime/phase8-generalization-review.mjs` as a **review-only** edge preflight. Requires agreement among local ledger source PK/GUID/raw"
+    },
+    {
+      "path": "29_SysMLv2_Translator_Workbench/Passes/PASS09_PRODUCTION_CANONICAL_RELATIONSHIP_VALIDATION_2026-10-17.md",
+      "line": 3,
+      "text": "Integrated `validateCanonicalRelationships` into the existing `validateGraph` implementation in `14_Workbench/registry/runtime/canonical-model.mjs`. Unlike prior stand-al"
+    },
+    {
+      "path": "29_SysMLv2_Translator_Workbench/Passes/PASS09_QEAX_BACKED_DIRECTION_HANDOFF_2026-10-18.md",
+      "line": 3,
+      "text": "Added `15_Testing/phase9_source_direction_bridge.py`, a local read-only check that compares the Phase 8 CSV ledger to the original QEAX `t_connector` identity, raw endpoi"
+    },
+    {
+      "path": "29_SysMLv2_Translator_Workbench/Passes/PASS09_QEAX_BACKED_DIRECTION_HANDOFF_2026-10-18.md",
+      "line": 14,
+      "text": "python3 15_Testing/phase9_source_direction_bridge.py --qeax \"$HOME/Documents/Vaults/Engineering_Data/EA_2026_10_15_endgame_mini.qeax\" --ledger \"$HOME/Documents/MDSE_Local"
+    },
+    {
+      "path": "29_SysMLv2_Translator_Workbench/Passes/PASS09_SOURCE_BOUND_GENERALIZATION_GATE_2026-10-18.md",
+      "line": 3,
+      "text": "Implemented `15_Testing/phase9_source_bound_generalization_gate.py`: on a local workstation, it first runs the complete Phase 8 normalization replay over the private QEAX"
+    },
+    {
+      "path": "29_SysMLv2_Translator_Workbench/Passes/PASS09_SOURCE_BOUND_GENERALIZATION_HANDOFF_2026-10-18.md",
+      "line": 3,
+      "text": "Added `15_Testing/phase9_local_generalization_handoff.py` to re-run the full Phase 8 ledger normalization check before verifying one selected EA Generalization connector "
+    },
+    {
+      "path": "29_SysMLv2_Translator_Workbench/Passes/PASS09_SOURCE_BOUND_HANDOFF_REVIEW_2026-10-18.md",
+      "line": 3,
+      "text": "Inspected existing `15_Testing/phase9_source_bound_specialization_review.py` and six synthetic tests. The gate reads QEAX `t_connector` in read-only mode, matches general"
+    },
+    {
+      "path": "29_SysMLv2_Translator_Workbench/Passes/PASS09_SOURCE_BOUND_SPECIALIZATION_REVIEW_BRIDGE_2026-10-18.md",
+      "line": 14,
+      "text": "python3 15_Testing/phase9_source_bound_specialization_review.py \\"
+    },
+    {
+      "path": "29_SysMLv2_Translator_Workbench/Passes/PASS09_SOURCE_DIRECTION_BRIDGE_HARDENING_2026-10-18.md",
+      "line": 3,
+      "text": "Repository already had a read-only local `15_Testing/phase9_source_direction_bridge.py` comparing full Phase 8 ledger identities, raw connector endpoints/direction, and o"
+    },
+    {
+      "path": "29_SysMLv2_Translator_Workbench/Passes/PASS09_SOURCE_DIRECTION_BRIDGE_HARDENING_2026-10-18.md",
+      "line": 12,
+      "text": "python3 15_Testing/phase9_source_direction_bridge.py --qeax \"$HOME/Documents/Vaults/Engineering_Data/EA_2026_10_15_endgame_mini.qeax\" --ledger \"$HOME/Documents/MDSE_Local"
+    },
+    {
+      "path": "29_SysMLv2_Translator_Workbench/Passes/PASS09_SOURCE_DIRECTION_EVIDENCE_ASSESSMENT_2026-10-17.md",
+      "line": 11,
+      "text": "python3 15_Testing/phase9_source_direction_assessment.py --qeax \"$HOME/Documents/Vaults/Engineering_Data/EA_2026_10_15_endgame_mini.qeax\" --ledger \"$HOME/Documents/MDSE_L"
+    },
+    {
+      "path": "29_SysMLv2_Translator_Workbench/Passes/PASS09_SOURCE_EVIDENCE_HANDOFF_PREREQUISITE_2026-10-18.md",
+      "line": 3,
+      "text": "Added `15_Testing/phase9_generalization_evidence_gate.py` and three synthetic tests. The local gate calls the existing complete QEAX/ledger replay first. Failed reconcili"
+    },
+    {
+      "path": "29_SysMLv2_Translator_Workbench/Passes/PASS09_SOURCE_EVIDENCE_SCREEN_2026-10-18.md",
+      "line": 5,
+      "text": "Run `python3 15_Testing/phase9_local_specialization_evidence_screen.py --qeax \"$HOME/Documents/Vaults/Engineering_Data/EA_2026_10_15_endgame_mini.qeax\" --ledger \"$HOME/Do"
+    }
+  ]
+}
