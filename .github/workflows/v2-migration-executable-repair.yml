@@ -33,7 +33,9 @@ jobs:
             git commit -m 'fix(v2): reconcile remaining moved executable registry paths'
             git push origin HEAD:chore/v2-folder-separation-20261018
           fi
-      - name: Confirm repair is idempotent and no stale executable references remain\n        run: python3 26_Definitions/tools/repair_v2_moved_registry_paths.py --check\n      - name: Verify pinned v2 source registry
+      - name: Confirm repair is idempotent and no stale executable references remain
+        run: python3 26_Definitions/tools/repair_v2_moved_registry_paths.py --check
+      - name: Verify pinned v2 source registry
         run: node 24_Workbench/registry/runtime/v2-translator-preflight.mjs "$PWD"
       - name: Execute synthetic V2 registry tests
         run: node --test 24_Workbench/registry/runtime/pinned-v2-eligibility.test.mjs
