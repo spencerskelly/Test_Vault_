@@ -8,8 +8,8 @@ def load(path):
 class FamilyCoverage(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
-        cls.source=load("14_Workbench/registry/family_disposition_registry.v0.2.json")
-        cls.target=load("14_Workbench/registry/sysml_v2_semantic_rules.v0.2.json")
+        cls.source=load("24_Workbench/registry/family_disposition_registry.v0.2.json")
+        cls.target=load("24_Workbench/registry/sysml_v2_semantic_rules.v0.2.json")
     def test_complete_exact_family_set(self):
         a={x["family"] for x in self.source["families"]}
         b={x["family"] for x in self.target["relationshipRules"]}
