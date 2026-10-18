@@ -11,6 +11,7 @@ scope: toolchain-development-repository
 > **Start here.** This note indexes the tools, approved semantics, source translators, workstreams, verification and retained project history. Links point to the owning document or folder; this map **does not supersede** those authorities. This is the development repository, **not a complete generated engineering model**. Imported model content and private QEAX/BOM ledgers remain local.
 
 ## 00 — Program status and next work
+- [STEP-02C — Approved Phase 8/9 rules integration, tests and next entrypoint](26_Definitions/STEP_02C_PHASE8_PHASE9_APPROVED_POLICY_INTEGRATION_2026-10-18.md)
 - [STEP-02B — Approved 60+26 resolver and reduced-QEAX family match](26_Definitions/STEP_02B_APPROVED_FAMILY_RESOLVER_AND_LOCAL_GROUP_CHECK_2026-10-18.md)
 - [STEP-02A — EA diagrams disabled until full toolchain and golden import acceptance](26_Definitions/STEP_02A_EA_DIAGRAM_DEFERRED_2026-10-18.md)
 - [Machine-readable source-table and feature-scope lock](26_Definitions/v2_ea_diagram_scope_lock.v0.1.json)
