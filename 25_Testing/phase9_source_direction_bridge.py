@@ -25,6 +25,19 @@ def audit(qeax,ledger):
     raw=(str(original["ea_guid"] or ""),str(original["Start_Object_ID"]),str(original["End_Object_ID"]),str(original["Direction"] or ""))
     if tuple(row[k] for k in ("source_guid","raw_from","raw_to","source_direction"))!=raw:
      errors["RAW_SOURCE_MISMATCH"]+=1;continue
+    # Approved exact-family Phase 8 never claims generalization orientation.
+    # Do not send its rows through the superseded provisional Phase 9 kind matrix.
+    if row["role"]=="approved-group-review":
+     expected_family=original["Connector_Type"]+(":"+original["Stereotype"] if original["Stereotype"] else "")
+     if row["family"]!=expected_family:errors["APPROVED_FAMILY_MISMATCH"]+=1;continue
+     if row["normalized_from"]!=raw[1] or row["normalized_to"]!=raw[2]:
+      errors["APPROVED_UNATTESTED_ORIENTATION"]+=1;continue
+     if row["status"] not in ("deferred_review","evidence_only"):
+      errors["UNAUTHORIZED_APPROVED_ROW_STATUS"]+=1;continue
+     if original["Connector_Type"]=="Generalization":
+      out["generalizations_checked"]+=1
+      out["approved_group_orientation_review"]+=1
+     continue
     if original["Connector_Type"]!="Generalization":continue
     out["generalizations_checked"]+=1
     if original["Direction"]!="Source -> Destination":
