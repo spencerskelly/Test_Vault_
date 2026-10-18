@@ -1,0 +1,15 @@
+import assert from 'node:assert/strict';
+import {test} from 'node:test';
+import {proposeGeneralization} from '../24_Workbench/registry/runtime/phase9-generalization-handoff.mjs';
+const graph=()=>({nodes:[{id:'1',kind:'PartDefinition'},{id:'2',kind:'PartDefinition'}]});
+const row=()=>({source_pk:'7',source_guid:'synthetic-guid',family:'Generalization',role:'source-subtype-to-destination-supertype',source_direction:'Source -> Destination',raw_from:'1',raw_to:'2',normalized_from:'1',normalized_to:'2'});
+const evidence=()=>({schema:'mdse-phase8-reconciled-local-manifest/1',verified:true,native_certified:0,semantic_direction_verified:true,source_connector:{connector_id:'7',guid:'synthetic-guid',family:'Generalization',direction:'Source -> Destination',start_id:'1',end_id:'2'}});
+const check=(r=row(),e=evidence(),g=graph())=>proposeGeneralization(g,r,e);
+const codes=x=>x.diagnostics.map(y=>y.code);
+test('matched local evidence is still candidate only',()=>{const x=check();assert.equal(x.status,'candidate');assert.equal(x.nativeCertified,false);assert.equal(x.mutation,false);});
+test('missing source connector cannot qualify',()=>{const e=evidence();delete e.source_connector;assert.ok(codes(check(row(),e)).includes('SOURCE_CONNECTOR_EVIDENCE_REQUIRED'));});
+test('mismatched connector id fails closed',()=>{const e=evidence();e.source_connector.connector_id='8';assert.ok(codes(check(row(),e)).includes('SOURCE_IDENTITY_MISMATCH'));});
+test('mismatched raw source endpoint fails closed',()=>{const e=evidence();e.source_connector.start_id='3';assert.ok(codes(check(row(),e)).includes('SOURCE_ENDPOINT_MISMATCH'));});
+test('ambiguous source direction fails closed',()=>{const e=evidence();e.source_connector.direction='Unspecified';assert.ok(codes(check(row(),e)).includes('SOURCE_CONNECTOR_EVIDENCE_REQUIRED'));});
+test('caller flag absent fails closed',()=>{const e=evidence();e.semantic_direction_verified=false;assert.ok(codes(check(row(),e)).includes('SOURCE_SEMANTICS_UNVERIFIED'));});
+test('canonical invalid target fails closed',()=>{const g=graph();g.nodes[1].kind='PartUsage';assert.equal(check(row(),evidence(),g).status,'review');});

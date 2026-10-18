@@ -1,0 +1,15 @@
+import assert from 'node:assert/strict';
+import {test} from 'node:test';
+import {validateGraph} from '../24_Workbench/registry/runtime/canonical-model.mjs';
+const g=()=>({nodes:[{id:'parent',kind:'PartDefinition'},{id:'child',kind:'PartDefinition',ownerId:'parent'}],relationships:[{kind:'lexicalContainment',fromId:'parent',toId:'child'},{kind:'specialization',fromId:'child',toId:'parent',sourceRef:'synthetic-guid',direction:'subtype-to-supertype'}]});
+const codes=x=>validateGraph(x).diagnostics.map(d=>d.code);
+test('coincident nested definition and supertype valid as distinct edge types',()=>assert.deepEqual(codes(g()),[]));
+test('mismatched lexical parent fails',()=>{const x=g();x.relationships[0].fromId='child';assert.ok(codes(x).includes('LEXICAL_OWNER_MISMATCH'));});
+test('generalization cannot use PartUsage as subtype',()=>{const x=g();x.nodes[1].kind='PartUsage';assert.ok(codes(x).includes('INVALID_SPECIALIZATION_KINDS'));});
+test('specialization provenance mandatory',()=>{const x=g();delete x.relationships[1].sourceRef;assert.ok(codes(x).includes('SPECIALIZATION_PROVENANCE_REQUIRED'));});
+test('missing direction rejected',()=>{const x=g();delete x.relationships[1].direction;assert.ok(codes(x).includes('SPECIALIZATION_DIRECTION_UNVERIFIED'));});
+test('bad direction rejected',()=>{const x=g();x.relationships[1].direction='supertype-to-subtype';assert.ok(codes(x).includes('SPECIALIZATION_DIRECTION_UNVERIFIED'));});
+test('two-node specialization cycle rejected',()=>{const x=g();x.relationships.push({kind:'specialization',fromId:'parent',toId:'child',sourceRef:'synthetic-2',direction:'subtype-to-supertype'});assert.ok(codes(x).includes('SPECIALIZATION_CYCLE'));});
+test('missing endpoint rejected',()=>{const x=g();x.relationships[1].toId='none';assert.ok(codes(x).includes('RELATIONSHIP_ENDPOINT_MISSING'));});
+test('duplicate edge rejected',()=>{const x=g();x.relationships.push({...x.relationships[1]});assert.ok(codes(x).includes('DUPLICATE_RELATIONSHIP'));});
+test('unrecognized edge does not silently pass',()=>{const x=g();x.relationships[1].kind='customBinding';assert.ok(codes(x).includes('UNSUPPORTED_CANONICAL_RELATIONSHIP'));});

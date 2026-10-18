@@ -1,0 +1,53 @@
+name: V2 migration executable repair
+on:
+  push:
+    branches: [chore/v2-folder-separation-20261018]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  repair-and-test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Test approved V2 element candidate projection
+        run: python3 -m unittest 25_Testing/test_v2_element_candidate_projection.py
+      - name: Test bounded V2 QEAX slice relationship review
+        run: python3 -m unittest 25_Testing/test_v2_qeax_slice_review.py
+      - name: Test V2 QEAX read-only source preflight
+        run: python3 -m unittest 25_Testing/test_v2_qeax_preflight.py
+      - name: Test standalone V2 base generation
+        run: python3 -m unittest 25_Testing/test_v2_test_base_builder.py
+      - name: Verify V1 archive and V2 relocation manifest completeness
+        run: python3 26_Definitions/tools/check_v2_migration_manifest.py
+      - name: Confirm repair is idempotent and no stale executable references remain
+        run: python3 26_Definitions/tools/repair_v2_moved_registry_paths.py --check
+      - name: Audit active V2 references without rewriting historical documentation
+        run: python3 26_Definitions/tools/audit_v2_legacy_references.py --strict > "$RUNNER_TEMP/v2-reference-audit.json"
+      - name: Publish migration reference audit
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: v2-active-reference-audit
+          path: ${{ runner.temp }}/v2-reference-audit.json
+          if-no-files-found: warn
+      - name: Reject V2 runtime dependencies on V1 archive
+        run: python3 26_Definitions/tools/check_v2_archive_runtime_boundary.py
+      - name: Verify unchanged governance registry hashes
+        run: python3 25_Testing/verify_sysml_v2_registry_pins.py "$PWD"
+      - name: Verify pinned v2 source registry
+        run: node 24_Workbench/registry/runtime/v2-translator-preflight.mjs "$PWD"
+      - name: Execute synthetic V2 registry tests
+        run: node --test 24_Workbench/registry/runtime/pinned-v2-eligibility.test.mjs
+      - name: Execute Phase 9 bridge tests
+        run: python3 -m unittest 25_Testing/test_phase9_source_direction_bridge.py

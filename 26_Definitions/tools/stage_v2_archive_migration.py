@@ -49,7 +49,7 @@ for p in tracked():
     try: val=real.read_text()
     except UnicodeDecodeError:continue
     for i,line in enumerate(val.splitlines(),1):
-        if any(x in line for x in ("14_Workbench/registry/","15_Testing/phase","11_Importer/Definition/SysML","10_Base Vault/Testing/V2_")):
+        if any(x in line for x in ("24_Workbench/registry/","15_Testing/phase","11_Importer/Definition/SysML","10_Base Vault/Testing/V2_")):
             findings.append({"path":str(p),"line":i,"text":line[:170]})
 report=root/"26_Definitions"/"V2_FOLDER_MIGRATION_REFERENCE_AUDIT_2026-10-18.json"
 report.write_text(json.dumps({"stale_active_references":findings},indent=2)+"\n")

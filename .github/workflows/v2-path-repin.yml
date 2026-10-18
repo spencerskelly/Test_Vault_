@@ -1,0 +1,33 @@
+name: V2 path-only registry repin
+on:
+  push:
+    branches: [chore/v2-folder-separation-20261018]
+    paths:
+      - '26_Definitions/tools/reconcile_v2_registry_pins.py'
+      - '.github/workflows/v2-path-repin.yml'
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  repin:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: chore/v2-folder-separation-20261018
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Verify historical hashes and repin path-only change
+        run: python3 26_Definitions/tools/reconcile_v2_registry_pins.py --write
+      - name: Verify new pins against exact bytes
+        run: python3 25_Testing/verify_sysml_v2_registry_pins.py "$PWD"
+      - name: Commit only validated pin manifest
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add 24_Workbench/registry/sysml_v2_registry_pins.v0.1.json
+          if ! git diff --cached --quiet; then
+            git commit -m 'fix(v2): repin approved registry bytes after path-only move'
+            git push origin HEAD:chore/v2-folder-separation-20261018
+          fi

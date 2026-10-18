@@ -1,0 +1,12 @@
+import assert from 'node:assert/strict';
+import {test} from 'node:test';
+import {reviewGeneralizationFromEvidence} from '../24_Workbench/registry/runtime/phase9-generalization-evidence-bridge.mjs';
+const graph=()=>({nodes:[{id:'super',kind:'PartDefinition'},{id:'sub',kind:'PartDefinition',ownerId:'super'}]});
+const evidence=()=>({schema:'mdse-phase9-generalization-direction/1',reconciliationVerified:true,sourceFamily:'Generalization',sourceDirection:'Source -> Destination',connectorRef:'synthetic-ref',sourceNodeId:'sub',targetNodeId:'super',snapshotSha256:'a'.repeat(64)});
+const codes=x=>x.diagnostics.map(d=>d.code);
+test('full synthetic review leaves native certification off',()=>{const r=reviewGeneralizationFromEvidence(graph(),evidence());assert.equal(r.status,'reviewable');assert.equal(r.graphValidated,true);assert.equal(r.nativeCertified,false);});
+test('untrusted reconciliation status blocked',()=>{const e=evidence();e.reconciliationVerified=false;assert.ok(codes(reviewGeneralizationFromEvidence(graph(),e)).includes('RECONCILIATION_NOT_VERIFIED'));});
+test('reversed direction blocked',()=>{const e=evidence();e.sourceDirection='Destination -> Source';assert.ok(codes(reviewGeneralizationFromEvidence(graph(),e)).includes('SOURCE_DIRECTION_UNVERIFIED'));});
+test('missing snapshot fingerprint blocked',()=>{const e=evidence();delete e.snapshotSha256;assert.ok(codes(reviewGeneralizationFromEvidence(graph(),e)).includes('SNAPSHOT_HASH_MISSING'));});
+test('invalid endpoint kind blocked by canonical validator',()=>{const g=graph();g.nodes[0].kind='PartUsage';assert.equal(reviewGeneralizationFromEvidence(g,evidence()).graphValidated,false);});
+test('duplicate existing specialization blocked',()=>{const g=graph();g.relationships=[{kind:'specialization',fromId:'sub',toId:'super',sourceRef:'synthetic-ref',direction:'subtype-to-supertype'}];assert.ok(codes(reviewGeneralizationFromEvidence(g,evidence())).includes('DUPLICATE_RELATIONSHIP'));});
