@@ -11,6 +11,8 @@ scope: toolchain-development-repository
 > **Start here.** This note indexes the tools, approved semantics, source translators, workstreams, verification and retained project history. Links point to the owning document or folder; this map **does not supersede** those authorities. This is the development repository, **not a complete generated engineering model**. Imported model content and private QEAX/BOM ledgers remain local.
 
 ## 00 — Program status and next work
+- [Titled implementation steps](26_Definitions/V2_NEXT_STEP_TITLES_2026-10-18.md)
+- [Source data retention approval holds](26_Definitions/V2_DATA_RETENTION_APPROVAL_HOLDS_2026-10-18.md)
 - [Complete repository Markdown-note census and 13 detailed MOC catalogs](26_Definitions/MOC_REPOSITORY_NOTE_CENSUS_2026-10-18.md)
 - [Approved mapping exception audit with exact rule identifiers](26_Definitions/V2_APPROVED_EXCEPTION_HANDLING_AUDIT_2026-10-18.md)
 - [Program goals, subwork, evidence-based completion estimates](26_Definitions/V2_PROGRAM_GOALS_AND_COMPLETION_2026-10-18.md)
