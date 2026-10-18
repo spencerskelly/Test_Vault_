@@ -74,3 +74,13 @@ On 2026-10-17 inspected the current `10_Base Vault/Tools/v0.8.0-r2/build-base.py
 A concrete fix was committed: the builder's printed validation command incorrectly referenced old `Base Vault/Testing/check-release.py`; it now names `10_Base Vault/Testing/check-release.py` (commit `8300715`). This is a command correctness fix, not release promotion.
 
 **Outstanding:** end-to-end builder run, full include-file existence audit, parser/native v2 compatibility, and first-open Bootstrap QA require a complete checkout. No generated base ZIP, npm build, or Obsidian acceptance was produced during this pass. Current release YAML remains Bootstrap 0.3.0 while lock/vendor use 0.3.1. Pass 02 CI workflow remains open. Continue in next user-approved bounded pass.
+
+## Pass 03 continuation — critical Base Vault builder fix (2026-10-17)
+
+Attempted to retrieve complete Test_Vault_ Git checkout from local runtime; `git ls-remote https://github.com/spencerskelly/Test_Vault_.git HEAD` failed with DNS resolution error. Therefore **no end-to-end base build can be claimed**.
+
+Read the active `10_Base Vault/Tools/v0.8.0-r2/build-base.py` and identified a definitive failure: `MANIFEST=os.path.join(ROOT,"Base Vault","Definition","mdse-release.yaml")` still named an absent pre-consolidation folder, although the release YAML had been moved. Commit `2f84fb680df60fbe143d7e5c860596803dcaae32` fixes the path to `10_Base Vault/Definition/mdse-release.yaml`, updates usage documentation, and adds **fail-early input preflight before writing output** for required files/trees, plugin-lock schema and referenced locked runtime payloads.
+
+This is a real source correction but **not execution evidence**. The new builder needs syntax/build tests on checkout; further latent path assumptions may remain. It preserves the old release version, all plugin hashes, and the non-overwrite destination policy. Critically, missing dependencies now produce visible BLOCKER messages instead of leaving an incomplete destination staging vault. Existing CI workflow migration and Bootstrap source build/Obsidian first-open remain open.
+
+**Next gated increment:** run checkout-level Python syntax check, `python3 10_Base Vault/Tools/v0.8.0-r2/build-base.py /tmp/clean-mdse-base`, and `python3 10_Base Vault/Testing/check-release.py --base /tmp/clean-mdse-base`. Capture exact error codes and iterate only on verified blockers. Do not accept an incomplete output as a release artifact.
