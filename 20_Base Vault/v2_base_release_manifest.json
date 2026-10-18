@@ -18,7 +18,7 @@
     "preserveUserFiles": true,
     "autoInstallPlugins": false
   },
-  "notes": "Empty community plugin list is deliberate. Plugin binaries, versions, hashes and platform acceptance must be verified before deployment.",
+  "notes": "Upstream directory metadata is not a tested package. No community plugin enabled until matching release assets, SHA-256, runtime support, license and installed Obsidian validation are recorded.",
   "settingsOwnership": {
     "app.json": "managed_defaults",
     "appearance.json": "managed_defaults",
@@ -35,7 +35,10 @@
     },
     {
       "id": "templater-obsidian",
-      "status": "verify_before_install"
+      "status": "upstream_metadata_verified_package_not_tested",
+      "observedDirectoryVersion": "2.26.0",
+      "observedMinimumObsidian": "1.13.0",
+      "source": "https://community.obsidian.md/plugins/templater-obsidian"
     },
     {
       "id": "dataview",
@@ -49,5 +52,20 @@
       "id": "mdse-workbench",
       "status": "verify_before_install"
     }
-  ]
+  ],
+  "pluginPackagingRequirements": {
+    "requiredFiles": [
+      "manifest.json",
+      "main.js"
+    ],
+    "optionalFiles": [
+      "styles.css"
+    ],
+    "releaseManifestVersionMustMatchTag": true,
+    "sha256RequiredBeforeEnable": true,
+    "minimumAppVersionRequired": true,
+    "manualApprovalRequired": true,
+    "preservePluginDataJson": true,
+    "allowAutomaticInstall": false
+  }
 }
