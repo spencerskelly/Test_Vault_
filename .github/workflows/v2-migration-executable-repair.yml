@@ -2,19 +2,17 @@ name: V2 migration executable repair
 on:
   push:
     branches: [chore/v2-folder-separation-20261018]
-    paths:
-      - '26_Definitions/tools/repair_v2_moved_registry_paths.py'
-      - '.github/workflows/v2-migration-executable-repair.yml'
+  pull_request:
+    branches: [main]
   workflow_dispatch:
 permissions:
-  contents: write
+  contents: read
 jobs:
   repair-and-test:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
         with:
-          ref: chore/v2-folder-separation-20261018
           fetch-depth: 0
       - uses: actions/setup-node@v4
         with:
@@ -22,17 +20,6 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
-      - name: Rewrite old registry paths in active V2 executable files
-        run: python3 26_Definitions/tools/repair_v2_moved_registry_paths.py
-      - name: Commit only verified path repairs
-        run: |
-          git config user.name 'github-actions[bot]'
-          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git add 24_Workbench 25_Testing 26_Definitions
-          if ! git diff --cached --quiet; then
-            git commit -m 'fix(v2): reconcile remaining moved executable registry paths'
-            git push origin HEAD:chore/v2-folder-separation-20261018
-          fi
       - name: Confirm repair is idempotent and no stale executable references remain
         run: python3 26_Definitions/tools/repair_v2_moved_registry_paths.py --check
       - name: Verify pinned v2 source registry
