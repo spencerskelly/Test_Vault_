@@ -8,10 +8,23 @@ data=json.loads(manifest.read_text())
 moves=data.get("path_moves",{})
 if not moves: raise SystemExit("EMPTY_MIGRATION")
 errors=[]
+# Before the migration, V1 reference content must remain byte-for-byte identical.
+baseline="671d54ade1601e051be35bcd95c51de55705e3c5"
+def git(*args):
+    return subprocess.check_output(["git",*args],cwd=root,text=True).strip()
+
 for source,target in moves.items():
     old=root/source; new=root/target
     if old.exists(): errors.append("SOURCE_STILL_ACTIVE: "+source)
     if not new.is_file(): errors.append("MISSING_DESTINATION: "+target)
+    elif target.startswith("100_Archive/V1/"):
+        try:
+            baseline_blob=git("rev-parse",f"{baseline}:{source}")
+            archived_blob=git("hash-object",target)
+            if baseline_blob!=archived_blob:
+                errors.append("ARCHIVE_CONTENT_DRIFT: "+source)
+        except subprocess.CalledProcessError:
+            errors.append("BASELINE_FILE_MISSING: "+source)
     if not (target.startswith("100_Archive/V1/") or target.split("/")[0] in {"20_Base Vault","21_Importer","23_Bootstrap","24_Workbench","25_Testing","26_Definitions","29_SysMLv2_Translator_Workbench"}):
         errors.append("INVALID_DESTINATION: "+target)
 archive=sum(v.startswith("100_Archive/V1/") for v in moves.values())
