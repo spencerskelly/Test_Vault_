@@ -26,3 +26,7 @@ STEP-01–08 constitute the approved first-release scope. STEP-09–12 are later
 STEP-01: [Original approved native decisions](MOC_Catalogs/sysml_decisions_1.md) and [V1 recovery ledger](V1_V2_REUSE_LEDGER_INDEX.md). Decision inventory is recovered; implementation linkage is not complete.
 
 STEP-02: [60-family approval](../24_Workbench/docs/GOLDEN_IMPORT_STEP2_60_FAMILY_DECISION_RECONCILIATION_2026-10-17.md) and [12 exception cases](V2_APPROVED_EXCEPTION_HANDLING_AUDIT_2026-10-18.md). Implement exact selectors, not new mapping policy.
+
+STEP-03: [Typed canonical graph](../24_Workbench/registry/runtime/canonical-model.mjs) and [V1 ModelRef identity contract](../100_Archive/V1/14_Workbench/WB106_IMPLEMENTATION_CONTRACT.md). Stable usage IDs, source GUIDs, aliases and review flags require writer-level integration.
+
+STEP-04: [Reduced EA family census](../24_Workbench/docs/GOLDEN_IMPORT_STEP2_FIRST_EXECUTION_2026-10-17.md), [Phase 8 source normalization](../24_Workbench/docs/SYSML_V2_PHASE8_CONNECTOR_NORMALIZATION.md). Reconcile source data against generated native and non-native outputs.
