@@ -31,6 +31,7 @@ export function validateGraph(graph){
   const visited=new Set();let current=n;
   while(current?.ownerId){if(visited.has(current.id)){errors.push(issue('OWNERSHIP_CYCLE',n.id));break;}visited.add(current.id);current=nodes.get(current.ownerId);}
  }
+ errors.push(...validateCanonicalRelationships(graph,nodes));
  return {valid:errors.length===0,diagnostics:errors.sort((a,b)=>a.code.localeCompare(b.code)||a.detail.localeCompare(b.detail)),nodes};
 }
 export function normalizeEA(input){
@@ -92,4 +93,43 @@ export function validateConnectionEvidence(graph,connection){
  if(!['source-to-target','target-to-source','bidirectional','undirected'].includes(connection?.direction))fail('UNVERIFIED_CONNECTION_DIRECTION');
  if(connection?.directionEvidence!==true)fail('UNATTESTED_DIRECTION');
  return {valid:diagnostics.length===0,diagnostics,nativeCertified:false};
+}
+
+ // Relationship checks are deliberately limited to two modeled edge kinds.
+ // Other families remain in their own eligibility gates; no emitter authorization.
+export function validateCanonicalRelationships(graph,index=null){
+ const nodes=index||new Map((graph?.nodes||[]).map(n=>[n.id,n]));
+ const errors=[],seen=new Set(),specialization=new Map();
+ for(const edge of graph?.relationships||[]){
+  const key=[edge?.kind,edge?.fromId,edge?.toId].join('|');
+  if(!edge?.kind||!edge?.fromId||!edge?.toId){errors.push(issue('INVALID_RELATIONSHIP','missing field'));continue;}
+  if(seen.has(key))errors.push(issue('DUPLICATE_RELATIONSHIP',key));
+  seen.add(key);
+  const from=nodes.get(edge.fromId),to=nodes.get(edge.toId);
+  if(!from||!to){errors.push(issue('RELATIONSHIP_ENDPOINT_MISSING',key));continue;}
+  if(edge.kind==='lexicalContainment'){
+   if(to.ownerId!==from.id)errors.push(issue('LEXICAL_OWNER_MISMATCH',key));
+  }else if(edge.kind==='specialization'){
+   if(!defKinds.has(from.kind)||from.kind!==to.kind)errors.push(issue('INVALID_SPECIALIZATION_KINDS',key));
+   if(from.id===to.id)errors.push(issue('SPECIALIZATION_CYCLE',key));
+   if(typeof edge.sourceRef!=='string'||!edge.sourceRef.trim())errors.push(issue('SPECIALIZATION_PROVENANCE_REQUIRED',key));
+   if(edge.direction!==undefined&&edge.direction!=='subtype-to-supertype')errors.push(issue('SPECIALIZATION_DIRECTION_UNVERIFIED',key));
+   if(!specialization.has(from.id))specialization.set(from.id,[]);
+   specialization.get(from.id).push(to.id);
+  }else errors.push(issue('UNSUPPORTED_CANONICAL_RELATIONSHIP',key));
+ }
+ // Iterative DFS detects cycles without recursive call-stack risk.
+ const color=new Map();
+ for(const start of specialization.keys()){
+  if(color.get(start))continue;
+  const stack=[[start,0]];color.set(start,1);
+  while(stack.length){
+   const top=stack[stack.length-1],neighbors=specialization.get(top[0])||[];
+   if(top[1]>=neighbors.length){color.set(top[0],2);stack.pop();continue;}
+   const next=neighbors[top[1]++];
+   if(color.get(next)===1)errors.push(issue('SPECIALIZATION_CYCLE',top[0]));
+   else if(!color.has(next)){color.set(next,1);stack.push([next,0]);}
+  }
+ }
+ return errors;
 }
