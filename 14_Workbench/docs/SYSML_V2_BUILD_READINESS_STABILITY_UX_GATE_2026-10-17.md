@@ -41,3 +41,23 @@ Approved mappings are sufficiently developed to begin engineering. Production wr
 
 ## Required test evidence before shipping
 Pinned parser version and native fixtures; source row disposition checksum; UID and usage collision checks; repeat-import idempotence; branch/conflict and rollback tests; Workbench multi-view snapshot coherence; runtime tests inside Obsidian; provenance-preserving merge/redirect tests; CI success and manual UX acceptance. Repo contains methods/tests/aggregate data only, never private raw model ledgers.
+
+## Superseding approved authority and UI decisions — 2026-10-17
+
+**Authoritative source: the note containing native SysML v2 syntax.** This supersedes any recommendation above that an independently persisted canonical graph governs edits or that .sysml is merely a derived projection.
+
+1. The relevant Obsidian note containing SysML v2 source is authoritative at all times. Every Workbench structural, visual, tabular, form, and relationship edit must be applied to the note's v2 syntax (via validated, minimally scoped text modification), then reparsed and reflected in all other views.
+2. Parsed semantic graphs, indexes and diagram/layout state are **derived and disposable**. Never store a competing authoritative graph. Reject invalid edits without changing the note; use atomic note writes and rollback/undo. An external/manual note edit invalidates projections and triggers a reparse and refresh. Preserve native semantics and surrounding human comments/formatting where possible.
+3. MDSE-only values (EA/BOM provenance, unmappable source fields, `flagLink`, note UID and other governed metadata) remain in **the same note's YAML**, with narrative explanation in the body as required. Do not fabricate native v2 syntax for MDSE-only content. Note editing applies a single atomic transaction when both v2 and YAML must change.
+4. The standard Obsidian File Explorer already provides vault navigation. **Remove the duplicate vault folder/file tree from the MDSE sidebar**. Do not remove native Obsidian File Explorer or note navigation.
+5. Provide a compact **element selector dropdown scoped to the currently open note**, listing the definitions/usages/features within that note. Distinguish same-named entries via kind and qualified/containing path; selecting one focuses its details, relationships and view context. Handle note switching, empty/no-syntax notes, duplicate names and parse errors gracefully.
+6. Move general Workbench actions and views toward an **on-demand popup/modal (or command-driven panel)** rather than a permanently space-consuming sidebar. Candidate surfaces: command palette, note context action, toolbar button. Keep an optional narrow contextual sidebar only if it adds distinct value. Preserve keyboard access, screen-size responsiveness and editor focus; no duplicate File Explorer.
+7. The popup provides element selection, structural/visual/text/relationship/table views and validated actions. It must always show which note and selected element the action will change; preview edits and parse feedback before commit.
+8. `Advanced Actions → Merge Notes` remains isolated from everyday actions. It requires preview, explicit confirmation, backup, surviving UID, redirect/link integrity validation and rollback. A merge updates the actual authoritative note(s), not a cached graph alone.
+9. All view consistency and reimport tests must assert **note syntax + governed YAML → parsed model → views**, and **view action → atomic note edit → reparse → every view**. Include external editor modifications, multi-element notes, malformed v2 text, round-trip formatting, UID links, conflicts and undo.
+
+### Implementation specification (pending code)
+- Specify a stable fenced-region/section convention for native SysML v2 within each note, including support for multiple elements and safe boundaries, while preserving ordinary Markdown.
+- Establish a pinned parser and a source-span-aware edit engine; partial edits must not rewrite unrelated syntax or source provenance.
+- Derived graph caches keyed by note content hash, with invalidation on vault change and editor buffer change.
+- UI acceptance: no Workbench vault tree; open-note dropdown; popup opens without disrupting editing; each action changes note source then synchronizes all projections.
