@@ -7,6 +7,9 @@ export function proposeGeneralization(graph,row,evidence){
  if(evidence?.semantic_direction_verified!==true)fail('SOURCE_SEMANTICS_UNVERIFIED');
  if(row?.family!=='Generalization'||row?.role!=='source-subtype-to-destination-supertype')fail('ROLE_UNVERIFIED');
  if(row?.source_direction!=='Source -> Destination')fail('DIRECTION_UNVERIFIED');
+ if(evidence?.source_connector?.family!=='Generalization'||evidence?.source_connector?.direction!=='Source -> Destination')fail('SOURCE_CONNECTOR_EVIDENCE_REQUIRED');
+ if(String(evidence?.source_connector?.connector_id)!==String(row?.source_pk)||evidence?.source_connector?.guid!==row?.source_guid)fail('SOURCE_IDENTITY_MISMATCH');
+ if(String(evidence?.source_connector?.start_id)!==String(row?.raw_from)||String(evidence?.source_connector?.end_id)!==String(row?.raw_to))fail('SOURCE_ENDPOINT_MISMATCH');
  if(String(row?.normalized_from)!==String(row?.raw_from)||String(row?.normalized_to)!==String(row?.raw_to))fail('ORIENTATION_MISMATCH');
  if(!row?.source_guid||!row?.source_pk)fail('MISSING_PROVENANCE');
  if(errors.length)return {status:'review',diagnostics:errors,nativeCertified:false,mutation:false};
