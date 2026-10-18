@@ -38,3 +38,7 @@ STEP-06: [Archived plugin lock baseline](../100_Archive/V1/10_Base%20Vault/Defin
 STEP-07: [Workbench interaction contract](../24_Workbench/docs/SYSML_V2_DRAW_TO_RELATE_AND_VAULT_DEFINITIONS_CONTRACT.md) and [historical Obsidian indexer](../100_Archive/V1/14_Workbench/src/obsidian/indexer.ts). Native read-only Obsidian integration remains pending.
 
 STEP-08: [Scoped migration CI](../.github/workflows/v2-migration-executable-repair.yml) and [source/no-loss gates](../24_Workbench/docs/GOLDEN_IMPORT_SOURCE_AND_VAULT_CONTROLS_PHASE1.md). Synthetic CI passes; golden source→parser→GUI acceptance is not established.
+
+STEP-09: [Archived transaction manager](../100_Archive/V1/14_Workbench/src/core/transaction.ts) and [source reconciliation](../100_Archive/V1/14_Workbench/src/core/source-reconciliation.ts) are reusable design/test sources. Transactional native-text editing follows the read-only release.
+
+STEP-10: [BOM integration review](../24_Workbench/docs/BOM_TO_SYSMLV2_MDSE_ELEMENT_RELATIONSHIP_INTEGRATION_REVIEW_2026-10-17.md) and [XLSX adapter test work](../29_SysMLv2_Translator_Workbench/Passes/PASS06_BOM_XLSX_ADAPTER_2026-10-17.md). Real assembly, formulas, units and configuration acceptance remain open.
