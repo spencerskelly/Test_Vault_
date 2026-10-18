@@ -32,6 +32,9 @@ The repository migration manifest records 1,165 archived v1 files and 268 v2-rel
 
 **Remedy:** author a new, approved-version resolver based on [60 approved element families](../24_Workbench/docs/GOLDEN_IMPORT_STEP2_60_FAMILY_DECISION_RECONCILIATION_2026-10-17.md) and [26 approved connector families](../24_Workbench/docs/GOLDEN_IMPORT_RELATIONSHIP_26_FAMILY_DECISION_AUDIT_2026-10-17.md), with typed exceptions and regression tests. Keep prior pinned files for audit history.
 
+### DEF-04: Canonical definition-kind list omits approved native kinds
+[October 17 element-family mapping](../24_Workbench/docs/GOLDEN_IMPORT_STEP2_60_FAMILY_DECISION_RECONCILIATION_2026-10-17.md) includes `UseCaseDefinition` and `OccurrenceDefinition` for approved source families. [canonical-model.mjs](../24_Workbench/registry/runtime/canonical-model.mjs) exports a `DEFINITION_KINDS` array without either. It also uses the set for identity/eligibility checks. This is **an identifiable registry coverage risk, not proof every use case/event is rejected**. Add positive/negative definition/usage tests and reconcile the closed-world type lists with approved native constructs before allowing full-source output.
+
 ## What was already engineered and must be leveraged
 
 ### A — EA importer maturity and large-model scale
