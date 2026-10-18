@@ -1,5 +1,5 @@
 // Phase 4 relationship eligibility engine. No writes, parser or automatic normalization.
-const definitionKinds=new Set(['PartDefinition','ActionDefinition','StateDefinition','RequirementDefinition','ItemDefinition','PortDefinition','InterfaceDefinition','ConstraintDefinition','AttributeDefinition','CalculationDefinition','VerificationCaseDefinition']);
+const definitionKinds=new Set(['PartDefinition','ActionDefinition','StateDefinition','RequirementDefinition','ItemDefinition','PortDefinition','InterfaceDefinition','ConstraintDefinition','AttributeDefinition','CalculationDefinition','VerificationCaseDefinition','UseCaseDefinition','OccurrenceDefinition']);
 const matches=(actual,expected)=>expected==='Element'?!!actual&&/^[A-Za-z][A-Za-z0-9]*$/.test(actual):expected==='Definition'?definitionKinds.has(actual):actual===expected;
 const diagnostic=(code,detail)=>({code,detail});
 const evidenceKey=s=>/direction|orientation/i.test(s)?'direction':/multiplicity|cardinality/i.test(s)?'multiplicity':/flag|composition/i.test(s)?'aggregationKind':/classifier/i.test(s)?'classifierId':/containment|parent\/child|owner/i.test(s)?'ownerId':/mapping|meaning|justification|classification|intended/i.test(s)?'semanticJustification':null;
@@ -18,7 +18,7 @@ export function evaluate(registry,request){
   if(from?.id&&from.id===to?.id)errors.push(diagnostic('SELF_RELATIONSHIP','Identical endpoints'));
   const missing=[...new Set(rule.source.map(evidenceKey).filter(Boolean))].filter(k=>request.evidence?.[k]===undefined||request.evidence?.[k]===null||request.evidence?.[k]==='');
   if(missing.length)errors.push(diagnostic('MISSING_EVIDENCE',missing.sort().join(',')));
-  if(rule.id==='AGG-OWNED'&&request.evidence?.aggregationKind!=='composite')errors.push(diagnostic('AGGREGATION_UNPROVEN','Composite ownership evidence required'));
+  if(rule.id==='AGG-OWNED'&&!['shared','composite','1','2',1,2].includes(request.evidence?.aggregationKind))errors.push(diagnostic('AGGREGATION_UNPROVEN','Explicit shared/composite EA flag and independently verified ownership required'));
   if(rule.id==='GENERALIZE'&&from?.kind!==to?.kind)errors.push(diagnostic('INCOMPATIBLE_SPECIALIZATION','Definition kinds differ; formal type system pending'));
   if(rule.gate==='review')errors.push(diagnostic('REVIEW_REQUIRED','Operator decision and provenance required'));
   if(rule.native===null)errors.push(diagnostic('NO_NATIVE_MAPPING','Evidence-only exception'));
