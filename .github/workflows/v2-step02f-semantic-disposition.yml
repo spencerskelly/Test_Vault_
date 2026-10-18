@@ -1,0 +1,22 @@
+name: MDSE V2 STEP-02F synthetic disposition
+on:
+  push:
+    paths:
+      - '25_Testing/v2_step02f_semantic_outlier_disposition.py'
+      - '25_Testing/test_v2_step02f_semantic_outlier_disposition.py'
+      - '.github/workflows/v2-step02f-semantic-disposition.yml'
+  pull_request:
+    paths:
+      - '25_Testing/v2_step02f_semantic_outlier_disposition.py'
+      - '25_Testing/test_v2_step02f_semantic_outlier_disposition.py'
+      - '.github/workflows/v2-step02f-semantic-disposition.yml'
+  workflow_dispatch:
+jobs:
+  synthetic-private-gate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - run: python3 -m unittest -v 25_Testing/test_v2_step02f_semantic_outlier_disposition.py
