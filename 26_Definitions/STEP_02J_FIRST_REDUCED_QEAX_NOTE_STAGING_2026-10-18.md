@@ -1,0 +1,9 @@
+# STEP-02J — First reduced-QEAX private note staging (2026-10-18)
+
+Status: **private source-accounting prototype passed**, not an approved native translator, verified Phase 8 gate, golden import, or Workbench acceptance.
+
+A read-only local staging script processed EA_2026_10_15_endgame_mini.qeax (source SHA-256 69222c060a81b3e35a3e25f365f2a1f4c3dd6eaa19d77fbbd5ba9abdf365a822). It generated 11,447 Markdown element notes and accounted for all 14,688 connector identities. No diagram tables were accessed and no source records were silently dropped. Staging buckets were 13,618 native candidate *unverified*, 657 provisional flagLink, and 413 reference only. The 657 flags use a conservative heuristic and are not approved Phase 8/9 semantic outcomes. Thirty sampled Markdown frontmatters parsed successfully.
+
+Script is provided in the conversation STEP-02J tool bundle, but is not yet integrated into the checked-out repository or production translator. Native SysML syntax was not emitted or parser-certified. Note locations are source-ID based rather than final MDSE governance; source model text remains private. The current output is a source-preservation demonstration with YAML references, **not a finished semantic golden vault**.
+
+Next: integrate the tool code and the previously tested STEP-02H overlay into repo; replace heuristic disposition with the approved evidence ledger and preserve the one-to-one source connector map; implement stable MDSE UIDs and governed placement, safe clean-regeneration/merge, flagNote emission and Workbench navigation. Verify the exact committed official source gate locally before declaring golden acceptance. Diagram exclusion continues. Failure of one semantic declaration must create a flagged MDSE fallback rather than block otherwise valid model data.
