@@ -6,7 +6,7 @@ ROOT=Path(__file__).resolve().parents[2]
 tracked=[Path(x) for x in subprocess.check_output(["git","ls-files","-z"],cwd=ROOT).decode().split("\0") if x]
 active={"20_Base Vault","21_Importer","23_Bootstrap","24_Workbench","25_Testing","26_Definitions","29_SysMLv2_Translator_Workbench"}
 code={".py",".mjs",".js",".ts",".json",".yml",".yaml"}
-old="14_Workbench/registry/"
+old="24_Workbench/registry/"
 changed=[]
 for path in tracked:
     if path.parts[0] not in active or path.suffix not in code:continue

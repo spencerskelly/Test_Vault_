@@ -2,7 +2,7 @@
 import json
 import pathlib
 import unittest
-RULES=pathlib.Path(__file__).resolve().parents[1]/"14_Workbench/registry/sysml_v2_semantic_rules.v0.1.json"
+RULES=pathlib.Path(__file__).resolve().parents[1]/"24_Workbench/registry/sysml_v2_semantic_rules.v0.1.json"
 class RulesetTests(unittest.TestCase):
     @classmethod
     def setUpClass(cls):

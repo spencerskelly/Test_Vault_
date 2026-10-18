@@ -1,6 +1,6 @@
 import assert from 'node:assert/strict';
 import {test} from 'node:test';
-import {proposeGeneralization} from '../14_Workbench/registry/runtime/phase9-generalization-handoff.mjs';
+import {proposeGeneralization} from '../24_Workbench/registry/runtime/phase9-generalization-handoff.mjs';
 const graph=()=>({nodes:[{id:'1',kind:'PartDefinition'},{id:'2',kind:'PartDefinition'}]});
 const row=()=>({source_pk:'7',source_guid:'synthetic-guid',family:'Generalization',role:'source-subtype-to-destination-supertype',source_direction:'Source -> Destination',raw_from:'1',raw_to:'2',normalized_from:'1',normalized_to:'2'});
 const evidence=()=>({schema:'mdse-phase8-reconciled-local-manifest/1',verified:true,native_certified:0,semantic_direction_verified:true,source_connector:{connector_id:'7',guid:'synthetic-guid',family:'Generalization',direction:'Source -> Destination',start_id:'1',end_id:'2'}});

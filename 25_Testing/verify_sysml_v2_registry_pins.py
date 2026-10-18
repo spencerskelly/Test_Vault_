@@ -5,7 +5,7 @@ import hashlib
 import json
 from pathlib import Path
 
-DEFAULT="14_Workbench/registry/sysml_v2_registry_pins.v0.1.json"
+DEFAULT="24_Workbench/registry/sysml_v2_registry_pins.v0.1.json"
 
 def verify(root, pins):
     results=[]
