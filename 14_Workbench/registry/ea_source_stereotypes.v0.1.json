@@ -1,0 +1,81 @@
+{
+  "schema": "mdse-ea-source-stereotype-taxonomy/0.1",
+  "version": "0.1.0",
+  "default": "deferred_review",
+  "nativeEmissionAuthorized": false,
+  "rules": [
+    {
+      "type": "Class",
+      "stereotype": "block",
+      "kind": "PartDefinition",
+      "status": "provisional_typed"
+    },
+    {
+      "type": "Class",
+      "stereotype": "Hardware Component",
+      "kind": "PartDefinition",
+      "status": "candidate_review"
+    },
+    {
+      "type": "Class",
+      "stereotype": "Module",
+      "kind": "PartDefinition",
+      "status": "candidate_review"
+    },
+    {
+      "type": "Class",
+      "stereotype": "Physical Component",
+      "kind": "PartDefinition",
+      "status": "candidate_review"
+    },
+    {
+      "type": "Class",
+      "stereotype": "Physical System Variant",
+      "kind": "PartDefinition",
+      "status": "candidate_review"
+    },
+    {
+      "type": "Object",
+      "stereotype": "*",
+      "kind": "PartUsage",
+      "status": "candidate_review"
+    },
+    {
+      "type": "Part",
+      "stereotype": "*",
+      "kind": "PartUsage",
+      "status": "candidate_review"
+    },
+    {
+      "type": "Activity",
+      "stereotype": "*",
+      "kind": "ActionDefinition",
+      "status": "separate_behavior_review"
+    },
+    {
+      "type": "State",
+      "stereotype": "*",
+      "kind": "StateDefinition",
+      "status": "separate_behavior_review"
+    },
+    {
+      "type": "Port",
+      "stereotype": "*",
+      "kind": null,
+      "status": "distinct_port_classification_review"
+    },
+    {
+      "type": "Class",
+      "stereotype": "Interface",
+      "kind": "InterfaceDefinition",
+      "status": "distinct_interface_review"
+    }
+  ],
+  "workbench": {
+    "structural": "preserve namespace, original EA type and distinct nested usage ownership",
+    "visual": "differentiate structural parts, actions, states, ports and interfaces",
+    "navigation": "show source and proposed normalized endpoints",
+    "validation": "evidence and parser required before creation",
+    "roundTrip": "retain source GUID, type, stereotype and rule version"
+  }
+}
