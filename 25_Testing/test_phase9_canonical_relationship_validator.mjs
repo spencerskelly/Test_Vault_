@@ -1,6 +1,6 @@
 import assert from 'node:assert/strict';
 import {test} from 'node:test';
-import {validateGraph} from '../14_Workbench/registry/runtime/canonical-model.mjs';
+import {validateGraph} from '../24_Workbench/registry/runtime/canonical-model.mjs';
 const g=()=>({nodes:[{id:'parent',kind:'PartDefinition'},{id:'child',kind:'PartDefinition',ownerId:'parent'}],relationships:[{kind:'lexicalContainment',fromId:'parent',toId:'child'},{kind:'specialization',fromId:'child',toId:'parent',sourceRef:'synthetic-guid',direction:'subtype-to-supertype'}]});
 const codes=x=>validateGraph(x).diagnostics.map(d=>d.code);
 test('coincident nested definition and supertype valid as distinct edge types',()=>assert.deepEqual(codes(g()),[]));
