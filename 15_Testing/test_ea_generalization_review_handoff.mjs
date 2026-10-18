@@ -1,0 +1,16 @@
+import assert from 'node:assert/strict';
+import {test} from 'node:test';
+import {reviewEAGeneralizationEvidence} from '../14_Workbench/registry/runtime/ea-generalization-review-handoff.mjs';
+const graph={nodes:[{id:'sub',kind:'PartDefinition'},{id:'super',kind:'PartDefinition'}]};
+const e=()=>({schema:'mdse-ea-generalization-handoff/1',family:'Generalization',rawDirection:'Source -> Destination',role:'source-subtype-to-destination-supertype',sourceConnectorRef:'synthetic-connector',sourceSnapshotSha256:'a'.repeat(64),ledgerSha256:'b'.repeat(64),sourceId:'sub',targetId:'super',normalizedFrom:'sub',normalizedTo:'super',sourceStatus:'orientation_normalized'});
+const result=x=>reviewEAGeneralizationEvidence(graph,x);
+const has=(r,c)=>r.diagnostics.some(x=>x.code===c);
+test('fully shaped evidence is review-only, never authenticated or certified',()=>{const r=result(e());assert.equal(r.reviewable,true);assert.equal(r.sourceAuthenticated,false);assert.equal(r.mayEmitNative,false);assert.equal(r.nativeCertified,false);assert.equal(r.candidate.direction,'subtype-to-supertype');});
+test('missing source direction rejected',()=>{const x=e();delete x.rawDirection;assert.ok(has(result(x),'EA_SOURCE_DIRECTION_NOT_EXPLICIT'));});
+test('reversed normalized endpoints rejected',()=>{const x=e();x.normalizedFrom='super';assert.ok(has(result(x),'NORMALIZED_DIRECTION_MISMATCH'));});
+test('unverified role rejected',()=>{const x=e();x.role='unknown';assert.ok(has(result(x),'EA_ROLE_UNCONFIRMED'));});
+test('missing snapshot rejected',()=>{const x=e();x.sourceSnapshotSha256='';assert.ok(has(result(x),'SOURCE_SNAPSHOT_HASH_MISSING'));});
+test('missing ledger fingerprint rejected',()=>{const x=e();x.ledgerSha256='';assert.ok(has(result(x),'LEDGER_HASH_MISSING'));});
+test('unresolved status rejected',()=>{const x=e();x.sourceStatus='deferred_review';assert.ok(has(result(x),'SOURCE_DISPOSITION_NOT_QUALIFIED'));});
+test('unknown endpoint rejected',()=>{const x=e();x.targetId='absent';x.normalizedTo='absent';assert.ok(has(result(x),'CANONICAL_ENDPOINT_MISSING'));});
+test('even a claimed verified field cannot authorize emission',()=>{const x=e();x.verified=true;x.nativeCertified=true;const r=result(x);assert.equal(r.nativeCertified,false);assert.equal(r.sourceAuthenticated,false);});
