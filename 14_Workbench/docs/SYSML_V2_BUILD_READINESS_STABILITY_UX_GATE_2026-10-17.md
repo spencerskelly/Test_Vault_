@@ -61,3 +61,54 @@ Pinned parser version and native fixtures; source row disposition checksum; UID 
 - Establish a pinned parser and a source-span-aware edit engine; partial edits must not rewrite unrelated syntax or source provenance.
 - Derived graph caches keyed by note content hash, with invalidation on vault change and editor buffer change.
 - UI acceptance: no Workbench vault tree; open-note dropdown; popup opens without disrupting editing; each action changes note source then synchronizes all projections.
+
+## Superseding note layout and model authoring contract — 2026-10-17
+
+**Approved:** The authoritative native SysML v2 syntax resides at the **bottom of each Obsidian note**, under its own dedicated section. Users can author ordinary notes, explanations, images, links and other supporting content **above** this section, without the Workbench taking ownership of that content. This clarifies the earlier unspecified placement of native syntax.
+
+### Note boundaries
+- Existing YAML frontmatter is for MDSE UID, provenance, source-specific BOM fields and MDSE-only relationships (including `flagLink`); do not fabricate native syntax for this metadata.
+- Freely editable Markdown content occupies the central/top body of the note. Workbench preserves it byte-for-byte unless a user explicitly edits that content.
+- The final dedicated section, suggested heading `## SysML v2`, owns exactly one **managed** `sysml` fenced region containing all native definitions/features/usages attributable to the note. Allow multiple semantic elements/usages inside this section; the file's native source is authoritative.
+- The managed region stays at the end of the note. The finalized delimiter/escaping strategy must be proven resilient to other fenced blocks and code examples in user-authored prose. Provide safe migration for existing notes and errors for duplicate/missing managed regions.
+
+### Primary user interaction
+- **Workbench interface is the primary authoring surface**. Users should not be expected to type or understand SysML v2 text to make normal model edits.
+- The active-note element dropdown scopes selection to definitions, usages and features contained in the open note. Provide context-aware Add Element, Add Part/Action/State/Port/Attribute, Add Relationship, Change Type, Edit Name, Set Multiplicity, Configure Quantity/Unit, Move/Remove/Review operations according to semantic eligibility. Do not offer actions unsupported by the type or namespace.
+- Use validated forms, property editor, visual diagram gestures, and relationship picker; preview the exact change, ownership, affected references and any failure reason where useful. An edit applies **to authoritative note syntax first**, then reparses and refreshes the dropdown, structure, diagrams, relationship panel, and tables. No independent graph or visual projection becomes authoritative.
+- Source-aware rewriting targets only the relevant native syntax span; preserve comments and formatting outside the target span where possible. Changes involving YAML must be one atomic note transaction. Handle stale editor buffers / concurrent external modifications with content-version checks, fail-closed conflict prompt, Undo, Git diff, backup and rollback.
+- Direct manual editing of native syntax remains possible for advanced users but is not required. Manual or external edits trigger reparse, validation and regeneration of derived views, not a competing editor-side model state.
+- Keep the Obsidian File Explorer as the sole vault navigator. The MDSE popup or minimal contextual toolbar provides scoped model actions/views; no duplicate vault tree.
+- Keep Merge Notes specifically in **Advanced Actions**, with reviewed survivor UID, independent EA/BOM note identity until approved, backlink/usage preservation, and undo/rollback.
+
+### Illustrative note layout (not a final schema definition)
+
+```markdown
+---
+uid: <stable-mdse-uid>
+eaAlias: PC-100
+bom:
+  partNumber: PC-100
+---
+
+# Charger Assembly
+
+Notes, design reasoning, attachments and supporting information written by users.
+
+## SysML v2
+
+```sysml
+part def ChargerAssembly {
+    part powerModule : PowerModule[4];
+}
+```
+```
+
+### Test gates
+1. Add/edit a part and typed usage entirely from Workbench without touching source text.
+2. Preserve prose and unrelated fences above the bottom managed section after every UI edit.
+3. With multiple elements in one note, dropdown selection identifies exact owned usage, edits only that source span, and preserves stable usage identifiers.
+4. Reject nonconformant generated edits atomically; keep the prior note and show actionable validation diagnostics.
+5. External edit / note rename / reimport causes consistent reparse, conflict protection and updated views.
+6. MDSE YAML metadata, source provenance and body `flagLink` explanation survive all native UI edits.
+7. Native parse against pinned OMG-compatible grammar is a release gate, not an assumption.
