@@ -14,6 +14,9 @@ Core plugin and schema compatibility is centrally governed. Approved personal pr
 ## ADR-V2-04 — Cross-vault sequencing
 Design IDs, links, resolver interfaces and lifecycle for cross-vault use now. Ship operational cross-vault support after single-vault validation; avoid a first-release dependency on it.
 
+## ADR-V2-05 — Defer all EA diagrams until after toolchain and golden import completion
+**Approved October 18, 2026.** EA diagram tables, diagrams, layout, Canvas generation from EA, diagram-based source normalization and any requirement to verify diagram fidelity are **out of scope** for all active V2 tools and golden import tests. Use EA elements/connectors and other non-diagram source evidence only. Native SysML-derived Workbench views remain in scope and must not need EA diagrams. [Detailed STEP-02A scope lock](STEP_02A_EA_DIAGRAM_DEFERRED_2026-10-18.md). Reopen only after the golden import is accepted, all planned tools are complete/tested, and the user approves a diagram phase.
+
 ## Non-negotiable retained rules
 - Approved mappings remain approved and are not reopened because implementation is incomplete.
 - Native OMG SysML v2 semantics only; non-native MDSE evidence and explicit review flags remain distinct.
