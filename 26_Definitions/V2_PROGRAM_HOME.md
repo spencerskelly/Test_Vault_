@@ -11,6 +11,7 @@
 - [Detailed implementation traceability and gaps](V2_IMPLEMENTATION_TRACEABILITY_AUDIT_2026-10-18.md)
 
 ## Definitions and conversions — approved authority
+- [STEP-02F — Private semantic outlier disposition and source-gate acceptance](STEP_02F_SEMANTIC_OUTLIER_DISPOSITION_AND_REAL_SOURCE_GATE_2026-10-18.md)
 - [STEP-02E — Independent real-source ledger parity and grouped exceptions](STEP_02E_REAL_SOURCE_LEDGER_PARITY_AND_OUTLIERS_2026-10-18.md)
 - [STEP-02D — Gated Phase 8 source reconciliation and measured exceptions](STEP_02D_APPROVED_PHASE8_GATE_AND_SOURCE_REVIEW_2026-10-18.md)
 - [STEP-02C — Approved rule resolver integrated into Phase 8/9 private ledger](STEP_02C_PHASE8_PHASE9_APPROVED_POLICY_INTEGRATION_2026-10-18.md)
