@@ -51,3 +51,19 @@ def raw_evidence_coverage(row):
                       "nativeCertified":False}
     return {"status":"raw_fields_retained","missingColumns":[],
             "nativeCertified":False}
+
+def raw_evidence_values(row):
+    """Check raw evidence value shape without inferring optional EA roles."""
+    coverage=raw_evidence_coverage(row)
+    if coverage["status"]!="raw_fields_retained":
+        return {"status":"schema_incomplete","diagnostics":coverage["missingColumns"],"nativeCertified":False}
+    diagnostics=[]
+    for name in ("raw_source_type","raw_target_type"):
+        if row.get(name) in (None,""):diagnostics.append("MISSING_"+name.upper())
+    for name in ("source_aggregation_flag","target_aggregation_flag"):
+        if str(row.get(name)) not in ("0","1","2"):
+            diagnostics.append("INVALID_"+name.upper())
+    # EA direction, roles and multiplicity may legitimately be blank or unspecified.
+    # Preserve them as-is and do not treat presence as semantic approval.
+    return {"status":"raw_values_present" if not diagnostics else "review_required",
+            "diagnostics":diagnostics,"nativeCertified":False}
