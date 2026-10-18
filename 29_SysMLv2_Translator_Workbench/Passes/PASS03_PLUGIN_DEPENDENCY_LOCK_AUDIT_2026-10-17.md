@@ -104,3 +104,19 @@ python3 "10_Base Vault/Testing/check-release.py" --base "$tmp/base"
 Positive and negative tests: alter one byte of a **disposable copy** of a locked plugin and confirm the builder exits before creating its destination; restore, then verify a valid base. Note that the v2 global release checker is *expected to block* until native importer, parser and v2 editor are released; it must not be confused with the v1/base-specific build acceptance check.
 
 **Work pass status:** completed source hardening and documented handoff; full release execution remains blocked by checkout access. User `y` required for next pass.
+
+## Continuation — Base Vault preflight regression coverage (2026-10-17)
+
+A renewed direct Git checkout attempt failed with `Could not resolve host: github.com`. The source runtime remains unavailable for an **actual** generated-base rehearsal. Added `15_Testing/test_base_builder_preflight.py` (commit `e6891da7a9dc3d6105116010166c94775b5462e4`) with five lightweight static contract tests: correct numbered manifest, syntax parse, hash guard ordering before output creation, binary SHA-256 comparison, and refusal to overwrite a nonempty destination. The tests have **not been run against a full checkout**, and static checks do not prove complete positive/negative build behavior.
+
+Recommended on full clone:
+```bash
+python3 -m unittest discover -s 15_Testing -p test_base_builder_preflight.py -v
+python3 -m py_compile '10_Base Vault/Tools/v0.8.0-r2/build-base.py'
+out="$(mktemp -d)/base"
+python3 '10_Base Vault/Tools/v0.8.0-r2/build-base.py' "$out"
+python3 '10_Base Vault/Testing/check-release.py' --base "$out"
+```
+For the negative case, use a separate disposable clone, change exactly one byte of a vendored file listed in plugin-lock.yaml, choose a *nonexistent* output path, and verify exit code !=0 and no output directory created. Restore from Git or discard the clone. Do not mutate Test_Vault_ main or the approved artifacts to simulate drift.
+
+**Status:** Added automated guard checks and reproducible instructions; end-to-end build and plugin first-open remain unverified, so **release NO-GO**. Await user `y` for next bounded pass.
