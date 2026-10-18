@@ -48,12 +48,12 @@ def reconcile(qeax,registry,output):
  output=pathlib.Path(output);output.mkdir(parents=True,exist_ok=True)
  status=collections.Counter();diagnostics=collections.Counter();rules=collections.Counter()
  with (output/'local_only_phase8_ledger.csv').open('w',newline='') as f:
-  headers=['source_pk','source_guid','raw_from','raw_to','family','rule','role','status','normalized_from','normalized_to','source_kind','target_kind','diagnostics']
+  headers=['source_pk','source_guid','raw_from','raw_to','family','rule','role','status','normalized_from','normalized_to','source_kind','target_kind','diagnostics','source_direction','source_role','target_role','source_cardinality','target_cardinality','raw_source_type','raw_source_stereotype','raw_target_type','raw_target_stereotype','source_aggregation_flag','target_aggregation_flag']
   w=csv.DictWriter(f,fieldnames=headers);w.writeheader()
-  q='SELECT Connector_ID,ea_guid,Connector_Type,Stereotype,Direction,Start_Object_ID,End_Object_ID,SourceIsAggregate,DestIsAggregate FROM t_connector ORDER BY Connector_ID'
+  q='SELECT Connector_ID,ea_guid,Connector_Type,Stereotype,Direction,Start_Object_ID,End_Object_ID,SourceIsAggregate,DestIsAggregate,SourceRole,DestRole,SourceCard,DestCard FROM t_connector ORDER BY Connector_ID'
   for r in con.execute(q):
    x=decide(r,objs.get(r['Start_Object_ID']),objs.get(r['End_Object_ID']),families)
-   w.writerow(dict(source_pk=r['Connector_ID'],source_guid=r['ea_guid'],raw_from=r['Start_Object_ID'],raw_to=r['End_Object_ID'],**{k:(';'.join(v) if isinstance(v,list) else v) for k,v in x.items()}))
+   w.writerow(dict(source_pk=r['Connector_ID'],source_guid=r['ea_guid'],raw_from=r['Start_Object_ID'],raw_to=r['End_Object_ID'],source_direction=r['Direction'],source_role=r['SourceRole'],target_role=r['DestRole'],source_cardinality=r['SourceCard'],target_cardinality=r['DestCard'],raw_source_type=(objs.get(r['Start_Object_ID']) or ('',''))[0],raw_source_stereotype=(objs.get(r['Start_Object_ID']) or ('',''))[1],raw_target_type=(objs.get(r['End_Object_ID']) or ('',''))[0],raw_target_stereotype=(objs.get(r['End_Object_ID']) or ('',''))[1],source_aggregation_flag=r['SourceIsAggregate'],target_aggregation_flag=r['DestIsAggregate'],**{k:(';'.join(v) if isinstance(v,list) else v) for k,v in x.items()}))
    status[x['status']]+=1;rules[x['rule'] or '(none)']+=1;diagnostics.update(x['diagnostics'])
  summary={'total':sum(status.values()),'status':dict(status),'rule_candidates':dict(rules),'diagnostics':dict(diagnostics),'native_certified':0}
  assert summary['total']==con.execute('SELECT COUNT(*) FROM t_connector').fetchone()[0]
