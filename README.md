@@ -11,23 +11,25 @@ MDSE toolchain development repository. This is **not** a generated engineering m
 - [V2 goals, work breakdown and progress](26_Definitions/V2_PROGRAM_GOALS_AND_COMPLETION_2026-10-18.md)
 - [V2 connector definitions](26_Definitions/V2_CONNECTOR_DEFINITIONS_INDEX.md)
 
+[V1 archive master MOC](100_Archive/MOC_V1_ARCHIVE.md) · [complete repository note census](26_Definitions/MOC_REPOSITORY_NOTE_CENSUS_2026-10-18.md)
+
 ## Versioned workspaces
 
 | Area | V1 | V2 |
 |---|---|---|
-| Base Vault | [10_Base Vault](10_Base%20Vault/README.md) | [20_Base Vault](20_Base%20Vault/README.md) |
-| Importer | [11_Importer](11_Importer/README.md) | [21_Importer](21_Importer/README.md) |
-| Bootstrap | [13_Bootstrap](13_Bootstrap/Definition/README.md) | [23_Bootstrap](23_Bootstrap/README.md) |
-| Workbench | [14_Workbench](14_Workbench/README.md) | [24_Workbench](24_Workbench/README.md) |
-| Testing | [15_Testing](15_Testing/) | [25_Testing](25_Testing/README.md) |
-| Definitions | [16_Definitions](16_Definitions/) | [26_Definitions](26_Definitions/README.md) |
+| Base Vault | [10_Base Vault](100_Archive/V1/10_Base%20Vault/README.md) | [20_Base Vault](20_Base%20Vault/README.md) |
+| Importer | [11_Importer](100_Archive/V1/11_Importer/README.md) | [21_Importer](21_Importer/README.md) |
+| Bootstrap | [13_Bootstrap](100_Archive/V1/13_Bootstrap/Definition/README.md) | [23_Bootstrap](23_Bootstrap/README.md) |
+| Workbench | [14_Workbench](100_Archive/V1/14_Workbench/README.md) | [24_Workbench](24_Workbench/README.md) |
+| Testing | [15_Testing](100_Archive/MOC_V1_testing_1.md) | [25_Testing](25_Testing/README.md) |
+| Definitions | [16_Definitions](100_Archive/MOC_V1_definitions_1.md) | [26_Definitions](26_Definitions/README.md) |
 
 [V2 SysML translator research and historical plan](29_SysMLv2_Translator_Workbench/README_SysMLv2_Translator_Workbench.md).
 
 ## Shared and cross-version
 
 - [55_Workspace](55_Workspace/README.md) — workspace governance, decision history, current-state registry (some internal references still require path migration).
-- [Reference](Reference/) — cross-version reference and architecture discussions.
+- [Reference](88_Reference/) — cross-version reference and architecture discussions.
 - [99_System](99_System/) — inherited system schemas, runtime configuration and v1 baseline; **not automatically v2 authority**.
 - [V2 architecture decisions](26_Definitions/Architecture%20Decisions.md), [v2 delivery plan](26_Definitions/V2%20Delivery%20Plan.md), [v2 BOM rules](26_Definitions/BOM%20Integration.md).
 
@@ -41,4 +43,4 @@ MDSE toolchain development repository. This is **not** a generated engineering m
 
 ## Move verification status
 
-**2026-10-15:** Folder moves have left legacy references inside executable scripts and the v1 release manifest. The new directory tree is navigable, **but executable compatibility is not yet certified**. See [move impact audit](25_Testing/Folder%20Move%20Audit%202026-10-15.md) before running v1 release/build tasks. Do not treat a source file being present as evidence that the build still succeeds.
+**Historical checkpoint (2026-10-15):** Folder moves left legacy references inside executable scripts and the v1 release manifest. The new directory tree is navigable, **but executable compatibility is not yet certified**. See [move impact audit](25_Testing/Folder%20Move%20Audit%202026-10-15.md) before running v1 release/build tasks. Do not treat a source file being present as evidence that the build still succeeds.
