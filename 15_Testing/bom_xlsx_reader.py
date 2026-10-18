@@ -51,7 +51,10 @@ def rows_from_xlsx(path,sheet_name):
             # large-workbook strategy if their table is itself enormous.
             row_tag="{"+NS["m"]+"}row"
             last_row=0
-            for event,node in ET.iterparse(stream,events=("end",)):
+            context=ET.iterparse(stream,events=("start","end"))
+            _,document_root=next(context)
+            for event,node in context:
+                if event!="end":continue
                 if node.tag!=row_tag:continue
                 row_num=int(node.get("r"))
                 if row_num<=last_row:raise ValueError("INVALID_OR_DUPLICATE_EXCEL_ROW")
@@ -59,6 +62,7 @@ def rows_from_xlsx(path,sheet_name):
                 vals={column_index(c.get("r")):text_cell(c,strings)
                       for c in node.findall("m:c",NS)}
                 node.clear()
+                document_root.clear()  # discard completed rows from parent tree
                 yield row_num,vals
 
 def iter_bom(path,sheet,columns,snapshot_id,workbook_id,header_row=1):
