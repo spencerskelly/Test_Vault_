@@ -22,3 +22,13 @@
 
 **RISK-06 — Flagged exceptions:** [flagLink approval](../24_Workbench/docs/GOLDEN_IMPORT_UNRESOLVED_RELATIONSHIP_FLAGLINK_APPROVED_2026-10-17.md) requires per-connector identity, YAML link, and a human-readable reason in the note; local-only disposition ledger alone does not satisfy generated-vault visibility. Permitted untyped usages must also retain review flags.
 
+
+**RISK-07 — BOM raw values:** [Historical BOM reader](../29_SysMLv2_Translator_Workbench/Passes/PASS06_BOM_XLSX_ADAPTER_2026-10-17.md) rejects formulas and skips wholly empty rows. Preserve rejected-row source position/value and never round decimals, infer units, or silently omit meaningful formulas, revisions or effectivity.
+
+**RISK-08 — Competing formal edit authority:** [Earlier build-readiness narrative](../24_Workbench/docs/SYSML_V2_BUILD_READINESS_STABILITY_UX_GATE_2026-10-17.md) includes graph-as-authority wording. [Later approved release decisions](V2_RELEASE_ARCHITECTURE_DECISIONS_2026-10-18.md) supersede it: SysML v2 text in the note owns formal semantics, and graphical edits must transactionally reparse and update the text. Derived graph overwrite must be forbidden.
+
+## Zero-silent-loss acceptance
+
+The private importer must reconcile each source record exactly once into `native`, `alias_merged`, `evidence_only`, `deferred_review`, `excluded_by_policy`, or `error`, each with stable source ID and explicit rationale. Valid source metadata must not disappear merely because there is no native SysML counterpart. Treat unrecoverable omission, non-authorized deletion, silent deduplication, failed note link resolution and conflicting edit overwrite as export blockers.
+
+Further engineering review is required for the source-to-generated-vault preservation of each risk. No direct model data is committed to the public methods repository.
