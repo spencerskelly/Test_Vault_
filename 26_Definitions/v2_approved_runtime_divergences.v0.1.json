@@ -12,12 +12,15 @@
       "runtime": "24_Workbench/registry/runtime/eligibility-engine.mjs",
       "symptom": "AGG-OWNED only accepts composite; approved typed owned usages may arise from shared or composite when parent-child meaning is verified",
       "required_fixture": "positive shared owned usage; negative unowned grouping; preserve source flag",
-      "status": "implementation_updated_tests_pending",
+      "status": "synthetic_verified_native_pending",
       "fix_evidence": {
         "code": "24_Workbench/registry/runtime/eligibility-engine.mjs",
         "test": "24_Workbench/registry/runtime/approved-v2-clarifications.test.mjs",
         "native_parser_accepted": false,
-        "full_source_verified": false
+        "full_source_verified": false,
+        "ci_run_id": 39159849707,
+        "ci_run_commit": "bbfffe6977a34c3852c0124302d7e59e54ca57ce",
+        "synthetic_passed": true
       }
     },
     {
@@ -28,12 +31,15 @@
       "runtime": "24_Workbench/registry/runtime/canonical-model.mjs",
       "symptom": "UNTYPED_USAGE emitted universally for missing definitionId; approved unresolved untyped Part/Action/Port usages require typed review disposition rather than universal semantic rejection",
       "required_fixture": "untyped Part Action Port with unresolved-type evidence plus illegal owner/missing identity negative tests",
-      "status": "implementation_updated_tests_pending",
+      "status": "synthetic_verified_native_pending",
       "fix_evidence": {
         "code": "24_Workbench/registry/runtime/canonical-model.mjs",
         "test": "24_Workbench/registry/runtime/approved-v2-clarifications.test.mjs",
         "native_parser_accepted": false,
-        "full_source_verified": false
+        "full_source_verified": false,
+        "ci_run_id": 39159849707,
+        "ci_run_commit": "bbfffe6977a34c3852c0124302d7e59e54ca57ce",
+        "synthetic_passed": true
       }
     },
     {
@@ -55,12 +61,15 @@
       "runtime": "24_Workbench/registry/runtime/canonical-model.mjs",
       "symptom": "DEFINITION_KINDS exported list omits approved UseCaseDefinition and OccurrenceDefinition; downstream impact not yet measured",
       "required_fixture": "positive UseCase/Occurrence definition support and negative invalid owner/typing",
-      "status": "implementation_updated_tests_pending",
+      "status": "synthetic_verified_native_pending",
       "fix_evidence": {
         "code": "24_Workbench/registry/runtime/canonical-model.mjs",
         "test": "24_Workbench/registry/runtime/approved-v2-clarifications.test.mjs",
         "native_parser_accepted": false,
-        "full_source_verified": false
+        "full_source_verified": false,
+        "ci_run_id": 39159849707,
+        "ci_run_commit": "bbfffe6977a34c3852c0124302d7e59e54ca57ce",
+        "synthetic_passed": true
       }
     }
   ]
