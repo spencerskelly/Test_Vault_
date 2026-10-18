@@ -1,6 +1,6 @@
 import assert from 'node:assert/strict';
 import {test} from 'node:test';
-import {reviewEAGeneralization} from '../14_Workbench/registry/runtime/phase9-ea-generalization-review.mjs';
+import {reviewEAGeneralization} from '../24_Workbench/registry/runtime/phase9-ea-generalization-review.mjs';
 const graph=()=>({nodes:[{id:'base',kind:'PartDefinition'},{id:'sub',kind:'PartDefinition'}]});
 const record=()=>({family:'Generalization',sourceRef:'synthetic-guid',rawFrom:'sub',rawTo:'base',normalizedFrom:'sub',normalizedTo:'base',sourceDirection:'Source -> Destination',role:'source-subtype-to-destination-supertype'});
 const codes=r=>r.diagnostics.map(d=>d.code);
