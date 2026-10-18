@@ -22,7 +22,9 @@ def adapt(row,snapshot_id):
        "ea_connector_guid":row.get("source_guid") or None,
        "phase8_status":row["status"],
        "nativeCertified":False,
-       "unattestedFields":[k for k in UNATTESTED if k not in row],
+       "unattestedFields":[k for k in UNATTESTED if
+           row.get({"source_type":"raw_source_type",
+                    "source_stereotype":"raw_source_stereotype"}.get(k,k)) in (None,"")],
        "requiredManualEvidence":["reviewer_decision","reviewer_rationale",
          "candidate_native_construct","parser_fixture_id","parser_result",
          "workbench_structural","workbench_visual","workbench_navigation",
