@@ -7,7 +7,10 @@ tracked=[Path(x) for x in subprocess.check_output(["git","ls-files","-z"],cwd=RO
 active={"20_Base Vault","21_Importer","23_Bootstrap","24_Workbench","25_Testing","26_Definitions","29_SysMLv2_Translator_Workbench"}
 code={".py",".mjs",".js",".ts",".json",".yml",".yaml"}
 old="14_Workbench/registry/"
-parser=argparse.ArgumentParser()\nparser.add_argument("--check",action="store_true",help="verify without writing")\nargs=parser.parse_args()\nchanged=[]
+parser=argparse.ArgumentParser()
+parser.add_argument("--check",action="store_true",help="verify without writing")
+args=parser.parse_args()
+changed=[]
 for path in tracked:
     if path.parts[0] not in active or path.suffix not in code:continue
     if path.name in {"V2_FOLDER_MIGRATION_MANIFEST_2026-10-18.json","V2_FOLDER_MIGRATION_REFERENCE_AUDIT_2026-10-18.json"}:continue
