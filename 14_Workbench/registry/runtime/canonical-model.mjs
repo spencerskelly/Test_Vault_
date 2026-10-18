@@ -18,6 +18,12 @@ export function validateGraph(graph){
   }
   if(usageToDef[n.kind]&&!n.definitionId)errors.push(issue('UNTYPED_USAGE',n.id));
   if(n.ownerId&&!nodes.has(n.ownerId))errors.push(issue('MISSING_OWNER',n.id));
+  if(n.kind==='PortUsage'&&n.ownerId&&nodes.has(n.ownerId)&&!['PartDefinition','PartUsage'].includes(nodes.get(n.ownerId).kind))errors.push(issue('INVALID_PORT_OWNER',n.id));
+  if(n.multiplicity!==undefined){
+   const m=n.multiplicity;
+   if(!Array.isArray(m)||m.length!==2||!Number.isInteger(m[0])||m[0]<0||!(m[1]==='*'||(Number.isInteger(m[1])&&m[1]>=m[0])))errors.push(issue('INVALID_MULTIPLICITY',n.id));
+  }
+  if(n.sourceRef!==undefined&&(typeof n.sourceRef!=='string'||!n.sourceRef.trim()))errors.push(issue('INVALID_PROVENANCE',n.id));
   if(n.ownerId===n.id)errors.push(issue('OWNERSHIP_CYCLE',n.id));
   if(n.ownerId&&defKinds.has(n.kind)&&n.definitionId)errors.push(issue('INVALID_DEFINITION_IDENTITY',n.id));
  }
