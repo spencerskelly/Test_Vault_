@@ -78,6 +78,8 @@ scope: toolchain-development-repository
 - [Family disposition registry](24_Workbench/registry/family_disposition_registry.v0.2.json)
 
 ## 60 — Project background and retained knowledge
+- [V1 Archive Master Map of Contents — all 1,165 archived paths](100_Archive/MOC_V1_ARCHIVE.md)
+- [V1 capabilities that may add value to V2, with gaps and priorities](26_Definitions/V1_ARCHIVE_VALUE_RECOVERY_GAPS_2026-10-18.md)
 - [Workspace governance and older decisions](55_Workspace/README.md)
 - [Earlier development and approvals: historic reference only](26_Definitions/V2_FOLDER_MIGRATION_MANIFEST_2026-10-18.json)
 - [Shared tool/runtime model schemas (check v2 authority before use)](99_System/)
