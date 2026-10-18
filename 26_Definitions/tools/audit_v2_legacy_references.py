@@ -23,5 +23,7 @@ for rel in files:
             results.append({"file":rel.as_posix(),"line":line_no,"reference":value,"class":classification})
 summary={"schema":"mdse-v2-migration-reference-audit/1","total":len(results),"review_active":sum(x["class"]=="review_active" for x in results),"historical_reference":sum(x["class"]=="historical_reference" for x in results),"findings":results}
 print(json.dumps(summary,indent=2))
-if "--strict" in sys.argv and any(x["class"]=="review_active" and Path(x["file"]).suffix in {".py",".mjs",".js",".ts",".json",".yaml",".yml",".html"} for x in results):
+blocking=[x for x in results if x["class"]=="review_active" and Path(x["file"]).suffix in {".py",".mjs",".js",".ts",".json",".yaml",".yml",".html"}]
+if "--strict" in sys.argv and blocking:
+    print(json.dumps({"status":"BLOCKED_ACTIVE_LEGACY_REFERENCE","blocking":blocking[:35],"total_blocking":len(blocking)},indent=2),file=sys.stderr)
     sys.exit(1)
