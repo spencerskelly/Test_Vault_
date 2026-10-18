@@ -15,7 +15,7 @@ from profile_qeax_local import profile
 from reconcile_qeax_dispositions import reconcile
 
 ROOT=Path(__file__).resolve().parents[1]
-PHASE8=ROOT/"14_Workbench/registry/runtime/normalize_qeax_phase8.py"
+PHASE8=ROOT/"24_Workbench/registry/runtime/normalize_qeax_phase8.py"
 
 def execute(qeax, source_profile, disposition_policy, registry, out, stage=None):
     ensure_private_output(out,ROOT)
