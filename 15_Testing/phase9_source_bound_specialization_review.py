@@ -1,5 +1,7 @@
 """Read-only QEAX -> canonical specialization review handoff. Never emits native SysML."""
 import argparse,csv,hashlib,json,pathlib,sqlite3
+from verify_phase8_rows_against_qeax import verify_rows
+from replay_phase8_local_normalization import check as replay_normalization
 def sha256(path):
  h=hashlib.sha256()
  with open(path,"rb") as f:
@@ -50,3 +52,16 @@ if __name__=="__main__":
   if not pathlib.Path(getattr(a,name)).is_file():p.error(name+" file does not exist")
  result=inspect(a.qeax,a.ledger,json.loads(pathlib.Path(a.graph).read_text()))
  print(json.dumps(result,indent=2))
+
+# Fail-closed wrapper: source integrity and exact normalizer replay must both pass.
+def inspect_verified(qeax,ledger,registry,attestation,graph,expected=14688):
+ integrity=verify_rows(qeax,ledger,registry,attestation,expected)
+ normalization=replay_normalization(qeax,ledger,registry)
+ blockers=[]
+ if not integrity['verified']:blockers.append('SOURCE_ROW_INTEGRITY_FAILED')
+ if not normalization['valid']:blockers.append('NORMALIZATION_REPLAY_FAILED')
+ if integrity['source_count']!=expected:blockers.append('SOURCE_COUNT_MISMATCH')
+ if blockers:
+  return {'schema':'mdse-phase9-verified-specialization-review/1','review_valid':False,'blockers':blockers,'native_certified':0,'may_emit_native':False}
+ result=inspect(qeax,ledger,graph)
+ return {'schema':'mdse-phase9-verified-specialization-review/1','review_valid':not result['errors'],'blockers':list(result['errors']),'aggregate':result,'native_certified':0,'may_emit_native':False}
