@@ -1,0 +1,22 @@
+{
+  "schema": "mdse-v2-base-release/1",
+  "release": "0.1.0-pilot-scaffold",
+  "status": "configuration_scaffold_not_plugin_verified",
+  "managedFiles": [
+    ".obsidian/app.json",
+    ".obsidian/appearance.json",
+    ".obsidian/core-plugins.json",
+    ".obsidian/community-plugins.json"
+  ],
+  "communityPlugins": [],
+  "pluginBinariesVerified": false,
+  "bootstrapReady": false,
+  "workbenchReady": false,
+  "minimumObsidianVersion": null,
+  "policy": {
+    "managedFileUpdate": "preview_and_backup_required",
+    "preserveUserFiles": true,
+    "autoInstallPlugins": false
+  },
+  "notes": "Empty community plugin list is deliberate. Plugin binaries, versions, hashes and platform acceptance must be verified before deployment."
+}
