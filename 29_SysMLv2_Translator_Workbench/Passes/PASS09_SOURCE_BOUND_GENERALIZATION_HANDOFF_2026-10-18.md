@@ -1,0 +1,9 @@
+# Phase 9 — Local-only source-bound generalization handoff
+
+Added `15_Testing/phase9_local_generalization_handoff.py` to re-run the full Phase 8 ledger normalization check before verifying one selected EA Generalization connector against read-only QEAX source direction and the matching local ledger. A successful result is strictly `reviewOnly: true`, `nativeCertified: false`. The local output contains connector GUID/IDs and therefore MUST stay private, outside GitHub. stdout shows only aggregate decision.
+
+This is **not a cryptographically trusted attestation issuer**. The manifest hashes bind the locally observed files but do not prove a trusted operator or independently validated EA semantics. It does not yet link the local handoff to the JS canonical graph or authorize native emission. The user must not upload local output or publish connector IDs. The gate is intentionally narrow: one explicitly directed, blank-stereotype Generalization with Phase 8 `orientation_normalized` status.
+
+Run the unit tests: `python3 -m unittest -v 15_Testing/test_phase9_local_generalization_handoff.py`. To invoke actual QEAX handoff, supply a private numeric connector ID using `--connector-pk` and an output path outside the repository. Do not share that output in chat. The broad 14,688-row consistency gate has previously passed on the user's Mac; this new tool has not yet been run on the real source or independently validated in CI.
+
+Next steps: test against private synthetic QEAX/ledger end-to-end, add verifier signing or file-handle scoped handoff, strict type compatibility and a safe canonical adapter that doesn't trust user-controlled booleans; extend Workbench structural and visual relationship validation. Native emission disabled.
