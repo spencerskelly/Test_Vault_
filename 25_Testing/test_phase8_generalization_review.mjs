@@ -1,6 +1,6 @@
 import assert from 'node:assert/strict';
 import {test} from 'node:test';
-import {reviewPhase8Generalization} from '../14_Workbench/registry/runtime/phase8-generalization-review.mjs';
+import {reviewPhase8Generalization} from '../24_Workbench/registry/runtime/phase8-generalization-review.mjs';
 const raw=()=>({Connector_ID:1,ea_guid:'synthetic',Connector_Type:'Generalization',Direction:'Source -> Destination',Start_Object_ID:10,End_Object_ID:20});
 const row=()=>({source_pk:'1',source_guid:'synthetic',raw_from:'10',raw_to:'20',family:'Generalization',source_direction:'Source -> Destination',role:'source-subtype-to-destination-supertype',normalized_from:'10',normalized_to:'20',status:'orientation_normalized'});
 const graph=()=>({nodes:[{id:'10',kind:'PartDefinition'},{id:'20',kind:'PartDefinition'}]});
