@@ -1,6 +1,6 @@
 # MDSE v2 — SysML Source Ownership and Note Storage
 
-**Status:** Gate A design proposal; user approval and parser fixtures pending.  
+**Status:** Historical Gate A proposal. **Superseded for implemented note layout and UX** by the approved 2026-10-17 SysML v2 note-authority and bottom-section decisions in `14_Workbench/docs/SYSML_V2_BUILD_READINESS_STABILITY_UX_GATE_2026-10-17.md`. The mid-note `## SysML source` example below is NOT the approved output layout. The approved layout has YAML frontmatter, user-authored Markdown, and a final `## SysML v2` fenced `sysml` region at the bottom. See `29_SysMLv2_Translator_Workbench/FIRST_RUN_FAST_TRACK_DEPENDENCY_RULES_DOC_AUDIT_2026-10-17.md` for first-run gates.  
 **Scope:** Authoritative SysML language distributed across MDSE Markdown notes.  
 **Date:** 2026-10-15.
 
