@@ -1,6 +1,6 @@
 import assert from 'node:assert/strict';
 import {test} from 'node:test';
-import {reviewGeneralizationFromEvidence} from '../14_Workbench/registry/runtime/phase9-generalization-evidence-bridge.mjs';
+import {reviewGeneralizationFromEvidence} from '../24_Workbench/registry/runtime/phase9-generalization-evidence-bridge.mjs';
 const graph=()=>({nodes:[{id:'a',kind:'PartDefinition'},{id:'b',kind:'PartDefinition'}]});
 const ev=()=>({schema:'mdse-phase9-generalization-direction/1',reconciliationVerified:true,sourceFamily:'Generalization',sourceDirection:'Source -> Destination',connectorRef:'synthetic-connector',sourceNodeId:'a',targetNodeId:'b',snapshotSha256:'a'.repeat(64)});
 test('synthetic review has no native certification',()=>{const r=reviewGeneralizationFromEvidence(graph(),ev());assert.equal(r.status,'reviewable');assert.equal(r.nativeCertified,false);});
