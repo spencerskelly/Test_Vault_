@@ -6,6 +6,15 @@ from sysml2_pilot_preflight import probe
 class PreflightTests(unittest.TestCase):
  def test_missing_java(self):
   self.assertEqual(probe(which=lambda name: None if name=="java" else "/bin/jupyter")["status"],"MISSING_DEPENDENCY")
+ def test_missing_jupyter_reported_independently(self):
+  r=probe(which=lambda name: "/bin/java" if name=="java" else None)
+  self.assertTrue(r["javaAvailable"])
+  self.assertFalse(r["jupyterAvailable"])
+  self.assertEqual(r["status"],"MISSING_DEPENDENCY")
+ def test_missing_java_reports_jupyter_present(self):
+  r=probe(which=lambda name: "/bin/jupyter" if name=="jupyter" else None)
+  self.assertFalse(r["javaAvailable"])
+  self.assertTrue(r["jupyterAvailable"])
  def test_registered_kernel(self):
   run=lambda *a,**kw:types.SimpleNamespace(returncode=0,stdout=json.dumps({"kernelspecs":{"python3":{},"sysml":{}}}))
   r=probe(which=lambda name:"/fake/"+name,run=run)
