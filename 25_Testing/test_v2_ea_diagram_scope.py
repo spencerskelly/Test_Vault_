@@ -5,7 +5,6 @@ Historical/v1 evidence documents are intentionally outside the executable gate.
 """
 import json
 import pathlib
-import re
 import unittest
 
 ROOT = pathlib.Path(__file__).resolve().parents[1]
@@ -18,7 +17,7 @@ SOURCES = [
     ROOT / "23_Bootstrap",
 ]
 EXTENSIONS = {".py", ".mjs", ".js", ".ts", ".html"}
-FORBIDDEN_SQL = re.compile(r"\\bt_diagram(?:objects|links)?\\b", re.I)
+FORBIDDEN_SQL = ("t_diagram", "t_diagramobjects", "t_diagramlinks")
 
 class V2DiagramExclusionTests(unittest.TestCase):
     def test_source_tables_and_reopening_gates(self):
@@ -40,7 +39,7 @@ class V2DiagramExclusionTests(unittest.TestCase):
                 if any(part.lower() in {"fixtures", "__pycache__", "testing"} for part in file.relative_to(directory).parts):
                     continue
                 text = file.read_text(encoding="utf-8", errors="replace")
-                if FORBIDDEN_SQL.search(text):
+                if any(token in text.lower() for token in FORBIDDEN_SQL):
                     violations.append(file.relative_to(ROOT).as_posix())
         self.assertEqual(violations, [], "EA diagram dependency introduced")
 
