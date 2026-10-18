@@ -36,6 +36,8 @@ jobs:
         run: python3 -m unittest 25_Testing/test_v2_master_moc.py
       - name: Validate executable candidate crosswalk
         run: python3 -m unittest 25_Testing/test_v2_executable_candidate_crosswalk.py
+      - name: Verify approved Phase 8 private golden gate and rollback
+        run: python3 -m unittest 25_Testing/test_run_gated_v2_approved_phase8.py
       - name: Verify approved Phase 8 and Phase 9 integration
         run: python3 -m unittest 25_Testing/test_v2_approved_phase8_phase9_integration.py
       - name: Verify diagram-free read-only QEAX approved-family projection
