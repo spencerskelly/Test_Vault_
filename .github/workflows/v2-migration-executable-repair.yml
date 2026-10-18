@@ -22,6 +22,8 @@ jobs:
           python-version: '3.12'
       - name: Confirm repair is idempotent and no stale executable references remain
         run: python3 26_Definitions/tools/repair_v2_moved_registry_paths.py --check
+      - name: Verify unchanged governance registry hashes
+        run: python3 25_Testing/verify_sysml_v2_registry_pins.py "$PWD"
       - name: Verify pinned v2 source registry
         run: node 24_Workbench/registry/runtime/v2-translator-preflight.mjs "$PWD"
       - name: Execute synthetic V2 registry tests
