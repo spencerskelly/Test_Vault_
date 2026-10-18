@@ -1,0 +1,11 @@
+# Phase 9 — Phase 8 generalization source-to-graph review bridge
+
+Implemented `14_Workbench/registry/runtime/phase8-generalization-review-bridge.mjs` as a **read-only candidate handoff**, not a trusted issuer, canonical mutation or native emitter. Compares ledger identity, original and normalized endpoints, generalization family, direction and subtype-to-supertype role to a separately supplied source evidence record. Only an explicit orientation-normalized record with expected diagnostic vocabulary can yield a `candidate_for_graph_review` edge. All outputs explicitly set nativeCertified=false.
+
+**CRITICAL:** `source.localSnapshotBound` and `source.definitionKindsVerified` are **caller assertions**, not authenticated facts. The bridge currently has no actual signature/hash verification or immutable source binding. Passing booleans is not independent attestation. Therefore its result MUST NOT be used to add production canonical graph edges, authorize native model emission, or mark EA relations eligible. The output is purely review-only. The actual local QEAX ledger/replay already passed all 14,688 connectors, but source-semantic qualification remains pending.
+
+Nine synthetic tests check positive review-only outcome, missing source, unbound snapshot, reversed direction, altered endpoint, altered connector identity, unverified kinds, deferred disposition and unsupported family. GitHub Actions workflow added. Tests were committed; successful CI execution is not yet observed.
+
+Next implementation must remove caller-asserted trust flags and bind independently checked QEAX source/ledger/registry digests to each candidate with a trusted local verifier; map source element IDs into canonical typed node IDs without leaking source records. Then integrate eligibility engine and production Workbench structural/visual relationships. Retain source provenance privately, state/part/port distinctions and round-trip checks. Native emission remains disabled.
+
+Run: `node --test 15_Testing/test_phase8_generalization_review_bridge.mjs`.
