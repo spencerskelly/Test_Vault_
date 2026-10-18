@@ -3,9 +3,10 @@ import assert from 'node:assert/strict';
 import {mkdtempSync,mkdirSync,writeFileSync,rmSync,readFileSync} from 'node:fs';
 import {tmpdir} from 'node:os';
 import {join,dirname,resolve} from 'node:path';
+import {fileURLToPath} from 'node:url';
 import {loadPinnedV2,evaluatePinnedV2} from './pinned-v2-eligibility.mjs';
 
-const root=resolve(import.meta.dirname,'../../../');
+const root=resolve(dirname(fileURLToPath(import.meta.url)),'../../../');
 test('pins load and prevent native emission',()=>{
  const pinned=loadPinnedV2(root);
  assert.equal(pinned.target.relationshipRules.length,26);
