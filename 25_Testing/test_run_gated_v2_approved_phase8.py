@@ -108,6 +108,46 @@ class CurrentV2GateTests(unittest.TestCase):
         self.assertFalse(self.dest.exists())
         self.assertFalse(list(self.home.glob(".v2-approved-stage-*")))
 
+    def test_duplicate_source_guid_blocks_publication(self):
+        with sqlite3.connect(self.qeax) as db:
+            db.execute("UPDATE t_connector SET ea_guid='synthetic-generalization' WHERE Connector_ID=11")
+        with self.assertRaisesRegex(ValueError, "MISSING_OR_DUPLICATE_SOURCE_CONNECTOR_GUID"):
+            self.invoke()
+        self.assertFalse(self.dest.exists())
+
+    def test_missing_endpoint_element_blocks_publication(self):
+        with sqlite3.connect(self.qeax) as db:
+            db.execute("UPDATE t_connector SET Start_Object_ID=999 WHERE Connector_ID=11")
+        with self.assertRaisesRegex(ValueError, "MISSING_ENDPOINT_ELEMENT_from"):
+            self.invoke()
+        self.assertFalse(self.dest.exists())
+
+    def test_tampered_endpoint_type_blocks_publication(self):
+        actual_load=gate.load_module
+        def load_tampered(name,path):
+            module=actual_load(name,path)
+            if name=="v2_phase8_normalizer":
+                normal=module.reconcile
+                def change(*args):
+                    result=normal(*args)
+                    ledger=pathlib.Path(args[2])/"local_only_phase8_ledger.csv"
+                    with ledger.open(newline="",encoding="utf-8") as inp:
+                        reader=csv.DictReader(inp)
+                        header=reader.fieldnames
+                        rows=list(reader)
+                    rows[0]["raw_source_type"]="UnrecognizedSourceType"
+                    with ledger.open("w",newline="",encoding="utf-8") as out:
+                        writer=csv.DictWriter(out,fieldnames=header)
+                        writer.writeheader()
+                        writer.writerows(rows)
+                    return result
+                module.reconcile=change
+            return module
+        with patch.object(gate,"load_module",side_effect=load_tampered):
+            with self.assertRaisesRegex(ValueError, "RAW_ENDPOINT_KIND_MISMATCH_from"):
+                self.invoke()
+        self.assertFalse(self.dest.exists())
+
     def test_invalid_registry_and_private_path(self):
         bad=self.home/"candidate.json"
         bad.write_text(json.dumps({"families":[]}))
