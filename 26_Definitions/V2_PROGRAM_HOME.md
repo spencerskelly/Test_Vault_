@@ -11,6 +11,7 @@
 - [Detailed implementation traceability and gaps](V2_IMPLEMENTATION_TRACEABILITY_AUDIT_2026-10-18.md)
 
 ## Definitions and conversions — approved authority
+- [STEP-02B — Approved exact-family runtime resolver and whole-source aggregate validation](STEP_02B_APPROVED_FAMILY_RESOLVER_AND_LOCAL_GROUP_CHECK_2026-10-18.md)
 - [Repository-wide Markdown note census](MOC_REPOSITORY_NOTE_CENSUS_2026-10-18.md)
 - [35 original SysML v2 decision notes](MOC_Catalogs/sysml_decisions_1.md)
 - [Exact mapping exception audit](V2_APPROVED_EXCEPTION_HANDLING_AUDIT_2026-10-18.md)
