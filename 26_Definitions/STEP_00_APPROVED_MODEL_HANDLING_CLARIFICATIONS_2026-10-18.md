@@ -1,0 +1,33 @@
+# STEP-00 — User-Approved Translation and Workbench Clarifications
+
+Date: 2026-10-18. Status: **APPROVED implementation direction**. Supersedes earlier proposed retention holds in [the review note](V2_DATA_RETENTION_APPROVAL_HOLDS_2026-10-18.md) where inconsistent. No prior native semantic approval is reopened. [Master MOC](../MOC_MDSE_V2.md) · [Titled steps](V2_NEXT_STEP_TITLES_2026-10-18.md).
+
+## Translation/data handling decisions
+
+1. **Copy/alias consolidation:** Merge all *meaningful* source text, properties, evidence and separate inbound/outbound relationships from copies that genuinely represent one definition into **one canonical Markdown note** and native alias memberships as approved. Removing redundant duplicate notes after verifying merger is not data loss. Do not collapse distinct usages or connectors. The original source stays available for reimport; no duplicate indefinite private source archive is required.
+2. **Boundary:** Keep Boundary in the generated MDSE result via **one Boundary note collecting all Boundaries**, with references to the notes/elements bounded and human-readable source descriptions. Full model has more than the three observed in reduced QEAX. This is MDSE descriptive evidence, **not** an invented native SysML Boundary relationship. Revise the earlier 'excluded from generated model' disposition in the implementation plan to `boundary_grouped` or an equivalent audited evidence-only outcome, while preserving one disposition per original element.
+3. **EA Packages:** Organizational folders replace package elements; do not create duplicate Package notes or require preservation of incidental package metadata. Package structure must not cause native SysML ownership or other semantics.
+4. **EA Sequences:** Create a meaningful **workflow note** showing participants, messages, event ordering, guards and source diagram meaning, and link a scoped sequence Canvas view as previously approved. Native SysML v2 **Message, EventOccurrence, Succession, Action and related constructs** should be used when supported by explicit source evidence. No behavior is inferred solely from diagram layout. Unsupported diagram-only sequence details remain readable in workflow note/view with review flags. This is a native-serialization and source-evidence coverage **GAP**, not a new ontology debate. Sources: [workflow-local sequence decision](../24_Workbench/docs/SYSML_V2_WORKFLOW_LOCAL_CANVAS_SEQUENCE_DECISION.md), [Message approval](../24_Workbench/docs/SYSML_V2_MESSAGE_AND_VISUAL_FILTERS.md), [Sequence family disposition](../24_Workbench/docs/GOLDEN_IMPORT_STEP2_SEQUENCE_REFERENCE_APPROVED_2026-10-17.md). OMG SysML 2.0 Language §7.16.2 includes sequence-view Message textual semantics.
+5. **Proxy/full/binding ports:** Already reviewed. Reuse [Interface/Port rules](../24_Workbench/docs/SYSML_V2_INTERFACE_APPROVED_MAPPING.md), [EA PortUsage](../24_Workbench/docs/GOLDEN_IMPORT_STEP2_PORT_USAGE_APPROVED_2026-10-17.md) and [Connection rules](../24_Workbench/docs/GOLDEN_IMPORT_RELATIONSHIP_CONNECTOR_PORTS_APPROVED_2026-10-17.md). Keep proxy vs full provenance and legally distinct port/part/binding/connection semantics; only true source outliers go to review.
+6. **Attachments:** Not model definition notes. The owning/related engineering notes hold links to documents and other attachments, with valid paths and no orphan attachment references.
+7. **Unresolved links:** Use approved MDSE `flagLink`; one source connector remains independently identifiable. Add **one explanatory line in the owning note body** about what was replaced and why; UI supports later correction. Monitor counts, percentages, reasons and concentration by mapping family; do not silently accept an excessive number. Define a numeric alert threshold from the actual import report rather than inventing a limit.
+8. **Untyped usages:** Allowed native Part/Action/Port usages are imported with nonblocking review markers similar to `flagLink`, for later human intent clarification. Do not invent a definition or block otherwise structurally valid usage.
+9. **BOM:** Follow approved part/assembly, quantity/UOM, revision and where-used contracts; review only demonstrated outliers and source-schema ambiguity.
+10. **Graph staleness:** All semantic edits update and validate authoritative note SysML **when the change is committed**. When an existing graph opens against a newer text/model revision, **freeze interactions and prompt Reset/Refresh**. Reset must reparse current note text and regenerate the derived view (preserving manual presentation state when possible). Do not overwrite the model from a stale graph or silently mutate SysML merely by opening a view.
+11. **Source availability and updates:** The original EA/BOM source remains accessible externally. **Do not make a second source archive.** Importers must reconcile updates deterministically with stable identity, source revision/fingerprint checks, repeat import, difference preview, and explicit conflict/merge action when required.
+
+## Grouped review/acceptance strategy
+
+- **STEP-02 — Native SysML mapping resolver:** Approve/freeze entire already-reviewed semantic groups and implement their common handling in bulk. Present **only individual outlier rule IDs** requiring missing evidence, native parser correction or a new semantic decision.
+- **STEP-03 — Canonical graph, UID and provenance** and **STEP-04 — QEAX importer and no-loss ledger:** Validate groups of source families and connector families together, using aggregate coverage and explicit exceptions. Distinguish loss of meaningful information from legitimate alias consolidation, folder-only organization and projection choices. Show outlier counts, source-to-result traceability and deterministic updates.
+- **STEP-05+**: Parser-validate meaningful native constructs, keep exceptions visible in notes, verify first-read Workbench and stale-view behavior, then scale.
+
+## Implementation gaps to carry, not reapprove
+
+GAP-SEQ-01: Native Message/EventOccurrence/Succession workflow emission vs EA interaction structure and diagram-only information.
+GAP-BOUNDARY-01: One aggregate Boundary note with stable links and full-model source coverage.
+GAP-FLAG-01: Persistent link/usage review flags, compact body explanation and measured alert rate.
+GAP-GRAPH-01: source-revision checking on graph open, frozen stale view and explicit reset.
+GAP-UPDATE-01: deterministic source reimport without copying source records.
+GAP-DOC-01: owning engineering note attachment-link validation and orphan audit.
+GAP-PORT-01: full/proxy-specific runtime tests against already-approved rules (not a new decision).
