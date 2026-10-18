@@ -1,0 +1,568 @@
+{
+  "schema": "mdse-v2-prior-work-reuse-ledger/1",
+  "date": "2026-10-18",
+  "status": "reviewed_evidence_not_port_acceptance",
+  "authority": "26_Definitions/V2_RELEASE_ARCHITECTURE_DECISIONS_2026-10-18.md",
+  "rules": [
+    "V1 archive is read-only",
+    "V2 SysML text owns formal semantics",
+    "Never treat candidate as implemented",
+    "Never import archived executable as V2 runtime",
+    "Validate old design against later approved 60+26 family decisions"
+  ],
+  "records": [
+    {
+      "id": "R01",
+      "capability": "QEAX source fidelity and dual-stage evidence",
+      "goal": "G04",
+      "milestone": "first",
+      "priority": "P0",
+      "v1_source": "100_Archive/V1/11_Importer/Definition/Importer Operating Contract.md",
+      "v2_target": "21_Importer/project_v2_element_candidates.py",
+      "disposition": "retain_source_contract",
+      "work": "Integrate preflight, mechanical/source ledger and independent semantic disposition; forbid silent coercion",
+      "old_asset_examined": true,
+      "v2_behavior_verified": false,
+      "port_status": "not_ported_or_not_verified",
+      "acceptance_required": [
+        "no_V1_runtime_imports",
+        "synthetic_regression",
+        "actual_v2_contract_check",
+        "scoped_source_or_UI_check"
+      ]
+    },
+    {
+      "id": "R02",
+      "capability": "Model scale deterministic whole import",
+      "goal": "G04",
+      "milestone": "first",
+      "priority": "P0",
+      "v1_source": "100_Archive/V1/11_Importer/Testing/v0.8.19/FULL_IMPORT_EXECUTION_STATUS.md",
+      "v2_target": "25_Testing/run_gated_phase8.py",
+      "disposition": "test_method_port",
+      "work": "Reproduce deterministic output comparisons on fresh v2 bases; v1 success does not certify native output",
+      "old_asset_examined": true,
+      "v2_behavior_verified": false,
+      "port_status": "not_ported_or_not_verified",
+      "acceptance_required": [
+        "no_V1_runtime_imports",
+        "synthetic_regression",
+        "actual_v2_contract_check",
+        "scoped_source_or_UI_check"
+      ]
+    },
+    {
+      "id": "R03",
+      "capability": "Path planning performance and growth",
+      "goal": "G04",
+      "milestone": "first",
+      "priority": "P0",
+      "v1_source": "100_Archive/V1/11_Importer/Testing/v0.8.19/path_planning_scalability_regression_test.js",
+      "v2_target": null,
+      "disposition": "test_method_port",
+      "work": "Preserve no-quadratic path planner test for >27000 notes and acceptance at v2 scale",
+      "old_asset_examined": false,
+      "v2_behavior_verified": false,
+      "port_status": "not_ported_or_not_verified",
+      "acceptance_required": [
+        "no_V1_runtime_imports",
+        "synthetic_regression",
+        "actual_v2_contract_check",
+        "scoped_source_or_UI_check"
+      ]
+    },
+    {
+      "id": "R04",
+      "capability": "Document attachment conservation",
+      "goal": "G04",
+      "milestone": "first",
+      "priority": "P1",
+      "v1_source": "100_Archive/V1/11_Importer/Testing/v0.8.19/FULL_IMPORT_EXECUTION_STATUS.md",
+      "v2_target": null,
+      "disposition": "source_evidence_contract",
+      "work": "Add explicit t_document and attachment disposition/output parity, if attachments are within first-release import scope",
+      "old_asset_examined": false,
+      "v2_behavior_verified": false,
+      "port_status": "not_ported_or_not_verified",
+      "acceptance_required": [
+        "no_V1_runtime_imports",
+        "synthetic_regression",
+        "actual_v2_contract_check",
+        "scoped_source_or_UI_check"
+      ]
+    },
+    {
+      "id": "R05",
+      "capability": "Port/binding exposure and ambiguity",
+      "goal": "G02",
+      "milestone": "first",
+      "priority": "P0",
+      "v1_source": "100_Archive/V1/11_Importer/Testing/v0.8.19/imp011_binding_review_acceptance.py",
+      "v2_target": "24_Workbench/docs/SYSML_V2_INTERFACE_APPROVED_MAPPING.md",
+      "disposition": "semantic_reference_not_port",
+      "work": "Protect port/binding/exposure distinctions and review cases; never import v1 equals/exposes as custom native v2 relationships",
+      "old_asset_examined": false,
+      "v2_behavior_verified": false,
+      "port_status": "not_ported_or_not_verified",
+      "acceptance_required": [
+        "no_V1_runtime_imports",
+        "synthetic_regression",
+        "actual_v2_contract_check",
+        "scoped_source_or_UI_check"
+      ]
+    },
+    {
+      "id": "R06",
+      "capability": "EA connector roles and original direction",
+      "goal": "G03",
+      "milestone": "first",
+      "priority": "P0",
+      "v1_source": "100_Archive/V1/15_Testing/audit_ea_connector_roles.py",
+      "v2_target": "25_Testing/phase9_source_direction_bridge.py",
+      "disposition": "partial_recovery",
+      "work": "Apply trusted direction audit before native semantics; reuse source validation patterns",
+      "old_asset_examined": false,
+      "v2_behavior_verified": false,
+      "port_status": "not_ported_or_not_verified",
+      "acceptance_required": [
+        "no_V1_runtime_imports",
+        "synthetic_regression",
+        "actual_v2_contract_check",
+        "scoped_source_or_UI_check"
+      ]
+    },
+    {
+      "id": "R07",
+      "capability": "Stable note and occurrence identity",
+      "goal": "G03",
+      "milestone": "first",
+      "priority": "P0",
+      "v1_source": "100_Archive/V1/14_Workbench/WB106_IMPLEMENTATION_CONTRACT.md",
+      "v2_target": "24_Workbench/registry/runtime/canonical-model.mjs",
+      "disposition": "architecture_partial",
+      "work": "Keep definition UID and separate owner-scoped usage identity; migrate ModelRef concept, not old runtime fields",
+      "old_asset_examined": true,
+      "v2_behavior_verified": false,
+      "port_status": "not_ported_or_not_verified",
+      "acceptance_required": [
+        "no_V1_runtime_imports",
+        "synthetic_regression",
+        "actual_v2_contract_check",
+        "scoped_source_or_UI_check"
+      ]
+    },
+    {
+      "id": "R08",
+      "capability": "Owned usage topology and reverse where-used",
+      "goal": "G03",
+      "milestone": "first",
+      "priority": "P0",
+      "v1_source": "100_Archive/V1/15_Testing/consolidation/localmodel_topology_index_v3.py",
+      "v2_target": "24_Workbench/registry/runtime/canonical-model.mjs",
+      "disposition": "algorithm_reference",
+      "work": "Rebuild topology and inbound usage indexes from parsed SysML features with stable identity",
+      "old_asset_examined": true,
+      "v2_behavior_verified": false,
+      "port_status": "not_ported_or_not_verified",
+      "acceptance_required": [
+        "no_V1_runtime_imports",
+        "synthetic_regression",
+        "actual_v2_contract_check",
+        "scoped_source_or_UI_check"
+      ]
+    },
+    {
+      "id": "R09",
+      "capability": "Workbench incremental indexer and hydration",
+      "goal": "G07",
+      "milestone": "first",
+      "priority": "P0",
+      "v1_source": "100_Archive/V1/14_Workbench/src/obsidian/indexer.ts",
+      "v2_target": "24_Workbench/v2-workbench.html",
+      "disposition": "missing_parity",
+      "work": "Port cooperative chunking, startup metadata burst debouncing and incremental owner hydration; v2 HTML preview is not a full Obsidian plugin",
+      "old_asset_examined": true,
+      "v2_behavior_verified": false,
+      "port_status": "not_ported_or_not_verified",
+      "acceptance_required": [
+        "no_V1_runtime_imports",
+        "synthetic_regression",
+        "actual_v2_contract_check",
+        "scoped_source_or_UI_check"
+      ]
+    },
+    {
+      "id": "R10",
+      "capability": "Reverse dependency invalidation and rename safety",
+      "goal": "G07",
+      "milestone": "first",
+      "priority": "P0",
+      "v1_source": "100_Archive/V1/14_Workbench/src/core/relationship-dependencies.ts",
+      "v2_target": null,
+      "disposition": "algorithm_reference",
+      "work": "Reuse targeted re-resolution for renamed/moved notes; add >10k candidate fallback and benchmarks",
+      "old_asset_examined": true,
+      "v2_behavior_verified": false,
+      "port_status": "not_ported_or_not_verified",
+      "acceptance_required": [
+        "no_V1_runtime_imports",
+        "synthetic_regression",
+        "actual_v2_contract_check",
+        "scoped_source_or_UI_check"
+      ]
+    },
+    {
+      "id": "R11",
+      "capability": "Semantic cache persistence and recoverability",
+      "goal": "G07",
+      "milestone": "first",
+      "priority": "P1",
+      "v1_source": "100_Archive/V1/14_Workbench/src/core/cache-persistence.ts",
+      "v2_target": null,
+      "disposition": "algorithm_reference",
+      "work": "Preserve disposable indexes and quiet/burst-aware writes; parsed SysML text remains authority",
+      "old_asset_examined": true,
+      "v2_behavior_verified": false,
+      "port_status": "not_ported_or_not_verified",
+      "acceptance_required": [
+        "no_V1_runtime_imports",
+        "synthetic_regression",
+        "actual_v2_contract_check",
+        "scoped_source_or_UI_check"
+      ]
+    },
+    {
+      "id": "R12",
+      "capability": "Transaction history and undo/redo engine",
+      "goal": "G09",
+      "milestone": "later",
+      "priority": "P1",
+      "v1_source": "100_Archive/V1/14_Workbench/src/core/transaction.ts",
+      "v2_target": null,
+      "disposition": "algorithm_reference",
+      "work": "Adapt pure transaction manager to parser-backed SysML AST write service and atomic vault changes",
+      "old_asset_examined": true,
+      "v2_behavior_verified": false,
+      "port_status": "not_ported_or_not_verified",
+      "acceptance_required": [
+        "no_V1_runtime_imports",
+        "synthetic_regression",
+        "actual_v2_contract_check"
+      ]
+    },
+    {
+      "id": "R13",
+      "capability": "Definition migration and inbound links",
+      "goal": "G09",
+      "milestone": "later",
+      "priority": "P1",
+      "v1_source": "100_Archive/V1/14_Workbench/src/core/definition-note-migrate-service.ts",
+      "v2_target": null,
+      "disposition": "algorithm_reference",
+      "work": "Preserve rename/redirect and transactional multi-note review but replace YAML semantic edits with SysML text",
+      "old_asset_examined": true,
+      "v2_behavior_verified": false,
+      "port_status": "not_ported_or_not_verified",
+      "acceptance_required": [
+        "no_V1_runtime_imports",
+        "synthetic_regression",
+        "actual_v2_contract_check"
+      ]
+    },
+    {
+      "id": "R14",
+      "capability": "Stale edit and source reconciliation detection",
+      "goal": "G09",
+      "milestone": "later",
+      "priority": "P1",
+      "v1_source": "100_Archive/V1/14_Workbench/src/core/source-reconciliation.ts",
+      "v2_target": null,
+      "disposition": "algorithm_reference",
+      "work": "Use dirty-state and hydration barriers before save, three-way diff and stable hashes",
+      "old_asset_examined": true,
+      "v2_behavior_verified": false,
+      "port_status": "not_ported_or_not_verified",
+      "acceptance_required": [
+        "no_V1_runtime_imports",
+        "synthetic_regression",
+        "actual_v2_contract_check"
+      ]
+    },
+    {
+      "id": "R15",
+      "capability": "Workbench real-vault acceptance tests",
+      "goal": "G07",
+      "milestone": "first",
+      "priority": "P0",
+      "v1_source": "100_Archive/V1/15_Testing/Step18_Obsidian_UI_Acceptance.md",
+      "v2_target": "24_Workbench/V2 Workbench MVP.md",
+      "disposition": "test_method_port",
+      "work": "Test first open and definition/usage navigation on real Obsidian host before calling GUI accepted",
+      "old_asset_examined": false,
+      "v2_behavior_verified": false,
+      "port_status": "not_ported_or_not_verified",
+      "acceptance_required": [
+        "no_V1_runtime_imports",
+        "synthetic_regression",
+        "actual_v2_contract_check",
+        "scoped_source_or_UI_check"
+      ]
+    },
+    {
+      "id": "R16",
+      "capability": "Plugin lock/hash and release checker",
+      "goal": "G06",
+      "milestone": "first",
+      "priority": "P0",
+      "v1_source": "100_Archive/V1/10_Base Vault/Testing/check-release.py",
+      "v2_target": "20_Base Vault/build_v2_test_base.py",
+      "disposition": "missing_parity",
+      "work": "Build independent v2 compatibility manifest, lock+SHA assertions and actual first-open plugin-ready base",
+      "old_asset_examined": true,
+      "v2_behavior_verified": false,
+      "port_status": "not_ported_or_not_verified",
+      "acceptance_required": [
+        "no_V1_runtime_imports",
+        "synthetic_regression",
+        "actual_v2_contract_check",
+        "scoped_source_or_UI_check"
+      ]
+    },
+    {
+      "id": "R17",
+      "capability": "Configured Obsidian runtime stack",
+      "goal": "G06",
+      "milestone": "first",
+      "priority": "P1",
+      "v1_source": "100_Archive/V1/10_Base Vault/Definition/Enabled Plugin Stack.md",
+      "v2_target": "20_Base Vault/build_v2_test_base.py",
+      "disposition": "config_reference",
+      "work": "Reconcile approved minimum Obsidian/plugins, update ownership and install-free/offline packaging",
+      "old_asset_examined": true,
+      "v2_behavior_verified": false,
+      "port_status": "not_ported_or_not_verified",
+      "acceptance_required": [
+        "no_V1_runtime_imports",
+        "synthetic_regression",
+        "actual_v2_contract_check",
+        "scoped_source_or_UI_check"
+      ]
+    },
+    {
+      "id": "R18",
+      "capability": "Bootstrap activation without silent code mutation",
+      "goal": "G11",
+      "milestone": "later",
+      "priority": "P1",
+      "v1_source": "100_Archive/V1/13_Bootstrap/Tools/v0.3.1/src/core.ts",
+      "v2_target": "23_Bootstrap/README.md",
+      "disposition": "algorithm_reference",
+      "work": "Reuse plugin lock verification and safe activation, but implement hybrid user settings preservation",
+      "old_asset_examined": true,
+      "v2_behavior_verified": false,
+      "port_status": "not_ported_or_not_verified",
+      "acceptance_required": [
+        "no_V1_runtime_imports",
+        "synthetic_regression",
+        "actual_v2_contract_check"
+      ]
+    },
+    {
+      "id": "R19",
+      "capability": "Author registration and UID collision governance",
+      "goal": "G03",
+      "milestone": "first",
+      "priority": "P1",
+      "v1_source": "100_Archive/V1/13_Bootstrap/Definition/Author Registration Spec.md",
+      "v2_target": "26_Definitions/APPROVED_V2_TRANSLATION_BASELINE_AND_TEST_HANDOFF_2026-10-18.md",
+      "disposition": "contract_reference",
+      "work": "Retain author UID collision checks, timezone discipline, AI identity and per-user config safely",
+      "old_asset_examined": true,
+      "v2_behavior_verified": false,
+      "port_status": "not_ported_or_not_verified",
+      "acceptance_required": [
+        "no_V1_runtime_imports",
+        "synthetic_regression",
+        "actual_v2_contract_check",
+        "scoped_source_or_UI_check"
+      ]
+    },
+    {
+      "id": "R20",
+      "capability": "BOM source reader and revised source history",
+      "goal": "G10",
+      "milestone": "later",
+      "priority": "P1",
+      "v1_source": "100_Archive/V1/15_Testing/bom_xlsx_reader.py",
+      "v2_target": "24_Workbench/docs/BOM_TO_SYSMLV2_MDSE_ELEMENT_RELATIONSHIP_INTEGRATION_REVIEW_2026-10-17.md",
+      "disposition": "later_adapter_candidate",
+      "work": "Recover spreadsheet parsing/tests, then implement effective BOM rows with separate EA and BOM identity",
+      "old_asset_examined": true,
+      "v2_behavior_verified": false,
+      "port_status": "not_ported_or_not_verified",
+      "acceptance_required": [
+        "no_V1_runtime_imports",
+        "synthetic_regression",
+        "actual_v2_contract_check"
+      ]
+    },
+    {
+      "id": "R21",
+      "capability": "BOM alternates/effectivity and numbers",
+      "goal": "G10",
+      "milestone": "later",
+      "priority": "P1",
+      "v1_source": "100_Archive/V1/14_Workbench/docs/bom/a01-a14/BOM_MDSE_Vault_Implementation_Plan.md",
+      "v2_target": "24_Workbench/docs/BOM_TO_SYSMLV2_MDSE_ELEMENT_RELATIONSHIP_INTEGRATION_REVIEW_2026-10-17.md",
+      "disposition": "proposed_parts_not_approved",
+      "work": "Separate exact-decimal quantity/unit, alternates and variant evidence from native generalization; approve pending schema",
+      "old_asset_examined": true,
+      "v2_behavior_verified": false,
+      "port_status": "not_ported_or_not_verified",
+      "acceptance_required": [
+        "no_V1_runtime_imports",
+        "synthetic_regression",
+        "actual_v2_contract_check"
+      ]
+    },
+    {
+      "id": "R22",
+      "capability": "Variant search and metadata errors",
+      "goal": "G10",
+      "milestone": "later",
+      "priority": "P2",
+      "v1_source": "100_Archive/V1/14_Workbench/src/core/variantof.ts",
+      "v2_target": null,
+      "disposition": "algorithm_reference",
+      "work": "Retain evidence-based variant comparison, not automatic specialization; test provenance",
+      "old_asset_examined": false,
+      "v2_behavior_verified": false,
+      "port_status": "not_ported_or_not_verified",
+      "acceptance_required": [
+        "no_V1_runtime_imports",
+        "synthetic_regression",
+        "actual_v2_contract_check"
+      ]
+    },
+    {
+      "id": "R23",
+      "capability": "Cross-repository audit and review",
+      "goal": "G01",
+      "milestone": "first",
+      "priority": "P0",
+      "v1_source": "100_Archive/V1/15_Testing/consolidation/STEP89_COMPLETE_FOUR_REF_TREE_AUDIT.md",
+      "v2_target": "26_Definitions/v2_recovery_traceability.v0.1.json",
+      "disposition": "method_reference",
+      "work": "Reconcile retained branches/refs by identity and SHA, detect undocumented changes before implementation",
+      "old_asset_examined": true,
+      "v2_behavior_verified": false,
+      "port_status": "not_ported_or_not_verified",
+      "acceptance_required": [
+        "no_V1_runtime_imports",
+        "synthetic_regression",
+        "actual_v2_contract_check",
+        "scoped_source_or_UI_check"
+      ]
+    },
+    {
+      "id": "R24",
+      "capability": "Native runtime registry and semantic gates",
+      "goal": "G02",
+      "milestone": "first",
+      "priority": "P0",
+      "v1_source": "100_Archive/V1/11_Importer/Definition/Translator Definition.md",
+      "v2_target": "24_Workbench/registry/runtime/eligibility-engine.mjs",
+      "disposition": "needs_alignment",
+      "work": "Do not copy legacy relation names; align eligibility engine to October 17 approved v2 semantics (shared/composite and family-specific priority)",
+      "old_asset_examined": true,
+      "v2_behavior_verified": false,
+      "port_status": "not_ported_or_not_verified",
+      "acceptance_required": [
+        "no_V1_runtime_imports",
+        "synthetic_regression",
+        "actual_v2_contract_check",
+        "scoped_source_or_UI_check"
+      ]
+    },
+    {
+      "id": "R25",
+      "capability": "Port, action, state corpus regression methods",
+      "goal": "G08",
+      "milestone": "first",
+      "priority": "P0",
+      "v1_source": "100_Archive/V1/11_Importer/Testing/v0.8.19/bindingconnector_review_disposition_regression_test.js",
+      "v2_target": "25_Testing/test_v2_mapping_family_recovery.py",
+      "disposition": "test_method_port",
+      "work": "Create v2 semantic negative fixtures for ambiguous binding/port/owner cases",
+      "old_asset_examined": false,
+      "v2_behavior_verified": false,
+      "port_status": "not_ported_or_not_verified",
+      "acceptance_required": [
+        "no_V1_runtime_imports",
+        "synthetic_regression",
+        "actual_v2_contract_check",
+        "scoped_source_or_UI_check"
+      ]
+    },
+    {
+      "id": "R26",
+      "capability": "Importer crash/rollback guards",
+      "goal": "G08",
+      "milestone": "first",
+      "priority": "P0",
+      "v1_source": "100_Archive/V1/11_Importer/Testing/v0.8.19/transaction_failure_regression_test.js",
+      "v2_target": "24_Workbench/docs/GOLDEN_IMPORT_SOURCE_AND_VAULT_CONTROLS_PHASE1.md",
+      "disposition": "contract_reference",
+      "work": "Assert no approved vault mutation for failed plans, invalid native text, partial writes or collisions",
+      "old_asset_examined": false,
+      "v2_behavior_verified": false,
+      "port_status": "not_ported_or_not_verified",
+      "acceptance_required": [
+        "no_V1_runtime_imports",
+        "synthetic_regression",
+        "actual_v2_contract_check",
+        "scoped_source_or_UI_check"
+      ]
+    },
+    {
+      "id": "R27",
+      "capability": "Release gate and source provenance",
+      "goal": "G08",
+      "milestone": "first",
+      "priority": "P0",
+      "v1_source": "100_Archive/V1/11_Importer/Testing/v0.8.19/release_gate_regression_test.js",
+      "v2_target": ".github/workflows/v2-migration-executable-repair.yml",
+      "disposition": "test_method_port",
+      "work": "Pin artifacts and attestation; separate CI synthetic pass from source/parser/GUI/release outcomes",
+      "old_asset_examined": true,
+      "v2_behavior_verified": false,
+      "port_status": "not_ported_or_not_verified",
+      "acceptance_required": [
+        "no_V1_runtime_imports",
+        "synthetic_regression",
+        "actual_v2_contract_check",
+        "scoped_source_or_UI_check"
+      ]
+    },
+    {
+      "id": "R28",
+      "capability": "System model property and schema vocabulary",
+      "goal": "G02",
+      "milestone": "first",
+      "priority": "P1",
+      "v1_source": "100_Archive/V1/16_Definitions/Note Layout.md",
+      "v2_target": "26_Definitions/SysML Source Ownership and Note Storage.md",
+      "disposition": "semantic_change_boundary",
+      "work": "Crosswalk legacy note/YAML properties to v2-native vs MDSE-only metadata; use authoritative bottom SysML v2 section",
+      "old_asset_examined": false,
+      "v2_behavior_verified": false,
+      "port_status": "not_ported_or_not_verified",
+      "acceptance_required": [
+        "no_V1_runtime_imports",
+        "synthetic_regression",
+        "actual_v2_contract_check",
+        "scoped_source_or_UI_check"
+      ]
+    }
+  ]
+}
