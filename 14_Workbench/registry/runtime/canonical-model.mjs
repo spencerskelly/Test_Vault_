@@ -113,7 +113,7 @@ export function validateCanonicalRelationships(graph,index=null){
    if(!defKinds.has(from.kind)||from.kind!==to.kind)errors.push(issue('INVALID_SPECIALIZATION_KINDS',key));
    if(from.id===to.id)errors.push(issue('SPECIALIZATION_CYCLE',key));
    if(typeof edge.sourceRef!=='string'||!edge.sourceRef.trim())errors.push(issue('SPECIALIZATION_PROVENANCE_REQUIRED',key));
-   if(edge.direction!==undefined&&edge.direction!=='subtype-to-supertype')errors.push(issue('SPECIALIZATION_DIRECTION_UNVERIFIED',key));
+   if(edge.direction!=='subtype-to-supertype')errors.push(issue('SPECIALIZATION_DIRECTION_UNVERIFIED',key));
    if(!specialization.has(from.id))specialization.set(from.id,[]);
    specialization.get(from.id).push(to.id);
   }else errors.push(issue('UNSUPPORTED_CANONICAL_RELATIONSHIP',key));
