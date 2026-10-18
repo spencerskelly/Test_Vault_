@@ -11,7 +11,7 @@ on:
       - '15_Testing/test_phase8_atomic_publication.py'
       - '15_Testing/test_phase8_input_attestation.py'
       - '15_Testing/verify_phase8_private_ledger.py'
-      - '15_Testing/test_verify_phase8_private_ledger test_phase8_original_field_mapping.py'
+      - '15_Testing/test_verify_phase8_private_ledger.py'
       - '15_Testing/test_phase8_original_field_mapping.py'
       - '.github/workflows/phase8-evidence-verification.yml'
   workflow_dispatch:
@@ -27,4 +27,4 @@ jobs:
         run: python -m py_compile 14_Workbench/registry/runtime/normalize_qeax_phase8.py 15_Testing/phase8_deferred_evidence_compat.py
       - name: Run exact repository regression files
         working-directory: 15_Testing
-        run: python -m unittest -v test_phase8_deferred_evidence_compat test_phase8_raw_evidence_coverage test_phase8_e2e_original_values test_phase8_raw_evidence_values test_phase8_atomic_publication test_phase8_input_attestation test_verify_phase8_private_ledger
+        run: python -m unittest -v test_phase8_deferred_evidence_compat test_phase8_raw_evidence_coverage test_phase8_e2e_original_values test_phase8_raw_evidence_values test_phase8_atomic_publication test_phase8_input_attestation test_verify_phase8_private_ledger test_phase8_original_field_mapping
