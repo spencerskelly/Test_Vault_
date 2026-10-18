@@ -1,12 +1,12 @@
 #!/usr/bin/env python3
-"""Stage verified V1 plugin artifacts as V2-owned release candidates.
+"""Stage vendored V2 plugin artifacts as V2-owned release candidates.
 
-V1 archive is INPUT to this one-time migration only. Generated runtime never
+Vendored V2 assets are the only INPUT. Generated runtime never
 reads from V1. No activation, overwrites, credentials or private plugin data.
 """
 import argparse,hashlib,json,pathlib,shutil,sys
 ROOT=pathlib.Path(__file__).resolve().parents[2]
-SOURCE=ROOT/"100_Archive/V1/10_Base Vault/Runtime/Plugins"
+SOURCE=ROOT/"20_Base Vault/Runtime/Plugins"
 PLUGINS=("mdse-bootstrap","mdse-workbench","templater-obsidian","fileclass","breadcrumbs","obsidian-git","advanced-canvas")
 FILES=("manifest.json","main.js","styles.css")
 def stage(destination):
@@ -33,7 +33,7 @@ def stage(destination):
                 shutil.copyfile(SOURCE/pid/filename,target)
                 if hashlib.sha256(target.read_bytes()).hexdigest()!=result[pid]["sha256"][filename]:
                     raise ValueError("COPIED_HASH_MISMATCH:"+pid)
-        (destination/"candidate-plugin-lock.json").write_text(json.dumps({"schema":"mdse-v2-plugin-candidate/1","status":"staged_not_activated","origin":"archived_v1_verified_payload","plugins":result},indent=2)+"\n")
+        (destination/"candidate-plugin-lock.json").write_text(json.dumps({"schema":"mdse-v2-plugin-candidate/1","status":"staged_not_activated","origin":"v2_vendored_payload","plugins":result},indent=2)+"\n")
     except BaseException:
         shutil.rmtree(destination,ignore_errors=True)
         raise
