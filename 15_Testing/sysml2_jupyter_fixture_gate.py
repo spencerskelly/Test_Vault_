@@ -6,7 +6,18 @@ All inputs should be synthetic and public; stdout prints aggregate statuses only
 import argparse
 import hashlib
 import json
+import re
 from pathlib import Path
+
+def diagnostic_categories(text):
+    if not isinstance(text,str):
+        return []
+    rules={
+        'error_marker':r'(?i)\b(?:error|errors|syntaxerror)\b\s*[:\[]',
+        'parser_recovery':r'(?i)\b(?:mismatched input|extraneous input|no viable alternative)\b',
+        'syntax_problem':r'(?i)\b(?:syntax error|parse error|parsing error)\b',
+    }
+    return [name for name,pattern in rules.items() if re.search(pattern,text)]
 
 def execute_fixture(path, timeout=90):
     from jupyter_client import KernelManager
@@ -27,6 +38,7 @@ def execute_fixture(path, timeout=90):
         idle=False
         observed_types={}
         stream_keyword_hits=0
+        diagnostic_counts={}
         shell_reply_type=None
         while not idle:
             msg=client.get_iopub_msg(timeout=timeout)
@@ -38,9 +50,12 @@ def execute_fixture(path, timeout=90):
                 error=True
             if msg_type=="stream":
                 text=msg.get("content",{}).get("text","")
-                if "Error" in text or "error" in text:
+                found=diagnostic_categories(text)
+                if found:
                     stream_keyword_hits+=1
                     error=True
+                    for category in found:
+                        diagnostic_counts[category]=diagnostic_counts.get(category,0)+1
             if msg_type=="status" and msg.get("content",{}).get("execution_state")=="idle":
                 idle=True
         # Ignore unmatched shell replies left over from kernel initialization.
@@ -54,7 +69,7 @@ def execute_fixture(path, timeout=90):
                 execute_reply=reply.get("content",{}).get("status")
                 break
         result["diagnosticSummary"]={"iopubMessageCounts":observed_types,
-          "streamKeywordHits":stream_keyword_hits,"iopubError":observed_types.get("error",0)>0,
+          "streamKeywordHits":stream_keyword_hits,"diagnosticCategories":diagnostic_counts,"iopubError":observed_types.get("error",0)>0,
           "sawIdle":idle,"shellReplyType":shell_reply_type,"shellReplyStatus":execute_reply}
         result["status"]="ACCEPTED" if idle and not error and execute_reply=="ok" else "REJECTED"
     except Exception as exc:
