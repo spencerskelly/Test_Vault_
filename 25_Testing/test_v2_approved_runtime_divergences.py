@@ -12,9 +12,9 @@ class RuntimeDivergenceLedgerTests(unittest.TestCase):
   for item in entries:
    self.assertTrue((ROOT/item["approved"]).is_file())
    self.assertTrue((ROOT/item["runtime"]).is_file())
-   self.assertIn(item["status"],("open_review","open_implementation_alignment","implementation_updated_tests_pending","resolved_verified"))
+   self.assertIn(item["status"],("open_review","open_implementation_alignment","implementation_updated_tests_pending","synthetic_verified_native_pending","resolved_verified"))
    self.assertTrue(item["required_fixture"])
-   if item["status"]=="implementation_updated_tests_pending":
+   if item["status"] in ("implementation_updated_tests_pending","synthetic_verified_native_pending"):
     self.assertTrue((ROOT/item["fix_evidence"]["code"]).is_file())
     self.assertTrue((ROOT/item["fix_evidence"]["test"]).is_file())
     self.assertFalse(item["fix_evidence"]["native_parser_accepted"])
