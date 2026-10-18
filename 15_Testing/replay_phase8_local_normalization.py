@@ -36,4 +36,8 @@ def check(qeax,ledger,registry):
 if __name__=="__main__":
  import argparse
  p=argparse.ArgumentParser();p.add_argument("--qeax",required=True);p.add_argument("--ledger",required=True);p.add_argument("--registry",required=True);a=p.parse_args()
+ inputs={"qeax":a.qeax,"ledger":a.ledger,"registry":a.registry}
+ missing=[name for name,value in inputs.items() if not pathlib.Path(value).expanduser().is_file()]
+ if missing:
+  p.error("Input file not found: "+", ".join(missing)+". Replace example paths with actual local files.")
  result=check(a.qeax,a.ledger,a.registry);print(json.dumps(result,indent=2));sys.exit(0 if result["valid"] else 1)
