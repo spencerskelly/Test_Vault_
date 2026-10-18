@@ -38,3 +38,16 @@ def aggregate_compatibility(reader,snapshot_id):
         "byPhase8Status":dict(sorted((s,sum(n for (status,_),n in counts.items()
                            if status==s)) for s,_ in counts)),
         "sourceEvidenceAutoApproved":0,"nativeCertified":0}
+
+EXTENDED_RAW_FIELDS={"source_direction","source_role","target_role",
+ "source_cardinality","target_cardinality","raw_source_type",
+ "raw_source_stereotype","raw_target_type","raw_target_stereotype",
+ "source_aggregation_flag","target_aggregation_flag"}
+
+def raw_evidence_coverage(row):
+    """Structural presence is not semantic truth or a parser pass."""
+    absent=sorted(EXTENDED_RAW_FIELDS-set(row))
+    if absent:return {"status":"schema_incomplete","missingColumns":absent,
+                      "nativeCertified":False}
+    return {"status":"raw_fields_retained","missingColumns":[],
+            "nativeCertified":False}
