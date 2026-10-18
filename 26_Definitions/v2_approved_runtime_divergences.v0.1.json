@@ -1,0 +1,48 @@
+{
+  "schema": "mdse-v2-implementation-divergence-register/1",
+  "date": "2026-10-18",
+  "scope": "code_vs_approved_policy_not_new_semantic_decisions",
+  "authority_note": "26_Definitions/V1_V2_DEEP_TECHNICAL_RECOVERY_AND_PLATFORM_ARCHITECTURE_2026-10-18.md",
+  "items": [
+    {
+      "id": "DEF-01",
+      "priority": "P0",
+      "area": "relationship_eligibility",
+      "approved": "24_Workbench/docs/GOLDEN_IMPORT_AGGREGATION_SHARED_COMPOSITE_USAGE_APPROVED_2026-10-17.md",
+      "runtime": "24_Workbench/registry/runtime/eligibility-engine.mjs",
+      "symptom": "AGG-OWNED only accepts composite; approved typed owned usages may arise from shared or composite when parent-child meaning is verified",
+      "required_fixture": "positive shared owned usage; negative unowned grouping; preserve source flag",
+      "status": "open_implementation_alignment"
+    },
+    {
+      "id": "DEF-02",
+      "priority": "P0",
+      "area": "canonical_usage_typing",
+      "approved": "24_Workbench/docs/GOLDEN_IMPORT_STEP2_60_FAMILY_DECISION_RECONCILIATION_2026-10-17.md",
+      "runtime": "24_Workbench/registry/runtime/canonical-model.mjs",
+      "symptom": "UNTYPED_USAGE emitted universally for missing definitionId; approved unresolved untyped Part/Action/Port usages require typed review disposition rather than universal semantic rejection",
+      "required_fixture": "untyped Part Action Port with unresolved-type evidence plus illegal owner/missing identity negative tests",
+      "status": "open_implementation_alignment"
+    },
+    {
+      "id": "DEF-03",
+      "priority": "P0",
+      "area": "approved_family_precedence",
+      "approved": "24_Workbench/docs/GOLDEN_IMPORT_STEP2_60_FAMILY_DECISION_RECONCILIATION_2026-10-17.md",
+      "runtime": "24_Workbench/registry/sysml_v2_semantic_rules.v0.2.json",
+      "symptom": "Provisional candidate selectors and wildcard coverage differ from approved mapping (InformationItem descriptive note, not ItemDefinition)",
+      "required_fixture": "all 60 exact approved families and 26 relationship family cases including non-native and review dispositions",
+      "status": "open_implementation_alignment"
+    },
+    {
+      "id": "DEF-04",
+      "priority": "P1",
+      "area": "canonical_definition_coverage",
+      "approved": "24_Workbench/docs/GOLDEN_IMPORT_STEP2_60_FAMILY_DECISION_RECONCILIATION_2026-10-17.md",
+      "runtime": "24_Workbench/registry/runtime/canonical-model.mjs",
+      "symptom": "DEFINITION_KINDS exported list omits approved UseCaseDefinition and OccurrenceDefinition; downstream impact not yet measured",
+      "required_fixture": "positive UseCase/Occurrence definition support and negative invalid owner/typing",
+      "status": "open_review"
+    }
+  ]
+}
