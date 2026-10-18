@@ -20,6 +20,8 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
+      - name: Test EA connector-end evidence extraction
+        run: python3 -m unittest 25_Testing/test_v2_connector_end_evidence.py
       - name: Test typed V2 relationship evidence gates
         run: python3 -m unittest 25_Testing/test_v2_typed_relationship_gates.py
       - name: Test V2 source endpoint types
