@@ -1,0 +1,34 @@
+name: V2 separation staging
+on:
+  push:
+    branches: [main]
+    paths:
+      - '26_Definitions/tools/stage_v2_archive_migration.py'
+      - '.github/workflows/v2-separation-staging.yml'
+  workflow_dispatch:
+permissions:
+  contents: write
+  pull-requests: write
+jobs:
+  stage:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Run reversible migration with audit
+        run: |
+          python3 26_Definitions/tools/stage_v2_archive_migration.py > "$RUNNER_TEMP/migration.log" 2>&1 || true
+          cat "$RUNNER_TEMP/migration.log"
+      - name: Commit and push migration branch
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -eu
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git switch -c chore/v2-folder-separation-20261018
+          git add -A
+          git commit -m 'chore(v2): relocate active components and archive V1'
+          git push --set-upstream origin chore/v2-folder-separation-20261018
+          gh pr create --base main --head chore/v2-folder-separation-20261018 --title 'V2 authority folders and V1 reference archive (review required)' --body 'Automatic lossless git-mv staging. Do not merge until stale references in V2_FOLDER_MIGRATION_REFERENCE_AUDIT are fixed and executable V2 checks pass. No model semantic changes authorized.' || true
