@@ -1,8 +1,8 @@
 {
   "schema": "mdse-v2-semantic-decision-register/1",
   "version": "0.1.0",
-  "sourceRegistry": "14_Workbench/registry/family_disposition_registry.v0.2.json",
-  "candidateRegistry": "14_Workbench/registry/sysml_v2_semantic_rules.v0.2.json",
+  "sourceRegistry": "24_Workbench/registry/family_disposition_registry.v0.2.json",
+  "candidateRegistry": "24_Workbench/registry/sysml_v2_semantic_rules.v0.2.json",
   "default": "deferred_pending_evidence_and_parser",
   "records": [
     {
