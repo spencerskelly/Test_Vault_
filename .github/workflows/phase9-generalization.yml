@@ -1,0 +1,23 @@
+name: Phase 9 independent generalization fixtures
+on:
+  push:
+    paths:
+      - '15_Testing/phase9_independent_generalization_audit.py'
+      - '15_Testing/test_phase9_independent_generalization_audit.py'
+      - '.github/workflows/phase9-generalization.yml'
+  pull_request:
+    paths:
+      - '15_Testing/phase9_independent_generalization_audit.py'
+      - '15_Testing/test_phase9_independent_generalization_audit.py'
+      - '.github/workflows/phase9-generalization.yml'
+  workflow_dispatch:
+jobs:
+  conservative-generalization:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Independent generalization fixture checks
+        run: python -m unittest -v 15_Testing/test_phase9_independent_generalization_audit.py
