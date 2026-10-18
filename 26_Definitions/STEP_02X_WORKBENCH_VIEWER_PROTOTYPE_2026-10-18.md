@@ -1,0 +1,5 @@
+# STEP-02X — Workbench browser graph viewer
+
+Date: 2026-10-18. A standalone self-contained HTML viewer prototype was created and five source-level contract tests passed. It accepts local STEP-02W nodes.jsonl and edges.jsonl, validates duplicate identities and unresolved endpoints, supports searchable node navigation, selected-neighborhood SVG visualization, relationship evidence inspection, and distinct flagLink / flagNote review visibility. It has no network requests and does not read EA diagrams or emit SysML. The viewer and tests are delivered in STEP_02X_workbench_viewer.zip in this conversation.
+
+Status boundary: This is **not yet installed in the repository's live Workbench interface**. Tests check static interface requirements and are not end-to-end browser interaction tests. Full private graph UI performance, record editing and resolution, source round-trip, and actual Obsidian/Workbench acceptance remain pending. The next step should integrate the viewer into existing Workbench runtime rather than maintain a competing application. Semantic outliers continue through flagLink and flagNote; source integrity failures still block acceptance.
