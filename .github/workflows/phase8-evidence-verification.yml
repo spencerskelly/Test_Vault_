@@ -6,6 +6,7 @@ on:
       - '15_Testing/phase8_deferred_evidence_compat.py'
       - '15_Testing/test_phase8_deferred_evidence_compat.py'
       - '15_Testing/test_phase8_raw_evidence_coverage.py'
+      - '15_Testing/test_phase8_e2e_original_values.py'
       - '.github/workflows/phase8-evidence-verification.yml'
   workflow_dispatch:
 jobs:
@@ -20,4 +21,4 @@ jobs:
         run: python -m py_compile 14_Workbench/registry/runtime/normalize_qeax_phase8.py 15_Testing/phase8_deferred_evidence_compat.py
       - name: Run exact repository regression files
         working-directory: 15_Testing
-        run: python -m unittest -v test_phase8_deferred_evidence_compat test_phase8_raw_evidence_coverage
+        run: python -m unittest -v test_phase8_deferred_evidence_compat test_phase8_raw_evidence_coverage test_phase8_e2e_original_values
