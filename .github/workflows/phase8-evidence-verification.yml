@@ -6,7 +6,8 @@ on:
       - '15_Testing/phase8_deferred_evidence_compat.py'
       - '15_Testing/test_phase8_deferred_evidence_compat.py'
       - '15_Testing/test_phase8_raw_evidence_coverage.py'
-      - '15_Testing/test_phase8_e2e_original_values.py'
+      - '15_Testing/test_phase8_e2e_original_values test_phase8_raw_evidence_values.py'
+      - '15_Testing/test_phase8_raw_evidence_values.py'
       - '.github/workflows/phase8-evidence-verification.yml'
   workflow_dispatch:
 jobs:
