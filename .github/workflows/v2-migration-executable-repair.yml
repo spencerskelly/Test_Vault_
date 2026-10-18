@@ -33,6 +33,8 @@ jobs:
           name: v2-active-reference-audit
           path: ${{ runner.temp }}/v2-reference-audit.json
           if-no-files-found: warn
+      - name: Reject V2 runtime dependencies on V1 archive
+        run: python3 26_Definitions/tools/check_v2_archive_runtime_boundary.py
       - name: Verify unchanged governance registry hashes
         run: python3 25_Testing/verify_sysml_v2_registry_pins.py "$PWD"
       - name: Verify pinned v2 source registry
