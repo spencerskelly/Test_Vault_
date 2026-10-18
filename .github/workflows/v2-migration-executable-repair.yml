@@ -20,6 +20,8 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
+      - name: Validate approved vs runtime divergence register
+        run: python3 -m unittest 25_Testing/test_v2_approved_runtime_divergences.py
       - name: Validate V1-to-V2 reuse ledger
         run: python3 -m unittest 25_Testing/test_v1_to_v2_reuse_ledger.py
       - name: Validate V1 archive MOC completeness
