@@ -20,6 +20,8 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
+      - name: Validate executable candidate crosswalk
+        run: python3 -m unittest 25_Testing/test_v2_executable_candidate_crosswalk.py
       - name: Validate recovered mapping families
         run: python3 -m unittest 25_Testing/test_v2_mapping_family_recovery.py
       - name: Validate recovery inventory
