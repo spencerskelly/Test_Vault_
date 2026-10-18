@@ -2,7 +2,7 @@
 """MDSE release consistency check (W-320, W-321, W-322).
 
 Usage:
-  python3 "Base Vault/Testing/check-release.py"
+  python3 "10_Base Vault/Testing/check-release.py"
       [--workbench PATH_TO_MDSE_WORKBENCH]
       [--base PATH_TO_GENERATED_BASE]
 
@@ -43,7 +43,7 @@ ap.add_argument("--workbench")
 ap.add_argument("--base")
 a=ap.parse_args()
 
-man=yaml.safe_load(read("Base Vault/Definition/mdse-release.yaml"))
+man=yaml.safe_load(read("10_Base Vault/Definition/mdse-release.yaml"))
 limits=man.get("limits",{})
 if limits.get("generatedPathLengthLimit", "missing") is not None:
     fail("release manifest generatedPathLengthLimit must be null (W-382)")
@@ -99,15 +99,15 @@ for d in man["documents"]:
         if re.search(r"^> \[!WARNING\].*SUPERSEDED",head,re.M):
             fail(f"current file has a SUPERSEDED banner: {p}")
 
-for folder in ("00_Workspace","Importer/Definition"):
+for folder in ("00_Workspace","11_Importer/Definition"):
     for fn in sorted(os.listdir(full(ROOT,folder))):
         if fn.endswith(".md") and fn != "README.md":
             p=folder+"/"+fn
             (ok if p in registered else fail)(f"current tool/workspace document registered: {p}")
 
-log=read("00_Workspace/Workspace Decision Log.md")
+log=read("55_Workspace/Workspace Decision Log.md")
 latest=max(int(n) for n in re.findall(r"^\*\*W-(\d+)\b",log,re.M))
-td=read("Importer/Definition/Translator Definition.md")
+td=read("11_Importer/Definition/Translator Definition.md")
 m=re.search(r"Current through W-(\d+)",td)
 if not m:
     fail("Translator Definition does not declare a Current through W-n marker")
@@ -126,7 +126,7 @@ stale={
 for needle,label in stale.items():
     (fail if needle in td else ok)(f"Translator Definition has no {label}")
 
-t=read("00_Workspace/00 - Current State.md")
+t=read("55_Workspace/00 - Current State.md")
 for v in (man["mdseRelease"],man["schemas"]["relationships"],man["schemas"]["elementTypes"],man["schemas"]["localModel"]):
     (ok if v in t else fail)(f"00 - Current State.md mentions {v}")
 (ok if f"W-{latest}" in t else fail)(f"Current State mentions W-{latest}")
@@ -297,12 +297,12 @@ if man["tools"]["cleanBase"]["repo"] is None:
 hist=man["tools"]["importer"].get("history")
 (ok if hist and os.path.isdir(full(ROOT,hist)) else fail)(f"retired importers archived at {hist} (W-326)")
 cand_dir=os.path.dirname(man["tools"]["importer"]["candidate"])
-others=[d for d in os.listdir(full(ROOT,"Importer/Tools")) if "Importer/Tools/"+d!=cand_dir]
+others=[d for d in os.listdir(full(ROOT,"11_Importer/Tools")) if "11_Importer/Tools/"+d!=cand_dir]
 if others:
     (fail if man["releaseStatus"]=="release" else warn)(
-        f"non-current importer revisions remain in Importer/Tools during {man['releaseStatus']} hardening: {others}; archive them before release")
+        f"non-current importer revisions remain in 11_Importer/Tools during {man['releaseStatus']} hardening: {others}; archive them before release")
 else:
-    ok("only the current importer revision is in Importer/Tools")
+    ok("only the current importer revision is in 11_Importer/Tools")
 
 if a.workbench:
     wb=os.path.abspath(a.workbench)
