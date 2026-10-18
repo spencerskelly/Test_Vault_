@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Build an uninitialized, standalone SysML v2 test base; never imports archived V1 files."""
 import argparse, json, shutil, pathlib, hashlib, sys
-ROOT=pathlib.Path(__file__).resolve().parents[2]
+ROOT=pathlib.Path(__file__).resolve().parents[1]
 REQUIRED={
  "20_Base Vault/README.md":"99_System/README_Base_V2.md",
  "21_Importer/README.md":"99_System/README_Importer_V2.md",
