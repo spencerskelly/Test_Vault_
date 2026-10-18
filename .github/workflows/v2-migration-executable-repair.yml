@@ -1,7 +1,7 @@
 name: V2 migration executable repair
 on:
   push:
-    branches: [chore/v2-folder-separation-20261018]
+    branches: [main]
   pull_request:
     branches: [main]
   workflow_dispatch:
@@ -20,6 +20,8 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
+      - name: Test V2 source endpoint types
+        run: python3 -m unittest 25_Testing/test_v2_source_endpoint_types.py
       - name: Test V2 relationship candidate projection
         run: python3 -m unittest 25_Testing/test_v2_relationship_candidate_projection.py
       - name: Test approved V2 element candidate projection
