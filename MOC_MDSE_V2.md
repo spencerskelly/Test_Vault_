@@ -95,6 +95,7 @@ scope: toolchain-development-repository
 - [V2 research / Phase 5–9 passes](29_SysMLv2_Translator_Workbench/README_SysMLv2_Translator_Workbench.md)
 
 ## 70 — Known missing coverage / avoid duplicated work
+- [Reference-safe repository consolidation register and note retention tiers](26_Definitions/V2_REPOSITORY_STABILITY_AND_CONSOLIDATION_2026-10-18.md)
 - [Four approved-rule vs runtime divergence findings and verification fixtures](26_Definitions/v2_approved_runtime_divergences.v0.1.json)
 | Gap | Why it matters | Next action |
 |---|---|---|
