@@ -43,3 +43,10 @@ The [workflow note and Canvas contract](../24_Workbench/docs/SYSML_V2_WORKFLOW_L
 - Future diagram work requires its own separate titled plan, source scope, native-versus-view-only decisions, tests and explicit approval.
 
 This scope lock does **not** delete, rewrite or shrink the original QEAX. The user retains source data externally; after golden acceptance the diagram phase can read it under a new authorized plan.
+
+
+## Existing legacy profile gate identified
+
+The older `25_Testing/gate_v2_qeax_reconciliation.py` / `run_gated_phase8.py` pathway still refers to historical `profile_qeax_local`, `check_qeax_source_profile` and `reconcile_qeax_dispositions` implementations that are not active V2 dependencies in this checkout. Historical profile tests refer to diagram totals. **This pathway is not approved for the current golden import.** Before reconnecting it, replace its source profiler with the diagram-free V2 preflight/schema contract and prove it never touches diagram tables. No reason to reconstruct diagram support to repair the Phase 8 pipeline.
+
+Older V1 branch-specific or historical GitHub workflows and `99_System` diagram schemas remain retained as historical assets, not runtime dependencies for V2. Their existence does not override the current no-diagram scope gate.
