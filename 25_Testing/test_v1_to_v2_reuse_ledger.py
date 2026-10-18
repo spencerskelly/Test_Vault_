@@ -16,7 +16,7 @@ class ReuseLedgerTest(unittest.TestCase):
   rows=ledger["records"]
   self.assertEqual(len(rows),28)
   self.assertEqual({x["id"] for x in rows},{f"R{i:02d}" for i in range(1,29)})
-  self.assertEqual(len(set(r["v1_source"] for r in rows)),len(rows)-len(rows)+len(set(r["v1_source"] for r in rows)))
+  self.assertGreaterEqual(len({r["v1_source"] for r in rows}),20)
   for r in rows:
    self.assertIn(r["milestone"],("first","later"))
    self.assertIn(r["priority"],("P0","P1","P2"))
