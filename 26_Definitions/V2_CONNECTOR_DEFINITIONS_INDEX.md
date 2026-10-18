@@ -3,6 +3,10 @@
 Purpose: find the approved construct before modifying code. This index links to the original decision document; it is NOT a separate definition or authorization of syntax. [Program home](V2_PROGRAM_HOME.md) · [26-family source mapping](../24_Workbench/docs/GOLDEN_IMPORT_RELATIONSHIP_26_FAMILY_DECISION_AUDIT_2026-10-17.md) · [Workbench help requirements](../24_Workbench/docs/SYSML_V2_RELATIONSHIP_REFERENCE_AND_HELP_PANEL.md)
 
 ## Governing semantic model
+- [Use Case definitions and contextual usages](SysML_v2_Use_Case_Definitions_and_Usages.md)
+- [Occurrence definitions, event usages, time slices and snapshots](SysML_v2_Occurrence_Definitions_and_Usages.md)
+- [Original approved relationship and native-feature decision corpus](MOC_Catalogs/sysml_decisions_1.md)
+- [Exact rule exception reconciliation](V2_APPROVED_EXCEPTION_HANDLING_AUDIT_2026-10-18.md)
 Native SysML v2 constructs can be feature ownership, usage, reference, typing, allocation, connection, binding, temporal succession or behavioral semantics rather than a generic binary edge. User-approved source mapping and per-row evidence are separate from grammar conformance and released implementation. Drawn line → eligible operation preview, not silent creation.
 
 ## Dedicated approved decisions (October 17)
