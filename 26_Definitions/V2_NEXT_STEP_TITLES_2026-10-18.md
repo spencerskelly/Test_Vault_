@@ -20,3 +20,9 @@ These step titles are stable handoff IDs. Completion percentages are current pla
 | STEP-12 — Cross-vault and deployment lifecycle | G12 | 15% |
 
 STEP-01–08 constitute the approved first-release scope. STEP-09–12 are later-phase work. Always search the owning definition, history, code and tests before implementing a step.
+
+## Source reuse register
+
+STEP-01: [Original approved native decisions](MOC_Catalogs/sysml_decisions_1.md) and [V1 recovery ledger](V1_V2_REUSE_LEDGER_INDEX.md). Decision inventory is recovered; implementation linkage is not complete.
+
+STEP-02: [60-family approval](../24_Workbench/docs/GOLDEN_IMPORT_STEP2_60_FAMILY_DECISION_RECONCILIATION_2026-10-17.md) and [12 exception cases](V2_APPROVED_EXCEPTION_HANDLING_AUDIT_2026-10-18.md). Implement exact selectors, not new mapping policy.
