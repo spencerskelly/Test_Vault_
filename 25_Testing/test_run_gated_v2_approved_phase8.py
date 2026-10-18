@@ -100,6 +100,14 @@ class CurrentV2GateTests(unittest.TestCase):
         self.assertFalse(self.dest.exists())
         self.assertFalse(list(self.home.glob(".v2-approved-stage-*")))
 
+    def test_selected_snapshot_fingerprint_mismatch_blocks_without_ledger(self):
+        result=self.invoke(expected_sha256="0"*64)
+        self.assertEqual(result["status"],"BLOCKED")
+        self.assertEqual(result["reason"],"SOURCE_SNAPSHOT_HASH_MISMATCH")
+        self.assertFalse(result["ledgerWritten"])
+        self.assertFalse(self.dest.exists())
+        self.assertFalse(list(self.home.glob(".v2-approved-stage-*")))
+
     def test_invalid_registry_and_private_path(self):
         bad=self.home/"candidate.json"
         bad.write_text(json.dumps({"families":[]}))
