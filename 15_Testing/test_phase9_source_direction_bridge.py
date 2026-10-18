@@ -32,4 +32,16 @@ class BridgeTests(unittest.TestCase):
  def test_tampered_guid(self):
   self.row['source_guid']='bogus';self.write()
   self.assertEqual(audit(self.q,self.ledger)['errors']['RAW_SOURCE_MISMATCH'],1)
+ def test_review_status_not_promoted(self):
+  self.row['status']='deferred_review';self.write()
+  r=audit(self.q,self.ledger)
+  self.assertTrue(r['valid'])
+  self.assertEqual(r['categories']['ledger_status_review'],1)
+  self.assertNotIn('direction_and_family_review_candidate',r['categories'])
+ def test_source_connector_stereotype_review(self):
+  with sqlite3.connect(self.q) as db:db.execute("UPDATE t_connector SET Stereotype='special' WHERE Connector_ID=1")
+  r=audit(self.q,self.ledger)
+  self.assertTrue(r['valid'])
+  self.assertEqual(r['categories']['connector_stereotype_review'],1)
+  self.assertFalse(r['may_emit_native'])
 if __name__=='__main__':unittest.main()
