@@ -3,7 +3,7 @@
  * Commands: diagnostics, rebuild index, explore Structure from the current note,
  * relate the current note to another, undo, and the Canvas probe.
  */
-import { App, getLinkpath, normalizePath, Notice, parseYaml, Plugin, PluginSettingTab, Setting, TFile } from "obsidian";
+import { App, getLinkpath, Modal, normalizePath, Notice, parseYaml, Plugin, PluginSettingTab, Setting, TFile } from "obsidian";
 import type { NoteRecord } from "./core/model";
 import { summarizeRuntimeHealth } from "./core/runtime-health";
 import { BACKGROUND_MAX_DEFERRAL_MS, BACKGROUND_RESUME_QUIET_MS, canRunBackgroundWork, canStartRuntimeWork, type RuntimeWorkKind } from "./core/background";
@@ -54,6 +54,8 @@ interface Settings {
   canvasProbe: boolean;
   /** Clicking a note on a generated view opens its details in a popup (WB-099). */
   showDetails: boolean;
+  /** Show contextual Workbench action popup when a new Markdown note is selected. */
+  autoActionsPopup: boolean;
   /** Pre-release gate for RTA-3 warm restore. Off in controlled bases until runtime validation passes. */
   warmCachePreview: boolean;
   /** 13 ASCII letters used as the governed creator suffix for newly created note UIDs. */
@@ -66,6 +68,7 @@ const DEFAULTS: Settings = {
   viewsFolder: "Workbench Views",
   canvasProbe: true,
   showDetails: true,
+  autoActionsPopup: false,
   warmCachePreview: false,
   creatorSuffix: "",
 };
@@ -122,6 +125,8 @@ export default class MdseWorkbench extends Plugin {
   private readonly transactions = new TransactionManager();
   detail: NoteDetailPanel | null = null;
   private statusEl: HTMLElement | null = null;
+  actionsPopup: Modal | null = null;
+  private lastActionsNotePath: string | null = null;
   private cancelStartupHandoff: (() => void) | null = null;
   private healthRefreshTimer: number | null = null;
   private localBackgroundTimer: number | null = null;
@@ -205,6 +210,8 @@ export default class MdseWorkbench extends Plugin {
     });
     this.addChild(this.detail);
     this.registerDetailClicks();
+    this.addCommand({ id: "open-note-actions", name: "Open Workbench actions for selected note", callback: () => { const file = this.app.workspace.getActiveFile(); if (file?.extension === "md") void this.openNoteActions(file); else new Notice("Select a Markdown note first."); } });
+    this.registerEvent(this.app.workspace.on("file-open", (file) => { if (!file || file.extension !== "md") { this.lastActionsNotePath = null; return; } if (!this.settings.autoActionsPopup || this.lastActionsNotePath === file.path) return; this.lastActionsNotePath = file.path; void this.openNoteActions(file); }));
 
     // Keep lightweight runtime health/history available during startup. Whole-model diagnostics
     // and cache inspection are nonessential and stay unavailable until the core model is ready.
@@ -1832,8 +1839,44 @@ export default class MdseWorkbench extends Plugin {
       const record = owner ? this.indexer?.local.recordsOf(owner.path).find((r) => r.localId === localTarget?.localId) : undefined;
       if (owner && record) this.detail?.showLocal(owner, record);
       else if (owner) new Notice(`Local Model record ${localTarget.localId} was not found in ${owner.basename}.`);
-    } else if (file) await this.detail?.show(file);
+    } else if (file) { if (this.settings.autoActionsPopup) await this.openNoteActions(file); else await this.detail?.show(file); }
     else if (missing) this.detail?.showUndefined(missing);
+  }
+
+  /** Context-sensitive, read-only action picker. All edits continue through existing guarded editors. */
+  private async openNoteActions(file: TFile): Promise<void> {
+    if (file.extension !== "md") return;
+    const source = await this.app.vault.cachedRead(file);
+    if (this.app.vault.getAbstractFileByPath(file.path) !== file) return;
+    this.actionsPopup?.close();
+    const modal = new Modal(this.app);
+    this.actionsPopup = modal;
+    modal.titleEl.setText("Workbench · " + file.basename);
+    modal.contentEl.createEl("p", { text: "Select an element from the open note, then choose an action. Model editing remains guarded by existing Workbench tools." });
+    const end = source.lastIndexOf("## SysML v2");
+    const tail = end < 0 ? "" : source.slice(end);
+    const fence = tail.match(/\x60\x60\x60sysml\s*\n([\s\S]*?)\n\x60\x60\x60/);
+    const choices: string[] = [];
+    if (fence) for (const line of fence[1].split(/\r?\n/)) {
+      const match = line.trim().match(/^(?:part|port|action|state|item|attribute|use case|requirement)(?:\s+def)?\s+([\w']+)/);
+      if (match) choices.push(match[1]);
+    }
+    if (choices.length) {
+      new Setting(modal.contentEl).setName("Element in open note").addDropdown(drop => {
+        for (const name of choices) drop.addOption(name, name);
+      });
+    } else {
+      modal.contentEl.createEl("p", { text: "No supported element declarations found in the note's bottom SysML v2 section. Note-level actions remain available.", cls: "setting-item-description" });
+    }
+    const action = (label: string, run: () => void) => new Setting(modal.contentEl).setName(label).addButton(b => b.setButtonText("Open").onClick(() => { modal.close(); run(); }));
+    action("Note details", () => { void this.detail?.show(file); });
+    action("Structure view", () => { void this.explore([file.path]); });
+    action("Choose Workbench view", () => { void this.pickView(file.path); });
+    action("Relate to another note", () => { void this.pickTargetThenRelate(file.path); });
+    modal.contentEl.createEl("p", { text: "Advanced Actions · Merge Notes is planned and is not enabled in this build.", cls: "setting-item-description" });
+    const priorClose = modal.onClose.bind(modal);
+    modal.onClose = () => { priorClose(); if (this.actionsPopup === modal) this.actionsPopup = null; };
+    modal.open();
   }
 
   async checkView(): Promise<void> {
@@ -1952,6 +1995,14 @@ class WorkbenchSettings extends PluginSettingTab {
           await this.plugin.saveAll();
         }),
       );
+    new Setting(containerEl)
+      .setName("Automatically show Workbench actions")
+      .setDesc("Open a contextual popup when a different Markdown note is selected from the editor or a generated Workbench Canvas. Off by default. The command ‘Open Workbench actions for selected note’ works regardless.")
+      .addToggle(t => t.setValue(this.plugin.settings.autoActionsPopup).onChange(async v => {
+        this.plugin.settings.autoActionsPopup = v;
+        if (!v) this.plugin.actionsPopup?.close();
+        await this.plugin.saveAll();
+      }));
     new Setting(containerEl)
       .setName("Note details on click")
       .setDesc("Clicking a note on a generated view (a canvas in the views folder) opens its properties and text in a popup. Uses Canvas internals that Obsidian does not document.")
