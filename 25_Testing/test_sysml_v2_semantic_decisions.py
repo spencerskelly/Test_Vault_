@@ -3,7 +3,7 @@ import json
 from pathlib import Path
 import unittest
 
-REGISTRY=Path(__file__).resolve().parents[1]/"14_Workbench/registry"
+REGISTRY=Path(__file__).resolve().parents[1]/"24_Workbench/registry"
 def load(name):
     return json.loads((REGISTRY/name).read_text(encoding="utf-8"))
 
