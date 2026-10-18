@@ -1,0 +1,22 @@
+name: Phase 8 generalization review bridge
+on:
+  push:
+    paths:
+      - '14_Workbench/registry/runtime/phase8-generalization-review-bridge.mjs'
+      - '15_Testing/test_phase8_generalization_review_bridge.mjs'
+      - '.github/workflows/phase8-generalization-review-bridge.yml'
+  pull_request:
+    paths:
+      - '14_Workbench/registry/runtime/phase8-generalization-review-bridge.mjs'
+      - '15_Testing/test_phase8_generalization_review_bridge.mjs'
+      - '.github/workflows/phase8-generalization-review-bridge.yml'
+  workflow_dispatch:
+jobs:
+  synthetic:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: node --test 15_Testing/test_phase8_generalization_review_bridge.mjs
