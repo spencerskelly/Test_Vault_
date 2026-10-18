@@ -8,7 +8,7 @@ const graph=()=>({version:'phase9-synthetic',nodes:[
  {id:'child',kind:'PartDefinition',ownerId:'parent',sourceRef:'synthetic-child'}
 ],relationships:[
  {kind:'lexicalContainment',fromId:'parent',toId:'child'},
- {kind:'specialization',fromId:'child',toId:'parent',sourceRef:'synthetic-generalization'}
+ {kind:'specialization',fromId:'child',toId:'parent',sourceRef:'synthetic-generalization',direction:'subtype-to-supertype'}
 ]});
 test('nested definitions remain distinct canonical nodes',()=>{
  const x=graph();assert.equal(validateGraph(x).valid,true);
