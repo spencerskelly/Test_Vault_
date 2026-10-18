@@ -1,6 +1,6 @@
 import assert from 'node:assert/strict';
 import {test} from 'node:test';
-import {evaluateLedgerConnection} from '../14_Workbench/registry/runtime/phase8-ledger-connection-gate.mjs';
+import {evaluateLedgerConnection} from '../24_Workbench/registry/runtime/phase8-ledger-connection-gate.mjs';
 const graph={nodes:[{id:'host',kind:'PartDefinition'},{id:'partA',kind:'PartUsage',ownerId:'host'},{id:'partB',kind:'PartUsage',ownerId:'host'}]};
 const row=()=>({source_pk:'synthetic-3',source_guid:'synthetic-guid',normalized_from:'partA',normalized_to:'partB',connection_owner_id:'host',source_direction:'Source -> Destination',diagnostics:'',status:'role_normalized',family:'Connector',role:'explicit-connection-owner'});
 const attest=()=>({schema:'mdse-phase8-local-ledger-attestation/1',verified:true,native_certified:0});
