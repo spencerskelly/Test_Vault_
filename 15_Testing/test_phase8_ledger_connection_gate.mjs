@@ -1,0 +1,14 @@
+import assert from 'node:assert/strict';
+import {test} from 'node:test';
+import {evaluateLedgerConnection} from '../14_Workbench/registry/runtime/phase8-ledger-connection-gate.mjs';
+const graph={nodes:[{id:'host',kind:'PartDefinition'},{id:'partA',kind:'PartUsage',ownerId:'host'},{id:'partB',kind:'PartUsage',ownerId:'host'}]};
+const row=()=>({source_pk:'synthetic-3',source_guid:'synthetic-guid',normalized_from:'partA',normalized_to:'partB',connection_owner_id:'host',source_direction:'Source -> Destination',diagnostics:'',status:'role_normalized',family:'Connector',role:'explicit-connection-owner'});
+const attest=()=>({schema:'mdse-phase8-local-ledger-attestation/1',verified:true,native_certified:0});
+const codes=r=>r.diagnostics.map(x=>x.code);
+test('review only even with fully provided synthetic evidence',()=>{const r=evaluateLedgerConnection(graph,row(),attest());assert.equal(r.valid,true);assert.equal(r.nativeCertified,false);assert.equal(r.reviewOnly,true);});
+test('unattested ledger rejected',()=>assert.ok(codes(evaluateLedgerConnection(graph,row(),{})).includes('LEDGER_ATTESTATION_REQUIRED')));
+test('source diagnostics block candidate',()=>{const r=row();r.diagnostics='DIRECTION_NOT_EXPLICIT';assert.ok(codes(evaluateLedgerConnection(graph,r,attest())).includes('UNRESOLVED_SOURCE_DIAGNOSTICS'));});
+test('unsupported family rejected',()=>{const r=row();r.family='Aggregation';assert.ok(codes(evaluateLedgerConnection(graph,r,attest())).includes('CONNECTION_FAMILY_NOT_CONFIRMED'));});
+test('missing owner rejected by graph',()=>{const r=row();r.connection_owner_id='missing';assert.ok(codes(evaluateLedgerConnection(graph,r,attest())).includes('INVALID_CONNECTION_OWNER'));});
+test('missing source identity rejected',()=>{const r=row();r.source_guid='';assert.ok(codes(evaluateLedgerConnection(graph,r,attest())).includes('SOURCE_CONNECTOR_ID_REQUIRED'));});
+test('native certification assertion rejected',()=>{const a=attest();a.native_certified=1;assert.ok(codes(evaluateLedgerConnection(graph,row(),a)).includes('LEDGER_ATTESTATION_REQUIRED'));});
