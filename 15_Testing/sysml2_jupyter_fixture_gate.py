@@ -1,0 +1,66 @@
+"""Run a SysML v2 fixture through an installed Jupyter SysML kernel.
+
+Exit nonzero on kernel error, timeout, or missing explicit completion.
+All inputs should be synthetic and public; stdout prints aggregate statuses only.
+"""
+import argparse
+import hashlib
+import json
+from pathlib import Path
+
+def execute_fixture(path, timeout=90):
+    from jupyter_client import KernelManager
+    source=Path(path).read_text(encoding="utf-8")
+    result={"schema":"mdse-sysml2-real-kernel/1",
+            "fixtureSha256":hashlib.sha256(source.encode("utf-8")).hexdigest(),
+            "kernel":"sysml","status":"FAIL","nativeCertified":False}
+    manager=KernelManager(kernel_name="sysml")
+    client=None
+    try:
+        manager.start_kernel()
+        client=manager.client()
+        client.start_channels()
+        client.wait_for_ready(timeout=timeout)
+        request=client.execute(source,store_history=False,allow_stdin=False,stop_on_error=True)
+        execute_reply=None
+        error=False
+        idle=False
+        while not idle:
+            msg=client.get_iopub_msg(timeout=timeout)
+            if msg.get("parent_header",{}).get("msg_id")!=request:
+                continue
+            msg_type=msg.get("msg_type")
+            if msg_type=="error":
+                error=True
+            if msg_type=="stream":
+                text=msg.get("content",{}).get("text","")
+                if "Error" in text or "error" in text:
+                    error=True
+            if msg_type=="status" and msg.get("content",{}).get("execution_state")=="idle":
+                idle=True
+        reply=client.get_shell_msg(timeout=timeout)
+        if reply.get("parent_header",{}).get("msg_id")==request:
+            execute_reply=reply.get("content",{}).get("status")
+        result["status"]="ACCEPTED" if idle and not error and execute_reply=="ok" else "REJECTED"
+    except Exception as exc:
+        result["status"]="RUNNER_ERROR"
+        result["errorCategory"]=type(exc).__name__
+    finally:
+        if client is not None:
+            client.stop_channels()
+        try:
+            manager.shutdown_kernel(now=True)
+        except Exception:
+            pass
+    return result
+
+def main():
+    parser=argparse.ArgumentParser()
+    parser.add_argument("--fixture",required=True)
+    parser.add_argument("--expect",choices=["ACCEPTED","REJECTED"],required=True)
+    args=parser.parse_args()
+    report=execute_fixture(args.fixture)
+    print(json.dumps(report,sort_keys=True))
+    raise SystemExit(0 if report["status"]==args.expect else 1)
+if __name__=="__main__":
+    main()
