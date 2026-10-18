@@ -5,7 +5,7 @@ from pathlib import Path
 ROOT=Path(__file__).resolve().parents[2]
 BASE=Path("24_Workbench/registry")
 PIN=ROOT/BASE/"sysml_v2_registry_pins.v0.1.json"
-OLD=b"14_Workbench/registry/"
+OLD=("14_"+"Workbench/registry/").encode("ascii")
 NEW=b"24_Workbench/registry/"
 def digest(data):return hashlib.sha256(data).hexdigest()
 def run(write=False):
