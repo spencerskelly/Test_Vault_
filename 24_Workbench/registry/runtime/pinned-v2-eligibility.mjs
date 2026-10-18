@@ -6,12 +6,12 @@ import {resolve} from 'node:path';
 import {evaluate} from './eligibility-engine.mjs';
 
 const files=[
- '14_Workbench/registry/family_disposition_registry.v0.2.json',
- '14_Workbench/registry/sysml_v2_semantic_rules.v0.2.json',
- '14_Workbench/registry/sysml_v2_semantic_decisions.v0.1.json'
+ '24_Workbench/registry/family_disposition_registry.v0.2.json',
+ '24_Workbench/registry/sysml_v2_semantic_rules.v0.2.json',
+ '24_Workbench/registry/sysml_v2_semantic_decisions.v0.1.json'
 ];
 export function loadPinnedV2(root){
- const pins=JSON.parse(readFileSync(resolve(root,'14_Workbench/registry/sysml_v2_registry_pins.v0.1.json')));
+ const pins=JSON.parse(readFileSync(resolve(root,'24_Workbench/registry/sysml_v2_registry_pins.v0.1.json')));
  if(pins.schema!=='mdse-v2-registry-pins/1'||Object.keys(pins.files||{}).sort().join('|')!==[...files].sort().join('|'))throw Error('INVALID_PIN_MANIFEST');
  const data={};
  for(const rel of files){
