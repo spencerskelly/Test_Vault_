@@ -1,0 +1,10 @@
+import assert from 'node:assert/strict';
+import {test} from 'node:test';
+import {reviewGeneralizationFromEvidence} from '../14_Workbench/registry/runtime/phase9-generalization-evidence-bridge.mjs';
+const graph=()=>({nodes:[{id:'a',kind:'PartDefinition'},{id:'b',kind:'PartDefinition'}]});
+const ev=()=>({schema:'mdse-phase9-generalization-direction/1',reconciliationVerified:true,sourceFamily:'Generalization',sourceDirection:'Source -> Destination',connectorRef:'synthetic-connector',sourceNodeId:'a',targetNodeId:'b',snapshotSha256:'a'.repeat(64)});
+test('synthetic review has no native certification',()=>{const r=reviewGeneralizationFromEvidence(graph(),ev());assert.equal(r.status,'reviewable');assert.equal(r.nativeCertified,false);});
+test('wrong source direction is held',()=>{const e=ev();e.sourceDirection='Unspecified';assert.equal(reviewGeneralizationFromEvidence(graph(),e).status,'review');});
+test('missing source snapshot hash is held',()=>{const e=ev();delete e.snapshotSha256;assert.equal(reviewGeneralizationFromEvidence(graph(),e).status,'review');});
+test('graph type errors are held',()=>{const g=graph();g.nodes[0].kind='PartUsage';assert.equal(reviewGeneralizationFromEvidence(g,ev()).status,'review');});
+test('caller supplied verified flag is not proof of trust',()=>{const r=reviewGeneralizationFromEvidence(graph(),ev());assert.equal(r.nativeCertified,false);assert.ok(!r.attestationTrusted);});
