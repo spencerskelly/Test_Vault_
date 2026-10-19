@@ -12,7 +12,7 @@ def rows(path):
                     raise ValueError("Non-object JSONL record")
                 yield obj
 
-def audit(nodes_path, edges_path, expected_notes):
+def audit(nodes_path, edges_path, expected_notes, expected_links=None):
     nodes = set()
     notes = 0
     for node in rows(nodes_path):
@@ -31,10 +31,13 @@ def audit(nodes_path, edges_path, expected_notes):
         edges.add(uid)
         if edge.get("source") not in nodes or edge.get("target") not in nodes:
             raise ValueError("Broken endpoint: " + uid)
-        if edge.get("type") == "flagLink" or any(s in str(edge.get("disposition", "")).lower() for s in ("flaglink", "unresolved", "review")):
-            links += 1
+        explicit = edge.get("flagLink")
+        legacy = edge.get("type") == "flagLink" or any(s in str(edge.get("disposition", "")).lower() for s in ("flaglink", "unresolved", "review"))
+        links += len(explicit) if isinstance(explicit, list) and explicit else int(bool(explicit) or legacy)
     if notes != expected_notes:
         raise ValueError(f"flagNote export loss: expected {expected_notes}; actual {notes}")
+    if expected_links is not None and links != expected_links:
+        raise ValueError(f"flagLink export loss: expected {expected_links}; actual {links}")
     return {"nodes": len(nodes), "edges": len(edges), "flagNotes": notes, "flagLinks": links}
 
 if __name__ == "__main__":
@@ -42,5 +45,6 @@ if __name__ == "__main__":
     p.add_argument("nodes")
     p.add_argument("edges")
     p.add_argument("--expected-flag-notes", required=True, type=int)
+    p.add_argument("--expected-flag-links", type=int)
     args = p.parse_args()
-    print(json.dumps(audit(args.nodes, args.edges, args.expected_flag_notes), sort_keys=True))
+    print(json.dumps(audit(args.nodes, args.edges, args.expected_flag_notes, args.expected_flag_links), sort_keys=True))
