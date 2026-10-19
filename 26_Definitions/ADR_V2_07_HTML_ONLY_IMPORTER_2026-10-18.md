@@ -45,12 +45,12 @@ Two known limits: the merge normalises trailing blank lines at the join between 
 | | Scope | Done when |
 |---|---|---|
 | M2 | Port the approved-family resolver, typed relationship gates and uid/id allocation to JS; emit ADR-V2-06 notes; id allocation continues from the highest existing id per prefix | JS output equals the Python oracle on the same synthetic QEAX; add-onto run twice is a no-op |
-| M3 | Typed canonical graph to SysML v2 text, one block per note | pinned parser accepts every block (see open question) |
+| M3 | Typed canonical graph to SysML v2 text, one block per note; emit the parser-check report format | pinned parser accepts every block in CI; report lists each note |
 | M4 | Package V2 Bootstrap and Workbench into the new-vault ZIP; fail readiness when binaries are missing | extracted ZIP starts Bootstrap on first open in Obsidian |
 | M5 | Run on the reduced QEAX, then the full one | binary acceptance list in the [recovery handoff](MDSE_V2_RECOVERY_HANDOFF_2026-10-18.md) |
 
 ## Consequences and open questions
 
-- **Parser gate.** The pinned official SysML v2 parser is a Java program and cannot run inside the page. Under "no installs" it can only run in CI or on a maintainer's machine against the extracted ZIP. Users would get a vault whose SysML was checked at release time, not on their machine. Owner decision needed before M3.
+- **Parser gate (owner accepted 2026-10-19).** The pinned official SysML v2 parser is a Java program and cannot run inside the page. It runs in CI and on a maintainer's machine against the generated vault. The ZIP carries a **parser-check report** (parser version, per-note result, date). Workbench marks that report **stale** whenever a SysML block changes after it was produced, and never presents unchecked SysML as verified. Consequence: users get a vault whose SysML was checked at release time, not on their own machine. M3 must emit the report format and M4 must make Workbench read it.
 - **Browser support.** Writing into an existing folder needs the File System Access API (Chrome, Edge). Firefox and Safari can only build ZIPs and run the read-only check.
 - **SharePoint.** A vault opened from a synced SharePoint folder is just a local folder, so the same page works; Rovo indexing of Markdown remains unverified (see the [organization proposal](V2_FILE_ORGANIZATION_PROPOSAL_2026-10-18.md)).
