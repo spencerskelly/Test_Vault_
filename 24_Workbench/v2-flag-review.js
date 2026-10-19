@@ -45,7 +45,7 @@
         if (!e.id || edgeIds.has(e.id)) throw new Error("Duplicate or missing connector ID");
         edgeIds.add(e.id); edges++;
         targets.push([e.source,e.target]);
-        if (/flaglink|unresolved|review/i.test(String(e.disposition || "")) || e.type === "flagLink") {
+        if (flags(e.flagLink) || /flaglink|unresolved|review/i.test(String(e.disposition || "")) || e.type === "flagLink") {
           linkFlags++; flagged.push({type:"flagLink", id:e.id, detail:e});
         }
       });
