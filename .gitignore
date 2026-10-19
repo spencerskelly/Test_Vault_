@@ -10,3 +10,7 @@ MDSE Bootstrap/plugin/main.js
 
 # Real EA model-derived evidence must remain outside this repository
 /Importer/Testing/EA Source Evidence/
+
+# Python bytecode
+__pycache__/
+*.pyc

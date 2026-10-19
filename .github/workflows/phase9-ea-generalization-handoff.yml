@@ -4,13 +4,13 @@ on:
     paths:
       - '24_Workbench/registry/runtime/ea-generalization-review-handoff.mjs'
       - '24_Workbench/registry/runtime/canonical-model.mjs'
-      - '100_Archive/V1/15_Testing/test_ea_generalization_review_handoff.mjs'
+      - '25_Testing/test_ea_generalization_review_handoff.mjs'
       - '.github/workflows/phase9-ea-generalization-handoff.yml'
   pull_request:
     paths:
       - '24_Workbench/registry/runtime/ea-generalization-review-handoff.mjs'
       - '24_Workbench/registry/runtime/canonical-model.mjs'
-      - '100_Archive/V1/15_Testing/test_ea_generalization_review_handoff.mjs'
+      - '25_Testing/test_ea_generalization_review_handoff.mjs'
       - '.github/workflows/phase9-ea-generalization-handoff.yml'
   workflow_dispatch:
 jobs:
@@ -21,4 +21,4 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: '22'
-      - run: node --test 100_Archive/V1/15_Testing/test_ea_generalization_review_handoff.mjs
+      - run: node --test 25_Testing/test_ea_generalization_review_handoff.mjs

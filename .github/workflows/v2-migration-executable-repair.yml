@@ -20,6 +20,27 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
+      - name: Install note-format dependencies
+        run: pip install 'PyYAML==6.0.2'
+      - name: Validate golden and sample notes against ADR-V2-06 note format
+        run: >
+          python3 21_Importer/mdse_note_format.py
+          "25_Testing/Fixtures/Golden Charger v2/Controller.md"
+          "25_Testing/Fixtures/Golden Charger v2/Power Module.md"
+          "25_Testing/Fixtures/Golden Charger v2/Charger.md"
+          "20_Base Vault/Public Sample Vault/10_Model/Sample Instrument.md"
+      - name: Test note-format validator
+        run: python3 -m unittest 25_Testing/test_v2_note_format.py
+      - name: Test SharePoint safety preflight
+        run: python3 -m unittest 25_Testing/test_check_sharepoint_safety.py
+      - name: SharePoint safety of the sample vault
+        run: python3 25_Testing/check_sharepoint_safety.py "20_Base Vault"
+      - name: Generated mapping matrix is current
+        run: python3 26_Definitions/tools/build_v2_mapping_matrix.py --check
+      - name: Generated step index is current
+        run: python3 26_Definitions/tools/build_v2_step_index.py --check
+      - name: No stale workflow or test paths remain
+        run: python3 26_Definitions/tools/repair_v2_workflow_paths.py --check
       - name: Verify reference-safe consolidation preflight
         run: python3 -m unittest 25_Testing/test_v2_note_backlink_audit.py
       - name: Verify all Markdown notes are indexed by MOCs

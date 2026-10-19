@@ -11,6 +11,10 @@ scope: toolchain-development-repository
 > **Start here.** This note indexes the tools, approved semantics, source translators, workstreams, verification and retained project history. Links point to the owning document or folder; this map **does not supersede** those authorities. This is the development repository, **not a complete generated engineering model**. Imported model content and private QEAX/BOM ledgers remain local.
 
 ## 00 — Program status and next work
+- [**Recovery handoff — restart entrypoint, owner-approved requirements, binary acceptance**](26_Definitions/MDSE_V2_RECOVERY_HANDOFF_2026-10-18.md)
+- [V2 step index — every STEP note, newest first (generated)](26_Definitions/V2_STEP_INDEX.md)
+- [File organization proposal — phases, SharePoint limits, Rovo and Git risks](26_Definitions/V2_FILE_ORGANIZATION_PROPOSAL_2026-10-18.md)
+- [Golden import flag-and-continue policy](26_Definitions/V2_GOLDEN_IMPORT_FLAG_AND_CONTINUE_POLICY_2026-10-18.md)
 - [STEP-02F — Verified-gate semantic disposition tool, independent source preview and remaining acceptance](26_Definitions/STEP_02F_SEMANTIC_OUTLIER_DISPOSITION_AND_REAL_SOURCE_GATE_2026-10-18.md)
 - [STEP-02E — Real-source 14,688-row audit and focused mapping outliers](26_Definitions/STEP_02E_REAL_SOURCE_LEDGER_PARITY_AND_OUTLIERS_2026-10-18.md)
 - [STEP-02D — Private gated Phase 8, real source outlier evidence and next acceptance](26_Definitions/STEP_02D_APPROVED_PHASE8_GATE_AND_SOURCE_REVIEW_2026-10-18.md)
@@ -33,6 +37,8 @@ scope: toolchain-development-repository
 - [Current approved-to-runtime mismatch report](26_Definitions/V2_EXECUTABLE_CANDIDATE_GAP_REVIEW_2026-10-18.md)
 
 ## 10 — Model language, definitions and relationships
+- [**ADR-V2-06 — Note format: user notes on top, one SysML v2 block at the bottom**](26_Definitions/ADR_V2_06_NOTE_FORMAT_2026-10-18.md)
+- [Note mapping matrix — EA → note type/subtype → native SysML v2, properties (generated)](26_Definitions/V2_NOTE_MAPPING_MATRIX.md)
 - [Use Case Definitions and Usages — full V2 semantics and acceptance](26_Definitions/SysML_v2_Use_Case_Definitions_and_Usages.md)
 - [Occurrence Definitions and Usages — full V2 semantics and acceptance](26_Definitions/SysML_v2_Occurrence_Definitions_and_Usages.md)
 - [Original October 16–17 native SysML v2 approvals (35 notes)](26_Definitions/MOC_Catalogs/sysml_decisions_1.md)
@@ -72,6 +78,10 @@ scope: toolchain-development-repository
 - [Cross-vault resolver planning and retained history](66_Cross-Vault/README.md)
 
 ## 40 — Testing, parser, release and source integrity
+- [Note-format validator and block rewriter](21_Importer/mdse_note_format.py) · [its tests](25_Testing/test_v2_note_format.py)
+- [SharePoint safety preflight for a generated vault](25_Testing/check_sharepoint_safety.py)
+- [Retired workflows and why they were retired](.github/workflows-retired/README.md)
+- [Workflow path repair tool (manifest-driven)](26_Definitions/tools/repair_v2_workflow_paths.py)
 - [Testing home](25_Testing/README.md)
 - [Golden Charger SysML fixture](25_Testing/Fixtures/Golden%20Charger%20v2/README.md)
 - [Official parser runner](25_Testing/sysml2_parser_runner.py)
@@ -124,3 +134,5 @@ scope: toolchain-development-repository
 4. New folder or workstream must have an index/README and an entry here. Document supersession instead of maintaining multiple competing copies.
 5. Do not embed raw QEAX, proprietary model elements, BOM data or private disposition ledgers in this public development repository.
 6. Run [the MOC link integrity test](25_Testing/test_v2_master_moc.py) on CI and review its findings alongside implementation traceability.
+7. **Generated pages are regenerated, never hand-edited:** the [step index](26_Definitions/V2_STEP_INDEX.md) (`26_Definitions/tools/build_v2_step_index.py`) and the [mapping matrix](26_Definitions/V2_NOTE_MAPPING_MATRIX.md) (`build_v2_mapping_matrix.py`). CI runs both with `--check`, so a new `STEP_*` note is indexed by running the tool, not by editing this map.
+8. **Notes follow [ADR-V2-06](26_Definitions/ADR_V2_06_NOTE_FORMAT_2026-10-18.md):** governed frontmatter, user notes on top, `## SysML v2` last. Run `python3 21_Importer/mdse_note_format.py NOTE.md` before committing a v2 note.
