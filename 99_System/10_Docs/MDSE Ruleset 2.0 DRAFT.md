@@ -31,9 +31,9 @@ Rule IDs use the form `R-<section>.<n>`. Source references use the document name
 
 - **R-3.1** Only relationships defined in `relationships.yaml` are used. A relationship with no endpoint rule is not restricted, and `tracesTo` is provisional until replaced. Source: `AI_INSTRUCTIONS.md` (W-272, W-277, W-288). Status: approved.
 - **R-3.2** Author the forward relationship only. Inverses are generated and must match. Where they disagree, the forward field wins. Source: 1.23 §4, `AI_INSTRUCTIONS.md` (W-275). Status: approved.
-- **R-3.3** State ownership: an Object `hasState` a State or State Machine. A State Machine `hasState` a State. `stateOf` is the generated inverse. Source: 1.23 §4 (W-291, W-292). Status: approved.
-- **R-3.4** Only Function and Design use `satisfies`. State and State Machine never satisfy a Requirement. Requirement scope uses `appliesTo`. Verification uses `verifies`. Source: 1.23 §7 (W-327). Status: approved.
-- **R-3.5** Function means behavior controlled by the modeled product. Use Case means externally controlled behavior. Human or external steps are not Functions. Source: 1.23 §5. Status: approved.
+- **R-3.3** State ownership: `hasState` runs from Object or Condition to Condition. `stateOf` is the generated inverse. Source: `relationships.yaml` 1.36. Status: STALE in 1.23 §4 (W-291, W-292), which names State and State Machine. W-384 (2026-10-05) replaced the first-class Function, State, Design, Step, and Port classes with Behavior and Condition. Needs owner confirmation of the current wording.
+- **R-3.4** Requirement scope uses `appliesTo`. Verification uses `verifies`. Which classes may `satisfies` a Requirement must be re-read from `relationships.yaml` 1.36. Source: 1.23 §7 (W-327). Status: STALE. 1.23 §7 names Function, Design, State, and State Machine, which W-384 removed as classes.
+- **R-3.5** Behavior controlled by the modeled product is distinct from externally controlled behavior (Use Case). Human or external steps are not product behavior. Source: 1.23 §5. Status: wording STALE. 1.23 §5 says "Function"; W-384 uses Behavior.
 - **R-3.6** Folder placement is navigation only. It creates no semantic relationship. Source: 1.23 §1, §9. Status: approved.
 - **R-3.7** A repeated identical semantic relationship is not used to express quantity. Quantity is Local Model `multiplicity`. Source: 1.23 §15.7. Status: approved.
 
@@ -90,7 +90,7 @@ Rule IDs use the form `R-<section>.<n>`. Source references use the document name
 - **R-8.1** Local records use a kind prefix and a 30-character token: `part-`, `ep-`, `conn-`, `flow-`. The token is globally unique and never reused. Source: 1.23 §15.7, §16.1. Status: approved.
 - **R-8.2** Persisted references use native Obsidian block links. The block ID equals the local ID. Source: 1.23 §15.7. Status: approved.
 - **R-8.3** Part and endpoint records may carry `usage: standard | variant | option`. Omission means `standard`. Connections and flows carry no `usage`. Source: 1.23 §15.7. Status: approved.
-- **R-8.4** Local Model schema 0.2 is the writer format. Readers support 0.1 and 0.2. Source: 1.23 §15.7. Status: approved.
+- **R-8.4** The Local Model writer format is the `writableVersion` in `local-model.yaml` (currently 0.5). Readers support 0.1 to 0.5. Reading an older version never rewrites it. Source: `local-model.yaml`, W-384, W-398. Status: approved. 1.23 §15.7 names 0.2 and is STALE.
 - **R-8.5** Local Model usages are SysML usages in v2. Stable tokens for v2 usages are an open question (ADR-V2-06 Q1). Status: open.
 
 ## 9. SysML v2 section
@@ -136,12 +136,22 @@ Rule IDs use the form `R-<section>.<n>`. Source references use the document name
 | C-7 | Template keeps all properties | `AI_INSTRUCTIONS.md` vs R-2.3 | Owner to confirm R-2.2 and R-2.3 scope. |
 | C-8 | Translator Definition §10 cited but not present | 1.23 §14 | Create the Translator Definition or remove the citation. |
 | C-9 | Local Model v2 identity tokens | ADR-V2-06 Q1 vs R-8.5 | Open. Needs parser verification. |
+| C-10 | Ruleset 1.23 is behind the Decision Log. W-384 and later (W-320 to W-398) changed classes, Local Model schema (now 0.5), and element-types (now 1.18) after 1.23 was issued | 1.23 §3–§7, §15.7 vs W-384, W-398, `local-model.yaml`, `element-types.yaml`, `relationships.yaml` | Re-derive R-3.3 to R-3.5 and section 8 from the current schemas, not from 1.23. |
+| C-11 | "The tool is never run over an existing vault" and "a released vault is never re-imported" | W-36, W-37 vs R-4.2 and Phase 2 BOM import into an existing vault | Owner's October 2026 direction (importer builds a vault or adds onto one) and ADR-V2-07 supersede W-36 and W-37. Record this as a new W-decision that names W-36, W-37, and W-62. |
+| C-12 | Total path length: 212 characters, then 400 hard stop, then no limit, then 400 report-only | W-318/W-319, W-324, W-382, ADR-V2-06 Q5 | W-382 is the latest accepted decision (no limit). ADR-V2-06 Q5 proposes a 400-character report. Owner to confirm which applies. |
+| C-13 | Identity conflicts are hard errors and never auto-repaired | W-317 vs R-4.7 (conflict listed with `flagConflict`) | Keep W-317 for identity (same `uid`, different type is an error and nothing is written). Use `flagConflict` for content conflicts. Owner to confirm. |
+| C-14 | Dataview in the runtime stack | Project notes and `AI_INSTRUCTIONS.md` vs W-370 (Dataview removed 2026-10-04) | W-370 governs. Check `AI_INSTRUCTIONS.md` and templates for Dataview dependencies. |
 
-## 15. Sources not yet inventoried
+## 15. Sources and inventory status
 
-This draft covers the sources read so far: Ruleset 1.23 §1–§16, `AI_INSTRUCTIONS.md`, ADR-V2-06/07/08, and the MDSE definition. The following have not been inventoried and may contain further rules or conflicts:
-- Workspace Decision Log (W-numbers)
-- `element-types.yaml`, `relationships.yaml`, `local-model.yaml`
+Read in full: Ruleset 1.23 §1–§16, `AI_INSTRUCTIONS.md`, ADR-V2-06/07/08, and the MDSE definition.
+
+Scanned, not read in full: the Workspace Decision Log (`55_Workspace/Workspace Decision Log.md`, about 405 entries, W-01 to W-398, plus an Open section). I read the entry titles, the full text of W-30, W-36, W-37, W-38, W-62, W-317, and W-384, and keyword hits for rerun, overwrite, merge, empty fields, and supersession. The log has about 24 mentions of "supersede" and 4 of "reverse". Entries I have not read may carry further rules or conflicts. The log's decisions about empty fields (W-40, W-49, W-63, W-74) support R-2.3. W-30 (two-stage import, stage 1 faithful and mechanical) supports R-4.1. W-339 says the Workbench is an editor, which fits Phase 3.
+
+Schema versions seen: `element-types.yaml` 1.18, `relationships.yaml` 1.36, `local-model.yaml` 0.5. Their contents were read only for headers and the class list.
+
+Not yet inventoried:
+- Remaining Workspace Decision Log entries, and its Open and Local Model sections in full
 - `Structural Mapping Contract.md`, `SysML Source Ownership and Note Storage.md`, `Mapping and Conformance.md`
 - `MDSE_V2_0_SHARED_NOTE_AND_RELEASE_CONTRACT`, `V2 Delivery Plan.md`
 - `Translator Definition` (referenced, not present)
