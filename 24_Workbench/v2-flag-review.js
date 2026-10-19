@@ -46,7 +46,7 @@
         edgeIds.add(e.id); edges++;
         targets.push([e.source,e.target]);
         if (flags(e.flagLink) || /flaglink|unresolved|review/i.test(String(e.disposition || "")) || e.type === "flagLink") {
-          linkFlags++; flagged.push({type:"flagLink", id:e.id, detail:e});
+          linkFlags += flags(e.flagLink) || 1; flagged.push({type:"flagLink", id:e.id, detail:e});
         }
       });
       if (targets.some(([a,b]) => !nodeIds.has(a) || !nodeIds.has(b))) throw new Error("Broken graph endpoint");
