@@ -20,7 +20,7 @@ def read(rel):
         emit("BLOCKER","MISSING_FILE",rel)
         return None
     return file.read_text(encoding="utf-8")
-raw=read("10_Base Vault/Definition/mdse-release.yaml")
+raw=read("100_Archive/V1/10_Base Vault/Definition/mdse-release.yaml")
 m=yaml.safe_load(raw) if raw else {}
 tools=m.get("tools",{})
 workbench=tools.get("workbench",{})
@@ -46,7 +46,7 @@ if not workbench.get("sysmlV2NoteEditorVerified"):
     emit("BLOCKER","V2_WORKBENCH_UNVERIFIED","Note-first SysML v2 editing not built and tested in Obsidian")
 if not m.get("sysmlV2ParserPin"):
     emit("BLOCKER","NO_PINNED_V2_PARSER","Missing independent native SysML v2 parser/library pin and acceptance evidence")
-for path in ["10_Base Vault/Tools/v0.8.0-r2/build-base.py","10_Base Vault/Runtime/Plugins/mdse-bootstrap/main.js","10_Base Vault/Runtime/Plugins/mdse-workbench/main.js"]:
+for path in ["100_Archive/V1/10_Base Vault/Tools/v0.8.0-r2/build-base.py","100_Archive/V1/10_Base Vault/Runtime/Plugins/mdse-bootstrap/main.js","100_Archive/V1/10_Base Vault/Runtime/Plugins/mdse-workbench/main.js"]:
     if not (root/path).is_file():
         emit("BLOCKER","MISSING_RELEASE_PAYLOAD",path)
 # First-run dependency audit: check source tree, lockfile and release path migration

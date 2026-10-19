@@ -2,11 +2,11 @@ name: MDSE registry policy tests
 on:
   push:
     paths:
-      - '14_Workbench/registry/**'
+      - '24_Workbench/registry/**'
       - '.github/workflows/mdse-relationship-registry.yml'
   pull_request:
     paths:
-      - '14_Workbench/registry/**'
+      - '24_Workbench/registry/**'
       - '.github/workflows/mdse-relationship-registry.yml'
   workflow_dispatch:
 jobs:
@@ -23,6 +23,6 @@ jobs:
         with:
           python-version: '3.12'
       - name: JavaScript registry tests
-        run: node --test 14_Workbench/registry/runtime/*.test.mjs
+        run: node --test 24_Workbench/registry/runtime/*.test.mjs
       - name: Python evidence and family tests
-        run: python -m unittest discover -s 14_Workbench/registry/runtime -p 'test_*.py' -v
+        run: python -m unittest discover -s 24_Workbench/registry/runtime -p 'test_*.py' -v

@@ -2,16 +2,16 @@ name: Phase 9 nested definition Workbench contract
 on:
   push:
     paths:
-      - '15_Testing/test_phase9_nested_definition_workbench_contract.mjs'
-      - '15_Testing/test_phase9_canonical_relationship_validator.mjs'
-      - '15_Testing/test_phase9_ea_generalization_review.mjs'
-      - '14_Workbench/registry/runtime/phase9-ea-generalization-review.mjs'
-      - '14_Workbench/registry/runtime/canonical-model.mjs'
+      - '25_Testing/test_phase9_nested_definition_workbench_contract.mjs'
+      - '25_Testing/test_phase9_canonical_relationship_validator.mjs'
+      - '25_Testing/test_phase9_ea_generalization_review.mjs'
+      - '24_Workbench/registry/runtime/phase9-ea-generalization-review.mjs'
+      - '24_Workbench/registry/runtime/canonical-model.mjs'
       - '.github/workflows/phase9-nested-definition-contract.yml'
   pull_request:
     paths:
-      - '15_Testing/test_phase9_nested_definition_workbench_contract.mjs'
-      - '14_Workbench/registry/runtime/canonical-model.mjs'
+      - '25_Testing/test_phase9_nested_definition_workbench_contract.mjs'
+      - '24_Workbench/registry/runtime/canonical-model.mjs'
       - '.github/workflows/phase9-nested-definition-contract.yml'
   workflow_dispatch:
 jobs:
@@ -23,4 +23,4 @@ jobs:
         with:
           node-version: '22'
       - name: Verify synthetic canonical nested-definition contract
-        run: node --test 15_Testing/test_phase9_nested_definition_workbench_contract.mjs 15_Testing/test_phase9_canonical_relationship_validator.mjs 15_Testing/test_phase9_ea_generalization_review.mjs
+        run: node --test 25_Testing/test_phase9_nested_definition_workbench_contract.mjs 25_Testing/test_phase9_canonical_relationship_validator.mjs 25_Testing/test_phase9_ea_generalization_review.mjs

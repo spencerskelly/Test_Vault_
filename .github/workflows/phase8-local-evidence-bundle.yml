@@ -2,21 +2,21 @@ name: Phase 8 local evidence verifier synthetic tests
 on:
   push:
     paths:
-      - '15_Testing/verify_phase8_local_evidence_bundle.py'
-      - '15_Testing/test_verify_phase8_local_evidence_bundle.py'
-      - '15_Testing/verify_phase8_rows_against_qeax.py'
-      - '15_Testing/test_verify_phase8_rows_against_qeax.py'
-      - '15_Testing/replay_phase8_local_normalization.py'
-      - '15_Testing/test_replay_phase8_local_normalization.py'
+      - '25_Testing/verify_phase8_local_evidence_bundle.py'
+      - '25_Testing/test_verify_phase8_local_evidence_bundle.py'
+      - '25_Testing/verify_phase8_rows_against_qeax.py'
+      - '25_Testing/test_verify_phase8_rows_against_qeax.py'
+      - '25_Testing/replay_phase8_local_normalization.py'
+      - '25_Testing/test_replay_phase8_local_normalization.py'
       - '.github/workflows/phase8-local-evidence-bundle.yml'
   pull_request:
     paths:
-      - '15_Testing/verify_phase8_local_evidence_bundle.py'
-      - '15_Testing/test_verify_phase8_local_evidence_bundle.py'
-      - '15_Testing/replay_phase8_local_normalization.py'
-      - '15_Testing/test_replay_phase8_local_normalization.py'
-      - '15_Testing/verify_phase8_rows_against_qeax.py'
-      - '15_Testing/test_verify_phase8_rows_against_qeax.py'
+      - '25_Testing/verify_phase8_local_evidence_bundle.py'
+      - '25_Testing/test_verify_phase8_local_evidence_bundle.py'
+      - '25_Testing/replay_phase8_local_normalization.py'
+      - '25_Testing/test_replay_phase8_local_normalization.py'
+      - '25_Testing/verify_phase8_rows_against_qeax.py'
+      - '25_Testing/test_verify_phase8_rows_against_qeax.py'
       - '.github/workflows/phase8-local-evidence-bundle.yml'
   workflow_dispatch:
 jobs:
@@ -28,6 +28,6 @@ jobs:
         with:
           python-version: '3.11'
       - name: Check exact source syntax
-        run: python -m py_compile 15_Testing/verify_phase8_local_evidence_bundle.py 15_Testing/test_verify_phase8_local_evidence_bundle.py 15_Testing/replay_phase8_local_normalization.py 15_Testing/test_replay_phase8_local_normalization.py
+        run: python -m py_compile 25_Testing/verify_phase8_local_evidence_bundle.py 25_Testing/test_verify_phase8_local_evidence_bundle.py 25_Testing/replay_phase8_local_normalization.py 25_Testing/test_replay_phase8_local_normalization.py
       - name: Run synthetic evidence tamper tests
-        run: python -m unittest -v 15_Testing/test_verify_phase8_local_evidence_bundle.py 15_Testing/test_verify_phase8_rows_against_qeax.py 15_Testing/test_replay_phase8_local_normalization.py
+        run: python -m unittest -v 25_Testing/test_verify_phase8_local_evidence_bundle.py 25_Testing/test_verify_phase8_rows_against_qeax.py 25_Testing/test_replay_phase8_local_normalization.py

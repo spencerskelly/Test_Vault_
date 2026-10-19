@@ -2,13 +2,13 @@ name: Phase 9 independent generalization fixtures
 on:
   push:
     paths:
-      - '15_Testing/phase9_independent_generalization_audit.py'
-      - '15_Testing/test_phase9_independent_generalization_audit.py'
+      - '25_Testing/phase9_independent_generalization_audit.py'
+      - '25_Testing/test_phase9_independent_generalization_audit.py'
       - '.github/workflows/phase9-generalization.yml'
   pull_request:
     paths:
-      - '15_Testing/phase9_independent_generalization_audit.py'
-      - '15_Testing/test_phase9_independent_generalization_audit.py'
+      - '25_Testing/phase9_independent_generalization_audit.py'
+      - '25_Testing/test_phase9_independent_generalization_audit.py'
       - '.github/workflows/phase9-generalization.yml'
   workflow_dispatch:
 jobs:
@@ -20,4 +20,4 @@ jobs:
         with:
           python-version: '3.11'
       - name: Independent generalization fixture checks
-        run: python -m unittest -v 15_Testing/test_phase9_independent_generalization_audit.py
+        run: python -m unittest -v 25_Testing/test_phase9_independent_generalization_audit.py

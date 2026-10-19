@@ -26,28 +26,28 @@ jobs:
           python -c "from jupyter_client import KernelManager; assert 'sysml' in __import__('jupyter_client.kernelspec',fromlist=['KernelSpecManager']).KernelSpecManager().find_kernel_specs()"
       - name: Verify diagnostic classifier regression
         shell: bash -el {0}
-        run: python -m unittest -v 15_Testing/test_sysml2_jupyter_diagnostics.py
+        run: python -m unittest -v 100_Archive/V1/15_Testing/test_sysml2_jupyter_diagnostics.py
       - name: Validate positive SysML fixture with real kernel
         shell: bash -el {0}
-        run: python 15_Testing/sysml2_jupyter_fixture_gate.py --fixture 29_SysMLv2_Translator_Workbench/Fixtures/synthetic_part_definition_usage.sysml --expect ACCEPTED
+        run: python 100_Archive/V1/15_Testing/sysml2_jupyter_fixture_gate.py --fixture 29_SysMLv2_Translator_Workbench/Fixtures/synthetic_part_definition_usage.sysml --expect ACCEPTED
       - name: Validate nested part usages
         shell: bash -el {0}
-        run: python 15_Testing/sysml2_jupyter_fixture_gate.py --fixture 29_SysMLv2_Translator_Workbench/Fixtures/synthetic_nested_part_usages.sysml --expect ACCEPTED
+        run: python 100_Archive/V1/15_Testing/sysml2_jupyter_fixture_gate.py --fixture 29_SysMLv2_Translator_Workbench/Fixtures/synthetic_nested_part_usages.sysml --expect ACCEPTED
       - name: Validate port definitions and usages
         shell: bash -el {0}
-        run: python 15_Testing/sysml2_jupyter_fixture_gate.py --fixture 29_SysMLv2_Translator_Workbench/Fixtures/synthetic_port_as_part.sysml --expect ACCEPTED
+        run: python 100_Archive/V1/15_Testing/sysml2_jupyter_fixture_gate.py --fixture 29_SysMLv2_Translator_Workbench/Fixtures/synthetic_port_as_part.sysml --expect ACCEPTED
       - name: Validate native connection usage
         shell: bash -el {0}
-        run: python 15_Testing/sysml2_jupyter_fixture_gate.py --fixture 29_SysMLv2_Translator_Workbench/Fixtures/synthetic_connection_usage.sysml --expect ACCEPTED
+        run: python 100_Archive/V1/15_Testing/sysml2_jupyter_fixture_gate.py --fixture 29_SysMLv2_Translator_Workbench/Fixtures/synthetic_connection_usage.sysml --expect ACCEPTED
 
       - name: Validate nested definition specialization of lexical owner
         shell: bash -el {0}
-        run: python 15_Testing/sysml2_jupyter_fixture_gate.py --fixture 29_SysMLv2_Translator_Workbench/Fixtures/synthetic_nested_definition_specializes_owner.sysml --expect ACCEPTED
+        run: python 100_Archive/V1/15_Testing/sysml2_jupyter_fixture_gate.py --fixture 29_SysMLv2_Translator_Workbench/Fixtures/synthetic_nested_definition_specializes_owner.sysml --expect ACCEPTED
       - name: Validate contrast between nested usage and definition
         shell: bash -el {0}
-        run: python 15_Testing/sysml2_jupyter_fixture_gate.py --fixture 29_SysMLv2_Translator_Workbench/Fixtures/synthetic_nested_usage_not_definition.sysml --expect ACCEPTED
+        run: python 100_Archive/V1/15_Testing/sysml2_jupyter_fixture_gate.py --fixture 29_SysMLv2_Translator_Workbench/Fixtures/synthetic_nested_usage_not_definition.sysml --expect ACCEPTED
       - name: Reject invalid SysML fixture with real kernel
         shell: bash -el {0}
-        run: python 15_Testing/sysml2_jupyter_fixture_gate.py --fixture 29_SysMLv2_Translator_Workbench/Fixtures/synthetic_invalid_syntax.sysml --expect REJECTED
+        run: python 100_Archive/V1/15_Testing/sysml2_jupyter_fixture_gate.py --fixture 29_SysMLv2_Translator_Workbench/Fixtures/synthetic_invalid_syntax.sysml --expect REJECTED
 # Manual dispatch until actual parser execution and diagnostics are validated.
 # A passing workflow is parser evidence, not authorization for native emission.

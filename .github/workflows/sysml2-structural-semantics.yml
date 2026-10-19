@@ -2,13 +2,13 @@ name: SysML v2 structural semantics unit tests
 on:
   push:
     paths:
-      - '15_Testing/sysml2_structural_semantic_contract.py'
-      - '15_Testing/test_sysml2_structural_semantic_contract.py'
+      - '100_Archive/V1/15_Testing/sysml2_structural_semantic_contract.py'
+      - '100_Archive/V1/15_Testing/test_sysml2_structural_semantic_contract.py'
       - '.github/workflows/sysml2-structural-semantics.yml'
   pull_request:
     paths:
-      - '15_Testing/sysml2_structural_semantic_contract.py'
-      - '15_Testing/test_sysml2_structural_semantic_contract.py'
+      - '100_Archive/V1/15_Testing/sysml2_structural_semantic_contract.py'
+      - '100_Archive/V1/15_Testing/test_sysml2_structural_semantic_contract.py'
       - '.github/workflows/sysml2-structural-semantics.yml'
   workflow_dispatch:
 jobs:
@@ -20,7 +20,7 @@ jobs:
         with:
           python-version: '3.11'
       - name: Compile structural contract and tests
-        run: python -m py_compile 15_Testing/sysml2_structural_semantic_contract.py 15_Testing/test_sysml2_structural_semantic_contract.py
+        run: python -m py_compile 100_Archive/V1/15_Testing/sysml2_structural_semantic_contract.py 100_Archive/V1/15_Testing/test_sysml2_structural_semantic_contract.py
       - name: Run synthetic structural semantics tests
-        run: python -m unittest -v 15_Testing/test_sysml2_structural_semantic_contract.py
+        run: python -m unittest -v 100_Archive/V1/15_Testing/test_sysml2_structural_semantic_contract.py
 # This synthetic suite does not authorize native emission.
