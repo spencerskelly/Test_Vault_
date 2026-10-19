@@ -42,6 +42,7 @@ scope: toolchain-development-repository
 ## 10 — Model language, definitions and relationships
 - [**ADR-V2-06 — Note format: user notes on top, one SysML v2 block at the bottom**](26_Definitions/ADR_V2_06_NOTE_FORMAT_2026-10-18.md)
 - [**ADR-V2-07 — The importer is one HTML file: new vault or add onto an existing one**](26_Definitions/ADR_V2_07_HTML_ONLY_IMPORTER_2026-10-18.md)
+- [**ADR-V2-08 — BOM scope: latest product revisions only**](26_Definitions/ADR_V2_08_BOM_LATEST_REVISION_SCOPE_2026-10-19.md)
 - [Note mapping matrix — EA → note type/subtype → native SysML v2, properties (generated)](26_Definitions/V2_NOTE_MAPPING_MATRIX.md)
 - [Use Case Definitions and Usages — full V2 semantics and acceptance](26_Definitions/SysML_v2_Use_Case_Definitions_and_Usages.md)
 - [Occurrence Definitions and Usages — full V2 semantics and acceptance](26_Definitions/SysML_v2_Occurrence_Definitions_and_Usages.md)
