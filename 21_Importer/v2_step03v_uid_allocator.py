@@ -10,7 +10,13 @@ VALID=re.compile(r"^[0-9]{17}[a-z-]{13}$")
 BASE=datetime.datetime(2026,9,11,0,0,0,1000)
 
 def author_code(value):
-    s=re.sub("[^a-z]","",str(value or "").lower())
+    raw=str(value or "").strip().lower()
+    if "," in raw:
+        family,given=raw.split(",",1)
+        s=re.sub("[^a-z]","",family+given)
+    else:
+        words=re.findall("[a-z]+",raw)
+        s=(words[-1]+"".join(words[:-1])) if len(words)>1 else "".join(words)
     return (s or "skellyspencer")[:13].ljust(13,"-")
 
 def seed_date(value):
