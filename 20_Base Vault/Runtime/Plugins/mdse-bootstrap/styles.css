@@ -1,0 +1,8 @@
+/* MDSE Bootstrap. Theme variables only. */
+.mdse-bootstrap-check table { border-collapse: collapse; width: 100%; margin-bottom: 1em; }
+.mdse-bootstrap-check th, .mdse-bootstrap-check td { padding: 2px 8px; border-bottom: 1px solid var(--background-modifier-border); text-align: left; vertical-align: top; }
+.mdse-bootstrap-check .mdse-ok { color: var(--text-success); }
+.mdse-bootstrap-check .mdse-warn { color: var(--text-warning); }
+.mdse-bootstrap-check .mdse-error { color: var(--text-error); }
+.mdse-bootstrap-register .setting-item { border-top: none; }
+.mdse-bootstrap-register .mdse-error { color: var(--text-error); min-height: 1.2em; }

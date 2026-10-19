@@ -15,6 +15,16 @@ class V2BaseTest(unittest.TestCase):
             self.assertTrue(manifest["files"])
             self.assertFalse(any("100_Archive" in p for p in manifest["files"]))
             self.assertTrue((dest/"99_System/Approved_V2_Translation_Baseline.md").exists())
+            self.assertTrue((dest/".obsidian/app.json").exists())
+            self.assertEqual(json.loads((dest/".obsidian/community-plugins.json").read_text()),[])
+            release=json.loads((dest/"99_System/v2_base_release_manifest.json").read_text())
+            self.assertFalse(release["pluginBinariesVerified"])
+            self.assertFalse(release["bootstrapReady"])
+            self.assertEqual(release["settingsOwnership"]["workspace.json"],"user_owned")
+            self.assertTrue(all(x["status"]=="verify_before_install" for x in release["candidatePlugins"]))
+            for name in ("app.json","appearance.json","core-plugins.json","community-plugins.json"):
+                self.assertIn(".obsidian/"+name,manifest["files"])
+                json.loads((dest/".obsidian"/name).read_text())
             with self.assertRaisesRegex(ValueError,"OUTPUT_ALREADY_EXISTS"):module.build(dest)
     def test_disallow_output_in_source(self):
         with self.assertRaisesRegex(ValueError,"NO_BUILD_INSIDE_REPOSITORY"):

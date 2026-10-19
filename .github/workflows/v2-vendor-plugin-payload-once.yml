@@ -1,0 +1,33 @@
+name: V2 plugin lock generation
+on:
+  push:
+    branches: [feat/v2-integrated-pilot-20261018]
+    paths:
+      - '.github/workflows/v2-vendor-plugin-payload-once.yml'
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  pin:
+    if: github.ref == 'refs/heads/feat/v2-integrated-pilot-20261018'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: true
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Generate V2-only plugin lock
+        run: python3 "20_Base Vault/build_v2_plugin_lock.py"
+      - name: Validate pinned plugin binaries
+        run: python3 "20_Base Vault/build_v2_plugin_lock.py" --check
+      - name: Validate vendored custom plugin payloads
+        run: python3 -m unittest 25_Testing/test_v2_custom_plugin_payloads.py 25_Testing/test_v2_vendored_plugin_runtime.py
+      - name: Commit lock into implementation branch
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add "20_Base Vault/Runtime/Plugins/plugin-lock.v2.json"
+          git diff --cached --quiet || git commit -m "build(v2): pin seven owned plugin packages by SHA256"
+          git push origin HEAD:feat/v2-integrated-pilot-20261018

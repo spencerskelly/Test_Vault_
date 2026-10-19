@@ -1,0 +1,71 @@
+{
+  "schema": "mdse-v2-base-release/1",
+  "release": "0.1.0-pilot-scaffold",
+  "status": "configuration_scaffold_not_plugin_verified",
+  "managedFiles": [
+    ".obsidian/app.json",
+    ".obsidian/appearance.json",
+    ".obsidian/core-plugins.json",
+    ".obsidian/community-plugins.json"
+  ],
+  "communityPlugins": [],
+  "pluginBinariesVerified": false,
+  "bootstrapReady": false,
+  "workbenchReady": false,
+  "minimumObsidianVersion": null,
+  "policy": {
+    "managedFileUpdate": "preview_and_backup_required",
+    "preserveUserFiles": true,
+    "autoInstallPlugins": false
+  },
+  "notes": "Upstream directory metadata is not a tested package. No community plugin enabled until matching release assets, SHA-256, runtime support, license and installed Obsidian validation are recorded.",
+  "settingsOwnership": {
+    "app.json": "managed_defaults",
+    "appearance.json": "managed_defaults",
+    "core-plugins.json": "managed_defaults",
+    "community-plugins.json": "bootstrap_approval_required",
+    "workspace.json": "user_owned",
+    "hotkeys.json": "user_owned",
+    "plugin_data": "preserve_until_validated_migration"
+  },
+  "candidatePlugins": [
+    {
+      "id": "obsidian-git",
+      "status": "verify_before_install"
+    },
+    {
+      "id": "templater-obsidian",
+      "status": "upstream_metadata_verified_package_not_tested",
+      "observedDirectoryVersion": "2.26.0",
+      "observedMinimumObsidian": "1.13.0",
+      "source": "https://community.obsidian.md/plugins/templater-obsidian"
+    },
+    {
+      "id": "dataview",
+      "status": "verify_before_install"
+    },
+    {
+      "id": "mdse-bootstrap",
+      "status": "verify_before_install"
+    },
+    {
+      "id": "mdse-workbench",
+      "status": "verify_before_install"
+    }
+  ],
+  "pluginPackagingRequirements": {
+    "requiredFiles": [
+      "manifest.json",
+      "main.js"
+    ],
+    "optionalFiles": [
+      "styles.css"
+    ],
+    "releaseManifestVersionMustMatchTag": true,
+    "sha256RequiredBeforeEnable": true,
+    "minimumAppVersionRequired": true,
+    "manualApprovalRequired": true,
+    "preservePluginDataJson": true,
+    "allowAutomaticInstall": false
+  }
+}
