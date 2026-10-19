@@ -59,4 +59,5 @@ el("files").onchange=async e=>{const selectedFiles=[...e.target.files];const loa
 el("download").onclick=()=>{const blob=new Blob([files.map(f=>"// FILE: "+f.name+"\n"+f.text).join("\n")],{type:"text/plain"});const url=URL.createObjectURL(blob);const a=document.createElement("a");a.href=url;a.download="mdse-v2-combined.sysml";a.click();setTimeout(()=>URL.revokeObjectURL(url),1000)};
 el("copy").onclick=()=>{const n=nodes.find(x=>x.id===selected);if(n)navigator.clipboard?.writeText(n.source)};
 load(fixture);
-</script><script src="v2-graph-mode.js"></script></body></html>
+</script><script src="v2-graph-mode.js"></script>
+<script src="v2-flag-review.js"></script></body></html>
