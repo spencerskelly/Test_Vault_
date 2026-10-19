@@ -2,6 +2,14 @@
 
 For every AI tool that creates or edits notes in this vault (Claude, ChatGPT, Rovo, Gemini, or any other). AI tools cannot run Templater, so you do by hand exactly what the template snippets do. The result must look the same as a note created from a template.
 
+## AI processes
+
+Each AI process has an instruction file and an ID. Use the file for that process; do not write unique instructions for a run.
+
+| ID | Process | Instruction file |
+|---|---|---|
+| AI-CR-01 | Changelog review: sort changes into Engineering, Editorial, Irrelevant before an engineer reads them | `99_System/02_AI/processes/AI_Process_Changelog_Review.md` |
+
 Before substantial work: if `00_Workspace/00 - Current State.md` exists, read it first (this is the methodology workspace). A lean generated engineering vault intentionally omits that registry; there, start with `99_System/10_Docs/MDSE Modeling Ruleset 1.23.md`, `99_System/03_Schemas/relationships.yaml`, `99_System/03_Schemas/element-types.yaml`, `99_System/03_Schemas/authors.yaml` (AI codes and the default time zone) and the person notes in `99_System/04_People` (each person's author code and time zone). Property meanings are in `Definitions/Properties`.
 
 ## Creating a note
