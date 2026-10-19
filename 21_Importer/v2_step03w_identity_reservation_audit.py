@@ -19,7 +19,7 @@ def audit(ledger,crosswalk,reference_vault,output):
     allocations=rows(ledger);source=rows(crosswalk)
     by_oid={r["eaObjectID"]:r for r in source}
     if len(source)!=len(by_oid):raise ValueError("Duplicate source identities")
-    seen=set();reserved=set();existing_basenames=set()
+    seen=set();seen_uid=set();reserved=set();existing_basenames=set()
     for file in base.rglob("*.md"):
         existing_basenames.add(file.stem.casefold())
         content=file.read_text(encoding="utf-8",errors="replace")
@@ -32,6 +32,7 @@ def audit(ledger,crosswalk,reference_vault,output):
     for item in allocations:
         oid=item["eaObjectID"];uid=item.get("uid")
         if oid in seen or oid not in by_oid:raise ValueError("Duplicate/unmatched object ID")
+        if item.get("eaGUID")!=by_oid[oid].get("eaGUID"):raise ValueError("Source GUID mismatch")
         seen.add(oid)
         if uid is None:
             planned.append({"eaObjectID":oid,"eaGUID":item["eaGUID"],"status":item["migrationStatus"],
@@ -39,6 +40,8 @@ def audit(ledger,crosswalk,reference_vault,output):
             outcomes["held"]+=1
             continue
         if not UID.fullmatch(uid):raise ValueError("Invalid UID syntax")
+        if uid in seen_uid:raise ValueError("Duplicate candidate UID")
+        seen_uid.add(uid)
         if uid in reserved:
             status="uid_collision_review";outcomes[status]+=1
         else:
