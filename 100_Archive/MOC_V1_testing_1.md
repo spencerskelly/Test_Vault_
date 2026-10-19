@@ -4,9 +4,6 @@ Read-only historical index. Every entry comes from the verified folder-migration
 
 - [Step18_Obsidian_UI_Acceptance.md](V1/15_Testing/Step18_Obsidian_UI_Acceptance.md)
 
-### __pycache__
-- [sysml2_pilot_preflight.cpython-312.pyc](V1/15_Testing/__pycache__/sysml2_pilot_preflight.cpython-312.pyc)
-- [test_sysml2_pilot_preflight.cpython-312.pyc](V1/15_Testing/__pycache__/test_sysml2_pilot_preflight.cpython-312.pyc)
 
 ### Root
 - [audit_deferred_owner_stereotypes.py](V1/15_Testing/audit_deferred_owner_stereotypes.py)

@@ -9,7 +9,7 @@ source: V2_FOLDER_MIGRATION_MANIFEST_2026-10-18
 
 [Current v2 MOC](../MOC_MDSE_V2.md) · [V2 program goals](../26_Definitions/V2_PROGRAM_GOALS_AND_COMPLETION_2026-10-18.md) · [Full archived path manifest](../26_Definitions/V2_FOLDER_MIGRATION_MANIFEST_2026-10-18.json)
 
-**Read-only historical knowledge.** The v1 archive is a value-recovery source, **not** an executable or semantic dependency for v2. Do not overwrite v1, import its scripts into v2 directly, or treat provisional notes as approved rules. Source: the recorded relocation manifest; 1,165 archived paths (includes code, assets, tests, documentation, and binaries). The per-area indexes below explicitly link every listed archived path.
+**Read-only historical knowledge.** The v1 archive is a value-recovery source, **not** an executable or semantic dependency for v2. Do not overwrite v1, import its scripts into v2 directly, or treat provisional notes as approved rules. Source: the recorded relocation manifest; 1,163 archived paths (includes code, assets, tests, documentation, and binaries). The per-area indexes below explicitly link every listed archived path.
 
 ## 00 — Full archive file directory
 
@@ -19,9 +19,9 @@ source: V2_FOLDER_MIGRATION_MANIFEST_2026-10-18
 | EA importer | 666 | [1](MOC_V1_importer_1.md) · [2](MOC_V1_importer_2.md) · [3](MOC_V1_importer_3.md) · [4](MOC_V1_importer_4.md) · [5](MOC_V1_importer_5.md) |
 | Bootstrap | 28 | [Bootstrap files](MOC_V1_bootstrap_1.md) |
 | Workbench | 217 | [1](MOC_V1_workbench_1.md) · [2](MOC_V1_workbench_2.md) |
-| Testing and consolidation | 166 | [1](MOC_V1_testing_1.md) · [2](MOC_V1_testing_2.md) |
+| Testing and consolidation | 164 | [1](MOC_V1_testing_1.md) · [2](MOC_V1_testing_2.md) |
 | Definitions and property contracts | 40 | [Definitions files](MOC_V1_definitions_1.md) |
-| **Total** | **1,165** | [Migration manifest](../26_Definitions/V2_FOLDER_MIGRATION_MANIFEST_2026-10-18.json) |
+| **Total** | **1,163** | [Migration manifest](../26_Definitions/V2_FOLDER_MIGRATION_MANIFEST_2026-10-18.json) |
 
 ## 10 — Importer: source ingestion, safety, mapping and release
 

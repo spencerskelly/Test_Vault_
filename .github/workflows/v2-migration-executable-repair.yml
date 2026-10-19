@@ -29,6 +29,18 @@ jobs:
           "25_Testing/Fixtures/Golden Charger v2/Power Module.md"
           "25_Testing/Fixtures/Golden Charger v2/Charger.md"
           "20_Base Vault/Public Sample Vault/10_Model/Sample Instrument.md"
+      - name: Importer core unit tests (merge, rerun, ZIP)
+        run: node --test 25_Testing/test_mdse_core.test.mjs
+      - name: Importer core agrees with the Python validator
+        run: python3 -m unittest 25_Testing/test_mdse_core_crosscheck.py
+      - name: Browser SQLite reader returns exactly what sqlite3 returns
+        run: python3 -m unittest 25_Testing/test_qeax_reader.py
+      - name: Single-file HTML importer is current
+        run: node 21_Importer/build_importer_html.mjs --check
+      - name: Install Chromium for the importer browser test
+        run: pip install 'playwright==1.56.0' && python3 -m playwright install --with-deps chromium
+      - name: Drive the HTML importer in a real browser
+        run: python3 -m unittest 25_Testing/test_importer_html_browser.py
       - name: Test note-format validator
         run: python3 -m unittest 25_Testing/test_v2_note_format.py
       - name: Test SharePoint safety preflight
