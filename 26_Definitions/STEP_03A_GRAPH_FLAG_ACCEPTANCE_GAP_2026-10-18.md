@@ -1,0 +1,7 @@
+# STEP-03A — Workbench graph preflight and identified defect
+
+Independent full-file scan of the locally staged reduced-QEAX graph verified 11,445 unique nodes and 14,688 unique edges, zero duplicate connectors, zero broken endpoints and 408 flagged connector dispositions. It exposed a discrepancy: 159 flagNotes were reported in `aggregate_only.json`, but just 15 were actually attached to graph nodes. The remaining 144 attachment ownership flags had been counted from a review index without being serialized into corresponding attachment catalog nodes. This is an operational review gap, despite previously reported full graph accounting.
+
+A local-only, non-destructive correction annotated all 144 matching attachment catalog nodes and verified 159 node-resident flagNotes in the corrected graph output. The correction and audit tooling are distributed in the conversation's `STEP_03A_graph_preflight.zip`, without private source data. **The permanent exporter fix is still pending.**
+
+Outstanding gates: integrate catalog-node flag serialization in the canonical STEP-02W exporter with regression assertion, exercise actual Workbench browser import/navigation against the corrected 11,445-node graph, verify readable flags and responsiveness, confirm source preservation, and complete separate SysML native-parser and Obsidian UI acceptance. Diagram import remains excluded. No golden-import acceptance is claimed here.
