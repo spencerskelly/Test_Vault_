@@ -10,5 +10,6 @@ GitHub only runs `.github/workflows/`, so nothing here executes. Files are kept 
 | `bootstrap-candidate.yml` | Builds from `Bootstrap/Tools/v0.3.1`, a pre-numbering v1 path that does not exist. It also commits a rebuilt artifact back to the branch, so leaving it live and broken was the safer failure, but it should not run at all. |
 | `mdse-integration-readonly.yml` | 24 of 38 steps fail: `66_Testing/consolidation/`, `55_Workbench/`, `Importer/Tools/v0.8.19/`, `Base Vault/Tools/` do not exist. A transition-era aggregate of retired gates. |
 | `package-imp009-base.yml` | Runs `Base Vault/Tools/v0.8.0-r2/build-base.py` and `Base Vault/Testing/check-release.py`, v1 paths that do not exist. |
+| `v2-separation-staging.yml` | One-shot migration job, already executed (it produced the relocation commit). It runs `git switch -c`, `git push` and `gh pr create` with write permission whenever its own file or `stage_v2_archive_migration.py` changes on `main`, so it was a live footgun. |
 
 To revive one: restore the tool paths first, move the file back to `.github/workflows/`, and confirm it passes locally before pushing, because a workflow whose own file changes triggers itself.

@@ -21,7 +21,8 @@ class V2BaseTest(unittest.TestCase):
             self.assertFalse(release["pluginBinariesVerified"])
             self.assertFalse(release["bootstrapReady"])
             self.assertEqual(release["settingsOwnership"]["workspace.json"],"user_owned")
-            self.assertTrue(all(x["status"]=="verify_before_install" for x in release["candidatePlugins"]))
+            FAIL_CLOSED={"verify_before_install","upstream_metadata_verified_package_not_tested"}
+            self.assertTrue(all(x["status"] in FAIL_CLOSED for x in release["candidatePlugins"]),[x["status"] for x in release["candidatePlugins"]])
             for name in ("app.json","appearance.json","core-plugins.json","community-plugins.json"):
                 self.assertIn(".obsidian/"+name,manifest["files"])
                 json.loads((dest/".obsidian"/name).read_text())
