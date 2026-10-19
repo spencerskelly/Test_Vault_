@@ -1,0 +1,9 @@
+# STEP-02Y — Existing Workbench graph integration
+
+2026-10-18. Status: **repository integration committed and read-back verified; live browser acceptance pending**.
+
+The active `24_Workbench/v2-workbench.html` now loads sibling `v2-graph-mode.js` while retaining its previous standalone SysML preview unchanged. The new, read-only local graph panel accepts paired STEP-02W `nodes.jsonl` and `edges.jsonl`, validates unique node and connector identities and endpoint existence, displays UID/path/kind search results, and allows navigating connected nodes and reading raw connector provenance including disposition. It shows up to 100 search matches and up to 80 connections for a selected node to bound DOM rendering. No network calls, EA diagram access, mutation of engineering notes or native SysML emission.
+
+Commits: module `54f6c656b10ada3f416c0a1eb03b2ede1ddf863e`; Workbench integration `eaf4e1b4cb297d1179af1e03818fee88a57f906e`. Both files were independently read back from main, confirming correct linkage and preservation of the original SysML preview. This is code/structural integration, **not** live UI testing, full-graph performance, Obsidian navigation, or flag review/resolve acceptance. Dedicated visual relation layout and persistent review-state updates remain future steps.
+
+Next: open Workbench locally and load the private STEP-02W graph, test a 11,445-node / 14,688-edge graph, search and endpoint navigation, explicit flagLink/flagNote visibility, visual distinction and source provenance. Implement stronger filter/indexing and graph neighborhood renderer if needed, then review/resolve workflow with provenance and change management. Do not require zero unresolved semantic flags for functional model acceptance; do require complete source accounting and no broken references.
